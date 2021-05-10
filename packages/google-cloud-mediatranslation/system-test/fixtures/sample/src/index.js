@@ -20,7 +20,8 @@
 const mediatranslation = require('@google-cloud/media-translation');
 
 function main() {
-  const speechTranslationServiceClient = new mediatranslation.SpeechTranslationServiceClient();
+  const speechTranslationServiceClient =
+    new mediatranslation.SpeechTranslationServiceClient();
 }
 
 main();

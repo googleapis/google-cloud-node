@@ -304,7 +304,7 @@ export namespace google {
                     public streamingConfig?: (google.cloud.mediatranslation.v1beta1.IStreamingTranslateSpeechConfig|null);
 
                     /** StreamingTranslateSpeechRequest audioContent. */
-                    public audioContent: (Uint8Array|string);
+                    public audioContent?: (Uint8Array|string|null);
 
                     /** StreamingTranslateSpeechRequest streamingRequest. */
                     public streamingRequest?: ("streamingConfig"|"audioContent");

@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -75,49 +74,54 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient();
+    const client =
+      new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
-      {
-        fallback: true,
-      }
-    );
+    const client =
+      new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
+        {
+          fallback: true,
+        }
+      );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     assert.strictEqual(client.speechTranslationServiceStub, undefined);
     await client.initialize();
     assert(client.speechTranslationServiceStub);
   });
 
   it('has close method', () => {
-    const client = new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -126,12 +130,13 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -150,12 +155,13 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
 
   describe('streamingTranslateSpeech', () => {
     it('invokes streamingTranslateSpeech without error', async () => {
-      const client = new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechRequest()
@@ -163,9 +169,8 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechResponse()
       );
-      client.innerApiCalls.streamingTranslateSpeech = stubBidiStreamingCall(
-        expectedResponse
-      );
+      client.innerApiCalls.streamingTranslateSpeech =
+        stubBidiStreamingCall(expectedResponse);
       const stream = client.streamingTranslateSpeech();
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -190,20 +195,20 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
           .calledWithExactly(undefined)
       );
       assert.deepStrictEqual(
-        (((stream as unknown) as PassThrough)._transform as SinonStub).getCall(
-          0
-        ).args[0],
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
         request
       );
     });
 
     it('invokes streamingTranslateSpeech with error', async () => {
-      const client = new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new speechtranslationserviceModule.v1beta1.SpeechTranslationServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechRequest()
@@ -236,9 +241,8 @@ describe('v1beta1.SpeechTranslationServiceClient', () => {
           .calledWithExactly(undefined)
       );
       assert.deepStrictEqual(
-        (((stream as unknown) as PassThrough)._transform as SinonStub).getCall(
-          0
-        ).args[0],
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
         request
       );
     });

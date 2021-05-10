@@ -660,11 +660,11 @@
     
                         /**
                          * StreamingTranslateSpeechRequest audioContent.
-                         * @member {Uint8Array} audioContent
+                         * @member {Uint8Array|null|undefined} audioContent
                          * @memberof google.cloud.mediatranslation.v1beta1.StreamingTranslateSpeechRequest
                          * @instance
                          */
-                        StreamingTranslateSpeechRequest.prototype.audioContent = $util.newBuffer([]);
+                        StreamingTranslateSpeechRequest.prototype.audioContent = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
