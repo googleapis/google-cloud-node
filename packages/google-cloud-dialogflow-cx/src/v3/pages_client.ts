@@ -26,7 +26,6 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import * as path from 'path';
 
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
