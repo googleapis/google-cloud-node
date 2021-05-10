@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -279,9 +278,8 @@ describe('v3.AgentsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Agent()
       );
-      client.innerApiCalls.getAgent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getAgent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getAgent(
           request,
@@ -388,9 +386,8 @@ describe('v3.AgentsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Agent()
       );
-      client.innerApiCalls.createAgent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createAgent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createAgent(
           request,
@@ -502,9 +499,8 @@ describe('v3.AgentsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.Agent()
       );
-      client.innerApiCalls.updateAgent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateAgent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateAgent(
           request,
@@ -615,9 +611,8 @@ describe('v3.AgentsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteAgent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAgent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteAgent(
           request,
@@ -727,9 +722,8 @@ describe('v3.AgentsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.AgentValidationResult()
       );
-      client.innerApiCalls.validateAgent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.validateAgent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.validateAgent(
           request,
@@ -808,9 +802,8 @@ describe('v3.AgentsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.AgentValidationResult()
       );
-      client.innerApiCalls.getAgentValidationResult = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getAgentValidationResult =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getAgentValidationResult(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -841,9 +834,8 @@ describe('v3.AgentsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3.AgentValidationResult()
       );
-      client.innerApiCalls.getAgentValidationResult = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getAgentValidationResult =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getAgentValidationResult(
           request,
@@ -957,9 +949,8 @@ describe('v3.AgentsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportAgent = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportAgent =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportAgent(
           request,
@@ -1148,9 +1139,8 @@ describe('v3.AgentsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.restoreAgent = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.restoreAgent =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.restoreAgent(
           request,
@@ -1342,9 +1332,8 @@ describe('v3.AgentsClient', () => {
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Agent()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Agent()),
       ];
-      client.innerApiCalls.listAgents = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listAgents =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listAgents(
           request,
@@ -1416,9 +1405,8 @@ describe('v3.AgentsClient', () => {
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Agent()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Agent()),
       ];
-      client.descriptors.page.listAgents.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAgents.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listAgentsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.dialogflow.cx.v3.Agent[] = [];
@@ -1512,9 +1500,8 @@ describe('v3.AgentsClient', () => {
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Agent()),
         generateSampleMessage(new protos.google.cloud.dialogflow.cx.v3.Agent()),
       ];
-      client.descriptors.page.listAgents.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAgents.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.dialogflow.cx.v3.IAgent[] = [];
       const iterable = client.listAgentsAsync(request);
       for await (const resource of iterable) {
@@ -1665,34 +1652,38 @@ describe('v3.AgentsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromAgentValidationResultName', () => {
-        const result = client.matchProjectFromAgentValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromAgentValidationResultName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromAgentValidationResultName', () => {
-        const result = client.matchLocationFromAgentValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromAgentValidationResultName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1702,8 +1693,10 @@ describe('v3.AgentsClient', () => {
         const result = client.matchAgentFromAgentValidationResultName(fakePath);
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2055,34 +2048,38 @@ describe('v3.AgentsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromFlowValidationResultName', () => {
-        const result = client.matchProjectFromFlowValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromFlowValidationResultName', () => {
-        const result = client.matchLocationFromFlowValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2092,8 +2089,10 @@ describe('v3.AgentsClient', () => {
         const result = client.matchAgentFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2103,8 +2102,10 @@ describe('v3.AgentsClient', () => {
         const result = client.matchFlowFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'flowValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2378,111 +2379,130 @@ describe('v3.AgentsClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationAgentEnvironmentSessionEntityTypePath', () => {
-        const result = client.projectLocationAgentEnvironmentSessionEntityTypePath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'environmentValue',
-          'sessionValue',
-          'entityTypeValue'
-        );
+        const result =
+          client.projectLocationAgentEnvironmentSessionEntityTypePath(
+            'projectValue',
+            'locationValue',
+            'agentValue',
+            'environmentValue',
+            'sessionValue',
+            'entityTypeValue'
+          );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'environmentValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'sessionValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'entityTypeValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2503,12 +2523,10 @@ describe('v3.AgentsClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationAgentSessionEntityTypePath', () => {
         const result = client.projectLocationAgentSessionEntityTypePath(
@@ -2520,79 +2538,96 @@ describe('v3.AgentsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchProjectFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchLocationFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAgentFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchAgentFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchAgentFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchSessionFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchSessionFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchSessionFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'sessionValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEntityTypeFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'entityTypeValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2626,8 +2661,10 @@ describe('v3.AgentsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.securitySettingsPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.securitySettingsPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2654,9 +2691,8 @@ describe('v3.AgentsClient', () => {
       });
 
       it('matchSecuritySettingsFromSecuritySettingsName', () => {
-        const result = client.matchSecuritySettingsFromSecuritySettingsName(
-          fakePath
-        );
+        const result =
+          client.matchSecuritySettingsFromSecuritySettingsName(fakePath);
         assert.strictEqual(result, 'securitySettingsValue');
         assert(
           (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
@@ -2861,34 +2897,38 @@ describe('v3.AgentsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTransitionRouteGroupName', () => {
-        const result = client.matchProjectFromTransitionRouteGroupName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTransitionRouteGroupName', () => {
-        const result = client.matchLocationFromTransitionRouteGroupName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2898,8 +2938,10 @@ describe('v3.AgentsClient', () => {
         const result = client.matchAgentFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2909,21 +2951,26 @@ describe('v3.AgentsClient', () => {
         const result = client.matchFlowFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'flowValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTransitionRouteGroupFromTransitionRouteGroupName', () => {
-        const result = client.matchTransitionRouteGroupFromTransitionRouteGroupName(
-          fakePath
-        );
+        const result =
+          client.matchTransitionRouteGroupFromTransitionRouteGroupName(
+            fakePath
+          );
         assert.strictEqual(result, 'transitionRouteGroupValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

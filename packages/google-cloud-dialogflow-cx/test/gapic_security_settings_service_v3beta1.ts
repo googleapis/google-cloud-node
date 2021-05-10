@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -136,49 +135,46 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient();
+    const client =
+      new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-      {
+    const client =
+      new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-      {
+    const client =
+      new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.securitySettingsServiceStub, undefined);
     await client.initialize();
     assert(client.securitySettingsServiceStub);
   });
 
   it('has close method', () => {
-    const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-      {
+    const client =
+      new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-      {
+    const client =
+      new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -187,12 +183,11 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-      {
+    const client =
+      new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -211,12 +206,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
 
   describe('createSecuritySettings', () => {
     it('invokes createSecuritySettings without error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest()
@@ -233,9 +229,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
-      client.innerApiCalls.createSecuritySettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createSecuritySettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createSecuritySettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -246,12 +241,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes createSecuritySettings without error using callback', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest()
@@ -268,9 +264,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
-      client.innerApiCalls.createSecuritySettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createSecuritySettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createSecuritySettings(
           request,
@@ -296,12 +291,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes createSecuritySettings with error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateSecuritySettingsRequest()
@@ -334,12 +330,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
 
   describe('getSecuritySettings', () => {
     it('invokes getSecuritySettings without error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest()
@@ -356,9 +353,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
-      client.innerApiCalls.getSecuritySettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getSecuritySettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getSecuritySettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -369,12 +365,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes getSecuritySettings without error using callback', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest()
@@ -391,9 +388,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
-      client.innerApiCalls.getSecuritySettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getSecuritySettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getSecuritySettings(
           request,
@@ -419,12 +415,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes getSecuritySettings with error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetSecuritySettingsRequest()
@@ -454,12 +451,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
 
   describe('updateSecuritySettings', () => {
     it('invokes updateSecuritySettings without error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest()
@@ -477,9 +475,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
-      client.innerApiCalls.updateSecuritySettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSecuritySettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateSecuritySettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -490,12 +487,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes updateSecuritySettings without error using callback', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest()
@@ -513,9 +511,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
       );
-      client.innerApiCalls.updateSecuritySettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSecuritySettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateSecuritySettings(
           request,
@@ -541,12 +538,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes updateSecuritySettings with error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateSecuritySettingsRequest()
@@ -580,12 +578,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
 
   describe('deleteSecuritySettings', () => {
     it('invokes deleteSecuritySettings without error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest()
@@ -602,9 +601,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteSecuritySettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteSecuritySettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteSecuritySettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -615,12 +613,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes deleteSecuritySettings without error using callback', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest()
@@ -637,9 +636,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteSecuritySettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteSecuritySettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteSecuritySettings(
           request,
@@ -665,12 +663,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes deleteSecuritySettings with error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteSecuritySettingsRequest()
@@ -703,12 +702,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
 
   describe('listSecuritySettings', () => {
     it('invokes listSecuritySettings without error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
@@ -733,9 +733,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
           new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
         ),
       ];
-      client.innerApiCalls.listSecuritySettings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listSecuritySettings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listSecuritySettings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -746,12 +745,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes listSecuritySettings without error using callback', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
@@ -776,9 +776,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
           new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
         ),
       ];
-      client.innerApiCalls.listSecuritySettings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listSecuritySettings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listSecuritySettings(
           request,
@@ -806,12 +805,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes listSecuritySettings with error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
@@ -839,12 +839,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
     });
 
     it('invokes listSecuritySettingsStream without error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
@@ -862,12 +863,12 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
           new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
         ),
       ];
-      client.descriptors.page.listSecuritySettings.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSecuritySettings.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listSecuritySettingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings[] = [];
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings[] =
+          [];
         stream.on(
           'data',
           (
@@ -891,21 +892,21 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
           .calledWith(client.innerApiCalls.listSecuritySettings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listSecuritySettings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSecuritySettings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listSecuritySettingsStream with error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
@@ -913,13 +914,12 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listSecuritySettings.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listSecuritySettings.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listSecuritySettingsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings[] = [];
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings[] =
+          [];
         stream.on(
           'data',
           (
@@ -942,21 +942,21 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
           .calledWith(client.innerApiCalls.listSecuritySettings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listSecuritySettings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSecuritySettings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listSecuritySettings without error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
@@ -974,36 +974,37 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
           new protos.google.cloud.dialogflow.cx.v3beta1.SecuritySettings()
         ),
       ];
-      client.descriptors.page.listSecuritySettings.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings[] = [];
+      client.descriptors.page.listSecuritySettings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings[] =
+        [];
       const iterable = client.listSecuritySettingsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listSecuritySettings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listSecuritySettings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listSecuritySettings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSecuritySettings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listSecuritySettings with error', async () => {
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListSecuritySettingsRequest()
@@ -1011,27 +1012,26 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listSecuritySettings.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listSecuritySettings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listSecuritySettingsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings[] = [];
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.ISecuritySettings[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listSecuritySettings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listSecuritySettings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listSecuritySettings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSecuritySettings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1045,12 +1045,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         location: 'locationValue',
         agent: 'agentValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.agentPathTemplate.render = sinon
         .stub()
@@ -1111,12 +1112,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         location: 'locationValue',
         agent: 'agentValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.agentValidationResultPathTemplate.render = sinon
         .stub()
@@ -1133,34 +1135,38 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromAgentValidationResultName', () => {
-        const result = client.matchProjectFromAgentValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromAgentValidationResultName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromAgentValidationResultName', () => {
-        const result = client.matchLocationFromAgentValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromAgentValidationResultName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1170,8 +1176,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         const result = client.matchAgentFromAgentValidationResultName(fakePath);
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1186,12 +1194,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         agent: 'agentValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -1264,12 +1273,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         agent: 'agentValue',
         environment: 'environmentValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
@@ -1343,12 +1353,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         environment: 'environmentValue',
         experiment: 'experimentValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.experimentPathTemplate.render = sinon
         .stub()
@@ -1432,12 +1443,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         agent: 'agentValue',
         flow: 'flowValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.flowPathTemplate.render = sinon
         .stub()
@@ -1510,12 +1522,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         agent: 'agentValue',
         flow: 'flowValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.flowValidationResultPathTemplate.render = sinon
         .stub()
@@ -1533,34 +1546,38 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromFlowValidationResultName', () => {
-        const result = client.matchProjectFromFlowValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromFlowValidationResultName', () => {
-        const result = client.matchLocationFromFlowValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1570,8 +1587,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         const result = client.matchAgentFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1581,8 +1600,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         const result = client.matchFlowFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'flowValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1597,12 +1618,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         agent: 'agentValue',
         intent: 'intentValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.intentPathTemplate.render = sinon
         .stub()
@@ -1673,12 +1695,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -1727,12 +1750,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         flow: 'flowValue',
         page: 'pageValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.pagePathTemplate.render = sinon
         .stub()
@@ -1813,12 +1837,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -1859,118 +1884,138 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         session: 'sessionValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationAgentEnvironmentSessionEntityTypePath', () => {
-        const result = client.projectLocationAgentEnvironmentSessionEntityTypePath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'environmentValue',
-          'sessionValue',
-          'entityTypeValue'
-        );
+        const result =
+          client.projectLocationAgentEnvironmentSessionEntityTypePath(
+            'projectValue',
+            'locationValue',
+            'agentValue',
+            'environmentValue',
+            'sessionValue',
+            'entityTypeValue'
+          );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'environmentValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'sessionValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'entityTypeValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1986,19 +2031,18 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         session: 'sessionValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationAgentSessionEntityTypePath', () => {
         const result = client.projectLocationAgentSessionEntityTypePath(
@@ -2010,79 +2054,96 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchProjectFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchLocationFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAgentFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchAgentFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchAgentFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchSessionFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchSessionFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchSessionFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'sessionValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEntityTypeFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'entityTypeValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2096,12 +2157,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         location: 'locationValue',
         security_settings: 'securitySettingsValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.securitySettingsPathTemplate.render = sinon
         .stub()
@@ -2118,8 +2180,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.securitySettingsPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.securitySettingsPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2146,9 +2210,8 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       });
 
       it('matchSecuritySettingsFromSecuritySettingsName', () => {
-        const result = client.matchSecuritySettingsFromSecuritySettingsName(
-          fakePath
-        );
+        const result =
+          client.matchSecuritySettingsFromSecuritySettingsName(fakePath);
         assert.strictEqual(result, 'securitySettingsValue');
         assert(
           (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
@@ -2166,12 +2229,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         agent: 'agentValue',
         test_case: 'testCaseValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.testCasePathTemplate.render = sinon
         .stub()
@@ -2245,12 +2309,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         test_case: 'testCaseValue',
         result: 'resultValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.testCaseResultPathTemplate.render = sinon
         .stub()
@@ -2335,12 +2400,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         flow: 'flowValue',
         transition_route_group: 'transitionRouteGroupValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.transitionRouteGroupPathTemplate.render = sinon
         .stub()
@@ -2359,34 +2425,38 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTransitionRouteGroupName', () => {
-        const result = client.matchProjectFromTransitionRouteGroupName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTransitionRouteGroupName', () => {
-        const result = client.matchLocationFromTransitionRouteGroupName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2396,8 +2466,10 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         const result = client.matchAgentFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2407,21 +2479,26 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         const result = client.matchFlowFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'flowValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTransitionRouteGroupFromTransitionRouteGroupName', () => {
-        const result = client.matchTransitionRouteGroupFromTransitionRouteGroupName(
-          fakePath
-        );
+        const result =
+          client.matchTransitionRouteGroupFromTransitionRouteGroupName(
+            fakePath
+          );
         assert.strictEqual(result, 'transitionRouteGroupValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2437,12 +2514,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         flow: 'flowValue',
         version: 'versionValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
@@ -2526,12 +2604,13 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
         agent: 'agentValue',
         webhook: 'webhookValue',
       };
-      const client = new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.webhookPathTemplate.render = sinon
         .stub()

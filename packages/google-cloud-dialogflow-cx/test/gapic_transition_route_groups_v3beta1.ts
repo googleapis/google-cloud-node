@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -136,49 +135,46 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient();
+    const client =
+      new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-      {
+    const client =
+      new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-      {
+    const client =
+      new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.transitionRouteGroupsStub, undefined);
     await client.initialize();
     assert(client.transitionRouteGroupsStub);
   });
 
   it('has close method', () => {
-    const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-      {
+    const client =
+      new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-      {
+    const client =
+      new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -187,12 +183,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-      {
+    const client =
+      new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -211,12 +206,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
 
   describe('getTransitionRouteGroup', () => {
     it('invokes getTransitionRouteGroup without error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest()
@@ -233,9 +227,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
       );
-      client.innerApiCalls.getTransitionRouteGroup = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getTransitionRouteGroup =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getTransitionRouteGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -246,12 +239,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes getTransitionRouteGroup without error using callback', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest()
@@ -268,9 +260,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
       );
-      client.innerApiCalls.getTransitionRouteGroup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTransitionRouteGroup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTransitionRouteGroup(
           request,
@@ -296,12 +287,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes getTransitionRouteGroup with error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.GetTransitionRouteGroupRequest()
@@ -334,12 +324,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
 
   describe('createTransitionRouteGroup', () => {
     it('invokes createTransitionRouteGroup without error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest()
@@ -356,9 +345,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
       );
-      client.innerApiCalls.createTransitionRouteGroup = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createTransitionRouteGroup =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createTransitionRouteGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -369,12 +357,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes createTransitionRouteGroup without error using callback', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest()
@@ -391,9 +378,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
       );
-      client.innerApiCalls.createTransitionRouteGroup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTransitionRouteGroup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTransitionRouteGroup(
           request,
@@ -419,12 +405,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes createTransitionRouteGroup with error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.CreateTransitionRouteGroupRequest()
@@ -457,12 +442,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
 
   describe('updateTransitionRouteGroup', () => {
     it('invokes updateTransitionRouteGroup without error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateTransitionRouteGroupRequest()
@@ -480,9 +464,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
       );
-      client.innerApiCalls.updateTransitionRouteGroup = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTransitionRouteGroup =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateTransitionRouteGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -493,12 +476,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes updateTransitionRouteGroup without error using callback', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateTransitionRouteGroupRequest()
@@ -516,9 +498,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
       );
-      client.innerApiCalls.updateTransitionRouteGroup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTransitionRouteGroup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateTransitionRouteGroup(
           request,
@@ -544,12 +525,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes updateTransitionRouteGroup with error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.UpdateTransitionRouteGroupRequest()
@@ -583,12 +563,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
 
   describe('deleteTransitionRouteGroup', () => {
     it('invokes deleteTransitionRouteGroup without error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest()
@@ -605,9 +584,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteTransitionRouteGroup = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTransitionRouteGroup =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTransitionRouteGroup(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -618,12 +596,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes deleteTransitionRouteGroup without error using callback', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest()
@@ -640,9 +617,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteTransitionRouteGroup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTransitionRouteGroup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTransitionRouteGroup(
           request,
@@ -668,12 +644,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes deleteTransitionRouteGroup with error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.DeleteTransitionRouteGroupRequest()
@@ -706,12 +681,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
 
   describe('listTransitionRouteGroups', () => {
     it('invokes listTransitionRouteGroups without error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
@@ -736,9 +710,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
           new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
         ),
       ];
-      client.innerApiCalls.listTransitionRouteGroups = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransitionRouteGroups =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listTransitionRouteGroups(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -749,12 +722,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes listTransitionRouteGroups without error using callback', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
@@ -779,9 +751,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
           new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
         ),
       ];
-      client.innerApiCalls.listTransitionRouteGroups = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransitionRouteGroups =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTransitionRouteGroups(
           request,
@@ -809,12 +780,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes listTransitionRouteGroups with error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
@@ -845,12 +815,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
     });
 
     it('invokes listTransitionRouteGroupsStream without error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
@@ -868,12 +837,12 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
           new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
         ),
       ];
-      client.descriptors.page.listTransitionRouteGroups.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTransitionRouteGroups.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTransitionRouteGroupsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup[] = [];
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup[] =
+          [];
         stream.on(
           'data',
           (
@@ -892,27 +861,28 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listTransitionRouteGroups
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTransitionRouteGroups
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransitionRouteGroups, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransitionRouteGroups
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransitionRouteGroups
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listTransitionRouteGroupsStream with error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
@@ -920,13 +890,12 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransitionRouteGroups.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransitionRouteGroups.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTransitionRouteGroupsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup[] = [];
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup[] =
+          [];
         stream.on(
           'data',
           (
@@ -944,27 +913,28 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listTransitionRouteGroups
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTransitionRouteGroups
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransitionRouteGroups, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransitionRouteGroups
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransitionRouteGroups
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTransitionRouteGroups without error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
@@ -982,36 +952,37 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
           new protos.google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup()
         ),
       ];
-      client.descriptors.page.listTransitionRouteGroups.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup[] = [];
+      client.descriptors.page.listTransitionRouteGroups.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup[] =
+        [];
       const iterable = client.listTransitionRouteGroupsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransitionRouteGroups
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransitionRouteGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransitionRouteGroups
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransitionRouteGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listTransitionRouteGroups with error', async () => {
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.cx.v3beta1.ListTransitionRouteGroupsRequest()
@@ -1019,27 +990,28 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransitionRouteGroups.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransitionRouteGroups.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTransitionRouteGroupsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup[] = [];
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.ITransitionRouteGroup[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransitionRouteGroups
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransitionRouteGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransitionRouteGroups
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransitionRouteGroups
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1053,12 +1025,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         location: 'locationValue',
         agent: 'agentValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.agentPathTemplate.render = sinon
         .stub()
@@ -1119,12 +1090,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         location: 'locationValue',
         agent: 'agentValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.agentValidationResultPathTemplate.render = sinon
         .stub()
@@ -1141,34 +1111,38 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromAgentValidationResultName', () => {
-        const result = client.matchProjectFromAgentValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromAgentValidationResultName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromAgentValidationResultName', () => {
-        const result = client.matchLocationFromAgentValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromAgentValidationResultName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1178,8 +1152,10 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         const result = client.matchAgentFromAgentValidationResultName(fakePath);
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates.agentValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1194,12 +1170,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         agent: 'agentValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.entityTypePathTemplate.render = sinon
         .stub()
@@ -1272,12 +1247,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         agent: 'agentValue',
         environment: 'environmentValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.environmentPathTemplate.render = sinon
         .stub()
@@ -1351,12 +1325,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         environment: 'environmentValue',
         experiment: 'experimentValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.experimentPathTemplate.render = sinon
         .stub()
@@ -1440,12 +1413,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         agent: 'agentValue',
         flow: 'flowValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.flowPathTemplate.render = sinon
         .stub()
@@ -1518,12 +1490,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         agent: 'agentValue',
         flow: 'flowValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.flowValidationResultPathTemplate.render = sinon
         .stub()
@@ -1541,34 +1512,38 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromFlowValidationResultName', () => {
-        const result = client.matchProjectFromFlowValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromFlowValidationResultName', () => {
-        const result = client.matchLocationFromFlowValidationResultName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1578,8 +1553,10 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         const result = client.matchAgentFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1589,8 +1566,10 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         const result = client.matchFlowFromFlowValidationResultName(fakePath);
         assert.strictEqual(result, 'flowValue');
         assert(
-          (client.pathTemplates.flowValidationResultPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.flowValidationResultPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1605,12 +1584,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         agent: 'agentValue',
         intent: 'intentValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.intentPathTemplate.render = sinon
         .stub()
@@ -1681,12 +1659,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         project: 'projectValue',
         location: 'locationValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.locationPathTemplate.render = sinon
         .stub()
@@ -1735,12 +1712,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         flow: 'flowValue',
         page: 'pageValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.pagePathTemplate.render = sinon
         .stub()
@@ -1821,12 +1797,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       const expectedParameters = {
         project: 'projectValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.projectPathTemplate.render = sinon
         .stub()
@@ -1867,118 +1842,136 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         session: 'sessionValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAgentEnvironmentSessionEntityTypePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationAgentEnvironmentSessionEntityTypePath', () => {
-        const result = client.projectLocationAgentEnvironmentSessionEntityTypePath(
-          'projectValue',
-          'locationValue',
-          'agentValue',
-          'environmentValue',
-          'sessionValue',
-          'entityTypeValue'
-        );
+        const result =
+          client.projectLocationAgentEnvironmentSessionEntityTypePath(
+            'projectValue',
+            'locationValue',
+            'agentValue',
+            'environmentValue',
+            'sessionValue',
+            'entityTypeValue'
+          );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchAgentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchEnvironmentFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'environmentValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchSessionFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'sessionValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName', () => {
-        const result = client.matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchEntityTypeFromProjectLocationAgentEnvironmentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'entityTypeValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentEnvironmentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1994,19 +1987,16 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         session: 'sessionValue',
         entity_type: 'entityTypeValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationAgentSessionEntityTypePath', () => {
         const result = client.projectLocationAgentSessionEntityTypePath(
@@ -2018,79 +2008,96 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchProjectFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchLocationFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchAgentFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchAgentFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchAgentFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchSessionFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchSessionFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchSessionFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'sessionValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchEntityTypeFromProjectLocationAgentSessionEntityTypeName', () => {
-        const result = client.matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
-          fakePath
-        );
+        const result =
+          client.matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
+            fakePath
+          );
         assert.strictEqual(result, 'entityTypeValue');
         assert(
-          (client.pathTemplates
-            .projectLocationAgentSessionEntityTypePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates
+              .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2104,12 +2111,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         location: 'locationValue',
         security_settings: 'securitySettingsValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.securitySettingsPathTemplate.render = sinon
         .stub()
@@ -2126,8 +2132,10 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.securitySettingsPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.securitySettingsPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2154,9 +2162,8 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       });
 
       it('matchSecuritySettingsFromSecuritySettingsName', () => {
-        const result = client.matchSecuritySettingsFromSecuritySettingsName(
-          fakePath
-        );
+        const result =
+          client.matchSecuritySettingsFromSecuritySettingsName(fakePath);
         assert.strictEqual(result, 'securitySettingsValue');
         assert(
           (client.pathTemplates.securitySettingsPathTemplate.match as SinonStub)
@@ -2174,12 +2181,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         agent: 'agentValue',
         test_case: 'testCaseValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.testCasePathTemplate.render = sinon
         .stub()
@@ -2253,12 +2259,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         test_case: 'testCaseValue',
         result: 'resultValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.testCaseResultPathTemplate.render = sinon
         .stub()
@@ -2343,12 +2348,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         flow: 'flowValue',
         transition_route_group: 'transitionRouteGroupValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.transitionRouteGroupPathTemplate.render = sinon
         .stub()
@@ -2367,34 +2371,38 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromTransitionRouteGroupName', () => {
-        const result = client.matchProjectFromTransitionRouteGroupName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromTransitionRouteGroupName', () => {
-        const result = client.matchLocationFromTransitionRouteGroupName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2404,8 +2412,10 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         const result = client.matchAgentFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'agentValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2415,21 +2425,26 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         const result = client.matchFlowFromTransitionRouteGroupName(fakePath);
         assert.strictEqual(result, 'flowValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTransitionRouteGroupFromTransitionRouteGroupName', () => {
-        const result = client.matchTransitionRouteGroupFromTransitionRouteGroupName(
-          fakePath
-        );
+        const result =
+          client.matchTransitionRouteGroupFromTransitionRouteGroupName(
+            fakePath
+          );
         assert.strictEqual(result, 'transitionRouteGroupValue');
         assert(
-          (client.pathTemplates.transitionRouteGroupPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.transitionRouteGroupPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2445,12 +2460,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         flow: 'flowValue',
         version: 'versionValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.versionPathTemplate.render = sinon
         .stub()
@@ -2534,12 +2548,11 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
         agent: 'agentValue',
         webhook: 'webhookValue',
       };
-      const client = new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient(
-        {
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.webhookPathTemplate.render = sinon
         .stub()

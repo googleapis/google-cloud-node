@@ -1180,10 +1180,10 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3.IExportAgentResponse);
 
                         /** ExportAgentResponse agentUri. */
-                        public agentUri: string;
+                        public agentUri?: (string|null);
 
                         /** ExportAgentResponse agentContent. */
-                        public agentContent: (Uint8Array|string);
+                        public agentContent?: (Uint8Array|string|null);
 
                         /** ExportAgentResponse agent. */
                         public agent?: ("agentUri"|"agentContent");
@@ -1288,10 +1288,10 @@ export namespace google {
                         public name: string;
 
                         /** RestoreAgentRequest agentUri. */
-                        public agentUri: string;
+                        public agentUri?: (string|null);
 
                         /** RestoreAgentRequest agentContent. */
-                        public agentContent: (Uint8Array|string);
+                        public agentContent?: (Uint8Array|string|null);
 
                         /** RestoreAgentRequest restoreOption. */
                         public restoreOption: (google.cloud.dialogflow.cx.v3.RestoreAgentRequest.RestoreOption|keyof typeof google.cloud.dialogflow.cx.v3.RestoreAgentRequest.RestoreOption);
@@ -3160,10 +3160,10 @@ export namespace google {
                         public parent: string;
 
                         /** ImportFlowRequest flowUri. */
-                        public flowUri: string;
+                        public flowUri?: (string|null);
 
                         /** ImportFlowRequest flowContent. */
-                        public flowContent: (Uint8Array|string);
+                        public flowContent?: (Uint8Array|string|null);
 
                         /** ImportFlowRequest importOption. */
                         public importOption: (google.cloud.dialogflow.cx.v3.ImportFlowRequest.ImportOption|keyof typeof google.cloud.dialogflow.cx.v3.ImportFlowRequest.ImportOption);
@@ -3464,10 +3464,10 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3.IExportFlowResponse);
 
                         /** ExportFlowResponse flowUri. */
-                        public flowUri: string;
+                        public flowUri?: (string|null);
 
                         /** ExportFlowResponse flowContent. */
-                        public flowContent: (Uint8Array|string);
+                        public flowContent?: (Uint8Array|string|null);
 
                         /** ExportFlowResponse flow. */
                         public flow?: ("flowUri"|"flowContent");
@@ -4154,10 +4154,10 @@ export namespace google {
                         public triggerFulfillment?: (google.cloud.dialogflow.cx.v3.IFulfillment|null);
 
                         /** EventHandler targetPage. */
-                        public targetPage: string;
+                        public targetPage?: (string|null);
 
                         /** EventHandler targetFlow. */
-                        public targetFlow: string;
+                        public targetFlow?: (string|null);
 
                         /** EventHandler target. */
                         public target?: ("targetPage"|"targetFlow");
@@ -4277,10 +4277,10 @@ export namespace google {
                         public triggerFulfillment?: (google.cloud.dialogflow.cx.v3.IFulfillment|null);
 
                         /** TransitionRoute targetPage. */
-                        public targetPage: string;
+                        public targetPage?: (string|null);
 
                         /** TransitionRoute targetFlow. */
-                        public targetFlow: string;
+                        public targetFlow?: (string|null);
 
                         /** TransitionRoute target. */
                         public target?: ("targetPage"|"targetFlow");
@@ -5896,10 +5896,10 @@ export namespace google {
                             constructor(properties?: google.cloud.dialogflow.cx.v3.ResponseMessage.IOutputAudioText);
 
                             /** OutputAudioText text. */
-                            public text: string;
+                            public text?: (string|null);
 
                             /** OutputAudioText ssml. */
-                            public ssml: string;
+                            public ssml?: (string|null);
 
                             /** OutputAudioText allowPlaybackInterruption. */
                             public allowPlaybackInterruption: boolean;
@@ -6273,10 +6273,10 @@ export namespace google {
                                 constructor(properties?: google.cloud.dialogflow.cx.v3.ResponseMessage.MixedAudio.ISegment);
 
                                 /** Segment audio. */
-                                public audio: (Uint8Array|string);
+                                public audio?: (Uint8Array|string|null);
 
                                 /** Segment uri. */
-                                public uri: string;
+                                public uri?: (string|null);
 
                                 /** Segment allowPlaybackInterruption. */
                                 public allowPlaybackInterruption: boolean;
@@ -7345,7 +7345,7 @@ export namespace google {
                         public inspectTemplate: string;
 
                         /** SecuritySettings retentionWindowDays. */
-                        public retentionWindowDays: number;
+                        public retentionWindowDays?: (number|null);
 
                         /** SecuritySettings purgeDataTypes. */
                         public purgeDataTypes: google.cloud.dialogflow.cx.v3.SecuritySettings.PurgeDataType[];
@@ -13577,10 +13577,10 @@ export namespace google {
                         public parent: string;
 
                         /** ImportTestCasesRequest gcsUri. */
-                        public gcsUri: string;
+                        public gcsUri?: (string|null);
 
                         /** ImportTestCasesRequest content. */
-                        public content: (Uint8Array|string);
+                        public content?: (Uint8Array|string|null);
 
                         /** ImportTestCasesRequest source. */
                         public source?: ("gcsUri"|"content");
@@ -13961,7 +13961,7 @@ export namespace google {
                         public parent: string;
 
                         /** ExportTestCasesRequest gcsUri. */
-                        public gcsUri: string;
+                        public gcsUri?: (string|null);
 
                         /** ExportTestCasesRequest dataFormat. */
                         public dataFormat: (google.cloud.dialogflow.cx.v3.ExportTestCasesRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3.ExportTestCasesRequest.DataFormat);
@@ -14073,10 +14073,10 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3.IExportTestCasesResponse);
 
                         /** ExportTestCasesResponse gcsUri. */
-                        public gcsUri: string;
+                        public gcsUri?: (string|null);
 
                         /** ExportTestCasesResponse content. */
-                        public content: (Uint8Array|string);
+                        public content?: (Uint8Array|string|null);
 
                         /** ExportTestCasesResponse destination. */
                         public destination?: ("gcsUri"|"content");
@@ -16704,16 +16704,16 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3.IQueryResult);
 
                         /** QueryResult text. */
-                        public text: string;
+                        public text?: (string|null);
 
                         /** QueryResult triggerIntent. */
-                        public triggerIntent: string;
+                        public triggerIntent?: (string|null);
 
                         /** QueryResult transcript. */
-                        public transcript: string;
+                        public transcript?: (string|null);
 
                         /** QueryResult triggerEvent. */
-                        public triggerEvent: string;
+                        public triggerEvent?: (string|null);
 
                         /** QueryResult languageCode. */
                         public languageCode: string;
@@ -17552,16 +17552,16 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3.IMatchIntentResponse);
 
                         /** MatchIntentResponse text. */
-                        public text: string;
+                        public text?: (string|null);
 
                         /** MatchIntentResponse triggerIntent. */
-                        public triggerIntent: string;
+                        public triggerIntent?: (string|null);
 
                         /** MatchIntentResponse transcript. */
-                        public transcript: string;
+                        public transcript?: (string|null);
 
                         /** MatchIntentResponse triggerEvent. */
-                        public triggerEvent: string;
+                        public triggerEvent?: (string|null);
 
                         /** MatchIntentResponse matches. */
                         public matches: google.cloud.dialogflow.cx.v3.IMatch[];
@@ -20260,10 +20260,10 @@ export namespace google {
                                 public countType: (google.cloud.dialogflow.cx.v3.Experiment.Result.CountType|keyof typeof google.cloud.dialogflow.cx.v3.Experiment.Result.CountType);
 
                                 /** Metric ratio. */
-                                public ratio: number;
+                                public ratio?: (number|null);
 
                                 /** Metric count. */
-                                public count: number;
+                                public count?: (number|null);
 
                                 /** Metric confidenceInterval. */
                                 public confidenceInterval?: (google.cloud.dialogflow.cx.v3.Experiment.Result.IConfidenceInterval|null);
@@ -23542,16 +23542,16 @@ export namespace google {
                         public detectIntentResponseId: string;
 
                         /** WebhookRequest text. */
-                        public text: string;
+                        public text?: (string|null);
 
                         /** WebhookRequest triggerIntent. */
-                        public triggerIntent: string;
+                        public triggerIntent?: (string|null);
 
                         /** WebhookRequest transcript. */
-                        public transcript: string;
+                        public transcript?: (string|null);
 
                         /** WebhookRequest triggerEvent. */
-                        public triggerEvent: string;
+                        public triggerEvent?: (string|null);
 
                         /** WebhookRequest languageCode. */
                         public languageCode: string;
@@ -24091,10 +24091,10 @@ export namespace google {
                         public payload?: (google.protobuf.IStruct|null);
 
                         /** WebhookResponse targetPage. */
-                        public targetPage: string;
+                        public targetPage?: (string|null);
 
                         /** WebhookResponse targetFlow. */
-                        public targetFlow: string;
+                        public targetFlow?: (string|null);
 
                         /** WebhookResponse transition. */
                         public transition?: ("targetPage"|"targetFlow");
@@ -25847,10 +25847,10 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IExportAgentResponse);
 
                         /** ExportAgentResponse agentUri. */
-                        public agentUri: string;
+                        public agentUri?: (string|null);
 
                         /** ExportAgentResponse agentContent. */
-                        public agentContent: (Uint8Array|string);
+                        public agentContent?: (Uint8Array|string|null);
 
                         /** ExportAgentResponse agent. */
                         public agent?: ("agentUri"|"agentContent");
@@ -25955,10 +25955,10 @@ export namespace google {
                         public name: string;
 
                         /** RestoreAgentRequest agentUri. */
-                        public agentUri: string;
+                        public agentUri?: (string|null);
 
                         /** RestoreAgentRequest agentContent. */
-                        public agentContent: (Uint8Array|string);
+                        public agentContent?: (Uint8Array|string|null);
 
                         /** RestoreAgentRequest restoreOption. */
                         public restoreOption: (google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.RestoreOption|keyof typeof google.cloud.dialogflow.cx.v3beta1.RestoreAgentRequest.RestoreOption);
@@ -27827,10 +27827,10 @@ export namespace google {
                         public parent: string;
 
                         /** ImportFlowRequest flowUri. */
-                        public flowUri: string;
+                        public flowUri?: (string|null);
 
                         /** ImportFlowRequest flowContent. */
-                        public flowContent: (Uint8Array|string);
+                        public flowContent?: (Uint8Array|string|null);
 
                         /** ImportFlowRequest importOption. */
                         public importOption: (google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption|keyof typeof google.cloud.dialogflow.cx.v3beta1.ImportFlowRequest.ImportOption);
@@ -28131,10 +28131,10 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IExportFlowResponse);
 
                         /** ExportFlowResponse flowUri. */
-                        public flowUri: string;
+                        public flowUri?: (string|null);
 
                         /** ExportFlowResponse flowContent. */
-                        public flowContent: (Uint8Array|string);
+                        public flowContent?: (Uint8Array|string|null);
 
                         /** ExportFlowResponse flow. */
                         public flow?: ("flowUri"|"flowContent");
@@ -28821,10 +28821,10 @@ export namespace google {
                         public triggerFulfillment?: (google.cloud.dialogflow.cx.v3beta1.IFulfillment|null);
 
                         /** EventHandler targetPage. */
-                        public targetPage: string;
+                        public targetPage?: (string|null);
 
                         /** EventHandler targetFlow. */
-                        public targetFlow: string;
+                        public targetFlow?: (string|null);
 
                         /** EventHandler target. */
                         public target?: ("targetPage"|"targetFlow");
@@ -28944,10 +28944,10 @@ export namespace google {
                         public triggerFulfillment?: (google.cloud.dialogflow.cx.v3beta1.IFulfillment|null);
 
                         /** TransitionRoute targetPage. */
-                        public targetPage: string;
+                        public targetPage?: (string|null);
 
                         /** TransitionRoute targetFlow. */
-                        public targetFlow: string;
+                        public targetFlow?: (string|null);
 
                         /** TransitionRoute target. */
                         public target?: ("targetPage"|"targetFlow");
@@ -30563,10 +30563,10 @@ export namespace google {
                             constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.IOutputAudioText);
 
                             /** OutputAudioText text. */
-                            public text: string;
+                            public text?: (string|null);
 
                             /** OutputAudioText ssml. */
-                            public ssml: string;
+                            public ssml?: (string|null);
 
                             /** OutputAudioText allowPlaybackInterruption. */
                             public allowPlaybackInterruption: boolean;
@@ -30940,10 +30940,10 @@ export namespace google {
                                 constructor(properties?: google.cloud.dialogflow.cx.v3beta1.ResponseMessage.MixedAudio.ISegment);
 
                                 /** Segment audio. */
-                                public audio: (Uint8Array|string);
+                                public audio?: (Uint8Array|string|null);
 
                                 /** Segment uri. */
-                                public uri: string;
+                                public uri?: (string|null);
 
                                 /** Segment allowPlaybackInterruption. */
                                 public allowPlaybackInterruption: boolean;
@@ -32012,7 +32012,7 @@ export namespace google {
                         public inspectTemplate: string;
 
                         /** SecuritySettings retentionWindowDays. */
-                        public retentionWindowDays: number;
+                        public retentionWindowDays?: (number|null);
 
                         /** SecuritySettings purgeDataTypes. */
                         public purgeDataTypes: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.PurgeDataType[];
@@ -38244,10 +38244,10 @@ export namespace google {
                         public parent: string;
 
                         /** ImportTestCasesRequest gcsUri. */
-                        public gcsUri: string;
+                        public gcsUri?: (string|null);
 
                         /** ImportTestCasesRequest content. */
-                        public content: (Uint8Array|string);
+                        public content?: (Uint8Array|string|null);
 
                         /** ImportTestCasesRequest source. */
                         public source?: ("gcsUri"|"content");
@@ -38628,7 +38628,7 @@ export namespace google {
                         public parent: string;
 
                         /** ExportTestCasesRequest gcsUri. */
-                        public gcsUri: string;
+                        public gcsUri?: (string|null);
 
                         /** ExportTestCasesRequest dataFormat. */
                         public dataFormat: (google.cloud.dialogflow.cx.v3beta1.ExportTestCasesRequest.DataFormat|keyof typeof google.cloud.dialogflow.cx.v3beta1.ExportTestCasesRequest.DataFormat);
@@ -38740,10 +38740,10 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IExportTestCasesResponse);
 
                         /** ExportTestCasesResponse gcsUri. */
-                        public gcsUri: string;
+                        public gcsUri?: (string|null);
 
                         /** ExportTestCasesResponse content. */
-                        public content: (Uint8Array|string);
+                        public content?: (Uint8Array|string|null);
 
                         /** ExportTestCasesResponse destination. */
                         public destination?: ("gcsUri"|"content");
@@ -41371,16 +41371,16 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IQueryResult);
 
                         /** QueryResult text. */
-                        public text: string;
+                        public text?: (string|null);
 
                         /** QueryResult triggerIntent. */
-                        public triggerIntent: string;
+                        public triggerIntent?: (string|null);
 
                         /** QueryResult transcript. */
-                        public transcript: string;
+                        public transcript?: (string|null);
 
                         /** QueryResult triggerEvent. */
-                        public triggerEvent: string;
+                        public triggerEvent?: (string|null);
 
                         /** QueryResult languageCode. */
                         public languageCode: string;
@@ -42219,16 +42219,16 @@ export namespace google {
                         constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IMatchIntentResponse);
 
                         /** MatchIntentResponse text. */
-                        public text: string;
+                        public text?: (string|null);
 
                         /** MatchIntentResponse triggerIntent. */
-                        public triggerIntent: string;
+                        public triggerIntent?: (string|null);
 
                         /** MatchIntentResponse transcript. */
-                        public transcript: string;
+                        public transcript?: (string|null);
 
                         /** MatchIntentResponse triggerEvent. */
-                        public triggerEvent: string;
+                        public triggerEvent?: (string|null);
 
                         /** MatchIntentResponse matches. */
                         public matches: google.cloud.dialogflow.cx.v3beta1.IMatch[];
@@ -44927,10 +44927,10 @@ export namespace google {
                                 public countType: (google.cloud.dialogflow.cx.v3beta1.Experiment.Result.CountType|keyof typeof google.cloud.dialogflow.cx.v3beta1.Experiment.Result.CountType);
 
                                 /** Metric ratio. */
-                                public ratio: number;
+                                public ratio?: (number|null);
 
                                 /** Metric count. */
-                                public count: number;
+                                public count?: (number|null);
 
                                 /** Metric confidenceInterval. */
                                 public confidenceInterval?: (google.cloud.dialogflow.cx.v3beta1.Experiment.Result.IConfidenceInterval|null);
@@ -48209,16 +48209,16 @@ export namespace google {
                         public detectIntentResponseId: string;
 
                         /** WebhookRequest text. */
-                        public text: string;
+                        public text?: (string|null);
 
                         /** WebhookRequest triggerIntent. */
-                        public triggerIntent: string;
+                        public triggerIntent?: (string|null);
 
                         /** WebhookRequest transcript. */
-                        public transcript: string;
+                        public transcript?: (string|null);
 
                         /** WebhookRequest triggerEvent. */
-                        public triggerEvent: string;
+                        public triggerEvent?: (string|null);
 
                         /** WebhookRequest languageCode. */
                         public languageCode: string;
@@ -48758,10 +48758,10 @@ export namespace google {
                         public payload?: (google.protobuf.IStruct|null);
 
                         /** WebhookResponse targetPage. */
-                        public targetPage: string;
+                        public targetPage?: (string|null);
 
                         /** WebhookResponse targetFlow. */
-                        public targetFlow: string;
+                        public targetFlow?: (string|null);
 
                         /** WebhookResponse transition. */
                         public transition?: ("targetPage"|"targetFlow");
@@ -49509,19 +49509,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
@@ -53209,16 +53209,16 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue. */
-            public numberValue: number;
+            public numberValue?: (number|null);
 
             /** Value stringValue. */
-            public stringValue: string;
+            public stringValue?: (string|null);
 
             /** Value boolValue. */
-            public boolValue: boolean;
+            public boolValue?: (boolean|null);
 
             /** Value structValue. */
             public structValue?: (google.protobuf.IStruct|null);
