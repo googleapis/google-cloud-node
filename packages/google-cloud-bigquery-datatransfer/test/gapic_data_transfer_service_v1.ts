@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -253,9 +252,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
       );
-      client.innerApiCalls.getDataSource = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDataSource =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDataSource(
           request,
@@ -338,9 +336,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
-      client.innerApiCalls.createTransferConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createTransferConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createTransferConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -373,9 +370,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
-      client.innerApiCalls.createTransferConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTransferConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTransferConfig(
           request,
@@ -459,9 +455,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
-      client.innerApiCalls.updateTransferConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTransferConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateTransferConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -495,9 +490,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
-      client.innerApiCalls.updateTransferConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTransferConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateTransferConfig(
           request,
@@ -581,9 +575,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteTransferConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTransferConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteTransferConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -616,9 +609,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteTransferConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTransferConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTransferConfig(
           request,
@@ -734,9 +726,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
       );
-      client.innerApiCalls.getTransferConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTransferConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTransferConfig(
           request,
@@ -819,9 +810,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse()
       );
-      client.innerApiCalls.scheduleTransferRuns = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.scheduleTransferRuns =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.scheduleTransferRuns(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -854,9 +844,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsResponse()
       );
-      client.innerApiCalls.scheduleTransferRuns = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.scheduleTransferRuns =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.scheduleTransferRuns(
           request,
@@ -939,9 +928,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse()
       );
-      client.innerApiCalls.startManualTransferRuns = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.startManualTransferRuns =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.startManualTransferRuns(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -974,9 +962,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.StartManualTransferRunsResponse()
       );
-      client.innerApiCalls.startManualTransferRuns = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.startManualTransferRuns =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.startManualTransferRuns(
           request,
@@ -1095,9 +1082,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
       );
-      client.innerApiCalls.getTransferRun = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTransferRun =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTransferRun(
           request,
@@ -1213,9 +1199,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteTransferRun = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTransferRun =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTransferRun(
           request,
@@ -1331,9 +1316,8 @@ describe('v1.DataTransferServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.CheckValidCredsResponse()
       );
-      client.innerApiCalls.checkValidCreds = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.checkValidCreds =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.checkValidCreds(
           request,
@@ -1465,9 +1449,8 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
         ),
       ];
-      client.innerApiCalls.listDataSources = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDataSources =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDataSources(
           request,
@@ -1551,12 +1534,12 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
         ),
       ];
-      client.descriptors.page.listDataSources.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDataSources.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDataSourcesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.DataSource[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.DataSource[] =
+          [];
         stream.on(
           'data',
           (
@@ -1580,10 +1563,9 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(client.innerApiCalls.listDataSources, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataSources
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataSources.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1602,13 +1584,12 @@ describe('v1.DataTransferServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDataSources.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDataSources.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listDataSourcesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.DataSource[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.DataSource[] =
+          [];
         stream.on(
           'data',
           (
@@ -1631,10 +1612,9 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(client.innerApiCalls.listDataSources, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataSources
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataSources.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1663,25 +1643,25 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.DataSource()
         ),
       ];
-      client.descriptors.page.listDataSources.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.bigquery.datatransfer.v1.IDataSource[] = [];
+      client.descriptors.page.listDataSources.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.bigquery.datatransfer.v1.IDataSource[] =
+        [];
       const iterable = client.listDataSourcesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDataSources
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDataSources.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataSources
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataSources.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1700,27 +1680,26 @@ describe('v1.DataTransferServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDataSources.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDataSources.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDataSourcesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.IDataSource[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.IDataSource[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDataSources
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDataSources.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDataSources
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDataSources.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1758,9 +1737,8 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
         ),
       ];
-      client.innerApiCalls.listTransferConfigs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransferConfigs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listTransferConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1801,9 +1779,8 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
         ),
       ];
-      client.innerApiCalls.listTransferConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransferConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTransferConfigs(
           request,
@@ -1887,12 +1864,12 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
         ),
       ];
-      client.descriptors.page.listTransferConfigs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTransferConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTransferConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferConfig[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferConfig[] =
+          [];
         stream.on(
           'data',
           (
@@ -1916,10 +1893,9 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(client.innerApiCalls.listTransferConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1938,13 +1914,12 @@ describe('v1.DataTransferServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferConfigs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTransferConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferConfig[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferConfig[] =
+          [];
         stream.on(
           'data',
           (
@@ -1967,10 +1942,9 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(client.innerApiCalls.listTransferConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1999,25 +1973,25 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferConfig()
         ),
       ];
-      client.descriptors.page.listTransferConfigs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig[] = [];
+      client.descriptors.page.listTransferConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig[] =
+        [];
       const iterable = client.listTransferConfigsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2036,27 +2010,26 @@ describe('v1.DataTransferServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferConfigs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTransferConfigsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferConfig[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2135,9 +2108,8 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
         ),
       ];
-      client.innerApiCalls.listTransferRuns = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransferRuns =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTransferRuns(
           request,
@@ -2221,12 +2193,12 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
         ),
       ];
-      client.descriptors.page.listTransferRuns.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTransferRuns.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTransferRunsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferRun[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferRun[] =
+          [];
         stream.on(
           'data',
           (
@@ -2250,10 +2222,9 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(client.innerApiCalls.listTransferRuns, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferRuns
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferRuns.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2272,13 +2243,12 @@ describe('v1.DataTransferServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferRuns.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferRuns.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTransferRunsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferRun[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferRun[] =
+          [];
         stream.on(
           'data',
           (
@@ -2301,10 +2271,9 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(client.innerApiCalls.listTransferRuns, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferRuns
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferRuns.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2333,25 +2302,25 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferRun()
         ),
       ];
-      client.descriptors.page.listTransferRuns.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferRun[] = [];
+      client.descriptors.page.listTransferRuns.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferRun[] =
+        [];
       const iterable = client.listTransferRunsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferRuns
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferRuns
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferRuns.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2370,27 +2339,26 @@ describe('v1.DataTransferServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferRuns.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferRuns.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTransferRunsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferRun[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferRun[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferRuns
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferRuns.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferRuns
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferRuns.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2469,9 +2437,8 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferMessage()
         ),
       ];
-      client.innerApiCalls.listTransferLogs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransferLogs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTransferLogs(
           request,
@@ -2555,12 +2522,12 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferMessage()
         ),
       ];
-      client.descriptors.page.listTransferLogs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTransferLogs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTransferLogsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferMessage[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferMessage[] =
+          [];
         stream.on(
           'data',
           (
@@ -2584,10 +2551,9 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(client.innerApiCalls.listTransferLogs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferLogs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferLogs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2606,13 +2572,12 @@ describe('v1.DataTransferServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferLogs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferLogs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTransferLogsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferMessage[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.TransferMessage[] =
+          [];
         stream.on(
           'data',
           (
@@ -2635,10 +2600,9 @@ describe('v1.DataTransferServiceClient', () => {
           .calledWith(client.innerApiCalls.listTransferLogs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferLogs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferLogs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2667,25 +2631,25 @@ describe('v1.DataTransferServiceClient', () => {
           new protos.google.cloud.bigquery.datatransfer.v1.TransferMessage()
         ),
       ];
-      client.descriptors.page.listTransferLogs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage[] = [];
+      client.descriptors.page.listTransferLogs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage[] =
+        [];
       const iterable = client.listTransferLogsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferLogs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferLogs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferLogs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferLogs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2704,27 +2668,26 @@ describe('v1.DataTransferServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferLogs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferLogs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTransferLogsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage[] = [];
+        const responses: protos.google.cloud.bigquery.datatransfer.v1.ITransferMessage[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferLogs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferLogs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferLogs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferLogs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2798,8 +2761,10 @@ describe('v1.DataTransferServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectDataSourcePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectDataSourcePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2809,21 +2774,24 @@ describe('v1.DataTransferServiceClient', () => {
         const result = client.matchProjectFromProjectDataSourceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectDataSourcePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectDataSourcePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDataSourceFromProjectDataSourceName', () => {
-        const result = client.matchDataSourceFromProjectDataSourceName(
-          fakePath
-        );
+        const result =
+          client.matchDataSourceFromProjectDataSourceName(fakePath);
         assert.strictEqual(result, 'dataSourceValue');
         assert(
-          (client.pathTemplates.projectDataSourcePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectDataSourcePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2859,47 +2827,52 @@ describe('v1.DataTransferServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationDataSourcePathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationDataSourcePathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationDataSourceName', () => {
-        const result = client.matchProjectFromProjectLocationDataSourceName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationDataSourceName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationDataSourcePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationDataSourcePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationDataSourceName', () => {
-        const result = client.matchLocationFromProjectLocationDataSourceName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationDataSourceName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationDataSourcePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationDataSourcePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDataSourceFromProjectLocationDataSourceName', () => {
-        const result = client.matchDataSourceFromProjectLocationDataSourceName(
-          fakePath
-        );
+        const result =
+          client.matchDataSourceFromProjectLocationDataSourceName(fakePath);
         assert.strictEqual(result, 'dataSourceValue');
         assert(
-          (client.pathTemplates.projectLocationDataSourcePathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationDataSourcePathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2920,12 +2893,10 @@ describe('v1.DataTransferServiceClient', () => {
         }
       );
       client.initialize();
-      client.pathTemplates.projectLocationTransferConfigPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationTransferConfigPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationTransferConfigPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationTransferConfigPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationTransferConfigPath', () => {
         const result = client.projectLocationTransferConfigPath(
@@ -2935,47 +2906,54 @@ describe('v1.DataTransferServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationTransferConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationTransferConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationTransferConfigName', () => {
-        const result = client.matchProjectFromProjectLocationTransferConfigName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationTransferConfigName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationTransferConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationTransferConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationTransferConfigName', () => {
-        const result = client.matchLocationFromProjectLocationTransferConfigName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationTransferConfigName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationTransferConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationTransferConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTransferConfigFromProjectLocationTransferConfigName', () => {
-        const result = client.matchTransferConfigFromProjectLocationTransferConfigName(
-          fakePath
-        );
+        const result =
+          client.matchTransferConfigFromProjectLocationTransferConfigName(
+            fakePath
+          );
         assert.strictEqual(result, 'transferConfigValue');
         assert(
-          (client.pathTemplates.projectLocationTransferConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationTransferConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2997,12 +2975,10 @@ describe('v1.DataTransferServiceClient', () => {
         }
       );
       client.initialize();
-      client.pathTemplates.projectLocationTransferConfigRunPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
-      client.pathTemplates.projectLocationTransferConfigRunPathTemplate.match = sinon
-        .stub()
-        .returns(expectedParameters);
+      client.pathTemplates.projectLocationTransferConfigRunPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationTransferConfigRunPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
 
       it('projectLocationTransferConfigRunPath', () => {
         const result = client.projectLocationTransferConfigRunPath(
@@ -3013,60 +2989,70 @@ describe('v1.DataTransferServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectLocationTransferConfigRunPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectLocationTransferConfigRunPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectLocationTransferConfigRunName', () => {
-        const result = client.matchProjectFromProjectLocationTransferConfigRunName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectLocationTransferConfigRunName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectLocationTransferConfigRunPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationTransferConfigRunPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromProjectLocationTransferConfigRunName', () => {
-        const result = client.matchLocationFromProjectLocationTransferConfigRunName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromProjectLocationTransferConfigRunName(
+            fakePath
+          );
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.projectLocationTransferConfigRunPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationTransferConfigRunPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTransferConfigFromProjectLocationTransferConfigRunName', () => {
-        const result = client.matchTransferConfigFromProjectLocationTransferConfigRunName(
-          fakePath
-        );
+        const result =
+          client.matchTransferConfigFromProjectLocationTransferConfigRunName(
+            fakePath
+          );
         assert.strictEqual(result, 'transferConfigValue');
         assert(
-          (client.pathTemplates.projectLocationTransferConfigRunPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationTransferConfigRunPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchRunFromProjectLocationTransferConfigRunName', () => {
-        const result = client.matchRunFromProjectLocationTransferConfigRunName(
-          fakePath
-        );
+        const result =
+          client.matchRunFromProjectLocationTransferConfigRunName(fakePath);
         assert.strictEqual(result, 'runValue');
         assert(
-          (client.pathTemplates.projectLocationTransferConfigRunPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectLocationTransferConfigRunPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3100,34 +3086,38 @@ describe('v1.DataTransferServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTransferConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTransferConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectTransferConfigName', () => {
-        const result = client.matchProjectFromProjectTransferConfigName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectTransferConfigName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectTransferConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTransferConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTransferConfigFromProjectTransferConfigName', () => {
-        const result = client.matchTransferConfigFromProjectTransferConfigName(
-          fakePath
-        );
+        const result =
+          client.matchTransferConfigFromProjectTransferConfigName(fakePath);
         assert.strictEqual(result, 'transferConfigValue');
         assert(
-          (client.pathTemplates.projectTransferConfigPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTransferConfigPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3163,47 +3153,52 @@ describe('v1.DataTransferServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.projectTransferConfigRunPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.projectTransferConfigRunPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromProjectTransferConfigRunName', () => {
-        const result = client.matchProjectFromProjectTransferConfigRunName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromProjectTransferConfigRunName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.projectTransferConfigRunPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTransferConfigRunPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchTransferConfigFromProjectTransferConfigRunName', () => {
-        const result = client.matchTransferConfigFromProjectTransferConfigRunName(
-          fakePath
-        );
+        const result =
+          client.matchTransferConfigFromProjectTransferConfigRunName(fakePath);
         assert.strictEqual(result, 'transferConfigValue');
         assert(
-          (client.pathTemplates.projectTransferConfigRunPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTransferConfigRunPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchRunFromProjectTransferConfigRunName', () => {
-        const result = client.matchRunFromProjectTransferConfigRunName(
-          fakePath
-        );
+        const result =
+          client.matchRunFromProjectTransferConfigRunName(fakePath);
         assert.strictEqual(result, 'runValue');
         assert(
-          (client.pathTemplates.projectTransferConfigRunPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.projectTransferConfigRunPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
