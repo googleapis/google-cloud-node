@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -226,9 +225,8 @@ describe('v1.AuthorizedDomainsClient', () => {
           new protos.google.appengine.v1.AuthorizedDomain()
         ),
       ];
-      client.innerApiCalls.listAuthorizedDomains = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listAuthorizedDomains =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listAuthorizedDomains(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -267,9 +265,8 @@ describe('v1.AuthorizedDomainsClient', () => {
           new protos.google.appengine.v1.AuthorizedDomain()
         ),
       ];
-      client.innerApiCalls.listAuthorizedDomains = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listAuthorizedDomains =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listAuthorizedDomains(
           request,
@@ -350,9 +347,8 @@ describe('v1.AuthorizedDomainsClient', () => {
           new protos.google.appengine.v1.AuthorizedDomain()
         ),
       ];
-      client.descriptors.page.listAuthorizedDomains.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAuthorizedDomains.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listAuthorizedDomainsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.appengine.v1.AuthorizedDomain[] = [];
@@ -372,16 +368,18 @@ describe('v1.AuthorizedDomainsClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listAuthorizedDomains
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listAuthorizedDomains
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listAuthorizedDomains, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAuthorizedDomains
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAuthorizedDomains
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -398,10 +396,8 @@ describe('v1.AuthorizedDomainsClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAuthorizedDomains.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAuthorizedDomains.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listAuthorizedDomainsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.appengine.v1.AuthorizedDomain[] = [];
@@ -420,16 +416,18 @@ describe('v1.AuthorizedDomainsClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listAuthorizedDomains
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listAuthorizedDomains
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listAuthorizedDomains, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listAuthorizedDomains
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAuthorizedDomains
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -456,9 +454,8 @@ describe('v1.AuthorizedDomainsClient', () => {
           new protos.google.appengine.v1.AuthorizedDomain()
         ),
       ];
-      client.descriptors.page.listAuthorizedDomains.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listAuthorizedDomains.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.appengine.v1.IAuthorizedDomain[] = [];
       const iterable = client.listAuthorizedDomainsAsync(request);
       for await (const resource of iterable) {
@@ -466,15 +463,17 @@ describe('v1.AuthorizedDomainsClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listAuthorizedDomains
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAuthorizedDomains
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAuthorizedDomains
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAuthorizedDomains
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -491,10 +490,8 @@ describe('v1.AuthorizedDomainsClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listAuthorizedDomains.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listAuthorizedDomains.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listAuthorizedDomainsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.appengine.v1.IAuthorizedDomain[] = [];
@@ -503,15 +500,17 @@ describe('v1.AuthorizedDomainsClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listAuthorizedDomains
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listAuthorizedDomains
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listAuthorizedDomains
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listAuthorizedDomains
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });

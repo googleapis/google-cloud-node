@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1.DomainMappingsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.appengine.v1.DomainMapping()
       );
-      client.innerApiCalls.getDomainMapping = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDomainMapping =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDomainMapping(
           request,
@@ -362,9 +360,8 @@ describe('v1.DomainMappingsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createDomainMapping = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createDomainMapping =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createDomainMapping(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -396,9 +393,8 @@ describe('v1.DomainMappingsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createDomainMapping = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDomainMapping =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDomainMapping(
           request,
@@ -558,9 +554,8 @@ describe('v1.DomainMappingsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateDomainMapping = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDomainMapping =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateDomainMapping(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -592,9 +587,8 @@ describe('v1.DomainMappingsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateDomainMapping = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDomainMapping =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateDomainMapping(
           request,
@@ -754,9 +748,8 @@ describe('v1.DomainMappingsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteDomainMapping = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDomainMapping =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteDomainMapping(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -788,9 +781,8 @@ describe('v1.DomainMappingsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteDomainMapping = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDomainMapping =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDomainMapping(
           request,
@@ -952,9 +944,8 @@ describe('v1.DomainMappingsClient', () => {
         generateSampleMessage(new protos.google.appengine.v1.DomainMapping()),
         generateSampleMessage(new protos.google.appengine.v1.DomainMapping()),
       ];
-      client.innerApiCalls.listDomainMappings = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listDomainMappings =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listDomainMappings(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -987,9 +978,8 @@ describe('v1.DomainMappingsClient', () => {
         generateSampleMessage(new protos.google.appengine.v1.DomainMapping()),
         generateSampleMessage(new protos.google.appengine.v1.DomainMapping()),
       ];
-      client.innerApiCalls.listDomainMappings = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDomainMappings =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDomainMappings(
           request,
@@ -1061,9 +1051,8 @@ describe('v1.DomainMappingsClient', () => {
         generateSampleMessage(new protos.google.appengine.v1.DomainMapping()),
         generateSampleMessage(new protos.google.appengine.v1.DomainMapping()),
       ];
-      client.descriptors.page.listDomainMappings.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDomainMappings.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDomainMappingsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.appengine.v1.DomainMapping[] = [];
@@ -1088,10 +1077,9 @@ describe('v1.DomainMappingsClient', () => {
           .calledWith(client.innerApiCalls.listDomainMappings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDomainMappings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDomainMappings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1108,10 +1096,8 @@ describe('v1.DomainMappingsClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDomainMappings.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDomainMappings.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listDomainMappingsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.appengine.v1.DomainMapping[] = [];
@@ -1135,10 +1121,9 @@ describe('v1.DomainMappingsClient', () => {
           .calledWith(client.innerApiCalls.listDomainMappings, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDomainMappings
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDomainMappings.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1159,9 +1144,8 @@ describe('v1.DomainMappingsClient', () => {
         generateSampleMessage(new protos.google.appengine.v1.DomainMapping()),
         generateSampleMessage(new protos.google.appengine.v1.DomainMapping()),
       ];
-      client.descriptors.page.listDomainMappings.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDomainMappings.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.appengine.v1.IDomainMapping[] = [];
       const iterable = client.listDomainMappingsAsync(request);
       for await (const resource of iterable) {
@@ -1169,15 +1153,15 @@ describe('v1.DomainMappingsClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDomainMappings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDomainMappings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDomainMappings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDomainMappings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1194,10 +1178,8 @@ describe('v1.DomainMappingsClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDomainMappings.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDomainMappings.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDomainMappingsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.appengine.v1.IDomainMapping[] = [];
@@ -1206,15 +1188,15 @@ describe('v1.DomainMappingsClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDomainMappings
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDomainMappings.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDomainMappings
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDomainMappings.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });

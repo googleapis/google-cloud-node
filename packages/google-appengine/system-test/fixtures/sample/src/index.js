@@ -21,7 +21,8 @@ const appengine = require('@google-cloud/appengine-admin');
 
 function main() {
   const applicationsClient = new appengine.ApplicationsClient();
-  const authorizedCertificatesClient = new appengine.AuthorizedCertificatesClient();
+  const authorizedCertificatesClient =
+    new appengine.AuthorizedCertificatesClient();
   const authorizedDomainsClient = new appengine.AuthorizedDomainsClient();
   const domainMappingsClient = new appengine.DomainMappingsClient();
   const firewallClient = new appengine.FirewallClient();

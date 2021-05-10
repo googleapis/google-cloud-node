@@ -26,10 +26,9 @@ import * as applicationsModule from '../src';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -216,9 +215,8 @@ describe('v1.ApplicationsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.appengine.v1.Application()
       );
-      client.innerApiCalls.getApplication = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getApplication =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getApplication(
           request,
@@ -289,9 +287,8 @@ describe('v1.ApplicationsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createApplication = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createApplication =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createApplication(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -315,9 +312,8 @@ describe('v1.ApplicationsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createApplication = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createApplication =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createApplication(
           request,
@@ -461,9 +457,8 @@ describe('v1.ApplicationsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateApplication = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateApplication =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateApplication(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -495,9 +490,8 @@ describe('v1.ApplicationsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateApplication = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateApplication =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateApplication(
           request,
@@ -657,9 +651,8 @@ describe('v1.ApplicationsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.repairApplication = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.repairApplication =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.repairApplication(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -691,9 +684,8 @@ describe('v1.ApplicationsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.repairApplication = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.repairApplication =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.repairApplication(
           request,
