@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -216,9 +215,8 @@ describe('v1p1beta1.SpeechClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.RecognizeResponse()
       );
-      client.innerApiCalls.recognize = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.recognize =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.recognize(
           request,
@@ -278,9 +276,8 @@ describe('v1p1beta1.SpeechClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.longRunningRecognize = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.longRunningRecognize =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.longRunningRecognize(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -304,9 +301,8 @@ describe('v1p1beta1.SpeechClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.longRunningRecognize = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.longRunningRecognize =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.longRunningRecognize(
           request,
@@ -441,9 +437,8 @@ describe('v1p1beta1.SpeechClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse()
       );
-      client.innerApiCalls.streamingRecognize = stubBidiStreamingCall(
-        expectedResponse
-      );
+      client.innerApiCalls.streamingRecognize =
+        stubBidiStreamingCall(expectedResponse);
       const stream = client._streamingRecognize();
       const promise = new Promise((resolve, reject) => {
         stream.on(
@@ -468,9 +463,8 @@ describe('v1p1beta1.SpeechClient', () => {
           .calledWithExactly(undefined)
       );
       assert.deepStrictEqual(
-        (((stream as unknown) as PassThrough)._transform as SinonStub).getCall(
-          0
-        ).args[0],
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
         request
       );
     });
@@ -512,9 +506,8 @@ describe('v1p1beta1.SpeechClient', () => {
           .calledWithExactly(undefined)
       );
       assert.deepStrictEqual(
-        (((stream as unknown) as PassThrough)._transform as SinonStub).getCall(
-          0
-        ).args[0],
+        ((stream as unknown as PassThrough)._transform as SinonStub).getCall(0)
+          .args[0],
         request
       );
     });

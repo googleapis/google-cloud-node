@@ -675,11 +675,11 @@
     
                         /**
                          * StreamingRecognizeRequest audioContent.
-                         * @member {Uint8Array} audioContent
+                         * @member {Uint8Array|null|undefined} audioContent
                          * @memberof google.cloud.speech.v1.StreamingRecognizeRequest
                          * @instance
                          */
-                        StreamingRecognizeRequest.prototype.audioContent = $util.newBuffer([]);
+                        StreamingRecognizeRequest.prototype.audioContent = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -2733,19 +2733,19 @@
     
                         /**
                          * RecognitionAudio content.
-                         * @member {Uint8Array} content
+                         * @member {Uint8Array|null|undefined} content
                          * @memberof google.cloud.speech.v1.RecognitionAudio
                          * @instance
                          */
-                        RecognitionAudio.prototype.content = $util.newBuffer([]);
+                        RecognitionAudio.prototype.content = null;
     
                         /**
                          * RecognitionAudio uri.
-                         * @member {string} uri
+                         * @member {string|null|undefined} uri
                          * @memberof google.cloud.speech.v1.RecognitionAudio
                          * @instance
                          */
-                        RecognitionAudio.prototype.uri = "";
+                        RecognitionAudio.prototype.uri = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -5599,11 +5599,11 @@
     
                         /**
                          * TranscriptOutputConfig gcsUri.
-                         * @member {string} gcsUri
+                         * @member {string|null|undefined} gcsUri
                          * @memberof google.cloud.speech.v1p1beta1.TranscriptOutputConfig
                          * @instance
                          */
-                        TranscriptOutputConfig.prototype.gcsUri = "";
+                        TranscriptOutputConfig.prototype.gcsUri = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -5813,11 +5813,11 @@
     
                         /**
                          * StreamingRecognizeRequest audioContent.
-                         * @member {Uint8Array} audioContent
+                         * @member {Uint8Array|null|undefined} audioContent
                          * @memberof google.cloud.speech.v1p1beta1.StreamingRecognizeRequest
                          * @instance
                          */
-                        StreamingRecognizeRequest.prototype.audioContent = $util.newBuffer([]);
+                        StreamingRecognizeRequest.prototype.audioContent = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -8130,19 +8130,19 @@
     
                         /**
                          * RecognitionAudio content.
-                         * @member {Uint8Array} content
+                         * @member {Uint8Array|null|undefined} content
                          * @memberof google.cloud.speech.v1p1beta1.RecognitionAudio
                          * @instance
                          */
-                        RecognitionAudio.prototype.content = $util.newBuffer([]);
+                        RecognitionAudio.prototype.content = null;
     
                         /**
                          * RecognitionAudio uri.
-                         * @member {string} uri
+                         * @member {string|null|undefined} uri
                          * @memberof google.cloud.speech.v1p1beta1.RecognitionAudio
                          * @instance
                          */
-                        RecognitionAudio.prototype.uri = "";
+                        RecognitionAudio.prototype.uri = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -14948,43 +14948,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

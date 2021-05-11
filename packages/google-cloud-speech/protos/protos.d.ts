@@ -328,7 +328,7 @@ export namespace google {
                     public streamingConfig?: (google.cloud.speech.v1.IStreamingRecognitionConfig|null);
 
                     /** StreamingRecognizeRequest audioContent. */
-                    public audioContent: (Uint8Array|string);
+                    public audioContent?: (Uint8Array|string|null);
 
                     /** StreamingRecognizeRequest streamingRequest. */
                     public streamingRequest?: ("streamingConfig"|"audioContent");
@@ -1081,10 +1081,10 @@ export namespace google {
                     constructor(properties?: google.cloud.speech.v1.IRecognitionAudio);
 
                     /** RecognitionAudio content. */
-                    public content: (Uint8Array|string);
+                    public content?: (Uint8Array|string|null);
 
                     /** RecognitionAudio uri. */
-                    public uri: string;
+                    public uri?: (string|null);
 
                     /** RecognitionAudio audioSource. */
                     public audioSource?: ("content"|"uri");
@@ -2285,7 +2285,7 @@ export namespace google {
                     constructor(properties?: google.cloud.speech.v1p1beta1.ITranscriptOutputConfig);
 
                     /** TranscriptOutputConfig gcsUri. */
-                    public gcsUri: string;
+                    public gcsUri?: (string|null);
 
                     /** TranscriptOutputConfig outputType. */
                     public outputType?: "gcsUri";
@@ -2384,7 +2384,7 @@ export namespace google {
                     public streamingConfig?: (google.cloud.speech.v1p1beta1.IStreamingRecognitionConfig|null);
 
                     /** StreamingRecognizeRequest audioContent. */
-                    public audioContent: (Uint8Array|string);
+                    public audioContent?: (Uint8Array|string|null);
 
                     /** StreamingRecognizeRequest streamingRequest. */
                     public streamingRequest?: ("streamingConfig"|"audioContent");
@@ -3193,10 +3193,10 @@ export namespace google {
                     constructor(properties?: google.cloud.speech.v1p1beta1.IRecognitionAudio);
 
                     /** RecognitionAudio content. */
-                    public content: (Uint8Array|string);
+                    public content?: (Uint8Array|string|null);
 
                     /** RecognitionAudio uri. */
-                    public uri: string;
+                    public uri?: (string|null);
 
                     /** RecognitionAudio audioSource. */
                     public audioSource?: ("content"|"uri");
@@ -6160,19 +6160,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);

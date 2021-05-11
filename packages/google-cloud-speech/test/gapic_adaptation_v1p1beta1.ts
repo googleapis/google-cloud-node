@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -247,9 +246,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.PhraseSet()
       );
-      client.innerApiCalls.createPhraseSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createPhraseSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createPhraseSet(
           request,
@@ -359,9 +357,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.PhraseSet()
       );
-      client.innerApiCalls.getPhraseSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getPhraseSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getPhraseSet(
           request,
@@ -473,9 +470,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.PhraseSet()
       );
-      client.innerApiCalls.updatePhraseSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updatePhraseSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updatePhraseSet(
           request,
@@ -586,9 +582,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deletePhraseSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deletePhraseSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deletePhraseSet(
           request,
@@ -698,9 +693,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CustomClass()
       );
-      client.innerApiCalls.createCustomClass = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createCustomClass =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createCustomClass(
           request,
@@ -810,9 +804,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CustomClass()
       );
-      client.innerApiCalls.getCustomClass = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getCustomClass =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getCustomClass(
           request,
@@ -924,9 +917,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.speech.v1p1beta1.CustomClass()
       );
-      client.innerApiCalls.updateCustomClass = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateCustomClass =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateCustomClass(
           request,
@@ -1037,9 +1029,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteCustomClass = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteCustomClass =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteCustomClass(
           request,
@@ -1165,9 +1156,8 @@ describe('v1p1beta1.AdaptationClient', () => {
           new protos.google.cloud.speech.v1p1beta1.PhraseSet()
         ),
       ];
-      client.innerApiCalls.listPhraseSet = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listPhraseSet =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listPhraseSet(
           request,
@@ -1245,9 +1235,8 @@ describe('v1p1beta1.AdaptationClient', () => {
           new protos.google.cloud.speech.v1p1beta1.PhraseSet()
         ),
       ];
-      client.descriptors.page.listPhraseSet.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listPhraseSet.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listPhraseSetStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.speech.v1p1beta1.PhraseSet[] = [];
@@ -1272,10 +1261,9 @@ describe('v1p1beta1.AdaptationClient', () => {
           .calledWith(client.innerApiCalls.listPhraseSet, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPhraseSet
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPhraseSet.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1292,10 +1280,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listPhraseSet.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listPhraseSet.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listPhraseSetStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.speech.v1p1beta1.PhraseSet[] = [];
@@ -1319,10 +1305,9 @@ describe('v1p1beta1.AdaptationClient', () => {
           .calledWith(client.innerApiCalls.listPhraseSet, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPhraseSet
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPhraseSet.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1349,9 +1334,8 @@ describe('v1p1beta1.AdaptationClient', () => {
           new protos.google.cloud.speech.v1p1beta1.PhraseSet()
         ),
       ];
-      client.descriptors.page.listPhraseSet.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listPhraseSet.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.speech.v1p1beta1.IPhraseSet[] = [];
       const iterable = client.listPhraseSetAsync(request);
       for await (const resource of iterable) {
@@ -1359,15 +1343,15 @@ describe('v1p1beta1.AdaptationClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listPhraseSet
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPhraseSet.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPhraseSet
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPhraseSet.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1384,10 +1368,8 @@ describe('v1p1beta1.AdaptationClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listPhraseSet.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listPhraseSet.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listPhraseSetAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.speech.v1p1beta1.IPhraseSet[] = [];
@@ -1396,15 +1378,15 @@ describe('v1p1beta1.AdaptationClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listPhraseSet
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPhraseSet.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPhraseSet
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPhraseSet.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1479,9 +1461,8 @@ describe('v1p1beta1.AdaptationClient', () => {
           new protos.google.cloud.speech.v1p1beta1.CustomClass()
         ),
       ];
-      client.innerApiCalls.listCustomClasses = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listCustomClasses =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listCustomClasses(
           request,
@@ -1559,12 +1540,12 @@ describe('v1p1beta1.AdaptationClient', () => {
           new protos.google.cloud.speech.v1p1beta1.CustomClass()
         ),
       ];
-      client.descriptors.page.listCustomClasses.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCustomClasses.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listCustomClassesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.speech.v1p1beta1.CustomClass[] = [];
+        const responses: protos.google.cloud.speech.v1p1beta1.CustomClass[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.speech.v1p1beta1.CustomClass) => {
@@ -1586,10 +1567,9 @@ describe('v1p1beta1.AdaptationClient', () => {
           .calledWith(client.innerApiCalls.listCustomClasses, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomClasses
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomClasses.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1606,13 +1586,12 @@ describe('v1p1beta1.AdaptationClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCustomClasses.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCustomClasses.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listCustomClassesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.speech.v1p1beta1.CustomClass[] = [];
+        const responses: protos.google.cloud.speech.v1p1beta1.CustomClass[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.speech.v1p1beta1.CustomClass) => {
@@ -1633,10 +1612,9 @@ describe('v1p1beta1.AdaptationClient', () => {
           .calledWith(client.innerApiCalls.listCustomClasses, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomClasses
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomClasses.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1663,9 +1641,8 @@ describe('v1p1beta1.AdaptationClient', () => {
           new protos.google.cloud.speech.v1p1beta1.CustomClass()
         ),
       ];
-      client.descriptors.page.listCustomClasses.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCustomClasses.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.speech.v1p1beta1.ICustomClass[] = [];
       const iterable = client.listCustomClassesAsync(request);
       for await (const resource of iterable) {
@@ -1673,15 +1650,15 @@ describe('v1p1beta1.AdaptationClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listCustomClasses
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCustomClasses.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomClasses
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomClasses.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1698,27 +1675,26 @@ describe('v1p1beta1.AdaptationClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCustomClasses.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCustomClasses.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listCustomClassesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.speech.v1p1beta1.ICustomClass[] = [];
+        const responses: protos.google.cloud.speech.v1p1beta1.ICustomClass[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listCustomClasses
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCustomClasses.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomClasses
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomClasses.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });

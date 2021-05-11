@@ -30,9 +30,10 @@ describe('Speech helper methods', () => {
   });
 
   describe('streamingRecognize', () => {
-    const CONFIG: speech.protos.google.cloud.speech.v1.IStreamingRecognitionConfig = {
-      config: {encoding: 'LINEAR16', languageCode: 'en-us'},
-    };
+    const CONFIG: speech.protos.google.cloud.speech.v1.IStreamingRecognitionConfig =
+      {
+        config: {encoding: 'LINEAR16', languageCode: 'en-us'},
+      };
     const OPTIONS = {timeout: Infinity};
 
     it('writes the config to the resulting stream', done => {
