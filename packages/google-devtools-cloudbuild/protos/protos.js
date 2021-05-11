@@ -1786,6 +1786,252 @@
                         return RepoSource;
                     })();
     
+                    v1.StorageSourceManifest = (function() {
+    
+                        /**
+                         * Properties of a StorageSourceManifest.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IStorageSourceManifest
+                         * @property {string|null} [bucket] StorageSourceManifest bucket
+                         * @property {string|null} [object] StorageSourceManifest object
+                         * @property {number|Long|null} [generation] StorageSourceManifest generation
+                         */
+    
+                        /**
+                         * Constructs a new StorageSourceManifest.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a StorageSourceManifest.
+                         * @implements IStorageSourceManifest
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IStorageSourceManifest=} [properties] Properties to set
+                         */
+                        function StorageSourceManifest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * StorageSourceManifest bucket.
+                         * @member {string} bucket
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @instance
+                         */
+                        StorageSourceManifest.prototype.bucket = "";
+    
+                        /**
+                         * StorageSourceManifest object.
+                         * @member {string} object
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @instance
+                         */
+                        StorageSourceManifest.prototype.object = "";
+    
+                        /**
+                         * StorageSourceManifest generation.
+                         * @member {number|Long} generation
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @instance
+                         */
+                        StorageSourceManifest.prototype.generation = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * Creates a new StorageSourceManifest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IStorageSourceManifest=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.StorageSourceManifest} StorageSourceManifest instance
+                         */
+                        StorageSourceManifest.create = function create(properties) {
+                            return new StorageSourceManifest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified StorageSourceManifest message. Does not implicitly {@link google.devtools.cloudbuild.v1.StorageSourceManifest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IStorageSourceManifest} message StorageSourceManifest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StorageSourceManifest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bucket != null && Object.hasOwnProperty.call(message, "bucket"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.bucket);
+                            if (message.object != null && Object.hasOwnProperty.call(message, "object"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.object);
+                            if (message.generation != null && Object.hasOwnProperty.call(message, "generation"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.generation);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified StorageSourceManifest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.StorageSourceManifest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IStorageSourceManifest} message StorageSourceManifest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        StorageSourceManifest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a StorageSourceManifest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.StorageSourceManifest} StorageSourceManifest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StorageSourceManifest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.StorageSourceManifest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.bucket = reader.string();
+                                    break;
+                                case 2:
+                                    message.object = reader.string();
+                                    break;
+                                case 3:
+                                    message.generation = reader.int64();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a StorageSourceManifest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.StorageSourceManifest} StorageSourceManifest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        StorageSourceManifest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a StorageSourceManifest message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        StorageSourceManifest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                if (!$util.isString(message.bucket))
+                                    return "bucket: string expected";
+                            if (message.object != null && message.hasOwnProperty("object"))
+                                if (!$util.isString(message.object))
+                                    return "object: string expected";
+                            if (message.generation != null && message.hasOwnProperty("generation"))
+                                if (!$util.isInteger(message.generation) && !(message.generation && $util.isInteger(message.generation.low) && $util.isInteger(message.generation.high)))
+                                    return "generation: integer|Long expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a StorageSourceManifest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.StorageSourceManifest} StorageSourceManifest
+                         */
+                        StorageSourceManifest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.StorageSourceManifest)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.StorageSourceManifest();
+                            if (object.bucket != null)
+                                message.bucket = String(object.bucket);
+                            if (object.object != null)
+                                message.object = String(object.object);
+                            if (object.generation != null)
+                                if ($util.Long)
+                                    (message.generation = $util.Long.fromValue(object.generation)).unsigned = false;
+                                else if (typeof object.generation === "string")
+                                    message.generation = parseInt(object.generation, 10);
+                                else if (typeof object.generation === "number")
+                                    message.generation = object.generation;
+                                else if (typeof object.generation === "object")
+                                    message.generation = new $util.LongBits(object.generation.low >>> 0, object.generation.high >>> 0).toNumber();
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a StorageSourceManifest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.StorageSourceManifest} message StorageSourceManifest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        StorageSourceManifest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.bucket = "";
+                                object.object = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.generation = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.generation = options.longs === String ? "0" : 0;
+                            }
+                            if (message.bucket != null && message.hasOwnProperty("bucket"))
+                                object.bucket = message.bucket;
+                            if (message.object != null && message.hasOwnProperty("object"))
+                                object.object = message.object;
+                            if (message.generation != null && message.hasOwnProperty("generation"))
+                                if (typeof message.generation === "number")
+                                    object.generation = options.longs === String ? String(message.generation) : message.generation;
+                                else
+                                    object.generation = options.longs === String ? $util.Long.prototype.toString.call(message.generation) : options.longs === Number ? new $util.LongBits(message.generation.low >>> 0, message.generation.high >>> 0).toNumber() : message.generation;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this StorageSourceManifest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.StorageSourceManifest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        StorageSourceManifest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return StorageSourceManifest;
+                    })();
+    
                     v1.Source = (function() {
     
                         /**
@@ -1794,6 +2040,7 @@
                          * @interface ISource
                          * @property {google.devtools.cloudbuild.v1.IStorageSource|null} [storageSource] Source storageSource
                          * @property {google.devtools.cloudbuild.v1.IRepoSource|null} [repoSource] Source repoSource
+                         * @property {google.devtools.cloudbuild.v1.IStorageSourceManifest|null} [storageSourceManifest] Source storageSourceManifest
                          */
     
                         /**
@@ -1827,17 +2074,25 @@
                          */
                         Source.prototype.repoSource = null;
     
+                        /**
+                         * Source storageSourceManifest.
+                         * @member {google.devtools.cloudbuild.v1.IStorageSourceManifest|null|undefined} storageSourceManifest
+                         * @memberof google.devtools.cloudbuild.v1.Source
+                         * @instance
+                         */
+                        Source.prototype.storageSourceManifest = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
                         /**
                          * Source source.
-                         * @member {"storageSource"|"repoSource"|undefined} source
+                         * @member {"storageSource"|"repoSource"|"storageSourceManifest"|undefined} source
                          * @memberof google.devtools.cloudbuild.v1.Source
                          * @instance
                          */
                         Object.defineProperty(Source.prototype, "source", {
-                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource"]),
+                            get: $util.oneOfGetter($oneOfFields = ["storageSource", "repoSource", "storageSourceManifest"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -1869,6 +2124,8 @@
                                 $root.google.devtools.cloudbuild.v1.StorageSource.encode(message.storageSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.repoSource != null && Object.hasOwnProperty.call(message, "repoSource"))
                                 $root.google.devtools.cloudbuild.v1.RepoSource.encode(message.repoSource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.storageSourceManifest != null && Object.hasOwnProperty.call(message, "storageSourceManifest"))
+                                $root.google.devtools.cloudbuild.v1.StorageSourceManifest.encode(message.storageSourceManifest, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -1908,6 +2165,9 @@
                                     break;
                                 case 3:
                                     message.repoSource = $root.google.devtools.cloudbuild.v1.RepoSource.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.storageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1963,6 +2223,16 @@
                                         return "repoSource." + error;
                                 }
                             }
+                            if (message.storageSourceManifest != null && message.hasOwnProperty("storageSourceManifest")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.verify(message.storageSourceManifest);
+                                    if (error)
+                                        return "storageSourceManifest." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1987,6 +2257,11 @@
                                 if (typeof object.repoSource !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.Source.repoSource: object expected");
                                 message.repoSource = $root.google.devtools.cloudbuild.v1.RepoSource.fromObject(object.repoSource);
+                            }
+                            if (object.storageSourceManifest != null) {
+                                if (typeof object.storageSourceManifest !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Source.storageSourceManifest: object expected");
+                                message.storageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.fromObject(object.storageSourceManifest);
                             }
                             return message;
                         };
@@ -2013,6 +2288,11 @@
                                 object.repoSource = $root.google.devtools.cloudbuild.v1.RepoSource.toObject(message.repoSource, options);
                                 if (options.oneofs)
                                     object.source = "repoSource";
+                            }
+                            if (message.storageSourceManifest != null && message.hasOwnProperty("storageSourceManifest")) {
+                                object.storageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.toObject(message.storageSourceManifest, options);
+                                if (options.oneofs)
+                                    object.source = "storageSourceManifest";
                             }
                             return object;
                         };
@@ -5614,6 +5894,7 @@
                          * @interface ISourceProvenance
                          * @property {google.devtools.cloudbuild.v1.IStorageSource|null} [resolvedStorageSource] SourceProvenance resolvedStorageSource
                          * @property {google.devtools.cloudbuild.v1.IRepoSource|null} [resolvedRepoSource] SourceProvenance resolvedRepoSource
+                         * @property {google.devtools.cloudbuild.v1.IStorageSourceManifest|null} [resolvedStorageSourceManifest] SourceProvenance resolvedStorageSourceManifest
                          * @property {Object.<string,google.devtools.cloudbuild.v1.IFileHashes>|null} [fileHashes] SourceProvenance fileHashes
                          */
     
@@ -5648,6 +5929,14 @@
                          * @instance
                          */
                         SourceProvenance.prototype.resolvedRepoSource = null;
+    
+                        /**
+                         * SourceProvenance resolvedStorageSourceManifest.
+                         * @member {google.devtools.cloudbuild.v1.IStorageSourceManifest|null|undefined} resolvedStorageSourceManifest
+                         * @memberof google.devtools.cloudbuild.v1.SourceProvenance
+                         * @instance
+                         */
+                        SourceProvenance.prototype.resolvedStorageSourceManifest = null;
     
                         /**
                          * SourceProvenance fileHashes.
@@ -5690,6 +5979,8 @@
                                 }
                             if (message.resolvedRepoSource != null && Object.hasOwnProperty.call(message, "resolvedRepoSource"))
                                 $root.google.devtools.cloudbuild.v1.RepoSource.encode(message.resolvedRepoSource, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.resolvedStorageSourceManifest != null && Object.hasOwnProperty.call(message, "resolvedStorageSourceManifest"))
+                                $root.google.devtools.cloudbuild.v1.StorageSourceManifest.encode(message.resolvedStorageSourceManifest, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
                         };
     
@@ -5729,6 +6020,9 @@
                                     break;
                                 case 6:
                                     message.resolvedRepoSource = $root.google.devtools.cloudbuild.v1.RepoSource.decode(reader, reader.uint32());
+                                    break;
+                                case 9:
+                                    message.resolvedStorageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.decode(reader, reader.uint32());
                                     break;
                                 case 4:
                                     if (message.fileHashes === $util.emptyObject)
@@ -5797,6 +6091,11 @@
                                 if (error)
                                     return "resolvedRepoSource." + error;
                             }
+                            if (message.resolvedStorageSourceManifest != null && message.hasOwnProperty("resolvedStorageSourceManifest")) {
+                                var error = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.verify(message.resolvedStorageSourceManifest);
+                                if (error)
+                                    return "resolvedStorageSourceManifest." + error;
+                            }
                             if (message.fileHashes != null && message.hasOwnProperty("fileHashes")) {
                                 if (!$util.isObject(message.fileHashes))
                                     return "fileHashes: object expected";
@@ -5832,6 +6131,11 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.SourceProvenance.resolvedRepoSource: object expected");
                                 message.resolvedRepoSource = $root.google.devtools.cloudbuild.v1.RepoSource.fromObject(object.resolvedRepoSource);
                             }
+                            if (object.resolvedStorageSourceManifest != null) {
+                                if (typeof object.resolvedStorageSourceManifest !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.SourceProvenance.resolvedStorageSourceManifest: object expected");
+                                message.resolvedStorageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.fromObject(object.resolvedStorageSourceManifest);
+                            }
                             if (object.fileHashes) {
                                 if (typeof object.fileHashes !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.SourceProvenance.fileHashes: object expected");
@@ -5863,6 +6167,7 @@
                             if (options.defaults) {
                                 object.resolvedStorageSource = null;
                                 object.resolvedRepoSource = null;
+                                object.resolvedStorageSourceManifest = null;
                             }
                             if (message.resolvedStorageSource != null && message.hasOwnProperty("resolvedStorageSource"))
                                 object.resolvedStorageSource = $root.google.devtools.cloudbuild.v1.StorageSource.toObject(message.resolvedStorageSource, options);
@@ -5874,6 +6179,8 @@
                             }
                             if (message.resolvedRepoSource != null && message.hasOwnProperty("resolvedRepoSource"))
                                 object.resolvedRepoSource = $root.google.devtools.cloudbuild.v1.RepoSource.toObject(message.resolvedRepoSource, options);
+                            if (message.resolvedStorageSourceManifest != null && message.hasOwnProperty("resolvedStorageSourceManifest"))
+                                object.resolvedStorageSourceManifest = $root.google.devtools.cloudbuild.v1.StorageSourceManifest.toObject(message.resolvedStorageSourceManifest, options);
                             return object;
                         };
     

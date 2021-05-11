@@ -848,6 +848,108 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a StorageSourceManifest. */
+                interface IStorageSourceManifest {
+
+                    /** StorageSourceManifest bucket */
+                    bucket?: (string|null);
+
+                    /** StorageSourceManifest object */
+                    object?: (string|null);
+
+                    /** StorageSourceManifest generation */
+                    generation?: (number|Long|string|null);
+                }
+
+                /** Represents a StorageSourceManifest. */
+                class StorageSourceManifest implements IStorageSourceManifest {
+
+                    /**
+                     * Constructs a new StorageSourceManifest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IStorageSourceManifest);
+
+                    /** StorageSourceManifest bucket. */
+                    public bucket: string;
+
+                    /** StorageSourceManifest object. */
+                    public object: string;
+
+                    /** StorageSourceManifest generation. */
+                    public generation: (number|Long|string);
+
+                    /**
+                     * Creates a new StorageSourceManifest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageSourceManifest instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IStorageSourceManifest): google.devtools.cloudbuild.v1.StorageSourceManifest;
+
+                    /**
+                     * Encodes the specified StorageSourceManifest message. Does not implicitly {@link google.devtools.cloudbuild.v1.StorageSourceManifest.verify|verify} messages.
+                     * @param message StorageSourceManifest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IStorageSourceManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageSourceManifest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.StorageSourceManifest.verify|verify} messages.
+                     * @param message StorageSourceManifest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IStorageSourceManifest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageSourceManifest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageSourceManifest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.StorageSourceManifest;
+
+                    /**
+                     * Decodes a StorageSourceManifest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageSourceManifest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.StorageSourceManifest;
+
+                    /**
+                     * Verifies a StorageSourceManifest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageSourceManifest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageSourceManifest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.StorageSourceManifest;
+
+                    /**
+                     * Creates a plain object from a StorageSourceManifest message. Also converts values to other types if specified.
+                     * @param message StorageSourceManifest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.StorageSourceManifest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageSourceManifest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a Source. */
                 interface ISource {
 
@@ -856,6 +958,9 @@ export namespace google {
 
                     /** Source repoSource */
                     repoSource?: (google.devtools.cloudbuild.v1.IRepoSource|null);
+
+                    /** Source storageSourceManifest */
+                    storageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
                 }
 
                 /** Represents a Source. */
@@ -873,8 +978,11 @@ export namespace google {
                     /** Source repoSource. */
                     public repoSource?: (google.devtools.cloudbuild.v1.IRepoSource|null);
 
+                    /** Source storageSourceManifest. */
+                    public storageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
+
                     /** Source source. */
-                    public source?: ("storageSource"|"repoSource");
+                    public source?: ("storageSource"|"repoSource"|"storageSourceManifest");
 
                     /**
                      * Creates a new Source instance using the specified properties.
@@ -2175,6 +2283,9 @@ export namespace google {
                     /** SourceProvenance resolvedRepoSource */
                     resolvedRepoSource?: (google.devtools.cloudbuild.v1.IRepoSource|null);
 
+                    /** SourceProvenance resolvedStorageSourceManifest */
+                    resolvedStorageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
+
                     /** SourceProvenance fileHashes */
                     fileHashes?: ({ [k: string]: google.devtools.cloudbuild.v1.IFileHashes }|null);
                 }
@@ -2193,6 +2304,9 @@ export namespace google {
 
                     /** SourceProvenance resolvedRepoSource. */
                     public resolvedRepoSource?: (google.devtools.cloudbuild.v1.IRepoSource|null);
+
+                    /** SourceProvenance resolvedStorageSourceManifest. */
+                    public resolvedStorageSourceManifest?: (google.devtools.cloudbuild.v1.IStorageSourceManifest|null);
 
                     /** SourceProvenance fileHashes. */
                     public fileHashes: { [k: string]: google.devtools.cloudbuild.v1.IFileHashes };

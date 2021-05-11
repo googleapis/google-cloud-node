@@ -431,12 +431,29 @@
                         }
                       }
                     },
+                    "StorageSourceManifest": {
+                      "fields": {
+                        "bucket": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "object": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "generation": {
+                          "type": "int64",
+                          "id": 3
+                        }
+                      }
+                    },
                     "Source": {
                       "oneofs": {
                         "source": {
                           "oneof": [
                             "storageSource",
-                            "repoSource"
+                            "repoSource",
+                            "storageSourceManifest"
                           ]
                         }
                       },
@@ -448,6 +465,10 @@
                         "repoSource": {
                           "type": "RepoSource",
                           "id": 3
+                        },
+                        "storageSourceManifest": {
+                          "type": "StorageSourceManifest",
+                          "id": 8
                         }
                       }
                     },
@@ -835,6 +856,10 @@
                         "resolvedRepoSource": {
                           "type": "RepoSource",
                           "id": 6
+                        },
+                        "resolvedStorageSourceManifest": {
+                          "type": "StorageSourceManifest",
+                          "id": 9
                         },
                         "fileHashes": {
                           "keyType": "string",
