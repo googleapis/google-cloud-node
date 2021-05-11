@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.2.1](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.0...v6.2.1) (2021-05-11)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#657](https://www.github.com/googleapis/nodejs-translate/issues/657)) ([71d695d](https://www.github.com/googleapis/nodejs-translate/commit/71d695d5e217b96e688b4bb71887b19ebedae1ff))
+* use require() to load JSON protos ([#661](https://www.github.com/googleapis/nodejs-translate/issues/661)) ([5294080](https://www.github.com/googleapis/nodejs-translate/commit/529408087d68461651f1ce80b5fba460bde0f5bc))
+
 ## [6.2.0](https://www.github.com/googleapis/nodejs-translate/compare/v6.1.0...v6.2.0) (2021-04-07)
 
 
