@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+### [4.0.5](https://www.github.com/googleapis/nodejs-logging-winston/compare/v4.0.4...v4.0.5) (2021-05-10)
+
+
+### Miscellaneous Chores
+
+* release 4.0.5 ([#590](https://www.github.com/googleapis/nodejs-logging-winston/issues/590)) ([565684a](https://www.github.com/googleapis/nodejs-logging-winston/commit/565684a710b10402756b452fd6fd5fde1652b274))
+
 ### [4.0.4](https://www.github.com/googleapis/nodejs-logging-winston/compare/v4.0.3...v4.0.4) (2021-02-09)
 
 
