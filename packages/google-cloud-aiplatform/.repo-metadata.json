@@ -3,7 +3,7 @@
   "issue_tracker": "https://github.com/googleapis/nodejs-ai-platform/issues",
   "requires_billing": true,
   "name_pretty": "AI Platform",
-  "product_documentation": "https://cloud.google.com/ai-platform/docs",
+  "product_documentation": "https://cloud.google.com/ai-platform-unified/docs",
   "name": "aiplatform",
   "default_version": "v1",
   "client_documentation": "https://googleapis.dev/nodejs/aiplatform/latest",

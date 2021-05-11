@@ -6,7 +6,10 @@
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
-
+Google Cloud AI Platform is an integrated suite of machine learning tools
+and services for building and using ML models with AutoML or custom code.
+It offers both novices and experts the best workbench for the entire
+machine learning development lifecycle.
 
 ## Table of Contents
 
@@ -1253,4 +1256,4 @@ __Usage:__
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/README.md
-[product-docs]: https://cloud.google.com/ai-platform/docs
+[product-docs]: https://cloud.google.com/ai-platform-unified/docs
