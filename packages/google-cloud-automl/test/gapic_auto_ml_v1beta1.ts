@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -279,9 +278,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Dataset()
       );
-      client.innerApiCalls.createDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createDataset(
           request,
@@ -391,9 +389,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Dataset()
       );
-      client.innerApiCalls.getDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getDataset(
           request,
@@ -505,9 +502,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Dataset()
       );
-      client.innerApiCalls.updateDataset = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDataset =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateDataset(
           request,
@@ -618,9 +614,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.AnnotationSpec()
       );
-      client.innerApiCalls.getAnnotationSpec = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getAnnotationSpec =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getAnnotationSpec(
           request,
@@ -730,9 +725,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.TableSpec()
       );
-      client.innerApiCalls.getTableSpec = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTableSpec =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTableSpec(
           request,
@@ -844,9 +838,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.TableSpec()
       );
-      client.innerApiCalls.updateTableSpec = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateTableSpec =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateTableSpec(
           request,
@@ -957,9 +950,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ColumnSpec()
       );
-      client.innerApiCalls.getColumnSpec = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getColumnSpec =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getColumnSpec(
           request,
@@ -1071,9 +1063,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ColumnSpec()
       );
-      client.innerApiCalls.updateColumnSpec = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateColumnSpec =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateColumnSpec(
           request,
@@ -1184,9 +1175,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.Model()
       );
-      client.innerApiCalls.getModel = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getModel =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getModel(
           request,
@@ -1262,9 +1252,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ModelEvaluation()
       );
-      client.innerApiCalls.getModelEvaluation = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getModelEvaluation =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getModelEvaluation(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1295,9 +1284,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.ModelEvaluation()
       );
-      client.innerApiCalls.getModelEvaluation = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getModelEvaluation =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getModelEvaluation(
           request,
@@ -1376,9 +1364,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteDataset = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDataset =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteDataset(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1410,9 +1397,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteDataset = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteDataset =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteDataset(
           request,
@@ -1604,9 +1590,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.importData = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.importData =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.importData(
           request,
@@ -1795,9 +1780,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportData = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportData =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportData(
           request,
@@ -1986,9 +1970,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createModel = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createModel =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createModel(
           request,
@@ -2177,9 +2160,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteModel = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteModel =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteModel(
           request,
@@ -2368,9 +2350,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deployModel = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deployModel =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deployModel(
           request,
@@ -2527,9 +2508,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.undeployModel = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.undeployModel =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.undeployModel(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2561,9 +2541,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.undeployModel = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.undeployModel =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.undeployModel(
           request,
@@ -2755,9 +2734,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportModel = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportModel =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportModel(
           request,
@@ -2914,9 +2892,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.exportEvaluatedExamples =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.exportEvaluatedExamples(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2948,9 +2925,8 @@ describe('v1beta1.AutoMlClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.exportEvaluatedExamples = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.exportEvaluatedExamples =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.exportEvaluatedExamples(
           request,
@@ -3063,9 +3039,10 @@ describe('v1beta1.AutoMlClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkExportEvaluatedExamplesProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkExportEvaluatedExamplesProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -3148,9 +3125,8 @@ describe('v1beta1.AutoMlClient', () => {
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
       ];
-      client.innerApiCalls.listDatasets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listDatasets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listDatasets(
           request,
@@ -3222,9 +3198,8 @@ describe('v1beta1.AutoMlClient', () => {
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
       ];
-      client.descriptors.page.listDatasets.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDatasets.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listDatasetsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.automl.v1beta1.Dataset[] = [];
@@ -3249,10 +3224,9 @@ describe('v1beta1.AutoMlClient', () => {
           .calledWith(client.innerApiCalls.listDatasets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3296,10 +3270,9 @@ describe('v1beta1.AutoMlClient', () => {
           .calledWith(client.innerApiCalls.listDatasets, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3320,9 +3293,8 @@ describe('v1beta1.AutoMlClient', () => {
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Dataset()),
       ];
-      client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listDatasets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.automl.v1beta1.IDataset[] = [];
       const iterable = client.listDatasetsAsync(request);
       for await (const resource of iterable) {
@@ -3330,15 +3302,15 @@ describe('v1beta1.AutoMlClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3355,10 +3327,8 @@ describe('v1beta1.AutoMlClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listDatasets.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listDatasets.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listDatasetsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.automl.v1beta1.IDataset[] = [];
@@ -3367,15 +3337,15 @@ describe('v1beta1.AutoMlClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listDatasets
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listDatasets.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3450,9 +3420,8 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.TableSpec()
         ),
       ];
-      client.innerApiCalls.listTableSpecs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTableSpecs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTableSpecs(
           request,
@@ -3530,9 +3499,8 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.TableSpec()
         ),
       ];
-      client.descriptors.page.listTableSpecs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTableSpecs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTableSpecsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.automl.v1beta1.TableSpec[] = [];
@@ -3557,10 +3525,9 @@ describe('v1beta1.AutoMlClient', () => {
           .calledWith(client.innerApiCalls.listTableSpecs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTableSpecs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTableSpecs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3577,10 +3544,8 @@ describe('v1beta1.AutoMlClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTableSpecs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTableSpecs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTableSpecsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.automl.v1beta1.TableSpec[] = [];
@@ -3604,10 +3569,9 @@ describe('v1beta1.AutoMlClient', () => {
           .calledWith(client.innerApiCalls.listTableSpecs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTableSpecs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTableSpecs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3634,9 +3598,8 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.TableSpec()
         ),
       ];
-      client.descriptors.page.listTableSpecs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTableSpecs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.automl.v1beta1.ITableSpec[] = [];
       const iterable = client.listTableSpecsAsync(request);
       for await (const resource of iterable) {
@@ -3644,15 +3607,15 @@ describe('v1beta1.AutoMlClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTableSpecs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTableSpecs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTableSpecs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTableSpecs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3669,10 +3632,8 @@ describe('v1beta1.AutoMlClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTableSpecs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTableSpecs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTableSpecsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.automl.v1beta1.ITableSpec[] = [];
@@ -3681,15 +3642,15 @@ describe('v1beta1.AutoMlClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTableSpecs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTableSpecs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTableSpecs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTableSpecs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3764,9 +3725,8 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.ColumnSpec()
         ),
       ];
-      client.innerApiCalls.listColumnSpecs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listColumnSpecs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listColumnSpecs(
           request,
@@ -3844,9 +3804,8 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.ColumnSpec()
         ),
       ];
-      client.descriptors.page.listColumnSpecs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listColumnSpecs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listColumnSpecsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.automl.v1beta1.ColumnSpec[] = [];
@@ -3871,10 +3830,9 @@ describe('v1beta1.AutoMlClient', () => {
           .calledWith(client.innerApiCalls.listColumnSpecs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listColumnSpecs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listColumnSpecs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3891,10 +3849,8 @@ describe('v1beta1.AutoMlClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listColumnSpecs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listColumnSpecs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listColumnSpecsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.automl.v1beta1.ColumnSpec[] = [];
@@ -3918,10 +3874,9 @@ describe('v1beta1.AutoMlClient', () => {
           .calledWith(client.innerApiCalls.listColumnSpecs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listColumnSpecs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listColumnSpecs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3948,9 +3903,8 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.ColumnSpec()
         ),
       ];
-      client.descriptors.page.listColumnSpecs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listColumnSpecs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.automl.v1beta1.IColumnSpec[] = [];
       const iterable = client.listColumnSpecsAsync(request);
       for await (const resource of iterable) {
@@ -3958,15 +3912,15 @@ describe('v1beta1.AutoMlClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listColumnSpecs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listColumnSpecs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -3983,10 +3937,8 @@ describe('v1beta1.AutoMlClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listColumnSpecs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listColumnSpecs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listColumnSpecsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.automl.v1beta1.IColumnSpec[] = [];
@@ -3995,15 +3947,15 @@ describe('v1beta1.AutoMlClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listColumnSpecs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listColumnSpecs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listColumnSpecs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4066,9 +4018,8 @@ describe('v1beta1.AutoMlClient', () => {
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
       ];
-      client.innerApiCalls.listModels = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listModels =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listModels(
           request,
@@ -4140,9 +4091,8 @@ describe('v1beta1.AutoMlClient', () => {
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
       ];
-      client.descriptors.page.listModels.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listModels.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listModelsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.automl.v1beta1.Model[] = [];
@@ -4236,9 +4186,8 @@ describe('v1beta1.AutoMlClient', () => {
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
         generateSampleMessage(new protos.google.cloud.automl.v1beta1.Model()),
       ];
-      client.descriptors.page.listModels.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listModels.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.automl.v1beta1.IModel[] = [];
       const iterable = client.listModelsAsync(request);
       for await (const resource of iterable) {
@@ -4327,9 +4276,8 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.ModelEvaluation()
         ),
       ];
-      client.innerApiCalls.listModelEvaluations = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listModelEvaluations =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listModelEvaluations(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4368,9 +4316,8 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.ModelEvaluation()
         ),
       ];
-      client.innerApiCalls.listModelEvaluations = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listModelEvaluations =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listModelEvaluations(
           request,
@@ -4450,12 +4397,12 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.ModelEvaluation()
         ),
       ];
-      client.descriptors.page.listModelEvaluations.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listModelEvaluations.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listModelEvaluationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.ModelEvaluation[] = [];
+        const responses: protos.google.cloud.automl.v1beta1.ModelEvaluation[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.automl.v1beta1.ModelEvaluation) => {
@@ -4477,10 +4424,9 @@ describe('v1beta1.AutoMlClient', () => {
           .calledWith(client.innerApiCalls.listModelEvaluations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4497,13 +4443,12 @@ describe('v1beta1.AutoMlClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listModelEvaluations.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listModelEvaluations.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listModelEvaluationsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.automl.v1beta1.ModelEvaluation[] = [];
+        const responses: protos.google.cloud.automl.v1beta1.ModelEvaluation[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.automl.v1beta1.ModelEvaluation) => {
@@ -4524,10 +4469,9 @@ describe('v1beta1.AutoMlClient', () => {
           .calledWith(client.innerApiCalls.listModelEvaluations, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluations.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4554,25 +4498,25 @@ describe('v1beta1.AutoMlClient', () => {
           new protos.google.cloud.automl.v1beta1.ModelEvaluation()
         ),
       ];
-      client.descriptors.page.listModelEvaluations.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.automl.v1beta1.IModelEvaluation[] = [];
+      client.descriptors.page.listModelEvaluations.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.automl.v1beta1.IModelEvaluation[] =
+        [];
       const iterable = client.listModelEvaluationsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4589,27 +4533,26 @@ describe('v1beta1.AutoMlClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listModelEvaluations.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listModelEvaluations.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listModelEvaluationsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.automl.v1beta1.IModelEvaluation[] = [];
+        const responses: protos.google.cloud.automl.v1beta1.IModelEvaluation[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listModelEvaluations
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listModelEvaluations.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4682,9 +4625,8 @@ describe('v1beta1.AutoMlClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -5025,9 +4967,8 @@ describe('v1beta1.AutoMlClient', () => {
       });
 
       it('matchModelEvaluationFromModelEvaluationName', () => {
-        const result = client.matchModelEvaluationFromModelEvaluationName(
-          fakePath
-        );
+        const result =
+          client.matchModelEvaluationFromModelEvaluationName(fakePath);
         assert.strictEqual(result, 'modelEvaluationValue');
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)

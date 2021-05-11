@@ -26,10 +26,9 @@ import * as predictionserviceModule from '../src';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -102,7 +101,8 @@ describe('v1beta1.PredictionServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new predictionserviceModule.v1beta1.PredictionServiceClient();
+    const client =
+      new predictionserviceModule.v1beta1.PredictionServiceClient();
     assert(client);
   });
 
@@ -167,12 +167,11 @@ describe('v1beta1.PredictionServiceClient', () => {
 
   describe('predict', () => {
     it('invokes predict without error', async () => {
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.PredictRequest()
@@ -200,12 +199,11 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes predict without error using callback', async () => {
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.PredictRequest()
@@ -222,9 +220,8 @@ describe('v1beta1.PredictionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.PredictResponse()
       );
-      client.innerApiCalls.predict = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.predict =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.predict(
           request,
@@ -250,12 +247,11 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes predict with error', async () => {
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.PredictRequest()
@@ -282,12 +278,11 @@ describe('v1beta1.PredictionServiceClient', () => {
 
   describe('batchPredict', () => {
     it('invokes batchPredict without error', async () => {
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.BatchPredictRequest()
@@ -316,12 +311,11 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes batchPredict without error using callback', async () => {
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.BatchPredictRequest()
@@ -338,9 +332,8 @@ describe('v1beta1.PredictionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchPredict = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchPredict =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchPredict(
           request,
@@ -373,12 +366,11 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes batchPredict with call error', async () => {
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.BatchPredictRequest()
@@ -406,12 +398,11 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes batchPredict with LRO error', async () => {
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.automl.v1beta1.BatchPredictRequest()
@@ -441,12 +432,11 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes checkBatchPredictProgress without error', async () => {
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -465,12 +455,11 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
 
     it('invokes checkBatchPredictProgress with error', async () => {
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -492,12 +481,11 @@ describe('v1beta1.PredictionServiceClient', () => {
         dataset: 'datasetValue',
         annotation_spec: 'annotationSpecValue',
       };
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.annotationSpecPathTemplate.render = sinon
         .stub()
@@ -552,9 +540,8 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -573,12 +560,11 @@ describe('v1beta1.PredictionServiceClient', () => {
         table_spec: 'tableSpecValue',
         column_spec: 'columnSpecValue',
       };
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.columnSpecPathTemplate.render = sinon
         .stub()
@@ -661,12 +647,11 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         dataset: 'datasetValue',
       };
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.datasetPathTemplate.render = sinon
         .stub()
@@ -727,12 +712,11 @@ describe('v1beta1.PredictionServiceClient', () => {
         location: 'locationValue',
         model: 'modelValue',
       };
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.modelPathTemplate.render = sinon
         .stub()
@@ -794,12 +778,11 @@ describe('v1beta1.PredictionServiceClient', () => {
         model: 'modelValue',
         model_evaluation: 'modelEvaluationValue',
       };
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.modelEvaluationPathTemplate.render = sinon
         .stub()
@@ -854,9 +837,8 @@ describe('v1beta1.PredictionServiceClient', () => {
       });
 
       it('matchModelEvaluationFromModelEvaluationName', () => {
-        const result = client.matchModelEvaluationFromModelEvaluationName(
-          fakePath
-        );
+        const result =
+          client.matchModelEvaluationFromModelEvaluationName(fakePath);
         assert.strictEqual(result, 'modelEvaluationValue');
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)
@@ -874,12 +856,11 @@ describe('v1beta1.PredictionServiceClient', () => {
         dataset: 'datasetValue',
         table_spec: 'tableSpecValue',
       };
-      const client = new predictionserviceModule.v1beta1.PredictionServiceClient(
-        {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.tableSpecPathTemplate.render = sinon
         .stub()

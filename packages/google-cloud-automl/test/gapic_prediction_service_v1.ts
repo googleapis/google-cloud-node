@@ -26,10 +26,9 @@ import * as predictionserviceModule from '../src';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -218,9 +217,8 @@ describe('v1.PredictionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.automl.v1.PredictResponse()
       );
-      client.innerApiCalls.predict = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.predict =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.predict(
           request,
@@ -328,9 +326,8 @@ describe('v1.PredictionServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.batchPredict = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.batchPredict =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.batchPredict(
           request,
@@ -532,9 +529,8 @@ describe('v1.PredictionServiceClient', () => {
       });
 
       it('matchAnnotationSpecFromAnnotationSpecName', () => {
-        const result = client.matchAnnotationSpecFromAnnotationSpecName(
-          fakePath
-        );
+        const result =
+          client.matchAnnotationSpecFromAnnotationSpecName(fakePath);
         assert.strictEqual(result, 'annotationSpecValue');
         assert(
           (client.pathTemplates.annotationSpecPathTemplate.match as SinonStub)
@@ -738,9 +734,8 @@ describe('v1.PredictionServiceClient', () => {
       });
 
       it('matchModelEvaluationFromModelEvaluationName', () => {
-        const result = client.matchModelEvaluationFromModelEvaluationName(
-          fakePath
-        );
+        const result =
+          client.matchModelEvaluationFromModelEvaluationName(fakePath);
         assert.strictEqual(result, 'modelEvaluationValue');
         assert(
           (client.pathTemplates.modelEvaluationPathTemplate.match as SinonStub)

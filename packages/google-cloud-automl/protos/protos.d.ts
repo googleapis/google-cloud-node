@@ -2369,7 +2369,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1.IImage);
 
                     /** Image imageBytes. */
-                    public imageBytes: (Uint8Array|string);
+                    public imageBytes?: (Uint8Array|string|null);
 
                     /** Image thumbnailUri. */
                     public thumbnailUri: string;
@@ -6258,7 +6258,7 @@ export namespace google {
                         constructor(properties?: google.cloud.automl.v1.ExportDataOperationMetadata.IExportDataOutputInfo);
 
                         /** ExportDataOutputInfo gcsOutputDirectory. */
-                        public gcsOutputDirectory: string;
+                        public gcsOutputDirectory?: (string|null);
 
                         /** ExportDataOutputInfo outputLocation. */
                         public outputLocation?: "gcsOutputDirectory";
@@ -6450,7 +6450,7 @@ export namespace google {
                         constructor(properties?: google.cloud.automl.v1.BatchPredictOperationMetadata.IBatchPredictOutputInfo);
 
                         /** BatchPredictOutputInfo gcsOutputDirectory. */
-                        public gcsOutputDirectory: string;
+                        public gcsOutputDirectory?: (string|null);
 
                         /** BatchPredictOutputInfo outputLocation. */
                         public outputLocation?: "gcsOutputDirectory";
@@ -11511,10 +11511,10 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1beta1.ITablesModelMetadata);
 
                     /** TablesModelMetadata optimizationObjectiveRecallValue. */
-                    public optimizationObjectiveRecallValue: number;
+                    public optimizationObjectiveRecallValue?: (number|null);
 
                     /** TablesModelMetadata optimizationObjectivePrecisionValue. */
-                    public optimizationObjectivePrecisionValue: number;
+                    public optimizationObjectivePrecisionValue?: (number|null);
 
                     /** TablesModelMetadata targetColumnSpec. */
                     public targetColumnSpec?: (google.cloud.automl.v1beta1.IColumnSpec|null);
@@ -13277,7 +13277,7 @@ export namespace google {
                     public structType?: (google.cloud.automl.v1beta1.IStructType|null);
 
                     /** DataType timeFormat. */
-                    public timeFormat: string;
+                    public timeFormat?: (string|null);
 
                     /** DataType typeCode. */
                     public typeCode: (google.cloud.automl.v1beta1.TypeCode|keyof typeof google.cloud.automl.v1beta1.TypeCode);
@@ -13472,7 +13472,7 @@ export namespace google {
                     constructor(properties?: google.cloud.automl.v1beta1.IImage);
 
                     /** Image imageBytes. */
-                    public imageBytes: (Uint8Array|string);
+                    public imageBytes?: (Uint8Array|string|null);
 
                     /** Image inputConfig. */
                     public inputConfig?: (google.cloud.automl.v1beta1.IInputConfig|null);
@@ -19380,10 +19380,10 @@ export namespace google {
                         constructor(properties?: google.cloud.automl.v1beta1.ExportDataOperationMetadata.IExportDataOutputInfo);
 
                         /** ExportDataOutputInfo gcsOutputDirectory. */
-                        public gcsOutputDirectory: string;
+                        public gcsOutputDirectory?: (string|null);
 
                         /** ExportDataOutputInfo bigqueryOutputDataset. */
-                        public bigqueryOutputDataset: string;
+                        public bigqueryOutputDataset?: (string|null);
 
                         /** ExportDataOutputInfo outputLocation. */
                         public outputLocation?: ("gcsOutputDirectory"|"bigqueryOutputDataset");
@@ -19578,10 +19578,10 @@ export namespace google {
                         constructor(properties?: google.cloud.automl.v1beta1.BatchPredictOperationMetadata.IBatchPredictOutputInfo);
 
                         /** BatchPredictOutputInfo gcsOutputDirectory. */
-                        public gcsOutputDirectory: string;
+                        public gcsOutputDirectory?: (string|null);
 
                         /** BatchPredictOutputInfo bigqueryOutputDataset. */
-                        public bigqueryOutputDataset: string;
+                        public bigqueryOutputDataset?: (string|null);
 
                         /** BatchPredictOutputInfo outputLocation. */
                         public outputLocation?: ("gcsOutputDirectory"|"bigqueryOutputDataset");
@@ -24118,19 +24118,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
@@ -28010,16 +28010,16 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue. */
-            public numberValue: number;
+            public numberValue?: (number|null);
 
             /** Value stringValue. */
-            public stringValue: string;
+            public stringValue?: (string|null);
 
             /** Value boolValue. */
-            public boolValue: boolean;
+            public boolValue?: (boolean|null);
 
             /** Value structValue. */
             public structValue?: (google.protobuf.IStruct|null);
