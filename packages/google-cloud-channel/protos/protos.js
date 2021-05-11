@@ -1233,27 +1233,27 @@
     
                         /**
                          * Value int64Value.
-                         * @member {number|Long} int64Value
+                         * @member {number|Long|null|undefined} int64Value
                          * @memberof google.cloud.channel.v1.Value
                          * @instance
                          */
-                        Value.prototype.int64Value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        Value.prototype.int64Value = null;
     
                         /**
                          * Value stringValue.
-                         * @member {string} stringValue
+                         * @member {string|null|undefined} stringValue
                          * @memberof google.cloud.channel.v1.Value
                          * @instance
                          */
-                        Value.prototype.stringValue = "";
+                        Value.prototype.stringValue = null;
     
                         /**
                          * Value doubleValue.
-                         * @member {number} doubleValue
+                         * @member {number|null|undefined} doubleValue
                          * @memberof google.cloud.channel.v1.Value
                          * @instance
                          */
-                        Value.prototype.doubleValue = 0;
+                        Value.prototype.doubleValue = null;
     
                         /**
                          * Value protoValue.
@@ -1265,11 +1265,11 @@
     
                         /**
                          * Value boolValue.
-                         * @member {boolean} boolValue
+                         * @member {boolean|null|undefined} boolValue
                          * @memberof google.cloud.channel.v1.Value
                          * @instance
                          */
-                        Value.prototype.boolValue = false;
+                        Value.prototype.boolValue = null;
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -13254,19 +13254,19 @@
     
                         /**
                          * ListTransferableSkusRequest cloudIdentityId.
-                         * @member {string} cloudIdentityId
+                         * @member {string|null|undefined} cloudIdentityId
                          * @memberof google.cloud.channel.v1.ListTransferableSkusRequest
                          * @instance
                          */
-                        ListTransferableSkusRequest.prototype.cloudIdentityId = "";
+                        ListTransferableSkusRequest.prototype.cloudIdentityId = null;
     
                         /**
                          * ListTransferableSkusRequest customerName.
-                         * @member {string} customerName
+                         * @member {string|null|undefined} customerName
                          * @memberof google.cloud.channel.v1.ListTransferableSkusRequest
                          * @instance
                          */
-                        ListTransferableSkusRequest.prototype.customerName = "";
+                        ListTransferableSkusRequest.prototype.customerName = null;
     
                         /**
                          * ListTransferableSkusRequest parent.
@@ -13830,19 +13830,19 @@
     
                         /**
                          * ListTransferableOffersRequest cloudIdentityId.
-                         * @member {string} cloudIdentityId
+                         * @member {string|null|undefined} cloudIdentityId
                          * @memberof google.cloud.channel.v1.ListTransferableOffersRequest
                          * @instance
                          */
-                        ListTransferableOffersRequest.prototype.cloudIdentityId = "";
+                        ListTransferableOffersRequest.prototype.cloudIdentityId = null;
     
                         /**
                          * ListTransferableOffersRequest customerName.
-                         * @member {string} customerName
+                         * @member {string|null|undefined} customerName
                          * @memberof google.cloud.channel.v1.ListTransferableOffersRequest
                          * @instance
                          */
-                        ListTransferableOffersRequest.prototype.customerName = "";
+                        ListTransferableOffersRequest.prototype.customerName = null;
     
                         /**
                          * ListTransferableOffersRequest parent.
@@ -24798,43 +24798,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

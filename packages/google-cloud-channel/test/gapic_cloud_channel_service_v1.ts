@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -285,9 +284,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
-      client.innerApiCalls.getCustomer = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getCustomer =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getCustomer(
           request,
@@ -370,9 +368,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistResponse()
       );
-      client.innerApiCalls.checkCloudIdentityAccountsExist = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.checkCloudIdentityAccountsExist =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.checkCloudIdentityAccountsExist(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -405,9 +402,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.CheckCloudIdentityAccountsExistResponse()
       );
-      client.innerApiCalls.checkCloudIdentityAccountsExist = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.checkCloudIdentityAccountsExist =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.checkCloudIdentityAccountsExist(
           request,
@@ -526,9 +522,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
-      client.innerApiCalls.createCustomer = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createCustomer =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createCustomer(
           request,
@@ -646,9 +641,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Customer()
       );
-      client.innerApiCalls.updateCustomer = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateCustomer =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateCustomer(
           request,
@@ -765,9 +759,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteCustomer = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteCustomer =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteCustomer(
           request,
@@ -883,9 +876,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.Entitlement()
       );
-      client.innerApiCalls.getEntitlement = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getEntitlement =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getEntitlement(
           request,
@@ -968,9 +960,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
-      client.innerApiCalls.getChannelPartnerLink = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getChannelPartnerLink =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getChannelPartnerLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1003,9 +994,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
-      client.innerApiCalls.getChannelPartnerLink = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getChannelPartnerLink =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getChannelPartnerLink(
           request,
@@ -1091,9 +1081,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
-      client.innerApiCalls.createChannelPartnerLink = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createChannelPartnerLink =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createChannelPartnerLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1126,9 +1115,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
-      client.innerApiCalls.createChannelPartnerLink = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createChannelPartnerLink =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createChannelPartnerLink(
           request,
@@ -1214,9 +1202,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
-      client.innerApiCalls.updateChannelPartnerLink = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateChannelPartnerLink =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateChannelPartnerLink(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1249,9 +1236,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.ChannelPartnerLink()
       );
-      client.innerApiCalls.updateChannelPartnerLink = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateChannelPartnerLink =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateChannelPartnerLink(
           request,
@@ -1337,9 +1323,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberResponse()
       );
-      client.innerApiCalls.registerSubscriber = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.registerSubscriber =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.registerSubscriber(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1372,9 +1357,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.RegisterSubscriberResponse()
       );
-      client.innerApiCalls.registerSubscriber = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.registerSubscriber =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.registerSubscriber(
           request,
@@ -1457,9 +1441,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberResponse()
       );
-      client.innerApiCalls.unregisterSubscriber = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.unregisterSubscriber =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.unregisterSubscriber(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1492,9 +1475,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.channel.v1.UnregisterSubscriberResponse()
       );
-      client.innerApiCalls.unregisterSubscriber = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.unregisterSubscriber =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.unregisterSubscriber(
           request,
@@ -1577,9 +1559,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.provisionCloudIdentity = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.provisionCloudIdentity =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.provisionCloudIdentity(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1613,9 +1594,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.provisionCloudIdentity = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.provisionCloudIdentity =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.provisionCloudIdentity(
           request,
@@ -1788,9 +1768,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createEntitlement = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createEntitlement =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createEntitlement(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1824,9 +1803,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createEntitlement = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createEntitlement =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createEntitlement(
           request,
@@ -1996,9 +1974,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.changeParameters = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.changeParameters =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.changeParameters(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2032,9 +2009,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.changeParameters = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.changeParameters =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.changeParameters(
           request,
@@ -2204,9 +2180,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.changeRenewalSettings = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.changeRenewalSettings =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.changeRenewalSettings(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2240,9 +2215,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.changeRenewalSettings = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.changeRenewalSettings =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.changeRenewalSettings(
           request,
@@ -2449,9 +2423,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.changeOffer = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.changeOffer =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.changeOffer(
           request,
@@ -2618,9 +2591,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.startPaidService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.startPaidService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.startPaidService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2654,9 +2626,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.startPaidService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.startPaidService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.startPaidService(
           request,
@@ -2826,9 +2797,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.suspendEntitlement = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.suspendEntitlement =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.suspendEntitlement(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2862,9 +2832,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.suspendEntitlement = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.suspendEntitlement =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.suspendEntitlement(
           request,
@@ -3034,9 +3003,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.cancelEntitlement = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelEntitlement =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.cancelEntitlement(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -3070,9 +3038,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.cancelEntitlement = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelEntitlement =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelEntitlement(
           request,
@@ -3242,9 +3209,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.activateEntitlement = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.activateEntitlement =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.activateEntitlement(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -3278,9 +3244,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.activateEntitlement = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.activateEntitlement =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.activateEntitlement(
           request,
@@ -3450,9 +3415,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.transferEntitlements = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.transferEntitlements =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.transferEntitlements(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -3486,9 +3450,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.transferEntitlements = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.transferEntitlements =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.transferEntitlements(
           request,
@@ -3658,9 +3621,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.transferEntitlementsToGoogle = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.transferEntitlementsToGoogle =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.transferEntitlementsToGoogle(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -3694,9 +3656,8 @@ describe('v1.CloudChannelServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.transferEntitlementsToGoogle = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.transferEntitlementsToGoogle =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.transferEntitlementsToGoogle(
           request,
@@ -3815,9 +3776,10 @@ describe('v1.CloudChannelServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkTransferEntitlementsToGoogleProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkTransferEntitlementsToGoogleProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -3906,9 +3868,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
       ];
-      client.innerApiCalls.listCustomers = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listCustomers =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listCustomers(
           request,
@@ -3984,9 +3945,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
       ];
-      client.descriptors.page.listCustomers.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCustomers.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listCustomersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.Customer[] = [];
@@ -4011,10 +3971,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listCustomers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4033,10 +3992,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCustomers.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCustomers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listCustomersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.Customer[] = [];
@@ -4060,10 +4017,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listCustomers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4086,9 +4042,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Customer()),
       ];
-      client.descriptors.page.listCustomers.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listCustomers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.channel.v1.ICustomer[] = [];
       const iterable = client.listCustomersAsync(request);
       for await (const resource of iterable) {
@@ -4096,15 +4051,15 @@ describe('v1.CloudChannelServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listCustomers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCustomers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4123,10 +4078,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listCustomers.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listCustomers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listCustomersAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.channel.v1.ICustomer[] = [];
@@ -4135,15 +4088,15 @@ describe('v1.CloudChannelServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listCustomers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listCustomers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listCustomers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listCustomers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4210,9 +4163,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
       ];
-      client.innerApiCalls.listEntitlements = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listEntitlements =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listEntitlements(
           request,
@@ -4288,9 +4240,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
       ];
-      client.descriptors.page.listEntitlements.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listEntitlements.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listEntitlementsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.Entitlement[] = [];
@@ -4315,10 +4266,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listEntitlements, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listEntitlements
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEntitlements.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4337,10 +4287,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEntitlements.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listEntitlements.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listEntitlementsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.Entitlement[] = [];
@@ -4364,10 +4312,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listEntitlements, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listEntitlements
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEntitlements.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4390,9 +4337,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Entitlement()),
       ];
-      client.descriptors.page.listEntitlements.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listEntitlements.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.channel.v1.IEntitlement[] = [];
       const iterable = client.listEntitlementsAsync(request);
       for await (const resource of iterable) {
@@ -4400,15 +4346,15 @@ describe('v1.CloudChannelServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listEntitlements
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listEntitlements.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listEntitlements
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEntitlements.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4427,10 +4373,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listEntitlements.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listEntitlements.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listEntitlementsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.channel.v1.IEntitlement[] = [];
@@ -4439,15 +4383,15 @@ describe('v1.CloudChannelServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listEntitlements
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listEntitlements.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listEntitlements
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listEntitlements.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4485,9 +4429,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.TransferableSku()
         ),
       ];
-      client.innerApiCalls.listTransferableSkus = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransferableSkus =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listTransferableSkus(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4528,9 +4471,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.TransferableSku()
         ),
       ];
-      client.innerApiCalls.listTransferableSkus = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransferableSkus =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTransferableSkus(
           request,
@@ -4612,9 +4554,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.TransferableSku()
         ),
       ];
-      client.descriptors.page.listTransferableSkus.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTransferableSkus.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTransferableSkusStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.TransferableSku[] = [];
@@ -4639,10 +4580,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listTransferableSkus, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferableSkus
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferableSkus.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4661,10 +4601,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferableSkus.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferableSkus.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTransferableSkusStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.TransferableSku[] = [];
@@ -4688,10 +4626,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listTransferableSkus, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferableSkus
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferableSkus.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4720,9 +4657,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.TransferableSku()
         ),
       ];
-      client.descriptors.page.listTransferableSkus.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTransferableSkus.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.channel.v1.ITransferableSku[] = [];
       const iterable = client.listTransferableSkusAsync(request);
       for await (const resource of iterable) {
@@ -4730,15 +4666,15 @@ describe('v1.CloudChannelServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferableSkus
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferableSkus
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4757,10 +4693,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferableSkus.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferableSkus.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTransferableSkusAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.channel.v1.ITransferableSku[] = [];
@@ -4769,15 +4703,15 @@ describe('v1.CloudChannelServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferableSkus
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferableSkus
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferableSkus.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4815,9 +4749,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.TransferableOffer()
         ),
       ];
-      client.innerApiCalls.listTransferableOffers = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransferableOffers =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listTransferableOffers(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4858,9 +4791,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.TransferableOffer()
         ),
       ];
-      client.innerApiCalls.listTransferableOffers = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTransferableOffers =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTransferableOffers(
           request,
@@ -4945,12 +4877,12 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.TransferableOffer()
         ),
       ];
-      client.descriptors.page.listTransferableOffers.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTransferableOffers.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTransferableOffersStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.channel.v1.TransferableOffer[] = [];
+        const responses: protos.google.cloud.channel.v1.TransferableOffer[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.channel.v1.TransferableOffer) => {
@@ -4967,16 +4899,18 @@ describe('v1.CloudChannelServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listTransferableOffers
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTransferableOffers
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferableOffers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferableOffers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferableOffers
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -4995,13 +4929,12 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferableOffers.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferableOffers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listTransferableOffersStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.channel.v1.TransferableOffer[] = [];
+        const responses: protos.google.cloud.channel.v1.TransferableOffer[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.channel.v1.TransferableOffer) => {
@@ -5017,16 +4950,18 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listTransferableOffers
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listTransferableOffers
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listTransferableOffers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferableOffers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferableOffers
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5055,9 +4990,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.TransferableOffer()
         ),
       ];
-      client.descriptors.page.listTransferableOffers.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTransferableOffers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.channel.v1.ITransferableOffer[] = [];
       const iterable = client.listTransferableOffersAsync(request);
       for await (const resource of iterable) {
@@ -5065,15 +4999,17 @@ describe('v1.CloudChannelServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferableOffers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferableOffers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferableOffers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferableOffers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5092,27 +5028,28 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listTransferableOffers.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listTransferableOffers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listTransferableOffersAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.channel.v1.ITransferableOffer[] = [];
+        const responses: protos.google.cloud.channel.v1.ITransferableOffer[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listTransferableOffers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listTransferableOffers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listTransferableOffers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listTransferableOffers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5150,9 +5087,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.ChannelPartnerLink()
         ),
       ];
-      client.innerApiCalls.listChannelPartnerLinks = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listChannelPartnerLinks =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listChannelPartnerLinks(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -5193,9 +5129,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.ChannelPartnerLink()
         ),
       ];
-      client.innerApiCalls.listChannelPartnerLinks = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listChannelPartnerLinks =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listChannelPartnerLinks(
           request,
@@ -5280,12 +5215,12 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.ChannelPartnerLink()
         ),
       ];
-      client.descriptors.page.listChannelPartnerLinks.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listChannelPartnerLinks.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listChannelPartnerLinksStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.channel.v1.ChannelPartnerLink[] = [];
+        const responses: protos.google.cloud.channel.v1.ChannelPartnerLink[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.channel.v1.ChannelPartnerLink) => {
@@ -5302,16 +5237,18 @@ describe('v1.CloudChannelServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listChannelPartnerLinks
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listChannelPartnerLinks
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listChannelPartnerLinks, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listChannelPartnerLinks
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listChannelPartnerLinks
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5330,13 +5267,12 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listChannelPartnerLinks.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listChannelPartnerLinks.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listChannelPartnerLinksStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.channel.v1.ChannelPartnerLink[] = [];
+        const responses: protos.google.cloud.channel.v1.ChannelPartnerLink[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.channel.v1.ChannelPartnerLink) => {
@@ -5352,16 +5288,18 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listChannelPartnerLinks
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listChannelPartnerLinks
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listChannelPartnerLinks, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listChannelPartnerLinks
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listChannelPartnerLinks
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5390,25 +5328,27 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.ChannelPartnerLink()
         ),
       ];
-      client.descriptors.page.listChannelPartnerLinks.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.channel.v1.IChannelPartnerLink[] = [];
+      client.descriptors.page.listChannelPartnerLinks.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.channel.v1.IChannelPartnerLink[] =
+        [];
       const iterable = client.listChannelPartnerLinksAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listChannelPartnerLinks
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listChannelPartnerLinks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listChannelPartnerLinks
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listChannelPartnerLinks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5427,27 +5367,28 @@ describe('v1.CloudChannelServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listChannelPartnerLinks.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listChannelPartnerLinks.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listChannelPartnerLinksAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.channel.v1.IChannelPartnerLink[] = [];
+        const responses: protos.google.cloud.channel.v1.IChannelPartnerLink[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listChannelPartnerLinks
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listChannelPartnerLinks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listChannelPartnerLinks
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listChannelPartnerLinks
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -5498,9 +5439,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
       ];
-      client.innerApiCalls.listProducts = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listProducts =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listProducts(
           request,
@@ -5566,9 +5506,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
       ];
-      client.descriptors.page.listProducts.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProducts.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listProductsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.Product[] = [];
@@ -5650,9 +5589,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Product()),
       ];
-      client.descriptors.page.listProducts.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listProducts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.channel.v1.IProduct[] = [];
       const iterable = client.listProductsAsync(request);
       for await (const resource of iterable) {
@@ -5660,8 +5598,9 @@ describe('v1.CloudChannelServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listProducts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -5678,10 +5617,8 @@ describe('v1.CloudChannelServiceClient', () => {
         new protos.google.cloud.channel.v1.ListProductsRequest()
       );
       const expectedError = new Error('expected');
-      client.descriptors.page.listProducts.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listProducts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listProductsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.channel.v1.IProduct[] = [];
@@ -5690,8 +5627,9 @@ describe('v1.CloudChannelServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listProducts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -5758,9 +5696,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
       ];
-      client.innerApiCalls.listSkus = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listSkus =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listSkus(
           request,
@@ -5833,9 +5770,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
       ];
-      client.descriptors.page.listSkus.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSkus.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listSkusStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.Sku[] = [];
@@ -5925,9 +5861,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Sku()),
       ];
-      client.descriptors.page.listSkus.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSkus.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.channel.v1.ISku[] = [];
       const iterable = client.listSkusAsync(request);
       for await (const resource of iterable) {
@@ -6045,9 +5980,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
       ];
-      client.innerApiCalls.listOffers = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listOffers =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listOffers(
           request,
@@ -6123,9 +6057,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
       ];
-      client.descriptors.page.listOffers.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listOffers.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listOffersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.Offer[] = [];
@@ -6217,9 +6150,8 @@ describe('v1.CloudChannelServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
         generateSampleMessage(new protos.google.cloud.channel.v1.Offer()),
       ];
-      client.descriptors.page.listOffers.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listOffers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.channel.v1.IOffer[] = [];
       const iterable = client.listOffersAsync(request);
       for await (const resource of iterable) {
@@ -6312,9 +6244,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.PurchasableSku()
         ),
       ];
-      client.innerApiCalls.listPurchasableSkus = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listPurchasableSkus =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listPurchasableSkus(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -6355,9 +6286,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.PurchasableSku()
         ),
       ];
-      client.innerApiCalls.listPurchasableSkus = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listPurchasableSkus =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listPurchasableSkus(
           request,
@@ -6439,9 +6369,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.PurchasableSku()
         ),
       ];
-      client.descriptors.page.listPurchasableSkus.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listPurchasableSkus.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listPurchasableSkusStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.PurchasableSku[] = [];
@@ -6466,10 +6395,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listPurchasableSkus, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPurchasableSkus
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPurchasableSkus.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6488,10 +6416,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.customer = '';
       const expectedHeaderRequestParams = 'customer=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listPurchasableSkus.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listPurchasableSkus.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listPurchasableSkusStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.PurchasableSku[] = [];
@@ -6515,10 +6441,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listPurchasableSkus, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPurchasableSkus
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPurchasableSkus.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6547,9 +6472,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.PurchasableSku()
         ),
       ];
-      client.descriptors.page.listPurchasableSkus.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listPurchasableSkus.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.channel.v1.IPurchasableSku[] = [];
       const iterable = client.listPurchasableSkusAsync(request);
       for await (const resource of iterable) {
@@ -6557,15 +6481,15 @@ describe('v1.CloudChannelServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listPurchasableSkus
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPurchasableSkus
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6584,10 +6508,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.customer = '';
       const expectedHeaderRequestParams = 'customer=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listPurchasableSkus.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listPurchasableSkus.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listPurchasableSkusAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.channel.v1.IPurchasableSku[] = [];
@@ -6596,15 +6518,15 @@ describe('v1.CloudChannelServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listPurchasableSkus
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPurchasableSkus
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPurchasableSkus.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6642,9 +6564,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.PurchasableOffer()
         ),
       ];
-      client.innerApiCalls.listPurchasableOffers = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listPurchasableOffers =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listPurchasableOffers(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -6685,9 +6606,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.PurchasableOffer()
         ),
       ];
-      client.innerApiCalls.listPurchasableOffers = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listPurchasableOffers =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listPurchasableOffers(
           request,
@@ -6772,9 +6692,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.PurchasableOffer()
         ),
       ];
-      client.descriptors.page.listPurchasableOffers.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listPurchasableOffers.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listPurchasableOffersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.PurchasableOffer[] = [];
@@ -6794,16 +6713,18 @@ describe('v1.CloudChannelServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listPurchasableOffers
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listPurchasableOffers
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listPurchasableOffers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPurchasableOffers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPurchasableOffers
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6822,10 +6743,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.customer = '';
       const expectedHeaderRequestParams = 'customer=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listPurchasableOffers.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listPurchasableOffers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listPurchasableOffersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.channel.v1.PurchasableOffer[] = [];
@@ -6844,16 +6763,18 @@ describe('v1.CloudChannelServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listPurchasableOffers
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listPurchasableOffers
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listPurchasableOffers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listPurchasableOffers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPurchasableOffers
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6882,9 +6803,8 @@ describe('v1.CloudChannelServiceClient', () => {
           new protos.google.cloud.channel.v1.PurchasableOffer()
         ),
       ];
-      client.descriptors.page.listPurchasableOffers.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listPurchasableOffers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.channel.v1.IPurchasableOffer[] = [];
       const iterable = client.listPurchasableOffersAsync(request);
       for await (const resource of iterable) {
@@ -6892,15 +6812,17 @@ describe('v1.CloudChannelServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listPurchasableOffers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPurchasableOffers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPurchasableOffers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPurchasableOffers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6919,27 +6841,28 @@ describe('v1.CloudChannelServiceClient', () => {
       request.customer = '';
       const expectedHeaderRequestParams = 'customer=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listPurchasableOffers.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listPurchasableOffers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listPurchasableOffersAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.channel.v1.IPurchasableOffer[] = [];
+        const responses: protos.google.cloud.channel.v1.IPurchasableOffer[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listPurchasableOffers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listPurchasableOffers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listPurchasableOffers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listPurchasableOffers
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -6998,9 +6921,8 @@ describe('v1.CloudChannelServiceClient', () => {
         },
       };
       const expectedResponse = [new String(), new String(), new String()];
-      client.innerApiCalls.listSubscribers = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listSubscribers =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listSubscribers(
           request,
@@ -7069,9 +6991,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.account = '';
       const expectedHeaderRequestParams = 'account=';
       const expectedResponse = [new String(), new String(), new String()];
-      client.descriptors.page.listSubscribers.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSubscribers.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listSubscribersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: string[] = [];
@@ -7093,10 +7014,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listSubscribers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listSubscribers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSubscribers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -7115,10 +7035,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.account = '';
       const expectedHeaderRequestParams = 'account=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listSubscribers.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listSubscribers.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listSubscribersStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: string[] = [];
@@ -7139,10 +7057,9 @@ describe('v1.CloudChannelServiceClient', () => {
           .calledWith(client.innerApiCalls.listSubscribers, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listSubscribers
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSubscribers.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -7161,9 +7078,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.account = '';
       const expectedHeaderRequestParams = 'account=';
       const expectedResponse = [new String(), new String(), new String()];
-      client.descriptors.page.listSubscribers.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSubscribers.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: string[] = [];
       const iterable = client.listSubscribersAsync(request);
       for await (const resource of iterable) {
@@ -7171,15 +7087,15 @@ describe('v1.CloudChannelServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listSubscribers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listSubscribers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listSubscribers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSubscribers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -7198,10 +7114,8 @@ describe('v1.CloudChannelServiceClient', () => {
       request.account = '';
       const expectedHeaderRequestParams = 'account=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listSubscribers.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listSubscribers.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listSubscribersAsync(request);
       await assert.rejects(async () => {
         const responses: string[] = [];
@@ -7210,15 +7124,15 @@ describe('v1.CloudChannelServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listSubscribers
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listSubscribers.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listSubscribers
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listSubscribers.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });

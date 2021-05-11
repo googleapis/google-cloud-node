@@ -469,19 +469,19 @@ export namespace google {
                     constructor(properties?: google.cloud.channel.v1.IValue);
 
                     /** Value int64Value. */
-                    public int64Value: (number|Long|string);
+                    public int64Value?: (number|Long|string|null);
 
                     /** Value stringValue. */
-                    public stringValue: string;
+                    public stringValue?: (string|null);
 
                     /** Value doubleValue. */
-                    public doubleValue: number;
+                    public doubleValue?: (number|null);
 
                     /** Value protoValue. */
                     public protoValue?: (google.protobuf.IAny|null);
 
                     /** Value boolValue. */
-                    public boolValue: boolean;
+                    public boolValue?: (boolean|null);
 
                     /** Value kind. */
                     public kind?: ("int64Value"|"stringValue"|"doubleValue"|"protoValue"|"boolValue");
@@ -5507,10 +5507,10 @@ export namespace google {
                     constructor(properties?: google.cloud.channel.v1.IListTransferableSkusRequest);
 
                     /** ListTransferableSkusRequest cloudIdentityId. */
-                    public cloudIdentityId: string;
+                    public cloudIdentityId?: (string|null);
 
                     /** ListTransferableSkusRequest customerName. */
-                    public customerName: string;
+                    public customerName?: (string|null);
 
                     /** ListTransferableSkusRequest parent. */
                     public parent: string;
@@ -5732,10 +5732,10 @@ export namespace google {
                     constructor(properties?: google.cloud.channel.v1.IListTransferableOffersRequest);
 
                     /** ListTransferableOffersRequest cloudIdentityId. */
-                    public cloudIdentityId: string;
+                    public cloudIdentityId?: (string|null);
 
                     /** ListTransferableOffersRequest customerName. */
-                    public customerName: string;
+                    public customerName?: (string|null);
 
                     /** ListTransferableOffersRequest parent. */
                     public parent: string;
@@ -10396,19 +10396,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
