@@ -1298,7 +1298,7 @@ export class FeaturestoreServiceClient {
    *     * `display_name`
    *     * `labels`
    *     * `online_serving_config.fixed_node_count`
-   *     * `online_serving_config.max_online_serving_size`
+   *     * `retention_policy.online_storage_ttl_days`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
