@@ -26,10 +26,9 @@ import * as quotacontrollerModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,9 +185,8 @@ describe('v1.QuotaControllerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicecontrol.v1.AllocateQuotaResponse()
       );
-      client.innerApiCalls.allocateQuota = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.allocateQuota =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.allocateQuota(
           request,
