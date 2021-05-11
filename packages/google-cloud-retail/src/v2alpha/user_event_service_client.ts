@@ -25,7 +25,6 @@ import {
   ClientOptions,
   LROperation,
 } from 'google-gax';
-import * as path from 'path';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
