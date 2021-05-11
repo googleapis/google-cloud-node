@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -247,9 +246,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Queue()
       );
-      client.innerApiCalls.getQueue = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getQueue =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getQueue(
           request,
@@ -356,9 +354,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Queue()
       );
-      client.innerApiCalls.createQueue = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createQueue =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createQueue(
           request,
@@ -470,9 +467,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Queue()
       );
-      client.innerApiCalls.updateQueue = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateQueue =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateQueue(
           request,
@@ -583,9 +579,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteQueue = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteQueue =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteQueue(
           request,
@@ -695,9 +690,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Queue()
       );
-      client.innerApiCalls.purgeQueue = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.purgeQueue =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.purgeQueue(
           request,
@@ -807,9 +801,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Queue()
       );
-      client.innerApiCalls.pauseQueue = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.pauseQueue =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.pauseQueue(
           request,
@@ -919,9 +912,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Queue()
       );
-      client.innerApiCalls.resumeQueue = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.resumeQueue =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.resumeQueue(
           request,
@@ -1031,9 +1023,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -1143,9 +1134,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -1224,9 +1214,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1257,9 +1246,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.iam.v1.TestIamPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -1369,9 +1357,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Task()
       );
-      client.innerApiCalls.getTask = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getTask =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getTask(
           request,
@@ -1478,9 +1465,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Task()
       );
-      client.innerApiCalls.createTask = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createTask =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createTask(
           request,
@@ -1590,9 +1576,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.deleteTask = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteTask =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteTask(
           request,
@@ -1702,9 +1687,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.LeaseTasksResponse()
       );
-      client.innerApiCalls.leaseTasks = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.leaseTasks =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.leaseTasks(
           request,
@@ -1814,9 +1798,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.protobuf.Empty()
       );
-      client.innerApiCalls.acknowledgeTask = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.acknowledgeTask =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.acknowledgeTask(
           request,
@@ -1926,9 +1909,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Task()
       );
-      client.innerApiCalls.renewLease = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.renewLease =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.renewLease(
           request,
@@ -2038,9 +2020,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Task()
       );
-      client.innerApiCalls.cancelLease = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.cancelLease =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.cancelLease(
           request,
@@ -2150,9 +2131,8 @@ describe('v2beta2.CloudTasksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.tasks.v2beta2.Task()
       );
-      client.innerApiCalls.runTask = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.runTask =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.runTask(
           request,
@@ -2263,9 +2243,8 @@ describe('v2beta2.CloudTasksClient', () => {
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Queue()),
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Queue()),
       ];
-      client.innerApiCalls.listQueues = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listQueues =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listQueues(
           request,
@@ -2337,9 +2316,8 @@ describe('v2beta2.CloudTasksClient', () => {
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Queue()),
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Queue()),
       ];
-      client.descriptors.page.listQueues.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listQueues.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listQueuesStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.tasks.v2beta2.Queue[] = [];
@@ -2433,9 +2411,8 @@ describe('v2beta2.CloudTasksClient', () => {
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Queue()),
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Queue()),
       ];
-      client.descriptors.page.listQueues.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listQueues.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.tasks.v2beta2.IQueue[] = [];
       const iterable = client.listQueuesAsync(request);
       for await (const resource of iterable) {
@@ -2551,9 +2528,8 @@ describe('v2beta2.CloudTasksClient', () => {
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Task()),
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Task()),
       ];
-      client.innerApiCalls.listTasks = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listTasks =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listTasks(
           request,
@@ -2622,9 +2598,8 @@ describe('v2beta2.CloudTasksClient', () => {
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Task()),
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Task()),
       ];
-      client.descriptors.page.listTasks.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTasks.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listTasksStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.tasks.v2beta2.Task[] = [];
@@ -2716,9 +2691,8 @@ describe('v2beta2.CloudTasksClient', () => {
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Task()),
         generateSampleMessage(new protos.google.cloud.tasks.v2beta2.Task()),
       ];
-      client.descriptors.page.listTasks.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listTasks.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.tasks.v2beta2.ITask[] = [];
       const iterable = client.listTasksAsync(request);
       for await (const resource of iterable) {

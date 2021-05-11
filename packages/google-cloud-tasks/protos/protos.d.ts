@@ -5779,10 +5779,10 @@ export namespace google {
                     constructor(properties?: google.cloud.tasks.v2beta2.IRetryConfig);
 
                     /** RetryConfig maxAttempts. */
-                    public maxAttempts: number;
+                    public maxAttempts?: (number|null);
 
                     /** RetryConfig unlimitedAttempts. */
-                    public unlimitedAttempts: boolean;
+                    public unlimitedAttempts?: (boolean|null);
 
                     /** RetryConfig maxRetryDuration. */
                     public maxRetryDuration?: (google.protobuf.IDuration|null);
@@ -10403,19 +10403,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
