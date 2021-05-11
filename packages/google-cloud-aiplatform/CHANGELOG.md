@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.6.0...v1.7.0) (2021-05-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* BREAKING_CHANGE: remove display_name from FeatureStore feat: add invalid_row_count to ImportFeatureValuesResponse and ImportFeatureValuesOperationMetadata (#124)
+* BREAKING CHANGE: remove unsupported accelerator types feat: add aiplatform API Vizier service (#92)
+
+### Features
+
+* add featurestore, index, metadata, monitoring, pipeline, and tensorboard services to aiplatform v1beta1. ([#118](https://www.github.com/googleapis/nodejs-ai-platform/issues/118)) ([c3ce821](https://www.github.com/googleapis/nodejs-ai-platform/commit/c3ce8215218dff6d6d42536c9307a05c00bf458b))
+* BREAKING CHANGE: remove unsupported accelerator types feat: add aiplatform API Vizier service ([#92](https://www.github.com/googleapis/nodejs-ai-platform/issues/92)) ([23f184d](https://www.github.com/googleapis/nodejs-ai-platform/commit/23f184dffb8482fc032234ae652e75999eb93203))
+
+
+### Bug Fixes
+
+* BREAKING_CHANGE: remove display_name from FeatureStore feat: add invalid_row_count to ImportFeatureValuesResponse and ImportFeatureValuesOperationMetadata ([#124](https://www.github.com/googleapis/nodejs-ai-platform/issues/124)) ([34b8548](https://www.github.com/googleapis/nodejs-ai-platform/commit/34b85485bc7ead9d86daebfd736a0d938d431566))
+* **deps:** require google-gax v2.12.0 ([#120](https://www.github.com/googleapis/nodejs-ai-platform/issues/120)) ([2b58ecb](https://www.github.com/googleapis/nodejs-ai-platform/commit/2b58ecbaad65f8718bfaaf125664ce86cb1ae1d8))
+* use require() to load JSON protos ([#122](https://www.github.com/googleapis/nodejs-ai-platform/issues/122)) ([3f26575](https://www.github.com/googleapis/nodejs-ai-platform/commit/3f265753f9c9e9a52966e549c9f74c0fe31002b1))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.5.0...v1.6.0) (2021-03-11)
 
 
