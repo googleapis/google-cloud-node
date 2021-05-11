@@ -30,7 +30,7 @@ function main(
    * TODO(developer): Uncomment the following lines before running the sample.
    */
   // The ID of your GCS bucket
-  // const srcBucketName = 'your-source-bucket';
+  // const bucketName = 'your-source-bucket';
 
   // The ID of your GCS file
   // const srcFileName = 'your-file-name';
