@@ -3818,10 +3818,16 @@ export namespace google {
                         public celExpression?: (google.type.IExpr|null);
 
                         /** CertificateIdentityConstraints allowSubjectPassthrough. */
-                        public allowSubjectPassthrough: boolean;
+                        public allowSubjectPassthrough?: (boolean|null);
 
                         /** CertificateIdentityConstraints allowSubjectAltNamesPassthrough. */
-                        public allowSubjectAltNamesPassthrough: boolean;
+                        public allowSubjectAltNamesPassthrough?: (boolean|null);
+
+                        /** CertificateIdentityConstraints _allowSubjectPassthrough. */
+                        public _allowSubjectPassthrough?: "allowSubjectPassthrough";
+
+                        /** CertificateIdentityConstraints _allowSubjectAltNamesPassthrough. */
+                        public _allowSubjectAltNamesPassthrough?: "allowSubjectAltNamesPassthrough";
 
                         /**
                          * Creates a new CertificateIdentityConstraints instance using the specified properties.

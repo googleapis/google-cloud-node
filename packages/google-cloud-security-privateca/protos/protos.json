@@ -1186,6 +1186,18 @@
                           }
                         },
                         "CertificateIdentityConstraints": {
+                          "oneofs": {
+                            "_allowSubjectPassthrough": {
+                              "oneof": [
+                                "allowSubjectPassthrough"
+                              ]
+                            },
+                            "_allowSubjectAltNamesPassthrough": {
+                              "oneof": [
+                                "allowSubjectAltNamesPassthrough"
+                              ]
+                            }
+                          },
                           "fields": {
                             "celExpression": {
                               "type": "google.type.Expr",
@@ -1198,14 +1210,16 @@
                               "type": "bool",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
                               }
                             },
                             "allowSubjectAltNamesPassthrough": {
                               "type": "bool",
                               "id": 3,
                               "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "proto3_optional": true
                               }
                             }
                           }

@@ -10226,19 +10226,44 @@
     
                             /**
                              * CertificateIdentityConstraints allowSubjectPassthrough.
-                             * @member {boolean} allowSubjectPassthrough
+                             * @member {boolean|null|undefined} allowSubjectPassthrough
                              * @memberof google.cloud.security.privateca.v1.CertificateIdentityConstraints
                              * @instance
                              */
-                            CertificateIdentityConstraints.prototype.allowSubjectPassthrough = false;
+                            CertificateIdentityConstraints.prototype.allowSubjectPassthrough = null;
     
                             /**
                              * CertificateIdentityConstraints allowSubjectAltNamesPassthrough.
-                             * @member {boolean} allowSubjectAltNamesPassthrough
+                             * @member {boolean|null|undefined} allowSubjectAltNamesPassthrough
                              * @memberof google.cloud.security.privateca.v1.CertificateIdentityConstraints
                              * @instance
                              */
-                            CertificateIdentityConstraints.prototype.allowSubjectAltNamesPassthrough = false;
+                            CertificateIdentityConstraints.prototype.allowSubjectAltNamesPassthrough = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            /**
+                             * CertificateIdentityConstraints _allowSubjectPassthrough.
+                             * @member {"allowSubjectPassthrough"|undefined} _allowSubjectPassthrough
+                             * @memberof google.cloud.security.privateca.v1.CertificateIdentityConstraints
+                             * @instance
+                             */
+                            Object.defineProperty(CertificateIdentityConstraints.prototype, "_allowSubjectPassthrough", {
+                                get: $util.oneOfGetter($oneOfFields = ["allowSubjectPassthrough"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * CertificateIdentityConstraints _allowSubjectAltNamesPassthrough.
+                             * @member {"allowSubjectAltNamesPassthrough"|undefined} _allowSubjectAltNamesPassthrough
+                             * @memberof google.cloud.security.privateca.v1.CertificateIdentityConstraints
+                             * @instance
+                             */
+                            Object.defineProperty(CertificateIdentityConstraints.prototype, "_allowSubjectAltNamesPassthrough", {
+                                get: $util.oneOfGetter($oneOfFields = ["allowSubjectAltNamesPassthrough"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
     
                             /**
                              * Creates a new CertificateIdentityConstraints instance using the specified properties.
@@ -10348,17 +10373,22 @@
                             CertificateIdentityConstraints.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                var properties = {};
                                 if (message.celExpression != null && message.hasOwnProperty("celExpression")) {
                                     var error = $root.google.type.Expr.verify(message.celExpression);
                                     if (error)
                                         return "celExpression." + error;
                                 }
-                                if (message.allowSubjectPassthrough != null && message.hasOwnProperty("allowSubjectPassthrough"))
+                                if (message.allowSubjectPassthrough != null && message.hasOwnProperty("allowSubjectPassthrough")) {
+                                    properties._allowSubjectPassthrough = 1;
                                     if (typeof message.allowSubjectPassthrough !== "boolean")
                                         return "allowSubjectPassthrough: boolean expected";
-                                if (message.allowSubjectAltNamesPassthrough != null && message.hasOwnProperty("allowSubjectAltNamesPassthrough"))
+                                }
+                                if (message.allowSubjectAltNamesPassthrough != null && message.hasOwnProperty("allowSubjectAltNamesPassthrough")) {
+                                    properties._allowSubjectAltNamesPassthrough = 1;
                                     if (typeof message.allowSubjectAltNamesPassthrough !== "boolean")
                                         return "allowSubjectAltNamesPassthrough: boolean expected";
+                                }
                                 return null;
                             };
     
@@ -10399,17 +10429,20 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults) {
+                                if (options.defaults)
                                     object.celExpression = null;
-                                    object.allowSubjectPassthrough = false;
-                                    object.allowSubjectAltNamesPassthrough = false;
-                                }
                                 if (message.celExpression != null && message.hasOwnProperty("celExpression"))
                                     object.celExpression = $root.google.type.Expr.toObject(message.celExpression, options);
-                                if (message.allowSubjectPassthrough != null && message.hasOwnProperty("allowSubjectPassthrough"))
+                                if (message.allowSubjectPassthrough != null && message.hasOwnProperty("allowSubjectPassthrough")) {
                                     object.allowSubjectPassthrough = message.allowSubjectPassthrough;
-                                if (message.allowSubjectAltNamesPassthrough != null && message.hasOwnProperty("allowSubjectAltNamesPassthrough"))
+                                    if (options.oneofs)
+                                        object._allowSubjectPassthrough = "allowSubjectPassthrough";
+                                }
+                                if (message.allowSubjectAltNamesPassthrough != null && message.hasOwnProperty("allowSubjectAltNamesPassthrough")) {
                                     object.allowSubjectAltNamesPassthrough = message.allowSubjectAltNamesPassthrough;
+                                    if (options.oneofs)
+                                        object._allowSubjectAltNamesPassthrough = "allowSubjectAltNamesPassthrough";
+                                }
                                 return object;
                             };
     
