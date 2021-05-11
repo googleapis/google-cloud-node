@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -279,9 +278,8 @@ describe('v1alpha1.HubServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.Hub()
       );
-      client.innerApiCalls.getHub = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getHub =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getHub(
           request,
@@ -388,9 +386,8 @@ describe('v1alpha1.HubServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.networkconnectivity.v1alpha1.Spoke()
       );
-      client.innerApiCalls.getSpoke = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getSpoke =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getSpoke(
           request,
@@ -498,9 +495,8 @@ describe('v1alpha1.HubServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createHub = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createHub =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createHub(
           request,
@@ -691,9 +687,8 @@ describe('v1alpha1.HubServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateHub = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateHub =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateHub(
           request,
@@ -884,9 +879,8 @@ describe('v1alpha1.HubServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteHub = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteHub =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteHub(
           request,
@@ -1075,9 +1069,8 @@ describe('v1alpha1.HubServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createSpoke = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createSpoke =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createSpoke(
           request,
@@ -1268,9 +1261,8 @@ describe('v1alpha1.HubServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateSpoke = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateSpoke =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateSpoke(
           request,
@@ -1461,9 +1453,8 @@ describe('v1alpha1.HubServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteSpoke = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteSpoke =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteSpoke(
           request,
@@ -1667,9 +1658,8 @@ describe('v1alpha1.HubServiceClient', () => {
           new protos.google.cloud.networkconnectivity.v1alpha1.Hub()
         ),
       ];
-      client.innerApiCalls.listHubs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listHubs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listHubs(
           request,
@@ -1746,12 +1736,12 @@ describe('v1alpha1.HubServiceClient', () => {
           new protos.google.cloud.networkconnectivity.v1alpha1.Hub()
         ),
       ];
-      client.descriptors.page.listHubs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listHubs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listHubsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkconnectivity.v1alpha1.Hub[] = [];
+        const responses: protos.google.cloud.networkconnectivity.v1alpha1.Hub[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.networkconnectivity.v1alpha1.Hub) => {
@@ -1797,7 +1787,8 @@ describe('v1alpha1.HubServiceClient', () => {
       );
       const stream = client.listHubsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkconnectivity.v1alpha1.Hub[] = [];
+        const responses: protos.google.cloud.networkconnectivity.v1alpha1.Hub[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.networkconnectivity.v1alpha1.Hub) => {
@@ -1846,10 +1837,10 @@ describe('v1alpha1.HubServiceClient', () => {
           new protos.google.cloud.networkconnectivity.v1alpha1.Hub()
         ),
       ];
-      client.descriptors.page.listHubs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.networkconnectivity.v1alpha1.IHub[] = [];
+      client.descriptors.page.listHubs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.networkconnectivity.v1alpha1.IHub[] =
+        [];
       const iterable = client.listHubsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1885,7 +1876,8 @@ describe('v1alpha1.HubServiceClient', () => {
       );
       const iterable = client.listHubsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.networkconnectivity.v1alpha1.IHub[] = [];
+        const responses: protos.google.cloud.networkconnectivity.v1alpha1.IHub[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -1972,9 +1964,8 @@ describe('v1alpha1.HubServiceClient', () => {
           new protos.google.cloud.networkconnectivity.v1alpha1.Spoke()
         ),
       ];
-      client.innerApiCalls.listSpokes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listSpokes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listSpokes(
           request,
@@ -2054,12 +2045,12 @@ describe('v1alpha1.HubServiceClient', () => {
           new protos.google.cloud.networkconnectivity.v1alpha1.Spoke()
         ),
       ];
-      client.descriptors.page.listSpokes.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listSpokes.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listSpokesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkconnectivity.v1alpha1.Spoke[] = [];
+        const responses: protos.google.cloud.networkconnectivity.v1alpha1.Spoke[] =
+          [];
         stream.on(
           'data',
           (
@@ -2108,7 +2099,8 @@ describe('v1alpha1.HubServiceClient', () => {
       );
       const stream = client.listSpokesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.networkconnectivity.v1alpha1.Spoke[] = [];
+        const responses: protos.google.cloud.networkconnectivity.v1alpha1.Spoke[] =
+          [];
         stream.on(
           'data',
           (
@@ -2160,10 +2152,10 @@ describe('v1alpha1.HubServiceClient', () => {
           new protos.google.cloud.networkconnectivity.v1alpha1.Spoke()
         ),
       ];
-      client.descriptors.page.listSpokes.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[] = [];
+      client.descriptors.page.listSpokes.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[] =
+        [];
       const iterable = client.listSpokesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -2201,7 +2193,8 @@ describe('v1alpha1.HubServiceClient', () => {
       );
       const iterable = client.listSpokesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[] = [];
+        const responses: protos.google.cloud.networkconnectivity.v1alpha1.ISpoke[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
@@ -2362,47 +2355,52 @@ describe('v1alpha1.HubServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.interconnectAttachmentPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.interconnectAttachmentPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromInterconnectAttachmentName', () => {
-        const result = client.matchProjectFromInterconnectAttachmentName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromInterconnectAttachmentName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.interconnectAttachmentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.interconnectAttachmentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchRegionFromInterconnectAttachmentName', () => {
-        const result = client.matchRegionFromInterconnectAttachmentName(
-          fakePath
-        );
+        const result =
+          client.matchRegionFromInterconnectAttachmentName(fakePath);
         assert.strictEqual(result, 'regionValue');
         assert(
-          (client.pathTemplates.interconnectAttachmentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.interconnectAttachmentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchResourceIdFromInterconnectAttachmentName', () => {
-        const result = client.matchResourceIdFromInterconnectAttachmentName(
-          fakePath
-        );
+        const result =
+          client.matchResourceIdFromInterconnectAttachmentName(fakePath);
         assert.strictEqual(result, 'resourceIdValue');
         assert(
-          (client.pathTemplates.interconnectAttachmentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.interconnectAttachmentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
