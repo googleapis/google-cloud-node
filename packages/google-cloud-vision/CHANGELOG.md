@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.1...v2.3.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#897](https://www.github.com/googleapis/nodejs-vision/issues/897)) ([bc987f4](https://www.github.com/googleapis/nodejs-vision/commit/bc987f4cc731de64792d5b56d4861038b310f211))
+* **deps:** update dependency natural to v5 ([#880](https://www.github.com/googleapis/nodejs-vision/issues/880)) ([6a82d95](https://www.github.com/googleapis/nodejs-vision/commit/6a82d95f532f054cd120920339c198d57ce2cf28))
+* use require() to load JSON protos ([#899](https://www.github.com/googleapis/nodejs-vision/issues/899)) ([01ff4e3](https://www.github.com/googleapis/nodejs-vision/commit/01ff4e3162541e4e255ca7b3e5478c2b754a78b9))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.0...v2.3.1) (2021-02-18)
 
 
