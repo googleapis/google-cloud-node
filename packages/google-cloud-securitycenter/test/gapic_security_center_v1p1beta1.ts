@@ -4152,10 +4152,10 @@ describe('v1p1beta1.SecurityCenterClient', () => {
   });
 
   describe('Path templates', () => {
-    describe('asset', () => {
-      const fakePath = '/rendered/path/asset';
+    describe('folderAsset', () => {
+      const fakePath = '/rendered/path/folderAsset';
       const expectedParameters = {
-        organization: 'organizationValue',
+        folder: 'folderValue',
         asset: 'assetValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
@@ -4163,48 +4163,160 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.assetPathTemplate.render = sinon
+      client.pathTemplates.folderAssetPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.assetPathTemplate.match = sinon
+      client.pathTemplates.folderAssetPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('assetPath', () => {
-        const result = client.assetPath('organizationValue', 'assetValue');
+      it('folderAssetPath', () => {
+        const result = client.folderAssetPath('folderValue', 'assetValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.assetPathTemplate.render as SinonStub)
+          (client.pathTemplates.folderAssetPathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchOrganizationFromAssetName', () => {
-        const result = client.matchOrganizationFromAssetName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
+      it('matchFolderFromFolderAssetName', () => {
+        const result = client.matchFolderFromFolderAssetName(fakePath);
+        assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
+          (client.pathTemplates.folderAssetPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchAssetFromAssetName', () => {
-        const result = client.matchAssetFromAssetName(fakePath);
+      it('matchAssetFromFolderAssetName', () => {
+        const result = client.matchAssetFromFolderAssetName(fakePath);
         assert.strictEqual(result, 'assetValue');
         assert(
-          (client.pathTemplates.assetPathTemplate.match as SinonStub)
+          (client.pathTemplates.folderAssetPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
     });
 
-    describe('finding', () => {
-      const fakePath = '/rendered/path/finding';
+    describe('folderAssetSecurityMarks', () => {
+      const fakePath = '/rendered/path/folderAssetSecurityMarks';
       const expectedParameters = {
-        organization: 'organizationValue',
+        folder: 'folderValue',
+        asset: 'assetValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderAssetSecurityMarksPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderAssetSecurityMarksPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderAssetSecurityMarksPath', () => {
+        const result = client.folderAssetSecurityMarksPath(
+          'folderValue',
+          'assetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderAssetSecurityMarksPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderAssetSecurityMarksName', () => {
+        const result =
+          client.matchFolderFromFolderAssetSecurityMarksName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAssetFromFolderAssetSecurityMarksName', () => {
+        const result =
+          client.matchAssetFromFolderAssetSecurityMarksName(fakePath);
+        assert.strictEqual(result, 'assetValue');
+        assert(
+          (
+            client.pathTemplates.folderAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('folderSource', () => {
+      const fakePath = '/rendered/path/folderSource';
+      const expectedParameters = {
+        folder: 'folderValue',
+        source: 'sourceValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderSourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.folderSourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('folderSourcePath', () => {
+        const result = client.folderSourcePath('folderValue', 'sourceValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.folderSourcePathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderSourceName', () => {
+        const result = client.matchFolderFromFolderSourceName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (client.pathTemplates.folderSourcePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSourceFromFolderSourceName', () => {
+        const result = client.matchSourceFromFolderSourceName(fakePath);
+        assert.strictEqual(result, 'sourceValue');
+        assert(
+          (client.pathTemplates.folderSourcePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('folderSourceFinding', () => {
+      const fakePath = '/rendered/path/folderSourceFinding';
+      const expectedParameters = {
+        folder: 'folderValue',
         source: 'sourceValue',
         finding: 'findingValue',
       };
@@ -4213,52 +4325,141 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.findingPathTemplate.render = sinon
+      client.pathTemplates.folderSourceFindingPathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.findingPathTemplate.match = sinon
+      client.pathTemplates.folderSourceFindingPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('findingPath', () => {
-        const result = client.findingPath(
-          'organizationValue',
+      it('folderSourceFindingPath', () => {
+        const result = client.folderSourceFindingPath(
+          'folderValue',
           'sourceValue',
           'findingValue'
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.findingPathTemplate.render as SinonStub)
+          (
+            client.pathTemplates.folderSourceFindingPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchOrganizationFromFindingName', () => {
-        const result = client.matchOrganizationFromFindingName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
+      it('matchFolderFromFolderSourceFindingName', () => {
+        const result = client.matchFolderFromFolderSourceFindingName(fakePath);
+        assert.strictEqual(result, 'folderValue');
         assert(
-          (client.pathTemplates.findingPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.folderSourceFindingPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchSourceFromFindingName', () => {
-        const result = client.matchSourceFromFindingName(fakePath);
+      it('matchSourceFromFolderSourceFindingName', () => {
+        const result = client.matchSourceFromFolderSourceFindingName(fakePath);
         assert.strictEqual(result, 'sourceValue');
         assert(
-          (client.pathTemplates.findingPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.folderSourceFindingPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchFindingFromFindingName', () => {
-        const result = client.matchFindingFromFindingName(fakePath);
+      it('matchFindingFromFolderSourceFindingName', () => {
+        const result = client.matchFindingFromFolderSourceFindingName(fakePath);
         assert.strictEqual(result, 'findingValue');
         assert(
-          (client.pathTemplates.findingPathTemplate.match as SinonStub)
+          (
+            client.pathTemplates.folderSourceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('folderSourceFindingSecurityMarks', () => {
+      const fakePath = '/rendered/path/folderSourceFindingSecurityMarks';
+      const expectedParameters = {
+        folder: 'folderValue',
+        source: 'sourceValue',
+        finding: 'findingValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('folderSourceFindingSecurityMarksPath', () => {
+        const result = client.folderSourceFindingSecurityMarksPath(
+          'folderValue',
+          'sourceValue',
+          'findingValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchFolderFromFolderSourceFindingSecurityMarksName', () => {
+        const result =
+          client.matchFolderFromFolderSourceFindingSecurityMarksName(fakePath);
+        assert.strictEqual(result, 'folderValue');
+        assert(
+          (
+            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSourceFromFolderSourceFindingSecurityMarksName', () => {
+        const result =
+          client.matchSourceFromFolderSourceFindingSecurityMarksName(fakePath);
+        assert.strictEqual(result, 'sourceValue');
+        assert(
+          (
+            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFindingFromFolderSourceFindingSecurityMarksName', () => {
+        const result =
+          client.matchFindingFromFolderSourceFindingSecurityMarksName(fakePath);
+        assert.strictEqual(result, 'findingValue');
+        assert(
+          (
+            client.pathTemplates.folderSourceFindingSecurityMarksPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4360,6 +4561,68 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         assert.strictEqual(result, 'organizationValue');
         assert(
           (client.pathTemplates.organizationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationAsset', () => {
+      const fakePath = '/rendered/path/organizationAsset';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        asset: 'assetValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationAssetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationAssetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationAssetPath', () => {
+        const result = client.organizationAssetPath(
+          'organizationValue',
+          'assetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationAssetPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationAssetName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationAssetName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationAssetPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAssetFromOrganizationAssetName', () => {
+        const result = client.matchAssetFromOrganizationAssetName(fakePath);
+        assert.strictEqual(result, 'assetValue');
+        assert(
+          (
+            client.pathTemplates.organizationAssetPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4474,6 +4737,147 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       });
     });
 
+    describe('organizationSource', () => {
+      const fakePath = '/rendered/path/organizationSource';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        source: 'sourceValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationSourcePathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationSourcePathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationSourcePath', () => {
+        const result = client.organizationSourcePath(
+          'organizationValue',
+          'sourceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationSourcePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationSourceName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationSourceName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationSourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSourceFromOrganizationSourceName', () => {
+        const result = client.matchSourceFromOrganizationSourceName(fakePath);
+        assert.strictEqual(result, 'sourceValue');
+        assert(
+          (
+            client.pathTemplates.organizationSourcePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationSourceFinding', () => {
+      const fakePath = '/rendered/path/organizationSourceFinding';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        source: 'sourceValue',
+        finding: 'findingValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.organizationSourceFindingPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.organizationSourceFindingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('organizationSourceFindingPath', () => {
+        const result = client.organizationSourceFindingPath(
+          'organizationValue',
+          'sourceValue',
+          'findingValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationSourceFindingPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationSourceFindingName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationSourceFindingName(fakePath);
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationSourceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSourceFromOrganizationSourceFindingName', () => {
+        const result =
+          client.matchSourceFromOrganizationSourceFindingName(fakePath);
+        assert.strictEqual(result, 'sourceValue');
+        assert(
+          (
+            client.pathTemplates.organizationSourceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFindingFromOrganizationSourceFindingName', () => {
+        const result =
+          client.matchFindingFromOrganizationSourceFindingName(fakePath);
+        assert.strictEqual(result, 'findingValue');
+        assert(
+          (
+            client.pathTemplates.organizationSourceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationSourceFindingSecurityMarks', () => {
       const fakePath = '/rendered/path/organizationSourceFindingSecurityMarks';
       const expectedParameters = {
@@ -4561,10 +4965,122 @@ describe('v1p1beta1.SecurityCenterClient', () => {
       });
     });
 
-    describe('source', () => {
-      const fakePath = '/rendered/path/source';
+    describe('projectAsset', () => {
+      const fakePath = '/rendered/path/projectAsset';
       const expectedParameters = {
-        organization: 'organizationValue',
+        project: 'projectValue',
+        asset: 'assetValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAssetPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectAssetPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectAssetPath', () => {
+        const result = client.projectAssetPath('projectValue', 'assetValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.projectAssetPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAssetName', () => {
+        const result = client.matchProjectFromProjectAssetName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.projectAssetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAssetFromProjectAssetName', () => {
+        const result = client.matchAssetFromProjectAssetName(fakePath);
+        assert.strictEqual(result, 'assetValue');
+        assert(
+          (client.pathTemplates.projectAssetPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectAssetSecurityMarks', () => {
+      const fakePath = '/rendered/path/projectAssetSecurityMarks';
+      const expectedParameters = {
+        project: 'projectValue',
+        asset: 'assetValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectAssetSecurityMarksPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectAssetSecurityMarksPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectAssetSecurityMarksPath', () => {
+        const result = client.projectAssetSecurityMarksPath(
+          'projectValue',
+          'assetValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectAssetSecurityMarksPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectAssetSecurityMarksName', () => {
+        const result =
+          client.matchProjectFromProjectAssetSecurityMarksName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAssetFromProjectAssetSecurityMarksName', () => {
+        const result =
+          client.matchAssetFromProjectAssetSecurityMarksName(fakePath);
+        assert.strictEqual(result, 'assetValue');
+        assert(
+          (
+            client.pathTemplates.projectAssetSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectSource', () => {
+      const fakePath = '/rendered/path/projectSource';
+      const expectedParameters = {
+        project: 'projectValue',
         source: 'sourceValue',
       };
       const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
@@ -4572,38 +5088,197 @@ describe('v1p1beta1.SecurityCenterClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.sourcePathTemplate.render = sinon
+      client.pathTemplates.projectSourcePathTemplate.render = sinon
         .stub()
         .returns(fakePath);
-      client.pathTemplates.sourcePathTemplate.match = sinon
+      client.pathTemplates.projectSourcePathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
 
-      it('sourcePath', () => {
-        const result = client.sourcePath('organizationValue', 'sourceValue');
+      it('projectSourcePath', () => {
+        const result = client.projectSourcePath('projectValue', 'sourceValue');
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.sourcePathTemplate.render as SinonStub)
+          (client.pathTemplates.projectSourcePathTemplate.render as SinonStub)
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
-      it('matchOrganizationFromSourceName', () => {
-        const result = client.matchOrganizationFromSourceName(fakePath);
-        assert.strictEqual(result, 'organizationValue');
+      it('matchProjectFromProjectSourceName', () => {
+        const result = client.matchProjectFromProjectSourceName(fakePath);
+        assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.sourcePathTemplate.match as SinonStub)
+          (client.pathTemplates.projectSourcePathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
-      it('matchSourceFromSourceName', () => {
-        const result = client.matchSourceFromSourceName(fakePath);
+      it('matchSourceFromProjectSourceName', () => {
+        const result = client.matchSourceFromProjectSourceName(fakePath);
         assert.strictEqual(result, 'sourceValue');
         assert(
-          (client.pathTemplates.sourcePathTemplate.match as SinonStub)
+          (client.pathTemplates.projectSourcePathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectSourceFinding', () => {
+      const fakePath = '/rendered/path/projectSourceFinding';
+      const expectedParameters = {
+        project: 'projectValue',
+        source: 'sourceValue',
+        finding: 'findingValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectSourceFindingPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.projectSourceFindingPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('projectSourceFindingPath', () => {
+        const result = client.projectSourceFindingPath(
+          'projectValue',
+          'sourceValue',
+          'findingValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectSourceFindingName', () => {
+        const result =
+          client.matchProjectFromProjectSourceFindingName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSourceFromProjectSourceFindingName', () => {
+        const result = client.matchSourceFromProjectSourceFindingName(fakePath);
+        assert.strictEqual(result, 'sourceValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFindingFromProjectSourceFindingName', () => {
+        const result =
+          client.matchFindingFromProjectSourceFindingName(fakePath);
+        assert.strictEqual(result, 'findingValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectSourceFindingSecurityMarks', () => {
+      const fakePath = '/rendered/path/projectSourceFindingSecurityMarks';
+      const expectedParameters = {
+        project: 'projectValue',
+        source: 'sourceValue',
+        finding: 'findingValue',
+      };
+      const client = new securitycenterModule.v1p1beta1.SecurityCenterClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectSourceFindingSecurityMarksPath', () => {
+        const result = client.projectSourceFindingSecurityMarksPath(
+          'projectValue',
+          'sourceValue',
+          'findingValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectSourceFindingSecurityMarksName', () => {
+        const result =
+          client.matchProjectFromProjectSourceFindingSecurityMarksName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchSourceFromProjectSourceFindingSecurityMarksName', () => {
+        const result =
+          client.matchSourceFromProjectSourceFindingSecurityMarksName(fakePath);
+        assert.strictEqual(result, 'sourceValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchFindingFromProjectSourceFindingSecurityMarksName', () => {
+        const result =
+          client.matchFindingFromProjectSourceFindingSecurityMarksName(
+            fakePath
+          );
+        assert.strictEqual(result, 'findingValue');
+        assert(
+          (
+            client.pathTemplates.projectSourceFindingSecurityMarksPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

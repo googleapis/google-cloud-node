@@ -2558,15 +2558,15 @@
                     "java_package": "com.google.cloud.securitycenter.v1p1beta1",
                     "php_namespace": "Google\\Cloud\\SecurityCenter\\V1p1beta1",
                     "ruby_package": "Google::Cloud::SecurityCenter::V1p1beta1",
+                    "java_outer_classname": "ResourceProto",
                     "(google.api.resource_definition).type": "pubsub.googleapis.com/Topic",
-                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}",
-                    "java_outer_classname": "ResourceProto"
+                    "(google.api.resource_definition).pattern": "projects/{project}/topics/{topic}"
                   },
                   "nested": {
                     "Asset": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Asset",
-                        "(google.api.resource).pattern": "organizations/{organization}/assets/{asset}"
+                        "(google.api.resource).pattern": "projects/{project}/assets/{asset}"
                       },
                       "fields": {
                         "name": {
@@ -2597,6 +2597,10 @@
                         "iamPolicy": {
                           "type": "IamPolicy",
                           "id": 11
+                        },
+                        "canonicalName": {
+                          "type": "string",
+                          "id": 13
                         }
                       },
                       "nested": {
@@ -2634,6 +2638,11 @@
                             "resourceProjectDisplayName": {
                               "type": "string",
                               "id": 8
+                            },
+                            "folders": {
+                              "rule": "repeated",
+                              "type": "Folder",
+                              "id": 10
                             }
                           }
                         },
@@ -2647,10 +2656,22 @@
                         }
                       }
                     },
+                    "Folder": {
+                      "fields": {
+                        "resourceFolder": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "resourceFolderDisplayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
                     "SecurityMarks": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/SecurityMarks",
-                        "(google.api.resource).pattern": "organizations/{organization}/sources/{source}/findings/{finding}/securityMarks"
+                        "(google.api.resource).pattern": "projects/{project}/sources/{source}/findings/{finding}/securityMarks"
                       },
                       "fields": {
                         "name": {
@@ -2661,13 +2682,17 @@
                           "keyType": "string",
                           "type": "string",
                           "id": 2
+                        },
+                        "canonicalName": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
                     "Finding": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Finding",
-                        "(google.api.resource).pattern": "organizations/{organization}/sources/{source}/findings/{finding}"
+                        "(google.api.resource).pattern": "projects/{project}/sources/{source}/findings/{finding}"
                       },
                       "fields": {
                         "name": {
@@ -2717,6 +2742,10 @@
                         "severity": {
                           "type": "Severity",
                           "id": 13
+                        },
+                        "canonicalName": {
+                          "type": "string",
+                          "id": 14
                         }
                       },
                       "nested": {
@@ -2843,6 +2872,14 @@
                         "parentDisplayName": {
                           "type": "string",
                           "id": 5
+                        },
+                        "folders": {
+                          "rule": "repeated",
+                          "type": "Folder",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -2876,6 +2913,11 @@
                             "inclusionMode": {
                               "type": "InclusionMode",
                               "id": 2
+                            },
+                            "folderIds": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3
                             }
                           },
                           "nested": {
@@ -3081,13 +3123,25 @@
                           "responseType": "GroupAssetsResponse",
                           "options": {
                             "(google.api.http).post": "/v1p1beta1/{parent=organizations/*}/assets:group",
-                            "(google.api.http).body": "*"
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1p1beta1/{parent=projects/*}/assets:group",
+                            "(google.api.http).additional_bindings.body": "*"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1p1beta1/{parent=organizations/*}/assets:group",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1p1beta1/{parent=folders/*}/assets:group",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1p1beta1/{parent=projects/*}/assets:group",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             }
                           ]
@@ -3098,13 +3152,25 @@
                           "options": {
                             "(google.api.http).post": "/v1p1beta1/{parent=organizations/*/sources/*}/findings:group",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1p1beta1/{parent=projects/*/sources/*}/findings:group",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "parent,group_by"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1p1beta1/{parent=organizations/*/sources/*}/findings:group",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1p1beta1/{parent=folders/*/sources/*}/findings:group",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1p1beta1/{parent=projects/*/sources/*}/findings:group",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -3117,12 +3183,21 @@
                           "responseType": "ListAssetsResponse",
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{parent=organizations/*}/assets",
+                            "(google.api.http).additional_bindings.get": "/v1p1beta1/{parent=projects/*}/assets",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1p1beta1/{parent=organizations/*}/assets"
+                                "get": "/v1p1beta1/{parent=organizations/*}/assets",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1p1beta1/{parent=folders/*}/assets"
+                                  },
+                                  {
+                                    "get": "/v1p1beta1/{parent=projects/*}/assets"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -3135,12 +3210,21 @@
                           "responseType": "ListFindingsResponse",
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{parent=organizations/*/sources/*}/findings",
+                            "(google.api.http).additional_bindings.get": "/v1p1beta1/{parent=projects/*/sources/*}/findings",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1p1beta1/{parent=organizations/*/sources/*}/findings"
+                                "get": "/v1p1beta1/{parent=organizations/*/sources/*}/findings",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1p1beta1/{parent=folders/*/sources/*}/findings"
+                                  },
+                                  {
+                                    "get": "/v1p1beta1/{parent=projects/*/sources/*}/findings"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -3171,12 +3255,21 @@
                           "responseType": "ListSourcesResponse",
                           "options": {
                             "(google.api.http).get": "/v1p1beta1/{parent=organizations/*}/sources",
+                            "(google.api.http).additional_bindings.get": "/v1p1beta1/{parent=projects/*}/sources",
                             "(google.api.method_signature)": "parent"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1p1beta1/{parent=organizations/*}/sources"
+                                "get": "/v1p1beta1/{parent=organizations/*}/sources",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1p1beta1/{parent=folders/*}/sources"
+                                  },
+                                  {
+                                    "get": "/v1p1beta1/{parent=projects/*}/sources"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -3218,13 +3311,25 @@
                           "options": {
                             "(google.api.http).post": "/v1p1beta1/{name=organizations/*/sources/*/findings/*}:setState",
                             "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1p1beta1/{name=projects/*/sources/*/findings/*}:setState",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "name,state,start_time"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1p1beta1/{name=organizations/*/sources/*/findings/*}:setState",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1p1beta1/{name=folders/*/sources/*/findings/*}:setState",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1p1beta1/{name=projects/*/sources/*/findings/*}:setState",
+                                    "body": "*"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -3278,13 +3383,25 @@
                           "options": {
                             "(google.api.http).patch": "/v1p1beta1/{finding.name=organizations/*/sources/*/findings/*}",
                             "(google.api.http).body": "finding",
+                            "(google.api.http).additional_bindings.patch": "/v1p1beta1/{finding.name=projects/*/sources/*/findings/*}",
+                            "(google.api.http).additional_bindings.body": "finding",
                             "(google.api.method_signature)": "finding,update_mask"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1p1beta1/{finding.name=organizations/*/sources/*/findings/*}",
-                                "body": "finding"
+                                "body": "finding",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1p1beta1/{finding.name=folders/*/sources/*/findings/*}",
+                                    "body": "finding"
+                                  },
+                                  {
+                                    "patch": "/v1p1beta1/{finding.name=projects/*/sources/*/findings/*}",
+                                    "body": "finding"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -3367,7 +3484,7 @@
                           "options": {
                             "(google.api.http).patch": "/v1p1beta1/{security_marks.name=organizations/*/assets/*/securityMarks}",
                             "(google.api.http).body": "security_marks",
-                            "(google.api.http).additional_bindings.patch": "/v1p1beta1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
+                            "(google.api.http).additional_bindings.patch": "/v1p1beta1/{security_marks.name=projects/*/sources/*/findings/*/securityMarks}",
                             "(google.api.http).additional_bindings.body": "security_marks",
                             "(google.api.method_signature)": "security_marks,update_mask"
                           },
@@ -3376,10 +3493,28 @@
                               "(google.api.http)": {
                                 "patch": "/v1p1beta1/{security_marks.name=organizations/*/assets/*/securityMarks}",
                                 "body": "security_marks",
-                                "additional_bindings": {
-                                  "patch": "/v1p1beta1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
-                                  "body": "security_marks"
-                                }
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1p1beta1/{security_marks.name=folders/*/assets/*/securityMarks}",
+                                    "body": "security_marks"
+                                  },
+                                  {
+                                    "patch": "/v1p1beta1/{security_marks.name=projects/*/assets/*/securityMarks}",
+                                    "body": "security_marks"
+                                  },
+                                  {
+                                    "patch": "/v1p1beta1/{security_marks.name=organizations/*/sources/*/findings/*/securityMarks}",
+                                    "body": "security_marks"
+                                  },
+                                  {
+                                    "patch": "/v1p1beta1/{security_marks.name=folders/*/sources/*/findings/*/securityMarks}",
+                                    "body": "security_marks"
+                                  },
+                                  {
+                                    "patch": "/v1p1beta1/{security_marks.name=projects/*/sources/*/findings/*/securityMarks}",
+                                    "body": "security_marks"
+                                  }
+                                ]
                               }
                             },
                             {
@@ -3518,7 +3653,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/Asset"
                           }
                         },
                         "filter": {
@@ -3684,7 +3819,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/Source"
                           }
                         },
                         "pageToken": {
@@ -3717,7 +3852,7 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Organization"
+                            "(google.api.resource_reference).child_type": "securitycenter.googleapis.com/Asset"
                           }
                         },
                         "filter": {
@@ -3896,6 +4031,11 @@
                                 "parentDisplayName": {
                                   "type": "string",
                                   "id": 5
+                                },
+                                "folders": {
+                                  "rule": "repeated",
+                                  "type": "Folder",
+                                  "id": 10
                                 }
                               }
                             },
@@ -4032,7 +4172,7 @@
                     "Source": {
                       "options": {
                         "(google.api.resource).type": "securitycenter.googleapis.com/Source",
-                        "(google.api.resource).pattern": "organizations/{organization}/sources/{source}"
+                        "(google.api.resource).pattern": "projects/{project}/sources/{source}"
                       },
                       "fields": {
                         "name": {
@@ -4046,6 +4186,10 @@
                         "description": {
                           "type": "string",
                           "id": 3
+                        },
+                        "canonicalName": {
+                          "type": "string",
+                          "id": 14
                         }
                       }
                     }
