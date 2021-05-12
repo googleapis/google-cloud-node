@@ -30,8 +30,8 @@ def patch(library: pathlib.Path):
 
     # perform surgery inserting the Grafeas client.
     s.replace(library / "src/v1/container_analysis_client.ts",
-            """import \* as path from \'path\';""",
-            """import * as path from 'path';
+            """import \* as gax from \'google-gax\';""",
+            """import * as gax from 'google-gax';
 import {GrafeasClient} from '@google-cloud/grafeas';""")
     s.replace(library / "src/v1/container_analysis_client.ts", "^}",
             r"""
