@@ -1,6 +1,7 @@
 [
   "../../protos/google/cloud/securitycenter/v1/asset.proto",
   "../../protos/google/cloud/securitycenter/v1/finding.proto",
+  "../../protos/google/cloud/securitycenter/v1/folder.proto",
   "../../protos/google/cloud/securitycenter/v1/notification_config.proto",
   "../../protos/google/cloud/securitycenter/v1/notification_message.proto",
   "../../protos/google/cloud/securitycenter/v1/organization_settings.proto",

@@ -153,17 +153,30 @@ export class SecurityCenterClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      assetPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/assets/{asset}'
+      folderAssetPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/assets/{asset}'
       ),
-      findingPathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/sources/{source}/findings/{finding}'
+      folderAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/assets/{asset}/securityMarks'
       ),
+      folderSourcePathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/sources/{source}'
+      ),
+      folderSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
+        'folders/{folder}/sources/{source}/findings/{finding}'
+      ),
+      folderSourceFindingSecurityMarksPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'folders/{folder}/sources/{source}/findings/{finding}/securityMarks'
+        ),
       notificationConfigPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/notificationConfigs/{notification_config}'
       ),
       organizationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}'
+      ),
+      organizationAssetPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/assets/{asset}'
       ),
       organizationAssetSecurityMarksPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -172,13 +185,32 @@ export class SecurityCenterClient {
       organizationSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/organizationSettings'
       ),
+      organizationSourcePathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/sources/{source}'
+      ),
+      organizationSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/sources/{source}/findings/{finding}'
+      ),
       organizationSourceFindingSecurityMarksPathTemplate:
         new this._gaxModule.PathTemplate(
           'organizations/{organization}/sources/{source}/findings/{finding}/securityMarks'
         ),
-      sourcePathTemplate: new this._gaxModule.PathTemplate(
-        'organizations/{organization}/sources/{source}'
+      projectAssetPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/assets/{asset}'
       ),
+      projectAssetSecurityMarksPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/assets/{asset}/securityMarks'
+      ),
+      projectSourcePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/sources/{source}'
+      ),
+      projectSourceFindingPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/sources/{source}/findings/{finding}'
+      ),
+      projectSourceFindingSecurityMarksPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/sources/{source}/findings/{finding}/securityMarks'
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -1600,6 +1632,7 @@ export class SecurityCenterClient {
     >
   ): void;
   /**
+   *
    * Updates a notification config. The following update
    * fields are allowed: description, pubsub_topic, streaming_config.filter
    *
@@ -2165,7 +2198,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the organization to groupBy. Its format is
-   *   "organizations/[organization_id]".
+   *   "organizations/[organization_id], folders/[folder_id], or
+   *   projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -2351,7 +2385,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the organization to groupBy. Its format is
-   *   "organizations/[organization_id]".
+   *   "organizations/[organization_id], folders/[folder_id], or
+   *   projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -2515,7 +2550,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the organization to groupBy. Its format is
-   *   "organizations/[organization_id]".
+   *   "organizations/[organization_id], folders/[folder_id], or
+   *   projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -2711,15 +2747,20 @@ export class SecurityCenterClient {
    * specified properties.
    *
    * To group across all sources provide a `-` as the source id.
-   * Example: /v1/organizations/{organization_id}/sources/-/findings
+   * Example: /v1/organizations/{organization_id}/sources/-/findings,
+   * /v1/folders/{folder_id}/sources/-/findings,
+   * /v1/projects/{project_id}/sources/-/findings
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source to groupBy. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
-   *   all sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
+   *   "organizations/[organization_id]/sources/[source_id]",
+   *   folders/[folder_id]/sources/[source_id], or
+   *   projects/[project_id]/sources/[source_id]. To groupBy across all sources
+   *   provide a source_id of `-`. For example:
+   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-,
+   *   or projects/{project_id}/sources/-
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -2895,9 +2936,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source to groupBy. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
-   *   all sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
+   *   "organizations/[organization_id]/sources/[source_id]",
+   *   folders/[folder_id]/sources/[source_id], or
+   *   projects/[project_id]/sources/[source_id]. To groupBy across all sources
+   *   provide a source_id of `-`. For example:
+   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-,
+   *   or projects/{project_id}/sources/-
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -3051,9 +3095,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source to groupBy. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To groupBy across
-   *   all sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
+   *   "organizations/[organization_id]/sources/[source_id]",
+   *   folders/[folder_id]/sources/[source_id], or
+   *   projects/[project_id]/sources/[source_id]. To groupBy across all sources
+   *   provide a source_id of `-`. For example:
+   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-,
+   *   or projects/{project_id}/sources/-
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -3241,7 +3288,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the organization assets should belong to. Its format is
-   *   "organizations/[organization_id]".
+   *   "organizations/[organization_id], folders/[folder_id], or
+   *   projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -3431,7 +3479,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the organization assets should belong to. Its format is
-   *   "organizations/[organization_id]".
+   *   "organizations/[organization_id], folders/[folder_id], or
+   *   projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -3599,7 +3648,8 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the organization assets should belong to. Its format is
-   *   "organizations/[organization_id]".
+   *   "organizations/[organization_id], folders/[folder_id], or
+   *   projects/[project_id]".
    * @param {string} request.filter
    *   Expression that defines the filter to apply across assets.
    *   The expression is a list of zero or more restrictions combined via logical
@@ -3804,9 +3854,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source the findings belong to. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To list across all
-   *   sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
+   *   "organizations/[organization_id]/sources/[source_id],
+   *   folders/[folder_id]/sources/[source_id], or
+   *   projects/[project_id]/sources/[source_id]". To list across all sources
+   *   provide a source_id of `-`. For example:
+   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/- or
+   *   projects/{projects_id}/sources/-
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -3986,9 +4039,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source the findings belong to. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To list across all
-   *   sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
+   *   "organizations/[organization_id]/sources/[source_id],
+   *   folders/[folder_id]/sources/[source_id], or
+   *   projects/[project_id]/sources/[source_id]". To list across all sources
+   *   provide a source_id of `-`. For example:
+   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/- or
+   *   projects/{projects_id}/sources/-
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -4146,9 +4202,12 @@ export class SecurityCenterClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Name of the source the findings belong to. Its format is
-   *   "organizations/[organization_id]/sources/[source_id]". To list across all
-   *   sources provide a source_id of `-`. For example:
-   *   organizations/{organization_id}/sources/-
+   *   "organizations/[organization_id]/sources/[source_id],
+   *   folders/[folder_id]/sources/[source_id], or
+   *   projects/[project_id]/sources/[source_id]". To list across all sources
+   *   provide a source_id of `-`. For example:
+   *   organizations/{organization_id}/sources/-, folders/{folder_id}/sources/- or
+   *   projects/{projects_id}/sources/-
    * @param {string} request.filter
    *   Expression that defines the filter to apply across findings.
    *   The expression is a list of one or more restrictions combined via logical
@@ -4546,8 +4605,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id]".
+   *   Required. Resource name of the parent of sources to list. Its format should be
+   *   "organizations/[organization_id], folders/[folder_id], or
+   *   projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -4617,8 +4677,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id]".
+   *   Required. Resource name of the parent of sources to list. Its format should be
+   *   "organizations/[organization_id], folders/[folder_id], or
+   *   projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -4666,8 +4727,9 @@ export class SecurityCenterClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the parent of sources to list. Its format should
-   *   be "organizations/[organization_id]".
+   *   Required. Resource name of the parent of sources to list. Its format should be
+   *   "organizations/[organization_id], folders/[folder_id], or
+   *   projects/[project_id]".
    * @param {string} request.pageToken
    *   The value returned by the last `ListSourcesResponse`; indicates
    *   that this is a continuation of a prior `ListSources` call, and
@@ -4717,89 +4779,245 @@ export class SecurityCenterClient {
   // --------------------
 
   /**
-   * Return a fully-qualified asset resource name string.
+   * Return a fully-qualified folderAsset resource name string.
    *
-   * @param {string} organization
+   * @param {string} folder
    * @param {string} asset
    * @returns {string} Resource name string.
    */
-  assetPath(organization: string, asset: string) {
-    return this.pathTemplates.assetPathTemplate.render({
-      organization: organization,
+  folderAssetPath(folder: string, asset: string) {
+    return this.pathTemplates.folderAssetPathTemplate.render({
+      folder: folder,
       asset: asset,
     });
   }
 
   /**
-   * Parse the organization from Asset resource.
+   * Parse the folder from FolderAsset resource.
    *
-   * @param {string} assetName
-   *   A fully-qualified path representing Asset resource.
-   * @returns {string} A string representing the organization.
+   * @param {string} folderAssetName
+   *   A fully-qualified path representing folder_asset resource.
+   * @returns {string} A string representing the folder.
    */
-  matchOrganizationFromAssetName(assetName: string) {
-    return this.pathTemplates.assetPathTemplate.match(assetName).organization;
+  matchFolderFromFolderAssetName(folderAssetName: string) {
+    return this.pathTemplates.folderAssetPathTemplate.match(folderAssetName)
+      .folder;
   }
 
   /**
-   * Parse the asset from Asset resource.
+   * Parse the asset from FolderAsset resource.
    *
-   * @param {string} assetName
-   *   A fully-qualified path representing Asset resource.
+   * @param {string} folderAssetName
+   *   A fully-qualified path representing folder_asset resource.
    * @returns {string} A string representing the asset.
    */
-  matchAssetFromAssetName(assetName: string) {
-    return this.pathTemplates.assetPathTemplate.match(assetName).asset;
+  matchAssetFromFolderAssetName(folderAssetName: string) {
+    return this.pathTemplates.folderAssetPathTemplate.match(folderAssetName)
+      .asset;
   }
 
   /**
-   * Return a fully-qualified finding resource name string.
+   * Return a fully-qualified folderAssetSecurityMarks resource name string.
    *
-   * @param {string} organization
+   * @param {string} folder
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  folderAssetSecurityMarksPath(folder: string, asset: string) {
+    return this.pathTemplates.folderAssetSecurityMarksPathTemplate.render({
+      folder: folder,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderAssetSecurityMarks resource.
+   *
+   * @param {string} folderAssetSecurityMarksName
+   *   A fully-qualified path representing folder_asset_securityMarks resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderAssetSecurityMarksName(
+    folderAssetSecurityMarksName: string
+  ) {
+    return this.pathTemplates.folderAssetSecurityMarksPathTemplate.match(
+      folderAssetSecurityMarksName
+    ).folder;
+  }
+
+  /**
+   * Parse the asset from FolderAssetSecurityMarks resource.
+   *
+   * @param {string} folderAssetSecurityMarksName
+   *   A fully-qualified path representing folder_asset_securityMarks resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromFolderAssetSecurityMarksName(
+    folderAssetSecurityMarksName: string
+  ) {
+    return this.pathTemplates.folderAssetSecurityMarksPathTemplate.match(
+      folderAssetSecurityMarksName
+    ).asset;
+  }
+
+  /**
+   * Return a fully-qualified folderSource resource name string.
+   *
+   * @param {string} folder
+   * @param {string} source
+   * @returns {string} Resource name string.
+   */
+  folderSourcePath(folder: string, source: string) {
+    return this.pathTemplates.folderSourcePathTemplate.render({
+      folder: folder,
+      source: source,
+    });
+  }
+
+  /**
+   * Parse the folder from FolderSource resource.
+   *
+   * @param {string} folderSourceName
+   *   A fully-qualified path representing folder_source resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderSourceName(folderSourceName: string) {
+    return this.pathTemplates.folderSourcePathTemplate.match(folderSourceName)
+      .folder;
+  }
+
+  /**
+   * Parse the source from FolderSource resource.
+   *
+   * @param {string} folderSourceName
+   *   A fully-qualified path representing folder_source resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromFolderSourceName(folderSourceName: string) {
+    return this.pathTemplates.folderSourcePathTemplate.match(folderSourceName)
+      .source;
+  }
+
+  /**
+   * Return a fully-qualified folderSourceFinding resource name string.
+   *
+   * @param {string} folder
    * @param {string} source
    * @param {string} finding
    * @returns {string} Resource name string.
    */
-  findingPath(organization: string, source: string, finding: string) {
-    return this.pathTemplates.findingPathTemplate.render({
-      organization: organization,
+  folderSourceFindingPath(folder: string, source: string, finding: string) {
+    return this.pathTemplates.folderSourceFindingPathTemplate.render({
+      folder: folder,
       source: source,
       finding: finding,
     });
   }
 
   /**
-   * Parse the organization from Finding resource.
+   * Parse the folder from FolderSourceFinding resource.
    *
-   * @param {string} findingName
-   *   A fully-qualified path representing Finding resource.
-   * @returns {string} A string representing the organization.
+   * @param {string} folderSourceFindingName
+   *   A fully-qualified path representing folder_source_finding resource.
+   * @returns {string} A string representing the folder.
    */
-  matchOrganizationFromFindingName(findingName: string) {
-    return this.pathTemplates.findingPathTemplate.match(findingName)
-      .organization;
+  matchFolderFromFolderSourceFindingName(folderSourceFindingName: string) {
+    return this.pathTemplates.folderSourceFindingPathTemplate.match(
+      folderSourceFindingName
+    ).folder;
   }
 
   /**
-   * Parse the source from Finding resource.
+   * Parse the source from FolderSourceFinding resource.
    *
-   * @param {string} findingName
-   *   A fully-qualified path representing Finding resource.
+   * @param {string} folderSourceFindingName
+   *   A fully-qualified path representing folder_source_finding resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromFindingName(findingName: string) {
-    return this.pathTemplates.findingPathTemplate.match(findingName).source;
+  matchSourceFromFolderSourceFindingName(folderSourceFindingName: string) {
+    return this.pathTemplates.folderSourceFindingPathTemplate.match(
+      folderSourceFindingName
+    ).source;
   }
 
   /**
-   * Parse the finding from Finding resource.
+   * Parse the finding from FolderSourceFinding resource.
    *
-   * @param {string} findingName
-   *   A fully-qualified path representing Finding resource.
+   * @param {string} folderSourceFindingName
+   *   A fully-qualified path representing folder_source_finding resource.
    * @returns {string} A string representing the finding.
    */
-  matchFindingFromFindingName(findingName: string) {
-    return this.pathTemplates.findingPathTemplate.match(findingName).finding;
+  matchFindingFromFolderSourceFindingName(folderSourceFindingName: string) {
+    return this.pathTemplates.folderSourceFindingPathTemplate.match(
+      folderSourceFindingName
+    ).finding;
+  }
+
+  /**
+   * Return a fully-qualified folderSourceFindingSecurityMarks resource name string.
+   *
+   * @param {string} folder
+   * @param {string} source
+   * @param {string} finding
+   * @returns {string} Resource name string.
+   */
+  folderSourceFindingSecurityMarksPath(
+    folder: string,
+    source: string,
+    finding: string
+  ) {
+    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.render(
+      {
+        folder: folder,
+        source: source,
+        finding: finding,
+      }
+    );
+  }
+
+  /**
+   * Parse the folder from FolderSourceFindingSecurityMarks resource.
+   *
+   * @param {string} folderSourceFindingSecurityMarksName
+   *   A fully-qualified path representing folder_source_finding_securityMarks resource.
+   * @returns {string} A string representing the folder.
+   */
+  matchFolderFromFolderSourceFindingSecurityMarksName(
+    folderSourceFindingSecurityMarksName: string
+  ) {
+    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match(
+      folderSourceFindingSecurityMarksName
+    ).folder;
+  }
+
+  /**
+   * Parse the source from FolderSourceFindingSecurityMarks resource.
+   *
+   * @param {string} folderSourceFindingSecurityMarksName
+   *   A fully-qualified path representing folder_source_finding_securityMarks resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromFolderSourceFindingSecurityMarksName(
+    folderSourceFindingSecurityMarksName: string
+  ) {
+    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match(
+      folderSourceFindingSecurityMarksName
+    ).source;
+  }
+
+  /**
+   * Parse the finding from FolderSourceFindingSecurityMarks resource.
+   *
+   * @param {string} folderSourceFindingSecurityMarksName
+   *   A fully-qualified path representing folder_source_finding_securityMarks resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromFolderSourceFindingSecurityMarksName(
+    folderSourceFindingSecurityMarksName: string
+  ) {
+    return this.pathTemplates.folderSourceFindingSecurityMarksPathTemplate.match(
+      folderSourceFindingSecurityMarksName
+    ).finding;
   }
 
   /**
@@ -4866,6 +5084,46 @@ export class SecurityCenterClient {
   matchOrganizationFromOrganizationName(organizationName: string) {
     return this.pathTemplates.organizationPathTemplate.match(organizationName)
       .organization;
+  }
+
+  /**
+   * Return a fully-qualified organizationAsset resource name string.
+   *
+   * @param {string} organization
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  organizationAssetPath(organization: string, asset: string) {
+    return this.pathTemplates.organizationAssetPathTemplate.render({
+      organization: organization,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationAsset resource.
+   *
+   * @param {string} organizationAssetName
+   *   A fully-qualified path representing organization_asset resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationAssetName(organizationAssetName: string) {
+    return this.pathTemplates.organizationAssetPathTemplate.match(
+      organizationAssetName
+    ).organization;
+  }
+
+  /**
+   * Parse the asset from OrganizationAsset resource.
+   *
+   * @param {string} organizationAssetName
+   *   A fully-qualified path representing organization_asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromOrganizationAssetName(organizationAssetName: string) {
+    return this.pathTemplates.organizationAssetPathTemplate.match(
+      organizationAssetName
+    ).asset;
   }
 
   /**
@@ -4942,6 +5200,111 @@ export class SecurityCenterClient {
   }
 
   /**
+   * Return a fully-qualified organizationSource resource name string.
+   *
+   * @param {string} organization
+   * @param {string} source
+   * @returns {string} Resource name string.
+   */
+  organizationSourcePath(organization: string, source: string) {
+    return this.pathTemplates.organizationSourcePathTemplate.render({
+      organization: organization,
+      source: source,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationSource resource.
+   *
+   * @param {string} organizationSourceName
+   *   A fully-qualified path representing organization_source resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSourceName(organizationSourceName: string) {
+    return this.pathTemplates.organizationSourcePathTemplate.match(
+      organizationSourceName
+    ).organization;
+  }
+
+  /**
+   * Parse the source from OrganizationSource resource.
+   *
+   * @param {string} organizationSourceName
+   *   A fully-qualified path representing organization_source resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromOrganizationSourceName(organizationSourceName: string) {
+    return this.pathTemplates.organizationSourcePathTemplate.match(
+      organizationSourceName
+    ).source;
+  }
+
+  /**
+   * Return a fully-qualified organizationSourceFinding resource name string.
+   *
+   * @param {string} organization
+   * @param {string} source
+   * @param {string} finding
+   * @returns {string} Resource name string.
+   */
+  organizationSourceFindingPath(
+    organization: string,
+    source: string,
+    finding: string
+  ) {
+    return this.pathTemplates.organizationSourceFindingPathTemplate.render({
+      organization: organization,
+      source: source,
+      finding: finding,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationSourceFinding resource.
+   *
+   * @param {string} organizationSourceFindingName
+   *   A fully-qualified path representing organization_source_finding resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationSourceFindingName(
+    organizationSourceFindingName: string
+  ) {
+    return this.pathTemplates.organizationSourceFindingPathTemplate.match(
+      organizationSourceFindingName
+    ).organization;
+  }
+
+  /**
+   * Parse the source from OrganizationSourceFinding resource.
+   *
+   * @param {string} organizationSourceFindingName
+   *   A fully-qualified path representing organization_source_finding resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromOrganizationSourceFindingName(
+    organizationSourceFindingName: string
+  ) {
+    return this.pathTemplates.organizationSourceFindingPathTemplate.match(
+      organizationSourceFindingName
+    ).source;
+  }
+
+  /**
+   * Parse the finding from OrganizationSourceFinding resource.
+   *
+   * @param {string} organizationSourceFindingName
+   *   A fully-qualified path representing organization_source_finding resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromOrganizationSourceFindingName(
+    organizationSourceFindingName: string
+  ) {
+    return this.pathTemplates.organizationSourceFindingPathTemplate.match(
+      organizationSourceFindingName
+    ).finding;
+  }
+
+  /**
    * Return a fully-qualified organizationSourceFindingSecurityMarks resource name string.
    *
    * @param {string} organization
@@ -5009,39 +5372,245 @@ export class SecurityCenterClient {
   }
 
   /**
-   * Return a fully-qualified source resource name string.
+   * Return a fully-qualified projectAsset resource name string.
    *
-   * @param {string} organization
+   * @param {string} project
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  projectAssetPath(project: string, asset: string) {
+    return this.pathTemplates.projectAssetPathTemplate.render({
+      project: project,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAsset resource.
+   *
+   * @param {string} projectAssetName
+   *   A fully-qualified path representing project_asset resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAssetName(projectAssetName: string) {
+    return this.pathTemplates.projectAssetPathTemplate.match(projectAssetName)
+      .project;
+  }
+
+  /**
+   * Parse the asset from ProjectAsset resource.
+   *
+   * @param {string} projectAssetName
+   *   A fully-qualified path representing project_asset resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromProjectAssetName(projectAssetName: string) {
+    return this.pathTemplates.projectAssetPathTemplate.match(projectAssetName)
+      .asset;
+  }
+
+  /**
+   * Return a fully-qualified projectAssetSecurityMarks resource name string.
+   *
+   * @param {string} project
+   * @param {string} asset
+   * @returns {string} Resource name string.
+   */
+  projectAssetSecurityMarksPath(project: string, asset: string) {
+    return this.pathTemplates.projectAssetSecurityMarksPathTemplate.render({
+      project: project,
+      asset: asset,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAssetSecurityMarks resource.
+   *
+   * @param {string} projectAssetSecurityMarksName
+   *   A fully-qualified path representing project_asset_securityMarks resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAssetSecurityMarksName(
+    projectAssetSecurityMarksName: string
+  ) {
+    return this.pathTemplates.projectAssetSecurityMarksPathTemplate.match(
+      projectAssetSecurityMarksName
+    ).project;
+  }
+
+  /**
+   * Parse the asset from ProjectAssetSecurityMarks resource.
+   *
+   * @param {string} projectAssetSecurityMarksName
+   *   A fully-qualified path representing project_asset_securityMarks resource.
+   * @returns {string} A string representing the asset.
+   */
+  matchAssetFromProjectAssetSecurityMarksName(
+    projectAssetSecurityMarksName: string
+  ) {
+    return this.pathTemplates.projectAssetSecurityMarksPathTemplate.match(
+      projectAssetSecurityMarksName
+    ).asset;
+  }
+
+  /**
+   * Return a fully-qualified projectSource resource name string.
+   *
+   * @param {string} project
    * @param {string} source
    * @returns {string} Resource name string.
    */
-  sourcePath(organization: string, source: string) {
-    return this.pathTemplates.sourcePathTemplate.render({
-      organization: organization,
+  projectSourcePath(project: string, source: string) {
+    return this.pathTemplates.projectSourcePathTemplate.render({
+      project: project,
       source: source,
     });
   }
 
   /**
-   * Parse the organization from Source resource.
+   * Parse the project from ProjectSource resource.
    *
-   * @param {string} sourceName
-   *   A fully-qualified path representing Source resource.
-   * @returns {string} A string representing the organization.
+   * @param {string} projectSourceName
+   *   A fully-qualified path representing project_source resource.
+   * @returns {string} A string representing the project.
    */
-  matchOrganizationFromSourceName(sourceName: string) {
-    return this.pathTemplates.sourcePathTemplate.match(sourceName).organization;
+  matchProjectFromProjectSourceName(projectSourceName: string) {
+    return this.pathTemplates.projectSourcePathTemplate.match(projectSourceName)
+      .project;
   }
 
   /**
-   * Parse the source from Source resource.
+   * Parse the source from ProjectSource resource.
    *
-   * @param {string} sourceName
-   *   A fully-qualified path representing Source resource.
+   * @param {string} projectSourceName
+   *   A fully-qualified path representing project_source resource.
    * @returns {string} A string representing the source.
    */
-  matchSourceFromSourceName(sourceName: string) {
-    return this.pathTemplates.sourcePathTemplate.match(sourceName).source;
+  matchSourceFromProjectSourceName(projectSourceName: string) {
+    return this.pathTemplates.projectSourcePathTemplate.match(projectSourceName)
+      .source;
+  }
+
+  /**
+   * Return a fully-qualified projectSourceFinding resource name string.
+   *
+   * @param {string} project
+   * @param {string} source
+   * @param {string} finding
+   * @returns {string} Resource name string.
+   */
+  projectSourceFindingPath(project: string, source: string, finding: string) {
+    return this.pathTemplates.projectSourceFindingPathTemplate.render({
+      project: project,
+      source: source,
+      finding: finding,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectSourceFinding resource.
+   *
+   * @param {string} projectSourceFindingName
+   *   A fully-qualified path representing project_source_finding resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSourceFindingName(projectSourceFindingName: string) {
+    return this.pathTemplates.projectSourceFindingPathTemplate.match(
+      projectSourceFindingName
+    ).project;
+  }
+
+  /**
+   * Parse the source from ProjectSourceFinding resource.
+   *
+   * @param {string} projectSourceFindingName
+   *   A fully-qualified path representing project_source_finding resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromProjectSourceFindingName(projectSourceFindingName: string) {
+    return this.pathTemplates.projectSourceFindingPathTemplate.match(
+      projectSourceFindingName
+    ).source;
+  }
+
+  /**
+   * Parse the finding from ProjectSourceFinding resource.
+   *
+   * @param {string} projectSourceFindingName
+   *   A fully-qualified path representing project_source_finding resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromProjectSourceFindingName(projectSourceFindingName: string) {
+    return this.pathTemplates.projectSourceFindingPathTemplate.match(
+      projectSourceFindingName
+    ).finding;
+  }
+
+  /**
+   * Return a fully-qualified projectSourceFindingSecurityMarks resource name string.
+   *
+   * @param {string} project
+   * @param {string} source
+   * @param {string} finding
+   * @returns {string} Resource name string.
+   */
+  projectSourceFindingSecurityMarksPath(
+    project: string,
+    source: string,
+    finding: string
+  ) {
+    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.render(
+      {
+        project: project,
+        source: source,
+        finding: finding,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectSourceFindingSecurityMarks resource.
+   *
+   * @param {string} projectSourceFindingSecurityMarksName
+   *   A fully-qualified path representing project_source_finding_securityMarks resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectSourceFindingSecurityMarksName(
+    projectSourceFindingSecurityMarksName: string
+  ) {
+    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(
+      projectSourceFindingSecurityMarksName
+    ).project;
+  }
+
+  /**
+   * Parse the source from ProjectSourceFindingSecurityMarks resource.
+   *
+   * @param {string} projectSourceFindingSecurityMarksName
+   *   A fully-qualified path representing project_source_finding_securityMarks resource.
+   * @returns {string} A string representing the source.
+   */
+  matchSourceFromProjectSourceFindingSecurityMarksName(
+    projectSourceFindingSecurityMarksName: string
+  ) {
+    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(
+      projectSourceFindingSecurityMarksName
+    ).source;
+  }
+
+  /**
+   * Parse the finding from ProjectSourceFindingSecurityMarks resource.
+   *
+   * @param {string} projectSourceFindingSecurityMarksName
+   *   A fully-qualified path representing project_source_finding_securityMarks resource.
+   * @returns {string} A string representing the finding.
+   */
+  matchFindingFromProjectSourceFindingSecurityMarksName(
+    projectSourceFindingSecurityMarksName: string
+  ) {
+    return this.pathTemplates.projectSourceFindingSecurityMarksPathTemplate.match(
+      projectSourceFindingSecurityMarksName
+    ).finding;
   }
 
   /**
