@@ -1,0 +1,163 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.osconfig.v1alpha",
+  "libraryPackage": "@google-cloud/osconfig",
+  "services": {
+    "OsConfigZonalService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OsConfigZonalServiceClient",
+          "rpcs": {
+            "GetOSPolicyAssignment": {
+              "methods": [
+                "getOSPolicyAssignment"
+              ]
+            },
+            "GetInstanceOSPoliciesCompliance": {
+              "methods": [
+                "getInstanceOSPoliciesCompliance"
+              ]
+            },
+            "GetInventory": {
+              "methods": [
+                "getInventory"
+              ]
+            },
+            "GetVulnerabilityReport": {
+              "methods": [
+                "getVulnerabilityReport"
+              ]
+            },
+            "CreateOSPolicyAssignment": {
+              "methods": [
+                "createOSPolicyAssignment"
+              ]
+            },
+            "UpdateOSPolicyAssignment": {
+              "methods": [
+                "updateOSPolicyAssignment"
+              ]
+            },
+            "DeleteOSPolicyAssignment": {
+              "methods": [
+                "deleteOSPolicyAssignment"
+              ]
+            },
+            "ListOSPolicyAssignments": {
+              "methods": [
+                "listOSPolicyAssignments",
+                "listOSPolicyAssignmentsStream",
+                "listOSPolicyAssignmentsAsync"
+              ]
+            },
+            "ListOSPolicyAssignmentRevisions": {
+              "methods": [
+                "listOSPolicyAssignmentRevisions",
+                "listOSPolicyAssignmentRevisionsStream",
+                "listOSPolicyAssignmentRevisionsAsync"
+              ]
+            },
+            "ListInstanceOSPoliciesCompliances": {
+              "methods": [
+                "listInstanceOSPoliciesCompliances",
+                "listInstanceOSPoliciesCompliancesStream",
+                "listInstanceOSPoliciesCompliancesAsync"
+              ]
+            },
+            "ListInventories": {
+              "methods": [
+                "listInventories",
+                "listInventoriesStream",
+                "listInventoriesAsync"
+              ]
+            },
+            "ListVulnerabilityReports": {
+              "methods": [
+                "listVulnerabilityReports",
+                "listVulnerabilityReportsStream",
+                "listVulnerabilityReportsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OsConfigZonalServiceClient",
+          "rpcs": {
+            "GetOSPolicyAssignment": {
+              "methods": [
+                "getOSPolicyAssignment"
+              ]
+            },
+            "GetInstanceOSPoliciesCompliance": {
+              "methods": [
+                "getInstanceOSPoliciesCompliance"
+              ]
+            },
+            "GetInventory": {
+              "methods": [
+                "getInventory"
+              ]
+            },
+            "GetVulnerabilityReport": {
+              "methods": [
+                "getVulnerabilityReport"
+              ]
+            },
+            "CreateOSPolicyAssignment": {
+              "methods": [
+                "createOSPolicyAssignment"
+              ]
+            },
+            "UpdateOSPolicyAssignment": {
+              "methods": [
+                "updateOSPolicyAssignment"
+              ]
+            },
+            "DeleteOSPolicyAssignment": {
+              "methods": [
+                "deleteOSPolicyAssignment"
+              ]
+            },
+            "ListOSPolicyAssignments": {
+              "methods": [
+                "listOSPolicyAssignments",
+                "listOSPolicyAssignmentsStream",
+                "listOSPolicyAssignmentsAsync"
+              ]
+            },
+            "ListOSPolicyAssignmentRevisions": {
+              "methods": [
+                "listOSPolicyAssignmentRevisions",
+                "listOSPolicyAssignmentRevisionsStream",
+                "listOSPolicyAssignmentRevisionsAsync"
+              ]
+            },
+            "ListInstanceOSPoliciesCompliances": {
+              "methods": [
+                "listInstanceOSPoliciesCompliances",
+                "listInstanceOSPoliciesCompliancesStream",
+                "listInstanceOSPoliciesCompliancesAsync"
+              ]
+            },
+            "ListInventories": {
+              "methods": [
+                "listInventories",
+                "listInventoriesStream",
+                "listInventoriesAsync"
+              ]
+            },
+            "ListVulnerabilityReports": {
+              "methods": [
+                "listVulnerabilityReports",
+                "listVulnerabilityReportsStream",
+                "listVulnerabilityReportsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
