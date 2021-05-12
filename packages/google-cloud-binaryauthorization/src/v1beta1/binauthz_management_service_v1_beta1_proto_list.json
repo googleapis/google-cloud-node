@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/binaryauthorization/v1beta1/continuous_validation_logging.proto",
   "../../protos/google/cloud/binaryauthorization/v1beta1/resources.proto",
   "../../protos/google/cloud/binaryauthorization/v1beta1/service.proto"
 ]
