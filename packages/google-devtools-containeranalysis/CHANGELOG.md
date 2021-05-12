@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [3.1.3](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.2...v3.1.3) (2021-05-12)
+
+
+### Bug Fixes
+
+* use require() to load JSON protos ([#301](https://www.github.com/googleapis/nodejs-containeranalysis/issues/301)) ([46bed2e](https://www.github.com/googleapis/nodejs-containeranalysis/commit/46bed2e0b0dadaae2504f2c765d13f2d46f4a0b0))
+
 ### [3.1.2](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.1...v3.1.2) (2021-05-07)
 
 
