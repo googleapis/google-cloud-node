@@ -9246,35 +9246,35 @@
     
                 /**
                  * Value nullValue.
-                 * @member {google.protobuf.NullValue} nullValue
+                 * @member {google.protobuf.NullValue|null|undefined} nullValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.nullValue = 0;
+                Value.prototype.nullValue = null;
     
                 /**
                  * Value numberValue.
-                 * @member {number} numberValue
+                 * @member {number|null|undefined} numberValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.numberValue = 0;
+                Value.prototype.numberValue = null;
     
                 /**
                  * Value stringValue.
-                 * @member {string} stringValue
+                 * @member {string|null|undefined} stringValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.stringValue = "";
+                Value.prototype.stringValue = null;
     
                 /**
                  * Value boolValue.
-                 * @member {boolean} boolValue
+                 * @member {boolean|null|undefined} boolValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.boolValue = false;
+                Value.prototype.boolValue = null;
     
                 /**
                  * Value structValue.
@@ -12255,11 +12255,11 @@
     
                         /**
                          * LogEntry textPayload.
-                         * @member {string} textPayload
+                         * @member {string|null|undefined} textPayload
                          * @memberof google.api.servicecontrol.v1.LogEntry
                          * @instance
                          */
-                        LogEntry.prototype.textPayload = "";
+                        LogEntry.prototype.textPayload = null;
     
                         /**
                          * LogEntry structPayload.
@@ -13288,35 +13288,35 @@
     
                         /**
                          * MetricValue boolValue.
-                         * @member {boolean} boolValue
+                         * @member {boolean|null|undefined} boolValue
                          * @memberof google.api.servicecontrol.v1.MetricValue
                          * @instance
                          */
-                        MetricValue.prototype.boolValue = false;
+                        MetricValue.prototype.boolValue = null;
     
                         /**
                          * MetricValue int64Value.
-                         * @member {number|Long} int64Value
+                         * @member {number|Long|null|undefined} int64Value
                          * @memberof google.api.servicecontrol.v1.MetricValue
                          * @instance
                          */
-                        MetricValue.prototype.int64Value = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+                        MetricValue.prototype.int64Value = null;
     
                         /**
                          * MetricValue doubleValue.
-                         * @member {number} doubleValue
+                         * @member {number|null|undefined} doubleValue
                          * @memberof google.api.servicecontrol.v1.MetricValue
                          * @instance
                          */
-                        MetricValue.prototype.doubleValue = 0;
+                        MetricValue.prototype.doubleValue = null;
     
                         /**
                          * MetricValue stringValue.
-                         * @member {string} stringValue
+                         * @member {string|null|undefined} stringValue
                          * @memberof google.api.servicecontrol.v1.MetricValue
                          * @instance
                          */
-                        MetricValue.prototype.stringValue = "";
+                        MetricValue.prototype.stringValue = null;
     
                         /**
                          * MetricValue distributionValue.
@@ -17917,43 +17917,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string} get
+                 * @member {string|null|undefined} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = "";
+                HttpRule.prototype.get = null;
     
                 /**
                  * HttpRule put.
-                 * @member {string} put
+                 * @member {string|null|undefined} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = "";
+                HttpRule.prototype.put = null;
     
                 /**
                  * HttpRule post.
-                 * @member {string} post
+                 * @member {string|null|undefined} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = "";
+                HttpRule.prototype.post = null;
     
                 /**
                  * HttpRule delete.
-                 * @member {string} delete
+                 * @member {string|null|undefined} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = "";
+                HttpRule.prototype["delete"] = null;
     
                 /**
                  * HttpRule patch.
-                 * @member {string} patch
+                 * @member {string|null|undefined} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = "";
+                HttpRule.prototype.patch = null;
     
                 /**
                  * HttpRule custom.

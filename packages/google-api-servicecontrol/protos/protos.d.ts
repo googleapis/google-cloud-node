@@ -3448,16 +3448,16 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue. */
-            public numberValue: number;
+            public numberValue?: (number|null);
 
             /** Value stringValue. */
-            public stringValue: string;
+            public stringValue?: (string|null);
 
             /** Value boolValue. */
-            public boolValue: boolean;
+            public boolValue?: (boolean|null);
 
             /** Value structValue. */
             public structValue?: (google.protobuf.IStruct|null);
@@ -4562,7 +4562,7 @@ export namespace google {
                     public protoPayload?: (google.protobuf.IAny|null);
 
                     /** LogEntry textPayload. */
-                    public textPayload: string;
+                    public textPayload?: (string|null);
 
                     /** LogEntry structPayload. */
                     public structPayload?: (google.protobuf.IStruct|null);
@@ -4904,16 +4904,16 @@ export namespace google {
                     public endTime?: (google.protobuf.ITimestamp|null);
 
                     /** MetricValue boolValue. */
-                    public boolValue: boolean;
+                    public boolValue?: (boolean|null);
 
                     /** MetricValue int64Value. */
-                    public int64Value: (number|Long|string);
+                    public int64Value?: (number|Long|string|null);
 
                     /** MetricValue doubleValue. */
-                    public doubleValue: number;
+                    public doubleValue?: (number|null);
 
                     /** MetricValue stringValue. */
-                    public stringValue: string;
+                    public stringValue?: (string|null);
 
                     /** MetricValue distributionValue. */
                     public distributionValue?: (google.api.servicecontrol.v1.IDistribution|null);
@@ -6687,19 +6687,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
