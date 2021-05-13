@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.3.0...v1.3.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#81](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/81)) ([4613348](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/46133486a55dc2a4d8f75bae748898397df31714))
+* use require() to load JSON protos ([#84](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/84)) ([00b0814](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/00b0814beadc47856a58c2fea3d9f651f343245b))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.2.2...v1.3.0) (2021-01-09)
 
 
