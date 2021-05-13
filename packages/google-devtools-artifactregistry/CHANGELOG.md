@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.0...v1.0.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#39](https://www.github.com/googleapis/nodejs-artifact-registry/issues/39)) ([19dab94](https://www.github.com/googleapis/nodejs-artifact-registry/commit/19dab9455d86f078785102f8094567faa3534657))
+* use require() to load JSON protos ([#42](https://www.github.com/googleapis/nodejs-artifact-registry/issues/42)) ([c4e83db](https://www.github.com/googleapis/nodejs-artifact-registry/commit/c4e83db23c4eafed55f83755d2c16df75ac57b8c))
+
 ## 1.0.0 (2021-01-06)
 
 
