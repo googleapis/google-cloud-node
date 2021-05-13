@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.0...v1.0.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#22](https://www.github.com/googleapis/nodejs-org-policy/issues/22)) ([6cedadc](https://www.github.com/googleapis/nodejs-org-policy/commit/6cedadc06a04f7ab6fe0f9c0610ad4caef9be2d6))
+* use require() to load JSON protos ([#25](https://www.github.com/googleapis/nodejs-org-policy/issues/25)) ([56ff04c](https://www.github.com/googleapis/nodejs-org-policy/commit/56ff04c79de8be8a6d7554732b5e92d37a08440c))
+
 ## 1.0.0 (2021-02-24)
 
 
