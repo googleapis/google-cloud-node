@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.0...v2.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#358](https://www.github.com/googleapis/nodejs-scheduler/issues/358)) ([3591be3](https://www.github.com/googleapis/nodejs-scheduler/commit/3591be3f195d1c5edd37a3ff05b2f122db471d38))
+* use require() to load JSON protos ([#361](https://www.github.com/googleapis/nodejs-scheduler/issues/361)) ([1d43a37](https://www.github.com/googleapis/nodejs-scheduler/commit/1d43a3759cd239cb3f2ea7fbac5ba2ad51320919))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.1.3...v2.2.0) (2021-01-09)
 
 
