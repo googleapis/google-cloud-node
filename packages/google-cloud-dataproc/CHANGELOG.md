@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.0...v2.4.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#486](https://www.github.com/googleapis/nodejs-dataproc/issues/486)) ([0e6a4a4](https://www.github.com/googleapis/nodejs-dataproc/commit/0e6a4a4f71e615c8e896cb63c6de13381a0194f0))
+* use require() to load JSON protos ([#489](https://www.github.com/googleapis/nodejs-dataproc/issues/489)) ([25f5fa9](https://www.github.com/googleapis/nodejs-dataproc/commit/25f5fa91c78e78f438d7ecd988b6f662af5c74aa))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.3.0...v2.4.0) (2021-04-26)
 
 
