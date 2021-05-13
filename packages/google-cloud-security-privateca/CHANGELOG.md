@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.0...v2.3.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#80](https://www.github.com/googleapis/nodejs-security-private-ca/issues/80)) ([e0b4aa6](https://www.github.com/googleapis/nodejs-security-private-ca/commit/e0b4aa64be0e8433f10cb29ad9f0167a7b292609))
+* use require() to load JSON protos ([#84](https://www.github.com/googleapis/nodejs-security-private-ca/issues/84)) ([3ec9321](https://www.github.com/googleapis/nodejs-security-private-ca/commit/3ec9321734af9de467a082cf34db6c4cf8039d7b))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.2.0...v2.3.0) (2021-04-21)
 
 
