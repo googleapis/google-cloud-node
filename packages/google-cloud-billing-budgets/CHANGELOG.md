@@ -1,5 +1,13 @@
 # Changelog
 
+### [3.2.1](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.0...v3.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#224](https://www.github.com/googleapis/nodejs-billing-budgets/issues/224)) ([170bbbd](https://www.github.com/googleapis/nodejs-billing-budgets/commit/170bbbda8163103b8eaec6fc0c8879963c4d748e))
+* use require() to load JSON protos ([#227](https://www.github.com/googleapis/nodejs-billing-budgets/issues/227)) ([48ece89](https://www.github.com/googleapis/nodejs-billing-budgets/commit/48ece8976e061e419bc6d11dc5e136a7b10ee7c2))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.1.0...v3.2.0) (2021-04-20)
 
 
