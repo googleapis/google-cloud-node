@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-channel/compare/v1.1.0...v1.1.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#43](https://www.github.com/googleapis/nodejs-channel/issues/43)) ([542e361](https://www.github.com/googleapis/nodejs-channel/commit/542e361d7f932359b0f793d4d3781be089360de1))
+* use require() to load JSON protos ([#46](https://www.github.com/googleapis/nodejs-channel/issues/46)) ([e6bd7c9](https://www.github.com/googleapis/nodejs-channel/commit/e6bd7c9765f102577a9b3d84c3f8b88b36571df5))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-channel/compare/v1.0.0...v1.1.0) (2021-03-02)
 
 
