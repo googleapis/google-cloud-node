@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.0...v2.4.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#288](https://www.github.com/googleapis/nodejs-phishing-protection/issues/288)) ([cc7cbcd](https://www.github.com/googleapis/nodejs-phishing-protection/commit/cc7cbcd44ffce28a7471a663b38c59af050d5a03))
+* use require() to load JSON protos ([#291](https://www.github.com/googleapis/nodejs-phishing-protection/issues/291)) ([d7273f7](https://www.github.com/googleapis/nodejs-phishing-protection/commit/d7273f733e729df389fe409b55ae6df98255c3e4))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.3.3...v2.4.0) (2021-01-09)
 
 
