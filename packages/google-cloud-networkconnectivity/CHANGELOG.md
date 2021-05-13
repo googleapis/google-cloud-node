@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.0...v1.1.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#39](https://www.github.com/googleapis/nodejs-network-connectivity/issues/39)) ([2564f8e](https://www.github.com/googleapis/nodejs-network-connectivity/commit/2564f8e86d03e6c4b98f46c8b9ed2be35ad6550a))
+* use require() to load JSON protos ([#42](https://www.github.com/googleapis/nodejs-network-connectivity/issues/42)) ([9632da3](https://www.github.com/googleapis/nodejs-network-connectivity/commit/9632da36d550a4775b34d4ab54300eae00960b41))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.0.0...v1.1.0) (2021-03-02)
 
 
