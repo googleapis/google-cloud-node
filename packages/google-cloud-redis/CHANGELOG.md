@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.0...v2.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#472](https://www.github.com/googleapis/nodejs-redis/issues/472)) ([799a3bf](https://www.github.com/googleapis/nodejs-redis/commit/799a3bfce47352f686110faadf7a8ce5289509a4))
+* use require() to load JSON protos ([#475](https://www.github.com/googleapis/nodejs-redis/issues/475)) ([8bb086f](https://www.github.com/googleapis/nodejs-redis/commit/8bb086f423dbcc9ab05e389f71b4ed7451f2e605))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-redis/compare/v2.1.2...v2.2.0) (2021-01-09)
 
 
