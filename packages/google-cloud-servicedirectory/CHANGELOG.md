@@ -1,5 +1,13 @@
 # Changelog
 
+### [3.1.1](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.1.0...v3.1.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#135](https://www.github.com/googleapis/nodejs-service-directory/issues/135)) ([410e92b](https://www.github.com/googleapis/nodejs-service-directory/commit/410e92b844ac0012409df4f37582c9896a4af02f))
+* use require() to load JSON protos ([#138](https://www.github.com/googleapis/nodejs-service-directory/issues/138)) ([2bda8f7](https://www.github.com/googleapis/nodejs-service-directory/commit/2bda8f786599bbac10f6a5e833338ff83dd6806e))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.0.0...v3.1.0) (2021-01-09)
 
 
