@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.1...v2.2.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* use require() to load JSON protos ([#225](https://www.github.com/googleapis/nodejs-cloudbuild/issues/225)) ([1d9fc28](https://www.github.com/googleapis/nodejs-cloudbuild/commit/1d9fc28d5b2a18305a44a2b315a5f8ccd2cf4da7))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.0...v2.2.1) (2021-05-07)
 
 
