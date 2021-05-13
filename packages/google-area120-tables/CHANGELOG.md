@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.0...v1.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#52](https://www.github.com/googleapis/nodejs-area120-tables/issues/52)) ([68312da](https://www.github.com/googleapis/nodejs-area120-tables/commit/68312daba169bc6697864614cafaef65a9cf1dbf))
+* use require() to load JSON protos ([#55](https://www.github.com/googleapis/nodejs-area120-tables/issues/55)) ([ca90de3](https://www.github.com/googleapis/nodejs-area120-tables/commit/ca90de30da4cea5c73a67def7f7290c48bf6d7d5))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.1.0...v1.2.0) (2021-03-02)
 
 
