@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/data-qna",
-  "version": "0.1.0",
+  "version": "1.0.2",
   "description": "Dataqna client for Node.js",
   "repository": "googleapis/nodejs-data-qna",
   "license": "Apache-2.0",

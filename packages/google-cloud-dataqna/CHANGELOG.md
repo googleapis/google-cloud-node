@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.1...v1.0.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#28](https://www.github.com/googleapis/nodejs-data-qna/issues/28)) ([df1e1cf](https://www.github.com/googleapis/nodejs-data-qna/commit/df1e1cfbe00985ec6d10418ebdef313b4601985a))
+* use require() to load JSON protos ([#31](https://www.github.com/googleapis/nodejs-data-qna/issues/31)) ([1ab9737](https://www.github.com/googleapis/nodejs-data-qna/commit/1ab9737dc7901bfd397e8ea13682bc1a7e6d78cb))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.0...v1.0.1) (2021-01-22)
 
 
