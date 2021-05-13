@@ -1,5 +1,12 @@
 # Changelog
 
+### [4.2.1](https://www.github.com/googleapis/nodejs-recommender/compare/v4.2.0...v4.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#167](https://www.github.com/googleapis/nodejs-recommender/issues/167)) ([01f400c](https://www.github.com/googleapis/nodejs-recommender/commit/01f400cbc89403727c5fd8b55c151d30dd8bd78c))
+
 ## [4.2.0](https://www.github.com/googleapis/nodejs-recommender/compare/v4.1.0...v4.2.0) (2021-01-27)
 
 
