@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-retail/compare/v1.1.0...v1.1.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#47](https://www.github.com/googleapis/nodejs-retail/issues/47)) ([3ed1774](https://www.github.com/googleapis/nodejs-retail/commit/3ed1774f8c50a9f1e96610e1cef724d233b10cc3))
+* use require() to load JSON protos ([#50](https://www.github.com/googleapis/nodejs-retail/issues/50)) ([45348f3](https://www.github.com/googleapis/nodejs-retail/commit/45348f3958cb3e1b70f4e335c3aba5b255887e06))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-retail/compare/v1.0.0...v1.1.0) (2021-03-02)
 
 
