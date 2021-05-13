@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.0...v1.4.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#107](https://www.github.com/googleapis/nodejs-memcache/issues/107)) ([5a10a63](https://www.github.com/googleapis/nodejs-memcache/commit/5a10a632b62e00b2fe488deb92885bdc14f09f92))
+* use require() to load JSON protos ([#110](https://www.github.com/googleapis/nodejs-memcache/issues/110)) ([8335678](https://www.github.com/googleapis/nodejs-memcache/commit/8335678c41a08fb0b811db48540ff232b802e47a))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-memcache/compare/v1.3.0...v1.4.0) (2021-03-01)
 
 
