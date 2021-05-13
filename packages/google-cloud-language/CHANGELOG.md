@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [4.2.3](https://www.github.com/googleapis/nodejs-language/compare/v4.2.2...v4.2.3) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#569](https://www.github.com/googleapis/nodejs-language/issues/569)) ([70b3883](https://www.github.com/googleapis/nodejs-language/commit/70b3883797cc61f6ef314f19e75930f0c0193dff))
+* use require() to load JSON protos ([#572](https://www.github.com/googleapis/nodejs-language/issues/572)) ([e3efed9](https://www.github.com/googleapis/nodejs-language/commit/e3efed93fb7dab7236b9ba4effdcda915327fd1d))
+
 ### [4.2.2](https://www.github.com/googleapis/nodejs-language/compare/v4.2.1...v4.2.2) (2021-03-07)
 
 
