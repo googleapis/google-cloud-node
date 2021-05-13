@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.0...v2.3.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#519](https://www.github.com/googleapis/nodejs-tasks/issues/519)) ([8cee43a](https://www.github.com/googleapis/nodejs-tasks/commit/8cee43a5ffa7df38d809fac087454b1c6d848d53))
+* use require() to load JSON protos ([#522](https://www.github.com/googleapis/nodejs-tasks/issues/522)) ([3c367be](https://www.github.com/googleapis/nodejs-tasks/commit/3c367bed5218655dfa50adfed3eb655d2d632d31))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-tasks/compare/v2.2.0...v2.3.0) (2021-01-22)
 
 
