@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [3.2.1](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.0...v3.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#439](https://www.github.com/googleapis/nodejs-os-login/issues/439)) ([c85faf2](https://www.github.com/googleapis/nodejs-os-login/commit/c85faf2a1529cc4557e37938903b2e73dfb8d40c))
+* use require() to load JSON protos ([#442](https://www.github.com/googleapis/nodejs-os-login/issues/442)) ([41d5b27](https://www.github.com/googleapis/nodejs-os-login/commit/41d5b274bb3b3e07af0d6bd511f6b76f7f96a927))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-os-login/compare/v3.1.3...v3.2.0) (2021-01-09)
 
 
