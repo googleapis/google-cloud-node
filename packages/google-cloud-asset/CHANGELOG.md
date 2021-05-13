@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.12.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.12.0...v3.12.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#481](https://www.github.com/googleapis/nodejs-asset/issues/481)) ([f6f890f](https://www.github.com/googleapis/nodejs-asset/commit/f6f890fa49a68b0b67556af8dae0ef9d52c43e34))
+* use require() to load JSON protos ([#484](https://www.github.com/googleapis/nodejs-asset/issues/484)) ([1aa6fa9](https://www.github.com/googleapis/nodejs-asset/commit/1aa6fa96540f94bd51784357186db87b080fdfe5))
+
 ## [3.12.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.11.0...v3.12.0) (2021-02-09)
 
 
