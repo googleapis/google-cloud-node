@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [2.4.2](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.1...v2.4.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#501](https://www.github.com/googleapis/nodejs-automl/issues/501)) ([f88cc91](https://www.github.com/googleapis/nodejs-automl/commit/f88cc915df6ac67f7dc46fa345d9fc481b12d7da))
+* use require() to load JSON protos ([#504](https://www.github.com/googleapis/nodejs-automl/issues/504)) ([4cd9585](https://www.github.com/googleapis/nodejs-automl/commit/4cd9585da11b3a9189ed8f3f0e5ddc76c578a462))
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.0...v2.4.1) (2021-03-07)
 
 
