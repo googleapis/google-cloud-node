@@ -16,14 +16,14 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta1 from './v1beta1';
 import * as v1p1beta1 from './v1p1beta1';
+import * as v1beta1 from './v1beta1';
 import * as v1 from './v1';
 
 const SecurityCenterClient = v1.SecurityCenterClient;
 type SecurityCenterClient = v1.SecurityCenterClient;
 
-export {v1beta1, v1p1beta1, v1, SecurityCenterClient};
-export default {v1beta1, v1p1beta1, v1, SecurityCenterClient};
+export {v1p1beta1, v1beta1, v1, SecurityCenterClient};
+export default {v1p1beta1, v1beta1, v1, SecurityCenterClient};
 import * as protos from '../protos/protos';
 export {protos};

@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.3.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.2.0...v5.3.0) (2021-05-12)
+
+
+### Features
+
+* **v1:** add canonical_name and folder fields ([#379](https://www.github.com/googleapis/nodejs-security-center/issues/379)) ([239901b](https://www.github.com/googleapis/nodejs-security-center/commit/239901ba42e5973024c86728013354cd4731a0ee))
+* **v1p1beta1:** add canonical_name and folder fields ([#378](https://www.github.com/googleapis/nodejs-security-center/issues/378)) ([5354f52](https://www.github.com/googleapis/nodejs-security-center/commit/5354f52df024d465b224c9db20e0c9cd9586060b))
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#373](https://www.github.com/googleapis/nodejs-security-center/issues/373)) ([c13a77a](https://www.github.com/googleapis/nodejs-security-center/commit/c13a77aa4340e63cc4c32b01463c2a761bef2f1f))
+* use require() to load JSON protos ([#376](https://www.github.com/googleapis/nodejs-security-center/issues/376)) ([efac58d](https://www.github.com/googleapis/nodejs-security-center/commit/efac58d6a49a68598703e8b7a7c7c235894c525f))
+
 ## [5.2.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.1.3...v5.2.0) (2021-01-07)
 
 
