@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.10.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.9.0...v2.10.0) (2021-05-12)
+
+
+### Features
+
+* add confidence field to the PageAnchor.PageRef in document.proto ([#206](https://www.github.com/googleapis/nodejs-document-ai/issues/206)) ([f3154a9](https://www.github.com/googleapis/nodejs-document-ai/commit/f3154a9456c5727b317af34c5a76ca0c7cda9cbb))
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#210](https://www.github.com/googleapis/nodejs-document-ai/issues/210)) ([86d31c7](https://www.github.com/googleapis/nodejs-document-ai/commit/86d31c767881ee5524f4285bf828bf674a7d282e))
+* use require() to load JSON protos ([#214](https://www.github.com/googleapis/nodejs-document-ai/issues/214)) ([c73202d](https://www.github.com/googleapis/nodejs-document-ai/commit/c73202dba1d62a1b414abe8b1dc39b93c0eb2e7b))
+
 ## [2.9.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.8.0...v2.9.0) (2021-04-26)
 
 
