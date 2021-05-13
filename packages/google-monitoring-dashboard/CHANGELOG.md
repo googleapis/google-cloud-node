@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.0...v2.3.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#167](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/167)) ([3316b86](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/3316b8619dafe3dde4dbba355907cdf804974ef8))
+* use require() to load JSON protos ([#170](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/170)) ([af92ed3](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/af92ed3942a3889a3567514b3614e04a2955dc17))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.2.0...v2.3.0) (2021-03-19)
 
 
