@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.1.1](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.0...v3.1.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#606](https://www.github.com/googleapis/nodejs-dlp/issues/606)) ([9c80ae6](https://www.github.com/googleapis/nodejs-dlp/commit/9c80ae620f44174ebb22a173e6d97cc832fb425a))
+* use require() to load JSON protos ([#609](https://www.github.com/googleapis/nodejs-dlp/issues/609)) ([e52f7ab](https://www.github.com/googleapis/nodejs-dlp/commit/e52f7ab21f8b6d08953a8caf0d993d595111717d))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-dlp/compare/v3.0.6...v3.1.0) (2021-01-09)
 
 
