@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.2.0...v2.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#431](https://www.github.com/googleapis/nodejs-cloud-container/issues/431)) ([cdcce07](https://www.github.com/googleapis/nodejs-cloud-container/commit/cdcce07da06d7ee53b2207b8d9dd2f8e0c59a6d7))
+* use require() to load JSON protos ([#434](https://www.github.com/googleapis/nodejs-cloud-container/issues/434)) ([ce2dd09](https://www.github.com/googleapis/nodejs-cloud-container/commit/ce2dd092d84d165f905f2f912f1fdb382c8b69e5))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.1.2...v2.2.0) (2020-11-25)
 
 
