@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.0...v1.4.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#60](https://www.github.com/googleapis/nodejs-assured-workloads/issues/60)) ([2d79414](https://www.github.com/googleapis/nodejs-assured-workloads/commit/2d79414b862ca6cd91b22be00aea06e166f89b42))
+* use require() to load JSON protos ([#63](https://www.github.com/googleapis/nodejs-assured-workloads/issues/63)) ([faf72cf](https://www.github.com/googleapis/nodejs-assured-workloads/commit/faf72cfffbba6acc34e5b981c40151dc8df3281d))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.3.0...v1.4.0) (2021-03-23)
 
 
