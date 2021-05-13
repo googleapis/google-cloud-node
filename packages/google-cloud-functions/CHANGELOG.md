@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.3...v1.1.4) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#70](https://www.github.com/googleapis/nodejs-functions/issues/70)) ([0369f0c](https://www.github.com/googleapis/nodejs-functions/commit/0369f0cdf8424a531861b3ad65b10215d293b74d))
+* use require() to load JSON protos ([#73](https://www.github.com/googleapis/nodejs-functions/issues/73)) ([b3da62e](https://www.github.com/googleapis/nodejs-functions/commit/b3da62e5a46628f91615854fc8fa61f315ab1ff9))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.2...v1.1.3) (2021-03-15)
 
 
