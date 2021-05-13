@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [2.1.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.0...v2.1.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#239](https://www.github.com/googleapis/nodejs-web-risk/issues/239)) ([de691fa](https://www.github.com/googleapis/nodejs-web-risk/commit/de691fa4caddb128964b8ba7e10b49d82cb804e6))
+* use require() to load JSON protos ([#242](https://www.github.com/googleapis/nodejs-web-risk/issues/242)) ([15817b1](https://www.github.com/googleapis/nodejs-web-risk/commit/15817b1e7c5d310a8d189f0c94fcd3e6054f3d12))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.0.3...v2.1.0) (2021-01-09)
 
 
