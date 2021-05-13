@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-kms/compare/v2.3.1...v2.3.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#447](https://www.github.com/googleapis/nodejs-kms/issues/447)) ([5fcb7ff](https://www.github.com/googleapis/nodejs-kms/commit/5fcb7ff15d68346f786ac6d0652547232d016f3a))
+* use require() to load JSON protos ([#450](https://www.github.com/googleapis/nodejs-kms/issues/450)) ([bd67dfb](https://www.github.com/googleapis/nodejs-kms/commit/bd67dfba1a813ef7dd67437c3df76fa4b2aaa1c1))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-kms/compare/v2.3.0...v2.3.1) (2021-02-12)
 
 
