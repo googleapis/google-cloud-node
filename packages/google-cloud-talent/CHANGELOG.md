@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [3.2.1](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.0...v3.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#315](https://www.github.com/googleapis/nodejs-talent/issues/315)) ([e2bb1fc](https://www.github.com/googleapis/nodejs-talent/commit/e2bb1fc5b03cd3ce7ca8c655012935aa83e37921))
+* use require() to load JSON protos ([#318](https://www.github.com/googleapis/nodejs-talent/issues/318)) ([d4e91b9](https://www.github.com/googleapis/nodejs-talent/commit/d4e91b9a623acfce93411a20a37c499b1a5bc3a5))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.1.0...v3.2.0) (2021-03-02)
 
 
