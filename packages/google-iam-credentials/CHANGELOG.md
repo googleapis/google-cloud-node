@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.1...v1.0.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#45](https://www.github.com/googleapis/nodejs-iam-credentials/issues/45)) ([4ede28c](https://www.github.com/googleapis/nodejs-iam-credentials/commit/4ede28cc5c1621c5334487efcbfa0aec157c6ddc))
+* use require() to load JSON protos ([#48](https://www.github.com/googleapis/nodejs-iam-credentials/issues/48)) ([7e744c0](https://www.github.com/googleapis/nodejs-iam-credentials/commit/7e744c0ff6464177821909d76b0112a832648a7d))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.0...v1.0.1) (2021-02-04)
 
 
