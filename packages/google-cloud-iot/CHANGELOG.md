@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.0...v2.3.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#469](https://www.github.com/googleapis/nodejs-iot/issues/469)) ([fba8758](https://www.github.com/googleapis/nodejs-iot/commit/fba875813f41232a71338971c4c1766001dcefb5))
+* use require() to load JSON protos ([#472](https://www.github.com/googleapis/nodejs-iot/issues/472)) ([d963cf7](https://www.github.com/googleapis/nodejs-iot/commit/d963cf709052a7236a80cf1c0c9fbbaffd311aad))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.2.1...v2.3.0) (2021-02-10)
 
 
