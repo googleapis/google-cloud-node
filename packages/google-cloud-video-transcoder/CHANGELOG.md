@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.4.0...v1.4.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#58](https://www.github.com/googleapis/nodejs-video-transcoder/issues/58)) ([50f8132](https://www.github.com/googleapis/nodejs-video-transcoder/commit/50f813209878f5c2472bd1b38640341ae5715d33))
+* use require() to load JSON protos ([#61](https://www.github.com/googleapis/nodejs-video-transcoder/issues/61)) ([8f4fab7](https://www.github.com/googleapis/nodejs-video-transcoder/commit/8f4fab7b0b796dc730915ff0f06d0e965f0af915))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.3.0...v1.4.0) (2021-03-31)
 
 
