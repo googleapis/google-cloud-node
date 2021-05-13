@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.0...v1.1.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#44](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/44)) ([fc2d8a3](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/fc2d8a313af1438e71c0b6f4890a0e774334afd7))
+* use require() to load JSON protos ([#47](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/47)) ([d607efa](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/d607efaeef14c8483743d97711c3937e84e5b032))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.0.0...v1.1.0) (2021-03-18)
 
 
