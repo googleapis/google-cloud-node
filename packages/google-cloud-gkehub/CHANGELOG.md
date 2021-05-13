@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.1.0...v1.1.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#44](https://www.github.com/googleapis/nodejs-gke-hub/issues/44)) ([c14ef1e](https://www.github.com/googleapis/nodejs-gke-hub/commit/c14ef1ed09325896027ade1c36cbc6b670f115df))
+* use require() to load JSON protos ([#47](https://www.github.com/googleapis/nodejs-gke-hub/issues/47)) ([5f7bef5](https://www.github.com/googleapis/nodejs-gke-hub/commit/5f7bef5c92f24230f3eae878431be1599a5688ed))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.0.2...v1.1.0) (2021-02-14)
 
 
