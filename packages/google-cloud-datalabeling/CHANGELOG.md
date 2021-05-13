@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.0...v2.2.1) (2021-05-12)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#270](https://www.github.com/googleapis/nodejs-datalabeling/issues/270)) ([9f1d2fa](https://www.github.com/googleapis/nodejs-datalabeling/commit/9f1d2faacdbb3e9503b450b6c8da4d70bcd4d66f))
+* use require() to load JSON protos ([#273](https://www.github.com/googleapis/nodejs-datalabeling/issues/273)) ([4ba477e](https://www.github.com/googleapis/nodejs-datalabeling/commit/4ba477e2f408db02ed08cc4acfc02914273c5b92))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.1.2...v2.2.0) (2021-01-09)
 
 
