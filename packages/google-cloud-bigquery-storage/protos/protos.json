@@ -51,7 +51,8 @@
                             "CompressionCodec": {
                               "values": {
                                 "COMPRESSION_UNSPECIFIED": 0,
-                                "LZ4_FRAME": 1
+                                "LZ4_FRAME": 1,
+                                "ZSTD": 2
                               }
                             }
                           }

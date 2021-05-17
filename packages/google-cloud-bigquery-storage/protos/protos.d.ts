@@ -310,7 +310,8 @@ export namespace google {
                         /** CompressionCodec enum. */
                         enum CompressionCodec {
                             COMPRESSION_UNSPECIFIED = 0,
-                            LZ4_FRAME = 1
+                            LZ4_FRAME = 1,
+                            ZSTD = 2
                         }
                     }
 

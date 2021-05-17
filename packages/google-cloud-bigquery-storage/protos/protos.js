@@ -640,6 +640,7 @@
                                         return "bufferCompression: enum value expected";
                                     case 0:
                                     case 1:
+                                    case 2:
                                         break;
                                     }
                                 return null;
@@ -665,6 +666,10 @@
                                 case "LZ4_FRAME":
                                 case 1:
                                     message.bufferCompression = 1;
+                                    break;
+                                case "ZSTD":
+                                case 2:
+                                    message.bufferCompression = 2;
                                     break;
                                 }
                                 return message;
@@ -707,11 +712,13 @@
                              * @enum {number}
                              * @property {number} COMPRESSION_UNSPECIFIED=0 COMPRESSION_UNSPECIFIED value
                              * @property {number} LZ4_FRAME=1 LZ4_FRAME value
+                             * @property {number} ZSTD=2 ZSTD value
                              */
                             ArrowSerializationOptions.CompressionCodec = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "COMPRESSION_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "LZ4_FRAME"] = 1;
+                                values[valuesById[2] = "ZSTD"] = 2;
                                 return values;
                             })();
     
