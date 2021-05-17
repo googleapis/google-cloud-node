@@ -58,6 +58,8 @@
     "protobufjs": "^6.8.8"
   },
   "devDependencies": {
+    "@microsoft/api-documenter": "^7.8.10",
+    "@microsoft/api-extractor": "^7.8.10",
     "@types/extend": "^3.0.0",
     "@types/mocha": "^8.0.0",
     "@types/node": "^10.5.7",
@@ -77,8 +79,6 @@
     "pack-n-play": "^1.0.0-2",
     "proxyquire": "^2.0.1",
     "sinon": "^10.0.0",
-    "typescript": "^3.8.3",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10"
+    "typescript": "^3.8.3"
   }
 }
