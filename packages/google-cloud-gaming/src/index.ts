@@ -16,8 +16,8 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
 import * as v1beta from './v1beta';
+import * as v1 from './v1';
 
 const GameServerClustersServiceClient = v1.GameServerClustersServiceClient;
 type GameServerClustersServiceClient = v1.GameServerClustersServiceClient;
@@ -30,16 +30,16 @@ const RealmsServiceClient = v1.RealmsServiceClient;
 type RealmsServiceClient = v1.RealmsServiceClient;
 
 export {
-  v1,
   v1beta,
+  v1,
   GameServerClustersServiceClient,
   GameServerConfigsServiceClient,
   GameServerDeploymentsServiceClient,
   RealmsServiceClient,
 };
 export default {
-  v1,
   v1beta,
+  v1,
   GameServerClustersServiceClient,
   GameServerConfigsServiceClient,
   GameServerDeploymentsServiceClient,

@@ -1,13 +1,14 @@
 {
-  "name": "game-servers",
-  "name_pretty": "Google Cloud Game Servers",
-  "product_documentation": "https://cloud.google.com/game-servers/",
   "client_documentation": "https://googleapis.dev/nodejs/game-servers/latest",
-  "issue_tracker": "",
+  "product_documentation": "https://cloud.google.com/game-servers/",
+  "name": "game-servers",
+  "requires_billing": true,
   "release_level": "ga",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-game-servers",
-  "distribution_name": "@google-cloud/game-servers",
   "api_id": "gameservices.googleapis.com",
-  "requires_billing": true
+  "distribution_name": "@google-cloud/game-servers",
+  "repo": "googleapis/nodejs-game-servers",
+  "issue_tracker": "",
+  "name_pretty": "Google Cloud Game Servers",
+  "default_version": "v1"
 }

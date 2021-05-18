@@ -1,0 +1,351 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.gaming.v1",
+  "libraryPackage": "gaming",
+  "services": {
+    "GameServerClustersService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GameServerClustersServiceClient",
+          "rpcs": {
+            "GetGameServerCluster": {
+              "methods": [
+                "getGameServerCluster"
+              ]
+            },
+            "PreviewCreateGameServerCluster": {
+              "methods": [
+                "previewCreateGameServerCluster"
+              ]
+            },
+            "PreviewDeleteGameServerCluster": {
+              "methods": [
+                "previewDeleteGameServerCluster"
+              ]
+            },
+            "PreviewUpdateGameServerCluster": {
+              "methods": [
+                "previewUpdateGameServerCluster"
+              ]
+            },
+            "CreateGameServerCluster": {
+              "methods": [
+                "createGameServerCluster"
+              ]
+            },
+            "DeleteGameServerCluster": {
+              "methods": [
+                "deleteGameServerCluster"
+              ]
+            },
+            "UpdateGameServerCluster": {
+              "methods": [
+                "updateGameServerCluster"
+              ]
+            },
+            "ListGameServerClusters": {
+              "methods": [
+                "listGameServerClusters",
+                "listGameServerClustersStream",
+                "listGameServerClustersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GameServerClustersServiceClient",
+          "rpcs": {
+            "GetGameServerCluster": {
+              "methods": [
+                "getGameServerCluster"
+              ]
+            },
+            "PreviewCreateGameServerCluster": {
+              "methods": [
+                "previewCreateGameServerCluster"
+              ]
+            },
+            "PreviewDeleteGameServerCluster": {
+              "methods": [
+                "previewDeleteGameServerCluster"
+              ]
+            },
+            "PreviewUpdateGameServerCluster": {
+              "methods": [
+                "previewUpdateGameServerCluster"
+              ]
+            },
+            "CreateGameServerCluster": {
+              "methods": [
+                "createGameServerCluster"
+              ]
+            },
+            "DeleteGameServerCluster": {
+              "methods": [
+                "deleteGameServerCluster"
+              ]
+            },
+            "UpdateGameServerCluster": {
+              "methods": [
+                "updateGameServerCluster"
+              ]
+            },
+            "ListGameServerClusters": {
+              "methods": [
+                "listGameServerClusters",
+                "listGameServerClustersStream",
+                "listGameServerClustersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GameServerConfigsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GameServerConfigsServiceClient",
+          "rpcs": {
+            "GetGameServerConfig": {
+              "methods": [
+                "getGameServerConfig"
+              ]
+            },
+            "CreateGameServerConfig": {
+              "methods": [
+                "createGameServerConfig"
+              ]
+            },
+            "DeleteGameServerConfig": {
+              "methods": [
+                "deleteGameServerConfig"
+              ]
+            },
+            "ListGameServerConfigs": {
+              "methods": [
+                "listGameServerConfigs",
+                "listGameServerConfigsStream",
+                "listGameServerConfigsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GameServerConfigsServiceClient",
+          "rpcs": {
+            "GetGameServerConfig": {
+              "methods": [
+                "getGameServerConfig"
+              ]
+            },
+            "CreateGameServerConfig": {
+              "methods": [
+                "createGameServerConfig"
+              ]
+            },
+            "DeleteGameServerConfig": {
+              "methods": [
+                "deleteGameServerConfig"
+              ]
+            },
+            "ListGameServerConfigs": {
+              "methods": [
+                "listGameServerConfigs",
+                "listGameServerConfigsStream",
+                "listGameServerConfigsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GameServerDeploymentsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GameServerDeploymentsServiceClient",
+          "rpcs": {
+            "GetGameServerDeployment": {
+              "methods": [
+                "getGameServerDeployment"
+              ]
+            },
+            "GetGameServerDeploymentRollout": {
+              "methods": [
+                "getGameServerDeploymentRollout"
+              ]
+            },
+            "PreviewGameServerDeploymentRollout": {
+              "methods": [
+                "previewGameServerDeploymentRollout"
+              ]
+            },
+            "FetchDeploymentState": {
+              "methods": [
+                "fetchDeploymentState"
+              ]
+            },
+            "CreateGameServerDeployment": {
+              "methods": [
+                "createGameServerDeployment"
+              ]
+            },
+            "DeleteGameServerDeployment": {
+              "methods": [
+                "deleteGameServerDeployment"
+              ]
+            },
+            "UpdateGameServerDeployment": {
+              "methods": [
+                "updateGameServerDeployment"
+              ]
+            },
+            "UpdateGameServerDeploymentRollout": {
+              "methods": [
+                "updateGameServerDeploymentRollout"
+              ]
+            },
+            "ListGameServerDeployments": {
+              "methods": [
+                "listGameServerDeployments",
+                "listGameServerDeploymentsStream",
+                "listGameServerDeploymentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GameServerDeploymentsServiceClient",
+          "rpcs": {
+            "GetGameServerDeployment": {
+              "methods": [
+                "getGameServerDeployment"
+              ]
+            },
+            "GetGameServerDeploymentRollout": {
+              "methods": [
+                "getGameServerDeploymentRollout"
+              ]
+            },
+            "PreviewGameServerDeploymentRollout": {
+              "methods": [
+                "previewGameServerDeploymentRollout"
+              ]
+            },
+            "FetchDeploymentState": {
+              "methods": [
+                "fetchDeploymentState"
+              ]
+            },
+            "CreateGameServerDeployment": {
+              "methods": [
+                "createGameServerDeployment"
+              ]
+            },
+            "DeleteGameServerDeployment": {
+              "methods": [
+                "deleteGameServerDeployment"
+              ]
+            },
+            "UpdateGameServerDeployment": {
+              "methods": [
+                "updateGameServerDeployment"
+              ]
+            },
+            "UpdateGameServerDeploymentRollout": {
+              "methods": [
+                "updateGameServerDeploymentRollout"
+              ]
+            },
+            "ListGameServerDeployments": {
+              "methods": [
+                "listGameServerDeployments",
+                "listGameServerDeploymentsStream",
+                "listGameServerDeploymentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RealmsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RealmsServiceClient",
+          "rpcs": {
+            "GetRealm": {
+              "methods": [
+                "getRealm"
+              ]
+            },
+            "PreviewRealmUpdate": {
+              "methods": [
+                "previewRealmUpdate"
+              ]
+            },
+            "CreateRealm": {
+              "methods": [
+                "createRealm"
+              ]
+            },
+            "DeleteRealm": {
+              "methods": [
+                "deleteRealm"
+              ]
+            },
+            "UpdateRealm": {
+              "methods": [
+                "updateRealm"
+              ]
+            },
+            "ListRealms": {
+              "methods": [
+                "listRealms",
+                "listRealmsStream",
+                "listRealmsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RealmsServiceClient",
+          "rpcs": {
+            "GetRealm": {
+              "methods": [
+                "getRealm"
+              ]
+            },
+            "PreviewRealmUpdate": {
+              "methods": [
+                "previewRealmUpdate"
+              ]
+            },
+            "CreateRealm": {
+              "methods": [
+                "createRealm"
+              ]
+            },
+            "DeleteRealm": {
+              "methods": [
+                "deleteRealm"
+              ]
+            },
+            "UpdateRealm": {
+              "methods": [
+                "updateRealm"
+              ]
+            },
+            "ListRealms": {
+              "methods": [
+                "listRealms",
+                "listRealmsStream",
+                "listRealmsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

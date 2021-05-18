@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -169,49 +168,54 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient();
+    const client =
+      new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-      {
-        fallback: true,
-      }
-    );
+    const client =
+      new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+        {
+          fallback: true,
+        }
+      );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     assert.strictEqual(client.gameServerDeploymentsServiceStub, undefined);
     await client.initialize();
     assert(client.gameServerDeploymentsServiceStub);
   });
 
   it('has close method', () => {
-    const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -220,12 +224,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -244,12 +249,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   describe('getGameServerDeployment', () => {
     it('invokes getGameServerDeployment without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerDeploymentRequest()
@@ -266,9 +272,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GameServerDeployment()
       );
-      client.innerApiCalls.getGameServerDeployment = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getGameServerDeployment =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getGameServerDeployment(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -279,12 +284,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes getGameServerDeployment without error using callback', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerDeploymentRequest()
@@ -301,9 +307,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GameServerDeployment()
       );
-      client.innerApiCalls.getGameServerDeployment = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getGameServerDeployment =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getGameServerDeployment(
           request,
@@ -329,12 +334,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes getGameServerDeployment with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerDeploymentRequest()
@@ -367,12 +373,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   describe('getGameServerDeploymentRollout', () => {
     it('invokes getGameServerDeploymentRollout without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest()
@@ -389,9 +396,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GameServerDeploymentRollout()
       );
-      client.innerApiCalls.getGameServerDeploymentRollout = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getGameServerDeploymentRollout =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getGameServerDeploymentRollout(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -402,12 +408,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes getGameServerDeploymentRollout without error using callback', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest()
@@ -424,9 +431,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GameServerDeploymentRollout()
       );
-      client.innerApiCalls.getGameServerDeploymentRollout = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getGameServerDeploymentRollout =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getGameServerDeploymentRollout(
           request,
@@ -452,12 +458,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes getGameServerDeploymentRollout with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerDeploymentRolloutRequest()
@@ -490,12 +497,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   describe('previewGameServerDeploymentRollout', () => {
     it('invokes previewGameServerDeploymentRollout without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest()
@@ -513,9 +521,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse()
       );
-      client.innerApiCalls.previewGameServerDeploymentRollout = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.previewGameServerDeploymentRollout =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.previewGameServerDeploymentRollout(
         request
       );
@@ -528,12 +535,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes previewGameServerDeploymentRollout without error using callback', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest()
@@ -551,9 +559,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutResponse()
       );
-      client.innerApiCalls.previewGameServerDeploymentRollout = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.previewGameServerDeploymentRollout =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.previewGameServerDeploymentRollout(
           request,
@@ -579,12 +586,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes previewGameServerDeploymentRollout with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.PreviewGameServerDeploymentRolloutRequest()
@@ -618,12 +626,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   describe('fetchDeploymentState', () => {
     it('invokes fetchDeploymentState without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.FetchDeploymentStateRequest()
@@ -640,9 +649,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.FetchDeploymentStateResponse()
       );
-      client.innerApiCalls.fetchDeploymentState = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.fetchDeploymentState =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.fetchDeploymentState(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -653,12 +661,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes fetchDeploymentState without error using callback', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.FetchDeploymentStateRequest()
@@ -675,9 +684,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.FetchDeploymentStateResponse()
       );
-      client.innerApiCalls.fetchDeploymentState = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.fetchDeploymentState =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.fetchDeploymentState(
           request,
@@ -703,12 +711,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes fetchDeploymentState with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.FetchDeploymentStateRequest()
@@ -738,12 +747,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   describe('createGameServerDeployment', () => {
     it('invokes createGameServerDeployment without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerDeploymentRequest()
@@ -760,9 +770,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createGameServerDeployment = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createGameServerDeployment =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createGameServerDeployment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -774,12 +783,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes createGameServerDeployment without error using callback', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerDeploymentRequest()
@@ -796,9 +806,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createGameServerDeployment = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createGameServerDeployment =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createGameServerDeployment(
           request,
@@ -831,12 +840,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes createGameServerDeployment with call error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerDeploymentRequest()
@@ -867,12 +877,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes createGameServerDeployment with LRO error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerDeploymentRequest()
@@ -902,12 +913,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes checkCreateGameServerDeploymentProgress without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -917,21 +929,23 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkCreateGameServerDeploymentProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkCreateGameServerDeploymentProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
     it('invokes checkCreateGameServerDeploymentProgress with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -949,12 +963,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   describe('deleteGameServerDeployment', () => {
     it('invokes deleteGameServerDeployment without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerDeploymentRequest()
@@ -971,9 +986,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteGameServerDeployment = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteGameServerDeployment =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteGameServerDeployment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -985,12 +999,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes deleteGameServerDeployment without error using callback', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerDeploymentRequest()
@@ -1007,9 +1022,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteGameServerDeployment = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteGameServerDeployment =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteGameServerDeployment(
           request,
@@ -1042,12 +1056,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes deleteGameServerDeployment with call error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerDeploymentRequest()
@@ -1078,12 +1093,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes deleteGameServerDeployment with LRO error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerDeploymentRequest()
@@ -1113,12 +1129,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes checkDeleteGameServerDeploymentProgress without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1128,21 +1145,23 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkDeleteGameServerDeploymentProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkDeleteGameServerDeploymentProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
     it('invokes checkDeleteGameServerDeploymentProgress with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1160,12 +1179,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   describe('updateGameServerDeployment', () => {
     it('invokes updateGameServerDeployment without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerDeploymentRequest()
@@ -1183,9 +1203,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateGameServerDeployment = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateGameServerDeployment =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateGameServerDeployment(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1197,12 +1216,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes updateGameServerDeployment without error using callback', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerDeploymentRequest()
@@ -1220,9 +1240,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateGameServerDeployment = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateGameServerDeployment =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateGameServerDeployment(
           request,
@@ -1255,12 +1274,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes updateGameServerDeployment with call error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerDeploymentRequest()
@@ -1292,12 +1312,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes updateGameServerDeployment with LRO error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerDeploymentRequest()
@@ -1328,12 +1349,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes checkUpdateGameServerDeploymentProgress without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1343,21 +1365,23 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateGameServerDeploymentProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkUpdateGameServerDeploymentProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
     it('invokes checkUpdateGameServerDeploymentProgress with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1375,12 +1399,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   describe('updateGameServerDeploymentRollout', () => {
     it('invokes updateGameServerDeploymentRollout without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest()
@@ -1398,9 +1423,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateGameServerDeploymentRollout = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateGameServerDeploymentRollout =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.updateGameServerDeploymentRollout(
         request
       );
@@ -1414,12 +1438,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes updateGameServerDeploymentRollout without error using callback', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest()
@@ -1437,9 +1462,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateGameServerDeploymentRollout = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateGameServerDeploymentRollout =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateGameServerDeploymentRollout(
           request,
@@ -1472,12 +1496,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes updateGameServerDeploymentRollout with call error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest()
@@ -1493,10 +1518,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateGameServerDeploymentRollout = stubLongRunningCall(
-        undefined,
-        expectedError
-      );
+      client.innerApiCalls.updateGameServerDeploymentRollout =
+        stubLongRunningCall(undefined, expectedError);
       await assert.rejects(
         client.updateGameServerDeploymentRollout(request),
         expectedError
@@ -1509,12 +1532,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes updateGameServerDeploymentRollout with LRO error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.UpdateGameServerDeploymentRolloutRequest()
@@ -1530,11 +1554,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateGameServerDeploymentRollout = stubLongRunningCall(
-        undefined,
-        undefined,
-        expectedError
-      );
+      client.innerApiCalls.updateGameServerDeploymentRollout =
+        stubLongRunningCall(undefined, undefined, expectedError);
       const [operation] = await client.updateGameServerDeploymentRollout(
         request
       );
@@ -1547,12 +1568,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes checkUpdateGameServerDeploymentRolloutProgress without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1562,21 +1584,23 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
 
       client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
-      const decodedOperation = await client.checkUpdateGameServerDeploymentRolloutProgress(
-        expectedResponse.name
-      );
+      const decodedOperation =
+        await client.checkUpdateGameServerDeploymentRolloutProgress(
+          expectedResponse.name
+        );
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
 
     it('invokes checkUpdateGameServerDeploymentRolloutProgress with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1594,12 +1618,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
 
   describe('listGameServerDeployments', () => {
     it('invokes listGameServerDeployments without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerDeploymentsRequest()
@@ -1624,9 +1649,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
           new protos.google.cloud.gaming.v1.GameServerDeployment()
         ),
       ];
-      client.innerApiCalls.listGameServerDeployments = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listGameServerDeployments =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listGameServerDeployments(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1637,12 +1661,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes listGameServerDeployments without error using callback', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerDeploymentsRequest()
@@ -1667,9 +1692,8 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
           new protos.google.cloud.gaming.v1.GameServerDeployment()
         ),
       ];
-      client.innerApiCalls.listGameServerDeployments = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listGameServerDeployments =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listGameServerDeployments(
           request,
@@ -1697,12 +1721,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes listGameServerDeployments with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerDeploymentsRequest()
@@ -1733,12 +1758,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
     });
 
     it('invokes listGameServerDeploymentsStream without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerDeploymentsRequest()
@@ -1756,12 +1782,12 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
           new protos.google.cloud.gaming.v1.GameServerDeployment()
         ),
       ];
-      client.descriptors.page.listGameServerDeployments.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listGameServerDeployments.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listGameServerDeploymentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gaming.v1.GameServerDeployment[] = [];
+        const responses: protos.google.cloud.gaming.v1.GameServerDeployment[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.gaming.v1.GameServerDeployment) => {
@@ -1778,27 +1804,30 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listGameServerDeployments
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listGameServerDeployments
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listGameServerDeployments, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listGameServerDeployments
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGameServerDeployments
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listGameServerDeploymentsStream with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerDeploymentsRequest()
@@ -1806,13 +1835,12 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listGameServerDeployments.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listGameServerDeployments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listGameServerDeploymentsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.gaming.v1.GameServerDeployment[] = [];
+        const responses: protos.google.cloud.gaming.v1.GameServerDeployment[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.cloud.gaming.v1.GameServerDeployment) => {
@@ -1828,27 +1856,30 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listGameServerDeployments
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listGameServerDeployments
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listGameServerDeployments, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listGameServerDeployments
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGameServerDeployments
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listGameServerDeployments without error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerDeploymentsRequest()
@@ -1866,36 +1897,39 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
           new protos.google.cloud.gaming.v1.GameServerDeployment()
         ),
       ];
-      client.descriptors.page.listGameServerDeployments.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.cloud.gaming.v1.IGameServerDeployment[] = [];
+      client.descriptors.page.listGameServerDeployments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.gaming.v1.IGameServerDeployment[] =
+        [];
       const iterable = client.listGameServerDeploymentsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listGameServerDeployments
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listGameServerDeployments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listGameServerDeployments
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGameServerDeployments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listGameServerDeployments with error', async () => {
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerDeploymentsRequest()
@@ -1903,27 +1937,28 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listGameServerDeployments.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listGameServerDeployments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listGameServerDeploymentsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.gaming.v1.IGameServerDeployment[] = [];
+        const responses: protos.google.cloud.gaming.v1.IGameServerDeployment[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listGameServerDeployments
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listGameServerDeployments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listGameServerDeployments
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGameServerDeployments
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1938,12 +1973,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         realm: 'realmValue',
         cluster: 'clusterValue',
       };
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.gameServerClusterPathTemplate.render = sinon
         .stub()
@@ -1961,8 +1997,10 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1972,8 +2010,10 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         const result = client.matchProjectFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1983,8 +2023,10 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         const result = client.matchLocationFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1994,8 +2036,10 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         const result = client.matchRealmFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'realmValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2005,8 +2049,10 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         const result = client.matchClusterFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'clusterValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2021,12 +2067,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         deployment: 'deploymentValue',
         config: 'configValue',
       };
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.gameServerConfigPathTemplate.render = sinon
         .stub()
@@ -2044,8 +2091,10 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -2099,12 +2148,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         location: 'locationValue',
         deployment: 'deploymentValue',
       };
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.gameServerDeploymentPathTemplate.render = sinon
         .stub()
@@ -2121,47 +2171,52 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromGameServerDeploymentName', () => {
-        const result = client.matchProjectFromGameServerDeploymentName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromGameServerDeploymentName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromGameServerDeploymentName', () => {
-        const result = client.matchLocationFromGameServerDeploymentName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromGameServerDeploymentName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeploymentFromGameServerDeploymentName', () => {
-        const result = client.matchDeploymentFromGameServerDeploymentName(
-          fakePath
-        );
+        const result =
+          client.matchDeploymentFromGameServerDeploymentName(fakePath);
         assert.strictEqual(result, 'deploymentValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2175,16 +2230,16 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         location: 'locationValue',
         deployment: 'deploymentValue',
       };
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
-      client.pathTemplates.gameServerDeploymentRolloutPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
+      client.pathTemplates.gameServerDeploymentRolloutPathTemplate.render =
+        sinon.stub().returns(fakePath);
       client.pathTemplates.gameServerDeploymentRolloutPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
@@ -2197,47 +2252,52 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromGameServerDeploymentRolloutName', () => {
-        const result = client.matchProjectFromGameServerDeploymentRolloutName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromGameServerDeploymentRolloutName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromGameServerDeploymentRolloutName', () => {
-        const result = client.matchLocationFromGameServerDeploymentRolloutName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromGameServerDeploymentRolloutName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeploymentFromGameServerDeploymentRolloutName', () => {
-        const result = client.matchDeploymentFromGameServerDeploymentRolloutName(
-          fakePath
-        );
+        const result =
+          client.matchDeploymentFromGameServerDeploymentRolloutName(fakePath);
         assert.strictEqual(result, 'deploymentValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2251,12 +2311,13 @@ describe('v1.GameServerDeploymentsServiceClient', () => {
         location: 'locationValue',
         realm: 'realmValue',
       };
-      const client = new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new gameserverdeploymentsserviceModule.v1.GameServerDeploymentsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       client.pathTemplates.realmPathTemplate.render = sinon
         .stub()

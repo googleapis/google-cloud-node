@@ -20,9 +20,12 @@
 const gaming = require('@google-cloud/game-servers');
 
 function main() {
-  const gameServerClustersServiceClient = new gaming.GameServerClustersServiceClient();
-  const gameServerConfigsServiceClient = new gaming.GameServerConfigsServiceClient();
-  const gameServerDeploymentsServiceClient = new gaming.GameServerDeploymentsServiceClient();
+  const gameServerClustersServiceClient =
+    new gaming.GameServerClustersServiceClient();
+  const gameServerConfigsServiceClient =
+    new gaming.GameServerConfigsServiceClient();
+  const gameServerDeploymentsServiceClient =
+    new gaming.GameServerDeploymentsServiceClient();
   const realmsServiceClient = new gaming.RealmsServiceClient();
 }
 

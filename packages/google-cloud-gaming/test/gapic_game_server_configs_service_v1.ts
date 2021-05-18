@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -168,49 +167,46 @@ describe('v1.GameServerConfigsServiceClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient();
+    const client =
+      new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-      {
+    const client =
+      new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-      {
+    const client =
+      new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.gameServerConfigsServiceStub, undefined);
     await client.initialize();
     assert(client.gameServerConfigsServiceStub);
   });
 
   it('has close method', () => {
-    const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-      {
+    const client =
+      new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-      {
+    const client =
+      new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -219,12 +215,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-      {
+    const client =
+      new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -243,12 +238,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
 
   describe('getGameServerConfig', () => {
     it('invokes getGameServerConfig without error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerConfigRequest()
@@ -265,9 +259,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GameServerConfig()
       );
-      client.innerApiCalls.getGameServerConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getGameServerConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getGameServerConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -278,12 +271,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes getGameServerConfig without error using callback', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerConfigRequest()
@@ -300,9 +292,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GameServerConfig()
       );
-      client.innerApiCalls.getGameServerConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getGameServerConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getGameServerConfig(
           request,
@@ -328,12 +319,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes getGameServerConfig with error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.GetGameServerConfigRequest()
@@ -363,12 +353,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
 
   describe('createGameServerConfig', () => {
     it('invokes createGameServerConfig without error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerConfigRequest()
@@ -385,9 +374,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createGameServerConfig = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createGameServerConfig =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createGameServerConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -399,12 +387,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes createGameServerConfig without error using callback', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerConfigRequest()
@@ -421,9 +408,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createGameServerConfig = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createGameServerConfig =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createGameServerConfig(
           request,
@@ -456,12 +442,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes createGameServerConfig with call error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerConfigRequest()
@@ -492,12 +477,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes createGameServerConfig with LRO error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.CreateGameServerConfigRequest()
@@ -527,12 +511,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes checkCreateGameServerConfigProgress without error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -551,12 +534,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes checkCreateGameServerConfigProgress with error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -574,12 +556,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
 
   describe('deleteGameServerConfig', () => {
     it('invokes deleteGameServerConfig without error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerConfigRequest()
@@ -596,9 +577,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteGameServerConfig = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteGameServerConfig =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteGameServerConfig(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -610,12 +590,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes deleteGameServerConfig without error using callback', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerConfigRequest()
@@ -632,9 +611,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteGameServerConfig = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteGameServerConfig =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteGameServerConfig(
           request,
@@ -667,12 +645,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes deleteGameServerConfig with call error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerConfigRequest()
@@ -703,12 +680,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes deleteGameServerConfig with LRO error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.DeleteGameServerConfigRequest()
@@ -738,12 +714,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes checkDeleteGameServerConfigProgress without error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -762,12 +737,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes checkDeleteGameServerConfigProgress with error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -785,12 +759,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
 
   describe('listGameServerConfigs', () => {
     it('invokes listGameServerConfigs without error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
@@ -815,9 +788,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
           new protos.google.cloud.gaming.v1.GameServerConfig()
         ),
       ];
-      client.innerApiCalls.listGameServerConfigs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listGameServerConfigs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listGameServerConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -828,12 +800,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes listGameServerConfigs without error using callback', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
@@ -858,9 +829,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
           new protos.google.cloud.gaming.v1.GameServerConfig()
         ),
       ];
-      client.innerApiCalls.listGameServerConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listGameServerConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listGameServerConfigs(
           request,
@@ -886,12 +856,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes listGameServerConfigs with error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
@@ -922,12 +891,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
     });
 
     it('invokes listGameServerConfigsStream without error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
@@ -945,9 +913,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
           new protos.google.cloud.gaming.v1.GameServerConfig()
         ),
       ];
-      client.descriptors.page.listGameServerConfigs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listGameServerConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listGameServerConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.gaming.v1.GameServerConfig[] = [];
@@ -967,27 +934,28 @@ describe('v1.GameServerConfigsServiceClient', () => {
       const responses = await promise;
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.descriptors.page.listGameServerConfigs
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listGameServerConfigs
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listGameServerConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listGameServerConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGameServerConfigs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('invokes listGameServerConfigsStream with error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
@@ -995,10 +963,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listGameServerConfigs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listGameServerConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listGameServerConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.gaming.v1.GameServerConfig[] = [];
@@ -1017,27 +983,28 @@ describe('v1.GameServerConfigsServiceClient', () => {
       });
       await assert.rejects(promise, expectedError);
       assert(
-        (client.descriptors.page.listGameServerConfigs
-          .createStream as SinonStub)
+        (
+          client.descriptors.page.listGameServerConfigs
+            .createStream as SinonStub
+        )
           .getCall(0)
           .calledWith(client.innerApiCalls.listGameServerConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listGameServerConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGameServerConfigs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listGameServerConfigs without error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
@@ -1055,9 +1022,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
           new protos.google.cloud.gaming.v1.GameServerConfig()
         ),
       ];
-      client.descriptors.page.listGameServerConfigs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listGameServerConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.gaming.v1.IGameServerConfig[] = [];
       const iterable = client.listGameServerConfigsAsync(request);
       for await (const resource of iterable) {
@@ -1065,26 +1031,27 @@ describe('v1.GameServerConfigsServiceClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listGameServerConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listGameServerConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listGameServerConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGameServerConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
 
     it('uses async iteration with listGameServerConfigs with error', async () => {
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.gaming.v1.ListGameServerConfigsRequest()
@@ -1092,10 +1059,8 @@ describe('v1.GameServerConfigsServiceClient', () => {
       request.parent = '';
       const expectedHeaderRequestParams = 'parent=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listGameServerConfigs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listGameServerConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listGameServerConfigsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.cloud.gaming.v1.IGameServerConfig[] = [];
@@ -1104,15 +1069,17 @@ describe('v1.GameServerConfigsServiceClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listGameServerConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listGameServerConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listGameServerConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listGameServerConfigs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -1127,12 +1094,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
         realm: 'realmValue',
         cluster: 'clusterValue',
       };
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.gameServerClusterPathTemplate.render = sinon
         .stub()
@@ -1150,8 +1116,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1161,8 +1129,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
         const result = client.matchProjectFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1172,8 +1142,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
         const result = client.matchLocationFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1183,8 +1155,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
         const result = client.matchRealmFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'realmValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1194,8 +1168,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
         const result = client.matchClusterFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'clusterValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1210,12 +1186,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
         deployment: 'deploymentValue',
         config: 'configValue',
       };
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.gameServerConfigPathTemplate.render = sinon
         .stub()
@@ -1233,8 +1208,10 @@ describe('v1.GameServerConfigsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1288,12 +1265,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
         location: 'locationValue',
         deployment: 'deploymentValue',
       };
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.gameServerDeploymentPathTemplate.render = sinon
         .stub()
@@ -1310,47 +1286,52 @@ describe('v1.GameServerConfigsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromGameServerDeploymentName', () => {
-        const result = client.matchProjectFromGameServerDeploymentName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromGameServerDeploymentName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromGameServerDeploymentName', () => {
-        const result = client.matchLocationFromGameServerDeploymentName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromGameServerDeploymentName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeploymentFromGameServerDeploymentName', () => {
-        const result = client.matchDeploymentFromGameServerDeploymentName(
-          fakePath
-        );
+        const result =
+          client.matchDeploymentFromGameServerDeploymentName(fakePath);
         assert.strictEqual(result, 'deploymentValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1364,16 +1345,14 @@ describe('v1.GameServerConfigsServiceClient', () => {
         location: 'locationValue',
         deployment: 'deploymentValue',
       };
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
-      client.pathTemplates.gameServerDeploymentRolloutPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
+      client.pathTemplates.gameServerDeploymentRolloutPathTemplate.render =
+        sinon.stub().returns(fakePath);
       client.pathTemplates.gameServerDeploymentRolloutPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
@@ -1386,47 +1365,52 @@ describe('v1.GameServerConfigsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromGameServerDeploymentRolloutName', () => {
-        const result = client.matchProjectFromGameServerDeploymentRolloutName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromGameServerDeploymentRolloutName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromGameServerDeploymentRolloutName', () => {
-        const result = client.matchLocationFromGameServerDeploymentRolloutName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromGameServerDeploymentRolloutName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeploymentFromGameServerDeploymentRolloutName', () => {
-        const result = client.matchDeploymentFromGameServerDeploymentRolloutName(
-          fakePath
-        );
+        const result =
+          client.matchDeploymentFromGameServerDeploymentRolloutName(fakePath);
         assert.strictEqual(result, 'deploymentValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1440,12 +1424,11 @@ describe('v1.GameServerConfigsServiceClient', () => {
         location: 'locationValue',
         realm: 'realmValue',
       };
-      const client = new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient(
-        {
+      const client =
+        new gameserverconfigsserviceModule.v1.GameServerConfigsServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       client.pathTemplates.realmPathTemplate.render = sinon
         .stub()

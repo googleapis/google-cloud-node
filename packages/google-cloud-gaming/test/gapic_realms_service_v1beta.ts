@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1beta.RealmsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.Realm()
       );
-      client.innerApiCalls.getRealm = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getRealm =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getRealm(
           request,
@@ -360,9 +358,8 @@ describe('v1beta.RealmsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.PreviewRealmUpdateResponse()
       );
-      client.innerApiCalls.previewRealmUpdate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.previewRealmUpdate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.previewRealmUpdate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -394,9 +391,8 @@ describe('v1beta.RealmsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.gaming.v1beta.PreviewRealmUpdateResponse()
       );
-      client.innerApiCalls.previewRealmUpdate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.previewRealmUpdate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.previewRealmUpdate(
           request,
@@ -508,9 +504,8 @@ describe('v1beta.RealmsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createRealm = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createRealm =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createRealm(
           request,
@@ -699,9 +694,8 @@ describe('v1beta.RealmsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteRealm = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteRealm =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteRealm(
           request,
@@ -892,9 +886,8 @@ describe('v1beta.RealmsServiceClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.updateRealm = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateRealm =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateRealm(
           request,
@@ -1088,9 +1081,8 @@ describe('v1beta.RealmsServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
         generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
       ];
-      client.innerApiCalls.listRealms = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listRealms =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listRealms(
           request,
@@ -1162,9 +1154,8 @@ describe('v1beta.RealmsServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
         generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
       ];
-      client.descriptors.page.listRealms.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listRealms.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listRealmsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.cloud.gaming.v1beta.Realm[] = [];
@@ -1258,9 +1249,8 @@ describe('v1beta.RealmsServiceClient', () => {
         generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
         generateSampleMessage(new protos.google.cloud.gaming.v1beta.Realm()),
       ];
-      client.descriptors.page.listRealms.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listRealms.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.cloud.gaming.v1beta.IRealm[] = [];
       const iterable = client.listRealmsAsync(request);
       for await (const resource of iterable) {
@@ -1349,8 +1339,10 @@ describe('v1beta.RealmsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1360,8 +1352,10 @@ describe('v1beta.RealmsServiceClient', () => {
         const result = client.matchProjectFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1371,8 +1365,10 @@ describe('v1beta.RealmsServiceClient', () => {
         const result = client.matchLocationFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1382,8 +1378,10 @@ describe('v1beta.RealmsServiceClient', () => {
         const result = client.matchRealmFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'realmValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1393,8 +1391,10 @@ describe('v1beta.RealmsServiceClient', () => {
         const result = client.matchClusterFromGameServerClusterName(fakePath);
         assert.strictEqual(result, 'clusterValue');
         assert(
-          (client.pathTemplates.gameServerClusterPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerClusterPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1430,8 +1430,10 @@ describe('v1beta.RealmsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerConfigPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerConfigPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
@@ -1505,47 +1507,52 @@ describe('v1beta.RealmsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromGameServerDeploymentName', () => {
-        const result = client.matchProjectFromGameServerDeploymentName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromGameServerDeploymentName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromGameServerDeploymentName', () => {
-        const result = client.matchLocationFromGameServerDeploymentName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromGameServerDeploymentName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeploymentFromGameServerDeploymentName', () => {
-        const result = client.matchDeploymentFromGameServerDeploymentName(
-          fakePath
-        );
+        const result =
+          client.matchDeploymentFromGameServerDeploymentName(fakePath);
         assert.strictEqual(result, 'deploymentValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1564,9 +1571,8 @@ describe('v1beta.RealmsServiceClient', () => {
         projectId: 'bogus',
       });
       client.initialize();
-      client.pathTemplates.gameServerDeploymentRolloutPathTemplate.render = sinon
-        .stub()
-        .returns(fakePath);
+      client.pathTemplates.gameServerDeploymentRolloutPathTemplate.render =
+        sinon.stub().returns(fakePath);
       client.pathTemplates.gameServerDeploymentRolloutPathTemplate.match = sinon
         .stub()
         .returns(expectedParameters);
@@ -1579,47 +1585,52 @@ describe('v1beta.RealmsServiceClient', () => {
         );
         assert.strictEqual(result, fakePath);
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .render as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .render as SinonStub
+          )
             .getCall(-1)
             .calledWith(expectedParameters)
         );
       });
 
       it('matchProjectFromGameServerDeploymentRolloutName', () => {
-        const result = client.matchProjectFromGameServerDeploymentRolloutName(
-          fakePath
-        );
+        const result =
+          client.matchProjectFromGameServerDeploymentRolloutName(fakePath);
         assert.strictEqual(result, 'projectValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchLocationFromGameServerDeploymentRolloutName', () => {
-        const result = client.matchLocationFromGameServerDeploymentRolloutName(
-          fakePath
-        );
+        const result =
+          client.matchLocationFromGameServerDeploymentRolloutName(fakePath);
         assert.strictEqual(result, 'locationValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
       });
 
       it('matchDeploymentFromGameServerDeploymentRolloutName', () => {
-        const result = client.matchDeploymentFromGameServerDeploymentRolloutName(
-          fakePath
-        );
+        const result =
+          client.matchDeploymentFromGameServerDeploymentRolloutName(fakePath);
         assert.strictEqual(result, 'deploymentValue');
         assert(
-          (client.pathTemplates.gameServerDeploymentRolloutPathTemplate
-            .match as SinonStub)
+          (
+            client.pathTemplates.gameServerDeploymentRolloutPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );

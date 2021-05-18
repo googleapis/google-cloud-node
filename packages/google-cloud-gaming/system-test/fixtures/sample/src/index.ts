@@ -51,7 +51,8 @@ function main() {
   const gameServerConfigsServiceClient = new GameServerConfigsServiceClient();
   doStuffWithGameServerConfigsServiceClient(gameServerConfigsServiceClient);
   // check that the client instance can be created
-  const gameServerDeploymentsServiceClient = new GameServerDeploymentsServiceClient();
+  const gameServerDeploymentsServiceClient =
+    new GameServerDeploymentsServiceClient();
   doStuffWithGameServerDeploymentsServiceClient(
     gameServerDeploymentsServiceClient
   );
