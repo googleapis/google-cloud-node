@@ -2404,9 +2404,8 @@ Compute.prototype.getDisksStream = paginator.streamify('getDisks');
  *   });
  */
 
-Compute.prototype.getInstanceGroupsStream = paginator.streamify(
-  'getInstanceGroups'
-);
+Compute.prototype.getInstanceGroupsStream =
+  paginator.streamify('getInstanceGroups');
 
 /**
  * Get a list of {@link Firewall} objects as a readable object stream.
@@ -2465,9 +2464,8 @@ Compute.prototype.getFirewallsStream = paginator.streamify('getFirewalls');
  *     this.end();
  *   });
  */
-Compute.prototype.getHealthChecksStream = paginator.streamify(
-  'getHealthChecks'
-);
+Compute.prototype.getHealthChecksStream =
+  paginator.streamify('getHealthChecks');
 
 /**
  * Get a list of {@link Image} objects as a readable object stream.
@@ -2526,9 +2524,8 @@ Compute.prototype.getImagesStream = paginator.streamify('getImages');
  *     this.end();
  *   });
  */
-Compute.prototype.getMachineTypesStream = paginator.streamify(
-  'getMachineTypes'
-);
+Compute.prototype.getMachineTypesStream =
+  paginator.streamify('getMachineTypes');
 
 /**
  * Get a list of {@link Network} objects as a readable object stream.
