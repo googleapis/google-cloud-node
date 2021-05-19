@@ -1,5 +1,13 @@
 # Changelog
 
+### [0.2.1](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v0.2.0...v0.2.1) (2021-05-19)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#39](https://www.github.com/googleapis/nodejs-appengine-admin/issues/39)) ([f6c8735](https://www.github.com/googleapis/nodejs-appengine-admin/commit/f6c873571770a56d5d46449b63c0adfc1375ced5))
+* use require() to load JSON protos ([#42](https://www.github.com/googleapis/nodejs-appengine-admin/issues/42)) ([d406ced](https://www.github.com/googleapis/nodejs-appengine-admin/commit/d406ced6996c5b0128a69fde745b86f0e67107cb))
+
 ## 0.2.0 (2021-03-30)
 
 
