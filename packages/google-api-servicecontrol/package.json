@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/service-control",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Service control client for Node.js",
   "repository": "googleapis/nodejs-service-control",
   "license": "Apache-2.0",
