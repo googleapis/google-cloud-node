@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v0.2.1...v1.0.0) (2021-05-20)
+
+
+### Features
+
+* promote the library to 1.0 ([#46](https://www.github.com/googleapis/nodejs-appengine-admin/issues/46)) ([8c1e9b7](https://www.github.com/googleapis/nodejs-appengine-admin/commit/8c1e9b793364e51cc7d140ab6df531016ad197c2))
+
 ### [0.2.1](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v0.2.0...v0.2.1) (2021-05-19)
 
 
