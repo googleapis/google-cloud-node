@@ -11,5 +11,5 @@
   "api_id": "documentai.googleapis.com",
   "requires_billing": true,
   "codeowner_team": "@googleapis/ml-apis",
-  "default_version": "v1beta3"
+  "default_version": "v1"
 }
