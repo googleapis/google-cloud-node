@@ -20,6 +20,7 @@ machine learning development lifecycle.
   * [Create-batch-prediction-job-text-classification](#create-batch-prediction-job-text-classification)
   * [Create-batch-prediction-job-text-entity-extraction](#create-batch-prediction-job-text-entity-extraction)
   * [Create-batch-prediction-job-text-sentiment-analysis](#create-batch-prediction-job-text-sentiment-analysis)
+  * [Create-batch-prediction-job-video-action-recognition](#create-batch-prediction-job-video-action-recognition)
   * [Create-batch-prediction-job-video-classification](#create-batch-prediction-job-video-classification)
   * [Create-batch-prediction-job-video-object-tracking](#create-batch-prediction-job-video-object-tracking)
   * [Create-custom-job](#create-custom-job)
@@ -30,6 +31,8 @@ machine learning development lifecycle.
   * [Create-dataset-video](#create-dataset-video)
   * [Create-dataset](#create-dataset)
   * [Create-endpoint](#create-endpoint)
+  * [Create-hyperparameter-tuning-job-sample](#create-hyperparameter-tuning-job-sample)
+  * [Create-hyperparameter-tuning-job](#create-hyperparameter-tuning-job)
   * [Create-training-pipeline-image-classification](#create-training-pipeline-image-classification)
   * [Create-training-pipeline-image-object-detection](#create-training-pipeline-image-object-detection)
   * [Create-training-pipeline-tabular-classification](#create-training-pipeline-tabular-classification)
@@ -37,6 +40,7 @@ machine learning development lifecycle.
   * [Create-training-pipeline-text-classification](#create-training-pipeline-text-classification)
   * [Create-training-pipeline-text-entity-extraction](#create-training-pipeline-text-entity-extraction)
   * [Create-training-pipeline-text-sentiment-analysis](#create-training-pipeline-text-sentiment-analysis)
+  * [Create-training-pipeline-video-action-recognition](#create-training-pipeline-video-action-recognition)
   * [Create-training-pipeline-video-classification](#create-training-pipeline-video-classification)
   * [Create-training-pipeline-video-object-tracking](#create-training-pipeline-video-object-tracking)
   * [Delete-batch-prediction-job](#delete-batch-prediction-job)
@@ -45,11 +49,13 @@ machine learning development lifecycle.
   * [Delete-endpoint](#delete-endpoint)
   * [Delete-export-model](#delete-export-model)
   * [Delete-model](#delete-model)
+  * [Deploy-model-custom-trained-model](#deploy-model-custom-trained-model)
   * [Deploy-model](#deploy-model)
   * [Export-model-tabular-classification](#export-model-tabular-classification)
   * [Export-model](#export-model)
   * [Get-batch-prediction-job](#get-batch-prediction-job)
   * [Get-custom-job](#get-custom-job)
+  * [Get-hyperparameter-tuning-job](#get-hyperparameter-tuning-job)
   * [Get-model-evaluation-image-classification](#get-model-evaluation-image-classification)
   * [Get-model-evaluation-image-object-detection](#get-model-evaluation-image-object-detection)
   * [Get-model-evaluation-slice](#get-model-evaluation-slice)
@@ -58,15 +64,18 @@ machine learning development lifecycle.
   * [Get-model-evaluation-text-classification](#get-model-evaluation-text-classification)
   * [Get-model-evaluation-text-entity-extraction](#get-model-evaluation-text-entity-extraction)
   * [Get-model-evaluation-text-sentiment-analysis](#get-model-evaluation-text-sentiment-analysis)
+  * [Get-model-evaluation-video-action-recognition](#get-model-evaluation-video-action-recognition)
   * [Get-model-evaluation-video-classification](#get-model-evaluation-video-classification)
   * [Get-model-evaluation-video-object-tracking](#get-model-evaluation-video-object-tracking)
   * [Get-model-evaluation](#get-model-evaluation)
   * [Get-model](#get-model)
+  * [Get-training-pipeline](#get-training-pipeline)
   * [Import-data-image-classification](#import-data-image-classification)
   * [Import-data-image-object-detection](#import-data-image-object-detection)
   * [Import-data-text-classification-single-label](#import-data-text-classification-single-label)
   * [Import-data-text-entity-extraction](#import-data-text-entity-extraction)
   * [Import-data-text-sentiment-analysis](#import-data-text-sentiment-analysis)
+  * [Import-data-video-action-recognition](#import-data-video-action-recognition)
   * [Import-data-video-classification](#import-data-video-classification)
   * [Import-data-video-object-tracking](#import-data-video-object-tracking)
   * [Import-data](#import-data)
@@ -177,6 +186,23 @@ __Usage:__
 
 
 `node samples/create-batch-prediction-job-text-sentiment-analysis.js`
+
+
+-----
+
+
+
+
+### Create-batch-prediction-job-video-action-recognition
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-video-action-recognition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-video-action-recognition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-batch-prediction-job-video-action-recognition.js`
 
 
 -----
@@ -354,6 +380,40 @@ __Usage:__
 
 
 
+### Create-hyperparameter-tuning-job-sample
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-hyperparameter-tuning-job-sample.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-hyperparameter-tuning-job-sample.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-hyperparameter-tuning-job-sample.js`
+
+
+-----
+
+
+
+
+### Create-hyperparameter-tuning-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-hyperparameter-tuning-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-hyperparameter-tuning-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-hyperparameter-tuning-job.js`
+
+
+-----
+
+
+
+
 ### Create-training-pipeline-image-classification
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-image-classification.js).
@@ -466,6 +526,23 @@ __Usage:__
 
 
 `node samples/create-training-pipeline-text-sentiment-analysis.js`
+
+
+-----
+
+
+
+
+### Create-training-pipeline-video-action-recognition
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-video-action-recognition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-video-action-recognition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-training-pipeline-video-action-recognition.js`
 
 
 -----
@@ -609,6 +686,23 @@ __Usage:__
 
 
 
+### Deploy-model-custom-trained-model
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/deploy-model-custom-trained-model.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/deploy-model-custom-trained-model.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/deploy-model-custom-trained-model.js`
+
+
+-----
+
+
+
+
 ### Deploy-model
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/deploy-model.js).
@@ -687,6 +781,23 @@ __Usage:__
 
 
 `node samples/get-custom-job.js`
+
+
+-----
+
+
+
+
+### Get-hyperparameter-tuning-job
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-hyperparameter-tuning-job.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-hyperparameter-tuning-job.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-hyperparameter-tuning-job.js`
 
 
 -----
@@ -830,6 +941,23 @@ __Usage:__
 
 
 
+### Get-model-evaluation-video-action-recognition
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-video-action-recognition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-video-action-recognition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-model-evaluation-video-action-recognition.js`
+
+
+-----
+
+
+
+
 ### Get-model-evaluation-video-classification
 
 View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-video-classification.js).
@@ -891,6 +1019,23 @@ __Usage:__
 
 
 `node samples/get-model.js`
+
+
+-----
+
+
+
+
+### Get-training-pipeline
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-training-pipeline.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-training-pipeline.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/get-training-pipeline.js`
 
 
 -----
@@ -976,6 +1121,23 @@ __Usage:__
 
 
 `node samples/import-data-text-sentiment-analysis.js`
+
+
+-----
+
+
+
+
+### Import-data-video-action-recognition
+
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-video-action-recognition.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-video-action-recognition.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/import-data-video-action-recognition.js`
 
 
 -----
