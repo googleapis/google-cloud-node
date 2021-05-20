@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/aiplatform",
   "version": "1.7.0",
-  "description": "Aiplatform client for Node.js",
+  "description": "Vertex AI client for Node.js",
   "repository": "googleapis/nodejs-ai-platform",
   "license": "Apache-2.0",
   "author": "Google LLC",
@@ -19,7 +19,8 @@
     "google cloud platform",
     "google cloud",
     "cloud",
-    "google aiplatform",
+    "google vertex ai",
+    "google vertex",
     "aiplatform",
     "dataset service",
     "endpoint service",

@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [AI Platform: Node.js Client](https://github.com/googleapis/nodejs-ai-platform)
+# [Vertex AI: Node.js Client](https://github.com/googleapis/nodejs-ai-platform)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/aiplatform.svg)](https://www.npmjs.org/package/@google-cloud/aiplatform)
@@ -11,7 +11,7 @@
 
 
 
-Google Cloud AI Platform is an integrated suite of machine learning tools
+Google Cloud Vertex AI is an integrated suite of machine learning tools
 and services for building and using ML models with AutoML or custom code.
 It offers both novices and experts the best workbench for the entire
 machine learning development lifecycle.
@@ -20,8 +20,8 @@ machine learning development lifecycle.
 A comprehensive list of changes in each version may be found in
 [the CHANGELOG](https://github.com/googleapis/nodejs-ai-platform/blob/master/CHANGELOG.md).
 
-* [AI Platform Node.js Client API Reference][client-docs]
-* [AI Platform Documentation][product-docs]
+* [Vertex AI Node.js Client API Reference][client-docs]
+* [Vertex AI Documentation][product-docs]
 * [github.com/googleapis/nodejs-ai-platform](https://github.com/googleapis/nodejs-ai-platform)
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -47,7 +47,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the AI Platform API][enable_api].
+1.  [Enable the Vertex AI API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -158,7 +158,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-ai-platform
 
 
 
-The [AI Platform Node.js Client API Reference][client-docs] documentation
+The [Vertex AI Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
 ## Supported Node.js Versions
@@ -217,7 +217,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-ai-platform/blob/master/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/aiplatform/latest
-[product-docs]: https://cloud.google.com/ai-platform-unified/docs
+[product-docs]: https://cloud.google.com/vertex-ai/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
