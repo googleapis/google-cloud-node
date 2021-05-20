@@ -477,10 +477,10 @@ describe('paginator', () => {
       it('should create a resource stream', () => {
         const fakeArgs = {};
         const fakeFn = sandbox.spy();
-        const stream = (p.paginator.runAsStream_(
+        const stream = p.paginator.runAsStream_(
           fakeArgs,
           fakeFn
-        ) as unknown) as FakeResourceStream;
+        ) as unknown as FakeResourceStream;
 
         assert(stream instanceof FakeResourceStream);
         const [args, requestFn] = stream.calledWith;
