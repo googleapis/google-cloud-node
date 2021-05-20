@@ -14,4 +14,5 @@
 """This script is used to synthesize generated parts of this library."""
 import synthtool.languages.node as node
 
-node.owlbot_main(staging_excludes=['package.json', 'README.md', '.github/CODEOWNERS'])
+node.owlbot_main(staging_excludes=['package.json', 'README.md'], templates_excludes=['.github/CODEOWNERS'])
+
