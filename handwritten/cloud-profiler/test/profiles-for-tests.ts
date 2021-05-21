@@ -181,9 +181,8 @@ export const timeProfile: perftools.profiles.IProfile = Object.freeze({
 
 // timeProfile is encoded then decoded to convert numbers to longs, in
 // decodedTimeProfile
-const encodedTimeProfile = perftools.profiles.Profile.encode(
-  timeProfile
-).finish();
+const encodedTimeProfile =
+  perftools.profiles.Profile.encode(timeProfile).finish();
 export const decodedTimeProfile = Object.freeze(
   perftools.profiles.Profile.decode(encodedTimeProfile)
 );
@@ -338,9 +337,8 @@ export const heapProfile: perftools.profiles.IProfile = Object.freeze({
 
 // heapProfile is encoded then decoded to convert numbers to longs, in
 // decodedHeapProfile
-const encodedHeapProfile = perftools.profiles.Profile.encode(
-  heapProfile
-).finish();
+const encodedHeapProfile =
+  perftools.profiles.Profile.encode(heapProfile).finish();
 export const decodedHeapProfile = Object.freeze(
   perftools.profiles.Profile.decode(encodedHeapProfile)
 );
@@ -394,8 +392,8 @@ const heapLocationsWithExternal = [
   new perftools.profiles.Location({line: [heapLinesWithExternal[4]], id: 5}),
 ];
 
-export const heapProfileWithExternal: perftools.profiles.IProfile = Object.freeze(
-  {
+export const heapProfileWithExternal: perftools.profiles.IProfile =
+  Object.freeze({
     sampleType: [
       new perftools.profiles.ValueType({type: 1, unit: 2}),
       new perftools.profiles.ValueType({type: 3, unit: 4}),
@@ -450,8 +448,7 @@ export const heapProfileWithExternal: perftools.profiles.IProfile = Object.freez
     timeNanos: 0,
     periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
     period: 524288,
-  }
-);
+  });
 
 // heapProfile is encoded then decoded to convert numbers to longs, in
 // decodedHeapProfile
@@ -496,8 +493,8 @@ const anonymousFunctionHeapLocations = [
   }),
 ];
 
-export const anonymousFunctionHeapProfile: perftools.profiles.IProfile = Object.freeze(
-  {
+export const anonymousFunctionHeapProfile: perftools.profiles.IProfile =
+  Object.freeze({
     sampleType: [
       new perftools.profiles.ValueType({type: 1, unit: 2}),
       new perftools.profiles.ValueType({type: 3, unit: 4}),
@@ -523,8 +520,7 @@ export const anonymousFunctionHeapProfile: perftools.profiles.IProfile = Object.
     timeNanos: 0,
     periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
     period: 524288,
-  }
-);
+  });
 
 const anonymousFunctionTimeNode = {
   scriptName: 'main',
@@ -569,8 +565,8 @@ const anonymousFunctionTimeLocations = [
   }),
 ];
 
-export const anonymousFunctionTimeProfile: perftools.profiles.IProfile = Object.freeze(
-  {
+export const anonymousFunctionTimeProfile: perftools.profiles.IProfile =
+  Object.freeze({
     sampleType: [
       new perftools.profiles.ValueType({type: 1, unit: 2}),
       new perftools.profiles.ValueType({type: 3, unit: 4}),
@@ -597,8 +593,7 @@ export const anonymousFunctionTimeProfile: perftools.profiles.IProfile = Object.
     durationNanos: 10 * 1000 * 1000 * 1000,
     periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
     period: 1000,
-  }
-);
+  });
 
 const heapWithPathLeaf1 = {
   name: 'foo2',
@@ -716,8 +711,8 @@ const heapIncludePathLocations = [
   }),
 ];
 
-export const heapProfileIncludePath: perftools.profiles.IProfile = Object.freeze(
-  {
+export const heapProfileIncludePath: perftools.profiles.IProfile =
+  Object.freeze({
     sampleType: [
       new perftools.profiles.ValueType({type: 1, unit: 2}),
       new perftools.profiles.ValueType({type: 3, unit: 4}),
@@ -759,8 +754,7 @@ export const heapProfileIncludePath: perftools.profiles.IProfile = Object.freeze
     timeNanos: 0,
     periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
     period: 524288,
-  }
-);
+  });
 
 // heapProfile is encoded then decoded to convert numbers to longs, in
 // decodedHeapProfile
@@ -797,8 +791,8 @@ const heapExcludePathLocations = [
   }),
 ];
 
-export const heapProfileExcludePath: perftools.profiles.IProfile = Object.freeze(
-  {
+export const heapProfileExcludePath: perftools.profiles.IProfile =
+  Object.freeze({
     sampleType: [
       new perftools.profiles.ValueType({type: 1, unit: 2}),
       new perftools.profiles.ValueType({type: 3, unit: 4}),
@@ -825,8 +819,7 @@ export const heapProfileExcludePath: perftools.profiles.IProfile = Object.freeze
     timeNanos: 0,
     periodType: new perftools.profiles.ValueType({type: 3, unit: 4}),
     period: 524288,
-  }
-);
+  });
 
 // heapProfile is encoded then decoded to convert numbers to longs, in
 // decodedHeapProfile

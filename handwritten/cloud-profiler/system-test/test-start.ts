@@ -45,27 +45,24 @@ before(async () => {
     .persist()
     .post('/projects/' + process.env.GCLOUD_PROJECT + '/profiles')
     .delay(1000)
-    .reply(
-      200,
-      (): RequestProfile => {
-        let prof;
-        if (createProfileCount % 2 === 0) {
-          prof = {
-            name: 'projects/X/test-projectId',
-            profileType: 'WALL',
-            duration: '10s',
-          };
-        } else {
-          prof = {
-            name: 'projects/X/test-projectId',
-            profileType: 'HEAP',
-            duration: '10s',
-          };
-        }
-        createProfileCount++;
-        return prof;
+    .reply(200, (): RequestProfile => {
+      let prof;
+      if (createProfileCount % 2 === 0) {
+        prof = {
+          name: 'projects/X/test-projectId',
+          profileType: 'WALL',
+          duration: '10s',
+        };
+      } else {
+        prof = {
+          name: 'projects/X/test-projectId',
+          profileType: 'HEAP',
+          duration: '10s',
+        };
       }
-    );
+      createProfileCount++;
+      return prof;
+    });
   const tempUploadedProfiles = new Array<RequestProfile>();
   nock(API)
     .persist()
