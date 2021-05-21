@@ -4,15 +4,15 @@
       "git": {
         "name": ".",
         "remote": "https://github.com/googleapis/nodejs-service-management.git",
-        "sha": "2735e9e9b0782dd7e433b62ddf9333072228cba5"
+        "sha": "e679ea9d735b9edd25913b990e3a0d037025c984"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "9f2dcbf032a77508144cf8a50b0d261e33653568",
-        "internalRef": "369759326"
+        "sha": "6fa858c6489b1bbc505a7d7afe39f2dc45819c38",
+        "internalRef": "372656503"
       }
     },
     {
