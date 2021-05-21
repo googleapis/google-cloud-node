@@ -130,7 +130,8 @@ function getServerResponseBackoff(body: object): number | undefined {
 export function parseBackoffDuration(
   backoffMessage: string
 ): number | undefined {
-  const backoffMessageRegex = /action throttled, backoff for ((?:([0-9]+)h)?(?:([0-9]+)m)?([0-9.]+)s)$/;
+  const backoffMessageRegex =
+    /action throttled, backoff for ((?:([0-9]+)h)?(?:([0-9]+)m)?([0-9.]+)s)$/;
   const [, duration] = backoffMessageRegex.exec(backoffMessage) || [
     undefined,
     undefined,
