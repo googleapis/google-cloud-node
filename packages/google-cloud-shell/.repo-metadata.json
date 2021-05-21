@@ -1,0 +1,14 @@
+{
+  "name": "cloudshell",
+  "name_pretty": "Cloud Shell",
+  "product_documentation": "https://cloud.google.com/shell/",
+  "client_documentation": "https://cloud.google.com/shell",
+  "issue_tracker": "https://github.com/googleapis/nodejs-cloud-shell/issues",
+  "release_level": "BETA",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-cloud-shell",
+  "distribution_name": "@google-cloud/cloud-shell,",
+  "api_id": "shell.googleapis.com",
+  "requires_billing": true
+}
+
