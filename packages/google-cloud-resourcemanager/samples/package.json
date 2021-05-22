@@ -3,7 +3,7 @@
   "private": true,
   "license": "Apache-2.0",
   "author": "Google LLC",
-  "repository": "googleapis/nodejs-resource",
+  "repository": "googleapis/nodejs-resource-manager",
   "files": [
     "*.js"
   ],

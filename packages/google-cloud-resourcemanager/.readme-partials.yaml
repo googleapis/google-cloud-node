@@ -8,3 +8,6 @@ introduction: |-
     manage common aspects of your resources such as access control and
     configuration settings. The [Cloud Resource Manager API](https://cloud.google.com/resource-manager/docs/)
     enables you to programmatically manage these container resources.
+
+    ### **_IMPORTANT NOTE_**
+    **Version 2.0.0 renames `@google-cloud/resource` to `@google-cloud/resource-manager` on npm.**

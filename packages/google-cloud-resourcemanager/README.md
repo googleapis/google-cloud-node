@@ -2,14 +2,11 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Resource Manager API: Node.js Client](https://github.com/googleapis/nodejs-resource)
+# [Google Cloud Resource Manager API: Node.js Client](https://github.com/googleapis/nodejs-resource-manager)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/resource.svg)](https://www.npmjs.org/package/@google-cloud/resource)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-resource/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-resource)
-
-
-
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-resource-manager/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-resource)
 
 
 > Node.js idiomatic client for [Cloud Resource Manager API][product-docs].
@@ -23,11 +20,11 @@ enables you to programmatically manage these container resources.
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-resource/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-resource-manager/blob/master/CHANGELOG.md).
 
 * [Google Cloud Resource Manager API Node.js Client API Reference][client-docs]
 * [Google Cloud Resource Manager API Documentation][product-docs]
-* [github.com/googleapis/nodejs-resource](https://github.com/googleapis/nodejs-resource)
+* [github.com/googleapis/nodejs-resource-manager](https://github.com/googleapis/nodejs-resource-manager)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -87,7 +84,7 @@ quickstart();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-resource/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-resource-manager/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |

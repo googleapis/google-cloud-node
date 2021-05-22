@@ -6,7 +6,7 @@
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559757",
   "release_level": "alpha",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-resource",
+  "repo": "googleapis/resource-manager",
   "distribution_name": "@google-cloud/resource",
   "api_id": "cloudresourcemanager.googleapis.com",
   "requires_billing": true

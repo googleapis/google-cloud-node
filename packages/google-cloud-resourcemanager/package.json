@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/resource",
+  "name": "@google-cloud/resource-manager",
   "description": "Cloud Resource Manager Client Library for Node.js",
   "version": "1.2.1",
   "license": "Apache-2.0",
@@ -7,7 +7,7 @@
   "engines": {
     "node": ">=10"
   },
-  "repository": "googleapis/nodejs-resource",
+  "repository": "googleapis/nodejs-resource-manager",
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
   "files": [
