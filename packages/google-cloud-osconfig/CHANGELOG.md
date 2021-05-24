@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.5.0...v1.6.0) (2021-05-24)
+
+
+### Features
+
+* OSConfig: add ExecResourceOutput and per step error message. ([#105](https://www.github.com/googleapis/nodejs-os-config/issues/105)) ([3d9dbe9](https://www.github.com/googleapis/nodejs-os-config/commit/3d9dbe9f619798e691df9e04a65f8e42a2c2b0bc))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.4.0...v1.5.0) (2021-05-12)
 
 
