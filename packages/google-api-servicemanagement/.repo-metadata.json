@@ -1,14 +1,14 @@
 {
-  "name": "service-management",
-  "name_pretty": "Service Management API",
-  "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
-  "client_documentation": "https://cloud.google.com/service-infrastructure/docs/service-management/reference",
   "issue_tracker": "https://github.com/googleapis/nodejs-service-management/issues",
-  "release_level": "GA",
-  "language": "nodejs",
-  "repo": "googleapis/nodejs-service-management",
   "distribution_name": "@google-cloud/service-management",
+  "client_documentation": "https://cloud.google.com/service-infrastructure/docs/service-management/reference",
+  "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
+  "name_pretty": "Service Management API",
+  "release_level": "GA",
+  "default_version": "v1",
+  "name": "service-management",
   "api_id": "servicemanagement.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-service-management"
 }
-
