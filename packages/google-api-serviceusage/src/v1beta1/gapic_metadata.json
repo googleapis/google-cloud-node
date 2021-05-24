@@ -1,0 +1,229 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.api.serviceusage.v1beta1",
+  "libraryPackage": "@google-cloud/serviceusage",
+  "services": {
+    "ServiceUsage": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServiceUsageClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetConsumerQuotaMetric": {
+              "methods": [
+                "getConsumerQuotaMetric"
+              ]
+            },
+            "GetConsumerQuotaLimit": {
+              "methods": [
+                "getConsumerQuotaLimit"
+              ]
+            },
+            "EnableService": {
+              "methods": [
+                "enableService"
+              ]
+            },
+            "DisableService": {
+              "methods": [
+                "disableService"
+              ]
+            },
+            "BatchEnableServices": {
+              "methods": [
+                "batchEnableServices"
+              ]
+            },
+            "CreateAdminOverride": {
+              "methods": [
+                "createAdminOverride"
+              ]
+            },
+            "UpdateAdminOverride": {
+              "methods": [
+                "updateAdminOverride"
+              ]
+            },
+            "DeleteAdminOverride": {
+              "methods": [
+                "deleteAdminOverride"
+              ]
+            },
+            "ImportAdminOverrides": {
+              "methods": [
+                "importAdminOverrides"
+              ]
+            },
+            "CreateConsumerOverride": {
+              "methods": [
+                "createConsumerOverride"
+              ]
+            },
+            "UpdateConsumerOverride": {
+              "methods": [
+                "updateConsumerOverride"
+              ]
+            },
+            "DeleteConsumerOverride": {
+              "methods": [
+                "deleteConsumerOverride"
+              ]
+            },
+            "ImportConsumerOverrides": {
+              "methods": [
+                "importConsumerOverrides"
+              ]
+            },
+            "GenerateServiceIdentity": {
+              "methods": [
+                "generateServiceIdentity"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListConsumerQuotaMetrics": {
+              "methods": [
+                "listConsumerQuotaMetrics",
+                "listConsumerQuotaMetricsStream",
+                "listConsumerQuotaMetricsAsync"
+              ]
+            },
+            "ListAdminOverrides": {
+              "methods": [
+                "listAdminOverrides",
+                "listAdminOverridesStream",
+                "listAdminOverridesAsync"
+              ]
+            },
+            "ListConsumerOverrides": {
+              "methods": [
+                "listConsumerOverrides",
+                "listConsumerOverridesStream",
+                "listConsumerOverridesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServiceUsageClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "GetConsumerQuotaMetric": {
+              "methods": [
+                "getConsumerQuotaMetric"
+              ]
+            },
+            "GetConsumerQuotaLimit": {
+              "methods": [
+                "getConsumerQuotaLimit"
+              ]
+            },
+            "EnableService": {
+              "methods": [
+                "enableService"
+              ]
+            },
+            "DisableService": {
+              "methods": [
+                "disableService"
+              ]
+            },
+            "BatchEnableServices": {
+              "methods": [
+                "batchEnableServices"
+              ]
+            },
+            "CreateAdminOverride": {
+              "methods": [
+                "createAdminOverride"
+              ]
+            },
+            "UpdateAdminOverride": {
+              "methods": [
+                "updateAdminOverride"
+              ]
+            },
+            "DeleteAdminOverride": {
+              "methods": [
+                "deleteAdminOverride"
+              ]
+            },
+            "ImportAdminOverrides": {
+              "methods": [
+                "importAdminOverrides"
+              ]
+            },
+            "CreateConsumerOverride": {
+              "methods": [
+                "createConsumerOverride"
+              ]
+            },
+            "UpdateConsumerOverride": {
+              "methods": [
+                "updateConsumerOverride"
+              ]
+            },
+            "DeleteConsumerOverride": {
+              "methods": [
+                "deleteConsumerOverride"
+              ]
+            },
+            "ImportConsumerOverrides": {
+              "methods": [
+                "importConsumerOverrides"
+              ]
+            },
+            "GenerateServiceIdentity": {
+              "methods": [
+                "generateServiceIdentity"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            },
+            "ListConsumerQuotaMetrics": {
+              "methods": [
+                "listConsumerQuotaMetrics",
+                "listConsumerQuotaMetricsStream",
+                "listConsumerQuotaMetricsAsync"
+              ]
+            },
+            "ListAdminOverrides": {
+              "methods": [
+                "listAdminOverrides",
+                "listAdminOverridesStream",
+                "listAdminOverridesAsync"
+              ]
+            },
+            "ListConsumerOverrides": {
+              "methods": [
+                "listConsumerOverrides",
+                "listConsumerOverridesStream",
+                "listConsumerOverridesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.api.serviceusage.v1",
+  "libraryPackage": "@google-cloud/serviceusage",
+  "services": {
+    "ServiceUsage": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ServiceUsageClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "BatchGetServices": {
+              "methods": [
+                "batchGetServices"
+              ]
+            },
+            "EnableService": {
+              "methods": [
+                "enableService"
+              ]
+            },
+            "DisableService": {
+              "methods": [
+                "disableService"
+              ]
+            },
+            "BatchEnableServices": {
+              "methods": [
+                "batchEnableServices"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ServiceUsageClient",
+          "rpcs": {
+            "GetService": {
+              "methods": [
+                "getService"
+              ]
+            },
+            "BatchGetServices": {
+              "methods": [
+                "batchGetServices"
+              ]
+            },
+            "EnableService": {
+              "methods": [
+                "enableService"
+              ]
+            },
+            "DisableService": {
+              "methods": [
+                "disableService"
+              ]
+            },
+            "BatchEnableServices": {
+              "methods": [
+                "batchEnableServices"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "listServices",
+                "listServicesStream",
+                "listServicesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

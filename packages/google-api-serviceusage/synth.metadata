@@ -1,0 +1,38 @@
+{
+  "sources": [
+    {
+      "git": {
+        "name": ".",
+        "remote": "sso://user/bencoe/nodejs-serviceusage",
+        "sha": "6b6d79f06860b5c837e204519de5ae343321381d"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "a6facdbf5c3422cc54d12dea886de0101b1d1e91"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "serviceusage",
+        "apiVersion": "v1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "serviceusage",
+        "apiVersion": "v1beta1",
+        "language": "nodejs",
+        "generator": "bazel"
+      }
+    }
+  ]
+}
