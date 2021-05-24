@@ -6,7 +6,7 @@
   "issue_tracker": "https://github.com/googleapis/nodejs-api-gateway/issues",
   "distribution_name": "@google-cloud/api-gateway",
   "language": "nodejs",
-  "release_level": "beta",
+  "release_level": "GA",
   "product_documentation": "https://cloud.google.com/api-gateway/docs",
   "name_pretty": "API Gateway",
   "repo": "googleapis/nodejs-api-gateway",

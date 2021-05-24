@@ -4,7 +4,7 @@
 
 # [API Gateway: Node.js Client](https://github.com/googleapis/nodejs-api-gateway)
 
-[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/api-gateway.svg)](https://www.npmjs.org/package/@google-cloud/api-gateway)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-api-gateway/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-api-gateway)
 
@@ -117,11 +117,6 @@ _Legacy Node.js versions are supported as a best effort:_
 This library follows [Semantic Versioning](http://semver.org/).
 
 
-
-This library is considered to be in **beta**. This means it is expected to be
-mostly stable while we work toward a general availability release; however,
-complete stability is not guaranteed. We will address issues and requests
-against beta libraries with a high priority.
 
 
 
