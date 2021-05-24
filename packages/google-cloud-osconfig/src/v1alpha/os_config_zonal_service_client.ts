@@ -1050,8 +1050,7 @@ export class OsConfigZonalServiceClient {
    * @param {google.cloud.osconfig.v1alpha.OSPolicyAssignment} request.osPolicyAssignment
    *   Required. The updated OS policy assignment.
    * @param {google.protobuf.FieldMask} [request.updateMask]
-   *   Optional. Field mask that controls which fields of the assignment should be
-   *   updated.
+   *   Optional. Field mask that controls which fields of the assignment should be updated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

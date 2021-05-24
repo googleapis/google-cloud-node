@@ -23303,6 +23303,7 @@
                          * @interface IOSPolicyResourceConfigStep
                          * @property {google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep.Type|null} [type] OSPolicyResourceConfigStep type
                          * @property {google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep.Outcome|null} [outcome] OSPolicyResourceConfigStep outcome
+                         * @property {string|null} [errorMessage] OSPolicyResourceConfigStep errorMessage
                          */
     
                         /**
@@ -23337,6 +23338,14 @@
                         OSPolicyResourceConfigStep.prototype.outcome = 0;
     
                         /**
+                         * OSPolicyResourceConfigStep errorMessage.
+                         * @member {string} errorMessage
+                         * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep
+                         * @instance
+                         */
+                        OSPolicyResourceConfigStep.prototype.errorMessage = "";
+    
+                        /**
                          * Creates a new OSPolicyResourceConfigStep instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep
@@ -23364,6 +23373,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
                             if (message.outcome != null && Object.hasOwnProperty.call(message, "outcome"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.outcome);
+                            if (message.errorMessage != null && Object.hasOwnProperty.call(message, "errorMessage"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.errorMessage);
                             return writer;
                         };
     
@@ -23403,6 +23414,9 @@
                                     break;
                                 case 2:
                                     message.outcome = reader.int32();
+                                    break;
+                                case 3:
+                                    message.errorMessage = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -23459,6 +23473,9 @@
                                 case 2:
                                     break;
                                 }
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                if (!$util.isString(message.errorMessage))
+                                    return "errorMessage: string expected";
                             return null;
                         };
     
@@ -23510,6 +23527,8 @@
                                 message.outcome = 2;
                                 break;
                             }
+                            if (object.errorMessage != null)
+                                message.errorMessage = String(object.errorMessage);
                             return message;
                         };
     
@@ -23529,11 +23548,14 @@
                             if (options.defaults) {
                                 object.type = options.enums === String ? "TYPE_UNSPECIFIED" : 0;
                                 object.outcome = options.enums === String ? "OUTCOME_UNSPECIFIED" : 0;
+                                object.errorMessage = "";
                             }
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep.Type[message.type] : message.type;
                             if (message.outcome != null && message.hasOwnProperty("outcome"))
                                 object.outcome = options.enums === String ? $root.google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep.Outcome[message.outcome] : message.outcome;
+                            if (message.errorMessage != null && message.hasOwnProperty("errorMessage"))
+                                object.errorMessage = message.errorMessage;
                             return object;
                         };
     
@@ -23596,6 +23618,7 @@
                          * @property {string|null} [osPolicyResourceId] OSPolicyResourceCompliance osPolicyResourceId
                          * @property {Array.<google.cloud.osconfig.v1alpha.IOSPolicyResourceConfigStep>|null} [configSteps] OSPolicyResourceCompliance configSteps
                          * @property {google.cloud.osconfig.v1alpha.OSPolicyComplianceState|null} [state] OSPolicyResourceCompliance state
+                         * @property {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput|null} [execResourceOutput] OSPolicyResourceCompliance execResourceOutput
                          */
     
                         /**
@@ -23639,6 +23662,28 @@
                         OSPolicyResourceCompliance.prototype.state = 0;
     
                         /**
+                         * OSPolicyResourceCompliance execResourceOutput.
+                         * @member {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput|null|undefined} execResourceOutput
+                         * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance
+                         * @instance
+                         */
+                        OSPolicyResourceCompliance.prototype.execResourceOutput = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * OSPolicyResourceCompliance output.
+                         * @member {"execResourceOutput"|undefined} output
+                         * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance
+                         * @instance
+                         */
+                        Object.defineProperty(OSPolicyResourceCompliance.prototype, "output", {
+                            get: $util.oneOfGetter($oneOfFields = ["execResourceOutput"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
                          * Creates a new OSPolicyResourceCompliance instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance
@@ -23669,6 +23714,8 @@
                                     $root.google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep.encode(message.configSteps[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.execResourceOutput != null && Object.hasOwnProperty.call(message, "execResourceOutput"))
+                                $root.google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput.encode(message.execResourceOutput, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -23714,6 +23761,9 @@
                                 case 3:
                                     message.state = reader.int32();
                                     break;
+                                case 4:
+                                    message.execResourceOutput = $root.google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput.decode(reader, reader.uint32());
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -23749,6 +23799,7 @@
                         OSPolicyResourceCompliance.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.osPolicyResourceId != null && message.hasOwnProperty("osPolicyResourceId"))
                                 if (!$util.isString(message.osPolicyResourceId))
                                     return "osPolicyResourceId: string expected";
@@ -23772,6 +23823,14 @@
                                 case 4:
                                     break;
                                 }
+                            if (message.execResourceOutput != null && message.hasOwnProperty("execResourceOutput")) {
+                                properties.output = 1;
+                                {
+                                    var error = $root.google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput.verify(message.execResourceOutput);
+                                    if (error)
+                                        return "execResourceOutput." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -23821,6 +23880,11 @@
                                 message.state = 4;
                                 break;
                             }
+                            if (object.execResourceOutput != null) {
+                                if (typeof object.execResourceOutput !== "object")
+                                    throw TypeError(".google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.execResourceOutput: object expected");
+                                message.execResourceOutput = $root.google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput.fromObject(object.execResourceOutput);
+                            }
                             return message;
                         };
     
@@ -23852,6 +23916,11 @@
                             }
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.osconfig.v1alpha.OSPolicyComplianceState[message.state] : message.state;
+                            if (message.execResourceOutput != null && message.hasOwnProperty("execResourceOutput")) {
+                                object.execResourceOutput = $root.google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput.toObject(message.execResourceOutput, options);
+                                if (options.oneofs)
+                                    object.output = "execResourceOutput";
+                            }
                             return object;
                         };
     
@@ -23865,6 +23934,202 @@
                         OSPolicyResourceCompliance.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        OSPolicyResourceCompliance.ExecResourceOutput = (function() {
+    
+                            /**
+                             * Properties of an ExecResourceOutput.
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance
+                             * @interface IExecResourceOutput
+                             * @property {Uint8Array|null} [enforcementOutput] ExecResourceOutput enforcementOutput
+                             */
+    
+                            /**
+                             * Constructs a new ExecResourceOutput.
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance
+                             * @classdesc Represents an ExecResourceOutput.
+                             * @implements IExecResourceOutput
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput=} [properties] Properties to set
+                             */
+                            function ExecResourceOutput(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ExecResourceOutput enforcementOutput.
+                             * @member {Uint8Array} enforcementOutput
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @instance
+                             */
+                            ExecResourceOutput.prototype.enforcementOutput = $util.newBuffer([]);
+    
+                            /**
+                             * Creates a new ExecResourceOutput instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @static
+                             * @param {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput} ExecResourceOutput instance
+                             */
+                            ExecResourceOutput.create = function create(properties) {
+                                return new ExecResourceOutput(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ExecResourceOutput message. Does not implicitly {@link google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @static
+                             * @param {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput} message ExecResourceOutput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExecResourceOutput.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enforcementOutput != null && Object.hasOwnProperty.call(message, "enforcementOutput"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.enforcementOutput);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ExecResourceOutput message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @static
+                             * @param {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput} message ExecResourceOutput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ExecResourceOutput.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an ExecResourceOutput message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput} ExecResourceOutput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExecResourceOutput.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 2:
+                                        message.enforcementOutput = reader.bytes();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an ExecResourceOutput message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput} ExecResourceOutput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ExecResourceOutput.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an ExecResourceOutput message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ExecResourceOutput.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enforcementOutput != null && message.hasOwnProperty("enforcementOutput"))
+                                    if (!(message.enforcementOutput && typeof message.enforcementOutput.length === "number" || $util.isString(message.enforcementOutput)))
+                                        return "enforcementOutput: buffer expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an ExecResourceOutput message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput} ExecResourceOutput
+                             */
+                            ExecResourceOutput.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput();
+                                if (object.enforcementOutput != null)
+                                    if (typeof object.enforcementOutput === "string")
+                                        $util.base64.decode(object.enforcementOutput, message.enforcementOutput = $util.newBuffer($util.base64.length(object.enforcementOutput)), 0);
+                                    else if (object.enforcementOutput.length)
+                                        message.enforcementOutput = object.enforcementOutput;
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an ExecResourceOutput message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @static
+                             * @param {google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput} message ExecResourceOutput
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ExecResourceOutput.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    if (options.bytes === String)
+                                        object.enforcementOutput = "";
+                                    else {
+                                        object.enforcementOutput = [];
+                                        if (options.bytes !== Array)
+                                            object.enforcementOutput = $util.newBuffer(object.enforcementOutput);
+                                    }
+                                if (message.enforcementOutput != null && message.hasOwnProperty("enforcementOutput"))
+                                    object.enforcementOutput = options.bytes === String ? $util.base64.encode(message.enforcementOutput, 0, message.enforcementOutput.length) : options.bytes === Array ? Array.prototype.slice.call(message.enforcementOutput) : message.enforcementOutput;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ExecResourceOutput to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ExecResourceOutput.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return ExecResourceOutput;
+                        })();
     
                         return OSPolicyResourceCompliance;
                     })();
@@ -34044,6 +34309,7 @@
                                      * @property {string|null} [script] Exec script
                                      * @property {Array.<string>|null} [args] Exec args
                                      * @property {google.cloud.osconfig.v1alpha.OSPolicy.Resource.ExecResource.Exec.Interpreter|null} [interpreter] Exec interpreter
+                                     * @property {string|null} [outputFilePath] Exec outputFilePath
                                      */
     
                                     /**
@@ -34094,6 +34360,14 @@
                                      */
                                     Exec.prototype.interpreter = 0;
     
+                                    /**
+                                     * Exec outputFilePath.
+                                     * @member {string} outputFilePath
+                                     * @memberof google.cloud.osconfig.v1alpha.OSPolicy.Resource.ExecResource.Exec
+                                     * @instance
+                                     */
+                                    Exec.prototype.outputFilePath = "";
+    
                                     // OneOf field names bound to virtual getters and setters
                                     var $oneOfFields;
     
@@ -34141,6 +34415,8 @@
                                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.args[i]);
                                         if (message.interpreter != null && Object.hasOwnProperty.call(message, "interpreter"))
                                             writer.uint32(/* id 4, wireType 0 =*/32).int32(message.interpreter);
+                                        if (message.outputFilePath != null && Object.hasOwnProperty.call(message, "outputFilePath"))
+                                            writer.uint32(/* id 5, wireType 2 =*/42).string(message.outputFilePath);
                                         return writer;
                                     };
     
@@ -34188,6 +34464,9 @@
                                                 break;
                                             case 4:
                                                 message.interpreter = reader.int32();
+                                                break;
+                                            case 5:
+                                                message.outputFilePath = reader.string();
                                                 break;
                                             default:
                                                 reader.skipType(tag & 7);
@@ -34257,6 +34536,9 @@
                                             case 3:
                                                 break;
                                             }
+                                        if (message.outputFilePath != null && message.hasOwnProperty("outputFilePath"))
+                                            if (!$util.isString(message.outputFilePath))
+                                                return "outputFilePath: string expected";
                                         return null;
                                     };
     
@@ -34304,6 +34586,8 @@
                                             message.interpreter = 3;
                                             break;
                                         }
+                                        if (object.outputFilePath != null)
+                                            message.outputFilePath = String(object.outputFilePath);
                                         return message;
                                     };
     
@@ -34322,8 +34606,10 @@
                                         var object = {};
                                         if (options.arrays || options.defaults)
                                             object.args = [];
-                                        if (options.defaults)
+                                        if (options.defaults) {
                                             object.interpreter = options.enums === String ? "INTERPRETER_UNSPECIFIED" : 0;
+                                            object.outputFilePath = "";
+                                        }
                                         if (message.file != null && message.hasOwnProperty("file")) {
                                             object.file = $root.google.cloud.osconfig.v1alpha.OSPolicy.Resource.File.toObject(message.file, options);
                                             if (options.oneofs)
@@ -34341,6 +34627,8 @@
                                         }
                                         if (message.interpreter != null && message.hasOwnProperty("interpreter"))
                                             object.interpreter = options.enums === String ? $root.google.cloud.osconfig.v1alpha.OSPolicy.Resource.ExecResource.Exec.Interpreter[message.interpreter] : message.interpreter;
+                                        if (message.outputFilePath != null && message.hasOwnProperty("outputFilePath"))
+                                            object.outputFilePath = message.outputFilePath;
                                         return object;
                                     };
     

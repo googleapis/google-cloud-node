@@ -2399,9 +2399,9 @@
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsConfig.V1Alpha",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/osconfig/v1alpha;osconfig",
+                    "java_multiple_files": true,
                     "java_outer_classname": "VulnerabilityProto",
                     "java_package": "com.google.cloud.osconfig.v1alpha",
-                    "java_multiple_files": true,
                     "php_namespace": "Google\\Cloud\\OsConfig\\V1alpha",
                     "ruby_package": "Google::Cloud::OsConfig::V1alpha",
                     "(google.api.resource_definition).type": "compute.googleapis.com/Instance",
@@ -2417,6 +2417,10 @@
                         "outcome": {
                           "type": "Outcome",
                           "id": 2
+                        },
+                        "errorMessage": {
+                          "type": "string",
+                          "id": 3
                         }
                       },
                       "nested": {
@@ -2439,6 +2443,13 @@
                       }
                     },
                     "OSPolicyResourceCompliance": {
+                      "oneofs": {
+                        "output": {
+                          "oneof": [
+                            "execResourceOutput"
+                          ]
+                        }
+                      },
                       "fields": {
                         "osPolicyResourceId": {
                           "type": "string",
@@ -2452,6 +2463,20 @@
                         "state": {
                           "type": "OSPolicyComplianceState",
                           "id": 3
+                        },
+                        "execResourceOutput": {
+                          "type": "ExecResourceOutput",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "ExecResourceOutput": {
+                          "fields": {
+                            "enforcementOutput": {
+                              "type": "bytes",
+                              "id": 2
+                            }
+                          }
                         }
                       }
                     },
@@ -3457,6 +3482,10 @@
                                       "options": {
                                         "(google.api.field_behavior)": "REQUIRED"
                                       }
+                                    },
+                                    "outputFilePath": {
+                                      "type": "string",
+                                      "id": 5
                                     }
                                   },
                                   "nested": {

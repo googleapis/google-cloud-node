@@ -8792,6 +8792,9 @@ export namespace google {
 
                     /** OSPolicyResourceConfigStep outcome */
                     outcome?: (google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep.Outcome|keyof typeof google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep.Outcome|null);
+
+                    /** OSPolicyResourceConfigStep errorMessage */
+                    errorMessage?: (string|null);
                 }
 
                 /** Represents a OSPolicyResourceConfigStep. */
@@ -8808,6 +8811,9 @@ export namespace google {
 
                     /** OSPolicyResourceConfigStep outcome. */
                     public outcome: (google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep.Outcome|keyof typeof google.cloud.osconfig.v1alpha.OSPolicyResourceConfigStep.Outcome);
+
+                    /** OSPolicyResourceConfigStep errorMessage. */
+                    public errorMessage: string;
 
                     /**
                      * Creates a new OSPolicyResourceConfigStep instance using the specified properties.
@@ -8910,6 +8916,9 @@ export namespace google {
 
                     /** OSPolicyResourceCompliance state */
                     state?: (google.cloud.osconfig.v1alpha.OSPolicyComplianceState|keyof typeof google.cloud.osconfig.v1alpha.OSPolicyComplianceState|null);
+
+                    /** OSPolicyResourceCompliance execResourceOutput */
+                    execResourceOutput?: (google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput|null);
                 }
 
                 /** Represents a OSPolicyResourceCompliance. */
@@ -8929,6 +8938,12 @@ export namespace google {
 
                     /** OSPolicyResourceCompliance state. */
                     public state: (google.cloud.osconfig.v1alpha.OSPolicyComplianceState|keyof typeof google.cloud.osconfig.v1alpha.OSPolicyComplianceState);
+
+                    /** OSPolicyResourceCompliance execResourceOutput. */
+                    public execResourceOutput?: (google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput|null);
+
+                    /** OSPolicyResourceCompliance output. */
+                    public output?: "execResourceOutput";
 
                     /**
                      * Creates a new OSPolicyResourceCompliance instance using the specified properties.
@@ -8999,6 +9014,99 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace OSPolicyResourceCompliance {
+
+                    /** Properties of an ExecResourceOutput. */
+                    interface IExecResourceOutput {
+
+                        /** ExecResourceOutput enforcementOutput */
+                        enforcementOutput?: (Uint8Array|string|null);
+                    }
+
+                    /** Represents an ExecResourceOutput. */
+                    class ExecResourceOutput implements IExecResourceOutput {
+
+                        /**
+                         * Constructs a new ExecResourceOutput.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput);
+
+                        /** ExecResourceOutput enforcementOutput. */
+                        public enforcementOutput: (Uint8Array|string);
+
+                        /**
+                         * Creates a new ExecResourceOutput instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ExecResourceOutput instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput): google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput;
+
+                        /**
+                         * Encodes the specified ExecResourceOutput message. Does not implicitly {@link google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput.verify|verify} messages.
+                         * @param message ExecResourceOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ExecResourceOutput message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput.verify|verify} messages.
+                         * @param message ExecResourceOutput message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.IExecResourceOutput, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an ExecResourceOutput message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ExecResourceOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput;
+
+                        /**
+                         * Decodes an ExecResourceOutput message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ExecResourceOutput
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput;
+
+                        /**
+                         * Verifies an ExecResourceOutput message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an ExecResourceOutput message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ExecResourceOutput
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput;
+
+                        /**
+                         * Creates a plain object from an ExecResourceOutput message. Also converts values to other types if specified.
+                         * @param message ExecResourceOutput
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1alpha.OSPolicyResourceCompliance.ExecResourceOutput, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ExecResourceOutput to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
                 }
 
                 /** OSPolicyComplianceState enum. */
@@ -13036,6 +13144,9 @@ export namespace google {
 
                                 /** Exec interpreter */
                                 interpreter?: (google.cloud.osconfig.v1alpha.OSPolicy.Resource.ExecResource.Exec.Interpreter|keyof typeof google.cloud.osconfig.v1alpha.OSPolicy.Resource.ExecResource.Exec.Interpreter|null);
+
+                                /** Exec outputFilePath */
+                                outputFilePath?: (string|null);
                             }
 
                             /** Represents an Exec. */
@@ -13058,6 +13169,9 @@ export namespace google {
 
                                 /** Exec interpreter. */
                                 public interpreter: (google.cloud.osconfig.v1alpha.OSPolicy.Resource.ExecResource.Exec.Interpreter|keyof typeof google.cloud.osconfig.v1alpha.OSPolicy.Resource.ExecResource.Exec.Interpreter);
+
+                                /** Exec outputFilePath. */
+                                public outputFilePath: string;
 
                                 /** Exec source. */
                                 public source?: ("file"|"script");
