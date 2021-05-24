@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.4.0...v2.4.1) (2021-05-19)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#101](https://www.github.com/googleapis/nodejs-analytics-data/issues/101)) ([c7b4ff1](https://www.github.com/googleapis/nodejs-analytics-data/commit/c7b4ff1856cbc700098d14fcb86fa11dd31a234b))
+* use require() to load JSON protos ([#104](https://www.github.com/googleapis/nodejs-analytics-data/issues/104)) ([bd0ecb9](https://www.github.com/googleapis/nodejs-analytics-data/commit/bd0ecb923ee6ec73c6f60844e5150b22acc91aa4))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.3.0...v2.4.0) (2021-04-02)
 
 
