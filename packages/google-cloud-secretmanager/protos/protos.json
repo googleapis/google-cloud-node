@@ -81,6 +81,13 @@
                             "(google.api.field_behavior)": "INPUT_ONLY"
                           }
                         },
+                        "etag": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "rotation": {
                           "type": "Rotation",
                           "id": 9,
@@ -127,6 +134,13 @@
                         "replicationStatus": {
                           "type": "ReplicationStatus",
                           "id": 5
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -821,6 +835,13 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "secretmanager.googleapis.com/Secret"
                           }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -832,6 +853,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -845,6 +873,13 @@
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                           }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -856,6 +891,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

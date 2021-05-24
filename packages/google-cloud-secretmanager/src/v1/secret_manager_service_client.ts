@@ -743,6 +743,10 @@ export class SecretManagerServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the {@link google.cloud.secretmanager.v1.Secret|Secret} to delete in the format
    *   `projects/* /secrets/*`.
+   * @param {string} [request.etag]
+   *   Optional. Etag of the {@link google.cloud.secretmanager.v1.Secret|Secret}. The request succeeds if it matches
+   *   the etag of the currently stored secret object. If the etag is omitted,
+   *   the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -830,16 +834,17 @@ export class SecretManagerServiceClient {
   /**
    * Gets metadata for a {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
-   * `projects/* /secrets/* /versions/latest` is an alias to the `latest`
-   * {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * `projects/* /secrets/* /versions/latest` is an alias to the most recently
+   * created {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
    *   `projects/* /secrets/* /versions/*`.
-   *   `projects/* /secrets/* /versions/latest` is an alias to the `latest`
-   *   {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   *
+   *   `projects/* /secrets/* /versions/latest` is an alias to the most recently
+   *   created {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -930,14 +935,17 @@ export class SecretManagerServiceClient {
   /**
    * Accesses a {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. This call returns the secret data.
    *
-   * `projects/* /secrets/* /versions/latest` is an alias to the `latest`
-   * {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
+   * `projects/* /secrets/* /versions/latest` is an alias to the most recently
+   * created {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} in the format
    *   `projects/* /secrets/* /versions/*`.
+   *
+   *   `projects/* /secrets/* /versions/latest` is an alias to the most recently
+   *   created {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1039,6 +1047,10 @@ export class SecretManagerServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to disable in the format
    *   `projects/* /secrets/* /versions/*`.
+   * @param {string} [request.etag]
+   *   Optional. Etag of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
+   *   the etag of the currently stored secret version object. If the etag is
+   *   omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1140,6 +1152,10 @@ export class SecretManagerServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to enable in the format
    *   `projects/* /secrets/* /versions/*`.
+   * @param {string} [request.etag]
+   *   Optional. Etag of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
+   *   the etag of the currently stored secret version object. If the etag is
+   *   omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1242,6 +1258,10 @@ export class SecretManagerServiceClient {
    * @param {string} request.name
    *   Required. The resource name of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion} to destroy in the format
    *   `projects/* /secrets/* /versions/*`.
+   * @param {string} [request.etag]
+   *   Optional. Etag of the {@link google.cloud.secretmanager.v1.SecretVersion|SecretVersion}. The request succeeds if it matches
+   *   the etag of the currently stored secret version object. If the etag is
+   *   omitted, the request succeeds.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -79,6 +79,7 @@
                          * @property {Array.<google.cloud.secretmanager.v1.ITopic>|null} [topics] Secret topics
                          * @property {google.protobuf.ITimestamp|null} [expireTime] Secret expireTime
                          * @property {google.protobuf.IDuration|null} [ttl] Secret ttl
+                         * @property {string|null} [etag] Secret etag
                          * @property {google.cloud.secretmanager.v1.IRotation|null} [rotation] Secret rotation
                          */
     
@@ -156,6 +157,14 @@
                         Secret.prototype.ttl = null;
     
                         /**
+                         * Secret etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1.Secret
+                         * @instance
+                         */
+                        Secret.prototype.etag = "";
+    
+                        /**
                          * Secret rotation.
                          * @member {google.cloud.secretmanager.v1.IRotation|null|undefined} rotation
                          * @memberof google.cloud.secretmanager.v1.Secret
@@ -217,6 +226,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.expireTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.ttl != null && Object.hasOwnProperty.call(message, "ttl"))
                                 $root.google.protobuf.Duration.encode(message.ttl, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.etag);
                             if (message.rotation != null && Object.hasOwnProperty.call(message, "rotation"))
                                 $root.google.cloud.secretmanager.v1.Rotation.encode(message.rotation, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             return writer;
@@ -294,6 +305,9 @@
                                     break;
                                 case 7:
                                     message.ttl = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    message.etag = reader.string();
                                     break;
                                 case 9:
                                     message.rotation = $root.google.cloud.secretmanager.v1.Rotation.decode(reader, reader.uint32());
@@ -382,6 +396,9 @@
                                         return "ttl." + error;
                                 }
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             if (message.rotation != null && message.hasOwnProperty("rotation")) {
                                 var error = $root.google.cloud.secretmanager.v1.Rotation.verify(message.rotation);
                                 if (error)
@@ -441,6 +458,8 @@
                                     throw TypeError(".google.cloud.secretmanager.v1.Secret.ttl: object expected");
                                 message.ttl = $root.google.protobuf.Duration.fromObject(object.ttl);
                             }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             if (object.rotation != null) {
                                 if (typeof object.rotation !== "object")
                                     throw TypeError(".google.cloud.secretmanager.v1.Secret.rotation: object expected");
@@ -470,6 +489,7 @@
                                 object.name = "";
                                 object.replication = null;
                                 object.createTime = null;
+                                object.etag = "";
                                 object.rotation = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -499,6 +519,8 @@
                                 if (options.oneofs)
                                     object.expiration = "ttl";
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             if (message.rotation != null && message.hasOwnProperty("rotation"))
                                 object.rotation = $root.google.cloud.secretmanager.v1.Rotation.toObject(message.rotation, options);
                             return object;
@@ -529,6 +551,7 @@
                          * @property {google.protobuf.ITimestamp|null} [destroyTime] SecretVersion destroyTime
                          * @property {google.cloud.secretmanager.v1.SecretVersion.State|null} [state] SecretVersion state
                          * @property {google.cloud.secretmanager.v1.IReplicationStatus|null} [replicationStatus] SecretVersion replicationStatus
+                         * @property {string|null} [etag] SecretVersion etag
                          */
     
                         /**
@@ -587,6 +610,14 @@
                         SecretVersion.prototype.replicationStatus = null;
     
                         /**
+                         * SecretVersion etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1.SecretVersion
+                         * @instance
+                         */
+                        SecretVersion.prototype.etag = "";
+    
+                        /**
                          * Creates a new SecretVersion instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.secretmanager.v1.SecretVersion
@@ -620,6 +651,8 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
                             if (message.replicationStatus != null && Object.hasOwnProperty.call(message, "replicationStatus"))
                                 $root.google.cloud.secretmanager.v1.ReplicationStatus.encode(message.replicationStatus, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
                             return writer;
                         };
     
@@ -668,6 +701,9 @@
                                     break;
                                 case 5:
                                     message.replicationStatus = $root.google.cloud.secretmanager.v1.ReplicationStatus.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.etag = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -732,6 +768,9 @@
                                 if (error)
                                     return "replicationStatus." + error;
                             }
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -782,6 +821,8 @@
                                     throw TypeError(".google.cloud.secretmanager.v1.SecretVersion.replicationStatus: object expected");
                                 message.replicationStatus = $root.google.cloud.secretmanager.v1.ReplicationStatus.fromObject(object.replicationStatus);
                             }
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -804,6 +845,7 @@
                                 object.destroyTime = null;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                 object.replicationStatus = null;
+                                object.etag = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -815,6 +857,8 @@
                                 object.state = options.enums === String ? $root.google.cloud.secretmanager.v1.SecretVersion.State[message.state] : message.state;
                             if (message.replicationStatus != null && message.hasOwnProperty("replicationStatus"))
                                 object.replicationStatus = $root.google.cloud.secretmanager.v1.ReplicationStatus.toObject(message.replicationStatus, options);
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -6504,6 +6548,7 @@
                          * @memberof google.cloud.secretmanager.v1
                          * @interface IDeleteSecretRequest
                          * @property {string|null} [name] DeleteSecretRequest name
+                         * @property {string|null} [etag] DeleteSecretRequest etag
                          */
     
                         /**
@@ -6528,6 +6573,14 @@
                          * @instance
                          */
                         DeleteSecretRequest.prototype.name = "";
+    
+                        /**
+                         * DeleteSecretRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1.DeleteSecretRequest
+                         * @instance
+                         */
+                        DeleteSecretRequest.prototype.etag = "";
     
                         /**
                          * Creates a new DeleteSecretRequest instance using the specified properties.
@@ -6555,6 +6608,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
                             return writer;
                         };
     
@@ -6591,6 +6646,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.etag = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6630,6 +6688,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -6647,6 +6708,8 @@
                             var message = new $root.google.cloud.secretmanager.v1.DeleteSecretRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -6663,10 +6726,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.etag = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -6691,6 +6758,7 @@
                          * @memberof google.cloud.secretmanager.v1
                          * @interface IDisableSecretVersionRequest
                          * @property {string|null} [name] DisableSecretVersionRequest name
+                         * @property {string|null} [etag] DisableSecretVersionRequest etag
                          */
     
                         /**
@@ -6715,6 +6783,14 @@
                          * @instance
                          */
                         DisableSecretVersionRequest.prototype.name = "";
+    
+                        /**
+                         * DisableSecretVersionRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1.DisableSecretVersionRequest
+                         * @instance
+                         */
+                        DisableSecretVersionRequest.prototype.etag = "";
     
                         /**
                          * Creates a new DisableSecretVersionRequest instance using the specified properties.
@@ -6742,6 +6818,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
                             return writer;
                         };
     
@@ -6778,6 +6856,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.etag = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6817,6 +6898,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -6834,6 +6918,8 @@
                             var message = new $root.google.cloud.secretmanager.v1.DisableSecretVersionRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -6850,10 +6936,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.etag = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -6878,6 +6968,7 @@
                          * @memberof google.cloud.secretmanager.v1
                          * @interface IEnableSecretVersionRequest
                          * @property {string|null} [name] EnableSecretVersionRequest name
+                         * @property {string|null} [etag] EnableSecretVersionRequest etag
                          */
     
                         /**
@@ -6902,6 +6993,14 @@
                          * @instance
                          */
                         EnableSecretVersionRequest.prototype.name = "";
+    
+                        /**
+                         * EnableSecretVersionRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1.EnableSecretVersionRequest
+                         * @instance
+                         */
+                        EnableSecretVersionRequest.prototype.etag = "";
     
                         /**
                          * Creates a new EnableSecretVersionRequest instance using the specified properties.
@@ -6929,6 +7028,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
                             return writer;
                         };
     
@@ -6965,6 +7066,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.etag = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -7004,6 +7108,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -7021,6 +7128,8 @@
                             var message = new $root.google.cloud.secretmanager.v1.EnableSecretVersionRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -7037,10 +7146,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.etag = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     
@@ -7065,6 +7178,7 @@
                          * @memberof google.cloud.secretmanager.v1
                          * @interface IDestroySecretVersionRequest
                          * @property {string|null} [name] DestroySecretVersionRequest name
+                         * @property {string|null} [etag] DestroySecretVersionRequest etag
                          */
     
                         /**
@@ -7089,6 +7203,14 @@
                          * @instance
                          */
                         DestroySecretVersionRequest.prototype.name = "";
+    
+                        /**
+                         * DestroySecretVersionRequest etag.
+                         * @member {string} etag
+                         * @memberof google.cloud.secretmanager.v1.DestroySecretVersionRequest
+                         * @instance
+                         */
+                        DestroySecretVersionRequest.prototype.etag = "";
     
                         /**
                          * Creates a new DestroySecretVersionRequest instance using the specified properties.
@@ -7116,6 +7238,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
                             return writer;
                         };
     
@@ -7152,6 +7276,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.etag = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -7191,6 +7318,9 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                if (!$util.isString(message.etag))
+                                    return "etag: string expected";
                             return null;
                         };
     
@@ -7208,6 +7338,8 @@
                             var message = new $root.google.cloud.secretmanager.v1.DestroySecretVersionRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.etag != null)
+                                message.etag = String(object.etag);
                             return message;
                         };
     
@@ -7224,10 +7356,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.etag = "";
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.etag != null && message.hasOwnProperty("etag"))
+                                object.etag = message.etag;
                             return object;
                         };
     

@@ -50,6 +50,9 @@ export namespace google {
                     /** Secret ttl */
                     ttl?: (google.protobuf.IDuration|null);
 
+                    /** Secret etag */
+                    etag?: (string|null);
+
                     /** Secret rotation */
                     rotation?: (google.cloud.secretmanager.v1.IRotation|null);
                 }
@@ -83,6 +86,9 @@ export namespace google {
 
                     /** Secret ttl. */
                     public ttl?: (google.protobuf.IDuration|null);
+
+                    /** Secret etag. */
+                    public etag: string;
 
                     /** Secret rotation. */
                     public rotation?: (google.cloud.secretmanager.v1.IRotation|null);
@@ -178,6 +184,9 @@ export namespace google {
 
                     /** SecretVersion replicationStatus */
                     replicationStatus?: (google.cloud.secretmanager.v1.IReplicationStatus|null);
+
+                    /** SecretVersion etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents a SecretVersion. */
@@ -203,6 +212,9 @@ export namespace google {
 
                     /** SecretVersion replicationStatus. */
                     public replicationStatus?: (google.cloud.secretmanager.v1.IReplicationStatus|null);
+
+                    /** SecretVersion etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new SecretVersion instance using the specified properties.
@@ -2916,6 +2928,9 @@ export namespace google {
 
                     /** DeleteSecretRequest name */
                     name?: (string|null);
+
+                    /** DeleteSecretRequest etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents a DeleteSecretRequest. */
@@ -2929,6 +2944,9 @@ export namespace google {
 
                     /** DeleteSecretRequest name. */
                     public name: string;
+
+                    /** DeleteSecretRequest etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new DeleteSecretRequest instance using the specified properties.
@@ -3006,6 +3024,9 @@ export namespace google {
 
                     /** DisableSecretVersionRequest name */
                     name?: (string|null);
+
+                    /** DisableSecretVersionRequest etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents a DisableSecretVersionRequest. */
@@ -3019,6 +3040,9 @@ export namespace google {
 
                     /** DisableSecretVersionRequest name. */
                     public name: string;
+
+                    /** DisableSecretVersionRequest etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new DisableSecretVersionRequest instance using the specified properties.
@@ -3096,6 +3120,9 @@ export namespace google {
 
                     /** EnableSecretVersionRequest name */
                     name?: (string|null);
+
+                    /** EnableSecretVersionRequest etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents an EnableSecretVersionRequest. */
@@ -3109,6 +3136,9 @@ export namespace google {
 
                     /** EnableSecretVersionRequest name. */
                     public name: string;
+
+                    /** EnableSecretVersionRequest etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new EnableSecretVersionRequest instance using the specified properties.
@@ -3186,6 +3216,9 @@ export namespace google {
 
                     /** DestroySecretVersionRequest name */
                     name?: (string|null);
+
+                    /** DestroySecretVersionRequest etag */
+                    etag?: (string|null);
                 }
 
                 /** Represents a DestroySecretVersionRequest. */
@@ -3199,6 +3232,9 @@ export namespace google {
 
                     /** DestroySecretVersionRequest name. */
                     public name: string;
+
+                    /** DestroySecretVersionRequest etag. */
+                    public etag: string;
 
                     /**
                      * Creates a new DestroySecretVersionRequest instance using the specified properties.
