@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.0.1...v1.1.0) (2021-05-24)
+
+
+### Features
+
+* bump release level to GA ([#30](https://www.github.com/googleapis/nodejs-api-gateway/issues/30)) ([17d6485](https://www.github.com/googleapis/nodejs-api-gateway/commit/17d6485a5061f8c1f14e835d335b88e6bc427ff0))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.0.0...v1.0.1) (2021-05-12)
 
 
