@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.1...v2.3.2) (2021-05-24)
+
+
+### Bug Fixes
+
+* use require() to load JSON protos ([#164](https://www.github.com/googleapis/nodejs-game-servers/issues/164)) ([b77e1e5](https://www.github.com/googleapis/nodejs-game-servers/commit/b77e1e5f7fc9396cdb30d4f1bfac370dd85800b8))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.0...v2.3.1) (2021-05-20)
 
 
