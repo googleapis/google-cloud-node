@@ -3,8 +3,7 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io",
-    "https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-automl-object-tracking.js"
+    "img.shields.io"
   ],
   "silent": true,
   "concurrency": 10
