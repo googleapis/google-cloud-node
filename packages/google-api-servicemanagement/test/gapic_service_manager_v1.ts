@@ -28,10 +28,9 @@ import {PassThrough} from 'stream';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -281,9 +280,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.ManagedService()
       );
-      client.innerApiCalls.getService = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getService =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getService(
           request,
@@ -393,9 +391,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
-      client.innerApiCalls.getServiceConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getServiceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getServiceConfig(
           request,
@@ -471,9 +468,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
-      client.innerApiCalls.createServiceConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createServiceConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.createServiceConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -504,9 +500,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.api.Service()
       );
-      client.innerApiCalls.createServiceConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createServiceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createServiceConfig(
           request,
@@ -613,9 +608,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.Rollout()
       );
-      client.innerApiCalls.getServiceRollout = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getServiceRollout =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getServiceRollout(
           request,
@@ -686,9 +680,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GenerateConfigReportResponse()
       );
-      client.innerApiCalls.generateConfigReport = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.generateConfigReport =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.generateConfigReport(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -711,9 +704,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.api.servicemanagement.v1.GenerateConfigReportResponse()
       );
-      client.innerApiCalls.generateConfigReport = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.generateConfigReport =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.generateConfigReport(
           request,
@@ -776,9 +768,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -802,9 +793,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createService(
           request,
@@ -948,9 +938,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.deleteService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -982,9 +971,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.deleteService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteService(
           request,
@@ -1144,9 +1132,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.undeleteService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.undeleteService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.undeleteService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1178,9 +1165,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.undeleteService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.undeleteService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.undeleteService(
           request,
@@ -1340,9 +1326,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.submitConfigSource = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.submitConfigSource =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.submitConfigSource(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1374,9 +1359,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.submitConfigSource = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.submitConfigSource =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.submitConfigSource(
           request,
@@ -1536,9 +1520,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createServiceRollout = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.createServiceRollout =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.createServiceRollout(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1570,9 +1553,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.createServiceRollout = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createServiceRollout =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createServiceRollout(
           request,
@@ -1732,9 +1714,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.enableService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.enableService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.enableService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1766,9 +1747,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.enableService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.enableService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.enableService(
           request,
@@ -1928,9 +1908,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.disableService = stubLongRunningCall(
-        expectedResponse
-      );
+      client.innerApiCalls.disableService =
+        stubLongRunningCall(expectedResponse);
       const [operation] = await client.disableService(request);
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -1962,9 +1941,8 @@ describe('v1.ServiceManagerClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.disableService = stubLongRunningCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.disableService =
+        stubLongRunningCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.disableService(
           request,
@@ -2155,9 +2133,8 @@ describe('v1.ServiceManagerClient', () => {
           new protos.google.api.servicemanagement.v1.ManagedService()
         ),
       ];
-      client.innerApiCalls.listServices = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listServices =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listServices(
           request,
@@ -2227,12 +2204,12 @@ describe('v1.ServiceManagerClient', () => {
           new protos.google.api.servicemanagement.v1.ManagedService()
         ),
       ];
-      client.descriptors.page.listServices.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServices.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listServicesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.servicemanagement.v1.ManagedService[] = [];
+        const responses: protos.google.api.servicemanagement.v1.ManagedService[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.api.servicemanagement.v1.ManagedService) => {
@@ -2271,7 +2248,8 @@ describe('v1.ServiceManagerClient', () => {
       );
       const stream = client.listServicesStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.api.servicemanagement.v1.ManagedService[] = [];
+        const responses: protos.google.api.servicemanagement.v1.ManagedService[] =
+          [];
         stream.on(
           'data',
           (response: protos.google.api.servicemanagement.v1.ManagedService) => {
@@ -2313,18 +2291,19 @@ describe('v1.ServiceManagerClient', () => {
           new protos.google.api.servicemanagement.v1.ManagedService()
         ),
       ];
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
-      const responses: protos.google.api.servicemanagement.v1.IManagedService[] = [];
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.api.servicemanagement.v1.IManagedService[] =
+        [];
       const iterable = client.listServicesAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -2339,20 +2318,20 @@ describe('v1.ServiceManagerClient', () => {
         new protos.google.api.servicemanagement.v1.ListServicesRequest()
       );
       const expectedError = new Error('expected');
-      client.descriptors.page.listServices.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServices.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listServicesAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.api.servicemanagement.v1.IManagedService[] = [];
+        const responses: protos.google.api.servicemanagement.v1.IManagedService[] =
+          [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listServices
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServices.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
     });
@@ -2382,9 +2361,8 @@ describe('v1.ServiceManagerClient', () => {
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
       ];
-      client.innerApiCalls.listServiceConfigs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listServiceConfigs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listServiceConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2417,9 +2395,8 @@ describe('v1.ServiceManagerClient', () => {
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
       ];
-      client.innerApiCalls.listServiceConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listServiceConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listServiceConfigs(
           request,
@@ -2491,9 +2468,8 @@ describe('v1.ServiceManagerClient', () => {
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
       ];
-      client.descriptors.page.listServiceConfigs.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServiceConfigs.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listServiceConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.api.Service[] = [];
@@ -2515,10 +2491,9 @@ describe('v1.ServiceManagerClient', () => {
           .calledWith(client.innerApiCalls.listServiceConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2535,10 +2510,8 @@ describe('v1.ServiceManagerClient', () => {
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listServiceConfigs.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServiceConfigs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listServiceConfigsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.api.Service[] = [];
@@ -2559,10 +2532,9 @@ describe('v1.ServiceManagerClient', () => {
           .calledWith(client.innerApiCalls.listServiceConfigs, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceConfigs
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceConfigs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2583,9 +2555,8 @@ describe('v1.ServiceManagerClient', () => {
         generateSampleMessage(new protos.google.api.Service()),
         generateSampleMessage(new protos.google.api.Service()),
       ];
-      client.descriptors.page.listServiceConfigs.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServiceConfigs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.api.IService[] = [];
       const iterable = client.listServiceConfigsAsync(request);
       for await (const resource of iterable) {
@@ -2593,15 +2564,15 @@ describe('v1.ServiceManagerClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listServiceConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2618,10 +2589,8 @@ describe('v1.ServiceManagerClient', () => {
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listServiceConfigs.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServiceConfigs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listServiceConfigsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.api.IService[] = [];
@@ -2630,15 +2599,15 @@ describe('v1.ServiceManagerClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listServiceConfigs
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceConfigs
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceConfigs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2674,9 +2643,8 @@ describe('v1.ServiceManagerClient', () => {
           new protos.google.api.servicemanagement.v1.Rollout()
         ),
       ];
-      client.innerApiCalls.listServiceRollouts = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listServiceRollouts =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listServiceRollouts(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2715,9 +2683,8 @@ describe('v1.ServiceManagerClient', () => {
           new protos.google.api.servicemanagement.v1.Rollout()
         ),
       ];
-      client.innerApiCalls.listServiceRollouts = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listServiceRollouts =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listServiceRollouts(
           request,
@@ -2795,9 +2762,8 @@ describe('v1.ServiceManagerClient', () => {
           new protos.google.api.servicemanagement.v1.Rollout()
         ),
       ];
-      client.descriptors.page.listServiceRollouts.createStream = stubPageStreamingCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServiceRollouts.createStream =
+        stubPageStreamingCall(expectedResponse);
       const stream = client.listServiceRolloutsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.api.servicemanagement.v1.Rollout[] = [];
@@ -2822,10 +2788,9 @@ describe('v1.ServiceManagerClient', () => {
           .calledWith(client.innerApiCalls.listServiceRollouts, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceRollouts
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceRollouts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2842,10 +2807,8 @@ describe('v1.ServiceManagerClient', () => {
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listServiceRollouts.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServiceRollouts.createStream =
+        stubPageStreamingCall(undefined, expectedError);
       const stream = client.listServiceRolloutsStream(request);
       const promise = new Promise((resolve, reject) => {
         const responses: protos.google.api.servicemanagement.v1.Rollout[] = [];
@@ -2869,10 +2832,9 @@ describe('v1.ServiceManagerClient', () => {
           .calledWith(client.innerApiCalls.listServiceRollouts, request)
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceRollouts
-          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceRollouts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2899,9 +2861,8 @@ describe('v1.ServiceManagerClient', () => {
           new protos.google.api.servicemanagement.v1.Rollout()
         ),
       ];
-      client.descriptors.page.listServiceRollouts.asyncIterate = stubAsyncIterationCall(
-        expectedResponse
-      );
+      client.descriptors.page.listServiceRollouts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
       const responses: protos.google.api.servicemanagement.v1.IRollout[] = [];
       const iterable = client.listServiceRolloutsAsync(request);
       for await (const resource of iterable) {
@@ -2909,15 +2870,15 @@ describe('v1.ServiceManagerClient', () => {
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (client.descriptors.page.listServiceRollouts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceRollouts
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
@@ -2934,10 +2895,8 @@ describe('v1.ServiceManagerClient', () => {
       request.serviceName = '';
       const expectedHeaderRequestParams = 'service_name=';
       const expectedError = new Error('expected');
-      client.descriptors.page.listServiceRollouts.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
+      client.descriptors.page.listServiceRollouts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
       const iterable = client.listServiceRolloutsAsync(request);
       await assert.rejects(async () => {
         const responses: protos.google.api.servicemanagement.v1.IRollout[] = [];
@@ -2946,15 +2905,15 @@ describe('v1.ServiceManagerClient', () => {
         }
       });
       assert.deepStrictEqual(
-        (client.descriptors.page.listServiceRollouts
-          .asyncIterate as SinonStub).getCall(0).args[1],
+        (
+          client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (client.descriptors.page.listServiceRollouts
-          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
-          'x-goog-request-params'
-        ],
+        (
+          client.descriptors.page.listServiceRollouts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );
     });
