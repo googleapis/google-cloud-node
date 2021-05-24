@@ -43,7 +43,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  A service that migrates resources from automl.googleapis.com,
- *  datalabeling.googleapis.com and ml.googleapis.com to AI Platform.
+ *  datalabeling.googleapis.com and ml.googleapis.com to Vertex AI.
  * @class
  * @memberof v1
  */
@@ -416,7 +416,7 @@ export class MigrationServiceClient {
   ): void;
   /**
    * Batch migrates resources from ml.googleapis.com, automl.googleapis.com,
-   * and datalabeling.googleapis.com to AI Platform (Unified).
+   * and datalabeling.googleapis.com to Vertex AI.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -559,13 +559,13 @@ export class MigrationServiceClient {
   /**
    * Searches all of the resources in automl.googleapis.com,
    * datalabeling.googleapis.com and ml.googleapis.com that can be migrated to
-   * AI Platform's given location.
+   * Vertex AI's given location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that the migratable resources should be searched from.
-   *   It's the AI Platform location that the resources can be migrated to, not
+   *   It's the Vertex AI location that the resources can be migrated to, not
    *   the resources' original location.
    *   Format:
    *   `projects/{project}/locations/{location}`
@@ -575,15 +575,18 @@ export class MigrationServiceClient {
    * @param {string} request.pageToken
    *   The standard page token.
    * @param {string} request.filter
-   *   Supported filters are:
-   *   * Resource type: For a specific type of MigratableResource.
-   *     * `ml_engine_model_version:*`
-   *     * `automl_model:*`,
-   *     * `automl_dataset:*`
-   *     * `data_labeling_dataset:*`.
-   *   * Migrated or not: Filter migrated resource or not by last_migrate_time.
-   *     * `last_migrate_time:*` will filter migrated resources.
-   *     * `NOT last_migrate_time:*` will filter not yet migrated resources.
+   *   A filter for your search. You can use the following types of filters:
+   *
+   *   *   Resource type filters. The following strings filter for a specific type
+   *       of {@link google.cloud.aiplatform.v1.MigratableResource|MigratableResource}:
+   *       *   `ml_engine_model_version:*`
+   *       *   `automl_model:*`
+   *       *   `automl_dataset:*`
+   *       *   `data_labeling_dataset:*`
+   *   *   "Migrated or not" filters. The following strings filter for resources
+   *       that either have or have not already been migrated:
+   *       *   `last_migrate_time:*` filters for migrated resources.
+   *       *   `NOT last_migrate_time:*` filters for not yet migrated resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -651,7 +654,7 @@ export class MigrationServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that the migratable resources should be searched from.
-   *   It's the AI Platform location that the resources can be migrated to, not
+   *   It's the Vertex AI location that the resources can be migrated to, not
    *   the resources' original location.
    *   Format:
    *   `projects/{project}/locations/{location}`
@@ -661,15 +664,18 @@ export class MigrationServiceClient {
    * @param {string} request.pageToken
    *   The standard page token.
    * @param {string} request.filter
-   *   Supported filters are:
-   *   * Resource type: For a specific type of MigratableResource.
-   *     * `ml_engine_model_version:*`
-   *     * `automl_model:*`,
-   *     * `automl_dataset:*`
-   *     * `data_labeling_dataset:*`.
-   *   * Migrated or not: Filter migrated resource or not by last_migrate_time.
-   *     * `last_migrate_time:*` will filter migrated resources.
-   *     * `NOT last_migrate_time:*` will filter not yet migrated resources.
+   *   A filter for your search. You can use the following types of filters:
+   *
+   *   *   Resource type filters. The following strings filter for a specific type
+   *       of {@link google.cloud.aiplatform.v1.MigratableResource|MigratableResource}:
+   *       *   `ml_engine_model_version:*`
+   *       *   `automl_model:*`
+   *       *   `automl_dataset:*`
+   *       *   `data_labeling_dataset:*`
+   *   *   "Migrated or not" filters. The following strings filter for resources
+   *       that either have or have not already been migrated:
+   *       *   `last_migrate_time:*` filters for migrated resources.
+   *       *   `NOT last_migrate_time:*` filters for not yet migrated resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -711,7 +717,7 @@ export class MigrationServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that the migratable resources should be searched from.
-   *   It's the AI Platform location that the resources can be migrated to, not
+   *   It's the Vertex AI location that the resources can be migrated to, not
    *   the resources' original location.
    *   Format:
    *   `projects/{project}/locations/{location}`
@@ -721,15 +727,18 @@ export class MigrationServiceClient {
    * @param {string} request.pageToken
    *   The standard page token.
    * @param {string} request.filter
-   *   Supported filters are:
-   *   * Resource type: For a specific type of MigratableResource.
-   *     * `ml_engine_model_version:*`
-   *     * `automl_model:*`,
-   *     * `automl_dataset:*`
-   *     * `data_labeling_dataset:*`.
-   *   * Migrated or not: Filter migrated resource or not by last_migrate_time.
-   *     * `last_migrate_time:*` will filter migrated resources.
-   *     * `NOT last_migrate_time:*` will filter not yet migrated resources.
+   *   A filter for your search. You can use the following types of filters:
+   *
+   *   *   Resource type filters. The following strings filter for a specific type
+   *       of {@link google.cloud.aiplatform.v1.MigratableResource|MigratableResource}:
+   *       *   `ml_engine_model_version:*`
+   *       *   `automl_model:*`
+   *       *   `automl_dataset:*`
+   *       *   `data_labeling_dataset:*`
+   *   *   "Migrated or not" filters. The following strings filter for resources
+   *       that either have or have not already been migrated:
+   *       *   `last_migrate_time:*` filters for migrated resources.
+   *       *   `NOT last_migrate_time:*` filters for not yet migrated resources.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

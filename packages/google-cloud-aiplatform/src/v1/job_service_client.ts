@@ -42,7 +42,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  A service for creating and managing AI Platform's jobs.
+ *  A service for creating and managing Vertex AI's jobs.
  * @class
  * @memberof v1
  */
@@ -873,7 +873,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the DataLabelingJob.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -970,7 +969,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the DataLabelingJob.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1174,7 +1172,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the HyperparameterTuningJob resource.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1287,7 +1284,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the HyperparameterTuningJob to cancel.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1496,7 +1492,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the BatchPredictionJob resource.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1605,7 +1600,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the BatchPredictionJob to cancel.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1855,7 +1849,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the DataLabelingJob to be deleted.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1999,7 +1992,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the HyperparameterTuningJob resource to be deleted.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -2148,7 +2140,6 @@ export class JobServiceClient {
    * @param {string} request.name
    *   Required. The name of the BatchPredictionJob resource to be deleted.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -3105,6 +3096,8 @@ export class JobServiceClient {
    *
    *     * `state` supports = and !=.
    *
+   *     * `model_display_name` supports = and !=
+   *
    *   Some examples of using the filter are:
    *
    *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
@@ -3200,6 +3193,8 @@ export class JobServiceClient {
    *
    *     * `state` supports = and !=.
    *
+   *     * `model_display_name` supports = and !=
+   *
    *   Some examples of using the filter are:
    *
    *    * `state="JOB_STATE_SUCCEEDED" AND display_name="my_job"`
@@ -3268,6 +3263,8 @@ export class JobServiceClient {
    *     * `display_name` supports = and !=.
    *
    *     * `state` supports = and !=.
+   *
+   *     * `model_display_name` supports = and !=
    *
    *   Some examples of using the filter are:
    *

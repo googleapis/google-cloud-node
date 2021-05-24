@@ -537,9 +537,7 @@ export class EndpointServiceClient {
    * @param {google.cloud.aiplatform.v1.Endpoint} request.endpoint
    *   Required. The Endpoint which replaces the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   Required. The update mask applies to the resource.
-   *   See
-   *   [FieldMask](https://tinyurl.com/protobufs/google.protobuf#fieldmask).
+   *   Required. The update mask applies to the resource. See {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

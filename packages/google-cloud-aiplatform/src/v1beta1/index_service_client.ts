@@ -42,7 +42,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  A service for creating and managing AI Platform's Index resources.
+ *  A service for creating and managing Vertex AI's Index resources.
  * @class
  * @memberof v1beta1
  */
@@ -734,8 +734,7 @@ export class IndexServiceClient {
    *   Required. The Index which updates the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   The update mask applies to the resource.
-   *   For the `FieldMask` definition, see
-   *   [FieldMask](https://tinyurl.com/protobufs#google.protobuf.FieldMask).
+   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

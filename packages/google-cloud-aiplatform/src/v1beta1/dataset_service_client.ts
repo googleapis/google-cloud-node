@@ -609,8 +609,7 @@ export class DatasetServiceClient {
    *   Required. The Dataset which replaces the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource.
-   *   For the `FieldMask` definition, see
-   *   [FieldMask](https://tinyurl.com/protobufs/google.protobuf#fieldmask).
+   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
    *   Updatable fields:
    *
    *     * `display_name`

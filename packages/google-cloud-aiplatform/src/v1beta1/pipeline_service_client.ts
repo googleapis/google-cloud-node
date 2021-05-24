@@ -42,7 +42,9 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  A service for creating and managing AI Platform's pipelines.
+ *  A service for creating and managing Vertex AI's pipelines. This includes both
+ *  `TrainingPipeline` resources (used for AutoML and custom training) and
+ *  `PipelineJob` resources (used for Vertex Pipelines).
  * @class
  * @memberof v1beta1
  */
@@ -1671,14 +1673,16 @@ export class PipelineServiceClient {
    * @param {string} request.filter
    *   The standard list filter.
    *   Supported fields:
-   *     * `display_name` supports = and !=.
-   *     * `state` supports = and !=.
    *
-   *   Some examples of using the filter are:
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *    * `NOT display_name="my_pipeline"`
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *   * `display_name` supports `=` and `!=`.
+   *   * `state` supports `=` and `!=`.
+   *
+   *   The following examples demonstrate how to filter the list of PipelineJobs:
+   *
+   *   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+   *   * `NOT display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_FAILED"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1753,14 +1757,16 @@ export class PipelineServiceClient {
    * @param {string} request.filter
    *   The standard list filter.
    *   Supported fields:
-   *     * `display_name` supports = and !=.
-   *     * `state` supports = and !=.
    *
-   *   Some examples of using the filter are:
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *    * `NOT display_name="my_pipeline"`
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *   * `display_name` supports `=` and `!=`.
+   *   * `state` supports `=` and `!=`.
+   *
+   *   The following examples demonstrate how to filter the list of PipelineJobs:
+   *
+   *   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+   *   * `NOT display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_FAILED"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1813,14 +1819,16 @@ export class PipelineServiceClient {
    * @param {string} request.filter
    *   The standard list filter.
    *   Supported fields:
-   *     * `display_name` supports = and !=.
-   *     * `state` supports = and !=.
    *
-   *   Some examples of using the filter are:
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *    * `NOT display_name="my_pipeline"`
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *   * `display_name` supports `=` and `!=`.
+   *   * `state` supports `=` and `!=`.
+   *
+   *   The following examples demonstrate how to filter the list of PipelineJobs:
+   *
+   *   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+   *   * `NOT display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_FAILED"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken

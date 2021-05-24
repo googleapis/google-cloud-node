@@ -551,8 +551,7 @@ export class DatasetServiceClient {
    *   Required. The Dataset which replaces the resource on the server.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. The update mask applies to the resource.
-   *   For the `FieldMask` definition, see
-   *   [FieldMask](https://tinyurl.com/protobufs/google.protobuf#fieldmask).
+   *   For the `FieldMask` definition, see {@link google.protobuf.FieldMask|google.protobuf.FieldMask}.
    *   Updatable fields:
    *
    *     * `display_name`
@@ -650,7 +649,6 @@ export class DatasetServiceClient {
    * @param {string} request.name
    *   Required. The name of the AnnotationSpec resource.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}`
    * @param {google.protobuf.FieldMask} request.readMask
    *   Mask specifying which fields to read.
@@ -1806,7 +1804,6 @@ export class DatasetServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the DataItem to list Annotations from.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}`
    * @param {string} request.filter
    *   The standard list filter.
@@ -1883,7 +1880,6 @@ export class DatasetServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the DataItem to list Annotations from.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}`
    * @param {string} request.filter
    *   The standard list filter.
@@ -1938,7 +1934,6 @@ export class DatasetServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the DataItem to list Annotations from.
    *   Format:
-   *
    *   `projects/{project}/locations/{location}/datasets/{dataset}/dataItems/{data_item}`
    * @param {string} request.filter
    *   The standard list filter.

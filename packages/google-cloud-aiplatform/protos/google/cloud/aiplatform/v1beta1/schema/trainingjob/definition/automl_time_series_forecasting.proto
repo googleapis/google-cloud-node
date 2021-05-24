@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -42,31 +42,32 @@ message AutoMlForecastingInputs {
     }
 
     // Training pipeline will perform following transformation functions.
+    //
     // *  The value converted to float32.
+    //
     // *  The z_score of the value.
+    //
     // *  log(value+1) when the value is greater than or equal to 0. Otherwise,
     //    this transformation is not applied and the value is considered a
     //    missing value.
+    //
     // *  z_score of log(value+1) when the value is greater than or equal to 0.
     //    Otherwise, this transformation is not applied and the value is
     //    considered a missing value.
+    //
     // *  A boolean value that indicates whether the value is valid.
     message NumericTransformation {
       string column_name = 1;
-
-      // If invalid values is allowed, the training pipeline will create a
-      // boolean feature that indicated whether the value is valid.
-      // Otherwise, the training pipeline will discard the input row from
-      // trainining data.
-      bool invalid_values_allowed = 2;
     }
 
     // Training pipeline will perform following transformation functions.
+    //
     // *  The categorical string as is--no change to case, punctuation,
-    // spelling,
-    //    tense, and so on.
+    //    spelling, tense, and so on.
+    //
     // *  Convert the category name to a dictionary lookup index and generate an
     //    embedding for each index.
+    //
     // *  Categories that appear less than 5 times in the training dataset are
     //    treated as the "unknown" category. The "unknown" category gets its own
     //    special lookup index and resulting embedding.
@@ -75,9 +76,12 @@ message AutoMlForecastingInputs {
     }
 
     // Training pipeline will perform following transformation functions.
+    //
     // *  Apply the transformation functions for Numerical columns.
+    //
     // *  Determine the year, month, day,and weekday. Treat each value from the
-    // *  timestamp as a Categorical column.
+    //    timestamp as a Categorical column.
+    //
     // *  Invalid numerical values (for example, values that fall outside of a
     //    typical timestamp range, or are extreme values) receive no special
     //    treatment and are not removed.
@@ -86,74 +90,34 @@ message AutoMlForecastingInputs {
 
       // The format in which that time field is expressed. The time_format must
       // either be one of:
+      //
       // * `unix-seconds`
+      //
       // * `unix-milliseconds`
+      //
       // * `unix-microseconds`
+      //
       // * `unix-nanoseconds`
+      //
       // (for respectively number of seconds, milliseconds, microseconds and
       // nanoseconds since start of the Unix epoch);
-      // or be written in `strftime` syntax. If time_format is not set, then the
+      //
+      // or be written in `strftime` syntax.
+      //
+      // If time_format is not set, then the
       // default format is RFC 3339 `date-time` format, where
       // `time-offset` = `"Z"` (e.g. 1985-04-12T23:20:50.52Z)
       string time_format = 2;
-
-      // If invalid values is allowed, the training pipeline will create a
-      // boolean feature that indicated whether the value is valid.
-      // Otherwise, the training pipeline will discard the input row from
-      // trainining data.
-      bool invalid_values_allowed = 3;
     }
 
     // Training pipeline will perform following transformation functions.
+    //
     // *  The text as is--no change to case, punctuation, spelling, tense, and
-    // so
-    //    on.
-    // *  Tokenize text to words. Convert each words to a dictionary lookup
-    // index
-    //    and generate an embedding for each index. Combine the embedding of all
-    //    elements into a single embedding using the mean.
-    // *  Tokenization is based on unicode script boundaries.
-    // *  Missing values get their own lookup index and resulting embedding.
-    // *  Stop-words receive no special treatment and are not removed.
+    //    so on.
+    //
+    // *  Convert the category name to a dictionary lookup index and generate an
+    //    embedding for each index.
     message TextTransformation {
-      string column_name = 1;
-    }
-
-    // Treats the column as numerical array and performs following
-    // transformation functions.
-    // *  All transformations for Numerical types applied to the average of the
-    //    all elements.
-    // *  The average of empty arrays is treated as zero.
-    message NumericArrayTransformation {
-      string column_name = 1;
-
-      // If invalid values is allowed, the training pipeline will create a
-      // boolean feature that indicated whether the value is valid.
-      // Otherwise, the training pipeline will discard the input row from
-      // trainining data.
-      bool invalid_values_allowed = 2;
-    }
-
-    // Treats the column as categorical array and performs following
-    // transformation functions.
-    // *  For each element in the array, convert the category name to a
-    // dictionary
-    //    lookup index and generate an embedding for each index.
-    //    Combine the embedding of all elements into a single embedding using
-    //    the mean.
-    // *  Empty arrays treated as an embedding of zeroes.
-    message CategoricalArrayTransformation {
-      string column_name = 1;
-    }
-
-    // Treats the column as text array and performs following transformation
-    // functions.
-    // *  Concatenate all text values in the array into a single text value
-    // using
-    //    a space (" ") as a delimiter, and then treat the result as a single
-    //    text value. Apply the transformations for Text columns.
-    // *  Empty arrays treated as an empty text.
-    message TextArrayTransformation {
       string column_name = 1;
     }
 
@@ -169,28 +133,31 @@ message AutoMlForecastingInputs {
       TimestampTransformation timestamp = 4;
 
       TextTransformation text = 5;
-
-      NumericArrayTransformation repeated_numeric = 6;
-
-      CategoricalArrayTransformation repeated_categorical = 7;
-
-      TextArrayTransformation repeated_text = 8;
     }
   }
 
   // A duration of time expressed in time granularity units.
-  message Period {
+  message Granularity {
     // The time granularity unit of this time period.
-    // The supported unit are:
-    //  "minute"
-    //  "hour"
-    //  "day"
-    //  "week"
-    //  "month"
-    //  "year"
+    // The supported units are:
+    //
+    //  * "minute"
+    //
+    //  * "hour"
+    //
+    //  * "day"
+    //
+    //  * "week"
+    //
+    //  * "month"
+    //
+    //  * "year"
     string unit = 1;
 
-    // The number of units per period, e.g. 3 weeks or 2 months.
+    // The number of granularity_units between data points in the training
+    // data. If `granularity_unit` is `minute`,
+    // can be 1, 5, 10, 15, or 30. For all other values of `granularity_unit`,
+    // must be 1.
     int64 quantity = 2;
   }
 
@@ -214,13 +181,19 @@ message AutoMlForecastingInputs {
   // function over the validation set.
   //
   // The supported optimization objectives:
-  //   "minimize-rmse" (default) - Minimize root-mean-squared error (RMSE).
-  //   "minimize-mae" - Minimize mean-absolute error (MAE).
-  //   "minimize-rmsle" - Minimize root-mean-squared log error (RMSLE).
-  //   "minimize-rmspe" - Minimize root-mean-squared percentage error (RMSPE).
-  //   "minimize-wape-mae" - Minimize the combination of weighted absolute
+  //
+  //   * "minimize-rmse" (default) - Minimize root-mean-squared error (RMSE).
+  //
+  //   * "minimize-mae" - Minimize mean-absolute error (MAE).
+  //
+  //   * "minimize-rmsle" - Minimize root-mean-squared log error (RMSLE).
+  //
+  //   * "minimize-rmspe" - Minimize root-mean-squared percentage error (RMSPE).
+  //
+  //   * "minimize-wape-mae" - Minimize the combination of weighted absolute
   //     percentage error (WAPE) and mean-absolute-error (MAE).
-  //   "minimize-quantile-loss" - Minimize the quantile loss at the quantiles
+  //
+  //   * "minimize-quantile-loss" - Minimize the quantile loss at the quantiles
   //     defined in `quantiles`.
   string optimization_objective = 5;
 
@@ -248,42 +221,36 @@ message AutoMlForecastingInputs {
   // of 1.
   string weight_column = 7;
 
-  // Column names that should be used as static columns.
-  // The value of these columns are static per time series.
-  repeated string static_columns = 8;
+  // Column names that should be used as attribute columns.
+  // The value of these columns does not vary as a function of time.
+  // For example, store ID or item color.
+  repeated string time_series_attribute_columns = 19;
 
-  // Column names that should be used as time variant past only columns.
-  // This column contains information for the given entity (identified by the
-  // time_series_identifier_column) that is known for the past but not the
-  // future (e.g. population of a city in a given year, or weather on a given
-  // day).
-  repeated string time_variant_past_only_columns = 9;
+  // Names of columns that are unavailable when a forecast is requested.
+  // This column contains information for the given entity (identified
+  // by the time_series_identifier_column) that is unknown before the forecast
+  // For example, actual weather on a given day.
+  repeated string unavailable_at_forecast_columns = 20;
 
-  // Column names that should be used as time variant past and future columns.
-  // This column contains information for the given entity (identified by the
-  // key column) that is known for the past and the future
-  repeated string time_variant_past_and_future_columns = 10;
+  // Names of columns that are available and provided when a forecast
+  // is requested. These columns
+  // contain information for the given entity (identified by the
+  // time_series_identifier_column column) that is known at forecast.
+  // For example, predicted weather for a specific day.
+  repeated string available_at_forecast_columns = 21;
 
-  // Expected difference in time granularity between rows in the data. If it is
-  // not set, the period is inferred from data.
-  Period period = 11;
+  // Expected difference in time granularity between rows in the data.
+  Granularity data_granularity = 22;
 
-  // The number of periods offset into the future as the start of the forecast
-  // window (the window of future values to predict, relative to the present.),
-  // where each period is one unit of granularity as defined by the `period`
-  // field above. Default to 0. Inclusive.
-  int64 forecast_window_start = 12;
+  // The amount of time into the future for which forecasted values for the
+  // target are returned. Expressed in number of units defined by the
+  // `data_granularity` field.
+  int64 forecast_horizon = 23;
 
-  // The number of periods offset into the future as the end of the forecast
-  // window (the window of future values to predict, relative to the present.),
-  // where each period is one unit of granularity as defined by the `period`
-  // field above. Inclusive.
-  int64 forecast_window_end = 13;
-
-  // The number of periods offset into the past to restrict past sequence, where
-  // each period is one unit of granularity as defined by the `period`. Default
-  // value 0 means that it lets algorithm to define the value. Inclusive.
-  int64 past_horizon = 14;
+  // The amount of time into the past training and prediction data is used
+  // for model training and prediction respectively. Expressed in number of
+  // units defined by the `data_granularity` field.
+  int64 context_window = 24;
 
   // Configuration for exporting test set predictions to a BigQuery table. If
   // this configuration is absent, then the export is not performed.
@@ -297,9 +264,11 @@ message AutoMlForecastingInputs {
 
   // Validation options for the data validation component. The available options
   // are:
-  //   "fail-pipeline" - default, will validate against the validation and
-  //                     fail the pipeline if it fails.
-  //   "ignore-validation" - ignore the results of the validation and continue
+  //
+  //   * "fail-pipeline" - default, will validate against the validation and
+  //      fail the pipeline if it fails.
+  //
+  //   * "ignore-validation" - ignore the results of the validation and continue
   string validation_options = 17;
 }
 

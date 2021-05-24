@@ -445,7 +445,6 @@ export class SpecialistPoolServiceClient {
    * @param {string} request.name
    *   Required. The name of the SpecialistPool resource.
    *   The form is
-   *
    *   `projects/{project}/locations/{location}/specialistPools/{specialist_pool}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

@@ -43,7 +43,7 @@ const version = require('../../../package.json').version;
 
 /**
  *  A service that migrates resources from automl.googleapis.com,
- *  datalabeling.googleapis.com and ml.googleapis.com to AI Platform.
+ *  datalabeling.googleapis.com and ml.googleapis.com to Vertex AI.
  * @class
  * @memberof v1beta1
  */
@@ -469,7 +469,7 @@ export class MigrationServiceClient {
   ): void;
   /**
    * Batch migrates resources from ml.googleapis.com, automl.googleapis.com,
-   * and datalabeling.googleapis.com to AI Platform (Unified).
+   * and datalabeling.googleapis.com to Vertex AI.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -612,13 +612,13 @@ export class MigrationServiceClient {
   /**
    * Searches all of the resources in automl.googleapis.com,
    * datalabeling.googleapis.com and ml.googleapis.com that can be migrated to
-   * AI Platform's given location.
+   * Vertex AI's given location.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that the migratable resources should be searched from.
-   *   It's the AI Platform location that the resources can be migrated to, not
+   *   It's the Vertex AI location that the resources can be migrated to, not
    *   the resources' original location.
    *   Format:
    *   `projects/{project}/locations/{location}`
@@ -707,7 +707,7 @@ export class MigrationServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that the migratable resources should be searched from.
-   *   It's the AI Platform location that the resources can be migrated to, not
+   *   It's the Vertex AI location that the resources can be migrated to, not
    *   the resources' original location.
    *   Format:
    *   `projects/{project}/locations/{location}`
@@ -770,7 +770,7 @@ export class MigrationServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The location that the migratable resources should be searched from.
-   *   It's the AI Platform location that the resources can be migrated to, not
+   *   It's the Vertex AI location that the resources can be migrated to, not
    *   the resources' original location.
    *   Format:
    *   `projects/{project}/locations/{location}`

@@ -1295,10 +1295,8 @@ export class FeaturestoreServiceClient {
    *
    *   Updatable fields:
    *
-   *     * `display_name`
    *     * `labels`
    *     * `online_serving_config.fixed_node_count`
-   *     * `retention_policy.online_storage_ttl_days`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2859,7 +2857,6 @@ export class FeaturestoreServiceClient {
    *   Lists the featurestores that match the filter expression. The following
    *   fields are supported:
    *
-   *   * `display_name`: Supports =, != comparisons.
    *   * `create_time`: Supports =, !=, <, >, <=, and >= comparisons. Values must
    *   be
    *     in RFC 3339 format.
@@ -2894,7 +2891,6 @@ export class FeaturestoreServiceClient {
    *   Use "desc" after a field name for descending.
    *   Supported Fields:
    *
-   *     * `display_name`
    *     * `create_time`
    *     * `update_time`
    *     * `online_serving_config.fixed_node_count`
@@ -2969,7 +2965,6 @@ export class FeaturestoreServiceClient {
    *   Lists the featurestores that match the filter expression. The following
    *   fields are supported:
    *
-   *   * `display_name`: Supports =, != comparisons.
    *   * `create_time`: Supports =, !=, <, >, <=, and >= comparisons. Values must
    *   be
    *     in RFC 3339 format.
@@ -3004,7 +2999,6 @@ export class FeaturestoreServiceClient {
    *   Use "desc" after a field name for descending.
    *   Supported Fields:
    *
-   *     * `display_name`
    *     * `create_time`
    *     * `update_time`
    *     * `online_serving_config.fixed_node_count`
@@ -3057,7 +3051,6 @@ export class FeaturestoreServiceClient {
    *   Lists the featurestores that match the filter expression. The following
    *   fields are supported:
    *
-   *   * `display_name`: Supports =, != comparisons.
    *   * `create_time`: Supports =, !=, <, >, <=, and >= comparisons. Values must
    *   be
    *     in RFC 3339 format.
@@ -3092,7 +3085,6 @@ export class FeaturestoreServiceClient {
    *   Use "desc" after a field name for descending.
    *   Supported Fields:
    *
-   *     * `display_name`
    *     * `create_time`
    *     * `update_time`
    *     * `online_serving_config.fixed_node_count`
