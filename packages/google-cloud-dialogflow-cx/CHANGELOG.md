@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.8.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.7.0...v2.8.0) (2021-05-25)
+
+
+### Features
+
+* added API for continuous test ([#119](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/119)) ([d36009b](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/d36009b8079314fbd7f9c30d2013ed53dc811342))
+
 ## [2.7.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.6.0...v2.7.0) (2021-05-10)
 
 
