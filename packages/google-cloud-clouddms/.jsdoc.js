@@ -16,11 +16,40 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-/* eslint-disable node/no-missing-require, no-unused-vars */
-const clouddms = require('@google-cloud/dms');
+'use strict';
 
-function main() {
-  const dataMigrationServiceClient = new clouddms.DataMigrationServiceClient();
-}
-
-main();
+module.exports = {
+  opts: {
+    readme: './README.md',
+    package: './package.json',
+    template: './node_modules/jsdoc-fresh',
+    recurse: true,
+    verbose: true,
+    destination: './docs/'
+  },
+  plugins: [
+    'plugins/markdown',
+    'jsdoc-region-tag'
+  ],
+  source: {
+    excludePattern: '(^|\\/|\\\\)[._]',
+    include: [
+      'build/src',
+      'protos'
+    ],
+    includePattern: '\\.js$'
+  },
+  templates: {
+    copyright: 'Copyright 2021 Google LLC',
+    includeDate: false,
+    sourceFiles: false,
+    systemName: '@google-cloud/secret-manager',
+    theme: 'lumen',
+    default: {
+      outputSourceFiles: false
+    }
+  },
+  markdown: {
+    idInHeadings: true
+  }
+};

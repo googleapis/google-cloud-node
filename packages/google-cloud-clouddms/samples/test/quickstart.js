@@ -1,4 +1,3 @@
-// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,11 +15,31 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-/* eslint-disable node/no-missing-require, no-unused-vars */
-const clouddms = require('@google-cloud/dms');
+'use strict';
 
-function main() {
-  const dataMigrationServiceClient = new clouddms.DataMigrationServiceClient();
-}
+const path = require('path');
+const cp = require('child_process');
+const {before, describe, it} = require('mocha');
+const {DataMigrationServiceClient} = require('@google-cloud/dms');
+const {assert} = require('chai');
 
-main();
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+
+const cwd = path.join(__dirname, '..');
+
+const client = new DataMigrationServiceClient();
+
+describe('Quickstart', () => {
+  let projectId;
+  before(async () => {
+    // eslint-disable-next-line no-unused-vars
+    projectId = await client.getProjectId();
+  });
+
+  it('should run quickstart', async () => {
+    const stdout = execSync(`node ./quickstart.js ${projectId} us-central1`, {
+      cwd,
+    });
+    assert.match(stdout, /DRAFT/);
+  });
+});
