@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/kms",
   "description": "Google Cloud Key Management Service (KMS) API client for Node.js",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {

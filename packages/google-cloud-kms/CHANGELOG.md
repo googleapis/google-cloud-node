@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-kms/compare/v2.3.2...v2.3.3) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#456](https://www.github.com/googleapis/nodejs-kms/issues/456)) ([6f9ceae](https://www.github.com/googleapis/nodejs-kms/commit/6f9ceae5600620e889fb87f6ab250c951d73c3c3))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-kms/compare/v2.3.1...v2.3.2) (2021-05-12)
 
 
