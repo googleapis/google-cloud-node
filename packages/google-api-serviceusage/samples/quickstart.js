@@ -1,3 +1,5 @@
+// Copyright 2021 Google LLC
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -10,35 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-
 'use strict';
 
-async function main() {
-  // [START nodejs_serviceusage_quickstart]
+async function main(
+  parent = 'projects/my-project', // Project to list service usage for.
+  filter = 'state:ENABLED' // Service to filter on.
+) {
+  // [START serviceusage_quickstart]
   // Imports the Google Cloud client library
-
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
   const {ServiceUsageClient} = require('@google-cloud/serviceusage');
 
-  // TODO(developer): replace with your prefered project ID.
-  // const projectId = 'my-project'
+  // const parent = 'projects/my-project', // Project to list service usage for.
+  // filter = 'state:ENABLED' // Filter when listing services.
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {ServiceUsageClient}();
-
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-    console.log(
-      'DPE! Change this code so that it shows how to use the library! See comments below on structure.'
-    );
-    // const [thing] = await client.methodName({
-    // });
-    // console.info(thing);
+  const client = new ServiceUsageClient();
+  async function listServices() {
+    for await (const service of client.listServicesAsync({
+      parent,
+      filter,
+    })) {
+      console.info(service.name);
+    }
   }
-  doSomething();
-  // [END nodejs_serviceusage_quickstart]
+  listServices();
+  // [END serviceusage_quickstart]
 }
 
 main(...process.argv.slice(2)).catch(err => {

@@ -59,28 +59,22 @@ npm install @google-cloud/serviceusage
 
 ```javascript
 // Imports the Google Cloud client library
-
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
 const {ServiceUsageClient} = require('@google-cloud/serviceusage');
 
-// TODO(developer): replace with your prefered project ID.
-// const projectId = 'my-project'
+// const parent = 'projects/my-project', // Project to list service usage for.
+// filter = 'state:ENABLED' // Filter when listing services.
 
 // Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {ServiceUsageClient}();
-
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
-  console.log(
-    'DPE! Change this code so that it shows how to use the library! See comments below on structure.'
-  );
-  // const [thing] = await client.methodName({
-  // });
-  // console.info(thing);
+const client = new ServiceUsageClient();
+async function listServices() {
+  for await (const service of client.listServicesAsync({
+    parent,
+    filter,
+  })) {
+    console.info(service.name);
+  }
 }
-doSomething();
+listServices();
 
 ```
 
