@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.1.1...v2.1.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#279](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/279)) ([6dc35a7](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/6dc35a7c158b3981d7854969d37ff0ddebbbe6de))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.1.0...v2.1.1) (2021-05-12)
 
 
