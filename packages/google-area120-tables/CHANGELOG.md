@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.1...v1.2.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#60](https://www.github.com/googleapis/nodejs-area120-tables/issues/60)) ([c4dd5b2](https://www.github.com/googleapis/nodejs-area120-tables/commit/c4dd5b28d22eacc2cd34b36519c4abbebb5fa840))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.0...v1.2.1) (2021-05-12)
 
 
