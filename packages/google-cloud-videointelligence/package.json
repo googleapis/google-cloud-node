@@ -65,7 +65,7 @@
     "null-loader": "^4.0.0",
     "pack-n-play": "^1.0.0-2",
     "prettier": "^2.1.2",
-    "sinon": "^10.0.0",
+    "sinon": "^11.0.0",
     "ts-loader": "^9.0.0",
     "typescript": "^3.8.3"
   }
