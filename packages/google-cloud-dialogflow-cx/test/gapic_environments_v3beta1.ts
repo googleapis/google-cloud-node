@@ -841,6 +841,200 @@ describe('v3beta1.EnvironmentsClient', () => {
     });
   });
 
+  describe('runContinuousTest', () => {
+    it('invokes runContinuousTest without error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RunContinuousTestRequest()
+      );
+      request.environment = '';
+      const expectedHeaderRequestParams = 'environment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.runContinuousTest =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.runContinuousTest(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.runContinuousTest as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes runContinuousTest without error using callback', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RunContinuousTestRequest()
+      );
+      request.environment = '';
+      const expectedHeaderRequestParams = 'environment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.runContinuousTest =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.runContinuousTest(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.dialogflow.cx.v3beta1.IRunContinuousTestResponse,
+              protos.google.cloud.dialogflow.cx.v3beta1.IRunContinuousTestMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.dialogflow.cx.v3beta1.IRunContinuousTestResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IRunContinuousTestMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.runContinuousTest as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes runContinuousTest with call error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RunContinuousTestRequest()
+      );
+      request.environment = '';
+      const expectedHeaderRequestParams = 'environment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.runContinuousTest = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.runContinuousTest(request), expectedError);
+      assert(
+        (client.innerApiCalls.runContinuousTest as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes runContinuousTest with LRO error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.RunContinuousTestRequest()
+      );
+      request.environment = '';
+      const expectedHeaderRequestParams = 'environment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.runContinuousTest = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.runContinuousTest(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.runContinuousTest as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkRunContinuousTestProgress without error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkRunContinuousTestProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRunContinuousTestProgress with error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkRunContinuousTestProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
   describe('listEnvironments', () => {
     it('invokes listEnvironments without error', async () => {
       const client = new environmentsModule.v3beta1.EnvironmentsClient({
@@ -1479,6 +1673,337 @@ describe('v3beta1.EnvironmentsClient', () => {
     });
   });
 
+  describe('listContinuousTestResults', () => {
+    it('invokes listContinuousTestResults without error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListContinuousTestResultsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+      ];
+      client.innerApiCalls.listContinuousTestResults =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listContinuousTestResults(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listContinuousTestResults as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listContinuousTestResults without error using callback', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListContinuousTestResultsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+      ];
+      client.innerApiCalls.listContinuousTestResults =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listContinuousTestResults(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.dialogflow.cx.v3beta1.IContinuousTestResult[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listContinuousTestResults as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listContinuousTestResults with error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListContinuousTestResultsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listContinuousTestResults = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listContinuousTestResults(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listContinuousTestResults as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listContinuousTestResultsStream without error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListContinuousTestResultsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+      ];
+      client.descriptors.page.listContinuousTestResults.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listContinuousTestResultsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listContinuousTestResults
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listContinuousTestResults, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listContinuousTestResults
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listContinuousTestResultsStream with error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListContinuousTestResultsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listContinuousTestResults.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listContinuousTestResultsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listContinuousTestResults
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listContinuousTestResults, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listContinuousTestResults
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listContinuousTestResults without error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListContinuousTestResultsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.dialogflow.cx.v3beta1.ContinuousTestResult()
+        ),
+      ];
+      client.descriptors.page.listContinuousTestResults.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.dialogflow.cx.v3beta1.IContinuousTestResult[] =
+        [];
+      const iterable = client.listContinuousTestResultsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listContinuousTestResults
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listContinuousTestResults
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listContinuousTestResults with error', async () => {
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.dialogflow.cx.v3beta1.ListContinuousTestResultsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listContinuousTestResults.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listContinuousTestResultsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.dialogflow.cx.v3beta1.IContinuousTestResult[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listContinuousTestResults
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listContinuousTestResults
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('agent', () => {
       const fakePath = '/rendered/path/agent';
@@ -1614,6 +2139,118 @@ describe('v3beta1.EnvironmentsClient', () => {
         assert(
           (
             client.pathTemplates.agentValidationResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('continuousTestResult', () => {
+      const fakePath = '/rendered/path/continuousTestResult';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        environment: 'environmentValue',
+        continuous_test_result: 'continuousTestResultValue',
+      };
+      const client = new environmentsModule.v3beta1.EnvironmentsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.continuousTestResultPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.continuousTestResultPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('continuousTestResultPath', () => {
+        const result = client.continuousTestResultPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'environmentValue',
+          'continuousTestResultValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromContinuousTestResultName', () => {
+        const result =
+          client.matchProjectFromContinuousTestResultName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromContinuousTestResultName', () => {
+        const result =
+          client.matchLocationFromContinuousTestResultName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromContinuousTestResultName', () => {
+        const result = client.matchAgentFromContinuousTestResultName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromContinuousTestResultName', () => {
+        const result =
+          client.matchEnvironmentFromContinuousTestResultName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchContinuousTestResultFromContinuousTestResultName', () => {
+        const result =
+          client.matchContinuousTestResultFromContinuousTestResultName(
+            fakePath
+          );
+        assert.strictEqual(result, 'continuousTestResultValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
               .match as SinonStub
           )
             .getCall(-1)

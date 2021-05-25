@@ -206,6 +206,11 @@
                 "updateEnvironment"
               ]
             },
+            "RunContinuousTest": {
+              "methods": [
+                "runContinuousTest"
+              ]
+            },
             "ListEnvironments": {
               "methods": [
                 "listEnvironments",
@@ -218,6 +223,13 @@
                 "lookupEnvironmentHistory",
                 "lookupEnvironmentHistoryStream",
                 "lookupEnvironmentHistoryAsync"
+              ]
+            },
+            "ListContinuousTestResults": {
+              "methods": [
+                "listContinuousTestResults",
+                "listContinuousTestResultsStream",
+                "listContinuousTestResultsAsync"
               ]
             }
           }
@@ -245,6 +257,11 @@
                 "updateEnvironment"
               ]
             },
+            "RunContinuousTest": {
+              "methods": [
+                "runContinuousTest"
+              ]
+            },
             "ListEnvironments": {
               "methods": [
                 "listEnvironments",
@@ -257,6 +274,13 @@
                 "lookupEnvironmentHistory",
                 "lookupEnvironmentHistoryStream",
                 "lookupEnvironmentHistoryAsync"
+              ]
+            },
+            "ListContinuousTestResults": {
+              "methods": [
+                "listContinuousTestResults",
+                "listContinuousTestResultsStream",
+                "listContinuousTestResultsAsync"
               ]
             }
           }

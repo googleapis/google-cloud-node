@@ -1162,6 +1162,119 @@ describe('v3beta1.TransitionRouteGroupsClient', () => {
       });
     });
 
+    describe('continuousTestResult', () => {
+      const fakePath = '/rendered/path/continuousTestResult';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        agent: 'agentValue',
+        environment: 'environmentValue',
+        continuous_test_result: 'continuousTestResultValue',
+      };
+      const client =
+        new transitionroutegroupsModule.v3beta1.TransitionRouteGroupsClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      client.pathTemplates.continuousTestResultPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.continuousTestResultPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('continuousTestResultPath', () => {
+        const result = client.continuousTestResultPath(
+          'projectValue',
+          'locationValue',
+          'agentValue',
+          'environmentValue',
+          'continuousTestResultValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromContinuousTestResultName', () => {
+        const result =
+          client.matchProjectFromContinuousTestResultName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromContinuousTestResultName', () => {
+        const result =
+          client.matchLocationFromContinuousTestResultName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAgentFromContinuousTestResultName', () => {
+        const result = client.matchAgentFromContinuousTestResultName(fakePath);
+        assert.strictEqual(result, 'agentValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchEnvironmentFromContinuousTestResultName', () => {
+        const result =
+          client.matchEnvironmentFromContinuousTestResultName(fakePath);
+        assert.strictEqual(result, 'environmentValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchContinuousTestResultFromContinuousTestResultName', () => {
+        const result =
+          client.matchContinuousTestResultFromContinuousTestResultName(
+            fakePath
+          );
+        assert.strictEqual(result, 'continuousTestResultValue');
+        assert(
+          (
+            client.pathTemplates.continuousTestResultPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('entityType', () => {
       const fakePath = '/rendered/path/entityType';
       const expectedParameters = {

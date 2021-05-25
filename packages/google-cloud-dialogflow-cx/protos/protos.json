@@ -9406,6 +9406,48 @@
                                   "(google.api.method_signature)": "name"
                                 }
                               ]
+                            },
+                            "RunContinuousTest": {
+                              "requestType": "RunContinuousTestRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{environment=projects/*/locations/*/agents/*/environments/*}:runContinuousTest",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "RunContinuousTestResponse",
+                                "(google.longrunning.operation_info).metadata_type": "RunContinuousTestMetadata"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{environment=projects/*/locations/*/agents/*/environments/*}:runContinuousTest",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "RunContinuousTestResponse",
+                                    "metadata_type": "RunContinuousTestMetadata"
+                                  }
+                                }
+                              ]
+                            },
+                            "ListContinuousTestResults": {
+                              "requestType": "ListContinuousTestResultsRequest",
+                              "responseType": "ListContinuousTestResultsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*}/continuousTestResults",
+                                "(google.api.method_signature)": "parent"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v3beta1/{parent=projects/*/locations/*/agents/*/environments/*}/continuousTestResults"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent"
+                                }
+                              ]
                             }
                           }
                         },
@@ -9580,6 +9622,105 @@
                             "environments": {
                               "rule": "repeated",
                               "type": "Environment",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "ContinuousTestResult": {
+                          "options": {
+                            "(google.api.resource).type": "dialogflow.googleapis.com/ContinuousTestResult",
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}"
+                          },
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "result": {
+                              "type": "AggregatedTestResult",
+                              "id": 2
+                            },
+                            "testCaseResults": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/TestCaseResult"
+                              }
+                            },
+                            "runTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "AggregatedTestResult": {
+                              "values": {
+                                "AGGREGATED_TEST_RESULT_UNSPECIFIED": 0,
+                                "PASSED": 1,
+                                "FAILED": 2
+                              }
+                            }
+                          }
+                        },
+                        "RunContinuousTestRequest": {
+                          "fields": {
+                            "environment": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Environment"
+                              }
+                            }
+                          }
+                        },
+                        "RunContinuousTestResponse": {
+                          "fields": {
+                            "continuousTestResult": {
+                              "type": "ContinuousTestResult",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "RunContinuousTestMetadata": {
+                          "fields": {
+                            "errors": {
+                              "rule": "repeated",
+                              "type": "TestError",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ListContinuousTestResultsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/ContinuousTestResult"
+                              }
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "ListContinuousTestResultsResponse": {
+                          "fields": {
+                            "continuousTestResults": {
+                              "rule": "repeated",
+                              "type": "ContinuousTestResult",
                               "id": 1
                             },
                             "nextPageToken": {
