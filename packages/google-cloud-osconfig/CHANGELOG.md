@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.6.1](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.0...v1.6.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#108](https://www.github.com/googleapis/nodejs-os-config/issues/108)) ([3d61a36](https://www.github.com/googleapis/nodejs-os-config/commit/3d61a36652465fa948595a18a99e0ebb3ecd0eac))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.5.0...v1.6.0) (2021-05-24)
 
 
