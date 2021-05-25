@@ -64,6 +64,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-paginator/t
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-paginator/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-paginator&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Streamify | [source code](https://github.com/googleapis/nodejs-paginator/blob/master/samples/streamify.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-paginator&page=editor&open_in_editor=samples/streamify.js,samples/README.md) |
 
 
 
