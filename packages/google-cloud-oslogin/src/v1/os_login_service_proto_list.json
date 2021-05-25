@@ -1,3 +1,4 @@
 [
+  "../../protos/google/cloud/oslogin/common/common.proto",
   "../../protos/google/cloud/oslogin/v1/oslogin.proto"
 ]

@@ -23,6 +23,275 @@ export namespace google {
         /** Namespace oslogin. */
         namespace oslogin {
 
+            /** Namespace common. */
+            namespace common {
+
+                /** OperatingSystemType enum. */
+                enum OperatingSystemType {
+                    OPERATING_SYSTEM_TYPE_UNSPECIFIED = 0,
+                    LINUX = 1,
+                    WINDOWS = 2
+                }
+
+                /** Properties of a PosixAccount. */
+                interface IPosixAccount {
+
+                    /** PosixAccount primary */
+                    primary?: (boolean|null);
+
+                    /** PosixAccount username */
+                    username?: (string|null);
+
+                    /** PosixAccount uid */
+                    uid?: (number|Long|string|null);
+
+                    /** PosixAccount gid */
+                    gid?: (number|Long|string|null);
+
+                    /** PosixAccount homeDirectory */
+                    homeDirectory?: (string|null);
+
+                    /** PosixAccount shell */
+                    shell?: (string|null);
+
+                    /** PosixAccount gecos */
+                    gecos?: (string|null);
+
+                    /** PosixAccount systemId */
+                    systemId?: (string|null);
+
+                    /** PosixAccount accountId */
+                    accountId?: (string|null);
+
+                    /** PosixAccount operatingSystemType */
+                    operatingSystemType?: (google.cloud.oslogin.common.OperatingSystemType|keyof typeof google.cloud.oslogin.common.OperatingSystemType|null);
+
+                    /** PosixAccount name */
+                    name?: (string|null);
+                }
+
+                /** Represents a PosixAccount. */
+                class PosixAccount implements IPosixAccount {
+
+                    /**
+                     * Constructs a new PosixAccount.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oslogin.common.IPosixAccount);
+
+                    /** PosixAccount primary. */
+                    public primary: boolean;
+
+                    /** PosixAccount username. */
+                    public username: string;
+
+                    /** PosixAccount uid. */
+                    public uid: (number|Long|string);
+
+                    /** PosixAccount gid. */
+                    public gid: (number|Long|string);
+
+                    /** PosixAccount homeDirectory. */
+                    public homeDirectory: string;
+
+                    /** PosixAccount shell. */
+                    public shell: string;
+
+                    /** PosixAccount gecos. */
+                    public gecos: string;
+
+                    /** PosixAccount systemId. */
+                    public systemId: string;
+
+                    /** PosixAccount accountId. */
+                    public accountId: string;
+
+                    /** PosixAccount operatingSystemType. */
+                    public operatingSystemType: (google.cloud.oslogin.common.OperatingSystemType|keyof typeof google.cloud.oslogin.common.OperatingSystemType);
+
+                    /** PosixAccount name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new PosixAccount instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PosixAccount instance
+                     */
+                    public static create(properties?: google.cloud.oslogin.common.IPosixAccount): google.cloud.oslogin.common.PosixAccount;
+
+                    /**
+                     * Encodes the specified PosixAccount message. Does not implicitly {@link google.cloud.oslogin.common.PosixAccount.verify|verify} messages.
+                     * @param message PosixAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oslogin.common.IPosixAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PosixAccount message, length delimited. Does not implicitly {@link google.cloud.oslogin.common.PosixAccount.verify|verify} messages.
+                     * @param message PosixAccount message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oslogin.common.IPosixAccount, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PosixAccount message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PosixAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.common.PosixAccount;
+
+                    /**
+                     * Decodes a PosixAccount message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PosixAccount
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.common.PosixAccount;
+
+                    /**
+                     * Verifies a PosixAccount message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PosixAccount message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PosixAccount
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.common.PosixAccount;
+
+                    /**
+                     * Creates a plain object from a PosixAccount message. Also converts values to other types if specified.
+                     * @param message PosixAccount
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oslogin.common.PosixAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PosixAccount to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a SshPublicKey. */
+                interface ISshPublicKey {
+
+                    /** SshPublicKey key */
+                    key?: (string|null);
+
+                    /** SshPublicKey expirationTimeUsec */
+                    expirationTimeUsec?: (number|Long|string|null);
+
+                    /** SshPublicKey fingerprint */
+                    fingerprint?: (string|null);
+
+                    /** SshPublicKey name */
+                    name?: (string|null);
+                }
+
+                /** Represents a SshPublicKey. */
+                class SshPublicKey implements ISshPublicKey {
+
+                    /**
+                     * Constructs a new SshPublicKey.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oslogin.common.ISshPublicKey);
+
+                    /** SshPublicKey key. */
+                    public key: string;
+
+                    /** SshPublicKey expirationTimeUsec. */
+                    public expirationTimeUsec: (number|Long|string);
+
+                    /** SshPublicKey fingerprint. */
+                    public fingerprint: string;
+
+                    /** SshPublicKey name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new SshPublicKey instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SshPublicKey instance
+                     */
+                    public static create(properties?: google.cloud.oslogin.common.ISshPublicKey): google.cloud.oslogin.common.SshPublicKey;
+
+                    /**
+                     * Encodes the specified SshPublicKey message. Does not implicitly {@link google.cloud.oslogin.common.SshPublicKey.verify|verify} messages.
+                     * @param message SshPublicKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oslogin.common.ISshPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SshPublicKey message, length delimited. Does not implicitly {@link google.cloud.oslogin.common.SshPublicKey.verify|verify} messages.
+                     * @param message SshPublicKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oslogin.common.ISshPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SshPublicKey message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SshPublicKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.common.SshPublicKey;
+
+                    /**
+                     * Decodes a SshPublicKey message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SshPublicKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.common.SshPublicKey;
+
+                    /**
+                     * Verifies a SshPublicKey message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SshPublicKey message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SshPublicKey
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.common.SshPublicKey;
+
+                    /**
+                     * Creates a plain object from a SshPublicKey message. Also converts values to other types if specified.
+                     * @param message SshPublicKey
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oslogin.common.SshPublicKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SshPublicKey to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Namespace v1. */
             namespace v1 {
 
@@ -939,275 +1208,6 @@ export namespace google {
 
                     /**
                      * Converts this UpdateSshPublicKeyRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-            }
-
-            /** Namespace common. */
-            namespace common {
-
-                /** OperatingSystemType enum. */
-                enum OperatingSystemType {
-                    OPERATING_SYSTEM_TYPE_UNSPECIFIED = 0,
-                    LINUX = 1,
-                    WINDOWS = 2
-                }
-
-                /** Properties of a PosixAccount. */
-                interface IPosixAccount {
-
-                    /** PosixAccount primary */
-                    primary?: (boolean|null);
-
-                    /** PosixAccount username */
-                    username?: (string|null);
-
-                    /** PosixAccount uid */
-                    uid?: (number|Long|string|null);
-
-                    /** PosixAccount gid */
-                    gid?: (number|Long|string|null);
-
-                    /** PosixAccount homeDirectory */
-                    homeDirectory?: (string|null);
-
-                    /** PosixAccount shell */
-                    shell?: (string|null);
-
-                    /** PosixAccount gecos */
-                    gecos?: (string|null);
-
-                    /** PosixAccount systemId */
-                    systemId?: (string|null);
-
-                    /** PosixAccount accountId */
-                    accountId?: (string|null);
-
-                    /** PosixAccount operatingSystemType */
-                    operatingSystemType?: (google.cloud.oslogin.common.OperatingSystemType|keyof typeof google.cloud.oslogin.common.OperatingSystemType|null);
-
-                    /** PosixAccount name */
-                    name?: (string|null);
-                }
-
-                /** Represents a PosixAccount. */
-                class PosixAccount implements IPosixAccount {
-
-                    /**
-                     * Constructs a new PosixAccount.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.oslogin.common.IPosixAccount);
-
-                    /** PosixAccount primary. */
-                    public primary: boolean;
-
-                    /** PosixAccount username. */
-                    public username: string;
-
-                    /** PosixAccount uid. */
-                    public uid: (number|Long|string);
-
-                    /** PosixAccount gid. */
-                    public gid: (number|Long|string);
-
-                    /** PosixAccount homeDirectory. */
-                    public homeDirectory: string;
-
-                    /** PosixAccount shell. */
-                    public shell: string;
-
-                    /** PosixAccount gecos. */
-                    public gecos: string;
-
-                    /** PosixAccount systemId. */
-                    public systemId: string;
-
-                    /** PosixAccount accountId. */
-                    public accountId: string;
-
-                    /** PosixAccount operatingSystemType. */
-                    public operatingSystemType: (google.cloud.oslogin.common.OperatingSystemType|keyof typeof google.cloud.oslogin.common.OperatingSystemType);
-
-                    /** PosixAccount name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new PosixAccount instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PosixAccount instance
-                     */
-                    public static create(properties?: google.cloud.oslogin.common.IPosixAccount): google.cloud.oslogin.common.PosixAccount;
-
-                    /**
-                     * Encodes the specified PosixAccount message. Does not implicitly {@link google.cloud.oslogin.common.PosixAccount.verify|verify} messages.
-                     * @param message PosixAccount message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.oslogin.common.IPosixAccount, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PosixAccount message, length delimited. Does not implicitly {@link google.cloud.oslogin.common.PosixAccount.verify|verify} messages.
-                     * @param message PosixAccount message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.oslogin.common.IPosixAccount, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PosixAccount message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PosixAccount
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.common.PosixAccount;
-
-                    /**
-                     * Decodes a PosixAccount message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PosixAccount
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.common.PosixAccount;
-
-                    /**
-                     * Verifies a PosixAccount message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PosixAccount message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PosixAccount
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.common.PosixAccount;
-
-                    /**
-                     * Creates a plain object from a PosixAccount message. Also converts values to other types if specified.
-                     * @param message PosixAccount
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.oslogin.common.PosixAccount, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PosixAccount to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a SshPublicKey. */
-                interface ISshPublicKey {
-
-                    /** SshPublicKey key */
-                    key?: (string|null);
-
-                    /** SshPublicKey expirationTimeUsec */
-                    expirationTimeUsec?: (number|Long|string|null);
-
-                    /** SshPublicKey fingerprint */
-                    fingerprint?: (string|null);
-
-                    /** SshPublicKey name */
-                    name?: (string|null);
-                }
-
-                /** Represents a SshPublicKey. */
-                class SshPublicKey implements ISshPublicKey {
-
-                    /**
-                     * Constructs a new SshPublicKey.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.oslogin.common.ISshPublicKey);
-
-                    /** SshPublicKey key. */
-                    public key: string;
-
-                    /** SshPublicKey expirationTimeUsec. */
-                    public expirationTimeUsec: (number|Long|string);
-
-                    /** SshPublicKey fingerprint. */
-                    public fingerprint: string;
-
-                    /** SshPublicKey name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new SshPublicKey instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns SshPublicKey instance
-                     */
-                    public static create(properties?: google.cloud.oslogin.common.ISshPublicKey): google.cloud.oslogin.common.SshPublicKey;
-
-                    /**
-                     * Encodes the specified SshPublicKey message. Does not implicitly {@link google.cloud.oslogin.common.SshPublicKey.verify|verify} messages.
-                     * @param message SshPublicKey message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.oslogin.common.ISshPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified SshPublicKey message, length delimited. Does not implicitly {@link google.cloud.oslogin.common.SshPublicKey.verify|verify} messages.
-                     * @param message SshPublicKey message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.oslogin.common.ISshPublicKey, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a SshPublicKey message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns SshPublicKey
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oslogin.common.SshPublicKey;
-
-                    /**
-                     * Decodes a SshPublicKey message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns SshPublicKey
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oslogin.common.SshPublicKey;
-
-                    /**
-                     * Verifies a SshPublicKey message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a SshPublicKey message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns SshPublicKey
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.oslogin.common.SshPublicKey;
-
-                    /**
-                     * Creates a plain object from a SshPublicKey message. Also converts values to other types if specified.
-                     * @param message SshPublicKey
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.oslogin.common.SshPublicKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this SshPublicKey to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2141,6 +2141,255 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -2475,255 +2724,6 @@ export namespace google {
 
             /**
              * Converts this CustomHttpPattern to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

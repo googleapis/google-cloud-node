@@ -57,6 +57,756 @@
                  */
                 var oslogin = {};
     
+                oslogin.common = (function() {
+    
+                    /**
+                     * Namespace common.
+                     * @memberof google.cloud.oslogin
+                     * @namespace
+                     */
+                    var common = {};
+    
+                    /**
+                     * OperatingSystemType enum.
+                     * @name google.cloud.oslogin.common.OperatingSystemType
+                     * @enum {number}
+                     * @property {number} OPERATING_SYSTEM_TYPE_UNSPECIFIED=0 OPERATING_SYSTEM_TYPE_UNSPECIFIED value
+                     * @property {number} LINUX=1 LINUX value
+                     * @property {number} WINDOWS=2 WINDOWS value
+                     */
+                    common.OperatingSystemType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "OPERATING_SYSTEM_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "LINUX"] = 1;
+                        values[valuesById[2] = "WINDOWS"] = 2;
+                        return values;
+                    })();
+    
+                    common.PosixAccount = (function() {
+    
+                        /**
+                         * Properties of a PosixAccount.
+                         * @memberof google.cloud.oslogin.common
+                         * @interface IPosixAccount
+                         * @property {boolean|null} [primary] PosixAccount primary
+                         * @property {string|null} [username] PosixAccount username
+                         * @property {number|Long|null} [uid] PosixAccount uid
+                         * @property {number|Long|null} [gid] PosixAccount gid
+                         * @property {string|null} [homeDirectory] PosixAccount homeDirectory
+                         * @property {string|null} [shell] PosixAccount shell
+                         * @property {string|null} [gecos] PosixAccount gecos
+                         * @property {string|null} [systemId] PosixAccount systemId
+                         * @property {string|null} [accountId] PosixAccount accountId
+                         * @property {google.cloud.oslogin.common.OperatingSystemType|null} [operatingSystemType] PosixAccount operatingSystemType
+                         * @property {string|null} [name] PosixAccount name
+                         */
+    
+                        /**
+                         * Constructs a new PosixAccount.
+                         * @memberof google.cloud.oslogin.common
+                         * @classdesc Represents a PosixAccount.
+                         * @implements IPosixAccount
+                         * @constructor
+                         * @param {google.cloud.oslogin.common.IPosixAccount=} [properties] Properties to set
+                         */
+                        function PosixAccount(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * PosixAccount primary.
+                         * @member {boolean} primary
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.primary = false;
+    
+                        /**
+                         * PosixAccount username.
+                         * @member {string} username
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.username = "";
+    
+                        /**
+                         * PosixAccount uid.
+                         * @member {number|Long} uid
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.uid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * PosixAccount gid.
+                         * @member {number|Long} gid
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * PosixAccount homeDirectory.
+                         * @member {string} homeDirectory
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.homeDirectory = "";
+    
+                        /**
+                         * PosixAccount shell.
+                         * @member {string} shell
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.shell = "";
+    
+                        /**
+                         * PosixAccount gecos.
+                         * @member {string} gecos
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.gecos = "";
+    
+                        /**
+                         * PosixAccount systemId.
+                         * @member {string} systemId
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.systemId = "";
+    
+                        /**
+                         * PosixAccount accountId.
+                         * @member {string} accountId
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.accountId = "";
+    
+                        /**
+                         * PosixAccount operatingSystemType.
+                         * @member {google.cloud.oslogin.common.OperatingSystemType} operatingSystemType
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.operatingSystemType = 0;
+    
+                        /**
+                         * PosixAccount name.
+                         * @member {string} name
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         */
+                        PosixAccount.prototype.name = "";
+    
+                        /**
+                         * Creates a new PosixAccount instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @static
+                         * @param {google.cloud.oslogin.common.IPosixAccount=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.common.PosixAccount} PosixAccount instance
+                         */
+                        PosixAccount.create = function create(properties) {
+                            return new PosixAccount(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified PosixAccount message. Does not implicitly {@link google.cloud.oslogin.common.PosixAccount.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @static
+                         * @param {google.cloud.oslogin.common.IPosixAccount} message PosixAccount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PosixAccount.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.primary != null && Object.hasOwnProperty.call(message, "primary"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.primary);
+                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.username);
+                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.uid);
+                            if (message.gid != null && Object.hasOwnProperty.call(message, "gid"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.gid);
+                            if (message.homeDirectory != null && Object.hasOwnProperty.call(message, "homeDirectory"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.homeDirectory);
+                            if (message.shell != null && Object.hasOwnProperty.call(message, "shell"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.shell);
+                            if (message.gecos != null && Object.hasOwnProperty.call(message, "gecos"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.gecos);
+                            if (message.systemId != null && Object.hasOwnProperty.call(message, "systemId"))
+                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.systemId);
+                            if (message.accountId != null && Object.hasOwnProperty.call(message, "accountId"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.accountId);
+                            if (message.operatingSystemType != null && Object.hasOwnProperty.call(message, "operatingSystemType"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.operatingSystemType);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified PosixAccount message, length delimited. Does not implicitly {@link google.cloud.oslogin.common.PosixAccount.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @static
+                         * @param {google.cloud.oslogin.common.IPosixAccount} message PosixAccount message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        PosixAccount.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a PosixAccount message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.common.PosixAccount} PosixAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PosixAccount.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.common.PosixAccount();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.primary = reader.bool();
+                                    break;
+                                case 2:
+                                    message.username = reader.string();
+                                    break;
+                                case 3:
+                                    message.uid = reader.int64();
+                                    break;
+                                case 4:
+                                    message.gid = reader.int64();
+                                    break;
+                                case 5:
+                                    message.homeDirectory = reader.string();
+                                    break;
+                                case 6:
+                                    message.shell = reader.string();
+                                    break;
+                                case 7:
+                                    message.gecos = reader.string();
+                                    break;
+                                case 8:
+                                    message.systemId = reader.string();
+                                    break;
+                                case 9:
+                                    message.accountId = reader.string();
+                                    break;
+                                case 10:
+                                    message.operatingSystemType = reader.int32();
+                                    break;
+                                case 11:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a PosixAccount message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.common.PosixAccount} PosixAccount
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        PosixAccount.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a PosixAccount message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        PosixAccount.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.primary != null && message.hasOwnProperty("primary"))
+                                if (typeof message.primary !== "boolean")
+                                    return "primary: boolean expected";
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                if (!$util.isString(message.username))
+                                    return "username: string expected";
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (!$util.isInteger(message.uid) && !(message.uid && $util.isInteger(message.uid.low) && $util.isInteger(message.uid.high)))
+                                    return "uid: integer|Long expected";
+                            if (message.gid != null && message.hasOwnProperty("gid"))
+                                if (!$util.isInteger(message.gid) && !(message.gid && $util.isInteger(message.gid.low) && $util.isInteger(message.gid.high)))
+                                    return "gid: integer|Long expected";
+                            if (message.homeDirectory != null && message.hasOwnProperty("homeDirectory"))
+                                if (!$util.isString(message.homeDirectory))
+                                    return "homeDirectory: string expected";
+                            if (message.shell != null && message.hasOwnProperty("shell"))
+                                if (!$util.isString(message.shell))
+                                    return "shell: string expected";
+                            if (message.gecos != null && message.hasOwnProperty("gecos"))
+                                if (!$util.isString(message.gecos))
+                                    return "gecos: string expected";
+                            if (message.systemId != null && message.hasOwnProperty("systemId"))
+                                if (!$util.isString(message.systemId))
+                                    return "systemId: string expected";
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                if (!$util.isString(message.accountId))
+                                    return "accountId: string expected";
+                            if (message.operatingSystemType != null && message.hasOwnProperty("operatingSystemType"))
+                                switch (message.operatingSystemType) {
+                                default:
+                                    return "operatingSystemType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a PosixAccount message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.common.PosixAccount} PosixAccount
+                         */
+                        PosixAccount.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.common.PosixAccount)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.common.PosixAccount();
+                            if (object.primary != null)
+                                message.primary = Boolean(object.primary);
+                            if (object.username != null)
+                                message.username = String(object.username);
+                            if (object.uid != null)
+                                if ($util.Long)
+                                    (message.uid = $util.Long.fromValue(object.uid)).unsigned = false;
+                                else if (typeof object.uid === "string")
+                                    message.uid = parseInt(object.uid, 10);
+                                else if (typeof object.uid === "number")
+                                    message.uid = object.uid;
+                                else if (typeof object.uid === "object")
+                                    message.uid = new $util.LongBits(object.uid.low >>> 0, object.uid.high >>> 0).toNumber();
+                            if (object.gid != null)
+                                if ($util.Long)
+                                    (message.gid = $util.Long.fromValue(object.gid)).unsigned = false;
+                                else if (typeof object.gid === "string")
+                                    message.gid = parseInt(object.gid, 10);
+                                else if (typeof object.gid === "number")
+                                    message.gid = object.gid;
+                                else if (typeof object.gid === "object")
+                                    message.gid = new $util.LongBits(object.gid.low >>> 0, object.gid.high >>> 0).toNumber();
+                            if (object.homeDirectory != null)
+                                message.homeDirectory = String(object.homeDirectory);
+                            if (object.shell != null)
+                                message.shell = String(object.shell);
+                            if (object.gecos != null)
+                                message.gecos = String(object.gecos);
+                            if (object.systemId != null)
+                                message.systemId = String(object.systemId);
+                            if (object.accountId != null)
+                                message.accountId = String(object.accountId);
+                            switch (object.operatingSystemType) {
+                            case "OPERATING_SYSTEM_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.operatingSystemType = 0;
+                                break;
+                            case "LINUX":
+                            case 1:
+                                message.operatingSystemType = 1;
+                                break;
+                            case "WINDOWS":
+                            case 2:
+                                message.operatingSystemType = 2;
+                                break;
+                            }
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a PosixAccount message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @static
+                         * @param {google.cloud.oslogin.common.PosixAccount} message PosixAccount
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        PosixAccount.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.primary = false;
+                                object.username = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.uid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.uid = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.gid = options.longs === String ? "0" : 0;
+                                object.homeDirectory = "";
+                                object.shell = "";
+                                object.gecos = "";
+                                object.systemId = "";
+                                object.accountId = "";
+                                object.operatingSystemType = options.enums === String ? "OPERATING_SYSTEM_TYPE_UNSPECIFIED" : 0;
+                                object.name = "";
+                            }
+                            if (message.primary != null && message.hasOwnProperty("primary"))
+                                object.primary = message.primary;
+                            if (message.username != null && message.hasOwnProperty("username"))
+                                object.username = message.username;
+                            if (message.uid != null && message.hasOwnProperty("uid"))
+                                if (typeof message.uid === "number")
+                                    object.uid = options.longs === String ? String(message.uid) : message.uid;
+                                else
+                                    object.uid = options.longs === String ? $util.Long.prototype.toString.call(message.uid) : options.longs === Number ? new $util.LongBits(message.uid.low >>> 0, message.uid.high >>> 0).toNumber() : message.uid;
+                            if (message.gid != null && message.hasOwnProperty("gid"))
+                                if (typeof message.gid === "number")
+                                    object.gid = options.longs === String ? String(message.gid) : message.gid;
+                                else
+                                    object.gid = options.longs === String ? $util.Long.prototype.toString.call(message.gid) : options.longs === Number ? new $util.LongBits(message.gid.low >>> 0, message.gid.high >>> 0).toNumber() : message.gid;
+                            if (message.homeDirectory != null && message.hasOwnProperty("homeDirectory"))
+                                object.homeDirectory = message.homeDirectory;
+                            if (message.shell != null && message.hasOwnProperty("shell"))
+                                object.shell = message.shell;
+                            if (message.gecos != null && message.hasOwnProperty("gecos"))
+                                object.gecos = message.gecos;
+                            if (message.systemId != null && message.hasOwnProperty("systemId"))
+                                object.systemId = message.systemId;
+                            if (message.accountId != null && message.hasOwnProperty("accountId"))
+                                object.accountId = message.accountId;
+                            if (message.operatingSystemType != null && message.hasOwnProperty("operatingSystemType"))
+                                object.operatingSystemType = options.enums === String ? $root.google.cloud.oslogin.common.OperatingSystemType[message.operatingSystemType] : message.operatingSystemType;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this PosixAccount to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.common.PosixAccount
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        PosixAccount.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return PosixAccount;
+                    })();
+    
+                    common.SshPublicKey = (function() {
+    
+                        /**
+                         * Properties of a SshPublicKey.
+                         * @memberof google.cloud.oslogin.common
+                         * @interface ISshPublicKey
+                         * @property {string|null} [key] SshPublicKey key
+                         * @property {number|Long|null} [expirationTimeUsec] SshPublicKey expirationTimeUsec
+                         * @property {string|null} [fingerprint] SshPublicKey fingerprint
+                         * @property {string|null} [name] SshPublicKey name
+                         */
+    
+                        /**
+                         * Constructs a new SshPublicKey.
+                         * @memberof google.cloud.oslogin.common
+                         * @classdesc Represents a SshPublicKey.
+                         * @implements ISshPublicKey
+                         * @constructor
+                         * @param {google.cloud.oslogin.common.ISshPublicKey=} [properties] Properties to set
+                         */
+                        function SshPublicKey(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * SshPublicKey key.
+                         * @member {string} key
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @instance
+                         */
+                        SshPublicKey.prototype.key = "";
+    
+                        /**
+                         * SshPublicKey expirationTimeUsec.
+                         * @member {number|Long} expirationTimeUsec
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @instance
+                         */
+                        SshPublicKey.prototype.expirationTimeUsec = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * SshPublicKey fingerprint.
+                         * @member {string} fingerprint
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @instance
+                         */
+                        SshPublicKey.prototype.fingerprint = "";
+    
+                        /**
+                         * SshPublicKey name.
+                         * @member {string} name
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @instance
+                         */
+                        SshPublicKey.prototype.name = "";
+    
+                        /**
+                         * Creates a new SshPublicKey instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @static
+                         * @param {google.cloud.oslogin.common.ISshPublicKey=} [properties] Properties to set
+                         * @returns {google.cloud.oslogin.common.SshPublicKey} SshPublicKey instance
+                         */
+                        SshPublicKey.create = function create(properties) {
+                            return new SshPublicKey(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified SshPublicKey message. Does not implicitly {@link google.cloud.oslogin.common.SshPublicKey.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @static
+                         * @param {google.cloud.oslogin.common.ISshPublicKey} message SshPublicKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SshPublicKey.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
+                            if (message.expirationTimeUsec != null && Object.hasOwnProperty.call(message, "expirationTimeUsec"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.expirationTimeUsec);
+                            if (message.fingerprint != null && Object.hasOwnProperty.call(message, "fingerprint"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.fingerprint);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified SshPublicKey message, length delimited. Does not implicitly {@link google.cloud.oslogin.common.SshPublicKey.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @static
+                         * @param {google.cloud.oslogin.common.ISshPublicKey} message SshPublicKey message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        SshPublicKey.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a SshPublicKey message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.oslogin.common.SshPublicKey} SshPublicKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SshPublicKey.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.common.SshPublicKey();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.key = reader.string();
+                                    break;
+                                case 2:
+                                    message.expirationTimeUsec = reader.int64();
+                                    break;
+                                case 3:
+                                    message.fingerprint = reader.string();
+                                    break;
+                                case 4:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a SshPublicKey message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.oslogin.common.SshPublicKey} SshPublicKey
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        SshPublicKey.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a SshPublicKey message.
+                         * @function verify
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        SshPublicKey.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                if (!$util.isString(message.key))
+                                    return "key: string expected";
+                            if (message.expirationTimeUsec != null && message.hasOwnProperty("expirationTimeUsec"))
+                                if (!$util.isInteger(message.expirationTimeUsec) && !(message.expirationTimeUsec && $util.isInteger(message.expirationTimeUsec.low) && $util.isInteger(message.expirationTimeUsec.high)))
+                                    return "expirationTimeUsec: integer|Long expected";
+                            if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
+                                if (!$util.isString(message.fingerprint))
+                                    return "fingerprint: string expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a SshPublicKey message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.oslogin.common.SshPublicKey} SshPublicKey
+                         */
+                        SshPublicKey.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.oslogin.common.SshPublicKey)
+                                return object;
+                            var message = new $root.google.cloud.oslogin.common.SshPublicKey();
+                            if (object.key != null)
+                                message.key = String(object.key);
+                            if (object.expirationTimeUsec != null)
+                                if ($util.Long)
+                                    (message.expirationTimeUsec = $util.Long.fromValue(object.expirationTimeUsec)).unsigned = false;
+                                else if (typeof object.expirationTimeUsec === "string")
+                                    message.expirationTimeUsec = parseInt(object.expirationTimeUsec, 10);
+                                else if (typeof object.expirationTimeUsec === "number")
+                                    message.expirationTimeUsec = object.expirationTimeUsec;
+                                else if (typeof object.expirationTimeUsec === "object")
+                                    message.expirationTimeUsec = new $util.LongBits(object.expirationTimeUsec.low >>> 0, object.expirationTimeUsec.high >>> 0).toNumber();
+                            if (object.fingerprint != null)
+                                message.fingerprint = String(object.fingerprint);
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a SshPublicKey message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @static
+                         * @param {google.cloud.oslogin.common.SshPublicKey} message SshPublicKey
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        SshPublicKey.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.key = "";
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.expirationTimeUsec = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.expirationTimeUsec = options.longs === String ? "0" : 0;
+                                object.fingerprint = "";
+                                object.name = "";
+                            }
+                            if (message.key != null && message.hasOwnProperty("key"))
+                                object.key = message.key;
+                            if (message.expirationTimeUsec != null && message.hasOwnProperty("expirationTimeUsec"))
+                                if (typeof message.expirationTimeUsec === "number")
+                                    object.expirationTimeUsec = options.longs === String ? String(message.expirationTimeUsec) : message.expirationTimeUsec;
+                                else
+                                    object.expirationTimeUsec = options.longs === String ? $util.Long.prototype.toString.call(message.expirationTimeUsec) : options.longs === Number ? new $util.LongBits(message.expirationTimeUsec.low >>> 0, message.expirationTimeUsec.high >>> 0).toNumber() : message.expirationTimeUsec;
+                            if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
+                                object.fingerprint = message.fingerprint;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this SshPublicKey to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.oslogin.common.SshPublicKey
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        SshPublicKey.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return SshPublicKey;
+                    })();
+    
+                    return common;
+                })();
+    
                 oslogin.v1 = (function() {
     
                     /**
@@ -2060,756 +2810,6 @@
                     })();
     
                     return v1;
-                })();
-    
-                oslogin.common = (function() {
-    
-                    /**
-                     * Namespace common.
-                     * @memberof google.cloud.oslogin
-                     * @namespace
-                     */
-                    var common = {};
-    
-                    /**
-                     * OperatingSystemType enum.
-                     * @name google.cloud.oslogin.common.OperatingSystemType
-                     * @enum {number}
-                     * @property {number} OPERATING_SYSTEM_TYPE_UNSPECIFIED=0 OPERATING_SYSTEM_TYPE_UNSPECIFIED value
-                     * @property {number} LINUX=1 LINUX value
-                     * @property {number} WINDOWS=2 WINDOWS value
-                     */
-                    common.OperatingSystemType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "OPERATING_SYSTEM_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "LINUX"] = 1;
-                        values[valuesById[2] = "WINDOWS"] = 2;
-                        return values;
-                    })();
-    
-                    common.PosixAccount = (function() {
-    
-                        /**
-                         * Properties of a PosixAccount.
-                         * @memberof google.cloud.oslogin.common
-                         * @interface IPosixAccount
-                         * @property {boolean|null} [primary] PosixAccount primary
-                         * @property {string|null} [username] PosixAccount username
-                         * @property {number|Long|null} [uid] PosixAccount uid
-                         * @property {number|Long|null} [gid] PosixAccount gid
-                         * @property {string|null} [homeDirectory] PosixAccount homeDirectory
-                         * @property {string|null} [shell] PosixAccount shell
-                         * @property {string|null} [gecos] PosixAccount gecos
-                         * @property {string|null} [systemId] PosixAccount systemId
-                         * @property {string|null} [accountId] PosixAccount accountId
-                         * @property {google.cloud.oslogin.common.OperatingSystemType|null} [operatingSystemType] PosixAccount operatingSystemType
-                         * @property {string|null} [name] PosixAccount name
-                         */
-    
-                        /**
-                         * Constructs a new PosixAccount.
-                         * @memberof google.cloud.oslogin.common
-                         * @classdesc Represents a PosixAccount.
-                         * @implements IPosixAccount
-                         * @constructor
-                         * @param {google.cloud.oslogin.common.IPosixAccount=} [properties] Properties to set
-                         */
-                        function PosixAccount(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * PosixAccount primary.
-                         * @member {boolean} primary
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.primary = false;
-    
-                        /**
-                         * PosixAccount username.
-                         * @member {string} username
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.username = "";
-    
-                        /**
-                         * PosixAccount uid.
-                         * @member {number|Long} uid
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.uid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * PosixAccount gid.
-                         * @member {number|Long} gid
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.gid = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * PosixAccount homeDirectory.
-                         * @member {string} homeDirectory
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.homeDirectory = "";
-    
-                        /**
-                         * PosixAccount shell.
-                         * @member {string} shell
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.shell = "";
-    
-                        /**
-                         * PosixAccount gecos.
-                         * @member {string} gecos
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.gecos = "";
-    
-                        /**
-                         * PosixAccount systemId.
-                         * @member {string} systemId
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.systemId = "";
-    
-                        /**
-                         * PosixAccount accountId.
-                         * @member {string} accountId
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.accountId = "";
-    
-                        /**
-                         * PosixAccount operatingSystemType.
-                         * @member {google.cloud.oslogin.common.OperatingSystemType} operatingSystemType
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.operatingSystemType = 0;
-    
-                        /**
-                         * PosixAccount name.
-                         * @member {string} name
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         */
-                        PosixAccount.prototype.name = "";
-    
-                        /**
-                         * Creates a new PosixAccount instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @static
-                         * @param {google.cloud.oslogin.common.IPosixAccount=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.common.PosixAccount} PosixAccount instance
-                         */
-                        PosixAccount.create = function create(properties) {
-                            return new PosixAccount(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified PosixAccount message. Does not implicitly {@link google.cloud.oslogin.common.PosixAccount.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @static
-                         * @param {google.cloud.oslogin.common.IPosixAccount} message PosixAccount message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PosixAccount.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.primary != null && Object.hasOwnProperty.call(message, "primary"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.primary);
-                            if (message.username != null && Object.hasOwnProperty.call(message, "username"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.username);
-                            if (message.uid != null && Object.hasOwnProperty.call(message, "uid"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.uid);
-                            if (message.gid != null && Object.hasOwnProperty.call(message, "gid"))
-                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.gid);
-                            if (message.homeDirectory != null && Object.hasOwnProperty.call(message, "homeDirectory"))
-                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.homeDirectory);
-                            if (message.shell != null && Object.hasOwnProperty.call(message, "shell"))
-                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.shell);
-                            if (message.gecos != null && Object.hasOwnProperty.call(message, "gecos"))
-                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.gecos);
-                            if (message.systemId != null && Object.hasOwnProperty.call(message, "systemId"))
-                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.systemId);
-                            if (message.accountId != null && Object.hasOwnProperty.call(message, "accountId"))
-                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.accountId);
-                            if (message.operatingSystemType != null && Object.hasOwnProperty.call(message, "operatingSystemType"))
-                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.operatingSystemType);
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.name);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified PosixAccount message, length delimited. Does not implicitly {@link google.cloud.oslogin.common.PosixAccount.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @static
-                         * @param {google.cloud.oslogin.common.IPosixAccount} message PosixAccount message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        PosixAccount.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a PosixAccount message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.common.PosixAccount} PosixAccount
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PosixAccount.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.common.PosixAccount();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.primary = reader.bool();
-                                    break;
-                                case 2:
-                                    message.username = reader.string();
-                                    break;
-                                case 3:
-                                    message.uid = reader.int64();
-                                    break;
-                                case 4:
-                                    message.gid = reader.int64();
-                                    break;
-                                case 5:
-                                    message.homeDirectory = reader.string();
-                                    break;
-                                case 6:
-                                    message.shell = reader.string();
-                                    break;
-                                case 7:
-                                    message.gecos = reader.string();
-                                    break;
-                                case 8:
-                                    message.systemId = reader.string();
-                                    break;
-                                case 9:
-                                    message.accountId = reader.string();
-                                    break;
-                                case 10:
-                                    message.operatingSystemType = reader.int32();
-                                    break;
-                                case 11:
-                                    message.name = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a PosixAccount message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.common.PosixAccount} PosixAccount
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        PosixAccount.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a PosixAccount message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        PosixAccount.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.primary != null && message.hasOwnProperty("primary"))
-                                if (typeof message.primary !== "boolean")
-                                    return "primary: boolean expected";
-                            if (message.username != null && message.hasOwnProperty("username"))
-                                if (!$util.isString(message.username))
-                                    return "username: string expected";
-                            if (message.uid != null && message.hasOwnProperty("uid"))
-                                if (!$util.isInteger(message.uid) && !(message.uid && $util.isInteger(message.uid.low) && $util.isInteger(message.uid.high)))
-                                    return "uid: integer|Long expected";
-                            if (message.gid != null && message.hasOwnProperty("gid"))
-                                if (!$util.isInteger(message.gid) && !(message.gid && $util.isInteger(message.gid.low) && $util.isInteger(message.gid.high)))
-                                    return "gid: integer|Long expected";
-                            if (message.homeDirectory != null && message.hasOwnProperty("homeDirectory"))
-                                if (!$util.isString(message.homeDirectory))
-                                    return "homeDirectory: string expected";
-                            if (message.shell != null && message.hasOwnProperty("shell"))
-                                if (!$util.isString(message.shell))
-                                    return "shell: string expected";
-                            if (message.gecos != null && message.hasOwnProperty("gecos"))
-                                if (!$util.isString(message.gecos))
-                                    return "gecos: string expected";
-                            if (message.systemId != null && message.hasOwnProperty("systemId"))
-                                if (!$util.isString(message.systemId))
-                                    return "systemId: string expected";
-                            if (message.accountId != null && message.hasOwnProperty("accountId"))
-                                if (!$util.isString(message.accountId))
-                                    return "accountId: string expected";
-                            if (message.operatingSystemType != null && message.hasOwnProperty("operatingSystemType"))
-                                switch (message.operatingSystemType) {
-                                default:
-                                    return "operatingSystemType: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a PosixAccount message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.common.PosixAccount} PosixAccount
-                         */
-                        PosixAccount.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.common.PosixAccount)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.common.PosixAccount();
-                            if (object.primary != null)
-                                message.primary = Boolean(object.primary);
-                            if (object.username != null)
-                                message.username = String(object.username);
-                            if (object.uid != null)
-                                if ($util.Long)
-                                    (message.uid = $util.Long.fromValue(object.uid)).unsigned = false;
-                                else if (typeof object.uid === "string")
-                                    message.uid = parseInt(object.uid, 10);
-                                else if (typeof object.uid === "number")
-                                    message.uid = object.uid;
-                                else if (typeof object.uid === "object")
-                                    message.uid = new $util.LongBits(object.uid.low >>> 0, object.uid.high >>> 0).toNumber();
-                            if (object.gid != null)
-                                if ($util.Long)
-                                    (message.gid = $util.Long.fromValue(object.gid)).unsigned = false;
-                                else if (typeof object.gid === "string")
-                                    message.gid = parseInt(object.gid, 10);
-                                else if (typeof object.gid === "number")
-                                    message.gid = object.gid;
-                                else if (typeof object.gid === "object")
-                                    message.gid = new $util.LongBits(object.gid.low >>> 0, object.gid.high >>> 0).toNumber();
-                            if (object.homeDirectory != null)
-                                message.homeDirectory = String(object.homeDirectory);
-                            if (object.shell != null)
-                                message.shell = String(object.shell);
-                            if (object.gecos != null)
-                                message.gecos = String(object.gecos);
-                            if (object.systemId != null)
-                                message.systemId = String(object.systemId);
-                            if (object.accountId != null)
-                                message.accountId = String(object.accountId);
-                            switch (object.operatingSystemType) {
-                            case "OPERATING_SYSTEM_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.operatingSystemType = 0;
-                                break;
-                            case "LINUX":
-                            case 1:
-                                message.operatingSystemType = 1;
-                                break;
-                            case "WINDOWS":
-                            case 2:
-                                message.operatingSystemType = 2;
-                                break;
-                            }
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a PosixAccount message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @static
-                         * @param {google.cloud.oslogin.common.PosixAccount} message PosixAccount
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        PosixAccount.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.primary = false;
-                                object.username = "";
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.uid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.uid = options.longs === String ? "0" : 0;
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.gid = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.gid = options.longs === String ? "0" : 0;
-                                object.homeDirectory = "";
-                                object.shell = "";
-                                object.gecos = "";
-                                object.systemId = "";
-                                object.accountId = "";
-                                object.operatingSystemType = options.enums === String ? "OPERATING_SYSTEM_TYPE_UNSPECIFIED" : 0;
-                                object.name = "";
-                            }
-                            if (message.primary != null && message.hasOwnProperty("primary"))
-                                object.primary = message.primary;
-                            if (message.username != null && message.hasOwnProperty("username"))
-                                object.username = message.username;
-                            if (message.uid != null && message.hasOwnProperty("uid"))
-                                if (typeof message.uid === "number")
-                                    object.uid = options.longs === String ? String(message.uid) : message.uid;
-                                else
-                                    object.uid = options.longs === String ? $util.Long.prototype.toString.call(message.uid) : options.longs === Number ? new $util.LongBits(message.uid.low >>> 0, message.uid.high >>> 0).toNumber() : message.uid;
-                            if (message.gid != null && message.hasOwnProperty("gid"))
-                                if (typeof message.gid === "number")
-                                    object.gid = options.longs === String ? String(message.gid) : message.gid;
-                                else
-                                    object.gid = options.longs === String ? $util.Long.prototype.toString.call(message.gid) : options.longs === Number ? new $util.LongBits(message.gid.low >>> 0, message.gid.high >>> 0).toNumber() : message.gid;
-                            if (message.homeDirectory != null && message.hasOwnProperty("homeDirectory"))
-                                object.homeDirectory = message.homeDirectory;
-                            if (message.shell != null && message.hasOwnProperty("shell"))
-                                object.shell = message.shell;
-                            if (message.gecos != null && message.hasOwnProperty("gecos"))
-                                object.gecos = message.gecos;
-                            if (message.systemId != null && message.hasOwnProperty("systemId"))
-                                object.systemId = message.systemId;
-                            if (message.accountId != null && message.hasOwnProperty("accountId"))
-                                object.accountId = message.accountId;
-                            if (message.operatingSystemType != null && message.hasOwnProperty("operatingSystemType"))
-                                object.operatingSystemType = options.enums === String ? $root.google.cloud.oslogin.common.OperatingSystemType[message.operatingSystemType] : message.operatingSystemType;
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this PosixAccount to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.common.PosixAccount
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        PosixAccount.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return PosixAccount;
-                    })();
-    
-                    common.SshPublicKey = (function() {
-    
-                        /**
-                         * Properties of a SshPublicKey.
-                         * @memberof google.cloud.oslogin.common
-                         * @interface ISshPublicKey
-                         * @property {string|null} [key] SshPublicKey key
-                         * @property {number|Long|null} [expirationTimeUsec] SshPublicKey expirationTimeUsec
-                         * @property {string|null} [fingerprint] SshPublicKey fingerprint
-                         * @property {string|null} [name] SshPublicKey name
-                         */
-    
-                        /**
-                         * Constructs a new SshPublicKey.
-                         * @memberof google.cloud.oslogin.common
-                         * @classdesc Represents a SshPublicKey.
-                         * @implements ISshPublicKey
-                         * @constructor
-                         * @param {google.cloud.oslogin.common.ISshPublicKey=} [properties] Properties to set
-                         */
-                        function SshPublicKey(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * SshPublicKey key.
-                         * @member {string} key
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @instance
-                         */
-                        SshPublicKey.prototype.key = "";
-    
-                        /**
-                         * SshPublicKey expirationTimeUsec.
-                         * @member {number|Long} expirationTimeUsec
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @instance
-                         */
-                        SshPublicKey.prototype.expirationTimeUsec = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * SshPublicKey fingerprint.
-                         * @member {string} fingerprint
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @instance
-                         */
-                        SshPublicKey.prototype.fingerprint = "";
-    
-                        /**
-                         * SshPublicKey name.
-                         * @member {string} name
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @instance
-                         */
-                        SshPublicKey.prototype.name = "";
-    
-                        /**
-                         * Creates a new SshPublicKey instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @static
-                         * @param {google.cloud.oslogin.common.ISshPublicKey=} [properties] Properties to set
-                         * @returns {google.cloud.oslogin.common.SshPublicKey} SshPublicKey instance
-                         */
-                        SshPublicKey.create = function create(properties) {
-                            return new SshPublicKey(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified SshPublicKey message. Does not implicitly {@link google.cloud.oslogin.common.SshPublicKey.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @static
-                         * @param {google.cloud.oslogin.common.ISshPublicKey} message SshPublicKey message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SshPublicKey.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.key != null && Object.hasOwnProperty.call(message, "key"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.key);
-                            if (message.expirationTimeUsec != null && Object.hasOwnProperty.call(message, "expirationTimeUsec"))
-                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.expirationTimeUsec);
-                            if (message.fingerprint != null && Object.hasOwnProperty.call(message, "fingerprint"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.fingerprint);
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified SshPublicKey message, length delimited. Does not implicitly {@link google.cloud.oslogin.common.SshPublicKey.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @static
-                         * @param {google.cloud.oslogin.common.ISshPublicKey} message SshPublicKey message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        SshPublicKey.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a SshPublicKey message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.oslogin.common.SshPublicKey} SshPublicKey
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SshPublicKey.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.oslogin.common.SshPublicKey();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.key = reader.string();
-                                    break;
-                                case 2:
-                                    message.expirationTimeUsec = reader.int64();
-                                    break;
-                                case 3:
-                                    message.fingerprint = reader.string();
-                                    break;
-                                case 4:
-                                    message.name = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a SshPublicKey message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.oslogin.common.SshPublicKey} SshPublicKey
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        SshPublicKey.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a SshPublicKey message.
-                         * @function verify
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        SshPublicKey.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.key != null && message.hasOwnProperty("key"))
-                                if (!$util.isString(message.key))
-                                    return "key: string expected";
-                            if (message.expirationTimeUsec != null && message.hasOwnProperty("expirationTimeUsec"))
-                                if (!$util.isInteger(message.expirationTimeUsec) && !(message.expirationTimeUsec && $util.isInteger(message.expirationTimeUsec.low) && $util.isInteger(message.expirationTimeUsec.high)))
-                                    return "expirationTimeUsec: integer|Long expected";
-                            if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
-                                if (!$util.isString(message.fingerprint))
-                                    return "fingerprint: string expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a SshPublicKey message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.oslogin.common.SshPublicKey} SshPublicKey
-                         */
-                        SshPublicKey.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.oslogin.common.SshPublicKey)
-                                return object;
-                            var message = new $root.google.cloud.oslogin.common.SshPublicKey();
-                            if (object.key != null)
-                                message.key = String(object.key);
-                            if (object.expirationTimeUsec != null)
-                                if ($util.Long)
-                                    (message.expirationTimeUsec = $util.Long.fromValue(object.expirationTimeUsec)).unsigned = false;
-                                else if (typeof object.expirationTimeUsec === "string")
-                                    message.expirationTimeUsec = parseInt(object.expirationTimeUsec, 10);
-                                else if (typeof object.expirationTimeUsec === "number")
-                                    message.expirationTimeUsec = object.expirationTimeUsec;
-                                else if (typeof object.expirationTimeUsec === "object")
-                                    message.expirationTimeUsec = new $util.LongBits(object.expirationTimeUsec.low >>> 0, object.expirationTimeUsec.high >>> 0).toNumber();
-                            if (object.fingerprint != null)
-                                message.fingerprint = String(object.fingerprint);
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a SshPublicKey message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @static
-                         * @param {google.cloud.oslogin.common.SshPublicKey} message SshPublicKey
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        SshPublicKey.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.key = "";
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.expirationTimeUsec = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.expirationTimeUsec = options.longs === String ? "0" : 0;
-                                object.fingerprint = "";
-                                object.name = "";
-                            }
-                            if (message.key != null && message.hasOwnProperty("key"))
-                                object.key = message.key;
-                            if (message.expirationTimeUsec != null && message.hasOwnProperty("expirationTimeUsec"))
-                                if (typeof message.expirationTimeUsec === "number")
-                                    object.expirationTimeUsec = options.longs === String ? String(message.expirationTimeUsec) : message.expirationTimeUsec;
-                                else
-                                    object.expirationTimeUsec = options.longs === String ? $util.Long.prototype.toString.call(message.expirationTimeUsec) : options.longs === Number ? new $util.LongBits(message.expirationTimeUsec.low >>> 0, message.expirationTimeUsec.high >>> 0).toNumber() : message.expirationTimeUsec;
-                            if (message.fingerprint != null && message.hasOwnProperty("fingerprint"))
-                                object.fingerprint = message.fingerprint;
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this SshPublicKey to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.oslogin.common.SshPublicKey
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        SshPublicKey.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return SshPublicKey;
-                    })();
-    
-                    return common;
                 })();
     
                 oslogin.v1beta = (function() {
@@ -4832,6 +4832,665 @@
              */
             var api = {};
     
+            /**
+             * FieldBehavior enum.
+             * @name google.api.FieldBehavior
+             * @enum {number}
+             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
+             * @property {number} OPTIONAL=1 OPTIONAL value
+             * @property {number} REQUIRED=2 REQUIRED value
+             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
+             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
+             * @property {number} IMMUTABLE=5 IMMUTABLE value
+             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
+             */
+            api.FieldBehavior = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "OPTIONAL"] = 1;
+                values[valuesById[2] = "REQUIRED"] = 2;
+                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
+                values[valuesById[4] = "INPUT_ONLY"] = 4;
+                values[valuesById[5] = "IMMUTABLE"] = 5;
+                values[valuesById[6] = "UNORDERED_LIST"] = 6;
+                return values;
+            })();
+    
+            api.ResourceDescriptor = (function() {
+    
+                /**
+                 * Properties of a ResourceDescriptor.
+                 * @memberof google.api
+                 * @interface IResourceDescriptor
+                 * @property {string|null} [type] ResourceDescriptor type
+                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
+                 * @property {string|null} [nameField] ResourceDescriptor nameField
+                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
+                 * @property {string|null} [plural] ResourceDescriptor plural
+                 * @property {string|null} [singular] ResourceDescriptor singular
+                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
+                 */
+    
+                /**
+                 * Constructs a new ResourceDescriptor.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceDescriptor.
+                 * @implements IResourceDescriptor
+                 * @constructor
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 */
+                function ResourceDescriptor(properties) {
+                    this.pattern = [];
+                    this.style = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceDescriptor type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.type = "";
+    
+                /**
+                 * ResourceDescriptor pattern.
+                 * @member {Array.<string>} pattern
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.pattern = $util.emptyArray;
+    
+                /**
+                 * ResourceDescriptor nameField.
+                 * @member {string} nameField
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.nameField = "";
+    
+                /**
+                 * ResourceDescriptor history.
+                 * @member {google.api.ResourceDescriptor.History} history
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.history = 0;
+    
+                /**
+                 * ResourceDescriptor plural.
+                 * @member {string} plural
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.plural = "";
+    
+                /**
+                 * ResourceDescriptor singular.
+                 * @member {string} singular
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.singular = "";
+    
+                /**
+                 * ResourceDescriptor style.
+                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 */
+                ResourceDescriptor.prototype.style = $util.emptyArray;
+    
+                /**
+                 * Creates a new ResourceDescriptor instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
+                 */
+                ResourceDescriptor.create = function create(properties) {
+                    return new ResourceDescriptor(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.pattern != null && message.pattern.length)
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
+                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
+                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
+                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
+                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
+                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
+                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
+                    if (message.style != null && message.style.length) {
+                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
+                        for (var i = 0; i < message.style.length; ++i)
+                            writer.int32(message.style[i]);
+                        writer.ldelim();
+                    }
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            if (!(message.pattern && message.pattern.length))
+                                message.pattern = [];
+                            message.pattern.push(reader.string());
+                            break;
+                        case 3:
+                            message.nameField = reader.string();
+                            break;
+                        case 4:
+                            message.history = reader.int32();
+                            break;
+                        case 5:
+                            message.plural = reader.string();
+                            break;
+                        case 6:
+                            message.singular = reader.string();
+                            break;
+                        case 10:
+                            if (!(message.style && message.style.length))
+                                message.style = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.style.push(reader.int32());
+                            } else
+                                message.style.push(reader.int32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceDescriptor message.
+                 * @function verify
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceDescriptor.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
+                        if (!Array.isArray(message.pattern))
+                            return "pattern: array expected";
+                        for (var i = 0; i < message.pattern.length; ++i)
+                            if (!$util.isString(message.pattern[i]))
+                                return "pattern: string[] expected";
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        if (!$util.isString(message.nameField))
+                            return "nameField: string expected";
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        switch (message.history) {
+                        default:
+                            return "history: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        if (!$util.isString(message.plural))
+                            return "plural: string expected";
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        if (!$util.isString(message.singular))
+                            return "singular: string expected";
+                    if (message.style != null && message.hasOwnProperty("style")) {
+                        if (!Array.isArray(message.style))
+                            return "style: array expected";
+                        for (var i = 0; i < message.style.length; ++i)
+                            switch (message.style[i]) {
+                            default:
+                                return "style: enum value[] expected";
+                            case 0:
+                            case 1:
+                                break;
+                            }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
+                 */
+                ResourceDescriptor.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceDescriptor)
+                        return object;
+                    var message = new $root.google.api.ResourceDescriptor();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.pattern) {
+                        if (!Array.isArray(object.pattern))
+                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
+                        message.pattern = [];
+                        for (var i = 0; i < object.pattern.length; ++i)
+                            message.pattern[i] = String(object.pattern[i]);
+                    }
+                    if (object.nameField != null)
+                        message.nameField = String(object.nameField);
+                    switch (object.history) {
+                    case "HISTORY_UNSPECIFIED":
+                    case 0:
+                        message.history = 0;
+                        break;
+                    case "ORIGINALLY_SINGLE_PATTERN":
+                    case 1:
+                        message.history = 1;
+                        break;
+                    case "FUTURE_MULTI_PATTERN":
+                    case 2:
+                        message.history = 2;
+                        break;
+                    }
+                    if (object.plural != null)
+                        message.plural = String(object.plural);
+                    if (object.singular != null)
+                        message.singular = String(object.singular);
+                    if (object.style) {
+                        if (!Array.isArray(object.style))
+                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
+                        message.style = [];
+                        for (var i = 0; i < object.style.length; ++i)
+                            switch (object.style[i]) {
+                            default:
+                            case "STYLE_UNSPECIFIED":
+                            case 0:
+                                message.style[i] = 0;
+                                break;
+                            case "DECLARATIVE_FRIENDLY":
+                            case 1:
+                                message.style[i] = 1;
+                                break;
+                            }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceDescriptor
+                 * @static
+                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceDescriptor.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.pattern = [];
+                        object.style = [];
+                    }
+                    if (options.defaults) {
+                        object.type = "";
+                        object.nameField = "";
+                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
+                        object.plural = "";
+                        object.singular = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.pattern && message.pattern.length) {
+                        object.pattern = [];
+                        for (var j = 0; j < message.pattern.length; ++j)
+                            object.pattern[j] = message.pattern[j];
+                    }
+                    if (message.nameField != null && message.hasOwnProperty("nameField"))
+                        object.nameField = message.nameField;
+                    if (message.history != null && message.hasOwnProperty("history"))
+                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
+                    if (message.plural != null && message.hasOwnProperty("plural"))
+                        object.plural = message.plural;
+                    if (message.singular != null && message.hasOwnProperty("singular"))
+                        object.singular = message.singular;
+                    if (message.style && message.style.length) {
+                        object.style = [];
+                        for (var j = 0; j < message.style.length; ++j)
+                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceDescriptor to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceDescriptor
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceDescriptor.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * History enum.
+                 * @name google.api.ResourceDescriptor.History
+                 * @enum {number}
+                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
+                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
+                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
+                 */
+                ResourceDescriptor.History = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
+                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
+                    return values;
+                })();
+    
+                /**
+                 * Style enum.
+                 * @name google.api.ResourceDescriptor.Style
+                 * @enum {number}
+                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
+                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
+                 */
+                ResourceDescriptor.Style = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
+                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
+                    return values;
+                })();
+    
+                return ResourceDescriptor;
+            })();
+    
+            api.ResourceReference = (function() {
+    
+                /**
+                 * Properties of a ResourceReference.
+                 * @memberof google.api
+                 * @interface IResourceReference
+                 * @property {string|null} [type] ResourceReference type
+                 * @property {string|null} [childType] ResourceReference childType
+                 */
+    
+                /**
+                 * Constructs a new ResourceReference.
+                 * @memberof google.api
+                 * @classdesc Represents a ResourceReference.
+                 * @implements IResourceReference
+                 * @constructor
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 */
+                function ResourceReference(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * ResourceReference type.
+                 * @member {string} type
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.type = "";
+    
+                /**
+                 * ResourceReference childType.
+                 * @member {string} childType
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 */
+                ResourceReference.prototype.childType = "";
+    
+                /**
+                 * Creates a new ResourceReference instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference=} [properties] Properties to set
+                 * @returns {google.api.ResourceReference} ResourceReference instance
+                 */
+                ResourceReference.create = function create(properties) {
+                    return new ResourceReference(properties);
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
+                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type = reader.string();
+                            break;
+                        case 2:
+                            message.childType = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a ResourceReference message.
+                 * @function verify
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                ResourceReference.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        if (!$util.isString(message.type))
+                            return "type: string expected";
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        if (!$util.isString(message.childType))
+                            return "childType: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.ResourceReference} ResourceReference
+                 */
+                ResourceReference.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.ResourceReference)
+                        return object;
+                    var message = new $root.google.api.ResourceReference();
+                    if (object.type != null)
+                        message.type = String(object.type);
+                    if (object.childType != null)
+                        message.childType = String(object.childType);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.ResourceReference
+                 * @static
+                 * @param {google.api.ResourceReference} message ResourceReference
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                ResourceReference.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type = "";
+                        object.childType = "";
+                    }
+                    if (message.type != null && message.hasOwnProperty("type"))
+                        object.type = message.type;
+                    if (message.childType != null && message.hasOwnProperty("childType"))
+                        object.childType = message.childType;
+                    return object;
+                };
+    
+                /**
+                 * Converts this ResourceReference to JSON.
+                 * @function toJSON
+                 * @memberof google.api.ResourceReference
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                ResourceReference.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return ResourceReference;
+            })();
+    
             api.Http = (function() {
     
                 /**
@@ -5734,665 +6393,6 @@
                 };
     
                 return CustomHttpPattern;
-            })();
-    
-            /**
-             * FieldBehavior enum.
-             * @name google.api.FieldBehavior
-             * @enum {number}
-             * @property {number} FIELD_BEHAVIOR_UNSPECIFIED=0 FIELD_BEHAVIOR_UNSPECIFIED value
-             * @property {number} OPTIONAL=1 OPTIONAL value
-             * @property {number} REQUIRED=2 REQUIRED value
-             * @property {number} OUTPUT_ONLY=3 OUTPUT_ONLY value
-             * @property {number} INPUT_ONLY=4 INPUT_ONLY value
-             * @property {number} IMMUTABLE=5 IMMUTABLE value
-             * @property {number} UNORDERED_LIST=6 UNORDERED_LIST value
-             */
-            api.FieldBehavior = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "FIELD_BEHAVIOR_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "OPTIONAL"] = 1;
-                values[valuesById[2] = "REQUIRED"] = 2;
-                values[valuesById[3] = "OUTPUT_ONLY"] = 3;
-                values[valuesById[4] = "INPUT_ONLY"] = 4;
-                values[valuesById[5] = "IMMUTABLE"] = 5;
-                values[valuesById[6] = "UNORDERED_LIST"] = 6;
-                return values;
-            })();
-    
-            api.ResourceDescriptor = (function() {
-    
-                /**
-                 * Properties of a ResourceDescriptor.
-                 * @memberof google.api
-                 * @interface IResourceDescriptor
-                 * @property {string|null} [type] ResourceDescriptor type
-                 * @property {Array.<string>|null} [pattern] ResourceDescriptor pattern
-                 * @property {string|null} [nameField] ResourceDescriptor nameField
-                 * @property {google.api.ResourceDescriptor.History|null} [history] ResourceDescriptor history
-                 * @property {string|null} [plural] ResourceDescriptor plural
-                 * @property {string|null} [singular] ResourceDescriptor singular
-                 * @property {Array.<google.api.ResourceDescriptor.Style>|null} [style] ResourceDescriptor style
-                 */
-    
-                /**
-                 * Constructs a new ResourceDescriptor.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceDescriptor.
-                 * @implements IResourceDescriptor
-                 * @constructor
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 */
-                function ResourceDescriptor(properties) {
-                    this.pattern = [];
-                    this.style = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceDescriptor type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.type = "";
-    
-                /**
-                 * ResourceDescriptor pattern.
-                 * @member {Array.<string>} pattern
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.pattern = $util.emptyArray;
-    
-                /**
-                 * ResourceDescriptor nameField.
-                 * @member {string} nameField
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.nameField = "";
-    
-                /**
-                 * ResourceDescriptor history.
-                 * @member {google.api.ResourceDescriptor.History} history
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.history = 0;
-    
-                /**
-                 * ResourceDescriptor plural.
-                 * @member {string} plural
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.plural = "";
-    
-                /**
-                 * ResourceDescriptor singular.
-                 * @member {string} singular
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.singular = "";
-    
-                /**
-                 * ResourceDescriptor style.
-                 * @member {Array.<google.api.ResourceDescriptor.Style>} style
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 */
-                ResourceDescriptor.prototype.style = $util.emptyArray;
-    
-                /**
-                 * Creates a new ResourceDescriptor instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor=} [properties] Properties to set
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor instance
-                 */
-                ResourceDescriptor.create = function create(properties) {
-                    return new ResourceDescriptor(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.pattern != null && message.pattern.length)
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.pattern[i]);
-                    if (message.nameField != null && Object.hasOwnProperty.call(message, "nameField"))
-                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.nameField);
-                    if (message.history != null && Object.hasOwnProperty.call(message, "history"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.history);
-                    if (message.plural != null && Object.hasOwnProperty.call(message, "plural"))
-                        writer.uint32(/* id 5, wireType 2 =*/42).string(message.plural);
-                    if (message.singular != null && Object.hasOwnProperty.call(message, "singular"))
-                        writer.uint32(/* id 6, wireType 2 =*/50).string(message.singular);
-                    if (message.style != null && message.style.length) {
-                        writer.uint32(/* id 10, wireType 2 =*/82).fork();
-                        for (var i = 0; i < message.style.length; ++i)
-                            writer.int32(message.style[i]);
-                        writer.ldelim();
-                    }
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.IResourceDescriptor} message ResourceDescriptor message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceDescriptor.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceDescriptor();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            if (!(message.pattern && message.pattern.length))
-                                message.pattern = [];
-                            message.pattern.push(reader.string());
-                            break;
-                        case 3:
-                            message.nameField = reader.string();
-                            break;
-                        case 4:
-                            message.history = reader.int32();
-                            break;
-                        case 5:
-                            message.plural = reader.string();
-                            break;
-                        case 6:
-                            message.singular = reader.string();
-                            break;
-                        case 10:
-                            if (!(message.style && message.style.length))
-                                message.style = [];
-                            if ((tag & 7) === 2) {
-                                var end2 = reader.uint32() + reader.pos;
-                                while (reader.pos < end2)
-                                    message.style.push(reader.int32());
-                            } else
-                                message.style.push(reader.int32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceDescriptor.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceDescriptor message.
-                 * @function verify
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceDescriptor.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.pattern != null && message.hasOwnProperty("pattern")) {
-                        if (!Array.isArray(message.pattern))
-                            return "pattern: array expected";
-                        for (var i = 0; i < message.pattern.length; ++i)
-                            if (!$util.isString(message.pattern[i]))
-                                return "pattern: string[] expected";
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        if (!$util.isString(message.nameField))
-                            return "nameField: string expected";
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        switch (message.history) {
-                        default:
-                            return "history: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        if (!$util.isString(message.plural))
-                            return "plural: string expected";
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        if (!$util.isString(message.singular))
-                            return "singular: string expected";
-                    if (message.style != null && message.hasOwnProperty("style")) {
-                        if (!Array.isArray(message.style))
-                            return "style: array expected";
-                        for (var i = 0; i < message.style.length; ++i)
-                            switch (message.style[i]) {
-                            default:
-                                return "style: enum value[] expected";
-                            case 0:
-                            case 1:
-                                break;
-                            }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceDescriptor} ResourceDescriptor
-                 */
-                ResourceDescriptor.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceDescriptor)
-                        return object;
-                    var message = new $root.google.api.ResourceDescriptor();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.pattern) {
-                        if (!Array.isArray(object.pattern))
-                            throw TypeError(".google.api.ResourceDescriptor.pattern: array expected");
-                        message.pattern = [];
-                        for (var i = 0; i < object.pattern.length; ++i)
-                            message.pattern[i] = String(object.pattern[i]);
-                    }
-                    if (object.nameField != null)
-                        message.nameField = String(object.nameField);
-                    switch (object.history) {
-                    case "HISTORY_UNSPECIFIED":
-                    case 0:
-                        message.history = 0;
-                        break;
-                    case "ORIGINALLY_SINGLE_PATTERN":
-                    case 1:
-                        message.history = 1;
-                        break;
-                    case "FUTURE_MULTI_PATTERN":
-                    case 2:
-                        message.history = 2;
-                        break;
-                    }
-                    if (object.plural != null)
-                        message.plural = String(object.plural);
-                    if (object.singular != null)
-                        message.singular = String(object.singular);
-                    if (object.style) {
-                        if (!Array.isArray(object.style))
-                            throw TypeError(".google.api.ResourceDescriptor.style: array expected");
-                        message.style = [];
-                        for (var i = 0; i < object.style.length; ++i)
-                            switch (object.style[i]) {
-                            default:
-                            case "STYLE_UNSPECIFIED":
-                            case 0:
-                                message.style[i] = 0;
-                                break;
-                            case "DECLARATIVE_FRIENDLY":
-                            case 1:
-                                message.style[i] = 1;
-                                break;
-                            }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceDescriptor
-                 * @static
-                 * @param {google.api.ResourceDescriptor} message ResourceDescriptor
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceDescriptor.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults) {
-                        object.pattern = [];
-                        object.style = [];
-                    }
-                    if (options.defaults) {
-                        object.type = "";
-                        object.nameField = "";
-                        object.history = options.enums === String ? "HISTORY_UNSPECIFIED" : 0;
-                        object.plural = "";
-                        object.singular = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.pattern && message.pattern.length) {
-                        object.pattern = [];
-                        for (var j = 0; j < message.pattern.length; ++j)
-                            object.pattern[j] = message.pattern[j];
-                    }
-                    if (message.nameField != null && message.hasOwnProperty("nameField"))
-                        object.nameField = message.nameField;
-                    if (message.history != null && message.hasOwnProperty("history"))
-                        object.history = options.enums === String ? $root.google.api.ResourceDescriptor.History[message.history] : message.history;
-                    if (message.plural != null && message.hasOwnProperty("plural"))
-                        object.plural = message.plural;
-                    if (message.singular != null && message.hasOwnProperty("singular"))
-                        object.singular = message.singular;
-                    if (message.style && message.style.length) {
-                        object.style = [];
-                        for (var j = 0; j < message.style.length; ++j)
-                            object.style[j] = options.enums === String ? $root.google.api.ResourceDescriptor.Style[message.style[j]] : message.style[j];
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceDescriptor to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceDescriptor
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceDescriptor.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * History enum.
-                 * @name google.api.ResourceDescriptor.History
-                 * @enum {number}
-                 * @property {number} HISTORY_UNSPECIFIED=0 HISTORY_UNSPECIFIED value
-                 * @property {number} ORIGINALLY_SINGLE_PATTERN=1 ORIGINALLY_SINGLE_PATTERN value
-                 * @property {number} FUTURE_MULTI_PATTERN=2 FUTURE_MULTI_PATTERN value
-                 */
-                ResourceDescriptor.History = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "HISTORY_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "ORIGINALLY_SINGLE_PATTERN"] = 1;
-                    values[valuesById[2] = "FUTURE_MULTI_PATTERN"] = 2;
-                    return values;
-                })();
-    
-                /**
-                 * Style enum.
-                 * @name google.api.ResourceDescriptor.Style
-                 * @enum {number}
-                 * @property {number} STYLE_UNSPECIFIED=0 STYLE_UNSPECIFIED value
-                 * @property {number} DECLARATIVE_FRIENDLY=1 DECLARATIVE_FRIENDLY value
-                 */
-                ResourceDescriptor.Style = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "STYLE_UNSPECIFIED"] = 0;
-                    values[valuesById[1] = "DECLARATIVE_FRIENDLY"] = 1;
-                    return values;
-                })();
-    
-                return ResourceDescriptor;
-            })();
-    
-            api.ResourceReference = (function() {
-    
-                /**
-                 * Properties of a ResourceReference.
-                 * @memberof google.api
-                 * @interface IResourceReference
-                 * @property {string|null} [type] ResourceReference type
-                 * @property {string|null} [childType] ResourceReference childType
-                 */
-    
-                /**
-                 * Constructs a new ResourceReference.
-                 * @memberof google.api
-                 * @classdesc Represents a ResourceReference.
-                 * @implements IResourceReference
-                 * @constructor
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 */
-                function ResourceReference(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * ResourceReference type.
-                 * @member {string} type
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.type = "";
-    
-                /**
-                 * ResourceReference childType.
-                 * @member {string} childType
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 */
-                ResourceReference.prototype.childType = "";
-    
-                /**
-                 * Creates a new ResourceReference instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference=} [properties] Properties to set
-                 * @returns {google.api.ResourceReference} ResourceReference instance
-                 */
-                ResourceReference.create = function create(properties) {
-                    return new ResourceReference(properties);
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type);
-                    if (message.childType != null && Object.hasOwnProperty.call(message, "childType"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.childType);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.IResourceReference} message ResourceReference message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                ResourceReference.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.ResourceReference();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type = reader.string();
-                            break;
-                        case 2:
-                            message.childType = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                ResourceReference.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a ResourceReference message.
-                 * @function verify
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                ResourceReference.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        if (!$util.isString(message.type))
-                            return "type: string expected";
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        if (!$util.isString(message.childType))
-                            return "childType: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.ResourceReference} ResourceReference
-                 */
-                ResourceReference.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.ResourceReference)
-                        return object;
-                    var message = new $root.google.api.ResourceReference();
-                    if (object.type != null)
-                        message.type = String(object.type);
-                    if (object.childType != null)
-                        message.childType = String(object.childType);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.ResourceReference
-                 * @static
-                 * @param {google.api.ResourceReference} message ResourceReference
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                ResourceReference.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type = "";
-                        object.childType = "";
-                    }
-                    if (message.type != null && message.hasOwnProperty("type"))
-                        object.type = message.type;
-                    if (message.childType != null && message.hasOwnProperty("childType"))
-                        object.childType = message.childType;
-                    return object;
-                };
-    
-                /**
-                 * Converts this ResourceReference to JSON.
-                 * @function toJSON
-                 * @memberof google.api.ResourceReference
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                ResourceReference.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return ResourceReference;
             })();
     
             return api;
