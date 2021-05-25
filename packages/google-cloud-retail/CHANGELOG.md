@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-retail/compare/v1.1.1...v1.1.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#55](https://www.github.com/googleapis/nodejs-retail/issues/55)) ([907ba0c](https://www.github.com/googleapis/nodejs-retail/commit/907ba0cc02b8c02b85a2549b4d1e76bf8dc59c93))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-retail/compare/v1.1.0...v1.1.1) (2021-05-12)
 
 
