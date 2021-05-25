@@ -10,6 +10,7 @@ applications that interact with individual Google Cloud services:
 | Repo | Release Level | Version |
 |------|----------|-----------------|
 | [Access Approval](https://github.com/googleapis/nodejs-access-approval) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/access-approval)](https://npm.im/@google-cloud/access-approval) |
+| [API Gateway](https://github.com/googleapis/nodejs-api-gateway) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/api-gateway)](https://npm.im/@google-cloud/api-gateway) |
 | [App Engine Admin API](https://github.com/googleapis/nodejs-appengine-admin) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/appengine-admin)](https://npm.im/@google-cloud/appengine-admin) |
 | [Asset Inventory](https://github.com/googleapis/nodejs-asset) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/asset)](https://npm.im/@google-cloud/asset) |
 | [AutoML](https://github.com/googleapis/nodejs-automl) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/automl)](https://npm.im/@google-cloud/automl) |
@@ -76,9 +77,8 @@ applications that interact with individual Google Cloud services:
 | [Vision API](https://github.com/googleapis/nodejs-vision) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vision)](https://npm.im/@google-cloud/vision) |
 | [Web Risk API](https://github.com/googleapis/nodejs-web-risk) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/web-risk)](https://npm.im/@google-cloud/web-risk) |
 | [Web Security Scanner](https://github.com/googleapis/nodejs-web-security-scanner) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/web-security-scanner)](https://npm.im/@google-cloud/web-security-scanner) |
-| [AI Platform](https://github.com/googleapis/nodejs-ai-platform) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/aiplatform)](https://npm.im/@google-cloud/aiplatform) |
+| [Workflows](https://github.com/googleapis/nodejs-workflows) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/workflows)](https://npm.im/@google-cloud/workflows) |
 | [AI Platform Notebooks](https://github.com/googleapis/nodejs-notebooks) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/notebooks)](https://npm.im/@google-cloud/notebooks) |
-| [API Gateway](https://github.com/googleapis/nodejs-api-gateway) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/api-gateway)](https://npm.im/@google-cloud/api-gateway) |
 | [Area120 Tables API](https://github.com/googleapis/nodejs-area120-tables) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google/area120-tables)](https://npm.im/@google/area120-tables) |
 | [Artifact Registry](https://github.com/googleapis/nodejs-artifact-registry) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/artifact-registry)](https://npm.im/@google-cloud/artifact-registry) |
 | [Assured Workloads for Government](https://github.com/googleapis/nodejs-assured-workloads) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/assured-workloads)](https://npm.im/@google-cloud/assured-workloads) |
@@ -97,12 +97,13 @@ applications that interact with individual Google Cloud services:
 | [Media Translation](https://github.com/googleapis/nodejs-media-translation) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/media-translation)](https://npm.im/@google-cloud/media-translation) |
 | [Network Connectivity Center](https://github.com/googleapis/nodejs-network-connectivity) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/network-connectivity)](https://npm.im/@google-cloud/network-connectivity) |
 | [Phishing Protection](https://github.com/googleapis/nodejs-phishing-protection) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/phishing-protection)](https://npm.im/@google-cloud/phishing-protection) |
-| [Resource Manager API](https://github.com/googleapis/nodejs-resource) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/resource)](https://npm.im/@google-cloud/resource) |
+| [Resource Manager API](https://github.com/googleapis/resource-manager) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/resource)](https://npm.im/@google-cloud/resource) |
 | [Runtime Config](https://github.com/googleapis/nodejs-rcloadenv) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/rcloadenv)](https://npm.im/@google-cloud/rcloadenv) |
+| [Service Usage](https://github.com/googleapis/nodejs-serviceusage) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/serviceusage)](https://npm.im/@google-cloud/serviceusage) |
 | [Stackdriver Debugger](https://github.com/googleapis/cloud-debug-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/debug-agent)](https://npm.im/@google-cloud/debug-agent) |
 | [Stackdriver Trace](https://github.com/googleapis/cloud-trace-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/trace-agent)](https://npm.im/@google-cloud/trace-agent) |
 | [Transcoder API](https://github.com/googleapis/nodejs-video-transcoder) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/video-transcoder)](https://npm.im/@google-cloud/video-transcoder) |
-| [Workflows](https://github.com/googleapis/nodejs-workflows) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/workflows)](https://npm.im/@google-cloud/workflows) |
+| [Vertex AI](https://github.com/googleapis/nodejs-ai-platform) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/aiplatform)](https://npm.im/@google-cloud/aiplatform) |
 
 
 If the service is not listed above, [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client) interfaces
