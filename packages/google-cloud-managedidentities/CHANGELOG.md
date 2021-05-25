@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.1...v1.0.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#52](https://www.github.com/googleapis/nodejs-managed-identities/issues/52)) ([747a6f2](https://www.github.com/googleapis/nodejs-managed-identities/commit/747a6f2ee3a7a6d341ad5f3825a22f31886474ac))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.0...v1.0.1) (2021-05-12)
 
 
