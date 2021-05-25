@@ -2,11 +2,11 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Service Usage: Node.js Client](https://github.com/googleapis/nodejs-serviceusage)
+# [Service Usage: Node.js Client](https://github.com/googleapis/nodejs-service-usage)
 
-[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/serviceusage.svg)](https://www.npmjs.org/package/@google-cloud/serviceusage)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-serviceusage/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-serviceusage)
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/service-usage.svg)](https://www.npmjs.org/package/@google-cloud/service-usage)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-service-usage/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-service-usage)
 
 
 
@@ -15,11 +15,11 @@ Serviceusage client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-serviceusage/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-service-usage/blob/master/CHANGELOG.md).
 
 * [Service Usage Node.js Client API Reference][client-docs]
 * [Service Usage Documentation][product-docs]
-* [github.com/googleapis/nodejs-serviceusage](https://github.com/googleapis/nodejs-serviceusage)
+* [github.com/googleapis/nodejs-service-usage](https://github.com/googleapis/nodejs-service-usage)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/serviceusage
+npm install @google-cloud/service-usage
 ```
 
 
@@ -59,7 +59,7 @@ npm install @google-cloud/serviceusage
 
 ```javascript
 // Imports the Google Cloud client library
-const {ServiceUsageClient} = require('@google-cloud/serviceusage');
+const {ServiceUsageClient} = require('@google-cloud/service-usage');
 
 // const parent = 'projects/my-project', // Project to list service usage for.
 // filter = 'state:ENABLED' // Filter when listing services.
@@ -82,11 +82,11 @@ listServices();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-serviceusage/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-service-usage/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-serviceusage/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-serviceusage&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-service-usage/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-usage&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -119,6 +119,12 @@ _Legacy Node.js versions are supported as a best effort:_
 This library follows [Semantic Versioning](http://semver.org/).
 
 
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
+
 
 
 
@@ -129,7 +135,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-serviceusage/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-service-usage/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -141,7 +147,7 @@ to its template in this
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-serviceusage/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-service-usage/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/service-usage/docs/overview
 [product-docs]: https://cloud.google.com/service-usage/

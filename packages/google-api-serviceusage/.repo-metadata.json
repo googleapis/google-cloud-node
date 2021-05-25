@@ -1,13 +1,13 @@
 {
-  "name": "serviceusage",
+  "name": "service-usage",
   "name_pretty": "Service Usage",
   "product_documentation": "https://cloud.google.com/service-usage/",
   "client_documentation": "https://cloud.google.com/service-usage/docs/overview",
-  "issue_tracker": "https://www.github.com/googleapis/nodejs-serviceusage/issues",
-  "release_level": "BETA",
+  "issue_tracker": "https://www.github.com/googleapis/nodejs-service-usage/issues",
+  "release_level": "ga",
   "language": "nodejs",
-  "repo": "googleapis/nodejs-serviceusage",
-  "distribution_name": "@google-cloud/serviceusage",
+  "repo": "googleapis/nodejs-service-usage",
+  "distribution_name": "@google-cloud/service-usage",
   "api_id": "serviceusage.googleapis.com",
   "requires_billing": true,
   "default_version": "v1"

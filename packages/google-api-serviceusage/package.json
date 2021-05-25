@@ -1,8 +1,8 @@
 {
-  "name": "@google-cloud/serviceusage",
+  "name": "@google-cloud/service-usage",
   "version": "0.1.0",
   "description": "Serviceusage client for Node.js",
-  "repository": "googleapis/nodejs-serviceusage",
+  "repository": "googleapis/nodejs-service-usage",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",

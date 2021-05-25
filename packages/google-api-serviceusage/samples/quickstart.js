@@ -20,7 +20,7 @@ async function main(
 ) {
   // [START serviceusage_quickstart]
   // Imports the Google Cloud client library
-  const {ServiceUsageClient} = require('@google-cloud/serviceusage');
+  const {ServiceUsageClient} = require('@google-cloud/service-usage');
 
   // const parent = 'projects/my-project', // Project to list service usage for.
   // filter = 'state:ENABLED' // Filter when listing services.

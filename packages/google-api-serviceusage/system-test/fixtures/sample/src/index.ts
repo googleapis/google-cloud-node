@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ServiceUsageClient} from '@google-cloud/serviceusage';
+import {ServiceUsageClient} from '@google-cloud/service-usage';
 
 // check that the client class type name can be used
 function doStuffWithServiceUsageClient(client: ServiceUsageClient) {
