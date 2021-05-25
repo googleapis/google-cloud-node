@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.7.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.6.1...v3.7.0) (2021-05-24)
+
+
+### Features
+
+* Etags in Secret Manager ([#253](https://www.github.com/googleapis/nodejs-secret-manager/issues/253)) ([a950e88](https://www.github.com/googleapis/nodejs-secret-manager/commit/a950e88744a7d2382ffb2199f580f7305900da6b))
+
 ### [3.6.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.6.0...v3.6.1) (2021-05-12)
 
 
