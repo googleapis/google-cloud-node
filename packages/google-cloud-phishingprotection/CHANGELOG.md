@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+### [2.4.2](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.1...v2.4.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#298](https://www.github.com/googleapis/nodejs-phishing-protection/issues/298)) ([ea669a8](https://www.github.com/googleapis/nodejs-phishing-protection/commit/ea669a8485c1744dd61fa83774ca39bdfcff5a07))
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.0...v2.4.1) (2021-05-12)
 
 
