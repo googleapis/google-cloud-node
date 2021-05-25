@@ -43,7 +43,7 @@
     "hard-rejection": "^2.1.0",
     "linkinator": "^2.0.0",
     "mocha": "^8.0.0",
-    "sinon": "^10.0.0",
+    "sinon": "^11.0.0",
     "typescript": "^3.8.3",
     "@microsoft/api-documenter": "^7.8.10",
     "@microsoft/api-extractor": "^7.8.10"
