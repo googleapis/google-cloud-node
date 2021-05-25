@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.1...v2.3.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#529](https://www.github.com/googleapis/nodejs-tasks/issues/529)) ([760c204](https://www.github.com/googleapis/nodejs-tasks/commit/760c2043f9bccb0d2787e83dd08ace942e6b10fd))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.0...v2.3.1) (2021-05-12)
 
 
