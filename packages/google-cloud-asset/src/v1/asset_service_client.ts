@@ -142,6 +142,8 @@ export class AssetServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest') {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -168,6 +170,11 @@ export class AssetServiceClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
+      listAssets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'assets'
+      ),
       searchAllResources: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -269,6 +276,7 @@ export class AssetServiceClient {
     // and create an API call method for each.
     const assetServiceStubMethods = [
       'exportAssets',
+      'listAssets',
       'batchGetAssetsHistory',
       'createFeed',
       'getFeed',
@@ -1362,6 +1370,292 @@ export class AssetServiceClient {
       protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest
     >;
   }
+  listAssets(
+    request: protos.google.cloud.asset.v1.IListAssetsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1.IAsset[],
+      protos.google.cloud.asset.v1.IListAssetsRequest | null,
+      protos.google.cloud.asset.v1.IListAssetsResponse
+    ]
+  >;
+  listAssets(
+    request: protos.google.cloud.asset.v1.IListAssetsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1.IListAssetsRequest,
+      protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
+      protos.google.cloud.asset.v1.IAsset
+    >
+  ): void;
+  listAssets(
+    request: protos.google.cloud.asset.v1.IListAssetsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.asset.v1.IListAssetsRequest,
+      protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
+      protos.google.cloud.asset.v1.IAsset
+    >
+  ): void;
+  /**
+   * Lists assets with time and resource types and returns paged results in
+   * response.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the organization or project the assets belong to. Format:
+   *   "organizations/[organization-number]" (such as "organizations/123"),
+   *   "projects/[project-id]" (such as "projects/my-project-id"), or
+   *   "projects/[project-number]" (such as "projects/12345").
+   * @param {google.protobuf.Timestamp} request.readTime
+   *   Timestamp to take an asset snapshot. This can only be set to a timestamp
+   *   between the current time and the current time minus 35 days (inclusive).
+   *   If not specified, the current time will be used. Due to delays in resource
+   *   data collection and indexing, there is a volatile window during which
+   *   running the same query may get different results.
+   * @param {string[]} request.assetTypes
+   *   A list of asset types to take a snapshot for. For example:
+   *   "compute.googleapis.com/Disk".
+   *
+   *   Regular expression is also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+   *   with "compute.googleapis.com".
+   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
+   *
+   *   If specified, only matching assets will be returned, otherwise, it will
+   *   snapshot all asset types. See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+   *   for all supported asset types.
+   * @param {google.cloud.asset.v1.ContentType} request.contentType
+   *   Asset content type. If not specified, no content but the asset name will
+   *   be returned.
+   * @param {number} request.pageSize
+   *   The maximum number of assets to be returned in a single response. Default
+   *   is 100, minimum is 1, and maximum is 1000.
+   * @param {string} request.pageToken
+   *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
+   *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
+   *   prior `ListAssets` call, and the API should return the next page of assets.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Asset]{@link google.cloud.asset.v1.Asset}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAssetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listAssets(
+    request: protos.google.cloud.asset.v1.IListAssetsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.asset.v1.IListAssetsRequest,
+          protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
+          protos.google.cloud.asset.v1.IAsset
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.asset.v1.IListAssetsRequest,
+      protos.google.cloud.asset.v1.IListAssetsResponse | null | undefined,
+      protos.google.cloud.asset.v1.IAsset
+    >
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1.IAsset[],
+      protos.google.cloud.asset.v1.IListAssetsRequest | null,
+      protos.google.cloud.asset.v1.IListAssetsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listAssets(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the organization or project the assets belong to. Format:
+   *   "organizations/[organization-number]" (such as "organizations/123"),
+   *   "projects/[project-id]" (such as "projects/my-project-id"), or
+   *   "projects/[project-number]" (such as "projects/12345").
+   * @param {google.protobuf.Timestamp} request.readTime
+   *   Timestamp to take an asset snapshot. This can only be set to a timestamp
+   *   between the current time and the current time minus 35 days (inclusive).
+   *   If not specified, the current time will be used. Due to delays in resource
+   *   data collection and indexing, there is a volatile window during which
+   *   running the same query may get different results.
+   * @param {string[]} request.assetTypes
+   *   A list of asset types to take a snapshot for. For example:
+   *   "compute.googleapis.com/Disk".
+   *
+   *   Regular expression is also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+   *   with "compute.googleapis.com".
+   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
+   *
+   *   If specified, only matching assets will be returned, otherwise, it will
+   *   snapshot all asset types. See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+   *   for all supported asset types.
+   * @param {google.cloud.asset.v1.ContentType} request.contentType
+   *   Asset content type. If not specified, no content but the asset name will
+   *   be returned.
+   * @param {number} request.pageSize
+   *   The maximum number of assets to be returned in a single response. Default
+   *   is 100, minimum is 1, and maximum is 1000.
+   * @param {string} request.pageToken
+   *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
+   *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
+   *   prior `ListAssets` call, and the API should return the next page of assets.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Asset]{@link google.cloud.asset.v1.Asset} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAssetsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listAssetsStream(
+    request?: protos.google.cloud.asset.v1.IListAssetsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listAssets.createStream(
+      this.innerApiCalls.listAssets as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listAssets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Name of the organization or project the assets belong to. Format:
+   *   "organizations/[organization-number]" (such as "organizations/123"),
+   *   "projects/[project-id]" (such as "projects/my-project-id"), or
+   *   "projects/[project-number]" (such as "projects/12345").
+   * @param {google.protobuf.Timestamp} request.readTime
+   *   Timestamp to take an asset snapshot. This can only be set to a timestamp
+   *   between the current time and the current time minus 35 days (inclusive).
+   *   If not specified, the current time will be used. Due to delays in resource
+   *   data collection and indexing, there is a volatile window during which
+   *   running the same query may get different results.
+   * @param {string[]} request.assetTypes
+   *   A list of asset types to take a snapshot for. For example:
+   *   "compute.googleapis.com/Disk".
+   *
+   *   Regular expression is also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+   *   with "compute.googleapis.com".
+   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
+   *
+   *   If specified, only matching assets will be returned, otherwise, it will
+   *   snapshot all asset types. See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+   *   for all supported asset types.
+   * @param {google.cloud.asset.v1.ContentType} request.contentType
+   *   Asset content type. If not specified, no content but the asset name will
+   *   be returned.
+   * @param {number} request.pageSize
+   *   The maximum number of assets to be returned in a single response. Default
+   *   is 100, minimum is 1, and maximum is 1000.
+   * @param {string} request.pageToken
+   *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
+   *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
+   *   prior `ListAssets` call, and the API should return the next page of assets.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Asset]{@link google.cloud.asset.v1.Asset}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listAssetsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listAssetsAsync(
+    request?: protos.google.cloud.asset.v1.IListAssetsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.asset.v1.IAsset> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listAssets.asyncIterate(
+      this.innerApiCalls['listAssets'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.asset.v1.IAsset>;
+  }
   searchAllResources(
     request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
     options?: CallOptions
@@ -1404,7 +1698,7 @@ export class AssetServiceClient {
    * @param {string} request.scope
    *   Required. A scope can be a project, a folder, or an organization. The search is
    *   limited to the resources within the `scope`. The caller must be granted the
-   *   [`cloudasset.assets.searchAllResources`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+   *   [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
    *   permission on the desired scope.
    *
    *   The allowed values are:
@@ -1415,36 +1709,41 @@ export class AssetServiceClient {
    *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
    * @param {string} [request.query]
    *   Optional. The query statement. See [how to construct a
-   *   query](http://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+   *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
    *   for more information. If not specified or empty, it will search all the
-   *   resources within the specified `scope`. Note that the query string is
-   *   compared against each Cloud IAM policy binding, including its members,
-   *   roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
-   *   contain the bindings that match your query. To learn more about the IAM
-   *   policy structure, see [IAM policy
-   *   doc](https://cloud.google.com/iam/docs/policies#structure).
+   *   resources within the specified `scope`.
    *
    *   Examples:
    *
    *   * `name:Important` to find Cloud resources whose name contains
    *     "Important" as a word.
+   *   * `name=Important` to find the Cloud resource whose name is exactly
+   *     "Important".
    *   * `displayName:Impor*` to find Cloud resources whose display name
-   *     contains "Impor" as a prefix.
-   *   * `description:*por*` to find Cloud resources whose description
-   *     contains "por" as a substring.
-   *   * `location:us-west*` to find Cloud resources whose location is
-   *     prefixed with "us-west".
+   *     contains "Impor" as a prefix of any word in the field.
+   *   * `location:us-west*` to find Cloud resources whose location contains both
+   *     "us" and "west" as prefixes.
    *   * `labels:prod` to find Cloud resources whose labels contain "prod" as
    *     a key or value.
    *   * `labels.env:prod` to find Cloud resources that have a label "env"
    *     and its value is "prod".
    *   * `labels.env:*` to find Cloud resources that have a label "env".
+   *   * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
+   *     encryption key whose name contains the word "key".
+   *   * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
+   *     word.
+   *   * `NOT state:ACTIVE` to find {{gcp_name}} resources whose state
+   *     doesn't contain "ACTIVE" as a word.
+   *   * `createTime<1609459200` to find Cloud resources that were created before
+   *     "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+   *     "2021-01-01 00:00:00 UTC" in seconds.
+   *   * `updateTime>1609459200` to find Cloud resources that were updated after
+   *     "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+   *     "2021-01-01 00:00:00 UTC" in seconds.
    *   * `Important` to find Cloud resources that contain "Important" as a word
    *     in any of the searchable fields.
-   *   * `Impor*` to find Cloud resources that contain "Impor" as a prefix
-   *     in any of the searchable fields.
-   *   * `*por*` to find Cloud resources that contain "por" as a substring in
-   *     any of the searchable fields.
+   *   * `Impor*` to find Cloud resources that contain "Impor" as a prefix of any
+   *     word in any of the searchable fields.
    *   * `Important location:(us-west1 OR global)` to find Cloud
    *     resources that contain "Important" as a word in any of the searchable
    *     fields and are also located in the "us-west1" region or the "global"
@@ -1453,6 +1752,17 @@ export class AssetServiceClient {
    *   Optional. A list of asset types that this request searches for. If empty, it will
    *   search all the [searchable asset
    *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   *
+   *   Regular expressions are also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+   *   with "compute.googleapis.com".
+   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
    * @param {number} [request.pageSize]
    *   Optional. The page size for search result pagination. Page size is capped at 500 even
    *   if a larger value is given. If set to zero, server will pick an appropriate
@@ -1464,12 +1774,24 @@ export class AssetServiceClient {
    *   the previous response. The values of all other method parameters, must be
    *   identical to those in the previous call.
    * @param {string} [request.orderBy]
-   *   Optional. A comma separated list of fields specifying the sorting order of the
+   *   Optional. A comma-separated list of fields specifying the sorting order of the
    *   results. The default order is ascending. Add " DESC" after the field name
    *   to indicate descending order. Redundant space characters are ignored.
-   *   Example: "location DESC, name". Only string fields in the response are
-   *   sortable, including `name`, `displayName`, `description`, `location`. All
-   *   the other fields such as repeated fields (e.g., `networkTags`), map
+   *   Example: "location DESC, name".
+   *   Only singular primitive fields in the response are sortable:
+   *     * name
+   *     * assetType
+   *     * project
+   *     * displayName
+   *     * description
+   *     * location
+   *     * kmsKey
+   *     * createTime
+   *     * updateTime
+   *     * state
+   *     * parentFullResourceName
+   *     * parentAssetType
+   *   All the other fields such as repeated fields (e.g., `networkTags`), map
    *   fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
    *   are not supported.
    * @param {object} [options]
@@ -1536,7 +1858,7 @@ export class AssetServiceClient {
    * @param {string} request.scope
    *   Required. A scope can be a project, a folder, or an organization. The search is
    *   limited to the resources within the `scope`. The caller must be granted the
-   *   [`cloudasset.assets.searchAllResources`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+   *   [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
    *   permission on the desired scope.
    *
    *   The allowed values are:
@@ -1547,36 +1869,41 @@ export class AssetServiceClient {
    *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
    * @param {string} [request.query]
    *   Optional. The query statement. See [how to construct a
-   *   query](http://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+   *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
    *   for more information. If not specified or empty, it will search all the
-   *   resources within the specified `scope`. Note that the query string is
-   *   compared against each Cloud IAM policy binding, including its members,
-   *   roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
-   *   contain the bindings that match your query. To learn more about the IAM
-   *   policy structure, see [IAM policy
-   *   doc](https://cloud.google.com/iam/docs/policies#structure).
+   *   resources within the specified `scope`.
    *
    *   Examples:
    *
    *   * `name:Important` to find Cloud resources whose name contains
    *     "Important" as a word.
+   *   * `name=Important` to find the Cloud resource whose name is exactly
+   *     "Important".
    *   * `displayName:Impor*` to find Cloud resources whose display name
-   *     contains "Impor" as a prefix.
-   *   * `description:*por*` to find Cloud resources whose description
-   *     contains "por" as a substring.
-   *   * `location:us-west*` to find Cloud resources whose location is
-   *     prefixed with "us-west".
+   *     contains "Impor" as a prefix of any word in the field.
+   *   * `location:us-west*` to find Cloud resources whose location contains both
+   *     "us" and "west" as prefixes.
    *   * `labels:prod` to find Cloud resources whose labels contain "prod" as
    *     a key or value.
    *   * `labels.env:prod` to find Cloud resources that have a label "env"
    *     and its value is "prod".
    *   * `labels.env:*` to find Cloud resources that have a label "env".
+   *   * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
+   *     encryption key whose name contains the word "key".
+   *   * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
+   *     word.
+   *   * `NOT state:ACTIVE` to find {{gcp_name}} resources whose state
+   *     doesn't contain "ACTIVE" as a word.
+   *   * `createTime<1609459200` to find Cloud resources that were created before
+   *     "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+   *     "2021-01-01 00:00:00 UTC" in seconds.
+   *   * `updateTime>1609459200` to find Cloud resources that were updated after
+   *     "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+   *     "2021-01-01 00:00:00 UTC" in seconds.
    *   * `Important` to find Cloud resources that contain "Important" as a word
    *     in any of the searchable fields.
-   *   * `Impor*` to find Cloud resources that contain "Impor" as a prefix
-   *     in any of the searchable fields.
-   *   * `*por*` to find Cloud resources that contain "por" as a substring in
-   *     any of the searchable fields.
+   *   * `Impor*` to find Cloud resources that contain "Impor" as a prefix of any
+   *     word in any of the searchable fields.
    *   * `Important location:(us-west1 OR global)` to find Cloud
    *     resources that contain "Important" as a word in any of the searchable
    *     fields and are also located in the "us-west1" region or the "global"
@@ -1585,6 +1912,17 @@ export class AssetServiceClient {
    *   Optional. A list of asset types that this request searches for. If empty, it will
    *   search all the [searchable asset
    *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   *
+   *   Regular expressions are also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+   *   with "compute.googleapis.com".
+   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
    * @param {number} [request.pageSize]
    *   Optional. The page size for search result pagination. Page size is capped at 500 even
    *   if a larger value is given. If set to zero, server will pick an appropriate
@@ -1596,12 +1934,24 @@ export class AssetServiceClient {
    *   the previous response. The values of all other method parameters, must be
    *   identical to those in the previous call.
    * @param {string} [request.orderBy]
-   *   Optional. A comma separated list of fields specifying the sorting order of the
+   *   Optional. A comma-separated list of fields specifying the sorting order of the
    *   results. The default order is ascending. Add " DESC" after the field name
    *   to indicate descending order. Redundant space characters are ignored.
-   *   Example: "location DESC, name". Only string fields in the response are
-   *   sortable, including `name`, `displayName`, `description`, `location`. All
-   *   the other fields such as repeated fields (e.g., `networkTags`), map
+   *   Example: "location DESC, name".
+   *   Only singular primitive fields in the response are sortable:
+   *     * name
+   *     * assetType
+   *     * project
+   *     * displayName
+   *     * description
+   *     * location
+   *     * kmsKey
+   *     * createTime
+   *     * updateTime
+   *     * state
+   *     * parentFullResourceName
+   *     * parentAssetType
+   *   All the other fields such as repeated fields (e.g., `networkTags`), map
    *   fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
    *   are not supported.
    * @param {object} [options]
@@ -1646,7 +1996,7 @@ export class AssetServiceClient {
    * @param {string} request.scope
    *   Required. A scope can be a project, a folder, or an organization. The search is
    *   limited to the resources within the `scope`. The caller must be granted the
-   *   [`cloudasset.assets.searchAllResources`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+   *   [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
    *   permission on the desired scope.
    *
    *   The allowed values are:
@@ -1657,36 +2007,41 @@ export class AssetServiceClient {
    *   * organizations/{ORGANIZATION_NUMBER} (e.g., "organizations/123456")
    * @param {string} [request.query]
    *   Optional. The query statement. See [how to construct a
-   *   query](http://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
+   *   query](https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query)
    *   for more information. If not specified or empty, it will search all the
-   *   resources within the specified `scope`. Note that the query string is
-   *   compared against each Cloud IAM policy binding, including its members,
-   *   roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
-   *   contain the bindings that match your query. To learn more about the IAM
-   *   policy structure, see [IAM policy
-   *   doc](https://cloud.google.com/iam/docs/policies#structure).
+   *   resources within the specified `scope`.
    *
    *   Examples:
    *
    *   * `name:Important` to find Cloud resources whose name contains
    *     "Important" as a word.
+   *   * `name=Important` to find the Cloud resource whose name is exactly
+   *     "Important".
    *   * `displayName:Impor*` to find Cloud resources whose display name
-   *     contains "Impor" as a prefix.
-   *   * `description:*por*` to find Cloud resources whose description
-   *     contains "por" as a substring.
-   *   * `location:us-west*` to find Cloud resources whose location is
-   *     prefixed with "us-west".
+   *     contains "Impor" as a prefix of any word in the field.
+   *   * `location:us-west*` to find Cloud resources whose location contains both
+   *     "us" and "west" as prefixes.
    *   * `labels:prod` to find Cloud resources whose labels contain "prod" as
    *     a key or value.
    *   * `labels.env:prod` to find Cloud resources that have a label "env"
    *     and its value is "prod".
    *   * `labels.env:*` to find Cloud resources that have a label "env".
+   *   * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
+   *     encryption key whose name contains the word "key".
+   *   * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
+   *     word.
+   *   * `NOT state:ACTIVE` to find {{gcp_name}} resources whose state
+   *     doesn't contain "ACTIVE" as a word.
+   *   * `createTime<1609459200` to find Cloud resources that were created before
+   *     "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+   *     "2021-01-01 00:00:00 UTC" in seconds.
+   *   * `updateTime>1609459200` to find Cloud resources that were updated after
+   *     "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
+   *     "2021-01-01 00:00:00 UTC" in seconds.
    *   * `Important` to find Cloud resources that contain "Important" as a word
    *     in any of the searchable fields.
-   *   * `Impor*` to find Cloud resources that contain "Impor" as a prefix
-   *     in any of the searchable fields.
-   *   * `*por*` to find Cloud resources that contain "por" as a substring in
-   *     any of the searchable fields.
+   *   * `Impor*` to find Cloud resources that contain "Impor" as a prefix of any
+   *     word in any of the searchable fields.
    *   * `Important location:(us-west1 OR global)` to find Cloud
    *     resources that contain "Important" as a word in any of the searchable
    *     fields and are also located in the "us-west1" region or the "global"
@@ -1695,6 +2050,17 @@ export class AssetServiceClient {
    *   Optional. A list of asset types that this request searches for. If empty, it will
    *   search all the [searchable asset
    *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   *
+   *   Regular expressions are also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots resources whose asset type starts
+   *   with "compute.googleapis.com".
+   *   * ".*Instance" snapshots resources whose asset type ends with "Instance".
+   *   * ".*Instance.*" snapshots resources whose asset type contains "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
    * @param {number} [request.pageSize]
    *   Optional. The page size for search result pagination. Page size is capped at 500 even
    *   if a larger value is given. If set to zero, server will pick an appropriate
@@ -1706,12 +2072,24 @@ export class AssetServiceClient {
    *   the previous response. The values of all other method parameters, must be
    *   identical to those in the previous call.
    * @param {string} [request.orderBy]
-   *   Optional. A comma separated list of fields specifying the sorting order of the
+   *   Optional. A comma-separated list of fields specifying the sorting order of the
    *   results. The default order is ascending. Add " DESC" after the field name
    *   to indicate descending order. Redundant space characters are ignored.
-   *   Example: "location DESC, name". Only string fields in the response are
-   *   sortable, including `name`, `displayName`, `description`, `location`. All
-   *   the other fields such as repeated fields (e.g., `networkTags`), map
+   *   Example: "location DESC, name".
+   *   Only singular primitive fields in the response are sortable:
+   *     * name
+   *     * assetType
+   *     * project
+   *     * displayName
+   *     * description
+   *     * location
+   *     * kmsKey
+   *     * createTime
+   *     * updateTime
+   *     * state
+   *     * parentFullResourceName
+   *     * parentAssetType
+   *   All the other fields such as repeated fields (e.g., `networkTags`), map
    *   fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
    *   are not supported.
    * @param {object} [options]
@@ -1794,7 +2172,7 @@ export class AssetServiceClient {
    *   Required. A scope can be a project, a folder, or an organization. The search is
    *   limited to the IAM policies within the `scope`. The caller must be granted
    *   the
-   *   [`cloudasset.assets.searchAllIamPolicies`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+   *   [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
    *   permission on the desired scope.
    *
    *   The allowed values are:
@@ -1807,7 +2185,12 @@ export class AssetServiceClient {
    *   Optional. The query statement. See [how to construct a
    *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
    *   for more information. If not specified or empty, it will search all the
-   *   IAM policies within the specified `scope`.
+   *   IAM policies within the specified `scope`. Note that the query string is
+   *   compared against each Cloud IAM policy binding, including its members,
+   *   roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+   *   contain the bindings that match your query. To learn more about the IAM
+   *   policy structure, see [IAM policy
+   *   doc](https://cloud.google.com/iam/docs/policies#structure).
    *
    *   Examples:
    *
@@ -1815,18 +2198,25 @@ export class AssetServiceClient {
    *     "amy@gmail.com".
    *   * `policy:roles/compute.admin` to find IAM policy bindings that specify
    *     the Compute Admin role.
+   *   * `policy:comp*` to find IAM policy bindings that contain "comp" as a
+   *     prefix of any word in the binding.
    *   * `policy.role.permissions:storage.buckets.update` to find IAM policy
    *     bindings that specify a role containing "storage.buckets.update"
    *     permission. Note that if callers don't have `iam.roles.get` access to a
    *     role's included permissions, policy bindings that specify this role will
    *     be dropped from the search results.
+   *   * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
+   *     role containing "upd" as a prefix of any word in the role permission.
+   *     Note that if callers don't have `iam.roles.get` access to a role's
+   *     included permissions, policy bindings that specify this role will be
+   *     dropped from the search results.
    *   * `resource:organizations/123456` to find IAM policy bindings
    *     that are set on "organizations/123456".
+   *   * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
+   *     find IAM policy bindings that are set on the project named "myproject".
    *   * `Important` to find IAM policy bindings that contain "Important" as a
    *     word in any of the searchable fields (except for the included
    *     permissions).
-   *   * `*por*` to find IAM policy bindings that contain "por" as a substring
-   *     in any of the searchable fields (except for the included permissions).
    *   * `resource:(instance1 OR instance2) policy:amy` to find
    *     IAM policy bindings that are set on resources "instance1" or
    *     "instance2" and also specify user "amy".
@@ -1905,7 +2295,7 @@ export class AssetServiceClient {
    *   Required. A scope can be a project, a folder, or an organization. The search is
    *   limited to the IAM policies within the `scope`. The caller must be granted
    *   the
-   *   [`cloudasset.assets.searchAllIamPolicies`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+   *   [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
    *   permission on the desired scope.
    *
    *   The allowed values are:
@@ -1918,7 +2308,12 @@ export class AssetServiceClient {
    *   Optional. The query statement. See [how to construct a
    *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
    *   for more information. If not specified or empty, it will search all the
-   *   IAM policies within the specified `scope`.
+   *   IAM policies within the specified `scope`. Note that the query string is
+   *   compared against each Cloud IAM policy binding, including its members,
+   *   roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+   *   contain the bindings that match your query. To learn more about the IAM
+   *   policy structure, see [IAM policy
+   *   doc](https://cloud.google.com/iam/docs/policies#structure).
    *
    *   Examples:
    *
@@ -1926,18 +2321,25 @@ export class AssetServiceClient {
    *     "amy@gmail.com".
    *   * `policy:roles/compute.admin` to find IAM policy bindings that specify
    *     the Compute Admin role.
+   *   * `policy:comp*` to find IAM policy bindings that contain "comp" as a
+   *     prefix of any word in the binding.
    *   * `policy.role.permissions:storage.buckets.update` to find IAM policy
    *     bindings that specify a role containing "storage.buckets.update"
    *     permission. Note that if callers don't have `iam.roles.get` access to a
    *     role's included permissions, policy bindings that specify this role will
    *     be dropped from the search results.
+   *   * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
+   *     role containing "upd" as a prefix of any word in the role permission.
+   *     Note that if callers don't have `iam.roles.get` access to a role's
+   *     included permissions, policy bindings that specify this role will be
+   *     dropped from the search results.
    *   * `resource:organizations/123456` to find IAM policy bindings
    *     that are set on "organizations/123456".
+   *   * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
+   *     find IAM policy bindings that are set on the project named "myproject".
    *   * `Important` to find IAM policy bindings that contain "Important" as a
    *     word in any of the searchable fields (except for the included
    *     permissions).
-   *   * `*por*` to find IAM policy bindings that contain "por" as a substring
-   *     in any of the searchable fields (except for the included permissions).
    *   * `resource:(instance1 OR instance2) policy:amy` to find
    *     IAM policy bindings that are set on resources "instance1" or
    *     "instance2" and also specify user "amy".
@@ -1994,7 +2396,7 @@ export class AssetServiceClient {
    *   Required. A scope can be a project, a folder, or an organization. The search is
    *   limited to the IAM policies within the `scope`. The caller must be granted
    *   the
-   *   [`cloudasset.assets.searchAllIamPolicies`](http://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
+   *   [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
    *   permission on the desired scope.
    *
    *   The allowed values are:
@@ -2007,7 +2409,12 @@ export class AssetServiceClient {
    *   Optional. The query statement. See [how to construct a
    *   query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
    *   for more information. If not specified or empty, it will search all the
-   *   IAM policies within the specified `scope`.
+   *   IAM policies within the specified `scope`. Note that the query string is
+   *   compared against each Cloud IAM policy binding, including its members,
+   *   roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+   *   contain the bindings that match your query. To learn more about the IAM
+   *   policy structure, see [IAM policy
+   *   doc](https://cloud.google.com/iam/docs/policies#structure).
    *
    *   Examples:
    *
@@ -2015,18 +2422,25 @@ export class AssetServiceClient {
    *     "amy@gmail.com".
    *   * `policy:roles/compute.admin` to find IAM policy bindings that specify
    *     the Compute Admin role.
+   *   * `policy:comp*` to find IAM policy bindings that contain "comp" as a
+   *     prefix of any word in the binding.
    *   * `policy.role.permissions:storage.buckets.update` to find IAM policy
    *     bindings that specify a role containing "storage.buckets.update"
    *     permission. Note that if callers don't have `iam.roles.get` access to a
    *     role's included permissions, policy bindings that specify this role will
    *     be dropped from the search results.
+   *   * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
+   *     role containing "upd" as a prefix of any word in the role permission.
+   *     Note that if callers don't have `iam.roles.get` access to a role's
+   *     included permissions, policy bindings that specify this role will be
+   *     dropped from the search results.
    *   * `resource:organizations/123456` to find IAM policy bindings
    *     that are set on "organizations/123456".
+   *   * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
+   *     find IAM policy bindings that are set on the project named "myproject".
    *   * `Important` to find IAM policy bindings that contain "Important" as a
    *     word in any of the searchable fields (except for the included
    *     permissions).
-   *   * `*por*` to find IAM policy bindings that contain "por" as a substring
-   *     in any of the searchable fields (except for the included permissions).
    *   * `resource:(instance1 OR instance2) policy:amy` to find
    *     IAM policy bindings that are set on resources "instance1" or
    *     "instance2" and also specify user "amy".
