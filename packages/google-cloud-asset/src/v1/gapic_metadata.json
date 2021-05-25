@@ -55,6 +55,13 @@
                 "analyzeIamPolicyLongrunning"
               ]
             },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
+              ]
+            },
             "SearchAllResources": {
               "methods": [
                 "searchAllResources",
@@ -117,6 +124,13 @@
             "AnalyzeIamPolicyLongrunning": {
               "methods": [
                 "analyzeIamPolicyLongrunning"
+              ]
+            },
+            "ListAssets": {
+              "methods": [
+                "listAssets",
+                "listAssetsStream",
+                "listAssetsAsync"
               ]
             },
             "SearchAllResources": {

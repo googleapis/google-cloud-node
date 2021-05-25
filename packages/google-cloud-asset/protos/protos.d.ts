@@ -61,6 +61,20 @@ export namespace google {
                     public exportAssets(request: google.cloud.asset.v1.IExportAssetsRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ListAssets.
+                     * @param request ListAssetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListAssetsResponse
+                     */
+                    public listAssets(request: google.cloud.asset.v1.IListAssetsRequest, callback: google.cloud.asset.v1.AssetService.ListAssetsCallback): void;
+
+                    /**
+                     * Calls ListAssets.
+                     * @param request ListAssetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listAssets(request: google.cloud.asset.v1.IListAssetsRequest): Promise<google.cloud.asset.v1.ListAssetsResponse>;
+
+                    /**
                      * Calls BatchGetAssetsHistory.
                      * @param request BatchGetAssetsHistoryRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and BatchGetAssetsHistoryResponse
@@ -209,6 +223,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ExportAssetsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.asset.v1.AssetService#listAssets}.
+                     * @param error Error, if any
+                     * @param [response] ListAssetsResponse
+                     */
+                    type ListAssetsCallback = (error: (Error|null), response?: google.cloud.asset.v1.ListAssetsResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.asset.v1.AssetService#batchGetAssetsHistory}.
@@ -492,6 +513,228 @@ export namespace google {
 
                     /**
                      * Converts this ExportAssetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListAssetsRequest. */
+                interface IListAssetsRequest {
+
+                    /** ListAssetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListAssetsRequest readTime */
+                    readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListAssetsRequest assetTypes */
+                    assetTypes?: (string[]|null);
+
+                    /** ListAssetsRequest contentType */
+                    contentType?: (google.cloud.asset.v1.ContentType|keyof typeof google.cloud.asset.v1.ContentType|null);
+
+                    /** ListAssetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListAssetsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListAssetsRequest. */
+                class ListAssetsRequest implements IListAssetsRequest {
+
+                    /**
+                     * Constructs a new ListAssetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IListAssetsRequest);
+
+                    /** ListAssetsRequest parent. */
+                    public parent: string;
+
+                    /** ListAssetsRequest readTime. */
+                    public readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListAssetsRequest assetTypes. */
+                    public assetTypes: string[];
+
+                    /** ListAssetsRequest contentType. */
+                    public contentType: (google.cloud.asset.v1.ContentType|keyof typeof google.cloud.asset.v1.ContentType);
+
+                    /** ListAssetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListAssetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListAssetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAssetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IListAssetsRequest): google.cloud.asset.v1.ListAssetsRequest;
+
+                    /**
+                     * Encodes the specified ListAssetsRequest message. Does not implicitly {@link google.cloud.asset.v1.ListAssetsRequest.verify|verify} messages.
+                     * @param message ListAssetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IListAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAssetsRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ListAssetsRequest.verify|verify} messages.
+                     * @param message ListAssetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IListAssetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAssetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAssetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.ListAssetsRequest;
+
+                    /**
+                     * Decodes a ListAssetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAssetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.ListAssetsRequest;
+
+                    /**
+                     * Verifies a ListAssetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAssetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAssetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.ListAssetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListAssetsRequest message. Also converts values to other types if specified.
+                     * @param message ListAssetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.ListAssetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAssetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListAssetsResponse. */
+                interface IListAssetsResponse {
+
+                    /** ListAssetsResponse readTime */
+                    readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListAssetsResponse assets */
+                    assets?: (google.cloud.asset.v1.IAsset[]|null);
+
+                    /** ListAssetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListAssetsResponse. */
+                class ListAssetsResponse implements IListAssetsResponse {
+
+                    /**
+                     * Constructs a new ListAssetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IListAssetsResponse);
+
+                    /** ListAssetsResponse readTime. */
+                    public readTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListAssetsResponse assets. */
+                    public assets: google.cloud.asset.v1.IAsset[];
+
+                    /** ListAssetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListAssetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListAssetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IListAssetsResponse): google.cloud.asset.v1.ListAssetsResponse;
+
+                    /**
+                     * Encodes the specified ListAssetsResponse message. Does not implicitly {@link google.cloud.asset.v1.ListAssetsResponse.verify|verify} messages.
+                     * @param message ListAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IListAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListAssetsResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ListAssetsResponse.verify|verify} messages.
+                     * @param message ListAssetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IListAssetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListAssetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.ListAssetsResponse;
+
+                    /**
+                     * Decodes a ListAssetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListAssetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.ListAssetsResponse;
+
+                    /**
+                     * Verifies a ListAssetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListAssetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListAssetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.ListAssetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListAssetsResponse message. Also converts values to other types if specified.
+                     * @param message ListAssetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.ListAssetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListAssetsResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2588,6 +2831,9 @@ export namespace google {
 
                     /** IamPolicyAnalysisQuery options */
                     options?: (google.cloud.asset.v1.IamPolicyAnalysisQuery.IOptions|null);
+
+                    /** IamPolicyAnalysisQuery conditionContext */
+                    conditionContext?: (google.cloud.asset.v1.IamPolicyAnalysisQuery.IConditionContext|null);
                 }
 
                 /** Represents an IamPolicyAnalysisQuery. */
@@ -2613,6 +2859,9 @@ export namespace google {
 
                     /** IamPolicyAnalysisQuery options. */
                     public options?: (google.cloud.asset.v1.IamPolicyAnalysisQuery.IOptions|null);
+
+                    /** IamPolicyAnalysisQuery conditionContext. */
+                    public conditionContext?: (google.cloud.asset.v1.IamPolicyAnalysisQuery.IConditionContext|null);
 
                     /**
                      * Creates a new IamPolicyAnalysisQuery instance using the specified properties.
@@ -3078,6 +3327,99 @@ export namespace google {
 
                         /**
                          * Converts this Options to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ConditionContext. */
+                    interface IConditionContext {
+
+                        /** ConditionContext accessTime */
+                        accessTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a ConditionContext. */
+                    class ConditionContext implements IConditionContext {
+
+                        /**
+                         * Constructs a new ConditionContext.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.asset.v1.IamPolicyAnalysisQuery.IConditionContext);
+
+                        /** ConditionContext accessTime. */
+                        public accessTime?: (google.protobuf.ITimestamp|null);
+
+                        /** ConditionContext TimeContext. */
+                        public TimeContext?: "accessTime";
+
+                        /**
+                         * Creates a new ConditionContext instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConditionContext instance
+                         */
+                        public static create(properties?: google.cloud.asset.v1.IamPolicyAnalysisQuery.IConditionContext): google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext;
+
+                        /**
+                         * Encodes the specified ConditionContext message. Does not implicitly {@link google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext.verify|verify} messages.
+                         * @param message ConditionContext message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.asset.v1.IamPolicyAnalysisQuery.IConditionContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConditionContext message, length delimited. Does not implicitly {@link google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext.verify|verify} messages.
+                         * @param message ConditionContext message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.asset.v1.IamPolicyAnalysisQuery.IConditionContext, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConditionContext message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConditionContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext;
+
+                        /**
+                         * Decodes a ConditionContext message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConditionContext
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext;
+
+                        /**
+                         * Verifies a ConditionContext message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConditionContext message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConditionContext
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext;
+
+                        /**
+                         * Creates a plain object from a ConditionContext message. Also converts values to other types if specified.
+                         * @param message ConditionContext
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.asset.v1.IamPolicyAnalysisQuery.ConditionContext, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConditionContext to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
@@ -4405,6 +4747,12 @@ export namespace google {
                     /** ResourceSearchResult project */
                     project?: (string|null);
 
+                    /** ResourceSearchResult folders */
+                    folders?: (string[]|null);
+
+                    /** ResourceSearchResult organization */
+                    organization?: (string|null);
+
                     /** ResourceSearchResult displayName */
                     displayName?: (string|null);
 
@@ -4420,8 +4768,26 @@ export namespace google {
                     /** ResourceSearchResult networkTags */
                     networkTags?: (string[]|null);
 
+                    /** ResourceSearchResult kmsKey */
+                    kmsKey?: (string|null);
+
+                    /** ResourceSearchResult createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ResourceSearchResult updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ResourceSearchResult state */
+                    state?: (string|null);
+
                     /** ResourceSearchResult additionalAttributes */
                     additionalAttributes?: (google.protobuf.IStruct|null);
+
+                    /** ResourceSearchResult parentFullResourceName */
+                    parentFullResourceName?: (string|null);
+
+                    /** ResourceSearchResult parentAssetType */
+                    parentAssetType?: (string|null);
                 }
 
                 /** Represents a ResourceSearchResult. */
@@ -4442,6 +4808,12 @@ export namespace google {
                     /** ResourceSearchResult project. */
                     public project: string;
 
+                    /** ResourceSearchResult folders. */
+                    public folders: string[];
+
+                    /** ResourceSearchResult organization. */
+                    public organization: string;
+
                     /** ResourceSearchResult displayName. */
                     public displayName: string;
 
@@ -4457,8 +4829,26 @@ export namespace google {
                     /** ResourceSearchResult networkTags. */
                     public networkTags: string[];
 
+                    /** ResourceSearchResult kmsKey. */
+                    public kmsKey: string;
+
+                    /** ResourceSearchResult createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ResourceSearchResult updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ResourceSearchResult state. */
+                    public state: string;
+
                     /** ResourceSearchResult additionalAttributes. */
                     public additionalAttributes?: (google.protobuf.IStruct|null);
+
+                    /** ResourceSearchResult parentFullResourceName. */
+                    public parentFullResourceName: string;
+
+                    /** ResourceSearchResult parentAssetType. */
+                    public parentAssetType: string;
 
                     /**
                      * Creates a new ResourceSearchResult instance using the specified properties.
@@ -4919,6 +5309,107 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ConditionEvaluation. */
+                interface IConditionEvaluation {
+
+                    /** ConditionEvaluation evaluationValue */
+                    evaluationValue?: (google.cloud.asset.v1.ConditionEvaluation.EvaluationValue|keyof typeof google.cloud.asset.v1.ConditionEvaluation.EvaluationValue|null);
+                }
+
+                /** Represents a ConditionEvaluation. */
+                class ConditionEvaluation implements IConditionEvaluation {
+
+                    /**
+                     * Constructs a new ConditionEvaluation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IConditionEvaluation);
+
+                    /** ConditionEvaluation evaluationValue. */
+                    public evaluationValue: (google.cloud.asset.v1.ConditionEvaluation.EvaluationValue|keyof typeof google.cloud.asset.v1.ConditionEvaluation.EvaluationValue);
+
+                    /**
+                     * Creates a new ConditionEvaluation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConditionEvaluation instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IConditionEvaluation): google.cloud.asset.v1.ConditionEvaluation;
+
+                    /**
+                     * Encodes the specified ConditionEvaluation message. Does not implicitly {@link google.cloud.asset.v1.ConditionEvaluation.verify|verify} messages.
+                     * @param message ConditionEvaluation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IConditionEvaluation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConditionEvaluation message, length delimited. Does not implicitly {@link google.cloud.asset.v1.ConditionEvaluation.verify|verify} messages.
+                     * @param message ConditionEvaluation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IConditionEvaluation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConditionEvaluation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConditionEvaluation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.ConditionEvaluation;
+
+                    /**
+                     * Decodes a ConditionEvaluation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConditionEvaluation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.ConditionEvaluation;
+
+                    /**
+                     * Verifies a ConditionEvaluation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConditionEvaluation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConditionEvaluation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.ConditionEvaluation;
+
+                    /**
+                     * Creates a plain object from a ConditionEvaluation message. Also converts values to other types if specified.
+                     * @param message ConditionEvaluation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.ConditionEvaluation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConditionEvaluation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ConditionEvaluation {
+
+                    /** EvaluationValue enum. */
+                    enum EvaluationValue {
+                        EVALUATION_VALUE_UNSPECIFIED = 0,
+                        TRUE = 1,
+                        FALSE = 2,
+                        CONDITIONAL = 3
+                    }
                 }
 
                 /** Properties of an IamPolicyAnalysisResult. */
@@ -5441,6 +5932,9 @@ export namespace google {
 
                         /** AccessControlList resourceEdges */
                         resourceEdges?: (google.cloud.asset.v1.IamPolicyAnalysisResult.IEdge[]|null);
+
+                        /** AccessControlList conditionEvaluation */
+                        conditionEvaluation?: (google.cloud.asset.v1.IConditionEvaluation|null);
                     }
 
                     /** Represents an AccessControlList. */
@@ -5460,6 +5954,9 @@ export namespace google {
 
                         /** AccessControlList resourceEdges. */
                         public resourceEdges: google.cloud.asset.v1.IamPolicyAnalysisResult.IEdge[];
+
+                        /** AccessControlList conditionEvaluation. */
+                        public conditionEvaluation?: (google.cloud.asset.v1.IConditionEvaluation|null);
 
                         /**
                          * Creates a new AccessControlList instance using the specified properties.
