@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [3.2.2](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.1...v3.2.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#449](https://www.github.com/googleapis/nodejs-os-login/issues/449)) ([40518aa](https://www.github.com/googleapis/nodejs-os-login/commit/40518aaf15307d6b89579c5d40c3739d7c499279))
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.0...v3.2.1) (2021-05-12)
 
 
