@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.2.1...v2.2.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#441](https://www.github.com/googleapis/nodejs-cloud-container/issues/441)) ([03134c0](https://www.github.com/googleapis/nodejs-cloud-container/commit/03134c09b67eaa9cf78b06b413169d5ef3f82f3c))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.2.0...v2.2.1) (2021-05-12)
 
 

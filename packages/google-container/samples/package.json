@@ -14,7 +14,7 @@
     "test": "mocha system-test --timeout 10000"
   },
   "dependencies": {
-    "@google-cloud/container": "^2.2.1"
+    "@google-cloud/container": "^2.2.2"
   },
   "devDependencies": {
     "chai": "^4.2.0",
