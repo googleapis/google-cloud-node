@@ -47,6 +47,24 @@
                             }
                           ]
                         },
+                        "ListAssets": {
+                          "requestType": "ListAssetsRequest",
+                          "responseType": "ListAssetsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=*/*}/assets",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=*/*}/assets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
                         "BatchGetAssetsHistory": {
                           "requestType": "BatchGetAssetsHistoryRequest",
                           "responseType": "BatchGetAssetsHistoryResponse",
@@ -275,6 +293,56 @@
                         },
                         "outputResult": {
                           "type": "OutputResult",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListAssetsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudasset.googleapis.com/Asset"
+                          }
+                        },
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "assetTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        },
+                        "contentType": {
+                          "type": "ContentType",
+                          "id": 4
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "ListAssetsResponse": {
+                      "fields": {
+                        "readTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "assets": {
+                          "rule": "repeated",
+                          "type": "Asset",
+                          "id": 2
+                        },
+                        "nextPageToken": {
+                          "type": "string",
                           "id": 3
                         }
                       }
@@ -722,6 +790,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "conditionContext": {
+                          "type": "ConditionContext",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -810,6 +885,21 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            }
+                          }
+                        },
+                        "ConditionContext": {
+                          "oneofs": {
+                            "TimeContext": {
+                              "oneof": [
+                                "accessTime"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "accessTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 1
                             }
                           }
                         }
@@ -1131,6 +1221,15 @@
                           "type": "string",
                           "id": 3
                         },
+                        "folders": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 17
+                        },
+                        "organization": {
+                          "type": "string",
+                          "id": 18
+                        },
                         "displayName": {
                           "type": "string",
                           "id": 4
@@ -1153,9 +1252,33 @@
                           "type": "string",
                           "id": 8
                         },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 12
+                        },
+                        "state": {
+                          "type": "string",
+                          "id": 13
+                        },
                         "additionalAttributes": {
                           "type": "google.protobuf.Struct",
                           "id": 9
+                        },
+                        "parentFullResourceName": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "parentAssetType": {
+                          "type": "string",
+                          "id": 103
                         }
                       }
                     },
@@ -1210,6 +1333,24 @@
                         "cause": {
                           "type": "string",
                           "id": 2
+                        }
+                      }
+                    },
+                    "ConditionEvaluation": {
+                      "fields": {
+                        "evaluationValue": {
+                          "type": "EvaluationValue",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "EvaluationValue": {
+                          "values": {
+                            "EVALUATION_VALUE_UNSPECIFIED": 0,
+                            "TRUE": 1,
+                            "FALSE": 2,
+                            "CONDITIONAL": 3
+                          }
                         }
                       }
                     },
@@ -1314,6 +1455,10 @@
                               "rule": "repeated",
                               "type": "Edge",
                               "id": 3
+                            },
+                            "conditionEvaluation": {
+                              "type": "ConditionEvaluation",
+                              "id": 4
                             }
                           }
                         },

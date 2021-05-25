@@ -1398,6 +1398,285 @@ describe('v1.AssetServiceClient', () => {
     });
   });
 
+  describe('listAssets', () => {
+    it('invokes listAssets without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.ListAssetsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+      ];
+      client.innerApiCalls.listAssets = stubSimpleCall(expectedResponse);
+      const [response] = await client.listAssets(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listAssets as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listAssets without error using callback', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.ListAssetsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+      ];
+      client.innerApiCalls.listAssets =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listAssets(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.asset.v1.IAsset[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listAssets as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listAssets with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.ListAssetsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listAssets = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listAssets(request), expectedError);
+      assert(
+        (client.innerApiCalls.listAssets as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listAssetsStream without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.ListAssetsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+      ];
+      client.descriptors.page.listAssets.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listAssetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.asset.v1.Asset[] = [];
+        stream.on('data', (response: protos.google.cloud.asset.v1.Asset) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAssets, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listAssets.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listAssetsStream with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.ListAssetsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAssets.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listAssetsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.asset.v1.Asset[] = [];
+        stream.on('data', (response: protos.google.cloud.asset.v1.Asset) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listAssets.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listAssets, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listAssets.createStream as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listAssets without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.ListAssetsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+        generateSampleMessage(new protos.google.cloud.asset.v1.Asset()),
+      ];
+      client.descriptors.page.listAssets.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.asset.v1.IAsset[] = [];
+      const iterable = client.listAssetsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listAssets with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.ListAssetsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listAssets.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listAssetsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.asset.v1.IAsset[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
+          0
+        ).args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.listAssets.asyncIterate as SinonStub).getCall(
+          0
+        ).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('searchAllResources', () => {
     it('invokes searchAllResources without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
