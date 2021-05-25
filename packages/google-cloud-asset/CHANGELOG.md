@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.12.2](https://www.github.com/googleapis/nodejs-asset/compare/v3.12.1...v3.12.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#492](https://www.github.com/googleapis/nodejs-asset/issues/492)) ([f8f8ed6](https://www.github.com/googleapis/nodejs-asset/commit/f8f8ed67b1f71d2491c9f54eb2beb09475c5663d))
+
 ### [3.12.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.12.0...v3.12.1) (2021-05-12)
 
 
