@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.1...v2.3.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#177](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/177)) ([5e89c98](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/5e89c9890ce5f2762398f46105be44301d4d6aa2))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.0...v2.3.1) (2021-05-12)
 
 
