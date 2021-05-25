@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.2](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.1...v3.2.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#232](https://www.github.com/googleapis/nodejs-billing-budgets/issues/232)) ([edfbcfc](https://www.github.com/googleapis/nodejs-billing-budgets/commit/edfbcfc048f89d8827327f497161a0734da6a7f8))
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.0...v3.2.1) (2021-05-12)
 
 
