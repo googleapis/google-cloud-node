@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.1...v1.1.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#47](https://www.github.com/googleapis/nodejs-network-connectivity/issues/47)) ([bc0944e](https://www.github.com/googleapis/nodejs-network-connectivity/commit/bc0944e2320a10abc9e2a8bb36ff48bff904c9c3))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.0...v1.1.1) (2021-05-12)
 
 
