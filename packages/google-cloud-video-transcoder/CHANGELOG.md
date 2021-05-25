@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.2](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.4.1...v1.4.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#67](https://www.github.com/googleapis/nodejs-video-transcoder/issues/67)) ([6475120](https://www.github.com/googleapis/nodejs-video-transcoder/commit/6475120814774a482655eb3b60e31a7fc00c2504))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.4.0...v1.4.1) (2021-05-12)
 
 
