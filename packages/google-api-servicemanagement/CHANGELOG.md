@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.2](https://www.github.com/googleapis/nodejs-service-management/compare/v0.2.1...v0.2.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#54](https://www.github.com/googleapis/nodejs-service-management/issues/54)) ([9376a6c](https://www.github.com/googleapis/nodejs-service-management/commit/9376a6c9836b9460d512a8fbd32094cc4f5ccb85))
+
 ### [0.2.1](https://www.github.com/googleapis/nodejs-service-management/compare/v0.2.0...v0.2.1) (2021-05-24)
 
 
