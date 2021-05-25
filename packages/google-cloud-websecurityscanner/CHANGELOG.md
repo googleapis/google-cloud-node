@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.1...v1.0.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#46](https://www.github.com/googleapis/nodejs-web-security-scanner/issues/46)) ([4d97ddc](https://www.github.com/googleapis/nodejs-web-security-scanner/commit/4d97ddc5340c337c6c80bf6c098e0f9a10f26297))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.0...v1.0.1) (2021-05-12)
 
 
