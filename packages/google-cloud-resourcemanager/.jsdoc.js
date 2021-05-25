@@ -39,7 +39,7 @@ module.exports = {
     copyright: 'Copyright 2019 Google, LLC.',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/resource',
+    systemName: '@google-cloud/resource-manager',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

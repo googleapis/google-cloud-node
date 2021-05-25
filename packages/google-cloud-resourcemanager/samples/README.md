@@ -2,7 +2,7 @@
 [//]: # "To regenerate it, use `python -m synthtool`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Google Cloud Resource Manager API: Node.js Samples](https://github.com/googleapis/nodejs-resource)
+# [Google Cloud Resource Manager API: Node.js Samples](https://github.com/googleapis/nodejs-resource-manager)
 
 [![Open in Cloud Shell][shell_img]][shell_link]
 
@@ -16,6 +16,9 @@ manage common aspects of your resources such as access control and
 configuration settings. The [Cloud Resource Manager API](https://cloud.google.com/resource-manager/docs/)
 enables you to programmatically manage these container resources.
 
+### **_IMPORTANT NOTE_**
+**Version 2.0.0 renames `@google-cloud/resource` to `@google-cloud/resource-manager` on npm.**
+
 ## Table of Contents
 
 * [Before you begin](#before-you-begin)
@@ -26,7 +29,7 @@ enables you to programmatically manage these container resources.
 ## Before you begin
 
 Before running the samples, make sure you've followed the steps outlined in
-[Using the client library](https://github.com/googleapis/nodejs-resource#using-the-client-library).
+[Using the client library](https://github.com/googleapis/nodejs-resource-manager#using-the-client-library).
 
 `cd samples`
 
@@ -42,9 +45,9 @@ Before running the samples, make sure you've followed the steps outlined in
 
 List all current projects.
 
-View the [source code](https://github.com/googleapis/nodejs-resource/blob/master/samples/listProjects.js).
+View the [source code](https://github.com/googleapis/nodejs-resource-manager/blob/master/samples/listProjects.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource&page=editor&open_in_editor=samples/listProjects.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource-manager&page=editor&open_in_editor=samples/listProjects.js,samples/README.md)
 
 __Usage:__
 
@@ -59,9 +62,9 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-resource/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-resource-manager/blob/master/samples/quickstart.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource-manager&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
 __Usage:__
 
@@ -74,5 +77,5 @@ __Usage:__
 
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
-[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource&page=editor&open_in_editor=samples/README.md
+[shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource-manager&page=editor&open_in_editor=samples/README.md
 [product-docs]: https://cloud.google.com/resource-manager

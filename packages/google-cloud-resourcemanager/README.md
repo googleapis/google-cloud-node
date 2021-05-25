@@ -5,8 +5,11 @@
 # [Google Cloud Resource Manager API: Node.js Client](https://github.com/googleapis/nodejs-resource-manager)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/resource.svg)](https://www.npmjs.org/package/@google-cloud/resource)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-resource-manager/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-resource)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/resource-manager.svg)](https://www.npmjs.org/package/@google-cloud/resource-manager)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-resource-manager/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-resource-manager)
+
+
+
 
 
 > Node.js idiomatic client for [Cloud Resource Manager API][product-docs].
@@ -17,6 +20,9 @@ Cloud Platform resources. This hierarchical organization lets you easily
 manage common aspects of your resources such as access control and
 configuration settings. The [Cloud Resource Manager API](https://cloud.google.com/resource-manager/docs/)
 enables you to programmatically manage these container resources.
+
+### **_IMPORTANT NOTE_**
+**Version 2.0.0 renames `@google-cloud/resource` to `@google-cloud/resource-manager` on npm.**
 
 
 A comprehensive list of changes in each version may be found in
@@ -56,7 +62,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/resource
+npm install @google-cloud/resource-manager
 ```
 
 
@@ -88,8 +94,8 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-resource-ma
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| List Projects | [source code](https://github.com/googleapis/nodejs-resource/blob/master/samples/listProjects.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource&page=editor&open_in_editor=samples/listProjects.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-resource/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| List Projects | [source code](https://github.com/googleapis/nodejs-resource-manager/blob/master/samples/listProjects.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource-manager&page=editor&open_in_editor=samples/listProjects.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-resource-manager/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource-manager&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -136,7 +142,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-resource/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-resource-manager/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -148,7 +154,7 @@ to its template in this
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-resource/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-resource-manager/blob/master/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/resource/latest
 [product-docs]: https://cloud.google.com/resource-manager
