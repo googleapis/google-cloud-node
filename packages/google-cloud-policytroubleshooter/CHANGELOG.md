@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.0.1...v1.0.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#46](https://www.github.com/googleapis/nodejs-policy-troubleshooter/issues/46)) ([59e135f](https://www.github.com/googleapis/nodejs-policy-troubleshooter/commit/59e135ff3cf2e39f0b8805ecd74bd5a8de1bdb93))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.0.0...v1.0.1) (2021-05-12)
 
 
