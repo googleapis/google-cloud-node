@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.4.2](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.4.1...v2.4.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#110](https://www.github.com/googleapis/nodejs-analytics-data/issues/110)) ([816580a](https://www.github.com/googleapis/nodejs-analytics-data/commit/816580a5446ea45373f514813cf6d81be93c0532))
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.4.0...v2.4.1) (2021-05-19)
 
 
