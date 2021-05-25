@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-channel/compare/v1.1.1...v1.1.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#51](https://www.github.com/googleapis/nodejs-channel/issues/51)) ([107499a](https://www.github.com/googleapis/nodejs-channel/commit/107499a1eec09021e72ad8b1b75f644f6644f8a9))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-channel/compare/v1.1.0...v1.1.1) (2021-05-12)
 
 
