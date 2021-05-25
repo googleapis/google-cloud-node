@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [5.3.1](https://www.github.com/googleapis/nodejs-security-center/compare/v5.3.0...v5.3.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#385](https://www.github.com/googleapis/nodejs-security-center/issues/385)) ([7faea1b](https://www.github.com/googleapis/nodejs-security-center/commit/7faea1b6670b96cf26d9bbc6d18a58b868627c60))
+
 ## [5.3.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.2.0...v5.3.0) (2021-05-12)
 
 
