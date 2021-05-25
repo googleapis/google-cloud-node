@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.1.2](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.1...v3.1.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#615](https://www.github.com/googleapis/nodejs-dlp/issues/615)) ([f1ef17b](https://www.github.com/googleapis/nodejs-dlp/commit/f1ef17b7e14c8c029e270bab2fb830e87304ecbb))
+
 ### [3.1.1](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.0...v3.1.1) (2021-05-12)
 
 
