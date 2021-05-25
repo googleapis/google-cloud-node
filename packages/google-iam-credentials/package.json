@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/iam-credentials",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Credentials client for Node.js",
   "repository": "googleapis/nodejs-iam-credentials",
   "license": "Apache-2.0",

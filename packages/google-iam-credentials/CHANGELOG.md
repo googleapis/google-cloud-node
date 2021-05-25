@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.2...v1.0.3) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#53](https://www.github.com/googleapis/nodejs-iam-credentials/issues/53)) ([d1371b0](https://www.github.com/googleapis/nodejs-iam-credentials/commit/d1371b02e45095c609807674dc5403fb27560acf))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.1...v1.0.2) (2021-05-12)
 
 
