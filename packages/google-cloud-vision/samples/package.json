@@ -15,7 +15,7 @@
   "dependencies": {
     "@google-cloud/vision": "^2.3.2",
     "natural": "^5.0.0",
-    "pureimage": "^0.2.1",
+    "pureimage": "^0.3.0",
     "redis": "^3.0.0",
     "yargs": "^16.0.0"
   },
