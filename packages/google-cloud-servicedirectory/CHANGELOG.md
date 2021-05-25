@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.1.2](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.1.1...v3.1.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#144](https://www.github.com/googleapis/nodejs-service-directory/issues/144)) ([631084d](https://www.github.com/googleapis/nodejs-service-directory/commit/631084de940c87b6d53404d6e5299ac11f8a6740))
+
 ### [3.1.1](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.1.0...v3.1.1) (2021-05-12)
 
 
