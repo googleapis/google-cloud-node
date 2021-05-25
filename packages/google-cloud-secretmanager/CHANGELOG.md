@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.7.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.7.0...v3.7.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#258](https://www.github.com/googleapis/nodejs-secret-manager/issues/258)) ([269cba4](https://www.github.com/googleapis/nodejs-secret-manager/commit/269cba4083ad0dff74f514b424c6a0592c0e81b0))
+
 ## [3.7.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.6.1...v3.7.0) (2021-05-24)
 
 
