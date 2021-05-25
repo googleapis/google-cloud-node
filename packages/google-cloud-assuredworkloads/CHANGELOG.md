@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.2](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.1...v1.4.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#68](https://www.github.com/googleapis/nodejs-assured-workloads/issues/68)) ([551c5b3](https://www.github.com/googleapis/nodejs-assured-workloads/commit/551c5b3db4314f6bcc7fe385651cde1269722b85))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.0...v1.4.1) (2021-05-12)
 
 
