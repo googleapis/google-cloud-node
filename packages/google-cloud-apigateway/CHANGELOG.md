@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.0...v1.1.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#33](https://www.github.com/googleapis/nodejs-api-gateway/issues/33)) ([d58a7f6](https://www.github.com/googleapis/nodejs-api-gateway/commit/d58a7f6ac39c050cacb82367588a536df5b94090))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.0.1...v1.1.0) (2021-05-24)
 
 
