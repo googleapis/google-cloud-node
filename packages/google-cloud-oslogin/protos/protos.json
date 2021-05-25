@@ -6,6 +6,115 @@
           "nested": {
             "oslogin": {
               "nested": {
+                "common": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.OsLogin.Common",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/oslogin/common;common",
+                    "java_outer_classname": "OsLoginProto",
+                    "java_package": "com.google.cloud.oslogin.common",
+                    "php_namespace": "Google\\Cloud\\OsLogin\\Common",
+                    "ruby_package": "Google::Cloud::OsLogin::Common",
+                    "(google.api.resource_definition).type": "oslogin.googleapis.com/User",
+                    "(google.api.resource_definition).pattern": "users/{user}"
+                  },
+                  "nested": {
+                    "OperatingSystemType": {
+                      "values": {
+                        "OPERATING_SYSTEM_TYPE_UNSPECIFIED": 0,
+                        "LINUX": 1,
+                        "WINDOWS": 2
+                      }
+                    },
+                    "PosixAccount": {
+                      "options": {
+                        "(google.api.resource).type": "oslogin.googleapis.com/PosixAccount",
+                        "(google.api.resource).pattern": "users/{user}/projects/{project}"
+                      },
+                      "fields": {
+                        "primary": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "username": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "uid": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "gid": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "homeDirectory": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "shell": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "gecos": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "systemId": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "accountId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "operatingSystemType": {
+                          "type": "OperatingSystemType",
+                          "id": 10
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "SshPublicKey": {
+                      "options": {
+                        "(google.api.resource).type": "oslogin.googleapis.com/SshPublicKey",
+                        "(google.api.resource).pattern": "users/{user}/sshPublicKeys/{fingerprint}"
+                      },
+                      "fields": {
+                        "key": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expirationTimeUsec": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "fingerprint": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1": {
                   "options": {
                     "csharp_namespace": "Google.Cloud.OsLogin.V1",
@@ -271,115 +380,6 @@
                         "updateMask": {
                           "type": "google.protobuf.FieldMask",
                           "id": 3
-                        }
-                      }
-                    }
-                  }
-                },
-                "common": {
-                  "options": {
-                    "csharp_namespace": "Google.Cloud.OsLogin.Common",
-                    "go_package": "google.golang.org/genproto/googleapis/cloud/oslogin/common;common",
-                    "java_outer_classname": "OsLoginProto",
-                    "java_package": "com.google.cloud.oslogin.common",
-                    "php_namespace": "Google\\Cloud\\OsLogin\\Common",
-                    "ruby_package": "Google::Cloud::OsLogin::Common",
-                    "(google.api.resource_definition).type": "oslogin.googleapis.com/User",
-                    "(google.api.resource_definition).pattern": "users/{user}"
-                  },
-                  "nested": {
-                    "OperatingSystemType": {
-                      "values": {
-                        "OPERATING_SYSTEM_TYPE_UNSPECIFIED": 0,
-                        "LINUX": 1,
-                        "WINDOWS": 2
-                      }
-                    },
-                    "PosixAccount": {
-                      "options": {
-                        "(google.api.resource).type": "oslogin.googleapis.com/PosixAccount",
-                        "(google.api.resource).pattern": "users/{user}/projects/{project}"
-                      },
-                      "fields": {
-                        "primary": {
-                          "type": "bool",
-                          "id": 1
-                        },
-                        "username": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "uid": {
-                          "type": "int64",
-                          "id": 3
-                        },
-                        "gid": {
-                          "type": "int64",
-                          "id": 4
-                        },
-                        "homeDirectory": {
-                          "type": "string",
-                          "id": 5
-                        },
-                        "shell": {
-                          "type": "string",
-                          "id": 6
-                        },
-                        "gecos": {
-                          "type": "string",
-                          "id": 7
-                        },
-                        "systemId": {
-                          "type": "string",
-                          "id": 8
-                        },
-                        "accountId": {
-                          "type": "string",
-                          "id": 9,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "operatingSystemType": {
-                          "type": "OperatingSystemType",
-                          "id": 10
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 11,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "SshPublicKey": {
-                      "options": {
-                        "(google.api.resource).type": "oslogin.googleapis.com/SshPublicKey",
-                        "(google.api.resource).pattern": "users/{user}/sshPublicKeys/{fingerprint}"
-                      },
-                      "fields": {
-                        "key": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "expirationTimeUsec": {
-                          "type": "int64",
-                          "id": 2
-                        },
-                        "fingerprint": {
-                          "type": "string",
-                          "id": 3,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        },
-                        "name": {
-                          "type": "string",
-                          "id": 4,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
                         }
                       }
                     }
@@ -662,12 +662,106 @@
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "ResourceProto",
+            "java_outer_classname": "ClientProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -770,100 +864,6 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
             }
           }
         },
