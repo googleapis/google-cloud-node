@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.1...v1.0.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#30](https://www.github.com/googleapis/nodejs-org-policy/issues/30)) ([8df94f7](https://www.github.com/googleapis/nodejs-org-policy/commit/8df94f7fb7ef3b47924048c878ea9827b3db1236))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.0...v1.0.1) (2021-05-12)
 
 
