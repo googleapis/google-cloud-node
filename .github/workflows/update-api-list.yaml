@@ -13,6 +13,8 @@ jobs:
           node-version: 14
       - run: npm install
       - run: npm run generate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: googleapis/code-suggester@v2
         env:
           ACCESS_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
