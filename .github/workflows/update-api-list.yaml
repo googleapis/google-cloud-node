@@ -1,0 +1,27 @@
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-api-list:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - run: npm install
+      - run: npm run generate
+      - uses: googleapis/code-suggester@v1
+        env:
+          ACCESS_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+        with:
+          command: pr
+          upstream_owner: googleapis
+          upstream_repo: google-cloud-node
+          description: 'Update the list of available APIs in the README.'
+          title: 'docs: update the list of available APIs'
+          message: 'docs: update the list of available APIs'
+          branch: update-api-list
+          git_dir: '.'
