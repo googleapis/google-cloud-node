@@ -25,6 +25,12 @@ API is part of the larger Cloud Machine Learning API family.
 Before running the samples, make sure you've followed the steps outlined in
 [Using the client library](https://github.com/googleapis/nodejs-translate#using-the-client-library).
 
+### Choosing between Advanced v3 and Basic v2
+
+Basic supports language detection and text translation [Cloud Translation - Basic v2](https://cloud.google.com/translate/docs/editions#basic).
+
+The advanced edition of [Cloud Translation - V3](https://cloud.google.com/translate/docs/editions#advanced) is optimized for customization and long form content use cases including glossary, batch, and model selection.
+
 ### Translate V3 Beta Samples
 
 #### Install Dependencies
