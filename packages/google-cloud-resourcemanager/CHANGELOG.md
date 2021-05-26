@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource?activeTab=versions
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-resource-manager/compare/v1.2.1...v1.3.0) (2021-05-25)
+
+
+### Features
+
+* package rename in npm ([#370](https://www.github.com/googleapis/nodejs-resource-manager/issues/370)) ([04d21a2](https://www.github.com/googleapis/nodejs-resource-manager/commit/04d21a25a1eeb7c7a7070eadcaf64d5ca2d3b408))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-resource/compare/v1.2.0...v1.2.1) (2020-07-10)
 
 
