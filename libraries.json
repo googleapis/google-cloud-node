@@ -1,20 +1,5 @@
 [
   {
-    "name": "accessapproval",
-    "name_pretty": "Access Approval",
-    "product_documentation": "https://cloud.google.com/access-approval/",
-    "client_documentation": "https://googleapis.dev/nodejs/accessapproval/latest/",
-    "issue_tracker": "https://github.com/googleapis/nodejs-access-approval/issues",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-access-approval",
-    "distribution_name": "@google-cloud/access-approval",
-    "api_id": "accessapproval.googleapis.com",
-    "requires_billing": true,
-    "default_version": "v1",
-    "support_documentation": "https://cloud.google.com/access-approval/"
-  },
-  {
     "requires_billing": true,
     "name": "api-gateway",
     "client_documentation": "https://googleapis.dev/nodejs/api-gateway/latest",
