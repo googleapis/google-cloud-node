@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.13.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.12.2...v3.13.0) (2021-05-26)
+
+
+### Features
+
+* add Cloud Asset List API, add access time as condition context in request and evaluation value in response for Cloud Asset AnalyzeIamPolicy API, add more info (folders, organizations, kms_key, create_time, update_time, state, parent_full_resource_name, parent_asset_type) in response for Cloud Asset SearchAllResources API ([#491](https://www.github.com/googleapis/nodejs-asset/issues/491)) ([8eea45f](https://www.github.com/googleapis/nodejs-asset/commit/8eea45fe3e5b528faf85a8ebb96e2c0c35a7e66d))
+
 ### [3.12.2](https://www.github.com/googleapis/nodejs-asset/compare/v3.12.1...v3.12.2) (2021-05-25)
 
 
