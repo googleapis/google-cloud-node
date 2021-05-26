@@ -181,6 +181,21 @@
     "support_documentation": "https://cloud.google.com/dlp/docs/"
   },
   {
+    "name": "dms",
+    "name_pretty": "Database Migration Service",
+    "product_documentation": "https://cloud.google.com/database-migration/",
+    "client_documentation": "https://googleapis.dev/nodejs/dms/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-dms/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-dms",
+    "distribution_name": "@google-cloud/dms",
+    "api_id": "datamigration.googleapis.com",
+    "requires_billing": true,
+    "default_version": "v1",
+    "support_documentation": "https://cloud.google.com/database-migration/docs/getting-support"
+  },
+  {
     "client_documentation": "https://googleapis.dev/nodejs/dataproc/latest",
     "api_id": "dataproc.googleapis.com",
     "distribution_name": "@google-cloud/dataproc",
@@ -846,6 +861,21 @@
     "support_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/"
   },
   {
+    "name": "service-usage",
+    "name_pretty": "Service Usage",
+    "product_documentation": "https://cloud.google.com/service-usage/",
+    "client_documentation": "https://cloud.google.com/service-usage/docs/overview",
+    "issue_tracker": "https://www.github.com/googleapis/nodejs-service-usage/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-service-usage",
+    "distribution_name": "@google-cloud/service-usage",
+    "api_id": "serviceusage.googleapis.com",
+    "requires_billing": true,
+    "default_version": "v1",
+    "support_documentation": "https://cloud.google.com/service-usage/"
+  },
+  {
     "name": "spanner",
     "name_pretty": "Spanner",
     "product_documentation": "https://cloud.google.com/spanner/docs/",
@@ -1232,6 +1262,21 @@
     "support_documentation": "https://cloud.google.com/error-reporting"
   },
   {
+    "client_documentation": "https://cloud.google.com/resource-manager/docs/reference/essentialcontacts/rest",
+    "product_documentation": "https://cloud.google.com/resource-manager/docs/managing-notification-contacts/",
+    "name": "essentialcontacts",
+    "requires_billing": true,
+    "release_level": "beta",
+    "language": "nodejs",
+    "api_id": "essentialcontacts.googleapis.com",
+    "distribution_name": "@google-cloud/essential-contacts",
+    "repo": "googleapis/nodejs-essential-contacts",
+    "issue_tracker": "https://github.com/googleapis/nodejs-essential-contacts/issues",
+    "name_pretty": "Essential Contacts API",
+    "default_version": "v1",
+    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
+  },
+  {
     "client_documentation": "https://googleapis.dev/nodejs/gke-hub/latest/",
     "api_id": "gkehub.googleapis.com",
     "distribution_name": "@google-cloud/gke-hub",
@@ -1343,7 +1388,7 @@
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559757",
     "release_level": "alpha",
     "language": "nodejs",
-    "repo": "googleapis/resource-manager",
+    "repo": "googleapis/nodejs-resource-manager",
     "distribution_name": "@google-cloud/resource",
     "api_id": "cloudresourcemanager.googleapis.com",
     "requires_billing": true,
@@ -1359,21 +1404,6 @@
     "distribution_name": "@google-cloud/rcloadenv",
     "api_id": "runtimeconfig.googleapis.com",
     "support_documentation": "https://cloud.google.com/deployment-manager/runtime-configurator/"
-  },
-  {
-    "name": "serviceusage",
-    "name_pretty": "Service Usage",
-    "product_documentation": "https://cloud.google.com/service-usage/",
-    "client_documentation": "https://cloud.google.com/service-usage/docs/overview",
-    "issue_tracker": "https://www.github.com/googleapis/nodejs-serviceusage/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-serviceusage",
-    "distribution_name": "@google-cloud/serviceusage",
-    "api_id": "serviceusage.googleapis.com",
-    "requires_billing": true,
-    "default_version": "v1",
-    "support_documentation": "https://cloud.google.com/service-usage/"
   },
   {
     "name": "debugger",
