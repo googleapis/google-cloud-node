@@ -9,6 +9,7 @@ applications that interact with individual Google Cloud services:
 
 | Repo | Release Level | Version |
 |------|----------|-----------------|
+| [Access Approval](https://github.com/googleapis/nodejs-access-approval) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/access-approval)](https://npm.im/@google-cloud/access-approval) |
 | [API Gateway](https://github.com/googleapis/nodejs-api-gateway) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/api-gateway)](https://npm.im/@google-cloud/api-gateway) |
 | [App Engine Admin API](https://github.com/googleapis/nodejs-appengine-admin) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/appengine-admin)](https://npm.im/@google-cloud/appengine-admin) |
 | [Asset Inventory](https://github.com/googleapis/nodejs-asset) | [![GA][ga-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/asset)](https://npm.im/@google-cloud/asset) |
