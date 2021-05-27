@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.1...v1.1.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#52](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/52)) ([664fa28](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/664fa28a1526bbed531d58c8e51eae714e51afce))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.0...v1.1.1) (2021-05-12)
 
 
