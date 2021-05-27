@@ -15,29 +15,10 @@
 """This script is used to synthesize generated parts of this library."""
 
 import synthtool as s
-import synthtool.gcp as gcp
 import synthtool.languages.node as node
-import logging
 
-logging.basicConfig(level=logging.DEBUG)
-
-AUTOSYNTH_MULTIPLE_COMMITS = True
-
-
-# Run the gapic generator
-gapic = gcp.GAPICBazel()
-name = 'datacatalog'
-versions = ['v1', 'v1beta1']
-for version in versions:
-    library = gapic.node_library(name, version)
-    s.copy(library, excludes=[
+node.owlbot_main(staging_excludes=[
            'README.md', 'linkinator.config.json', '.mocharc.json', 'package.json'])
-
-# Copy common templates
-common_templates = gcp.CommonTemplates()
-templates = common_templates.node_library(
-    source_location='build/src', versions=versions, default_version='v1')
-s.copy(templates, excludes=[])
 
 # TODO: Remove the following replace once Datacatalog is ready to release a break change
 # Users should use beta Client with explicitly specify the beta version
@@ -50,5 +31,3 @@ const PolicyTagManagerSerializationClient = v1beta1.PolicyTagManagerSerializatio
 type PolicyTagManagerSerializationClient = v1beta1.PolicyTagManagerSerializationClient;
 export {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};
 export default {v1, v1beta1, DataCatalogClient, PolicyTagManagerClient, PolicyTagManagerSerializationClient};""")
-
-node.postprocess_gapic_library()

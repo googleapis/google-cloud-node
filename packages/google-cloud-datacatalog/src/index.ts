@@ -16,8 +16,8 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
+import * as v1 from './v1';
 
 const DataCatalogClient = v1.DataCatalogClient;
 type DataCatalogClient = v1.DataCatalogClient;
@@ -25,18 +25,19 @@ const PolicyTagManagerClient = v1.PolicyTagManagerClient;
 type PolicyTagManagerClient = v1.PolicyTagManagerClient;
 const PolicyTagManagerSerializationClient =
   v1.PolicyTagManagerSerializationClient;
-type PolicyTagManagerSerializationClient = v1.PolicyTagManagerSerializationClient;
+type PolicyTagManagerSerializationClient =
+  v1.PolicyTagManagerSerializationClient;
 
 export {
-  v1,
   v1beta1,
+  v1,
   DataCatalogClient,
   PolicyTagManagerClient,
   PolicyTagManagerSerializationClient,
 };
 export default {
-  v1,
   v1beta1,
+  v1,
   DataCatalogClient,
   PolicyTagManagerClient,
   PolicyTagManagerSerializationClient,
