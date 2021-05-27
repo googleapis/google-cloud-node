@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.3](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.2...v2.2.3) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#231](https://www.github.com/googleapis/nodejs-cloudbuild/issues/231)) ([d6bd0be](https://www.github.com/googleapis/nodejs-cloudbuild/commit/d6bd0bee152c1c9864b8d6f09ab473309a576b50))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.1...v2.2.2) (2021-05-12)
 
 
