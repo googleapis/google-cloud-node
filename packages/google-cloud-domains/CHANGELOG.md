@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.1...v1.0.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#42](https://www.github.com/googleapis/nodejs-domains/issues/42)) ([3830c18](https://www.github.com/googleapis/nodejs-domains/commit/3830c1832e65c5ecbfd821931582fd87cada793b))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.0...v1.0.1) (2021-05-12)
 
 
