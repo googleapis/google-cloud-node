@@ -1617,6 +1617,171 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getMeasurementProtocolSecret}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetMeasurementProtocolSecretCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.MeasurementProtocolSecret} [response] MeasurementProtocolSecret
+                         */
+    
+                        /**
+                         * Calls GetMeasurementProtocolSecret.
+                         * @function getMeasurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest} request GetMeasurementProtocolSecretRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetMeasurementProtocolSecretCallback} callback Node-style callback called with the error, if any, and MeasurementProtocolSecret
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getMeasurementProtocolSecret = function getMeasurementProtocolSecret(request, callback) {
+                            return this.rpcCall(getMeasurementProtocolSecret, $root.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest, $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret, request, callback);
+                        }, "name", { value: "GetMeasurementProtocolSecret" });
+    
+                        /**
+                         * Calls GetMeasurementProtocolSecret.
+                         * @function getMeasurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest} request GetMeasurementProtocolSecretRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.MeasurementProtocolSecret>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listMeasurementProtocolSecrets}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ListMeasurementProtocolSecretsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse} [response] ListMeasurementProtocolSecretsResponse
+                         */
+    
+                        /**
+                         * Calls ListMeasurementProtocolSecrets.
+                         * @function listMeasurementProtocolSecrets
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest} request ListMeasurementProtocolSecretsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ListMeasurementProtocolSecretsCallback} callback Node-style callback called with the error, if any, and ListMeasurementProtocolSecretsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.listMeasurementProtocolSecrets = function listMeasurementProtocolSecrets(request, callback) {
+                            return this.rpcCall(listMeasurementProtocolSecrets, $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest, $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse, request, callback);
+                        }, "name", { value: "ListMeasurementProtocolSecrets" });
+    
+                        /**
+                         * Calls ListMeasurementProtocolSecrets.
+                         * @function listMeasurementProtocolSecrets
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest} request ListMeasurementProtocolSecretsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createMeasurementProtocolSecret}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef CreateMeasurementProtocolSecretCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.MeasurementProtocolSecret} [response] MeasurementProtocolSecret
+                         */
+    
+                        /**
+                         * Calls CreateMeasurementProtocolSecret.
+                         * @function createMeasurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest} request CreateMeasurementProtocolSecretRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.CreateMeasurementProtocolSecretCallback} callback Node-style callback called with the error, if any, and MeasurementProtocolSecret
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.createMeasurementProtocolSecret = function createMeasurementProtocolSecret(request, callback) {
+                            return this.rpcCall(createMeasurementProtocolSecret, $root.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest, $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret, request, callback);
+                        }, "name", { value: "CreateMeasurementProtocolSecret" });
+    
+                        /**
+                         * Calls CreateMeasurementProtocolSecret.
+                         * @function createMeasurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest} request CreateMeasurementProtocolSecretRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.MeasurementProtocolSecret>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteMeasurementProtocolSecret}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef DeleteMeasurementProtocolSecretCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteMeasurementProtocolSecret.
+                         * @function deleteMeasurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest} request DeleteMeasurementProtocolSecretRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteMeasurementProtocolSecretCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.deleteMeasurementProtocolSecret = function deleteMeasurementProtocolSecret(request, callback) {
+                            return this.rpcCall(deleteMeasurementProtocolSecret, $root.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteMeasurementProtocolSecret" });
+    
+                        /**
+                         * Calls DeleteMeasurementProtocolSecret.
+                         * @function deleteMeasurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest} request DeleteMeasurementProtocolSecretRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateMeasurementProtocolSecret}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef UpdateMeasurementProtocolSecretCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.MeasurementProtocolSecret} [response] MeasurementProtocolSecret
+                         */
+    
+                        /**
+                         * Calls UpdateMeasurementProtocolSecret.
+                         * @function updateMeasurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest} request UpdateMeasurementProtocolSecretRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateMeasurementProtocolSecretCallback} callback Node-style callback called with the error, if any, and MeasurementProtocolSecret
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.updateMeasurementProtocolSecret = function updateMeasurementProtocolSecret(request, callback) {
+                            return this.rpcCall(updateMeasurementProtocolSecret, $root.google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest, $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret, request, callback);
+                        }, "name", { value: "UpdateMeasurementProtocolSecret" });
+    
+                        /**
+                         * Calls UpdateMeasurementProtocolSecret.
+                         * @function updateMeasurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest} request UpdateMeasurementProtocolSecretRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.MeasurementProtocolSecret>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#searchChangeHistoryEvents}.
                          * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
                          * @typedef SearchChangeHistoryEventsCallback
@@ -1646,6 +1811,534 @@
                          * @instance
                          * @param {google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest} request SearchChangeHistoryEventsRequest message or plain object
                          * @returns {Promise<google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getGoogleSignalsSettings}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetGoogleSignalsSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.GoogleSignalsSettings} [response] GoogleSignalsSettings
+                         */
+    
+                        /**
+                         * Calls GetGoogleSignalsSettings.
+                         * @function getGoogleSignalsSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest} request GetGoogleSignalsSettingsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetGoogleSignalsSettingsCallback} callback Node-style callback called with the error, if any, and GoogleSignalsSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getGoogleSignalsSettings = function getGoogleSignalsSettings(request, callback) {
+                            return this.rpcCall(getGoogleSignalsSettings, $root.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest, $root.google.analytics.admin.v1alpha.GoogleSignalsSettings, request, callback);
+                        }, "name", { value: "GetGoogleSignalsSettings" });
+    
+                        /**
+                         * Calls GetGoogleSignalsSettings.
+                         * @function getGoogleSignalsSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest} request GetGoogleSignalsSettingsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.GoogleSignalsSettings>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateGoogleSignalsSettings}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef UpdateGoogleSignalsSettingsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.GoogleSignalsSettings} [response] GoogleSignalsSettings
+                         */
+    
+                        /**
+                         * Calls UpdateGoogleSignalsSettings.
+                         * @function updateGoogleSignalsSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest} request UpdateGoogleSignalsSettingsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateGoogleSignalsSettingsCallback} callback Node-style callback called with the error, if any, and GoogleSignalsSettings
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.updateGoogleSignalsSettings = function updateGoogleSignalsSettings(request, callback) {
+                            return this.rpcCall(updateGoogleSignalsSettings, $root.google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest, $root.google.analytics.admin.v1alpha.GoogleSignalsSettings, request, callback);
+                        }, "name", { value: "UpdateGoogleSignalsSettings" });
+    
+                        /**
+                         * Calls UpdateGoogleSignalsSettings.
+                         * @function updateGoogleSignalsSettings
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest} request UpdateGoogleSignalsSettingsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.GoogleSignalsSettings>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createConversionEvent}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef CreateConversionEventCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ConversionEvent} [response] ConversionEvent
+                         */
+    
+                        /**
+                         * Calls CreateConversionEvent.
+                         * @function createConversionEvent
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateConversionEventRequest} request CreateConversionEventRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.CreateConversionEventCallback} callback Node-style callback called with the error, if any, and ConversionEvent
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.createConversionEvent = function createConversionEvent(request, callback) {
+                            return this.rpcCall(createConversionEvent, $root.google.analytics.admin.v1alpha.CreateConversionEventRequest, $root.google.analytics.admin.v1alpha.ConversionEvent, request, callback);
+                        }, "name", { value: "CreateConversionEvent" });
+    
+                        /**
+                         * Calls CreateConversionEvent.
+                         * @function createConversionEvent
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateConversionEventRequest} request CreateConversionEventRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ConversionEvent>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getConversionEvent}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetConversionEventCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ConversionEvent} [response] ConversionEvent
+                         */
+    
+                        /**
+                         * Calls GetConversionEvent.
+                         * @function getConversionEvent
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetConversionEventRequest} request GetConversionEventRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetConversionEventCallback} callback Node-style callback called with the error, if any, and ConversionEvent
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getConversionEvent = function getConversionEvent(request, callback) {
+                            return this.rpcCall(getConversionEvent, $root.google.analytics.admin.v1alpha.GetConversionEventRequest, $root.google.analytics.admin.v1alpha.ConversionEvent, request, callback);
+                        }, "name", { value: "GetConversionEvent" });
+    
+                        /**
+                         * Calls GetConversionEvent.
+                         * @function getConversionEvent
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetConversionEventRequest} request GetConversionEventRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ConversionEvent>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#deleteConversionEvent}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef DeleteConversionEventCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls DeleteConversionEvent.
+                         * @function deleteConversionEvent
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IDeleteConversionEventRequest} request DeleteConversionEventRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.DeleteConversionEventCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.deleteConversionEvent = function deleteConversionEvent(request, callback) {
+                            return this.rpcCall(deleteConversionEvent, $root.google.analytics.admin.v1alpha.DeleteConversionEventRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "DeleteConversionEvent" });
+    
+                        /**
+                         * Calls DeleteConversionEvent.
+                         * @function deleteConversionEvent
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IDeleteConversionEventRequest} request DeleteConversionEventRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listConversionEvents}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ListConversionEventsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ListConversionEventsResponse} [response] ListConversionEventsResponse
+                         */
+    
+                        /**
+                         * Calls ListConversionEvents.
+                         * @function listConversionEvents
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsRequest} request ListConversionEventsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ListConversionEventsCallback} callback Node-style callback called with the error, if any, and ListConversionEventsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.listConversionEvents = function listConversionEvents(request, callback) {
+                            return this.rpcCall(listConversionEvents, $root.google.analytics.admin.v1alpha.ListConversionEventsRequest, $root.google.analytics.admin.v1alpha.ListConversionEventsResponse, request, callback);
+                        }, "name", { value: "ListConversionEvents" });
+    
+                        /**
+                         * Calls ListConversionEvents.
+                         * @function listConversionEvents
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsRequest} request ListConversionEventsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ListConversionEventsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createCustomDimension}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef CreateCustomDimensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.CustomDimension} [response] CustomDimension
+                         */
+    
+                        /**
+                         * Calls CreateCustomDimension.
+                         * @function createCustomDimension
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomDimensionRequest} request CreateCustomDimensionRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.CreateCustomDimensionCallback} callback Node-style callback called with the error, if any, and CustomDimension
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.createCustomDimension = function createCustomDimension(request, callback) {
+                            return this.rpcCall(createCustomDimension, $root.google.analytics.admin.v1alpha.CreateCustomDimensionRequest, $root.google.analytics.admin.v1alpha.CustomDimension, request, callback);
+                        }, "name", { value: "CreateCustomDimension" });
+    
+                        /**
+                         * Calls CreateCustomDimension.
+                         * @function createCustomDimension
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomDimensionRequest} request CreateCustomDimensionRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.CustomDimension>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateCustomDimension}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef UpdateCustomDimensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.CustomDimension} [response] CustomDimension
+                         */
+    
+                        /**
+                         * Calls UpdateCustomDimension.
+                         * @function updateCustomDimension
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest} request UpdateCustomDimensionRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateCustomDimensionCallback} callback Node-style callback called with the error, if any, and CustomDimension
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.updateCustomDimension = function updateCustomDimension(request, callback) {
+                            return this.rpcCall(updateCustomDimension, $root.google.analytics.admin.v1alpha.UpdateCustomDimensionRequest, $root.google.analytics.admin.v1alpha.CustomDimension, request, callback);
+                        }, "name", { value: "UpdateCustomDimension" });
+    
+                        /**
+                         * Calls UpdateCustomDimension.
+                         * @function updateCustomDimension
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest} request UpdateCustomDimensionRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.CustomDimension>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listCustomDimensions}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ListCustomDimensionsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ListCustomDimensionsResponse} [response] ListCustomDimensionsResponse
+                         */
+    
+                        /**
+                         * Calls ListCustomDimensions.
+                         * @function listCustomDimensions
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsRequest} request ListCustomDimensionsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ListCustomDimensionsCallback} callback Node-style callback called with the error, if any, and ListCustomDimensionsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.listCustomDimensions = function listCustomDimensions(request, callback) {
+                            return this.rpcCall(listCustomDimensions, $root.google.analytics.admin.v1alpha.ListCustomDimensionsRequest, $root.google.analytics.admin.v1alpha.ListCustomDimensionsResponse, request, callback);
+                        }, "name", { value: "ListCustomDimensions" });
+    
+                        /**
+                         * Calls ListCustomDimensions.
+                         * @function listCustomDimensions
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsRequest} request ListCustomDimensionsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ListCustomDimensionsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#archiveCustomDimension}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ArchiveCustomDimensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls ArchiveCustomDimension.
+                         * @function archiveCustomDimension
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest} request ArchiveCustomDimensionRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ArchiveCustomDimensionCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.archiveCustomDimension = function archiveCustomDimension(request, callback) {
+                            return this.rpcCall(archiveCustomDimension, $root.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "ArchiveCustomDimension" });
+    
+                        /**
+                         * Calls ArchiveCustomDimension.
+                         * @function archiveCustomDimension
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest} request ArchiveCustomDimensionRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getCustomDimension}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetCustomDimensionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.CustomDimension} [response] CustomDimension
+                         */
+    
+                        /**
+                         * Calls GetCustomDimension.
+                         * @function getCustomDimension
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetCustomDimensionRequest} request GetCustomDimensionRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetCustomDimensionCallback} callback Node-style callback called with the error, if any, and CustomDimension
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getCustomDimension = function getCustomDimension(request, callback) {
+                            return this.rpcCall(getCustomDimension, $root.google.analytics.admin.v1alpha.GetCustomDimensionRequest, $root.google.analytics.admin.v1alpha.CustomDimension, request, callback);
+                        }, "name", { value: "GetCustomDimension" });
+    
+                        /**
+                         * Calls GetCustomDimension.
+                         * @function getCustomDimension
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetCustomDimensionRequest} request GetCustomDimensionRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.CustomDimension>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#createCustomMetric}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef CreateCustomMetricCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.CustomMetric} [response] CustomMetric
+                         */
+    
+                        /**
+                         * Calls CreateCustomMetric.
+                         * @function createCustomMetric
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomMetricRequest} request CreateCustomMetricRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.CreateCustomMetricCallback} callback Node-style callback called with the error, if any, and CustomMetric
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.createCustomMetric = function createCustomMetric(request, callback) {
+                            return this.rpcCall(createCustomMetric, $root.google.analytics.admin.v1alpha.CreateCustomMetricRequest, $root.google.analytics.admin.v1alpha.CustomMetric, request, callback);
+                        }, "name", { value: "CreateCustomMetric" });
+    
+                        /**
+                         * Calls CreateCustomMetric.
+                         * @function createCustomMetric
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomMetricRequest} request CreateCustomMetricRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.CustomMetric>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#updateCustomMetric}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef UpdateCustomMetricCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.CustomMetric} [response] CustomMetric
+                         */
+    
+                        /**
+                         * Calls UpdateCustomMetric.
+                         * @function updateCustomMetric
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomMetricRequest} request UpdateCustomMetricRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateCustomMetricCallback} callback Node-style callback called with the error, if any, and CustomMetric
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.updateCustomMetric = function updateCustomMetric(request, callback) {
+                            return this.rpcCall(updateCustomMetric, $root.google.analytics.admin.v1alpha.UpdateCustomMetricRequest, $root.google.analytics.admin.v1alpha.CustomMetric, request, callback);
+                        }, "name", { value: "UpdateCustomMetric" });
+    
+                        /**
+                         * Calls UpdateCustomMetric.
+                         * @function updateCustomMetric
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomMetricRequest} request UpdateCustomMetricRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.CustomMetric>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#listCustomMetrics}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ListCustomMetricsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.ListCustomMetricsResponse} [response] ListCustomMetricsResponse
+                         */
+    
+                        /**
+                         * Calls ListCustomMetrics.
+                         * @function listCustomMetrics
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsRequest} request ListCustomMetricsRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ListCustomMetricsCallback} callback Node-style callback called with the error, if any, and ListCustomMetricsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.listCustomMetrics = function listCustomMetrics(request, callback) {
+                            return this.rpcCall(listCustomMetrics, $root.google.analytics.admin.v1alpha.ListCustomMetricsRequest, $root.google.analytics.admin.v1alpha.ListCustomMetricsResponse, request, callback);
+                        }, "name", { value: "ListCustomMetrics" });
+    
+                        /**
+                         * Calls ListCustomMetrics.
+                         * @function listCustomMetrics
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsRequest} request ListCustomMetricsRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.ListCustomMetricsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#archiveCustomMetric}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef ArchiveCustomMetricCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.protobuf.Empty} [response] Empty
+                         */
+    
+                        /**
+                         * Calls ArchiveCustomMetric.
+                         * @function archiveCustomMetric
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomMetricRequest} request ArchiveCustomMetricRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.ArchiveCustomMetricCallback} callback Node-style callback called with the error, if any, and Empty
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.archiveCustomMetric = function archiveCustomMetric(request, callback) {
+                            return this.rpcCall(archiveCustomMetric, $root.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest, $root.google.protobuf.Empty, request, callback);
+                        }, "name", { value: "ArchiveCustomMetric" });
+    
+                        /**
+                         * Calls ArchiveCustomMetric.
+                         * @function archiveCustomMetric
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomMetricRequest} request ArchiveCustomMetricRequest message or plain object
+                         * @returns {Promise<google.protobuf.Empty>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.analytics.admin.v1alpha.AnalyticsAdminService#getCustomMetric}.
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @typedef GetCustomMetricCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.admin.v1alpha.CustomMetric} [response] CustomMetric
+                         */
+    
+                        /**
+                         * Calls GetCustomMetric.
+                         * @function getCustomMetric
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetCustomMetricRequest} request GetCustomMetricRequest message or plain object
+                         * @param {google.analytics.admin.v1alpha.AnalyticsAdminService.GetCustomMetricCallback} callback Node-style callback called with the error, if any, and CustomMetric
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AnalyticsAdminService.prototype.getCustomMetric = function getCustomMetric(request, callback) {
+                            return this.rpcCall(getCustomMetric, $root.google.analytics.admin.v1alpha.GetCustomMetricRequest, $root.google.analytics.admin.v1alpha.CustomMetric, request, callback);
+                        }, "name", { value: "GetCustomMetric" });
+    
+                        /**
+                         * Calls GetCustomMetric.
+                         * @function getCustomMetric
+                         * @memberof google.analytics.admin.v1alpha.AnalyticsAdminService
+                         * @instance
+                         * @param {google.analytics.admin.v1alpha.IGetCustomMetricRequest} request GetCustomMetricRequest message or plain object
+                         * @returns {Promise<google.analytics.admin.v1alpha.CustomMetric>} Promise
                          * @variation 2
                          */
     
@@ -14746,6 +15439,11 @@
                                     case 5:
                                     case 6:
                                     case 7:
+                                    case 8:
+                                    case 9:
+                                    case 10:
+                                    case 11:
+                                    case 12:
                                         break;
                                     }
                             }
@@ -14843,6 +15541,26 @@
                                     case "GOOGLE_ADS_LINK":
                                     case 7:
                                         message.resourceType[i] = 7;
+                                        break;
+                                    case "GOOGLE_SIGNALS_SETTINGS":
+                                    case 8:
+                                        message.resourceType[i] = 8;
+                                        break;
+                                    case "CONVERSION_EVENT":
+                                    case 9:
+                                        message.resourceType[i] = 9;
+                                        break;
+                                    case "MEASUREMENT_PROTOCOL_SECRET":
+                                    case 10:
+                                        message.resourceType[i] = 10;
+                                        break;
+                                    case "CUSTOM_DIMENSION":
+                                    case 11:
+                                        message.resourceType[i] = 11;
+                                        break;
+                                    case "CUSTOM_METRIC":
+                                    case 12:
+                                        message.resourceType[i] = 12;
                                         break;
                                     }
                             }
@@ -15196,6 +15914,5281 @@
                         return SearchChangeHistoryEventsResponse;
                     })();
     
+                    v1alpha.GetMeasurementProtocolSecretRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMeasurementProtocolSecretRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetMeasurementProtocolSecretRequest
+                         * @property {string|null} [name] GetMeasurementProtocolSecretRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMeasurementProtocolSecretRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetMeasurementProtocolSecretRequest.
+                         * @implements IGetMeasurementProtocolSecretRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest=} [properties] Properties to set
+                         */
+                        function GetMeasurementProtocolSecretRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMeasurementProtocolSecretRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @instance
+                         */
+                        GetMeasurementProtocolSecretRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMeasurementProtocolSecretRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest} GetMeasurementProtocolSecretRequest instance
+                         */
+                        GetMeasurementProtocolSecretRequest.create = function create(properties) {
+                            return new GetMeasurementProtocolSecretRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMeasurementProtocolSecretRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest} message GetMeasurementProtocolSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMeasurementProtocolSecretRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMeasurementProtocolSecretRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest} message GetMeasurementProtocolSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMeasurementProtocolSecretRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMeasurementProtocolSecretRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest} GetMeasurementProtocolSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMeasurementProtocolSecretRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest} GetMeasurementProtocolSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMeasurementProtocolSecretRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMeasurementProtocolSecretRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMeasurementProtocolSecretRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMeasurementProtocolSecretRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest} GetMeasurementProtocolSecretRequest
+                         */
+                        GetMeasurementProtocolSecretRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMeasurementProtocolSecretRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest} message GetMeasurementProtocolSecretRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMeasurementProtocolSecretRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMeasurementProtocolSecretRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMeasurementProtocolSecretRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetMeasurementProtocolSecretRequest;
+                    })();
+    
+                    v1alpha.CreateMeasurementProtocolSecretRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateMeasurementProtocolSecretRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ICreateMeasurementProtocolSecretRequest
+                         * @property {string|null} [parent] CreateMeasurementProtocolSecretRequest parent
+                         * @property {google.analytics.admin.v1alpha.IMeasurementProtocolSecret|null} [measurementProtocolSecret] CreateMeasurementProtocolSecretRequest measurementProtocolSecret
+                         */
+    
+                        /**
+                         * Constructs a new CreateMeasurementProtocolSecretRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a CreateMeasurementProtocolSecretRequest.
+                         * @implements ICreateMeasurementProtocolSecretRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest=} [properties] Properties to set
+                         */
+                        function CreateMeasurementProtocolSecretRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateMeasurementProtocolSecretRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @instance
+                         */
+                        CreateMeasurementProtocolSecretRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateMeasurementProtocolSecretRequest measurementProtocolSecret.
+                         * @member {google.analytics.admin.v1alpha.IMeasurementProtocolSecret|null|undefined} measurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @instance
+                         */
+                        CreateMeasurementProtocolSecretRequest.prototype.measurementProtocolSecret = null;
+    
+                        /**
+                         * Creates a new CreateMeasurementProtocolSecretRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest} CreateMeasurementProtocolSecretRequest instance
+                         */
+                        CreateMeasurementProtocolSecretRequest.create = function create(properties) {
+                            return new CreateMeasurementProtocolSecretRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMeasurementProtocolSecretRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest} message CreateMeasurementProtocolSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMeasurementProtocolSecretRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.measurementProtocolSecret != null && Object.hasOwnProperty.call(message, "measurementProtocolSecret"))
+                                $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.encode(message.measurementProtocolSecret, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMeasurementProtocolSecretRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest} message CreateMeasurementProtocolSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMeasurementProtocolSecretRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateMeasurementProtocolSecretRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest} CreateMeasurementProtocolSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateMeasurementProtocolSecretRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest} CreateMeasurementProtocolSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMeasurementProtocolSecretRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateMeasurementProtocolSecretRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateMeasurementProtocolSecretRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.measurementProtocolSecret != null && message.hasOwnProperty("measurementProtocolSecret")) {
+                                var error = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.verify(message.measurementProtocolSecret);
+                                if (error)
+                                    return "measurementProtocolSecret." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateMeasurementProtocolSecretRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest} CreateMeasurementProtocolSecretRequest
+                         */
+                        CreateMeasurementProtocolSecretRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.measurementProtocolSecret != null) {
+                                if (typeof object.measurementProtocolSecret !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest.measurementProtocolSecret: object expected");
+                                message.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.fromObject(object.measurementProtocolSecret);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateMeasurementProtocolSecretRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest} message CreateMeasurementProtocolSecretRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateMeasurementProtocolSecretRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.measurementProtocolSecret = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.measurementProtocolSecret != null && message.hasOwnProperty("measurementProtocolSecret"))
+                                object.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.toObject(message.measurementProtocolSecret, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateMeasurementProtocolSecretRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.CreateMeasurementProtocolSecretRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateMeasurementProtocolSecretRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateMeasurementProtocolSecretRequest;
+                    })();
+    
+                    v1alpha.DeleteMeasurementProtocolSecretRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteMeasurementProtocolSecretRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IDeleteMeasurementProtocolSecretRequest
+                         * @property {string|null} [name] DeleteMeasurementProtocolSecretRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteMeasurementProtocolSecretRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a DeleteMeasurementProtocolSecretRequest.
+                         * @implements IDeleteMeasurementProtocolSecretRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest=} [properties] Properties to set
+                         */
+                        function DeleteMeasurementProtocolSecretRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteMeasurementProtocolSecretRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @instance
+                         */
+                        DeleteMeasurementProtocolSecretRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteMeasurementProtocolSecretRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest} DeleteMeasurementProtocolSecretRequest instance
+                         */
+                        DeleteMeasurementProtocolSecretRequest.create = function create(properties) {
+                            return new DeleteMeasurementProtocolSecretRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMeasurementProtocolSecretRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest} message DeleteMeasurementProtocolSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMeasurementProtocolSecretRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMeasurementProtocolSecretRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest} message DeleteMeasurementProtocolSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMeasurementProtocolSecretRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteMeasurementProtocolSecretRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest} DeleteMeasurementProtocolSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteMeasurementProtocolSecretRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest} DeleteMeasurementProtocolSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMeasurementProtocolSecretRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteMeasurementProtocolSecretRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteMeasurementProtocolSecretRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteMeasurementProtocolSecretRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest} DeleteMeasurementProtocolSecretRequest
+                         */
+                        DeleteMeasurementProtocolSecretRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteMeasurementProtocolSecretRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest} message DeleteMeasurementProtocolSecretRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteMeasurementProtocolSecretRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteMeasurementProtocolSecretRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.DeleteMeasurementProtocolSecretRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteMeasurementProtocolSecretRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteMeasurementProtocolSecretRequest;
+                    })();
+    
+                    v1alpha.UpdateMeasurementProtocolSecretRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateMeasurementProtocolSecretRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IUpdateMeasurementProtocolSecretRequest
+                         * @property {google.analytics.admin.v1alpha.IMeasurementProtocolSecret|null} [measurementProtocolSecret] UpdateMeasurementProtocolSecretRequest measurementProtocolSecret
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateMeasurementProtocolSecretRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateMeasurementProtocolSecretRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an UpdateMeasurementProtocolSecretRequest.
+                         * @implements IUpdateMeasurementProtocolSecretRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest=} [properties] Properties to set
+                         */
+                        function UpdateMeasurementProtocolSecretRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateMeasurementProtocolSecretRequest measurementProtocolSecret.
+                         * @member {google.analytics.admin.v1alpha.IMeasurementProtocolSecret|null|undefined} measurementProtocolSecret
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @instance
+                         */
+                        UpdateMeasurementProtocolSecretRequest.prototype.measurementProtocolSecret = null;
+    
+                        /**
+                         * UpdateMeasurementProtocolSecretRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @instance
+                         */
+                        UpdateMeasurementProtocolSecretRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateMeasurementProtocolSecretRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest} UpdateMeasurementProtocolSecretRequest instance
+                         */
+                        UpdateMeasurementProtocolSecretRequest.create = function create(properties) {
+                            return new UpdateMeasurementProtocolSecretRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMeasurementProtocolSecretRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest} message UpdateMeasurementProtocolSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMeasurementProtocolSecretRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.measurementProtocolSecret != null && Object.hasOwnProperty.call(message, "measurementProtocolSecret"))
+                                $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.encode(message.measurementProtocolSecret, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMeasurementProtocolSecretRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest} message UpdateMeasurementProtocolSecretRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMeasurementProtocolSecretRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateMeasurementProtocolSecretRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest} UpdateMeasurementProtocolSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMeasurementProtocolSecretRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateMeasurementProtocolSecretRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest} UpdateMeasurementProtocolSecretRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMeasurementProtocolSecretRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateMeasurementProtocolSecretRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateMeasurementProtocolSecretRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.measurementProtocolSecret != null && message.hasOwnProperty("measurementProtocolSecret")) {
+                                var error = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.verify(message.measurementProtocolSecret);
+                                if (error)
+                                    return "measurementProtocolSecret." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateMeasurementProtocolSecretRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest} UpdateMeasurementProtocolSecretRequest
+                         */
+                        UpdateMeasurementProtocolSecretRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest();
+                            if (object.measurementProtocolSecret != null) {
+                                if (typeof object.measurementProtocolSecret !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest.measurementProtocolSecret: object expected");
+                                message.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.fromObject(object.measurementProtocolSecret);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateMeasurementProtocolSecretRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest} message UpdateMeasurementProtocolSecretRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateMeasurementProtocolSecretRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.measurementProtocolSecret = null;
+                                object.updateMask = null;
+                            }
+                            if (message.measurementProtocolSecret != null && message.hasOwnProperty("measurementProtocolSecret"))
+                                object.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.toObject(message.measurementProtocolSecret, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateMeasurementProtocolSecretRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.UpdateMeasurementProtocolSecretRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateMeasurementProtocolSecretRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateMeasurementProtocolSecretRequest;
+                    })();
+    
+                    v1alpha.ListMeasurementProtocolSecretsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMeasurementProtocolSecretsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListMeasurementProtocolSecretsRequest
+                         * @property {string|null} [parent] ListMeasurementProtocolSecretsRequest parent
+                         * @property {number|null} [pageSize] ListMeasurementProtocolSecretsRequest pageSize
+                         * @property {string|null} [pageToken] ListMeasurementProtocolSecretsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMeasurementProtocolSecretsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListMeasurementProtocolSecretsRequest.
+                         * @implements IListMeasurementProtocolSecretsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest=} [properties] Properties to set
+                         */
+                        function ListMeasurementProtocolSecretsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMeasurementProtocolSecretsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @instance
+                         */
+                        ListMeasurementProtocolSecretsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMeasurementProtocolSecretsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @instance
+                         */
+                        ListMeasurementProtocolSecretsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMeasurementProtocolSecretsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @instance
+                         */
+                        ListMeasurementProtocolSecretsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListMeasurementProtocolSecretsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest} ListMeasurementProtocolSecretsRequest instance
+                         */
+                        ListMeasurementProtocolSecretsRequest.create = function create(properties) {
+                            return new ListMeasurementProtocolSecretsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMeasurementProtocolSecretsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest} message ListMeasurementProtocolSecretsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMeasurementProtocolSecretsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMeasurementProtocolSecretsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest} message ListMeasurementProtocolSecretsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMeasurementProtocolSecretsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMeasurementProtocolSecretsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest} ListMeasurementProtocolSecretsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMeasurementProtocolSecretsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMeasurementProtocolSecretsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest} ListMeasurementProtocolSecretsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMeasurementProtocolSecretsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMeasurementProtocolSecretsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMeasurementProtocolSecretsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMeasurementProtocolSecretsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest} ListMeasurementProtocolSecretsRequest
+                         */
+                        ListMeasurementProtocolSecretsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMeasurementProtocolSecretsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest} message ListMeasurementProtocolSecretsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMeasurementProtocolSecretsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMeasurementProtocolSecretsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMeasurementProtocolSecretsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListMeasurementProtocolSecretsRequest;
+                    })();
+    
+                    v1alpha.ListMeasurementProtocolSecretsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMeasurementProtocolSecretsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListMeasurementProtocolSecretsResponse
+                         * @property {Array.<google.analytics.admin.v1alpha.IMeasurementProtocolSecret>|null} [measurementProtocolSecrets] ListMeasurementProtocolSecretsResponse measurementProtocolSecrets
+                         * @property {string|null} [nextPageToken] ListMeasurementProtocolSecretsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListMeasurementProtocolSecretsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListMeasurementProtocolSecretsResponse.
+                         * @implements IListMeasurementProtocolSecretsResponse
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse=} [properties] Properties to set
+                         */
+                        function ListMeasurementProtocolSecretsResponse(properties) {
+                            this.measurementProtocolSecrets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMeasurementProtocolSecretsResponse measurementProtocolSecrets.
+                         * @member {Array.<google.analytics.admin.v1alpha.IMeasurementProtocolSecret>} measurementProtocolSecrets
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @instance
+                         */
+                        ListMeasurementProtocolSecretsResponse.prototype.measurementProtocolSecrets = $util.emptyArray;
+    
+                        /**
+                         * ListMeasurementProtocolSecretsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @instance
+                         */
+                        ListMeasurementProtocolSecretsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListMeasurementProtocolSecretsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse} ListMeasurementProtocolSecretsResponse instance
+                         */
+                        ListMeasurementProtocolSecretsResponse.create = function create(properties) {
+                            return new ListMeasurementProtocolSecretsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMeasurementProtocolSecretsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse} message ListMeasurementProtocolSecretsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMeasurementProtocolSecretsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.measurementProtocolSecrets != null && message.measurementProtocolSecrets.length)
+                                for (var i = 0; i < message.measurementProtocolSecrets.length; ++i)
+                                    $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.encode(message.measurementProtocolSecrets[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMeasurementProtocolSecretsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse} message ListMeasurementProtocolSecretsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMeasurementProtocolSecretsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMeasurementProtocolSecretsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse} ListMeasurementProtocolSecretsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMeasurementProtocolSecretsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.measurementProtocolSecrets && message.measurementProtocolSecrets.length))
+                                        message.measurementProtocolSecrets = [];
+                                    message.measurementProtocolSecrets.push($root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMeasurementProtocolSecretsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse} ListMeasurementProtocolSecretsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMeasurementProtocolSecretsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMeasurementProtocolSecretsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMeasurementProtocolSecretsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.measurementProtocolSecrets != null && message.hasOwnProperty("measurementProtocolSecrets")) {
+                                if (!Array.isArray(message.measurementProtocolSecrets))
+                                    return "measurementProtocolSecrets: array expected";
+                                for (var i = 0; i < message.measurementProtocolSecrets.length; ++i) {
+                                    var error = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.verify(message.measurementProtocolSecrets[i]);
+                                    if (error)
+                                        return "measurementProtocolSecrets." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMeasurementProtocolSecretsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse} ListMeasurementProtocolSecretsResponse
+                         */
+                        ListMeasurementProtocolSecretsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse();
+                            if (object.measurementProtocolSecrets) {
+                                if (!Array.isArray(object.measurementProtocolSecrets))
+                                    throw TypeError(".google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse.measurementProtocolSecrets: array expected");
+                                message.measurementProtocolSecrets = [];
+                                for (var i = 0; i < object.measurementProtocolSecrets.length; ++i) {
+                                    if (typeof object.measurementProtocolSecrets[i] !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse.measurementProtocolSecrets: object expected");
+                                    message.measurementProtocolSecrets[i] = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.fromObject(object.measurementProtocolSecrets[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMeasurementProtocolSecretsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse} message ListMeasurementProtocolSecretsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMeasurementProtocolSecretsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.measurementProtocolSecrets = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.measurementProtocolSecrets && message.measurementProtocolSecrets.length) {
+                                object.measurementProtocolSecrets = [];
+                                for (var j = 0; j < message.measurementProtocolSecrets.length; ++j)
+                                    object.measurementProtocolSecrets[j] = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.toObject(message.measurementProtocolSecrets[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMeasurementProtocolSecretsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListMeasurementProtocolSecretsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMeasurementProtocolSecretsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListMeasurementProtocolSecretsResponse;
+                    })();
+    
+                    v1alpha.GetGoogleSignalsSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of a GetGoogleSignalsSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetGoogleSignalsSettingsRequest
+                         * @property {string|null} [name] GetGoogleSignalsSettingsRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetGoogleSignalsSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetGoogleSignalsSettingsRequest.
+                         * @implements IGetGoogleSignalsSettingsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest=} [properties] Properties to set
+                         */
+                        function GetGoogleSignalsSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetGoogleSignalsSettingsRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @instance
+                         */
+                        GetGoogleSignalsSettingsRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetGoogleSignalsSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest} GetGoogleSignalsSettingsRequest instance
+                         */
+                        GetGoogleSignalsSettingsRequest.create = function create(properties) {
+                            return new GetGoogleSignalsSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetGoogleSignalsSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest} message GetGoogleSignalsSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGoogleSignalsSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetGoogleSignalsSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest} message GetGoogleSignalsSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetGoogleSignalsSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetGoogleSignalsSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest} GetGoogleSignalsSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGoogleSignalsSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetGoogleSignalsSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest} GetGoogleSignalsSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetGoogleSignalsSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetGoogleSignalsSettingsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetGoogleSignalsSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetGoogleSignalsSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest} GetGoogleSignalsSettingsRequest
+                         */
+                        GetGoogleSignalsSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetGoogleSignalsSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest} message GetGoogleSignalsSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetGoogleSignalsSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetGoogleSignalsSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetGoogleSignalsSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetGoogleSignalsSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetGoogleSignalsSettingsRequest;
+                    })();
+    
+                    v1alpha.UpdateGoogleSignalsSettingsRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateGoogleSignalsSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IUpdateGoogleSignalsSettingsRequest
+                         * @property {google.analytics.admin.v1alpha.IGoogleSignalsSettings|null} [googleSignalsSettings] UpdateGoogleSignalsSettingsRequest googleSignalsSettings
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateGoogleSignalsSettingsRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateGoogleSignalsSettingsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an UpdateGoogleSignalsSettingsRequest.
+                         * @implements IUpdateGoogleSignalsSettingsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest=} [properties] Properties to set
+                         */
+                        function UpdateGoogleSignalsSettingsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateGoogleSignalsSettingsRequest googleSignalsSettings.
+                         * @member {google.analytics.admin.v1alpha.IGoogleSignalsSettings|null|undefined} googleSignalsSettings
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @instance
+                         */
+                        UpdateGoogleSignalsSettingsRequest.prototype.googleSignalsSettings = null;
+    
+                        /**
+                         * UpdateGoogleSignalsSettingsRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @instance
+                         */
+                        UpdateGoogleSignalsSettingsRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateGoogleSignalsSettingsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest} UpdateGoogleSignalsSettingsRequest instance
+                         */
+                        UpdateGoogleSignalsSettingsRequest.create = function create(properties) {
+                            return new UpdateGoogleSignalsSettingsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGoogleSignalsSettingsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest} message UpdateGoogleSignalsSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGoogleSignalsSettingsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.googleSignalsSettings != null && Object.hasOwnProperty.call(message, "googleSignalsSettings"))
+                                $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.encode(message.googleSignalsSettings, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateGoogleSignalsSettingsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest} message UpdateGoogleSignalsSettingsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateGoogleSignalsSettingsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateGoogleSignalsSettingsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest} UpdateGoogleSignalsSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGoogleSignalsSettingsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.googleSignalsSettings = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateGoogleSignalsSettingsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest} UpdateGoogleSignalsSettingsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateGoogleSignalsSettingsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateGoogleSignalsSettingsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateGoogleSignalsSettingsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.googleSignalsSettings != null && message.hasOwnProperty("googleSignalsSettings")) {
+                                var error = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.verify(message.googleSignalsSettings);
+                                if (error)
+                                    return "googleSignalsSettings." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateGoogleSignalsSettingsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest} UpdateGoogleSignalsSettingsRequest
+                         */
+                        UpdateGoogleSignalsSettingsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest();
+                            if (object.googleSignalsSettings != null) {
+                                if (typeof object.googleSignalsSettings !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest.googleSignalsSettings: object expected");
+                                message.googleSignalsSettings = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.fromObject(object.googleSignalsSettings);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateGoogleSignalsSettingsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest} message UpdateGoogleSignalsSettingsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateGoogleSignalsSettingsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.googleSignalsSettings = null;
+                                object.updateMask = null;
+                            }
+                            if (message.googleSignalsSettings != null && message.hasOwnProperty("googleSignalsSettings"))
+                                object.googleSignalsSettings = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.toObject(message.googleSignalsSettings, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateGoogleSignalsSettingsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.UpdateGoogleSignalsSettingsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateGoogleSignalsSettingsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateGoogleSignalsSettingsRequest;
+                    })();
+    
+                    v1alpha.CreateConversionEventRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateConversionEventRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ICreateConversionEventRequest
+                         * @property {google.analytics.admin.v1alpha.IConversionEvent|null} [conversionEvent] CreateConversionEventRequest conversionEvent
+                         * @property {string|null} [parent] CreateConversionEventRequest parent
+                         */
+    
+                        /**
+                         * Constructs a new CreateConversionEventRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a CreateConversionEventRequest.
+                         * @implements ICreateConversionEventRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ICreateConversionEventRequest=} [properties] Properties to set
+                         */
+                        function CreateConversionEventRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateConversionEventRequest conversionEvent.
+                         * @member {google.analytics.admin.v1alpha.IConversionEvent|null|undefined} conversionEvent
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @instance
+                         */
+                        CreateConversionEventRequest.prototype.conversionEvent = null;
+    
+                        /**
+                         * CreateConversionEventRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @instance
+                         */
+                        CreateConversionEventRequest.prototype.parent = "";
+    
+                        /**
+                         * Creates a new CreateConversionEventRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateConversionEventRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.CreateConversionEventRequest} CreateConversionEventRequest instance
+                         */
+                        CreateConversionEventRequest.create = function create(properties) {
+                            return new CreateConversionEventRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateConversionEventRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConversionEventRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateConversionEventRequest} message CreateConversionEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateConversionEventRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.conversionEvent != null && Object.hasOwnProperty.call(message, "conversionEvent"))
+                                $root.google.analytics.admin.v1alpha.ConversionEvent.encode(message.conversionEvent, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.parent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateConversionEventRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateConversionEventRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateConversionEventRequest} message CreateConversionEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateConversionEventRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateConversionEventRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.CreateConversionEventRequest} CreateConversionEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateConversionEventRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateConversionEventRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.parent = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateConversionEventRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.CreateConversionEventRequest} CreateConversionEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateConversionEventRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateConversionEventRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateConversionEventRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.conversionEvent != null && message.hasOwnProperty("conversionEvent")) {
+                                var error = $root.google.analytics.admin.v1alpha.ConversionEvent.verify(message.conversionEvent);
+                                if (error)
+                                    return "conversionEvent." + error;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateConversionEventRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.CreateConversionEventRequest} CreateConversionEventRequest
+                         */
+                        CreateConversionEventRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.CreateConversionEventRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.CreateConversionEventRequest();
+                            if (object.conversionEvent != null) {
+                                if (typeof object.conversionEvent !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.CreateConversionEventRequest.conversionEvent: object expected");
+                                message.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.fromObject(object.conversionEvent);
+                            }
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateConversionEventRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.CreateConversionEventRequest} message CreateConversionEventRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateConversionEventRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.conversionEvent = null;
+                                object.parent = "";
+                            }
+                            if (message.conversionEvent != null && message.hasOwnProperty("conversionEvent"))
+                                object.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.toObject(message.conversionEvent, options);
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateConversionEventRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.CreateConversionEventRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateConversionEventRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateConversionEventRequest;
+                    })();
+    
+                    v1alpha.GetConversionEventRequest = (function() {
+    
+                        /**
+                         * Properties of a GetConversionEventRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetConversionEventRequest
+                         * @property {string|null} [name] GetConversionEventRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetConversionEventRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetConversionEventRequest.
+                         * @implements IGetConversionEventRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetConversionEventRequest=} [properties] Properties to set
+                         */
+                        function GetConversionEventRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetConversionEventRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @instance
+                         */
+                        GetConversionEventRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetConversionEventRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetConversionEventRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetConversionEventRequest} GetConversionEventRequest instance
+                         */
+                        GetConversionEventRequest.create = function create(properties) {
+                            return new GetConversionEventRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetConversionEventRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetConversionEventRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetConversionEventRequest} message GetConversionEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetConversionEventRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetConversionEventRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetConversionEventRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetConversionEventRequest} message GetConversionEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetConversionEventRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetConversionEventRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetConversionEventRequest} GetConversionEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetConversionEventRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetConversionEventRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetConversionEventRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetConversionEventRequest} GetConversionEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetConversionEventRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetConversionEventRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetConversionEventRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetConversionEventRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetConversionEventRequest} GetConversionEventRequest
+                         */
+                        GetConversionEventRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetConversionEventRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetConversionEventRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetConversionEventRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetConversionEventRequest} message GetConversionEventRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetConversionEventRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetConversionEventRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetConversionEventRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetConversionEventRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetConversionEventRequest;
+                    })();
+    
+                    v1alpha.DeleteConversionEventRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteConversionEventRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IDeleteConversionEventRequest
+                         * @property {string|null} [name] DeleteConversionEventRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteConversionEventRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a DeleteConversionEventRequest.
+                         * @implements IDeleteConversionEventRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IDeleteConversionEventRequest=} [properties] Properties to set
+                         */
+                        function DeleteConversionEventRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteConversionEventRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @instance
+                         */
+                        DeleteConversionEventRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteConversionEventRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteConversionEventRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.DeleteConversionEventRequest} DeleteConversionEventRequest instance
+                         */
+                        DeleteConversionEventRequest.create = function create(properties) {
+                            return new DeleteConversionEventRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteConversionEventRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteConversionEventRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteConversionEventRequest} message DeleteConversionEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteConversionEventRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteConversionEventRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.DeleteConversionEventRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IDeleteConversionEventRequest} message DeleteConversionEventRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteConversionEventRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteConversionEventRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.DeleteConversionEventRequest} DeleteConversionEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteConversionEventRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.DeleteConversionEventRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteConversionEventRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.DeleteConversionEventRequest} DeleteConversionEventRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteConversionEventRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteConversionEventRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteConversionEventRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteConversionEventRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.DeleteConversionEventRequest} DeleteConversionEventRequest
+                         */
+                        DeleteConversionEventRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.DeleteConversionEventRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.DeleteConversionEventRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteConversionEventRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.DeleteConversionEventRequest} message DeleteConversionEventRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteConversionEventRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteConversionEventRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.DeleteConversionEventRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteConversionEventRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteConversionEventRequest;
+                    })();
+    
+                    v1alpha.ListConversionEventsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListConversionEventsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListConversionEventsRequest
+                         * @property {string|null} [parent] ListConversionEventsRequest parent
+                         * @property {number|null} [pageSize] ListConversionEventsRequest pageSize
+                         * @property {string|null} [pageToken] ListConversionEventsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListConversionEventsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListConversionEventsRequest.
+                         * @implements IListConversionEventsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsRequest=} [properties] Properties to set
+                         */
+                        function ListConversionEventsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListConversionEventsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @instance
+                         */
+                        ListConversionEventsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListConversionEventsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @instance
+                         */
+                        ListConversionEventsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListConversionEventsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @instance
+                         */
+                        ListConversionEventsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListConversionEventsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListConversionEventsRequest} ListConversionEventsRequest instance
+                         */
+                        ListConversionEventsRequest.create = function create(properties) {
+                            return new ListConversionEventsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListConversionEventsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListConversionEventsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsRequest} message ListConversionEventsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListConversionEventsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListConversionEventsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListConversionEventsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsRequest} message ListConversionEventsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListConversionEventsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListConversionEventsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListConversionEventsRequest} ListConversionEventsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListConversionEventsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListConversionEventsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListConversionEventsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListConversionEventsRequest} ListConversionEventsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListConversionEventsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListConversionEventsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListConversionEventsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListConversionEventsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListConversionEventsRequest} ListConversionEventsRequest
+                         */
+                        ListConversionEventsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListConversionEventsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListConversionEventsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListConversionEventsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListConversionEventsRequest} message ListConversionEventsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListConversionEventsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListConversionEventsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListConversionEventsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListConversionEventsRequest;
+                    })();
+    
+                    v1alpha.ListConversionEventsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListConversionEventsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListConversionEventsResponse
+                         * @property {Array.<google.analytics.admin.v1alpha.IConversionEvent>|null} [conversionEvents] ListConversionEventsResponse conversionEvents
+                         * @property {string|null} [nextPageToken] ListConversionEventsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListConversionEventsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListConversionEventsResponse.
+                         * @implements IListConversionEventsResponse
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsResponse=} [properties] Properties to set
+                         */
+                        function ListConversionEventsResponse(properties) {
+                            this.conversionEvents = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListConversionEventsResponse conversionEvents.
+                         * @member {Array.<google.analytics.admin.v1alpha.IConversionEvent>} conversionEvents
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @instance
+                         */
+                        ListConversionEventsResponse.prototype.conversionEvents = $util.emptyArray;
+    
+                        /**
+                         * ListConversionEventsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @instance
+                         */
+                        ListConversionEventsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListConversionEventsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListConversionEventsResponse} ListConversionEventsResponse instance
+                         */
+                        ListConversionEventsResponse.create = function create(properties) {
+                            return new ListConversionEventsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListConversionEventsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListConversionEventsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsResponse} message ListConversionEventsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListConversionEventsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.conversionEvents != null && message.conversionEvents.length)
+                                for (var i = 0; i < message.conversionEvents.length; ++i)
+                                    $root.google.analytics.admin.v1alpha.ConversionEvent.encode(message.conversionEvents[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListConversionEventsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListConversionEventsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListConversionEventsResponse} message ListConversionEventsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListConversionEventsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListConversionEventsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListConversionEventsResponse} ListConversionEventsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListConversionEventsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListConversionEventsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.conversionEvents && message.conversionEvents.length))
+                                        message.conversionEvents = [];
+                                    message.conversionEvents.push($root.google.analytics.admin.v1alpha.ConversionEvent.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListConversionEventsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListConversionEventsResponse} ListConversionEventsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListConversionEventsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListConversionEventsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListConversionEventsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.conversionEvents != null && message.hasOwnProperty("conversionEvents")) {
+                                if (!Array.isArray(message.conversionEvents))
+                                    return "conversionEvents: array expected";
+                                for (var i = 0; i < message.conversionEvents.length; ++i) {
+                                    var error = $root.google.analytics.admin.v1alpha.ConversionEvent.verify(message.conversionEvents[i]);
+                                    if (error)
+                                        return "conversionEvents." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListConversionEventsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListConversionEventsResponse} ListConversionEventsResponse
+                         */
+                        ListConversionEventsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListConversionEventsResponse)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListConversionEventsResponse();
+                            if (object.conversionEvents) {
+                                if (!Array.isArray(object.conversionEvents))
+                                    throw TypeError(".google.analytics.admin.v1alpha.ListConversionEventsResponse.conversionEvents: array expected");
+                                message.conversionEvents = [];
+                                for (var i = 0; i < object.conversionEvents.length; ++i) {
+                                    if (typeof object.conversionEvents[i] !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ListConversionEventsResponse.conversionEvents: object expected");
+                                    message.conversionEvents[i] = $root.google.analytics.admin.v1alpha.ConversionEvent.fromObject(object.conversionEvents[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListConversionEventsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListConversionEventsResponse} message ListConversionEventsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListConversionEventsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.conversionEvents = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.conversionEvents && message.conversionEvents.length) {
+                                object.conversionEvents = [];
+                                for (var j = 0; j < message.conversionEvents.length; ++j)
+                                    object.conversionEvents[j] = $root.google.analytics.admin.v1alpha.ConversionEvent.toObject(message.conversionEvents[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListConversionEventsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListConversionEventsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListConversionEventsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListConversionEventsResponse;
+                    })();
+    
+                    v1alpha.CreateCustomDimensionRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateCustomDimensionRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ICreateCustomDimensionRequest
+                         * @property {string|null} [parent] CreateCustomDimensionRequest parent
+                         * @property {google.analytics.admin.v1alpha.ICustomDimension|null} [customDimension] CreateCustomDimensionRequest customDimension
+                         */
+    
+                        /**
+                         * Constructs a new CreateCustomDimensionRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a CreateCustomDimensionRequest.
+                         * @implements ICreateCustomDimensionRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomDimensionRequest=} [properties] Properties to set
+                         */
+                        function CreateCustomDimensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateCustomDimensionRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @instance
+                         */
+                        CreateCustomDimensionRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateCustomDimensionRequest customDimension.
+                         * @member {google.analytics.admin.v1alpha.ICustomDimension|null|undefined} customDimension
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @instance
+                         */
+                        CreateCustomDimensionRequest.prototype.customDimension = null;
+    
+                        /**
+                         * Creates a new CreateCustomDimensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomDimensionRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.CreateCustomDimensionRequest} CreateCustomDimensionRequest instance
+                         */
+                        CreateCustomDimensionRequest.create = function create(properties) {
+                            return new CreateCustomDimensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomDimensionRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateCustomDimensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomDimensionRequest} message CreateCustomDimensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomDimensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.customDimension != null && Object.hasOwnProperty.call(message, "customDimension"))
+                                $root.google.analytics.admin.v1alpha.CustomDimension.encode(message.customDimension, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomDimensionRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateCustomDimensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomDimensionRequest} message CreateCustomDimensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomDimensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomDimensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.CreateCustomDimensionRequest} CreateCustomDimensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomDimensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateCustomDimensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomDimensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.CreateCustomDimensionRequest} CreateCustomDimensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomDimensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateCustomDimensionRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateCustomDimensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.customDimension != null && message.hasOwnProperty("customDimension")) {
+                                var error = $root.google.analytics.admin.v1alpha.CustomDimension.verify(message.customDimension);
+                                if (error)
+                                    return "customDimension." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateCustomDimensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.CreateCustomDimensionRequest} CreateCustomDimensionRequest
+                         */
+                        CreateCustomDimensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.CreateCustomDimensionRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.CreateCustomDimensionRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.customDimension != null) {
+                                if (typeof object.customDimension !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.CreateCustomDimensionRequest.customDimension: object expected");
+                                message.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.fromObject(object.customDimension);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateCustomDimensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.CreateCustomDimensionRequest} message CreateCustomDimensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateCustomDimensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.customDimension = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.customDimension != null && message.hasOwnProperty("customDimension"))
+                                object.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.toObject(message.customDimension, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateCustomDimensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomDimensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateCustomDimensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateCustomDimensionRequest;
+                    })();
+    
+                    v1alpha.UpdateCustomDimensionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCustomDimensionRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IUpdateCustomDimensionRequest
+                         * @property {google.analytics.admin.v1alpha.ICustomDimension|null} [customDimension] UpdateCustomDimensionRequest customDimension
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateCustomDimensionRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCustomDimensionRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an UpdateCustomDimensionRequest.
+                         * @implements IUpdateCustomDimensionRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest=} [properties] Properties to set
+                         */
+                        function UpdateCustomDimensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCustomDimensionRequest customDimension.
+                         * @member {google.analytics.admin.v1alpha.ICustomDimension|null|undefined} customDimension
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @instance
+                         */
+                        UpdateCustomDimensionRequest.prototype.customDimension = null;
+    
+                        /**
+                         * UpdateCustomDimensionRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @instance
+                         */
+                        UpdateCustomDimensionRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateCustomDimensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.UpdateCustomDimensionRequest} UpdateCustomDimensionRequest instance
+                         */
+                        UpdateCustomDimensionRequest.create = function create(properties) {
+                            return new UpdateCustomDimensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomDimensionRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateCustomDimensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest} message UpdateCustomDimensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomDimensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customDimension != null && Object.hasOwnProperty.call(message, "customDimension"))
+                                $root.google.analytics.admin.v1alpha.CustomDimension.encode(message.customDimension, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomDimensionRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateCustomDimensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest} message UpdateCustomDimensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomDimensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomDimensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.UpdateCustomDimensionRequest} UpdateCustomDimensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomDimensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateCustomDimensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomDimensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.UpdateCustomDimensionRequest} UpdateCustomDimensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomDimensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCustomDimensionRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCustomDimensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customDimension != null && message.hasOwnProperty("customDimension")) {
+                                var error = $root.google.analytics.admin.v1alpha.CustomDimension.verify(message.customDimension);
+                                if (error)
+                                    return "customDimension." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCustomDimensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.UpdateCustomDimensionRequest} UpdateCustomDimensionRequest
+                         */
+                        UpdateCustomDimensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.UpdateCustomDimensionRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.UpdateCustomDimensionRequest();
+                            if (object.customDimension != null) {
+                                if (typeof object.customDimension !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateCustomDimensionRequest.customDimension: object expected");
+                                message.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.fromObject(object.customDimension);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateCustomDimensionRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCustomDimensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.UpdateCustomDimensionRequest} message UpdateCustomDimensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCustomDimensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.customDimension = null;
+                                object.updateMask = null;
+                            }
+                            if (message.customDimension != null && message.hasOwnProperty("customDimension"))
+                                object.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.toObject(message.customDimension, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCustomDimensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomDimensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCustomDimensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateCustomDimensionRequest;
+                    })();
+    
+                    v1alpha.ListCustomDimensionsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListCustomDimensionsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListCustomDimensionsRequest
+                         * @property {string|null} [parent] ListCustomDimensionsRequest parent
+                         * @property {number|null} [pageSize] ListCustomDimensionsRequest pageSize
+                         * @property {string|null} [pageToken] ListCustomDimensionsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomDimensionsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListCustomDimensionsRequest.
+                         * @implements IListCustomDimensionsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsRequest=} [properties] Properties to set
+                         */
+                        function ListCustomDimensionsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomDimensionsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @instance
+                         */
+                        ListCustomDimensionsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListCustomDimensionsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @instance
+                         */
+                        ListCustomDimensionsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListCustomDimensionsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @instance
+                         */
+                        ListCustomDimensionsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListCustomDimensionsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListCustomDimensionsRequest} ListCustomDimensionsRequest instance
+                         */
+                        ListCustomDimensionsRequest.create = function create(properties) {
+                            return new ListCustomDimensionsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomDimensionsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListCustomDimensionsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsRequest} message ListCustomDimensionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomDimensionsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomDimensionsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListCustomDimensionsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsRequest} message ListCustomDimensionsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomDimensionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomDimensionsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListCustomDimensionsRequest} ListCustomDimensionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomDimensionsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCustomDimensionsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomDimensionsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListCustomDimensionsRequest} ListCustomDimensionsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomDimensionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomDimensionsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomDimensionsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomDimensionsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListCustomDimensionsRequest} ListCustomDimensionsRequest
+                         */
+                        ListCustomDimensionsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListCustomDimensionsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListCustomDimensionsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomDimensionsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListCustomDimensionsRequest} message ListCustomDimensionsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomDimensionsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomDimensionsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomDimensionsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListCustomDimensionsRequest;
+                    })();
+    
+                    v1alpha.ListCustomDimensionsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListCustomDimensionsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListCustomDimensionsResponse
+                         * @property {Array.<google.analytics.admin.v1alpha.ICustomDimension>|null} [customDimensions] ListCustomDimensionsResponse customDimensions
+                         * @property {string|null} [nextPageToken] ListCustomDimensionsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomDimensionsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListCustomDimensionsResponse.
+                         * @implements IListCustomDimensionsResponse
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsResponse=} [properties] Properties to set
+                         */
+                        function ListCustomDimensionsResponse(properties) {
+                            this.customDimensions = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomDimensionsResponse customDimensions.
+                         * @member {Array.<google.analytics.admin.v1alpha.ICustomDimension>} customDimensions
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @instance
+                         */
+                        ListCustomDimensionsResponse.prototype.customDimensions = $util.emptyArray;
+    
+                        /**
+                         * ListCustomDimensionsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @instance
+                         */
+                        ListCustomDimensionsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListCustomDimensionsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListCustomDimensionsResponse} ListCustomDimensionsResponse instance
+                         */
+                        ListCustomDimensionsResponse.create = function create(properties) {
+                            return new ListCustomDimensionsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomDimensionsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListCustomDimensionsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsResponse} message ListCustomDimensionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomDimensionsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customDimensions != null && message.customDimensions.length)
+                                for (var i = 0; i < message.customDimensions.length; ++i)
+                                    $root.google.analytics.admin.v1alpha.CustomDimension.encode(message.customDimensions[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomDimensionsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListCustomDimensionsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomDimensionsResponse} message ListCustomDimensionsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomDimensionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomDimensionsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListCustomDimensionsResponse} ListCustomDimensionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomDimensionsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCustomDimensionsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.customDimensions && message.customDimensions.length))
+                                        message.customDimensions = [];
+                                    message.customDimensions.push($root.google.analytics.admin.v1alpha.CustomDimension.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomDimensionsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListCustomDimensionsResponse} ListCustomDimensionsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomDimensionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomDimensionsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomDimensionsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customDimensions != null && message.hasOwnProperty("customDimensions")) {
+                                if (!Array.isArray(message.customDimensions))
+                                    return "customDimensions: array expected";
+                                for (var i = 0; i < message.customDimensions.length; ++i) {
+                                    var error = $root.google.analytics.admin.v1alpha.CustomDimension.verify(message.customDimensions[i]);
+                                    if (error)
+                                        return "customDimensions." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomDimensionsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListCustomDimensionsResponse} ListCustomDimensionsResponse
+                         */
+                        ListCustomDimensionsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListCustomDimensionsResponse)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListCustomDimensionsResponse();
+                            if (object.customDimensions) {
+                                if (!Array.isArray(object.customDimensions))
+                                    throw TypeError(".google.analytics.admin.v1alpha.ListCustomDimensionsResponse.customDimensions: array expected");
+                                message.customDimensions = [];
+                                for (var i = 0; i < object.customDimensions.length; ++i) {
+                                    if (typeof object.customDimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ListCustomDimensionsResponse.customDimensions: object expected");
+                                    message.customDimensions[i] = $root.google.analytics.admin.v1alpha.CustomDimension.fromObject(object.customDimensions[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomDimensionsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListCustomDimensionsResponse} message ListCustomDimensionsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomDimensionsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.customDimensions = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.customDimensions && message.customDimensions.length) {
+                                object.customDimensions = [];
+                                for (var j = 0; j < message.customDimensions.length; ++j)
+                                    object.customDimensions[j] = $root.google.analytics.admin.v1alpha.CustomDimension.toObject(message.customDimensions[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomDimensionsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListCustomDimensionsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomDimensionsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListCustomDimensionsResponse;
+                    })();
+    
+                    v1alpha.ArchiveCustomDimensionRequest = (function() {
+    
+                        /**
+                         * Properties of an ArchiveCustomDimensionRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IArchiveCustomDimensionRequest
+                         * @property {string|null} [name] ArchiveCustomDimensionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ArchiveCustomDimensionRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an ArchiveCustomDimensionRequest.
+                         * @implements IArchiveCustomDimensionRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest=} [properties] Properties to set
+                         */
+                        function ArchiveCustomDimensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ArchiveCustomDimensionRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @instance
+                         */
+                        ArchiveCustomDimensionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new ArchiveCustomDimensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest} ArchiveCustomDimensionRequest instance
+                         */
+                        ArchiveCustomDimensionRequest.create = function create(properties) {
+                            return new ArchiveCustomDimensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ArchiveCustomDimensionRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest} message ArchiveCustomDimensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ArchiveCustomDimensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ArchiveCustomDimensionRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest} message ArchiveCustomDimensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ArchiveCustomDimensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ArchiveCustomDimensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest} ArchiveCustomDimensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ArchiveCustomDimensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ArchiveCustomDimensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest} ArchiveCustomDimensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ArchiveCustomDimensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ArchiveCustomDimensionRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ArchiveCustomDimensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ArchiveCustomDimensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest} ArchiveCustomDimensionRequest
+                         */
+                        ArchiveCustomDimensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ArchiveCustomDimensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest} message ArchiveCustomDimensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ArchiveCustomDimensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ArchiveCustomDimensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomDimensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ArchiveCustomDimensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ArchiveCustomDimensionRequest;
+                    })();
+    
+                    v1alpha.GetCustomDimensionRequest = (function() {
+    
+                        /**
+                         * Properties of a GetCustomDimensionRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetCustomDimensionRequest
+                         * @property {string|null} [name] GetCustomDimensionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetCustomDimensionRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetCustomDimensionRequest.
+                         * @implements IGetCustomDimensionRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetCustomDimensionRequest=} [properties] Properties to set
+                         */
+                        function GetCustomDimensionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetCustomDimensionRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @instance
+                         */
+                        GetCustomDimensionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetCustomDimensionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetCustomDimensionRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetCustomDimensionRequest} GetCustomDimensionRequest instance
+                         */
+                        GetCustomDimensionRequest.create = function create(properties) {
+                            return new GetCustomDimensionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomDimensionRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetCustomDimensionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetCustomDimensionRequest} message GetCustomDimensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomDimensionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomDimensionRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetCustomDimensionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetCustomDimensionRequest} message GetCustomDimensionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomDimensionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetCustomDimensionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetCustomDimensionRequest} GetCustomDimensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomDimensionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetCustomDimensionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetCustomDimensionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetCustomDimensionRequest} GetCustomDimensionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomDimensionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetCustomDimensionRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetCustomDimensionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetCustomDimensionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetCustomDimensionRequest} GetCustomDimensionRequest
+                         */
+                        GetCustomDimensionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetCustomDimensionRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetCustomDimensionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetCustomDimensionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetCustomDimensionRequest} message GetCustomDimensionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetCustomDimensionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetCustomDimensionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetCustomDimensionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetCustomDimensionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetCustomDimensionRequest;
+                    })();
+    
+                    v1alpha.CreateCustomMetricRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateCustomMetricRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ICreateCustomMetricRequest
+                         * @property {string|null} [parent] CreateCustomMetricRequest parent
+                         * @property {google.analytics.admin.v1alpha.ICustomMetric|null} [customMetric] CreateCustomMetricRequest customMetric
+                         */
+    
+                        /**
+                         * Constructs a new CreateCustomMetricRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a CreateCustomMetricRequest.
+                         * @implements ICreateCustomMetricRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomMetricRequest=} [properties] Properties to set
+                         */
+                        function CreateCustomMetricRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateCustomMetricRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @instance
+                         */
+                        CreateCustomMetricRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateCustomMetricRequest customMetric.
+                         * @member {google.analytics.admin.v1alpha.ICustomMetric|null|undefined} customMetric
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @instance
+                         */
+                        CreateCustomMetricRequest.prototype.customMetric = null;
+    
+                        /**
+                         * Creates a new CreateCustomMetricRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomMetricRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.CreateCustomMetricRequest} CreateCustomMetricRequest instance
+                         */
+                        CreateCustomMetricRequest.create = function create(properties) {
+                            return new CreateCustomMetricRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomMetricRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.CreateCustomMetricRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomMetricRequest} message CreateCustomMetricRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomMetricRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.customMetric != null && Object.hasOwnProperty.call(message, "customMetric"))
+                                $root.google.analytics.admin.v1alpha.CustomMetric.encode(message.customMetric, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateCustomMetricRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CreateCustomMetricRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICreateCustomMetricRequest} message CreateCustomMetricRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateCustomMetricRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomMetricRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.CreateCustomMetricRequest} CreateCustomMetricRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomMetricRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CreateCustomMetricRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateCustomMetricRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.CreateCustomMetricRequest} CreateCustomMetricRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateCustomMetricRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateCustomMetricRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateCustomMetricRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.customMetric != null && message.hasOwnProperty("customMetric")) {
+                                var error = $root.google.analytics.admin.v1alpha.CustomMetric.verify(message.customMetric);
+                                if (error)
+                                    return "customMetric." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateCustomMetricRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.CreateCustomMetricRequest} CreateCustomMetricRequest
+                         */
+                        CreateCustomMetricRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.CreateCustomMetricRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.CreateCustomMetricRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.customMetric != null) {
+                                if (typeof object.customMetric !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.CreateCustomMetricRequest.customMetric: object expected");
+                                message.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.fromObject(object.customMetric);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateCustomMetricRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.CreateCustomMetricRequest} message CreateCustomMetricRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateCustomMetricRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.customMetric = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.customMetric != null && message.hasOwnProperty("customMetric"))
+                                object.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.toObject(message.customMetric, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateCustomMetricRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.CreateCustomMetricRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateCustomMetricRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateCustomMetricRequest;
+                    })();
+    
+                    v1alpha.UpdateCustomMetricRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCustomMetricRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IUpdateCustomMetricRequest
+                         * @property {google.analytics.admin.v1alpha.ICustomMetric|null} [customMetric] UpdateCustomMetricRequest customMetric
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateCustomMetricRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCustomMetricRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an UpdateCustomMetricRequest.
+                         * @implements IUpdateCustomMetricRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomMetricRequest=} [properties] Properties to set
+                         */
+                        function UpdateCustomMetricRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCustomMetricRequest customMetric.
+                         * @member {google.analytics.admin.v1alpha.ICustomMetric|null|undefined} customMetric
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @instance
+                         */
+                        UpdateCustomMetricRequest.prototype.customMetric = null;
+    
+                        /**
+                         * UpdateCustomMetricRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @instance
+                         */
+                        UpdateCustomMetricRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateCustomMetricRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomMetricRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.UpdateCustomMetricRequest} UpdateCustomMetricRequest instance
+                         */
+                        UpdateCustomMetricRequest.create = function create(properties) {
+                            return new UpdateCustomMetricRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomMetricRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateCustomMetricRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomMetricRequest} message UpdateCustomMetricRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomMetricRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customMetric != null && Object.hasOwnProperty.call(message, "customMetric"))
+                                $root.google.analytics.admin.v1alpha.CustomMetric.encode(message.customMetric, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCustomMetricRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.UpdateCustomMetricRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IUpdateCustomMetricRequest} message UpdateCustomMetricRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCustomMetricRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomMetricRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.UpdateCustomMetricRequest} UpdateCustomMetricRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomMetricRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.UpdateCustomMetricRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCustomMetricRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.UpdateCustomMetricRequest} UpdateCustomMetricRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCustomMetricRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCustomMetricRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCustomMetricRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customMetric != null && message.hasOwnProperty("customMetric")) {
+                                var error = $root.google.analytics.admin.v1alpha.CustomMetric.verify(message.customMetric);
+                                if (error)
+                                    return "customMetric." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCustomMetricRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.UpdateCustomMetricRequest} UpdateCustomMetricRequest
+                         */
+                        UpdateCustomMetricRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.UpdateCustomMetricRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.UpdateCustomMetricRequest();
+                            if (object.customMetric != null) {
+                                if (typeof object.customMetric !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateCustomMetricRequest.customMetric: object expected");
+                                message.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.fromObject(object.customMetric);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.UpdateCustomMetricRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCustomMetricRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.UpdateCustomMetricRequest} message UpdateCustomMetricRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCustomMetricRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.customMetric = null;
+                                object.updateMask = null;
+                            }
+                            if (message.customMetric != null && message.hasOwnProperty("customMetric"))
+                                object.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.toObject(message.customMetric, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCustomMetricRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.UpdateCustomMetricRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCustomMetricRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateCustomMetricRequest;
+                    })();
+    
+                    v1alpha.ListCustomMetricsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListCustomMetricsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListCustomMetricsRequest
+                         * @property {string|null} [parent] ListCustomMetricsRequest parent
+                         * @property {number|null} [pageSize] ListCustomMetricsRequest pageSize
+                         * @property {string|null} [pageToken] ListCustomMetricsRequest pageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomMetricsRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListCustomMetricsRequest.
+                         * @implements IListCustomMetricsRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsRequest=} [properties] Properties to set
+                         */
+                        function ListCustomMetricsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomMetricsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @instance
+                         */
+                        ListCustomMetricsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListCustomMetricsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @instance
+                         */
+                        ListCustomMetricsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListCustomMetricsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @instance
+                         */
+                        ListCustomMetricsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * Creates a new ListCustomMetricsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListCustomMetricsRequest} ListCustomMetricsRequest instance
+                         */
+                        ListCustomMetricsRequest.create = function create(properties) {
+                            return new ListCustomMetricsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomMetricsRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ListCustomMetricsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsRequest} message ListCustomMetricsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomMetricsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomMetricsRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListCustomMetricsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsRequest} message ListCustomMetricsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomMetricsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomMetricsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListCustomMetricsRequest} ListCustomMetricsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomMetricsRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCustomMetricsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.pageSize = reader.int32();
+                                    break;
+                                case 3:
+                                    message.pageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomMetricsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListCustomMetricsRequest} ListCustomMetricsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomMetricsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomMetricsRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomMetricsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomMetricsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListCustomMetricsRequest} ListCustomMetricsRequest
+                         */
+                        ListCustomMetricsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListCustomMetricsRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListCustomMetricsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomMetricsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListCustomMetricsRequest} message ListCustomMetricsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomMetricsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomMetricsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomMetricsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListCustomMetricsRequest;
+                    })();
+    
+                    v1alpha.ListCustomMetricsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListCustomMetricsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IListCustomMetricsResponse
+                         * @property {Array.<google.analytics.admin.v1alpha.ICustomMetric>|null} [customMetrics] ListCustomMetricsResponse customMetrics
+                         * @property {string|null} [nextPageToken] ListCustomMetricsResponse nextPageToken
+                         */
+    
+                        /**
+                         * Constructs a new ListCustomMetricsResponse.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ListCustomMetricsResponse.
+                         * @implements IListCustomMetricsResponse
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsResponse=} [properties] Properties to set
+                         */
+                        function ListCustomMetricsResponse(properties) {
+                            this.customMetrics = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListCustomMetricsResponse customMetrics.
+                         * @member {Array.<google.analytics.admin.v1alpha.ICustomMetric>} customMetrics
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @instance
+                         */
+                        ListCustomMetricsResponse.prototype.customMetrics = $util.emptyArray;
+    
+                        /**
+                         * ListCustomMetricsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @instance
+                         */
+                        ListCustomMetricsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * Creates a new ListCustomMetricsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsResponse=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ListCustomMetricsResponse} ListCustomMetricsResponse instance
+                         */
+                        ListCustomMetricsResponse.create = function create(properties) {
+                            return new ListCustomMetricsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomMetricsResponse message. Does not implicitly {@link google.analytics.admin.v1alpha.ListCustomMetricsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsResponse} message ListCustomMetricsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomMetricsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.customMetrics != null && message.customMetrics.length)
+                                for (var i = 0; i < message.customMetrics.length; ++i)
+                                    $root.google.analytics.admin.v1alpha.CustomMetric.encode(message.customMetrics[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListCustomMetricsResponse message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ListCustomMetricsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IListCustomMetricsResponse} message ListCustomMetricsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListCustomMetricsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListCustomMetricsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ListCustomMetricsResponse} ListCustomMetricsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomMetricsResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ListCustomMetricsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.customMetrics && message.customMetrics.length))
+                                        message.customMetrics = [];
+                                    message.customMetrics.push($root.google.analytics.admin.v1alpha.CustomMetric.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    message.nextPageToken = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListCustomMetricsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ListCustomMetricsResponse} ListCustomMetricsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListCustomMetricsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListCustomMetricsResponse message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListCustomMetricsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.customMetrics != null && message.hasOwnProperty("customMetrics")) {
+                                if (!Array.isArray(message.customMetrics))
+                                    return "customMetrics: array expected";
+                                for (var i = 0; i < message.customMetrics.length; ++i) {
+                                    var error = $root.google.analytics.admin.v1alpha.CustomMetric.verify(message.customMetrics[i]);
+                                    if (error)
+                                        return "customMetrics." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListCustomMetricsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ListCustomMetricsResponse} ListCustomMetricsResponse
+                         */
+                        ListCustomMetricsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ListCustomMetricsResponse)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ListCustomMetricsResponse();
+                            if (object.customMetrics) {
+                                if (!Array.isArray(object.customMetrics))
+                                    throw TypeError(".google.analytics.admin.v1alpha.ListCustomMetricsResponse.customMetrics: array expected");
+                                message.customMetrics = [];
+                                for (var i = 0; i < object.customMetrics.length; ++i) {
+                                    if (typeof object.customMetrics[i] !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ListCustomMetricsResponse.customMetrics: object expected");
+                                    message.customMetrics[i] = $root.google.analytics.admin.v1alpha.CustomMetric.fromObject(object.customMetrics[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListCustomMetricsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ListCustomMetricsResponse} message ListCustomMetricsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListCustomMetricsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.customMetrics = [];
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.customMetrics && message.customMetrics.length) {
+                                object.customMetrics = [];
+                                for (var j = 0; j < message.customMetrics.length; ++j)
+                                    object.customMetrics[j] = $root.google.analytics.admin.v1alpha.CustomMetric.toObject(message.customMetrics[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListCustomMetricsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ListCustomMetricsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListCustomMetricsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ListCustomMetricsResponse;
+                    })();
+    
+                    v1alpha.ArchiveCustomMetricRequest = (function() {
+    
+                        /**
+                         * Properties of an ArchiveCustomMetricRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IArchiveCustomMetricRequest
+                         * @property {string|null} [name] ArchiveCustomMetricRequest name
+                         */
+    
+                        /**
+                         * Constructs a new ArchiveCustomMetricRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents an ArchiveCustomMetricRequest.
+                         * @implements IArchiveCustomMetricRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomMetricRequest=} [properties] Properties to set
+                         */
+                        function ArchiveCustomMetricRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ArchiveCustomMetricRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @instance
+                         */
+                        ArchiveCustomMetricRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new ArchiveCustomMetricRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomMetricRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ArchiveCustomMetricRequest} ArchiveCustomMetricRequest instance
+                         */
+                        ArchiveCustomMetricRequest.create = function create(properties) {
+                            return new ArchiveCustomMetricRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ArchiveCustomMetricRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.ArchiveCustomMetricRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomMetricRequest} message ArchiveCustomMetricRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ArchiveCustomMetricRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ArchiveCustomMetricRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ArchiveCustomMetricRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IArchiveCustomMetricRequest} message ArchiveCustomMetricRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ArchiveCustomMetricRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ArchiveCustomMetricRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ArchiveCustomMetricRequest} ArchiveCustomMetricRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ArchiveCustomMetricRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ArchiveCustomMetricRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ArchiveCustomMetricRequest} ArchiveCustomMetricRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ArchiveCustomMetricRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ArchiveCustomMetricRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ArchiveCustomMetricRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ArchiveCustomMetricRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ArchiveCustomMetricRequest} ArchiveCustomMetricRequest
+                         */
+                        ArchiveCustomMetricRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ArchiveCustomMetricRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ArchiveCustomMetricRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ArchiveCustomMetricRequest} message ArchiveCustomMetricRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ArchiveCustomMetricRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ArchiveCustomMetricRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ArchiveCustomMetricRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ArchiveCustomMetricRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ArchiveCustomMetricRequest;
+                    })();
+    
+                    v1alpha.GetCustomMetricRequest = (function() {
+    
+                        /**
+                         * Properties of a GetCustomMetricRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGetCustomMetricRequest
+                         * @property {string|null} [name] GetCustomMetricRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetCustomMetricRequest.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GetCustomMetricRequest.
+                         * @implements IGetCustomMetricRequest
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGetCustomMetricRequest=} [properties] Properties to set
+                         */
+                        function GetCustomMetricRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetCustomMetricRequest name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @instance
+                         */
+                        GetCustomMetricRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetCustomMetricRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetCustomMetricRequest=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GetCustomMetricRequest} GetCustomMetricRequest instance
+                         */
+                        GetCustomMetricRequest.create = function create(properties) {
+                            return new GetCustomMetricRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomMetricRequest message. Does not implicitly {@link google.analytics.admin.v1alpha.GetCustomMetricRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetCustomMetricRequest} message GetCustomMetricRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomMetricRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetCustomMetricRequest message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GetCustomMetricRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGetCustomMetricRequest} message GetCustomMetricRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetCustomMetricRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetCustomMetricRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GetCustomMetricRequest} GetCustomMetricRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomMetricRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GetCustomMetricRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetCustomMetricRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GetCustomMetricRequest} GetCustomMetricRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetCustomMetricRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetCustomMetricRequest message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetCustomMetricRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetCustomMetricRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GetCustomMetricRequest} GetCustomMetricRequest
+                         */
+                        GetCustomMetricRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GetCustomMetricRequest)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GetCustomMetricRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetCustomMetricRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GetCustomMetricRequest} message GetCustomMetricRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetCustomMetricRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetCustomMetricRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GetCustomMetricRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetCustomMetricRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GetCustomMetricRequest;
+                    })();
+    
                     /**
                      * MaximumUserAccess enum.
                      * @name google.analytics.admin.v1alpha.MaximumUserAccess
@@ -15328,6 +21321,11 @@
                      * @property {number} IOS_APP_DATA_STREAM=5 IOS_APP_DATA_STREAM value
                      * @property {number} FIREBASE_LINK=6 FIREBASE_LINK value
                      * @property {number} GOOGLE_ADS_LINK=7 GOOGLE_ADS_LINK value
+                     * @property {number} GOOGLE_SIGNALS_SETTINGS=8 GOOGLE_SIGNALS_SETTINGS value
+                     * @property {number} CONVERSION_EVENT=9 CONVERSION_EVENT value
+                     * @property {number} MEASUREMENT_PROTOCOL_SECRET=10 MEASUREMENT_PROTOCOL_SECRET value
+                     * @property {number} CUSTOM_DIMENSION=11 CUSTOM_DIMENSION value
+                     * @property {number} CUSTOM_METRIC=12 CUSTOM_METRIC value
                      */
                     v1alpha.ChangeHistoryResourceType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -15339,6 +21337,43 @@
                         values[valuesById[5] = "IOS_APP_DATA_STREAM"] = 5;
                         values[valuesById[6] = "FIREBASE_LINK"] = 6;
                         values[valuesById[7] = "GOOGLE_ADS_LINK"] = 7;
+                        values[valuesById[8] = "GOOGLE_SIGNALS_SETTINGS"] = 8;
+                        values[valuesById[9] = "CONVERSION_EVENT"] = 9;
+                        values[valuesById[10] = "MEASUREMENT_PROTOCOL_SECRET"] = 10;
+                        values[valuesById[11] = "CUSTOM_DIMENSION"] = 11;
+                        values[valuesById[12] = "CUSTOM_METRIC"] = 12;
+                        return values;
+                    })();
+    
+                    /**
+                     * GoogleSignalsState enum.
+                     * @name google.analytics.admin.v1alpha.GoogleSignalsState
+                     * @enum {number}
+                     * @property {number} GOOGLE_SIGNALS_STATE_UNSPECIFIED=0 GOOGLE_SIGNALS_STATE_UNSPECIFIED value
+                     * @property {number} GOOGLE_SIGNALS_ENABLED=1 GOOGLE_SIGNALS_ENABLED value
+                     * @property {number} GOOGLE_SIGNALS_DISABLED=2 GOOGLE_SIGNALS_DISABLED value
+                     */
+                    v1alpha.GoogleSignalsState = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "GOOGLE_SIGNALS_STATE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "GOOGLE_SIGNALS_ENABLED"] = 1;
+                        values[valuesById[2] = "GOOGLE_SIGNALS_DISABLED"] = 2;
+                        return values;
+                    })();
+    
+                    /**
+                     * GoogleSignalsConsent enum.
+                     * @name google.analytics.admin.v1alpha.GoogleSignalsConsent
+                     * @enum {number}
+                     * @property {number} GOOGLE_SIGNALS_CONSENT_UNSPECIFIED=0 GOOGLE_SIGNALS_CONSENT_UNSPECIFIED value
+                     * @property {number} GOOGLE_SIGNALS_CONSENT_CONSENTED=2 GOOGLE_SIGNALS_CONSENT_CONSENTED value
+                     * @property {number} GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED=1 GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED value
+                     */
+                    v1alpha.GoogleSignalsConsent = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED"] = 0;
+                        values[valuesById[2] = "GOOGLE_SIGNALS_CONSENT_CONSENTED"] = 2;
+                        values[valuesById[1] = "GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED"] = 1;
                         return values;
                     })();
     
@@ -19723,6 +25758,238 @@
                         return PropertySummary;
                     })();
     
+                    v1alpha.MeasurementProtocolSecret = (function() {
+    
+                        /**
+                         * Properties of a MeasurementProtocolSecret.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IMeasurementProtocolSecret
+                         * @property {string|null} [name] MeasurementProtocolSecret name
+                         * @property {string|null} [displayName] MeasurementProtocolSecret displayName
+                         * @property {string|null} [secretValue] MeasurementProtocolSecret secretValue
+                         */
+    
+                        /**
+                         * Constructs a new MeasurementProtocolSecret.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a MeasurementProtocolSecret.
+                         * @implements IMeasurementProtocolSecret
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IMeasurementProtocolSecret=} [properties] Properties to set
+                         */
+                        function MeasurementProtocolSecret(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MeasurementProtocolSecret name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @instance
+                         */
+                        MeasurementProtocolSecret.prototype.name = "";
+    
+                        /**
+                         * MeasurementProtocolSecret displayName.
+                         * @member {string} displayName
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @instance
+                         */
+                        MeasurementProtocolSecret.prototype.displayName = "";
+    
+                        /**
+                         * MeasurementProtocolSecret secretValue.
+                         * @member {string} secretValue
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @instance
+                         */
+                        MeasurementProtocolSecret.prototype.secretValue = "";
+    
+                        /**
+                         * Creates a new MeasurementProtocolSecret instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IMeasurementProtocolSecret=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.MeasurementProtocolSecret} MeasurementProtocolSecret instance
+                         */
+                        MeasurementProtocolSecret.create = function create(properties) {
+                            return new MeasurementProtocolSecret(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MeasurementProtocolSecret message. Does not implicitly {@link google.analytics.admin.v1alpha.MeasurementProtocolSecret.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IMeasurementProtocolSecret} message MeasurementProtocolSecret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MeasurementProtocolSecret.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
+                            if (message.secretValue != null && Object.hasOwnProperty.call(message, "secretValue"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.secretValue);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MeasurementProtocolSecret message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.MeasurementProtocolSecret.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IMeasurementProtocolSecret} message MeasurementProtocolSecret message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MeasurementProtocolSecret.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MeasurementProtocolSecret message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.MeasurementProtocolSecret} MeasurementProtocolSecret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MeasurementProtocolSecret.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 3:
+                                    message.secretValue = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MeasurementProtocolSecret message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.MeasurementProtocolSecret} MeasurementProtocolSecret
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MeasurementProtocolSecret.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MeasurementProtocolSecret message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MeasurementProtocolSecret.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.secretValue != null && message.hasOwnProperty("secretValue"))
+                                if (!$util.isString(message.secretValue))
+                                    return "secretValue: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MeasurementProtocolSecret message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.MeasurementProtocolSecret} MeasurementProtocolSecret
+                         */
+                        MeasurementProtocolSecret.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.secretValue != null)
+                                message.secretValue = String(object.secretValue);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MeasurementProtocolSecret message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.MeasurementProtocolSecret} message MeasurementProtocolSecret
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MeasurementProtocolSecret.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.displayName = "";
+                                object.secretValue = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.secretValue != null && message.hasOwnProperty("secretValue"))
+                                object.secretValue = message.secretValue;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MeasurementProtocolSecret to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.MeasurementProtocolSecret
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MeasurementProtocolSecret.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MeasurementProtocolSecret;
+                    })();
+    
                     v1alpha.ChangeHistoryEvent = (function() {
     
                         /**
@@ -20368,6 +26635,11 @@
                              * @property {google.analytics.admin.v1alpha.IIosAppDataStream|null} [iosAppDataStream] ChangeHistoryResource iosAppDataStream
                              * @property {google.analytics.admin.v1alpha.IFirebaseLink|null} [firebaseLink] ChangeHistoryResource firebaseLink
                              * @property {google.analytics.admin.v1alpha.IGoogleAdsLink|null} [googleAdsLink] ChangeHistoryResource googleAdsLink
+                             * @property {google.analytics.admin.v1alpha.IGoogleSignalsSettings|null} [googleSignalsSettings] ChangeHistoryResource googleSignalsSettings
+                             * @property {google.analytics.admin.v1alpha.IConversionEvent|null} [conversionEvent] ChangeHistoryResource conversionEvent
+                             * @property {google.analytics.admin.v1alpha.IMeasurementProtocolSecret|null} [measurementProtocolSecret] ChangeHistoryResource measurementProtocolSecret
+                             * @property {google.analytics.admin.v1alpha.ICustomDimension|null} [customDimension] ChangeHistoryResource customDimension
+                             * @property {google.analytics.admin.v1alpha.ICustomMetric|null} [customMetric] ChangeHistoryResource customMetric
                              */
     
                             /**
@@ -20441,17 +26713,57 @@
                              */
                             ChangeHistoryResource.prototype.googleAdsLink = null;
     
+                            /**
+                             * ChangeHistoryResource googleSignalsSettings.
+                             * @member {google.analytics.admin.v1alpha.IGoogleSignalsSettings|null|undefined} googleSignalsSettings
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.googleSignalsSettings = null;
+    
+                            /**
+                             * ChangeHistoryResource conversionEvent.
+                             * @member {google.analytics.admin.v1alpha.IConversionEvent|null|undefined} conversionEvent
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.conversionEvent = null;
+    
+                            /**
+                             * ChangeHistoryResource measurementProtocolSecret.
+                             * @member {google.analytics.admin.v1alpha.IMeasurementProtocolSecret|null|undefined} measurementProtocolSecret
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.measurementProtocolSecret = null;
+    
+                            /**
+                             * ChangeHistoryResource customDimension.
+                             * @member {google.analytics.admin.v1alpha.ICustomDimension|null|undefined} customDimension
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.customDimension = null;
+    
+                            /**
+                             * ChangeHistoryResource customMetric.
+                             * @member {google.analytics.admin.v1alpha.ICustomMetric|null|undefined} customMetric
+                             * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
+                             * @instance
+                             */
+                            ChangeHistoryResource.prototype.customMetric = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * ChangeHistoryResource resource.
-                             * @member {"account"|"property"|"webDataStream"|"androidAppDataStream"|"iosAppDataStream"|"firebaseLink"|"googleAdsLink"|undefined} resource
+                             * @member {"account"|"property"|"webDataStream"|"androidAppDataStream"|"iosAppDataStream"|"firebaseLink"|"googleAdsLink"|"googleSignalsSettings"|"conversionEvent"|"measurementProtocolSecret"|"customDimension"|"customMetric"|undefined} resource
                              * @memberof google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource
                              * @instance
                              */
                             Object.defineProperty(ChangeHistoryResource.prototype, "resource", {
-                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "webDataStream", "androidAppDataStream", "iosAppDataStream", "firebaseLink", "googleAdsLink"]),
+                                get: $util.oneOfGetter($oneOfFields = ["account", "property", "webDataStream", "androidAppDataStream", "iosAppDataStream", "firebaseLink", "googleAdsLink", "googleSignalsSettings", "conversionEvent", "measurementProtocolSecret", "customDimension", "customMetric"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -20493,6 +26805,16 @@
                                     $root.google.analytics.admin.v1alpha.FirebaseLink.encode(message.firebaseLink, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 if (message.googleAdsLink != null && Object.hasOwnProperty.call(message, "googleAdsLink"))
                                     $root.google.analytics.admin.v1alpha.GoogleAdsLink.encode(message.googleAdsLink, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                if (message.googleSignalsSettings != null && Object.hasOwnProperty.call(message, "googleSignalsSettings"))
+                                    $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.encode(message.googleSignalsSettings, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.conversionEvent != null && Object.hasOwnProperty.call(message, "conversionEvent"))
+                                    $root.google.analytics.admin.v1alpha.ConversionEvent.encode(message.conversionEvent, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                                if (message.measurementProtocolSecret != null && Object.hasOwnProperty.call(message, "measurementProtocolSecret"))
+                                    $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.encode(message.measurementProtocolSecret, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                                if (message.customDimension != null && Object.hasOwnProperty.call(message, "customDimension"))
+                                    $root.google.analytics.admin.v1alpha.CustomDimension.encode(message.customDimension, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                                if (message.customMetric != null && Object.hasOwnProperty.call(message, "customMetric"))
+                                    $root.google.analytics.admin.v1alpha.CustomMetric.encode(message.customMetric, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                                 return writer;
                             };
     
@@ -20547,6 +26869,21 @@
                                         break;
                                     case 7:
                                         message.googleAdsLink = $root.google.analytics.admin.v1alpha.GoogleAdsLink.decode(reader, reader.uint32());
+                                        break;
+                                    case 8:
+                                        message.googleSignalsSettings = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.decode(reader, reader.uint32());
+                                        break;
+                                    case 11:
+                                        message.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.decode(reader, reader.uint32());
+                                        break;
+                                    case 12:
+                                        message.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.decode(reader, reader.uint32());
+                                        break;
+                                    case 13:
+                                        message.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.decode(reader, reader.uint32());
+                                        break;
+                                    case 14:
+                                        message.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -20652,6 +26989,56 @@
                                             return "googleAdsLink." + error;
                                     }
                                 }
+                                if (message.googleSignalsSettings != null && message.hasOwnProperty("googleSignalsSettings")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.verify(message.googleSignalsSettings);
+                                        if (error)
+                                            return "googleSignalsSettings." + error;
+                                    }
+                                }
+                                if (message.conversionEvent != null && message.hasOwnProperty("conversionEvent")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.ConversionEvent.verify(message.conversionEvent);
+                                        if (error)
+                                            return "conversionEvent." + error;
+                                    }
+                                }
+                                if (message.measurementProtocolSecret != null && message.hasOwnProperty("measurementProtocolSecret")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.verify(message.measurementProtocolSecret);
+                                        if (error)
+                                            return "measurementProtocolSecret." + error;
+                                    }
+                                }
+                                if (message.customDimension != null && message.hasOwnProperty("customDimension")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.CustomDimension.verify(message.customDimension);
+                                        if (error)
+                                            return "customDimension." + error;
+                                    }
+                                }
+                                if (message.customMetric != null && message.hasOwnProperty("customMetric")) {
+                                    if (properties.resource === 1)
+                                        return "resource: multiple values";
+                                    properties.resource = 1;
+                                    {
+                                        var error = $root.google.analytics.admin.v1alpha.CustomMetric.verify(message.customMetric);
+                                        if (error)
+                                            return "customMetric." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -20701,6 +27088,31 @@
                                     if (typeof object.googleAdsLink !== "object")
                                         throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.googleAdsLink: object expected");
                                     message.googleAdsLink = $root.google.analytics.admin.v1alpha.GoogleAdsLink.fromObject(object.googleAdsLink);
+                                }
+                                if (object.googleSignalsSettings != null) {
+                                    if (typeof object.googleSignalsSettings !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.googleSignalsSettings: object expected");
+                                    message.googleSignalsSettings = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.fromObject(object.googleSignalsSettings);
+                                }
+                                if (object.conversionEvent != null) {
+                                    if (typeof object.conversionEvent !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.conversionEvent: object expected");
+                                    message.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.fromObject(object.conversionEvent);
+                                }
+                                if (object.measurementProtocolSecret != null) {
+                                    if (typeof object.measurementProtocolSecret !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.measurementProtocolSecret: object expected");
+                                    message.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.fromObject(object.measurementProtocolSecret);
+                                }
+                                if (object.customDimension != null) {
+                                    if (typeof object.customDimension !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.customDimension: object expected");
+                                    message.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.fromObject(object.customDimension);
+                                }
+                                if (object.customMetric != null) {
+                                    if (typeof object.customMetric !== "object")
+                                        throw TypeError(".google.analytics.admin.v1alpha.ChangeHistoryChange.ChangeHistoryResource.customMetric: object expected");
+                                    message.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.fromObject(object.customMetric);
                                 }
                                 return message;
                             };
@@ -20753,6 +27165,31 @@
                                     if (options.oneofs)
                                         object.resource = "googleAdsLink";
                                 }
+                                if (message.googleSignalsSettings != null && message.hasOwnProperty("googleSignalsSettings")) {
+                                    object.googleSignalsSettings = $root.google.analytics.admin.v1alpha.GoogleSignalsSettings.toObject(message.googleSignalsSettings, options);
+                                    if (options.oneofs)
+                                        object.resource = "googleSignalsSettings";
+                                }
+                                if (message.conversionEvent != null && message.hasOwnProperty("conversionEvent")) {
+                                    object.conversionEvent = $root.google.analytics.admin.v1alpha.ConversionEvent.toObject(message.conversionEvent, options);
+                                    if (options.oneofs)
+                                        object.resource = "conversionEvent";
+                                }
+                                if (message.measurementProtocolSecret != null && message.hasOwnProperty("measurementProtocolSecret")) {
+                                    object.measurementProtocolSecret = $root.google.analytics.admin.v1alpha.MeasurementProtocolSecret.toObject(message.measurementProtocolSecret, options);
+                                    if (options.oneofs)
+                                        object.resource = "measurementProtocolSecret";
+                                }
+                                if (message.customDimension != null && message.hasOwnProperty("customDimension")) {
+                                    object.customDimension = $root.google.analytics.admin.v1alpha.CustomDimension.toObject(message.customDimension, options);
+                                    if (options.oneofs)
+                                        object.resource = "customDimension";
+                                }
+                                if (message.customMetric != null && message.hasOwnProperty("customMetric")) {
+                                    object.customMetric = $root.google.analytics.admin.v1alpha.CustomMetric.toObject(message.customMetric, options);
+                                    if (options.oneofs)
+                                        object.resource = "customMetric";
+                                }
                                 return object;
                             };
     
@@ -20771,6 +27208,1280 @@
                         })();
     
                         return ChangeHistoryChange;
+                    })();
+    
+                    v1alpha.ConversionEvent = (function() {
+    
+                        /**
+                         * Properties of a ConversionEvent.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IConversionEvent
+                         * @property {string|null} [name] ConversionEvent name
+                         * @property {string|null} [eventName] ConversionEvent eventName
+                         * @property {google.protobuf.ITimestamp|null} [createTime] ConversionEvent createTime
+                         * @property {boolean|null} [isDeletable] ConversionEvent isDeletable
+                         */
+    
+                        /**
+                         * Constructs a new ConversionEvent.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a ConversionEvent.
+                         * @implements IConversionEvent
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IConversionEvent=} [properties] Properties to set
+                         */
+                        function ConversionEvent(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConversionEvent name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @instance
+                         */
+                        ConversionEvent.prototype.name = "";
+    
+                        /**
+                         * ConversionEvent eventName.
+                         * @member {string} eventName
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @instance
+                         */
+                        ConversionEvent.prototype.eventName = "";
+    
+                        /**
+                         * ConversionEvent createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @instance
+                         */
+                        ConversionEvent.prototype.createTime = null;
+    
+                        /**
+                         * ConversionEvent isDeletable.
+                         * @member {boolean} isDeletable
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @instance
+                         */
+                        ConversionEvent.prototype.isDeletable = false;
+    
+                        /**
+                         * Creates a new ConversionEvent instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IConversionEvent=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.ConversionEvent} ConversionEvent instance
+                         */
+                        ConversionEvent.create = function create(properties) {
+                            return new ConversionEvent(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConversionEvent message. Does not implicitly {@link google.analytics.admin.v1alpha.ConversionEvent.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IConversionEvent} message ConversionEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversionEvent.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.eventName != null && Object.hasOwnProperty.call(message, "eventName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.eventName);
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.isDeletable != null && Object.hasOwnProperty.call(message, "isDeletable"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.isDeletable);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConversionEvent message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.ConversionEvent.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IConversionEvent} message ConversionEvent message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversionEvent.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConversionEvent message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.ConversionEvent} ConversionEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversionEvent.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.ConversionEvent();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.eventName = reader.string();
+                                    break;
+                                case 3:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.isDeletable = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConversionEvent message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.ConversionEvent} ConversionEvent
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversionEvent.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConversionEvent message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConversionEvent.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.eventName != null && message.hasOwnProperty("eventName"))
+                                if (!$util.isString(message.eventName))
+                                    return "eventName: string expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.isDeletable != null && message.hasOwnProperty("isDeletable"))
+                                if (typeof message.isDeletable !== "boolean")
+                                    return "isDeletable: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConversionEvent message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.ConversionEvent} ConversionEvent
+                         */
+                        ConversionEvent.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.ConversionEvent)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.ConversionEvent();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.eventName != null)
+                                message.eventName = String(object.eventName);
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.analytics.admin.v1alpha.ConversionEvent.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.isDeletable != null)
+                                message.isDeletable = Boolean(object.isDeletable);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConversionEvent message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ConversionEvent} message ConversionEvent
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConversionEvent.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.eventName = "";
+                                object.createTime = null;
+                                object.isDeletable = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.eventName != null && message.hasOwnProperty("eventName"))
+                                object.eventName = message.eventName;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.isDeletable != null && message.hasOwnProperty("isDeletable"))
+                                object.isDeletable = message.isDeletable;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConversionEvent to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.ConversionEvent
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConversionEvent.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ConversionEvent;
+                    })();
+    
+                    v1alpha.GoogleSignalsSettings = (function() {
+    
+                        /**
+                         * Properties of a GoogleSignalsSettings.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface IGoogleSignalsSettings
+                         * @property {string|null} [name] GoogleSignalsSettings name
+                         * @property {google.analytics.admin.v1alpha.GoogleSignalsState|null} [state] GoogleSignalsSettings state
+                         * @property {google.analytics.admin.v1alpha.GoogleSignalsConsent|null} [consent] GoogleSignalsSettings consent
+                         */
+    
+                        /**
+                         * Constructs a new GoogleSignalsSettings.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a GoogleSignalsSettings.
+                         * @implements IGoogleSignalsSettings
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.IGoogleSignalsSettings=} [properties] Properties to set
+                         */
+                        function GoogleSignalsSettings(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GoogleSignalsSettings name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @instance
+                         */
+                        GoogleSignalsSettings.prototype.name = "";
+    
+                        /**
+                         * GoogleSignalsSettings state.
+                         * @member {google.analytics.admin.v1alpha.GoogleSignalsState} state
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @instance
+                         */
+                        GoogleSignalsSettings.prototype.state = 0;
+    
+                        /**
+                         * GoogleSignalsSettings consent.
+                         * @member {google.analytics.admin.v1alpha.GoogleSignalsConsent} consent
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @instance
+                         */
+                        GoogleSignalsSettings.prototype.consent = 0;
+    
+                        /**
+                         * Creates a new GoogleSignalsSettings instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGoogleSignalsSettings=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.GoogleSignalsSettings} GoogleSignalsSettings instance
+                         */
+                        GoogleSignalsSettings.create = function create(properties) {
+                            return new GoogleSignalsSettings(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleSignalsSettings message. Does not implicitly {@link google.analytics.admin.v1alpha.GoogleSignalsSettings.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGoogleSignalsSettings} message GoogleSignalsSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleSignalsSettings.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.state);
+                            if (message.consent != null && Object.hasOwnProperty.call(message, "consent"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.consent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GoogleSignalsSettings message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.GoogleSignalsSettings.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.IGoogleSignalsSettings} message GoogleSignalsSettings message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GoogleSignalsSettings.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GoogleSignalsSettings message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.GoogleSignalsSettings} GoogleSignalsSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleSignalsSettings.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.GoogleSignalsSettings();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 3:
+                                    message.state = reader.int32();
+                                    break;
+                                case 4:
+                                    message.consent = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GoogleSignalsSettings message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.GoogleSignalsSettings} GoogleSignalsSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GoogleSignalsSettings.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GoogleSignalsSettings message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GoogleSignalsSettings.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.consent != null && message.hasOwnProperty("consent"))
+                                switch (message.consent) {
+                                default:
+                                    return "consent: enum value expected";
+                                case 0:
+                                case 2:
+                                case 1:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GoogleSignalsSettings message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.GoogleSignalsSettings} GoogleSignalsSettings
+                         */
+                        GoogleSignalsSettings.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.GoogleSignalsSettings)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.GoogleSignalsSettings();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            switch (object.state) {
+                            case "GOOGLE_SIGNALS_STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "GOOGLE_SIGNALS_ENABLED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "GOOGLE_SIGNALS_DISABLED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            switch (object.consent) {
+                            case "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED":
+                            case 0:
+                                message.consent = 0;
+                                break;
+                            case "GOOGLE_SIGNALS_CONSENT_CONSENTED":
+                            case 2:
+                                message.consent = 2;
+                                break;
+                            case "GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED":
+                            case 1:
+                                message.consent = 1;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GoogleSignalsSettings message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.GoogleSignalsSettings} message GoogleSignalsSettings
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GoogleSignalsSettings.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.state = options.enums === String ? "GOOGLE_SIGNALS_STATE_UNSPECIFIED" : 0;
+                                object.consent = options.enums === String ? "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.analytics.admin.v1alpha.GoogleSignalsState[message.state] : message.state;
+                            if (message.consent != null && message.hasOwnProperty("consent"))
+                                object.consent = options.enums === String ? $root.google.analytics.admin.v1alpha.GoogleSignalsConsent[message.consent] : message.consent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GoogleSignalsSettings to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.GoogleSignalsSettings
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GoogleSignalsSettings.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GoogleSignalsSettings;
+                    })();
+    
+                    v1alpha.CustomDimension = (function() {
+    
+                        /**
+                         * Properties of a CustomDimension.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ICustomDimension
+                         * @property {string|null} [name] CustomDimension name
+                         * @property {string|null} [parameterName] CustomDimension parameterName
+                         * @property {string|null} [displayName] CustomDimension displayName
+                         * @property {string|null} [description] CustomDimension description
+                         * @property {google.analytics.admin.v1alpha.CustomDimension.DimensionScope|null} [scope] CustomDimension scope
+                         * @property {boolean|null} [disallowAdsPersonalization] CustomDimension disallowAdsPersonalization
+                         */
+    
+                        /**
+                         * Constructs a new CustomDimension.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a CustomDimension.
+                         * @implements ICustomDimension
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ICustomDimension=} [properties] Properties to set
+                         */
+                        function CustomDimension(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomDimension name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @instance
+                         */
+                        CustomDimension.prototype.name = "";
+    
+                        /**
+                         * CustomDimension parameterName.
+                         * @member {string} parameterName
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @instance
+                         */
+                        CustomDimension.prototype.parameterName = "";
+    
+                        /**
+                         * CustomDimension displayName.
+                         * @member {string} displayName
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @instance
+                         */
+                        CustomDimension.prototype.displayName = "";
+    
+                        /**
+                         * CustomDimension description.
+                         * @member {string} description
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @instance
+                         */
+                        CustomDimension.prototype.description = "";
+    
+                        /**
+                         * CustomDimension scope.
+                         * @member {google.analytics.admin.v1alpha.CustomDimension.DimensionScope} scope
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @instance
+                         */
+                        CustomDimension.prototype.scope = 0;
+    
+                        /**
+                         * CustomDimension disallowAdsPersonalization.
+                         * @member {boolean} disallowAdsPersonalization
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @instance
+                         */
+                        CustomDimension.prototype.disallowAdsPersonalization = false;
+    
+                        /**
+                         * Creates a new CustomDimension instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICustomDimension=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.CustomDimension} CustomDimension instance
+                         */
+                        CustomDimension.create = function create(properties) {
+                            return new CustomDimension(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomDimension message. Does not implicitly {@link google.analytics.admin.v1alpha.CustomDimension.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICustomDimension} message CustomDimension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomDimension.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.parameterName != null && Object.hasOwnProperty.call(message, "parameterName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.parameterName);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.scope);
+                            if (message.disallowAdsPersonalization != null && Object.hasOwnProperty.call(message, "disallowAdsPersonalization"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.disallowAdsPersonalization);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomDimension message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CustomDimension.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICustomDimension} message CustomDimension message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomDimension.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomDimension message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.CustomDimension} CustomDimension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomDimension.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CustomDimension();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.parameterName = reader.string();
+                                    break;
+                                case 3:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 4:
+                                    message.description = reader.string();
+                                    break;
+                                case 5:
+                                    message.scope = reader.int32();
+                                    break;
+                                case 6:
+                                    message.disallowAdsPersonalization = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomDimension message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.CustomDimension} CustomDimension
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomDimension.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomDimension message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomDimension.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.parameterName != null && message.hasOwnProperty("parameterName"))
+                                if (!$util.isString(message.parameterName))
+                                    return "parameterName: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                switch (message.scope) {
+                                default:
+                                    return "scope: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.disallowAdsPersonalization != null && message.hasOwnProperty("disallowAdsPersonalization"))
+                                if (typeof message.disallowAdsPersonalization !== "boolean")
+                                    return "disallowAdsPersonalization: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomDimension message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.CustomDimension} CustomDimension
+                         */
+                        CustomDimension.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.CustomDimension)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.CustomDimension();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.parameterName != null)
+                                message.parameterName = String(object.parameterName);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.scope) {
+                            case "DIMENSION_SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.scope = 0;
+                                break;
+                            case "EVENT":
+                            case 1:
+                                message.scope = 1;
+                                break;
+                            case "USER":
+                            case 2:
+                                message.scope = 2;
+                                break;
+                            }
+                            if (object.disallowAdsPersonalization != null)
+                                message.disallowAdsPersonalization = Boolean(object.disallowAdsPersonalization);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomDimension message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.CustomDimension} message CustomDimension
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomDimension.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.parameterName = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.scope = options.enums === String ? "DIMENSION_SCOPE_UNSPECIFIED" : 0;
+                                object.disallowAdsPersonalization = false;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.parameterName != null && message.hasOwnProperty("parameterName"))
+                                object.parameterName = message.parameterName;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                object.scope = options.enums === String ? $root.google.analytics.admin.v1alpha.CustomDimension.DimensionScope[message.scope] : message.scope;
+                            if (message.disallowAdsPersonalization != null && message.hasOwnProperty("disallowAdsPersonalization"))
+                                object.disallowAdsPersonalization = message.disallowAdsPersonalization;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomDimension to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.CustomDimension
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomDimension.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * DimensionScope enum.
+                         * @name google.analytics.admin.v1alpha.CustomDimension.DimensionScope
+                         * @enum {number}
+                         * @property {number} DIMENSION_SCOPE_UNSPECIFIED=0 DIMENSION_SCOPE_UNSPECIFIED value
+                         * @property {number} EVENT=1 EVENT value
+                         * @property {number} USER=2 USER value
+                         */
+                        CustomDimension.DimensionScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DIMENSION_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EVENT"] = 1;
+                            values[valuesById[2] = "USER"] = 2;
+                            return values;
+                        })();
+    
+                        return CustomDimension;
+                    })();
+    
+                    v1alpha.CustomMetric = (function() {
+    
+                        /**
+                         * Properties of a CustomMetric.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @interface ICustomMetric
+                         * @property {string|null} [name] CustomMetric name
+                         * @property {string|null} [parameterName] CustomMetric parameterName
+                         * @property {string|null} [displayName] CustomMetric displayName
+                         * @property {string|null} [description] CustomMetric description
+                         * @property {google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit|null} [measurementUnit] CustomMetric measurementUnit
+                         * @property {google.analytics.admin.v1alpha.CustomMetric.MetricScope|null} [scope] CustomMetric scope
+                         */
+    
+                        /**
+                         * Constructs a new CustomMetric.
+                         * @memberof google.analytics.admin.v1alpha
+                         * @classdesc Represents a CustomMetric.
+                         * @implements ICustomMetric
+                         * @constructor
+                         * @param {google.analytics.admin.v1alpha.ICustomMetric=} [properties] Properties to set
+                         */
+                        function CustomMetric(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CustomMetric name.
+                         * @member {string} name
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @instance
+                         */
+                        CustomMetric.prototype.name = "";
+    
+                        /**
+                         * CustomMetric parameterName.
+                         * @member {string} parameterName
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @instance
+                         */
+                        CustomMetric.prototype.parameterName = "";
+    
+                        /**
+                         * CustomMetric displayName.
+                         * @member {string} displayName
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @instance
+                         */
+                        CustomMetric.prototype.displayName = "";
+    
+                        /**
+                         * CustomMetric description.
+                         * @member {string} description
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @instance
+                         */
+                        CustomMetric.prototype.description = "";
+    
+                        /**
+                         * CustomMetric measurementUnit.
+                         * @member {google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit} measurementUnit
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @instance
+                         */
+                        CustomMetric.prototype.measurementUnit = 0;
+    
+                        /**
+                         * CustomMetric scope.
+                         * @member {google.analytics.admin.v1alpha.CustomMetric.MetricScope} scope
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @instance
+                         */
+                        CustomMetric.prototype.scope = 0;
+    
+                        /**
+                         * Creates a new CustomMetric instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICustomMetric=} [properties] Properties to set
+                         * @returns {google.analytics.admin.v1alpha.CustomMetric} CustomMetric instance
+                         */
+                        CustomMetric.create = function create(properties) {
+                            return new CustomMetric(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CustomMetric message. Does not implicitly {@link google.analytics.admin.v1alpha.CustomMetric.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICustomMetric} message CustomMetric message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomMetric.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.parameterName != null && Object.hasOwnProperty.call(message, "parameterName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.parameterName);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
+                            if (message.measurementUnit != null && Object.hasOwnProperty.call(message, "measurementUnit"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.measurementUnit);
+                            if (message.scope != null && Object.hasOwnProperty.call(message, "scope"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.scope);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CustomMetric message, length delimited. Does not implicitly {@link google.analytics.admin.v1alpha.CustomMetric.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.ICustomMetric} message CustomMetric message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CustomMetric.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CustomMetric message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.admin.v1alpha.CustomMetric} CustomMetric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomMetric.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.admin.v1alpha.CustomMetric();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.parameterName = reader.string();
+                                    break;
+                                case 3:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 4:
+                                    message.description = reader.string();
+                                    break;
+                                case 5:
+                                    message.measurementUnit = reader.int32();
+                                    break;
+                                case 6:
+                                    message.scope = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CustomMetric message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.admin.v1alpha.CustomMetric} CustomMetric
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CustomMetric.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CustomMetric message.
+                         * @function verify
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CustomMetric.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.parameterName != null && message.hasOwnProperty("parameterName"))
+                                if (!$util.isString(message.parameterName))
+                                    return "parameterName: string expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.measurementUnit != null && message.hasOwnProperty("measurementUnit"))
+                                switch (message.measurementUnit) {
+                                default:
+                                    return "measurementUnit: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                case 8:
+                                case 9:
+                                case 10:
+                                    break;
+                                }
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                switch (message.scope) {
+                                default:
+                                    return "scope: enum value expected";
+                                case 0:
+                                case 1:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CustomMetric message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.admin.v1alpha.CustomMetric} CustomMetric
+                         */
+                        CustomMetric.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.admin.v1alpha.CustomMetric)
+                                return object;
+                            var message = new $root.google.analytics.admin.v1alpha.CustomMetric();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.parameterName != null)
+                                message.parameterName = String(object.parameterName);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            switch (object.measurementUnit) {
+                            case "MEASUREMENT_UNIT_UNSPECIFIED":
+                            case 0:
+                                message.measurementUnit = 0;
+                                break;
+                            case "STANDARD":
+                            case 1:
+                                message.measurementUnit = 1;
+                                break;
+                            case "CURRENCY":
+                            case 2:
+                                message.measurementUnit = 2;
+                                break;
+                            case "FEET":
+                            case 3:
+                                message.measurementUnit = 3;
+                                break;
+                            case "METERS":
+                            case 4:
+                                message.measurementUnit = 4;
+                                break;
+                            case "KILOMETERS":
+                            case 5:
+                                message.measurementUnit = 5;
+                                break;
+                            case "MILES":
+                            case 6:
+                                message.measurementUnit = 6;
+                                break;
+                            case "MILLISECONDS":
+                            case 7:
+                                message.measurementUnit = 7;
+                                break;
+                            case "SECONDS":
+                            case 8:
+                                message.measurementUnit = 8;
+                                break;
+                            case "MINUTES":
+                            case 9:
+                                message.measurementUnit = 9;
+                                break;
+                            case "HOURS":
+                            case 10:
+                                message.measurementUnit = 10;
+                                break;
+                            }
+                            switch (object.scope) {
+                            case "METRIC_SCOPE_UNSPECIFIED":
+                            case 0:
+                                message.scope = 0;
+                                break;
+                            case "EVENT":
+                            case 1:
+                                message.scope = 1;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CustomMetric message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @static
+                         * @param {google.analytics.admin.v1alpha.CustomMetric} message CustomMetric
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CustomMetric.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.parameterName = "";
+                                object.displayName = "";
+                                object.description = "";
+                                object.measurementUnit = options.enums === String ? "MEASUREMENT_UNIT_UNSPECIFIED" : 0;
+                                object.scope = options.enums === String ? "METRIC_SCOPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.parameterName != null && message.hasOwnProperty("parameterName"))
+                                object.parameterName = message.parameterName;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.measurementUnit != null && message.hasOwnProperty("measurementUnit"))
+                                object.measurementUnit = options.enums === String ? $root.google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit[message.measurementUnit] : message.measurementUnit;
+                            if (message.scope != null && message.hasOwnProperty("scope"))
+                                object.scope = options.enums === String ? $root.google.analytics.admin.v1alpha.CustomMetric.MetricScope[message.scope] : message.scope;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CustomMetric to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.admin.v1alpha.CustomMetric
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CustomMetric.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * MeasurementUnit enum.
+                         * @name google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit
+                         * @enum {number}
+                         * @property {number} MEASUREMENT_UNIT_UNSPECIFIED=0 MEASUREMENT_UNIT_UNSPECIFIED value
+                         * @property {number} STANDARD=1 STANDARD value
+                         * @property {number} CURRENCY=2 CURRENCY value
+                         * @property {number} FEET=3 FEET value
+                         * @property {number} METERS=4 METERS value
+                         * @property {number} KILOMETERS=5 KILOMETERS value
+                         * @property {number} MILES=6 MILES value
+                         * @property {number} MILLISECONDS=7 MILLISECONDS value
+                         * @property {number} SECONDS=8 SECONDS value
+                         * @property {number} MINUTES=9 MINUTES value
+                         * @property {number} HOURS=10 HOURS value
+                         */
+                        CustomMetric.MeasurementUnit = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "MEASUREMENT_UNIT_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "STANDARD"] = 1;
+                            values[valuesById[2] = "CURRENCY"] = 2;
+                            values[valuesById[3] = "FEET"] = 3;
+                            values[valuesById[4] = "METERS"] = 4;
+                            values[valuesById[5] = "KILOMETERS"] = 5;
+                            values[valuesById[6] = "MILES"] = 6;
+                            values[valuesById[7] = "MILLISECONDS"] = 7;
+                            values[valuesById[8] = "SECONDS"] = 8;
+                            values[valuesById[9] = "MINUTES"] = 9;
+                            values[valuesById[10] = "HOURS"] = 10;
+                            return values;
+                        })();
+    
+                        /**
+                         * MetricScope enum.
+                         * @name google.analytics.admin.v1alpha.CustomMetric.MetricScope
+                         * @enum {number}
+                         * @property {number} METRIC_SCOPE_UNSPECIFIED=0 METRIC_SCOPE_UNSPECIFIED value
+                         * @property {number} EVENT=1 EVENT value
+                         */
+                        CustomMetric.MetricScope = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "METRIC_SCOPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "EVENT"] = 1;
+                            return values;
+                        })();
+    
+                        return CustomMetric;
                     })();
     
                     return v1alpha;

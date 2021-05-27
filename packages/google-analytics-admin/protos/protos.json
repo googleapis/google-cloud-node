@@ -902,6 +902,151 @@
                             }
                           ]
                         },
+                        "GetMeasurementProtocolSecret": {
+                          "requestType": "GetMeasurementProtocolSecretRequest",
+                          "responseType": "MeasurementProtocolSecret",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/webDataStreams/*/measurementProtocolSecrets/*}",
+                            "(google.api.http).additional_bindings.get": "/v1alpha/{name=properties/*/androidAppDataStreams/*/measurementProtocolSecrets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/webDataStreams/*/measurementProtocolSecrets/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1alpha/{name=properties/*/iosAppDataStreams/*/measurementProtocolSecrets/*}"
+                                  },
+                                  {
+                                    "get": "/v1alpha/{name=properties/*/androidAppDataStreams/*/measurementProtocolSecrets/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListMeasurementProtocolSecrets": {
+                          "requestType": "ListMeasurementProtocolSecretsRequest",
+                          "responseType": "ListMeasurementProtocolSecretsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*/webDataStreams/*}/measurementProtocolSecrets",
+                            "(google.api.http).additional_bindings.get": "/v1alpha/{parent=properties/*/androidAppDataStreams/*}/measurementProtocolSecrets",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*/webDataStreams/*}/measurementProtocolSecrets",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1alpha/{parent=properties/*/iosAppDataStreams/*}/measurementProtocolSecrets"
+                                  },
+                                  {
+                                    "get": "/v1alpha/{parent=properties/*/androidAppDataStreams/*}/measurementProtocolSecrets"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateMeasurementProtocolSecret": {
+                          "requestType": "CreateMeasurementProtocolSecretRequest",
+                          "responseType": "MeasurementProtocolSecret",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*/webDataStreams/*}/measurementProtocolSecrets",
+                            "(google.api.http).body": "measurement_protocol_secret",
+                            "(google.api.http).additional_bindings.post": "/v1alpha/{parent=properties/*/androidAppDataStreams/*}/measurementProtocolSecrets",
+                            "(google.api.http).additional_bindings.body": "measurement_protocol_secret",
+                            "(google.api.method_signature)": "parent,measurement_protocol_secret"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*/webDataStreams/*}/measurementProtocolSecrets",
+                                "body": "measurement_protocol_secret",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1alpha/{parent=properties/*/iosAppDataStreams/*}/measurementProtocolSecrets",
+                                    "body": "measurement_protocol_secret"
+                                  },
+                                  {
+                                    "post": "/v1alpha/{parent=properties/*/androidAppDataStreams/*}/measurementProtocolSecrets",
+                                    "body": "measurement_protocol_secret"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,measurement_protocol_secret"
+                            }
+                          ]
+                        },
+                        "DeleteMeasurementProtocolSecret": {
+                          "requestType": "DeleteMeasurementProtocolSecretRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/webDataStreams/*/measurementProtocolSecrets/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1alpha/{name=properties/*/androidAppDataStreams/*/measurementProtocolSecrets/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/webDataStreams/*/measurementProtocolSecrets/*}",
+                                "additional_bindings": [
+                                  {
+                                    "delete": "/v1alpha/{name=properties/*/iosAppDataStreams/*/measurementProtocolSecrets/*}"
+                                  },
+                                  {
+                                    "delete": "/v1alpha/{name=properties/*/androidAppDataStreams/*/measurementProtocolSecrets/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateMeasurementProtocolSecret": {
+                          "requestType": "UpdateMeasurementProtocolSecretRequest",
+                          "responseType": "MeasurementProtocolSecret",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{measurement_protocol_secret.name=properties/*/webDataStreams/*/measurementProtocolSecrets/*}",
+                            "(google.api.http).body": "measurement_protocol_secret",
+                            "(google.api.http).additional_bindings.patch": "/v1alpha/{measurement_protocol_secret.name=properties/*/androidAppDataStreams/*/measurementProtocolSecrets/*}",
+                            "(google.api.http).additional_bindings.body": "measurement_protocol_secret",
+                            "(google.api.method_signature)": "measurement_protocol_secret,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{measurement_protocol_secret.name=properties/*/webDataStreams/*/measurementProtocolSecrets/*}",
+                                "body": "measurement_protocol_secret",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1alpha/{measurement_protocol_secret.name=properties/*/iosAppDataStreams/*/measurementProtocolSecrets/*}",
+                                    "body": "measurement_protocol_secret"
+                                  },
+                                  {
+                                    "patch": "/v1alpha/{measurement_protocol_secret.name=properties/*/androidAppDataStreams/*/measurementProtocolSecrets/*}",
+                                    "body": "measurement_protocol_secret"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "measurement_protocol_secret,update_mask"
+                            }
+                          ]
+                        },
                         "SearchChangeHistoryEvents": {
                           "requestType": "SearchChangeHistoryEventsRequest",
                           "responseType": "SearchChangeHistoryEventsResponse",
@@ -915,6 +1060,310 @@
                                 "post": "/v1alpha/{account=accounts/*}:searchChangeHistoryEvents",
                                 "body": "*"
                               }
+                            }
+                          ]
+                        },
+                        "GetGoogleSignalsSettings": {
+                          "requestType": "GetGoogleSignalsSettingsRequest",
+                          "responseType": "GoogleSignalsSettings",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/googleSignalsSettings}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/googleSignalsSettings}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpdateGoogleSignalsSettings": {
+                          "requestType": "UpdateGoogleSignalsSettingsRequest",
+                          "responseType": "GoogleSignalsSettings",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{google_signals_settings.name=properties/*/googleSignalsSettings}",
+                            "(google.api.http).body": "google_signals_settings",
+                            "(google.api.method_signature)": "google_signals_settings,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{google_signals_settings.name=properties/*/googleSignalsSettings}",
+                                "body": "google_signals_settings"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "google_signals_settings,update_mask"
+                            }
+                          ]
+                        },
+                        "CreateConversionEvent": {
+                          "requestType": "CreateConversionEventRequest",
+                          "responseType": "ConversionEvent",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/conversionEvents",
+                            "(google.api.http).body": "conversion_event",
+                            "(google.api.method_signature)": "parent,conversion_event"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/conversionEvents",
+                                "body": "conversion_event"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,conversion_event"
+                            }
+                          ]
+                        },
+                        "GetConversionEvent": {
+                          "requestType": "GetConversionEventRequest",
+                          "responseType": "ConversionEvent",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/conversionEvents/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/conversionEvents/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteConversionEvent": {
+                          "requestType": "DeleteConversionEventRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1alpha/{name=properties/*/conversionEvents/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1alpha/{name=properties/*/conversionEvents/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListConversionEvents": {
+                          "requestType": "ListConversionEventsRequest",
+                          "responseType": "ListConversionEventsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/conversionEvents",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/conversionEvents"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateCustomDimension": {
+                          "requestType": "CreateCustomDimensionRequest",
+                          "responseType": "CustomDimension",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/customDimensions",
+                            "(google.api.http).body": "custom_dimension",
+                            "(google.api.method_signature)": "parent,custom_dimension"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/customDimensions",
+                                "body": "custom_dimension"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,custom_dimension"
+                            }
+                          ]
+                        },
+                        "UpdateCustomDimension": {
+                          "requestType": "UpdateCustomDimensionRequest",
+                          "responseType": "CustomDimension",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{custom_dimension.name=properties/*/customDimensions/*}",
+                            "(google.api.http).body": "custom_dimension",
+                            "(google.api.method_signature)": "custom_dimension,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{custom_dimension.name=properties/*/customDimensions/*}",
+                                "body": "custom_dimension"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "custom_dimension,update_mask"
+                            }
+                          ]
+                        },
+                        "ListCustomDimensions": {
+                          "requestType": "ListCustomDimensionsRequest",
+                          "responseType": "ListCustomDimensionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/customDimensions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/customDimensions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ArchiveCustomDimension": {
+                          "requestType": "ArchiveCustomDimensionRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=properties/*/customDimensions/*}:archive",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=properties/*/customDimensions/*}:archive",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetCustomDimension": {
+                          "requestType": "GetCustomDimensionRequest",
+                          "responseType": "CustomDimension",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/customDimensions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/customDimensions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateCustomMetric": {
+                          "requestType": "CreateCustomMetricRequest",
+                          "responseType": "CustomMetric",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{parent=properties/*}/customMetrics",
+                            "(google.api.http).body": "custom_metric",
+                            "(google.api.method_signature)": "parent,custom_metric"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{parent=properties/*}/customMetrics",
+                                "body": "custom_metric"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,custom_metric"
+                            }
+                          ]
+                        },
+                        "UpdateCustomMetric": {
+                          "requestType": "UpdateCustomMetricRequest",
+                          "responseType": "CustomMetric",
+                          "options": {
+                            "(google.api.http).patch": "/v1alpha/{custom_metric.name=properties/*/customMetrics/*}",
+                            "(google.api.http).body": "custom_metric",
+                            "(google.api.method_signature)": "custom_metric,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1alpha/{custom_metric.name=properties/*/customMetrics/*}",
+                                "body": "custom_metric"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "custom_metric,update_mask"
+                            }
+                          ]
+                        },
+                        "ListCustomMetrics": {
+                          "requestType": "ListCustomMetricsRequest",
+                          "responseType": "ListCustomMetricsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{parent=properties/*}/customMetrics",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{parent=properties/*}/customMetrics"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ArchiveCustomMetric": {
+                          "requestType": "ArchiveCustomMetricRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{name=properties/*/customMetrics/*}:archive",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{name=properties/*/customMetrics/*}:archive",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "GetCustomMetric": {
+                          "requestType": "GetCustomMetricRequest",
+                          "responseType": "CustomMetric",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/{name=properties/*/customMetrics/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/{name=properties/*/customMetrics/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
                             }
                           ]
                         }
@@ -1911,6 +2360,385 @@
                         }
                       }
                     },
+                    "GetMeasurementProtocolSecretRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/MeasurementProtocolSecret"
+                          }
+                        }
+                      }
+                    },
+                    "CreateMeasurementProtocolSecretRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/MeasurementProtocolSecret"
+                          }
+                        },
+                        "measurementProtocolSecret": {
+                          "type": "MeasurementProtocolSecret",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteMeasurementProtocolSecretRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/MeasurementProtocolSecret"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateMeasurementProtocolSecretRequest": {
+                      "fields": {
+                        "measurementProtocolSecret": {
+                          "type": "MeasurementProtocolSecret",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListMeasurementProtocolSecretsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/MeasurementProtocolSecret"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListMeasurementProtocolSecretsResponse": {
+                      "fields": {
+                        "measurementProtocolSecrets": {
+                          "rule": "repeated",
+                          "type": "MeasurementProtocolSecret",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetGoogleSignalsSettingsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/GoogleSignalsSettings"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateGoogleSignalsSettingsRequest": {
+                      "fields": {
+                        "googleSignalsSettings": {
+                          "type": "GoogleSignalsSettings",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConversionEventRequest": {
+                      "fields": {
+                        "conversionEvent": {
+                          "type": "ConversionEvent",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/ConversionEvent"
+                          }
+                        }
+                      }
+                    },
+                    "GetConversionEventRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/ConversionEvent"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteConversionEventRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/ConversionEvent"
+                          }
+                        }
+                      }
+                    },
+                    "ListConversionEventsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/ConversionEvent"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListConversionEventsResponse": {
+                      "fields": {
+                        "conversionEvents": {
+                          "rule": "repeated",
+                          "type": "ConversionEvent",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateCustomDimensionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/CustomDimension"
+                          }
+                        },
+                        "customDimension": {
+                          "type": "CustomDimension",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCustomDimensionRequest": {
+                      "fields": {
+                        "customDimension": {
+                          "type": "CustomDimension",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomDimensionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/CustomDimension"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListCustomDimensionsResponse": {
+                      "fields": {
+                        "customDimensions": {
+                          "rule": "repeated",
+                          "type": "CustomDimension",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ArchiveCustomDimensionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/CustomDimension"
+                          }
+                        }
+                      }
+                    },
+                    "GetCustomDimensionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/CustomDimension"
+                          }
+                        }
+                      }
+                    },
+                    "CreateCustomMetricRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/CustomMetric"
+                          }
+                        },
+                        "customMetric": {
+                          "type": "CustomMetric",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateCustomMetricRequest": {
+                      "fields": {
+                        "customMetric": {
+                          "type": "CustomMetric",
+                          "id": 1
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListCustomMetricsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "analyticsadmin.googleapis.com/CustomMetric"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListCustomMetricsResponse": {
+                      "fields": {
+                        "customMetrics": {
+                          "rule": "repeated",
+                          "type": "CustomMetric",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ArchiveCustomMetricRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/CustomMetric"
+                          }
+                        }
+                      }
+                    },
+                    "GetCustomMetricRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "analyticsadmin.googleapis.com/CustomMetric"
+                          }
+                        }
+                      }
+                    },
                     "MaximumUserAccess": {
                       "values": {
                         "MAXIMUM_USER_ACCESS_UNSPECIFIED": 0,
@@ -1976,7 +2804,26 @@
                         "ANDROID_APP_DATA_STREAM": 4,
                         "IOS_APP_DATA_STREAM": 5,
                         "FIREBASE_LINK": 6,
-                        "GOOGLE_ADS_LINK": 7
+                        "GOOGLE_ADS_LINK": 7,
+                        "GOOGLE_SIGNALS_SETTINGS": 8,
+                        "CONVERSION_EVENT": 9,
+                        "MEASUREMENT_PROTOCOL_SECRET": 10,
+                        "CUSTOM_DIMENSION": 11,
+                        "CUSTOM_METRIC": 12
+                      }
+                    },
+                    "GoogleSignalsState": {
+                      "values": {
+                        "GOOGLE_SIGNALS_STATE_UNSPECIFIED": 0,
+                        "GOOGLE_SIGNALS_ENABLED": 1,
+                        "GOOGLE_SIGNALS_DISABLED": 2
+                      }
+                    },
+                    "GoogleSignalsConsent": {
+                      "values": {
+                        "GOOGLE_SIGNALS_CONSENT_UNSPECIFIED": 0,
+                        "GOOGLE_SIGNALS_CONSENT_CONSENTED": 2,
+                        "GOOGLE_SIGNALS_CONSENT_NOT_CONSENTED": 1
                       }
                     },
                     "Account": {
@@ -2257,11 +3104,17 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "emailAddress": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         },
                         "directRoles": {
                           "rule": "repeated",
@@ -2547,6 +3400,35 @@
                         }
                       }
                     },
+                    "MeasurementProtocolSecret": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/MeasurementProtocolSecret",
+                        "(google.api.resource).pattern": "properties/{property}/webDataStreams/{web_data_stream}/measurementProtocolSecrets/{measurement_protocol_secret}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "secretValue": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
                     "ChangeHistoryEvent": {
                       "fields": {
                         "id": {
@@ -2606,7 +3488,12 @@
                                 "androidAppDataStream",
                                 "iosAppDataStream",
                                 "firebaseLink",
-                                "googleAdsLink"
+                                "googleAdsLink",
+                                "googleSignalsSettings",
+                                "conversionEvent",
+                                "measurementProtocolSecret",
+                                "customDimension",
+                                "customMetric"
                               ]
                             }
                           },
@@ -2638,7 +3525,221 @@
                             "googleAdsLink": {
                               "type": "GoogleAdsLink",
                               "id": 7
+                            },
+                            "googleSignalsSettings": {
+                              "type": "GoogleSignalsSettings",
+                              "id": 8
+                            },
+                            "conversionEvent": {
+                              "type": "ConversionEvent",
+                              "id": 11
+                            },
+                            "measurementProtocolSecret": {
+                              "type": "MeasurementProtocolSecret",
+                              "id": 12
+                            },
+                            "customDimension": {
+                              "type": "CustomDimension",
+                              "id": 13
+                            },
+                            "customMetric": {
+                              "type": "CustomMetric",
+                              "id": 14
                             }
+                          }
+                        }
+                      }
+                    },
+                    "ConversionEvent": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/ConversionEvent",
+                        "(google.api.resource).pattern": "properties/{property}/conversionEvents/{conversion_event}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "eventName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "isDeletable": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "GoogleSignalsSettings": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/GoogleSignalsSettings",
+                        "(google.api.resource).pattern": "properties/{property}/googleSignalsSettings"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "GoogleSignalsState",
+                          "id": 3
+                        },
+                        "consent": {
+                          "type": "GoogleSignalsConsent",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CustomDimension": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/CustomDimension",
+                        "(google.api.resource).pattern": "properties/{property}/customDimensions"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "parameterName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scope": {
+                          "type": "DimensionScope",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "disallowAdsPersonalization": {
+                          "type": "bool",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DimensionScope": {
+                          "values": {
+                            "DIMENSION_SCOPE_UNSPECIFIED": 0,
+                            "EVENT": 1,
+                            "USER": 2
+                          }
+                        }
+                      }
+                    },
+                    "CustomMetric": {
+                      "options": {
+                        "(google.api.resource).type": "analyticsadmin.googleapis.com/CustomMetric",
+                        "(google.api.resource).pattern": "properties/{property}/customMetrics"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "parameterName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "measurementUnit": {
+                          "type": "MeasurementUnit",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "scope": {
+                          "type": "MetricScope",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "MeasurementUnit": {
+                          "values": {
+                            "MEASUREMENT_UNIT_UNSPECIFIED": 0,
+                            "STANDARD": 1,
+                            "CURRENCY": 2,
+                            "FEET": 3,
+                            "METERS": 4,
+                            "KILOMETERS": 5,
+                            "MILES": 6,
+                            "MILLISECONDS": 7,
+                            "SECONDS": 8,
+                            "MINUTES": 9,
+                            "HOURS": 10
+                          }
+                        },
+                        "MetricScope": {
+                          "values": {
+                            "METRIC_SCOPE_UNSPECIFIED": 0,
+                            "EVENT": 1
                           }
                         }
                       }

@@ -166,6 +166,15 @@ export class AnalyticsAdminServiceClient {
       androidAppDataStreamPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/androidAppDataStreams/{android_app_data_stream}'
       ),
+      conversionEventPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/conversionEvents/{conversion_event}'
+      ),
+      customDimensionPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/customDimensions'
+      ),
+      customMetricPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/customMetrics'
+      ),
       dataSharingSettingsPathTemplate: new this._gaxModule.PathTemplate(
         'accounts/{account}/dataSharingSettings'
       ),
@@ -181,8 +190,14 @@ export class AnalyticsAdminServiceClient {
       googleAdsLinkPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/googleAdsLinks/{google_ads_link}'
       ),
+      googleSignalsSettingsPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/googleSignalsSettings'
+      ),
       iosAppDataStreamPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}/iosAppDataStreams/{ios_app_data_stream}'
+      ),
+      measurementProtocolSecretPathTemplate: new this._gaxModule.PathTemplate(
+        'properties/{property}/webDataStreams/{web_data_stream}/measurementProtocolSecrets/{measurement_protocol_secret}'
       ),
       propertyPathTemplate: new this._gaxModule.PathTemplate(
         'properties/{property}'
@@ -249,10 +264,30 @@ export class AnalyticsAdminServiceClient {
         'nextPageToken',
         'googleAdsLinks'
       ),
+      listMeasurementProtocolSecrets: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'measurementProtocolSecrets'
+      ),
       searchChangeHistoryEvents: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'changeHistoryEvents'
+      ),
+      listConversionEvents: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'conversionEvents'
+      ),
+      listCustomDimensions: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'customDimensions'
+      ),
+      listCustomMetrics: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'customMetrics'
       ),
     };
 
@@ -349,7 +384,28 @@ export class AnalyticsAdminServiceClient {
       'deleteGoogleAdsLink',
       'listGoogleAdsLinks',
       'getDataSharingSettings',
+      'getMeasurementProtocolSecret',
+      'listMeasurementProtocolSecrets',
+      'createMeasurementProtocolSecret',
+      'deleteMeasurementProtocolSecret',
+      'updateMeasurementProtocolSecret',
       'searchChangeHistoryEvents',
+      'getGoogleSignalsSettings',
+      'updateGoogleSignalsSettings',
+      'createConversionEvent',
+      'getConversionEvent',
+      'deleteConversionEvent',
+      'listConversionEvents',
+      'createCustomDimension',
+      'updateCustomDimension',
+      'listCustomDimensions',
+      'archiveCustomDimension',
+      'getCustomDimension',
+      'createCustomMetric',
+      'updateCustomMetric',
+      'listCustomMetrics',
+      'archiveCustomMetric',
+      'getCustomMetric',
     ];
     for (const methodName of analyticsAdminServiceStubMethods) {
       const callPromise = this.analyticsAdminServiceStub.then(
@@ -4038,6 +4094,1723 @@ export class AnalyticsAdminServiceClient {
       callback
     );
   }
+  getMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Lookup for a single "GA4" MeasurementProtocolSecret.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the measurement protocol secret to lookup.
+   *   Format:
+   *   properties/{property}/webDataStreams/{webDataStream}/measurementProtocolSecrets/{measurementProtocolSecret}
+   *   Note: Any type of stream (WebDataStream, IosAppDataStream,
+   *   AndroidAppDataStream) may be a parent.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MeasurementProtocolSecret]{@link google.analytics.admin.v1alpha.MeasurementProtocolSecret}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getMeasurementProtocolSecret(request);
+   */
+  getMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+          | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getMeasurementProtocolSecret(
+      request,
+      options,
+      callback
+    );
+  }
+  createMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a measurement protocol secret.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this secret will be created.
+   *   Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
+   *   may be a parent.
+   *   Format: properties/{property}/webDataStreams/{webDataStream}
+   * @param {google.analytics.admin.v1alpha.MeasurementProtocolSecret} request.measurementProtocolSecret
+   *   Required. The measurement protocol secret to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MeasurementProtocolSecret]{@link google.analytics.admin.v1alpha.MeasurementProtocolSecret}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createMeasurementProtocolSecret(request);
+   */
+  createMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+          | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createMeasurementProtocolSecret(
+      request,
+      options,
+      callback
+    );
+  }
+  deleteMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes target MeasurementProtocolSecret.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the MeasurementProtocolSecret to delete.
+   *   Format:
+   *   properties/{property}/webDataStreams/{webDataStream}/measurementProtocolSecrets/{measurementProtocolSecret}
+   *   Note: Any type of stream (WebDataStream, IosAppDataStream,
+   *   AndroidAppDataStream) may be a parent.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.deleteMeasurementProtocolSecret(request);
+   */
+  deleteMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteMeasurementProtocolSecret(
+      request,
+      options,
+      callback
+    );
+  }
+  updateMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates a measurement protocol secret.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.MeasurementProtocolSecret} request.measurementProtocolSecret
+   *   Required. The measurement protocol secret to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated. Omitted fields will not be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MeasurementProtocolSecret]{@link google.analytics.admin.v1alpha.MeasurementProtocolSecret}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateMeasurementProtocolSecret(request);
+   */
+  updateMeasurementProtocolSecret(
+    request: protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+          | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'measurement_protocol_secret.name':
+          request.measurementProtocolSecret!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateMeasurementProtocolSecret(
+      request,
+      options,
+      callback
+    );
+  }
+  getGoogleSignalsSettings(
+    request: protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getGoogleSignalsSettings(
+    request: protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getGoogleSignalsSettings(
+    request: protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Lookup for Google Signals settings for a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the google signals settings to retrieve.
+   *   Format: properties/{property}/googleSignalsSettings
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GoogleSignalsSettings]{@link google.analytics.admin.v1alpha.GoogleSignalsSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getGoogleSignalsSettings(request);
+   */
+  getGoogleSignalsSettings(
+    request: protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+          | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getGoogleSignalsSettings(
+      request,
+      options,
+      callback
+    );
+  }
+  updateGoogleSignalsSettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateGoogleSignalsSettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateGoogleSignalsSettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates Google Signals settings for a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.GoogleSignalsSettings} request.googleSignalsSettings
+   *   Required. The settings to update.
+   *   The `name` field is used to identify the settings to be updated.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Field names must be in snake case
+   *   (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+   *   the entire entity, use one path with the string "*" to match all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GoogleSignalsSettings]{@link google.analytics.admin.v1alpha.GoogleSignalsSettings}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateGoogleSignalsSettings(request);
+   */
+  updateGoogleSignalsSettings(
+    request: protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+          | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IGoogleSignalsSettings,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'google_signals_settings.name':
+          request.googleSignalsSettings!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateGoogleSignalsSettings(
+      request,
+      options,
+      callback
+    );
+  }
+  createConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a conversion event with the specified attributes.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.ConversionEvent} request.conversionEvent
+   *   Required. The conversion event to create.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent property where this conversion event will
+   *   be created. Format: properties/123
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ConversionEvent]{@link google.analytics.admin.v1alpha.ConversionEvent}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createConversionEvent(request);
+   */
+  createConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IConversionEvent,
+          | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createConversionEvent(request, options, callback);
+  }
+  getConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IGetConversionEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IGetConversionEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IGetConversionEventRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Retrieve a single conversion event.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the conversion event to retrieve.
+   *   Format: properties/{property}/conversionEvents/{conversion_event}
+   *   Example: "properties/123/conversionEvents/456"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ConversionEvent]{@link google.analytics.admin.v1alpha.ConversionEvent}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getConversionEvent(request);
+   */
+  getConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IGetConversionEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.IConversionEvent,
+          | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IConversionEvent,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetConversionEventRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getConversionEvent(request, options, callback);
+  }
+  deleteConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  deleteConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a conversion event in a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the conversion event to delete.
+   *   Format: properties/{property}/conversionEvents/{conversion_event}
+   *   Example: "properties/123/conversionEvents/456"
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.deleteConversionEvent(request);
+   */
+  deleteConversionEvent(
+    request: protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteConversionEvent(request, options, callback);
+  }
+  createCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a CustomDimension.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {google.analytics.admin.v1alpha.CustomDimension} request.customDimension
+   *   Required. The CustomDimension to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomDimension]{@link google.analytics.admin.v1alpha.CustomDimension}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createCustomDimension(request);
+   */
+  createCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomDimension,
+          | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createCustomDimension(request, options, callback);
+  }
+  updateCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates a CustomDimension on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.CustomDimension} request.customDimension
+   *   The CustomDimension to update
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomDimension]{@link google.analytics.admin.v1alpha.CustomDimension}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateCustomDimension(request);
+   */
+  updateCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomDimension,
+          | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'custom_dimension.name': request.customDimension!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateCustomDimension(request, options, callback);
+  }
+  archiveCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  archiveCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  archiveCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Archives a CustomDimension on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomDimension to archive.
+   *   Example format: properties/1234/customDimensions/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.archiveCustomDimension(request);
+   */
+  archiveCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.archiveCustomDimension(
+      request,
+      options,
+      callback
+    );
+  }
+  getCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Lookup for a single CustomDimension.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomDimension to get.
+   *   Example format: properties/1234/customDimensions/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomDimension]{@link google.analytics.admin.v1alpha.CustomDimension}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getCustomDimension(request);
+   */
+  getCustomDimension(
+    request: protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomDimension,
+          | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomDimension,
+      (
+        | protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getCustomDimension(request, options, callback);
+  }
+  createCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a CustomMetric.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {google.analytics.admin.v1alpha.CustomMetric} request.customMetric
+   *   Required. The CustomMetric to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomMetric]{@link google.analytics.admin.v1alpha.CustomMetric}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createCustomMetric(request);
+   */
+  createCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomMetric,
+          | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createCustomMetric(request, options, callback);
+  }
+  updateCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates a CustomMetric on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.analytics.admin.v1alpha.CustomMetric} request.customMetric
+   *   The CustomMetric to update
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The list of fields to be updated. Omitted fields will not be updated.
+   *   To replace the entire entity, use one path with the string "*" to match
+   *   all fields.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomMetric]{@link google.analytics.admin.v1alpha.CustomMetric}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateCustomMetric(request);
+   */
+  updateCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomMetric,
+          | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      (
+        | protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'custom_metric.name': request.customMetric!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateCustomMetric(request, options, callback);
+  }
+  archiveCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  archiveCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  archiveCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Archives a CustomMetric on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomMetric to archive.
+   *   Example format: properties/1234/customMetrics/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.archiveCustomMetric(request);
+   */
+  archiveCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.archiveCustomMetric(request, options, callback);
+  }
+  getCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      | protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest,
+    callback: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      | protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Lookup for a single CustomMetric.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the CustomMetric to get.
+   *   Example format: properties/1234/customMetrics/5678
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CustomMetric]{@link google.analytics.admin.v1alpha.CustomMetric}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getCustomMetric(request);
+   */
+  getCustomMetric(
+    request: protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.admin.v1alpha.ICustomMetric,
+          | protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      | protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomMetric,
+      protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getCustomMetric(request, options, callback);
+  }
 
   listAccounts(
     request: protos.google.analytics.admin.v1alpha.IListAccountsRequest,
@@ -6172,6 +7945,229 @@ export class AnalyticsAdminServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IGoogleAdsLink>;
   }
+  listMeasurementProtocolSecrets(
+    request: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret[],
+      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse
+    ]
+  >;
+  listMeasurementProtocolSecrets(
+    request: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+      | protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret
+    >
+  ): void;
+  listMeasurementProtocolSecrets(
+    request: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+      | protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret
+    >
+  ): void;
+  /**
+   * Returns child MeasurementProtocolSecrets under the specified parent
+   * Property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent stream.
+   *   Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
+   *   may be a parent.
+   *   Format:
+   *   properties/{property}/webDataStreams/{webDataStream}/measurementProtocolSecrets
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 10 resources will be returned.
+   *   The maximum value is 10. Higher values will be coerced to the maximum.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListMeasurementProtocolSecrets`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListMeasurementProtocolSecrets` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [MeasurementProtocolSecret]{@link google.analytics.admin.v1alpha.MeasurementProtocolSecret}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listMeasurementProtocolSecretsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listMeasurementProtocolSecrets(
+    request: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+          | protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+      | protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret[],
+      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listMeasurementProtocolSecrets(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent stream.
+   *   Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
+   *   may be a parent.
+   *   Format:
+   *   properties/{property}/webDataStreams/{webDataStream}/measurementProtocolSecrets
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 10 resources will be returned.
+   *   The maximum value is 10. Higher values will be coerced to the maximum.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListMeasurementProtocolSecrets`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListMeasurementProtocolSecrets` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [MeasurementProtocolSecret]{@link google.analytics.admin.v1alpha.MeasurementProtocolSecret} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listMeasurementProtocolSecretsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listMeasurementProtocolSecretsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listMeasurementProtocolSecrets.createStream(
+      this.innerApiCalls.listMeasurementProtocolSecrets as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listMeasurementProtocolSecrets`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent stream.
+   *   Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
+   *   may be a parent.
+   *   Format:
+   *   properties/{property}/webDataStreams/{webDataStream}/measurementProtocolSecrets
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 10 resources will be returned.
+   *   The maximum value is 10. Higher values will be coerced to the maximum.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListMeasurementProtocolSecrets`
+   *   call. Provide this to retrieve the subsequent page. When paginating, all
+   *   other parameters provided to `ListMeasurementProtocolSecrets` must match
+   *   the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [MeasurementProtocolSecret]{@link google.analytics.admin.v1alpha.MeasurementProtocolSecret}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listMeasurementProtocolSecretsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listMeasurementProtocolSecretsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listMeasurementProtocolSecrets.asyncIterate(
+      this.innerApiCalls['listMeasurementProtocolSecrets'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret>;
+  }
   searchChangeHistoryEvents(
     request: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
     options?: CallOptions
@@ -6431,6 +8427,635 @@ export class AnalyticsAdminServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IChangeHistoryEvent>;
   }
+  listConversionEvents(
+    request: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IConversionEvent[],
+      protos.google.analytics.admin.v1alpha.IListConversionEventsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListConversionEventsResponse
+    ]
+  >;
+  listConversionEvents(
+    request: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+      | protos.google.analytics.admin.v1alpha.IListConversionEventsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IConversionEvent
+    >
+  ): void;
+  listConversionEvents(
+    request: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+      | protos.google.analytics.admin.v1alpha.IListConversionEventsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IConversionEvent
+    >
+  ): void;
+  /**
+   * Returns a list of conversion events in the specified parent property.
+   *
+   * Returns an empty list if no conversion events are found.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent property.
+   *   Example: 'properties/123'
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListConversionEvents` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListConversionEvents`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ConversionEvent]{@link google.analytics.admin.v1alpha.ConversionEvent}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listConversionEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listConversionEvents(
+    request: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+          | protos.google.analytics.admin.v1alpha.IListConversionEventsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.IConversionEvent
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+      | protos.google.analytics.admin.v1alpha.IListConversionEventsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.IConversionEvent
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.IConversionEvent[],
+      protos.google.analytics.admin.v1alpha.IListConversionEventsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListConversionEventsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listConversionEvents(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent property.
+   *   Example: 'properties/123'
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListConversionEvents` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListConversionEvents`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ConversionEvent]{@link google.analytics.admin.v1alpha.ConversionEvent} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listConversionEventsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listConversionEventsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listConversionEvents.createStream(
+      this.innerApiCalls.listConversionEvents as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listConversionEvents`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the parent property.
+   *   Example: 'properties/123'
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200; (higher values will be coerced to the maximum)
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListConversionEvents` call.
+   *   Provide this to retrieve the subsequent page.
+   *   When paginating, all other parameters provided to `ListConversionEvents`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ConversionEvent]{@link google.analytics.admin.v1alpha.ConversionEvent}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listConversionEventsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listConversionEventsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.IConversionEvent> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listConversionEvents.asyncIterate(
+      this.innerApiCalls['listConversionEvents'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IConversionEvent>;
+  }
+  listCustomDimensions(
+    request: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomDimension[],
+      protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse
+    ]
+  >;
+  listCustomDimensions(
+    request: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+      | protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ICustomDimension
+    >
+  ): void;
+  listCustomDimensions(
+    request: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+      | protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ICustomDimension
+    >
+  ): void;
+  /**
+   * Lists CustomDimensions on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListCustomDimensions` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCustomDimensions`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [CustomDimension]{@link google.analytics.admin.v1alpha.CustomDimension}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCustomDimensionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listCustomDimensions(
+    request: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+          | protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ICustomDimension
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+      | protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ICustomDimension
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomDimension[],
+      protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListCustomDimensionsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listCustomDimensions(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListCustomDimensions` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCustomDimensions`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [CustomDimension]{@link google.analytics.admin.v1alpha.CustomDimension} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCustomDimensionsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listCustomDimensionsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listCustomDimensions.createStream(
+      this.innerApiCalls.listCustomDimensions as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listCustomDimensions`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListCustomDimensions` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCustomDimensions`
+   *   must match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [CustomDimension]{@link google.analytics.admin.v1alpha.CustomDimension}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listCustomDimensionsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listCustomDimensionsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.ICustomDimension> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listCustomDimensions.asyncIterate(
+      this.innerApiCalls['listCustomDimensions'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ICustomDimension>;
+  }
+  listCustomMetrics(
+    request: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomMetric[],
+      protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse
+    ]
+  >;
+  listCustomMetrics(
+    request: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+      | protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ICustomMetric
+    >
+  ): void;
+  listCustomMetrics(
+    request: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+    callback: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+      | protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ICustomMetric
+    >
+  ): void;
+  /**
+   * Lists CustomMetrics on a property.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListCustomMetrics` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCustomMetrics` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [CustomMetric]{@link google.analytics.admin.v1alpha.CustomMetric}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listCustomMetricsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listCustomMetrics(
+    request: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+          | protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse
+          | null
+          | undefined,
+          protos.google.analytics.admin.v1alpha.ICustomMetric
+        >,
+    callback?: PaginationCallback<
+      protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+      | protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse
+      | null
+      | undefined,
+      protos.google.analytics.admin.v1alpha.ICustomMetric
+    >
+  ): Promise<
+    [
+      protos.google.analytics.admin.v1alpha.ICustomMetric[],
+      protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest | null,
+      protos.google.analytics.admin.v1alpha.IListCustomMetricsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listCustomMetrics(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListCustomMetrics` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCustomMetrics` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [CustomMetric]{@link google.analytics.admin.v1alpha.CustomMetric} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listCustomMetricsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listCustomMetricsStream(
+    request?: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listCustomMetrics.createStream(
+      this.innerApiCalls.listCustomMetrics as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listCustomMetrics`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. Example format: properties/1234
+   * @param {number} request.pageSize
+   *   The maximum number of resources to return.
+   *   If unspecified, at most 50 resources will be returned.
+   *   The maximum value is 200 (higher values will be coerced to the maximum).
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListCustomMetrics` call.
+   *   Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to `ListCustomMetrics` must
+   *   match the call that provided the page token.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [CustomMetric]{@link google.analytics.admin.v1alpha.CustomMetric}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listCustomMetricsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listCustomMetricsAsync(
+    request?: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.analytics.admin.v1alpha.ICustomMetric> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listCustomMetrics.asyncIterate(
+      this.innerApiCalls['listCustomMetrics'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ICustomMetric>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -6563,6 +9188,95 @@ export class AnalyticsAdminServiceClient {
     return this.pathTemplates.androidAppDataStreamPathTemplate.match(
       androidAppDataStreamName
     ).android_app_data_stream;
+  }
+
+  /**
+   * Return a fully-qualified conversionEvent resource name string.
+   *
+   * @param {string} property
+   * @param {string} conversion_event
+   * @returns {string} Resource name string.
+   */
+  conversionEventPath(property: string, conversionEvent: string) {
+    return this.pathTemplates.conversionEventPathTemplate.render({
+      property: property,
+      conversion_event: conversionEvent,
+    });
+  }
+
+  /**
+   * Parse the property from ConversionEvent resource.
+   *
+   * @param {string} conversionEventName
+   *   A fully-qualified path representing ConversionEvent resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromConversionEventName(conversionEventName: string) {
+    return this.pathTemplates.conversionEventPathTemplate.match(
+      conversionEventName
+    ).property;
+  }
+
+  /**
+   * Parse the conversion_event from ConversionEvent resource.
+   *
+   * @param {string} conversionEventName
+   *   A fully-qualified path representing ConversionEvent resource.
+   * @returns {string} A string representing the conversion_event.
+   */
+  matchConversionEventFromConversionEventName(conversionEventName: string) {
+    return this.pathTemplates.conversionEventPathTemplate.match(
+      conversionEventName
+    ).conversion_event;
+  }
+
+  /**
+   * Return a fully-qualified customDimension resource name string.
+   *
+   * @param {string} property
+   * @returns {string} Resource name string.
+   */
+  customDimensionPath(property: string) {
+    return this.pathTemplates.customDimensionPathTemplate.render({
+      property: property,
+    });
+  }
+
+  /**
+   * Parse the property from CustomDimension resource.
+   *
+   * @param {string} customDimensionName
+   *   A fully-qualified path representing CustomDimension resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromCustomDimensionName(customDimensionName: string) {
+    return this.pathTemplates.customDimensionPathTemplate.match(
+      customDimensionName
+    ).property;
+  }
+
+  /**
+   * Return a fully-qualified customMetric resource name string.
+   *
+   * @param {string} property
+   * @returns {string} Resource name string.
+   */
+  customMetricPath(property: string) {
+    return this.pathTemplates.customMetricPathTemplate.render({
+      property: property,
+    });
+  }
+
+  /**
+   * Parse the property from CustomMetric resource.
+   *
+   * @param {string} customMetricName
+   *   A fully-qualified path representing CustomMetric resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromCustomMetricName(customMetricName: string) {
+    return this.pathTemplates.customMetricPathTemplate.match(customMetricName)
+      .property;
   }
 
   /**
@@ -6735,6 +9449,33 @@ export class AnalyticsAdminServiceClient {
   }
 
   /**
+   * Return a fully-qualified googleSignalsSettings resource name string.
+   *
+   * @param {string} property
+   * @returns {string} Resource name string.
+   */
+  googleSignalsSettingsPath(property: string) {
+    return this.pathTemplates.googleSignalsSettingsPathTemplate.render({
+      property: property,
+    });
+  }
+
+  /**
+   * Parse the property from GoogleSignalsSettings resource.
+   *
+   * @param {string} googleSignalsSettingsName
+   *   A fully-qualified path representing GoogleSignalsSettings resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromGoogleSignalsSettingsName(
+    googleSignalsSettingsName: string
+  ) {
+    return this.pathTemplates.googleSignalsSettingsPathTemplate.match(
+      googleSignalsSettingsName
+    ).property;
+  }
+
+  /**
    * Return a fully-qualified iosAppDataStream resource name string.
    *
    * @param {string} property
@@ -6772,6 +9513,71 @@ export class AnalyticsAdminServiceClient {
     return this.pathTemplates.iosAppDataStreamPathTemplate.match(
       iosAppDataStreamName
     ).ios_app_data_stream;
+  }
+
+  /**
+   * Return a fully-qualified measurementProtocolSecret resource name string.
+   *
+   * @param {string} property
+   * @param {string} web_data_stream
+   * @param {string} measurement_protocol_secret
+   * @returns {string} Resource name string.
+   */
+  measurementProtocolSecretPath(
+    property: string,
+    webDataStream: string,
+    measurementProtocolSecret: string
+  ) {
+    return this.pathTemplates.measurementProtocolSecretPathTemplate.render({
+      property: property,
+      web_data_stream: webDataStream,
+      measurement_protocol_secret: measurementProtocolSecret,
+    });
+  }
+
+  /**
+   * Parse the property from MeasurementProtocolSecret resource.
+   *
+   * @param {string} measurementProtocolSecretName
+   *   A fully-qualified path representing MeasurementProtocolSecret resource.
+   * @returns {string} A string representing the property.
+   */
+  matchPropertyFromMeasurementProtocolSecretName(
+    measurementProtocolSecretName: string
+  ) {
+    return this.pathTemplates.measurementProtocolSecretPathTemplate.match(
+      measurementProtocolSecretName
+    ).property;
+  }
+
+  /**
+   * Parse the web_data_stream from MeasurementProtocolSecret resource.
+   *
+   * @param {string} measurementProtocolSecretName
+   *   A fully-qualified path representing MeasurementProtocolSecret resource.
+   * @returns {string} A string representing the web_data_stream.
+   */
+  matchWebDataStreamFromMeasurementProtocolSecretName(
+    measurementProtocolSecretName: string
+  ) {
+    return this.pathTemplates.measurementProtocolSecretPathTemplate.match(
+      measurementProtocolSecretName
+    ).web_data_stream;
+  }
+
+  /**
+   * Parse the measurement_protocol_secret from MeasurementProtocolSecret resource.
+   *
+   * @param {string} measurementProtocolSecretName
+   *   A fully-qualified path representing MeasurementProtocolSecret resource.
+   * @returns {string} A string representing the measurement_protocol_secret.
+   */
+  matchMeasurementProtocolSecretFromMeasurementProtocolSecretName(
+    measurementProtocolSecretName: string
+  ) {
+    return this.pathTemplates.measurementProtocolSecretPathTemplate.match(
+      measurementProtocolSecretName
+    ).measurement_protocol_secret;
   }
 
   /**

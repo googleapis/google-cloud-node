@@ -190,6 +190,91 @@
                 "getDataSharingSettings"
               ]
             },
+            "GetMeasurementProtocolSecret": {
+              "methods": [
+                "getMeasurementProtocolSecret"
+              ]
+            },
+            "CreateMeasurementProtocolSecret": {
+              "methods": [
+                "createMeasurementProtocolSecret"
+              ]
+            },
+            "DeleteMeasurementProtocolSecret": {
+              "methods": [
+                "deleteMeasurementProtocolSecret"
+              ]
+            },
+            "UpdateMeasurementProtocolSecret": {
+              "methods": [
+                "updateMeasurementProtocolSecret"
+              ]
+            },
+            "GetGoogleSignalsSettings": {
+              "methods": [
+                "getGoogleSignalsSettings"
+              ]
+            },
+            "UpdateGoogleSignalsSettings": {
+              "methods": [
+                "updateGoogleSignalsSettings"
+              ]
+            },
+            "CreateConversionEvent": {
+              "methods": [
+                "createConversionEvent"
+              ]
+            },
+            "GetConversionEvent": {
+              "methods": [
+                "getConversionEvent"
+              ]
+            },
+            "DeleteConversionEvent": {
+              "methods": [
+                "deleteConversionEvent"
+              ]
+            },
+            "CreateCustomDimension": {
+              "methods": [
+                "createCustomDimension"
+              ]
+            },
+            "UpdateCustomDimension": {
+              "methods": [
+                "updateCustomDimension"
+              ]
+            },
+            "ArchiveCustomDimension": {
+              "methods": [
+                "archiveCustomDimension"
+              ]
+            },
+            "GetCustomDimension": {
+              "methods": [
+                "getCustomDimension"
+              ]
+            },
+            "CreateCustomMetric": {
+              "methods": [
+                "createCustomMetric"
+              ]
+            },
+            "UpdateCustomMetric": {
+              "methods": [
+                "updateCustomMetric"
+              ]
+            },
+            "ArchiveCustomMetric": {
+              "methods": [
+                "archiveCustomMetric"
+              ]
+            },
+            "GetCustomMetric": {
+              "methods": [
+                "getCustomMetric"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -260,11 +345,39 @@
                 "listGoogleAdsLinksAsync"
               ]
             },
+            "ListMeasurementProtocolSecrets": {
+              "methods": [
+                "listMeasurementProtocolSecrets",
+                "listMeasurementProtocolSecretsStream",
+                "listMeasurementProtocolSecretsAsync"
+              ]
+            },
             "SearchChangeHistoryEvents": {
               "methods": [
                 "searchChangeHistoryEvents",
                 "searchChangeHistoryEventsStream",
                 "searchChangeHistoryEventsAsync"
+              ]
+            },
+            "ListConversionEvents": {
+              "methods": [
+                "listConversionEvents",
+                "listConversionEventsStream",
+                "listConversionEventsAsync"
+              ]
+            },
+            "ListCustomDimensions": {
+              "methods": [
+                "listCustomDimensions",
+                "listCustomDimensionsStream",
+                "listCustomDimensionsAsync"
+              ]
+            },
+            "ListCustomMetrics": {
+              "methods": [
+                "listCustomMetrics",
+                "listCustomMetricsStream",
+                "listCustomMetricsAsync"
               ]
             }
           }
@@ -452,6 +565,91 @@
                 "getDataSharingSettings"
               ]
             },
+            "GetMeasurementProtocolSecret": {
+              "methods": [
+                "getMeasurementProtocolSecret"
+              ]
+            },
+            "CreateMeasurementProtocolSecret": {
+              "methods": [
+                "createMeasurementProtocolSecret"
+              ]
+            },
+            "DeleteMeasurementProtocolSecret": {
+              "methods": [
+                "deleteMeasurementProtocolSecret"
+              ]
+            },
+            "UpdateMeasurementProtocolSecret": {
+              "methods": [
+                "updateMeasurementProtocolSecret"
+              ]
+            },
+            "GetGoogleSignalsSettings": {
+              "methods": [
+                "getGoogleSignalsSettings"
+              ]
+            },
+            "UpdateGoogleSignalsSettings": {
+              "methods": [
+                "updateGoogleSignalsSettings"
+              ]
+            },
+            "CreateConversionEvent": {
+              "methods": [
+                "createConversionEvent"
+              ]
+            },
+            "GetConversionEvent": {
+              "methods": [
+                "getConversionEvent"
+              ]
+            },
+            "DeleteConversionEvent": {
+              "methods": [
+                "deleteConversionEvent"
+              ]
+            },
+            "CreateCustomDimension": {
+              "methods": [
+                "createCustomDimension"
+              ]
+            },
+            "UpdateCustomDimension": {
+              "methods": [
+                "updateCustomDimension"
+              ]
+            },
+            "ArchiveCustomDimension": {
+              "methods": [
+                "archiveCustomDimension"
+              ]
+            },
+            "GetCustomDimension": {
+              "methods": [
+                "getCustomDimension"
+              ]
+            },
+            "CreateCustomMetric": {
+              "methods": [
+                "createCustomMetric"
+              ]
+            },
+            "UpdateCustomMetric": {
+              "methods": [
+                "updateCustomMetric"
+              ]
+            },
+            "ArchiveCustomMetric": {
+              "methods": [
+                "archiveCustomMetric"
+              ]
+            },
+            "GetCustomMetric": {
+              "methods": [
+                "getCustomMetric"
+              ]
+            },
             "ListAccounts": {
               "methods": [
                 "listAccounts",
@@ -522,11 +720,39 @@
                 "listGoogleAdsLinksAsync"
               ]
             },
+            "ListMeasurementProtocolSecrets": {
+              "methods": [
+                "listMeasurementProtocolSecrets",
+                "listMeasurementProtocolSecretsStream",
+                "listMeasurementProtocolSecretsAsync"
+              ]
+            },
             "SearchChangeHistoryEvents": {
               "methods": [
                 "searchChangeHistoryEvents",
                 "searchChangeHistoryEventsStream",
                 "searchChangeHistoryEventsAsync"
+              ]
+            },
+            "ListConversionEvents": {
+              "methods": [
+                "listConversionEvents",
+                "listConversionEventsStream",
+                "listConversionEventsAsync"
+              ]
+            },
+            "ListCustomDimensions": {
+              "methods": [
+                "listCustomDimensions",
+                "listCustomDimensionsStream",
+                "listCustomDimensionsAsync"
+              ]
+            },
+            "ListCustomMetrics": {
+              "methods": [
+                "listCustomMetrics",
+                "listCustomMetricsStream",
+                "listCustomMetricsAsync"
               ]
             }
           }
