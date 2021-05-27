@@ -849,9 +849,8 @@ class DatastoreRequest {
       try {
         await Promise.all(
           arrify(entities).map(async (objEntity: Entity) => {
-            const obj: Entity = DatastoreRequest.prepareEntityObject_(
-              objEntity
-            );
+            const obj: Entity =
+              DatastoreRequest.prepareEntityObject_(objEntity);
             const [data] = await transaction.get(obj.key);
             obj.method = 'upsert';
             obj.data = Object.assign({}, data, obj.data);

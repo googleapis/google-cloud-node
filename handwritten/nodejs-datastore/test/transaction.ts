@@ -56,11 +56,11 @@ describe('Transaction', () => {
   const PROJECT_ID = 'project-id';
   const NAMESPACE = 'a-namespace';
 
-  const DATASTORE = ({
+  const DATASTORE = {
     request_() {},
     projectId: PROJECT_ID,
     namespace: NAMESPACE,
-  } as {}) as Datastore;
+  } as {} as Datastore;
 
   function key(path: Path) {
     return new entity.Key({path: arrify(path)});
@@ -573,13 +573,13 @@ describe('Transaction', () => {
       it('should allow full override of transactionOptions', done => {
         transaction.readOnly = true;
 
-        const options = ({
+        const options = {
           transactionOptions: {
             readWrite: {
               previousTransaction: 'transaction-id',
             },
           },
-        } as {}) as TransactionOptions;
+        } as {} as TransactionOptions;
 
         transaction.request_ = config => {
           assert.deepStrictEqual(config.reqOpts, options);
