@@ -364,7 +364,7 @@ export namespace entity {
           isDsInt(identifier) ||
           isDsIntLike(identifier)
         ) {
-          this.id = (((identifier as {}) as Int).value || identifier) as string;
+          this.id = ((identifier as {} as Int).value || identifier) as string;
         } else if (is.string(identifier)) {
           this.name = identifier as string;
         }

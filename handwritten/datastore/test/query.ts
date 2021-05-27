@@ -49,7 +49,7 @@ describe('Query', () => {
         new Query(SCOPE, '', KINDS),
         new Query(SCOPE, null, KINDS),
         new Query(SCOPE, undefined, KINDS),
-        new Query(SCOPE, (0 as {}) as string, KINDS),
+        new Query(SCOPE, 0 as {} as string, KINDS),
         new Query(SCOPE, KINDS),
       ].forEach(query => {
         assert.strictEqual(query.namespace, null);

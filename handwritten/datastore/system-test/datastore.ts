@@ -1035,8 +1035,9 @@ describe('Datastore', () => {
       // This is a >20 minute operation, so we're just going to make sure the
       // right type of operation was started.
       assert.strictEqual(
-        (importOperation.metadata as google.datastore.admin.v1.IImportEntitiesMetadata)
-          .inputUrl,
+        (
+          importOperation.metadata as google.datastore.admin.v1.IImportEntitiesMetadata
+        ).inputUrl,
         `gs://${exportedFile.bucket.name}/${exportedFile.name}`
       );
 

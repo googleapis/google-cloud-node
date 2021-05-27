@@ -95,14 +95,14 @@ const fakeGoogleGax = {
     constructor(opts: gax.GrpcClientOptions) {
       // super constructor must be called first!
       super(opts);
-      this.grpc = ({
+      this.grpc = {
         credentials: {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           createInsecure(...args: any[]) {
             return (createInsecureOverride || (() => {}))(...args);
           },
         },
-      } as {}) as gax.GrpcModule;
+      } as {} as gax.GrpcModule;
     }
   },
 };
@@ -1762,7 +1762,7 @@ describe('Datastore', () => {
       ];
 
       fakeEntity.entityToEntityProto = (entity: EntityObject) => {
-        return (entity as unknown) as EntityProto;
+        return entity as unknown as EntityProto;
       };
       datastore.request_ = (config: RequestConfig) => {
         assert.strictEqual(
@@ -1845,9 +1845,9 @@ describe('Datastore', () => {
 
       sandbox.stub(fakeEntity, 'keyFromKeyProto').callsFake(keyProto => {
         keyProtos.push(keyProto);
-        return ({
+        return {
           id: ids[keyProtos.length - 1],
-        } as {}) as entity.Key;
+        } as {} as entity.Key;
       });
 
       datastore.save(
