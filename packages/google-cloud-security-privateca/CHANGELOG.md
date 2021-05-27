@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.1...v2.3.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#90](https://www.github.com/googleapis/nodejs-security-private-ca/issues/90)) ([0a5e25f](https://www.github.com/googleapis/nodejs-security-private-ca/commit/0a5e25f5d351f2bd471512a16f08c2ddc06f2721))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.0...v2.3.1) (2021-05-12)
 
 
