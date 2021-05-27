@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [3.1.4](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.3...v3.1.4) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#308](https://www.github.com/googleapis/nodejs-containeranalysis/issues/308)) ([040323a](https://www.github.com/googleapis/nodejs-containeranalysis/commit/040323ad90f03e1d50ecb0036c3bf62352eada09))
+
 ### [3.1.3](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.2...v3.1.3) (2021-05-12)
 
 
