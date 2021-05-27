@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [3.2.2](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.1...v3.2.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#324](https://www.github.com/googleapis/nodejs-talent/issues/324)) ([912fb40](https://www.github.com/googleapis/nodejs-talent/commit/912fb40b63085c1cde18b669b13be0a1c1422d4e))
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.0...v3.2.1) (2021-05-12)
 
 
