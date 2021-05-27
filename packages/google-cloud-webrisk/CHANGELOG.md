@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [2.1.2](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.1...v2.1.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#248](https://www.github.com/googleapis/nodejs-web-risk/issues/248)) ([8e6a80d](https://www.github.com/googleapis/nodejs-web-risk/commit/8e6a80d5a227a83727e71b06d5add4f9aa876d7f))
+
 ### [2.1.1](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.0...v2.1.1) (2021-05-12)
 
 
