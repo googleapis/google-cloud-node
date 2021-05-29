@@ -16,15 +16,15 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta1 from './v1beta1';
 import * as v1 from './v1';
+import * as v1beta1 from './v1beta1';
 
 const LookupServiceClient = v1.LookupServiceClient;
 type LookupServiceClient = v1.LookupServiceClient;
 const RegistrationServiceClient = v1.RegistrationServiceClient;
 type RegistrationServiceClient = v1.RegistrationServiceClient;
 
-export {v1beta1, v1, LookupServiceClient, RegistrationServiceClient};
-export default {v1beta1, v1, LookupServiceClient, RegistrationServiceClient};
+export {v1, v1beta1, LookupServiceClient, RegistrationServiceClient};
+export default {v1, v1beta1, LookupServiceClient, RegistrationServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
