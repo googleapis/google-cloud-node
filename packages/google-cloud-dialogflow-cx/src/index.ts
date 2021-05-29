@@ -16,8 +16,8 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v3beta1 from './v3beta1';
 import * as v3 from './v3';
+import * as v3beta1 from './v3beta1';
 
 const AgentsClient = v3.AgentsClient;
 type AgentsClient = v3.AgentsClient;
@@ -49,8 +49,8 @@ const WebhooksClient = v3.WebhooksClient;
 type WebhooksClient = v3.WebhooksClient;
 
 export {
-  v3beta1,
   v3,
+  v3beta1,
   AgentsClient,
   EntityTypesClient,
   EnvironmentsClient,
@@ -67,8 +67,8 @@ export {
   WebhooksClient,
 };
 export default {
-  v3beta1,
   v3,
+  v3beta1,
   AgentsClient,
   EntityTypesClient,
   EnvironmentsClient,
