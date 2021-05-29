@@ -16,8 +16,8 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v4beta1 from './v4beta1';
 import * as v4 from './v4';
+import * as v4beta1 from './v4beta1';
 
 const CompanyServiceClient = v4.CompanyServiceClient;
 type CompanyServiceClient = v4.CompanyServiceClient;
@@ -31,8 +31,8 @@ const TenantServiceClient = v4.TenantServiceClient;
 type TenantServiceClient = v4.TenantServiceClient;
 
 export {
-  v4beta1,
   v4,
+  v4beta1,
   CompanyServiceClient,
   CompletionClient,
   EventServiceClient,
@@ -40,8 +40,8 @@ export {
   TenantServiceClient,
 };
 export default {
-  v4beta1,
   v4,
+  v4beta1,
   CompanyServiceClient,
   CompletionClient,
   EventServiceClient,
