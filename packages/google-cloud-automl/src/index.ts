@@ -16,15 +16,15 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta1 from './v1beta1';
 import * as v1 from './v1';
+import * as v1beta1 from './v1beta1';
 
 const AutoMlClient = v1.AutoMlClient;
 type AutoMlClient = v1.AutoMlClient;
 const PredictionServiceClient = v1.PredictionServiceClient;
 type PredictionServiceClient = v1.PredictionServiceClient;
 
-export {v1beta1, v1, AutoMlClient, PredictionServiceClient};
-export default {v1beta1, v1, AutoMlClient, PredictionServiceClient};
+export {v1, v1beta1, AutoMlClient, PredictionServiceClient};
+export default {v1, v1beta1, AutoMlClient, PredictionServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
