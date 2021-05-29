@@ -16,13 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta1 from './v1beta1';
 import * as v1 from './v1';
+import * as v1beta1 from './v1beta1';
 
 const ServiceUsageClient = v1.ServiceUsageClient;
 type ServiceUsageClient = v1.ServiceUsageClient;
 
-export {v1beta1, v1, ServiceUsageClient};
-export default {v1beta1, v1, ServiceUsageClient};
+export {v1, v1beta1, ServiceUsageClient};
+export default {v1, v1beta1, ServiceUsageClient};
 import * as protos from '../protos/protos';
 export {protos};
