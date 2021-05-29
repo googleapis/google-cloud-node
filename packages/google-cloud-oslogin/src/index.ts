@@ -16,13 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta from './v1beta';
 import * as v1 from './v1';
+import * as v1beta from './v1beta';
 
 const OsLoginServiceClient = v1.OsLoginServiceClient;
 type OsLoginServiceClient = v1.OsLoginServiceClient;
 
-export {v1beta, v1, OsLoginServiceClient};
-export default {v1beta, v1, OsLoginServiceClient};
+export {v1, v1beta, OsLoginServiceClient};
+export default {v1, v1beta, OsLoginServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
