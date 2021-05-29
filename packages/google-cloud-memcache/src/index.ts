@@ -16,13 +16,13 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta2 from './v1beta2';
 import * as v1 from './v1';
+import * as v1beta2 from './v1beta2';
 
 const CloudMemcacheClient = v1.CloudMemcacheClient;
 type CloudMemcacheClient = v1.CloudMemcacheClient;
 
-export {v1beta2, v1, CloudMemcacheClient};
-export default {v1beta2, v1, CloudMemcacheClient};
+export {v1, v1beta2, CloudMemcacheClient};
+export default {v1, v1beta2, CloudMemcacheClient};
 import * as protos from '../protos/protos';
 export {protos};
