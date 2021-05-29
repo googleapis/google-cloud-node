@@ -16,15 +16,15 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta3 from './v1beta3';
+import * as v1 from './v1';
 import * as v1beta1 from './v1beta1';
 import * as v1beta2 from './v1beta2';
-import * as v1 from './v1';
+import * as v1beta3 from './v1beta3';
 
 const DocumentProcessorServiceClient = v1.DocumentProcessorServiceClient;
 type DocumentProcessorServiceClient = v1.DocumentProcessorServiceClient;
 
-export {v1beta3, v1beta1, v1beta2, v1, DocumentProcessorServiceClient};
-export default {v1beta3, v1beta1, v1beta2, v1, DocumentProcessorServiceClient};
+export {v1, v1beta1, v1beta2, v1beta3, DocumentProcessorServiceClient};
+export default {v1, v1beta1, v1beta2, v1beta3, DocumentProcessorServiceClient};
 import * as protos from '../protos/protos';
 export {protos};
