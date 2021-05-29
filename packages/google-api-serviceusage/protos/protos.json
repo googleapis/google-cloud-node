@@ -1918,7 +1918,7 @@
                     "ServiceUsage": {
                       "options": {
                         "(google.api.default_host)": "serviceusage.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/cloud-platform.read-only,https://www.googleapis.com/auth/service.management"
                       },
                       "methods": {
                         "EnableService": {
