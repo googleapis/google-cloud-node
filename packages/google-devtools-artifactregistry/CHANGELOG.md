@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.1...v1.0.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#47](https://www.github.com/googleapis/nodejs-artifact-registry/issues/47)) ([64cd82e](https://www.github.com/googleapis/nodejs-artifact-registry/commit/64cd82e6ba344495d61338642b930b873ca4c66e))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.0...v1.0.1) (2021-05-12)
 
 
