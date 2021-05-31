@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.0...v1.1.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#56](https://www.github.com/googleapis/nodejs-binary-authorization/issues/56)) ([32e1533](https://www.github.com/googleapis/nodejs-binary-authorization/commit/32e1533ae0d5ff336f3ec671fd7df34e88c49d12))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.0.1...v1.1.0) (2021-05-12)
 
 
