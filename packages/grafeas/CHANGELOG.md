@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [3.4.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.1...v3.4.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#262](https://www.github.com/googleapis/nodejs-grafeas/issues/262)) ([2713381](https://www.github.com/googleapis/nodejs-grafeas/commit/27133818c3b6ef89ef5bb53a001af7b6634f60b0))
+
 ### [3.4.1](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.0...v3.4.1) (2021-05-12)
 
 
