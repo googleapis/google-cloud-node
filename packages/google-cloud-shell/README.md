@@ -5,7 +5,7 @@
 # [Cloud Shell: Node.js Client](https://github.com/googleapis/nodejs-cloud-shell)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/cloud-shell,.svg)](https://www.npmjs.org/package/@google-cloud/cloud-shell,)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/cloud-shell.svg)](https://www.npmjs.org/package/@google-cloud/cloud-shell)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloud-shell/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloud-shell)
 
 
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/cloud-shell,
+npm install @google-cloud/cloud-shell
 ```
 
 
@@ -111,7 +111,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-cloud-shell/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/shell
+[client-docs]: https://cloud.google.com/shell/docs/reference/rest
 [product-docs]: https://cloud.google.com/shell/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
