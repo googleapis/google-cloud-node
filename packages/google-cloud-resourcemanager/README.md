@@ -70,7 +70,7 @@ npm install @google-cloud/resource-manager
 
 ```javascript
 // Imports the Google Cloud client library
-const {Resource} = require('@google-cloud/resource');
+const {Resource} = require('@google-cloud/resource-manager');
 
 // Creates a client
 const resource = new Resource();
