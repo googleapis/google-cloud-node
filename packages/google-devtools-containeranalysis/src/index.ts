@@ -16,8 +16,8 @@
 // ** https://github.com/googleapis/synthtool **
 // ** All changes to this file may be overwritten. **
 
-import * as v1beta1 from './v1beta1';
 import * as v1 from './v1';
+import * as v1beta1 from './v1beta1';
 
 const ContainerAnalysisClient = v1.ContainerAnalysisClient;
 type ContainerAnalysisClient = v1.ContainerAnalysisClient;

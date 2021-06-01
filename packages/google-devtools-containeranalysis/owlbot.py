@@ -69,8 +69,8 @@ node.owlbot_main(staging_excludes=[
 # Add beta version GrafeasClient to export
 s.replace('src/index.ts',
         r"""
-export \{v1beta1, v1, ContainerAnalysisClient\};
-export default \{v1beta1, v1, ContainerAnalysisClient\};""",
+export \{v1, v1beta1, ContainerAnalysisClient\};
+export default \{v1, v1beta1, ContainerAnalysisClient\};""",
         'const GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n' +
         'type GrafeasClient = v1beta1.GrafeasV1Beta1Client;\n\n' +
         'export {v1, v1beta1, ContainerAnalysisClient, GrafeasClient};\n' +
