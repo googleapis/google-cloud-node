@@ -1,0 +1,101 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.essentialcontacts.v1",
+  "libraryPackage": "@google-cloud/essentialcontacts",
+  "services": {
+    "EssentialContactsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EssentialContactsServiceClient",
+          "rpcs": {
+            "CreateContact": {
+              "methods": [
+                "createContact"
+              ]
+            },
+            "UpdateContact": {
+              "methods": [
+                "updateContact"
+              ]
+            },
+            "GetContact": {
+              "methods": [
+                "getContact"
+              ]
+            },
+            "DeleteContact": {
+              "methods": [
+                "deleteContact"
+              ]
+            },
+            "SendTestMessage": {
+              "methods": [
+                "sendTestMessage"
+              ]
+            },
+            "ListContacts": {
+              "methods": [
+                "listContacts",
+                "listContactsStream",
+                "listContactsAsync"
+              ]
+            },
+            "ComputeContacts": {
+              "methods": [
+                "computeContacts",
+                "computeContactsStream",
+                "computeContactsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EssentialContactsServiceClient",
+          "rpcs": {
+            "CreateContact": {
+              "methods": [
+                "createContact"
+              ]
+            },
+            "UpdateContact": {
+              "methods": [
+                "updateContact"
+              ]
+            },
+            "GetContact": {
+              "methods": [
+                "getContact"
+              ]
+            },
+            "DeleteContact": {
+              "methods": [
+                "deleteContact"
+              ]
+            },
+            "SendTestMessage": {
+              "methods": [
+                "sendTestMessage"
+              ]
+            },
+            "ListContacts": {
+              "methods": [
+                "listContacts",
+                "listContactsStream",
+                "listContactsAsync"
+              ]
+            },
+            "ComputeContacts": {
+              "methods": [
+                "computeContacts",
+                "computeContactsStream",
+                "computeContactsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "recurse": true,
+  "skip": [
+    "https://github.com/googleapis/nodejs-essential-contacts/blob/master/samples/quickstart.js",
+    "https://github.com/googleapis/nodejs-essential-contacts/blob/master/CHANGELOG.md",
+    "https://github.com/googleapis/nodejs-essential-contacts/tree/master/samples",
+    "https://codecov.io/gh/googleapis/",
+    "www.googleapis.com",
+    "img.shields.io"
+  ],
+  "silent": true,
+  "concurrency": 10
+}

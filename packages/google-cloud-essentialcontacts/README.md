@@ -5,13 +5,13 @@
 # [Essential Contacts API: Node.js Client](https://github.com/googleapis/nodejs-essential-contacts)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/essentialcontacts.svg)](https://www.npmjs.org/package/@google-cloud/essentialcontacts)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/essential-contacts.svg)](https://www.npmjs.org/package/@google-cloud/essential-contacts)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-essential-contacts/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-essential-contacts)
 
 
 
 
-Essentialcontacts client for Node.js
+Essential contacts client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -51,10 +51,45 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/essentialcontacts
+npm install @google-cloud/essential-contacts
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+
+// eslint-disable-next-line node/no-missing-require
+const {
+  EssentialContactsServiceClient,
+} = require('@google-cloud/essential-contacts');
+
+// TODO(developer): replace with your prefered project ID and serviceName.
+// const projectId = 'my-project'
+
+// Creates a client
+const client = new EssentialContactsServiceClient();
+
+async function listContacts() {
+  const [response] = await client.listContacts({
+    parent: `projects/${projectId}`,
+  });
+  console.info(response);
+}
+listContacts();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-essential-contacts/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-essential-contacts/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-essential-contacts&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
