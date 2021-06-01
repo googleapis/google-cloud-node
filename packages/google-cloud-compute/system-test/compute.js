@@ -18,6 +18,7 @@ const assert = require('assert');
 const concat = require('concat-stream');
 const uuid = require('uuid');
 const {promisify} = require('util');
+let testFlag = true;
 
 const Compute = require('../');
 
@@ -745,8 +746,16 @@ describe('Compute', () => {
         network: `${resourceUrlPrefix}/global/networks/${NETWORK_NAME}`,
         ports: ['80', '81', '82'],
       });
+
       RULE = rule;
-      await ruleOperation.promise();
+      try {
+        const timeOutPromise = new Promise((resolve, reject) => {
+          setTimeout(() => reject('Timed out!'), 1100000);
+        });
+        await Promise.race([timeOutPromise, await ruleOperation.promise()]);
+      } catch (err) {
+        testFlag = false;
+      }
     });
 
     after(async () => {
@@ -757,23 +766,27 @@ describe('Compute', () => {
       for (const firewall of firewallsToDelete) {
         await firewall.delete();
       }
-      const [ruleOperation] = await RULE.delete();
-      await ruleOperation.promise();
-      await computeRequest({
-        method: 'DELETE',
-        uri: 'regions/us-central1/backendServices/' + BACKEND_SERVICE_NAME,
-      });
+      if (testFlag) {
+        const [ruleOperation] = await RULE.delete();
+        await ruleOperation.promise();
+        await computeRequest({
+          method: 'DELETE',
+          uri: 'regions/us-central1/backendServices/' + BACKEND_SERVICE_NAME,
+        });
+      }
 
       const [subnetworkOperation] = await SUBNETWORK.delete();
       await subnetworkOperation.promise();
     });
 
     it('should have created the right rule', async () => {
-      const [metadata] = await RULE.getMetadata();
-      assert.strictEqual(metadata.name, RULE_NAME);
-      assert.strictEqual(metadata.IPProtocol, 'TCP');
-      assert.deepStrictEqual(metadata.ports, ['80', '81', '82']);
-      assert.strictEqual(metadata.loadBalancingScheme, 'INTERNAL');
+      if (testFlag) {
+        const [metadata] = await RULE.getMetadata();
+        assert.strictEqual(metadata.name, RULE_NAME);
+        assert.strictEqual(metadata.IPProtocol, 'TCP');
+        assert.deepStrictEqual(metadata.ports, ['80', '81', '82']);
+        assert.strictEqual(metadata.loadBalancingScheme, 'INTERNAL');
+      }
     });
   });
 
