@@ -18,7 +18,13 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions, LROperation} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  LROperation,
+} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -28,7 +34,7 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './cloud_shell_service_client_config.json';
-import { operationsProtos } from 'google-gax';
+import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
@@ -98,10 +104,13 @@ export class CloudShellServiceClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof CloudShellServiceClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -119,7 +128,7 @@ export class CloudShellServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -127,10 +136,7 @@ export class CloudShellServiceClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -138,7 +144,7 @@ export class CloudShellServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -162,50 +168,67 @@ export class CloudShellServiceClient {
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
 
-    this.operationsClient = this._gaxModule.lro({
-      auth: this.auth,
-      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
-    }).operationsClient(opts);
+    this.operationsClient = this._gaxModule
+      .lro({
+        auth: this.auth,
+        grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined,
+      })
+      .operationsClient(opts);
     const startEnvironmentResponse = protoFilesRoot.lookup(
-      '.google.cloud.shell.v1.StartEnvironmentResponse') as gax.protobuf.Type;
+      '.google.cloud.shell.v1.StartEnvironmentResponse'
+    ) as gax.protobuf.Type;
     const startEnvironmentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.shell.v1.StartEnvironmentMetadata') as gax.protobuf.Type;
+      '.google.cloud.shell.v1.StartEnvironmentMetadata'
+    ) as gax.protobuf.Type;
     const authorizeEnvironmentResponse = protoFilesRoot.lookup(
-      '.google.cloud.shell.v1.AuthorizeEnvironmentResponse') as gax.protobuf.Type;
+      '.google.cloud.shell.v1.AuthorizeEnvironmentResponse'
+    ) as gax.protobuf.Type;
     const authorizeEnvironmentMetadata = protoFilesRoot.lookup(
-      '.google.cloud.shell.v1.AuthorizeEnvironmentMetadata') as gax.protobuf.Type;
+      '.google.cloud.shell.v1.AuthorizeEnvironmentMetadata'
+    ) as gax.protobuf.Type;
     const addPublicKeyResponse = protoFilesRoot.lookup(
-      '.google.cloud.shell.v1.AddPublicKeyResponse') as gax.protobuf.Type;
+      '.google.cloud.shell.v1.AddPublicKeyResponse'
+    ) as gax.protobuf.Type;
     const addPublicKeyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.shell.v1.AddPublicKeyMetadata') as gax.protobuf.Type;
+      '.google.cloud.shell.v1.AddPublicKeyMetadata'
+    ) as gax.protobuf.Type;
     const removePublicKeyResponse = protoFilesRoot.lookup(
-      '.google.cloud.shell.v1.RemovePublicKeyResponse') as gax.protobuf.Type;
+      '.google.cloud.shell.v1.RemovePublicKeyResponse'
+    ) as gax.protobuf.Type;
     const removePublicKeyMetadata = protoFilesRoot.lookup(
-      '.google.cloud.shell.v1.RemovePublicKeyMetadata') as gax.protobuf.Type;
+      '.google.cloud.shell.v1.RemovePublicKeyMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       startEnvironment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         startEnvironmentResponse.decode.bind(startEnvironmentResponse),
-        startEnvironmentMetadata.decode.bind(startEnvironmentMetadata)),
+        startEnvironmentMetadata.decode.bind(startEnvironmentMetadata)
+      ),
       authorizeEnvironment: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         authorizeEnvironmentResponse.decode.bind(authorizeEnvironmentResponse),
-        authorizeEnvironmentMetadata.decode.bind(authorizeEnvironmentMetadata)),
+        authorizeEnvironmentMetadata.decode.bind(authorizeEnvironmentMetadata)
+      ),
       addPublicKey: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         addPublicKeyResponse.decode.bind(addPublicKeyResponse),
-        addPublicKeyMetadata.decode.bind(addPublicKeyMetadata)),
+        addPublicKeyMetadata.decode.bind(addPublicKeyMetadata)
+      ),
       removePublicKey: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         removePublicKeyResponse.decode.bind(removePublicKeyResponse),
-        removePublicKeyMetadata.decode.bind(removePublicKeyMetadata))
+        removePublicKeyMetadata.decode.bind(removePublicKeyMetadata)
+      ),
     };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.shell.v1.CloudShellService', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.shell.v1.CloudShellService',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -233,32 +256,40 @@ export class CloudShellServiceClient {
     // Put together the "service stub" for
     // google.cloud.shell.v1.CloudShellService.
     this.cloudShellServiceStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.shell.v1.CloudShellService') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.shell.v1.CloudShellService'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.shell.v1.CloudShellService,
-        this._opts) as Promise<{[method: string]: Function}>;
+      this._opts
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const cloudShellServiceStubMethods =
-        ['getEnvironment', 'startEnvironment', 'authorizeEnvironment', 'addPublicKey', 'removePublicKey'];
+    const cloudShellServiceStubMethods = [
+      'getEnvironment',
+      'startEnvironment',
+      'authorizeEnvironment',
+      'addPublicKey',
+      'removePublicKey',
+    ];
     for (const methodName of cloudShellServiceStubMethods) {
       const callPromise = this.cloudShellServiceStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        this.descriptors.longrunning[methodName] ||
-        undefined;
+      const descriptor = this.descriptors.longrunning[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -302,9 +333,7 @@ export class CloudShellServiceClient {
    * @returns {string[]} List of default scopes.
    */
   static get scopes() {
-    return [
-      'https://www.googleapis.com/auth/cloud-platform'
-    ];
+    return ['https://www.googleapis.com/auth/cloud-platform'];
   }
 
   getProjectId(): Promise<string>;
@@ -313,8 +342,9 @@ export class CloudShellServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -326,499 +356,697 @@ export class CloudShellServiceClient {
   // -- Service calls --
   // -------------------
   getEnvironment(
-      request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.shell.v1.IEnvironment,
-        protos.google.cloud.shell.v1.IGetEnvironmentRequest|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.shell.v1.IEnvironment,
+      protos.google.cloud.shell.v1.IGetEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  >;
   getEnvironment(
-      request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.shell.v1.IEnvironment,
-          protos.google.cloud.shell.v1.IGetEnvironmentRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.shell.v1.IEnvironment,
+      protos.google.cloud.shell.v1.IGetEnvironmentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getEnvironment(
-      request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
-      callback: Callback<
-          protos.google.cloud.shell.v1.IEnvironment,
-          protos.google.cloud.shell.v1.IGetEnvironmentRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Gets an environment. Returns NOT_FOUND if the environment does not exist.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Required. Name of the requested resource, for example `users/me/environments/default`
- *   or `users/someone@example.com/environments/default`.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Environment]{@link google.cloud.shell.v1.Environment}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.getEnvironment(request);
- */
+    request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
+    callback: Callback<
+      protos.google.cloud.shell.v1.IEnvironment,
+      protos.google.cloud.shell.v1.IGetEnvironmentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets an environment. Returns NOT_FOUND if the environment does not exist.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Name of the requested resource, for example `users/me/environments/default`
+   *   or `users/someone@example.com/environments/default`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Environment]{@link google.cloud.shell.v1.Environment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getEnvironment(request);
+   */
   getEnvironment(
-      request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request: protos.google.cloud.shell.v1.IGetEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.shell.v1.IEnvironment,
-          protos.google.cloud.shell.v1.IGetEnvironmentRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.shell.v1.IEnvironment,
-          protos.google.cloud.shell.v1.IGetEnvironmentRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.shell.v1.IEnvironment,
-        protos.google.cloud.shell.v1.IGetEnvironmentRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.shell.v1.IGetEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.shell.v1.IEnvironment,
+      protos.google.cloud.shell.v1.IGetEnvironmentRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.shell.v1.IEnvironment,
+      protos.google.cloud.shell.v1.IGetEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getEnvironment(request, options, callback);
   }
 
   startEnvironment(
-      request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.shell.v1.IStartEnvironmentResponse, protos.google.cloud.shell.v1.IStartEnvironmentMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.shell.v1.IStartEnvironmentResponse,
+        protos.google.cloud.shell.v1.IStartEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   startEnvironment(
-      request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.shell.v1.IStartEnvironmentResponse, protos.google.cloud.shell.v1.IStartEnvironmentMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IStartEnvironmentResponse,
+        protos.google.cloud.shell.v1.IStartEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   startEnvironment(
-      request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.shell.v1.IStartEnvironmentResponse, protos.google.cloud.shell.v1.IStartEnvironmentMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Starts an existing environment, allowing clients to connect to it. The
- * returned operation will contain an instance of StartEnvironmentMetadata in
- * its metadata field. Users can wait for the environment to start by polling
- * this operation via GetOperation. Once the environment has finished starting
- * and is ready to accept connections, the operation will contain a
- * StartEnvironmentResponse in its response field.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Name of the resource that should be started, for example
- *   `users/me/environments/default` or
- *   `users/someone@example.com/environments/default`.
- * @param {string} request.accessToken
- *   The initial access token passed to the environment. If this is present and
- *   valid, the environment will be pre-authenticated with gcloud so that the
- *   user can run gcloud commands in Cloud Shell without having to log in. This
- *   code can be updated later by calling AuthorizeEnvironment.
- * @param {string[]} request.publicKeys
- *   Public keys that should be added to the environment before it is started.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const [operation] = await client.startEnvironment(request);
- * const [response] = await operation.promise();
- */
+    request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IStartEnvironmentResponse,
+        protos.google.cloud.shell.v1.IStartEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Starts an existing environment, allowing clients to connect to it. The
+   * returned operation will contain an instance of StartEnvironmentMetadata in
+   * its metadata field. Users can wait for the environment to start by polling
+   * this operation via GetOperation. Once the environment has finished starting
+   * and is ready to accept connections, the operation will contain a
+   * StartEnvironmentResponse in its response field.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource that should be started, for example
+   *   `users/me/environments/default` or
+   *   `users/someone@example.com/environments/default`.
+   * @param {string} request.accessToken
+   *   The initial access token passed to the environment. If this is present and
+   *   valid, the environment will be pre-authenticated with gcloud so that the
+   *   user can run gcloud commands in Cloud Shell without having to log in. This
+   *   code can be updated later by calling AuthorizeEnvironment.
+   * @param {string[]} request.publicKeys
+   *   Public keys that should be added to the environment before it is started.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.startEnvironment(request);
+   * const [response] = await operation.promise();
+   */
   startEnvironment(
-      request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.shell.v1.IStartEnvironmentResponse, protos.google.cloud.shell.v1.IStartEnvironmentMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.shell.v1.IStartEnvironmentResponse, protos.google.cloud.shell.v1.IStartEnvironmentMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.shell.v1.IStartEnvironmentResponse, protos.google.cloud.shell.v1.IStartEnvironmentMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.shell.v1.IStartEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.shell.v1.IStartEnvironmentResponse,
+            protos.google.cloud.shell.v1.IStartEnvironmentMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IStartEnvironmentResponse,
+        protos.google.cloud.shell.v1.IStartEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.shell.v1.IStartEnvironmentResponse,
+        protos.google.cloud.shell.v1.IStartEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.startEnvironment(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `startEnvironment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const decodedOperation = await checkStartEnvironmentProgress(name);
- * console.log(decodedOperation.result);
- * console.log(decodedOperation.done);
- * console.log(decodedOperation.metadata);
- */
-  async checkStartEnvironmentProgress(name: string): Promise<LROperation<protos.google.cloud.shell.v1.StartEnvironmentResponse, protos.google.cloud.shell.v1.StartEnvironmentMetadata>>{
-    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `startEnvironment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkStartEnvironmentProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkStartEnvironmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.shell.v1.StartEnvironmentResponse,
+      protos.google.cloud.shell.v1.StartEnvironmentMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.startEnvironment, gax.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.shell.v1.StartEnvironmentResponse, protos.google.cloud.shell.v1.StartEnvironmentMetadata>;
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.startEnvironment,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.shell.v1.StartEnvironmentResponse,
+      protos.google.cloud.shell.v1.StartEnvironmentMetadata
+    >;
   }
   authorizeEnvironment(
-      request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   authorizeEnvironment(
-      request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   authorizeEnvironment(
-      request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Sends OAuth credentials to a running environment on behalf of a user. When
- * this completes, the environment will be authorized to run various Google
- * Cloud command line tools without requiring the user to manually
- * authenticate.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.name
- *   Name of the resource that should receive the credentials, for example
- *   `users/me/environments/default` or
- *   `users/someone@example.com/environments/default`.
- * @param {string} request.accessToken
- *   The OAuth access token that should be sent to the environment.
- * @param {string} request.idToken
- *   The OAuth ID token that should be sent to the environment.
- * @param {google.protobuf.Timestamp} request.expireTime
- *   The time when the credentials expire. If not set, defaults to one hour from
- *   when the server received the request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const [operation] = await client.authorizeEnvironment(request);
- * const [response] = await operation.promise();
- */
+    request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Sends OAuth credentials to a running environment on behalf of a user. When
+   * this completes, the environment will be authorized to run various Google
+   * Cloud command line tools without requiring the user to manually
+   * authenticate.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Name of the resource that should receive the credentials, for example
+   *   `users/me/environments/default` or
+   *   `users/someone@example.com/environments/default`.
+   * @param {string} request.accessToken
+   *   The OAuth access token that should be sent to the environment.
+   * @param {string} request.idToken
+   *   The OAuth ID token that should be sent to the environment.
+   * @param {google.protobuf.Timestamp} request.expireTime
+   *   The time when the credentials expire. If not set, defaults to one hour from
+   *   when the server received the request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.authorizeEnvironment(request);
+   * const [response] = await operation.promise();
+   */
   authorizeEnvironment(
-      request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.shell.v1.IAuthorizeEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
+            protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentResponse,
+        protos.google.cloud.shell.v1.IAuthorizeEnvironmentMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'name': request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.authorizeEnvironment(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `authorizeEnvironment()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const decodedOperation = await checkAuthorizeEnvironmentProgress(name);
- * console.log(decodedOperation.result);
- * console.log(decodedOperation.done);
- * console.log(decodedOperation.metadata);
- */
-  async checkAuthorizeEnvironmentProgress(name: string): Promise<LROperation<protos.google.cloud.shell.v1.AuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.AuthorizeEnvironmentMetadata>>{
-    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `authorizeEnvironment()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkAuthorizeEnvironmentProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkAuthorizeEnvironmentProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.shell.v1.AuthorizeEnvironmentResponse,
+      protos.google.cloud.shell.v1.AuthorizeEnvironmentMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.authorizeEnvironment, gax.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.shell.v1.AuthorizeEnvironmentResponse, protos.google.cloud.shell.v1.AuthorizeEnvironmentMetadata>;
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.authorizeEnvironment,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.shell.v1.AuthorizeEnvironmentResponse,
+      protos.google.cloud.shell.v1.AuthorizeEnvironmentMetadata
+    >;
   }
   addPublicKey(
-      request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.shell.v1.IAddPublicKeyResponse, protos.google.cloud.shell.v1.IAddPublicKeyMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.shell.v1.IAddPublicKeyResponse,
+        protos.google.cloud.shell.v1.IAddPublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   addPublicKey(
-      request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.shell.v1.IAddPublicKeyResponse, protos.google.cloud.shell.v1.IAddPublicKeyMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IAddPublicKeyResponse,
+        protos.google.cloud.shell.v1.IAddPublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   addPublicKey(
-      request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.shell.v1.IAddPublicKeyResponse, protos.google.cloud.shell.v1.IAddPublicKeyMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Adds a public SSH key to an environment, allowing clients with the
- * corresponding private key to connect to that environment via SSH. If a key
- * with the same content already exists, this will error with ALREADY_EXISTS.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.environment
- *   Environment this key should be added to, e.g.
- *   `users/me/environments/default`.
- * @param {string} request.key
- *   Key that should be added to the environment. Supported formats are
- *   `ssh-dss` (see RFC4253), `ssh-rsa` (see RFC4253), `ecdsa-sha2-nistp256`
- *   (see RFC5656), `ecdsa-sha2-nistp384` (see RFC5656) and
- *   `ecdsa-sha2-nistp521` (see RFC5656). It should be structured as
- *   &lt;format&gt; &lt;content&gt;, where &lt;content&gt; part is encoded with
- *   Base64.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const [operation] = await client.addPublicKey(request);
- * const [response] = await operation.promise();
- */
+    request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IAddPublicKeyResponse,
+        protos.google.cloud.shell.v1.IAddPublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Adds a public SSH key to an environment, allowing clients with the
+   * corresponding private key to connect to that environment via SSH. If a key
+   * with the same content already exists, this will error with ALREADY_EXISTS.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   Environment this key should be added to, e.g.
+   *   `users/me/environments/default`.
+   * @param {string} request.key
+   *   Key that should be added to the environment. Supported formats are
+   *   `ssh-dss` (see RFC4253), `ssh-rsa` (see RFC4253), `ecdsa-sha2-nistp256`
+   *   (see RFC5656), `ecdsa-sha2-nistp384` (see RFC5656) and
+   *   `ecdsa-sha2-nistp521` (see RFC5656). It should be structured as
+   *   &lt;format&gt; &lt;content&gt;, where &lt;content&gt; part is encoded with
+   *   Base64.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.addPublicKey(request);
+   * const [response] = await operation.promise();
+   */
   addPublicKey(
-      request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.shell.v1.IAddPublicKeyResponse, protos.google.cloud.shell.v1.IAddPublicKeyMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.shell.v1.IAddPublicKeyResponse, protos.google.cloud.shell.v1.IAddPublicKeyMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.shell.v1.IAddPublicKeyResponse, protos.google.cloud.shell.v1.IAddPublicKeyMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.shell.v1.IAddPublicKeyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.shell.v1.IAddPublicKeyResponse,
+            protos.google.cloud.shell.v1.IAddPublicKeyMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IAddPublicKeyResponse,
+        protos.google.cloud.shell.v1.IAddPublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.shell.v1.IAddPublicKeyResponse,
+        protos.google.cloud.shell.v1.IAddPublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'environment': request.environment || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        environment: request.environment || '',
+      });
     this.initialize();
     return this.innerApiCalls.addPublicKey(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `addPublicKey()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const decodedOperation = await checkAddPublicKeyProgress(name);
- * console.log(decodedOperation.result);
- * console.log(decodedOperation.done);
- * console.log(decodedOperation.metadata);
- */
-  async checkAddPublicKeyProgress(name: string): Promise<LROperation<protos.google.cloud.shell.v1.AddPublicKeyResponse, protos.google.cloud.shell.v1.AddPublicKeyMetadata>>{
-    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `addPublicKey()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkAddPublicKeyProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkAddPublicKeyProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.shell.v1.AddPublicKeyResponse,
+      protos.google.cloud.shell.v1.AddPublicKeyMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.addPublicKey, gax.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.shell.v1.AddPublicKeyResponse, protos.google.cloud.shell.v1.AddPublicKeyMetadata>;
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.addPublicKey,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.shell.v1.AddPublicKeyResponse,
+      protos.google.cloud.shell.v1.AddPublicKeyMetadata
+    >;
   }
   removePublicKey(
-      request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
-      options?: CallOptions):
-      Promise<[
-        LROperation<protos.google.cloud.shell.v1.IRemovePublicKeyResponse, protos.google.cloud.shell.v1.IRemovePublicKeyMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>;
+    request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
+        protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
   removePublicKey(
-      request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
-      options: CallOptions,
-      callback: Callback<
-          LROperation<protos.google.cloud.shell.v1.IRemovePublicKeyResponse, protos.google.cloud.shell.v1.IRemovePublicKeyMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
+        protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   removePublicKey(
-      request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
-      callback: Callback<
-          LROperation<protos.google.cloud.shell.v1.IRemovePublicKeyResponse, protos.google.cloud.shell.v1.IRemovePublicKeyMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Removes a public SSH key from an environment. Clients will no longer be
- * able to connect to the environment using the corresponding private key.
- * If a key with the same content is not present, this will error with
- * NOT_FOUND.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.environment
- *   Environment this key should be removed from, e.g.
- *   `users/me/environments/default`.
- * @param {string} request.key
- *   Key that should be removed from the environment.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing
- *   a long running operation. Its `promise()` method returns a promise
- *   you can `await` for.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const [operation] = await client.removePublicKey(request);
- * const [response] = await operation.promise();
- */
+    request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
+        protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Removes a public SSH key from an environment. Clients will no longer be
+   * able to connect to the environment using the corresponding private key.
+   * If a key with the same content is not present, this will error with
+   * NOT_FOUND.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   Environment this key should be removed from, e.g.
+   *   `users/me/environments/default`.
+   * @param {string} request.key
+   *   Key that should be removed from the environment.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.removePublicKey(request);
+   * const [response] = await operation.promise();
+   */
   removePublicKey(
-      request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
-      optionsOrCallback?: CallOptions|Callback<
-          LROperation<protos.google.cloud.shell.v1.IRemovePublicKeyResponse, protos.google.cloud.shell.v1.IRemovePublicKeyMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          LROperation<protos.google.cloud.shell.v1.IRemovePublicKeyResponse, protos.google.cloud.shell.v1.IRemovePublicKeyMetadata>,
-          protos.google.longrunning.IOperation|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        LROperation<protos.google.cloud.shell.v1.IRemovePublicKeyResponse, protos.google.cloud.shell.v1.IRemovePublicKeyMetadata>,
-        protos.google.longrunning.IOperation|undefined, {}|undefined
-      ]>|void {
+    request: protos.google.cloud.shell.v1.IRemovePublicKeyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
+            protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
+        protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.shell.v1.IRemovePublicKeyResponse,
+        protos.google.cloud.shell.v1.IRemovePublicKeyMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'environment': request.environment || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        environment: request.environment || '',
+      });
     this.initialize();
     return this.innerApiCalls.removePublicKey(request, options, callback);
   }
-/**
- * Check the status of the long running operation returned by `removePublicKey()`.
- * @param {String} name
- *   The operation name that will be passed.
- * @returns {Promise} - The promise which resolves to an object.
- *   The decoded operation object has result and metadata field to get information from.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
- *   for more details and examples.
- * @example
- * const decodedOperation = await checkRemovePublicKeyProgress(name);
- * console.log(decodedOperation.result);
- * console.log(decodedOperation.done);
- * console.log(decodedOperation.metadata);
- */
-  async checkRemovePublicKeyProgress(name: string): Promise<LROperation<protos.google.cloud.shell.v1.RemovePublicKeyResponse, protos.google.cloud.shell.v1.RemovePublicKeyMetadata>>{
-    const request = new operationsProtos.google.longrunning.GetOperationRequest({name});
+  /**
+   * Check the status of the long running operation returned by `removePublicKey()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkRemovePublicKeyProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkRemovePublicKeyProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.shell.v1.RemovePublicKeyResponse,
+      protos.google.cloud.shell.v1.RemovePublicKeyMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
     const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(operation, this.descriptors.longrunning.removePublicKey, gax.createDefaultBackoffSettings());
-    return decodeOperation as LROperation<protos.google.cloud.shell.v1.RemovePublicKeyResponse, protos.google.cloud.shell.v1.RemovePublicKeyMetadata>;
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.removePublicKey,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.shell.v1.RemovePublicKeyResponse,
+      protos.google.cloud.shell.v1.RemovePublicKeyMetadata
+    >;
   }
   // --------------------
   // -- Path templates --
@@ -831,7 +1059,7 @@ export class CloudShellServiceClient {
    * @param {string} environment
    * @returns {string} Resource name string.
    */
-  environmentPath(user:string,environment:string) {
+  environmentPath(user: string, environment: string) {
     return this.pathTemplates.environmentPathTemplate.render({
       user: user,
       environment: environment,
@@ -846,7 +1074,8 @@ export class CloudShellServiceClient {
    * @returns {string} A string representing the user.
    */
   matchUserFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).user;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .user;
   }
 
   /**
@@ -857,7 +1086,8 @@ export class CloudShellServiceClient {
    * @returns {string} A string representing the environment.
    */
   matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName).environment;
+    return this.pathTemplates.environmentPathTemplate.match(environmentName)
+      .environment;
   }
 
   /**
