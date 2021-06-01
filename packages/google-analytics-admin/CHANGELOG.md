@@ -1,5 +1,24 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v2.0.3...v3.0.0) (2021-05-27)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove `CreateIosAppDataStream`, `CreateAndroidAppDataStream` methods from the API (#105)
+
+### Features
+
+* add several new functions and types ([#119](https://www.github.com/googleapis/nodejs-analytics-admin/issues/119)) ([d7c4e29](https://www.github.com/googleapis/nodejs-analytics-admin/commit/d7c4e290bf88b6db9f6c67379c811390cc3b4783))
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#110](https://www.github.com/googleapis/nodejs-analytics-admin/issues/110)) ([cec8b6a](https://www.github.com/googleapis/nodejs-analytics-admin/commit/cec8b6ae04200a57d90586cd58f2fe6d3c94f684))
+* GoogleAdsError missing using generator version after 1.3.0 ([#118](https://www.github.com/googleapis/nodejs-analytics-admin/issues/118)) ([f69d3e9](https://www.github.com/googleapis/nodejs-analytics-admin/commit/f69d3e9bea2a10ecfd6bf3d9edfdf17c6fda168a))
+* remove `CreateIosAppDataStream`, `CreateAndroidAppDataStream` methods from the API ([#105](https://www.github.com/googleapis/nodejs-analytics-admin/issues/105)) ([c6c1883](https://www.github.com/googleapis/nodejs-analytics-admin/commit/c6c1883cdcdbeacce0112c7142758806078cd431))
+* use require() to load JSON protos ([#112](https://www.github.com/googleapis/nodejs-analytics-admin/issues/112)) ([904aaf6](https://www.github.com/googleapis/nodejs-analytics-admin/commit/904aaf6bd48de4f404203aeaeadda1ba8cc62ac9))
+
 ### [2.0.3](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v2.0.2...v2.0.3) (2021-03-08)
 
 
