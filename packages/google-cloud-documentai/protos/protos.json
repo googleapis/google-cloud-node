@@ -3117,7 +3117,7 @@
                     "csharp_namespace": "Google.Cloud.DocumentAI.V1Beta3",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/documentai/v1beta3;documentai",
                     "java_multiple_files": true,
-                    "java_outer_classname": "DocumentAiProcessorService",
+                    "java_outer_classname": "OperationMetadataProto",
                     "java_package": "com.google.cloud.documentai.v1beta3",
                     "php_namespace": "Google\\Cloud\\DocumentAI\\V1beta3",
                     "ruby_package": "Google::Cloud::DocumentAI::V1beta3",
