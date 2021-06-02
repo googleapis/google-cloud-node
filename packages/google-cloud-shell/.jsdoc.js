@@ -1,3 +1,4 @@
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,18 +18,38 @@
 
 'use strict';
 
-const path = require('path');
-const cp = require('child_process');
-const {describe, it} = require('mocha');
-const {assert} = require('chai');
-
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
-
-const cwd = path.join(__dirname, '..');
-
-describe('Quickstart', () => {
-  it('should run quickstart', async () => {
-    const stdout = execSync('node ./quickstart.js', {cwd});
-    assert.match(stdout, /ServiceClientImpl/);
-  });
-});
+module.exports = {
+  opts: {
+    readme: './README.md',
+    package: './package.json',
+    template: './node_modules/jsdoc-fresh',
+    recurse: true,
+    verbose: true,
+    destination: './docs/'
+  },
+  plugins: [
+    'plugins/markdown',
+    'jsdoc-region-tag'
+  ],
+  source: {
+    excludePattern: '(^|\\/|\\\\)[._]',
+    include: [
+      'build/src',
+      'protos'
+    ],
+    includePattern: '\\.js$'
+  },
+  templates: {
+    copyright: 'Copyright 2021 Google LLC',
+    includeDate: false,
+    sourceFiles: false,
+    systemName: '@google-cloud/cloud-shell',
+    theme: 'lumen',
+    default: {
+      outputSourceFiles: false
+    }
+  },
+  markdown: {
+    idInHeadings: true
+  }
+};

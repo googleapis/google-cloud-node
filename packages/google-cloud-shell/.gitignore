@@ -1,2 +1,15 @@
+**/*.log
+**/node_modules
+.coverage
+coverage
+.nyc_output
+docs/
+out/
 build/
-node_modules
+system-test/secrets.js
+system-test/*key.json
+*.lock
+.DS_Store
+package-lock.json
+__pycache__
+owl-bot-staging
