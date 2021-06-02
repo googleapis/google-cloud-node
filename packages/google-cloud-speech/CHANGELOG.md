@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.5.2](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.1...v4.5.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#755](https://www.github.com/googleapis/nodejs-speech/issues/755)) ([0f612f3](https://www.github.com/googleapis/nodejs-speech/commit/0f612f3b7fa2430e3ab17dd258ad8c17e578aad9))
+
 ### [4.5.1](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.0...v4.5.1) (2021-05-20)
 
 
