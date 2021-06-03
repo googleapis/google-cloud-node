@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.1...v2.2.2) (2021-05-29)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#481](https://www.github.com/googleapis/nodejs-redis/issues/481)) ([165e87d](https://www.github.com/googleapis/nodejs-redis/commit/165e87d5f5ed15bac43f3e74dc6af910dd511ab6))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.0...v2.2.1) (2021-05-12)
 
 
