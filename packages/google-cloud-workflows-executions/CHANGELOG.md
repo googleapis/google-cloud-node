@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.0...v1.2.1) (2021-05-26)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#61](https://www.github.com/googleapis/nodejs-workflows/issues/61)) ([7f776b8](https://www.github.com/googleapis/nodejs-workflows/commit/7f776b893eaac71b35512be32c13f7c1e5f00cde))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-workflows/compare/v1.1.0...v1.2.0) (2021-05-10)
 
 
