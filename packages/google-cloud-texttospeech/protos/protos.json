@@ -245,7 +245,7 @@
                 "v1beta1": {
                   "options": {
                     "cc_enable_arenas": true,
-                    "csharp_namespace": "Google.Cloud.TextToSpeech.V1beta1",
+                    "csharp_namespace": "Google.Cloud.TextToSpeech.V1Beta1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/texttospeech/v1beta1;texttospeech",
                     "java_multiple_files": true,
                     "java_outer_classname": "TextToSpeechProto",
