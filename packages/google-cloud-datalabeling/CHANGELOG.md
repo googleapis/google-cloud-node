@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.1...v2.2.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#279](https://www.github.com/googleapis/nodejs-datalabeling/issues/279)) ([a78809f](https://www.github.com/googleapis/nodejs-datalabeling/commit/a78809f7a83fd774dad8599315938e1cdb6e438a))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.0...v2.2.1) (2021-05-12)
 
 
