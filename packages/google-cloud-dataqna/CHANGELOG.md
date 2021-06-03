@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.2...v1.0.3) (2021-05-25)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#36](https://www.github.com/googleapis/nodejs-data-qna/issues/36)) ([40c69dc](https://www.github.com/googleapis/nodejs-data-qna/commit/40c69dc32d2db3b871459dcec2e2b883fa866097))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.1...v1.0.2) (2021-05-12)
 
 
