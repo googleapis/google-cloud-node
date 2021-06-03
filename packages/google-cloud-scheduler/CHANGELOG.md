@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.1...v2.2.2) (2021-05-29)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#367](https://www.github.com/googleapis/nodejs-scheduler/issues/367)) ([8c798fc](https://www.github.com/googleapis/nodejs-scheduler/commit/8c798fc0fa44223d4b75549b96cef7bb39f10066))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.0...v2.2.1) (2021-05-12)
 
 
