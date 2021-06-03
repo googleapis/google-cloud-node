@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.2](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.1...v1.4.2) (2021-05-29)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#116](https://www.github.com/googleapis/nodejs-memcache/issues/116)) ([d892630](https://www.github.com/googleapis/nodejs-memcache/commit/d89263085fd359b47105c1fa3e78fd3cfb2f1d3c))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.0...v1.4.1) (2021-05-12)
 
 
