@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [2.4.2](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.1...v2.4.2) (2021-05-29)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#495](https://www.github.com/googleapis/nodejs-dataproc/issues/495)) ([3dd2344](https://www.github.com/googleapis/nodejs-dataproc/commit/3dd2344349254250dcb3f0b4d5dbd452d76aecb2))
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.0...v2.4.1) (2021-05-12)
 
 
