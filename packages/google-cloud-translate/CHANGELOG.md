@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.2.2](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.1...v6.2.2) (2021-06-01)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#672](https://www.github.com/googleapis/nodejs-translate/issues/672)) ([55ca7e7](https://www.github.com/googleapis/nodejs-translate/commit/55ca7e7acd102fb6590a8440c403df8600109357))
+
 ### [6.2.1](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.0...v6.2.1) (2021-05-11)
 
 

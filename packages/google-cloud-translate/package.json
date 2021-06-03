@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/translate",
   "description": "Cloud Translation API Client Library for Node.js",
-  "version": "6.2.1",
+  "version": "6.2.2",
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
