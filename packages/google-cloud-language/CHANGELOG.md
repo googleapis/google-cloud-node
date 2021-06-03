@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [4.2.4](https://www.github.com/googleapis/nodejs-language/compare/v4.2.3...v4.2.4) (2021-05-29)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#579](https://www.github.com/googleapis/nodejs-language/issues/579)) ([3ab88da](https://www.github.com/googleapis/nodejs-language/commit/3ab88daffd13aeab99689ccccfe3ec29f8ec89cd))
+
 ### [4.2.3](https://www.github.com/googleapis/nodejs-language/compare/v4.2.2...v4.2.3) (2021-05-12)
 
 
