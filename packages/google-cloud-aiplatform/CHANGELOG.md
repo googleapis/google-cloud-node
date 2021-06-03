@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.1](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.0...v1.7.1) (2021-06-02)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#141](https://www.github.com/googleapis/nodejs-ai-platform/issues/141)) ([743c71b](https://www.github.com/googleapis/nodejs-ai-platform/commit/743c71b3cbfd1a1ce62e7bb1395fc599e3690a41))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.6.0...v1.7.0) (2021-05-11)
 
 
