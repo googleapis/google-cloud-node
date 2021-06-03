@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.2...v2.3.3) (2021-05-26)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#908](https://www.github.com/googleapis/nodejs-vision/issues/908)) ([3bd4071](https://www.github.com/googleapis/nodejs-vision/commit/3bd4071597067b7f31d61cbaeaef1fc531179fc4))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.1...v2.3.2) (2021-05-12)
 
 
