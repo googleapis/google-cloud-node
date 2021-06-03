@@ -14,6 +14,7 @@
 * [Samples](#samples)
   * [Microphone stream](#microphone-stream)
   * [Beta Features](#beta-features)
+  * [Export-to-storage.v1p1beta1](#export-to-storage.v1p1beta1)
   * [Infinite Streaming](#infinite-streaming)
   * [Model Adaptation](#model-adaptation)
   * [Multi Region](#multi-region)
@@ -67,6 +68,23 @@ __Usage:__
 
 
 `node samples/betaFeatures.js`
+
+
+-----
+
+
+
+
+### Export-to-storage.v1p1beta1
+
+View the [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/export-to-storage.v1p1beta1.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/export-to-storage.v1p1beta1.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/export-to-storage.v1p1beta1.js`
 
 
 -----
