@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [3.2.2](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.2.1...v3.2.2) (2021-06-04)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#515](https://www.github.com/googleapis/nodejs-text-to-speech/issues/515)) ([f48e238](https://www.github.com/googleapis/nodejs-text-to-speech/commit/f48e238ae8141c4bd92cfa2fbca8f6af7cc07355))
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.2.0...v3.2.1) (2021-05-12)
 
 
