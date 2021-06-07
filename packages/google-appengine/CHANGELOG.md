@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.0...v1.0.1) (2021-06-07)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#49](https://www.github.com/googleapis/nodejs-appengine-admin/issues/49)) ([13a7d7e](https://www.github.com/googleapis/nodejs-appengine-admin/commit/13a7d7e975e583191ede000ee650be9fff7a87fa))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v0.2.1...v1.0.0) (2021-05-20)
 
 
