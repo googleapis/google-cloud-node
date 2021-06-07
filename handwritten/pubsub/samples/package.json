@@ -1,7 +1,8 @@
 {
   "name": "nodejs-docs-samples-pubsub",
   "files": [
-    "*.js"
+    "*.js",
+    "typescript/*.ts"
   ],
   "private": true,
   "license": "Apache-2.0",
@@ -11,16 +12,33 @@
     "node": ">=10"
   },
   "scripts": {
-    "test": "mocha system-test --timeout 600000"
+    "test": "mocha build/system-test --timeout 600000",
+    "pretest": "npm run compile",
+    "tsc": "tsc -p .",
+    "simplifier": "node ./utils/simplifier.js post build/typescript/build/*.js",
+    "copybuilt": "cp *.js build/ && cp build/typescript/build/*.js build/",
+    "copytests": "cp -p system-test/*.js build/system-test",
+    "sampletsc": "cd typescript && tsc -p . && cd ..",
+    "compile": "npm run tsc && npm run sampletsc && npm run simplifier && npm run copybuilt && npm run copytests",
+    "clean": "gts clean && rm -rf build/",
+    "precompile": "npm run clean && node ./utils/simplifier.js commentify typescript/*.ts",
+    "updatejs": "cp build/*.js ."
   },
   "dependencies": {
     "@google-cloud/pubsub": "^2.12.0",
     "@opentelemetry/api": "^0.18.1",
-    "@opentelemetry/tracing": "^0.18.2"
+    "@opentelemetry/tracing": "^0.18.2",
+    "avro-js": "^1.10.1",
+    "p-defer": "^3.0.0",
+    "protobufjs": "^6.11.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.16",
+    "@types/rimraf": "^3.0.0",
     "chai": "^4.2.0",
+    "gts": "^3.1.0",
     "mocha": "^8.0.0",
+    "rimraf": "^3.0.2",
     "uuid": "^8.0.0"
   }
 }
