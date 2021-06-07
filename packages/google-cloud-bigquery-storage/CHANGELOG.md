@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.4.0...v2.5.0) (2021-06-07)
+
+
+### Features
+
+* Add ZSTD compression as an option for Arrow. ([#165](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/165)) ([dc5a1d0](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/dc5a1d00f92f09dafbf0d3b1a9bf5ea4b5c43103))
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#158](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/158)) ([3347edd](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/3347edd3781d7a37ae6a50b0d6885365bc2e4b2f))
+* GoogleAdsError missing using generator version after 1.3.0 ([#171](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/171)) ([8504761](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/850476101d06f4c3f903fb10ebb6709c1a6ffa95))
+* use require() to load JSON protos ([#161](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/161)) ([a16129f](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/a16129f7a56882e3070fa79f29b8b6018e7cd651))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.3.0...v2.4.0) (2021-04-20)
 
 
