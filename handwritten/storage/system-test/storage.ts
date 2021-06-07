@@ -3378,14 +3378,11 @@ describe('storage', () => {
         .file(fileName)
         .save('hello1', {resumable: false});
       await assert.rejects(
-        async () => {
-          await bucketWithVersioning
-            .file(fileName, {generation: 0})
-            .save('hello2');
-        },
-        {
-          code: 412,
-          message: 'Precondition Failed',
+        bucketWithVersioning.file(fileName, {generation: 0}).save('hello2'),
+        (err: ApiError) => {
+          assert.strictEqual(err.code, 412);
+          assert.strictEqual(err.errors![0].reason, 'conditionNotMet');
+          return true;
         }
       );
       await bucketWithVersioning
