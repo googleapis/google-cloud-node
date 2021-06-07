@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.1...v1.1.2) (2021-06-07)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#58](https://www.github.com/googleapis/nodejs-notebooks/issues/58)) ([e85232e](https://www.github.com/googleapis/nodejs-notebooks/commit/e85232ee798d1de45dd13f4ba9d1d1e0982983c6))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.0...v1.1.1) (2021-05-12)
 
 
