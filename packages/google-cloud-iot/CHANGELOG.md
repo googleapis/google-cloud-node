@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.1...v2.3.2) (2021-06-07)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#478](https://www.github.com/googleapis/nodejs-iot/issues/478)) ([5c20030](https://www.github.com/googleapis/nodejs-iot/commit/5c20030e43fdd110b87aeeabed533f6c70a03e81))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.0...v2.3.1) (2021-05-12)
 
 
