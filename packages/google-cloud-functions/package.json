@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/functions",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "Functions client for Node.js",
   "repository": "googleapis/nodejs-functions",
   "license": "Apache-2.0",

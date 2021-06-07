@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.5](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.4...v1.1.5) (2021-06-07)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#78](https://www.github.com/googleapis/nodejs-functions/issues/78)) ([4c413d8](https://www.github.com/googleapis/nodejs-functions/commit/4c413d8e199cfe5e4e6d1f9144b44fea1a98d59d))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.3...v1.1.4) (2021-05-12)
 
 
