@@ -173,8 +173,10 @@ describe('signer', () => {
         const expiresNumber = accessibleAtNumber + 86400000; //2020-02-18T16:00:00-08:00
 
         it('should set correct settings if accessibleAt provided', async () => {
-          const authClientSign: sinon.SinonStub<[string], Promise<string>> =
-            sandbox.stub(authClient, 'sign').resolves('signature');
+          const authClientSign: sinon.SinonStub<
+            [string],
+            Promise<string>
+          > = sandbox.stub(authClient, 'sign').resolves('signature');
           const accessibleAt = new Date(accessibleAtNumber);
           await signer.getSignedUrl({
             version: 'v4',
