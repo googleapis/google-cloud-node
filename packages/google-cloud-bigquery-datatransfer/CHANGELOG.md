@@ -4,6 +4,15 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+### [2.2.1](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.2.0...v2.2.1) (2021-06-07)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#450](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/450)) ([8872637](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/88726378bab4349b653160b9dfcda7ed142c87d9))
+* GoogleAdsError missing using generator version after 1.3.0 ([#460](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/460)) ([585f7d8](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/585f7d89b879faa9ae5127eb2b53c233c9ba1028))
+* use require() to load JSON protos ([#453](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/453)) ([ceae869](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/ceae8690c4d1b2b1edf7255f484d7885edc1dbf1))
+
 ## [2.2.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.1.2...v2.2.0) (2021-01-09)
 
 
