@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.1...v1.1.2) (2021-06-07)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#72](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/72)) ([17a06f7](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/17a06f7921e7c0200f1ff73ed29cd03c4c85b560))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.0...v1.1.1) (2021-05-12)
 
 
