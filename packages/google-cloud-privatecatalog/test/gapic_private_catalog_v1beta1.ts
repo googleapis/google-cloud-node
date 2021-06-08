@@ -28,9 +28,10 @@ import {PassThrough} from 'stream';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -264,8 +265,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
           new protos.google.cloud.privatecatalog.v1beta1.Catalog()
         ),
       ];
-      client.innerApiCalls.searchCatalogs =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.searchCatalogs = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.searchCatalogs(
           request,
@@ -345,12 +347,12 @@ describe('v1beta1.PrivateCatalogClient', () => {
           new protos.google.cloud.privatecatalog.v1beta1.Catalog()
         ),
       ];
-      client.descriptors.page.searchCatalogs.createStream =
-        stubPageStreamingCall(expectedResponse);
+      client.descriptors.page.searchCatalogs.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
       const stream = client.searchCatalogsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privatecatalog.v1beta1.Catalog[] =
-          [];
+        const responses: protos.google.cloud.privatecatalog.v1beta1.Catalog[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.privatecatalog.v1beta1.Catalog) => {
@@ -372,9 +374,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
           .calledWith(client.innerApiCalls.searchCatalogs, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchCatalogs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchCatalogs
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -391,12 +394,13 @@ describe('v1beta1.PrivateCatalogClient', () => {
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchCatalogs.createStream =
-        stubPageStreamingCall(undefined, expectedError);
+      client.descriptors.page.searchCatalogs.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
       const stream = client.searchCatalogsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privatecatalog.v1beta1.Catalog[] =
-          [];
+        const responses: protos.google.cloud.privatecatalog.v1beta1.Catalog[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.privatecatalog.v1beta1.Catalog) => {
@@ -417,9 +421,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
           .calledWith(client.innerApiCalls.searchCatalogs, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchCatalogs.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchCatalogs
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -446,25 +451,25 @@ describe('v1beta1.PrivateCatalogClient', () => {
           new protos.google.cloud.privatecatalog.v1beta1.Catalog()
         ),
       ];
-      client.descriptors.page.searchCatalogs.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.privatecatalog.v1beta1.ICatalog[] =
-        [];
+      client.descriptors.page.searchCatalogs.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.privatecatalog.v1beta1.ICatalog[] = [];
       const iterable = client.searchCatalogsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchCatalogs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.searchCatalogs
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchCatalogs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchCatalogs
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -481,26 +486,27 @@ describe('v1beta1.PrivateCatalogClient', () => {
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchCatalogs.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
+      client.descriptors.page.searchCatalogs.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
       const iterable = client.searchCatalogsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.privatecatalog.v1beta1.ICatalog[] =
-          [];
+        const responses: protos.google.cloud.privatecatalog.v1beta1.ICatalog[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchCatalogs.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.searchCatalogs
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchCatalogs.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchCatalogs
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -575,8 +581,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
           new protos.google.cloud.privatecatalog.v1beta1.Product()
         ),
       ];
-      client.innerApiCalls.searchProducts =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.searchProducts = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.searchProducts(
           request,
@@ -656,12 +663,12 @@ describe('v1beta1.PrivateCatalogClient', () => {
           new protos.google.cloud.privatecatalog.v1beta1.Product()
         ),
       ];
-      client.descriptors.page.searchProducts.createStream =
-        stubPageStreamingCall(expectedResponse);
+      client.descriptors.page.searchProducts.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
       const stream = client.searchProductsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privatecatalog.v1beta1.Product[] =
-          [];
+        const responses: protos.google.cloud.privatecatalog.v1beta1.Product[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.privatecatalog.v1beta1.Product) => {
@@ -683,9 +690,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
           .calledWith(client.innerApiCalls.searchProducts, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchProducts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchProducts
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -702,12 +710,13 @@ describe('v1beta1.PrivateCatalogClient', () => {
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchProducts.createStream =
-        stubPageStreamingCall(undefined, expectedError);
+      client.descriptors.page.searchProducts.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
       const stream = client.searchProductsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privatecatalog.v1beta1.Product[] =
-          [];
+        const responses: protos.google.cloud.privatecatalog.v1beta1.Product[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.privatecatalog.v1beta1.Product) => {
@@ -728,9 +737,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
           .calledWith(client.innerApiCalls.searchProducts, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchProducts.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchProducts
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -757,25 +767,25 @@ describe('v1beta1.PrivateCatalogClient', () => {
           new protos.google.cloud.privatecatalog.v1beta1.Product()
         ),
       ];
-      client.descriptors.page.searchProducts.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.privatecatalog.v1beta1.IProduct[] =
-        [];
+      client.descriptors.page.searchProducts.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.privatecatalog.v1beta1.IProduct[] = [];
       const iterable = client.searchProductsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchProducts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.searchProducts
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchProducts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchProducts
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -792,26 +802,27 @@ describe('v1beta1.PrivateCatalogClient', () => {
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchProducts.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
+      client.descriptors.page.searchProducts.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
       const iterable = client.searchProductsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.privatecatalog.v1beta1.IProduct[] =
-          [];
+        const responses: protos.google.cloud.privatecatalog.v1beta1.IProduct[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchProducts.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.searchProducts
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchProducts.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchProducts
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -886,8 +897,9 @@ describe('v1beta1.PrivateCatalogClient', () => {
           new protos.google.cloud.privatecatalog.v1beta1.Version()
         ),
       ];
-      client.innerApiCalls.searchVersions =
-        stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.searchVersions = stubSimpleCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.searchVersions(
           request,
@@ -967,12 +979,12 @@ describe('v1beta1.PrivateCatalogClient', () => {
           new protos.google.cloud.privatecatalog.v1beta1.Version()
         ),
       ];
-      client.descriptors.page.searchVersions.createStream =
-        stubPageStreamingCall(expectedResponse);
+      client.descriptors.page.searchVersions.createStream = stubPageStreamingCall(
+        expectedResponse
+      );
       const stream = client.searchVersionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privatecatalog.v1beta1.Version[] =
-          [];
+        const responses: protos.google.cloud.privatecatalog.v1beta1.Version[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.privatecatalog.v1beta1.Version) => {
@@ -994,9 +1006,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
           .calledWith(client.innerApiCalls.searchVersions, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchVersions.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchVersions
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -1013,12 +1026,13 @@ describe('v1beta1.PrivateCatalogClient', () => {
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchVersions.createStream =
-        stubPageStreamingCall(undefined, expectedError);
+      client.descriptors.page.searchVersions.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
       const stream = client.searchVersionsStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.privatecatalog.v1beta1.Version[] =
-          [];
+        const responses: protos.google.cloud.privatecatalog.v1beta1.Version[] = [];
         stream.on(
           'data',
           (response: protos.google.cloud.privatecatalog.v1beta1.Version) => {
@@ -1039,9 +1053,10 @@ describe('v1beta1.PrivateCatalogClient', () => {
           .calledWith(client.innerApiCalls.searchVersions, request)
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchVersions.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchVersions
+          .createStream as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -1068,25 +1083,25 @@ describe('v1beta1.PrivateCatalogClient', () => {
           new protos.google.cloud.privatecatalog.v1beta1.Version()
         ),
       ];
-      client.descriptors.page.searchVersions.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.privatecatalog.v1beta1.IVersion[] =
-        [];
+      client.descriptors.page.searchVersions.asyncIterate = stubAsyncIterationCall(
+        expectedResponse
+      );
+      const responses: protos.google.cloud.privatecatalog.v1beta1.IVersion[] = [];
       const iterable = client.searchVersionsAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
       }
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.searchVersions
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchVersions.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchVersions
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });
@@ -1103,26 +1118,27 @@ describe('v1beta1.PrivateCatalogClient', () => {
       request.resource = '';
       const expectedHeaderRequestParams = 'resource=';
       const expectedError = new Error('expected');
-      client.descriptors.page.searchVersions.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
+      client.descriptors.page.searchVersions.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
       const iterable = client.searchVersionsAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.privatecatalog.v1beta1.IVersion[] =
-          [];
+        const responses: protos.google.cloud.privatecatalog.v1beta1.IVersion[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }
       });
       assert.deepStrictEqual(
-        (
-          client.descriptors.page.searchVersions.asyncIterate as SinonStub
-        ).getCall(0).args[1],
+        (client.descriptors.page.searchVersions
+          .asyncIterate as SinonStub).getCall(0).args[1],
         request
       );
       assert.strictEqual(
-        (
-          client.descriptors.page.searchVersions.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        (client.descriptors.page.searchVersions
+          .asyncIterate as SinonStub).getCall(0).args[2].otherArgs.headers[
+          'x-goog-request-params'
+        ],
         expectedHeaderRequestParams
       );
     });

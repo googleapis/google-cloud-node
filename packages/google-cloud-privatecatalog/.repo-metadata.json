@@ -7,7 +7,7 @@
   "release_level": "BETA",
   "language": "nodejs",
   "repo": "googleapis/nodejs-private-catalog",
-  "distribution_name": "",
+  "distribution_name": "@google-cloud/private-catalog",
   "api_id": "privatecatalog.googleapis.com",
   "default_version": "v1beta1",
   "requires_billing": true

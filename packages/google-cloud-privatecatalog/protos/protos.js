@@ -28,7 +28,7 @@
     var $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
     
     // Exported root namespace
-    var $root = $protobuf.roots.undefined_protos || ($protobuf.roots.undefined_protos = {});
+    var $root = $protobuf.roots._google_cloud_private_catalog_protos || ($protobuf.roots._google_cloud_private_catalog_protos = {});
     
     $root.google = (function() {
     
@@ -2375,19 +2375,19 @@
     
                         /**
                          * AssetReference asset.
-                         * @member {string|null|undefined} asset
+                         * @member {string} asset
                          * @memberof google.cloud.privatecatalog.v1beta1.AssetReference
                          * @instance
                          */
-                        AssetReference.prototype.asset = null;
+                        AssetReference.prototype.asset = "";
     
                         /**
                          * AssetReference gcsPath.
-                         * @member {string|null|undefined} gcsPath
+                         * @member {string} gcsPath
                          * @memberof google.cloud.privatecatalog.v1beta1.AssetReference
                          * @instance
                          */
-                        AssetReference.prototype.gcsPath = null;
+                        AssetReference.prototype.gcsPath = "";
     
                         /**
                          * AssetReference gitSource.
@@ -3320,27 +3320,27 @@
     
                         /**
                          * GitSource commit.
-                         * @member {string|null|undefined} commit
+                         * @member {string} commit
                          * @memberof google.cloud.privatecatalog.v1beta1.GitSource
                          * @instance
                          */
-                        GitSource.prototype.commit = null;
+                        GitSource.prototype.commit = "";
     
                         /**
                          * GitSource branch.
-                         * @member {string|null|undefined} branch
+                         * @member {string} branch
                          * @memberof google.cloud.privatecatalog.v1beta1.GitSource
                          * @instance
                          */
-                        GitSource.prototype.branch = null;
+                        GitSource.prototype.branch = "";
     
                         /**
                          * GitSource tag.
-                         * @member {string|null|undefined} tag
+                         * @member {string} tag
                          * @memberof google.cloud.privatecatalog.v1beta1.GitSource
                          * @instance
                          */
-                        GitSource.prototype.tag = null;
+                        GitSource.prototype.tag = "";
     
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
@@ -4165,43 +4165,43 @@
     
                 /**
                  * HttpRule get.
-                 * @member {string|null|undefined} get
+                 * @member {string} get
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.get = null;
+                HttpRule.prototype.get = "";
     
                 /**
                  * HttpRule put.
-                 * @member {string|null|undefined} put
+                 * @member {string} put
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.put = null;
+                HttpRule.prototype.put = "";
     
                 /**
                  * HttpRule post.
-                 * @member {string|null|undefined} post
+                 * @member {string} post
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.post = null;
+                HttpRule.prototype.post = "";
     
                 /**
                  * HttpRule delete.
-                 * @member {string|null|undefined} delete
+                 * @member {string} delete
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype["delete"] = null;
+                HttpRule.prototype["delete"] = "";
     
                 /**
                  * HttpRule patch.
-                 * @member {string|null|undefined} patch
+                 * @member {string} patch
                  * @memberof google.api.HttpRule
                  * @instance
                  */
-                HttpRule.prototype.patch = null;
+                HttpRule.prototype.patch = "";
     
                 /**
                  * HttpRule custom.
@@ -15238,35 +15238,35 @@
     
                 /**
                  * Value nullValue.
-                 * @member {google.protobuf.NullValue|null|undefined} nullValue
+                 * @member {google.protobuf.NullValue} nullValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.nullValue = null;
+                Value.prototype.nullValue = 0;
     
                 /**
                  * Value numberValue.
-                 * @member {number|null|undefined} numberValue
+                 * @member {number} numberValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.numberValue = null;
+                Value.prototype.numberValue = 0;
     
                 /**
                  * Value stringValue.
-                 * @member {string|null|undefined} stringValue
+                 * @member {string} stringValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.stringValue = null;
+                Value.prototype.stringValue = "";
     
                 /**
                  * Value boolValue.
-                 * @member {boolean|null|undefined} boolValue
+                 * @member {boolean} boolValue
                  * @memberof google.protobuf.Value
                  * @instance
                  */
-                Value.prototype.boolValue = null;
+                Value.prototype.boolValue = false;
     
                 /**
                  * Value structValue.

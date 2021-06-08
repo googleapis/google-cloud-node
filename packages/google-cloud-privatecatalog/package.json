@@ -1,8 +1,8 @@
 {
-  "name": "undefined",
+  "name": "@google-cloud/private-catalog",
   "version": "0.1.0",
   "description": "cloudprivatecatalog client for Node.js",
-  "repository": "googleapis/googleapis/nodejs-private-catalog",
+  "repository": "googleapis/nodejs-private-catalog",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
