@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-dns/compare/v2.1.0...v2.2.0) (2021-06-07)
+
+
+### Features
+
+* add `gcf-owl-bot[bot]` to `ignoreAuthors` ([#452](https://www.github.com/googleapis/nodejs-dns/issues/452)) ([6148f03](https://www.github.com/googleapis/nodejs-dns/commit/6148f03b37be1960bd5ed6ce32d696a8c0acdd2f))
+
 ## [2.1.0](https://www.github.com/googleapis/nodejs-dns/compare/v2.0.2...v2.1.0) (2020-12-22)
 
 
