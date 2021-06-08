@@ -823,7 +823,7 @@ export class DataMigrationServiceClient {
    *   Required. The ID of the instance to create.
    * @param {google.cloud.clouddms.v1.MigrationJob} request.migrationJob
    *   Required. Represents a [migration
-   *   job](https://cloud.google.com/database-migration/reference/rest/v1/projects.locations.migrationJobs)
+   *   job](https://cloud.google.com/database-migration/docs/reference/rest/v1/projects.locations.migrationJobs)
    *   object.
    * @param {string} request.requestId
    *   A unique id used to identify the request. If the server receives two
