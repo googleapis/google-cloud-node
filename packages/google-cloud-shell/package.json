@@ -1,8 +1,8 @@
 {
-  "name": "@google-cloud/cloud-shell",
+  "name": "@google-cloud/shell",
   "version": "0.1.0",
   "description": "cloudshell client for Node.js",
-  "repository": "googleapis/googleapis/nodejs-cloud-shell",
+  "repository": "googleapis/nodejs-cloud-shell",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",

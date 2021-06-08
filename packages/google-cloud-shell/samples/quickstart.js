@@ -19,7 +19,7 @@ async function main() {
 
   // remove this line after package is released
   // eslint-disable-next-line node/no-missing-require
-  const {CloudShellServiceClient} = require('@google-cloud/cloud-shell');
+  const {CloudShellServiceClient} = require('@google-cloud/shell');
 
   // TODO(developer): replace with your prefered project ID.
   // const projectId = 'my-project'

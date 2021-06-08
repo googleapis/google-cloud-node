@@ -5,7 +5,7 @@
 # [Cloud Shell: Node.js Client](https://github.com/googleapis/nodejs-cloud-shell)
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/@google-cloud/cloud-shell.svg)](https://www.npmjs.org/package/@google-cloud/cloud-shell)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/shell.svg)](https://www.npmjs.org/package/@google-cloud/shell)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloud-shell/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloud-shell)
 
 
@@ -51,7 +51,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/cloud-shell
+npm install @google-cloud/shell
 ```
 
 
@@ -62,7 +62,7 @@ npm install @google-cloud/cloud-shell
 
 // remove this line after package is released
 // eslint-disable-next-line node/no-missing-require
-const {CloudShellServiceClient} = require('@google-cloud/cloud-shell');
+const {CloudShellServiceClient} = require('@google-cloud/shell');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'

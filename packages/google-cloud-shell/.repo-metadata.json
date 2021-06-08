@@ -7,7 +7,7 @@
   "release_level": "BETA",
   "language": "nodejs",
   "repo": "googleapis/nodejs-cloud-shell",
-  "distribution_name": "@google-cloud/cloud-shell",
+  "distribution_name": "@google-cloud/shell",
   "api_id": "shell.googleapis.com",
   "default_version": "v1",
   "requires_billing": true
