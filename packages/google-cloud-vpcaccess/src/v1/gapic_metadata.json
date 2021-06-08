@@ -1,0 +1,67 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.vpcaccess.v1",
+  "libraryPackage": "@google-cloud/vpcaccess",
+  "services": {
+    "VpcAccessService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VpcAccessServiceClient",
+          "rpcs": {
+            "GetConnector": {
+              "methods": [
+                "getConnector"
+              ]
+            },
+            "CreateConnector": {
+              "methods": [
+                "createConnector"
+              ]
+            },
+            "DeleteConnector": {
+              "methods": [
+                "deleteConnector"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "listConnectors",
+                "listConnectorsStream",
+                "listConnectorsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VpcAccessServiceClient",
+          "rpcs": {
+            "GetConnector": {
+              "methods": [
+                "getConnector"
+              ]
+            },
+            "CreateConnector": {
+              "methods": [
+                "createConnector"
+              ]
+            },
+            "DeleteConnector": {
+              "methods": [
+                "deleteConnector"
+              ]
+            },
+            "ListConnectors": {
+              "methods": [
+                "listConnectors",
+                "listConnectorsStream",
+                "listConnectorsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
