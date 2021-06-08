@@ -20,6 +20,7 @@ jobs:
           ACCESS_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
         with:
           command: pr
+          force: true
           upstream_owner: googleapis
           upstream_repo: google-cloud-node
           description: 'Update the list of available APIs in the README.'
