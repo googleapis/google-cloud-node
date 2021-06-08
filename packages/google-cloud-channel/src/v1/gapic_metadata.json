@@ -55,6 +55,11 @@
                 "updateChannelPartnerLink"
               ]
             },
+            "LookupOffer": {
+              "methods": [
+                "lookupOffer"
+              ]
+            },
             "RegisterSubscriber": {
               "methods": [
                 "registerSubscriber"
@@ -245,6 +250,11 @@
             "UpdateChannelPartnerLink": {
               "methods": [
                 "updateChannelPartnerLink"
+              ]
+            },
+            "LookupOffer": {
+              "methods": [
+                "lookupOffer"
               ]
             },
             "RegisterSubscriber": {

@@ -1299,6 +1299,123 @@ describe('v1.CloudChannelServiceClient', () => {
     });
   });
 
+  describe('lookupOffer', () => {
+    it('invokes lookupOffer without error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.LookupOfferRequest()
+      );
+      request.entitlement = '';
+      const expectedHeaderRequestParams = 'entitlement=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.Offer()
+      );
+      client.innerApiCalls.lookupOffer = stubSimpleCall(expectedResponse);
+      const [response] = await client.lookupOffer(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.lookupOffer as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes lookupOffer without error using callback', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.LookupOfferRequest()
+      );
+      request.entitlement = '';
+      const expectedHeaderRequestParams = 'entitlement=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.channel.v1.Offer()
+      );
+      client.innerApiCalls.lookupOffer =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.lookupOffer(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.channel.v1.IOffer | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.lookupOffer as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes lookupOffer with error', async () => {
+      const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.channel.v1.LookupOfferRequest()
+      );
+      request.entitlement = '';
+      const expectedHeaderRequestParams = 'entitlement=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.lookupOffer = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.lookupOffer(request), expectedError);
+      assert(
+        (client.innerApiCalls.lookupOffer as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('registerSubscriber', () => {
     it('invokes registerSubscriber without error', async () => {
       const client = new cloudchannelserviceModule.v1.CloudChannelServiceClient(

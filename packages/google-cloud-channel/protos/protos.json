@@ -995,12 +995,16 @@
                           "requestType": "ListCustomersRequest",
                           "responseType": "ListCustomersResponse",
                           "options": {
-                            "(google.api.http).get": "/v1/{parent=accounts/*}/customers"
+                            "(google.api.http).get": "/v1/{parent=accounts/*}/customers",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=accounts/*/channelPartnerLinks/*}/customers"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{parent=accounts/*}/customers"
+                                "get": "/v1/{parent=accounts/*}/customers",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=accounts/*/channelPartnerLinks/*}/customers"
+                                }
                               }
                             }
                           ]
@@ -1010,12 +1014,16 @@
                           "responseType": "Customer",
                           "options": {
                             "(google.api.http).get": "/v1/{name=accounts/*/customers/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=accounts/*/channelPartnerLinks/*/customers/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/{name=accounts/*/customers/*}"
+                                "get": "/v1/{name=accounts/*/customers/*}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=accounts/*/channelPartnerLinks/*/customers/*}"
+                                }
                               }
                             },
                             {
@@ -1044,13 +1052,19 @@
                           "responseType": "Customer",
                           "options": {
                             "(google.api.http).post": "/v1/{parent=accounts/*}/customers",
-                            "(google.api.http).body": "customer"
+                            "(google.api.http).body": "customer",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=accounts/*/channelPartnerLinks/*}/customers",
+                            "(google.api.http).additional_bindings.body": "customer"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{parent=accounts/*}/customers",
-                                "body": "customer"
+                                "body": "customer",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=accounts/*/channelPartnerLinks/*}/customers",
+                                  "body": "customer"
+                                }
                               }
                             }
                           ]
@@ -1060,13 +1074,19 @@
                           "responseType": "Customer",
                           "options": {
                             "(google.api.http).patch": "/v1/{customer.name=accounts/*/customers/*}",
-                            "(google.api.http).body": "customer"
+                            "(google.api.http).body": "customer",
+                            "(google.api.http).additional_bindings.patch": "/v1/{customer.name=accounts/*/channelPartnerLinks/*/customers/*}",
+                            "(google.api.http).additional_bindings.body": "customer"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/{customer.name=accounts/*/customers/*}",
-                                "body": "customer"
+                                "body": "customer",
+                                "additional_bindings": {
+                                  "patch": "/v1/{customer.name=accounts/*/channelPartnerLinks/*/customers/*}",
+                                  "body": "customer"
+                                }
                               }
                             }
                           ]
@@ -1076,12 +1096,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1/{name=accounts/*/customers/*}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=accounts/*/channelPartnerLinks/*/customers/*}",
                             "(google.api.method_signature)": "name"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1/{name=accounts/*/customers/*}"
+                                "delete": "/v1/{name=accounts/*/customers/*}",
+                                "additional_bindings": {
+                                  "delete": "/v1/{name=accounts/*/channelPartnerLinks/*/customers/*}"
+                                }
                               }
                             },
                             {
@@ -1469,6 +1493,20 @@
                               "(google.api.http)": {
                                 "patch": "/v1/{name=accounts/*/channelPartnerLinks/*}",
                                 "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "LookupOffer": {
+                          "requestType": "LookupOfferRequest",
+                          "responseType": "Offer",
+                          "options": {
+                            "(google.api.http).get": "/v1/{entitlement=accounts/*/customers/*/entitlements/*}:lookupOffer"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{entitlement=accounts/*/customers/*/entitlements/*}:lookupOffer"
                               }
                             }
                           ]
@@ -2299,6 +2337,18 @@
                         }
                       }
                     },
+                    "LookupOfferRequest": {
+                      "fields": {
+                        "entitlement": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Entitlement"
+                          }
+                        }
+                      }
+                    },
                     "ListProductsRequest": {
                       "fields": {
                         "account": {
@@ -2806,7 +2856,8 @@
                             "SKU_CHANGED": 9,
                             "RENEWAL_SETTING_CHANGED": 10,
                             "PAID_SERVICE_STARTED": 11,
-                            "LICENSE_ASSIGNMENT_CHANGED": 12
+                            "LICENSE_ASSIGNMENT_CHANGED": 12,
+                            "LICENSE_CAP_CHANGED": 13
                           }
                         }
                       }

@@ -10285,6 +10285,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#lookupOffer}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef LookupOfferCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.Offer} [response] Offer
+                         */
+    
+                        /**
+                         * Calls LookupOffer.
+                         * @function lookupOffer
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.ILookupOfferRequest} request LookupOfferRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.LookupOfferCallback} callback Node-style callback called with the error, if any, and Offer
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.lookupOffer = function lookupOffer(request, callback) {
+                            return this.rpcCall(lookupOffer, $root.google.cloud.channel.v1.LookupOfferRequest, $root.google.cloud.channel.v1.Offer, request, callback);
+                        }, "name", { value: "LookupOffer" });
+    
+                        /**
+                         * Calls LookupOffer.
+                         * @function lookupOffer
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.ILookupOfferRequest} request LookupOfferRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.Offer>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#listProducts}.
                          * @memberof google.cloud.channel.v1.CloudChannelService
                          * @typedef ListProductsCallback
@@ -18567,6 +18600,193 @@
                         return ActivateEntitlementRequest;
                     })();
     
+                    v1.LookupOfferRequest = (function() {
+    
+                        /**
+                         * Properties of a LookupOfferRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface ILookupOfferRequest
+                         * @property {string|null} [entitlement] LookupOfferRequest entitlement
+                         */
+    
+                        /**
+                         * Constructs a new LookupOfferRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents a LookupOfferRequest.
+                         * @implements ILookupOfferRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.ILookupOfferRequest=} [properties] Properties to set
+                         */
+                        function LookupOfferRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * LookupOfferRequest entitlement.
+                         * @member {string} entitlement
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @instance
+                         */
+                        LookupOfferRequest.prototype.entitlement = "";
+    
+                        /**
+                         * Creates a new LookupOfferRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ILookupOfferRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.LookupOfferRequest} LookupOfferRequest instance
+                         */
+                        LookupOfferRequest.create = function create(properties) {
+                            return new LookupOfferRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified LookupOfferRequest message. Does not implicitly {@link google.cloud.channel.v1.LookupOfferRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ILookupOfferRequest} message LookupOfferRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookupOfferRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.entitlement != null && Object.hasOwnProperty.call(message, "entitlement"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.entitlement);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified LookupOfferRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.LookupOfferRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ILookupOfferRequest} message LookupOfferRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        LookupOfferRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a LookupOfferRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.LookupOfferRequest} LookupOfferRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookupOfferRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.LookupOfferRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.entitlement = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a LookupOfferRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.LookupOfferRequest} LookupOfferRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        LookupOfferRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a LookupOfferRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        LookupOfferRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.entitlement != null && message.hasOwnProperty("entitlement"))
+                                if (!$util.isString(message.entitlement))
+                                    return "entitlement: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a LookupOfferRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.LookupOfferRequest} LookupOfferRequest
+                         */
+                        LookupOfferRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.LookupOfferRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.LookupOfferRequest();
+                            if (object.entitlement != null)
+                                message.entitlement = String(object.entitlement);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a LookupOfferRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.LookupOfferRequest} message LookupOfferRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        LookupOfferRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.entitlement = "";
+                            if (message.entitlement != null && message.hasOwnProperty("entitlement"))
+                                object.entitlement = message.entitlement;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this LookupOfferRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.LookupOfferRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        LookupOfferRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return LookupOfferRequest;
+                    })();
+    
                     v1.ListProductsRequest = (function() {
     
                         /**
@@ -24092,6 +24312,7 @@
                                 case 10:
                                 case 11:
                                 case 12:
+                                case 13:
                                     break;
                                 }
                             return null;
@@ -24160,6 +24381,10 @@
                             case 12:
                                 message.eventType = 12;
                                 break;
+                            case "LICENSE_CAP_CHANGED":
+                            case 13:
+                                message.eventType = 13;
+                                break;
                             }
                             return message;
                         };
@@ -24215,6 +24440,7 @@
                          * @property {number} RENEWAL_SETTING_CHANGED=10 RENEWAL_SETTING_CHANGED value
                          * @property {number} PAID_SERVICE_STARTED=11 PAID_SERVICE_STARTED value
                          * @property {number} LICENSE_ASSIGNMENT_CHANGED=12 LICENSE_ASSIGNMENT_CHANGED value
+                         * @property {number} LICENSE_CAP_CHANGED=13 LICENSE_CAP_CHANGED value
                          */
                         EntitlementEvent.Type = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -24230,6 +24456,7 @@
                             values[valuesById[10] = "RENEWAL_SETTING_CHANGED"] = 10;
                             values[valuesById[11] = "PAID_SERVICE_STARTED"] = 11;
                             values[valuesById[12] = "LICENSE_ASSIGNMENT_CHANGED"] = 12;
+                            values[valuesById[13] = "LICENSE_CAP_CHANGED"] = 13;
                             return values;
                         })();
     

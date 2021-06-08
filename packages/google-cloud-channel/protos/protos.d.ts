@@ -3956,6 +3956,20 @@ export namespace google {
                     public updateChannelPartnerLink(request: google.cloud.channel.v1.IUpdateChannelPartnerLinkRequest): Promise<google.cloud.channel.v1.ChannelPartnerLink>;
 
                     /**
+                     * Calls LookupOffer.
+                     * @param request LookupOfferRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Offer
+                     */
+                    public lookupOffer(request: google.cloud.channel.v1.ILookupOfferRequest, callback: google.cloud.channel.v1.CloudChannelService.LookupOfferCallback): void;
+
+                    /**
+                     * Calls LookupOffer.
+                     * @param request LookupOfferRequest message or plain object
+                     * @returns Promise
+                     */
+                    public lookupOffer(request: google.cloud.channel.v1.ILookupOfferRequest): Promise<google.cloud.channel.v1.Offer>;
+
+                    /**
                      * Calls ListProducts.
                      * @param request ListProductsRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListProductsResponse
@@ -4244,6 +4258,13 @@ export namespace google {
                      * @param [response] ChannelPartnerLink
                      */
                     type UpdateChannelPartnerLinkCallback = (error: (Error|null), response?: google.cloud.channel.v1.ChannelPartnerLink) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#lookupOffer}.
+                     * @param error Error, if any
+                     * @param [response] Offer
+                     */
+                    type LookupOfferCallback = (error: (Error|null), response?: google.cloud.channel.v1.Offer) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#listProducts}.
@@ -7710,6 +7731,96 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a LookupOfferRequest. */
+                interface ILookupOfferRequest {
+
+                    /** LookupOfferRequest entitlement */
+                    entitlement?: (string|null);
+                }
+
+                /** Represents a LookupOfferRequest. */
+                class LookupOfferRequest implements ILookupOfferRequest {
+
+                    /**
+                     * Constructs a new LookupOfferRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.ILookupOfferRequest);
+
+                    /** LookupOfferRequest entitlement. */
+                    public entitlement: string;
+
+                    /**
+                     * Creates a new LookupOfferRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LookupOfferRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.ILookupOfferRequest): google.cloud.channel.v1.LookupOfferRequest;
+
+                    /**
+                     * Encodes the specified LookupOfferRequest message. Does not implicitly {@link google.cloud.channel.v1.LookupOfferRequest.verify|verify} messages.
+                     * @param message LookupOfferRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.ILookupOfferRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LookupOfferRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.LookupOfferRequest.verify|verify} messages.
+                     * @param message LookupOfferRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.ILookupOfferRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LookupOfferRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LookupOfferRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.LookupOfferRequest;
+
+                    /**
+                     * Decodes a LookupOfferRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LookupOfferRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.LookupOfferRequest;
+
+                    /**
+                     * Verifies a LookupOfferRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LookupOfferRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LookupOfferRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.LookupOfferRequest;
+
+                    /**
+                     * Creates a plain object from a LookupOfferRequest message. Also converts values to other types if specified.
+                     * @param message LookupOfferRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.LookupOfferRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LookupOfferRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a ListProductsRequest. */
                 interface IListProductsRequest {
 
@@ -10133,7 +10244,8 @@ export namespace google {
                         SKU_CHANGED = 9,
                         RENEWAL_SETTING_CHANGED = 10,
                         PAID_SERVICE_STARTED = 11,
-                        LICENSE_ASSIGNMENT_CHANGED = 12
+                        LICENSE_ASSIGNMENT_CHANGED = 12,
+                        LICENSE_CAP_CHANGED = 13
                     }
                 }
 
