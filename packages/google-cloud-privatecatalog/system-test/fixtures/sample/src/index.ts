@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {PrivateCatalogClient} from '@google-cloud/privatecatalog';
+import {PrivateCatalogClient} from '@google-cloud/private-catalog';
 
 // check that the client class type name can be used
 function doStuffWithPrivateCatalogClient(client: PrivateCatalogClient) {

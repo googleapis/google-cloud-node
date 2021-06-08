@@ -1030,10 +1030,10 @@ export namespace google {
                     public validationOperation?: (google.longrunning.IOperation|null);
 
                     /** AssetReference asset. */
-                    public asset: string;
+                    public asset?: (string|null);
 
                     /** AssetReference gcsPath. */
-                    public gcsPath: string;
+                    public gcsPath?: (string|null);
 
                     /** AssetReference gitSource. */
                     public gitSource?: (google.cloud.privatecatalog.v1beta1.IGitSource|null);
@@ -1362,13 +1362,13 @@ export namespace google {
                     public dir: string;
 
                     /** GitSource commit. */
-                    public commit: string;
+                    public commit?: (string|null);
 
                     /** GitSource branch. */
-                    public branch: string;
+                    public branch?: (string|null);
 
                     /** GitSource tag. */
-                    public tag: string;
+                    public tag?: (string|null);
 
                     /** GitSource ref. */
                     public ref?: ("commit"|"branch"|"tag");
@@ -1707,19 +1707,19 @@ export namespace google {
             public selector: string;
 
             /** HttpRule get. */
-            public get: string;
+            public get?: (string|null);
 
             /** HttpRule put. */
-            public put: string;
+            public put?: (string|null);
 
             /** HttpRule post. */
-            public post: string;
+            public post?: (string|null);
 
             /** HttpRule delete. */
-            public delete: string;
+            public delete?: (string|null);
 
             /** HttpRule patch. */
-            public patch: string;
+            public patch?: (string|null);
 
             /** HttpRule custom. */
             public custom?: (google.api.ICustomHttpPattern|null);
@@ -5773,16 +5773,16 @@ export namespace google {
             constructor(properties?: google.protobuf.IValue);
 
             /** Value nullValue. */
-            public nullValue: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue);
+            public nullValue?: (google.protobuf.NullValue|keyof typeof google.protobuf.NullValue|null);
 
             /** Value numberValue. */
-            public numberValue: number;
+            public numberValue?: (number|null);
 
             /** Value stringValue. */
-            public stringValue: string;
+            public stringValue?: (string|null);
 
             /** Value boolValue. */
-            public boolValue: boolean;
+            public boolValue?: (boolean|null);
 
             /** Value structValue. */
             public structValue?: (google.protobuf.IStruct|null);

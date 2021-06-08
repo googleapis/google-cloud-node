@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const privatecatalog = require('@google-cloud/privatecatalog');
+const privatecatalog = require('@google-cloud/private-catalog');
 
 function main() {
   const privateCatalogClient = new privatecatalog.PrivateCatalogClient();
