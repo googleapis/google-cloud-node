@@ -21744,6 +21744,7 @@
                      * @property {string|null} [diskType] AutoprovisioningNodePoolDefaults diskType
                      * @property {google.container.v1.IShieldedInstanceConfig|null} [shieldedInstanceConfig] AutoprovisioningNodePoolDefaults shieldedInstanceConfig
                      * @property {string|null} [bootDiskKmsKey] AutoprovisioningNodePoolDefaults bootDiskKmsKey
+                     * @property {string|null} [imageType] AutoprovisioningNodePoolDefaults imageType
                      */
     
                     /**
@@ -21835,6 +21836,14 @@
                     AutoprovisioningNodePoolDefaults.prototype.bootDiskKmsKey = "";
     
                     /**
+                     * AutoprovisioningNodePoolDefaults imageType.
+                     * @member {string} imageType
+                     * @memberof google.container.v1.AutoprovisioningNodePoolDefaults
+                     * @instance
+                     */
+                    AutoprovisioningNodePoolDefaults.prototype.imageType = "";
+    
+                    /**
                      * Creates a new AutoprovisioningNodePoolDefaults instance using the specified properties.
                      * @function create
                      * @memberof google.container.v1.AutoprovisioningNodePoolDefaults
@@ -21877,6 +21886,8 @@
                             $root.google.container.v1.ShieldedInstanceConfig.encode(message.shieldedInstanceConfig, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                         if (message.bootDiskKmsKey != null && Object.hasOwnProperty.call(message, "bootDiskKmsKey"))
                             writer.uint32(/* id 9, wireType 2 =*/74).string(message.bootDiskKmsKey);
+                        if (message.imageType != null && Object.hasOwnProperty.call(message, "imageType"))
+                            writer.uint32(/* id 10, wireType 2 =*/82).string(message.imageType);
                         return writer;
                     };
     
@@ -21939,6 +21950,9 @@
                                 break;
                             case 9:
                                 message.bootDiskKmsKey = reader.string();
+                                break;
+                            case 10:
+                                message.imageType = reader.string();
                                 break;
                             default:
                                 reader.skipType(tag & 7);
@@ -22012,6 +22026,9 @@
                         if (message.bootDiskKmsKey != null && message.hasOwnProperty("bootDiskKmsKey"))
                             if (!$util.isString(message.bootDiskKmsKey))
                                 return "bootDiskKmsKey: string expected";
+                        if (message.imageType != null && message.hasOwnProperty("imageType"))
+                            if (!$util.isString(message.imageType))
+                                return "imageType: string expected";
                         return null;
                     };
     
@@ -22059,6 +22076,8 @@
                         }
                         if (object.bootDiskKmsKey != null)
                             message.bootDiskKmsKey = String(object.bootDiskKmsKey);
+                        if (object.imageType != null)
+                            message.imageType = String(object.imageType);
                         return message;
                     };
     
@@ -22086,6 +22105,7 @@
                             object.diskType = "";
                             object.shieldedInstanceConfig = null;
                             object.bootDiskKmsKey = "";
+                            object.imageType = "";
                         }
                         if (message.oauthScopes && message.oauthScopes.length) {
                             object.oauthScopes = [];
@@ -22108,6 +22128,8 @@
                             object.shieldedInstanceConfig = $root.google.container.v1.ShieldedInstanceConfig.toObject(message.shieldedInstanceConfig, options);
                         if (message.bootDiskKmsKey != null && message.hasOwnProperty("bootDiskKmsKey"))
                             object.bootDiskKmsKey = message.bootDiskKmsKey;
+                        if (message.imageType != null && message.hasOwnProperty("imageType"))
+                            object.imageType = message.imageType;
                         return object;
                     };
     

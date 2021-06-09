@@ -8661,6 +8661,9 @@ export namespace google {
 
                 /** AutoprovisioningNodePoolDefaults bootDiskKmsKey */
                 bootDiskKmsKey?: (string|null);
+
+                /** AutoprovisioningNodePoolDefaults imageType */
+                imageType?: (string|null);
             }
 
             /** Represents an AutoprovisioningNodePoolDefaults. */
@@ -8698,6 +8701,9 @@ export namespace google {
 
                 /** AutoprovisioningNodePoolDefaults bootDiskKmsKey. */
                 public bootDiskKmsKey: string;
+
+                /** AutoprovisioningNodePoolDefaults imageType. */
+                public imageType: string;
 
                 /**
                  * Creates a new AutoprovisioningNodePoolDefaults instance using the specified properties.

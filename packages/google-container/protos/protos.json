@@ -3026,6 +3026,10 @@
                     "bootDiskKmsKey": {
                       "type": "string",
                       "id": 9
+                    },
+                    "imageType": {
+                      "type": "string",
+                      "id": 10
                     }
                   }
                 },
