@@ -1465,6 +1465,21 @@
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
   },
   {
+    "name": "tpu",
+    "name_pretty": "TPU",
+    "product_documentation": "https://cloud.google.com/tpu/",
+    "client_documentation": "https://cloud.google.com/tpu",
+    "issue_tracker": "https://github.com/googleapis/nodejs-cloud-tpu/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-cloud-tpu",
+    "distribution_name": "@google-cloud/tpu",
+    "api_id": "tpu.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/tpu/docs/getting-support"
+  },
+  {
     "client_documentation": "https://googleapis.dev/nodejs/transcoder/latest",
     "product_documentation": "https://googleapis.dev/nodejs/transcoder/latest",
     "name": "transcoder",
@@ -1494,5 +1509,20 @@
     "codeowner_team": "@googleapis/ml-apis",
     "distribution_name": "@google-cloud/aiplatform",
     "support_documentation": "https://cloud.google.com/vertex-ai/docs"
+  },
+  {
+    "name": "vpcaccess",
+    "name_pretty": "Virtual Private Cloud",
+    "product_documentation": "https://cloud.google.com/vpc/",
+    "client_documentation": "https://cloud.google.com/vpc",
+    "issue_tracker": "https://github.com/googleapis/nodejs-vpc-access/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-vpc-access",
+    "distribution_name": "@google-cloud/vpc-access",
+    "api_id": "vpcaccess.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/vpc/"
   }
 ]

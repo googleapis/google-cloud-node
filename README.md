@@ -106,8 +106,10 @@ applications that interact with individual Google Cloud services:
 | [Shell](https://github.com/googleapis/nodejs-cloud-shell) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/shell)](https://npm.im/@google-cloud/shell) |
 | [Stackdriver Debugger](https://github.com/googleapis/cloud-debug-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/debug-agent)](https://npm.im/@google-cloud/debug-agent) |
 | [Stackdriver Trace](https://github.com/googleapis/cloud-trace-nodejs) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/trace-agent)](https://npm.im/@google-cloud/trace-agent) |
+| [TPU](https://github.com/googleapis/nodejs-cloud-tpu) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/tpu)](https://npm.im/@google-cloud/tpu) |
 | [Transcoder API](https://github.com/googleapis/nodejs-video-transcoder) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/video-transcoder)](https://npm.im/@google-cloud/video-transcoder) |
 | [Vertex AI](https://github.com/googleapis/nodejs-ai-platform) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/aiplatform)](https://npm.im/@google-cloud/aiplatform) |
+| [Virtual Private Cloud](https://github.com/googleapis/nodejs-vpc-access) | [![Preview][preview-stability]][launch-stages] | [![npm](https://img.shields.io/npm/v/@google-cloud/vpc-access)](https://npm.im/@google-cloud/vpc-access) |
 
 
 If the service is not listed above, [google-api-nodejs-client](https://github.com/googleapis/google-api-nodejs-client) interfaces
