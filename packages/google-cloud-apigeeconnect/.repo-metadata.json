@@ -1,0 +1,15 @@
+{
+  "name": "apigeeconnect",
+  "name_pretty": "Apigee Connect API",
+  "product_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/",
+  "client_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect",
+  "issue_tracker": "https://github.com/googleapis/nodejs-apigee-connect/issues",
+  "release_level": "BETA",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-apigee-connect",
+  "distribution_name": "@google-cloud/apigee-connect",
+  "api_id": "apigeeconnect.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true
+}
+
