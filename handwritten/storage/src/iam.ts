@@ -127,7 +127,6 @@ interface GetPolicyRequest {
  * @see [IAM Roles](https://cloud.google.com/iam/docs/understanding-roles)
  *
  * @constructor Iam
- * @mixin
  *
  * @param {Bucket} bucket The parent instance.
  * @example
