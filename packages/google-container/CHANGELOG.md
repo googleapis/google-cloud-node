@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.2.2...v2.3.0) (2021-06-09)
+
+
+### Features
+
+* support for NodeAutoprovisioning ImageType ([#446](https://www.github.com/googleapis/nodejs-cloud-container/issues/446)) ([e826d24](https://www.github.com/googleapis/nodejs-cloud-container/commit/e826d242fdfbc6831c67eb6abf6c0fb0b12b707a))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.2.1...v2.2.2) (2021-05-25)
 
 
