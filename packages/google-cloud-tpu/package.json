@@ -2,7 +2,7 @@
   "name": "@google-cloud/tpu",
   "version": "0.1.0",
   "description": "tpu client for Node.js",
-  "repository": "googleapis/googleapis/nodejs-cloud-tpu",
+  "repository": "googleapis/nodejs-cloud-tpu",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
