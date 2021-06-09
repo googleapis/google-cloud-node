@@ -20,29 +20,39 @@ guides.
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Create an Avro based Schema](#create-an-avro-based-schema)
+  * [Create a Proto based Schema](#create-a-proto-based-schema)
   * [Create Push Subscription](#create-push-subscription)
   * [Create Subscription](#create-subscription)
   * [Create Subscription With Dead Letter Policy](#create-subscription-with-dead-letter-policy)
   * [Create Subscription with ordering enabled](#create-subscription-with-ordering-enabled)
   * [Create Topic](#create-topic)
+  * [Create Topic With Schema](#create-topic-with-schema)
+  * [Delete a previously created schema](#delete-a-previously-created-schema)
   * [Delete Subscription](#delete-subscription)
   * [Delete Topic](#delete-topic)
   * [Detach Subscription](#detach-subscription)
+  * [Get a previously created schema](#get-a-previously-created-schema)
   * [Get Subscription](#get-subscription)
   * [Get Subscription Policy](#get-subscription-policy)
   * [Get Topic Policy](#get-topic-policy)
   * [List All Topics](#list-all-topics)
+  * [List schemas on a project](#list-schemas-on-a-project)
   * [List Subscriptions](#list-subscriptions)
   * [List Subscriptions On a Topic](#list-subscriptions-on-a-topic)
+  * [Listen For Avro Records](#listen-for-avro-records)
   * [Listen For Errors](#listen-for-errors)
   * [Listen For Messages](#listen-for-messages)
+  * [Listen For Protobuf Messages](#listen-for-protobuf-messages)
   * [Listen For Messages With Custom Attributes](#listen-for-messages-with-custom-attributes)
   * [Modify Push Configuration](#modify-push-configuration)
   * [OpenTelemetry Tracing](#opentelemetry-tracing)
+  * [Publish Avro Records to a Topic](#publish-avro-records-to-a-topic)
   * [Publish Batched Messages](#publish-batched-messages)
   * [Publish Message](#publish-message)
   * [Publish Message With Custom Attributes](#publish-message-with-custom-attributes)
   * [Publish Ordered Message](#publish-ordered-message)
+  * [Publish Protobuf Messages to a Topic](#publish-protobuf-messages-to-a-topic)
   * [Publish With Retry Settings](#publish-with-retry-settings)
   * [Quickstart](#quickstart)
   * [Remove Dead Letter Policy](#remove-dead-letter-policy)
@@ -69,6 +79,44 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Create an Avro based Schema
+
+Creates a new schema definition on a project, using Avro
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createAvroSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createAvroSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node createAvroSchema.js <schema-name> <avsc-filename>`
+
+
+-----
+
+
+
+
+### Create a Proto based Schema
+
+Creates a new schema definition on a project, using Protos
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createProtoSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createProtoSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node createProtoSchema.js <schema-name> <proto-filename>`
+
+
+-----
+
 
 
 
@@ -167,6 +215,44 @@ __Usage:__
 
 
 
+### Create Topic With Schema
+
+Creates a new topic, with a schema definition.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createTopicWithSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createTopicWithSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node createTopicWithSchema.js <topic-name> <schema-name> [encoding-type]`
+
+
+-----
+
+
+
+
+### Delete a previously created schema
+
+Deletes a schema which was previously created in the project.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/deleteSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/deleteSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node deleteSchema.js <schema-name>`
+
+
+-----
+
+
+
+
 ### Delete Subscription
 
 Deletes an existing subscription from a topic.
@@ -217,6 +303,25 @@ __Usage:__
 
 
 `node detachSubscription.js <existing-subscription-name>`
+
+
+-----
+
+
+
+
+### Get a previously created schema
+
+Gets information about a schema which was previously created in the project.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/getSchema.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/getSchema.js,samples/README.md)
+
+__Usage:__
+
+
+`node getSchema.js <schema-name>`
 
 
 -----
@@ -300,6 +405,25 @@ __Usage:__
 
 
 
+### List schemas on a project
+
+Gets a list of schemas which were previously created in the project.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listSchemas.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listSchemas.js,samples/README.md)
+
+__Usage:__
+
+
+`node listSchemas.js`
+
+
+-----
+
+
+
+
 ### List Subscriptions
 
 Lists all subscriptions in the current project.
@@ -338,6 +462,25 @@ __Usage:__
 
 
 
+### Listen For Avro Records
+
+Listens for records in Avro encoding from a subscription.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listenForAvroRecords.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenForAvroRecords.js,samples/README.md)
+
+__Usage:__
+
+
+`node listenForAvroRecords.js <subscription-name> [timeout-in-seconds]`
+
+
+-----
+
+
+
+
 ### Listen For Errors
 
 Listens to messages and errors for a subscription.
@@ -369,6 +512,25 @@ __Usage:__
 
 
 `node listenForMessages.js <subscription-name> [timeout-in-seconds]`
+
+
+-----
+
+
+
+
+### Listen For Protobuf Messages
+
+Listens for messages in protobuf encoding from a subscription.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listenForProtobufMessages.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenForProtobufMessages.js,samples/README.md)
+
+__Usage:__
+
+
+`node listenForProtobufMessages.js <proto-filename> <subscription-name> [timeout-in-seconds]`
 
 
 -----
@@ -426,6 +588,25 @@ __Usage:__
 
 
 `node openTelemetryTracing.js <topic-name> <subscription-name>`
+
+
+-----
+
+
+
+
+### Publish Avro Records to a Topic
+
+Publishes a record in Avro to a topic with a schema.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishAvroRecords.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishAvroRecords.js,samples/README.md)
+
+__Usage:__
+
+
+`node publishAvroRecords.js <topic-name>`
 
 
 -----
@@ -502,6 +683,25 @@ __Usage:__
 
 
 `node publishOrderedMessage.js <topic-name> <data>`
+
+
+-----
+
+
+
+
+### Publish Protobuf Messages to a Topic
+
+Publishes a message in protobuf form to a topic with a schema.
+
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishProtobufMessages.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishProtobufMessages.js,samples/README.md)
+
+__Usage:__
+
+
+`node publishProtobufMessages.js <topic-name>`
 
 
 -----
