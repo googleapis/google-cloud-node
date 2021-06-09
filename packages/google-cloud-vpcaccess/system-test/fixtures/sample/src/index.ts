@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {VpcAccessServiceClient} from '@google-cloud/vpcaccess';
+import {VpcAccessServiceClient} from '@google-cloud/vpc-access';
 
 // check that the client class type name can be used
 function doStuffWithVpcAccessServiceClient(client: VpcAccessServiceClient) {

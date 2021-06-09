@@ -13,8 +13,7 @@
 
 'use strict';
 
-async function main() {
-
+async function main(projectId, location) {
   // [START nodejs_vpc_access_quickstart]
   // Imports the Google Cloud client library
 
@@ -27,16 +26,15 @@ async function main() {
 
   // Creates a client
   // eslint-disable-next-line no-unused-vars
-  const client = new {VpcAccessServiceClient}();
+  const client = new VpcAccessServiceClient();
 
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-   console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
-   // const [thing] = await client.methodName({
-   // });
-   // console.info(thing);
+  async function listConnectors() {
+    const connectors = await client.listConnectors({
+      parent: `projects/${projectId}/locations/${location}`,
+    });
+    console.info(connectors);
   }
-  doSomething();
+  listConnectors();
   // [END nodejs_vpc_access_quickstart]
 }
 

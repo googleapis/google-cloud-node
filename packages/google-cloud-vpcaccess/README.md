@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -55,6 +55,41 @@ npm install @google-cloud/vpc-access
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+
+// remove this line after package is released
+// eslint-disable-next-line node/no-missing-require
+const {VpcAccessServiceClient} = require('@google-cloud/vpc-access');
+
+// TODO(developer): replace with your prefered project ID.
+// const projectId = 'my-project'
+
+// Creates a client
+// eslint-disable-next-line no-unused-vars
+const client = new VpcAccessServiceClient();
+
+async function listConnectors() {
+  const connectors = await client.listConnectors({
+    parent: `projects/${projectId}/locations/${location}`,
+  });
+  console.info(connectors);
+}
+listConnectors();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-vpc-access/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-vpc-access/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vpc-access&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 

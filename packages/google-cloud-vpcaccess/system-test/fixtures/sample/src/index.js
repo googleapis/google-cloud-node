@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const vpcaccess = require('@google-cloud/vpcaccess');
+const vpcaccess = require('@google-cloud/vpc-access');
 
 function main() {
   const vpcAccessServiceClient = new vpcaccess.VpcAccessServiceClient();
