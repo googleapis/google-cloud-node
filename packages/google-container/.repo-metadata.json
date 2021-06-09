@@ -8,7 +8,7 @@
   "distribution_name": "@google-cloud/container",
   "requires_billing": true,
   "product_documentation": "https://cloud.google.com/kubernetes-engine",
-  "codeowner_team": "@googleapis/cicd",
+  "codeowner_team": "@googleapis/anthos-dpe",
   "name_pretty": "Kubernetes Engine Cluster Manager API",
   "client_documentation": "https://googleapis.dev/nodejs/container/latest",
   "release_level": "ga"
