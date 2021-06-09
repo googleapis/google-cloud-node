@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-channel/compare/v1.1.2...v1.2.0) (2021-06-08)
+
+
+### Features
+
+* Add/Update API definitions for Cloud Channel API, including ([#55](https://www.github.com/googleapis/nodejs-channel/issues/55)) ([3db17ba](https://www.github.com/googleapis/nodejs-channel/commit/3db17ba086e1da649e905ba4235c1dc64bd1a883))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-channel/compare/v1.1.1...v1.1.2) (2021-05-25)
 
 
