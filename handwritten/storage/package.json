@@ -47,9 +47,7 @@
     "predocs-test": "npm run docs",
     "benchwrapper": "node bin/benchwrapper.js",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean",
-    "api-extractor": "api-extractor run --local",
-    "api-documenter": "api-documenter yaml --input-folder=temp"
+    "precompile": "gts clean"
   },
   "dependencies": {
     "@google-cloud/common": "^3.6.0",
@@ -78,8 +76,6 @@
     "@google-cloud/pubsub": "^2.0.0",
     "@grpc/grpc-js": "^1.0.3",
     "@grpc/proto-loader": "^0.6.0",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10",
     "@types/async-retry": "^1.4.2",
     "@types/compressible": "^2.0.0",
     "@types/concat-stream": "^1.6.0",
