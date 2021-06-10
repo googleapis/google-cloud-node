@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.2...v2.3.3) (2021-06-10)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#175](https://www.github.com/googleapis/nodejs-game-servers/issues/175)) ([a0df035](https://www.github.com/googleapis/nodejs-game-servers/commit/a0df03530d0dc438c8c4318854fbcfa8d7752f8d))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.1...v2.3.2) (2021-05-24)
 
 
