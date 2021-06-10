@@ -38,9 +38,7 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean",
-    "api-extractor": "api-extractor run --local",
-    "api-documenter": "api-documenter yaml --input-folder=temp"
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^2.12.0",
@@ -61,8 +59,6 @@
     "pack-n-play": "^1.0.0-2",
     "sinon": "^11.0.0",
     "ts-loader": "^9.0.0",
-    "typescript": "^3.8.3",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10"
+    "typescript": "^3.8.3"
   }
 }
