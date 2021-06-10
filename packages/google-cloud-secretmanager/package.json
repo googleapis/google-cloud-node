@@ -33,9 +33,7 @@
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean",
-    "api-extractor": "api-extractor run --local",
-    "api-documenter": "api-documenter yaml --input-folder=temp"
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^2.12.0"
@@ -57,9 +55,7 @@
     "ts-loader": "^9.0.0",
     "typescript": "^3.8.3",
     "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10"
+    "webpack-cli": "^4.0.0"
   },
   "engines": {
     "node": ">=10"
