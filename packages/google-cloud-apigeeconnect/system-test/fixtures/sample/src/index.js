@@ -17,7 +17,7 @@
 // ** All changes to this file may be overwritten. **
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const apigeeconnect = require('@google-cloud/apigeeconnect');
+const apigeeconnect = require('@google-cloud/apigee-connect');
 
 function main() {
   const connectionServiceClient = new apigeeconnect.ConnectionServiceClient();

@@ -2,7 +2,7 @@
   "name": "@google-cloud/apigee-connect",
   "version": "0.1.0",
   "description": "apigeeconnect client for Node.js",
-  "repository": "googleapis/googleapis/nodejs-apigee-connect",
+  "repository": "googleapis/nodejs-apigee-connect",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",

@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2021 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/apigeeconnect',
+    systemName: '@google-cloud/apigee-connect',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
