@@ -14,9 +14,7 @@
     "clean": "gts clean",
     "precompile": "gts clean",
     "system-test": "echo no system tests 😱",
-    "samples-test": "echo no sample tests 😱",
-    "api-extractor": "api-extractor run --local",
-    "api-documenter": "api-documenter yaml --input-folder=temp"
+    "samples-test": "echo no sample tests 😱"
   },
   "repository": {
     "type": "git",
@@ -40,9 +38,7 @@
     "parse-link-header": "^1.0.1"
   },
   "devDependencies": {
-    "semistandard": "^13.0.1",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10"
+    "semistandard": "^13.0.1"
   },
   "engines": {
     "node": ">=10"
