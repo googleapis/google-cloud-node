@@ -21,9 +21,7 @@
     "license-check": "jsgl --local .",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "precompile": "gts clean",
-    "api-extractor": "api-extractor run --local",
-    "api-documenter": "api-documenter yaml --input-folder=temp"
+    "precompile": "gts clean"
   },
   "author": {
     "name": "Google Inc."
@@ -66,9 +64,7 @@
     "sinon": "^11.0.0",
     "source-map": "^0.7.0",
     "tmp": "0.2.1",
-    "typescript": "^3.8.3",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10"
+    "typescript": "^3.8.3"
   },
   "files": [
     "build/src",
