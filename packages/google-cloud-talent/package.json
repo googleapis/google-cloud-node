@@ -40,16 +40,12 @@
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "prepare": "npm run compile-protos && npm run compile",
-    "precompile": "gts clean",
-    "api-extractor": "api-extractor run --local",
-    "api-documenter": "api-documenter yaml --input-folder=temp"
+    "precompile": "gts clean"
   },
   "dependencies": {
     "google-gax": "^2.12.0"
   },
   "devDependencies": {
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10",
     "@types/mocha": "^8.0.0",
     "@types/node": "^14.0.0",
     "@types/sinon": "^10.0.0",
