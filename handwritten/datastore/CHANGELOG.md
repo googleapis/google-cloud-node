@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [6.4.1](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.0...v6.4.1) (2021-06-10)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#825](https://www.github.com/googleapis/nodejs-datastore/issues/825)) ([0dee08a](https://www.github.com/googleapis/nodejs-datastore/commit/0dee08a912620c114ddfcf38a1d0636893f6f15a))
+* **deps:** update dependency sinon to v11 ([#832](https://www.github.com/googleapis/nodejs-datastore/issues/832)) ([d32610c](https://www.github.com/googleapis/nodejs-datastore/commit/d32610cdbe08151effc1a8d4b74540e68cbf4012))
+
 ## [6.4.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.3.1...v6.4.0) (2021-04-29)
 
 
