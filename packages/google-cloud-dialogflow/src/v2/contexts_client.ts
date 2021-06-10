@@ -181,21 +181,24 @@ export class ContextsClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      projectAgentEnvironmentUserSessionContextPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
-      ),
-      projectAgentEnvironmentUserSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
-      ),
+      projectAgentEnvironmentUserSessionContextPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
+        ),
+      projectAgentEnvironmentUserSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
+        ),
       projectAgentSessionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}'
       ),
       projectAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
-      projectAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
-      ),
+      projectAgentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
+        ),
       projectAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/answerRecords/{answer_record}'
       ),
@@ -205,39 +208,46 @@ export class ContextsClient {
       projectConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversations/{conversation}/messages/{message}'
       ),
-      projectConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversations/{conversation}/participants/{participant}'
-      ),
+      projectConversationParticipantPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/conversations/{conversation}/participants/{participant}'
+        ),
       projectConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversationProfiles/{conversation_profile}'
       ),
       projectKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/knowledgeBases/{knowledge_base}'
       ),
-      projectKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
-      ),
+      projectKnowledgeBaseDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
+        ),
       projectLocationAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/answerRecords/{answer_record}'
       ),
       projectLocationConversationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversations/{conversation}'
       ),
-      projectLocationConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
-      ),
-      projectLocationConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}'
-      ),
-      projectLocationConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}'
-      ),
-      projectLocationKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
-      ),
-      projectLocationKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
-      ),
+      projectLocationConversationMessagePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
+        ),
+      projectLocationConversationParticipantPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}'
+        ),
+      projectLocationConversationProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}'
+        ),
+      projectLocationKnowledgeBasePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
+        ),
+      projectLocationKnowledgeBaseDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -306,13 +316,14 @@ export class ContextsClient {
     ];
     for (const methodName of contextsStubMethods) {
       const callPromise = this.contextsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -470,11 +481,10 @@ export class ContextsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getContext(request, options, callback);
   }
@@ -571,11 +581,10 @@ export class ContextsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.createContext(request, options, callback);
   }
@@ -665,11 +674,10 @@ export class ContextsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'context.name': request.context!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'context.name': request.context!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.updateContext(request, options, callback);
   }
@@ -762,11 +770,10 @@ export class ContextsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteContext(request, options, callback);
   }
@@ -859,11 +866,10 @@ export class ContextsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteAllContexts(request, options, callback);
   }
@@ -965,11 +971,10 @@ export class ContextsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.listContexts(request, options, callback);
   }
@@ -1010,11 +1015,10 @@ export class ContextsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listContexts.createStream(
@@ -1066,17 +1070,16 @@ export class ContextsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listContexts.asyncIterate(
       this.innerApiCalls['listContexts'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.v2.IContext>;
   }

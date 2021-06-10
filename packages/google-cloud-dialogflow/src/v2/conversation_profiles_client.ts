@@ -181,18 +181,21 @@ export class ConversationProfilesClient {
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
-      projectAgentEnvironmentUserSessionContextPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
-      ),
-      projectAgentEnvironmentUserSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
-      ),
+      projectAgentEnvironmentUserSessionContextPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
+        ),
+      projectAgentEnvironmentUserSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
+        ),
       projectAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
-      projectAgentSessionEntityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
-      ),
+      projectAgentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
+        ),
       projectAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/answerRecords/{answer_record}'
       ),
@@ -202,39 +205,46 @@ export class ConversationProfilesClient {
       projectConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversations/{conversation}/messages/{message}'
       ),
-      projectConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/conversations/{conversation}/participants/{participant}'
-      ),
+      projectConversationParticipantPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/conversations/{conversation}/participants/{participant}'
+        ),
       projectConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/conversationProfiles/{conversation_profile}'
       ),
       projectKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/knowledgeBases/{knowledge_base}'
       ),
-      projectKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
-      ),
+      projectKnowledgeBaseDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
+        ),
       projectLocationAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/answerRecords/{answer_record}'
       ),
       projectLocationConversationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/conversations/{conversation}'
       ),
-      projectLocationConversationMessagePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
-      ),
-      projectLocationConversationParticipantPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}'
-      ),
-      projectLocationConversationProfilePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}'
-      ),
-      projectLocationKnowledgeBasePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
-      ),
-      projectLocationKnowledgeBaseDocumentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
-      ),
+      projectLocationConversationMessagePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/messages/{message}'
+        ),
+      projectLocationConversationParticipantPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}'
+        ),
+      projectLocationConversationProfilePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/conversationProfiles/{conversation_profile}'
+        ),
+      projectLocationKnowledgeBasePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}'
+        ),
+      projectLocationKnowledgeBaseDocumentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/knowledgeBases/{knowledge_base}/documents/{document}'
+        ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -302,13 +312,14 @@ export class ConversationProfilesClient {
     ];
     for (const methodName of conversationProfilesStubMethods) {
       const callPromise = this.conversationProfilesStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -475,11 +486,10 @@ export class ConversationProfilesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getConversationProfile(
       request,
@@ -584,11 +594,10 @@ export class ConversationProfilesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.createConversationProfile(
       request,
@@ -692,11 +701,10 @@ export class ConversationProfilesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'conversation_profile.name': request.conversationProfile!.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'conversation_profile.name': request.conversationProfile!.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.updateConversationProfile(
       request,
@@ -796,11 +804,10 @@ export class ConversationProfilesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      name: request.name || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteConversationProfile(
       request,
@@ -902,11 +909,10 @@ export class ConversationProfilesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     this.initialize();
     return this.innerApiCalls.listConversationProfiles(
       request,
@@ -947,11 +953,10 @@ export class ConversationProfilesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listConversationProfiles.createStream(
@@ -999,17 +1004,16 @@ export class ConversationProfilesClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      parent: request.parent || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
     return this.descriptors.page.listConversationProfiles.asyncIterate(
       this.innerApiCalls['listConversationProfiles'] as GaxCall,
-      (request as unknown) as RequestType,
+      request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.v2.IConversationProfile>;
   }

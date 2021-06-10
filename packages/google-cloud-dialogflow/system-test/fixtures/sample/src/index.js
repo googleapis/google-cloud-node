@@ -23,7 +23,8 @@ function main() {
   const agentsClient = new dialogflow.AgentsClient();
   const answerRecordsClient = new dialogflow.AnswerRecordsClient();
   const contextsClient = new dialogflow.ContextsClient();
-  const conversationProfilesClient = new dialogflow.ConversationProfilesClient();
+  const conversationProfilesClient =
+    new dialogflow.ConversationProfilesClient();
   const conversationsClient = new dialogflow.ConversationsClient();
   const documentsClient = new dialogflow.DocumentsClient();
   const entityTypesClient = new dialogflow.EntityTypesClient();
