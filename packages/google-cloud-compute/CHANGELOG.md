@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [2.5.1](https://www.github.com/googleapis/nodejs-compute/compare/v2.5.0...v2.5.1) (2021-06-10)
+
+
+### Bug Fixes
+
+* flaky test ([#563](https://www.github.com/googleapis/nodejs-compute/issues/563)) ([827a333](https://www.github.com/googleapis/nodejs-compute/commit/827a333443d6716b232fd21e00cc61a4df16aff0))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.4.4...v2.5.0) (2021-05-25)
 
 
