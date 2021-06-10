@@ -62,23 +62,22 @@ npm install @google-cloud/apigee-connect
 
 // remove this line after package is released
 // eslint-disable-next-line node/no-missing-require
-const {TetherClient} = require('@google-cloud/apigee-connect');
+const {ConnectionServiceClient} = require('@google-cloud/apigee-connect');
 
 // TODO(developer): replace with your prefered project ID.
 // const projectId = 'my-project'
 
 // Creates a client
 // eslint-disable-next-line no-unused-vars
-const client = new {TetherClient}();
+const client = new ConnectionServiceClient();
 
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
- console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+async function listConnections() {
+  const connections = await client.listConnections({
+    parent: `projects/${projectId}/endpoints/${endpoint}`,
+  });
+  console.info(connections);
 }
-doSomething();
+listConnections();
 
 ```
 
