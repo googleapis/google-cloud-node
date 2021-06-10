@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.2](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.3.1...v1.3.2) (2021-06-10)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#89](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/89)) ([dca26bf](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/dca26bfe396c852e9c7e7481105b8d7387ed1977))
+
 ### [1.3.1](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.3.0...v1.3.1) (2021-05-12)
 
 
