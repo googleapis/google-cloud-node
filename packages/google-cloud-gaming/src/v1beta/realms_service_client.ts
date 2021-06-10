@@ -27,7 +27,6 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import * as path from 'path';
 
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
@@ -144,6 +143,8 @@ export class RealmsServiceClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest') {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
