@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.8.1](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.8.0...v2.8.1) (2021-06-10)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#122](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/122)) ([af8ca45](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/af8ca45c8d70264899bb458f68d6b5c0060229fa))
+
 ## [2.8.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.7.0...v2.8.0) (2021-05-25)
 
 
