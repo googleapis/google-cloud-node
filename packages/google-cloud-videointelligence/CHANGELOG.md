@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [3.3.3](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.3.2...v3.3.3) (2021-06-10)
+
+
+### Bug Fixes
+
+* GoogleAdsError missing using generator version after 1.3.0 ([#556](https://www.github.com/googleapis/nodejs-video-intelligence/issues/556)) ([be3a053](https://www.github.com/googleapis/nodejs-video-intelligence/commit/be3a053818f7b59825f777460e129a10ada7fd79))
+* remove doc config exception ([#553](https://www.github.com/googleapis/nodejs-video-intelligence/issues/553)) ([39d0f04](https://www.github.com/googleapis/nodejs-video-intelligence/commit/39d0f04a9f37e649dae5a2ad559d21db99665bdf))
+
 ### [3.3.2](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.3.1...v3.3.2) (2021-05-12)
 
 
