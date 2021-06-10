@@ -525,7 +525,7 @@
     "distribution_name": "@google-cloud/container",
     "requires_billing": true,
     "product_documentation": "https://cloud.google.com/kubernetes-engine",
-    "codeowner_team": "@googleapis/cicd",
+    "codeowner_team": "@googleapis/anthos-dpe",
     "name_pretty": "Kubernetes Engine Cluster Manager API",
     "client_documentation": "https://googleapis.dev/nodejs/container/latest",
     "release_level": "ga",
@@ -1092,6 +1092,21 @@
     "distribution_name": "@google-cloud/notebooks",
     "api_id": "notebooks.googleapis.com",
     "support_documentation": "https://cloud.google.com/ai-platform/notebooks/docs/getting-support"
+  },
+  {
+    "name": "apigeeconnect",
+    "name_pretty": "Apigee Connect API",
+    "product_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/",
+    "client_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect",
+    "issue_tracker": "https://github.com/googleapis/nodejs-apigee-connect/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-apigee-connect",
+    "distribution_name": "@google-cloud/apigee-connect",
+    "api_id": "apigeeconnect.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/"
   },
   {
     "language": "nodejs",
