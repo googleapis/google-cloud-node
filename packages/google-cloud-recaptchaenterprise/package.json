@@ -44,9 +44,7 @@
     "ts-loader": "^9.0.0",
     "typescript": "^3.8.3",
     "webpack": "^5.0.0",
-    "webpack-cli": "^4.0.0",
-    "@microsoft/api-documenter": "^7.8.10",
-    "@microsoft/api-extractor": "^7.8.10"
+    "webpack-cli": "^4.0.0"
   },
   "scripts": {
     "lint": "gts check",
@@ -62,9 +60,7 @@
     "predocs-test": "npm run docs",
     "prepare": "npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
-    "precompile": "gts clean",
-    "api-extractor": "api-extractor run --local",
-    "api-documenter": "api-documenter yaml --input-folder=temp"
+    "precompile": "gts clean"
   },
   "license": "Apache-2.0",
   "engines": {
