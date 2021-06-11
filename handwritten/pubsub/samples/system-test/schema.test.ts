@@ -23,7 +23,7 @@ import {
   Topic,
 } from '@google-cloud/pubsub';
 import {assert} from 'chai';
-import {describe, it, afterEach} from 'mocha';
+import {describe, it, after} from 'mocha';
 import * as cp from 'child_process';
 import * as uuid from 'uuid';
 import * as path from 'path';
@@ -40,9 +40,9 @@ describe('schema', () => {
   const pubsub = new PubSub({projectId});
   const runId = uuid.v4();
   console.log(`Topics runId: ${runId}`);
-  const topicIdStem = `schema-top-${runId}`;
-  const subscriptionIdStem = `schema-sub-${runId}`;
-  const schemaIdStem = `schema-${runId}`;
+  const topicIdStem = `schema-top-${runId}-`;
+  const subscriptionIdStem = `schema-sub-${runId}-`;
+  const schemaIdStem = `schema-${runId}-`;
 
   // Schemas have a delay between deletion and actual deletion, so
   // we have to make unique schema names. It's simplest to do it for topics
@@ -68,7 +68,7 @@ describe('schema', () => {
 
   const commandFor = (action: string) => `node ${action}.js`;
 
-  async function cleanSchemas() {
+  async function cleanAllSchemas() {
     const schemas = [];
     for await (const s of pubsub.listSchemas()) {
       schemas.push(pubsub.schema(s.name!).delete());
@@ -76,24 +76,24 @@ describe('schema', () => {
     await Promise.all(schemas);
   }
 
-  async function cleanTopics() {
+  async function cleanAllTopics() {
     const [topics] = await pubsub.getTopics();
     await Promise.all(
       topics.filter(x => x.name.endsWith(runId)).map(x => x.delete())
     );
   }
 
-  async function cleanSubs() {
+  async function cleanAllSubs() {
     const [subscriptions] = await pubsub.getSubscriptions();
     await Promise.all(
       subscriptions.filter(x => x.name.endsWith(runId)).map(x => x.delete())
     );
   }
 
-  afterEach(async () => {
-    await cleanSubs();
-    await cleanTopics();
-    await cleanSchemas();
+  after(async () => {
+    await cleanAllSubs();
+    await cleanAllTopics();
+    await cleanAllSchemas();
   });
 
   function fixturePath(fixture: string): string {
@@ -202,12 +202,13 @@ describe('schema', () => {
     assert.include(output, schema.id);
     assert.include(output, 'deleted.');
 
-    try {
+    // Because of caching delays, this can't be deterministic without a big wait.
+    /*try {
       const got = await pubsub.schema(schema.id).get();
       assert.isNotOk(got, "schema hadn't been deleted");
     } catch (e) {
       // This is expected.
-    }
+    }*/
   });
 
   it('should get a schema', async () => {

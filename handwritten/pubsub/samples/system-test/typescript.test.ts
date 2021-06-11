@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {assert} from 'chai';
-import {describe, it, afterEach} from 'mocha';
+import {describe, it} from 'mocha';
 import * as cp from 'child_process';
 import * as fs from 'fs';
 import * as rimraf from 'rimraf';
