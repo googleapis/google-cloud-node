@@ -1452,6 +1452,21 @@
     "support_documentation": "https://cloud.google.com/shell/docs/getting-support"
   },
   {
+    "name": "sqladmin",
+    "name_pretty": "SQL Admin API",
+    "product_documentation": "https://cloud.google.com/sql/docs/mysql/admin-api/",
+    "client_documentation": "https://cloud.google.com/sql",
+    "issue_tracker": "https://github.com/googleapis/nodejs-sql-admin/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-sql-admin",
+    "distribution_name": "@google-cloud/sql-admin",
+    "api_id": "sql.googleapis.com",
+    "default_version": "v1beta4",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/sql/docs/getting-support"
+  },
+  {
     "name": "debugger",
     "name_pretty": "Stackdriver Debugger",
     "product_documentation": "https://cloud.google.com/debugger",
