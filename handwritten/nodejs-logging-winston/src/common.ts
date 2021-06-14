@@ -72,11 +72,21 @@ const STACKDRIVER_LOGGING_LEVEL_CODE_TO_NAME: {
 export const LOGGING_TRACE_KEY = 'logging.googleapis.com/trace';
 
 /*!
+ * Log entry data key to allow users to indicate a spanId for the request.
+ */
+export const LOGGING_SPAN_KEY = 'logging.googleapis.com/spanId';
+
+/*!
+ * Log entry data key to allow users to indicate a traceSampled flag for the request.
+ */
+export const LOGGING_SAMPLED_KEY = 'logging.googleapis.com/trace_sampled';
+
+/*!
  * Gets the current fully qualified trace ID when available from the
  * @google-cloud/trace-agent library in the LogEntry.trace field format of:
  * "projects/[PROJECT-ID]/traces/[TRACE-ID]".
  */
-function getCurrentTraceFromAgent(): string | null {
+export function getCurrentTraceFromAgent(): string | null {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const agent = (global as any)._google_trace_agent;
   if (!agent || !agent.getCurrentContextId || !agent.getWriterProjectId) {
@@ -105,7 +115,12 @@ export class LoggingCommon {
   private serviceContext: ServiceContext | undefined;
   private prefix: string | undefined;
   private labels: object | undefined;
+  // LOGGING_TRACE_KEY is Cloud Logging specific and has the format:
+  // logging.googleapis.com/trace
   static readonly LOGGING_TRACE_KEY = LOGGING_TRACE_KEY;
+  // LOGGING_TRACE_KEY is Cloud Logging specific and has the format:
+  // logging.googleapis.com/spanId
+  static readonly LOGGING_SPAN_KEY = LOGGING_SPAN_KEY;
 
   constructor(options?: Options) {
     options = Object.assign(
@@ -213,6 +228,15 @@ export class LoggingCommon {
       entryMetadata.trace = trace as string;
     }
 
+    const spanId = metadata[LOGGING_SPAN_KEY];
+    if (spanId) {
+      entryMetadata.spanId = spanId as string;
+    }
+
+    if (LOGGING_SAMPLED_KEY in metadata) {
+      entryMetadata.traceSampled = metadata[LOGGING_SAMPLED_KEY] === '1';
+    }
+
     // we have tests that assert that metadata is always passed.
     // not sure if its correct but for now we always set it even if it has
     // nothing in it
@@ -223,6 +247,8 @@ export class LoggingCommon {
     if (hasMetadata) {
       // clean entryMetadata props
       delete data.metadata![LOGGING_TRACE_KEY];
+      delete data.metadata![LOGGING_SPAN_KEY];
+      delete data.metadata![LOGGING_SAMPLED_KEY];
       delete data.metadata!.httpRequest;
       delete data.metadata!.labels;
       delete data.metadata!.timestamp;

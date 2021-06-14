@@ -71,7 +71,7 @@ describe(__filename, () => {
             'user-agent': 'Mocha/test-case',
           },
           statusCode: 200,
-          originalUrl: '/foo/bar',
+          originalUrl: 'http://google.com',
           method: 'PUSH',
         };
         const fakeResponse = {
@@ -96,6 +96,9 @@ describe(__filename, () => {
           assert.strictEqual(LOG_MESSAGE, appLogEntry.data.message);
           assert(appLogEntry.metadata.trace, 'should have a trace property');
           assert(appLogEntry.metadata.trace!.match(/projects\/.*\/traces\/.*/));
+          assert(appLogEntry.metadata.spanId, 'should have a span property');
+          assert(appLogEntry.metadata.spanId!.match(/^[0-9]*/));
+          assert.strictEqual(appLogEntry.metadata.traceSampled, false);
           assert.strictEqual(appLogEntry.metadata.severity, 'INFO');
 
           const requestLog = logging.log(`${LOG_NAME}${REQUEST_LOG_SUFFIX}`);
