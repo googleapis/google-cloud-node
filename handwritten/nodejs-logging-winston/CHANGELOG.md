@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/logging-winston?activeTab=versions
 
+## [4.1.0](https://www.github.com/googleapis/nodejs-logging-winston/compare/v4.0.5...v4.1.0) (2021-06-14)
+
+
+### Features
+
+* propagate spanIds  ([#599](https://www.github.com/googleapis/nodejs-logging-winston/issues/599)) ([6a34151](https://www.github.com/googleapis/nodejs-logging-winston/commit/6a341511ec195282d14bb05ccae7752c91bdd36c))
+
 ### [4.0.5](https://www.github.com/googleapis/nodejs-logging-winston/compare/v4.0.4...v4.0.5) (2021-05-10)
 
 
