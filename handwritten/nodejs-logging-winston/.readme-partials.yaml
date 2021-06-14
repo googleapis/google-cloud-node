@@ -130,7 +130,7 @@ body: |-
 
     ![Logs in Trace Example](https://raw.githubusercontent.com/googleapis/nodejs-logging-winston/master/doc/images/winston-logs-in-trace.png)
 
-    If you wish to set the LogEntry `trace` property with a custom value, then set a winston metadata property for `'logging.googleapis.com/trace'`, which is exported by this module as `LOGGING_TRACE_KEY`. For example:
+    If you wish to set the LogEntry `trace`, `spanId`, and `traceSampled` properties with custom values, then set Winston metadata properties for `'logging.googleapis.com/trace'`, `'logging.googleapis.com/spanId'`, `'logging.googleapis.com/trace_sampled'`, which is exported by this module as `LOGGING_TRACE_KEY`, `LOGGING_SPAN_KEY`, and `LOGGING_SAMPLED_KEY` respectively. For example:
 
     ```js
     const winston = require('winston');
@@ -140,6 +140,8 @@ body: |-
 
     winston.info('Log entry with custom trace value', {
     [LoggingWinston.LOGGING_TRACE_KEY]: 'custom-trace-value'
+    [LoggingWinston.LOGGING_SPAN_KEY]: 'custom-span-value'
+    [LoggingWinston.LOGGING_SAMPLED_KEY]: true
     });
     ```
 

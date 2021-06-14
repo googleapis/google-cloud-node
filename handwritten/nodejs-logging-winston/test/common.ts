@@ -345,17 +345,46 @@ describe('logging-common', () => {
       loggingCommon.log(LEVEL, MESSAGE, metadataWithLabels, assert.ifError);
     });
 
-    it('should promote prefixed trace property to metadata', done => {
+    it('should promote prefixed trace properties to metadata', done => {
       const metadataWithTrace = Object.assign({}, METADATA);
       const loggingTraceKey = loggingCommonLib.LOGGING_TRACE_KEY;
+      const loggingSpanKey = loggingCommonLib.LOGGING_SPAN_KEY;
+      const loggingSampledKey = loggingCommonLib.LOGGING_SAMPLED_KEY;
       // metadataWithTrace does not have index signature.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (metadataWithTrace as any)[loggingTraceKey] = 'trace1';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (metadataWithTrace as any)[loggingSpanKey] = 'span1';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (metadataWithTrace as any)[loggingSampledKey] = '1';
 
       loggingCommon.stackdriverLog.entry = (entryMetadata: {}, data: {}) => {
         assert.deepStrictEqual(entryMetadata, {
           resource: loggingCommon.resource,
           trace: 'trace1',
+          spanId: 'span1',
+          traceSampled: true,
+        });
+        assert.deepStrictEqual(data, {
+          message: MESSAGE,
+          metadata: METADATA,
+        });
+        done();
+      };
+      loggingCommon.log(LEVEL, MESSAGE, metadataWithTrace, assert.ifError);
+    });
+
+    it('should promote a false traceSampled value to metadata', done => {
+      const metadataWithTrace = Object.assign({}, METADATA);
+      const loggingSampledKey = loggingCommonLib.LOGGING_SAMPLED_KEY;
+      // metadataWithTrace does not have index signature.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (metadataWithTrace as any)[loggingSampledKey] = '0';
+
+      loggingCommon.stackdriverLog.entry = (entryMetadata: {}, data: {}) => {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingCommon.resource,
+          traceSampled: false,
         });
         assert.deepStrictEqual(data, {
           message: MESSAGE,

@@ -14,7 +14,13 @@
 
 import TransportStream = require('winston-transport');
 
-import {LOGGING_TRACE_KEY as COMMON_TRACE_KEY, LoggingCommon} from './common';
+import {
+  LOGGING_TRACE_KEY as COMMON_TRACE_KEY,
+  LOGGING_SPAN_KEY as COMMON_SPAN_KEY,
+  LOGGING_SAMPLED_KEY as COMMON_SAMPLED_KEY,
+  LoggingCommon,
+  getCurrentTraceFromAgent,
+} from './common';
 import * as express from './middleware/express';
 import {getDefaultMetadataForTracing} from './default-metadata';
 import {
@@ -28,6 +34,7 @@ const LEVEL = Symbol.for('level');
 // Export the express middleware as 'express'.
 export {express};
 export {getDefaultMetadataForTracing};
+export {getCurrentTraceFromAgent};
 
 type Callback = (err: Error | null, apiResponse?: {}) => void;
 
@@ -160,6 +167,8 @@ export interface Options extends LoggingOptions {
  */
 export class LoggingWinston extends TransportStream {
   static readonly LOGGING_TRACE_KEY = COMMON_TRACE_KEY;
+  static readonly LOGGING_SPAN_KEY = COMMON_SPAN_KEY;
+  static readonly LOGGING_SAMPLED_KEY = COMMON_SAMPLED_KEY;
 
   common: LoggingCommon;
 
@@ -184,4 +193,18 @@ export class LoggingWinston extends TransportStream {
   }
 }
 
+// LOGGING_TRACE_KEY is Cloud Logging specific and has the format:
+// logging.googleapis.com/trace
+// For more information, see: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.trace
 export const LOGGING_TRACE_KEY = COMMON_TRACE_KEY;
+
+// LOGGING_SPAN_KEY is Cloud Logging specific and has the format:
+// logging.googleapis.com/spanId
+// For more information, see: https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.span_id
+export const LOGGING_SPAN_KEY = COMMON_SPAN_KEY;
+
+// LOGGING_SAMPLED_KEY is Cloud Logging specific and has the format:
+// logging.googleapis.com/trace_sampled
+// The value of this field must be either true or false. For more information,
+// see traceSampled on the LogEntry page:	https://cloud.google.com/logging/docs/reference/v2/rest/v2/LogEntry#FIELDS.trace_sampled
+export const LOGGING_SAMPLED_KEY = COMMON_SAMPLED_KEY;
