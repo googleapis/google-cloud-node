@@ -919,6 +919,7 @@
                                 case 17:
                                 case 12:
                                 case 13:
+                                case 31:
                                 case 18:
                                     break;
                                 }
@@ -1019,6 +1020,10 @@
                             case "EC_SIGN_P384_SHA384":
                             case 13:
                                 message.algorithm = 13;
+                                break;
+                            case "EC_SIGN_SECP256K1_SHA256":
+                            case 31:
+                                message.algorithm = 31;
                                 break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
@@ -1664,6 +1669,7 @@
                                 case 17:
                                 case 12:
                                 case 13:
+                                case 31:
                                 case 18:
                                     break;
                                 }
@@ -1842,6 +1848,10 @@
                             case 13:
                                 message.algorithm = 13;
                                 break;
+                            case "EC_SIGN_SECP256K1_SHA256":
+                            case 31:
+                                message.algorithm = 31;
+                                break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
@@ -1977,6 +1987,7 @@
                          * @property {number} RSA_DECRYPT_OAEP_4096_SHA512=17 RSA_DECRYPT_OAEP_4096_SHA512 value
                          * @property {number} EC_SIGN_P256_SHA256=12 EC_SIGN_P256_SHA256 value
                          * @property {number} EC_SIGN_P384_SHA384=13 EC_SIGN_P384_SHA384 value
+                         * @property {number} EC_SIGN_SECP256K1_SHA256=31 EC_SIGN_SECP256K1_SHA256 value
                          * @property {number} EXTERNAL_SYMMETRIC_ENCRYPTION=18 EXTERNAL_SYMMETRIC_ENCRYPTION value
                          */
                         CryptoKeyVersion.CryptoKeyVersionAlgorithm = (function() {
@@ -1997,6 +2008,7 @@
                             values[valuesById[17] = "RSA_DECRYPT_OAEP_4096_SHA512"] = 17;
                             values[valuesById[12] = "EC_SIGN_P256_SHA256"] = 12;
                             values[valuesById[13] = "EC_SIGN_P384_SHA384"] = 13;
+                            values[valuesById[31] = "EC_SIGN_SECP256K1_SHA256"] = 31;
                             values[valuesById[18] = "EXTERNAL_SYMMETRIC_ENCRYPTION"] = 18;
                             return values;
                         })();
@@ -2239,6 +2251,7 @@
                                 case 17:
                                 case 12:
                                 case 13:
+                                case 31:
                                 case 18:
                                     break;
                                 }
@@ -2331,6 +2344,10 @@
                             case "EC_SIGN_P384_SHA384":
                             case 13:
                                 message.algorithm = 13;
+                                break;
+                            case "EC_SIGN_SECP256K1_SHA256":
+                            case 31:
+                                message.algorithm = 31;
                                 break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
@@ -8137,6 +8154,7 @@
                                 case 17:
                                 case 12:
                                 case 13:
+                                case 31:
                                 case 18:
                                     break;
                                 }
@@ -8229,6 +8247,10 @@
                             case "EC_SIGN_P384_SHA384":
                             case 13:
                                 message.algorithm = 13;
+                                break;
+                            case "EC_SIGN_SECP256K1_SHA256":
+                            case 31:
+                                message.algorithm = 31;
                                 break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:

@@ -2005,7 +2005,8 @@ export class KeyManagementServiceClient {
   /**
    * Update the version of a {@link google.cloud.kms.v1.CryptoKey|CryptoKey} that will be used in {@link google.cloud.kms.v1.KeyManagementService.Encrypt|Encrypt}.
    *
-   * Returns an error if called on an asymmetric key.
+   * Returns an error if called on a key whose purpose is not
+   * {@link google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT|ENCRYPT_DECRYPT}.
    *
    * @param {Object} request
    *   The request object that will be sent.
