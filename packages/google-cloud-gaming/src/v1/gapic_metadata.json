@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.gaming.v1",
-  "libraryPackage": "gaming",
+  "libraryPackage": "@google-cloud/game-servers",
   "services": {
     "GameServerClustersService": {
       "clients": {
