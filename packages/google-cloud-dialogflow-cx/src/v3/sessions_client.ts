@@ -152,6 +152,9 @@ export class SessionsClient {
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/validationResult'
       ),
+      continuousTestResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/entityTypes/{entity_type}'
       ),
@@ -815,6 +818,101 @@ export class SessionsClient {
     return this.pathTemplates.agentValidationResultPathTemplate.match(
       agentValidationResultName
     ).agent;
+  }
+
+  /**
+   * Return a fully-qualified continuousTestResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} environment
+   * @param {string} continuous_test_result
+   * @returns {string} Resource name string.
+   */
+  continuousTestResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    continuousTestResult: string
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      environment: environment,
+      continuous_test_result: continuousTestResult,
+    });
+  }
+
+  /**
+   * Parse the project from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).agent;
+  }
+
+  /**
+   * Parse the environment from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromContinuousTestResultName(
+    continuousTestResultName: string
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).environment;
+  }
+
+  /**
+   * Parse the continuous_test_result from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the continuous_test_result.
+   */
+  matchContinuousTestResultFromContinuousTestResultName(
+    continuousTestResultName: string
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).continuous_test_result;
   }
 
   /**

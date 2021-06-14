@@ -161,6 +161,9 @@ export class EnvironmentsClient {
       agentValidationResultPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/validationResult'
       ),
+      continuousTestResultPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agents/{agent}/environments/{environment}/continuousTestResults/{continuous_test_result}'
+      ),
       entityTypePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/entityTypes/{entity_type}'
       ),
@@ -230,6 +233,11 @@ export class EnvironmentsClient {
         'nextPageToken',
         'environments'
       ),
+      listContinuousTestResults: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'continuousTestResults'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -256,6 +264,12 @@ export class EnvironmentsClient {
     const updateEnvironmentMetadata = protoFilesRoot.lookup(
       '.google.protobuf.Struct'
     ) as gax.protobuf.Type;
+    const runContinuousTestResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.RunContinuousTestResponse'
+    ) as gax.protobuf.Type;
+    const runContinuousTestMetadata = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createEnvironment: new this._gaxModule.LongrunningDescriptor(
@@ -267,6 +281,11 @@ export class EnvironmentsClient {
         this.operationsClient,
         updateEnvironmentResponse.decode.bind(updateEnvironmentResponse),
         updateEnvironmentMetadata.decode.bind(updateEnvironmentMetadata)
+      ),
+      runContinuousTest: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        runContinuousTestResponse.decode.bind(runContinuousTestResponse),
+        runContinuousTestMetadata.decode.bind(runContinuousTestMetadata)
       ),
     };
 
@@ -322,6 +341,8 @@ export class EnvironmentsClient {
       'updateEnvironment',
       'deleteEnvironment',
       'lookupEnvironmentHistory',
+      'runContinuousTest',
+      'listContinuousTestResults',
     ];
     for (const methodName of environmentsStubMethods) {
       const callPromise = this.environmentsStub.then(
@@ -890,6 +911,148 @@ export class EnvironmentsClient {
       protos.google.protobuf.Struct
     >;
   }
+  runContinuousTest(
+    request: protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse,
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  runContinuousTest(
+    request: protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse,
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  runContinuousTest(
+    request: protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse,
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Kicks off a continuous test under the specified {@link google.cloud.dialogflow.cx.v3.Environment|Environment}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.environment
+   *   Required. Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
+   *   ID>/environments/<Environment ID>`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.runContinuousTest(request);
+   * const [response] = await operation.promise();
+   */
+  runContinuousTest(
+    request: protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse,
+            protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse,
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse,
+        protos.google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        environment: request.environment || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.runContinuousTest(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `runContinuousTest()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkRunContinuousTestProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkRunContinuousTestProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.dialogflow.cx.v3.RunContinuousTestResponse,
+      protos.google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.runContinuousTest,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.dialogflow.cx.v3.RunContinuousTestResponse,
+      protos.google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata
+    >;
+  }
   listEnvironments(
     request: protos.google.cloud.dialogflow.cx.v3.IListEnvironmentsRequest,
     options?: CallOptions
@@ -1291,6 +1454,210 @@ export class EnvironmentsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IEnvironment>;
   }
+  listContinuousTestResults(
+    request: protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult[],
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest | null,
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+    ]
+  >;
+  listContinuousTestResults(
+    request: protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+      | protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult
+    >
+  ): void;
+  listContinuousTestResults(
+    request: protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+      | protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult
+    >
+  ): void;
+  /**
+   * Fetches a list of continuous test results for a given environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The environment to list results for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+   *   environments/<Environment ID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ContinuousTestResult]{@link google.cloud.dialogflow.cx.v3.ContinuousTestResult}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listContinuousTestResultsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listContinuousTestResults(
+    request: protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+          | protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+      | protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+      | null
+      | undefined,
+      protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult[],
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest | null,
+      protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listContinuousTestResults(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The environment to list results for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+   *   environments/<Environment ID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ContinuousTestResult]{@link google.cloud.dialogflow.cx.v3.ContinuousTestResult} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listContinuousTestResultsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listContinuousTestResultsStream(
+    request?: protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listContinuousTestResults.createStream(
+      this.innerApiCalls.listContinuousTestResults as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listContinuousTestResults`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The environment to list results for.
+   *   Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent ID>/
+   *   environments/<Environment ID>`.
+   * @param {number} request.pageSize
+   *   The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ContinuousTestResult]{@link google.cloud.dialogflow.cx.v3.ContinuousTestResult}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listContinuousTestResultsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listContinuousTestResultsAsync(
+    request?: protos.google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listContinuousTestResults.asyncIterate(
+      this.innerApiCalls['listContinuousTestResults'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3.IContinuousTestResult>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -1399,6 +1766,101 @@ export class EnvironmentsClient {
     return this.pathTemplates.agentValidationResultPathTemplate.match(
       agentValidationResultName
     ).agent;
+  }
+
+  /**
+   * Return a fully-qualified continuousTestResult resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} agent
+   * @param {string} environment
+   * @param {string} continuous_test_result
+   * @returns {string} Resource name string.
+   */
+  continuousTestResultPath(
+    project: string,
+    location: string,
+    agent: string,
+    environment: string,
+    continuousTestResult: string
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.render({
+      project: project,
+      location: location,
+      agent: agent,
+      environment: environment,
+      continuous_test_result: continuousTestResult,
+    });
+  }
+
+  /**
+   * Parse the project from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).location;
+  }
+
+  /**
+   * Parse the agent from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the agent.
+   */
+  matchAgentFromContinuousTestResultName(continuousTestResultName: string) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).agent;
+  }
+
+  /**
+   * Parse the environment from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromContinuousTestResultName(
+    continuousTestResultName: string
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).environment;
+  }
+
+  /**
+   * Parse the continuous_test_result from ContinuousTestResult resource.
+   *
+   * @param {string} continuousTestResultName
+   *   A fully-qualified path representing ContinuousTestResult resource.
+   * @returns {string} A string representing the continuous_test_result.
+   */
+  matchContinuousTestResultFromContinuousTestResultName(
+    continuousTestResultName: string
+  ) {
+    return this.pathTemplates.continuousTestResultPathTemplate.match(
+      continuousTestResultName
+    ).continuous_test_result;
   }
 
   /**

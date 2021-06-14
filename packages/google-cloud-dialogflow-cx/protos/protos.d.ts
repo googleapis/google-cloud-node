@@ -7445,6 +7445,18 @@ export namespace google {
                         }
                     }
 
+                    /** AudioEncoding enum. */
+                    enum AudioEncoding {
+                        AUDIO_ENCODING_UNSPECIFIED = 0,
+                        AUDIO_ENCODING_LINEAR_16 = 1,
+                        AUDIO_ENCODING_FLAC = 2,
+                        AUDIO_ENCODING_MULAW = 3,
+                        AUDIO_ENCODING_AMR = 4,
+                        AUDIO_ENCODING_AMR_WB = 5,
+                        AUDIO_ENCODING_OGG_OPUS = 6,
+                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
+                    }
+
                     /** Properties of a SpeechWordInfo. */
                     interface ISpeechWordInfo {
 
@@ -7551,18 +7563,6 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
-                    }
-
-                    /** AudioEncoding enum. */
-                    enum AudioEncoding {
-                        AUDIO_ENCODING_UNSPECIFIED = 0,
-                        AUDIO_ENCODING_LINEAR_16 = 1,
-                        AUDIO_ENCODING_FLAC = 2,
-                        AUDIO_ENCODING_MULAW = 3,
-                        AUDIO_ENCODING_AMR = 4,
-                        AUDIO_ENCODING_AMR_WB = 5,
-                        AUDIO_ENCODING_OGG_OPUS = 6,
-                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                     }
 
                     /** Properties of an InputAudioConfig. */
@@ -9196,6 +9196,34 @@ export namespace google {
                          * @returns Promise
                          */
                         public lookupEnvironmentHistory(request: google.cloud.dialogflow.cx.v3.ILookupEnvironmentHistoryRequest): Promise<google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryResponse>;
+
+                        /**
+                         * Calls RunContinuousTest.
+                         * @param request RunContinuousTestRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Operation
+                         */
+                        public runContinuousTest(request: google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest, callback: google.cloud.dialogflow.cx.v3.Environments.RunContinuousTestCallback): void;
+
+                        /**
+                         * Calls RunContinuousTest.
+                         * @param request RunContinuousTestRequest message or plain object
+                         * @returns Promise
+                         */
+                        public runContinuousTest(request: google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest): Promise<google.longrunning.Operation>;
+
+                        /**
+                         * Calls ListContinuousTestResults.
+                         * @param request ListContinuousTestResultsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListContinuousTestResultsResponse
+                         */
+                        public listContinuousTestResults(request: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest, callback: google.cloud.dialogflow.cx.v3.Environments.ListContinuousTestResultsCallback): void;
+
+                        /**
+                         * Calls ListContinuousTestResults.
+                         * @param request ListContinuousTestResultsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listContinuousTestResults(request: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest): Promise<google.cloud.dialogflow.cx.v3.ListContinuousTestResultsResponse>;
                     }
 
                     namespace Environments {
@@ -9241,6 +9269,20 @@ export namespace google {
                          * @param [response] LookupEnvironmentHistoryResponse
                          */
                         type LookupEnvironmentHistoryCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.LookupEnvironmentHistoryResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Environments#runContinuousTest}.
+                         * @param error Error, if any
+                         * @param [response] Operation
+                         */
+                        type RunContinuousTestCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.dialogflow.cx.v3.Environments#listContinuousTestResults}.
+                         * @param error Error, if any
+                         * @param [response] ListContinuousTestResultsResponse
+                         */
+                        type ListContinuousTestResultsCallback = (error: (Error|null), response?: google.cloud.dialogflow.cx.v3.ListContinuousTestResultsResponse) => void;
                     }
 
                     /** Properties of an Environment. */
@@ -10213,6 +10255,592 @@ export namespace google {
 
                         /**
                          * Converts this LookupEnvironmentHistoryResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ContinuousTestResult. */
+                    interface IContinuousTestResult {
+
+                        /** ContinuousTestResult name */
+                        name?: (string|null);
+
+                        /** ContinuousTestResult result */
+                        result?: (google.cloud.dialogflow.cx.v3.ContinuousTestResult.AggregatedTestResult|keyof typeof google.cloud.dialogflow.cx.v3.ContinuousTestResult.AggregatedTestResult|null);
+
+                        /** ContinuousTestResult testCaseResults */
+                        testCaseResults?: (string[]|null);
+
+                        /** ContinuousTestResult runTime */
+                        runTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a ContinuousTestResult. */
+                    class ContinuousTestResult implements IContinuousTestResult {
+
+                        /**
+                         * Constructs a new ContinuousTestResult.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IContinuousTestResult);
+
+                        /** ContinuousTestResult name. */
+                        public name: string;
+
+                        /** ContinuousTestResult result. */
+                        public result: (google.cloud.dialogflow.cx.v3.ContinuousTestResult.AggregatedTestResult|keyof typeof google.cloud.dialogflow.cx.v3.ContinuousTestResult.AggregatedTestResult);
+
+                        /** ContinuousTestResult testCaseResults. */
+                        public testCaseResults: string[];
+
+                        /** ContinuousTestResult runTime. */
+                        public runTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new ContinuousTestResult instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ContinuousTestResult instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IContinuousTestResult): google.cloud.dialogflow.cx.v3.ContinuousTestResult;
+
+                        /**
+                         * Encodes the specified ContinuousTestResult message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ContinuousTestResult.verify|verify} messages.
+                         * @param message ContinuousTestResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IContinuousTestResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ContinuousTestResult message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ContinuousTestResult.verify|verify} messages.
+                         * @param message ContinuousTestResult message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IContinuousTestResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ContinuousTestResult message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ContinuousTestResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ContinuousTestResult;
+
+                        /**
+                         * Decodes a ContinuousTestResult message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ContinuousTestResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ContinuousTestResult;
+
+                        /**
+                         * Verifies a ContinuousTestResult message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ContinuousTestResult message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ContinuousTestResult
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ContinuousTestResult;
+
+                        /**
+                         * Creates a plain object from a ContinuousTestResult message. Also converts values to other types if specified.
+                         * @param message ContinuousTestResult
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ContinuousTestResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ContinuousTestResult to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace ContinuousTestResult {
+
+                        /** AggregatedTestResult enum. */
+                        enum AggregatedTestResult {
+                            AGGREGATED_TEST_RESULT_UNSPECIFIED = 0,
+                            PASSED = 1,
+                            FAILED = 2
+                        }
+                    }
+
+                    /** Properties of a RunContinuousTestRequest. */
+                    interface IRunContinuousTestRequest {
+
+                        /** RunContinuousTestRequest environment */
+                        environment?: (string|null);
+                    }
+
+                    /** Represents a RunContinuousTestRequest. */
+                    class RunContinuousTestRequest implements IRunContinuousTestRequest {
+
+                        /**
+                         * Constructs a new RunContinuousTestRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest);
+
+                        /** RunContinuousTestRequest environment. */
+                        public environment: string;
+
+                        /**
+                         * Creates a new RunContinuousTestRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RunContinuousTestRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest): google.cloud.dialogflow.cx.v3.RunContinuousTestRequest;
+
+                        /**
+                         * Encodes the specified RunContinuousTestRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RunContinuousTestRequest.verify|verify} messages.
+                         * @param message RunContinuousTestRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RunContinuousTestRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RunContinuousTestRequest.verify|verify} messages.
+                         * @param message RunContinuousTestRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IRunContinuousTestRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RunContinuousTestRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RunContinuousTestRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RunContinuousTestRequest;
+
+                        /**
+                         * Decodes a RunContinuousTestRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RunContinuousTestRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RunContinuousTestRequest;
+
+                        /**
+                         * Verifies a RunContinuousTestRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RunContinuousTestRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RunContinuousTestRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RunContinuousTestRequest;
+
+                        /**
+                         * Creates a plain object from a RunContinuousTestRequest message. Also converts values to other types if specified.
+                         * @param message RunContinuousTestRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.RunContinuousTestRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RunContinuousTestRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a RunContinuousTestResponse. */
+                    interface IRunContinuousTestResponse {
+
+                        /** RunContinuousTestResponse continuousTestResult */
+                        continuousTestResult?: (google.cloud.dialogflow.cx.v3.IContinuousTestResult|null);
+                    }
+
+                    /** Represents a RunContinuousTestResponse. */
+                    class RunContinuousTestResponse implements IRunContinuousTestResponse {
+
+                        /**
+                         * Constructs a new RunContinuousTestResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse);
+
+                        /** RunContinuousTestResponse continuousTestResult. */
+                        public continuousTestResult?: (google.cloud.dialogflow.cx.v3.IContinuousTestResult|null);
+
+                        /**
+                         * Creates a new RunContinuousTestResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RunContinuousTestResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse): google.cloud.dialogflow.cx.v3.RunContinuousTestResponse;
+
+                        /**
+                         * Encodes the specified RunContinuousTestResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RunContinuousTestResponse.verify|verify} messages.
+                         * @param message RunContinuousTestResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RunContinuousTestResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RunContinuousTestResponse.verify|verify} messages.
+                         * @param message RunContinuousTestResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IRunContinuousTestResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RunContinuousTestResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RunContinuousTestResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RunContinuousTestResponse;
+
+                        /**
+                         * Decodes a RunContinuousTestResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RunContinuousTestResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RunContinuousTestResponse;
+
+                        /**
+                         * Verifies a RunContinuousTestResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RunContinuousTestResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RunContinuousTestResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RunContinuousTestResponse;
+
+                        /**
+                         * Creates a plain object from a RunContinuousTestResponse message. Also converts values to other types if specified.
+                         * @param message RunContinuousTestResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.RunContinuousTestResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RunContinuousTestResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a RunContinuousTestMetadata. */
+                    interface IRunContinuousTestMetadata {
+
+                        /** RunContinuousTestMetadata errors */
+                        errors?: (google.cloud.dialogflow.cx.v3.ITestError[]|null);
+                    }
+
+                    /** Represents a RunContinuousTestMetadata. */
+                    class RunContinuousTestMetadata implements IRunContinuousTestMetadata {
+
+                        /**
+                         * Constructs a new RunContinuousTestMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata);
+
+                        /** RunContinuousTestMetadata errors. */
+                        public errors: google.cloud.dialogflow.cx.v3.ITestError[];
+
+                        /**
+                         * Creates a new RunContinuousTestMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RunContinuousTestMetadata instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata): google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata;
+
+                        /**
+                         * Encodes the specified RunContinuousTestMetadata message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata.verify|verify} messages.
+                         * @param message RunContinuousTestMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RunContinuousTestMetadata message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata.verify|verify} messages.
+                         * @param message RunContinuousTestMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IRunContinuousTestMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RunContinuousTestMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RunContinuousTestMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata;
+
+                        /**
+                         * Decodes a RunContinuousTestMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RunContinuousTestMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata;
+
+                        /**
+                         * Verifies a RunContinuousTestMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RunContinuousTestMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RunContinuousTestMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata;
+
+                        /**
+                         * Creates a plain object from a RunContinuousTestMetadata message. Also converts values to other types if specified.
+                         * @param message RunContinuousTestMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.RunContinuousTestMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RunContinuousTestMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListContinuousTestResultsRequest. */
+                    interface IListContinuousTestResultsRequest {
+
+                        /** ListContinuousTestResultsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListContinuousTestResultsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListContinuousTestResultsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListContinuousTestResultsRequest. */
+                    class ListContinuousTestResultsRequest implements IListContinuousTestResultsRequest {
+
+                        /**
+                         * Constructs a new ListContinuousTestResultsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest);
+
+                        /** ListContinuousTestResultsRequest parent. */
+                        public parent: string;
+
+                        /** ListContinuousTestResultsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListContinuousTestResultsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListContinuousTestResultsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListContinuousTestResultsRequest instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest): google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest;
+
+                        /**
+                         * Encodes the specified ListContinuousTestResultsRequest message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest.verify|verify} messages.
+                         * @param message ListContinuousTestResultsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListContinuousTestResultsRequest message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest.verify|verify} messages.
+                         * @param message ListContinuousTestResultsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListContinuousTestResultsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListContinuousTestResultsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest;
+
+                        /**
+                         * Decodes a ListContinuousTestResultsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListContinuousTestResultsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest;
+
+                        /**
+                         * Verifies a ListContinuousTestResultsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListContinuousTestResultsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListContinuousTestResultsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest;
+
+                        /**
+                         * Creates a plain object from a ListContinuousTestResultsRequest message. Also converts values to other types if specified.
+                         * @param message ListContinuousTestResultsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListContinuousTestResultsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListContinuousTestResultsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a ListContinuousTestResultsResponse. */
+                    interface IListContinuousTestResultsResponse {
+
+                        /** ListContinuousTestResultsResponse continuousTestResults */
+                        continuousTestResults?: (google.cloud.dialogflow.cx.v3.IContinuousTestResult[]|null);
+
+                        /** ListContinuousTestResultsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListContinuousTestResultsResponse. */
+                    class ListContinuousTestResultsResponse implements IListContinuousTestResultsResponse {
+
+                        /**
+                         * Constructs a new ListContinuousTestResultsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse);
+
+                        /** ListContinuousTestResultsResponse continuousTestResults. */
+                        public continuousTestResults: google.cloud.dialogflow.cx.v3.IContinuousTestResult[];
+
+                        /** ListContinuousTestResultsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListContinuousTestResultsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListContinuousTestResultsResponse instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse): google.cloud.dialogflow.cx.v3.ListContinuousTestResultsResponse;
+
+                        /**
+                         * Encodes the specified ListContinuousTestResultsResponse message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListContinuousTestResultsResponse.verify|verify} messages.
+                         * @param message ListContinuousTestResultsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListContinuousTestResultsResponse message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.ListContinuousTestResultsResponse.verify|verify} messages.
+                         * @param message ListContinuousTestResultsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IListContinuousTestResultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListContinuousTestResultsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListContinuousTestResultsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.ListContinuousTestResultsResponse;
+
+                        /**
+                         * Decodes a ListContinuousTestResultsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListContinuousTestResultsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.ListContinuousTestResultsResponse;
+
+                        /**
+                         * Verifies a ListContinuousTestResultsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListContinuousTestResultsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListContinuousTestResultsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.ListContinuousTestResultsResponse;
+
+                        /**
+                         * Creates a plain object from a ListContinuousTestResultsResponse message. Also converts values to other types if specified.
+                         * @param message ListContinuousTestResultsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.ListContinuousTestResultsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListContinuousTestResultsResponse to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
