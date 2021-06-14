@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.3.3...v2.4.0) (2021-06-14)
+
+
+### Features
+
+* add ECDSA secp256k1 to the list of supported algorithms ([#464](https://www.github.com/googleapis/nodejs-kms/issues/464)) ([a27f95d](https://www.github.com/googleapis/nodejs-kms/commit/a27f95dffdea8a803d02da443a38b10ed7720c86))
+
 ### [2.3.3](https://www.github.com/googleapis/nodejs-kms/compare/v2.3.2...v2.3.3) (2021-05-25)
 
 
