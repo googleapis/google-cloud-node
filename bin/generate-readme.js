@@ -45,19 +45,44 @@ async function downloadRepoMetadata () {
   checkpoint(`Discovered ${repos.length} node.js repos with metadata`);
   const repoMetadata = {};
   for (const repo of repos) {
+    // download the .repo-metadata.json
+    let meta;
     try {
       const url = `${baseUrl}/repos/${repo}/contents/.repo-metadata.json`;
       const res = await github.request({ url });
-      repoMetadata[repo] = JSON.parse(
+      meta = JSON.parse(
         Buffer.from(res.data.content, 'base64').toString('utf8')
       );
-      checkpoint(`${repo} found .repo-metadata.json`);
     } catch (err) {
       if (!err.response || err.response.status !== 404) {
         throw err;
       }
       checkpoint(`${repo} had no .repo-metadata.json`, false);
+      continue;
     }
+
+    // validate that the package has been published
+    const packageName = meta.distribution_name;
+    if (!packageName) {
+      checkpoint(`${repo} had no distribution_name in repo-metadata.json`, false);
+      continue;
+    }
+    try {
+      await github.request({
+        url: `https://registry.npmjs.org/${packageName}`,
+        method: 'HEAD',
+      });
+    } catch (err) {
+      if (!err.response || err.response.status !== 404) {
+        throw err;
+      }
+      checkpoint(`${repo} had no published package "${packageName}"`, false);
+      continue;
+    }
+
+    // we have metadata, and the package is published!
+    repoMetadata[repo] = meta;
+    checkpoint(`${repo} found .repo-metadata.json`);
   }
   const libraries = await processMetadata(repoMetadata);
   return libraries;
