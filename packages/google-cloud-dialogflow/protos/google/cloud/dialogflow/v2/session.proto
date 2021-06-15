@@ -41,6 +41,8 @@ option (google.api.resource_definition) = {
   type: "dialogflow.googleapis.com/Session"
   pattern: "projects/{project}/agent/sessions/{session}"
   pattern: "projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}"
+  pattern: "projects/{project}/locations/{location}/agent/sessions/{session}"
+  pattern: "projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}"
 };
 
 // A service used for session interactions.
@@ -306,6 +308,10 @@ message QueryResult {
   // - `true` if all required parameter values have been collected, or if the
   //    matched intent doesn't contain any required parameters.
   bool all_required_params_present = 5;
+
+  // Indicates whether the conversational query triggers a cancellation for slot
+  // filling.
+  bool cancels_slot_filling = 21;
 
   // The text to be pronounced to the user or shown on the screen.
   // Note: This is a legacy field, `fulfillment_messages` should be preferred.

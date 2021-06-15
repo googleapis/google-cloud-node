@@ -26,11 +26,11 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import * as path from 'path';
 
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
  * `src/v2/environments_client_config.json`.
@@ -140,46 +140,30 @@ export class EnvironmentsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest') {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      agentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent'
-      ),
-      entityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/entityTypes/{entity_type}'
-      ),
-      environmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}'
-      ),
-      intentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/intents/{intent}'
-      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
+      ),
+      projectAgentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent'
+      ),
+      projectAgentEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/entityTypes/{entity_type}'
+      ),
+      projectAgentEnvironmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}'
       ),
       projectAgentEnvironmentUserSessionContextPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -189,6 +173,12 @@ export class EnvironmentsClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
         ),
+      projectAgentFulfillmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/fulfillment'
+      ),
+      projectAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/intents/{intent}'
+      ),
       projectAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
@@ -196,6 +186,9 @@ export class EnvironmentsClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
         ),
+      projectAgentVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/versions/{version}'
+      ),
       projectAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/answerRecords/{answer_record}'
       ),
@@ -219,6 +212,43 @@ export class EnvironmentsClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
         ),
+      projectLocationAgentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent'
+      ),
+      projectLocationAgentEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentEnvironmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/environments/{environment}'
+        ),
+      projectLocationAgentEnvironmentUserSessionContextPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
+        ),
+      projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentFulfillmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/fulfillment'
+        ),
+      projectLocationAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/intents/{intent}'
+      ),
+      projectLocationAgentSessionContextPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/sessions/{session}/contexts/{context}'
+        ),
+      projectLocationAgentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/sessions/{session}/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/versions/{version}'
+      ),
       projectLocationAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/answerRecords/{answer_record}'
       ),
@@ -255,6 +285,11 @@ export class EnvironmentsClient {
         'pageToken',
         'nextPageToken',
         'environments'
+      ),
+      getEnvironmentHistory: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'entries'
       ),
     };
 
@@ -303,7 +338,14 @@ export class EnvironmentsClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const environmentsStubMethods = ['listEnvironments'];
+    const environmentsStubMethods = [
+      'listEnvironments',
+      'getEnvironment',
+      'createEnvironment',
+      'updateEnvironment',
+      'deleteEnvironment',
+      'getEnvironmentHistory',
+    ];
     for (const methodName of environmentsStubMethods) {
       const callPromise = this.environmentsStub.then(
         stub =>
@@ -388,6 +430,403 @@ export class EnvironmentsClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  getEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Retrieves the specified agent environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the environment.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Environment]{@link google.cloud.dialogflow.v2.Environment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getEnvironment(request);
+   */
+  getEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IEnvironment,
+          | protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEnvironment(request, options, callback);
+  }
+  createEnvironment(
+    request: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createEnvironment(
+    request: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createEnvironment(
+    request: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates an agent environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The agent to create an environment for.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
+   * @param {google.cloud.dialogflow.v2.Environment} request.environment
+   *   Required. The environment to create.
+   * @param {string} request.environmentId
+   *   Required. The unique id of the new environment.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Environment]{@link google.cloud.dialogflow.v2.Environment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createEnvironment(request);
+   */
+  createEnvironment(
+    request: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IEnvironment,
+          | protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createEnvironment(request, options, callback);
+  }
+  updateEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  updateEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
+    callback: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates the specified agent environment.
+   *
+   * This method allows you to deploy new agent versions into the environment.
+   * When an environment is pointed to a new agent version by setting
+   * `environment.agent_version`, the environment is temporarily set to the
+   * `LOADING` state. During that time, the environment keeps on serving the
+   * previous version of the agent. After the new agent version is done loading,
+   * the environment is set back to the `RUNNING` state.
+   * You can use "-" as Environment ID in environment name to update version
+   * in "draft" environment. WARNING: this will negate all recent changes to
+   * draft and can't be undone. You may want to save the draft to a version
+   * before calling this function.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.dialogflow.v2.Environment} request.environment
+   *   Required. The environment to update.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The mask to control which fields get updated.
+   * @param {boolean} [request.allowLoadToDraftAndDiscardChanges]
+   *   Optional. This field is used to prevent accidental overwrite of the draft
+   *   environment, which is an operation that cannot be undone. To confirm that
+   *   the caller desires this overwrite, this field must be explicitly set to
+   *   true when updating the draft environment (environment ID = `-`).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Environment]{@link google.cloud.dialogflow.v2.Environment}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateEnvironment(request);
+   */
+  updateEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.dialogflow.v2.IEnvironment,
+          | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      | protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.IEnvironment,
+      protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'environment.name': request.environment!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateEnvironment(request, options, callback);
+  }
+  deleteEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes the specified agent environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the environment to delete.
+   *   / Format:
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+   *   - `projects/<Project ID>/locations/<Location
+   *   ID>/agent/environments/<Environment ID>`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.deleteEnvironment(request);
+   */
+  deleteEnvironment(
+    request: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteEnvironment(request, options, callback);
+  }
 
   listEnvironments(
     request: protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest,
@@ -427,7 +866,9 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all environments from.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Format:
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -496,7 +937,9 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all environments from.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Format:
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -543,7 +986,9 @@ export class EnvironmentsClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The agent to list all environments from.
-   *   Format: `projects/<Project ID>/agent`.
+   *   Format:
+   *   - `projects/<Project ID>/agent`
+   *   - `projects/<Project ID>/locations/<Location ID>/agent`
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return in a single page. By default 100 and
    *   at most 1000.
@@ -586,144 +1031,209 @@ export class EnvironmentsClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.dialogflow.v2.IEnvironment>;
   }
+  getEnvironmentHistory(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry[],
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest | null,
+      protos.google.cloud.dialogflow.v2.IEnvironmentHistory
+    ]
+  >;
+  getEnvironmentHistory(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+      protos.google.cloud.dialogflow.v2.IEnvironmentHistory | null | undefined,
+      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry
+    >
+  ): void;
+  getEnvironmentHistory(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+      protos.google.cloud.dialogflow.v2.IEnvironmentHistory | null | undefined,
+      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry
+    >
+  ): void;
+  /**
+   * Gets the history of the specified environment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the environment to retrieve history for.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Entry]{@link google.cloud.dialogflow.v2.EnvironmentHistory.Entry}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `getEnvironmentHistoryAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  getEnvironmentHistory(
+    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+          | protos.google.cloud.dialogflow.v2.IEnvironmentHistory
+          | null
+          | undefined,
+          protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+      protos.google.cloud.dialogflow.v2.IEnvironmentHistory | null | undefined,
+      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry
+    >
+  ): Promise<
+    [
+      protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry[],
+      protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest | null,
+      protos.google.cloud.dialogflow.v2.IEnvironmentHistory
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEnvironmentHistory(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the environment to retrieve history for.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Entry]{@link google.cloud.dialogflow.v2.EnvironmentHistory.Entry} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `getEnvironmentHistoryAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  getEnvironmentHistoryStream(
+    request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.getEnvironmentHistory.createStream(
+      this.innerApiCalls.getEnvironmentHistory as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `getEnvironmentHistory`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The name of the environment to retrieve history for.
+   *   Supported formats:
+   *   - `projects/<Project ID>/agent/environments/<Environment ID>`
+   *   - `projects/<Project ID>/locations/<Location
+   *     ID>/agent/environments/<Environment ID>`
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of items to return in a single page. By default 100 and
+   *   at most 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. The next_page_token value returned from a previous list request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Entry]{@link google.cloud.dialogflow.v2.EnvironmentHistory.Entry}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.getEnvironmentHistoryAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  getEnvironmentHistoryAsync(
+    request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.getEnvironmentHistory.asyncIterate(
+      this.innerApiCalls['getEnvironmentHistory'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.dialogflow.v2.EnvironmentHistory.IEntry>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
-
-  /**
-   * Return a fully-qualified agent resource name string.
-   *
-   * @param {string} project
-   * @returns {string} Resource name string.
-   */
-  agentPath(project: string) {
-    return this.pathTemplates.agentPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
-   * Parse the project from Agent resource.
-   *
-   * @param {string} agentName
-   *   A fully-qualified path representing Agent resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromAgentName(agentName: string) {
-    return this.pathTemplates.agentPathTemplate.match(agentName).project;
-  }
-
-  /**
-   * Return a fully-qualified entityType resource name string.
-   *
-   * @param {string} project
-   * @param {string} entity_type
-   * @returns {string} Resource name string.
-   */
-  entityTypePath(project: string, entityType: string) {
-    return this.pathTemplates.entityTypePathTemplate.render({
-      project: project,
-      entity_type: entityType,
-    });
-  }
-
-  /**
-   * Parse the project from EntityType resource.
-   *
-   * @param {string} entityTypeName
-   *   A fully-qualified path representing EntityType resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .project;
-  }
-
-  /**
-   * Parse the entity_type from EntityType resource.
-   *
-   * @param {string} entityTypeName
-   *   A fully-qualified path representing EntityType resource.
-   * @returns {string} A string representing the entity_type.
-   */
-  matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .entity_type;
-  }
-
-  /**
-   * Return a fully-qualified environment resource name string.
-   *
-   * @param {string} project
-   * @param {string} environment
-   * @returns {string} Resource name string.
-   */
-  environmentPath(project: string, environment: string) {
-    return this.pathTemplates.environmentPathTemplate.render({
-      project: project,
-      environment: environment,
-    });
-  }
-
-  /**
-   * Parse the project from Environment resource.
-   *
-   * @param {string} environmentName
-   *   A fully-qualified path representing Environment resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
-  }
-
-  /**
-   * Parse the environment from Environment resource.
-   *
-   * @param {string} environmentName
-   *   A fully-qualified path representing Environment resource.
-   * @returns {string} A string representing the environment.
-   */
-  matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
-  }
-
-  /**
-   * Return a fully-qualified intent resource name string.
-   *
-   * @param {string} project
-   * @param {string} intent
-   * @returns {string} Resource name string.
-   */
-  intentPath(project: string, intent: string) {
-    return this.pathTemplates.intentPathTemplate.render({
-      project: project,
-      intent: intent,
-    });
-  }
-
-  /**
-   * Parse the project from Intent resource.
-   *
-   * @param {string} intentName
-   *   A fully-qualified path representing Intent resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromIntentName(intentName: string) {
-    return this.pathTemplates.intentPathTemplate.match(intentName).project;
-  }
-
-  /**
-   * Parse the intent from Intent resource.
-   *
-   * @param {string} intentName
-   *   A fully-qualified path representing Intent resource.
-   * @returns {string} A string representing the intent.
-   */
-  matchIntentFromIntentName(intentName: string) {
-    return this.pathTemplates.intentPathTemplate.match(intentName).intent;
-  }
 
   /**
    * Return a fully-qualified project resource name string.
@@ -746,6 +1256,118 @@ export class EnvironmentsClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectAgent resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectAgentPath(project: string) {
+    return this.pathTemplates.projectAgentPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgent resource.
+   *
+   * @param {string} projectAgentName
+   *   A fully-qualified path representing project_agent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentName(projectAgentName: string) {
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+      .project;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectAgentEntityTypePath(project: string, entityType: string) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.render({
+      project: project,
+      entity_type: entityType,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentEntityType resource.
+   *
+   * @param {string} projectAgentEntityTypeName
+   *   A fully-qualified path representing project_agent_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEntityTypeName(
+    projectAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
+      projectAgentEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the entity_type from ProjectAgentEntityType resource.
+   *
+   * @param {string} projectAgentEntityTypeName
+   *   A fully-qualified path representing project_agent_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectAgentEntityTypeName(
+    projectAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
+      projectAgentEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEnvironment resource name string.
+   *
+   * @param {string} project
+   * @param {string} environment
+   * @returns {string} Resource name string.
+   */
+  projectAgentEnvironmentPath(project: string, environment: string) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.render({
+      project: project,
+      environment: environment,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentEnvironment resource.
+   *
+   * @param {string} projectAgentEnvironmentName
+   *   A fully-qualified path representing project_agent_environment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEnvironmentName(
+    projectAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
+      projectAgentEnvironmentName
+    ).project;
+  }
+
+  /**
+   * Parse the environment from ProjectAgentEnvironment resource.
+   *
+   * @param {string} projectAgentEnvironmentName
+   *   A fully-qualified path representing project_agent_environment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectAgentEnvironmentName(
+    projectAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
+      projectAgentEnvironmentName
+    ).environment;
   }
 
   /**
@@ -955,6 +1577,73 @@ export class EnvironmentsClient {
   }
 
   /**
+   * Return a fully-qualified projectAgentFulfillment resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectAgentFulfillmentPath(project: string) {
+    return this.pathTemplates.projectAgentFulfillmentPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentFulfillment resource.
+   *
+   * @param {string} projectAgentFulfillmentName
+   *   A fully-qualified path representing project_agent_fulfillment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentFulfillmentName(
+    projectAgentFulfillmentName: string
+  ) {
+    return this.pathTemplates.projectAgentFulfillmentPathTemplate.match(
+      projectAgentFulfillmentName
+    ).project;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentIntent resource name string.
+   *
+   * @param {string} project
+   * @param {string} intent
+   * @returns {string} Resource name string.
+   */
+  projectAgentIntentPath(project: string, intent: string) {
+    return this.pathTemplates.projectAgentIntentPathTemplate.render({
+      project: project,
+      intent: intent,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentIntent resource.
+   *
+   * @param {string} projectAgentIntentName
+   *   A fully-qualified path representing project_agent_intent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
+    ).project;
+  }
+
+  /**
+   * Parse the intent from ProjectAgentIntent resource.
+   *
+   * @param {string} projectAgentIntentName
+   *   A fully-qualified path representing project_agent_intent resource.
+   * @returns {string} A string representing the intent.
+   */
+  matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
+    ).intent;
+  }
+
+  /**
    * Return a fully-qualified projectAgentSessionContext resource name string.
    *
    * @param {string} project
@@ -1082,6 +1771,46 @@ export class EnvironmentsClient {
     return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
       projectAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  projectAgentVersionPath(project: string, version: string) {
+    return this.pathTemplates.projectAgentVersionPathTemplate.render({
+      project: project,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentVersion resource.
+   *
+   * @param {string} projectAgentVersionName
+   *   A fully-qualified path representing project_agent_version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentVersionName(projectAgentVersionName: string) {
+    return this.pathTemplates.projectAgentVersionPathTemplate.match(
+      projectAgentVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the version from ProjectAgentVersion resource.
+   *
+   * @param {string} projectAgentVersionName
+   *   A fully-qualified path representing project_agent_version resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromProjectAgentVersionName(projectAgentVersionName: string) {
+    return this.pathTemplates.projectAgentVersionPathTemplate.match(
+      projectAgentVersionName
+    ).version;
   }
 
   /**
@@ -1449,6 +2178,768 @@ export class EnvironmentsClient {
     return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
       projectKnowledgeBaseDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationAgentPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgent resource.
+   *
+   * @param {string} projectLocationAgentName
+   *   A fully-qualified path representing project_location_agent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgent resource.
+   *
+   * @param {string} projectLocationAgentName
+   *   A fully-qualified path representing project_location_agent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEntityTypePath(
+    project: string,
+    location: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEntityType resource.
+   *
+   * @param {string} projectLocationAgentEntityTypeName
+   *   A fully-qualified path representing project_location_agent_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEntityType resource.
+   *
+   * @param {string} projectLocationAgentEntityTypeName
+   *   A fully-qualified path representing project_location_agent_entity_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the entity_type from ProjectLocationAgentEntityType resource.
+   *
+   * @param {string} projectLocationAgentEntityTypeName
+   *   A fully-qualified path representing project_location_agent_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEnvironment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEnvironmentPath(
+    project: string,
+    location: string,
+    environment: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEnvironment resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentName
+   *   A fully-qualified path representing project_location_agent_environment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEnvironment resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentName
+   *   A fully-qualified path representing project_location_agent_environment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from ProjectLocationAgentEnvironment resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentName
+   *   A fully-qualified path representing project_location_agent_environment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName
+    ).environment;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEnvironmentUserSessionContext resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user
+   * @param {string} session
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEnvironmentUserSessionContextPath(
+    project: string,
+    location: string,
+    environment: string,
+    user: string,
+    session: string,
+    context: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+        user: user,
+        session: session,
+        context: context,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).environment;
+  }
+
+  /**
+   * Parse the user from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).user;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).session;
+  }
+
+  /**
+   * Parse the context from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).context;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEnvironmentUserSessionEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user
+   * @param {string} session
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEnvironmentUserSessionEntityTypePath(
+    project: string,
+    location: string,
+    environment: string,
+    user: string,
+    session: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+        user: user,
+        session: session,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).environment;
+  }
+
+  /**
+   * Parse the user from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).user;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).session;
+  }
+
+  /**
+   * Parse the entity_type from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentFulfillment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentFulfillmentPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentFulfillment resource.
+   *
+   * @param {string} projectLocationAgentFulfillmentName
+   *   A fully-qualified path representing project_location_agent_fulfillment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentFulfillmentName(
+    projectLocationAgentFulfillmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(
+      projectLocationAgentFulfillmentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentFulfillment resource.
+   *
+   * @param {string} projectLocationAgentFulfillmentName
+   *   A fully-qualified path representing project_location_agent_fulfillment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentFulfillmentName(
+    projectLocationAgentFulfillmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(
+      projectLocationAgentFulfillmentName
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentIntent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intent
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentIntentPath(
+    project: string,
+    location: string,
+    intent: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
+      project: project,
+      location: location,
+      intent: intent,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentIntent resource.
+   *
+   * @param {string} projectLocationAgentIntentName
+   *   A fully-qualified path representing project_location_agent_intent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentIntent resource.
+   *
+   * @param {string} projectLocationAgentIntentName
+   *   A fully-qualified path representing project_location_agent_intent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).location;
+  }
+
+  /**
+   * Parse the intent from ProjectLocationAgentIntent resource.
+   *
+   * @param {string} projectLocationAgentIntentName
+   *   A fully-qualified path representing project_location_agent_intent resource.
+   * @returns {string} A string representing the intent.
+   */
+  matchIntentFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).intent;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentSessionContext resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentSessionContextPath(
+    project: string,
+    location: string,
+    session: string,
+    context: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        session: session,
+        context: context,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).session;
+  }
+
+  /**
+   * Parse the context from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).context;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentSessionEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentSessionEntityTypePath(
+    project: string,
+    location: string,
+    session: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        session: session,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).session;
+  }
+
+  /**
+   * Parse the entity_type from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentVersionPath(
+    project: string,
+    location: string,
+    version: string
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.render({
+      project: project,
+      location: location,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentVersion resource.
+   *
+   * @param {string} projectLocationAgentVersionName
+   *   A fully-qualified path representing project_location_agent_version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentVersionName(
+    projectLocationAgentVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
+      projectLocationAgentVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentVersion resource.
+   *
+   * @param {string} projectLocationAgentVersionName
+   *   A fully-qualified path representing project_location_agent_version resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentVersionName(
+    projectLocationAgentVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
+      projectLocationAgentVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the version from ProjectLocationAgentVersion resource.
+   *
+   * @param {string} projectLocationAgentVersionName
+   *   A fully-qualified path representing project_location_agent_version resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromProjectLocationAgentVersionName(
+    projectLocationAgentVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
+      projectLocationAgentVersionName
+    ).version;
   }
 
   /**

@@ -10,5 +10,6 @@
   "distribution_name": "@google-cloud/dialogflow",
   "api_id": "dialogflow.googleapis.com",
   "requires_billing": true,
-  "codeowner_team": "@googleapis/ml-apis"
+  "codeowner_team": "@googleapis/ml-apis",
+  "default_version": "v2"
 }

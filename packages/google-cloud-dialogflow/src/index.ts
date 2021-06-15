@@ -35,6 +35,8 @@ const EntityTypesClient = v2.EntityTypesClient;
 type EntityTypesClient = v2.EntityTypesClient;
 const EnvironmentsClient = v2.EnvironmentsClient;
 type EnvironmentsClient = v2.EnvironmentsClient;
+const FulfillmentsClient = v2.FulfillmentsClient;
+type FulfillmentsClient = v2.FulfillmentsClient;
 const IntentsClient = v2.IntentsClient;
 type IntentsClient = v2.IntentsClient;
 const KnowledgeBasesClient = v2.KnowledgeBasesClient;
@@ -45,6 +47,8 @@ const SessionEntityTypesClient = v2.SessionEntityTypesClient;
 type SessionEntityTypesClient = v2.SessionEntityTypesClient;
 const SessionsClient = v2.SessionsClient;
 type SessionsClient = v2.SessionsClient;
+const VersionsClient = v2.VersionsClient;
+type VersionsClient = v2.VersionsClient;
 
 export {
   v2,
@@ -57,11 +61,13 @@ export {
   DocumentsClient,
   EntityTypesClient,
   EnvironmentsClient,
+  FulfillmentsClient,
   IntentsClient,
   KnowledgeBasesClient,
   ParticipantsClient,
   SessionEntityTypesClient,
   SessionsClient,
+  VersionsClient,
 };
 export default {
   v2,
@@ -74,11 +80,13 @@ export default {
   DocumentsClient,
   EntityTypesClient,
   EnvironmentsClient,
+  FulfillmentsClient,
   IntentsClient,
   KnowledgeBasesClient,
   ParticipantsClient,
   SessionEntityTypesClient,
   SessionsClient,
+  VersionsClient,
 };
 import * as protos from '../protos/protos';
 export {protos};

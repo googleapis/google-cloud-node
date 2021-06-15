@@ -600,11 +600,38 @@
         "grpc": {
           "libraryClient": "EnvironmentsClient",
           "rpcs": {
+            "GetEnvironment": {
+              "methods": [
+                "getEnvironment"
+              ]
+            },
+            "CreateEnvironment": {
+              "methods": [
+                "createEnvironment"
+              ]
+            },
+            "UpdateEnvironment": {
+              "methods": [
+                "updateEnvironment"
+              ]
+            },
+            "DeleteEnvironment": {
+              "methods": [
+                "deleteEnvironment"
+              ]
+            },
             "ListEnvironments": {
               "methods": [
                 "listEnvironments",
                 "listEnvironmentsStream",
                 "listEnvironmentsAsync"
+              ]
+            },
+            "GetEnvironmentHistory": {
+              "methods": [
+                "getEnvironmentHistory",
+                "getEnvironmentHistoryStream",
+                "getEnvironmentHistoryAsync"
               ]
             }
           }
@@ -612,11 +639,72 @@
         "grpc-fallback": {
           "libraryClient": "EnvironmentsClient",
           "rpcs": {
+            "GetEnvironment": {
+              "methods": [
+                "getEnvironment"
+              ]
+            },
+            "CreateEnvironment": {
+              "methods": [
+                "createEnvironment"
+              ]
+            },
+            "UpdateEnvironment": {
+              "methods": [
+                "updateEnvironment"
+              ]
+            },
+            "DeleteEnvironment": {
+              "methods": [
+                "deleteEnvironment"
+              ]
+            },
             "ListEnvironments": {
               "methods": [
                 "listEnvironments",
                 "listEnvironmentsStream",
                 "listEnvironmentsAsync"
+              ]
+            },
+            "GetEnvironmentHistory": {
+              "methods": [
+                "getEnvironmentHistory",
+                "getEnvironmentHistoryStream",
+                "getEnvironmentHistoryAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Fulfillments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FulfillmentsClient",
+          "rpcs": {
+            "GetFulfillment": {
+              "methods": [
+                "getFulfillment"
+              ]
+            },
+            "UpdateFulfillment": {
+              "methods": [
+                "updateFulfillment"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FulfillmentsClient",
+          "rpcs": {
+            "GetFulfillment": {
+              "methods": [
+                "getFulfillment"
+              ]
+            },
+            "UpdateFulfillment": {
+              "methods": [
+                "updateFulfillment"
               ]
             }
           }
@@ -992,6 +1080,74 @@
             "DetectIntent": {
               "methods": [
                 "detectIntent"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Versions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VersionsClient",
+          "rpcs": {
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "createVersion"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "updateVersion"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "deleteVersion"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "listVersions",
+                "listVersionsStream",
+                "listVersionsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VersionsClient",
+          "rpcs": {
+            "GetVersion": {
+              "methods": [
+                "getVersion"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "createVersion"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "updateVersion"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "deleteVersion"
+              ]
+            },
+            "ListVersions": {
+              "methods": [
+                "listVersions",
+                "listVersionsStream",
+                "listVersionsAsync"
               ]
             }
           }

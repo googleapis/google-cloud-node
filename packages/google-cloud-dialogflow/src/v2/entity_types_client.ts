@@ -27,11 +27,11 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-import * as path from 'path';
 
 import {Transform} from 'stream';
 import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
  * `src/v2/entity_types_client_config.json`.
@@ -142,46 +142,30 @@ export class EntityTypesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest') {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
-      agentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent'
-      ),
-      entityTypePathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/entityTypes/{entity_type}'
-      ),
-      environmentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/environments/{environment}'
-      ),
-      intentPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/agent/intents/{intent}'
-      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
+      ),
+      projectAgentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent'
+      ),
+      projectAgentEntityTypePathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/entityTypes/{entity_type}'
+      ),
+      projectAgentEnvironmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/environments/{environment}'
       ),
       projectAgentEnvironmentUserSessionContextPathTemplate:
         new this._gaxModule.PathTemplate(
@@ -191,6 +175,12 @@ export class EntityTypesClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
         ),
+      projectAgentFulfillmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/fulfillment'
+      ),
+      projectAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/intents/{intent}'
+      ),
       projectAgentSessionContextPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/agent/sessions/{session}/contexts/{context}'
       ),
@@ -198,6 +188,9 @@ export class EntityTypesClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/agent/sessions/{session}/entityTypes/{entity_type}'
         ),
+      projectAgentVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/agent/versions/{version}'
+      ),
       projectAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/answerRecords/{answer_record}'
       ),
@@ -221,6 +214,43 @@ export class EntityTypesClient {
         new this._gaxModule.PathTemplate(
           'projects/{project}/knowledgeBases/{knowledge_base}/documents/{document}'
         ),
+      projectLocationAgentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent'
+      ),
+      projectLocationAgentEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentEnvironmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/environments/{environment}'
+        ),
+      projectLocationAgentEnvironmentUserSessionContextPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/contexts/{context}'
+        ),
+      projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentFulfillmentPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/fulfillment'
+        ),
+      projectLocationAgentIntentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/intents/{intent}'
+      ),
+      projectLocationAgentSessionContextPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/sessions/{session}/contexts/{context}'
+        ),
+      projectLocationAgentSessionEntityTypePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/agent/sessions/{session}/entityTypes/{entity_type}'
+        ),
+      projectLocationAgentVersionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/agent/versions/{version}'
+      ),
       projectLocationAnswerRecordPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/answerRecords/{answer_record}'
       ),
@@ -260,15 +290,11 @@ export class EntityTypesClient {
       ),
     };
 
+    const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
+
     // This API contains "long-running operations", which return a
     // an Operation object that allows for tracking of the operation,
     // rather than holding a request open.
-    const protoFilesRoot = opts.fallback
-      ? this._gaxModule.protobuf.Root.fromJSON(
-          // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        )
-      : this._gaxModule.protobuf.loadSync(nodejsProtoPath);
 
     this.operationsClient = this._gaxModule
       .lro({
@@ -1863,141 +1889,6 @@ export class EntityTypesClient {
   // --------------------
 
   /**
-   * Return a fully-qualified agent resource name string.
-   *
-   * @param {string} project
-   * @returns {string} Resource name string.
-   */
-  agentPath(project: string) {
-    return this.pathTemplates.agentPathTemplate.render({
-      project: project,
-    });
-  }
-
-  /**
-   * Parse the project from Agent resource.
-   *
-   * @param {string} agentName
-   *   A fully-qualified path representing Agent resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromAgentName(agentName: string) {
-    return this.pathTemplates.agentPathTemplate.match(agentName).project;
-  }
-
-  /**
-   * Return a fully-qualified entityType resource name string.
-   *
-   * @param {string} project
-   * @param {string} entity_type
-   * @returns {string} Resource name string.
-   */
-  entityTypePath(project: string, entityType: string) {
-    return this.pathTemplates.entityTypePathTemplate.render({
-      project: project,
-      entity_type: entityType,
-    });
-  }
-
-  /**
-   * Parse the project from EntityType resource.
-   *
-   * @param {string} entityTypeName
-   *   A fully-qualified path representing EntityType resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .project;
-  }
-
-  /**
-   * Parse the entity_type from EntityType resource.
-   *
-   * @param {string} entityTypeName
-   *   A fully-qualified path representing EntityType resource.
-   * @returns {string} A string representing the entity_type.
-   */
-  matchEntityTypeFromEntityTypeName(entityTypeName: string) {
-    return this.pathTemplates.entityTypePathTemplate.match(entityTypeName)
-      .entity_type;
-  }
-
-  /**
-   * Return a fully-qualified environment resource name string.
-   *
-   * @param {string} project
-   * @param {string} environment
-   * @returns {string} Resource name string.
-   */
-  environmentPath(project: string, environment: string) {
-    return this.pathTemplates.environmentPathTemplate.render({
-      project: project,
-      environment: environment,
-    });
-  }
-
-  /**
-   * Parse the project from Environment resource.
-   *
-   * @param {string} environmentName
-   *   A fully-qualified path representing Environment resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .project;
-  }
-
-  /**
-   * Parse the environment from Environment resource.
-   *
-   * @param {string} environmentName
-   *   A fully-qualified path representing Environment resource.
-   * @returns {string} A string representing the environment.
-   */
-  matchEnvironmentFromEnvironmentName(environmentName: string) {
-    return this.pathTemplates.environmentPathTemplate.match(environmentName)
-      .environment;
-  }
-
-  /**
-   * Return a fully-qualified intent resource name string.
-   *
-   * @param {string} project
-   * @param {string} intent
-   * @returns {string} Resource name string.
-   */
-  intentPath(project: string, intent: string) {
-    return this.pathTemplates.intentPathTemplate.render({
-      project: project,
-      intent: intent,
-    });
-  }
-
-  /**
-   * Parse the project from Intent resource.
-   *
-   * @param {string} intentName
-   *   A fully-qualified path representing Intent resource.
-   * @returns {string} A string representing the project.
-   */
-  matchProjectFromIntentName(intentName: string) {
-    return this.pathTemplates.intentPathTemplate.match(intentName).project;
-  }
-
-  /**
-   * Parse the intent from Intent resource.
-   *
-   * @param {string} intentName
-   *   A fully-qualified path representing Intent resource.
-   * @returns {string} A string representing the intent.
-   */
-  matchIntentFromIntentName(intentName: string) {
-    return this.pathTemplates.intentPathTemplate.match(intentName).intent;
-  }
-
-  /**
    * Return a fully-qualified project resource name string.
    *
    * @param {string} project
@@ -2018,6 +1909,118 @@ export class EntityTypesClient {
    */
   matchProjectFromProjectName(projectName: string) {
     return this.pathTemplates.projectPathTemplate.match(projectName).project;
+  }
+
+  /**
+   * Return a fully-qualified projectAgent resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectAgentPath(project: string) {
+    return this.pathTemplates.projectAgentPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgent resource.
+   *
+   * @param {string} projectAgentName
+   *   A fully-qualified path representing project_agent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentName(projectAgentName: string) {
+    return this.pathTemplates.projectAgentPathTemplate.match(projectAgentName)
+      .project;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectAgentEntityTypePath(project: string, entityType: string) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.render({
+      project: project,
+      entity_type: entityType,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentEntityType resource.
+   *
+   * @param {string} projectAgentEntityTypeName
+   *   A fully-qualified path representing project_agent_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEntityTypeName(
+    projectAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
+      projectAgentEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the entity_type from ProjectAgentEntityType resource.
+   *
+   * @param {string} projectAgentEntityTypeName
+   *   A fully-qualified path representing project_agent_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectAgentEntityTypeName(
+    projectAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectAgentEntityTypePathTemplate.match(
+      projectAgentEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentEnvironment resource name string.
+   *
+   * @param {string} project
+   * @param {string} environment
+   * @returns {string} Resource name string.
+   */
+  projectAgentEnvironmentPath(project: string, environment: string) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.render({
+      project: project,
+      environment: environment,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentEnvironment resource.
+   *
+   * @param {string} projectAgentEnvironmentName
+   *   A fully-qualified path representing project_agent_environment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentEnvironmentName(
+    projectAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
+      projectAgentEnvironmentName
+    ).project;
+  }
+
+  /**
+   * Parse the environment from ProjectAgentEnvironment resource.
+   *
+   * @param {string} projectAgentEnvironmentName
+   *   A fully-qualified path representing project_agent_environment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectAgentEnvironmentName(
+    projectAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectAgentEnvironmentPathTemplate.match(
+      projectAgentEnvironmentName
+    ).environment;
   }
 
   /**
@@ -2227,6 +2230,73 @@ export class EntityTypesClient {
   }
 
   /**
+   * Return a fully-qualified projectAgentFulfillment resource name string.
+   *
+   * @param {string} project
+   * @returns {string} Resource name string.
+   */
+  projectAgentFulfillmentPath(project: string) {
+    return this.pathTemplates.projectAgentFulfillmentPathTemplate.render({
+      project: project,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentFulfillment resource.
+   *
+   * @param {string} projectAgentFulfillmentName
+   *   A fully-qualified path representing project_agent_fulfillment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentFulfillmentName(
+    projectAgentFulfillmentName: string
+  ) {
+    return this.pathTemplates.projectAgentFulfillmentPathTemplate.match(
+      projectAgentFulfillmentName
+    ).project;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentIntent resource name string.
+   *
+   * @param {string} project
+   * @param {string} intent
+   * @returns {string} Resource name string.
+   */
+  projectAgentIntentPath(project: string, intent: string) {
+    return this.pathTemplates.projectAgentIntentPathTemplate.render({
+      project: project,
+      intent: intent,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentIntent resource.
+   *
+   * @param {string} projectAgentIntentName
+   *   A fully-qualified path representing project_agent_intent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentIntentName(projectAgentIntentName: string) {
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
+    ).project;
+  }
+
+  /**
+   * Parse the intent from ProjectAgentIntent resource.
+   *
+   * @param {string} projectAgentIntentName
+   *   A fully-qualified path representing project_agent_intent resource.
+   * @returns {string} A string representing the intent.
+   */
+  matchIntentFromProjectAgentIntentName(projectAgentIntentName: string) {
+    return this.pathTemplates.projectAgentIntentPathTemplate.match(
+      projectAgentIntentName
+    ).intent;
+  }
+
+  /**
    * Return a fully-qualified projectAgentSessionContext resource name string.
    *
    * @param {string} project
@@ -2354,6 +2424,46 @@ export class EntityTypesClient {
     return this.pathTemplates.projectAgentSessionEntityTypePathTemplate.match(
       projectAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectAgentVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  projectAgentVersionPath(project: string, version: string) {
+    return this.pathTemplates.projectAgentVersionPathTemplate.render({
+      project: project,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectAgentVersion resource.
+   *
+   * @param {string} projectAgentVersionName
+   *   A fully-qualified path representing project_agent_version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectAgentVersionName(projectAgentVersionName: string) {
+    return this.pathTemplates.projectAgentVersionPathTemplate.match(
+      projectAgentVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the version from ProjectAgentVersion resource.
+   *
+   * @param {string} projectAgentVersionName
+   *   A fully-qualified path representing project_agent_version resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromProjectAgentVersionName(projectAgentVersionName: string) {
+    return this.pathTemplates.projectAgentVersionPathTemplate.match(
+      projectAgentVersionName
+    ).version;
   }
 
   /**
@@ -2721,6 +2831,768 @@ export class EntityTypesClient {
     return this.pathTemplates.projectKnowledgeBaseDocumentPathTemplate.match(
       projectKnowledgeBaseDocumentName
     ).document;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationAgentPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgent resource.
+   *
+   * @param {string} projectLocationAgentName
+   *   A fully-qualified path representing project_location_agent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentName(projectLocationAgentName: string) {
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgent resource.
+   *
+   * @param {string} projectLocationAgentName
+   *   A fully-qualified path representing project_location_agent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentName(projectLocationAgentName: string) {
+    return this.pathTemplates.projectLocationAgentPathTemplate.match(
+      projectLocationAgentName
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEntityTypePath(
+    project: string,
+    location: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEntityType resource.
+   *
+   * @param {string} projectLocationAgentEntityTypeName
+   *   A fully-qualified path representing project_location_agent_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEntityType resource.
+   *
+   * @param {string} projectLocationAgentEntityTypeName
+   *   A fully-qualified path representing project_location_agent_entity_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the entity_type from ProjectLocationAgentEntityType resource.
+   *
+   * @param {string} projectLocationAgentEntityTypeName
+   *   A fully-qualified path representing project_location_agent_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectLocationAgentEntityTypeName(
+    projectLocationAgentEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEntityTypePathTemplate.match(
+      projectLocationAgentEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEnvironment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEnvironmentPath(
+    project: string,
+    location: string,
+    environment: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEnvironment resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentName
+   *   A fully-qualified path representing project_location_agent_environment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEnvironment resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentName
+   *   A fully-qualified path representing project_location_agent_environment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from ProjectLocationAgentEnvironment resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentName
+   *   A fully-qualified path representing project_location_agent_environment resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectLocationAgentEnvironmentName(
+    projectLocationAgentEnvironmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentPathTemplate.match(
+      projectLocationAgentEnvironmentName
+    ).environment;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEnvironmentUserSessionContext resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user
+   * @param {string} session
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEnvironmentUserSessionContextPath(
+    project: string,
+    location: string,
+    environment: string,
+    user: string,
+    session: string,
+    context: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+        user: user,
+        session: session,
+        context: context,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).environment;
+  }
+
+  /**
+   * Parse the user from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).user;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).session;
+  }
+
+  /**
+   * Parse the context from ProjectLocationAgentEnvironmentUserSessionContext resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionContextName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromProjectLocationAgentEnvironmentUserSessionContextName(
+    projectLocationAgentEnvironmentUserSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionContextPathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionContextName
+    ).context;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentEnvironmentUserSessionEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} environment
+   * @param {string} user
+   * @param {string} session
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentEnvironmentUserSessionEntityTypePath(
+    project: string,
+    location: string,
+    environment: string,
+    user: string,
+    session: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        environment: environment,
+        user: user,
+        session: session,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the environment from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the environment.
+   */
+  matchEnvironmentFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).environment;
+  }
+
+  /**
+   * Parse the user from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the user.
+   */
+  matchUserFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).user;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).session;
+  }
+
+  /**
+   * Parse the entity_type from ProjectLocationAgentEnvironmentUserSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentEnvironmentUserSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_environment_user_session_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectLocationAgentEnvironmentUserSessionEntityTypeName(
+    projectLocationAgentEnvironmentUserSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentEnvironmentUserSessionEntityTypePathTemplate.match(
+      projectLocationAgentEnvironmentUserSessionEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentFulfillment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentFulfillmentPath(project: string, location: string) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.render(
+      {
+        project: project,
+        location: location,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentFulfillment resource.
+   *
+   * @param {string} projectLocationAgentFulfillmentName
+   *   A fully-qualified path representing project_location_agent_fulfillment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentFulfillmentName(
+    projectLocationAgentFulfillmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(
+      projectLocationAgentFulfillmentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentFulfillment resource.
+   *
+   * @param {string} projectLocationAgentFulfillmentName
+   *   A fully-qualified path representing project_location_agent_fulfillment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentFulfillmentName(
+    projectLocationAgentFulfillmentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentFulfillmentPathTemplate.match(
+      projectLocationAgentFulfillmentName
+    ).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentIntent resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} intent
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentIntentPath(
+    project: string,
+    location: string,
+    intent: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.render({
+      project: project,
+      location: location,
+      intent: intent,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentIntent resource.
+   *
+   * @param {string} projectLocationAgentIntentName
+   *   A fully-qualified path representing project_location_agent_intent resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentIntent resource.
+   *
+   * @param {string} projectLocationAgentIntentName
+   *   A fully-qualified path representing project_location_agent_intent resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).location;
+  }
+
+  /**
+   * Parse the intent from ProjectLocationAgentIntent resource.
+   *
+   * @param {string} projectLocationAgentIntentName
+   *   A fully-qualified path representing project_location_agent_intent resource.
+   * @returns {string} A string representing the intent.
+   */
+  matchIntentFromProjectLocationAgentIntentName(
+    projectLocationAgentIntentName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentIntentPathTemplate.match(
+      projectLocationAgentIntentName
+    ).intent;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentSessionContext resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentSessionContextPath(
+    project: string,
+    location: string,
+    session: string,
+    context: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.render(
+      {
+        project: project,
+        location: location,
+        session: session,
+        context: context,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).session;
+  }
+
+  /**
+   * Parse the context from ProjectLocationAgentSessionContext resource.
+   *
+   * @param {string} projectLocationAgentSessionContextName
+   *   A fully-qualified path representing project_location_agent_session_context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromProjectLocationAgentSessionContextName(
+    projectLocationAgentSessionContextName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionContextPathTemplate.match(
+      projectLocationAgentSessionContextName
+    ).context;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentSessionEntityType resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} session
+   * @param {string} entity_type
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentSessionEntityTypePath(
+    project: string,
+    location: string,
+    session: string,
+    entityType: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        session: session,
+        entity_type: entityType,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).location;
+  }
+
+  /**
+   * Parse the session from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the session.
+   */
+  matchSessionFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).session;
+  }
+
+  /**
+   * Parse the entity_type from ProjectLocationAgentSessionEntityType resource.
+   *
+   * @param {string} projectLocationAgentSessionEntityTypeName
+   *   A fully-qualified path representing project_location_agent_session_entity_type resource.
+   * @returns {string} A string representing the entity_type.
+   */
+  matchEntityTypeFromProjectLocationAgentSessionEntityTypeName(
+    projectLocationAgentSessionEntityTypeName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
+      projectLocationAgentSessionEntityTypeName
+    ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationAgentVersion resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} version
+   * @returns {string} Resource name string.
+   */
+  projectLocationAgentVersionPath(
+    project: string,
+    location: string,
+    version: string
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.render({
+      project: project,
+      location: location,
+      version: version,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationAgentVersion resource.
+   *
+   * @param {string} projectLocationAgentVersionName
+   *   A fully-qualified path representing project_location_agent_version resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationAgentVersionName(
+    projectLocationAgentVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
+      projectLocationAgentVersionName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationAgentVersion resource.
+   *
+   * @param {string} projectLocationAgentVersionName
+   *   A fully-qualified path representing project_location_agent_version resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationAgentVersionName(
+    projectLocationAgentVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
+      projectLocationAgentVersionName
+    ).location;
+  }
+
+  /**
+   * Parse the version from ProjectLocationAgentVersion resource.
+   *
+   * @param {string} projectLocationAgentVersionName
+   *   A fully-qualified path representing project_location_agent_version resource.
+   * @returns {string} A string representing the version.
+   */
+  matchVersionFromProjectLocationAgentVersionName(
+    projectLocationAgentVersionName: string
+  ) {
+    return this.pathTemplates.projectLocationAgentVersionPathTemplate.match(
+      projectLocationAgentVersionName
+    ).version;
   }
 
   /**

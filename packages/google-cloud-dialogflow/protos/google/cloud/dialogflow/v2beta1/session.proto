@@ -44,6 +44,7 @@ option (google.api.resource_definition) = {
   pattern: "projects/{project}/agent/sessions/{session}"
   pattern: "projects/{project}/agent/environments/{environment}/users/{user}/sessions/{session}"
   pattern: "projects/{project}/locations/{location}/agent/sessions/{session}"
+  pattern: "projects/{project}/locations/{location}/agent/environments/{environment}/users/{user}/sessions/{session}"
 };
 
 // A service used for session interactions.
@@ -340,6 +341,10 @@ message QueryResult {
   // - `true` if all required parameter values have been collected, or if the
   //    matched intent doesn't contain any required parameters.
   bool all_required_params_present = 5;
+
+  // Indicates whether the conversational query triggers a cancellation for slot
+  // filling.
+  bool cancels_slot_filling = 21;
 
   // The text to be pronounced to the user or shown on the screen.
   // Note: This is a legacy field, `fulfillment_messages` should be preferred.
@@ -658,6 +663,12 @@ message StreamingRecognitionResult {
     // Message contains a (possibly partial) transcript.
     TRANSCRIPT = 1;
 
+    // Message contains DTMF digits. When the client gets the message, it
+    // should stop sending additional data, half-close the gRPC connection, and
+    // wait for any additional results until the server closes the gRPC.
+    // connection.
+    DTMF_DIGITS = 3;
+
     // Event indicates that the server has detected the end of the user's speech
     // utterance and expects no additional speech. Therefore, the server will
     // not process additional audio (although it may subsequently return
@@ -666,6 +677,11 @@ message StreamingRecognitionResult {
     // until the server closes the gRPC connection. This message is only sent if
     // `single_utterance` was set to `true`, and is not used otherwise.
     END_OF_SINGLE_UTTERANCE = 2;
+
+    // Message contains DTMF digits. Before a message with DTMF_DIGITS is sent,
+    // a message with PARTIAL_DTMF_DIGITS may be sent with DTMF digits collected
+    // up to the time of sending, which represents an intermediate result.
+    PARTIAL_DTMF_DIGITS = 4;
   }
 
   // Type of the result message.

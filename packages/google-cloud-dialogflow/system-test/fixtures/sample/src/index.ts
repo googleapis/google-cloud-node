@@ -25,11 +25,13 @@ import {
   DocumentsClient,
   EntityTypesClient,
   EnvironmentsClient,
+  FulfillmentsClient,
   IntentsClient,
   KnowledgeBasesClient,
   ParticipantsClient,
   SessionEntityTypesClient,
   SessionsClient,
+  VersionsClient,
 } from '@google-cloud/dialogflow';
 
 // check that the client class type name can be used
@@ -59,6 +61,9 @@ function doStuffWithEntityTypesClient(client: EntityTypesClient) {
 function doStuffWithEnvironmentsClient(client: EnvironmentsClient) {
   client.close();
 }
+function doStuffWithFulfillmentsClient(client: FulfillmentsClient) {
+  client.close();
+}
 function doStuffWithIntentsClient(client: IntentsClient) {
   client.close();
 }
@@ -72,6 +77,9 @@ function doStuffWithSessionEntityTypesClient(client: SessionEntityTypesClient) {
   client.close();
 }
 function doStuffWithSessionsClient(client: SessionsClient) {
+  client.close();
+}
+function doStuffWithVersionsClient(client: VersionsClient) {
   client.close();
 }
 
@@ -101,6 +109,9 @@ function main() {
   const environmentsClient = new EnvironmentsClient();
   doStuffWithEnvironmentsClient(environmentsClient);
   // check that the client instance can be created
+  const fulfillmentsClient = new FulfillmentsClient();
+  doStuffWithFulfillmentsClient(fulfillmentsClient);
+  // check that the client instance can be created
   const intentsClient = new IntentsClient();
   doStuffWithIntentsClient(intentsClient);
   // check that the client instance can be created
@@ -115,6 +126,9 @@ function main() {
   // check that the client instance can be created
   const sessionsClient = new SessionsClient();
   doStuffWithSessionsClient(sessionsClient);
+  // check that the client instance can be created
+  const versionsClient = new VersionsClient();
+  doStuffWithVersionsClient(versionsClient);
 }
 
 main();

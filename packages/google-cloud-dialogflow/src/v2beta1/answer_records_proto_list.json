@@ -9,6 +9,7 @@
   "../../protos/google/cloud/dialogflow/v2beta1/document.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/entity_type.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/environment.proto",
+  "../../protos/google/cloud/dialogflow/v2beta1/fulfillment.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/gcs.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/human_agent_assistant_event.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/intent.proto",
@@ -17,5 +18,6 @@
   "../../protos/google/cloud/dialogflow/v2beta1/session.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/session_entity_type.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/validation_result.proto",
+  "../../protos/google/cloud/dialogflow/v2beta1/version.proto",
   "../../protos/google/cloud/dialogflow/v2beta1/webhook.proto"
 ]

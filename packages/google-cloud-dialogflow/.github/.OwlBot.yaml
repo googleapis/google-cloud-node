@@ -14,20 +14,9 @@
 docker:
   image: gcr.io/repo-automation-bots/owlbot-nodejs:latest
 
+deep-remove-regex:
+  - /owl-bot-staging
+
 deep-copy-regex:
-  # source code:
-  - source: /google/cloud/dialogflow/.*/dialogflow-.*-nodejs/src/(.*)
-    dest: /src/$1
-    rm-dest: /src/.*
-  # protos:
-  - source: /google/cloud/dialogflow/.*/dialogflow-.*-nodejs/protos/google/cloud/dialogflow/(.*)
-    dest: /protos/google/cloud/dialogflow/$1
-    rm-dest: /protos/google/cloud/dialogflow/*
-  # unit tests:
-  - source: /google/cloud/dialogflow/.*/dialogflow-.*-nodejs/test/(.*)
-    dest: /test/$1
-    rm-dest: /test/.*
-  # TypeScript integration tests:
-  - source: /google/cloud/dialogflow/.*/dialogflow-.*-nodejs/system-test/(.*)
-    dest: /system-test/$1
-    rm-dest: /system-test/.*
+  - source: /google/cloud/dialogflow/(v.*)/.*-nodejs/(.*)
+    dest: /owl-bot-staging/$1/$2

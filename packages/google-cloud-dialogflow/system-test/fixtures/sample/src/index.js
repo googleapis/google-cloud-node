@@ -29,11 +29,13 @@ function main() {
   const documentsClient = new dialogflow.DocumentsClient();
   const entityTypesClient = new dialogflow.EntityTypesClient();
   const environmentsClient = new dialogflow.EnvironmentsClient();
+  const fulfillmentsClient = new dialogflow.FulfillmentsClient();
   const intentsClient = new dialogflow.IntentsClient();
   const knowledgeBasesClient = new dialogflow.KnowledgeBasesClient();
   const participantsClient = new dialogflow.ParticipantsClient();
   const sessionEntityTypesClient = new dialogflow.SessionEntityTypesClient();
   const sessionsClient = new dialogflow.SessionsClient();
+  const versionsClient = new dialogflow.VersionsClient();
 }
 
 main();

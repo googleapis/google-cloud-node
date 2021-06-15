@@ -5,13 +5,18 @@
 # [Dialogflow API: Node.js Client](https://github.com/googleapis/nodejs-dialogflow)
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
-[![npm version](https://img.shields.io/npm/v/dialogflow.svg)](https://www.npmjs.org/package/dialogflow)
+[![npm version](https://img.shields.io/npm/v/@google-cloud/dialogflow.svg)](https://www.npmjs.org/package/@google-cloud/dialogflow)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-dialogflow/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-dialogflow)
+
+
+
 
 ### **_IMPORTANT NOTE_**
 **Version 2.0.0 renames `dialogflow` to `@google-cloud/dialogflow` on npm, along with introducing TypeScript types.**
 
- Dialogflow API client for Node.js
+
+A comprehensive list of changes in each version may be found in
+[the CHANGELOG](https://github.com/googleapis/nodejs-dialogflow/blob/master/CHANGELOG.md).
 
 * [Dialogflow API Node.js Client API Reference][client-docs]
 * [Dialogflow API Documentation][product-docs]
@@ -40,7 +45,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Dialogflow API][enable_api].
+1.  [Enable the Dialogflow API API][enable_api].
 1.  [Set up authentication with a service account][auth] so you can access the
     API from your local workstation.
 
@@ -68,7 +73,10 @@ async function runSample(projectId = 'your-project-id') {
 
   // Create a new session
   const sessionClient = new dialogflow.SessionsClient();
-  const sessionPath = sessionClient.projectAgentSessionPath(projectId, sessionId);
+  const sessionPath = sessionClient.projectAgentSessionPath(
+    projectId,
+    sessionId
+  );
 
   // The text query request.
   const request = {
@@ -92,53 +100,69 @@ async function runSample(projectId = 'your-project-id') {
   if (result.intent) {
     console.log(`  Intent: ${result.intent.displayName}`);
   } else {
-    console.log(`  No intent matched.`);
+    console.log('  No intent matched.');
   }
 }
+
 ```
+
+
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-dialogflow/tree/master/samples) directory. The samples' `README.md`
-has instructions for running the samples.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-dialogflow/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Detect Intent (Text) | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.js,samples/README.md) |
-| Create Knowledge Base | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| Get Knowledge Base | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| list Knowledge Base | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| list Knowledge Base | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| create Document | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| list Documents | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| Get Document | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| delete Document | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| detect Intent with sentiment analysis | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| detect Intent with text-to-speech response | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| detect Intent with Knowledge Base | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
-| Detect Intent (Audio) | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.js,samples/README.md) |
-| Detect Intent (Streaming) | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.js,samples/README.md) |
-| Create Entity | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md) |
-| Delete Entity | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md) |
-| Create Intent | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md) |
-| Delete Intent | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md) |
-| Create Context | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md) |
-| Delete Context | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md) |
-| Create Session Entity Type | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md) |
-| Delete Session Entity Type | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md) |
+| Create-intent | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/create-intent.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/create-intent.js,samples/README.md) |
+| Detect-intent-TTS-response.v2 | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect-intent-TTS-response.v2.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect-intent-TTS-response.v2.js,samples/README.md) |
+| Detect-intent-sentiment.v2 | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect-intent-sentiment.v2.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect-intent-sentiment.v2.js,samples/README.md) |
+| Detect | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.js,samples/README.md) |
+| Detect.v2beta1 | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/detect.v2beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/detect.v2beta1.js,samples/README.md) |
+| List-intents | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/list-intents.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/list-intents.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Resource | [source code](https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow&page=editor&open_in_editor=samples/resource.js,samples/README.md) |
+
+
 
 The [Dialogflow API Node.js Client API Reference][client-docs] documentation
 also contains samples.
 
+## Supported Node.js Versions
+
+Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
+Libraries are compatible with all current _active_ and _maintenance_ versions of
+Node.js.
+
+Client libraries targeting some end-of-life versions of Node.js are available, and
+can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
+The dist-tags follow the naming convention `legacy-(version)`.
+
+_Legacy Node.js versions are supported as a best effort:_
+
+* Legacy versions will not be tested in continuous integration.
+* Some security patches may not be able to be backported.
+* Dependencies will not be kept up-to-date, and features will not be backported.
+
+#### Legacy tags available
+
+* `legacy-8`: install client libraries from this dist-tag for versions
+  compatible with Node.js 8.
+
 ## Versioning
 
 This library follows [Semantic Versioning](http://semver.org/).
+
 
 This library is considered to be **General Availability (GA)**. This means it
 is stable; the code surface will not change in backwards-incompatible ways
 unless absolutely necessary (e.g. because of critical security issues) or with
 an extensive deprecation period. Issues and requests against **GA** libraries
 are addressed with the highest priority.
+
+
+
+
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
@@ -147,6 +171,12 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 ## Contributing
 
 Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-dialogflow/blob/master/CONTRIBUTING.md).
+
+Please note that this `README.md`, the `samples/README.md`,
+and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
+are generated from a central template. To edit one of these files, make an edit
+to its template in this
+[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
 
 ## License
 

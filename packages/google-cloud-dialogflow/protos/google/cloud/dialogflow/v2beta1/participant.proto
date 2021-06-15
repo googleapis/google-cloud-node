@@ -21,6 +21,7 @@ import "google/api/client.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/cloud/dialogflow/v2beta1/audio_config.proto";
+import "google/cloud/dialogflow/v2beta1/gcs.proto";
 import "google/cloud/dialogflow/v2beta1/session.proto";
 import "google/protobuf/any.proto";
 import "google/protobuf/duration.proto";
@@ -97,7 +98,7 @@ service Participants {
   //
   // Note: Always use agent versions for production traffic
   // sent to virtual agents. See [Versions and
-  // environments(https://cloud.google.com/dialogflow/es/docs/agents-versions).
+  // environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
   rpc AnalyzeContent(AnalyzeContentRequest) returns (AnalyzeContentResponse) {
     option (google.api.http) = {
       post: "/v2beta1/{participant=projects/*/conversations/*/participants/*}:analyzeContent"
@@ -168,7 +169,8 @@ service Participants {
   // This method should be used by human agent client software to fetch auto
   // generated suggestions in real-time, while the conversation with an end user
   // is in progress. The functionality is implemented in terms of the
-  // [list pagination](https://cloud.google.com/apis/design/design_patterns#list_pagination)
+  // [list
+  // pagination](https://cloud.google.com/apis/design/design_patterns#list_pagination)
   // design pattern. The client app should use the `next_page_token` field
   // to fetch the next batch of suggestions. `suggestions` are sorted by
   // `create_time` in descending order.
@@ -385,6 +387,20 @@ message OutputAudio {
 
 // Represents a response from an automated agent.
 message AutomatedAgentReply {
+  // Represents different automated agent reply types.
+  enum AutomatedAgentReplyType {
+    // Not specified. This should never happen.
+    AUTOMATED_AGENT_REPLY_TYPE_UNSPECIFIED = 0;
+
+    // Partial reply. e.g. Aggregated responses in a `Fulfillment` that enables
+    // `return_partial_response` can be returned as partial reply.
+    // WARNING: partial reply is not eligible for barge-in.
+    PARTIAL = 1;
+
+    // Final reply.
+    FINAL = 2;
+  }
+
   // Required.
   oneof response {
     // Response of the Dialogflow [Sessions.DetectIntent][google.cloud.dialogflow.v2beta1.Sessions.DetectIntent] call.
@@ -409,9 +425,29 @@ message AutomatedAgentReply {
     string event = 5;
   }
 
+  // The confidence of the match. Values range from 0.0 (completely uncertain)
+  // to 1.0 (completely certain).
+  // This value is for informational purpose only and is only used to help match
+  // the best intent within the classification threshold. This value may change
+  // for the same end-user expression at any time due to a model retraining or
+  // change in implementation.
+  float match_confidence = 9;
+
+  // The collection of current parameters at the time of this response.
+  google.protobuf.Struct parameters = 10;
+
   // The collection of current Dialogflow CX agent session parameters at the
   // time of this response.
-  google.protobuf.Struct cx_session_parameters = 6;
+  // Deprecated: Use `parameters` instead.
+  google.protobuf.Struct cx_session_parameters = 6 [deprecated = true];
+
+  // AutomatedAgentReply type.
+  AutomatedAgentReplyType automated_agent_reply_type = 7;
+
+  // Indicates whether the partial automated agent reply is interruptible when a
+  // later reply message arrives. e.g. if the agent specified some music as
+  // partial response, it can be cancelled.
+  bool allow_cancellation = 8;
 }
 
 // The type of Human Agent Assistant API suggestion to perform, and the maximum
@@ -538,7 +574,6 @@ message AnalyzeContentResponse {
   // Indicates the parameters of DTMF.
   DtmfParameters dtmf_parameters = 9;
 }
-
 
 // Represents a part of a message possibly annotated with an entity. The part
 // can be an entity or purely a part of the message between two entities or
@@ -914,7 +949,7 @@ message ListSuggestionsRequest {
   // `create_time` and `create_time_epoch_microseconds` are supported.
   // `create_time` only support milliseconds accuracy. E.g.,
   // `create_time_epoch_microseconds > 1551790877964485` or
-  // `create_time > 2017-01-15T01:30:15.01Z`
+  // `create_time > "2017-01-15T01:30:15.01Z"`
   //
   // For more information about filtering, see
   // [API Filtering](https://aip.dev/160).
