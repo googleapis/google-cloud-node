@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [4.1.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.0.0...v4.1.0) (2021-06-15)
+
+
+### Features
+
+* added Automated agent reply type and allow cancellation flag for partial response feature ([#825](https://www.github.com/googleapis/nodejs-dialogflow/issues/825)) ([5b128d9](https://www.github.com/googleapis/nodejs-dialogflow/commit/5b128d97eeb63e7d7666e800e5a62789f6f56a65))
+
 ## [4.0.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.5.0...v4.0.0) (2021-06-15)
 
 
