@@ -160,6 +160,8 @@ export interface StackdriverEntryMetadata {
   httpRequest?: HttpRequest;
   labels?: {};
   trace?: {};
+  spanId?: {};
+  traceSampled?: {};
 }
 
 export interface StackdriverLog {

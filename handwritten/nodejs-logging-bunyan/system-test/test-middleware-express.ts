@@ -72,6 +72,9 @@ describe('express middleware', () => {
         assert.strictEqual(LOG_MESSAGE, entry.data.message);
         assert(entry.metadata.trace, 'should have a trace property');
         assert(entry.metadata.trace!.match(/projects\/.*\/traces\/.*/));
+        assert(entry.metadata.spanId, 'should have a span property');
+        assert(entry.metadata.spanId!.match(/^[0-9]*/));
+        assert.strictEqual(entry.metadata.traceSampled, false);
         done();
       };
 
