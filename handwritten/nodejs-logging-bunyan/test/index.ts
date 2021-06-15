@@ -407,11 +407,15 @@ describe('logging-bunyan', () => {
       loggingBunyan.formatEntry_(recordWithLabels);
     });
 
-    it('should promote prefixed trace property to metadata', done => {
+    it('should promote prefixed trace properties to metadata', done => {
       const recordWithTrace = Object.assign({}, RECORD);
       // recordWithTrace does not have index signature.
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (recordWithTrace as any)[loggingBunyanLib.LOGGING_TRACE_KEY] = 'trace1';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (recordWithTrace as any)[loggingBunyanLib.LOGGING_SPAN_KEY] = 'span1';
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (recordWithTrace as any)[loggingBunyanLib.LOGGING_SAMPLED_KEY] = true;
 
       loggingBunyan.stackdriverLog.entry = (
         entryMetadata: types.StackdriverEntryMetadata,
@@ -422,6 +426,30 @@ describe('logging-bunyan', () => {
           timestamp: RECORD.time,
           severity: 'INFO',
           trace: 'trace1',
+          spanId: 'span1',
+          traceSampled: true,
+        });
+        assert.deepStrictEqual(record, RECORD);
+        done();
+      };
+
+      loggingBunyan.formatEntry_(recordWithTrace);
+    });
+
+    it('should promote a `false` traceSampled property to metadata', done => {
+      const recordWithTrace = Object.assign({}, RECORD);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (recordWithTrace as any)[loggingBunyanLib.LOGGING_SAMPLED_KEY] = false;
+
+      loggingBunyan.stackdriverLog.entry = (
+        entryMetadata: types.StackdriverEntryMetadata,
+        record: string | types.BunyanLogRecord
+      ) => {
+        assert.deepStrictEqual(entryMetadata, {
+          resource: loggingBunyan.resource,
+          timestamp: RECORD.time,
+          severity: 'INFO',
+          traceSampled: false,
         });
         assert.deepStrictEqual(record, RECORD);
         done();
