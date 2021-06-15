@@ -4,6 +4,36 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [4.0.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.5.0...v4.0.0) (2021-06-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* helper agentPath becomes projectAgentPath
+* helper intentPath becomes projectAgentIntentPath
+* helper entityTypePath becomes projectAgentEntityTypePath
+* remove unused proto InputText, InputAudio (#796)
+
+### Features
+
+* added Fulfillment service ([fa42037](https://www.github.com/googleapis/nodejs-dialogflow/commit/fa420372a4dc6ec99e68df277050ed36b8c3091d))
+* added more Environment RPCs ([fa42037](https://www.github.com/googleapis/nodejs-dialogflow/commit/fa420372a4dc6ec99e68df277050ed36b8c3091d))
+* added TextToSpeechSettings. ([fa42037](https://www.github.com/googleapis/nodejs-dialogflow/commit/fa420372a4dc6ec99e68df277050ed36b8c3091d))
+* added Versions service ([fa42037](https://www.github.com/googleapis/nodejs-dialogflow/commit/fa420372a4dc6ec99e68df277050ed36b8c3091d))
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.12.0 ([#812](https://www.github.com/googleapis/nodejs-dialogflow/issues/812)) ([0ecd65c](https://www.github.com/googleapis/nodejs-dialogflow/commit/0ecd65cb683801827078fb83e60231ea45eec568))
+* remove unused proto InputText, InputAudio ([#796](https://www.github.com/googleapis/nodejs-dialogflow/issues/796)) ([4f6f7d6](https://www.github.com/googleapis/nodejs-dialogflow/commit/4f6f7d6de67533a68866da1452e669e28ff1b2a8))
+
+
+### Code Refactoring
+
+* helper agentPath becomes projectAgentPath ([fa42037](https://www.github.com/googleapis/nodejs-dialogflow/commit/fa420372a4dc6ec99e68df277050ed36b8c3091d))
+* helper entityTypePath becomes projectAgentEntityTypePath ([fa42037](https://www.github.com/googleapis/nodejs-dialogflow/commit/fa420372a4dc6ec99e68df277050ed36b8c3091d))
+* helper intentPath becomes projectAgentIntentPath ([fa42037](https://www.github.com/googleapis/nodejs-dialogflow/commit/fa420372a4dc6ec99e68df277050ed36b8c3091d))
+
 ## [3.5.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v3.4.0...v3.5.0) (2021-04-06)
 
 

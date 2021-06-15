@@ -15,7 +15,7 @@
     "test": "mocha system-test --timeout=600000"
   },
   "dependencies": {
-    "@google-cloud/dialogflow": "^3.5.0",
+    "@google-cloud/dialogflow": "^4.0.0",
     "pb-util": "^1.0.0",
     "uuid": "^8.0.0",
     "yargs": "^16.0.0"
