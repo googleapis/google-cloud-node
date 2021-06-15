@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+## [3.1.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v3.0.2...v3.1.0) (2021-06-15)
+
+
+### Features
+
+* add spanId and traceSampled logic ([#543](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/543)) ([548111b](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/548111b87e4817b410cc2d6a13cc468a78aa5f8a))
+
 ### [3.0.2](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v3.0.1...v3.0.2) (2021-02-09)
 
 
