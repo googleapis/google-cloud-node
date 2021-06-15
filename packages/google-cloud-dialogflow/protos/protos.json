@@ -1443,6 +1443,23 @@
                         "detectIntentResponse": {
                           "type": "DetectIntentResponse",
                           "id": 1
+                        },
+                        "automatedAgentReplyType": {
+                          "type": "AutomatedAgentReplyType",
+                          "id": 7
+                        },
+                        "allowCancellation": {
+                          "type": "bool",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "AutomatedAgentReplyType": {
+                          "values": {
+                            "AUTOMATED_AGENT_REPLY_TYPE_UNSPECIFIED": 0,
+                            "PARTIAL": 1,
+                            "FINAL": 2
+                          }
                         }
                       }
                     },

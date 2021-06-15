@@ -4258,6 +4258,12 @@ export namespace google {
 
                     /** AutomatedAgentReply detectIntentResponse */
                     detectIntentResponse?: (google.cloud.dialogflow.v2.IDetectIntentResponse|null);
+
+                    /** AutomatedAgentReply automatedAgentReplyType */
+                    automatedAgentReplyType?: (google.cloud.dialogflow.v2.AutomatedAgentReply.AutomatedAgentReplyType|keyof typeof google.cloud.dialogflow.v2.AutomatedAgentReply.AutomatedAgentReplyType|null);
+
+                    /** AutomatedAgentReply allowCancellation */
+                    allowCancellation?: (boolean|null);
                 }
 
                 /** Represents an AutomatedAgentReply. */
@@ -4271,6 +4277,12 @@ export namespace google {
 
                     /** AutomatedAgentReply detectIntentResponse. */
                     public detectIntentResponse?: (google.cloud.dialogflow.v2.IDetectIntentResponse|null);
+
+                    /** AutomatedAgentReply automatedAgentReplyType. */
+                    public automatedAgentReplyType: (google.cloud.dialogflow.v2.AutomatedAgentReply.AutomatedAgentReplyType|keyof typeof google.cloud.dialogflow.v2.AutomatedAgentReply.AutomatedAgentReplyType);
+
+                    /** AutomatedAgentReply allowCancellation. */
+                    public allowCancellation: boolean;
 
                     /**
                      * Creates a new AutomatedAgentReply instance using the specified properties.
@@ -4341,6 +4353,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace AutomatedAgentReply {
+
+                    /** AutomatedAgentReplyType enum. */
+                    enum AutomatedAgentReplyType {
+                        AUTOMATED_AGENT_REPLY_TYPE_UNSPECIFIED = 0,
+                        PARTIAL = 1,
+                        FINAL = 2
+                    }
                 }
 
                 /** Properties of an ArticleAnswer. */
