@@ -3,5 +3,7 @@
   "../../protos/google/cloud/documentai/v1beta3/document_io.proto",
   "../../protos/google/cloud/documentai/v1beta3/document_processor_service.proto",
   "../../protos/google/cloud/documentai/v1beta3/geometry.proto",
-  "../../protos/google/cloud/documentai/v1beta3/operation_metadata.proto"
+  "../../protos/google/cloud/documentai/v1beta3/operation_metadata.proto",
+  "../../protos/google/cloud/documentai/v1beta3/processor.proto",
+  "../../protos/google/cloud/documentai/v1beta3/processor_type.proto"
 ]

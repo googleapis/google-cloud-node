@@ -15192,6 +15192,9 @@ export namespace google {
 
                         /** Page formFields */
                         formFields?: (google.cloud.documentai.v1beta3.Document.Page.IFormField[]|null);
+
+                        /** Page provenance */
+                        provenance?: (google.cloud.documentai.v1beta3.Document.IProvenance|null);
                     }
 
                     /** Represents a Page. */
@@ -15241,6 +15244,9 @@ export namespace google {
 
                         /** Page formFields. */
                         public formFields: google.cloud.documentai.v1beta3.Document.Page.IFormField[];
+
+                        /** Page provenance. */
+                        public provenance?: (google.cloud.documentai.v1beta3.Document.IProvenance|null);
 
                         /**
                          * Creates a new Page instance using the specified properties.
@@ -16699,6 +16705,9 @@ export namespace google {
 
                             /** FormField valueType */
                             valueType?: (string|null);
+
+                            /** FormField provenance */
+                            provenance?: (google.cloud.documentai.v1beta3.Document.IProvenance|null);
                         }
 
                         /** Represents a FormField. */
@@ -16724,6 +16733,9 @@ export namespace google {
 
                             /** FormField valueType. */
                             public valueType: string;
+
+                            /** FormField provenance. */
+                            public provenance?: (google.cloud.documentai.v1beta3.Document.IProvenance|null);
 
                             /**
                              * Creates a new FormField instance using the specified properties.
@@ -17804,6 +17816,9 @@ export namespace google {
                             /** Parent revision */
                             revision?: (number|null);
 
+                            /** Parent index */
+                            index?: (number|null);
+
                             /** Parent id */
                             id?: (number|null);
                         }
@@ -17819,6 +17834,9 @@ export namespace google {
 
                             /** Parent revision. */
                             public revision: number;
+
+                            /** Parent index. */
+                            public index: number;
 
                             /** Parent id. */
                             public id: number;
@@ -19225,6 +19243,90 @@ export namespace google {
                     public batchProcessDocuments(request: google.cloud.documentai.v1beta3.IBatchProcessRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls FetchProcessorTypes.
+                     * @param request FetchProcessorTypesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchProcessorTypesResponse
+                     */
+                    public fetchProcessorTypes(request: google.cloud.documentai.v1beta3.IFetchProcessorTypesRequest, callback: google.cloud.documentai.v1beta3.DocumentProcessorService.FetchProcessorTypesCallback): void;
+
+                    /**
+                     * Calls FetchProcessorTypes.
+                     * @param request FetchProcessorTypesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchProcessorTypes(request: google.cloud.documentai.v1beta3.IFetchProcessorTypesRequest): Promise<google.cloud.documentai.v1beta3.FetchProcessorTypesResponse>;
+
+                    /**
+                     * Calls ListProcessors.
+                     * @param request ListProcessorsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListProcessorsResponse
+                     */
+                    public listProcessors(request: google.cloud.documentai.v1beta3.IListProcessorsRequest, callback: google.cloud.documentai.v1beta3.DocumentProcessorService.ListProcessorsCallback): void;
+
+                    /**
+                     * Calls ListProcessors.
+                     * @param request ListProcessorsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listProcessors(request: google.cloud.documentai.v1beta3.IListProcessorsRequest): Promise<google.cloud.documentai.v1beta3.ListProcessorsResponse>;
+
+                    /**
+                     * Calls CreateProcessor.
+                     * @param request CreateProcessorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Processor
+                     */
+                    public createProcessor(request: google.cloud.documentai.v1beta3.ICreateProcessorRequest, callback: google.cloud.documentai.v1beta3.DocumentProcessorService.CreateProcessorCallback): void;
+
+                    /**
+                     * Calls CreateProcessor.
+                     * @param request CreateProcessorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createProcessor(request: google.cloud.documentai.v1beta3.ICreateProcessorRequest): Promise<google.cloud.documentai.v1beta3.Processor>;
+
+                    /**
+                     * Calls DeleteProcessor.
+                     * @param request DeleteProcessorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteProcessor(request: google.cloud.documentai.v1beta3.IDeleteProcessorRequest, callback: google.cloud.documentai.v1beta3.DocumentProcessorService.DeleteProcessorCallback): void;
+
+                    /**
+                     * Calls DeleteProcessor.
+                     * @param request DeleteProcessorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteProcessor(request: google.cloud.documentai.v1beta3.IDeleteProcessorRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls EnableProcessor.
+                     * @param request EnableProcessorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public enableProcessor(request: google.cloud.documentai.v1beta3.IEnableProcessorRequest, callback: google.cloud.documentai.v1beta3.DocumentProcessorService.EnableProcessorCallback): void;
+
+                    /**
+                     * Calls EnableProcessor.
+                     * @param request EnableProcessorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public enableProcessor(request: google.cloud.documentai.v1beta3.IEnableProcessorRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DisableProcessor.
+                     * @param request DisableProcessorRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public disableProcessor(request: google.cloud.documentai.v1beta3.IDisableProcessorRequest, callback: google.cloud.documentai.v1beta3.DocumentProcessorService.DisableProcessorCallback): void;
+
+                    /**
+                     * Calls DisableProcessor.
+                     * @param request DisableProcessorRequest message or plain object
+                     * @returns Promise
+                     */
+                    public disableProcessor(request: google.cloud.documentai.v1beta3.IDisableProcessorRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls ReviewDocument.
                      * @param request ReviewDocumentRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -19254,6 +19356,48 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type BatchProcessDocumentsCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService#fetchProcessorTypes}.
+                     * @param error Error, if any
+                     * @param [response] FetchProcessorTypesResponse
+                     */
+                    type FetchProcessorTypesCallback = (error: (Error|null), response?: google.cloud.documentai.v1beta3.FetchProcessorTypesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService#listProcessors}.
+                     * @param error Error, if any
+                     * @param [response] ListProcessorsResponse
+                     */
+                    type ListProcessorsCallback = (error: (Error|null), response?: google.cloud.documentai.v1beta3.ListProcessorsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService#createProcessor}.
+                     * @param error Error, if any
+                     * @param [response] Processor
+                     */
+                    type CreateProcessorCallback = (error: (Error|null), response?: google.cloud.documentai.v1beta3.Processor) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService#deleteProcessor}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteProcessorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService#enableProcessor}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type EnableProcessorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService#disableProcessor}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DisableProcessorCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.documentai.v1beta3.DocumentProcessorService#reviewDocument}.
@@ -20231,6 +20375,1188 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a FetchProcessorTypesRequest. */
+                interface IFetchProcessorTypesRequest {
+
+                    /** FetchProcessorTypesRequest parent */
+                    parent?: (string|null);
+                }
+
+                /** Represents a FetchProcessorTypesRequest. */
+                class FetchProcessorTypesRequest implements IFetchProcessorTypesRequest {
+
+                    /**
+                     * Constructs a new FetchProcessorTypesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IFetchProcessorTypesRequest);
+
+                    /** FetchProcessorTypesRequest parent. */
+                    public parent: string;
+
+                    /**
+                     * Creates a new FetchProcessorTypesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchProcessorTypesRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IFetchProcessorTypesRequest): google.cloud.documentai.v1beta3.FetchProcessorTypesRequest;
+
+                    /**
+                     * Encodes the specified FetchProcessorTypesRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.FetchProcessorTypesRequest.verify|verify} messages.
+                     * @param message FetchProcessorTypesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IFetchProcessorTypesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchProcessorTypesRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.FetchProcessorTypesRequest.verify|verify} messages.
+                     * @param message FetchProcessorTypesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IFetchProcessorTypesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchProcessorTypesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchProcessorTypesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.FetchProcessorTypesRequest;
+
+                    /**
+                     * Decodes a FetchProcessorTypesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchProcessorTypesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.FetchProcessorTypesRequest;
+
+                    /**
+                     * Verifies a FetchProcessorTypesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchProcessorTypesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchProcessorTypesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.FetchProcessorTypesRequest;
+
+                    /**
+                     * Creates a plain object from a FetchProcessorTypesRequest message. Also converts values to other types if specified.
+                     * @param message FetchProcessorTypesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.FetchProcessorTypesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchProcessorTypesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a FetchProcessorTypesResponse. */
+                interface IFetchProcessorTypesResponse {
+
+                    /** FetchProcessorTypesResponse processorTypes */
+                    processorTypes?: (google.cloud.documentai.v1beta3.IProcessorType[]|null);
+                }
+
+                /** Represents a FetchProcessorTypesResponse. */
+                class FetchProcessorTypesResponse implements IFetchProcessorTypesResponse {
+
+                    /**
+                     * Constructs a new FetchProcessorTypesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IFetchProcessorTypesResponse);
+
+                    /** FetchProcessorTypesResponse processorTypes. */
+                    public processorTypes: google.cloud.documentai.v1beta3.IProcessorType[];
+
+                    /**
+                     * Creates a new FetchProcessorTypesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchProcessorTypesResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IFetchProcessorTypesResponse): google.cloud.documentai.v1beta3.FetchProcessorTypesResponse;
+
+                    /**
+                     * Encodes the specified FetchProcessorTypesResponse message. Does not implicitly {@link google.cloud.documentai.v1beta3.FetchProcessorTypesResponse.verify|verify} messages.
+                     * @param message FetchProcessorTypesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IFetchProcessorTypesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchProcessorTypesResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.FetchProcessorTypesResponse.verify|verify} messages.
+                     * @param message FetchProcessorTypesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IFetchProcessorTypesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchProcessorTypesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchProcessorTypesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.FetchProcessorTypesResponse;
+
+                    /**
+                     * Decodes a FetchProcessorTypesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchProcessorTypesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.FetchProcessorTypesResponse;
+
+                    /**
+                     * Verifies a FetchProcessorTypesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchProcessorTypesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchProcessorTypesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.FetchProcessorTypesResponse;
+
+                    /**
+                     * Creates a plain object from a FetchProcessorTypesResponse message. Also converts values to other types if specified.
+                     * @param message FetchProcessorTypesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.FetchProcessorTypesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchProcessorTypesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListProcessorsRequest. */
+                interface IListProcessorsRequest {
+
+                    /** ListProcessorsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListProcessorsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListProcessorsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListProcessorsRequest. */
+                class ListProcessorsRequest implements IListProcessorsRequest {
+
+                    /**
+                     * Constructs a new ListProcessorsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IListProcessorsRequest);
+
+                    /** ListProcessorsRequest parent. */
+                    public parent: string;
+
+                    /** ListProcessorsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListProcessorsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListProcessorsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProcessorsRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IListProcessorsRequest): google.cloud.documentai.v1beta3.ListProcessorsRequest;
+
+                    /**
+                     * Encodes the specified ListProcessorsRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.ListProcessorsRequest.verify|verify} messages.
+                     * @param message ListProcessorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IListProcessorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProcessorsRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ListProcessorsRequest.verify|verify} messages.
+                     * @param message ListProcessorsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IListProcessorsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProcessorsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProcessorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ListProcessorsRequest;
+
+                    /**
+                     * Decodes a ListProcessorsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProcessorsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ListProcessorsRequest;
+
+                    /**
+                     * Verifies a ListProcessorsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProcessorsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProcessorsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ListProcessorsRequest;
+
+                    /**
+                     * Creates a plain object from a ListProcessorsRequest message. Also converts values to other types if specified.
+                     * @param message ListProcessorsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ListProcessorsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProcessorsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListProcessorsResponse. */
+                interface IListProcessorsResponse {
+
+                    /** ListProcessorsResponse processors */
+                    processors?: (google.cloud.documentai.v1beta3.IProcessor[]|null);
+
+                    /** ListProcessorsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListProcessorsResponse. */
+                class ListProcessorsResponse implements IListProcessorsResponse {
+
+                    /**
+                     * Constructs a new ListProcessorsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IListProcessorsResponse);
+
+                    /** ListProcessorsResponse processors. */
+                    public processors: google.cloud.documentai.v1beta3.IProcessor[];
+
+                    /** ListProcessorsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListProcessorsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListProcessorsResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IListProcessorsResponse): google.cloud.documentai.v1beta3.ListProcessorsResponse;
+
+                    /**
+                     * Encodes the specified ListProcessorsResponse message. Does not implicitly {@link google.cloud.documentai.v1beta3.ListProcessorsResponse.verify|verify} messages.
+                     * @param message ListProcessorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IListProcessorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListProcessorsResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ListProcessorsResponse.verify|verify} messages.
+                     * @param message ListProcessorsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IListProcessorsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListProcessorsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListProcessorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ListProcessorsResponse;
+
+                    /**
+                     * Decodes a ListProcessorsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListProcessorsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ListProcessorsResponse;
+
+                    /**
+                     * Verifies a ListProcessorsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListProcessorsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListProcessorsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ListProcessorsResponse;
+
+                    /**
+                     * Creates a plain object from a ListProcessorsResponse message. Also converts values to other types if specified.
+                     * @param message ListProcessorsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ListProcessorsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListProcessorsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateProcessorRequest. */
+                interface ICreateProcessorRequest {
+
+                    /** CreateProcessorRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateProcessorRequest processor */
+                    processor?: (google.cloud.documentai.v1beta3.IProcessor|null);
+                }
+
+                /** Represents a CreateProcessorRequest. */
+                class CreateProcessorRequest implements ICreateProcessorRequest {
+
+                    /**
+                     * Constructs a new CreateProcessorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.ICreateProcessorRequest);
+
+                    /** CreateProcessorRequest parent. */
+                    public parent: string;
+
+                    /** CreateProcessorRequest processor. */
+                    public processor?: (google.cloud.documentai.v1beta3.IProcessor|null);
+
+                    /**
+                     * Creates a new CreateProcessorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateProcessorRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.ICreateProcessorRequest): google.cloud.documentai.v1beta3.CreateProcessorRequest;
+
+                    /**
+                     * Encodes the specified CreateProcessorRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.CreateProcessorRequest.verify|verify} messages.
+                     * @param message CreateProcessorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.ICreateProcessorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateProcessorRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.CreateProcessorRequest.verify|verify} messages.
+                     * @param message CreateProcessorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.ICreateProcessorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateProcessorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateProcessorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.CreateProcessorRequest;
+
+                    /**
+                     * Decodes a CreateProcessorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateProcessorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.CreateProcessorRequest;
+
+                    /**
+                     * Verifies a CreateProcessorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateProcessorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateProcessorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.CreateProcessorRequest;
+
+                    /**
+                     * Creates a plain object from a CreateProcessorRequest message. Also converts values to other types if specified.
+                     * @param message CreateProcessorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.CreateProcessorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateProcessorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteProcessorRequest. */
+                interface IDeleteProcessorRequest {
+
+                    /** DeleteProcessorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteProcessorRequest. */
+                class DeleteProcessorRequest implements IDeleteProcessorRequest {
+
+                    /**
+                     * Constructs a new DeleteProcessorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IDeleteProcessorRequest);
+
+                    /** DeleteProcessorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteProcessorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteProcessorRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IDeleteProcessorRequest): google.cloud.documentai.v1beta3.DeleteProcessorRequest;
+
+                    /**
+                     * Encodes the specified DeleteProcessorRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.DeleteProcessorRequest.verify|verify} messages.
+                     * @param message DeleteProcessorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IDeleteProcessorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteProcessorRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DeleteProcessorRequest.verify|verify} messages.
+                     * @param message DeleteProcessorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDeleteProcessorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteProcessorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteProcessorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DeleteProcessorRequest;
+
+                    /**
+                     * Decodes a DeleteProcessorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteProcessorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DeleteProcessorRequest;
+
+                    /**
+                     * Verifies a DeleteProcessorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteProcessorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteProcessorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DeleteProcessorRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteProcessorRequest message. Also converts values to other types if specified.
+                     * @param message DeleteProcessorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.DeleteProcessorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteProcessorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteProcessorMetadata. */
+                interface IDeleteProcessorMetadata {
+
+                    /** DeleteProcessorMetadata commonMetadata */
+                    commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+                }
+
+                /** Represents a DeleteProcessorMetadata. */
+                class DeleteProcessorMetadata implements IDeleteProcessorMetadata {
+
+                    /**
+                     * Constructs a new DeleteProcessorMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IDeleteProcessorMetadata);
+
+                    /** DeleteProcessorMetadata commonMetadata. */
+                    public commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+
+                    /**
+                     * Creates a new DeleteProcessorMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteProcessorMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IDeleteProcessorMetadata): google.cloud.documentai.v1beta3.DeleteProcessorMetadata;
+
+                    /**
+                     * Encodes the specified DeleteProcessorMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.DeleteProcessorMetadata.verify|verify} messages.
+                     * @param message DeleteProcessorMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IDeleteProcessorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteProcessorMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DeleteProcessorMetadata.verify|verify} messages.
+                     * @param message DeleteProcessorMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDeleteProcessorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteProcessorMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteProcessorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DeleteProcessorMetadata;
+
+                    /**
+                     * Decodes a DeleteProcessorMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteProcessorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DeleteProcessorMetadata;
+
+                    /**
+                     * Verifies a DeleteProcessorMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteProcessorMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteProcessorMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DeleteProcessorMetadata;
+
+                    /**
+                     * Creates a plain object from a DeleteProcessorMetadata message. Also converts values to other types if specified.
+                     * @param message DeleteProcessorMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.DeleteProcessorMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteProcessorMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EnableProcessorRequest. */
+                interface IEnableProcessorRequest {
+
+                    /** EnableProcessorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents an EnableProcessorRequest. */
+                class EnableProcessorRequest implements IEnableProcessorRequest {
+
+                    /**
+                     * Constructs a new EnableProcessorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IEnableProcessorRequest);
+
+                    /** EnableProcessorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new EnableProcessorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnableProcessorRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IEnableProcessorRequest): google.cloud.documentai.v1beta3.EnableProcessorRequest;
+
+                    /**
+                     * Encodes the specified EnableProcessorRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.EnableProcessorRequest.verify|verify} messages.
+                     * @param message EnableProcessorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IEnableProcessorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnableProcessorRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.EnableProcessorRequest.verify|verify} messages.
+                     * @param message EnableProcessorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IEnableProcessorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnableProcessorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnableProcessorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.EnableProcessorRequest;
+
+                    /**
+                     * Decodes an EnableProcessorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnableProcessorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.EnableProcessorRequest;
+
+                    /**
+                     * Verifies an EnableProcessorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnableProcessorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnableProcessorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.EnableProcessorRequest;
+
+                    /**
+                     * Creates a plain object from an EnableProcessorRequest message. Also converts values to other types if specified.
+                     * @param message EnableProcessorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.EnableProcessorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnableProcessorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EnableProcessorResponse. */
+                interface IEnableProcessorResponse {
+                }
+
+                /** Represents an EnableProcessorResponse. */
+                class EnableProcessorResponse implements IEnableProcessorResponse {
+
+                    /**
+                     * Constructs a new EnableProcessorResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IEnableProcessorResponse);
+
+                    /**
+                     * Creates a new EnableProcessorResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnableProcessorResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IEnableProcessorResponse): google.cloud.documentai.v1beta3.EnableProcessorResponse;
+
+                    /**
+                     * Encodes the specified EnableProcessorResponse message. Does not implicitly {@link google.cloud.documentai.v1beta3.EnableProcessorResponse.verify|verify} messages.
+                     * @param message EnableProcessorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IEnableProcessorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnableProcessorResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.EnableProcessorResponse.verify|verify} messages.
+                     * @param message EnableProcessorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IEnableProcessorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnableProcessorResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnableProcessorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.EnableProcessorResponse;
+
+                    /**
+                     * Decodes an EnableProcessorResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnableProcessorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.EnableProcessorResponse;
+
+                    /**
+                     * Verifies an EnableProcessorResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnableProcessorResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnableProcessorResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.EnableProcessorResponse;
+
+                    /**
+                     * Creates a plain object from an EnableProcessorResponse message. Also converts values to other types if specified.
+                     * @param message EnableProcessorResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.EnableProcessorResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnableProcessorResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an EnableProcessorMetadata. */
+                interface IEnableProcessorMetadata {
+
+                    /** EnableProcessorMetadata commonMetadata */
+                    commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+                }
+
+                /** Represents an EnableProcessorMetadata. */
+                class EnableProcessorMetadata implements IEnableProcessorMetadata {
+
+                    /**
+                     * Constructs a new EnableProcessorMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IEnableProcessorMetadata);
+
+                    /** EnableProcessorMetadata commonMetadata. */
+                    public commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+
+                    /**
+                     * Creates a new EnableProcessorMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EnableProcessorMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IEnableProcessorMetadata): google.cloud.documentai.v1beta3.EnableProcessorMetadata;
+
+                    /**
+                     * Encodes the specified EnableProcessorMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.EnableProcessorMetadata.verify|verify} messages.
+                     * @param message EnableProcessorMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IEnableProcessorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EnableProcessorMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.EnableProcessorMetadata.verify|verify} messages.
+                     * @param message EnableProcessorMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IEnableProcessorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EnableProcessorMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EnableProcessorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.EnableProcessorMetadata;
+
+                    /**
+                     * Decodes an EnableProcessorMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EnableProcessorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.EnableProcessorMetadata;
+
+                    /**
+                     * Verifies an EnableProcessorMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EnableProcessorMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EnableProcessorMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.EnableProcessorMetadata;
+
+                    /**
+                     * Creates a plain object from an EnableProcessorMetadata message. Also converts values to other types if specified.
+                     * @param message EnableProcessorMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.EnableProcessorMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EnableProcessorMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DisableProcessorRequest. */
+                interface IDisableProcessorRequest {
+
+                    /** DisableProcessorRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DisableProcessorRequest. */
+                class DisableProcessorRequest implements IDisableProcessorRequest {
+
+                    /**
+                     * Constructs a new DisableProcessorRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IDisableProcessorRequest);
+
+                    /** DisableProcessorRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DisableProcessorRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableProcessorRequest instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IDisableProcessorRequest): google.cloud.documentai.v1beta3.DisableProcessorRequest;
+
+                    /**
+                     * Encodes the specified DisableProcessorRequest message. Does not implicitly {@link google.cloud.documentai.v1beta3.DisableProcessorRequest.verify|verify} messages.
+                     * @param message DisableProcessorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IDisableProcessorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableProcessorRequest message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DisableProcessorRequest.verify|verify} messages.
+                     * @param message DisableProcessorRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDisableProcessorRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableProcessorRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableProcessorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DisableProcessorRequest;
+
+                    /**
+                     * Decodes a DisableProcessorRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableProcessorRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DisableProcessorRequest;
+
+                    /**
+                     * Verifies a DisableProcessorRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableProcessorRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableProcessorRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DisableProcessorRequest;
+
+                    /**
+                     * Creates a plain object from a DisableProcessorRequest message. Also converts values to other types if specified.
+                     * @param message DisableProcessorRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.DisableProcessorRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableProcessorRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DisableProcessorResponse. */
+                interface IDisableProcessorResponse {
+                }
+
+                /** Represents a DisableProcessorResponse. */
+                class DisableProcessorResponse implements IDisableProcessorResponse {
+
+                    /**
+                     * Constructs a new DisableProcessorResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IDisableProcessorResponse);
+
+                    /**
+                     * Creates a new DisableProcessorResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableProcessorResponse instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IDisableProcessorResponse): google.cloud.documentai.v1beta3.DisableProcessorResponse;
+
+                    /**
+                     * Encodes the specified DisableProcessorResponse message. Does not implicitly {@link google.cloud.documentai.v1beta3.DisableProcessorResponse.verify|verify} messages.
+                     * @param message DisableProcessorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IDisableProcessorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableProcessorResponse message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DisableProcessorResponse.verify|verify} messages.
+                     * @param message DisableProcessorResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDisableProcessorResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableProcessorResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableProcessorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DisableProcessorResponse;
+
+                    /**
+                     * Decodes a DisableProcessorResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableProcessorResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DisableProcessorResponse;
+
+                    /**
+                     * Verifies a DisableProcessorResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableProcessorResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableProcessorResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DisableProcessorResponse;
+
+                    /**
+                     * Creates a plain object from a DisableProcessorResponse message. Also converts values to other types if specified.
+                     * @param message DisableProcessorResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.DisableProcessorResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableProcessorResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DisableProcessorMetadata. */
+                interface IDisableProcessorMetadata {
+
+                    /** DisableProcessorMetadata commonMetadata */
+                    commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+                }
+
+                /** Represents a DisableProcessorMetadata. */
+                class DisableProcessorMetadata implements IDisableProcessorMetadata {
+
+                    /**
+                     * Constructs a new DisableProcessorMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IDisableProcessorMetadata);
+
+                    /** DisableProcessorMetadata commonMetadata. */
+                    public commonMetadata?: (google.cloud.documentai.v1beta3.ICommonOperationMetadata|null);
+
+                    /**
+                     * Creates a new DisableProcessorMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DisableProcessorMetadata instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IDisableProcessorMetadata): google.cloud.documentai.v1beta3.DisableProcessorMetadata;
+
+                    /**
+                     * Encodes the specified DisableProcessorMetadata message. Does not implicitly {@link google.cloud.documentai.v1beta3.DisableProcessorMetadata.verify|verify} messages.
+                     * @param message DisableProcessorMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IDisableProcessorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DisableProcessorMetadata message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.DisableProcessorMetadata.verify|verify} messages.
+                     * @param message DisableProcessorMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IDisableProcessorMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DisableProcessorMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DisableProcessorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.DisableProcessorMetadata;
+
+                    /**
+                     * Decodes a DisableProcessorMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DisableProcessorMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.DisableProcessorMetadata;
+
+                    /**
+                     * Verifies a DisableProcessorMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DisableProcessorMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DisableProcessorMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.DisableProcessorMetadata;
+
+                    /**
+                     * Creates a plain object from a DisableProcessorMetadata message. Also converts values to other types if specified.
+                     * @param message DisableProcessorMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.DisableProcessorMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DisableProcessorMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of a ReviewDocumentRequest. */
                 interface IReviewDocumentRequest {
 
@@ -20242,6 +21568,12 @@ export namespace google {
 
                     /** ReviewDocumentRequest document */
                     document?: (google.cloud.documentai.v1beta3.IDocument|null);
+
+                    /** ReviewDocumentRequest enableSchemaValidation */
+                    enableSchemaValidation?: (boolean|null);
+
+                    /** ReviewDocumentRequest priority */
+                    priority?: (google.cloud.documentai.v1beta3.ReviewDocumentRequest.Priority|keyof typeof google.cloud.documentai.v1beta3.ReviewDocumentRequest.Priority|null);
                 }
 
                 /** Represents a ReviewDocumentRequest. */
@@ -20261,6 +21593,12 @@ export namespace google {
 
                     /** ReviewDocumentRequest document. */
                     public document?: (google.cloud.documentai.v1beta3.IDocument|null);
+
+                    /** ReviewDocumentRequest enableSchemaValidation. */
+                    public enableSchemaValidation: boolean;
+
+                    /** ReviewDocumentRequest priority. */
+                    public priority: (google.cloud.documentai.v1beta3.ReviewDocumentRequest.Priority|keyof typeof google.cloud.documentai.v1beta3.ReviewDocumentRequest.Priority);
 
                     /** ReviewDocumentRequest source. */
                     public source?: "inlineDocument";
@@ -20334,6 +21672,15 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace ReviewDocumentRequest {
+
+                    /** Priority enum. */
+                    enum Priority {
+                        DEFAULT = 0,
+                        URGENT = 1
+                    }
                 }
 
                 /** Properties of a ReviewDocumentResponse. */
@@ -20671,6 +22018,360 @@ export namespace google {
                         SUCCEEDED = 3,
                         FAILED = 4,
                         CANCELLED = 5
+                    }
+                }
+
+                /** Properties of a Processor. */
+                interface IProcessor {
+
+                    /** Processor name */
+                    name?: (string|null);
+
+                    /** Processor type */
+                    type?: (string|null);
+
+                    /** Processor displayName */
+                    displayName?: (string|null);
+
+                    /** Processor state */
+                    state?: (google.cloud.documentai.v1beta3.Processor.State|keyof typeof google.cloud.documentai.v1beta3.Processor.State|null);
+
+                    /** Processor defaultProcessorVersion */
+                    defaultProcessorVersion?: (string|null);
+
+                    /** Processor processEndpoint */
+                    processEndpoint?: (string|null);
+
+                    /** Processor createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Processor kmsKeyName */
+                    kmsKeyName?: (string|null);
+                }
+
+                /** Represents a Processor. */
+                class Processor implements IProcessor {
+
+                    /**
+                     * Constructs a new Processor.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IProcessor);
+
+                    /** Processor name. */
+                    public name: string;
+
+                    /** Processor type. */
+                    public type: string;
+
+                    /** Processor displayName. */
+                    public displayName: string;
+
+                    /** Processor state. */
+                    public state: (google.cloud.documentai.v1beta3.Processor.State|keyof typeof google.cloud.documentai.v1beta3.Processor.State);
+
+                    /** Processor defaultProcessorVersion. */
+                    public defaultProcessorVersion: string;
+
+                    /** Processor processEndpoint. */
+                    public processEndpoint: string;
+
+                    /** Processor createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Processor kmsKeyName. */
+                    public kmsKeyName: string;
+
+                    /**
+                     * Creates a new Processor instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Processor instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IProcessor): google.cloud.documentai.v1beta3.Processor;
+
+                    /**
+                     * Encodes the specified Processor message. Does not implicitly {@link google.cloud.documentai.v1beta3.Processor.verify|verify} messages.
+                     * @param message Processor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IProcessor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Processor message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.Processor.verify|verify} messages.
+                     * @param message Processor message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IProcessor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Processor message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Processor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.Processor;
+
+                    /**
+                     * Decodes a Processor message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Processor
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.Processor;
+
+                    /**
+                     * Verifies a Processor message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Processor message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Processor
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.Processor;
+
+                    /**
+                     * Creates a plain object from a Processor message. Also converts values to other types if specified.
+                     * @param message Processor
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.Processor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Processor to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Processor {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        ENABLED = 1,
+                        DISABLED = 2,
+                        ENABLING = 3,
+                        DISABLING = 4,
+                        CREATING = 5,
+                        FAILED = 6,
+                        DELETING = 7
+                    }
+                }
+
+                /** Properties of a ProcessorType. */
+                interface IProcessorType {
+
+                    /** ProcessorType name */
+                    name?: (string|null);
+
+                    /** ProcessorType type */
+                    type?: (string|null);
+
+                    /** ProcessorType category */
+                    category?: (string|null);
+
+                    /** ProcessorType availableLocations */
+                    availableLocations?: (google.cloud.documentai.v1beta3.ProcessorType.ILocationInfo[]|null);
+
+                    /** ProcessorType allowCreation */
+                    allowCreation?: (boolean|null);
+                }
+
+                /** Represents a ProcessorType. */
+                class ProcessorType implements IProcessorType {
+
+                    /**
+                     * Constructs a new ProcessorType.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.documentai.v1beta3.IProcessorType);
+
+                    /** ProcessorType name. */
+                    public name: string;
+
+                    /** ProcessorType type. */
+                    public type: string;
+
+                    /** ProcessorType category. */
+                    public category: string;
+
+                    /** ProcessorType availableLocations. */
+                    public availableLocations: google.cloud.documentai.v1beta3.ProcessorType.ILocationInfo[];
+
+                    /** ProcessorType allowCreation. */
+                    public allowCreation: boolean;
+
+                    /**
+                     * Creates a new ProcessorType instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ProcessorType instance
+                     */
+                    public static create(properties?: google.cloud.documentai.v1beta3.IProcessorType): google.cloud.documentai.v1beta3.ProcessorType;
+
+                    /**
+                     * Encodes the specified ProcessorType message. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessorType.verify|verify} messages.
+                     * @param message ProcessorType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.documentai.v1beta3.IProcessorType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ProcessorType message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessorType.verify|verify} messages.
+                     * @param message ProcessorType message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.documentai.v1beta3.IProcessorType, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ProcessorType message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ProcessorType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ProcessorType;
+
+                    /**
+                     * Decodes a ProcessorType message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ProcessorType
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ProcessorType;
+
+                    /**
+                     * Verifies a ProcessorType message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ProcessorType message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ProcessorType
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ProcessorType;
+
+                    /**
+                     * Creates a plain object from a ProcessorType message. Also converts values to other types if specified.
+                     * @param message ProcessorType
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.documentai.v1beta3.ProcessorType, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ProcessorType to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ProcessorType {
+
+                    /** Properties of a LocationInfo. */
+                    interface ILocationInfo {
+
+                        /** LocationInfo locationId */
+                        locationId?: (string|null);
+                    }
+
+                    /** Represents a LocationInfo. */
+                    class LocationInfo implements ILocationInfo {
+
+                        /**
+                         * Constructs a new LocationInfo.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.documentai.v1beta3.ProcessorType.ILocationInfo);
+
+                        /** LocationInfo locationId. */
+                        public locationId: string;
+
+                        /**
+                         * Creates a new LocationInfo instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns LocationInfo instance
+                         */
+                        public static create(properties?: google.cloud.documentai.v1beta3.ProcessorType.ILocationInfo): google.cloud.documentai.v1beta3.ProcessorType.LocationInfo;
+
+                        /**
+                         * Encodes the specified LocationInfo message. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessorType.LocationInfo.verify|verify} messages.
+                         * @param message LocationInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.documentai.v1beta3.ProcessorType.ILocationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified LocationInfo message, length delimited. Does not implicitly {@link google.cloud.documentai.v1beta3.ProcessorType.LocationInfo.verify|verify} messages.
+                         * @param message LocationInfo message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.documentai.v1beta3.ProcessorType.ILocationInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a LocationInfo message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns LocationInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.documentai.v1beta3.ProcessorType.LocationInfo;
+
+                        /**
+                         * Decodes a LocationInfo message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns LocationInfo
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.documentai.v1beta3.ProcessorType.LocationInfo;
+
+                        /**
+                         * Verifies a LocationInfo message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a LocationInfo message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns LocationInfo
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.documentai.v1beta3.ProcessorType.LocationInfo;
+
+                        /**
+                         * Creates a plain object from a LocationInfo message. Also converts values to other types if specified.
+                         * @param message LocationInfo
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.documentai.v1beta3.ProcessorType.LocationInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this LocationInfo to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
                     }
                 }
             }

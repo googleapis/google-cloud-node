@@ -30,6 +30,30 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "FetchProcessorTypes": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListProcessors": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateProcessor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteProcessor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "EnableProcessor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DisableProcessor": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "ReviewDocument": {
           "timeout_millis": 120000,
           "retry_codes_name": "idempotent",

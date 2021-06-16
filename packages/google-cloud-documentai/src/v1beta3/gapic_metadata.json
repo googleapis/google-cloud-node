@@ -15,14 +15,46 @@
                 "processDocument"
               ]
             },
+            "FetchProcessorTypes": {
+              "methods": [
+                "fetchProcessorTypes"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "createProcessor"
+              ]
+            },
             "BatchProcessDocuments": {
               "methods": [
                 "batchProcessDocuments"
               ]
             },
+            "DeleteProcessor": {
+              "methods": [
+                "deleteProcessor"
+              ]
+            },
+            "EnableProcessor": {
+              "methods": [
+                "enableProcessor"
+              ]
+            },
+            "DisableProcessor": {
+              "methods": [
+                "disableProcessor"
+              ]
+            },
             "ReviewDocument": {
               "methods": [
                 "reviewDocument"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "listProcessors",
+                "listProcessorsStream",
+                "listProcessorsAsync"
               ]
             }
           }
@@ -35,14 +67,46 @@
                 "processDocument"
               ]
             },
+            "FetchProcessorTypes": {
+              "methods": [
+                "fetchProcessorTypes"
+              ]
+            },
+            "CreateProcessor": {
+              "methods": [
+                "createProcessor"
+              ]
+            },
             "BatchProcessDocuments": {
               "methods": [
                 "batchProcessDocuments"
               ]
             },
+            "DeleteProcessor": {
+              "methods": [
+                "deleteProcessor"
+              ]
+            },
+            "EnableProcessor": {
+              "methods": [
+                "enableProcessor"
+              ]
+            },
+            "DisableProcessor": {
+              "methods": [
+                "disableProcessor"
+              ]
+            },
             "ReviewDocument": {
               "methods": [
                 "reviewDocument"
+              ]
+            },
+            "ListProcessors": {
+              "methods": [
+                "listProcessors",
+                "listProcessorsStream",
+                "listProcessorsAsync"
               ]
             }
           }

@@ -3117,7 +3117,7 @@
                     "csharp_namespace": "Google.Cloud.DocumentAI.V1Beta3",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/documentai/v1beta3;documentai",
                     "java_multiple_files": true,
-                    "java_outer_classname": "OperationMetadataProto",
+                    "java_outer_classname": "DocumentAiProcessorType",
                     "java_package": "com.google.cloud.documentai.v1beta3",
                     "php_namespace": "Google\\Cloud\\DocumentAI\\V1beta3",
                     "ruby_package": "Google::Cloud::DocumentAI::V1beta3",
@@ -3324,6 +3324,10 @@
                               "rule": "repeated",
                               "type": "FormField",
                               "id": 11
+                            },
+                            "provenance": {
+                              "type": "Provenance",
+                              "id": 16
                             }
                           },
                           "nested": {
@@ -3601,6 +3605,10 @@
                                 "valueType": {
                                   "type": "string",
                                   "id": 5
+                                },
+                                "provenance": {
+                                  "type": "Provenance",
+                                  "id": 8
                                 }
                               }
                             },
@@ -3857,7 +3865,10 @@
                             },
                             "id": {
                               "type": "int32",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "parents": {
                               "rule": "repeated",
@@ -3876,9 +3887,16 @@
                                   "type": "int32",
                                   "id": 1
                                 },
+                                "index": {
+                                  "type": "int32",
+                                  "id": 3
+                                },
                                 "id": {
                                   "type": "int32",
-                                  "id": 2
+                                  "id": 2,
+                                  "options": {
+                                    "deprecated": true
+                                  }
                                 }
                               }
                             },
@@ -4143,6 +4161,136 @@
                             }
                           ]
                         },
+                        "FetchProcessorTypes": {
+                          "requestType": "FetchProcessorTypesRequest",
+                          "responseType": "FetchProcessorTypesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta3/{parent=projects/*/locations/*}:fetchProcessorTypes",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta3/{parent=projects/*/locations/*}:fetchProcessorTypes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "ListProcessors": {
+                          "requestType": "ListProcessorsRequest",
+                          "responseType": "ListProcessorsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta3/{parent=projects/*/locations/*}/processors",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta3/{parent=projects/*/locations/*}/processors"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "CreateProcessor": {
+                          "requestType": "CreateProcessorRequest",
+                          "responseType": "Processor",
+                          "options": {
+                            "(google.api.http).post": "/v1beta3/{parent=projects/*/locations/*}/processors",
+                            "(google.api.http).body": "processor",
+                            "(google.api.method_signature)": "parent,processor"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta3/{parent=projects/*/locations/*}/processors",
+                                "body": "processor"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,processor"
+                            }
+                          ]
+                        },
+                        "DeleteProcessor": {
+                          "requestType": "DeleteProcessorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta3/{name=projects/*/locations/*/processors/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteProcessorMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta3/{name=projects/*/locations/*/processors/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteProcessorMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "EnableProcessor": {
+                          "requestType": "EnableProcessorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta3/{name=projects/*/locations/*/processors/*}:enable",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "EnableProcessorResponse",
+                            "(google.longrunning.operation_info).metadata_type": "EnableProcessorMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta3/{name=projects/*/locations/*/processors/*}:enable",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "EnableProcessorResponse",
+                                "metadata_type": "EnableProcessorMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DisableProcessor": {
+                          "requestType": "DisableProcessorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta3/{name=projects/*/locations/*/processors/*}:disable",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "DisableProcessorResponse",
+                            "(google.longrunning.operation_info).metadata_type": "DisableProcessorMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta3/{name=projects/*/locations/*/processors/*}:disable",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DisableProcessorResponse",
+                                "metadata_type": "DisableProcessorMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "ReviewDocument": {
                           "requestType": "ReviewDocumentRequest",
                           "responseType": "google.longrunning.Operation",
@@ -4393,6 +4541,145 @@
                         }
                       }
                     },
+                    "FetchProcessorTypesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "documentai.googleapis.com/ProcessorType"
+                          }
+                        }
+                      }
+                    },
+                    "FetchProcessorTypesResponse": {
+                      "fields": {
+                        "processorTypes": {
+                          "rule": "repeated",
+                          "type": "ProcessorType",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ListProcessorsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "documentai.googleapis.com/Processor"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListProcessorsResponse": {
+                      "fields": {
+                        "processors": {
+                          "rule": "repeated",
+                          "type": "Processor",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateProcessorRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "documentai.googleapis.com/Processor"
+                          }
+                        },
+                        "processor": {
+                          "type": "Processor",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteProcessorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Processor"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteProcessorMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "EnableProcessorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Processor"
+                          }
+                        }
+                      }
+                    },
+                    "EnableProcessorResponse": {
+                      "fields": {}
+                    },
+                    "EnableProcessorMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "DisableProcessorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "documentai.googleapis.com/Processor"
+                          }
+                        }
+                      }
+                    },
+                    "DisableProcessorResponse": {
+                      "fields": {}
+                    },
+                    "DisableProcessorMetadata": {
+                      "fields": {
+                        "commonMetadata": {
+                          "type": "CommonOperationMetadata",
+                          "id": 5
+                        }
+                      }
+                    },
                     "ReviewDocumentRequest": {
                       "oneofs": {
                         "source": {
@@ -4419,6 +4706,22 @@
                           "id": 2,
                           "options": {
                             "deprecated": true
+                          }
+                        },
+                        "enableSchemaValidation": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "priority": {
+                          "type": "Priority",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Priority": {
+                          "values": {
+                            "DEFAULT": 0,
+                            "URGENT": 1
                           }
                         }
                       }
@@ -4495,6 +4798,108 @@
                             "SUCCEEDED": 3,
                             "FAILED": 4,
                             "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "Processor": {
+                      "options": {
+                        "(google.api.resource).type": "documentai.googleapis.com/Processor",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/processors/{processor}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "defaultProcessorVersion": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "processEndpoint": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7
+                        },
+                        "kmsKeyName": {
+                          "type": "string",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "DISABLED": 2,
+                            "ENABLING": 3,
+                            "DISABLING": 4,
+                            "CREATING": 5,
+                            "FAILED": 6,
+                            "DELETING": 7
+                          }
+                        }
+                      }
+                    },
+                    "ProcessorType": {
+                      "options": {
+                        "(google.api.resource).type": "documentai.googleapis.com/ProcessorType",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/processorTypes/{processor_type}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "availableLocations": {
+                          "rule": "repeated",
+                          "type": "LocationInfo",
+                          "id": 4
+                        },
+                        "allowCreation": {
+                          "type": "bool",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "LocationInfo": {
+                          "fields": {
+                            "locationId": {
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
