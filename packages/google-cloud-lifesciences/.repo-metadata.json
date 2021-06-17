@@ -1,0 +1,15 @@
+{
+  "name": "lifesciences",
+  "name_pretty": "Cloud Life Sciences",
+  "product_documentation": "https://cloud.google.com/life-sciences/",
+  "client_documentation": "https://cloud.google.com/life-sciences",
+  "issue_tracker": "https://github.com/googleapis/nodejs-life-sciences/issues",
+  "release_level": "BETA",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-life-sciences",
+  "distribution_name": "@google-cloud/life-sciences",
+  "api_id": "lifesciences.googleapis.com",
+  "default_version": "v2beta",
+  "requires_billing": true
+}
+
