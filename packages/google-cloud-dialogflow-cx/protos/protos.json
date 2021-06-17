@@ -10245,6 +10245,10 @@
                                 "isWebhookEnabled": {
                                   "type": "bool",
                                   "id": 3
+                                },
+                                "enableSentimentAnalysis": {
+                                  "type": "bool",
+                                  "id": 7
                                 }
                               }
                             },

@@ -36976,6 +36976,9 @@ export namespace google {
 
                             /** UserInput isWebhookEnabled */
                             isWebhookEnabled?: (boolean|null);
+
+                            /** UserInput enableSentimentAnalysis */
+                            enableSentimentAnalysis?: (boolean|null);
                         }
 
                         /** Represents a UserInput. */
@@ -36995,6 +36998,9 @@ export namespace google {
 
                             /** UserInput isWebhookEnabled. */
                             public isWebhookEnabled: boolean;
+
+                            /** UserInput enableSentimentAnalysis. */
+                            public enableSentimentAnalysis: boolean;
 
                             /**
                              * Creates a new UserInput instance using the specified properties.
