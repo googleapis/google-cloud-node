@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.10.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.9.0...v2.10.0) (2021-06-17)
+
+
+### Features
+
+* **v3:** support sentiment analysis in bot testing ([#125](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/125)) ([d6d7684](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/d6d7684692ec3790ec5a4284cb206a4c26f4a1ab))
+
 ## [2.9.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.8.1...v2.9.0) (2021-06-14)
 
 
