@@ -30368,6 +30368,9 @@ export namespace google {
                         /** Fulfillment webhook */
                         webhook?: (string|null);
 
+                        /** Fulfillment returnPartialResponses */
+                        returnPartialResponses?: (boolean|null);
+
                         /** Fulfillment tag */
                         tag?: (string|null);
 
@@ -30392,6 +30395,9 @@ export namespace google {
 
                         /** Fulfillment webhook. */
                         public webhook: string;
+
+                        /** Fulfillment returnPartialResponses. */
+                        public returnPartialResponses: boolean;
 
                         /** Fulfillment tag. */
                         public tag: string;
@@ -41984,6 +41990,12 @@ export namespace google {
 
                         /** DetectIntentResponse outputAudioConfig */
                         outputAudioConfig?: (google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig|null);
+
+                        /** DetectIntentResponse responseType */
+                        responseType?: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse.ResponseType|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse.ResponseType|null);
+
+                        /** DetectIntentResponse allowCancellation */
+                        allowCancellation?: (boolean|null);
                     }
 
                     /** Represents a DetectIntentResponse. */
@@ -42006,6 +42018,12 @@ export namespace google {
 
                         /** DetectIntentResponse outputAudioConfig. */
                         public outputAudioConfig?: (google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig|null);
+
+                        /** DetectIntentResponse responseType. */
+                        public responseType: (google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse.ResponseType|keyof typeof google.cloud.dialogflow.cx.v3beta1.DetectIntentResponse.ResponseType);
+
+                        /** DetectIntentResponse allowCancellation. */
+                        public allowCancellation: boolean;
 
                         /**
                          * Creates a new DetectIntentResponse instance using the specified properties.
@@ -42078,6 +42096,16 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    namespace DetectIntentResponse {
+
+                        /** ResponseType enum. */
+                        enum ResponseType {
+                            RESPONSE_TYPE_UNSPECIFIED = 0,
+                            PARTIAL = 1,
+                            FINAL = 2
+                        }
+                    }
+
                     /** Properties of a StreamingDetectIntentRequest. */
                     interface IStreamingDetectIntentRequest {
 
@@ -42092,6 +42120,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest outputAudioConfig */
                         outputAudioConfig?: (google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig|null);
+
+                        /** StreamingDetectIntentRequest enablePartialResponse */
+                        enablePartialResponse?: (boolean|null);
                     }
 
                     /** Represents a StreamingDetectIntentRequest. */
@@ -42114,6 +42145,9 @@ export namespace google {
 
                         /** StreamingDetectIntentRequest outputAudioConfig. */
                         public outputAudioConfig?: (google.cloud.dialogflow.cx.v3beta1.IOutputAudioConfig|null);
+
+                        /** StreamingDetectIntentRequest enablePartialResponse. */
+                        public enablePartialResponse: boolean;
 
                         /**
                          * Creates a new StreamingDetectIntentRequest instance using the specified properties.

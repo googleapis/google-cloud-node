@@ -8371,6 +8371,10 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Webhook"
                               }
                             },
+                            "returnPartialResponses": {
+                              "type": "bool",
+                              "id": 8
+                            },
                             "tag": {
                               "type": "string",
                               "id": 3
@@ -11374,6 +11378,23 @@
                             "outputAudioConfig": {
                               "type": "OutputAudioConfig",
                               "id": 5
+                            },
+                            "responseType": {
+                              "type": "ResponseType",
+                              "id": 6
+                            },
+                            "allowCancellation": {
+                              "type": "bool",
+                              "id": 7
+                            }
+                          },
+                          "nested": {
+                            "ResponseType": {
+                              "values": {
+                                "RESPONSE_TYPE_UNSPECIFIED": 0,
+                                "PARTIAL": 1,
+                                "FINAL": 2
+                              }
                             }
                           }
                         },
@@ -11400,6 +11421,10 @@
                             "outputAudioConfig": {
                               "type": "OutputAudioConfig",
                               "id": 4
+                            },
+                            "enablePartialResponse": {
+                              "type": "bool",
+                              "id": 5
                             }
                           }
                         },
