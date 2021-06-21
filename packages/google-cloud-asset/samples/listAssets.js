@@ -23,8 +23,8 @@
 async function main(assetTypes) {
   // [START asset_quickstart_list_assets]
   const util = require('util');
-  const {v1p5beta1} = require('@google-cloud/asset');
-  const client = new v1p5beta1.AssetServiceClient();
+  const {v1} = require('@google-cloud/asset');
+  const client = new v1.AssetServiceClient();
 
   const projectId = await client.getProjectId();
   const projectResource = `projects/${projectId}`;
@@ -43,7 +43,7 @@ async function main(assetTypes) {
       //   readTime: { seconds: 1593988758 },
     };
 
-    // Call cloud.assets.v1p5beta1.ListAssets API.
+    // Call cloud.assets.v1.ListAssets API.
     const result = await client.listAssets(request);
     // Handle the response.
     console.log(util.inspect(result, {depth: null}));
