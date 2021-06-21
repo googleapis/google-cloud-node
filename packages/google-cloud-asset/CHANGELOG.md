@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.14.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.13.0...v3.14.0) (2021-06-21)
+
+
+### Features
+
+* generate new surface for v1 ([#504](https://www.github.com/googleapis/nodejs-asset/issues/504)) ([e1c6350](https://www.github.com/googleapis/nodejs-asset/commit/e1c6350f09adb6ab1e420de4ce5a3a4fd4c8c252))
+
 ## [3.13.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.12.2...v3.13.0) (2021-05-26)
 
 
