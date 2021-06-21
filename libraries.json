@@ -252,6 +252,7 @@
     "api_id": "dialogflow.googleapis.com",
     "requires_billing": true,
     "codeowner_team": "@googleapis/ml-apis",
+    "default_version": "v2",
     "support_documentation": "https://cloud.google.com/dialogflow-enterprise/docs/getting-support"
   },
   {
@@ -1094,21 +1095,6 @@
     "support_documentation": "https://cloud.google.com/ai-platform/notebooks/docs/getting-support"
   },
   {
-    "name": "apigeeconnect",
-    "name_pretty": "Apigee Connect API",
-    "product_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/",
-    "client_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect",
-    "issue_tracker": "https://github.com/googleapis/nodejs-apigee-connect/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-apigee-connect",
-    "distribution_name": "@google-cloud/apigee-connect",
-    "api_id": "apigeeconnect.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/"
-  },
-  {
     "language": "nodejs",
     "repo": "googleapis/nodejs-area120-tables",
     "name": "area120tables",
@@ -1450,21 +1436,6 @@
     "default_version": "v1",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/shell/docs/getting-support"
-  },
-  {
-    "name": "sqladmin",
-    "name_pretty": "SQL Admin API",
-    "product_documentation": "https://cloud.google.com/sql/docs/mysql/admin-api/",
-    "client_documentation": "https://cloud.google.com/sql",
-    "issue_tracker": "https://github.com/googleapis/nodejs-sql-admin/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-sql-admin",
-    "distribution_name": "@google-cloud/sql-admin",
-    "api_id": "sql.googleapis.com",
-    "default_version": "v1beta4",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/sql/docs/getting-support"
   },
   {
     "name": "debugger",
