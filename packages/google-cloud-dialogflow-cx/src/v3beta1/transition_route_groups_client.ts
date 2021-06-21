@@ -519,6 +519,10 @@ export class TransitionRouteGroupsClient {
   /**
    * Creates an {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup} in the specified flow.
    *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -636,6 +640,10 @@ export class TransitionRouteGroupsClient {
   /**
    * Updates the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
    *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup} request.transitionRouteGroup
@@ -750,6 +758,10 @@ export class TransitionRouteGroupsClient {
   ): void;
   /**
    * Deletes the specified {@link google.cloud.dialogflow.cx.v3beta1.TransitionRouteGroup|TransitionRouteGroup}.
+   *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
    *
    * @param {Object} request
    *   The request object that will be sent.

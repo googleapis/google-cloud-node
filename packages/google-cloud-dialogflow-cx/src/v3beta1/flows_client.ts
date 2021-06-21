@@ -457,6 +457,10 @@ export class FlowsClient {
   /**
    * Creates a flow in the specified agent.
    *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -774,6 +778,10 @@ export class FlowsClient {
   ): void;
   /**
    * Updates the specified flow.
+   *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1098,6 +1106,10 @@ export class FlowsClient {
    * Trains the specified flow. Note that only the flow in 'draft' environment
    * is trained.
    *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -1237,6 +1249,10 @@ export class FlowsClient {
   ): void;
   /**
    * Imports the specified flow to the specified agent from a binary file.
+   *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
