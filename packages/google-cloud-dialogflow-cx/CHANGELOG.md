@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.11.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.10.0...v2.11.0) (2021-06-21)
+
+
+### Features
+
+* **v3beta1:** Support partial response feature ([ee8a24a](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/ee8a24a1e47cb352198880490f047e2ff3d47152))
+* **v3beta1:** support sentiment analysis in bot testing ([#127](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/127)) ([2c45b2c](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/2c45b2c4e9662aaef7352f3b3edf58c0bf29779e))
+
+
+### Bug Fixes
+
+* **v3beta1:** set agent default language code as required ([#134](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/134)) ([ee8a24a](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/ee8a24a1e47cb352198880490f047e2ff3d47152))
+
 ## [2.10.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.9.0...v2.10.0) (2021-06-17)
 
 
