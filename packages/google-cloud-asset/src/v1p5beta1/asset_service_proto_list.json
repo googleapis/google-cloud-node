@@ -1,4 +1,9 @@
 [
   "../../protos/google/cloud/asset/v1p5beta1/asset_service.proto",
-  "../../protos/google/cloud/asset/v1p5beta1/assets.proto"
+  "../../protos/google/cloud/asset/v1p5beta1/assets.proto",
+  "../../protos/google/cloud/orgpolicy/v1/orgpolicy.proto",
+  "../../protos/google/identity/accesscontextmanager/type/device_resources.proto",
+  "../../protos/google/identity/accesscontextmanager/v1/access_level.proto",
+  "../../protos/google/identity/accesscontextmanager/v1/access_policy.proto",
+  "../../protos/google/identity/accesscontextmanager/v1/service_perimeter.proto"
 ]
