@@ -365,7 +365,7 @@ export class PagesClient {
   // -- Service calls --
   // -------------------
   getPage(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetPageRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetPageRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -437,7 +437,7 @@ export class PagesClient {
    * const [response] = await client.getPage(request);
    */
   getPage(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetPageRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetPageRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -480,7 +480,7 @@ export class PagesClient {
     return this.innerApiCalls.getPage(request, options, callback);
   }
   createPage(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreatePageRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreatePageRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -553,7 +553,7 @@ export class PagesClient {
    * const [response] = await client.createPage(request);
    */
   createPage(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreatePageRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreatePageRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -596,7 +596,7 @@ export class PagesClient {
     return this.innerApiCalls.createPage(request, options, callback);
   }
   updatePage(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdatePageRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdatePageRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -668,7 +668,7 @@ export class PagesClient {
    * const [response] = await client.updatePage(request);
    */
   updatePage(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdatePageRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdatePageRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -711,7 +711,7 @@ export class PagesClient {
     return this.innerApiCalls.updatePage(request, options, callback);
   }
   deletePage(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeletePageRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeletePageRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -772,7 +772,7 @@ export class PagesClient {
    * const [response] = await client.deletePage(request);
    */
   deletePage(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeletePageRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeletePageRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -816,7 +816,7 @@ export class PagesClient {
   }
 
   listPages(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListPagesRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListPagesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -896,7 +896,7 @@ export class PagesClient {
    *   for more details and examples.
    */
   listPages(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListPagesRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListPagesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

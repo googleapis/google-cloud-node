@@ -369,7 +369,7 @@ export class SessionEntityTypesClient {
   // -- Service calls --
   // -------------------
   getSessionEntityType(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetSessionEntityTypeRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetSessionEntityTypeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -426,7 +426,7 @@ export class SessionEntityTypesClient {
    * const [response] = await client.getSessionEntityType(request);
    */
   getSessionEntityType(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetSessionEntityTypeRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetSessionEntityTypeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -472,7 +472,7 @@ export class SessionEntityTypesClient {
     return this.innerApiCalls.getSessionEntityType(request, options, callback);
   }
   createSessionEntityType(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateSessionEntityTypeRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateSessionEntityTypeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -530,7 +530,7 @@ export class SessionEntityTypesClient {
    * const [response] = await client.createSessionEntityType(request);
    */
   createSessionEntityType(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateSessionEntityTypeRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateSessionEntityTypeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -580,7 +580,7 @@ export class SessionEntityTypesClient {
     );
   }
   updateSessionEntityType(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateSessionEntityTypeRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateSessionEntityTypeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -639,7 +639,7 @@ export class SessionEntityTypesClient {
    * const [response] = await client.updateSessionEntityType(request);
    */
   updateSessionEntityType(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateSessionEntityTypeRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateSessionEntityTypeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -689,7 +689,7 @@ export class SessionEntityTypesClient {
     );
   }
   deleteSessionEntityType(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteSessionEntityTypeRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteSessionEntityTypeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -746,7 +746,7 @@ export class SessionEntityTypesClient {
    * const [response] = await client.deleteSessionEntityType(request);
    */
   deleteSessionEntityType(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteSessionEntityTypeRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteSessionEntityTypeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -797,7 +797,7 @@ export class SessionEntityTypesClient {
   }
 
   listSessionEntityTypes(
-    request: protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -858,7 +858,7 @@ export class SessionEntityTypesClient {
    *   for more details and examples.
    */
   listSessionEntityTypes(
-    request: protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IListSessionEntityTypesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

@@ -372,7 +372,7 @@ export class WebhooksClient {
   // -- Service calls --
   // -------------------
   getWebhook(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -422,7 +422,7 @@ export class WebhooksClient {
    * const [response] = await client.getWebhook(request);
    */
   getWebhook(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetWebhookRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -465,7 +465,7 @@ export class WebhooksClient {
     return this.innerApiCalls.getWebhook(request, options, callback);
   }
   createWebhook(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -516,7 +516,7 @@ export class WebhooksClient {
    * const [response] = await client.createWebhook(request);
    */
   createWebhook(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateWebhookRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -559,7 +559,7 @@ export class WebhooksClient {
     return this.innerApiCalls.createWebhook(request, options, callback);
   }
   updateWebhook(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -610,7 +610,7 @@ export class WebhooksClient {
    * const [response] = await client.updateWebhook(request);
    */
   updateWebhook(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateWebhookRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -653,7 +653,7 @@ export class WebhooksClient {
     return this.innerApiCalls.updateWebhook(request, options, callback);
   }
   deleteWebhook(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -713,7 +713,7 @@ export class WebhooksClient {
    * const [response] = await client.deleteWebhook(request);
    */
   deleteWebhook(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteWebhookRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -757,7 +757,7 @@ export class WebhooksClient {
   }
 
   listWebhooks(
-    request: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -814,7 +814,7 @@ export class WebhooksClient {
    *   for more details and examples.
    */
   listWebhooks(
-    request: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IListWebhooksRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

@@ -367,7 +367,7 @@ export class ExperimentsClient {
   // -- Service calls --
   // -------------------
   getExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -420,7 +420,7 @@ export class ExperimentsClient {
    * const [response] = await client.getExperiment(request);
    */
   getExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -466,7 +466,7 @@ export class ExperimentsClient {
     return this.innerApiCalls.getExperiment(request, options, callback);
   }
   createExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -521,7 +521,7 @@ export class ExperimentsClient {
    * const [response] = await client.createExperiment(request);
    */
   createExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -567,7 +567,7 @@ export class ExperimentsClient {
     return this.innerApiCalls.createExperiment(request, options, callback);
   }
   updateExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -620,7 +620,7 @@ export class ExperimentsClient {
    * const [response] = await client.updateExperiment(request);
    */
   updateExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -666,7 +666,7 @@ export class ExperimentsClient {
     return this.innerApiCalls.updateExperiment(request, options, callback);
   }
   deleteExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -719,7 +719,7 @@ export class ExperimentsClient {
    * const [response] = await client.deleteExperiment(request);
    */
   deleteExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -765,7 +765,7 @@ export class ExperimentsClient {
     return this.innerApiCalls.deleteExperiment(request, options, callback);
   }
   startExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IStartExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IStartExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -819,7 +819,7 @@ export class ExperimentsClient {
    * const [response] = await client.startExperiment(request);
    */
   startExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IStartExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IStartExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -865,7 +865,7 @@ export class ExperimentsClient {
     return this.innerApiCalls.startExperiment(request, options, callback);
   }
   stopExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IStopExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IStopExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -919,7 +919,7 @@ export class ExperimentsClient {
    * const [response] = await client.stopExperiment(request);
    */
   stopExperiment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IStopExperimentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IStopExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -966,7 +966,7 @@ export class ExperimentsClient {
   }
 
   listExperiments(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListExperimentsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListExperimentsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1024,7 +1024,7 @@ export class ExperimentsClient {
    *   for more details and examples.
    */
   listExperiments(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListExperimentsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListExperimentsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

@@ -412,7 +412,7 @@ export class AgentsClient {
   // -- Service calls --
   // -------------------
   getAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -461,7 +461,7 @@ export class AgentsClient {
    * const [response] = await client.getAgent(request);
    */
   getAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -504,7 +504,7 @@ export class AgentsClient {
     return this.innerApiCalls.getAgent(request, options, callback);
   }
   createAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateAgentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -559,7 +559,7 @@ export class AgentsClient {
    * const [response] = await client.createAgent(request);
    */
   createAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateAgentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -602,7 +602,7 @@ export class AgentsClient {
     return this.innerApiCalls.createAgent(request, options, callback);
   }
   updateAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateAgentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -657,7 +657,7 @@ export class AgentsClient {
    * const [response] = await client.updateAgent(request);
    */
   updateAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateAgentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -700,7 +700,7 @@ export class AgentsClient {
     return this.innerApiCalls.updateAgent(request, options, callback);
   }
   deleteAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteAgentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -749,7 +749,7 @@ export class AgentsClient {
    * const [response] = await client.deleteAgent(request);
    */
   deleteAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteAgentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -792,7 +792,7 @@ export class AgentsClient {
     return this.innerApiCalls.deleteAgent(request, options, callback);
   }
   validateAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IValidateAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IValidateAgentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -848,7 +848,7 @@ export class AgentsClient {
    * const [response] = await client.validateAgent(request);
    */
   validateAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IValidateAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IValidateAgentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -894,7 +894,7 @@ export class AgentsClient {
     return this.innerApiCalls.validateAgent(request, options, callback);
   }
   getAgentValidationResult(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentValidationResultRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentValidationResultRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -950,7 +950,7 @@ export class AgentsClient {
    * const [response] = await client.getAgentValidationResult(request);
    */
   getAgentValidationResult(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentValidationResultRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetAgentValidationResultRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1001,7 +1001,7 @@ export class AgentsClient {
   }
 
   exportAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IExportAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IExportAgentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1067,7 +1067,7 @@ export class AgentsClient {
    * const [response] = await operation.promise();
    */
   exportAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IExportAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IExportAgentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1152,7 +1152,7 @@ export class AgentsClient {
     >;
   }
   restoreAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IRestoreAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IRestoreAgentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1224,7 +1224,7 @@ export class AgentsClient {
    * const [response] = await operation.promise();
    */
   restoreAgent(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IRestoreAgentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IRestoreAgentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1306,7 +1306,7 @@ export class AgentsClient {
     >;
   }
   listAgents(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1363,7 +1363,7 @@ export class AgentsClient {
    *   for more details and examples.
    */
   listAgents(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListAgentsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

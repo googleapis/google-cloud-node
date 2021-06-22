@@ -367,7 +367,7 @@ export class TransitionRouteGroupsClient {
   // -- Service calls --
   // -------------------
   getTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -433,7 +433,7 @@ export class TransitionRouteGroupsClient {
    * const [response] = await client.getTransitionRouteGroup(request);
    */
   getTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetTransitionRouteGroupRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -483,7 +483,7 @@ export class TransitionRouteGroupsClient {
     );
   }
   createTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -550,7 +550,7 @@ export class TransitionRouteGroupsClient {
    * const [response] = await client.createTransitionRouteGroup(request);
    */
   createTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateTransitionRouteGroupRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -600,7 +600,7 @@ export class TransitionRouteGroupsClient {
     );
   }
   updateTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -665,7 +665,7 @@ export class TransitionRouteGroupsClient {
    * const [response] = await client.updateTransitionRouteGroup(request);
    */
   updateTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateTransitionRouteGroupRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -715,7 +715,7 @@ export class TransitionRouteGroupsClient {
     );
   }
   deleteTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -776,7 +776,7 @@ export class TransitionRouteGroupsClient {
    * const [response] = await client.deleteTransitionRouteGroup(request);
    */
   deleteTransitionRouteGroup(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteTransitionRouteGroupRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -827,7 +827,7 @@ export class TransitionRouteGroupsClient {
   }
 
   listTransitionRouteGroups(
-    request: protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -899,7 +899,7 @@ export class TransitionRouteGroupsClient {
    *   for more details and examples.
    */
   listTransitionRouteGroups(
-    request: protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IListTransitionRouteGroupsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

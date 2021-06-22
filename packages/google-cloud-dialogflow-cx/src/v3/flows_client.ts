@@ -424,7 +424,7 @@ export class FlowsClient {
   // -- Service calls --
   // -------------------
   createFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateFlowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -488,7 +488,7 @@ export class FlowsClient {
    * const [response] = await client.createFlow(request);
    */
   createFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.ICreateFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ICreateFlowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -531,7 +531,7 @@ export class FlowsClient {
     return this.innerApiCalls.createFlow(request, options, callback);
   }
   deleteFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteFlowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -592,7 +592,7 @@ export class FlowsClient {
    * const [response] = await client.deleteFlow(request);
    */
   deleteFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IDeleteFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IDeleteFlowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -635,7 +635,7 @@ export class FlowsClient {
     return this.innerApiCalls.deleteFlow(request, options, callback);
   }
   getFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetFlowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -695,7 +695,7 @@ export class FlowsClient {
    * const [response] = await client.getFlow(request);
    */
   getFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetFlowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -736,7 +736,7 @@ export class FlowsClient {
     return this.innerApiCalls.getFlow(request, options, callback);
   }
   updateFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateFlowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -800,7 +800,7 @@ export class FlowsClient {
    * const [response] = await client.updateFlow(request);
    */
   updateFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IUpdateFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IUpdateFlowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -843,7 +843,7 @@ export class FlowsClient {
     return this.innerApiCalls.updateFlow(request, options, callback);
   }
   validateFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IValidateFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IValidateFlowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -897,7 +897,7 @@ export class FlowsClient {
    * const [response] = await client.validateFlow(request);
    */
   validateFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IValidateFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IValidateFlowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -940,7 +940,7 @@ export class FlowsClient {
     return this.innerApiCalls.validateFlow(request, options, callback);
   }
   getFlowValidationResult(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetFlowValidationResultRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetFlowValidationResultRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -996,7 +996,7 @@ export class FlowsClient {
    * const [response] = await client.getFlowValidationResult(request);
    */
   getFlowValidationResult(
-    request: protos.google.cloud.dialogflow.cx.v3.IGetFlowValidationResultRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IGetFlowValidationResultRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1047,7 +1047,7 @@ export class FlowsClient {
   }
 
   trainFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.ITrainFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ITrainFlowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1106,7 +1106,7 @@ export class FlowsClient {
    * const [response] = await operation.promise();
    */
   trainFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.ITrainFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.ITrainFlowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1188,7 +1188,7 @@ export class FlowsClient {
     >;
   }
   importFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IImportFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IImportFlowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1253,7 +1253,7 @@ export class FlowsClient {
    * const [response] = await operation.promise();
    */
   importFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IImportFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IImportFlowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1338,7 +1338,7 @@ export class FlowsClient {
     >;
   }
   exportFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IExportFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IExportFlowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1406,7 +1406,7 @@ export class FlowsClient {
    * const [response] = await operation.promise();
    */
   exportFlow(
-    request: protos.google.cloud.dialogflow.cx.v3.IExportFlowRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IExportFlowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1491,7 +1491,7 @@ export class FlowsClient {
     >;
   }
   listFlows(
-    request: protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1562,7 +1562,7 @@ export class FlowsClient {
    *   for more details and examples.
    */
   listFlows(
-    request: protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3.IListFlowsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

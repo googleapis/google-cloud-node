@@ -432,7 +432,7 @@ export class EnvironmentsClient {
   // -- Service calls --
   // -------------------
   getEnvironment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -485,7 +485,7 @@ export class EnvironmentsClient {
    * const [response] = await client.getEnvironment(request);
    */
   getEnvironment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IGetEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IGetEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -531,7 +531,7 @@ export class EnvironmentsClient {
     return this.innerApiCalls.getEnvironment(request, options, callback);
   }
   deleteEnvironment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -584,7 +584,7 @@ export class EnvironmentsClient {
    * const [response] = await client.deleteEnvironment(request);
    */
   deleteEnvironment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IDeleteEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -631,7 +631,7 @@ export class EnvironmentsClient {
   }
 
   createEnvironment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -690,7 +690,7 @@ export class EnvironmentsClient {
    * const [response] = await operation.promise();
    */
   createEnvironment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ICreateEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ICreateEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -775,7 +775,7 @@ export class EnvironmentsClient {
     >;
   }
   updateEnvironment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -833,7 +833,7 @@ export class EnvironmentsClient {
    * const [response] = await operation.promise();
    */
   updateEnvironment(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IUpdateEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -918,7 +918,7 @@ export class EnvironmentsClient {
     >;
   }
   runContinuousTest(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IRunContinuousTestRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IRunContinuousTestRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -975,7 +975,7 @@ export class EnvironmentsClient {
    * const [response] = await operation.promise();
    */
   runContinuousTest(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IRunContinuousTestRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IRunContinuousTestRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1060,7 +1060,7 @@ export class EnvironmentsClient {
     >;
   }
   listEnvironments(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListEnvironmentsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListEnvironmentsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1117,7 +1117,7 @@ export class EnvironmentsClient {
    *   for more details and examples.
    */
   listEnvironments(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListEnvironmentsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListEnvironmentsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1257,7 +1257,7 @@ export class EnvironmentsClient {
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IEnvironment>;
   }
   lookupEnvironmentHistory(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ILookupEnvironmentHistoryRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ILookupEnvironmentHistoryRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1315,7 +1315,7 @@ export class EnvironmentsClient {
    *   for more details and examples.
    */
   lookupEnvironmentHistory(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.ILookupEnvironmentHistoryRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.ILookupEnvironmentHistoryRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1461,7 +1461,7 @@ export class EnvironmentsClient {
     ) as AsyncIterable<protos.google.cloud.dialogflow.cx.v3beta1.IEnvironment>;
   }
   listContinuousTestResults(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListContinuousTestResultsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListContinuousTestResultsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1519,7 +1519,7 @@ export class EnvironmentsClient {
    *   for more details and examples.
    */
   listContinuousTestResults(
-    request: protos.google.cloud.dialogflow.cx.v3beta1.IListContinuousTestResultsRequest,
+    request?: protos.google.cloud.dialogflow.cx.v3beta1.IListContinuousTestResultsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
