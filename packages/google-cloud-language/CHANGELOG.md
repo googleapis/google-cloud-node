@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [4.2.5](https://www.github.com/googleapis/nodejs-language/compare/v4.2.4...v4.2.5) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#588](https://www.github.com/googleapis/nodejs-language/issues/588)) ([878d365](https://www.github.com/googleapis/nodejs-language/commit/878d365dd0fba24ac58dcc80939e250c77d8cb53))
+
 ### [4.2.4](https://www.github.com/googleapis/nodejs-language/compare/v4.2.3...v4.2.4) (2021-05-29)
 
 
