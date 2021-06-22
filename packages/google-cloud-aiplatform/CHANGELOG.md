@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.2](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.1...v1.7.2) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#152](https://www.github.com/googleapis/nodejs-ai-platform/issues/152)) ([96b9fba](https://www.github.com/googleapis/nodejs-ai-platform/commit/96b9fba9b66807ac5ea2c5826d5fd3f4e895dc9e))
+
 ### [1.7.1](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.0...v1.7.1) (2021-06-02)
 
 
