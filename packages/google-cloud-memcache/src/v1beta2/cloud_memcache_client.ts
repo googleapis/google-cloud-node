@@ -410,7 +410,7 @@ export class CloudMemcacheClient {
   // -- Service calls --
   // -------------------
   getInstance(
-    request: protos.google.cloud.memcache.v1beta2.IGetInstanceRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IGetInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -460,7 +460,7 @@ export class CloudMemcacheClient {
    * const [response] = await client.getInstance(request);
    */
   getInstance(
-    request: protos.google.cloud.memcache.v1beta2.IGetInstanceRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IGetInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -504,7 +504,7 @@ export class CloudMemcacheClient {
   }
 
   createInstance(
-    request: protos.google.cloud.memcache.v1beta2.ICreateInstanceRequest,
+    request?: protos.google.cloud.memcache.v1beta2.ICreateInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -575,7 +575,7 @@ export class CloudMemcacheClient {
    * const [response] = await operation.promise();
    */
   createInstance(
-    request: protos.google.cloud.memcache.v1beta2.ICreateInstanceRequest,
+    request?: protos.google.cloud.memcache.v1beta2.ICreateInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -660,7 +660,7 @@ export class CloudMemcacheClient {
     >;
   }
   updateInstance(
-    request: protos.google.cloud.memcache.v1beta2.IUpdateInstanceRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IUpdateInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -720,7 +720,7 @@ export class CloudMemcacheClient {
    * const [response] = await operation.promise();
    */
   updateInstance(
-    request: protos.google.cloud.memcache.v1beta2.IUpdateInstanceRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IUpdateInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -805,7 +805,7 @@ export class CloudMemcacheClient {
     >;
   }
   updateParameters(
-    request: protos.google.cloud.memcache.v1beta2.IUpdateParametersRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IUpdateParametersRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -869,7 +869,7 @@ export class CloudMemcacheClient {
    * const [response] = await operation.promise();
    */
   updateParameters(
-    request: protos.google.cloud.memcache.v1beta2.IUpdateParametersRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IUpdateParametersRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -954,7 +954,7 @@ export class CloudMemcacheClient {
     >;
   }
   deleteInstance(
-    request: protos.google.cloud.memcache.v1beta2.IDeleteInstanceRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IDeleteInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1012,7 +1012,7 @@ export class CloudMemcacheClient {
    * const [response] = await operation.promise();
    */
   deleteInstance(
-    request: protos.google.cloud.memcache.v1beta2.IDeleteInstanceRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IDeleteInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1097,7 +1097,7 @@ export class CloudMemcacheClient {
     >;
   }
   applyParameters(
-    request: protos.google.cloud.memcache.v1beta2.IApplyParametersRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IApplyParametersRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1161,7 +1161,7 @@ export class CloudMemcacheClient {
    * const [response] = await operation.promise();
    */
   applyParameters(
-    request: protos.google.cloud.memcache.v1beta2.IApplyParametersRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IApplyParametersRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1246,7 +1246,7 @@ export class CloudMemcacheClient {
     >;
   }
   applySoftwareUpdate(
-    request: protos.google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1310,7 +1310,7 @@ export class CloudMemcacheClient {
    * const [response] = await operation.promise();
    */
   applySoftwareUpdate(
-    request: protos.google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IApplySoftwareUpdateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1395,7 +1395,7 @@ export class CloudMemcacheClient {
     >;
   }
   listInstances(
-    request: protos.google.cloud.memcache.v1beta2.IListInstancesRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IListInstancesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1463,7 +1463,7 @@ export class CloudMemcacheClient {
    *   for more details and examples.
    */
   listInstances(
-    request: protos.google.cloud.memcache.v1beta2.IListInstancesRequest,
+    request?: protos.google.cloud.memcache.v1beta2.IListInstancesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
