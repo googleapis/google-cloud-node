@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.2...v2.3.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#185](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/185)) ([898bf5c](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/898bf5c5259cab24d64326d7b0ddf37d6a7e7571))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.1...v2.3.2) (2021-05-25)
 
 
