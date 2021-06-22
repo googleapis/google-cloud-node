@@ -424,7 +424,7 @@ export class DlpServiceClient {
   // -- Service calls --
   // -------------------
   inspectContent(
-    request: protos.google.privacy.dlp.v2.IInspectContentRequest,
+    request?: protos.google.privacy.dlp.v2.IInspectContentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -504,7 +504,7 @@ export class DlpServiceClient {
    * const [response] = await client.inspectContent(request);
    */
   inspectContent(
-    request: protos.google.privacy.dlp.v2.IInspectContentRequest,
+    request?: protos.google.privacy.dlp.v2.IInspectContentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -545,7 +545,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.inspectContent(request, options, callback);
   }
   redactImage(
-    request: protos.google.privacy.dlp.v2.IRedactImageRequest,
+    request?: protos.google.privacy.dlp.v2.IRedactImageRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -622,7 +622,7 @@ export class DlpServiceClient {
    * const [response] = await client.redactImage(request);
    */
   redactImage(
-    request: protos.google.privacy.dlp.v2.IRedactImageRequest,
+    request?: protos.google.privacy.dlp.v2.IRedactImageRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -661,7 +661,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.redactImage(request, options, callback);
   }
   deidentifyContent(
-    request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
+    request?: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -751,7 +751,7 @@ export class DlpServiceClient {
    * const [response] = await client.deidentifyContent(request);
    */
   deidentifyContent(
-    request: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
+    request?: protos.google.privacy.dlp.v2.IDeidentifyContentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -792,7 +792,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.deidentifyContent(request, options, callback);
   }
   reidentifyContent(
-    request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
+    request?: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -885,7 +885,7 @@ export class DlpServiceClient {
    * const [response] = await client.reidentifyContent(request);
    */
   reidentifyContent(
-    request: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
+    request?: protos.google.privacy.dlp.v2.IReidentifyContentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -926,7 +926,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.reidentifyContent(request, options, callback);
   }
   listInfoTypes(
-    request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
+    request?: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -985,7 +985,7 @@ export class DlpServiceClient {
    * const [response] = await client.listInfoTypes(request);
    */
   listInfoTypes(
-    request: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
+    request?: protos.google.privacy.dlp.v2.IListInfoTypesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1024,7 +1024,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.listInfoTypes(request, options, callback);
   }
   createInspectTemplate(
-    request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1102,7 +1102,7 @@ export class DlpServiceClient {
    * const [response] = await client.createInspectTemplate(request);
    */
   createInspectTemplate(
-    request: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateInspectTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1145,7 +1145,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.createInspectTemplate(request, options, callback);
   }
   updateInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1200,7 +1200,7 @@ export class DlpServiceClient {
    * const [response] = await client.updateInspectTemplate(request);
    */
   updateInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IUpdateInspectTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1243,7 +1243,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.updateInspectTemplate(request, options, callback);
   }
   getInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1294,7 +1294,7 @@ export class DlpServiceClient {
    * const [response] = await client.getInspectTemplate(request);
    */
   getInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IGetInspectTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1337,7 +1337,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.getInspectTemplate(request, options, callback);
   }
   deleteInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1388,7 +1388,7 @@ export class DlpServiceClient {
    * const [response] = await client.deleteInspectTemplate(request);
    */
   deleteInspectTemplate(
-    request: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteInspectTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1431,7 +1431,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.deleteInspectTemplate(request, options, callback);
   }
   createDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1510,7 +1510,7 @@ export class DlpServiceClient {
    * const [response] = await client.createDeidentifyTemplate(request);
    */
   createDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateDeidentifyTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1557,7 +1557,7 @@ export class DlpServiceClient {
     );
   }
   updateDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1613,7 +1613,7 @@ export class DlpServiceClient {
    * const [response] = await client.updateDeidentifyTemplate(request);
    */
   updateDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IUpdateDeidentifyTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1660,7 +1660,7 @@ export class DlpServiceClient {
     );
   }
   getDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1712,7 +1712,7 @@ export class DlpServiceClient {
    * const [response] = await client.getDeidentifyTemplate(request);
    */
   getDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IGetDeidentifyTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1755,7 +1755,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.getDeidentifyTemplate(request, options, callback);
   }
   deleteDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1807,7 +1807,7 @@ export class DlpServiceClient {
    * const [response] = await client.deleteDeidentifyTemplate(request);
    */
   deleteDeidentifyTemplate(
-    request: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteDeidentifyTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1854,7 +1854,7 @@ export class DlpServiceClient {
     );
   }
   createJobTrigger(
-    request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1924,7 +1924,7 @@ export class DlpServiceClient {
    * const [response] = await client.createJobTrigger(request);
    */
   createJobTrigger(
-    request: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateJobTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1965,7 +1965,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.createJobTrigger(request, options, callback);
   }
   updateJobTrigger(
-    request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2015,7 +2015,7 @@ export class DlpServiceClient {
    * const [response] = await client.updateJobTrigger(request);
    */
   updateJobTrigger(
-    request: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IUpdateJobTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2056,7 +2056,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.updateJobTrigger(request, options, callback);
   }
   hybridInspectJobTrigger(
-    request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2112,7 +2112,7 @@ export class DlpServiceClient {
    * const [response] = await client.hybridInspectJobTrigger(request);
    */
   hybridInspectJobTrigger(
-    request: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IHybridInspectJobTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2159,7 +2159,7 @@ export class DlpServiceClient {
     );
   }
   getJobTrigger(
-    request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2205,7 +2205,7 @@ export class DlpServiceClient {
    * const [response] = await client.getJobTrigger(request);
    */
   getJobTrigger(
-    request: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IGetJobTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2244,7 +2244,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.getJobTrigger(request, options, callback);
   }
   deleteJobTrigger(
-    request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2290,7 +2290,7 @@ export class DlpServiceClient {
    * const [response] = await client.deleteJobTrigger(request);
    */
   deleteJobTrigger(
-    request: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteJobTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2331,7 +2331,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.deleteJobTrigger(request, options, callback);
   }
   activateJobTrigger(
-    request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2381,7 +2381,7 @@ export class DlpServiceClient {
    * const [response] = await client.activateJobTrigger(request);
    */
   activateJobTrigger(
-    request: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
+    request?: protos.google.privacy.dlp.v2.IActivateJobTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2424,7 +2424,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.activateJobTrigger(request, options, callback);
   }
   createDlpJob(
-    request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2500,7 +2500,7 @@ export class DlpServiceClient {
    * const [response] = await client.createDlpJob(request);
    */
   createDlpJob(
-    request: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateDlpJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2539,7 +2539,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.createDlpJob(request, options, callback);
   }
   getDlpJob(
-    request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2585,7 +2585,7 @@ export class DlpServiceClient {
    * const [response] = await client.getDlpJob(request);
    */
   getDlpJob(
-    request: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.IGetDlpJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2624,7 +2624,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.getDlpJob(request, options, callback);
   }
   deleteDlpJob(
-    request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2672,7 +2672,7 @@ export class DlpServiceClient {
    * const [response] = await client.deleteDlpJob(request);
    */
   deleteDlpJob(
-    request: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteDlpJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2711,7 +2711,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.deleteDlpJob(request, options, callback);
   }
   cancelDlpJob(
-    request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2759,7 +2759,7 @@ export class DlpServiceClient {
    * const [response] = await client.cancelDlpJob(request);
    */
   cancelDlpJob(
-    request: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.ICancelDlpJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2798,7 +2798,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.cancelDlpJob(request, options, callback);
   }
   createStoredInfoType(
-    request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2876,7 +2876,7 @@ export class DlpServiceClient {
    * const [response] = await client.createStoredInfoType(request);
    */
   createStoredInfoType(
-    request: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
+    request?: protos.google.privacy.dlp.v2.ICreateStoredInfoTypeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2919,7 +2919,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.createStoredInfoType(request, options, callback);
   }
   updateStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+    request?: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2978,7 +2978,7 @@ export class DlpServiceClient {
    * const [response] = await client.updateStoredInfoType(request);
    */
   updateStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
+    request?: protos.google.privacy.dlp.v2.IUpdateStoredInfoTypeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3021,7 +3021,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.updateStoredInfoType(request, options, callback);
   }
   getStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+    request?: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3069,7 +3069,7 @@ export class DlpServiceClient {
    * const [response] = await client.getStoredInfoType(request);
    */
   getStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
+    request?: protos.google.privacy.dlp.v2.IGetStoredInfoTypeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3110,7 +3110,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.getStoredInfoType(request, options, callback);
   }
   deleteStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3162,7 +3162,7 @@ export class DlpServiceClient {
    * const [response] = await client.deleteStoredInfoType(request);
    */
   deleteStoredInfoType(
-    request: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
+    request?: protos.google.privacy.dlp.v2.IDeleteStoredInfoTypeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3205,7 +3205,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.deleteStoredInfoType(request, options, callback);
   }
   hybridInspectDlpJob(
-    request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3261,7 +3261,7 @@ export class DlpServiceClient {
    * const [response] = await client.hybridInspectDlpJob(request);
    */
   hybridInspectDlpJob(
-    request: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.IHybridInspectDlpJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3304,7 +3304,7 @@ export class DlpServiceClient {
     return this.innerApiCalls.hybridInspectDlpJob(request, options, callback);
   }
   finishDlpJob(
-    request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3352,7 +3352,7 @@ export class DlpServiceClient {
    * const [response] = await client.finishDlpJob(request);
    */
   finishDlpJob(
-    request: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
+    request?: protos.google.privacy.dlp.v2.IFinishDlpJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3392,7 +3392,7 @@ export class DlpServiceClient {
   }
 
   listInspectTemplates(
-    request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+    request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3485,7 +3485,7 @@ export class DlpServiceClient {
    *   for more details and examples.
    */
   listInspectTemplates(
-    request: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
+    request?: protos.google.privacy.dlp.v2.IListInspectTemplatesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -3695,7 +3695,7 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IInspectTemplate>;
   }
   listDeidentifyTemplates(
-    request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+    request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3789,7 +3789,7 @@ export class DlpServiceClient {
    *   for more details and examples.
    */
   listDeidentifyTemplates(
-    request: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
+    request?: protos.google.privacy.dlp.v2.IListDeidentifyTemplatesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -4003,7 +4003,7 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IDeidentifyTemplate>;
   }
   listJobTriggers(
-    request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+    request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4115,7 +4115,7 @@ export class DlpServiceClient {
    *   for more details and examples.
    */
   listJobTriggers(
-    request: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
+    request?: protos.google.privacy.dlp.v2.IListJobTriggersRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -4369,7 +4369,7 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IJobTrigger>;
   }
   listDlpJobs(
-    request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+    request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4484,7 +4484,7 @@ export class DlpServiceClient {
    *   for more details and examples.
    */
   listDlpJobs(
-    request: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
+    request?: protos.google.privacy.dlp.v2.IListDlpJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -4740,7 +4740,7 @@ export class DlpServiceClient {
     ) as AsyncIterable<protos.google.privacy.dlp.v2.IDlpJob>;
   }
   listStoredInfoTypes(
-    request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+    request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4835,7 +4835,7 @@ export class DlpServiceClient {
    *   for more details and examples.
    */
   listStoredInfoTypes(
-    request: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
+    request?: protos.google.privacy.dlp.v2.IListStoredInfoTypesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
