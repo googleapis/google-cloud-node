@@ -329,7 +329,7 @@ export class ImageAnnotatorClient {
   // -- Service calls --
   // -------------------
   batchAnnotateImages(
-    request: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
+    request?: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -380,7 +380,7 @@ export class ImageAnnotatorClient {
    * const [response] = await client.batchAnnotateImages(request);
    */
   batchAnnotateImages(
-    request: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
+    request?: protos.google.cloud.vision.v1p3beta1.IBatchAnnotateImagesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -421,7 +421,7 @@ export class ImageAnnotatorClient {
   }
 
   asyncBatchAnnotateFiles(
-    request: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
+    request?: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -482,7 +482,7 @@ export class ImageAnnotatorClient {
    * const [response] = await operation.promise();
    */
   asyncBatchAnnotateFiles(
-    request: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
+    request?: protos.google.cloud.vision.v1p3beta1.IAsyncBatchAnnotateFilesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
