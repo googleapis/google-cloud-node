@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.4](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.3...v2.3.4) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#186](https://www.github.com/googleapis/nodejs-game-servers/issues/186)) ([99424ec](https://www.github.com/googleapis/nodejs-game-servers/commit/99424ecd0f87341bd4814cdbe092d2820c9a78d7))
+
 ### [2.3.3](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.2...v2.3.3) (2021-06-10)
 
 
