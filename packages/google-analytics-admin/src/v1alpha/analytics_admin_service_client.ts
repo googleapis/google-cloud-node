@@ -494,7 +494,7 @@ export class AnalyticsAdminServiceClient {
   // -- Service calls --
   // -------------------
   getAccount(
-    request: protos.google.analytics.admin.v1alpha.IGetAccountRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetAccountRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -544,7 +544,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getAccount(request);
    */
   getAccount(
-    request: protos.google.analytics.admin.v1alpha.IGetAccountRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetAccountRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -587,7 +587,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getAccount(request, options, callback);
   }
   deleteAccount(
-    request: protos.google.analytics.admin.v1alpha.IDeleteAccountRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteAccountRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -647,7 +647,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteAccount(request);
    */
   deleteAccount(
-    request: protos.google.analytics.admin.v1alpha.IDeleteAccountRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteAccountRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -690,7 +690,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.deleteAccount(request, options, callback);
   }
   updateAccount(
-    request: protos.google.analytics.admin.v1alpha.IUpdateAccountRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAccountRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -743,7 +743,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateAccount(request);
    */
   updateAccount(
-    request: protos.google.analytics.admin.v1alpha.IUpdateAccountRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAccountRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -786,7 +786,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.updateAccount(request, options, callback);
   }
   provisionAccountTicket(
-    request: protos.google.analytics.admin.v1alpha.IProvisionAccountTicketRequest,
+    request?: protos.google.analytics.admin.v1alpha.IProvisionAccountTicketRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -840,7 +840,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.provisionAccountTicket(request);
    */
   provisionAccountTicket(
-    request: protos.google.analytics.admin.v1alpha.IProvisionAccountTicketRequest,
+    request?: protos.google.analytics.admin.v1alpha.IProvisionAccountTicketRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -884,7 +884,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   getProperty(
-    request: protos.google.analytics.admin.v1alpha.IGetPropertyRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetPropertyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -934,7 +934,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getProperty(request);
    */
   getProperty(
-    request: protos.google.analytics.admin.v1alpha.IGetPropertyRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetPropertyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -977,7 +977,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getProperty(request, options, callback);
   }
   createProperty(
-    request: protos.google.analytics.admin.v1alpha.ICreatePropertyRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreatePropertyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1026,7 +1026,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.createProperty(request);
    */
   createProperty(
-    request: protos.google.analytics.admin.v1alpha.ICreatePropertyRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreatePropertyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1063,7 +1063,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.createProperty(request, options, callback);
   }
   deleteProperty(
-    request: protos.google.analytics.admin.v1alpha.IDeletePropertyRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeletePropertyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1123,7 +1123,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteProperty(request);
    */
   deleteProperty(
-    request: protos.google.analytics.admin.v1alpha.IDeletePropertyRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeletePropertyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1166,7 +1166,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.deleteProperty(request, options, callback);
   }
   updateProperty(
-    request: protos.google.analytics.admin.v1alpha.IUpdatePropertyRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdatePropertyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1220,7 +1220,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateProperty(request);
    */
   updateProperty(
-    request: protos.google.analytics.admin.v1alpha.IUpdatePropertyRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdatePropertyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1263,7 +1263,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.updateProperty(request, options, callback);
   }
   getUserLink(
-    request: protos.google.analytics.admin.v1alpha.IGetUserLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetUserLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1311,7 +1311,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getUserLink(request);
    */
   getUserLink(
-    request: protos.google.analytics.admin.v1alpha.IGetUserLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetUserLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1354,7 +1354,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getUserLink(request, options, callback);
   }
   batchGetUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IBatchGetUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IBatchGetUserLinksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1412,7 +1412,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.batchGetUserLinks(request);
    */
   batchGetUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IBatchGetUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IBatchGetUserLinksRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1458,7 +1458,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.batchGetUserLinks(request, options, callback);
   }
   createUserLink(
-    request: protos.google.analytics.admin.v1alpha.ICreateUserLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateUserLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1515,7 +1515,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.createUserLink(request);
    */
   createUserLink(
-    request: protos.google.analytics.admin.v1alpha.ICreateUserLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateUserLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1558,7 +1558,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.createUserLink(request, options, callback);
   }
   batchCreateUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IBatchCreateUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IBatchCreateUserLinksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1622,7 +1622,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.batchCreateUserLinks(request);
    */
   batchCreateUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IBatchCreateUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IBatchCreateUserLinksRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1668,7 +1668,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.batchCreateUserLinks(request, options, callback);
   }
   updateUserLink(
-    request: protos.google.analytics.admin.v1alpha.IUpdateUserLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateUserLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1716,7 +1716,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateUserLink(request);
    */
   updateUserLink(
-    request: protos.google.analytics.admin.v1alpha.IUpdateUserLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateUserLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1759,7 +1759,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.updateUserLink(request, options, callback);
   }
   batchUpdateUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IBatchUpdateUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IBatchUpdateUserLinksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1816,7 +1816,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.batchUpdateUserLinks(request);
    */
   batchUpdateUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IBatchUpdateUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IBatchUpdateUserLinksRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1862,7 +1862,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.batchUpdateUserLinks(request, options, callback);
   }
   deleteUserLink(
-    request: protos.google.analytics.admin.v1alpha.IDeleteUserLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteUserLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1910,7 +1910,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteUserLink(request);
    */
   deleteUserLink(
-    request: protos.google.analytics.admin.v1alpha.IDeleteUserLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteUserLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1953,7 +1953,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.deleteUserLink(request, options, callback);
   }
   batchDeleteUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IBatchDeleteUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IBatchDeleteUserLinksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2010,7 +2010,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.batchDeleteUserLinks(request);
    */
   batchDeleteUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IBatchDeleteUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IBatchDeleteUserLinksRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2056,7 +2056,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.batchDeleteUserLinks(request, options, callback);
   }
   getWebDataStream(
-    request: protos.google.analytics.admin.v1alpha.IGetWebDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetWebDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2109,7 +2109,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getWebDataStream(request);
    */
   getWebDataStream(
-    request: protos.google.analytics.admin.v1alpha.IGetWebDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetWebDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2155,7 +2155,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getWebDataStream(request, options, callback);
   }
   deleteWebDataStream(
-    request: protos.google.analytics.admin.v1alpha.IDeleteWebDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteWebDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2208,7 +2208,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteWebDataStream(request);
    */
   deleteWebDataStream(
-    request: protos.google.analytics.admin.v1alpha.IDeleteWebDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteWebDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2254,7 +2254,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.deleteWebDataStream(request, options, callback);
   }
   updateWebDataStream(
-    request: protos.google.analytics.admin.v1alpha.IUpdateWebDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateWebDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2310,7 +2310,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateWebDataStream(request);
    */
   updateWebDataStream(
-    request: protos.google.analytics.admin.v1alpha.IUpdateWebDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateWebDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2356,7 +2356,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.updateWebDataStream(request, options, callback);
   }
   createWebDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateWebDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateWebDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2410,7 +2410,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.createWebDataStream(request);
    */
   createWebDataStream(
-    request: protos.google.analytics.admin.v1alpha.ICreateWebDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateWebDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2456,7 +2456,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.createWebDataStream(request, options, callback);
   }
   getIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IGetIosAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetIosAppDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2509,7 +2509,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getIosAppDataStream(request);
    */
   getIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IGetIosAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetIosAppDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2555,7 +2555,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getIosAppDataStream(request, options, callback);
   }
   deleteIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IDeleteIosAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteIosAppDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2608,7 +2608,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteIosAppDataStream(request);
    */
   deleteIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IDeleteIosAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteIosAppDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2658,7 +2658,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   updateIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IUpdateIosAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateIosAppDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2714,7 +2714,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateIosAppDataStream(request);
    */
   updateIosAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IUpdateIosAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateIosAppDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2764,7 +2764,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   getAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IGetAndroidAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetAndroidAppDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2817,7 +2817,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getAndroidAppDataStream(request);
    */
   getAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IGetAndroidAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetAndroidAppDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2867,7 +2867,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   deleteAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IDeleteAndroidAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteAndroidAppDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2920,7 +2920,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteAndroidAppDataStream(request);
    */
   deleteAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IDeleteAndroidAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteAndroidAppDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2970,7 +2970,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   updateAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IUpdateAndroidAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAndroidAppDataStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3026,7 +3026,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateAndroidAppDataStream(request);
    */
   updateAndroidAppDataStream(
-    request: protos.google.analytics.admin.v1alpha.IUpdateAndroidAppDataStreamRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateAndroidAppDataStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3077,7 +3077,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   getEnhancedMeasurementSettings(
-    request: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3133,7 +3133,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getEnhancedMeasurementSettings(request);
    */
   getEnhancedMeasurementSettings(
-    request: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetEnhancedMeasurementSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3183,7 +3183,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   updateEnhancedMeasurementSettings(
-    request: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3241,7 +3241,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateEnhancedMeasurementSettings(request);
    */
   updateEnhancedMeasurementSettings(
-    request: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateEnhancedMeasurementSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3292,7 +3292,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   createFirebaseLink(
-    request: protos.google.analytics.admin.v1alpha.ICreateFirebaseLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateFirebaseLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3348,7 +3348,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.createFirebaseLink(request);
    */
   createFirebaseLink(
-    request: protos.google.analytics.admin.v1alpha.ICreateFirebaseLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateFirebaseLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3394,7 +3394,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.createFirebaseLink(request, options, callback);
   }
   updateFirebaseLink(
-    request: protos.google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3449,7 +3449,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateFirebaseLink(request);
    */
   updateFirebaseLink(
-    request: protos.google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateFirebaseLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3495,7 +3495,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.updateFirebaseLink(request, options, callback);
   }
   deleteFirebaseLink(
-    request: protos.google.analytics.admin.v1alpha.IDeleteFirebaseLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteFirebaseLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3547,7 +3547,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteFirebaseLink(request);
    */
   deleteFirebaseLink(
-    request: protos.google.analytics.admin.v1alpha.IDeleteFirebaseLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteFirebaseLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3593,7 +3593,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.deleteFirebaseLink(request, options, callback);
   }
   getGlobalSiteTag(
-    request: protos.google.analytics.admin.v1alpha.IGetGlobalSiteTagRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetGlobalSiteTagRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3648,7 +3648,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getGlobalSiteTag(request);
    */
   getGlobalSiteTag(
-    request: protos.google.analytics.admin.v1alpha.IGetGlobalSiteTagRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetGlobalSiteTagRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3694,7 +3694,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getGlobalSiteTag(request, options, callback);
   }
   createGoogleAdsLink(
-    request: protos.google.analytics.admin.v1alpha.ICreateGoogleAdsLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateGoogleAdsLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3747,7 +3747,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.createGoogleAdsLink(request);
    */
   createGoogleAdsLink(
-    request: protos.google.analytics.admin.v1alpha.ICreateGoogleAdsLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateGoogleAdsLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3793,7 +3793,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.createGoogleAdsLink(request, options, callback);
   }
   updateGoogleAdsLink(
-    request: protos.google.analytics.admin.v1alpha.IUpdateGoogleAdsLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateGoogleAdsLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3848,7 +3848,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateGoogleAdsLink(request);
    */
   updateGoogleAdsLink(
-    request: protos.google.analytics.admin.v1alpha.IUpdateGoogleAdsLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateGoogleAdsLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3894,7 +3894,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.updateGoogleAdsLink(request, options, callback);
   }
   deleteGoogleAdsLink(
-    request: protos.google.analytics.admin.v1alpha.IDeleteGoogleAdsLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteGoogleAdsLinkRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3945,7 +3945,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteGoogleAdsLink(request);
    */
   deleteGoogleAdsLink(
-    request: protos.google.analytics.admin.v1alpha.IDeleteGoogleAdsLinkRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteGoogleAdsLinkRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3991,7 +3991,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.deleteGoogleAdsLink(request, options, callback);
   }
   getDataSharingSettings(
-    request: protos.google.analytics.admin.v1alpha.IGetDataSharingSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetDataSharingSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4045,7 +4045,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getDataSharingSettings(request);
    */
   getDataSharingSettings(
-    request: protos.google.analytics.admin.v1alpha.IGetDataSharingSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetDataSharingSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4095,7 +4095,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   getMeasurementProtocolSecret(
-    request: protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4150,7 +4150,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getMeasurementProtocolSecret(request);
    */
   getMeasurementProtocolSecret(
-    request: protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetMeasurementProtocolSecretRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4200,7 +4200,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   createMeasurementProtocolSecret(
-    request: protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4256,7 +4256,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.createMeasurementProtocolSecret(request);
    */
   createMeasurementProtocolSecret(
-    request: protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateMeasurementProtocolSecretRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4306,7 +4306,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   deleteMeasurementProtocolSecret(
-    request: protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4361,7 +4361,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteMeasurementProtocolSecret(request);
    */
   deleteMeasurementProtocolSecret(
-    request: protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteMeasurementProtocolSecretRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4411,7 +4411,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   updateMeasurementProtocolSecret(
-    request: protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4464,7 +4464,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateMeasurementProtocolSecret(request);
    */
   updateMeasurementProtocolSecret(
-    request: protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateMeasurementProtocolSecretRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4515,7 +4515,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   getGoogleSignalsSettings(
-    request: protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4567,7 +4567,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getGoogleSignalsSettings(request);
    */
   getGoogleSignalsSettings(
-    request: protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetGoogleSignalsSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4617,7 +4617,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   updateGoogleSignalsSettings(
-    request: protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4673,7 +4673,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateGoogleSignalsSettings(request);
    */
   updateGoogleSignalsSettings(
-    request: protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateGoogleSignalsSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4724,7 +4724,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   createConversionEvent(
-    request: protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4778,7 +4778,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.createConversionEvent(request);
    */
   createConversionEvent(
-    request: protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateConversionEventRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4824,7 +4824,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.createConversionEvent(request, options, callback);
   }
   getConversionEvent(
-    request: protos.google.analytics.admin.v1alpha.IGetConversionEventRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetConversionEventRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4877,7 +4877,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getConversionEvent(request);
    */
   getConversionEvent(
-    request: protos.google.analytics.admin.v1alpha.IGetConversionEventRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetConversionEventRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4923,7 +4923,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getConversionEvent(request, options, callback);
   }
   deleteConversionEvent(
-    request: protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4976,7 +4976,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.deleteConversionEvent(request);
    */
   deleteConversionEvent(
-    request: protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest,
+    request?: protos.google.analytics.admin.v1alpha.IDeleteConversionEventRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -5022,7 +5022,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.deleteConversionEvent(request, options, callback);
   }
   createCustomDimension(
-    request: protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5075,7 +5075,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.createCustomDimension(request);
    */
   createCustomDimension(
-    request: protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateCustomDimensionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -5121,7 +5121,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.createCustomDimension(request, options, callback);
   }
   updateCustomDimension(
-    request: protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5176,7 +5176,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateCustomDimension(request);
    */
   updateCustomDimension(
-    request: protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateCustomDimensionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -5222,7 +5222,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.updateCustomDimension(request, options, callback);
   }
   archiveCustomDimension(
-    request: protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest,
+    request?: protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5274,7 +5274,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.archiveCustomDimension(request);
    */
   archiveCustomDimension(
-    request: protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest,
+    request?: protos.google.analytics.admin.v1alpha.IArchiveCustomDimensionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -5324,7 +5324,7 @@ export class AnalyticsAdminServiceClient {
     );
   }
   getCustomDimension(
-    request: protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5376,7 +5376,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getCustomDimension(request);
    */
   getCustomDimension(
-    request: protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetCustomDimensionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -5422,7 +5422,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.getCustomDimension(request, options, callback);
   }
   createCustomMetric(
-    request: protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5475,7 +5475,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.createCustomMetric(request);
    */
   createCustomMetric(
-    request: protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest,
+    request?: protos.google.analytics.admin.v1alpha.ICreateCustomMetricRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -5521,7 +5521,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.createCustomMetric(request, options, callback);
   }
   updateCustomMetric(
-    request: protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5576,7 +5576,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.updateCustomMetric(request);
    */
   updateCustomMetric(
-    request: protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest,
+    request?: protos.google.analytics.admin.v1alpha.IUpdateCustomMetricRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -5622,7 +5622,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.updateCustomMetric(request, options, callback);
   }
   archiveCustomMetric(
-    request: protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest,
+    request?: protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5674,7 +5674,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.archiveCustomMetric(request);
    */
   archiveCustomMetric(
-    request: protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest,
+    request?: protos.google.analytics.admin.v1alpha.IArchiveCustomMetricRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -5720,7 +5720,7 @@ export class AnalyticsAdminServiceClient {
     return this.innerApiCalls.archiveCustomMetric(request, options, callback);
   }
   getCustomMetric(
-    request: protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5769,7 +5769,7 @@ export class AnalyticsAdminServiceClient {
    * const [response] = await client.getCustomMetric(request);
    */
   getCustomMetric(
-    request: protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest,
+    request?: protos.google.analytics.admin.v1alpha.IGetCustomMetricRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -5813,7 +5813,7 @@ export class AnalyticsAdminServiceClient {
   }
 
   listAccounts(
-    request: protos.google.analytics.admin.v1alpha.IListAccountsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListAccountsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5880,7 +5880,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listAccounts(
-    request: protos.google.analytics.admin.v1alpha.IListAccountsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListAccountsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -6014,7 +6014,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAccount>;
   }
   listAccountSummaries(
-    request: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -6073,7 +6073,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listAccountSummaries(
-    request: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListAccountSummariesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -6199,7 +6199,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAccountSummary>;
   }
   listProperties(
-    request: protos.google.analytics.admin.v1alpha.IListPropertiesRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListPropertiesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -6281,7 +6281,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listProperties(
-    request: protos.google.analytics.admin.v1alpha.IListPropertiesRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListPropertiesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -6443,7 +6443,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IProperty>;
   }
   listUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IListUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListUserLinksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -6504,7 +6504,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IListUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListUserLinksRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -6652,7 +6652,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IUserLink>;
   }
   auditUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IAuditUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IAuditUserLinksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -6721,7 +6721,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   auditUserLinks(
-    request: protos.google.analytics.admin.v1alpha.IAuditUserLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IAuditUserLinksRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -6869,7 +6869,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAuditUserLink>;
   }
   listWebDataStreams(
-    request: protos.google.analytics.admin.v1alpha.IListWebDataStreamsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListWebDataStreamsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -6934,7 +6934,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listWebDataStreams(
-    request: protos.google.analytics.admin.v1alpha.IListWebDataStreamsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListWebDataStreamsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -7084,7 +7084,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IWebDataStream>;
   }
   listIosAppDataStreams(
-    request: protos.google.analytics.admin.v1alpha.IListIosAppDataStreamsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListIosAppDataStreamsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -7149,7 +7149,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listIosAppDataStreams(
-    request: protos.google.analytics.admin.v1alpha.IListIosAppDataStreamsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListIosAppDataStreamsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -7299,7 +7299,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IIosAppDataStream>;
   }
   listAndroidAppDataStreams(
-    request: protos.google.analytics.admin.v1alpha.IListAndroidAppDataStreamsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListAndroidAppDataStreamsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -7366,7 +7366,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listAndroidAppDataStreams(
-    request: protos.google.analytics.admin.v1alpha.IListAndroidAppDataStreamsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListAndroidAppDataStreamsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -7524,7 +7524,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IAndroidAppDataStream>;
   }
   listFirebaseLinks(
-    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -7587,7 +7587,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listFirebaseLinks(
-    request: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListFirebaseLinksRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -7737,7 +7737,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IFirebaseLink>;
   }
   listGoogleAdsLinks(
-    request: protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -7798,7 +7798,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listGoogleAdsLinks(
-    request: protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListGoogleAdsLinksRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -7946,7 +7946,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IGoogleAdsLink>;
   }
   listMeasurementProtocolSecrets(
-    request: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -8011,7 +8011,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listMeasurementProtocolSecrets(
-    request: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListMeasurementProtocolSecretsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -8169,7 +8169,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IMeasurementProtocolSecret>;
   }
   searchChangeHistoryEvents(
-    request: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+    request?: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -8246,7 +8246,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   searchChangeHistoryEvents(
-    request: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
+    request?: protos.google.analytics.admin.v1alpha.ISearchChangeHistoryEventsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -8428,7 +8428,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IChangeHistoryEvent>;
   }
   listConversionEvents(
-    request: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -8491,7 +8491,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listConversionEvents(
-    request: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListConversionEventsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -8639,7 +8639,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.IConversionEvent>;
   }
   listCustomDimensions(
-    request: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -8700,7 +8700,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listCustomDimensions(
-    request: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListCustomDimensionsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -8848,7 +8848,7 @@ export class AnalyticsAdminServiceClient {
     ) as AsyncIterable<protos.google.analytics.admin.v1alpha.ICustomDimension>;
   }
   listCustomMetrics(
-    request: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -8909,7 +8909,7 @@ export class AnalyticsAdminServiceClient {
    *   for more details and examples.
    */
   listCustomMetrics(
-    request: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
+    request?: protos.google.analytics.admin.v1alpha.IListCustomMetricsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
