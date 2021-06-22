@@ -405,7 +405,7 @@ export class CloudBuildClient {
   // -- Service calls --
   // -------------------
   getBuild(
-    request: protos.google.devtools.cloudbuild.v1.IGetBuildRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IGetBuildRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -457,7 +457,7 @@ export class CloudBuildClient {
    * const [response] = await client.getBuild(request);
    */
   getBuild(
-    request: protos.google.devtools.cloudbuild.v1.IGetBuildRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IGetBuildRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -499,7 +499,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.getBuild(request, options, callback);
   }
   cancelBuild(
-    request: protos.google.devtools.cloudbuild.v1.ICancelBuildRequest,
+    request?: protos.google.devtools.cloudbuild.v1.ICancelBuildRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -552,7 +552,7 @@ export class CloudBuildClient {
    * const [response] = await client.cancelBuild(request);
    */
   cancelBuild(
-    request: protos.google.devtools.cloudbuild.v1.ICancelBuildRequest,
+    request?: protos.google.devtools.cloudbuild.v1.ICancelBuildRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -596,7 +596,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.cancelBuild(request, options, callback);
   }
   createBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -651,7 +651,7 @@ export class CloudBuildClient {
    * const [response] = await client.createBuildTrigger(request);
    */
   createBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -697,7 +697,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.createBuildTrigger(request, options, callback);
   }
   getBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -749,7 +749,7 @@ export class CloudBuildClient {
    * const [response] = await client.getBuildTrigger(request);
    */
   getBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IGetBuildTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -792,7 +792,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.getBuildTrigger(request, options, callback);
   }
   deleteBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -847,7 +847,7 @@ export class CloudBuildClient {
    * const [response] = await client.deleteBuildTrigger(request);
    */
   deleteBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -893,7 +893,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.deleteBuildTrigger(request, options, callback);
   }
   updateBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -950,7 +950,7 @@ export class CloudBuildClient {
    * const [response] = await client.updateBuildTrigger(request);
    */
   updateBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IUpdateBuildTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -996,7 +996,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.updateBuildTrigger(request, options, callback);
   }
   receiveTriggerWebhook(
-    request: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1054,7 +1054,7 @@ export class CloudBuildClient {
    * const [response] = await client.receiveTriggerWebhook(request);
    */
   receiveTriggerWebhook(
-    request: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1100,7 +1100,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.receiveTriggerWebhook(request, options, callback);
   }
   createWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
+    request?: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1152,7 +1152,7 @@ export class CloudBuildClient {
    * const [response] = await client.createWorkerPool(request);
    */
   createWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
+    request?: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1189,7 +1189,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.createWorkerPool(request, options, callback);
   }
   getWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1240,7 +1240,7 @@ export class CloudBuildClient {
    * const [response] = await client.getWorkerPool(request);
    */
   getWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1277,7 +1277,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.getWorkerPool(request, options, callback);
   }
   deleteWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1328,7 +1328,7 @@ export class CloudBuildClient {
    * const [response] = await client.deleteWorkerPool(request);
    */
   deleteWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1365,7 +1365,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.deleteWorkerPool(request, options, callback);
   }
   updateWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1418,7 +1418,7 @@ export class CloudBuildClient {
    * const [response] = await client.updateWorkerPool(request);
    */
   updateWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1455,7 +1455,7 @@ export class CloudBuildClient {
     return this.innerApiCalls.updateWorkerPool(request, options, callback);
   }
   listWorkerPools(
-    request: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1505,7 +1505,7 @@ export class CloudBuildClient {
    * const [response] = await client.listWorkerPools(request);
    */
   listWorkerPools(
-    request: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1543,7 +1543,7 @@ export class CloudBuildClient {
   }
 
   createBuild(
-    request: protos.google.devtools.cloudbuild.v1.ICreateBuildRequest,
+    request?: protos.google.devtools.cloudbuild.v1.ICreateBuildRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1608,7 +1608,7 @@ export class CloudBuildClient {
    * const [response] = await operation.promise();
    */
   createBuild(
-    request: protos.google.devtools.cloudbuild.v1.ICreateBuildRequest,
+    request?: protos.google.devtools.cloudbuild.v1.ICreateBuildRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1694,7 +1694,7 @@ export class CloudBuildClient {
     >;
   }
   retryBuild(
-    request: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1781,7 +1781,7 @@ export class CloudBuildClient {
    * const [response] = await operation.promise();
    */
   retryBuild(
-    request: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IRetryBuildRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1867,7 +1867,7 @@ export class CloudBuildClient {
     >;
   }
   runBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1927,7 +1927,7 @@ export class CloudBuildClient {
    * const [response] = await operation.promise();
    */
   runBuildTrigger(
-    request: protos.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IRunBuildTriggerRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2012,7 +2012,7 @@ export class CloudBuildClient {
     >;
   }
   listBuilds(
-    request: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2083,7 +2083,7 @@ export class CloudBuildClient {
    *   for more details and examples.
    */
   listBuilds(
-    request: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2248,7 +2248,7 @@ export class CloudBuildClient {
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v1.IBuild>;
   }
   listBuildTriggers(
-    request: protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2305,7 +2305,7 @@ export class CloudBuildClient {
    *   for more details and examples.
    */
   listBuildTriggers(
-    request: protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
+    request?: protos.google.devtools.cloudbuild.v1.IListBuildTriggersRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
