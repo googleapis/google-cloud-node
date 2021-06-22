@@ -308,7 +308,7 @@ export class AssetServiceClient {
   // -- Service calls --
   // -------------------
   analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
+    request?: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -359,7 +359,7 @@ export class AssetServiceClient {
    * const [response] = await client.analyzeIamPolicy(request);
    */
   analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
+    request?: protos.google.cloud.asset.v1p4beta1.IAnalyzeIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -403,7 +403,7 @@ export class AssetServiceClient {
   }
 
   exportIamPolicyAnalysis(
-    request: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
+    request?: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -466,7 +466,7 @@ export class AssetServiceClient {
    * const [response] = await operation.promise();
    */
   exportIamPolicyAnalysis(
-    request: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
+    request?: protos.google.cloud.asset.v1p4beta1.IExportIamPolicyAnalysisRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

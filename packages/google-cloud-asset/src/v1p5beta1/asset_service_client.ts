@@ -288,7 +288,7 @@ export class AssetServiceClient {
   // -------------------
 
   listAssets(
-    request: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
+    request?: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -365,7 +365,7 @@ export class AssetServiceClient {
    *   for more details and examples.
    */
   listAssets(
-    request: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
+    request?: protos.google.cloud.asset.v1p5beta1.IListAssetsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
