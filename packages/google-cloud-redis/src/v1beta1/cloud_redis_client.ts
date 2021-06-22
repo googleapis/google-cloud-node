@@ -422,7 +422,7 @@ export class CloudRedisClient {
   // -- Service calls --
   // -------------------
   getInstance(
-    request: protos.google.cloud.redis.v1beta1.IGetInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IGetInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -468,7 +468,7 @@ export class CloudRedisClient {
    * const [response] = await client.getInstance(request);
    */
   getInstance(
-    request: protos.google.cloud.redis.v1beta1.IGetInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IGetInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -510,7 +510,7 @@ export class CloudRedisClient {
   }
 
   createInstance(
-    request: protos.google.cloud.redis.v1beta1.ICreateInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.ICreateInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -590,7 +590,7 @@ export class CloudRedisClient {
    * const [response] = await operation.promise();
    */
   createInstance(
-    request: protos.google.cloud.redis.v1beta1.ICreateInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.ICreateInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -675,7 +675,7 @@ export class CloudRedisClient {
     >;
   }
   updateInstance(
-    request: protos.google.cloud.redis.v1beta1.IUpdateInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IUpdateInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -745,7 +745,7 @@ export class CloudRedisClient {
    * const [response] = await operation.promise();
    */
   updateInstance(
-    request: protos.google.cloud.redis.v1beta1.IUpdateInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IUpdateInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -830,7 +830,7 @@ export class CloudRedisClient {
     >;
   }
   upgradeInstance(
-    request: protos.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -891,7 +891,7 @@ export class CloudRedisClient {
    * const [response] = await operation.promise();
    */
   upgradeInstance(
-    request: protos.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IUpgradeInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -976,7 +976,7 @@ export class CloudRedisClient {
     >;
   }
   importInstance(
-    request: protos.google.cloud.redis.v1beta1.IImportInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IImportInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1043,7 +1043,7 @@ export class CloudRedisClient {
    * const [response] = await operation.promise();
    */
   importInstance(
-    request: protos.google.cloud.redis.v1beta1.IImportInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IImportInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1128,7 +1128,7 @@ export class CloudRedisClient {
     >;
   }
   exportInstance(
-    request: protos.google.cloud.redis.v1beta1.IExportInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IExportInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1193,7 +1193,7 @@ export class CloudRedisClient {
    * const [response] = await operation.promise();
    */
   exportInstance(
-    request: protos.google.cloud.redis.v1beta1.IExportInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IExportInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1278,7 +1278,7 @@ export class CloudRedisClient {
     >;
   }
   failoverInstance(
-    request: protos.google.cloud.redis.v1beta1.IFailoverInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IFailoverInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1340,7 +1340,7 @@ export class CloudRedisClient {
    * const [response] = await operation.promise();
    */
   failoverInstance(
-    request: protos.google.cloud.redis.v1beta1.IFailoverInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IFailoverInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1425,7 +1425,7 @@ export class CloudRedisClient {
     >;
   }
   deleteInstance(
-    request: protos.google.cloud.redis.v1beta1.IDeleteInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IDeleteInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1475,7 +1475,7 @@ export class CloudRedisClient {
    * const [response] = await operation.promise();
    */
   deleteInstance(
-    request: protos.google.cloud.redis.v1beta1.IDeleteInstanceRequest,
+    request?: protos.google.cloud.redis.v1beta1.IDeleteInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1551,7 +1551,7 @@ export class CloudRedisClient {
     >;
   }
   listInstances(
-    request: protos.google.cloud.redis.v1beta1.IListInstancesRequest,
+    request?: protos.google.cloud.redis.v1beta1.IListInstancesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1623,7 +1623,7 @@ export class CloudRedisClient {
    *   for more details and examples.
    */
   listInstances(
-    request: protos.google.cloud.redis.v1beta1.IListInstancesRequest,
+    request?: protos.google.cloud.redis.v1beta1.IListInstancesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
