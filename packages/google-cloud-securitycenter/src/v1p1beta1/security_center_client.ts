@@ -434,7 +434,7 @@ export class SecurityCenterClient {
   // -- Service calls --
   // -------------------
   createSource(
-    request: protos.google.cloud.securitycenter.v1p1beta1.ICreateSourceRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.ICreateSourceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -489,7 +489,7 @@ export class SecurityCenterClient {
    * const [response] = await client.createSource(request);
    */
   createSource(
-    request: protos.google.cloud.securitycenter.v1p1beta1.ICreateSourceRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.ICreateSourceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -535,7 +535,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.createSource(request, options, callback);
   }
   createFinding(
-    request: protos.google.cloud.securitycenter.v1p1beta1.ICreateFindingRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.ICreateFindingRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -593,7 +593,7 @@ export class SecurityCenterClient {
    * const [response] = await client.createFinding(request);
    */
   createFinding(
-    request: protos.google.cloud.securitycenter.v1p1beta1.ICreateFindingRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.ICreateFindingRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -639,7 +639,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.createFinding(request, options, callback);
   }
   createNotificationConfig(
-    request: protos.google.cloud.securitycenter.v1p1beta1.ICreateNotificationConfigRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.ICreateNotificationConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -698,7 +698,7 @@ export class SecurityCenterClient {
    * const [response] = await client.createNotificationConfig(request);
    */
   createNotificationConfig(
-    request: protos.google.cloud.securitycenter.v1p1beta1.ICreateNotificationConfigRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.ICreateNotificationConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -748,7 +748,7 @@ export class SecurityCenterClient {
     );
   }
   deleteNotificationConfig(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IDeleteNotificationConfigRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IDeleteNotificationConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -800,7 +800,7 @@ export class SecurityCenterClient {
    * const [response] = await client.deleteNotificationConfig(request);
    */
   deleteNotificationConfig(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IDeleteNotificationConfigRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IDeleteNotificationConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -850,7 +850,7 @@ export class SecurityCenterClient {
     );
   }
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -898,7 +898,7 @@ export class SecurityCenterClient {
    * const [response] = await client.getIamPolicy(request);
    */
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -937,7 +937,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   getNotificationConfig(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGetNotificationConfigRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGetNotificationConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -989,7 +989,7 @@ export class SecurityCenterClient {
    * const [response] = await client.getNotificationConfig(request);
    */
   getNotificationConfig(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGetNotificationConfigRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGetNotificationConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1035,7 +1035,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.getNotificationConfig(request, options, callback);
   }
   getOrganizationSettings(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGetOrganizationSettingsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGetOrganizationSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1087,7 +1087,7 @@ export class SecurityCenterClient {
    * const [response] = await client.getOrganizationSettings(request);
    */
   getOrganizationSettings(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGetOrganizationSettingsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGetOrganizationSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1137,7 +1137,7 @@ export class SecurityCenterClient {
     );
   }
   getSource(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGetSourceRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGetSourceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1189,7 +1189,7 @@ export class SecurityCenterClient {
    * const [response] = await client.getSource(request);
    */
   getSource(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGetSourceRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGetSourceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1235,7 +1235,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.getSource(request, options, callback);
   }
   setFindingState(
-    request: protos.google.cloud.securitycenter.v1p1beta1.ISetFindingStateRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.ISetFindingStateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1293,7 +1293,7 @@ export class SecurityCenterClient {
    * const [response] = await client.setFindingState(request);
    */
   setFindingState(
-    request: protos.google.cloud.securitycenter.v1p1beta1.ISetFindingStateRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.ISetFindingStateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1339,7 +1339,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.setFindingState(request, options, callback);
   }
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1389,7 +1389,7 @@ export class SecurityCenterClient {
    * const [response] = await client.setIamPolicy(request);
    */
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1428,7 +1428,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1478,7 +1478,7 @@ export class SecurityCenterClient {
    * const [response] = await client.testIamPermissions(request);
    */
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1517,7 +1517,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
   updateFinding(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateFindingRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateFindingRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1582,7 +1582,7 @@ export class SecurityCenterClient {
    * const [response] = await client.updateFinding(request);
    */
   updateFinding(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateFindingRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateFindingRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1628,7 +1628,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.updateFinding(request, options, callback);
   }
   updateNotificationConfig(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateNotificationConfigRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateNotificationConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1684,7 +1684,7 @@ export class SecurityCenterClient {
    * const [response] = await client.updateNotificationConfig(request);
    */
   updateNotificationConfig(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateNotificationConfigRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateNotificationConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1734,7 +1734,7 @@ export class SecurityCenterClient {
     );
   }
   updateOrganizationSettings(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateOrganizationSettingsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateOrganizationSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1789,7 +1789,7 @@ export class SecurityCenterClient {
    * const [response] = await client.updateOrganizationSettings(request);
    */
   updateOrganizationSettings(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateOrganizationSettingsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateOrganizationSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1839,7 +1839,7 @@ export class SecurityCenterClient {
     );
   }
   updateSource(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateSourceRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateSourceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1894,7 +1894,7 @@ export class SecurityCenterClient {
    * const [response] = await client.updateSource(request);
    */
   updateSource(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateSourceRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateSourceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1940,7 +1940,7 @@ export class SecurityCenterClient {
     return this.innerApiCalls.updateSource(request, options, callback);
   }
   updateSecurityMarks(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateSecurityMarksRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateSecurityMarksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2001,7 +2001,7 @@ export class SecurityCenterClient {
    * const [response] = await client.updateSecurityMarks(request);
    */
   updateSecurityMarks(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IUpdateSecurityMarksRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IUpdateSecurityMarksRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2048,7 +2048,7 @@ export class SecurityCenterClient {
   }
 
   runAssetDiscovery(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IRunAssetDiscoveryRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IRunAssetDiscoveryRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2110,7 +2110,7 @@ export class SecurityCenterClient {
    * const [response] = await operation.promise();
    */
   runAssetDiscovery(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IRunAssetDiscoveryRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IRunAssetDiscoveryRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2195,7 +2195,7 @@ export class SecurityCenterClient {
     >;
   }
   groupAssets(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGroupAssetsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGroupAssetsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2371,7 +2371,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    */
   groupAssets(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGroupAssetsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGroupAssetsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2747,7 +2747,7 @@ export class SecurityCenterClient {
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1p1beta1.IGroupResult>;
   }
   groupFindings(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGroupFindingsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGroupFindingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2922,7 +2922,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    */
   groupFindings(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IGroupFindingsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IGroupFindingsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -3286,7 +3286,7 @@ export class SecurityCenterClient {
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1p1beta1.IGroupResult>;
   }
   listAssets(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IListAssetsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IListAssetsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3465,7 +3465,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    */
   listAssets(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IListAssetsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IListAssetsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -3849,7 +3849,7 @@ export class SecurityCenterClient {
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1p1beta1.ListAssetsResponse.IListAssetsResult>;
   }
   listFindings(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IListFindingsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IListFindingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4025,7 +4025,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    */
   listFindings(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IListFindingsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IListFindingsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -4397,7 +4397,7 @@ export class SecurityCenterClient {
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1p1beta1.ListFindingsResponse.IListFindingsResult>;
   }
   listNotificationConfigs(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IListNotificationConfigsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IListNotificationConfigsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4456,7 +4456,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    */
   listNotificationConfigs(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IListNotificationConfigsRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IListNotificationConfigsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -4604,7 +4604,7 @@ export class SecurityCenterClient {
     ) as AsyncIterable<protos.google.cloud.securitycenter.v1p1beta1.INotificationConfig>;
   }
   listSources(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IListSourcesRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IListSourcesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4664,7 +4664,7 @@ export class SecurityCenterClient {
    *   for more details and examples.
    */
   listSources(
-    request: protos.google.cloud.securitycenter.v1p1beta1.IListSourcesRequest,
+    request?: protos.google.cloud.securitycenter.v1p1beta1.IListSourcesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
