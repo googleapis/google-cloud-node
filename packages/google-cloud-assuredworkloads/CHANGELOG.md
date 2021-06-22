@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.3](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.2...v1.4.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#75](https://www.github.com/googleapis/nodejs-assured-workloads/issues/75)) ([eaf5667](https://www.github.com/googleapis/nodejs-assured-workloads/commit/eaf5667b16d355eff487409951fd26b21d4448c3))
+
 ### [1.4.2](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.1...v1.4.2) (2021-05-25)
 
 
