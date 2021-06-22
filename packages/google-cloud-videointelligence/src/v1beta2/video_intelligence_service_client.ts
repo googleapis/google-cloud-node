@@ -304,7 +304,7 @@ export class VideoIntelligenceServiceClient {
   // -------------------
 
   annotateVideo(
-    request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
+    request?: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -393,7 +393,7 @@ export class VideoIntelligenceServiceClient {
    * const [response] = await operation.promise();
    */
   annotateVideo(
-    request: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
+    request?: protos.google.cloud.videointelligence.v1beta2.IAnnotateVideoRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
