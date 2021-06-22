@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.1...v1.2.2) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#69](https://www.github.com/googleapis/nodejs-workflows/issues/69)) ([8e001de](https://www.github.com/googleapis/nodejs-workflows/commit/8e001de596a68c4705086ece713f1c8712462739))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.0...v1.2.1) (2021-05-26)
 
 
