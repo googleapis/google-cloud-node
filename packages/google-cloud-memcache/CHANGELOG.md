@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.3](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.2...v1.4.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#125](https://www.github.com/googleapis/nodejs-memcache/issues/125)) ([3b296ba](https://www.github.com/googleapis/nodejs-memcache/commit/3b296ba1e2598054ed391979b616ddf03f0b89f4))
+
 ### [1.4.2](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.1...v1.4.2) (2021-05-29)
 
 
