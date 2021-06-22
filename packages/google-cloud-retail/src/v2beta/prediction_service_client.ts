@@ -280,7 +280,7 @@ export class PredictionServiceClient {
   // -- Service calls --
   // -------------------
   predict(
-    request: protos.google.cloud.retail.v2beta.IPredictRequest,
+    request?: protos.google.cloud.retail.v2beta.IPredictRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -419,7 +419,7 @@ export class PredictionServiceClient {
    * const [response] = await client.predict(request);
    */
   predict(
-    request: protos.google.cloud.retail.v2beta.IPredictRequest,
+    request?: protos.google.cloud.retail.v2beta.IPredictRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

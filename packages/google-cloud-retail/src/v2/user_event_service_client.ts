@@ -342,7 +342,7 @@ export class UserEventServiceClient {
   // -- Service calls --
   // -------------------
   writeUserEvent(
-    request: protos.google.cloud.retail.v2.IWriteUserEventRequest,
+    request?: protos.google.cloud.retail.v2.IWriteUserEventRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -389,7 +389,7 @@ export class UserEventServiceClient {
    * const [response] = await client.writeUserEvent(request);
    */
   writeUserEvent(
-    request: protos.google.cloud.retail.v2.IWriteUserEventRequest,
+    request?: protos.google.cloud.retail.v2.IWriteUserEventRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -430,7 +430,7 @@ export class UserEventServiceClient {
     return this.innerApiCalls.writeUserEvent(request, options, callback);
   }
   collectUserEvent(
-    request: protos.google.cloud.retail.v2.ICollectUserEventRequest,
+    request?: protos.google.cloud.retail.v2.ICollectUserEventRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -491,7 +491,7 @@ export class UserEventServiceClient {
    * const [response] = await client.collectUserEvent(request);
    */
   collectUserEvent(
-    request: protos.google.cloud.retail.v2.ICollectUserEventRequest,
+    request?: protos.google.cloud.retail.v2.ICollectUserEventRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -533,7 +533,7 @@ export class UserEventServiceClient {
   }
 
   purgeUserEvents(
-    request: protos.google.cloud.retail.v2.IPurgeUserEventsRequest,
+    request?: protos.google.cloud.retail.v2.IPurgeUserEventsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -622,7 +622,7 @@ export class UserEventServiceClient {
    * const [response] = await operation.promise();
    */
   purgeUserEvents(
-    request: protos.google.cloud.retail.v2.IPurgeUserEventsRequest,
+    request?: protos.google.cloud.retail.v2.IPurgeUserEventsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -707,7 +707,7 @@ export class UserEventServiceClient {
     >;
   }
   importUserEvents(
-    request: protos.google.cloud.retail.v2.IImportUserEventsRequest,
+    request?: protos.google.cloud.retail.v2.IImportUserEventsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -774,7 +774,7 @@ export class UserEventServiceClient {
    * const [response] = await operation.promise();
    */
   importUserEvents(
-    request: protos.google.cloud.retail.v2.IImportUserEventsRequest,
+    request?: protos.google.cloud.retail.v2.IImportUserEventsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -859,7 +859,7 @@ export class UserEventServiceClient {
     >;
   }
   rejoinUserEvents(
-    request: protos.google.cloud.retail.v2.IRejoinUserEventsRequest,
+    request?: protos.google.cloud.retail.v2.IRejoinUserEventsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -927,7 +927,7 @@ export class UserEventServiceClient {
    * const [response] = await operation.promise();
    */
   rejoinUserEvents(
-    request: protos.google.cloud.retail.v2.IRejoinUserEventsRequest,
+    request?: protos.google.cloud.retail.v2.IRejoinUserEventsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

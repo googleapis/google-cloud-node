@@ -303,7 +303,7 @@ export class CatalogServiceClient {
   // -- Service calls --
   // -------------------
   updateCatalog(
-    request: protos.google.cloud.retail.v2.IUpdateCatalogRequest,
+    request?: protos.google.cloud.retail.v2.IUpdateCatalogRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -363,7 +363,7 @@ export class CatalogServiceClient {
    * const [response] = await client.updateCatalog(request);
    */
   updateCatalog(
-    request: protos.google.cloud.retail.v2.IUpdateCatalogRequest,
+    request?: protos.google.cloud.retail.v2.IUpdateCatalogRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -405,7 +405,7 @@ export class CatalogServiceClient {
   }
 
   listCatalogs(
-    request: protos.google.cloud.retail.v2.IListCatalogsRequest,
+    request?: protos.google.cloud.retail.v2.IListCatalogsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -475,7 +475,7 @@ export class CatalogServiceClient {
    *   for more details and examples.
    */
   listCatalogs(
-    request: protos.google.cloud.retail.v2.IListCatalogsRequest,
+    request?: protos.google.cloud.retail.v2.IListCatalogsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

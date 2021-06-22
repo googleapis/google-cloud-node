@@ -324,7 +324,7 @@ export class ProductServiceClient {
   // -- Service calls --
   // -------------------
   createProduct(
-    request: protos.google.cloud.retail.v2.ICreateProductRequest,
+    request?: protos.google.cloud.retail.v2.ICreateProductRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -387,7 +387,7 @@ export class ProductServiceClient {
    * const [response] = await client.createProduct(request);
    */
   createProduct(
-    request: protos.google.cloud.retail.v2.ICreateProductRequest,
+    request?: protos.google.cloud.retail.v2.ICreateProductRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -428,7 +428,7 @@ export class ProductServiceClient {
     return this.innerApiCalls.createProduct(request, options, callback);
   }
   getProduct(
-    request: protos.google.cloud.retail.v2.IGetProductRequest,
+    request?: protos.google.cloud.retail.v2.IGetProductRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -481,7 +481,7 @@ export class ProductServiceClient {
    * const [response] = await client.getProduct(request);
    */
   getProduct(
-    request: protos.google.cloud.retail.v2.IGetProductRequest,
+    request?: protos.google.cloud.retail.v2.IGetProductRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -520,7 +520,7 @@ export class ProductServiceClient {
     return this.innerApiCalls.getProduct(request, options, callback);
   }
   updateProduct(
-    request: protos.google.cloud.retail.v2.IUpdateProductRequest,
+    request?: protos.google.cloud.retail.v2.IUpdateProductRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -579,7 +579,7 @@ export class ProductServiceClient {
    * const [response] = await client.updateProduct(request);
    */
   updateProduct(
-    request: protos.google.cloud.retail.v2.IUpdateProductRequest,
+    request?: protos.google.cloud.retail.v2.IUpdateProductRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -620,7 +620,7 @@ export class ProductServiceClient {
     return this.innerApiCalls.updateProduct(request, options, callback);
   }
   deleteProduct(
-    request: protos.google.cloud.retail.v2.IDeleteProductRequest,
+    request?: protos.google.cloud.retail.v2.IDeleteProductRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -673,7 +673,7 @@ export class ProductServiceClient {
    * const [response] = await client.deleteProduct(request);
    */
   deleteProduct(
-    request: protos.google.cloud.retail.v2.IDeleteProductRequest,
+    request?: protos.google.cloud.retail.v2.IDeleteProductRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -715,7 +715,7 @@ export class ProductServiceClient {
   }
 
   importProducts(
-    request: protos.google.cloud.retail.v2.IImportProductsRequest,
+    request?: protos.google.cloud.retail.v2.IImportProductsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -788,7 +788,7 @@ export class ProductServiceClient {
    * const [response] = await operation.promise();
    */
   importProducts(
-    request: protos.google.cloud.retail.v2.IImportProductsRequest,
+    request?: protos.google.cloud.retail.v2.IImportProductsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
