@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.3](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.2...v1.2.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#67](https://www.github.com/googleapis/nodejs-area120-tables/issues/67)) ([904e384](https://www.github.com/googleapis/nodejs-area120-tables/commit/904e384bff960f0742cf940efd236a4c63c8672e))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.1...v1.2.2) (2021-05-25)
 
 
