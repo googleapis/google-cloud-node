@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.14.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.14.0...v3.14.1) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#507](https://www.github.com/googleapis/nodejs-asset/issues/507)) ([07b6827](https://www.github.com/googleapis/nodejs-asset/commit/07b68273ea5522ae4c3a94b714f05ee7d32391ef))
+
 ## [3.14.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.13.0...v3.14.0) (2021-06-21)
 
 
