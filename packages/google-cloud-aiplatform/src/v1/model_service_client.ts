@@ -417,7 +417,7 @@ export class ModelServiceClient {
   // -- Service calls --
   // -------------------
   getModel(
-    request: protos.google.cloud.aiplatform.v1.IGetModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetModelRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -462,7 +462,7 @@ export class ModelServiceClient {
    * const [response] = await client.getModel(request);
    */
   getModel(
-    request: protos.google.cloud.aiplatform.v1.IGetModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetModelRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -501,7 +501,7 @@ export class ModelServiceClient {
     return this.innerApiCalls.getModel(request, options, callback);
   }
   updateModel(
-    request: protos.google.cloud.aiplatform.v1.IUpdateModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IUpdateModelRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -548,7 +548,7 @@ export class ModelServiceClient {
    * const [response] = await client.updateModel(request);
    */
   updateModel(
-    request: protos.google.cloud.aiplatform.v1.IUpdateModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IUpdateModelRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -589,7 +589,7 @@ export class ModelServiceClient {
     return this.innerApiCalls.updateModel(request, options, callback);
   }
   getModelEvaluation(
-    request: protos.google.cloud.aiplatform.v1.IGetModelEvaluationRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetModelEvaluationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -639,7 +639,7 @@ export class ModelServiceClient {
    * const [response] = await client.getModelEvaluation(request);
    */
   getModelEvaluation(
-    request: protos.google.cloud.aiplatform.v1.IGetModelEvaluationRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetModelEvaluationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -682,7 +682,7 @@ export class ModelServiceClient {
     return this.innerApiCalls.getModelEvaluation(request, options, callback);
   }
   getModelEvaluationSlice(
-    request: protos.google.cloud.aiplatform.v1.IGetModelEvaluationSliceRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetModelEvaluationSliceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -735,7 +735,7 @@ export class ModelServiceClient {
    * const [response] = await client.getModelEvaluationSlice(request);
    */
   getModelEvaluationSlice(
-    request: protos.google.cloud.aiplatform.v1.IGetModelEvaluationSliceRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetModelEvaluationSliceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -786,7 +786,7 @@ export class ModelServiceClient {
   }
 
   uploadModel(
-    request: protos.google.cloud.aiplatform.v1.IUploadModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IUploadModelRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -845,7 +845,7 @@ export class ModelServiceClient {
    * const [response] = await operation.promise();
    */
   uploadModel(
-    request: protos.google.cloud.aiplatform.v1.IUploadModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IUploadModelRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -930,7 +930,7 @@ export class ModelServiceClient {
     >;
   }
   deleteModel(
-    request: protos.google.cloud.aiplatform.v1.IDeleteModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IDeleteModelRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -989,7 +989,7 @@ export class ModelServiceClient {
    * const [response] = await operation.promise();
    */
   deleteModel(
-    request: protos.google.cloud.aiplatform.v1.IDeleteModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IDeleteModelRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1074,7 +1074,7 @@ export class ModelServiceClient {
     >;
   }
   exportModel(
-    request: protos.google.cloud.aiplatform.v1.IExportModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IExportModelRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1135,7 +1135,7 @@ export class ModelServiceClient {
    * const [response] = await operation.promise();
    */
   exportModel(
-    request: protos.google.cloud.aiplatform.v1.IExportModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IExportModelRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1220,7 +1220,7 @@ export class ModelServiceClient {
     >;
   }
   listModels(
-    request: protos.google.cloud.aiplatform.v1.IListModelsRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListModelsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1302,7 +1302,7 @@ export class ModelServiceClient {
    *   for more details and examples.
    */
   listModels(
-    request: protos.google.cloud.aiplatform.v1.IListModelsRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListModelsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1498,7 +1498,7 @@ export class ModelServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModel>;
   }
   listModelEvaluations(
-    request: protos.google.cloud.aiplatform.v1.IListModelEvaluationsRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListModelEvaluationsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1561,7 +1561,7 @@ export class ModelServiceClient {
    *   for more details and examples.
    */
   listModelEvaluations(
-    request: protos.google.cloud.aiplatform.v1.IListModelEvaluationsRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListModelEvaluationsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1713,7 +1713,7 @@ export class ModelServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelEvaluation>;
   }
   listModelEvaluationSlices(
-    request: protos.google.cloud.aiplatform.v1.IListModelEvaluationSlicesRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListModelEvaluationSlicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1779,7 +1779,7 @@ export class ModelServiceClient {
    *   for more details and examples.
    */
   listModelEvaluationSlices(
-    request: protos.google.cloud.aiplatform.v1.IListModelEvaluationSlicesRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListModelEvaluationSlicesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

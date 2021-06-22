@@ -479,7 +479,7 @@ export class DatasetServiceClient {
   // -- Service calls --
   // -------------------
   getDataset(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetDatasetRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetDatasetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -529,7 +529,7 @@ export class DatasetServiceClient {
    * const [response] = await client.getDataset(request);
    */
   getDataset(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetDatasetRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetDatasetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -572,7 +572,7 @@ export class DatasetServiceClient {
     return this.innerApiCalls.getDataset(request, options, callback);
   }
   updateDataset(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -628,7 +628,7 @@ export class DatasetServiceClient {
    * const [response] = await client.updateDataset(request);
    */
   updateDataset(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateDatasetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -671,7 +671,7 @@ export class DatasetServiceClient {
     return this.innerApiCalls.updateDataset(request, options, callback);
   }
   getAnnotationSpec(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetAnnotationSpecRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetAnnotationSpecRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -726,7 +726,7 @@ export class DatasetServiceClient {
    * const [response] = await client.getAnnotationSpec(request);
    */
   getAnnotationSpec(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetAnnotationSpecRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetAnnotationSpecRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -773,7 +773,7 @@ export class DatasetServiceClient {
   }
 
   createDataset(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateDatasetRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateDatasetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -832,7 +832,7 @@ export class DatasetServiceClient {
    * const [response] = await operation.promise();
    */
   createDataset(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateDatasetRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateDatasetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -917,7 +917,7 @@ export class DatasetServiceClient {
     >;
   }
   deleteDataset(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteDatasetRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteDatasetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -975,7 +975,7 @@ export class DatasetServiceClient {
    * const [response] = await operation.promise();
    */
   deleteDataset(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteDatasetRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteDatasetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1060,7 +1060,7 @@ export class DatasetServiceClient {
     >;
   }
   importData(
-    request: protos.google.cloud.aiplatform.v1beta1.IImportDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IImportDataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1121,7 +1121,7 @@ export class DatasetServiceClient {
    * const [response] = await operation.promise();
    */
   importData(
-    request: protos.google.cloud.aiplatform.v1beta1.IImportDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IImportDataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1206,7 +1206,7 @@ export class DatasetServiceClient {
     >;
   }
   exportData(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IExportDataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1266,7 +1266,7 @@ export class DatasetServiceClient {
    * const [response] = await operation.promise();
    */
   exportData(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IExportDataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1351,7 +1351,7 @@ export class DatasetServiceClient {
     >;
   }
   listDatasets(
-    request: protos.google.cloud.aiplatform.v1beta1.IListDatasetsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListDatasetsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1430,7 +1430,7 @@ export class DatasetServiceClient {
    *   for more details and examples.
    */
   listDatasets(
-    request: protos.google.cloud.aiplatform.v1beta1.IListDatasetsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListDatasetsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1614,7 +1614,7 @@ export class DatasetServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataset>;
   }
   listDataItems(
-    request: protos.google.cloud.aiplatform.v1beta1.IListDataItemsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListDataItemsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1678,7 +1678,7 @@ export class DatasetServiceClient {
    *   for more details and examples.
    */
   listDataItems(
-    request: protos.google.cloud.aiplatform.v1beta1.IListDataItemsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListDataItemsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1832,7 +1832,7 @@ export class DatasetServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IDataItem>;
   }
   listAnnotations(
-    request: protos.google.cloud.aiplatform.v1beta1.IListAnnotationsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListAnnotationsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1896,7 +1896,7 @@ export class DatasetServiceClient {
    *   for more details and examples.
    */
   listAnnotations(
-    request: protos.google.cloud.aiplatform.v1beta1.IListAnnotationsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListAnnotationsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

@@ -468,7 +468,7 @@ export class IndexEndpointServiceClient {
   // -- Service calls --
   // -------------------
   getIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetIndexEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetIndexEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -521,7 +521,7 @@ export class IndexEndpointServiceClient {
    * const [response] = await client.getIndexEndpoint(request);
    */
   getIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetIndexEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetIndexEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -567,7 +567,7 @@ export class IndexEndpointServiceClient {
     return this.innerApiCalls.getIndexEndpoint(request, options, callback);
   }
   updateIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateIndexEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateIndexEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -620,7 +620,7 @@ export class IndexEndpointServiceClient {
    * const [response] = await client.updateIndexEndpoint(request);
    */
   updateIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateIndexEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateIndexEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -667,7 +667,7 @@ export class IndexEndpointServiceClient {
   }
 
   createIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateIndexEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateIndexEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -726,7 +726,7 @@ export class IndexEndpointServiceClient {
    * const [response] = await operation.promise();
    */
   createIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateIndexEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateIndexEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -811,7 +811,7 @@ export class IndexEndpointServiceClient {
     >;
   }
   deleteIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteIndexEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteIndexEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -869,7 +869,7 @@ export class IndexEndpointServiceClient {
    * const [response] = await operation.promise();
    */
   deleteIndexEndpoint(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteIndexEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteIndexEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -954,7 +954,7 @@ export class IndexEndpointServiceClient {
     >;
   }
   deployIndex(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeployIndexRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeployIndexRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1016,7 +1016,7 @@ export class IndexEndpointServiceClient {
    * const [response] = await operation.promise();
    */
   deployIndex(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeployIndexRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeployIndexRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1101,7 +1101,7 @@ export class IndexEndpointServiceClient {
     >;
   }
   undeployIndex(
-    request: protos.google.cloud.aiplatform.v1beta1.IUndeployIndexRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUndeployIndexRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1162,7 +1162,7 @@ export class IndexEndpointServiceClient {
    * const [response] = await operation.promise();
    */
   undeployIndex(
-    request: protos.google.cloud.aiplatform.v1beta1.IUndeployIndexRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUndeployIndexRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1247,7 +1247,7 @@ export class IndexEndpointServiceClient {
     >;
   }
   listIndexEndpoints(
-    request: protos.google.cloud.aiplatform.v1beta1.IListIndexEndpointsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListIndexEndpointsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1327,7 +1327,7 @@ export class IndexEndpointServiceClient {
    *   for more details and examples.
    */
   listIndexEndpoints(
-    request: protos.google.cloud.aiplatform.v1beta1.IListIndexEndpointsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListIndexEndpointsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

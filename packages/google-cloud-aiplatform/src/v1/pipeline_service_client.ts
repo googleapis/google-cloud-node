@@ -386,7 +386,7 @@ export class PipelineServiceClient {
   // -- Service calls --
   // -------------------
   createTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1.ICreateTrainingPipelineRequest,
+    request?: protos.google.cloud.aiplatform.v1.ICreateTrainingPipelineRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -441,7 +441,7 @@ export class PipelineServiceClient {
    * const [response] = await client.createTrainingPipeline(request);
    */
   createTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1.ICreateTrainingPipelineRequest,
+    request?: protos.google.cloud.aiplatform.v1.ICreateTrainingPipelineRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -491,7 +491,7 @@ export class PipelineServiceClient {
     );
   }
   getTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1.IGetTrainingPipelineRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetTrainingPipelineRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -541,7 +541,7 @@ export class PipelineServiceClient {
    * const [response] = await client.getTrainingPipeline(request);
    */
   getTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1.IGetTrainingPipelineRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetTrainingPipelineRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -584,7 +584,7 @@ export class PipelineServiceClient {
     return this.innerApiCalls.getTrainingPipeline(request, options, callback);
   }
   cancelTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1.ICancelTrainingPipelineRequest,
+    request?: protos.google.cloud.aiplatform.v1.ICancelTrainingPipelineRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -646,7 +646,7 @@ export class PipelineServiceClient {
    * const [response] = await client.cancelTrainingPipeline(request);
    */
   cancelTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1.ICancelTrainingPipelineRequest,
+    request?: protos.google.cloud.aiplatform.v1.ICancelTrainingPipelineRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -697,7 +697,7 @@ export class PipelineServiceClient {
   }
 
   deleteTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1.IDeleteTrainingPipelineRequest,
+    request?: protos.google.cloud.aiplatform.v1.IDeleteTrainingPipelineRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -755,7 +755,7 @@ export class PipelineServiceClient {
    * const [response] = await operation.promise();
    */
   deleteTrainingPipeline(
-    request: protos.google.cloud.aiplatform.v1.IDeleteTrainingPipelineRequest,
+    request?: protos.google.cloud.aiplatform.v1.IDeleteTrainingPipelineRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -844,7 +844,7 @@ export class PipelineServiceClient {
     >;
   }
   listTrainingPipelines(
-    request: protos.google.cloud.aiplatform.v1.IListTrainingPipelinesRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListTrainingPipelinesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -922,7 +922,7 @@ export class PipelineServiceClient {
    *   for more details and examples.
    */
   listTrainingPipelines(
-    request: protos.google.cloud.aiplatform.v1.IListTrainingPipelinesRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListTrainingPipelinesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

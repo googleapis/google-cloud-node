@@ -461,7 +461,7 @@ export class SpecialistPoolServiceClient {
   // -- Service calls --
   // -------------------
   getSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -514,7 +514,7 @@ export class SpecialistPoolServiceClient {
    * const [response] = await client.getSpecialistPool(request);
    */
   getSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetSpecialistPoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -561,7 +561,7 @@ export class SpecialistPoolServiceClient {
   }
 
   createSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -620,7 +620,7 @@ export class SpecialistPoolServiceClient {
    * const [response] = await operation.promise();
    */
   createSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateSpecialistPoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -705,7 +705,7 @@ export class SpecialistPoolServiceClient {
     >;
   }
   deleteSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteSpecialistPoolRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteSpecialistPoolRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -766,7 +766,7 @@ export class SpecialistPoolServiceClient {
    * const [response] = await operation.promise();
    */
   deleteSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteSpecialistPoolRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteSpecialistPoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -851,7 +851,7 @@ export class SpecialistPoolServiceClient {
     >;
   }
   updateSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -909,7 +909,7 @@ export class SpecialistPoolServiceClient {
    * const [response] = await operation.promise();
    */
   updateSpecialistPool(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateSpecialistPoolRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -994,7 +994,7 @@ export class SpecialistPoolServiceClient {
     >;
   }
   listSpecialistPools(
-    request: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1055,7 +1055,7 @@ export class SpecialistPoolServiceClient {
    *   for more details and examples.
    */
   listSpecialistPools(
-    request: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListSpecialistPoolsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

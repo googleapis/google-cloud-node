@@ -414,7 +414,7 @@ export class EndpointServiceClient {
   // -- Service calls --
   // -------------------
   getEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IGetEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -460,7 +460,7 @@ export class EndpointServiceClient {
    * const [response] = await client.getEndpoint(request);
    */
   getEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IGetEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1.IGetEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -501,7 +501,7 @@ export class EndpointServiceClient {
     return this.innerApiCalls.getEndpoint(request, options, callback);
   }
   updateEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IUpdateEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1.IUpdateEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -551,7 +551,7 @@ export class EndpointServiceClient {
    * const [response] = await client.updateEndpoint(request);
    */
   updateEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IUpdateEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1.IUpdateEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -595,7 +595,7 @@ export class EndpointServiceClient {
   }
 
   createEndpoint(
-    request: protos.google.cloud.aiplatform.v1.ICreateEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1.ICreateEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -654,7 +654,7 @@ export class EndpointServiceClient {
    * const [response] = await operation.promise();
    */
   createEndpoint(
-    request: protos.google.cloud.aiplatform.v1.ICreateEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1.ICreateEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -739,7 +739,7 @@ export class EndpointServiceClient {
     >;
   }
   deleteEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IDeleteEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1.IDeleteEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -797,7 +797,7 @@ export class EndpointServiceClient {
    * const [response] = await operation.promise();
    */
   deleteEndpoint(
-    request: protos.google.cloud.aiplatform.v1.IDeleteEndpointRequest,
+    request?: protos.google.cloud.aiplatform.v1.IDeleteEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -882,7 +882,7 @@ export class EndpointServiceClient {
     >;
   }
   deployModel(
-    request: protos.google.cloud.aiplatform.v1.IDeployModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IDeployModelRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -957,7 +957,7 @@ export class EndpointServiceClient {
    * const [response] = await operation.promise();
    */
   deployModel(
-    request: protos.google.cloud.aiplatform.v1.IDeployModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IDeployModelRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1042,7 +1042,7 @@ export class EndpointServiceClient {
     >;
   }
   undeployModel(
-    request: protos.google.cloud.aiplatform.v1.IUndeployModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IUndeployModelRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1111,7 +1111,7 @@ export class EndpointServiceClient {
    * const [response] = await operation.promise();
    */
   undeployModel(
-    request: protos.google.cloud.aiplatform.v1.IUndeployModelRequest,
+    request?: protos.google.cloud.aiplatform.v1.IUndeployModelRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1196,7 +1196,7 @@ export class EndpointServiceClient {
     >;
   }
   listEndpoints(
-    request: protos.google.cloud.aiplatform.v1.IListEndpointsRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListEndpointsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1282,7 +1282,7 @@ export class EndpointServiceClient {
    *   for more details and examples.
    */
   listEndpoints(
-    request: protos.google.cloud.aiplatform.v1.IListEndpointsRequest,
+    request?: protos.google.cloud.aiplatform.v1.IListEndpointsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

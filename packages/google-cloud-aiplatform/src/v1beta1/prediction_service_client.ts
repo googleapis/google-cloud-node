@@ -372,7 +372,7 @@ export class PredictionServiceClient {
   // -- Service calls --
   // -------------------
   predict(
-    request: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -433,7 +433,7 @@ export class PredictionServiceClient {
    * const [response] = await client.predict(request);
    */
   predict(
-    request: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IPredictRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -474,7 +474,7 @@ export class PredictionServiceClient {
     return this.innerApiCalls.predict(request, options, callback);
   }
   explain(
-    request: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -556,7 +556,7 @@ export class PredictionServiceClient {
    * const [response] = await client.explain(request);
    */
   explain(
-    request: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IExplainRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

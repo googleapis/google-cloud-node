@@ -381,7 +381,7 @@ export class MigrationServiceClient {
   // -------------------
 
   batchMigrateResources(
-    request: protos.google.cloud.aiplatform.v1.IBatchMigrateResourcesRequest,
+    request?: protos.google.cloud.aiplatform.v1.IBatchMigrateResourcesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -443,7 +443,7 @@ export class MigrationServiceClient {
    * const [response] = await operation.promise();
    */
   batchMigrateResources(
-    request: protos.google.cloud.aiplatform.v1.IBatchMigrateResourcesRequest,
+    request?: protos.google.cloud.aiplatform.v1.IBatchMigrateResourcesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -528,7 +528,7 @@ export class MigrationServiceClient {
     >;
   }
   searchMigratableResources(
-    request: protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesRequest,
+    request?: protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -603,7 +603,7 @@ export class MigrationServiceClient {
    *   for more details and examples.
    */
   searchMigratableResources(
-    request: protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesRequest,
+    request?: protos.google.cloud.aiplatform.v1.ISearchMigratableResourcesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

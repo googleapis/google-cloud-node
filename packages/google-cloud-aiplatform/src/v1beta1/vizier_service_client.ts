@@ -466,7 +466,7 @@ export class VizierServiceClient {
   // -- Service calls --
   // -------------------
   createStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -518,7 +518,7 @@ export class VizierServiceClient {
    * const [response] = await client.createStudy(request);
    */
   createStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateStudyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -561,7 +561,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.createStudy(request, options, callback);
   }
   getStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -610,7 +610,7 @@ export class VizierServiceClient {
    * const [response] = await client.getStudy(request);
    */
   getStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetStudyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -653,7 +653,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.getStudy(request, options, callback);
   }
   deleteStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -702,7 +702,7 @@ export class VizierServiceClient {
    * const [response] = await client.deleteStudy(request);
    */
   deleteStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteStudyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -745,7 +745,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.deleteStudy(request, options, callback);
   }
   lookupStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -797,7 +797,7 @@ export class VizierServiceClient {
    * const [response] = await client.lookupStudy(request);
    */
   lookupStudy(
-    request: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ILookupStudyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -840,7 +840,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.lookupStudy(request, options, callback);
   }
   createTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -891,7 +891,7 @@ export class VizierServiceClient {
    * const [response] = await client.createTrial(request);
    */
   createTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTrialRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -934,7 +934,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.createTrial(request, options, callback);
   }
   getTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -984,7 +984,7 @@ export class VizierServiceClient {
    * const [response] = await client.getTrial(request);
    */
   getTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTrialRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1027,7 +1027,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.getTrial(request, options, callback);
   }
   addTrialMeasurement(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1083,7 +1083,7 @@ export class VizierServiceClient {
    * const [response] = await client.addTrialMeasurement(request);
    */
   addTrialMeasurement(
-    request: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IAddTrialMeasurementRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1129,7 +1129,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.addTrialMeasurement(request, options, callback);
   }
   completeTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1189,7 +1189,7 @@ export class VizierServiceClient {
    * const [response] = await client.completeTrial(request);
    */
   completeTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICompleteTrialRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1232,7 +1232,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.completeTrial(request, options, callback);
   }
   deleteTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1282,7 +1282,7 @@ export class VizierServiceClient {
    * const [response] = await client.deleteTrial(request);
    */
   deleteTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTrialRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1325,7 +1325,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.deleteTrial(request, options, callback);
   }
   stopTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1375,7 +1375,7 @@ export class VizierServiceClient {
    * const [response] = await client.stopTrial(request);
    */
   stopTrial(
-    request: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IStopTrialRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1418,7 +1418,7 @@ export class VizierServiceClient {
     return this.innerApiCalls.stopTrial(request, options, callback);
   }
   listOptimalTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1472,7 +1472,7 @@ export class VizierServiceClient {
    * const [response] = await client.listOptimalTrials(request);
    */
   listOptimalTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListOptimalTrialsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1519,7 +1519,7 @@ export class VizierServiceClient {
   }
 
   suggestTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1588,7 +1588,7 @@ export class VizierServiceClient {
    * const [response] = await operation.promise();
    */
   suggestTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ISuggestTrialsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1673,7 +1673,7 @@ export class VizierServiceClient {
     >;
   }
   checkTrialEarlyStoppingState(
-    request: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1734,7 +1734,7 @@ export class VizierServiceClient {
    * const [response] = await operation.promise();
    */
   checkTrialEarlyStoppingState(
-    request: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICheckTrialEarlyStoppingStateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1823,7 +1823,7 @@ export class VizierServiceClient {
     >;
   }
   listStudies(
-    request: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1881,7 +1881,7 @@ export class VizierServiceClient {
    *   for more details and examples.
    */
   listStudies(
-    request: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListStudiesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2023,7 +2023,7 @@ export class VizierServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.IStudy>;
   }
   listTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2081,7 +2081,7 @@ export class VizierServiceClient {
    *   for more details and examples.
    */
   listTrials(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTrialsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

@@ -547,7 +547,7 @@ export class TensorboardServiceClient {
   // -- Service calls --
   // -------------------
   getTensorboard(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -597,7 +597,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.getTensorboard(request);
    */
   getTensorboard(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -640,7 +640,7 @@ export class TensorboardServiceClient {
     return this.innerApiCalls.getTensorboard(request, options, callback);
   }
   createTensorboardExperiment(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardExperimentRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -701,7 +701,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.createTensorboardExperiment(request);
    */
   createTensorboardExperiment(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardExperimentRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -751,7 +751,7 @@ export class TensorboardServiceClient {
     );
   }
   getTensorboardExperiment(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardExperimentRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -804,7 +804,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.getTensorboardExperiment(request);
    */
   getTensorboardExperiment(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardExperimentRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -854,7 +854,7 @@ export class TensorboardServiceClient {
     );
   }
   updateTensorboardExperiment(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardExperimentRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -914,7 +914,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.updateTensorboardExperiment(request);
    */
   updateTensorboardExperiment(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardExperimentRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -965,7 +965,7 @@ export class TensorboardServiceClient {
     );
   }
   createTensorboardRun(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRunRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRunRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1026,7 +1026,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.createTensorboardRun(request);
    */
   createTensorboardRun(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRunRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRunRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1072,7 +1072,7 @@ export class TensorboardServiceClient {
     return this.innerApiCalls.createTensorboardRun(request, options, callback);
   }
   getTensorboardRun(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1125,7 +1125,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.getTensorboardRun(request);
    */
   getTensorboardRun(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1171,7 +1171,7 @@ export class TensorboardServiceClient {
     return this.innerApiCalls.getTensorboardRun(request, options, callback);
   }
   updateTensorboardRun(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRunRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRunRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1231,7 +1231,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.updateTensorboardRun(request);
    */
   updateTensorboardRun(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRunRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRunRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1277,7 +1277,7 @@ export class TensorboardServiceClient {
     return this.innerApiCalls.updateTensorboardRun(request, options, callback);
   }
   createTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1339,7 +1339,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.createTensorboardTimeSeries(request);
    */
   createTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1389,7 +1389,7 @@ export class TensorboardServiceClient {
     );
   }
   getTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardTimeSeriesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1442,7 +1442,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.getTensorboardTimeSeries(request);
    */
   getTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardTimeSeriesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1492,7 +1492,7 @@ export class TensorboardServiceClient {
     );
   }
   updateTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardTimeSeriesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1553,7 +1553,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.updateTensorboardTimeSeries(request);
    */
   updateTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardTimeSeriesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1604,7 +1604,7 @@ export class TensorboardServiceClient {
     );
   }
   readTensorboardTimeSeriesData(
-    request: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1668,7 +1668,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.readTensorboardTimeSeriesData(request);
    */
   readTensorboardTimeSeriesData(
-    request: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IReadTensorboardTimeSeriesDataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1718,7 +1718,7 @@ export class TensorboardServiceClient {
     );
   }
   writeTensorboardRunData(
-    request: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardRunDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardRunDataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1779,7 +1779,7 @@ export class TensorboardServiceClient {
    * const [response] = await client.writeTensorboardRunData(request);
    */
   writeTensorboardRunData(
-    request: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardRunDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardRunDataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1872,7 +1872,7 @@ export class TensorboardServiceClient {
   }
 
   createTensorboard(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1931,7 +1931,7 @@ export class TensorboardServiceClient {
    * const [response] = await operation.promise();
    */
   createTensorboard(
-    request: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2016,7 +2016,7 @@ export class TensorboardServiceClient {
     >;
   }
   updateTensorboard(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2081,7 +2081,7 @@ export class TensorboardServiceClient {
    * const [response] = await operation.promise();
    */
   updateTensorboard(
-    request: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IUpdateTensorboardRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2166,7 +2166,7 @@ export class TensorboardServiceClient {
     >;
   }
   deleteTensorboard(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2224,7 +2224,7 @@ export class TensorboardServiceClient {
    * const [response] = await operation.promise();
    */
   deleteTensorboard(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2309,7 +2309,7 @@ export class TensorboardServiceClient {
     >;
   }
   deleteTensorboardExperiment(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardExperimentRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardExperimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2367,7 +2367,7 @@ export class TensorboardServiceClient {
    * const [response] = await operation.promise();
    */
   deleteTensorboardExperiment(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardExperimentRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardExperimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2456,7 +2456,7 @@ export class TensorboardServiceClient {
     >;
   }
   deleteTensorboardRun(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRunRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRunRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2514,7 +2514,7 @@ export class TensorboardServiceClient {
    * const [response] = await operation.promise();
    */
   deleteTensorboardRun(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRunRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardRunRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2599,7 +2599,7 @@ export class TensorboardServiceClient {
     >;
   }
   deleteTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardTimeSeriesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2657,7 +2657,7 @@ export class TensorboardServiceClient {
    * const [response] = await operation.promise();
    */
   deleteTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteTensorboardTimeSeriesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2746,7 +2746,7 @@ export class TensorboardServiceClient {
     >;
   }
   listTensorboards(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2818,7 +2818,7 @@ export class TensorboardServiceClient {
    *   for more details and examples.
    */
   listTensorboards(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2988,7 +2988,7 @@ export class TensorboardServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboard>;
   }
   listTensorboardExperiments(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3060,7 +3060,7 @@ export class TensorboardServiceClient {
    *   for more details and examples.
    */
   listTensorboardExperiments(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardExperimentsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -3234,7 +3234,7 @@ export class TensorboardServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboardExperiment>;
   }
   listTensorboardRuns(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3306,7 +3306,7 @@ export class TensorboardServiceClient {
    *   for more details and examples.
    */
   listTensorboardRuns(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardRunsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -3476,7 +3476,7 @@ export class TensorboardServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboardRun>;
   }
   listTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3548,7 +3548,7 @@ export class TensorboardServiceClient {
    *   for more details and examples.
    */
   listTensorboardTimeSeries(
-    request: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IListTensorboardTimeSeriesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -3722,7 +3722,7 @@ export class TensorboardServiceClient {
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1beta1.ITensorboardTimeSeries>;
   }
   exportTensorboardTimeSeriesData(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3794,7 +3794,7 @@ export class TensorboardServiceClient {
    *   for more details and examples.
    */
   exportTensorboardTimeSeriesData(
-    request: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
+    request?: protos.google.cloud.aiplatform.v1beta1.IExportTensorboardTimeSeriesDataRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
