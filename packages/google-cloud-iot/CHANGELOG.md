@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.2...v2.3.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#487](https://www.github.com/googleapis/nodejs-iot/issues/487)) ([72c258b](https://www.github.com/googleapis/nodejs-iot/commit/72c258b53e18add510c59f2756f9d8d628edefaa))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.1...v2.3.2) (2021-06-07)
 
 
