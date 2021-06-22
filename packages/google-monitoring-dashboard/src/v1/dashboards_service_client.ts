@@ -313,7 +313,7 @@ export class DashboardsServiceClient {
   // -- Service calls --
   // -------------------
   createDashboard(
-    request: protos.google.monitoring.dashboard.v1.ICreateDashboardRequest,
+    request?: protos.google.monitoring.dashboard.v1.ICreateDashboardRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -372,7 +372,7 @@ export class DashboardsServiceClient {
    * const [response] = await client.createDashboard(request);
    */
   createDashboard(
-    request: protos.google.monitoring.dashboard.v1.ICreateDashboardRequest,
+    request?: protos.google.monitoring.dashboard.v1.ICreateDashboardRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -415,7 +415,7 @@ export class DashboardsServiceClient {
     return this.innerApiCalls.createDashboard(request, options, callback);
   }
   getDashboard(
-    request: protos.google.monitoring.dashboard.v1.IGetDashboardRequest,
+    request?: protos.google.monitoring.dashboard.v1.IGetDashboardRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -471,7 +471,7 @@ export class DashboardsServiceClient {
    * const [response] = await client.getDashboard(request);
    */
   getDashboard(
-    request: protos.google.monitoring.dashboard.v1.IGetDashboardRequest,
+    request?: protos.google.monitoring.dashboard.v1.IGetDashboardRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -514,7 +514,7 @@ export class DashboardsServiceClient {
     return this.innerApiCalls.getDashboard(request, options, callback);
   }
   deleteDashboard(
-    request: protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
+    request?: protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -568,7 +568,7 @@ export class DashboardsServiceClient {
    * const [response] = await client.deleteDashboard(request);
    */
   deleteDashboard(
-    request: protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
+    request?: protos.google.monitoring.dashboard.v1.IDeleteDashboardRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -611,7 +611,7 @@ export class DashboardsServiceClient {
     return this.innerApiCalls.deleteDashboard(request, options, callback);
   }
   updateDashboard(
-    request: protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
+    request?: protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -663,7 +663,7 @@ export class DashboardsServiceClient {
    * const [response] = await client.updateDashboard(request);
    */
   updateDashboard(
-    request: protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
+    request?: protos.google.monitoring.dashboard.v1.IUpdateDashboardRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -707,7 +707,7 @@ export class DashboardsServiceClient {
   }
 
   listDashboards(
-    request: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
+    request?: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -771,7 +771,7 @@ export class DashboardsServiceClient {
    *   for more details and examples.
    */
   listDashboards(
-    request: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
+    request?: protos.google.monitoring.dashboard.v1.IListDashboardsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
