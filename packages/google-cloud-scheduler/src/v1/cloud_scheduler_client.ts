@@ -313,7 +313,7 @@ export class CloudSchedulerClient {
   // -- Service calls --
   // -------------------
   getJob(
-    request: protos.google.cloud.scheduler.v1.IGetJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IGetJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -358,7 +358,7 @@ export class CloudSchedulerClient {
    * const [response] = await client.getJob(request);
    */
   getJob(
-    request: protos.google.cloud.scheduler.v1.IGetJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IGetJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -397,7 +397,7 @@ export class CloudSchedulerClient {
     return this.innerApiCalls.getJob(request, options, callback);
   }
   createJob(
-    request: protos.google.cloud.scheduler.v1.ICreateJobRequest,
+    request?: protos.google.cloud.scheduler.v1.ICreateJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -448,7 +448,7 @@ export class CloudSchedulerClient {
    * const [response] = await client.createJob(request);
    */
   createJob(
-    request: protos.google.cloud.scheduler.v1.ICreateJobRequest,
+    request?: protos.google.cloud.scheduler.v1.ICreateJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -487,7 +487,7 @@ export class CloudSchedulerClient {
     return this.innerApiCalls.createJob(request, options, callback);
   }
   updateJob(
-    request: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -544,7 +544,7 @@ export class CloudSchedulerClient {
    * const [response] = await client.updateJob(request);
    */
   updateJob(
-    request: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IUpdateJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -583,7 +583,7 @@ export class CloudSchedulerClient {
     return this.innerApiCalls.updateJob(request, options, callback);
   }
   deleteJob(
-    request: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -628,7 +628,7 @@ export class CloudSchedulerClient {
    * const [response] = await client.deleteJob(request);
    */
   deleteJob(
-    request: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IDeleteJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -667,7 +667,7 @@ export class CloudSchedulerClient {
     return this.innerApiCalls.deleteJob(request, options, callback);
   }
   pauseJob(
-    request: protos.google.cloud.scheduler.v1.IPauseJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IPauseJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -718,7 +718,7 @@ export class CloudSchedulerClient {
    * const [response] = await client.pauseJob(request);
    */
   pauseJob(
-    request: protos.google.cloud.scheduler.v1.IPauseJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IPauseJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -757,7 +757,7 @@ export class CloudSchedulerClient {
     return this.innerApiCalls.pauseJob(request, options, callback);
   }
   resumeJob(
-    request: protos.google.cloud.scheduler.v1.IResumeJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IResumeJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -807,7 +807,7 @@ export class CloudSchedulerClient {
    * const [response] = await client.resumeJob(request);
    */
   resumeJob(
-    request: protos.google.cloud.scheduler.v1.IResumeJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IResumeJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -846,7 +846,7 @@ export class CloudSchedulerClient {
     return this.innerApiCalls.resumeJob(request, options, callback);
   }
   runJob(
-    request: protos.google.cloud.scheduler.v1.IRunJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IRunJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -894,7 +894,7 @@ export class CloudSchedulerClient {
    * const [response] = await client.runJob(request);
    */
   runJob(
-    request: protos.google.cloud.scheduler.v1.IRunJobRequest,
+    request?: protos.google.cloud.scheduler.v1.IRunJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -934,7 +934,7 @@ export class CloudSchedulerClient {
   }
 
   listJobs(
-    request: protos.google.cloud.scheduler.v1.IListJobsRequest,
+    request?: protos.google.cloud.scheduler.v1.IListJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -997,7 +997,7 @@ export class CloudSchedulerClient {
    *   for more details and examples.
    */
   listJobs(
-    request: protos.google.cloud.scheduler.v1.IListJobsRequest,
+    request?: protos.google.cloud.scheduler.v1.IListJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
