@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [2.2.3](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.2...v2.2.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#490](https://www.github.com/googleapis/nodejs-redis/issues/490)) ([c69e88a](https://www.github.com/googleapis/nodejs-redis/commit/c69e88a51d11c9e0eb66f2e8c0fcd26d1e0ae89a))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.1...v2.2.2) (2021-05-29)
 
 
