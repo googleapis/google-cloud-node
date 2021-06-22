@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.1...v1.1.2) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#63](https://www.github.com/googleapis/nodejs-binary-authorization/issues/63)) ([2a0380f](https://www.github.com/googleapis/nodejs-binary-authorization/commit/2a0380f6463b5ad0ee58b5a35ebe41d363390874))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.0...v1.1.1) (2021-05-25)
 
 
