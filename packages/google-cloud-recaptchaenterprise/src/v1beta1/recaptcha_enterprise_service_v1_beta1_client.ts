@@ -313,7 +313,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
   // -- Service calls --
   // -------------------
   createAssessment(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -367,7 +367,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * const [response] = await client.createAssessment(request);
    */
   createAssessment(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateAssessmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -413,7 +413,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     return this.innerApiCalls.createAssessment(request, options, callback);
   }
   annotateAssessment(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -468,7 +468,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * const [response] = await client.annotateAssessment(request);
    */
   annotateAssessment(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IAnnotateAssessmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -514,7 +514,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     return this.innerApiCalls.annotateAssessment(request, options, callback);
   }
   createKey(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -568,7 +568,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * const [response] = await client.createKey(request);
    */
   createKey(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.ICreateKeyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -614,7 +614,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     return this.innerApiCalls.createKey(request, options, callback);
   }
   getKey(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -666,7 +666,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * const [response] = await client.getKey(request);
    */
   getKey(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IGetKeyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -712,7 +712,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     return this.innerApiCalls.getKey(request, options, callback);
   }
   updateKey(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -766,7 +766,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * const [response] = await client.updateKey(request);
    */
   updateKey(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IUpdateKeyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -812,7 +812,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
     return this.innerApiCalls.updateKey(request, options, callback);
   }
   deleteKey(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -864,7 +864,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    * const [response] = await client.deleteKey(request);
    */
   deleteKey(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IDeleteKeyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -911,7 +911,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
   }
 
   listKeys(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -969,7 +969,7 @@ export class RecaptchaEnterpriseServiceV1Beta1Client {
    *   for more details and examples.
    */
   listKeys(
-    request: protos.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest,
+    request?: protos.google.cloud.recaptchaenterprise.v1beta1.IListKeysRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
