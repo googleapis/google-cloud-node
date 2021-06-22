@@ -363,7 +363,7 @@ export class GkeHubMembershipServiceClient {
   // -- Service calls --
   // -------------------
   getMembership(
-    request: protos.google.cloud.gkehub.v1beta1.IGetMembershipRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IGetMembershipRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -412,7 +412,7 @@ export class GkeHubMembershipServiceClient {
    * const [response] = await client.getMembership(request);
    */
   getMembership(
-    request: protos.google.cloud.gkehub.v1beta1.IGetMembershipRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IGetMembershipRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -455,7 +455,7 @@ export class GkeHubMembershipServiceClient {
     return this.innerApiCalls.getMembership(request, options, callback);
   }
   generateConnectManifest(
-    request: protos.google.cloud.gkehub.v1beta1.IGenerateConnectManifestRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IGenerateConnectManifestRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -519,7 +519,7 @@ export class GkeHubMembershipServiceClient {
    * const [response] = await client.generateConnectManifest(request);
    */
   generateConnectManifest(
-    request: protos.google.cloud.gkehub.v1beta1.IGenerateConnectManifestRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IGenerateConnectManifestRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -569,7 +569,7 @@ export class GkeHubMembershipServiceClient {
     );
   }
   validateExclusivity(
-    request: protos.google.cloud.gkehub.v1beta1.IValidateExclusivityRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IValidateExclusivityRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -628,7 +628,7 @@ export class GkeHubMembershipServiceClient {
    * const [response] = await client.validateExclusivity(request);
    */
   validateExclusivity(
-    request: protos.google.cloud.gkehub.v1beta1.IValidateExclusivityRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IValidateExclusivityRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -674,7 +674,7 @@ export class GkeHubMembershipServiceClient {
     return this.innerApiCalls.validateExclusivity(request, options, callback);
   }
   generateExclusivityManifest(
-    request: protos.google.cloud.gkehub.v1beta1.IGenerateExclusivityManifestRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IGenerateExclusivityManifestRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -745,7 +745,7 @@ export class GkeHubMembershipServiceClient {
    * const [response] = await client.generateExclusivityManifest(request);
    */
   generateExclusivityManifest(
-    request: protos.google.cloud.gkehub.v1beta1.IGenerateExclusivityManifestRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IGenerateExclusivityManifestRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -796,7 +796,7 @@ export class GkeHubMembershipServiceClient {
   }
 
   createMembership(
-    request: protos.google.cloud.gkehub.v1beta1.ICreateMembershipRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.ICreateMembershipRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -865,7 +865,7 @@ export class GkeHubMembershipServiceClient {
    * const [response] = await operation.promise();
    */
   createMembership(
-    request: protos.google.cloud.gkehub.v1beta1.ICreateMembershipRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.ICreateMembershipRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -950,7 +950,7 @@ export class GkeHubMembershipServiceClient {
     >;
   }
   deleteMembership(
-    request: protos.google.cloud.gkehub.v1beta1.IDeleteMembershipRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IDeleteMembershipRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1007,7 +1007,7 @@ export class GkeHubMembershipServiceClient {
    * const [response] = await operation.promise();
    */
   deleteMembership(
-    request: protos.google.cloud.gkehub.v1beta1.IDeleteMembershipRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IDeleteMembershipRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1092,7 +1092,7 @@ export class GkeHubMembershipServiceClient {
     >;
   }
   updateMembership(
-    request: protos.google.cloud.gkehub.v1beta1.IUpdateMembershipRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IUpdateMembershipRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1159,7 +1159,7 @@ export class GkeHubMembershipServiceClient {
    * const [response] = await operation.promise();
    */
   updateMembership(
-    request: protos.google.cloud.gkehub.v1beta1.IUpdateMembershipRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IUpdateMembershipRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1244,7 +1244,7 @@ export class GkeHubMembershipServiceClient {
     >;
   }
   listMemberships(
-    request: protos.google.cloud.gkehub.v1beta1.IListMembershipsRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IListMembershipsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1328,7 +1328,7 @@ export class GkeHubMembershipServiceClient {
    *   for more details and examples.
    */
   listMemberships(
-    request: protos.google.cloud.gkehub.v1beta1.IListMembershipsRequest,
+    request?: protos.google.cloud.gkehub.v1beta1.IListMembershipsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
