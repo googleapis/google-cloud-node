@@ -420,7 +420,7 @@ export class DomainsClient {
   // -- Service calls --
   // -------------------
   searchDomains(
-    request: protos.google.cloud.domains.v1beta1.ISearchDomainsRequest,
+    request?: protos.google.cloud.domains.v1beta1.ISearchDomainsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -474,7 +474,7 @@ export class DomainsClient {
    * const [response] = await client.searchDomains(request);
    */
   searchDomains(
-    request: protos.google.cloud.domains.v1beta1.ISearchDomainsRequest,
+    request?: protos.google.cloud.domains.v1beta1.ISearchDomainsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -517,7 +517,7 @@ export class DomainsClient {
     return this.innerApiCalls.searchDomains(request, options, callback);
   }
   retrieveRegisterParameters(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest,
+    request?: protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -571,7 +571,7 @@ export class DomainsClient {
    * const [response] = await client.retrieveRegisterParameters(request);
    */
   retrieveRegisterParameters(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest,
+    request?: protos.google.cloud.domains.v1beta1.IRetrieveRegisterParametersRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -621,7 +621,7 @@ export class DomainsClient {
     );
   }
   getRegistration(
-    request: protos.google.cloud.domains.v1beta1.IGetRegistrationRequest,
+    request?: protos.google.cloud.domains.v1beta1.IGetRegistrationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -670,7 +670,7 @@ export class DomainsClient {
    * const [response] = await client.getRegistration(request);
    */
   getRegistration(
-    request: protos.google.cloud.domains.v1beta1.IGetRegistrationRequest,
+    request?: protos.google.cloud.domains.v1beta1.IGetRegistrationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -713,7 +713,7 @@ export class DomainsClient {
     return this.innerApiCalls.getRegistration(request, options, callback);
   }
   retrieveAuthorizationCode(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest,
+    request?: protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -769,7 +769,7 @@ export class DomainsClient {
    * const [response] = await client.retrieveAuthorizationCode(request);
    */
   retrieveAuthorizationCode(
-    request: protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest,
+    request?: protos.google.cloud.domains.v1beta1.IRetrieveAuthorizationCodeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -819,7 +819,7 @@ export class DomainsClient {
     );
   }
   resetAuthorizationCode(
-    request: protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest,
+    request?: protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -874,7 +874,7 @@ export class DomainsClient {
    * const [response] = await client.resetAuthorizationCode(request);
    */
   resetAuthorizationCode(
-    request: protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest,
+    request?: protos.google.cloud.domains.v1beta1.IResetAuthorizationCodeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -925,7 +925,7 @@ export class DomainsClient {
   }
 
   registerDomain(
-    request: protos.google.cloud.domains.v1beta1.IRegisterDomainRequest,
+    request?: protos.google.cloud.domains.v1beta1.IRegisterDomainRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1011,7 +1011,7 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   registerDomain(
-    request: protos.google.cloud.domains.v1beta1.IRegisterDomainRequest,
+    request?: protos.google.cloud.domains.v1beta1.IRegisterDomainRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1096,7 +1096,7 @@ export class DomainsClient {
     >;
   }
   updateRegistration(
-    request: protos.google.cloud.domains.v1beta1.IUpdateRegistrationRequest,
+    request?: protos.google.cloud.domains.v1beta1.IUpdateRegistrationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1161,7 +1161,7 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   updateRegistration(
-    request: protos.google.cloud.domains.v1beta1.IUpdateRegistrationRequest,
+    request?: protos.google.cloud.domains.v1beta1.IUpdateRegistrationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1246,7 +1246,7 @@ export class DomainsClient {
     >;
   }
   configureManagementSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureManagementSettingsRequest,
+    request?: protos.google.cloud.domains.v1beta1.IConfigureManagementSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1309,7 +1309,7 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   configureManagementSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureManagementSettingsRequest,
+    request?: protos.google.cloud.domains.v1beta1.IConfigureManagementSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1398,7 +1398,7 @@ export class DomainsClient {
     >;
   }
   configureDnsSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureDnsSettingsRequest,
+    request?: protos.google.cloud.domains.v1beta1.IConfigureDnsSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1469,7 +1469,7 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   configureDnsSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureDnsSettingsRequest,
+    request?: protos.google.cloud.domains.v1beta1.IConfigureDnsSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1554,7 +1554,7 @@ export class DomainsClient {
     >;
   }
   configureContactSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureContactSettingsRequest,
+    request?: protos.google.cloud.domains.v1beta1.IConfigureContactSettingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1623,7 +1623,7 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   configureContactSettings(
-    request: protos.google.cloud.domains.v1beta1.IConfigureContactSettingsRequest,
+    request?: protos.google.cloud.domains.v1beta1.IConfigureContactSettingsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1712,7 +1712,7 @@ export class DomainsClient {
     >;
   }
   exportRegistration(
-    request: protos.google.cloud.domains.v1beta1.IExportRegistrationRequest,
+    request?: protos.google.cloud.domains.v1beta1.IExportRegistrationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1782,7 +1782,7 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   exportRegistration(
-    request: protos.google.cloud.domains.v1beta1.IExportRegistrationRequest,
+    request?: protos.google.cloud.domains.v1beta1.IExportRegistrationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1867,7 +1867,7 @@ export class DomainsClient {
     >;
   }
   deleteRegistration(
-    request: protos.google.cloud.domains.v1beta1.IDeleteRegistrationRequest,
+    request?: protos.google.cloud.domains.v1beta1.IDeleteRegistrationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1929,7 +1929,7 @@ export class DomainsClient {
    * const [response] = await operation.promise();
    */
   deleteRegistration(
-    request: protos.google.cloud.domains.v1beta1.IDeleteRegistrationRequest,
+    request?: protos.google.cloud.domains.v1beta1.IDeleteRegistrationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2014,7 +2014,7 @@ export class DomainsClient {
     >;
   }
   listRegistrations(
-    request: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
+    request?: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2088,7 +2088,7 @@ export class DomainsClient {
    *   for more details and examples.
    */
   listRegistrations(
-    request: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
+    request?: protos.google.cloud.domains.v1beta1.IListRegistrationsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
