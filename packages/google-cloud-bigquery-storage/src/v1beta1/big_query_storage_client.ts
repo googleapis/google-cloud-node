@@ -304,7 +304,7 @@ export class BigQueryStorageClient {
   // -- Service calls --
   // -------------------
   createReadSession(
-    request: protos.google.cloud.bigquery.storage.v1beta1.ICreateReadSessionRequest,
+    request?: protos.google.cloud.bigquery.storage.v1beta1.ICreateReadSessionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -387,7 +387,7 @@ export class BigQueryStorageClient {
    * const [response] = await client.createReadSession(request);
    */
   createReadSession(
-    request: protos.google.cloud.bigquery.storage.v1beta1.ICreateReadSessionRequest,
+    request?: protos.google.cloud.bigquery.storage.v1beta1.ICreateReadSessionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -434,7 +434,7 @@ export class BigQueryStorageClient {
     return this.innerApiCalls.createReadSession(request, options, callback);
   }
   batchCreateReadSessionStreams(
-    request: protos.google.cloud.bigquery.storage.v1beta1.IBatchCreateReadSessionStreamsRequest,
+    request?: protos.google.cloud.bigquery.storage.v1beta1.IBatchCreateReadSessionStreamsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -492,7 +492,7 @@ export class BigQueryStorageClient {
    * const [response] = await client.batchCreateReadSessionStreams(request);
    */
   batchCreateReadSessionStreams(
-    request: protos.google.cloud.bigquery.storage.v1beta1.IBatchCreateReadSessionStreamsRequest,
+    request?: protos.google.cloud.bigquery.storage.v1beta1.IBatchCreateReadSessionStreamsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -542,7 +542,7 @@ export class BigQueryStorageClient {
     );
   }
   finalizeStream(
-    request: protos.google.cloud.bigquery.storage.v1beta1.IFinalizeStreamRequest,
+    request?: protos.google.cloud.bigquery.storage.v1beta1.IFinalizeStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -606,7 +606,7 @@ export class BigQueryStorageClient {
    * const [response] = await client.finalizeStream(request);
    */
   finalizeStream(
-    request: protos.google.cloud.bigquery.storage.v1beta1.IFinalizeStreamRequest,
+    request?: protos.google.cloud.bigquery.storage.v1beta1.IFinalizeStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -652,7 +652,7 @@ export class BigQueryStorageClient {
     return this.innerApiCalls.finalizeStream(request, options, callback);
   }
   splitReadStream(
-    request: protos.google.cloud.bigquery.storage.v1beta1.ISplitReadStreamRequest,
+    request?: protos.google.cloud.bigquery.storage.v1beta1.ISplitReadStreamRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -723,7 +723,7 @@ export class BigQueryStorageClient {
    * const [response] = await client.splitReadStream(request);
    */
   splitReadStream(
-    request: protos.google.cloud.bigquery.storage.v1beta1.ISplitReadStreamRequest,
+    request?: protos.google.cloud.bigquery.storage.v1beta1.ISplitReadStreamRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
