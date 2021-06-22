@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [3.3.4](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.3.3...v3.3.4) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#566](https://www.github.com/googleapis/nodejs-video-intelligence/issues/566)) ([ef7abca](https://www.github.com/googleapis/nodejs-video-intelligence/commit/ef7abca3d3d7ba44f0fc8406ebef4a5396147bc4))
+
 ### [3.3.3](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.3.2...v3.3.3) (2021-06-10)
 
 
