@@ -296,7 +296,7 @@ export class AssetServiceClient {
   // -------------------
 
   searchAllResources(
-    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -377,7 +377,7 @@ export class AssetServiceClient {
    *   for more details and examples.
    */
   searchAllResources(
-    request: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllResourcesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -555,7 +555,7 @@ export class AssetServiceClient {
     ) as AsyncIterable<protos.google.cloud.asset.v1p1beta1.IStandardResourceMetadata>;
   }
   searchAllIamPolicies(
-    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -631,7 +631,7 @@ export class AssetServiceClient {
    *   for more details and examples.
    */
   searchAllIamPolicies(
-    request: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
+    request?: protos.google.cloud.asset.v1p1beta1.ISearchAllIamPoliciesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

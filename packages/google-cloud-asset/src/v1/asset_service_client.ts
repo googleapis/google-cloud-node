@@ -373,7 +373,7 @@ export class AssetServiceClient {
   // -- Service calls --
   // -------------------
   batchGetAssetsHistory(
-    request: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
+    request?: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -447,7 +447,7 @@ export class AssetServiceClient {
    * const [response] = await client.batchGetAssetsHistory(request);
    */
   batchGetAssetsHistory(
-    request: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
+    request?: protos.google.cloud.asset.v1.IBatchGetAssetsHistoryRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -490,7 +490,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.batchGetAssetsHistory(request, options, callback);
   }
   createFeed(
-    request: protos.google.cloud.asset.v1.ICreateFeedRequest,
+    request?: protos.google.cloud.asset.v1.ICreateFeedRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -548,7 +548,7 @@ export class AssetServiceClient {
    * const [response] = await client.createFeed(request);
    */
   createFeed(
-    request: protos.google.cloud.asset.v1.ICreateFeedRequest,
+    request?: protos.google.cloud.asset.v1.ICreateFeedRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -587,7 +587,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.createFeed(request, options, callback);
   }
   getFeed(
-    request: protos.google.cloud.asset.v1.IGetFeedRequest,
+    request?: protos.google.cloud.asset.v1.IGetFeedRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -634,7 +634,7 @@ export class AssetServiceClient {
    * const [response] = await client.getFeed(request);
    */
   getFeed(
-    request: protos.google.cloud.asset.v1.IGetFeedRequest,
+    request?: protos.google.cloud.asset.v1.IGetFeedRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -673,7 +673,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.getFeed(request, options, callback);
   }
   listFeeds(
-    request: protos.google.cloud.asset.v1.IListFeedsRequest,
+    request?: protos.google.cloud.asset.v1.IListFeedsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -719,7 +719,7 @@ export class AssetServiceClient {
    * const [response] = await client.listFeeds(request);
    */
   listFeeds(
-    request: protos.google.cloud.asset.v1.IListFeedsRequest,
+    request?: protos.google.cloud.asset.v1.IListFeedsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -758,7 +758,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.listFeeds(request, options, callback);
   }
   updateFeed(
-    request: protos.google.cloud.asset.v1.IUpdateFeedRequest,
+    request?: protos.google.cloud.asset.v1.IUpdateFeedRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -810,7 +810,7 @@ export class AssetServiceClient {
    * const [response] = await client.updateFeed(request);
    */
   updateFeed(
-    request: protos.google.cloud.asset.v1.IUpdateFeedRequest,
+    request?: protos.google.cloud.asset.v1.IUpdateFeedRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -849,7 +849,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.updateFeed(request, options, callback);
   }
   deleteFeed(
-    request: protos.google.cloud.asset.v1.IDeleteFeedRequest,
+    request?: protos.google.cloud.asset.v1.IDeleteFeedRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -896,7 +896,7 @@ export class AssetServiceClient {
    * const [response] = await client.deleteFeed(request);
    */
   deleteFeed(
-    request: protos.google.cloud.asset.v1.IDeleteFeedRequest,
+    request?: protos.google.cloud.asset.v1.IDeleteFeedRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -935,7 +935,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.deleteFeed(request, options, callback);
   }
   analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
+    request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -991,7 +991,7 @@ export class AssetServiceClient {
    * const [response] = await client.analyzeIamPolicy(request);
    */
   analyzeIamPolicy(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
+    request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1033,7 +1033,7 @@ export class AssetServiceClient {
   }
 
   exportAssets(
-    request: protos.google.cloud.asset.v1.IExportAssetsRequest,
+    request?: protos.google.cloud.asset.v1.IExportAssetsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1131,7 +1131,7 @@ export class AssetServiceClient {
    * const [response] = await operation.promise();
    */
   exportAssets(
-    request: protos.google.cloud.asset.v1.IExportAssetsRequest,
+    request?: protos.google.cloud.asset.v1.IExportAssetsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1216,7 +1216,7 @@ export class AssetServiceClient {
     >;
   }
   analyzeIamPolicyLongrunning(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
+    request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1282,7 +1282,7 @@ export class AssetServiceClient {
    * const [response] = await operation.promise();
    */
   analyzeIamPolicyLongrunning(
-    request: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
+    request?: protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1371,7 +1371,7 @@ export class AssetServiceClient {
     >;
   }
   listAssets(
-    request: protos.google.cloud.asset.v1.IListAssetsRequest,
+    request?: protos.google.cloud.asset.v1.IListAssetsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1457,7 +1457,7 @@ export class AssetServiceClient {
    *   for more details and examples.
    */
   listAssets(
-    request: protos.google.cloud.asset.v1.IListAssetsRequest,
+    request?: protos.google.cloud.asset.v1.IListAssetsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1657,7 +1657,7 @@ export class AssetServiceClient {
     ) as AsyncIterable<protos.google.cloud.asset.v1.IAsset>;
   }
   searchAllResources(
-    request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+    request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1808,7 +1808,7 @@ export class AssetServiceClient {
    *   for more details and examples.
    */
   searchAllResources(
-    request: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
+    request?: protos.google.cloud.asset.v1.ISearchAllResourcesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2130,7 +2130,7 @@ export class AssetServiceClient {
     ) as AsyncIterable<protos.google.cloud.asset.v1.IResourceSearchResult>;
   }
   searchAllIamPolicies(
-    request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+    request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2244,7 +2244,7 @@ export class AssetServiceClient {
    *   for more details and examples.
    */
   searchAllIamPolicies(
-    request: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
+    request?: protos.google.cloud.asset.v1.ISearchAllIamPoliciesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
