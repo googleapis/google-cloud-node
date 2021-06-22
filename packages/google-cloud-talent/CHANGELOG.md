@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [3.2.3](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.2...v3.2.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#335](https://www.github.com/googleapis/nodejs-talent/issues/335)) ([7ba1f51](https://www.github.com/googleapis/nodejs-talent/commit/7ba1f51db25cf37b33f9a611e031c7294112649a))
+
 ### [3.2.2](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.1...v3.2.2) (2021-05-25)
 
 
