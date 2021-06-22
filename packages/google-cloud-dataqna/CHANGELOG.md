@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.3...v1.0.4) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#43](https://www.github.com/googleapis/nodejs-data-qna/issues/43)) ([0e4009b](https://www.github.com/googleapis/nodejs-data-qna/commit/0e4009b1fc0d63eed93071df2b9db891977be047))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.2...v1.0.3) (2021-05-25)
 
 
