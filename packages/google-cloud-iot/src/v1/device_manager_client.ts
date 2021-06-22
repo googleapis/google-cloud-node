@@ -331,7 +331,7 @@ export class DeviceManagerClient {
   // -- Service calls --
   // -------------------
   createDeviceRegistry(
-    request: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
+    request?: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -384,7 +384,7 @@ export class DeviceManagerClient {
    * const [response] = await client.createDeviceRegistry(request);
    */
   createDeviceRegistry(
-    request: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
+    request?: protos.google.cloud.iot.v1.ICreateDeviceRegistryRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -427,7 +427,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.createDeviceRegistry(request, options, callback);
   }
   getDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
+    request?: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -472,7 +472,7 @@ export class DeviceManagerClient {
    * const [response] = await client.getDeviceRegistry(request);
    */
   getDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
+    request?: protos.google.cloud.iot.v1.IGetDeviceRegistryRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -513,7 +513,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.getDeviceRegistry(request, options, callback);
   }
   updateDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
+    request?: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -569,7 +569,7 @@ export class DeviceManagerClient {
    * const [response] = await client.updateDeviceRegistry(request);
    */
   updateDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
+    request?: protos.google.cloud.iot.v1.IUpdateDeviceRegistryRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -612,7 +612,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.updateDeviceRegistry(request, options, callback);
   }
   deleteDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
+    request?: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -661,7 +661,7 @@ export class DeviceManagerClient {
    * const [response] = await client.deleteDeviceRegistry(request);
    */
   deleteDeviceRegistry(
-    request: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
+    request?: protos.google.cloud.iot.v1.IDeleteDeviceRegistryRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -704,7 +704,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.deleteDeviceRegistry(request, options, callback);
   }
   createDevice(
-    request: protos.google.cloud.iot.v1.ICreateDeviceRequest,
+    request?: protos.google.cloud.iot.v1.ICreateDeviceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -754,7 +754,7 @@ export class DeviceManagerClient {
    * const [response] = await client.createDevice(request);
    */
   createDevice(
-    request: protos.google.cloud.iot.v1.ICreateDeviceRequest,
+    request?: protos.google.cloud.iot.v1.ICreateDeviceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -793,7 +793,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.createDevice(request, options, callback);
   }
   getDevice(
-    request: protos.google.cloud.iot.v1.IGetDeviceRequest,
+    request?: protos.google.cloud.iot.v1.IGetDeviceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -843,7 +843,7 @@ export class DeviceManagerClient {
    * const [response] = await client.getDevice(request);
    */
   getDevice(
-    request: protos.google.cloud.iot.v1.IGetDeviceRequest,
+    request?: protos.google.cloud.iot.v1.IGetDeviceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -882,7 +882,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.getDevice(request, options, callback);
   }
   updateDevice(
-    request: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
+    request?: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -934,7 +934,7 @@ export class DeviceManagerClient {
    * const [response] = await client.updateDevice(request);
    */
   updateDevice(
-    request: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
+    request?: protos.google.cloud.iot.v1.IUpdateDeviceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -973,7 +973,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.updateDevice(request, options, callback);
   }
   deleteDevice(
-    request: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
+    request?: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1019,7 +1019,7 @@ export class DeviceManagerClient {
    * const [response] = await client.deleteDevice(request);
    */
   deleteDevice(
-    request: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
+    request?: protos.google.cloud.iot.v1.IDeleteDeviceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1058,7 +1058,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.deleteDevice(request, options, callback);
   }
   modifyCloudToDeviceConfig(
-    request: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
+    request?: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1118,7 +1118,7 @@ export class DeviceManagerClient {
    * const [response] = await client.modifyCloudToDeviceConfig(request);
    */
   modifyCloudToDeviceConfig(
-    request: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
+    request?: protos.google.cloud.iot.v1.IModifyCloudToDeviceConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1165,7 +1165,7 @@ export class DeviceManagerClient {
     );
   }
   listDeviceConfigVersions(
-    request: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
+    request?: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1220,7 +1220,7 @@ export class DeviceManagerClient {
    * const [response] = await client.listDeviceConfigVersions(request);
    */
   listDeviceConfigVersions(
-    request: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
+    request?: protos.google.cloud.iot.v1.IListDeviceConfigVersionsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1267,7 +1267,7 @@ export class DeviceManagerClient {
     );
   }
   listDeviceStates(
-    request: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
+    request?: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1318,7 +1318,7 @@ export class DeviceManagerClient {
    * const [response] = await client.listDeviceStates(request);
    */
   listDeviceStates(
-    request: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
+    request?: protos.google.cloud.iot.v1.IListDeviceStatesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1359,7 +1359,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.listDeviceStates(request, options, callback);
   }
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1410,7 +1410,7 @@ export class DeviceManagerClient {
    * const [response] = await client.setIamPolicy(request);
    */
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1449,7 +1449,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1499,7 +1499,7 @@ export class DeviceManagerClient {
    * const [response] = await client.getIamPolicy(request);
    */
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1538,7 +1538,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1590,7 +1590,7 @@ export class DeviceManagerClient {
    * const [response] = await client.testIamPermissions(request);
    */
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1629,7 +1629,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
   sendCommandToDevice(
-    request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
+    request?: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1695,7 +1695,7 @@ export class DeviceManagerClient {
    * const [response] = await client.sendCommandToDevice(request);
    */
   sendCommandToDevice(
-    request: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
+    request?: protos.google.cloud.iot.v1.ISendCommandToDeviceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1736,7 +1736,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.sendCommandToDevice(request, options, callback);
   }
   bindDeviceToGateway(
-    request: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
+    request?: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1788,7 +1788,7 @@ export class DeviceManagerClient {
    * const [response] = await client.bindDeviceToGateway(request);
    */
   bindDeviceToGateway(
-    request: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
+    request?: protos.google.cloud.iot.v1.IBindDeviceToGatewayRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1829,7 +1829,7 @@ export class DeviceManagerClient {
     return this.innerApiCalls.bindDeviceToGateway(request, options, callback);
   }
   unbindDeviceFromGateway(
-    request: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
+    request?: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1885,7 +1885,7 @@ export class DeviceManagerClient {
    * const [response] = await client.unbindDeviceFromGateway(request);
    */
   unbindDeviceFromGateway(
-    request: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
+    request?: protos.google.cloud.iot.v1.IUnbindDeviceFromGatewayRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1933,7 +1933,7 @@ export class DeviceManagerClient {
   }
 
   listDeviceRegistries(
-    request: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+    request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1994,7 +1994,7 @@ export class DeviceManagerClient {
    *   for more details and examples.
    */
   listDeviceRegistries(
-    request: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
+    request?: protos.google.cloud.iot.v1.IListDeviceRegistriesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2142,7 +2142,7 @@ export class DeviceManagerClient {
     ) as AsyncIterable<protos.google.cloud.iot.v1.IDeviceRegistry>;
   }
   listDevices(
-    request: protos.google.cloud.iot.v1.IListDevicesRequest,
+    request?: protos.google.cloud.iot.v1.IListDevicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2212,7 +2212,7 @@ export class DeviceManagerClient {
    *   for more details and examples.
    */
   listDevices(
-    request: protos.google.cloud.iot.v1.IListDevicesRequest,
+    request?: protos.google.cloud.iot.v1.IListDevicesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
