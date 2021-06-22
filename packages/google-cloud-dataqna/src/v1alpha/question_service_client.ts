@@ -303,7 +303,7 @@ export class QuestionServiceClient {
   // -- Service calls --
   // -------------------
   getQuestion(
-    request: protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -354,7 +354,7 @@ export class QuestionServiceClient {
    * const [response] = await client.getQuestion(request);
    */
   getQuestion(
-    request: protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.IGetQuestionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -397,7 +397,7 @@ export class QuestionServiceClient {
     return this.innerApiCalls.getQuestion(request, options, callback);
   }
   createQuestion(
-    request: protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -448,7 +448,7 @@ export class QuestionServiceClient {
    * const [response] = await client.createQuestion(request);
    */
   createQuestion(
-    request: protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.ICreateQuestionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -491,7 +491,7 @@ export class QuestionServiceClient {
     return this.innerApiCalls.createQuestion(request, options, callback);
   }
   executeQuestion(
-    request: protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -542,7 +542,7 @@ export class QuestionServiceClient {
    * const [response] = await client.executeQuestion(request);
    */
   executeQuestion(
-    request: protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.IExecuteQuestionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -585,7 +585,7 @@ export class QuestionServiceClient {
     return this.innerApiCalls.executeQuestion(request, options, callback);
   }
   getUserFeedback(
-    request: protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -635,7 +635,7 @@ export class QuestionServiceClient {
    * const [response] = await client.getUserFeedback(request);
    */
   getUserFeedback(
-    request: protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.IGetUserFeedbackRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -678,7 +678,7 @@ export class QuestionServiceClient {
     return this.innerApiCalls.getUserFeedback(request, options, callback);
   }
   updateUserFeedback(
-    request: protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -735,7 +735,7 @@ export class QuestionServiceClient {
    * const [response] = await client.updateUserFeedback(request);
    */
   updateUserFeedback(
-    request: protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest,
+    request?: protos.google.cloud.dataqna.v1alpha.IUpdateUserFeedbackRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
