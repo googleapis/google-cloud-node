@@ -410,7 +410,7 @@ export class ClusterControllerClient {
   // -- Service calls --
   // -------------------
   getCluster(
-    request: protos.google.cloud.dataproc.v1.IGetClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IGetClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -459,7 +459,7 @@ export class ClusterControllerClient {
    * const [response] = await client.getCluster(request);
    */
   getCluster(
-    request: protos.google.cloud.dataproc.v1.IGetClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IGetClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -499,7 +499,7 @@ export class ClusterControllerClient {
   }
 
   createCluster(
-    request: protos.google.cloud.dataproc.v1.ICreateClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.ICreateClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -574,7 +574,7 @@ export class ClusterControllerClient {
    * const [response] = await operation.promise();
    */
   createCluster(
-    request: protos.google.cloud.dataproc.v1.ICreateClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.ICreateClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -659,7 +659,7 @@ export class ClusterControllerClient {
     >;
   }
   updateCluster(
-    request: protos.google.cloud.dataproc.v1.IUpdateClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IUpdateClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -799,7 +799,7 @@ export class ClusterControllerClient {
    * const [response] = await operation.promise();
    */
   updateCluster(
-    request: protos.google.cloud.dataproc.v1.IUpdateClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IUpdateClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -884,7 +884,7 @@ export class ClusterControllerClient {
     >;
   }
   stopCluster(
-    request: protos.google.cloud.dataproc.v1.IStopClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IStopClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -961,7 +961,7 @@ export class ClusterControllerClient {
    * const [response] = await operation.promise();
    */
   stopCluster(
-    request: protos.google.cloud.dataproc.v1.IStopClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IStopClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1046,7 +1046,7 @@ export class ClusterControllerClient {
     >;
   }
   startCluster(
-    request: protos.google.cloud.dataproc.v1.IStartClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IStartClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1123,7 +1123,7 @@ export class ClusterControllerClient {
    * const [response] = await operation.promise();
    */
   startCluster(
-    request: protos.google.cloud.dataproc.v1.IStartClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IStartClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1208,7 +1208,7 @@ export class ClusterControllerClient {
     >;
   }
   deleteCluster(
-    request: protos.google.cloud.dataproc.v1.IDeleteClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IDeleteClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1287,7 +1287,7 @@ export class ClusterControllerClient {
    * const [response] = await operation.promise();
    */
   deleteCluster(
-    request: protos.google.cloud.dataproc.v1.IDeleteClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IDeleteClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1372,7 +1372,7 @@ export class ClusterControllerClient {
     >;
   }
   diagnoseCluster(
-    request: protos.google.cloud.dataproc.v1.IDiagnoseClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IDiagnoseClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1439,7 +1439,7 @@ export class ClusterControllerClient {
    * const [response] = await operation.promise();
    */
   diagnoseCluster(
-    request: protos.google.cloud.dataproc.v1.IDiagnoseClusterRequest,
+    request?: protos.google.cloud.dataproc.v1.IDiagnoseClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1524,7 +1524,7 @@ export class ClusterControllerClient {
     >;
   }
   listClusters(
-    request: protos.google.cloud.dataproc.v1.IListClustersRequest,
+    request?: protos.google.cloud.dataproc.v1.IListClustersRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1598,7 +1598,7 @@ export class ClusterControllerClient {
    *   for more details and examples.
    */
   listClusters(
-    request: protos.google.cloud.dataproc.v1.IListClustersRequest,
+    request?: protos.google.cloud.dataproc.v1.IListClustersRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
