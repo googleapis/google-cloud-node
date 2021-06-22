@@ -349,7 +349,7 @@ export class InstancesClient {
   // -- Service calls --
   // -------------------
   getInstance(
-    request: protos.google.appengine.v1.IGetInstanceRequest,
+    request?: protos.google.appengine.v1.IGetInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -394,7 +394,7 @@ export class InstancesClient {
    * const [response] = await client.getInstance(request);
    */
   getInstance(
-    request: protos.google.appengine.v1.IGetInstanceRequest,
+    request?: protos.google.appengine.v1.IGetInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -434,7 +434,7 @@ export class InstancesClient {
   }
 
   deleteInstance(
-    request: protos.google.appengine.v1.IDeleteInstanceRequest,
+    request?: protos.google.appengine.v1.IDeleteInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -502,7 +502,7 @@ export class InstancesClient {
    * const [response] = await operation.promise();
    */
   deleteInstance(
-    request: protos.google.appengine.v1.IDeleteInstanceRequest,
+    request?: protos.google.appengine.v1.IDeleteInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -587,7 +587,7 @@ export class InstancesClient {
     >;
   }
   debugInstance(
-    request: protos.google.appengine.v1.IDebugInstanceRequest,
+    request?: protos.google.appengine.v1.IDebugInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -659,7 +659,7 @@ export class InstancesClient {
    * const [response] = await operation.promise();
    */
   debugInstance(
-    request: protos.google.appengine.v1.IDebugInstanceRequest,
+    request?: protos.google.appengine.v1.IDebugInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -744,7 +744,7 @@ export class InstancesClient {
     >;
   }
   listInstances(
-    request: protos.google.appengine.v1.IListInstancesRequest,
+    request?: protos.google.appengine.v1.IListInstancesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -799,7 +799,7 @@ export class InstancesClient {
    *   for more details and examples.
    */
   listInstances(
-    request: protos.google.appengine.v1.IListInstancesRequest,
+    request?: protos.google.appengine.v1.IListInstancesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

@@ -342,7 +342,7 @@ export class ApplicationsClient {
   // -- Service calls --
   // -------------------
   getApplication(
-    request: protos.google.appengine.v1.IGetApplicationRequest,
+    request?: protos.google.appengine.v1.IGetApplicationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -386,7 +386,7 @@ export class ApplicationsClient {
    * const [response] = await client.getApplication(request);
    */
   getApplication(
-    request: protos.google.appengine.v1.IGetApplicationRequest,
+    request?: protos.google.appengine.v1.IGetApplicationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -426,7 +426,7 @@ export class ApplicationsClient {
   }
 
   createApplication(
-    request: protos.google.appengine.v1.ICreateApplicationRequest,
+    request?: protos.google.appengine.v1.ICreateApplicationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -488,7 +488,7 @@ export class ApplicationsClient {
    * const [response] = await operation.promise();
    */
   createApplication(
-    request: protos.google.appengine.v1.ICreateApplicationRequest,
+    request?: protos.google.appengine.v1.ICreateApplicationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -567,7 +567,7 @@ export class ApplicationsClient {
     >;
   }
   updateApplication(
-    request: protos.google.appengine.v1.IUpdateApplicationRequest,
+    request?: protos.google.appengine.v1.IUpdateApplicationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -631,7 +631,7 @@ export class ApplicationsClient {
    * const [response] = await operation.promise();
    */
   updateApplication(
-    request: protos.google.appengine.v1.IUpdateApplicationRequest,
+    request?: protos.google.appengine.v1.IUpdateApplicationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -716,7 +716,7 @@ export class ApplicationsClient {
     >;
   }
   repairApplication(
-    request: protos.google.appengine.v1.IRepairApplicationRequest,
+    request?: protos.google.appengine.v1.IRepairApplicationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -781,7 +781,7 @@ export class ApplicationsClient {
    * const [response] = await operation.promise();
    */
   repairApplication(
-    request: protos.google.appengine.v1.IRepairApplicationRequest,
+    request?: protos.google.appengine.v1.IRepairApplicationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

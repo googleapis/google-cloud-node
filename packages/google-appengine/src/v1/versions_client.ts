@@ -361,7 +361,7 @@ export class VersionsClient {
   // -- Service calls --
   // -------------------
   getVersion(
-    request: protos.google.appengine.v1.IGetVersionRequest,
+    request?: protos.google.appengine.v1.IGetVersionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -410,7 +410,7 @@ export class VersionsClient {
    * const [response] = await client.getVersion(request);
    */
   getVersion(
-    request: protos.google.appengine.v1.IGetVersionRequest,
+    request?: protos.google.appengine.v1.IGetVersionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -450,7 +450,7 @@ export class VersionsClient {
   }
 
   createVersion(
-    request: protos.google.appengine.v1.ICreateVersionRequest,
+    request?: protos.google.appengine.v1.ICreateVersionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -509,7 +509,7 @@ export class VersionsClient {
    * const [response] = await operation.promise();
    */
   createVersion(
-    request: protos.google.appengine.v1.ICreateVersionRequest,
+    request?: protos.google.appengine.v1.ICreateVersionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -594,7 +594,7 @@ export class VersionsClient {
     >;
   }
   updateVersion(
-    request: protos.google.appengine.v1.IUpdateVersionRequest,
+    request?: protos.google.appengine.v1.IUpdateVersionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -691,7 +691,7 @@ export class VersionsClient {
    * const [response] = await operation.promise();
    */
   updateVersion(
-    request: protos.google.appengine.v1.IUpdateVersionRequest,
+    request?: protos.google.appengine.v1.IUpdateVersionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -776,7 +776,7 @@ export class VersionsClient {
     >;
   }
   deleteVersion(
-    request: protos.google.appengine.v1.IDeleteVersionRequest,
+    request?: protos.google.appengine.v1.IDeleteVersionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -833,7 +833,7 @@ export class VersionsClient {
    * const [response] = await operation.promise();
    */
   deleteVersion(
-    request: protos.google.appengine.v1.IDeleteVersionRequest,
+    request?: protos.google.appengine.v1.IDeleteVersionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -918,7 +918,7 @@ export class VersionsClient {
     >;
   }
   listVersions(
-    request: protos.google.appengine.v1.IListVersionsRequest,
+    request?: protos.google.appengine.v1.IListVersionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -972,7 +972,7 @@ export class VersionsClient {
    *   for more details and examples.
    */
   listVersions(
-    request: protos.google.appengine.v1.IListVersionsRequest,
+    request?: protos.google.appengine.v1.IListVersionsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

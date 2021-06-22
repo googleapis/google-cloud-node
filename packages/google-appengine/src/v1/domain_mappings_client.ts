@@ -361,7 +361,7 @@ export class DomainMappingsClient {
   // -- Service calls --
   // -------------------
   getDomainMapping(
-    request: protos.google.appengine.v1.IGetDomainMappingRequest,
+    request?: protos.google.appengine.v1.IGetDomainMappingRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -406,7 +406,7 @@ export class DomainMappingsClient {
    * const [response] = await client.getDomainMapping(request);
    */
   getDomainMapping(
-    request: protos.google.appengine.v1.IGetDomainMappingRequest,
+    request?: protos.google.appengine.v1.IGetDomainMappingRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -448,7 +448,7 @@ export class DomainMappingsClient {
   }
 
   createDomainMapping(
-    request: protos.google.appengine.v1.ICreateDomainMappingRequest,
+    request?: protos.google.appengine.v1.ICreateDomainMappingRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -511,7 +511,7 @@ export class DomainMappingsClient {
    * const [response] = await operation.promise();
    */
   createDomainMapping(
-    request: protos.google.appengine.v1.ICreateDomainMappingRequest,
+    request?: protos.google.appengine.v1.ICreateDomainMappingRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -596,7 +596,7 @@ export class DomainMappingsClient {
     >;
   }
   updateDomainMapping(
-    request: protos.google.appengine.v1.IUpdateDomainMappingRequest,
+    request?: protos.google.appengine.v1.IUpdateDomainMappingRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -661,7 +661,7 @@ export class DomainMappingsClient {
    * const [response] = await operation.promise();
    */
   updateDomainMapping(
-    request: protos.google.appengine.v1.IUpdateDomainMappingRequest,
+    request?: protos.google.appengine.v1.IUpdateDomainMappingRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -746,7 +746,7 @@ export class DomainMappingsClient {
     >;
   }
   deleteDomainMapping(
-    request: protos.google.appengine.v1.IDeleteDomainMappingRequest,
+    request?: protos.google.appengine.v1.IDeleteDomainMappingRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -805,7 +805,7 @@ export class DomainMappingsClient {
    * const [response] = await operation.promise();
    */
   deleteDomainMapping(
-    request: protos.google.appengine.v1.IDeleteDomainMappingRequest,
+    request?: protos.google.appengine.v1.IDeleteDomainMappingRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -890,7 +890,7 @@ export class DomainMappingsClient {
     >;
   }
   listDomainMappings(
-    request: protos.google.appengine.v1.IListDomainMappingsRequest,
+    request?: protos.google.appengine.v1.IListDomainMappingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -941,7 +941,7 @@ export class DomainMappingsClient {
    *   for more details and examples.
    */
   listDomainMappings(
-    request: protos.google.appengine.v1.IListDomainMappingsRequest,
+    request?: protos.google.appengine.v1.IListDomainMappingsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

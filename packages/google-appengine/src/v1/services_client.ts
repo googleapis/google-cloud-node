@@ -349,7 +349,7 @@ export class ServicesClient {
   // -- Service calls --
   // -------------------
   getService(
-    request: protos.google.appengine.v1.IGetServiceRequest,
+    request?: protos.google.appengine.v1.IGetServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -393,7 +393,7 @@ export class ServicesClient {
    * const [response] = await client.getService(request);
    */
   getService(
-    request: protos.google.appengine.v1.IGetServiceRequest,
+    request?: protos.google.appengine.v1.IGetServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -433,7 +433,7 @@ export class ServicesClient {
   }
 
   updateService(
-    request: protos.google.appengine.v1.IUpdateServiceRequest,
+    request?: protos.google.appengine.v1.IUpdateServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -507,7 +507,7 @@ export class ServicesClient {
    * const [response] = await operation.promise();
    */
   updateService(
-    request: protos.google.appengine.v1.IUpdateServiceRequest,
+    request?: protos.google.appengine.v1.IUpdateServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -592,7 +592,7 @@ export class ServicesClient {
     >;
   }
   deleteService(
-    request: protos.google.appengine.v1.IDeleteServiceRequest,
+    request?: protos.google.appengine.v1.IDeleteServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -648,7 +648,7 @@ export class ServicesClient {
    * const [response] = await operation.promise();
    */
   deleteService(
-    request: protos.google.appengine.v1.IDeleteServiceRequest,
+    request?: protos.google.appengine.v1.IDeleteServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -733,7 +733,7 @@ export class ServicesClient {
     >;
   }
   listServices(
-    request: protos.google.appengine.v1.IListServicesRequest,
+    request?: protos.google.appengine.v1.IListServicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -784,7 +784,7 @@ export class ServicesClient {
    *   for more details and examples.
    */
   listServices(
-    request: protos.google.appengine.v1.IListServicesRequest,
+    request?: protos.google.appengine.v1.IListServicesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

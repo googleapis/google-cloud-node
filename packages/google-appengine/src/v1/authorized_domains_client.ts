@@ -304,7 +304,7 @@ export class AuthorizedDomainsClient {
   // -------------------
 
   listAuthorizedDomains(
-    request: protos.google.appengine.v1.IListAuthorizedDomainsRequest,
+    request?: protos.google.appengine.v1.IListAuthorizedDomainsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -359,7 +359,7 @@ export class AuthorizedDomainsClient {
    *   for more details and examples.
    */
   listAuthorizedDomains(
-    request: protos.google.appengine.v1.IListAuthorizedDomainsRequest,
+    request?: protos.google.appengine.v1.IListAuthorizedDomainsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
