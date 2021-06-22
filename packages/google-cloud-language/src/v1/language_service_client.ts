@@ -278,7 +278,7 @@ export class LanguageServiceClient {
   // -- Service calls --
   // -------------------
   analyzeSentiment(
-    request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+    request?: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -328,7 +328,7 @@ export class LanguageServiceClient {
    * const [response] = await client.analyzeSentiment(request);
    */
   analyzeSentiment(
-    request: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
+    request?: protos.google.cloud.language.v1.IAnalyzeSentimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -365,7 +365,7 @@ export class LanguageServiceClient {
     return this.innerApiCalls.analyzeSentiment(request, options, callback);
   }
   analyzeEntities(
-    request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+    request?: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -417,7 +417,7 @@ export class LanguageServiceClient {
    * const [response] = await client.analyzeEntities(request);
    */
   analyzeEntities(
-    request: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
+    request?: protos.google.cloud.language.v1.IAnalyzeEntitiesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -454,7 +454,7 @@ export class LanguageServiceClient {
     return this.innerApiCalls.analyzeEntities(request, options, callback);
   }
   analyzeEntitySentiment(
-    request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+    request?: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -508,7 +508,7 @@ export class LanguageServiceClient {
    * const [response] = await client.analyzeEntitySentiment(request);
    */
   analyzeEntitySentiment(
-    request: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
+    request?: protos.google.cloud.language.v1.IAnalyzeEntitySentimentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -552,7 +552,7 @@ export class LanguageServiceClient {
     );
   }
   analyzeSyntax(
-    request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+    request?: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -600,7 +600,7 @@ export class LanguageServiceClient {
    * const [response] = await client.analyzeSyntax(request);
    */
   analyzeSyntax(
-    request: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
+    request?: protos.google.cloud.language.v1.IAnalyzeSyntaxRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -635,7 +635,7 @@ export class LanguageServiceClient {
     return this.innerApiCalls.analyzeSyntax(request, options, callback);
   }
   classifyText(
-    request: protos.google.cloud.language.v1.IClassifyTextRequest,
+    request?: protos.google.cloud.language.v1.IClassifyTextRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -679,7 +679,7 @@ export class LanguageServiceClient {
    * const [response] = await client.classifyText(request);
    */
   classifyText(
-    request: protos.google.cloud.language.v1.IClassifyTextRequest,
+    request?: protos.google.cloud.language.v1.IClassifyTextRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -714,7 +714,7 @@ export class LanguageServiceClient {
     return this.innerApiCalls.classifyText(request, options, callback);
   }
   annotateText(
-    request: protos.google.cloud.language.v1.IAnnotateTextRequest,
+    request?: protos.google.cloud.language.v1.IAnnotateTextRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -763,7 +763,7 @@ export class LanguageServiceClient {
    * const [response] = await client.annotateText(request);
    */
   annotateText(
-    request: protos.google.cloud.language.v1.IAnnotateTextRequest,
+    request?: protos.google.cloud.language.v1.IAnnotateTextRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
