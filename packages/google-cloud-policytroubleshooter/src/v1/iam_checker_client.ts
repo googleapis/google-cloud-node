@@ -269,7 +269,7 @@ export class IamCheckerClient {
   // -- Service calls --
   // -------------------
   troubleshootIamPolicy(
-    request: protos.google.cloud.policytroubleshooter.v1.ITroubleshootIamPolicyRequest,
+    request?: protos.google.cloud.policytroubleshooter.v1.ITroubleshootIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -322,7 +322,7 @@ export class IamCheckerClient {
    * const [response] = await client.troubleshootIamPolicy(request);
    */
   troubleshootIamPolicy(
-    request: protos.google.cloud.policytroubleshooter.v1.ITroubleshootIamPolicyRequest,
+    request?: protos.google.cloud.policytroubleshooter.v1.ITroubleshootIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
