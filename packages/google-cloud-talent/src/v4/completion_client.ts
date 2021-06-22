@@ -286,7 +286,7 @@ export class CompletionClient {
   // -- Service calls --
   // -------------------
   completeQuery(
-    request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
+    request?: protos.google.cloud.talent.v4.ICompleteQueryRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -359,7 +359,7 @@ export class CompletionClient {
    * const [response] = await client.completeQuery(request);
    */
   completeQuery(
-    request: protos.google.cloud.talent.v4.ICompleteQueryRequest,
+    request?: protos.google.cloud.talent.v4.ICompleteQueryRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

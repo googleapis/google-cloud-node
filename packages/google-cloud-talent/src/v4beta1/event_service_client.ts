@@ -301,7 +301,7 @@ export class EventServiceClient {
   // -- Service calls --
   // -------------------
   createClientEvent(
-    request: protos.google.cloud.talent.v4beta1.ICreateClientEventRequest,
+    request?: protos.google.cloud.talent.v4beta1.ICreateClientEventRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -362,7 +362,7 @@ export class EventServiceClient {
    * const [response] = await client.createClientEvent(request);
    */
   createClientEvent(
-    request: protos.google.cloud.talent.v4beta1.ICreateClientEventRequest,
+    request?: protos.google.cloud.talent.v4beta1.ICreateClientEventRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

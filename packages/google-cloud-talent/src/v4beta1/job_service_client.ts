@@ -375,7 +375,7 @@ export class JobServiceClient {
   // -- Service calls --
   // -------------------
   createJob(
-    request: protos.google.cloud.talent.v4beta1.ICreateJobRequest,
+    request?: protos.google.cloud.talent.v4beta1.ICreateJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -428,7 +428,7 @@ export class JobServiceClient {
    * const [response] = await client.createJob(request);
    */
   createJob(
-    request: protos.google.cloud.talent.v4beta1.ICreateJobRequest,
+    request?: protos.google.cloud.talent.v4beta1.ICreateJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -469,7 +469,7 @@ export class JobServiceClient {
     return this.innerApiCalls.createJob(request, options, callback);
   }
   getJob(
-    request: protos.google.cloud.talent.v4beta1.IGetJobRequest,
+    request?: protos.google.cloud.talent.v4beta1.IGetJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -521,7 +521,7 @@ export class JobServiceClient {
    * const [response] = await client.getJob(request);
    */
   getJob(
-    request: protos.google.cloud.talent.v4beta1.IGetJobRequest,
+    request?: protos.google.cloud.talent.v4beta1.IGetJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -560,7 +560,7 @@ export class JobServiceClient {
     return this.innerApiCalls.getJob(request, options, callback);
   }
   updateJob(
-    request: protos.google.cloud.talent.v4beta1.IUpdateJobRequest,
+    request?: protos.google.cloud.talent.v4beta1.IUpdateJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -615,7 +615,7 @@ export class JobServiceClient {
    * const [response] = await client.updateJob(request);
    */
   updateJob(
-    request: protos.google.cloud.talent.v4beta1.IUpdateJobRequest,
+    request?: protos.google.cloud.talent.v4beta1.IUpdateJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -656,7 +656,7 @@ export class JobServiceClient {
     return this.innerApiCalls.updateJob(request, options, callback);
   }
   deleteJob(
-    request: protos.google.cloud.talent.v4beta1.IDeleteJobRequest,
+    request?: protos.google.cloud.talent.v4beta1.IDeleteJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -710,7 +710,7 @@ export class JobServiceClient {
    * const [response] = await client.deleteJob(request);
    */
   deleteJob(
-    request: protos.google.cloud.talent.v4beta1.IDeleteJobRequest,
+    request?: protos.google.cloud.talent.v4beta1.IDeleteJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -751,7 +751,7 @@ export class JobServiceClient {
     return this.innerApiCalls.deleteJob(request, options, callback);
   }
   batchDeleteJobs(
-    request: protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -815,7 +815,7 @@ export class JobServiceClient {
    * const [response] = await client.batchDeleteJobs(request);
    */
   batchDeleteJobs(
-    request: protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IBatchDeleteJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -858,7 +858,7 @@ export class JobServiceClient {
     return this.innerApiCalls.batchDeleteJobs(request, options, callback);
   }
   searchJobs(
-    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1134,7 +1134,7 @@ export class JobServiceClient {
    * const [response] = await client.searchJobs(request);
    */
   searchJobs(
-    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1175,7 +1175,7 @@ export class JobServiceClient {
     return this.innerApiCalls.searchJobs(request, options, callback);
   }
   searchJobsForAlert(
-    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1456,7 +1456,7 @@ export class JobServiceClient {
    * const [response] = await client.searchJobsForAlert(request);
    */
   searchJobsForAlert(
-    request: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.ISearchJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1498,7 +1498,7 @@ export class JobServiceClient {
   }
 
   batchCreateJobs(
-    request: protos.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1560,7 +1560,7 @@ export class JobServiceClient {
    * const [response] = await operation.promise();
    */
   batchCreateJobs(
-    request: protos.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IBatchCreateJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1645,7 +1645,7 @@ export class JobServiceClient {
     >;
   }
   batchUpdateJobs(
-    request: protos.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1722,7 +1722,7 @@ export class JobServiceClient {
    * const [response] = await operation.promise();
    */
   batchUpdateJobs(
-    request: protos.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IBatchUpdateJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1807,7 +1807,7 @@ export class JobServiceClient {
     >;
   }
   listJobs(
-    request: protos.google.cloud.talent.v4beta1.IListJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1890,7 +1890,7 @@ export class JobServiceClient {
    *   for more details and examples.
    */
   listJobs(
-    request: protos.google.cloud.talent.v4beta1.IListJobsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

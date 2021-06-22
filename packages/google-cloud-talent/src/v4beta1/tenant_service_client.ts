@@ -327,7 +327,7 @@ export class TenantServiceClient {
   // -- Service calls --
   // -------------------
   createTenant(
-    request: protos.google.cloud.talent.v4beta1.ICreateTenantRequest,
+    request?: protos.google.cloud.talent.v4beta1.ICreateTenantRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -380,7 +380,7 @@ export class TenantServiceClient {
    * const [response] = await client.createTenant(request);
    */
   createTenant(
-    request: protos.google.cloud.talent.v4beta1.ICreateTenantRequest,
+    request?: protos.google.cloud.talent.v4beta1.ICreateTenantRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -423,7 +423,7 @@ export class TenantServiceClient {
     return this.innerApiCalls.createTenant(request, options, callback);
   }
   getTenant(
-    request: protos.google.cloud.talent.v4beta1.IGetTenantRequest,
+    request?: protos.google.cloud.talent.v4beta1.IGetTenantRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -470,7 +470,7 @@ export class TenantServiceClient {
    * const [response] = await client.getTenant(request);
    */
   getTenant(
-    request: protos.google.cloud.talent.v4beta1.IGetTenantRequest,
+    request?: protos.google.cloud.talent.v4beta1.IGetTenantRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -511,7 +511,7 @@ export class TenantServiceClient {
     return this.innerApiCalls.getTenant(request, options, callback);
   }
   updateTenant(
-    request: protos.google.cloud.talent.v4beta1.IUpdateTenantRequest,
+    request?: protos.google.cloud.talent.v4beta1.IUpdateTenantRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -567,7 +567,7 @@ export class TenantServiceClient {
    * const [response] = await client.updateTenant(request);
    */
   updateTenant(
-    request: protos.google.cloud.talent.v4beta1.IUpdateTenantRequest,
+    request?: protos.google.cloud.talent.v4beta1.IUpdateTenantRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -610,7 +610,7 @@ export class TenantServiceClient {
     return this.innerApiCalls.updateTenant(request, options, callback);
   }
   deleteTenant(
-    request: protos.google.cloud.talent.v4beta1.IDeleteTenantRequest,
+    request?: protos.google.cloud.talent.v4beta1.IDeleteTenantRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -661,7 +661,7 @@ export class TenantServiceClient {
    * const [response] = await client.deleteTenant(request);
    */
   deleteTenant(
-    request: protos.google.cloud.talent.v4beta1.IDeleteTenantRequest,
+    request?: protos.google.cloud.talent.v4beta1.IDeleteTenantRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -705,7 +705,7 @@ export class TenantServiceClient {
   }
 
   listTenants(
-    request: protos.google.cloud.talent.v4beta1.IListTenantsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListTenantsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -764,7 +764,7 @@ export class TenantServiceClient {
    *   for more details and examples.
    */
   listTenants(
-    request: protos.google.cloud.talent.v4beta1.IListTenantsRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListTenantsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

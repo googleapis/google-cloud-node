@@ -329,7 +329,7 @@ export class ProfileServiceClient {
   // -- Service calls --
   // -------------------
   createProfile(
-    request: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
+    request?: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -382,7 +382,7 @@ export class ProfileServiceClient {
    * const [response] = await client.createProfile(request);
    */
   createProfile(
-    request: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
+    request?: protos.google.cloud.talent.v4beta1.ICreateProfileRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -425,7 +425,7 @@ export class ProfileServiceClient {
     return this.innerApiCalls.createProfile(request, options, callback);
   }
   getProfile(
-    request: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
+    request?: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -473,7 +473,7 @@ export class ProfileServiceClient {
    * const [response] = await client.getProfile(request);
    */
   getProfile(
-    request: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
+    request?: protos.google.cloud.talent.v4beta1.IGetProfileRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -514,7 +514,7 @@ export class ProfileServiceClient {
     return this.innerApiCalls.getProfile(request, options, callback);
   }
   updateProfile(
-    request: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
+    request?: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -566,7 +566,7 @@ export class ProfileServiceClient {
    * const [response] = await client.updateProfile(request);
    */
   updateProfile(
-    request: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
+    request?: protos.google.cloud.talent.v4beta1.IUpdateProfileRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -609,7 +609,7 @@ export class ProfileServiceClient {
     return this.innerApiCalls.updateProfile(request, options, callback);
   }
   deleteProfile(
-    request: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
+    request?: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -663,7 +663,7 @@ export class ProfileServiceClient {
    * const [response] = await client.deleteProfile(request);
    */
   deleteProfile(
-    request: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
+    request?: protos.google.cloud.talent.v4beta1.IDeleteProfileRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -706,7 +706,7 @@ export class ProfileServiceClient {
     return this.innerApiCalls.deleteProfile(request, options, callback);
   }
   searchProfiles(
-    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
+    request?: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -929,7 +929,7 @@ export class ProfileServiceClient {
    * const [response] = await client.searchProfiles(request);
    */
   searchProfiles(
-    request: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
+    request?: protos.google.cloud.talent.v4beta1.ISearchProfilesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -973,7 +973,7 @@ export class ProfileServiceClient {
   }
 
   listProfiles(
-    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1061,7 +1061,7 @@ export class ProfileServiceClient {
    *   for more details and examples.
    */
   listProfiles(
-    request: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
+    request?: protos.google.cloud.talent.v4beta1.IListProfilesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
