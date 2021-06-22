@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [2.3.4](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.3...v2.3.4) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#917](https://www.github.com/googleapis/nodejs-vision/issues/917)) ([d301b79](https://www.github.com/googleapis/nodejs-vision/commit/d301b79dee83948bada4b16e33048933d454c051))
+
 ### [2.3.3](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.2...v2.3.3) (2021-05-26)
 
 
