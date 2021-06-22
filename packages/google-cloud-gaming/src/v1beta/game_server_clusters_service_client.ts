@@ -387,7 +387,7 @@ export class GameServerClustersServiceClient {
   // -- Service calls --
   // -------------------
   getGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IGetGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IGetGameServerClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -440,7 +440,7 @@ export class GameServerClustersServiceClient {
    * const [response] = await client.getGameServerCluster(request);
    */
   getGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IGetGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IGetGameServerClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -486,7 +486,7 @@ export class GameServerClustersServiceClient {
     return this.innerApiCalls.getGameServerCluster(request, options, callback);
   }
   previewCreateGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IPreviewCreateGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IPreviewCreateGameServerClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -545,7 +545,7 @@ export class GameServerClustersServiceClient {
    * const [response] = await client.previewCreateGameServerCluster(request);
    */
   previewCreateGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IPreviewCreateGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IPreviewCreateGameServerClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -595,7 +595,7 @@ export class GameServerClustersServiceClient {
     );
   }
   previewDeleteGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IPreviewDeleteGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IPreviewDeleteGameServerClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -649,7 +649,7 @@ export class GameServerClustersServiceClient {
    * const [response] = await client.previewDeleteGameServerCluster(request);
    */
   previewDeleteGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IPreviewDeleteGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IPreviewDeleteGameServerClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -699,7 +699,7 @@ export class GameServerClustersServiceClient {
     );
   }
   previewUpdateGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IPreviewUpdateGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IPreviewUpdateGameServerClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -760,7 +760,7 @@ export class GameServerClustersServiceClient {
    * const [response] = await client.previewUpdateGameServerCluster(request);
    */
   previewUpdateGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IPreviewUpdateGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IPreviewUpdateGameServerClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -811,7 +811,7 @@ export class GameServerClustersServiceClient {
   }
 
   createGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.ICreateGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.ICreateGameServerClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -872,7 +872,7 @@ export class GameServerClustersServiceClient {
    * const [response] = await operation.promise();
    */
   createGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.ICreateGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.ICreateGameServerClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -961,7 +961,7 @@ export class GameServerClustersServiceClient {
     >;
   }
   deleteGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IDeleteGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IDeleteGameServerClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1018,7 +1018,7 @@ export class GameServerClustersServiceClient {
    * const [response] = await operation.promise();
    */
   deleteGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IDeleteGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IDeleteGameServerClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1107,7 +1107,7 @@ export class GameServerClustersServiceClient {
     >;
   }
   updateGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IUpdateGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IUpdateGameServerClusterRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1171,7 +1171,7 @@ export class GameServerClustersServiceClient {
    * const [response] = await operation.promise();
    */
   updateGameServerCluster(
-    request: protos.google.cloud.gaming.v1beta.IUpdateGameServerClusterRequest,
+    request?: protos.google.cloud.gaming.v1beta.IUpdateGameServerClusterRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1260,7 +1260,7 @@ export class GameServerClustersServiceClient {
     >;
   }
   listGameServerClusters(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+    request?: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1326,7 +1326,7 @@ export class GameServerClustersServiceClient {
    *   for more details and examples.
    */
   listGameServerClusters(
-    request: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
+    request?: protos.google.cloud.gaming.v1beta.IListGameServerClustersRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

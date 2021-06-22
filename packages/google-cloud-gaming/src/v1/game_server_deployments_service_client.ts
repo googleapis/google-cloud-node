@@ -404,7 +404,7 @@ export class GameServerDeploymentsServiceClient {
   // -- Service calls --
   // -------------------
   getGameServerDeployment(
-    request: protos.google.cloud.gaming.v1.IGetGameServerDeploymentRequest,
+    request?: protos.google.cloud.gaming.v1.IGetGameServerDeploymentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -454,7 +454,7 @@ export class GameServerDeploymentsServiceClient {
    * const [response] = await client.getGameServerDeployment(request);
    */
   getGameServerDeployment(
-    request: protos.google.cloud.gaming.v1.IGetGameServerDeploymentRequest,
+    request?: protos.google.cloud.gaming.v1.IGetGameServerDeploymentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -501,7 +501,7 @@ export class GameServerDeploymentsServiceClient {
     );
   }
   getGameServerDeploymentRollout(
-    request: protos.google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest,
+    request?: protos.google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -554,7 +554,7 @@ export class GameServerDeploymentsServiceClient {
    * const [response] = await client.getGameServerDeploymentRollout(request);
    */
   getGameServerDeploymentRollout(
-    request: protos.google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest,
+    request?: protos.google.cloud.gaming.v1.IGetGameServerDeploymentRolloutRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -604,7 +604,7 @@ export class GameServerDeploymentsServiceClient {
     );
   }
   previewGameServerDeploymentRollout(
-    request: protos.google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest,
+    request?: protos.google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -667,7 +667,7 @@ export class GameServerDeploymentsServiceClient {
    * const [response] = await client.previewGameServerDeploymentRollout(request);
    */
   previewGameServerDeploymentRollout(
-    request: protos.google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest,
+    request?: protos.google.cloud.gaming.v1.IPreviewGameServerDeploymentRolloutRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -717,7 +717,7 @@ export class GameServerDeploymentsServiceClient {
     );
   }
   fetchDeploymentState(
-    request: protos.google.cloud.gaming.v1.IFetchDeploymentStateRequest,
+    request?: protos.google.cloud.gaming.v1.IFetchDeploymentStateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -769,7 +769,7 @@ export class GameServerDeploymentsServiceClient {
    * const [response] = await client.fetchDeploymentState(request);
    */
   fetchDeploymentState(
-    request: protos.google.cloud.gaming.v1.IFetchDeploymentStateRequest,
+    request?: protos.google.cloud.gaming.v1.IFetchDeploymentStateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -813,7 +813,7 @@ export class GameServerDeploymentsServiceClient {
   }
 
   createGameServerDeployment(
-    request: protos.google.cloud.gaming.v1.ICreateGameServerDeploymentRequest,
+    request?: protos.google.cloud.gaming.v1.ICreateGameServerDeploymentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -874,7 +874,7 @@ export class GameServerDeploymentsServiceClient {
    * const [response] = await operation.promise();
    */
   createGameServerDeployment(
-    request: protos.google.cloud.gaming.v1.ICreateGameServerDeploymentRequest,
+    request?: protos.google.cloud.gaming.v1.ICreateGameServerDeploymentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -963,7 +963,7 @@ export class GameServerDeploymentsServiceClient {
     >;
   }
   deleteGameServerDeployment(
-    request: protos.google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest,
+    request?: protos.google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1021,7 +1021,7 @@ export class GameServerDeploymentsServiceClient {
    * const [response] = await operation.promise();
    */
   deleteGameServerDeployment(
-    request: protos.google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest,
+    request?: protos.google.cloud.gaming.v1.IDeleteGameServerDeploymentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1110,7 +1110,7 @@ export class GameServerDeploymentsServiceClient {
     >;
   }
   updateGameServerDeployment(
-    request: protos.google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest,
+    request?: protos.google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1174,7 +1174,7 @@ export class GameServerDeploymentsServiceClient {
    * const [response] = await operation.promise();
    */
   updateGameServerDeployment(
-    request: protos.google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest,
+    request?: protos.google.cloud.gaming.v1.IUpdateGameServerDeploymentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1263,7 +1263,7 @@ export class GameServerDeploymentsServiceClient {
     >;
   }
   updateGameServerDeploymentRollout(
-    request: protos.google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest,
+    request?: protos.google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1332,7 +1332,7 @@ export class GameServerDeploymentsServiceClient {
    * const [response] = await operation.promise();
    */
   updateGameServerDeploymentRollout(
-    request: protos.google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest,
+    request?: protos.google.cloud.gaming.v1.IUpdateGameServerDeploymentRolloutRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1421,7 +1421,7 @@ export class GameServerDeploymentsServiceClient {
     >;
   }
   listGameServerDeployments(
-    request: protos.google.cloud.gaming.v1.IListGameServerDeploymentsRequest,
+    request?: protos.google.cloud.gaming.v1.IListGameServerDeploymentsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1487,7 +1487,7 @@ export class GameServerDeploymentsServiceClient {
    *   for more details and examples.
    */
   listGameServerDeployments(
-    request: protos.google.cloud.gaming.v1.IListGameServerDeploymentsRequest,
+    request?: protos.google.cloud.gaming.v1.IListGameServerDeploymentsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

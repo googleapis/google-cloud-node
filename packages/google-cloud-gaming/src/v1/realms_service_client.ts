@@ -371,7 +371,7 @@ export class RealmsServiceClient {
   // -- Service calls --
   // -------------------
   getRealm(
-    request: protos.google.cloud.gaming.v1.IGetRealmRequest,
+    request?: protos.google.cloud.gaming.v1.IGetRealmRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -416,7 +416,7 @@ export class RealmsServiceClient {
    * const [response] = await client.getRealm(request);
    */
   getRealm(
-    request: protos.google.cloud.gaming.v1.IGetRealmRequest,
+    request?: protos.google.cloud.gaming.v1.IGetRealmRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -455,7 +455,7 @@ export class RealmsServiceClient {
     return this.innerApiCalls.getRealm(request, options, callback);
   }
   previewRealmUpdate(
-    request: protos.google.cloud.gaming.v1.IPreviewRealmUpdateRequest,
+    request?: protos.google.cloud.gaming.v1.IPreviewRealmUpdateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -513,7 +513,7 @@ export class RealmsServiceClient {
    * const [response] = await client.previewRealmUpdate(request);
    */
   previewRealmUpdate(
-    request: protos.google.cloud.gaming.v1.IPreviewRealmUpdateRequest,
+    request?: protos.google.cloud.gaming.v1.IPreviewRealmUpdateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -557,7 +557,7 @@ export class RealmsServiceClient {
   }
 
   createRealm(
-    request: protos.google.cloud.gaming.v1.ICreateRealmRequest,
+    request?: protos.google.cloud.gaming.v1.ICreateRealmRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -618,7 +618,7 @@ export class RealmsServiceClient {
    * const [response] = await operation.promise();
    */
   createRealm(
-    request: protos.google.cloud.gaming.v1.ICreateRealmRequest,
+    request?: protos.google.cloud.gaming.v1.ICreateRealmRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -703,7 +703,7 @@ export class RealmsServiceClient {
     >;
   }
   deleteRealm(
-    request: protos.google.cloud.gaming.v1.IDeleteRealmRequest,
+    request?: protos.google.cloud.gaming.v1.IDeleteRealmRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -760,7 +760,7 @@ export class RealmsServiceClient {
    * const [response] = await operation.promise();
    */
   deleteRealm(
-    request: protos.google.cloud.gaming.v1.IDeleteRealmRequest,
+    request?: protos.google.cloud.gaming.v1.IDeleteRealmRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -845,7 +845,7 @@ export class RealmsServiceClient {
     >;
   }
   updateRealm(
-    request: protos.google.cloud.gaming.v1.IUpdateRealmRequest,
+    request?: protos.google.cloud.gaming.v1.IUpdateRealmRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -909,7 +909,7 @@ export class RealmsServiceClient {
    * const [response] = await operation.promise();
    */
   updateRealm(
-    request: protos.google.cloud.gaming.v1.IUpdateRealmRequest,
+    request?: protos.google.cloud.gaming.v1.IUpdateRealmRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -994,7 +994,7 @@ export class RealmsServiceClient {
     >;
   }
   listRealms(
-    request: protos.google.cloud.gaming.v1.IListRealmsRequest,
+    request?: protos.google.cloud.gaming.v1.IListRealmsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1056,7 +1056,7 @@ export class RealmsServiceClient {
    *   for more details and examples.
    */
   listRealms(
-    request: protos.google.cloud.gaming.v1.IListRealmsRequest,
+    request?: protos.google.cloud.gaming.v1.IListRealmsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
