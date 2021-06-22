@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.0...v1.2.1) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#60](https://www.github.com/googleapis/nodejs-channel/issues/60)) ([97f7100](https://www.github.com/googleapis/nodejs-channel/commit/97f7100ac2cc40a783ec2bcd5a535f4e5999889d))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-channel/compare/v1.1.2...v1.2.0) (2021-06-08)
 
 
