@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.1...v1.0.2) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#56](https://www.github.com/googleapis/nodejs-appengine-admin/issues/56)) ([1262e7e](https://www.github.com/googleapis/nodejs-appengine-admin/commit/1262e7e449888f56d8fb28801059783c077f6a17))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.0...v1.0.1) (2021-06-07)
 
 
