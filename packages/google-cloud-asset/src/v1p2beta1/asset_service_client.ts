@@ -289,7 +289,7 @@ export class AssetServiceClient {
   // -- Service calls --
   // -------------------
   createFeed(
-    request: protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -347,7 +347,7 @@ export class AssetServiceClient {
    * const [response] = await client.createFeed(request);
    */
   createFeed(
-    request: protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.ICreateFeedRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -388,7 +388,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.createFeed(request, options, callback);
   }
   getFeed(
-    request: protos.google.cloud.asset.v1p2beta1.IGetFeedRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.IGetFeedRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -435,7 +435,7 @@ export class AssetServiceClient {
    * const [response] = await client.getFeed(request);
    */
   getFeed(
-    request: protos.google.cloud.asset.v1p2beta1.IGetFeedRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.IGetFeedRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -476,7 +476,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.getFeed(request, options, callback);
   }
   listFeeds(
-    request: protos.google.cloud.asset.v1p2beta1.IListFeedsRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.IListFeedsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -522,7 +522,7 @@ export class AssetServiceClient {
    * const [response] = await client.listFeeds(request);
    */
   listFeeds(
-    request: protos.google.cloud.asset.v1p2beta1.IListFeedsRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.IListFeedsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -563,7 +563,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.listFeeds(request, options, callback);
   }
   updateFeed(
-    request: protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -615,7 +615,7 @@ export class AssetServiceClient {
    * const [response] = await client.updateFeed(request);
    */
   updateFeed(
-    request: protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.IUpdateFeedRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -656,7 +656,7 @@ export class AssetServiceClient {
     return this.innerApiCalls.updateFeed(request, options, callback);
   }
   deleteFeed(
-    request: protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -703,7 +703,7 @@ export class AssetServiceClient {
    * const [response] = await client.deleteFeed(request);
    */
   deleteFeed(
-    request: protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
+    request?: protos.google.cloud.asset.v1p2beta1.IDeleteFeedRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
