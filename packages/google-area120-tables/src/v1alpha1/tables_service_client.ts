@@ -342,7 +342,7 @@ export class TablesServiceClient {
   // -- Service calls --
   // -------------------
   getTable(
-    request: protos.google.area120.tables.v1alpha1.IGetTableRequest,
+    request?: protos.google.area120.tables.v1alpha1.IGetTableRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -387,7 +387,7 @@ export class TablesServiceClient {
    * const [response] = await client.getTable(request);
    */
   getTable(
-    request: protos.google.area120.tables.v1alpha1.IGetTableRequest,
+    request?: protos.google.area120.tables.v1alpha1.IGetTableRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -428,7 +428,7 @@ export class TablesServiceClient {
     return this.innerApiCalls.getTable(request, options, callback);
   }
   getWorkspace(
-    request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+    request?: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -477,7 +477,7 @@ export class TablesServiceClient {
    * const [response] = await client.getWorkspace(request);
    */
   getWorkspace(
-    request: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
+    request?: protos.google.area120.tables.v1alpha1.IGetWorkspaceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -520,7 +520,7 @@ export class TablesServiceClient {
     return this.innerApiCalls.getWorkspace(request, options, callback);
   }
   getRow(
-    request: protos.google.area120.tables.v1alpha1.IGetRowRequest,
+    request?: protos.google.area120.tables.v1alpha1.IGetRowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -568,7 +568,7 @@ export class TablesServiceClient {
    * const [response] = await client.getRow(request);
    */
   getRow(
-    request: protos.google.area120.tables.v1alpha1.IGetRowRequest,
+    request?: protos.google.area120.tables.v1alpha1.IGetRowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -609,7 +609,7 @@ export class TablesServiceClient {
     return this.innerApiCalls.getRow(request, options, callback);
   }
   createRow(
-    request: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
+    request?: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -663,7 +663,7 @@ export class TablesServiceClient {
    * const [response] = await client.createRow(request);
    */
   createRow(
-    request: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
+    request?: protos.google.area120.tables.v1alpha1.ICreateRowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -706,7 +706,7 @@ export class TablesServiceClient {
     return this.innerApiCalls.createRow(request, options, callback);
   }
   batchCreateRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
+    request?: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -759,7 +759,7 @@ export class TablesServiceClient {
    * const [response] = await client.batchCreateRows(request);
    */
   batchCreateRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
+    request?: protos.google.area120.tables.v1alpha1.IBatchCreateRowsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -802,7 +802,7 @@ export class TablesServiceClient {
     return this.innerApiCalls.batchCreateRows(request, options, callback);
   }
   updateRow(
-    request: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
+    request?: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -855,7 +855,7 @@ export class TablesServiceClient {
    * const [response] = await client.updateRow(request);
    */
   updateRow(
-    request: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
+    request?: protos.google.area120.tables.v1alpha1.IUpdateRowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -898,7 +898,7 @@ export class TablesServiceClient {
     return this.innerApiCalls.updateRow(request, options, callback);
   }
   batchUpdateRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
+    request?: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -951,7 +951,7 @@ export class TablesServiceClient {
    * const [response] = await client.batchUpdateRows(request);
    */
   batchUpdateRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
+    request?: protos.google.area120.tables.v1alpha1.IBatchUpdateRowsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -994,7 +994,7 @@ export class TablesServiceClient {
     return this.innerApiCalls.batchUpdateRows(request, options, callback);
   }
   deleteRow(
-    request: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
+    request?: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1043,7 +1043,7 @@ export class TablesServiceClient {
    * const [response] = await client.deleteRow(request);
    */
   deleteRow(
-    request: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
+    request?: protos.google.area120.tables.v1alpha1.IDeleteRowRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1086,7 +1086,7 @@ export class TablesServiceClient {
     return this.innerApiCalls.deleteRow(request, options, callback);
   }
   batchDeleteRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+    request?: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1140,7 +1140,7 @@ export class TablesServiceClient {
    * const [response] = await client.batchDeleteRows(request);
    */
   batchDeleteRows(
-    request: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
+    request?: protos.google.area120.tables.v1alpha1.IBatchDeleteRowsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1184,7 +1184,7 @@ export class TablesServiceClient {
   }
 
   listTables(
-    request: protos.google.area120.tables.v1alpha1.IListTablesRequest,
+    request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1245,7 +1245,7 @@ export class TablesServiceClient {
    *   for more details and examples.
    */
   listTables(
-    request: protos.google.area120.tables.v1alpha1.IListTablesRequest,
+    request?: protos.google.area120.tables.v1alpha1.IListTablesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1375,7 +1375,7 @@ export class TablesServiceClient {
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.ITable>;
   }
   listWorkspaces(
-    request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+    request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1436,7 +1436,7 @@ export class TablesServiceClient {
    *   for more details and examples.
    */
   listWorkspaces(
-    request: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
+    request?: protos.google.area120.tables.v1alpha1.IListWorkspacesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1566,7 +1566,7 @@ export class TablesServiceClient {
     ) as AsyncIterable<protos.google.area120.tables.v1alpha1.IWorkspace>;
   }
   listRows(
-    request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+    request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1637,7 +1637,7 @@ export class TablesServiceClient {
    *   for more details and examples.
    */
   listRows(
-    request: protos.google.area120.tables.v1alpha1.IListRowsRequest,
+    request?: protos.google.area120.tables.v1alpha1.IListRowsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
