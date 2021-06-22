@@ -331,7 +331,7 @@ export class DocumentProcessorServiceClient {
   // -- Service calls --
   // -------------------
   processDocument(
-    request: protos.google.cloud.documentai.v1.IProcessRequest,
+    request?: protos.google.cloud.documentai.v1.IProcessRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -382,7 +382,7 @@ export class DocumentProcessorServiceClient {
    * const [response] = await client.processDocument(request);
    */
   processDocument(
-    request: protos.google.cloud.documentai.v1.IProcessRequest,
+    request?: protos.google.cloud.documentai.v1.IProcessRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -422,7 +422,7 @@ export class DocumentProcessorServiceClient {
   }
 
   batchProcessDocuments(
-    request: protos.google.cloud.documentai.v1.IBatchProcessRequest,
+    request?: protos.google.cloud.documentai.v1.IBatchProcessRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -486,7 +486,7 @@ export class DocumentProcessorServiceClient {
    * const [response] = await operation.promise();
    */
   batchProcessDocuments(
-    request: protos.google.cloud.documentai.v1.IBatchProcessRequest,
+    request?: protos.google.cloud.documentai.v1.IBatchProcessRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -571,7 +571,7 @@ export class DocumentProcessorServiceClient {
     >;
   }
   reviewDocument(
-    request: protos.google.cloud.documentai.v1.IReviewDocumentRequest,
+    request?: protos.google.cloud.documentai.v1.IReviewDocumentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -631,7 +631,7 @@ export class DocumentProcessorServiceClient {
    * const [response] = await operation.promise();
    */
   reviewDocument(
-    request: protos.google.cloud.documentai.v1.IReviewDocumentRequest,
+    request?: protos.google.cloud.documentai.v1.IReviewDocumentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

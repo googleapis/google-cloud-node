@@ -303,7 +303,7 @@ export class DocumentUnderstandingServiceClient {
   // -------------------
 
   batchProcessDocuments(
-    request: protos.google.cloud.documentai.v1beta1.IBatchProcessDocumentsRequest,
+    request?: protos.google.cloud.documentai.v1beta1.IBatchProcessDocumentsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -365,7 +365,7 @@ export class DocumentUnderstandingServiceClient {
    * const [response] = await operation.promise();
    */
   batchProcessDocuments(
-    request: protos.google.cloud.documentai.v1beta1.IBatchProcessDocumentsRequest,
+    request?: protos.google.cloud.documentai.v1beta1.IBatchProcessDocumentsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
