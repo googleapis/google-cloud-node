@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.1.3](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.2...v3.1.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#623](https://www.github.com/googleapis/nodejs-dlp/issues/623)) ([77f45fb](https://www.github.com/googleapis/nodejs-dlp/commit/77f45fbcd1481079cc8f1bd10d5637da24405bce))
+
 ### [3.1.2](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.1...v3.1.2) (2021-05-25)
 
 
