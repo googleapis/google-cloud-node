@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.6.2](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.1...v1.6.2) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#117](https://www.github.com/googleapis/nodejs-os-config/issues/117)) ([4d1bbb8](https://www.github.com/googleapis/nodejs-os-config/commit/4d1bbb8593c3ca0ea0f6e8af1737b7106239617b))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.0...v1.6.1) (2021-05-25)
 
 
