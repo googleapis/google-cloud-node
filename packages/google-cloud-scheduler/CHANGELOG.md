@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [2.2.3](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.2...v2.2.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#377](https://www.github.com/googleapis/nodejs-scheduler/issues/377)) ([4e09949](https://www.github.com/googleapis/nodejs-scheduler/commit/4e0994968fa9fb08f5e7a5f8e9f7cbe96b62e4bf))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.1...v2.2.2) (2021-05-29)
 
 
