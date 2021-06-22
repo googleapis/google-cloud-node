@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.1](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.5.0...v2.5.1) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#179](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/179)) ([b0beaaa](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/b0beaaa280e7599f75e0a439f4ecd4a9a6c059ad))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.4.0...v2.5.0) (2021-06-07)
 
 
