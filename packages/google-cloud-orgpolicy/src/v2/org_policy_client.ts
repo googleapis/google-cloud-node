@@ -347,7 +347,7 @@ export class OrgPolicyClient {
   // -- Service calls --
   // -------------------
   getPolicy(
-    request: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -395,7 +395,7 @@ export class OrgPolicyClient {
    * const [response] = await client.getPolicy(request);
    */
   getPolicy(
-    request: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IGetPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -434,7 +434,7 @@ export class OrgPolicyClient {
     return this.innerApiCalls.getPolicy(request, options, callback);
   }
   getEffectivePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -487,7 +487,7 @@ export class OrgPolicyClient {
    * const [response] = await client.getEffectivePolicy(request);
    */
   getEffectivePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IGetEffectivePolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -530,7 +530,7 @@ export class OrgPolicyClient {
     return this.innerApiCalls.getEffectivePolicy(request, options, callback);
   }
   createPolicy(
-    request: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -586,7 +586,7 @@ export class OrgPolicyClient {
    * const [response] = await client.createPolicy(request);
    */
   createPolicy(
-    request: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.ICreatePolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -627,7 +627,7 @@ export class OrgPolicyClient {
     return this.innerApiCalls.createPolicy(request, options, callback);
   }
   updatePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -679,7 +679,7 @@ export class OrgPolicyClient {
    * const [response] = await client.updatePolicy(request);
    */
   updatePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IUpdatePolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -720,7 +720,7 @@ export class OrgPolicyClient {
     return this.innerApiCalls.updatePolicy(request, options, callback);
   }
   deletePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -768,7 +768,7 @@ export class OrgPolicyClient {
    * const [response] = await client.deletePolicy(request);
    */
   deletePolicy(
-    request: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IDeletePolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -810,7 +810,7 @@ export class OrgPolicyClient {
   }
 
   listConstraints(
-    request: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -873,7 +873,7 @@ export class OrgPolicyClient {
    *   for more details and examples.
    */
   listConstraints(
-    request: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IListConstraintsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1025,7 +1025,7 @@ export class OrgPolicyClient {
     ) as AsyncIterable<protos.google.cloud.orgpolicy.v2.IConstraint>;
   }
   listPolicies(
-    request: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1085,7 +1085,7 @@ export class OrgPolicyClient {
    *   for more details and examples.
    */
   listPolicies(
-    request: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
+    request?: protos.google.cloud.orgpolicy.v2.IListPoliciesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
