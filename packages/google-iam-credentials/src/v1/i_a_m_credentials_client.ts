@@ -280,7 +280,7 @@ export class IAMCredentialsClient {
   // -- Service calls --
   // -------------------
   generateAccessToken(
-    request: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
+    request?: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -352,7 +352,7 @@ export class IAMCredentialsClient {
    * const [response] = await client.generateAccessToken(request);
    */
   generateAccessToken(
-    request: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
+    request?: protos.google.iam.credentials.v1.IGenerateAccessTokenRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -395,7 +395,7 @@ export class IAMCredentialsClient {
     return this.innerApiCalls.generateAccessToken(request, options, callback);
   }
   generateIdToken(
-    request: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
+    request?: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -463,7 +463,7 @@ export class IAMCredentialsClient {
    * const [response] = await client.generateIdToken(request);
    */
   generateIdToken(
-    request: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
+    request?: protos.google.iam.credentials.v1.IGenerateIdTokenRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -506,7 +506,7 @@ export class IAMCredentialsClient {
     return this.innerApiCalls.generateIdToken(request, options, callback);
   }
   signBlob(
-    request: protos.google.iam.credentials.v1.ISignBlobRequest,
+    request?: protos.google.iam.credentials.v1.ISignBlobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -566,7 +566,7 @@ export class IAMCredentialsClient {
    * const [response] = await client.signBlob(request);
    */
   signBlob(
-    request: protos.google.iam.credentials.v1.ISignBlobRequest,
+    request?: protos.google.iam.credentials.v1.ISignBlobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -605,7 +605,7 @@ export class IAMCredentialsClient {
     return this.innerApiCalls.signBlob(request, options, callback);
   }
   signJwt(
-    request: protos.google.iam.credentials.v1.ISignJwtRequest,
+    request?: protos.google.iam.credentials.v1.ISignJwtRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -665,7 +665,7 @@ export class IAMCredentialsClient {
    * const [response] = await client.signJwt(request);
    */
   signJwt(
-    request: protos.google.iam.credentials.v1.ISignJwtRequest,
+    request?: protos.google.iam.credentials.v1.ISignJwtRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
