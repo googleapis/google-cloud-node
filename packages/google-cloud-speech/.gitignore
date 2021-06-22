@@ -12,4 +12,3 @@ system-test/*key.json
 .DS_Store
 package-lock.json
 __pycache__
-.vscode

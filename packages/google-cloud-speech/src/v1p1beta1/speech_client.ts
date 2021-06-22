@@ -329,7 +329,7 @@ export class SpeechClient {
   // -- Service calls --
   // -------------------
   recognize(
-    request: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
+    request?: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -377,7 +377,7 @@ export class SpeechClient {
    * const [response] = await client.recognize(request);
    */
   recognize(
-    request: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
+    request?: protos.google.cloud.speech.v1p1beta1.IRecognizeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -438,7 +438,7 @@ export class SpeechClient {
   }
 
   longRunningRecognize(
-    request: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
+    request?: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -504,7 +504,7 @@ export class SpeechClient {
    * const [response] = await operation.promise();
    */
   longRunningRecognize(
-    request: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
+    request?: protos.google.cloud.speech.v1p1beta1.ILongRunningRecognizeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
