@@ -323,7 +323,7 @@ export class TranscoderServiceClient {
   // -- Service calls --
   // -------------------
   createJob(
-    request: protos.google.cloud.video.transcoder.v1beta1.ICreateJobRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.ICreateJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -377,7 +377,7 @@ export class TranscoderServiceClient {
    * const [response] = await client.createJob(request);
    */
   createJob(
-    request: protos.google.cloud.video.transcoder.v1beta1.ICreateJobRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.ICreateJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -423,7 +423,7 @@ export class TranscoderServiceClient {
     return this.innerApiCalls.createJob(request, options, callback);
   }
   getJob(
-    request: protos.google.cloud.video.transcoder.v1beta1.IGetJobRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IGetJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -472,7 +472,7 @@ export class TranscoderServiceClient {
    * const [response] = await client.getJob(request);
    */
   getJob(
-    request: protos.google.cloud.video.transcoder.v1beta1.IGetJobRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IGetJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -515,7 +515,7 @@ export class TranscoderServiceClient {
     return this.innerApiCalls.getJob(request, options, callback);
   }
   deleteJob(
-    request: protos.google.cloud.video.transcoder.v1beta1.IDeleteJobRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IDeleteJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -567,7 +567,7 @@ export class TranscoderServiceClient {
    * const [response] = await client.deleteJob(request);
    */
   deleteJob(
-    request: protos.google.cloud.video.transcoder.v1beta1.IDeleteJobRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IDeleteJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -613,7 +613,7 @@ export class TranscoderServiceClient {
     return this.innerApiCalls.deleteJob(request, options, callback);
   }
   createJobTemplate(
-    request: protos.google.cloud.video.transcoder.v1beta1.ICreateJobTemplateRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.ICreateJobTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -673,7 +673,7 @@ export class TranscoderServiceClient {
    * const [response] = await client.createJobTemplate(request);
    */
   createJobTemplate(
-    request: protos.google.cloud.video.transcoder.v1beta1.ICreateJobTemplateRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.ICreateJobTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -719,7 +719,7 @@ export class TranscoderServiceClient {
     return this.innerApiCalls.createJobTemplate(request, options, callback);
   }
   getJobTemplate(
-    request: protos.google.cloud.video.transcoder.v1beta1.IGetJobTemplateRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IGetJobTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -772,7 +772,7 @@ export class TranscoderServiceClient {
    * const [response] = await client.getJobTemplate(request);
    */
   getJobTemplate(
-    request: protos.google.cloud.video.transcoder.v1beta1.IGetJobTemplateRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IGetJobTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -818,7 +818,7 @@ export class TranscoderServiceClient {
     return this.innerApiCalls.getJobTemplate(request, options, callback);
   }
   deleteJobTemplate(
-    request: protos.google.cloud.video.transcoder.v1beta1.IDeleteJobTemplateRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IDeleteJobTemplateRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -870,7 +870,7 @@ export class TranscoderServiceClient {
    * const [response] = await client.deleteJobTemplate(request);
    */
   deleteJobTemplate(
-    request: protos.google.cloud.video.transcoder.v1beta1.IDeleteJobTemplateRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IDeleteJobTemplateRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -917,7 +917,7 @@ export class TranscoderServiceClient {
   }
 
   listJobs(
-    request: protos.google.cloud.video.transcoder.v1beta1.IListJobsRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IListJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -973,7 +973,7 @@ export class TranscoderServiceClient {
    *   for more details and examples.
    */
   listJobs(
-    request: protos.google.cloud.video.transcoder.v1beta1.IListJobsRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IListJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1111,7 +1111,7 @@ export class TranscoderServiceClient {
     ) as AsyncIterable<protos.google.cloud.video.transcoder.v1beta1.IJob>;
   }
   listJobTemplates(
-    request: protos.google.cloud.video.transcoder.v1beta1.IListJobTemplatesRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IListJobTemplatesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1168,7 +1168,7 @@ export class TranscoderServiceClient {
    *   for more details and examples.
    */
   listJobTemplates(
-    request: protos.google.cloud.video.transcoder.v1beta1.IListJobTemplatesRequest,
+    request?: protos.google.cloud.video.transcoder.v1beta1.IListJobTemplatesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
