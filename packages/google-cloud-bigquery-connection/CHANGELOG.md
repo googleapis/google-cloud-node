@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.3](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.3.2...v1.3.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#98](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/98)) ([779e30b](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/779e30b0fbd9b2c1ed7b826c41d17e679d3d60db))
+
 ### [1.3.2](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.3.1...v1.3.2) (2021-06-10)
 
 
