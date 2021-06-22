@@ -39,7 +39,7 @@ function main(filename, encoding, sourceLanguage, targetLanguage) {
     // const filename = 'Local path to audio file, e.g. /path/to/audio.raw';
     // const encoding = 'Encoding of the audio file, e.g. LINEAR16';
     // const sourceLanguage = 'BCP-47 source language code, e.g. en-US';
-    // const targetLangauge = 'BCP-47 target language code, e.g. es-ES';
+    // const targetLanguage = 'BCP-47 target language code, e.g. es-ES';
 
     const config = {
       audioConfig: {
