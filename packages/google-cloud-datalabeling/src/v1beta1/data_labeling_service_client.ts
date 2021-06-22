@@ -484,7 +484,7 @@ export class DataLabelingServiceClient {
   // -- Service calls --
   // -------------------
   createDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -538,7 +538,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.createDataset(request);
    */
   createDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ICreateDatasetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -584,7 +584,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.createDataset(request, options, callback);
   }
   getDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -633,7 +633,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.getDataset(request);
    */
   getDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetDatasetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -676,7 +676,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.getDataset(request, options, callback);
   }
   deleteDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -728,7 +728,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.deleteDataset(request);
    */
   deleteDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteDatasetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -774,7 +774,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.deleteDataset(request, options, callback);
   }
   getDataItem(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -824,7 +824,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.getDataItem(request);
    */
   getDataItem(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetDataItemRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -867,7 +867,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.getDataItem(request, options, callback);
   }
   getAnnotatedDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -920,7 +920,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.getAnnotatedDataset(request);
    */
   getAnnotatedDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotatedDatasetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -966,7 +966,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.getAnnotatedDataset(request, options, callback);
   }
   deleteAnnotatedDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1019,7 +1019,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.deleteAnnotatedDataset(request);
    */
   deleteAnnotatedDataset(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotatedDatasetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1069,7 +1069,7 @@ export class DataLabelingServiceClient {
     );
   }
   getExample(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1123,7 +1123,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.getExample(request);
    */
   getExample(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetExampleRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1166,7 +1166,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.getExample(request, options, callback);
   }
   createAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1222,7 +1222,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.createAnnotationSpecSet(request);
    */
   createAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ICreateAnnotationSpecSetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1272,7 +1272,7 @@ export class DataLabelingServiceClient {
     );
   }
   getAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1324,7 +1324,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.getAnnotationSpecSet(request);
    */
   getAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetAnnotationSpecSetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1370,7 +1370,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.getAnnotationSpecSet(request, options, callback);
   }
   deleteAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1422,7 +1422,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.deleteAnnotationSpecSet(request);
    */
   deleteAnnotationSpecSet(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteAnnotationSpecSetRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1472,7 +1472,7 @@ export class DataLabelingServiceClient {
     );
   }
   getInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1524,7 +1524,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.getInstruction(request);
    */
   getInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetInstructionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1570,7 +1570,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.getInstruction(request, options, callback);
   }
   deleteInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1622,7 +1622,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.deleteInstruction(request);
    */
   deleteInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteInstructionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1668,7 +1668,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.deleteInstruction(request, options, callback);
   }
   getEvaluation(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1722,7 +1722,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.getEvaluation(request);
    */
   getEvaluation(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1768,7 +1768,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.getEvaluation(request, options, callback);
   }
   createEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1822,7 +1822,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.createEvaluationJob(request);
    */
   createEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ICreateEvaluationJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1868,7 +1868,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.createEvaluationJob(request, options, callback);
   }
   updateEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1934,7 +1934,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.updateEvaluationJob(request);
    */
   updateEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IUpdateEvaluationJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1980,7 +1980,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.updateEvaluationJob(request, options, callback);
   }
   getEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2033,7 +2033,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.getEvaluationJob(request);
    */
   getEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IGetEvaluationJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2079,7 +2079,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.getEvaluationJob(request, options, callback);
   }
   pauseEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2133,7 +2133,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.pauseEvaluationJob(request);
    */
   pauseEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IPauseEvaluationJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2179,7 +2179,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.pauseEvaluationJob(request, options, callback);
   }
   resumeEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2233,7 +2233,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.resumeEvaluationJob(request);
    */
   resumeEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IResumeEvaluationJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2279,7 +2279,7 @@ export class DataLabelingServiceClient {
     return this.innerApiCalls.resumeEvaluationJob(request, options, callback);
   }
   deleteEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2332,7 +2332,7 @@ export class DataLabelingServiceClient {
    * const [response] = await client.deleteEvaluationJob(request);
    */
   deleteEvaluationJob(
-    request: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IDeleteEvaluationJobRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2379,7 +2379,7 @@ export class DataLabelingServiceClient {
   }
 
   importData(
-    request: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2445,7 +2445,7 @@ export class DataLabelingServiceClient {
    * const [response] = await operation.promise();
    */
   importData(
-    request: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IImportDataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2530,7 +2530,7 @@ export class DataLabelingServiceClient {
     >;
   }
   exportData(
-    request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2600,7 +2600,7 @@ export class DataLabelingServiceClient {
    * const [response] = await operation.promise();
    */
   exportData(
-    request: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IExportDataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2685,7 +2685,7 @@ export class DataLabelingServiceClient {
     >;
   }
   labelImage(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2763,7 +2763,7 @@ export class DataLabelingServiceClient {
    * const [response] = await operation.promise();
    */
   labelImage(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ILabelImageRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2848,7 +2848,7 @@ export class DataLabelingServiceClient {
     >;
   }
   labelVideo(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2926,7 +2926,7 @@ export class DataLabelingServiceClient {
    * const [response] = await operation.promise();
    */
   labelVideo(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ILabelVideoRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3011,7 +3011,7 @@ export class DataLabelingServiceClient {
     >;
   }
   labelText(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3081,7 +3081,7 @@ export class DataLabelingServiceClient {
    * const [response] = await operation.promise();
    */
   labelText(
-    request: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ILabelTextRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3166,7 +3166,7 @@ export class DataLabelingServiceClient {
     >;
   }
   createInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3225,7 +3225,7 @@ export class DataLabelingServiceClient {
    * const [response] = await operation.promise();
    */
   createInstruction(
-    request: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ICreateInstructionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3310,7 +3310,7 @@ export class DataLabelingServiceClient {
     >;
   }
   listDatasets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3373,7 +3373,7 @@ export class DataLabelingServiceClient {
    *   for more details and examples.
    */
   listDatasets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListDatasetsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -3525,7 +3525,7 @@ export class DataLabelingServiceClient {
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataset>;
   }
   listDataItems(
-    request: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3589,7 +3589,7 @@ export class DataLabelingServiceClient {
    *   for more details and examples.
    */
   listDataItems(
-    request: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListDataItemsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -3741,7 +3741,7 @@ export class DataLabelingServiceClient {
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IDataItem>;
   }
   listAnnotatedDatasets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3804,7 +3804,7 @@ export class DataLabelingServiceClient {
    *   for more details and examples.
    */
   listAnnotatedDatasets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotatedDatasetsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -3956,7 +3956,7 @@ export class DataLabelingServiceClient {
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotatedDataset>;
   }
   listExamples(
-    request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4021,7 +4021,7 @@ export class DataLabelingServiceClient {
    *   for more details and examples.
    */
   listExamples(
-    request: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListExamplesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -4177,7 +4177,7 @@ export class DataLabelingServiceClient {
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IExample>;
   }
   listAnnotationSpecSets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4240,7 +4240,7 @@ export class DataLabelingServiceClient {
    *   for more details and examples.
    */
   listAnnotationSpecSets(
-    request: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListAnnotationSpecSetsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -4396,7 +4396,7 @@ export class DataLabelingServiceClient {
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IAnnotationSpecSet>;
   }
   listInstructions(
-    request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4459,7 +4459,7 @@ export class DataLabelingServiceClient {
    *   for more details and examples.
    */
   listInstructions(
-    request: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListInstructionsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -4611,7 +4611,7 @@ export class DataLabelingServiceClient {
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IInstruction>;
   }
   searchEvaluations(
-    request: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4706,7 +4706,7 @@ export class DataLabelingServiceClient {
    *   for more details and examples.
    */
   searchEvaluations(
-    request: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ISearchEvaluationsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -4922,7 +4922,7 @@ export class DataLabelingServiceClient {
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.IEvaluation>;
   }
   searchExampleComparisons(
-    request: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4989,7 +4989,7 @@ export class DataLabelingServiceClient {
    *   for more details and examples.
    */
   searchExampleComparisons(
-    request: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.ISearchExampleComparisonsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -5149,7 +5149,7 @@ export class DataLabelingServiceClient {
     ) as AsyncIterable<protos.google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse.IExampleComparison>;
   }
   listEvaluationJobs(
-    request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -5220,7 +5220,7 @@ export class DataLabelingServiceClient {
    *   for more details and examples.
    */
   listEvaluationJobs(
-    request: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
+    request?: protos.google.cloud.datalabeling.v1beta1.IListEvaluationJobsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
