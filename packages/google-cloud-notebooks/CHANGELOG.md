@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.2...v1.1.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#65](https://www.github.com/googleapis/nodejs-notebooks/issues/65)) ([ee49e2c](https://www.github.com/googleapis/nodejs-notebooks/commit/ee49e2c7f97aeee8ee0b1872a3f3d9416febfcd2))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.1...v1.1.2) (2021-06-07)
 
 
