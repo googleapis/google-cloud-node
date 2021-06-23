@@ -607,6 +607,10 @@ export class AgentsClient {
   /**
    * Creates/updates the specified agent.
    *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dialogflow.v2.Agent} request.agent
@@ -887,7 +891,10 @@ export class AgentsClient {
   /**
    * Trains the specified agent.
    *
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1027,8 +1034,6 @@ export class AgentsClient {
   ): void;
   /**
    * Exports the specified agent to a ZIP file.
-   *
-   * Operation <response: {@link google.cloud.dialogflow.v2.ExportAgentResponse|ExportAgentResponse}>
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1185,9 +1190,12 @@ export class AgentsClient {
    * call {@link google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the operation it returns in order to train
    * explicitly.
    *
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
    * An operation which tracks when importing is complete. It only tracks
    * when the draft agent is updated not when it is done training.
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1340,9 +1348,12 @@ export class AgentsClient {
    * completed yet. Please call {@link google.cloud.dialogflow.v2.Agents.TrainAgent|TrainAgent} and wait for the operation it
    * returns in order to train explicitly.
    *
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
    * An operation which tracks when restoring is complete. It only tracks
    * when the draft agent is updated not when it is done training.
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
