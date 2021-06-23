@@ -14,7 +14,7 @@
     "test": "mocha --timeout=600000"
   },
   "dependencies": {
-    "@google-cloud/datastore": "^6.4.1",
+    "@google-cloud/datastore": "^6.4.2",
     "sinon": "^11.0.0"
   },
   "devDependencies": {
