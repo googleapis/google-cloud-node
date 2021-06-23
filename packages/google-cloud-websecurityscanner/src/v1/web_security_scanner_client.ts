@@ -329,7 +329,7 @@ export class WebSecurityScannerClient {
   // -- Service calls --
   // -------------------
   createScanConfig(
-    request: protos.google.cloud.websecurityscanner.v1.ICreateScanConfigRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.ICreateScanConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -383,7 +383,7 @@ export class WebSecurityScannerClient {
    * const [response] = await client.createScanConfig(request);
    */
   createScanConfig(
-    request: protos.google.cloud.websecurityscanner.v1.ICreateScanConfigRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.ICreateScanConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -429,7 +429,7 @@ export class WebSecurityScannerClient {
     return this.innerApiCalls.createScanConfig(request, options, callback);
   }
   deleteScanConfig(
-    request: protos.google.cloud.websecurityscanner.v1.IDeleteScanConfigRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IDeleteScanConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -481,7 +481,7 @@ export class WebSecurityScannerClient {
    * const [response] = await client.deleteScanConfig(request);
    */
   deleteScanConfig(
-    request: protos.google.cloud.websecurityscanner.v1.IDeleteScanConfigRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IDeleteScanConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -527,7 +527,7 @@ export class WebSecurityScannerClient {
     return this.innerApiCalls.deleteScanConfig(request, options, callback);
   }
   getScanConfig(
-    request: protos.google.cloud.websecurityscanner.v1.IGetScanConfigRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IGetScanConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -579,7 +579,7 @@ export class WebSecurityScannerClient {
    * const [response] = await client.getScanConfig(request);
    */
   getScanConfig(
-    request: protos.google.cloud.websecurityscanner.v1.IGetScanConfigRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IGetScanConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -625,7 +625,7 @@ export class WebSecurityScannerClient {
     return this.innerApiCalls.getScanConfig(request, options, callback);
   }
   updateScanConfig(
-    request: protos.google.cloud.websecurityscanner.v1.IUpdateScanConfigRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IUpdateScanConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -682,7 +682,7 @@ export class WebSecurityScannerClient {
    * const [response] = await client.updateScanConfig(request);
    */
   updateScanConfig(
-    request: protos.google.cloud.websecurityscanner.v1.IUpdateScanConfigRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IUpdateScanConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -728,7 +728,7 @@ export class WebSecurityScannerClient {
     return this.innerApiCalls.updateScanConfig(request, options, callback);
   }
   startScanRun(
-    request: protos.google.cloud.websecurityscanner.v1.IStartScanRunRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IStartScanRunRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -780,7 +780,7 @@ export class WebSecurityScannerClient {
    * const [response] = await client.startScanRun(request);
    */
   startScanRun(
-    request: protos.google.cloud.websecurityscanner.v1.IStartScanRunRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IStartScanRunRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -826,7 +826,7 @@ export class WebSecurityScannerClient {
     return this.innerApiCalls.startScanRun(request, options, callback);
   }
   getScanRun(
-    request: protos.google.cloud.websecurityscanner.v1.IGetScanRunRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IGetScanRunRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -876,7 +876,7 @@ export class WebSecurityScannerClient {
    * const [response] = await client.getScanRun(request);
    */
   getScanRun(
-    request: protos.google.cloud.websecurityscanner.v1.IGetScanRunRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IGetScanRunRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -919,7 +919,7 @@ export class WebSecurityScannerClient {
     return this.innerApiCalls.getScanRun(request, options, callback);
   }
   stopScanRun(
-    request: protos.google.cloud.websecurityscanner.v1.IStopScanRunRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IStopScanRunRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -969,7 +969,7 @@ export class WebSecurityScannerClient {
    * const [response] = await client.stopScanRun(request);
    */
   stopScanRun(
-    request: protos.google.cloud.websecurityscanner.v1.IStopScanRunRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IStopScanRunRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1012,7 +1012,7 @@ export class WebSecurityScannerClient {
     return this.innerApiCalls.stopScanRun(request, options, callback);
   }
   getFinding(
-    request: protos.google.cloud.websecurityscanner.v1.IGetFindingRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IGetFindingRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1062,7 +1062,7 @@ export class WebSecurityScannerClient {
    * const [response] = await client.getFinding(request);
    */
   getFinding(
-    request: protos.google.cloud.websecurityscanner.v1.IGetFindingRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IGetFindingRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1105,7 +1105,7 @@ export class WebSecurityScannerClient {
     return this.innerApiCalls.getFinding(request, options, callback);
   }
   listFindingTypeStats(
-    request: protos.google.cloud.websecurityscanner.v1.IListFindingTypeStatsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListFindingTypeStatsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1158,7 +1158,7 @@ export class WebSecurityScannerClient {
    * const [response] = await client.listFindingTypeStats(request);
    */
   listFindingTypeStats(
-    request: protos.google.cloud.websecurityscanner.v1.IListFindingTypeStatsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListFindingTypeStatsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1205,7 +1205,7 @@ export class WebSecurityScannerClient {
   }
 
   listScanConfigs(
-    request: protos.google.cloud.websecurityscanner.v1.IListScanConfigsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListScanConfigsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1265,7 +1265,7 @@ export class WebSecurityScannerClient {
    *   for more details and examples.
    */
   listScanConfigs(
-    request: protos.google.cloud.websecurityscanner.v1.IListScanConfigsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListScanConfigsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1411,7 +1411,7 @@ export class WebSecurityScannerClient {
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1.IScanConfig>;
   }
   listScanRuns(
-    request: protos.google.cloud.websecurityscanner.v1.IListScanRunsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListScanRunsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1472,7 +1472,7 @@ export class WebSecurityScannerClient {
    *   for more details and examples.
    */
   listScanRuns(
-    request: protos.google.cloud.websecurityscanner.v1.IListScanRunsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListScanRunsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1618,7 +1618,7 @@ export class WebSecurityScannerClient {
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1.IScanRun>;
   }
   listCrawledUrls(
-    request: protos.google.cloud.websecurityscanner.v1.IListCrawledUrlsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListCrawledUrlsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1679,7 +1679,7 @@ export class WebSecurityScannerClient {
    *   for more details and examples.
    */
   listCrawledUrls(
-    request: protos.google.cloud.websecurityscanner.v1.IListCrawledUrlsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListCrawledUrlsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1827,7 +1827,7 @@ export class WebSecurityScannerClient {
     ) as AsyncIterable<protos.google.cloud.websecurityscanner.v1.ICrawledUrl>;
   }
   listFindings(
-    request: protos.google.cloud.websecurityscanner.v1.IListFindingsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListFindingsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1893,7 +1893,7 @@ export class WebSecurityScannerClient {
    *   for more details and examples.
    */
   listFindings(
-    request: protos.google.cloud.websecurityscanner.v1.IListFindingsRequest,
+    request?: protos.google.cloud.websecurityscanner.v1.IListFindingsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
