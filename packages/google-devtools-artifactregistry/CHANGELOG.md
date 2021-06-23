@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.2...v1.0.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#54](https://www.github.com/googleapis/nodejs-artifact-registry/issues/54)) ([59479c5](https://www.github.com/googleapis/nodejs-artifact-registry/commit/59479c5c1389415b83f43c7f851ada2a02e28ca4))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.1...v1.0.2) (2021-05-25)
 
 
