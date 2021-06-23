@@ -425,7 +425,7 @@ export class DataprocMetastoreClient {
   // -- Service calls --
   // -------------------
   getService(
-    request: protos.google.cloud.metastore.v1.IGetServiceRequest,
+    request?: protos.google.cloud.metastore.v1.IGetServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -472,7 +472,7 @@ export class DataprocMetastoreClient {
    * const [response] = await client.getService(request);
    */
   getService(
-    request: protos.google.cloud.metastore.v1.IGetServiceRequest,
+    request?: protos.google.cloud.metastore.v1.IGetServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -513,7 +513,7 @@ export class DataprocMetastoreClient {
     return this.innerApiCalls.getService(request, options, callback);
   }
   getMetadataImport(
-    request: protos.google.cloud.metastore.v1.IGetMetadataImportRequest,
+    request?: protos.google.cloud.metastore.v1.IGetMetadataImportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -564,7 +564,7 @@ export class DataprocMetastoreClient {
    * const [response] = await client.getMetadataImport(request);
    */
   getMetadataImport(
-    request: protos.google.cloud.metastore.v1.IGetMetadataImportRequest,
+    request?: protos.google.cloud.metastore.v1.IGetMetadataImportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -608,7 +608,7 @@ export class DataprocMetastoreClient {
   }
 
   createService(
-    request: protos.google.cloud.metastore.v1.ICreateServiceRequest,
+    request?: protos.google.cloud.metastore.v1.ICreateServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -691,7 +691,7 @@ export class DataprocMetastoreClient {
    * const [response] = await operation.promise();
    */
   createService(
-    request: protos.google.cloud.metastore.v1.ICreateServiceRequest,
+    request?: protos.google.cloud.metastore.v1.ICreateServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -776,7 +776,7 @@ export class DataprocMetastoreClient {
     >;
   }
   updateService(
-    request: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
+    request?: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -854,7 +854,7 @@ export class DataprocMetastoreClient {
    * const [response] = await operation.promise();
    */
   updateService(
-    request: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
+    request?: protos.google.cloud.metastore.v1.IUpdateServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -939,7 +939,7 @@ export class DataprocMetastoreClient {
     >;
   }
   deleteService(
-    request: protos.google.cloud.metastore.v1.IDeleteServiceRequest,
+    request?: protos.google.cloud.metastore.v1.IDeleteServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1011,7 +1011,7 @@ export class DataprocMetastoreClient {
    * const [response] = await operation.promise();
    */
   deleteService(
-    request: protos.google.cloud.metastore.v1.IDeleteServiceRequest,
+    request?: protos.google.cloud.metastore.v1.IDeleteServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1096,7 +1096,7 @@ export class DataprocMetastoreClient {
     >;
   }
   createMetadataImport(
-    request: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
+    request?: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1179,7 +1179,7 @@ export class DataprocMetastoreClient {
    * const [response] = await operation.promise();
    */
   createMetadataImport(
-    request: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
+    request?: protos.google.cloud.metastore.v1.ICreateMetadataImportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1264,7 +1264,7 @@ export class DataprocMetastoreClient {
     >;
   }
   updateMetadataImport(
-    request: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
+    request?: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1343,7 +1343,7 @@ export class DataprocMetastoreClient {
    * const [response] = await operation.promise();
    */
   updateMetadataImport(
-    request: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
+    request?: protos.google.cloud.metastore.v1.IUpdateMetadataImportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1428,7 +1428,7 @@ export class DataprocMetastoreClient {
     >;
   }
   exportMetadata(
-    request: protos.google.cloud.metastore.v1.IExportMetadataRequest,
+    request?: protos.google.cloud.metastore.v1.IExportMetadataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1506,7 +1506,7 @@ export class DataprocMetastoreClient {
    * const [response] = await operation.promise();
    */
   exportMetadata(
-    request: protos.google.cloud.metastore.v1.IExportMetadataRequest,
+    request?: protos.google.cloud.metastore.v1.IExportMetadataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1591,7 +1591,7 @@ export class DataprocMetastoreClient {
     >;
   }
   listServices(
-    request: protos.google.cloud.metastore.v1.IListServicesRequest,
+    request?: protos.google.cloud.metastore.v1.IListServicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1660,7 +1660,7 @@ export class DataprocMetastoreClient {
    *   for more details and examples.
    */
   listServices(
-    request: protos.google.cloud.metastore.v1.IListServicesRequest,
+    request?: protos.google.cloud.metastore.v1.IListServicesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1830,7 +1830,7 @@ export class DataprocMetastoreClient {
     ) as AsyncIterable<protos.google.cloud.metastore.v1.IService>;
   }
   listMetadataImports(
-    request: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
+    request?: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1903,7 +1903,7 @@ export class DataprocMetastoreClient {
    *   for more details and examples.
    */
   listMetadataImports(
-    request: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
+    request?: protos.google.cloud.metastore.v1.IListMetadataImportsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
