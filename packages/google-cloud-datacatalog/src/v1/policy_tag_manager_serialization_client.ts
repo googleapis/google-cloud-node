@@ -19,9 +19,9 @@
 /* global window */
 import * as gax from 'google-gax';
 import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
-import * as path from 'path';
 
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/policy_tag_manager_serialization_client_config.json`.
@@ -134,27 +134,14 @@ export class PolicyTagManagerSerializationClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest') {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // This API contains "path templates"; forward-slash-separated
     // identifiers to uniquely identify resources within the API.
@@ -321,7 +308,7 @@ export class PolicyTagManagerSerializationClient {
   // -- Service calls --
   // -------------------
   importTaxonomies(
-    request: protos.google.cloud.datacatalog.v1.IImportTaxonomiesRequest,
+    request?: protos.google.cloud.datacatalog.v1.IImportTaxonomiesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -381,7 +368,7 @@ export class PolicyTagManagerSerializationClient {
    * const [response] = await client.importTaxonomies(request);
    */
   importTaxonomies(
-    request: protos.google.cloud.datacatalog.v1.IImportTaxonomiesRequest,
+    request?: protos.google.cloud.datacatalog.v1.IImportTaxonomiesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -424,7 +411,7 @@ export class PolicyTagManagerSerializationClient {
     return this.innerApiCalls.importTaxonomies(request, options, callback);
   }
   exportTaxonomies(
-    request: protos.google.cloud.datacatalog.v1.IExportTaxonomiesRequest,
+    request?: protos.google.cloud.datacatalog.v1.IExportTaxonomiesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -482,7 +469,7 @@ export class PolicyTagManagerSerializationClient {
    * const [response] = await client.exportTaxonomies(request);
    */
   exportTaxonomies(
-    request: protos.google.cloud.datacatalog.v1.IExportTaxonomiesRequest,
+    request?: protos.google.cloud.datacatalog.v1.IExportTaxonomiesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
