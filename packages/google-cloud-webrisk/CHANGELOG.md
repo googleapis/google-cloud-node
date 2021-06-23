@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.2...v2.1.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#257](https://www.github.com/googleapis/nodejs-web-risk/issues/257)) ([e25d02e](https://www.github.com/googleapis/nodejs-web-risk/commit/e25d02ee2158ff04717af53a4a4e36e2b959e472))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.1...v2.1.2) (2021-05-25)
 
 
