@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.3...v1.0.4) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#60](https://www.github.com/googleapis/nodejs-iam-credentials/issues/60)) ([cc63b2a](https://www.github.com/googleapis/nodejs-iam-credentials/commit/cc63b2aaaafd9303e98bc45e4f3ba5fd335421ea))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.2...v1.0.3) (2021-05-25)
 
 
