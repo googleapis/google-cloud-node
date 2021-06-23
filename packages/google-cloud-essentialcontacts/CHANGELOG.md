@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.1...v1.0.2) (2021-06-23)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#17](https://www.github.com/googleapis/nodejs-essential-contacts/issues/17)) ([840d58f](https://www.github.com/googleapis/nodejs-essential-contacts/commit/840d58fcc2f9eaae3122005c9da47009836d04a3))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.0...v1.0.1) (2021-06-10)
 
 
