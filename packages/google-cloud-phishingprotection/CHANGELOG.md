@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+### [2.4.5](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.4...v2.4.5) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#320](https://www.github.com/googleapis/nodejs-phishing-protection/issues/320)) ([a3e6fa0](https://www.github.com/googleapis/nodejs-phishing-protection/commit/a3e6fa03485bb63eea70243554aa9c636b725bcd))
+
 ### [2.4.4](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.3...v2.4.4) (2021-06-16)
 
 
