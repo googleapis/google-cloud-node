@@ -321,7 +321,7 @@ export class EssentialContactsServiceClient {
   // -- Service calls --
   // -------------------
   createContact(
-    request: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -377,7 +377,7 @@ export class EssentialContactsServiceClient {
    * const [response] = await client.createContact(request);
    */
   createContact(
-    request: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.ICreateContactRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -423,7 +423,7 @@ export class EssentialContactsServiceClient {
     return this.innerApiCalls.createContact(request, options, callback);
   }
   updateContact(
-    request: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -480,7 +480,7 @@ export class EssentialContactsServiceClient {
    * const [response] = await client.updateContact(request);
    */
   updateContact(
-    request: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IUpdateContactRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -526,7 +526,7 @@ export class EssentialContactsServiceClient {
     return this.innerApiCalls.updateContact(request, options, callback);
   }
   getContact(
-    request: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -577,7 +577,7 @@ export class EssentialContactsServiceClient {
    * const [response] = await client.getContact(request);
    */
   getContact(
-    request: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IGetContactRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -620,7 +620,7 @@ export class EssentialContactsServiceClient {
     return this.innerApiCalls.getContact(request, options, callback);
   }
   deleteContact(
-    request: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -674,7 +674,7 @@ export class EssentialContactsServiceClient {
    * const [response] = await client.deleteContact(request);
    */
   deleteContact(
-    request: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IDeleteContactRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -720,7 +720,7 @@ export class EssentialContactsServiceClient {
     return this.innerApiCalls.deleteContact(request, options, callback);
   }
   sendTestMessage(
-    request: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -784,7 +784,7 @@ export class EssentialContactsServiceClient {
    * const [response] = await client.sendTestMessage(request);
    */
   sendTestMessage(
-    request: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.ISendTestMessageRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -831,7 +831,7 @@ export class EssentialContactsServiceClient {
   }
 
   listContacts(
-    request: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -894,7 +894,7 @@ export class EssentialContactsServiceClient {
    *   for more details and examples.
    */
   listContacts(
-    request: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IListContactsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1046,7 +1046,7 @@ export class EssentialContactsServiceClient {
     ) as AsyncIterable<protos.google.cloud.essentialcontacts.v1.IContact>;
   }
   computeContacts(
-    request: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1115,7 +1115,7 @@ export class EssentialContactsServiceClient {
    *   for more details and examples.
    */
   computeContacts(
-    request: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
+    request?: protos.google.cloud.essentialcontacts.v1.IComputeContactsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
