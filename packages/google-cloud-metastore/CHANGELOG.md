@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.2...v1.1.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#61](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/61)) ([ff13b45](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/ff13b45b9d75fee6630d2ba584279cf4f336f3f4))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.1...v1.1.2) (2021-05-25)
 
 
