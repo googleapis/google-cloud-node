@@ -327,7 +327,7 @@ export class AccessApprovalClient {
   // -- Service calls --
   // -------------------
   getApprovalRequest(
-    request: protos.google.cloud.accessapproval.v1.IGetApprovalRequestMessage,
+    request?: protos.google.cloud.accessapproval.v1.IGetApprovalRequestMessage,
     options?: CallOptions
   ): Promise<
     [
@@ -378,7 +378,7 @@ export class AccessApprovalClient {
    * const [response] = await client.getApprovalRequest(request);
    */
   getApprovalRequest(
-    request: protos.google.cloud.accessapproval.v1.IGetApprovalRequestMessage,
+    request?: protos.google.cloud.accessapproval.v1.IGetApprovalRequestMessage,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -424,7 +424,7 @@ export class AccessApprovalClient {
     return this.innerApiCalls.getApprovalRequest(request, options, callback);
   }
   approveApprovalRequest(
-    request: protos.google.cloud.accessapproval.v1.IApproveApprovalRequestMessage,
+    request?: protos.google.cloud.accessapproval.v1.IApproveApprovalRequestMessage,
     options?: CallOptions
   ): Promise<
     [
@@ -480,7 +480,7 @@ export class AccessApprovalClient {
    * const [response] = await client.approveApprovalRequest(request);
    */
   approveApprovalRequest(
-    request: protos.google.cloud.accessapproval.v1.IApproveApprovalRequestMessage,
+    request?: protos.google.cloud.accessapproval.v1.IApproveApprovalRequestMessage,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -530,7 +530,7 @@ export class AccessApprovalClient {
     );
   }
   dismissApprovalRequest(
-    request: protos.google.cloud.accessapproval.v1.IDismissApprovalRequestMessage,
+    request?: protos.google.cloud.accessapproval.v1.IDismissApprovalRequestMessage,
     options?: CallOptions
   ): Promise<
     [
@@ -590,7 +590,7 @@ export class AccessApprovalClient {
    * const [response] = await client.dismissApprovalRequest(request);
    */
   dismissApprovalRequest(
-    request: protos.google.cloud.accessapproval.v1.IDismissApprovalRequestMessage,
+    request?: protos.google.cloud.accessapproval.v1.IDismissApprovalRequestMessage,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -640,7 +640,7 @@ export class AccessApprovalClient {
     );
   }
   getAccessApprovalSettings(
-    request: protos.google.cloud.accessapproval.v1.IGetAccessApprovalSettingsMessage,
+    request?: protos.google.cloud.accessapproval.v1.IGetAccessApprovalSettingsMessage,
     options?: CallOptions
   ): Promise<
     [
@@ -691,7 +691,7 @@ export class AccessApprovalClient {
    * const [response] = await client.getAccessApprovalSettings(request);
    */
   getAccessApprovalSettings(
-    request: protos.google.cloud.accessapproval.v1.IGetAccessApprovalSettingsMessage,
+    request?: protos.google.cloud.accessapproval.v1.IGetAccessApprovalSettingsMessage,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -741,7 +741,7 @@ export class AccessApprovalClient {
     );
   }
   updateAccessApprovalSettings(
-    request: protos.google.cloud.accessapproval.v1.IUpdateAccessApprovalSettingsMessage,
+    request?: protos.google.cloud.accessapproval.v1.IUpdateAccessApprovalSettingsMessage,
     options?: CallOptions
   ): Promise<
     [
@@ -804,7 +804,7 @@ export class AccessApprovalClient {
    * const [response] = await client.updateAccessApprovalSettings(request);
    */
   updateAccessApprovalSettings(
-    request: protos.google.cloud.accessapproval.v1.IUpdateAccessApprovalSettingsMessage,
+    request?: protos.google.cloud.accessapproval.v1.IUpdateAccessApprovalSettingsMessage,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -854,7 +854,7 @@ export class AccessApprovalClient {
     );
   }
   deleteAccessApprovalSettings(
-    request: protos.google.cloud.accessapproval.v1.IDeleteAccessApprovalSettingsMessage,
+    request?: protos.google.cloud.accessapproval.v1.IDeleteAccessApprovalSettingsMessage,
     options?: CallOptions
   ): Promise<
     [
@@ -910,7 +910,7 @@ export class AccessApprovalClient {
    * const [response] = await client.deleteAccessApprovalSettings(request);
    */
   deleteAccessApprovalSettings(
-    request: protos.google.cloud.accessapproval.v1.IDeleteAccessApprovalSettingsMessage,
+    request?: protos.google.cloud.accessapproval.v1.IDeleteAccessApprovalSettingsMessage,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -961,7 +961,7 @@ export class AccessApprovalClient {
   }
 
   listApprovalRequests(
-    request: protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage,
+    request?: protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage,
     options?: CallOptions
   ): Promise<
     [
@@ -1029,7 +1029,7 @@ export class AccessApprovalClient {
    *   for more details and examples.
    */
   listApprovalRequests(
-    request: protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage,
+    request?: protos.google.cloud.accessapproval.v1.IListApprovalRequestsMessage,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
