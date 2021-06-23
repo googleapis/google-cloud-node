@@ -356,7 +356,7 @@ export class ServiceUsageClient {
   // -- Service calls --
   // -------------------
   getService(
-    request: protos.google.api.serviceusage.v1.IGetServiceRequest,
+    request?: protos.google.api.serviceusage.v1.IGetServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -404,7 +404,7 @@ export class ServiceUsageClient {
    * const [response] = await client.getService(request);
    */
   getService(
-    request: protos.google.api.serviceusage.v1.IGetServiceRequest,
+    request?: protos.google.api.serviceusage.v1.IGetServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -445,7 +445,7 @@ export class ServiceUsageClient {
     return this.innerApiCalls.getService(request, options, callback);
   }
   batchGetServices(
-    request: protos.google.api.serviceusage.v1.IBatchGetServicesRequest,
+    request?: protos.google.api.serviceusage.v1.IBatchGetServicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -505,7 +505,7 @@ export class ServiceUsageClient {
    * const [response] = await client.batchGetServices(request);
    */
   batchGetServices(
-    request: protos.google.api.serviceusage.v1.IBatchGetServicesRequest,
+    request?: protos.google.api.serviceusage.v1.IBatchGetServicesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -549,7 +549,7 @@ export class ServiceUsageClient {
   }
 
   enableService(
-    request: protos.google.api.serviceusage.v1.IEnableServiceRequest,
+    request?: protos.google.api.serviceusage.v1.IEnableServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -615,7 +615,7 @@ export class ServiceUsageClient {
    * const [response] = await operation.promise();
    */
   enableService(
-    request: protos.google.api.serviceusage.v1.IEnableServiceRequest,
+    request?: protos.google.api.serviceusage.v1.IEnableServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -700,7 +700,7 @@ export class ServiceUsageClient {
     >;
   }
   disableService(
-    request: protos.google.api.serviceusage.v1.IDisableServiceRequest,
+    request?: protos.google.api.serviceusage.v1.IDisableServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -776,7 +776,7 @@ export class ServiceUsageClient {
    * const [response] = await operation.promise();
    */
   disableService(
-    request: protos.google.api.serviceusage.v1.IDisableServiceRequest,
+    request?: protos.google.api.serviceusage.v1.IDisableServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -861,7 +861,7 @@ export class ServiceUsageClient {
     >;
   }
   batchEnableServices(
-    request: protos.google.api.serviceusage.v1.IBatchEnableServicesRequest,
+    request?: protos.google.api.serviceusage.v1.IBatchEnableServicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -936,7 +936,7 @@ export class ServiceUsageClient {
    * const [response] = await operation.promise();
    */
   batchEnableServices(
-    request: protos.google.api.serviceusage.v1.IBatchEnableServicesRequest,
+    request?: protos.google.api.serviceusage.v1.IBatchEnableServicesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1021,7 +1021,7 @@ export class ServiceUsageClient {
     >;
   }
   listServices(
-    request: protos.google.api.serviceusage.v1.IListServicesRequest,
+    request?: protos.google.api.serviceusage.v1.IListServicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1097,7 +1097,7 @@ export class ServiceUsageClient {
    *   for more details and examples.
    */
   listServices(
-    request: protos.google.api.serviceusage.v1.IListServicesRequest,
+    request?: protos.google.api.serviceusage.v1.IListServicesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
