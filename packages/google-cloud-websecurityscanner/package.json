@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/web-security-scanner",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Websecurityscanner client for Node.js",
   "repository": "googleapis/nodejs-web-security-scanner",
   "license": "Apache-2.0",

@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.2...v1.0.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#55](https://www.github.com/googleapis/nodejs-web-security-scanner/issues/55)) ([c6dfc29](https://www.github.com/googleapis/nodejs-web-security-scanner/commit/c6dfc29bf8f9f69f5a94319bb2f3410e7a782e3d))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.1...v1.0.2) (2021-05-25)
 
 
