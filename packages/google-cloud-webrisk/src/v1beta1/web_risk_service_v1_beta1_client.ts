@@ -274,7 +274,7 @@ export class WebRiskServiceV1Beta1Client {
   // -- Service calls --
   // -------------------
   computeThreatListDiff(
-    request: protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest,
+    request?: protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -330,7 +330,7 @@ export class WebRiskServiceV1Beta1Client {
    * const [response] = await client.computeThreatListDiff(request);
    */
   computeThreatListDiff(
-    request: protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest,
+    request?: protos.google.cloud.webrisk.v1beta1.IComputeThreatListDiffRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -370,7 +370,7 @@ export class WebRiskServiceV1Beta1Client {
     return this.innerApiCalls.computeThreatListDiff(request, options, callback);
   }
   searchUris(
-    request: protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest,
+    request?: protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -416,7 +416,7 @@ export class WebRiskServiceV1Beta1Client {
    * const [response] = await client.searchUris(request);
    */
   searchUris(
-    request: protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest,
+    request?: protos.google.cloud.webrisk.v1beta1.ISearchUrisRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -451,7 +451,7 @@ export class WebRiskServiceV1Beta1Client {
     return this.innerApiCalls.searchUris(request, options, callback);
   }
   searchHashes(
-    request: protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest,
+    request?: protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -506,7 +506,7 @@ export class WebRiskServiceV1Beta1Client {
    * const [response] = await client.searchHashes(request);
    */
   searchHashes(
-    request: protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest,
+    request?: protos.google.cloud.webrisk.v1beta1.ISearchHashesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
