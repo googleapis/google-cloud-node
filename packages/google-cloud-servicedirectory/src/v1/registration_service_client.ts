@@ -350,7 +350,7 @@ export class RegistrationServiceClient {
   // -- Service calls --
   // -------------------
   createNamespace(
-    request: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -412,7 +412,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.createNamespace(request);
    */
   createNamespace(
-    request: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.ICreateNamespaceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -458,7 +458,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.createNamespace(request, options, callback);
   }
   getNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -506,7 +506,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.getNamespace(request);
    */
   getNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IGetNamespaceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -549,7 +549,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.getNamespace(request, options, callback);
   }
   updateNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -602,7 +602,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.updateNamespace(request);
    */
   updateNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IUpdateNamespaceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -648,7 +648,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.updateNamespace(request, options, callback);
   }
   deleteNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -700,7 +700,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.deleteNamespace(request);
    */
   deleteNamespace(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IDeleteNamespaceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -746,7 +746,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.deleteNamespace(request, options, callback);
   }
   createService(
-    request: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -804,7 +804,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.createService(request);
    */
   createService(
-    request: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.ICreateServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -847,7 +847,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.createService(request, options, callback);
   }
   getService(
-    request: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -895,7 +895,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.getService(request);
    */
   getService(
-    request: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IGetServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -938,7 +938,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.getService(request, options, callback);
   }
   updateService(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -988,7 +988,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.updateService(request);
    */
   updateService(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IUpdateServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1031,7 +1031,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.updateService(request, options, callback);
   }
   deleteService(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1080,7 +1080,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.deleteService(request);
    */
   deleteService(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IDeleteServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1123,7 +1123,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.deleteService(request, options, callback);
   }
   createEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
+    request?: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1184,7 +1184,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.createEndpoint(request);
    */
   createEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
+    request?: protos.google.cloud.servicedirectory.v1.ICreateEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1230,7 +1230,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.createEndpoint(request, options, callback);
   }
   getEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1278,7 +1278,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.getEndpoint(request);
    */
   getEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IGetEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1321,7 +1321,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.getEndpoint(request, options, callback);
   }
   updateEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1374,7 +1374,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.updateEndpoint(request);
    */
   updateEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IUpdateEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1420,7 +1420,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.updateEndpoint(request, options, callback);
   }
   deleteEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1471,7 +1471,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.deleteEndpoint(request);
    */
   deleteEndpoint(
-    request: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IDeleteEndpointRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1517,7 +1517,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.deleteEndpoint(request, options, callback);
   }
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1565,7 +1565,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.getIamPolicy(request);
    */
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1604,7 +1604,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1654,7 +1654,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.setIamPolicy(request);
    */
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1693,7 +1693,7 @@ export class RegistrationServiceClient {
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1743,7 +1743,7 @@ export class RegistrationServiceClient {
    * const [response] = await client.testIamPermissions(request);
    */
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1783,7 +1783,7 @@ export class RegistrationServiceClient {
   }
 
   listNamespaces(
-    request: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1874,7 +1874,7 @@ export class RegistrationServiceClient {
    *   for more details and examples.
    */
   listNamespaces(
-    request: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IListNamespacesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2082,7 +2082,7 @@ export class RegistrationServiceClient {
     ) as AsyncIterable<protos.google.cloud.servicedirectory.v1.INamespace>;
   }
   listServices(
-    request: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2165,7 +2165,7 @@ export class RegistrationServiceClient {
    *   for more details and examples.
    */
   listServices(
-    request: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IListServicesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2357,7 +2357,7 @@ export class RegistrationServiceClient {
     ) as AsyncIterable<protos.google.cloud.servicedirectory.v1.IService>;
   }
   listEndpoints(
-    request: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2442,7 +2442,7 @@ export class RegistrationServiceClient {
    *   for more details and examples.
    */
   listEndpoints(
-    request: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
+    request?: protos.google.cloud.servicedirectory.v1.IListEndpointsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
