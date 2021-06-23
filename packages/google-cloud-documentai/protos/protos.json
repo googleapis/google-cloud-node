@@ -218,6 +218,10 @@
                               "rule": "repeated",
                               "type": "FormField",
                               "id": 11
+                            },
+                            "provenance": {
+                              "type": "Provenance",
+                              "id": 16
                             }
                           },
                           "nested": {
@@ -495,6 +499,10 @@
                                 "valueType": {
                                   "type": "string",
                                   "id": 5
+                                },
+                                "provenance": {
+                                  "type": "Provenance",
+                                  "id": 8
                                 }
                               }
                             },
@@ -751,7 +759,10 @@
                             },
                             "id": {
                               "type": "int32",
-                              "id": 2
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
                             },
                             "parents": {
                               "rule": "repeated",
@@ -770,9 +781,16 @@
                                   "type": "int32",
                                   "id": 1
                                 },
+                                "index": {
+                                  "type": "int32",
+                                  "id": 3
+                                },
                                 "id": {
                                   "type": "int32",
-                                  "id": 2
+                                  "id": 2,
+                                  "options": {
+                                    "deprecated": true
+                                  }
                                 }
                               }
                             },
@@ -1242,6 +1260,28 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "documentai.googleapis.com/HumanReviewConfig"
+                          }
+                        },
+                        "enableSchemaValidation": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "priority": {
+                          "type": "Priority",
+                          "id": 5
+                        }
+                      },
+                      "reserved": [
+                        [
+                          2,
+                          2
+                        ]
+                      ],
+                      "nested": {
+                        "Priority": {
+                          "values": {
+                            "DEFAULT": 0,
+                            "URGENT": 1
                           }
                         }
                       }

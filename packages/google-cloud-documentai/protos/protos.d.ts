@@ -555,6 +555,9 @@ export namespace google {
 
                         /** Page formFields */
                         formFields?: (google.cloud.documentai.v1.Document.Page.IFormField[]|null);
+
+                        /** Page provenance */
+                        provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
                     }
 
                     /** Represents a Page. */
@@ -604,6 +607,9 @@ export namespace google {
 
                         /** Page formFields. */
                         public formFields: google.cloud.documentai.v1.Document.Page.IFormField[];
+
+                        /** Page provenance. */
+                        public provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
 
                         /**
                          * Creates a new Page instance using the specified properties.
@@ -2062,6 +2068,9 @@ export namespace google {
 
                             /** FormField valueType */
                             valueType?: (string|null);
+
+                            /** FormField provenance */
+                            provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
                         }
 
                         /** Represents a FormField. */
@@ -2087,6 +2096,9 @@ export namespace google {
 
                             /** FormField valueType. */
                             public valueType: string;
+
+                            /** FormField provenance. */
+                            public provenance?: (google.cloud.documentai.v1.Document.IProvenance|null);
 
                             /**
                              * Creates a new FormField instance using the specified properties.
@@ -3167,6 +3179,9 @@ export namespace google {
                             /** Parent revision */
                             revision?: (number|null);
 
+                            /** Parent index */
+                            index?: (number|null);
+
                             /** Parent id */
                             id?: (number|null);
                         }
@@ -3182,6 +3197,9 @@ export namespace google {
 
                             /** Parent revision. */
                             public revision: number;
+
+                            /** Parent index. */
+                            public index: number;
 
                             /** Parent id. */
                             public id: number;
@@ -5383,6 +5401,12 @@ export namespace google {
 
                     /** ReviewDocumentRequest humanReviewConfig */
                     humanReviewConfig?: (string|null);
+
+                    /** ReviewDocumentRequest enableSchemaValidation */
+                    enableSchemaValidation?: (boolean|null);
+
+                    /** ReviewDocumentRequest priority */
+                    priority?: (google.cloud.documentai.v1.ReviewDocumentRequest.Priority|keyof typeof google.cloud.documentai.v1.ReviewDocumentRequest.Priority|null);
                 }
 
                 /** Represents a ReviewDocumentRequest. */
@@ -5399,6 +5423,12 @@ export namespace google {
 
                     /** ReviewDocumentRequest humanReviewConfig. */
                     public humanReviewConfig: string;
+
+                    /** ReviewDocumentRequest enableSchemaValidation. */
+                    public enableSchemaValidation: boolean;
+
+                    /** ReviewDocumentRequest priority. */
+                    public priority: (google.cloud.documentai.v1.ReviewDocumentRequest.Priority|keyof typeof google.cloud.documentai.v1.ReviewDocumentRequest.Priority);
 
                     /** ReviewDocumentRequest source. */
                     public source?: "inlineDocument";
@@ -5472,6 +5502,15 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace ReviewDocumentRequest {
+
+                    /** Priority enum. */
+                    enum Priority {
+                        DEFAULT = 0,
+                        URGENT = 1
+                    }
                 }
 
                 /** Properties of a ReviewDocumentResponse. */

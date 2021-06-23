@@ -617,6 +617,10 @@ export class DocumentProcessorServiceClient {
    * @param {string} request.humanReviewConfig
    *   Required. The resource name of the HumanReviewConfig that the document will be
    *   reviewed with.
+   * @param {boolean} request.enableSchemaValidation
+   *   Whether the validation should be performed on the ad-hoc review request.
+   * @param {google.cloud.documentai.v1.ReviewDocumentRequest.Priority} request.priority
+   *   The priority of the human review task.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
