@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [3.2.3](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.2.2...v3.2.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#525](https://www.github.com/googleapis/nodejs-text-to-speech/issues/525)) ([256f21b](https://www.github.com/googleapis/nodejs-text-to-speech/commit/256f21bada718586549f07327be2509c79da3912))
+
 ### [3.2.2](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.2.1...v3.2.2) (2021-06-04)
 
 
