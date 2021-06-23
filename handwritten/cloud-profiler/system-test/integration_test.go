@@ -64,6 +64,7 @@ const startupTemplate = `
 {{ define "setup"}}
 
 npm_install() {
+	npm cache clean --force # Avoid persistent errors on rare cache corruptions.
 	timeout 60 npm install --quiet --no-color --no-progress "${@}"
 }
 
