@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.1.3](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.1.2...v3.1.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#153](https://www.github.com/googleapis/nodejs-service-directory/issues/153)) ([3bc4004](https://www.github.com/googleapis/nodejs-service-directory/commit/3bc4004be93fadaf15b84c7aea31eba3450ddd8d))
+
 ### [3.1.2](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.1.1...v3.1.2) (2021-05-25)
 
 
