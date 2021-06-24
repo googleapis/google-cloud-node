@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.7.2](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.7.1...v3.7.2) (2021-06-24)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#269](https://www.github.com/googleapis/nodejs-secret-manager/issues/269)) ([99596db](https://www.github.com/googleapis/nodejs-secret-manager/commit/99596dbe31a9837fa903604305547ef8307c11bb))
+
 ### [3.7.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.7.0...v3.7.1) (2021-05-25)
 
 
