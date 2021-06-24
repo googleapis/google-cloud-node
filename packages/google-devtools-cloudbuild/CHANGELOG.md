@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.4](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.3...v2.2.4) (2021-06-24)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#241](https://www.github.com/googleapis/nodejs-cloudbuild/issues/241)) ([c96003a](https://www.github.com/googleapis/nodejs-cloudbuild/commit/c96003a4897d3f7c8181a56c273b842a4dcdfbf7))
+
 ### [2.2.3](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.2...v2.2.3) (2021-05-25)
 
 
