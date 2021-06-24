@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v3.0.0...v3.0.1) (2021-06-24)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#126](https://www.github.com/googleapis/nodejs-analytics-admin/issues/126)) ([a66c927](https://www.github.com/googleapis/nodejs-analytics-admin/commit/a66c927492a3186df97c52823e4a6db67c60e65b))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v2.0.3...v3.0.0) (2021-05-27)
 
 
