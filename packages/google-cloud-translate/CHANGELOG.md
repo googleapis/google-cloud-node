@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.2.3](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.2...v6.2.3) (2021-06-24)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#687](https://www.github.com/googleapis/nodejs-translate/issues/687)) ([621dc99](https://www.github.com/googleapis/nodejs-translate/commit/621dc99db8de832328731c3176e7bf44842062db))
+
 ### [6.2.2](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.1...v6.2.2) (2021-06-01)
 
 
