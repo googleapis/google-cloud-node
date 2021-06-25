@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.3](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.2...v3.2.3) (2021-06-24)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#241](https://www.github.com/googleapis/nodejs-billing-budgets/issues/241)) ([08862c7](https://www.github.com/googleapis/nodejs-billing-budgets/commit/08862c74805d5fad2b25d1dd38aeeacff2086cac))
+
 ### [3.2.2](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.1...v3.2.2) (2021-05-25)
 
 
