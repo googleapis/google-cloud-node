@@ -5,6 +5,5 @@
   "release_level": "ga",
   "client_documentation": "https://googleapis.dev/nodejs/promisify/latest",
   "name_pretty": "Google Cloud Common Promisify",
-  "default_version": "v1",
   "name": "promisify"
 }
