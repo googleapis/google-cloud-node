@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.2...v1.1.3) (2021-06-25)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#80](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/80)) ([5cf25a7](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/5cf25a7b312ce3a009635a18125ab8f10a096089))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.1...v1.1.2) (2021-06-07)
 
 
