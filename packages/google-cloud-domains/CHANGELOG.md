@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.2...v1.0.3) (2021-06-25)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#49](https://www.github.com/googleapis/nodejs-domains/issues/49)) ([cb5fb16](https://www.github.com/googleapis/nodejs-domains/commit/cb5fb16ac3de2c444537ac8b6bdd8a166f544ed6))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.1...v1.0.2) (2021-05-25)
 
 
