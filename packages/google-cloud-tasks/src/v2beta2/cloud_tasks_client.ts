@@ -333,7 +333,7 @@ export class CloudTasksClient {
   // -- Service calls --
   // -------------------
   getQueue(
-    request: protos.google.cloud.tasks.v2beta2.IGetQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IGetQueueRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -383,7 +383,7 @@ export class CloudTasksClient {
    * const [response] = await client.getQueue(request);
    */
   getQueue(
-    request: protos.google.cloud.tasks.v2beta2.IGetQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IGetQueueRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -422,7 +422,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.getQueue(request, options, callback);
   }
   createQueue(
-    request: protos.google.cloud.tasks.v2beta2.ICreateQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.ICreateQueueRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -486,7 +486,7 @@ export class CloudTasksClient {
    * const [response] = await client.createQueue(request);
    */
   createQueue(
-    request: protos.google.cloud.tasks.v2beta2.ICreateQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.ICreateQueueRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -527,7 +527,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.createQueue(request, options, callback);
   }
   updateQueue(
-    request: protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -595,7 +595,7 @@ export class CloudTasksClient {
    * const [response] = await client.updateQueue(request);
    */
   updateQueue(
-    request: protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IUpdateQueueRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -636,7 +636,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.updateQueue(request, options, callback);
   }
   deleteQueue(
-    request: protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -693,7 +693,7 @@ export class CloudTasksClient {
    * const [response] = await client.deleteQueue(request);
    */
   deleteQueue(
-    request: protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IDeleteQueueRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -734,7 +734,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.deleteQueue(request, options, callback);
   }
   purgeQueue(
-    request: protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -784,7 +784,7 @@ export class CloudTasksClient {
    * const [response] = await client.purgeQueue(request);
    */
   purgeQueue(
-    request: protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IPurgeQueueRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -825,7 +825,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.purgeQueue(request, options, callback);
   }
   pauseQueue(
-    request: protos.google.cloud.tasks.v2beta2.IPauseQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IPauseQueueRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -876,7 +876,7 @@ export class CloudTasksClient {
    * const [response] = await client.pauseQueue(request);
    */
   pauseQueue(
-    request: protos.google.cloud.tasks.v2beta2.IPauseQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IPauseQueueRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -917,7 +917,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.pauseQueue(request, options, callback);
   }
   resumeQueue(
-    request: protos.google.cloud.tasks.v2beta2.IResumeQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IResumeQueueRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -974,7 +974,7 @@ export class CloudTasksClient {
    * const [response] = await client.resumeQueue(request);
    */
   resumeQueue(
-    request: protos.google.cloud.tasks.v2beta2.IResumeQueueRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IResumeQueueRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1015,7 +1015,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.resumeQueue(request, options, callback);
   }
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1071,7 +1071,7 @@ export class CloudTasksClient {
    * const [response] = await client.getIamPolicy(request);
    */
   getIamPolicy(
-    request: protos.google.iam.v1.IGetIamPolicyRequest,
+    request?: protos.google.iam.v1.IGetIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1110,7 +1110,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1170,7 +1170,7 @@ export class CloudTasksClient {
    * const [response] = await client.setIamPolicy(request);
    */
   setIamPolicy(
-    request: protos.google.iam.v1.ISetIamPolicyRequest,
+    request?: protos.google.iam.v1.ISetIamPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1209,7 +1209,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1265,7 +1265,7 @@ export class CloudTasksClient {
    * const [response] = await client.testIamPermissions(request);
    */
   testIamPermissions(
-    request: protos.google.iam.v1.ITestIamPermissionsRequest,
+    request?: protos.google.iam.v1.ITestIamPermissionsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1304,7 +1304,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
   getTask(
-    request: protos.google.cloud.tasks.v2beta2.IGetTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IGetTaskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1362,7 +1362,7 @@ export class CloudTasksClient {
    * const [response] = await client.getTask(request);
    */
   getTask(
-    request: protos.google.cloud.tasks.v2beta2.IGetTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IGetTaskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1401,7 +1401,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.getTask(request, options, callback);
   }
   createTask(
-    request: protos.google.cloud.tasks.v2beta2.ICreateTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.ICreateTaskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1501,7 +1501,7 @@ export class CloudTasksClient {
    * const [response] = await client.createTask(request);
    */
   createTask(
-    request: protos.google.cloud.tasks.v2beta2.ICreateTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.ICreateTaskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1542,7 +1542,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.createTask(request, options, callback);
   }
   deleteTask(
-    request: protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1591,7 +1591,7 @@ export class CloudTasksClient {
    * const [response] = await client.deleteTask(request);
    */
   deleteTask(
-    request: protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IDeleteTaskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1632,7 +1632,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.deleteTask(request, options, callback);
   }
   leaseTasks(
-    request: protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
+    request?: protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1772,7 +1772,7 @@ export class CloudTasksClient {
    * const [response] = await client.leaseTasks(request);
    */
   leaseTasks(
-    request: protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
+    request?: protos.google.cloud.tasks.v2beta2.ILeaseTasksRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1813,7 +1813,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.leaseTasks(request, options, callback);
   }
   acknowledgeTask(
-    request: protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1880,7 +1880,7 @@ export class CloudTasksClient {
    * const [response] = await client.acknowledgeTask(request);
    */
   acknowledgeTask(
-    request: protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IAcknowledgeTaskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1923,7 +1923,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.acknowledgeTask(request, options, callback);
   }
   renewLease(
-    request: protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1997,7 +1997,7 @@ export class CloudTasksClient {
    * const [response] = await client.renewLease(request);
    */
   renewLease(
-    request: protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IRenewLeaseRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2038,7 +2038,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.renewLease(request, options, callback);
   }
   cancelLease(
-    request: protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
+    request?: protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2107,7 +2107,7 @@ export class CloudTasksClient {
    * const [response] = await client.cancelLease(request);
    */
   cancelLease(
-    request: protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
+    request?: protos.google.cloud.tasks.v2beta2.ICancelLeaseRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2148,7 +2148,7 @@ export class CloudTasksClient {
     return this.innerApiCalls.cancelLease(request, options, callback);
   }
   runTask(
-    request: protos.google.cloud.tasks.v2beta2.IRunTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IRunTaskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2232,7 +2232,7 @@ export class CloudTasksClient {
    * const [response] = await client.runTask(request);
    */
   runTask(
-    request: protos.google.cloud.tasks.v2beta2.IRunTaskRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IRunTaskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2272,7 +2272,7 @@ export class CloudTasksClient {
   }
 
   listQueues(
-    request: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2356,7 +2356,7 @@ export class CloudTasksClient {
    *   for more details and examples.
    */
   listQueues(
-    request: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IListQueuesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2552,7 +2552,7 @@ export class CloudTasksClient {
     ) as AsyncIterable<protos.google.cloud.tasks.v2beta2.IQueue>;
   }
   listTasks(
-    request: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2640,7 +2640,7 @@ export class CloudTasksClient {
    *   for more details and examples.
    */
   listTasks(
-    request: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
+    request?: protos.google.cloud.tasks.v2beta2.IListTasksRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
