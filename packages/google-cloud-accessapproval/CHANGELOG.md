@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.2...v1.0.3) (2021-06-25)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#55](https://www.github.com/googleapis/nodejs-access-approval/issues/55)) ([a2a0987](https://www.github.com/googleapis/nodejs-access-approval/commit/a2a0987235e81e1c9ec0128b71865dfef2688658))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.1...v1.0.2) (2021-05-25)
 
 
