@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-service-control/compare/v1.0.0...v1.1.0) (2021-06-25)
+
+
+### Features
+
+* Added the gRPC service config for the Service Controller v1 API docs: Updated some comments. ([#50](https://www.github.com/googleapis/nodejs-service-control/issues/50)) ([edc4448](https://www.github.com/googleapis/nodejs-service-control/commit/edc444896e4b2dda721d3ca8b8591e61eb267e66))
+
+
+### Bug Fixes
+
+* add dependency log_severity.proto ([#48](https://www.github.com/googleapis/nodejs-service-control/issues/48)) ([d7c32ff](https://www.github.com/googleapis/nodejs-service-control/commit/d7c32ff39298b466d72827934dea46da783fcfbe))
+
 ## [1.0.0](https://www.github.com/googleapis/nodejs-service-control/compare/v0.2.0...v1.0.0) (2021-05-19)
 
 
