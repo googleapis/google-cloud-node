@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+### [2.1.3](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.1.2...v2.1.3) (2021-06-24)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#290](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/290)) ([e18a1d1](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/e18a1d1131bed1ce355f9e91811a68b0799ca696))
+
 ### [2.1.2](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.1.1...v2.1.2) (2021-05-25)
 
 
