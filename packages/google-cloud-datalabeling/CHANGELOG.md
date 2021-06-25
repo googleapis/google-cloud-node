@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [2.2.3](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.2...v2.2.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#287](https://www.github.com/googleapis/nodejs-datalabeling/issues/287)) ([2565d60](https://www.github.com/googleapis/nodejs-datalabeling/commit/2565d60b3e98946c216fe040c2e7eb42cee6019f))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.1...v2.2.2) (2021-05-25)
 
 

@@ -14,7 +14,7 @@
     "test": "mocha --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/datalabeling": "^2.2.2"
+    "@google-cloud/datalabeling": "^2.2.3"
   },
   "devDependencies": {
     "chai": "^4.2.0",
