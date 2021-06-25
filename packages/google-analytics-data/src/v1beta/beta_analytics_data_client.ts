@@ -287,7 +287,7 @@ export class BetaAnalyticsDataClient {
   // -- Service calls --
   // -------------------
   runReport(
-    request: protos.google.analytics.data.v1beta.IRunReportRequest,
+    request?: protos.google.analytics.data.v1beta.IRunReportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -402,7 +402,7 @@ export class BetaAnalyticsDataClient {
    * const [response] = await client.runReport(request);
    */
   runReport(
-    request: protos.google.analytics.data.v1beta.IRunReportRequest,
+    request?: protos.google.analytics.data.v1beta.IRunReportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -443,7 +443,7 @@ export class BetaAnalyticsDataClient {
     return this.innerApiCalls.runReport(request, options, callback);
   }
   runPivotReport(
-    request: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
+    request?: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -540,7 +540,7 @@ export class BetaAnalyticsDataClient {
    * const [response] = await client.runPivotReport(request);
    */
   runPivotReport(
-    request: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
+    request?: protos.google.analytics.data.v1beta.IRunPivotReportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -583,7 +583,7 @@ export class BetaAnalyticsDataClient {
     return this.innerApiCalls.runPivotReport(request, options, callback);
   }
   batchRunReports(
-    request: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
+    request?: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -643,7 +643,7 @@ export class BetaAnalyticsDataClient {
    * const [response] = await client.batchRunReports(request);
    */
   batchRunReports(
-    request: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
+    request?: protos.google.analytics.data.v1beta.IBatchRunReportsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -686,7 +686,7 @@ export class BetaAnalyticsDataClient {
     return this.innerApiCalls.batchRunReports(request, options, callback);
   }
   batchRunPivotReports(
-    request: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
+    request?: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -749,7 +749,7 @@ export class BetaAnalyticsDataClient {
    * const [response] = await client.batchRunPivotReports(request);
    */
   batchRunPivotReports(
-    request: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
+    request?: protos.google.analytics.data.v1beta.IBatchRunPivotReportsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -795,7 +795,7 @@ export class BetaAnalyticsDataClient {
     return this.innerApiCalls.batchRunPivotReports(request, options, callback);
   }
   getMetadata(
-    request: protos.google.analytics.data.v1beta.IGetMetadataRequest,
+    request?: protos.google.analytics.data.v1beta.IGetMetadataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -862,7 +862,7 @@ export class BetaAnalyticsDataClient {
    * const [response] = await client.getMetadata(request);
    */
   getMetadata(
-    request: protos.google.analytics.data.v1beta.IGetMetadataRequest,
+    request?: protos.google.analytics.data.v1beta.IGetMetadataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -905,7 +905,7 @@ export class BetaAnalyticsDataClient {
     return this.innerApiCalls.getMetadata(request, options, callback);
   }
   runRealtimeReport(
-    request: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
+    request?: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -989,7 +989,7 @@ export class BetaAnalyticsDataClient {
    * const [response] = await client.runRealtimeReport(request);
    */
   runRealtimeReport(
-    request: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
+    request?: protos.google.analytics.data.v1beta.IRunRealtimeReportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

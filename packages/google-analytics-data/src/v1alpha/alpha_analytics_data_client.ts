@@ -288,7 +288,7 @@ export class AlphaAnalyticsDataClient {
   // -- Service calls --
   // -------------------
   runReport(
-    request: protos.google.analytics.data.v1alpha.IRunReportRequest,
+    request?: protos.google.analytics.data.v1alpha.IRunReportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -385,7 +385,7 @@ export class AlphaAnalyticsDataClient {
    * const [response] = await client.runReport(request);
    */
   runReport(
-    request: protos.google.analytics.data.v1alpha.IRunReportRequest,
+    request?: protos.google.analytics.data.v1alpha.IRunReportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -420,7 +420,7 @@ export class AlphaAnalyticsDataClient {
     return this.innerApiCalls.runReport(request, options, callback);
   }
   runPivotReport(
-    request: protos.google.analytics.data.v1alpha.IRunPivotReportRequest,
+    request?: protos.google.analytics.data.v1alpha.IRunPivotReportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -511,7 +511,7 @@ export class AlphaAnalyticsDataClient {
    * const [response] = await client.runPivotReport(request);
    */
   runPivotReport(
-    request: protos.google.analytics.data.v1alpha.IRunPivotReportRequest,
+    request?: protos.google.analytics.data.v1alpha.IRunPivotReportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -548,7 +548,7 @@ export class AlphaAnalyticsDataClient {
     return this.innerApiCalls.runPivotReport(request, options, callback);
   }
   batchRunReports(
-    request: protos.google.analytics.data.v1alpha.IBatchRunReportsRequest,
+    request?: protos.google.analytics.data.v1alpha.IBatchRunReportsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -602,7 +602,7 @@ export class AlphaAnalyticsDataClient {
    * const [response] = await client.batchRunReports(request);
    */
   batchRunReports(
-    request: protos.google.analytics.data.v1alpha.IBatchRunReportsRequest,
+    request?: protos.google.analytics.data.v1alpha.IBatchRunReportsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -639,7 +639,7 @@ export class AlphaAnalyticsDataClient {
     return this.innerApiCalls.batchRunReports(request, options, callback);
   }
   batchRunPivotReports(
-    request: protos.google.analytics.data.v1alpha.IBatchRunPivotReportsRequest,
+    request?: protos.google.analytics.data.v1alpha.IBatchRunPivotReportsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -696,7 +696,7 @@ export class AlphaAnalyticsDataClient {
    * const [response] = await client.batchRunPivotReports(request);
    */
   batchRunPivotReports(
-    request: protos.google.analytics.data.v1alpha.IBatchRunPivotReportsRequest,
+    request?: protos.google.analytics.data.v1alpha.IBatchRunPivotReportsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -736,7 +736,7 @@ export class AlphaAnalyticsDataClient {
     return this.innerApiCalls.batchRunPivotReports(request, options, callback);
   }
   getMetadata(
-    request: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
+    request?: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -803,7 +803,7 @@ export class AlphaAnalyticsDataClient {
    * const [response] = await client.getMetadata(request);
    */
   getMetadata(
-    request: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
+    request?: protos.google.analytics.data.v1alpha.IGetMetadataRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -846,7 +846,7 @@ export class AlphaAnalyticsDataClient {
     return this.innerApiCalls.getMetadata(request, options, callback);
   }
   runRealtimeReport(
-    request: protos.google.analytics.data.v1alpha.IRunRealtimeReportRequest,
+    request?: protos.google.analytics.data.v1alpha.IRunRealtimeReportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -926,7 +926,7 @@ export class AlphaAnalyticsDataClient {
    * const [response] = await client.runRealtimeReport(request);
    */
   runRealtimeReport(
-    request: protos.google.analytics.data.v1alpha.IRunRealtimeReportRequest,
+    request?: protos.google.analytics.data.v1alpha.IRunRealtimeReportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
