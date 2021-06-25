@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.2...v1.0.3) (2021-06-23)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#59](https://www.github.com/googleapis/nodejs-managed-identities/issues/59)) ([e9bf7c3](https://www.github.com/googleapis/nodejs-managed-identities/commit/e9bf7c3d97394c7d491f0cab064d53e30b23d2dd))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.1...v1.0.2) (2021-05-25)
 
 
