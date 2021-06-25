@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.2.3...v2.3.0) (2021-06-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* Remove unsupported fields: recognition_result and alternative_source_language_codes. docs: Add more comments for supported audio type (#131)
+
+### Bug Fixes
+
+* **build:** next version should be 2.3.0 ([#158](https://www.github.com/googleapis/nodejs-media-translation/issues/158)) ([1d4f7a0](https://www.github.com/googleapis/nodejs-media-translation/commit/1d4f7a00e3a88ab1581c5e690cad40074738cefb))
+* **deps:** require google-gax v2.12.0 ([#139](https://www.github.com/googleapis/nodejs-media-translation/issues/139)) ([bda81f9](https://www.github.com/googleapis/nodejs-media-translation/commit/bda81f920df258677ae4b24b647ee4c17a0ccbef))
+* GoogleAdsError missing using generator version after 1.3.0 ([#147](https://www.github.com/googleapis/nodejs-media-translation/issues/147)) ([735843a](https://www.github.com/googleapis/nodejs-media-translation/commit/735843a9bbeb84be9f61a718271bcd81860a5eaa))
+* Remove unsupported fields: recognition_result and alternative_source_language_codes. docs: Add more comments for supported audio type ([#131](https://www.github.com/googleapis/nodejs-media-translation/issues/131)) ([cfaeb1c](https://www.github.com/googleapis/nodejs-media-translation/commit/cfaeb1ce0699eaa372d1ed726bd445177dafe546))
+* use require() to load JSON protos ([#141](https://www.github.com/googleapis/nodejs-media-translation/issues/141)) ([1bc887c](https://www.github.com/googleapis/nodejs-media-translation/commit/1bc887cb22014d066e2c382a7f8cf7f518ec903d))
+
 ### [2.2.3](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.2.2...v2.2.3) (2021-02-04)
 
 
