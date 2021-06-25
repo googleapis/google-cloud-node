@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-retail/compare/v1.1.2...v1.1.3) (2021-06-22)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#62](https://www.github.com/googleapis/nodejs-retail/issues/62)) ([ea912e8](https://www.github.com/googleapis/nodejs-retail/commit/ea912e887a5a0b0695bcc54d506ec8e7c4c605c3))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-retail/compare/v1.1.1...v1.1.2) (2021-05-25)
 
 
