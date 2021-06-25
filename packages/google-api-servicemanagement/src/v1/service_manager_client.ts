@@ -416,7 +416,7 @@ export class ServiceManagerClient {
   // -- Service calls --
   // -------------------
   getService(
-    request: protos.google.api.servicemanagement.v1.IGetServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IGetServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -466,7 +466,7 @@ export class ServiceManagerClient {
    * const [response] = await client.getService(request);
    */
   getService(
-    request: protos.google.api.servicemanagement.v1.IGetServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IGetServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -509,7 +509,7 @@ export class ServiceManagerClient {
     return this.innerApiCalls.getService(request, options, callback);
   }
   getServiceConfig(
-    request: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
+    request?: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -569,7 +569,7 @@ export class ServiceManagerClient {
    * const [response] = await client.getServiceConfig(request);
    */
   getServiceConfig(
-    request: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
+    request?: protos.google.api.servicemanagement.v1.IGetServiceConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -615,7 +615,7 @@ export class ServiceManagerClient {
     return this.innerApiCalls.getServiceConfig(request, options, callback);
   }
   createServiceConfig(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
+    request?: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -676,7 +676,7 @@ export class ServiceManagerClient {
    * const [response] = await client.createServiceConfig(request);
    */
   createServiceConfig(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
+    request?: protos.google.api.servicemanagement.v1.ICreateServiceConfigRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -722,7 +722,7 @@ export class ServiceManagerClient {
     return this.innerApiCalls.createServiceConfig(request, options, callback);
   }
   getServiceRollout(
-    request: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
+    request?: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -776,7 +776,7 @@ export class ServiceManagerClient {
    * const [response] = await client.getServiceRollout(request);
    */
   getServiceRollout(
-    request: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
+    request?: protos.google.api.servicemanagement.v1.IGetServiceRolloutRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -822,7 +822,7 @@ export class ServiceManagerClient {
     return this.innerApiCalls.getServiceRollout(request, options, callback);
   }
   generateConfigReport(
-    request: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
+    request?: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -893,7 +893,7 @@ export class ServiceManagerClient {
    * const [response] = await client.generateConfigReport(request);
    */
   generateConfigReport(
-    request: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
+    request?: protos.google.api.servicemanagement.v1.IGenerateConfigReportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -934,7 +934,7 @@ export class ServiceManagerClient {
   }
 
   createService(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -993,7 +993,7 @@ export class ServiceManagerClient {
    * const [response] = await operation.promise();
    */
   createService(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.ICreateServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1072,7 +1072,7 @@ export class ServiceManagerClient {
     >;
   }
   deleteService(
-    request: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1134,7 +1134,7 @@ export class ServiceManagerClient {
    * const [response] = await operation.promise();
    */
   deleteService(
-    request: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IDeleteServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1219,7 +1219,7 @@ export class ServiceManagerClient {
     >;
   }
   undeleteService(
-    request: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1281,7 +1281,7 @@ export class ServiceManagerClient {
    * const [response] = await operation.promise();
    */
   undeleteService(
-    request: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IUndeleteServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1366,7 +1366,7 @@ export class ServiceManagerClient {
     >;
   }
   submitConfigSource(
-    request: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
+    request?: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1441,7 +1441,7 @@ export class ServiceManagerClient {
    * const [response] = await operation.promise();
    */
   submitConfigSource(
-    request: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
+    request?: protos.google.api.servicemanagement.v1.ISubmitConfigSourceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1526,7 +1526,7 @@ export class ServiceManagerClient {
     >;
   }
   createServiceRollout(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
+    request?: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1598,7 +1598,7 @@ export class ServiceManagerClient {
    * const [response] = await operation.promise();
    */
   createServiceRollout(
-    request: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
+    request?: protos.google.api.servicemanagement.v1.ICreateServiceRolloutRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1683,7 +1683,7 @@ export class ServiceManagerClient {
     >;
   }
   enableService(
-    request: protos.google.api.servicemanagement.v1.IEnableServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IEnableServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1753,9 +1753,10 @@ export class ServiceManagerClient {
    * @example
    * const [operation] = await client.enableService(request);
    * const [response] = await operation.promise();
+   * @deprecated EnableService is deprecated and may be removed in a future version.
    */
   enableService(
-    request: protos.google.api.servicemanagement.v1.IEnableServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IEnableServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1800,6 +1801,11 @@ export class ServiceManagerClient {
         service_name: request.serviceName || '',
       });
     this.initialize();
+    gax.warn(
+      'DEP$ServiceManager-$EnableService',
+      'EnableService is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.enableService(request, options, callback);
   }
   /**
@@ -1816,6 +1822,7 @@ export class ServiceManagerClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * @deprecated EnableService is deprecated and may be removed in a future version.
    */
   async checkEnableServiceProgress(
     name: string
@@ -1840,7 +1847,7 @@ export class ServiceManagerClient {
     >;
   }
   disableService(
-    request: protos.google.api.servicemanagement.v1.IDisableServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IDisableServiceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1909,9 +1916,10 @@ export class ServiceManagerClient {
    * @example
    * const [operation] = await client.disableService(request);
    * const [response] = await operation.promise();
+   * @deprecated DisableService is deprecated and may be removed in a future version.
    */
   disableService(
-    request: protos.google.api.servicemanagement.v1.IDisableServiceRequest,
+    request?: protos.google.api.servicemanagement.v1.IDisableServiceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1956,6 +1964,11 @@ export class ServiceManagerClient {
         service_name: request.serviceName || '',
       });
     this.initialize();
+    gax.warn(
+      'DEP$ServiceManager-$DisableService',
+      'DisableService is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.disableService(request, options, callback);
   }
   /**
@@ -1972,6 +1985,7 @@ export class ServiceManagerClient {
    * console.log(decodedOperation.result);
    * console.log(decodedOperation.done);
    * console.log(decodedOperation.metadata);
+   * @deprecated DisableService is deprecated and may be removed in a future version.
    */
   async checkDisableServiceProgress(
     name: string
@@ -1996,7 +2010,7 @@ export class ServiceManagerClient {
     >;
   }
   listServices(
-    request: protos.google.api.servicemanagement.v1.IListServicesRequest,
+    request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2067,7 +2081,7 @@ export class ServiceManagerClient {
    *   for more details and examples.
    */
   listServices(
-    request: protos.google.api.servicemanagement.v1.IListServicesRequest,
+    request?: protos.google.api.servicemanagement.v1.IListServicesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2201,7 +2215,7 @@ export class ServiceManagerClient {
     ) as AsyncIterable<protos.google.api.servicemanagement.v1.IManagedService>;
   }
   listServiceConfigs(
-    request: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+    request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2259,7 +2273,7 @@ export class ServiceManagerClient {
    *   for more details and examples.
    */
   listServiceConfigs(
-    request: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
+    request?: protos.google.api.servicemanagement.v1.IListServiceConfigsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -2399,7 +2413,7 @@ export class ServiceManagerClient {
     ) as AsyncIterable<protos.google.api.IService>;
   }
   listServiceRollouts(
-    request: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+    request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2466,7 +2480,7 @@ export class ServiceManagerClient {
    *   for more details and examples.
    */
   listServiceRollouts(
-    request: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
+    request?: protos.google.api.servicemanagement.v1.IListServiceRolloutsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
