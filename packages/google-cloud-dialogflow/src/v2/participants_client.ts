@@ -427,7 +427,7 @@ export class ParticipantsClient {
   // -- Service calls --
   // -------------------
   createParticipant(
-    request: protos.google.cloud.dialogflow.v2.ICreateParticipantRequest,
+    request?: protos.google.cloud.dialogflow.v2.ICreateParticipantRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -479,7 +479,7 @@ export class ParticipantsClient {
    * const [response] = await client.createParticipant(request);
    */
   createParticipant(
-    request: protos.google.cloud.dialogflow.v2.ICreateParticipantRequest,
+    request?: protos.google.cloud.dialogflow.v2.ICreateParticipantRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -522,7 +522,7 @@ export class ParticipantsClient {
     return this.innerApiCalls.createParticipant(request, options, callback);
   }
   getParticipant(
-    request: protos.google.cloud.dialogflow.v2.IGetParticipantRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetParticipantRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -572,7 +572,7 @@ export class ParticipantsClient {
    * const [response] = await client.getParticipant(request);
    */
   getParticipant(
-    request: protos.google.cloud.dialogflow.v2.IGetParticipantRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetParticipantRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -615,7 +615,7 @@ export class ParticipantsClient {
     return this.innerApiCalls.getParticipant(request, options, callback);
   }
   updateParticipant(
-    request: protos.google.cloud.dialogflow.v2.IUpdateParticipantRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateParticipantRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -665,7 +665,7 @@ export class ParticipantsClient {
    * const [response] = await client.updateParticipant(request);
    */
   updateParticipant(
-    request: protos.google.cloud.dialogflow.v2.IUpdateParticipantRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateParticipantRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -708,7 +708,7 @@ export class ParticipantsClient {
     return this.innerApiCalls.updateParticipant(request, options, callback);
   }
   analyzeContent(
-    request: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
+    request?: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -779,7 +779,7 @@ export class ParticipantsClient {
    * const [response] = await client.analyzeContent(request);
    */
   analyzeContent(
-    request: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
+    request?: protos.google.cloud.dialogflow.v2.IAnalyzeContentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -822,7 +822,7 @@ export class ParticipantsClient {
     return this.innerApiCalls.analyzeContent(request, options, callback);
   }
   suggestArticles(
-    request: protos.google.cloud.dialogflow.v2.ISuggestArticlesRequest,
+    request?: protos.google.cloud.dialogflow.v2.ISuggestArticlesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -883,7 +883,7 @@ export class ParticipantsClient {
    * const [response] = await client.suggestArticles(request);
    */
   suggestArticles(
-    request: protos.google.cloud.dialogflow.v2.ISuggestArticlesRequest,
+    request?: protos.google.cloud.dialogflow.v2.ISuggestArticlesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -926,7 +926,7 @@ export class ParticipantsClient {
     return this.innerApiCalls.suggestArticles(request, options, callback);
   }
   suggestFaqAnswers(
-    request: protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersRequest,
+    request?: protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -987,7 +987,7 @@ export class ParticipantsClient {
    * const [response] = await client.suggestFaqAnswers(request);
    */
   suggestFaqAnswers(
-    request: protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersRequest,
+    request?: protos.google.cloud.dialogflow.v2.ISuggestFaqAnswersRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1031,7 +1031,7 @@ export class ParticipantsClient {
   }
 
   listParticipants(
-    request: protos.google.cloud.dialogflow.v2.IListParticipantsRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListParticipantsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1089,7 +1089,7 @@ export class ParticipantsClient {
    *   for more details and examples.
    */
   listParticipants(
-    request: protos.google.cloud.dialogflow.v2.IListParticipantsRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListParticipantsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

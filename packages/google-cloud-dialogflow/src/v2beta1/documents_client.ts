@@ -503,7 +503,7 @@ export class DocumentsClient {
   // -- Service calls --
   // -------------------
   getDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -556,7 +556,7 @@ export class DocumentsClient {
    * const [response] = await client.getDocument(request);
    */
   getDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IGetDocumentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -600,7 +600,7 @@ export class DocumentsClient {
   }
 
   createDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -666,7 +666,7 @@ export class DocumentsClient {
    * const [response] = await operation.promise();
    */
   createDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.ICreateDocumentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -751,7 +751,7 @@ export class DocumentsClient {
     >;
   }
   importDocuments(
-    request: protos.google.cloud.dialogflow.v2beta1.IImportDocumentsRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IImportDocumentsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -823,7 +823,7 @@ export class DocumentsClient {
    * const [response] = await operation.promise();
    */
   importDocuments(
-    request: protos.google.cloud.dialogflow.v2beta1.IImportDocumentsRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IImportDocumentsRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -908,7 +908,7 @@ export class DocumentsClient {
     >;
   }
   deleteDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -969,7 +969,7 @@ export class DocumentsClient {
    * const [response] = await operation.promise();
    */
   deleteDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IDeleteDocumentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1054,7 +1054,7 @@ export class DocumentsClient {
     >;
   }
   updateDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1117,7 +1117,7 @@ export class DocumentsClient {
    * const [response] = await operation.promise();
    */
   updateDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IUpdateDocumentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1202,7 +1202,7 @@ export class DocumentsClient {
     >;
   }
   reloadDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1275,7 +1275,7 @@ export class DocumentsClient {
    * const [response] = await operation.promise();
    */
   reloadDocument(
-    request: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IReloadDocumentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1360,7 +1360,7 @@ export class DocumentsClient {
     >;
   }
   listDocuments(
-    request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1443,7 +1443,7 @@ export class DocumentsClient {
    *   for more details and examples.
    */
   listDocuments(
-    request: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
+    request?: protos.google.cloud.dialogflow.v2beta1.IListDocumentsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

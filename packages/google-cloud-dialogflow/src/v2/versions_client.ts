@@ -425,7 +425,7 @@ export class VersionsClient {
   // -- Service calls --
   // -------------------
   getVersion(
-    request: protos.google.cloud.dialogflow.v2.IGetVersionRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetVersionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -473,7 +473,7 @@ export class VersionsClient {
    * const [response] = await client.getVersion(request);
    */
   getVersion(
-    request: protos.google.cloud.dialogflow.v2.IGetVersionRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetVersionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -514,7 +514,7 @@ export class VersionsClient {
     return this.innerApiCalls.getVersion(request, options, callback);
   }
   createVersion(
-    request: protos.google.cloud.dialogflow.v2.ICreateVersionRequest,
+    request?: protos.google.cloud.dialogflow.v2.ICreateVersionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -569,7 +569,7 @@ export class VersionsClient {
    * const [response] = await client.createVersion(request);
    */
   createVersion(
-    request: protos.google.cloud.dialogflow.v2.ICreateVersionRequest,
+    request?: protos.google.cloud.dialogflow.v2.ICreateVersionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -612,7 +612,7 @@ export class VersionsClient {
     return this.innerApiCalls.createVersion(request, options, callback);
   }
   updateVersion(
-    request: protos.google.cloud.dialogflow.v2.IUpdateVersionRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateVersionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -670,7 +670,7 @@ export class VersionsClient {
    * const [response] = await client.updateVersion(request);
    */
   updateVersion(
-    request: protos.google.cloud.dialogflow.v2.IUpdateVersionRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateVersionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -713,7 +713,7 @@ export class VersionsClient {
     return this.innerApiCalls.updateVersion(request, options, callback);
   }
   deleteVersion(
-    request: protos.google.cloud.dialogflow.v2.IDeleteVersionRequest,
+    request?: protos.google.cloud.dialogflow.v2.IDeleteVersionRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -765,7 +765,7 @@ export class VersionsClient {
    * const [response] = await client.deleteVersion(request);
    */
   deleteVersion(
-    request: protos.google.cloud.dialogflow.v2.IDeleteVersionRequest,
+    request?: protos.google.cloud.dialogflow.v2.IDeleteVersionRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -809,7 +809,7 @@ export class VersionsClient {
   }
 
   listVersions(
-    request: protos.google.cloud.dialogflow.v2.IListVersionsRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListVersionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -868,7 +868,7 @@ export class VersionsClient {
    *   for more details and examples.
    */
   listVersions(
-    request: protos.google.cloud.dialogflow.v2.IListVersionsRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListVersionsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

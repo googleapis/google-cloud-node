@@ -422,7 +422,7 @@ export class AnswerRecordsClient {
   // -- Service calls --
   // -------------------
   updateAnswerRecord(
-    request: protos.google.cloud.dialogflow.v2.IUpdateAnswerRecordRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateAnswerRecordRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -472,7 +472,7 @@ export class AnswerRecordsClient {
    * const [response] = await client.updateAnswerRecord(request);
    */
   updateAnswerRecord(
-    request: protos.google.cloud.dialogflow.v2.IUpdateAnswerRecordRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateAnswerRecordRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -516,7 +516,7 @@ export class AnswerRecordsClient {
   }
 
   listAnswerRecords(
-    request: protos.google.cloud.dialogflow.v2.IListAnswerRecordsRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListAnswerRecordsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -586,7 +586,7 @@ export class AnswerRecordsClient {
    *   for more details and examples.
    */
   listAnswerRecords(
-    request: protos.google.cloud.dialogflow.v2.IListAnswerRecordsRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListAnswerRecordsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

@@ -431,7 +431,7 @@ export class EnvironmentsClient {
   // -- Service calls --
   // -------------------
   getEnvironment(
-    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -483,7 +483,7 @@ export class EnvironmentsClient {
    * const [response] = await client.getEnvironment(request);
    */
   getEnvironment(
-    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -526,7 +526,7 @@ export class EnvironmentsClient {
     return this.innerApiCalls.getEnvironment(request, options, callback);
   }
   createEnvironment(
-    request: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -581,7 +581,7 @@ export class EnvironmentsClient {
    * const [response] = await client.createEnvironment(request);
    */
   createEnvironment(
-    request: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.v2.ICreateEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -624,7 +624,7 @@ export class EnvironmentsClient {
     return this.innerApiCalls.createEnvironment(request, options, callback);
   }
   updateEnvironment(
-    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -690,7 +690,7 @@ export class EnvironmentsClient {
    * const [response] = await client.updateEnvironment(request);
    */
   updateEnvironment(
-    request: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -733,7 +733,7 @@ export class EnvironmentsClient {
     return this.innerApiCalls.updateEnvironment(request, options, callback);
   }
   deleteEnvironment(
-    request: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -785,7 +785,7 @@ export class EnvironmentsClient {
    * const [response] = await client.deleteEnvironment(request);
    */
   deleteEnvironment(
-    request: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
+    request?: protos.google.cloud.dialogflow.v2.IDeleteEnvironmentRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -829,7 +829,7 @@ export class EnvironmentsClient {
   }
 
   listEnvironments(
-    request: protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -888,7 +888,7 @@ export class EnvironmentsClient {
    *   for more details and examples.
    */
   listEnvironments(
-    request: protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListEnvironmentsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -1032,7 +1032,7 @@ export class EnvironmentsClient {
     ) as AsyncIterable<protos.google.cloud.dialogflow.v2.IEnvironment>;
   }
   getEnvironmentHistory(
-    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1088,7 +1088,7 @@ export class EnvironmentsClient {
    *   for more details and examples.
    */
   getEnvironmentHistory(
-    request: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetEnvironmentHistoryRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<

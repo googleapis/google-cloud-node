@@ -425,7 +425,7 @@ export class ConversationProfilesClient {
   // -- Service calls --
   // -------------------
   getConversationProfile(
-    request: protos.google.cloud.dialogflow.v2.IGetConversationProfileRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetConversationProfileRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -478,7 +478,7 @@ export class ConversationProfilesClient {
    * const [response] = await client.getConversationProfile(request);
    */
   getConversationProfile(
-    request: protos.google.cloud.dialogflow.v2.IGetConversationProfileRequest,
+    request?: protos.google.cloud.dialogflow.v2.IGetConversationProfileRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -528,7 +528,7 @@ export class ConversationProfilesClient {
     );
   }
   createConversationProfile(
-    request: protos.google.cloud.dialogflow.v2.ICreateConversationProfileRequest,
+    request?: protos.google.cloud.dialogflow.v2.ICreateConversationProfileRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -586,7 +586,7 @@ export class ConversationProfilesClient {
    * const [response] = await client.createConversationProfile(request);
    */
   createConversationProfile(
-    request: protos.google.cloud.dialogflow.v2.ICreateConversationProfileRequest,
+    request?: protos.google.cloud.dialogflow.v2.ICreateConversationProfileRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -636,7 +636,7 @@ export class ConversationProfilesClient {
     );
   }
   updateConversationProfile(
-    request: protos.google.cloud.dialogflow.v2.IUpdateConversationProfileRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateConversationProfileRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -693,7 +693,7 @@ export class ConversationProfilesClient {
    * const [response] = await client.updateConversationProfile(request);
    */
   updateConversationProfile(
-    request: protos.google.cloud.dialogflow.v2.IUpdateConversationProfileRequest,
+    request?: protos.google.cloud.dialogflow.v2.IUpdateConversationProfileRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -743,7 +743,7 @@ export class ConversationProfilesClient {
     );
   }
   deleteConversationProfile(
-    request: protos.google.cloud.dialogflow.v2.IDeleteConversationProfileRequest,
+    request?: protos.google.cloud.dialogflow.v2.IDeleteConversationProfileRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -796,7 +796,7 @@ export class ConversationProfilesClient {
    * const [response] = await client.deleteConversationProfile(request);
    */
   deleteConversationProfile(
-    request: protos.google.cloud.dialogflow.v2.IDeleteConversationProfileRequest,
+    request?: protos.google.cloud.dialogflow.v2.IDeleteConversationProfileRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -847,7 +847,7 @@ export class ConversationProfilesClient {
   }
 
   listConversationProfiles(
-    request: protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -904,7 +904,7 @@ export class ConversationProfilesClient {
    *   for more details and examples.
    */
   listConversationProfiles(
-    request: protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest,
+    request?: protos.google.cloud.dialogflow.v2.IListConversationProfilesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
