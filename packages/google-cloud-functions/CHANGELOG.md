@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.6](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.5...v1.1.6) (2021-06-24)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#85](https://www.github.com/googleapis/nodejs-functions/issues/85)) ([16b60eb](https://www.github.com/googleapis/nodejs-functions/commit/16b60eb08129f4da404970ba9b487770c1e8c9e8))
+
 ### [1.1.5](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.4...v1.1.5) (2021-06-07)
 
 
