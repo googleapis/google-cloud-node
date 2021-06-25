@@ -267,6 +267,230 @@
                 return Any;
             })();
     
+            protobuf.Timestamp = (function() {
+    
+                /**
+                 * Properties of a Timestamp.
+                 * @memberof google.protobuf
+                 * @interface ITimestamp
+                 * @property {number|Long|null} [seconds] Timestamp seconds
+                 * @property {number|null} [nanos] Timestamp nanos
+                 */
+    
+                /**
+                 * Constructs a new Timestamp.
+                 * @memberof google.protobuf
+                 * @classdesc Represents a Timestamp.
+                 * @implements ITimestamp
+                 * @constructor
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 */
+                function Timestamp(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Timestamp seconds.
+                 * @member {number|Long} seconds
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Timestamp nanos.
+                 * @member {number} nanos
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 */
+                Timestamp.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new Timestamp instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
+                 * @returns {google.protobuf.Timestamp} Timestamp instance
+                 */
+                Timestamp.create = function create(properties) {
+                    return new Timestamp(properties);
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.seconds = reader.int64();
+                            break;
+                        case 2:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Timestamp.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Timestamp message.
+                 * @function verify
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Timestamp.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
+                            return "seconds: integer|Long expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Timestamp} Timestamp
+                 */
+                Timestamp.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Timestamp)
+                        return object;
+                    var message = new $root.google.protobuf.Timestamp();
+                    if (object.seconds != null)
+                        if ($util.Long)
+                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
+                        else if (typeof object.seconds === "string")
+                            message.seconds = parseInt(object.seconds, 10);
+                        else if (typeof object.seconds === "number")
+                            message.seconds = object.seconds;
+                        else if (typeof object.seconds === "object")
+                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Timestamp
+                 * @static
+                 * @param {google.protobuf.Timestamp} message Timestamp
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Timestamp.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.seconds = options.longs === String ? "0" : 0;
+                        object.nanos = 0;
+                    }
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (typeof message.seconds === "number")
+                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
+                        else
+                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Timestamp to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Timestamp
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Timestamp.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Timestamp;
+            })();
+    
             protobuf.Duration = (function() {
     
                 /**
@@ -9800,230 +10024,6 @@
                 return ListValue;
             })();
     
-            protobuf.Timestamp = (function() {
-    
-                /**
-                 * Properties of a Timestamp.
-                 * @memberof google.protobuf
-                 * @interface ITimestamp
-                 * @property {number|Long|null} [seconds] Timestamp seconds
-                 * @property {number|null} [nanos] Timestamp nanos
-                 */
-    
-                /**
-                 * Constructs a new Timestamp.
-                 * @memberof google.protobuf
-                 * @classdesc Represents a Timestamp.
-                 * @implements ITimestamp
-                 * @constructor
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 */
-                function Timestamp(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Timestamp seconds.
-                 * @member {number|Long} seconds
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.seconds = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                /**
-                 * Timestamp nanos.
-                 * @member {number} nanos
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 */
-                Timestamp.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new Timestamp instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp=} [properties] Properties to set
-                 * @returns {google.protobuf.Timestamp} Timestamp instance
-                 */
-                Timestamp.create = function create(properties) {
-                    return new Timestamp(properties);
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.ITimestamp} message Timestamp message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Timestamp.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Timestamp();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.seconds = reader.int64();
-                            break;
-                        case 2:
-                            message.nanos = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Timestamp.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a Timestamp message.
-                 * @function verify
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Timestamp.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds) && !(message.seconds && $util.isInteger(message.seconds.low) && $util.isInteger(message.seconds.high)))
-                            return "seconds: integer|Long expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Timestamp} Timestamp
-                 */
-                Timestamp.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Timestamp)
-                        return object;
-                    var message = new $root.google.protobuf.Timestamp();
-                    if (object.seconds != null)
-                        if ($util.Long)
-                            (message.seconds = $util.Long.fromValue(object.seconds)).unsigned = false;
-                        else if (typeof object.seconds === "string")
-                            message.seconds = parseInt(object.seconds, 10);
-                        else if (typeof object.seconds === "number")
-                            message.seconds = object.seconds;
-                        else if (typeof object.seconds === "object")
-                            message.seconds = new $util.LongBits(object.seconds.low >>> 0, object.seconds.high >>> 0).toNumber();
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Timestamp
-                 * @static
-                 * @param {google.protobuf.Timestamp} message Timestamp
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Timestamp.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        if ($util.Long) {
-                            var long = new $util.Long(0, 0, false);
-                            object.seconds = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                        } else
-                            object.seconds = options.longs === String ? "0" : 0;
-                        object.nanos = 0;
-                    }
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (typeof message.seconds === "number")
-                            object.seconds = options.longs === String ? String(message.seconds) : message.seconds;
-                        else
-                            object.seconds = options.longs === String ? $util.Long.prototype.toString.call(message.seconds) : options.longs === Number ? new $util.LongBits(message.seconds.low >>> 0, message.seconds.high >>> 0).toNumber() : message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Timestamp to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Timestamp
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Timestamp.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Timestamp;
-            })();
-    
             return protobuf;
         })();
     
@@ -10488,6 +10488,7 @@
                          * @property {google.api.servicecontrol.v1.Distribution.ILinearBuckets|null} [linearBuckets] Distribution linearBuckets
                          * @property {google.api.servicecontrol.v1.Distribution.IExponentialBuckets|null} [exponentialBuckets] Distribution exponentialBuckets
                          * @property {google.api.servicecontrol.v1.Distribution.IExplicitBuckets|null} [explicitBuckets] Distribution explicitBuckets
+                         * @property {Array.<google.api.Distribution.IExemplar>|null} [exemplars] Distribution exemplars
                          */
     
                         /**
@@ -10500,6 +10501,7 @@
                          */
                         function Distribution(properties) {
                             this.bucketCounts = [];
+                            this.exemplars = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -10578,6 +10580,14 @@
                          */
                         Distribution.prototype.explicitBuckets = null;
     
+                        /**
+                         * Distribution exemplars.
+                         * @member {Array.<google.api.Distribution.IExemplar>} exemplars
+                         * @memberof google.api.servicecontrol.v1.Distribution
+                         * @instance
+                         */
+                        Distribution.prototype.exemplars = $util.emptyArray;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -10638,6 +10648,9 @@
                                 $root.google.api.servicecontrol.v1.Distribution.ExponentialBuckets.encode(message.exponentialBuckets, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.explicitBuckets != null && Object.hasOwnProperty.call(message, "explicitBuckets"))
                                 $root.google.api.servicecontrol.v1.Distribution.ExplicitBuckets.encode(message.explicitBuckets, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.exemplars != null && message.exemplars.length)
+                                for (var i = 0; i < message.exemplars.length; ++i)
+                                    $root.google.api.Distribution.Exemplar.encode(message.exemplars[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -10705,6 +10718,11 @@
                                     break;
                                 case 9:
                                     message.explicitBuckets = $root.google.api.servicecontrol.v1.Distribution.ExplicitBuckets.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    if (!(message.exemplars && message.exemplars.length))
+                                        message.exemplars = [];
+                                    message.exemplars.push($root.google.api.Distribution.Exemplar.decode(reader, reader.uint32()));
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10792,6 +10810,15 @@
                                         return "explicitBuckets." + error;
                                 }
                             }
+                            if (message.exemplars != null && message.hasOwnProperty("exemplars")) {
+                                if (!Array.isArray(message.exemplars))
+                                    return "exemplars: array expected";
+                                for (var i = 0; i < message.exemplars.length; ++i) {
+                                    var error = $root.google.api.Distribution.Exemplar.verify(message.exemplars[i]);
+                                    if (error)
+                                        return "exemplars." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -10853,6 +10880,16 @@
                                     throw TypeError(".google.api.servicecontrol.v1.Distribution.explicitBuckets: object expected");
                                 message.explicitBuckets = $root.google.api.servicecontrol.v1.Distribution.ExplicitBuckets.fromObject(object.explicitBuckets);
                             }
+                            if (object.exemplars) {
+                                if (!Array.isArray(object.exemplars))
+                                    throw TypeError(".google.api.servicecontrol.v1.Distribution.exemplars: array expected");
+                                message.exemplars = [];
+                                for (var i = 0; i < object.exemplars.length; ++i) {
+                                    if (typeof object.exemplars[i] !== "object")
+                                        throw TypeError(".google.api.servicecontrol.v1.Distribution.exemplars: object expected");
+                                    message.exemplars[i] = $root.google.api.Distribution.Exemplar.fromObject(object.exemplars[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -10869,8 +10906,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.bucketCounts = [];
+                                object.exemplars = [];
+                            }
                             if (options.defaults) {
                                 if ($util.Long) {
                                     var long = new $util.Long(0, 0, false);
@@ -10917,6 +10956,11 @@
                                 object.explicitBuckets = $root.google.api.servicecontrol.v1.Distribution.ExplicitBuckets.toObject(message.explicitBuckets, options);
                                 if (options.oneofs)
                                     object.bucketOption = "explicitBuckets";
+                            }
+                            if (message.exemplars && message.exemplars.length) {
+                                object.exemplars = [];
+                                for (var j = 0; j < message.exemplars.length; ++j)
+                                    object.exemplars[j] = $root.google.api.Distribution.Exemplar.toObject(message.exemplars[j], options);
                             }
                             return object;
                         };
@@ -15455,6 +15499,7 @@
                          * @property {google.api.servicecontrol.v1.QuotaError.Code|null} [code] QuotaError code
                          * @property {string|null} [subject] QuotaError subject
                          * @property {string|null} [description] QuotaError description
+                         * @property {google.rpc.IStatus|null} [status] QuotaError status
                          */
     
                         /**
@@ -15497,6 +15542,14 @@
                         QuotaError.prototype.description = "";
     
                         /**
+                         * QuotaError status.
+                         * @member {google.rpc.IStatus|null|undefined} status
+                         * @memberof google.api.servicecontrol.v1.QuotaError
+                         * @instance
+                         */
+                        QuotaError.prototype.status = null;
+    
+                        /**
                          * Creates a new QuotaError instance using the specified properties.
                          * @function create
                          * @memberof google.api.servicecontrol.v1.QuotaError
@@ -15526,6 +15579,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.subject);
                             if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.status != null && Object.hasOwnProperty.call(message, "status"))
+                                $root.google.rpc.Status.encode(message.status, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -15568,6 +15623,9 @@
                                     break;
                                 case 3:
                                     message.description = reader.string();
+                                    break;
+                                case 4:
+                                    message.status = $root.google.rpc.Status.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -15622,6 +15680,11 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
+                            if (message.status != null && message.hasOwnProperty("status")) {
+                                var error = $root.google.rpc.Status.verify(message.status);
+                                if (error)
+                                    return "status." + error;
+                            }
                             return null;
                         };
     
@@ -15667,6 +15730,11 @@
                                 message.subject = String(object.subject);
                             if (object.description != null)
                                 message.description = String(object.description);
+                            if (object.status != null) {
+                                if (typeof object.status !== "object")
+                                    throw TypeError(".google.api.servicecontrol.v1.QuotaError.status: object expected");
+                                message.status = $root.google.rpc.Status.fromObject(object.status);
+                            }
                             return message;
                         };
     
@@ -15687,6 +15755,7 @@
                                 object.code = options.enums === String ? "UNSPECIFIED" : 0;
                                 object.subject = "";
                                 object.description = "";
+                                object.status = null;
                             }
                             if (message.code != null && message.hasOwnProperty("code"))
                                 object.code = options.enums === String ? $root.google.api.servicecontrol.v1.QuotaError.Code[message.code] : message.code;
@@ -15694,6 +15763,8 @@
                                 object.subject = message.subject;
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
+                            if (message.status != null && message.hasOwnProperty("status"))
+                                object.status = $root.google.rpc.Status.toObject(message.status, options);
                             return object;
                         };
     
@@ -17640,6 +17711,1830 @@
                 })();
     
                 return servicecontrol;
+            })();
+    
+            api.Distribution = (function() {
+    
+                /**
+                 * Properties of a Distribution.
+                 * @memberof google.api
+                 * @interface IDistribution
+                 * @property {number|Long|null} [count] Distribution count
+                 * @property {number|null} [mean] Distribution mean
+                 * @property {number|null} [sumOfSquaredDeviation] Distribution sumOfSquaredDeviation
+                 * @property {google.api.Distribution.IRange|null} [range] Distribution range
+                 * @property {google.api.Distribution.IBucketOptions|null} [bucketOptions] Distribution bucketOptions
+                 * @property {Array.<number|Long>|null} [bucketCounts] Distribution bucketCounts
+                 * @property {Array.<google.api.Distribution.IExemplar>|null} [exemplars] Distribution exemplars
+                 */
+    
+                /**
+                 * Constructs a new Distribution.
+                 * @memberof google.api
+                 * @classdesc Represents a Distribution.
+                 * @implements IDistribution
+                 * @constructor
+                 * @param {google.api.IDistribution=} [properties] Properties to set
+                 */
+                function Distribution(properties) {
+                    this.bucketCounts = [];
+                    this.exemplars = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Distribution count.
+                 * @member {number|Long} count
+                 * @memberof google.api.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.count = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                /**
+                 * Distribution mean.
+                 * @member {number} mean
+                 * @memberof google.api.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.mean = 0;
+    
+                /**
+                 * Distribution sumOfSquaredDeviation.
+                 * @member {number} sumOfSquaredDeviation
+                 * @memberof google.api.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.sumOfSquaredDeviation = 0;
+    
+                /**
+                 * Distribution range.
+                 * @member {google.api.Distribution.IRange|null|undefined} range
+                 * @memberof google.api.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.range = null;
+    
+                /**
+                 * Distribution bucketOptions.
+                 * @member {google.api.Distribution.IBucketOptions|null|undefined} bucketOptions
+                 * @memberof google.api.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.bucketOptions = null;
+    
+                /**
+                 * Distribution bucketCounts.
+                 * @member {Array.<number|Long>} bucketCounts
+                 * @memberof google.api.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.bucketCounts = $util.emptyArray;
+    
+                /**
+                 * Distribution exemplars.
+                 * @member {Array.<google.api.Distribution.IExemplar>} exemplars
+                 * @memberof google.api.Distribution
+                 * @instance
+                 */
+                Distribution.prototype.exemplars = $util.emptyArray;
+    
+                /**
+                 * Creates a new Distribution instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.Distribution
+                 * @static
+                 * @param {google.api.IDistribution=} [properties] Properties to set
+                 * @returns {google.api.Distribution} Distribution instance
+                 */
+                Distribution.create = function create(properties) {
+                    return new Distribution(properties);
+                };
+    
+                /**
+                 * Encodes the specified Distribution message. Does not implicitly {@link google.api.Distribution.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.Distribution
+                 * @static
+                 * @param {google.api.IDistribution} message Distribution message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Distribution.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.count != null && Object.hasOwnProperty.call(message, "count"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int64(message.count);
+                    if (message.mean != null && Object.hasOwnProperty.call(message, "mean"))
+                        writer.uint32(/* id 2, wireType 1 =*/17).double(message.mean);
+                    if (message.sumOfSquaredDeviation != null && Object.hasOwnProperty.call(message, "sumOfSquaredDeviation"))
+                        writer.uint32(/* id 3, wireType 1 =*/25).double(message.sumOfSquaredDeviation);
+                    if (message.range != null && Object.hasOwnProperty.call(message, "range"))
+                        $root.google.api.Distribution.Range.encode(message.range, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                    if (message.bucketOptions != null && Object.hasOwnProperty.call(message, "bucketOptions"))
+                        $root.google.api.Distribution.BucketOptions.encode(message.bucketOptions, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                    if (message.bucketCounts != null && message.bucketCounts.length) {
+                        writer.uint32(/* id 7, wireType 2 =*/58).fork();
+                        for (var i = 0; i < message.bucketCounts.length; ++i)
+                            writer.int64(message.bucketCounts[i]);
+                        writer.ldelim();
+                    }
+                    if (message.exemplars != null && message.exemplars.length)
+                        for (var i = 0; i < message.exemplars.length; ++i)
+                            $root.google.api.Distribution.Exemplar.encode(message.exemplars[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Distribution message, length delimited. Does not implicitly {@link google.api.Distribution.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.Distribution
+                 * @static
+                 * @param {google.api.IDistribution} message Distribution message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Distribution.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Distribution message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.Distribution
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.Distribution} Distribution
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Distribution.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.count = reader.int64();
+                            break;
+                        case 2:
+                            message.mean = reader.double();
+                            break;
+                        case 3:
+                            message.sumOfSquaredDeviation = reader.double();
+                            break;
+                        case 4:
+                            message.range = $root.google.api.Distribution.Range.decode(reader, reader.uint32());
+                            break;
+                        case 6:
+                            message.bucketOptions = $root.google.api.Distribution.BucketOptions.decode(reader, reader.uint32());
+                            break;
+                        case 7:
+                            if (!(message.bucketCounts && message.bucketCounts.length))
+                                message.bucketCounts = [];
+                            if ((tag & 7) === 2) {
+                                var end2 = reader.uint32() + reader.pos;
+                                while (reader.pos < end2)
+                                    message.bucketCounts.push(reader.int64());
+                            } else
+                                message.bucketCounts.push(reader.int64());
+                            break;
+                        case 10:
+                            if (!(message.exemplars && message.exemplars.length))
+                                message.exemplars = [];
+                            message.exemplars.push($root.google.api.Distribution.Exemplar.decode(reader, reader.uint32()));
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Distribution message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.Distribution
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.Distribution} Distribution
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Distribution.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Distribution message.
+                 * @function verify
+                 * @memberof google.api.Distribution
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Distribution.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.count != null && message.hasOwnProperty("count"))
+                        if (!$util.isInteger(message.count) && !(message.count && $util.isInteger(message.count.low) && $util.isInteger(message.count.high)))
+                            return "count: integer|Long expected";
+                    if (message.mean != null && message.hasOwnProperty("mean"))
+                        if (typeof message.mean !== "number")
+                            return "mean: number expected";
+                    if (message.sumOfSquaredDeviation != null && message.hasOwnProperty("sumOfSquaredDeviation"))
+                        if (typeof message.sumOfSquaredDeviation !== "number")
+                            return "sumOfSquaredDeviation: number expected";
+                    if (message.range != null && message.hasOwnProperty("range")) {
+                        var error = $root.google.api.Distribution.Range.verify(message.range);
+                        if (error)
+                            return "range." + error;
+                    }
+                    if (message.bucketOptions != null && message.hasOwnProperty("bucketOptions")) {
+                        var error = $root.google.api.Distribution.BucketOptions.verify(message.bucketOptions);
+                        if (error)
+                            return "bucketOptions." + error;
+                    }
+                    if (message.bucketCounts != null && message.hasOwnProperty("bucketCounts")) {
+                        if (!Array.isArray(message.bucketCounts))
+                            return "bucketCounts: array expected";
+                        for (var i = 0; i < message.bucketCounts.length; ++i)
+                            if (!$util.isInteger(message.bucketCounts[i]) && !(message.bucketCounts[i] && $util.isInteger(message.bucketCounts[i].low) && $util.isInteger(message.bucketCounts[i].high)))
+                                return "bucketCounts: integer|Long[] expected";
+                    }
+                    if (message.exemplars != null && message.hasOwnProperty("exemplars")) {
+                        if (!Array.isArray(message.exemplars))
+                            return "exemplars: array expected";
+                        for (var i = 0; i < message.exemplars.length; ++i) {
+                            var error = $root.google.api.Distribution.Exemplar.verify(message.exemplars[i]);
+                            if (error)
+                                return "exemplars." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a Distribution message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.Distribution
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.Distribution} Distribution
+                 */
+                Distribution.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.Distribution)
+                        return object;
+                    var message = new $root.google.api.Distribution();
+                    if (object.count != null)
+                        if ($util.Long)
+                            (message.count = $util.Long.fromValue(object.count)).unsigned = false;
+                        else if (typeof object.count === "string")
+                            message.count = parseInt(object.count, 10);
+                        else if (typeof object.count === "number")
+                            message.count = object.count;
+                        else if (typeof object.count === "object")
+                            message.count = new $util.LongBits(object.count.low >>> 0, object.count.high >>> 0).toNumber();
+                    if (object.mean != null)
+                        message.mean = Number(object.mean);
+                    if (object.sumOfSquaredDeviation != null)
+                        message.sumOfSquaredDeviation = Number(object.sumOfSquaredDeviation);
+                    if (object.range != null) {
+                        if (typeof object.range !== "object")
+                            throw TypeError(".google.api.Distribution.range: object expected");
+                        message.range = $root.google.api.Distribution.Range.fromObject(object.range);
+                    }
+                    if (object.bucketOptions != null) {
+                        if (typeof object.bucketOptions !== "object")
+                            throw TypeError(".google.api.Distribution.bucketOptions: object expected");
+                        message.bucketOptions = $root.google.api.Distribution.BucketOptions.fromObject(object.bucketOptions);
+                    }
+                    if (object.bucketCounts) {
+                        if (!Array.isArray(object.bucketCounts))
+                            throw TypeError(".google.api.Distribution.bucketCounts: array expected");
+                        message.bucketCounts = [];
+                        for (var i = 0; i < object.bucketCounts.length; ++i)
+                            if ($util.Long)
+                                (message.bucketCounts[i] = $util.Long.fromValue(object.bucketCounts[i])).unsigned = false;
+                            else if (typeof object.bucketCounts[i] === "string")
+                                message.bucketCounts[i] = parseInt(object.bucketCounts[i], 10);
+                            else if (typeof object.bucketCounts[i] === "number")
+                                message.bucketCounts[i] = object.bucketCounts[i];
+                            else if (typeof object.bucketCounts[i] === "object")
+                                message.bucketCounts[i] = new $util.LongBits(object.bucketCounts[i].low >>> 0, object.bucketCounts[i].high >>> 0).toNumber();
+                    }
+                    if (object.exemplars) {
+                        if (!Array.isArray(object.exemplars))
+                            throw TypeError(".google.api.Distribution.exemplars: array expected");
+                        message.exemplars = [];
+                        for (var i = 0; i < object.exemplars.length; ++i) {
+                            if (typeof object.exemplars[i] !== "object")
+                                throw TypeError(".google.api.Distribution.exemplars: object expected");
+                            message.exemplars[i] = $root.google.api.Distribution.Exemplar.fromObject(object.exemplars[i]);
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Distribution message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.Distribution
+                 * @static
+                 * @param {google.api.Distribution} message Distribution
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Distribution.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults) {
+                        object.bucketCounts = [];
+                        object.exemplars = [];
+                    }
+                    if (options.defaults) {
+                        if ($util.Long) {
+                            var long = new $util.Long(0, 0, false);
+                            object.count = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                        } else
+                            object.count = options.longs === String ? "0" : 0;
+                        object.mean = 0;
+                        object.sumOfSquaredDeviation = 0;
+                        object.range = null;
+                        object.bucketOptions = null;
+                    }
+                    if (message.count != null && message.hasOwnProperty("count"))
+                        if (typeof message.count === "number")
+                            object.count = options.longs === String ? String(message.count) : message.count;
+                        else
+                            object.count = options.longs === String ? $util.Long.prototype.toString.call(message.count) : options.longs === Number ? new $util.LongBits(message.count.low >>> 0, message.count.high >>> 0).toNumber() : message.count;
+                    if (message.mean != null && message.hasOwnProperty("mean"))
+                        object.mean = options.json && !isFinite(message.mean) ? String(message.mean) : message.mean;
+                    if (message.sumOfSquaredDeviation != null && message.hasOwnProperty("sumOfSquaredDeviation"))
+                        object.sumOfSquaredDeviation = options.json && !isFinite(message.sumOfSquaredDeviation) ? String(message.sumOfSquaredDeviation) : message.sumOfSquaredDeviation;
+                    if (message.range != null && message.hasOwnProperty("range"))
+                        object.range = $root.google.api.Distribution.Range.toObject(message.range, options);
+                    if (message.bucketOptions != null && message.hasOwnProperty("bucketOptions"))
+                        object.bucketOptions = $root.google.api.Distribution.BucketOptions.toObject(message.bucketOptions, options);
+                    if (message.bucketCounts && message.bucketCounts.length) {
+                        object.bucketCounts = [];
+                        for (var j = 0; j < message.bucketCounts.length; ++j)
+                            if (typeof message.bucketCounts[j] === "number")
+                                object.bucketCounts[j] = options.longs === String ? String(message.bucketCounts[j]) : message.bucketCounts[j];
+                            else
+                                object.bucketCounts[j] = options.longs === String ? $util.Long.prototype.toString.call(message.bucketCounts[j]) : options.longs === Number ? new $util.LongBits(message.bucketCounts[j].low >>> 0, message.bucketCounts[j].high >>> 0).toNumber() : message.bucketCounts[j];
+                    }
+                    if (message.exemplars && message.exemplars.length) {
+                        object.exemplars = [];
+                        for (var j = 0; j < message.exemplars.length; ++j)
+                            object.exemplars[j] = $root.google.api.Distribution.Exemplar.toObject(message.exemplars[j], options);
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this Distribution to JSON.
+                 * @function toJSON
+                 * @memberof google.api.Distribution
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Distribution.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                Distribution.Range = (function() {
+    
+                    /**
+                     * Properties of a Range.
+                     * @memberof google.api.Distribution
+                     * @interface IRange
+                     * @property {number|null} [min] Range min
+                     * @property {number|null} [max] Range max
+                     */
+    
+                    /**
+                     * Constructs a new Range.
+                     * @memberof google.api.Distribution
+                     * @classdesc Represents a Range.
+                     * @implements IRange
+                     * @constructor
+                     * @param {google.api.Distribution.IRange=} [properties] Properties to set
+                     */
+                    function Range(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Range min.
+                     * @member {number} min
+                     * @memberof google.api.Distribution.Range
+                     * @instance
+                     */
+                    Range.prototype.min = 0;
+    
+                    /**
+                     * Range max.
+                     * @member {number} max
+                     * @memberof google.api.Distribution.Range
+                     * @instance
+                     */
+                    Range.prototype.max = 0;
+    
+                    /**
+                     * Creates a new Range instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.Distribution.Range
+                     * @static
+                     * @param {google.api.Distribution.IRange=} [properties] Properties to set
+                     * @returns {google.api.Distribution.Range} Range instance
+                     */
+                    Range.create = function create(properties) {
+                        return new Range(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Range message. Does not implicitly {@link google.api.Distribution.Range.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.Distribution.Range
+                     * @static
+                     * @param {google.api.Distribution.IRange} message Range message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Range.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.min != null && Object.hasOwnProperty.call(message, "min"))
+                            writer.uint32(/* id 1, wireType 1 =*/9).double(message.min);
+                        if (message.max != null && Object.hasOwnProperty.call(message, "max"))
+                            writer.uint32(/* id 2, wireType 1 =*/17).double(message.max);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Range message, length delimited. Does not implicitly {@link google.api.Distribution.Range.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.Distribution.Range
+                     * @static
+                     * @param {google.api.Distribution.IRange} message Range message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Range.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Range message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.Distribution.Range
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.Distribution.Range} Range
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Range.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.Range();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.min = reader.double();
+                                break;
+                            case 2:
+                                message.max = reader.double();
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Range message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.Distribution.Range
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.Distribution.Range} Range
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Range.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Range message.
+                     * @function verify
+                     * @memberof google.api.Distribution.Range
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Range.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.min != null && message.hasOwnProperty("min"))
+                            if (typeof message.min !== "number")
+                                return "min: number expected";
+                        if (message.max != null && message.hasOwnProperty("max"))
+                            if (typeof message.max !== "number")
+                                return "max: number expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Range message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.Distribution.Range
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.Distribution.Range} Range
+                     */
+                    Range.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.Distribution.Range)
+                            return object;
+                        var message = new $root.google.api.Distribution.Range();
+                        if (object.min != null)
+                            message.min = Number(object.min);
+                        if (object.max != null)
+                            message.max = Number(object.max);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Range message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.Distribution.Range
+                     * @static
+                     * @param {google.api.Distribution.Range} message Range
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Range.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.min = 0;
+                            object.max = 0;
+                        }
+                        if (message.min != null && message.hasOwnProperty("min"))
+                            object.min = options.json && !isFinite(message.min) ? String(message.min) : message.min;
+                        if (message.max != null && message.hasOwnProperty("max"))
+                            object.max = options.json && !isFinite(message.max) ? String(message.max) : message.max;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Range to JSON.
+                     * @function toJSON
+                     * @memberof google.api.Distribution.Range
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Range.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Range;
+                })();
+    
+                Distribution.BucketOptions = (function() {
+    
+                    /**
+                     * Properties of a BucketOptions.
+                     * @memberof google.api.Distribution
+                     * @interface IBucketOptions
+                     * @property {google.api.Distribution.BucketOptions.ILinear|null} [linearBuckets] BucketOptions linearBuckets
+                     * @property {google.api.Distribution.BucketOptions.IExponential|null} [exponentialBuckets] BucketOptions exponentialBuckets
+                     * @property {google.api.Distribution.BucketOptions.IExplicit|null} [explicitBuckets] BucketOptions explicitBuckets
+                     */
+    
+                    /**
+                     * Constructs a new BucketOptions.
+                     * @memberof google.api.Distribution
+                     * @classdesc Represents a BucketOptions.
+                     * @implements IBucketOptions
+                     * @constructor
+                     * @param {google.api.Distribution.IBucketOptions=} [properties] Properties to set
+                     */
+                    function BucketOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * BucketOptions linearBuckets.
+                     * @member {google.api.Distribution.BucketOptions.ILinear|null|undefined} linearBuckets
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @instance
+                     */
+                    BucketOptions.prototype.linearBuckets = null;
+    
+                    /**
+                     * BucketOptions exponentialBuckets.
+                     * @member {google.api.Distribution.BucketOptions.IExponential|null|undefined} exponentialBuckets
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @instance
+                     */
+                    BucketOptions.prototype.exponentialBuckets = null;
+    
+                    /**
+                     * BucketOptions explicitBuckets.
+                     * @member {google.api.Distribution.BucketOptions.IExplicit|null|undefined} explicitBuckets
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @instance
+                     */
+                    BucketOptions.prototype.explicitBuckets = null;
+    
+                    // OneOf field names bound to virtual getters and setters
+                    var $oneOfFields;
+    
+                    /**
+                     * BucketOptions options.
+                     * @member {"linearBuckets"|"exponentialBuckets"|"explicitBuckets"|undefined} options
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @instance
+                     */
+                    Object.defineProperty(BucketOptions.prototype, "options", {
+                        get: $util.oneOfGetter($oneOfFields = ["linearBuckets", "exponentialBuckets", "explicitBuckets"]),
+                        set: $util.oneOfSetter($oneOfFields)
+                    });
+    
+                    /**
+                     * Creates a new BucketOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @static
+                     * @param {google.api.Distribution.IBucketOptions=} [properties] Properties to set
+                     * @returns {google.api.Distribution.BucketOptions} BucketOptions instance
+                     */
+                    BucketOptions.create = function create(properties) {
+                        return new BucketOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified BucketOptions message. Does not implicitly {@link google.api.Distribution.BucketOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @static
+                     * @param {google.api.Distribution.IBucketOptions} message BucketOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BucketOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.linearBuckets != null && Object.hasOwnProperty.call(message, "linearBuckets"))
+                            $root.google.api.Distribution.BucketOptions.Linear.encode(message.linearBuckets, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.exponentialBuckets != null && Object.hasOwnProperty.call(message, "exponentialBuckets"))
+                            $root.google.api.Distribution.BucketOptions.Exponential.encode(message.exponentialBuckets, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.explicitBuckets != null && Object.hasOwnProperty.call(message, "explicitBuckets"))
+                            $root.google.api.Distribution.BucketOptions.Explicit.encode(message.explicitBuckets, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified BucketOptions message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @static
+                     * @param {google.api.Distribution.IBucketOptions} message BucketOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BucketOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a BucketOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.Distribution.BucketOptions} BucketOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BucketOptions.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.linearBuckets = $root.google.api.Distribution.BucketOptions.Linear.decode(reader, reader.uint32());
+                                break;
+                            case 2:
+                                message.exponentialBuckets = $root.google.api.Distribution.BucketOptions.Exponential.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                message.explicitBuckets = $root.google.api.Distribution.BucketOptions.Explicit.decode(reader, reader.uint32());
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a BucketOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.Distribution.BucketOptions} BucketOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BucketOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a BucketOptions message.
+                     * @function verify
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BucketOptions.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        var properties = {};
+                        if (message.linearBuckets != null && message.hasOwnProperty("linearBuckets")) {
+                            properties.options = 1;
+                            {
+                                var error = $root.google.api.Distribution.BucketOptions.Linear.verify(message.linearBuckets);
+                                if (error)
+                                    return "linearBuckets." + error;
+                            }
+                        }
+                        if (message.exponentialBuckets != null && message.hasOwnProperty("exponentialBuckets")) {
+                            if (properties.options === 1)
+                                return "options: multiple values";
+                            properties.options = 1;
+                            {
+                                var error = $root.google.api.Distribution.BucketOptions.Exponential.verify(message.exponentialBuckets);
+                                if (error)
+                                    return "exponentialBuckets." + error;
+                            }
+                        }
+                        if (message.explicitBuckets != null && message.hasOwnProperty("explicitBuckets")) {
+                            if (properties.options === 1)
+                                return "options: multiple values";
+                            properties.options = 1;
+                            {
+                                var error = $root.google.api.Distribution.BucketOptions.Explicit.verify(message.explicitBuckets);
+                                if (error)
+                                    return "explicitBuckets." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a BucketOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.Distribution.BucketOptions} BucketOptions
+                     */
+                    BucketOptions.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.Distribution.BucketOptions)
+                            return object;
+                        var message = new $root.google.api.Distribution.BucketOptions();
+                        if (object.linearBuckets != null) {
+                            if (typeof object.linearBuckets !== "object")
+                                throw TypeError(".google.api.Distribution.BucketOptions.linearBuckets: object expected");
+                            message.linearBuckets = $root.google.api.Distribution.BucketOptions.Linear.fromObject(object.linearBuckets);
+                        }
+                        if (object.exponentialBuckets != null) {
+                            if (typeof object.exponentialBuckets !== "object")
+                                throw TypeError(".google.api.Distribution.BucketOptions.exponentialBuckets: object expected");
+                            message.exponentialBuckets = $root.google.api.Distribution.BucketOptions.Exponential.fromObject(object.exponentialBuckets);
+                        }
+                        if (object.explicitBuckets != null) {
+                            if (typeof object.explicitBuckets !== "object")
+                                throw TypeError(".google.api.Distribution.BucketOptions.explicitBuckets: object expected");
+                            message.explicitBuckets = $root.google.api.Distribution.BucketOptions.Explicit.fromObject(object.explicitBuckets);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a BucketOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @static
+                     * @param {google.api.Distribution.BucketOptions} message BucketOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BucketOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (message.linearBuckets != null && message.hasOwnProperty("linearBuckets")) {
+                            object.linearBuckets = $root.google.api.Distribution.BucketOptions.Linear.toObject(message.linearBuckets, options);
+                            if (options.oneofs)
+                                object.options = "linearBuckets";
+                        }
+                        if (message.exponentialBuckets != null && message.hasOwnProperty("exponentialBuckets")) {
+                            object.exponentialBuckets = $root.google.api.Distribution.BucketOptions.Exponential.toObject(message.exponentialBuckets, options);
+                            if (options.oneofs)
+                                object.options = "exponentialBuckets";
+                        }
+                        if (message.explicitBuckets != null && message.hasOwnProperty("explicitBuckets")) {
+                            object.explicitBuckets = $root.google.api.Distribution.BucketOptions.Explicit.toObject(message.explicitBuckets, options);
+                            if (options.oneofs)
+                                object.options = "explicitBuckets";
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this BucketOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.api.Distribution.BucketOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BucketOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    BucketOptions.Linear = (function() {
+    
+                        /**
+                         * Properties of a Linear.
+                         * @memberof google.api.Distribution.BucketOptions
+                         * @interface ILinear
+                         * @property {number|null} [numFiniteBuckets] Linear numFiniteBuckets
+                         * @property {number|null} [width] Linear width
+                         * @property {number|null} [offset] Linear offset
+                         */
+    
+                        /**
+                         * Constructs a new Linear.
+                         * @memberof google.api.Distribution.BucketOptions
+                         * @classdesc Represents a Linear.
+                         * @implements ILinear
+                         * @constructor
+                         * @param {google.api.Distribution.BucketOptions.ILinear=} [properties] Properties to set
+                         */
+                        function Linear(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Linear numFiniteBuckets.
+                         * @member {number} numFiniteBuckets
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @instance
+                         */
+                        Linear.prototype.numFiniteBuckets = 0;
+    
+                        /**
+                         * Linear width.
+                         * @member {number} width
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @instance
+                         */
+                        Linear.prototype.width = 0;
+    
+                        /**
+                         * Linear offset.
+                         * @member {number} offset
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @instance
+                         */
+                        Linear.prototype.offset = 0;
+    
+                        /**
+                         * Creates a new Linear instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.ILinear=} [properties] Properties to set
+                         * @returns {google.api.Distribution.BucketOptions.Linear} Linear instance
+                         */
+                        Linear.create = function create(properties) {
+                            return new Linear(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Linear message. Does not implicitly {@link google.api.Distribution.BucketOptions.Linear.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.ILinear} message Linear message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Linear.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.numFiniteBuckets != null && Object.hasOwnProperty.call(message, "numFiniteBuckets"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.numFiniteBuckets);
+                            if (message.width != null && Object.hasOwnProperty.call(message, "width"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.width);
+                            if (message.offset != null && Object.hasOwnProperty.call(message, "offset"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.offset);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Linear message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Linear.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.ILinear} message Linear message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Linear.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Linear message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.Distribution.BucketOptions.Linear} Linear
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Linear.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions.Linear();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.numFiniteBuckets = reader.int32();
+                                    break;
+                                case 2:
+                                    message.width = reader.double();
+                                    break;
+                                case 3:
+                                    message.offset = reader.double();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Linear message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.Distribution.BucketOptions.Linear} Linear
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Linear.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Linear message.
+                         * @function verify
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Linear.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.numFiniteBuckets != null && message.hasOwnProperty("numFiniteBuckets"))
+                                if (!$util.isInteger(message.numFiniteBuckets))
+                                    return "numFiniteBuckets: integer expected";
+                            if (message.width != null && message.hasOwnProperty("width"))
+                                if (typeof message.width !== "number")
+                                    return "width: number expected";
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                if (typeof message.offset !== "number")
+                                    return "offset: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Linear message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.Distribution.BucketOptions.Linear} Linear
+                         */
+                        Linear.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.Distribution.BucketOptions.Linear)
+                                return object;
+                            var message = new $root.google.api.Distribution.BucketOptions.Linear();
+                            if (object.numFiniteBuckets != null)
+                                message.numFiniteBuckets = object.numFiniteBuckets | 0;
+                            if (object.width != null)
+                                message.width = Number(object.width);
+                            if (object.offset != null)
+                                message.offset = Number(object.offset);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Linear message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.Linear} message Linear
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Linear.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.numFiniteBuckets = 0;
+                                object.width = 0;
+                                object.offset = 0;
+                            }
+                            if (message.numFiniteBuckets != null && message.hasOwnProperty("numFiniteBuckets"))
+                                object.numFiniteBuckets = message.numFiniteBuckets;
+                            if (message.width != null && message.hasOwnProperty("width"))
+                                object.width = options.json && !isFinite(message.width) ? String(message.width) : message.width;
+                            if (message.offset != null && message.hasOwnProperty("offset"))
+                                object.offset = options.json && !isFinite(message.offset) ? String(message.offset) : message.offset;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Linear to JSON.
+                         * @function toJSON
+                         * @memberof google.api.Distribution.BucketOptions.Linear
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Linear.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Linear;
+                    })();
+    
+                    BucketOptions.Exponential = (function() {
+    
+                        /**
+                         * Properties of an Exponential.
+                         * @memberof google.api.Distribution.BucketOptions
+                         * @interface IExponential
+                         * @property {number|null} [numFiniteBuckets] Exponential numFiniteBuckets
+                         * @property {number|null} [growthFactor] Exponential growthFactor
+                         * @property {number|null} [scale] Exponential scale
+                         */
+    
+                        /**
+                         * Constructs a new Exponential.
+                         * @memberof google.api.Distribution.BucketOptions
+                         * @classdesc Represents an Exponential.
+                         * @implements IExponential
+                         * @constructor
+                         * @param {google.api.Distribution.BucketOptions.IExponential=} [properties] Properties to set
+                         */
+                        function Exponential(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Exponential numFiniteBuckets.
+                         * @member {number} numFiniteBuckets
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @instance
+                         */
+                        Exponential.prototype.numFiniteBuckets = 0;
+    
+                        /**
+                         * Exponential growthFactor.
+                         * @member {number} growthFactor
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @instance
+                         */
+                        Exponential.prototype.growthFactor = 0;
+    
+                        /**
+                         * Exponential scale.
+                         * @member {number} scale
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @instance
+                         */
+                        Exponential.prototype.scale = 0;
+    
+                        /**
+                         * Creates a new Exponential instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.IExponential=} [properties] Properties to set
+                         * @returns {google.api.Distribution.BucketOptions.Exponential} Exponential instance
+                         */
+                        Exponential.create = function create(properties) {
+                            return new Exponential(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Exponential message. Does not implicitly {@link google.api.Distribution.BucketOptions.Exponential.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.IExponential} message Exponential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Exponential.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.numFiniteBuckets != null && Object.hasOwnProperty.call(message, "numFiniteBuckets"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.numFiniteBuckets);
+                            if (message.growthFactor != null && Object.hasOwnProperty.call(message, "growthFactor"))
+                                writer.uint32(/* id 2, wireType 1 =*/17).double(message.growthFactor);
+                            if (message.scale != null && Object.hasOwnProperty.call(message, "scale"))
+                                writer.uint32(/* id 3, wireType 1 =*/25).double(message.scale);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Exponential message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Exponential.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.IExponential} message Exponential message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Exponential.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Exponential message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.Distribution.BucketOptions.Exponential} Exponential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Exponential.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions.Exponential();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.numFiniteBuckets = reader.int32();
+                                    break;
+                                case 2:
+                                    message.growthFactor = reader.double();
+                                    break;
+                                case 3:
+                                    message.scale = reader.double();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Exponential message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.Distribution.BucketOptions.Exponential} Exponential
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Exponential.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Exponential message.
+                         * @function verify
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Exponential.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.numFiniteBuckets != null && message.hasOwnProperty("numFiniteBuckets"))
+                                if (!$util.isInteger(message.numFiniteBuckets))
+                                    return "numFiniteBuckets: integer expected";
+                            if (message.growthFactor != null && message.hasOwnProperty("growthFactor"))
+                                if (typeof message.growthFactor !== "number")
+                                    return "growthFactor: number expected";
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                if (typeof message.scale !== "number")
+                                    return "scale: number expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Exponential message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.Distribution.BucketOptions.Exponential} Exponential
+                         */
+                        Exponential.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.Distribution.BucketOptions.Exponential)
+                                return object;
+                            var message = new $root.google.api.Distribution.BucketOptions.Exponential();
+                            if (object.numFiniteBuckets != null)
+                                message.numFiniteBuckets = object.numFiniteBuckets | 0;
+                            if (object.growthFactor != null)
+                                message.growthFactor = Number(object.growthFactor);
+                            if (object.scale != null)
+                                message.scale = Number(object.scale);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Exponential message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.Exponential} message Exponential
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Exponential.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.numFiniteBuckets = 0;
+                                object.growthFactor = 0;
+                                object.scale = 0;
+                            }
+                            if (message.numFiniteBuckets != null && message.hasOwnProperty("numFiniteBuckets"))
+                                object.numFiniteBuckets = message.numFiniteBuckets;
+                            if (message.growthFactor != null && message.hasOwnProperty("growthFactor"))
+                                object.growthFactor = options.json && !isFinite(message.growthFactor) ? String(message.growthFactor) : message.growthFactor;
+                            if (message.scale != null && message.hasOwnProperty("scale"))
+                                object.scale = options.json && !isFinite(message.scale) ? String(message.scale) : message.scale;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Exponential to JSON.
+                         * @function toJSON
+                         * @memberof google.api.Distribution.BucketOptions.Exponential
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Exponential.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Exponential;
+                    })();
+    
+                    BucketOptions.Explicit = (function() {
+    
+                        /**
+                         * Properties of an Explicit.
+                         * @memberof google.api.Distribution.BucketOptions
+                         * @interface IExplicit
+                         * @property {Array.<number>|null} [bounds] Explicit bounds
+                         */
+    
+                        /**
+                         * Constructs a new Explicit.
+                         * @memberof google.api.Distribution.BucketOptions
+                         * @classdesc Represents an Explicit.
+                         * @implements IExplicit
+                         * @constructor
+                         * @param {google.api.Distribution.BucketOptions.IExplicit=} [properties] Properties to set
+                         */
+                        function Explicit(properties) {
+                            this.bounds = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Explicit bounds.
+                         * @member {Array.<number>} bounds
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @instance
+                         */
+                        Explicit.prototype.bounds = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Explicit instance using the specified properties.
+                         * @function create
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.IExplicit=} [properties] Properties to set
+                         * @returns {google.api.Distribution.BucketOptions.Explicit} Explicit instance
+                         */
+                        Explicit.create = function create(properties) {
+                            return new Explicit(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Explicit message. Does not implicitly {@link google.api.Distribution.BucketOptions.Explicit.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.IExplicit} message Explicit message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Explicit.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.bounds != null && message.bounds.length) {
+                                writer.uint32(/* id 1, wireType 2 =*/10).fork();
+                                for (var i = 0; i < message.bounds.length; ++i)
+                                    writer.double(message.bounds[i]);
+                                writer.ldelim();
+                            }
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Explicit message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Explicit.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.IExplicit} message Explicit message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Explicit.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Explicit message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.api.Distribution.BucketOptions.Explicit} Explicit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Explicit.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.BucketOptions.Explicit();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.bounds && message.bounds.length))
+                                        message.bounds = [];
+                                    if ((tag & 7) === 2) {
+                                        var end2 = reader.uint32() + reader.pos;
+                                        while (reader.pos < end2)
+                                            message.bounds.push(reader.double());
+                                    } else
+                                        message.bounds.push(reader.double());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Explicit message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.api.Distribution.BucketOptions.Explicit} Explicit
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Explicit.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Explicit message.
+                         * @function verify
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Explicit.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.bounds != null && message.hasOwnProperty("bounds")) {
+                                if (!Array.isArray(message.bounds))
+                                    return "bounds: array expected";
+                                for (var i = 0; i < message.bounds.length; ++i)
+                                    if (typeof message.bounds[i] !== "number")
+                                        return "bounds: number[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Explicit message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.api.Distribution.BucketOptions.Explicit} Explicit
+                         */
+                        Explicit.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.api.Distribution.BucketOptions.Explicit)
+                                return object;
+                            var message = new $root.google.api.Distribution.BucketOptions.Explicit();
+                            if (object.bounds) {
+                                if (!Array.isArray(object.bounds))
+                                    throw TypeError(".google.api.Distribution.BucketOptions.Explicit.bounds: array expected");
+                                message.bounds = [];
+                                for (var i = 0; i < object.bounds.length; ++i)
+                                    message.bounds[i] = Number(object.bounds[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Explicit message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @static
+                         * @param {google.api.Distribution.BucketOptions.Explicit} message Explicit
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Explicit.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.bounds = [];
+                            if (message.bounds && message.bounds.length) {
+                                object.bounds = [];
+                                for (var j = 0; j < message.bounds.length; ++j)
+                                    object.bounds[j] = options.json && !isFinite(message.bounds[j]) ? String(message.bounds[j]) : message.bounds[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Explicit to JSON.
+                         * @function toJSON
+                         * @memberof google.api.Distribution.BucketOptions.Explicit
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Explicit.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Explicit;
+                    })();
+    
+                    return BucketOptions;
+                })();
+    
+                Distribution.Exemplar = (function() {
+    
+                    /**
+                     * Properties of an Exemplar.
+                     * @memberof google.api.Distribution
+                     * @interface IExemplar
+                     * @property {number|null} [value] Exemplar value
+                     * @property {google.protobuf.ITimestamp|null} [timestamp] Exemplar timestamp
+                     * @property {Array.<google.protobuf.IAny>|null} [attachments] Exemplar attachments
+                     */
+    
+                    /**
+                     * Constructs a new Exemplar.
+                     * @memberof google.api.Distribution
+                     * @classdesc Represents an Exemplar.
+                     * @implements IExemplar
+                     * @constructor
+                     * @param {google.api.Distribution.IExemplar=} [properties] Properties to set
+                     */
+                    function Exemplar(properties) {
+                        this.attachments = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Exemplar value.
+                     * @member {number} value
+                     * @memberof google.api.Distribution.Exemplar
+                     * @instance
+                     */
+                    Exemplar.prototype.value = 0;
+    
+                    /**
+                     * Exemplar timestamp.
+                     * @member {google.protobuf.ITimestamp|null|undefined} timestamp
+                     * @memberof google.api.Distribution.Exemplar
+                     * @instance
+                     */
+                    Exemplar.prototype.timestamp = null;
+    
+                    /**
+                     * Exemplar attachments.
+                     * @member {Array.<google.protobuf.IAny>} attachments
+                     * @memberof google.api.Distribution.Exemplar
+                     * @instance
+                     */
+                    Exemplar.prototype.attachments = $util.emptyArray;
+    
+                    /**
+                     * Creates a new Exemplar instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.Distribution.Exemplar
+                     * @static
+                     * @param {google.api.Distribution.IExemplar=} [properties] Properties to set
+                     * @returns {google.api.Distribution.Exemplar} Exemplar instance
+                     */
+                    Exemplar.create = function create(properties) {
+                        return new Exemplar(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Exemplar message. Does not implicitly {@link google.api.Distribution.Exemplar.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.Distribution.Exemplar
+                     * @static
+                     * @param {google.api.Distribution.IExemplar} message Exemplar message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Exemplar.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                            writer.uint32(/* id 1, wireType 1 =*/9).double(message.value);
+                        if (message.timestamp != null && Object.hasOwnProperty.call(message, "timestamp"))
+                            $root.google.protobuf.Timestamp.encode(message.timestamp, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.attachments != null && message.attachments.length)
+                            for (var i = 0; i < message.attachments.length; ++i)
+                                $root.google.protobuf.Any.encode(message.attachments[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Exemplar message, length delimited. Does not implicitly {@link google.api.Distribution.Exemplar.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.Distribution.Exemplar
+                     * @static
+                     * @param {google.api.Distribution.IExemplar} message Exemplar message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Exemplar.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an Exemplar message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.Distribution.Exemplar
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.Distribution.Exemplar} Exemplar
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Exemplar.decode = function decode(reader, length) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.Distribution.Exemplar();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            switch (tag >>> 3) {
+                            case 1:
+                                message.value = reader.double();
+                                break;
+                            case 2:
+                                message.timestamp = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                break;
+                            case 3:
+                                if (!(message.attachments && message.attachments.length))
+                                    message.attachments = [];
+                                message.attachments.push($root.google.protobuf.Any.decode(reader, reader.uint32()));
+                                break;
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an Exemplar message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.Distribution.Exemplar
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.Distribution.Exemplar} Exemplar
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Exemplar.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an Exemplar message.
+                     * @function verify
+                     * @memberof google.api.Distribution.Exemplar
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Exemplar.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            if (typeof message.value !== "number")
+                                return "value: number expected";
+                        if (message.timestamp != null && message.hasOwnProperty("timestamp")) {
+                            var error = $root.google.protobuf.Timestamp.verify(message.timestamp);
+                            if (error)
+                                return "timestamp." + error;
+                        }
+                        if (message.attachments != null && message.hasOwnProperty("attachments")) {
+                            if (!Array.isArray(message.attachments))
+                                return "attachments: array expected";
+                            for (var i = 0; i < message.attachments.length; ++i) {
+                                var error = $root.google.protobuf.Any.verify(message.attachments[i]);
+                                if (error)
+                                    return "attachments." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an Exemplar message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.Distribution.Exemplar
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.Distribution.Exemplar} Exemplar
+                     */
+                    Exemplar.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.Distribution.Exemplar)
+                            return object;
+                        var message = new $root.google.api.Distribution.Exemplar();
+                        if (object.value != null)
+                            message.value = Number(object.value);
+                        if (object.timestamp != null) {
+                            if (typeof object.timestamp !== "object")
+                                throw TypeError(".google.api.Distribution.Exemplar.timestamp: object expected");
+                            message.timestamp = $root.google.protobuf.Timestamp.fromObject(object.timestamp);
+                        }
+                        if (object.attachments) {
+                            if (!Array.isArray(object.attachments))
+                                throw TypeError(".google.api.Distribution.Exemplar.attachments: array expected");
+                            message.attachments = [];
+                            for (var i = 0; i < object.attachments.length; ++i) {
+                                if (typeof object.attachments[i] !== "object")
+                                    throw TypeError(".google.api.Distribution.Exemplar.attachments: object expected");
+                                message.attachments[i] = $root.google.protobuf.Any.fromObject(object.attachments[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an Exemplar message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.Distribution.Exemplar
+                     * @static
+                     * @param {google.api.Distribution.Exemplar} message Exemplar
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Exemplar.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.attachments = [];
+                        if (options.defaults) {
+                            object.value = 0;
+                            object.timestamp = null;
+                        }
+                        if (message.value != null && message.hasOwnProperty("value"))
+                            object.value = options.json && !isFinite(message.value) ? String(message.value) : message.value;
+                        if (message.timestamp != null && message.hasOwnProperty("timestamp"))
+                            object.timestamp = $root.google.protobuf.Timestamp.toObject(message.timestamp, options);
+                        if (message.attachments && message.attachments.length) {
+                            object.attachments = [];
+                            for (var j = 0; j < message.attachments.length; ++j)
+                                object.attachments[j] = $root.google.protobuf.Any.toObject(message.attachments[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Exemplar to JSON.
+                     * @function toJSON
+                     * @memberof google.api.Distribution.Exemplar
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Exemplar.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    return Exemplar;
+                })();
+    
+                return Distribution;
             })();
     
             api.Http = (function() {

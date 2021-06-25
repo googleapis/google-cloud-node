@@ -116,6 +116,102 @@ export namespace google {
             public toJSON(): { [k: string]: any };
         }
 
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -3633,102 +3729,6 @@ export namespace google {
              */
             public toJSON(): { [k: string]: any };
         }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
     }
 
     /** Namespace api. */
@@ -3905,6 +3905,9 @@ export namespace google {
 
                     /** Distribution explicitBuckets */
                     explicitBuckets?: (google.api.servicecontrol.v1.Distribution.IExplicitBuckets|null);
+
+                    /** Distribution exemplars */
+                    exemplars?: (google.api.Distribution.IExemplar[]|null);
                 }
 
                 /** Represents a Distribution. */
@@ -3942,6 +3945,9 @@ export namespace google {
 
                     /** Distribution explicitBuckets. */
                     public explicitBuckets?: (google.api.servicecontrol.v1.Distribution.IExplicitBuckets|null);
+
+                    /** Distribution exemplars. */
+                    public exemplars: google.api.Distribution.IExemplar[];
 
                     /** Distribution bucketOption. */
                     public bucketOption?: ("linearBuckets"|"exponentialBuckets"|"explicitBuckets");
@@ -5640,6 +5646,9 @@ export namespace google {
 
                     /** QuotaError description */
                     description?: (string|null);
+
+                    /** QuotaError status */
+                    status?: (google.rpc.IStatus|null);
                 }
 
                 /** Represents a QuotaError. */
@@ -5659,6 +5668,9 @@ export namespace google {
 
                     /** QuotaError description. */
                     public description: string;
+
+                    /** QuotaError status. */
+                    public status?: (google.rpc.IStatus|null);
 
                     /**
                      * Creates a new QuotaError instance using the specified properties.
@@ -6541,6 +6553,735 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
                 }
+            }
+        }
+
+        /** Properties of a Distribution. */
+        interface IDistribution {
+
+            /** Distribution count */
+            count?: (number|Long|string|null);
+
+            /** Distribution mean */
+            mean?: (number|null);
+
+            /** Distribution sumOfSquaredDeviation */
+            sumOfSquaredDeviation?: (number|null);
+
+            /** Distribution range */
+            range?: (google.api.Distribution.IRange|null);
+
+            /** Distribution bucketOptions */
+            bucketOptions?: (google.api.Distribution.IBucketOptions|null);
+
+            /** Distribution bucketCounts */
+            bucketCounts?: ((number|Long|string)[]|null);
+
+            /** Distribution exemplars */
+            exemplars?: (google.api.Distribution.IExemplar[]|null);
+        }
+
+        /** Represents a Distribution. */
+        class Distribution implements IDistribution {
+
+            /**
+             * Constructs a new Distribution.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IDistribution);
+
+            /** Distribution count. */
+            public count: (number|Long|string);
+
+            /** Distribution mean. */
+            public mean: number;
+
+            /** Distribution sumOfSquaredDeviation. */
+            public sumOfSquaredDeviation: number;
+
+            /** Distribution range. */
+            public range?: (google.api.Distribution.IRange|null);
+
+            /** Distribution bucketOptions. */
+            public bucketOptions?: (google.api.Distribution.IBucketOptions|null);
+
+            /** Distribution bucketCounts. */
+            public bucketCounts: (number|Long|string)[];
+
+            /** Distribution exemplars. */
+            public exemplars: google.api.Distribution.IExemplar[];
+
+            /**
+             * Creates a new Distribution instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Distribution instance
+             */
+            public static create(properties?: google.api.IDistribution): google.api.Distribution;
+
+            /**
+             * Encodes the specified Distribution message. Does not implicitly {@link google.api.Distribution.verify|verify} messages.
+             * @param message Distribution message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Distribution message, length delimited. Does not implicitly {@link google.api.Distribution.verify|verify} messages.
+             * @param message Distribution message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Distribution message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Distribution
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution;
+
+            /**
+             * Decodes a Distribution message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Distribution
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution;
+
+            /**
+             * Verifies a Distribution message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Distribution message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Distribution
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Distribution;
+
+            /**
+             * Creates a plain object from a Distribution message. Also converts values to other types if specified.
+             * @param message Distribution
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Distribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Distribution to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace Distribution {
+
+            /** Properties of a Range. */
+            interface IRange {
+
+                /** Range min */
+                min?: (number|null);
+
+                /** Range max */
+                max?: (number|null);
+            }
+
+            /** Represents a Range. */
+            class Range implements IRange {
+
+                /**
+                 * Constructs a new Range.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.Distribution.IRange);
+
+                /** Range min. */
+                public min: number;
+
+                /** Range max. */
+                public max: number;
+
+                /**
+                 * Creates a new Range instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Range instance
+                 */
+                public static create(properties?: google.api.Distribution.IRange): google.api.Distribution.Range;
+
+                /**
+                 * Encodes the specified Range message. Does not implicitly {@link google.api.Distribution.Range.verify|verify} messages.
+                 * @param message Range message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.Distribution.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Range message, length delimited. Does not implicitly {@link google.api.Distribution.Range.verify|verify} messages.
+                 * @param message Range message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.Distribution.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Range message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Range
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.Range;
+
+                /**
+                 * Decodes a Range message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Range
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.Range;
+
+                /**
+                 * Verifies a Range message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Range message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Range
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.Distribution.Range;
+
+                /**
+                 * Creates a plain object from a Range message. Also converts values to other types if specified.
+                 * @param message Range
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.Distribution.Range, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Range to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a BucketOptions. */
+            interface IBucketOptions {
+
+                /** BucketOptions linearBuckets */
+                linearBuckets?: (google.api.Distribution.BucketOptions.ILinear|null);
+
+                /** BucketOptions exponentialBuckets */
+                exponentialBuckets?: (google.api.Distribution.BucketOptions.IExponential|null);
+
+                /** BucketOptions explicitBuckets */
+                explicitBuckets?: (google.api.Distribution.BucketOptions.IExplicit|null);
+            }
+
+            /** Represents a BucketOptions. */
+            class BucketOptions implements IBucketOptions {
+
+                /**
+                 * Constructs a new BucketOptions.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.Distribution.IBucketOptions);
+
+                /** BucketOptions linearBuckets. */
+                public linearBuckets?: (google.api.Distribution.BucketOptions.ILinear|null);
+
+                /** BucketOptions exponentialBuckets. */
+                public exponentialBuckets?: (google.api.Distribution.BucketOptions.IExponential|null);
+
+                /** BucketOptions explicitBuckets. */
+                public explicitBuckets?: (google.api.Distribution.BucketOptions.IExplicit|null);
+
+                /** BucketOptions options. */
+                public options?: ("linearBuckets"|"exponentialBuckets"|"explicitBuckets");
+
+                /**
+                 * Creates a new BucketOptions instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BucketOptions instance
+                 */
+                public static create(properties?: google.api.Distribution.IBucketOptions): google.api.Distribution.BucketOptions;
+
+                /**
+                 * Encodes the specified BucketOptions message. Does not implicitly {@link google.api.Distribution.BucketOptions.verify|verify} messages.
+                 * @param message BucketOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.Distribution.IBucketOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BucketOptions message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.verify|verify} messages.
+                 * @param message BucketOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.Distribution.IBucketOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BucketOptions message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BucketOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions;
+
+                /**
+                 * Decodes a BucketOptions message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BucketOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions;
+
+                /**
+                 * Verifies a BucketOptions message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BucketOptions message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BucketOptions
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions;
+
+                /**
+                 * Creates a plain object from a BucketOptions message. Also converts values to other types if specified.
+                 * @param message BucketOptions
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.Distribution.BucketOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BucketOptions to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace BucketOptions {
+
+                /** Properties of a Linear. */
+                interface ILinear {
+
+                    /** Linear numFiniteBuckets */
+                    numFiniteBuckets?: (number|null);
+
+                    /** Linear width */
+                    width?: (number|null);
+
+                    /** Linear offset */
+                    offset?: (number|null);
+                }
+
+                /** Represents a Linear. */
+                class Linear implements ILinear {
+
+                    /**
+                     * Constructs a new Linear.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.Distribution.BucketOptions.ILinear);
+
+                    /** Linear numFiniteBuckets. */
+                    public numFiniteBuckets: number;
+
+                    /** Linear width. */
+                    public width: number;
+
+                    /** Linear offset. */
+                    public offset: number;
+
+                    /**
+                     * Creates a new Linear instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Linear instance
+                     */
+                    public static create(properties?: google.api.Distribution.BucketOptions.ILinear): google.api.Distribution.BucketOptions.Linear;
+
+                    /**
+                     * Encodes the specified Linear message. Does not implicitly {@link google.api.Distribution.BucketOptions.Linear.verify|verify} messages.
+                     * @param message Linear message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.Distribution.BucketOptions.ILinear, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Linear message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Linear.verify|verify} messages.
+                     * @param message Linear message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.Distribution.BucketOptions.ILinear, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Linear message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Linear
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions.Linear;
+
+                    /**
+                     * Decodes a Linear message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Linear
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions.Linear;
+
+                    /**
+                     * Verifies a Linear message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Linear message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Linear
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions.Linear;
+
+                    /**
+                     * Creates a plain object from a Linear message. Also converts values to other types if specified.
+                     * @param message Linear
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.Distribution.BucketOptions.Linear, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Linear to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Exponential. */
+                interface IExponential {
+
+                    /** Exponential numFiniteBuckets */
+                    numFiniteBuckets?: (number|null);
+
+                    /** Exponential growthFactor */
+                    growthFactor?: (number|null);
+
+                    /** Exponential scale */
+                    scale?: (number|null);
+                }
+
+                /** Represents an Exponential. */
+                class Exponential implements IExponential {
+
+                    /**
+                     * Constructs a new Exponential.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.Distribution.BucketOptions.IExponential);
+
+                    /** Exponential numFiniteBuckets. */
+                    public numFiniteBuckets: number;
+
+                    /** Exponential growthFactor. */
+                    public growthFactor: number;
+
+                    /** Exponential scale. */
+                    public scale: number;
+
+                    /**
+                     * Creates a new Exponential instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Exponential instance
+                     */
+                    public static create(properties?: google.api.Distribution.BucketOptions.IExponential): google.api.Distribution.BucketOptions.Exponential;
+
+                    /**
+                     * Encodes the specified Exponential message. Does not implicitly {@link google.api.Distribution.BucketOptions.Exponential.verify|verify} messages.
+                     * @param message Exponential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.Distribution.BucketOptions.IExponential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Exponential message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Exponential.verify|verify} messages.
+                     * @param message Exponential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.Distribution.BucketOptions.IExponential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Exponential message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Exponential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions.Exponential;
+
+                    /**
+                     * Decodes an Exponential message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Exponential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions.Exponential;
+
+                    /**
+                     * Verifies an Exponential message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Exponential message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Exponential
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions.Exponential;
+
+                    /**
+                     * Creates a plain object from an Exponential message. Also converts values to other types if specified.
+                     * @param message Exponential
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.Distribution.BucketOptions.Exponential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Exponential to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Explicit. */
+                interface IExplicit {
+
+                    /** Explicit bounds */
+                    bounds?: (number[]|null);
+                }
+
+                /** Represents an Explicit. */
+                class Explicit implements IExplicit {
+
+                    /**
+                     * Constructs a new Explicit.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.Distribution.BucketOptions.IExplicit);
+
+                    /** Explicit bounds. */
+                    public bounds: number[];
+
+                    /**
+                     * Creates a new Explicit instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Explicit instance
+                     */
+                    public static create(properties?: google.api.Distribution.BucketOptions.IExplicit): google.api.Distribution.BucketOptions.Explicit;
+
+                    /**
+                     * Encodes the specified Explicit message. Does not implicitly {@link google.api.Distribution.BucketOptions.Explicit.verify|verify} messages.
+                     * @param message Explicit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.Distribution.BucketOptions.IExplicit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Explicit message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Explicit.verify|verify} messages.
+                     * @param message Explicit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.Distribution.BucketOptions.IExplicit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Explicit message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Explicit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions.Explicit;
+
+                    /**
+                     * Decodes an Explicit message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Explicit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions.Explicit;
+
+                    /**
+                     * Verifies an Explicit message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Explicit message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Explicit
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions.Explicit;
+
+                    /**
+                     * Creates a plain object from an Explicit message. Also converts values to other types if specified.
+                     * @param message Explicit
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.Distribution.BucketOptions.Explicit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Explicit to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
+            /** Properties of an Exemplar. */
+            interface IExemplar {
+
+                /** Exemplar value */
+                value?: (number|null);
+
+                /** Exemplar timestamp */
+                timestamp?: (google.protobuf.ITimestamp|null);
+
+                /** Exemplar attachments */
+                attachments?: (google.protobuf.IAny[]|null);
+            }
+
+            /** Represents an Exemplar. */
+            class Exemplar implements IExemplar {
+
+                /**
+                 * Constructs a new Exemplar.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.Distribution.IExemplar);
+
+                /** Exemplar value. */
+                public value: number;
+
+                /** Exemplar timestamp. */
+                public timestamp?: (google.protobuf.ITimestamp|null);
+
+                /** Exemplar attachments. */
+                public attachments: google.protobuf.IAny[];
+
+                /**
+                 * Creates a new Exemplar instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Exemplar instance
+                 */
+                public static create(properties?: google.api.Distribution.IExemplar): google.api.Distribution.Exemplar;
+
+                /**
+                 * Encodes the specified Exemplar message. Does not implicitly {@link google.api.Distribution.Exemplar.verify|verify} messages.
+                 * @param message Exemplar message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.Distribution.IExemplar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Exemplar message, length delimited. Does not implicitly {@link google.api.Distribution.Exemplar.verify|verify} messages.
+                 * @param message Exemplar message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.Distribution.IExemplar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Exemplar message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Exemplar
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.Exemplar;
+
+                /**
+                 * Decodes an Exemplar message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Exemplar
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.Exemplar;
+
+                /**
+                 * Verifies an Exemplar message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Exemplar message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Exemplar
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.Distribution.Exemplar;
+
+                /**
+                 * Creates a plain object from an Exemplar message. Also converts values to other types if specified.
+                 * @param message Exemplar
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.Distribution.Exemplar, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Exemplar to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
             }
         }
 
