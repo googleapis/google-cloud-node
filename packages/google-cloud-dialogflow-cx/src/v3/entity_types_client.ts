@@ -504,6 +504,10 @@ export class EntityTypesClient {
   /**
    * Creates an entity type in the specified agent.
    *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -610,6 +614,10 @@ export class EntityTypesClient {
   /**
    * Updates the specified entity type.
    *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dialogflow.cx.v3.EntityType} request.entityType
@@ -714,6 +722,10 @@ export class EntityTypesClient {
   ): void;
   /**
    * Deletes the specified entity type.
+   *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
    *
    * @param {Object} request
    *   The request object that will be sent.

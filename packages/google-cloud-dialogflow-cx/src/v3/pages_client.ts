@@ -507,6 +507,10 @@ export class PagesClient {
   /**
    * Creates a page in the specified flow.
    *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -623,6 +627,10 @@ export class PagesClient {
   /**
    * Updates the specified page.
    *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dialogflow.cx.v3.Page} request.page
@@ -737,6 +745,10 @@ export class PagesClient {
   ): void;
   /**
    * Deletes the specified page.
+   *
+   * Note: You should always train a flow prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/cx/docs/concept/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
