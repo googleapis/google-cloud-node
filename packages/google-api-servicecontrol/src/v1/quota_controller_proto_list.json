@@ -6,5 +6,6 @@
   "../../protos/google/api/servicecontrol/v1/metric_value.proto",
   "../../protos/google/api/servicecontrol/v1/operation.proto",
   "../../protos/google/api/servicecontrol/v1/quota_controller.proto",
-  "../../protos/google/api/servicecontrol/v1/service_controller.proto"
+  "../../protos/google/api/servicecontrol/v1/service_controller.proto",
+  "../../protos/google/logging/type/log_severity.proto"
 ]

@@ -133,6 +133,8 @@ export class ServiceControllerClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest') {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -271,7 +273,7 @@ export class ServiceControllerClient {
   // -- Service calls --
   // -------------------
   check(
-    request: protos.google.api.servicecontrol.v1.ICheckRequest,
+    request?: protos.google.api.servicecontrol.v1.ICheckRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -343,7 +345,7 @@ export class ServiceControllerClient {
    * const [response] = await client.check(request);
    */
   check(
-    request: protos.google.api.servicecontrol.v1.ICheckRequest,
+    request?: protos.google.api.servicecontrol.v1.ICheckRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -382,7 +384,7 @@ export class ServiceControllerClient {
     return this.innerApiCalls.check(request, options, callback);
   }
   report(
-    request: protos.google.api.servicecontrol.v1.IReportRequest,
+    request?: protos.google.api.servicecontrol.v1.IReportRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -462,7 +464,7 @@ export class ServiceControllerClient {
    * const [response] = await client.report(request);
    */
   report(
-    request: protos.google.api.servicecontrol.v1.IReportRequest,
+    request?: protos.google.api.servicecontrol.v1.IReportRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
