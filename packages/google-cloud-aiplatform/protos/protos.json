@@ -8,10 +8,13 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.AIPlatform.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1;aiplatform",
                     "java_multiple_files": true,
                     "java_outer_classname": "SpecialistPoolServiceProto",
                     "java_package": "com.google.cloud.aiplatform.v1",
+                    "php_namespace": "Google\\Cloud\\AIPlatform\\V1",
+                    "ruby_package": "Google::Cloud::AIPlatform::V1",
                     "(google.api.resource_definition).type": "datalabeling.googleapis.com/AnnotatedDataset",
                     "(google.api.resource_definition).pattern": "projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}"
                   },
@@ -5527,10 +5530,13 @@
                           "nested": {
                             "instance": {
                               "options": {
+                                "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.Predict.Instance",
                                 "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/instance;instance",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionInstanceProto",
-                                "java_package": "com.google.cloud.aiplatform.v1.schema.predict.instance"
+                                "java_package": "com.google.cloud.aiplatform.v1.schema.predict.instance",
+                                "php_namespace": "Google\\Cloud\\AIPlatform\\V1\\Schema\\Predict\\Instance",
+                                "ruby_package": "Google::Cloud::AIPlatform::V1::Schema::Predict::Instance"
                               },
                               "nested": {
                                 "ImageClassificationPredictionInstance": {
@@ -5673,10 +5679,13 @@
                             },
                             "params": {
                               "options": {
+                                "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.Predict.Params",
                                 "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/params;params",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionParamsProto",
-                                "java_package": "com.google.cloud.aiplatform.v1.schema.predict.params"
+                                "java_package": "com.google.cloud.aiplatform.v1.schema.predict.params",
+                                "php_namespace": "Google\\Cloud\\AIPlatform\\V1\\Schema\\Predict\\Params",
+                                "ruby_package": "Google::Cloud::AIPlatform::V1::Schema::Predict::Params"
                               },
                               "nested": {
                                 "ImageClassificationPredictionParams": {
@@ -5767,10 +5776,13 @@
                             },
                             "prediction": {
                               "options": {
+                                "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.Predict.Prediction",
                                 "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/predict/prediction;prediction",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "VideoObjectTrackingPredictionResultProto",
-                                "java_package": "com.google.cloud.aiplatform.v1.schema.predict.prediction"
+                                "java_package": "com.google.cloud.aiplatform.v1.schema.predict.prediction",
+                                "php_namespace": "Google\\Cloud\\AIPlatform\\V1\\Schema\\Predict\\Prediction",
+                                "ruby_package": "Google::Cloud::AIPlatform::V1::Schema::Predict::Prediction"
                               },
                               "nested": {
                                 "ClassificationPredictionResult": {
@@ -6010,10 +6022,13 @@
                           "nested": {
                             "definition": {
                               "options": {
+                                "csharp_namespace": "Google.Cloud.AIPlatform.V1.Schema.TrainingJob.Definition",
                                 "go_package": "google.golang.org/genproto/googleapis/cloud/aiplatform/v1/schema/trainingjob/definition;definition",
                                 "java_multiple_files": true,
                                 "java_outer_classname": "AutoMLVideoObjectTrackingProto",
-                                "java_package": "com.google.cloud.aiplatform.v1.schema.trainingjob.definition"
+                                "java_package": "com.google.cloud.aiplatform.v1.schema.trainingjob.definition",
+                                "php_namespace": "Google\\Cloud\\AIPlatform\\V1\\Schema\\TrainingJob\\Definition",
+                                "ruby_package": "Google::Cloud::AIPlatform::V1::Schema::TrainingJob::Definition"
                               },
                               "nested": {
                                 "AutoMlImageClassification": {
