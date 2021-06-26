@@ -1,0 +1,73 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.gkeconnect.gateway.v1beta1",
+  "libraryPackage": "@google-cloud/gateway",
+  "services": {
+    "GatewayService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GatewayServiceClient",
+          "rpcs": {
+            "GetResource": {
+              "methods": [
+                "getResource"
+              ]
+            },
+            "PostResource": {
+              "methods": [
+                "postResource"
+              ]
+            },
+            "DeleteResource": {
+              "methods": [
+                "deleteResource"
+              ]
+            },
+            "PutResource": {
+              "methods": [
+                "putResource"
+              ]
+            },
+            "PatchResource": {
+              "methods": [
+                "patchResource"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GatewayServiceClient",
+          "rpcs": {
+            "GetResource": {
+              "methods": [
+                "getResource"
+              ]
+            },
+            "PostResource": {
+              "methods": [
+                "postResource"
+              ]
+            },
+            "DeleteResource": {
+              "methods": [
+                "deleteResource"
+              ]
+            },
+            "PutResource": {
+              "methods": [
+                "putResource"
+              ]
+            },
+            "PatchResource": {
+              "methods": [
+                "patchResource"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

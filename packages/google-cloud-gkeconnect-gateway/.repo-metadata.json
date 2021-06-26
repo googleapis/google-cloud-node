@@ -1,0 +1,15 @@
+{
+  "name": "apigateway",
+  "name_pretty": "API Gateway",
+  "product_documentation": "https://cloud.google.com/api-gateway/",
+  "client_documentation": "https://cloud.google.com/anthos/multicluster-management/gateway/using",
+  "issue_tracker": "https://github.com/googleapis/nodejs-connect-gateway/issues",
+  "release_level": "BETA",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-connect-gateway",
+  "distribution_name": "@google-cloud/connect-gateway",
+  "api_id": "gateway.googleapis.com",
+  "default_version": "v1beta1",
+  "requires_billing": true
+}
+
