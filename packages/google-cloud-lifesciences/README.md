@@ -73,10 +73,12 @@ const client = new {WorkflowsServiceV2BetaClient}();
 
 //TODO(library generator): write the actual function you will be testing
 async function doSomething() {
- console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
- // const [thing] = await client.methodName({
- // });
- // console.info(thing);
+  console.log(
+    'DPE! Change this code so that it shows how to use the library! See comments below on structure.'
+  );
+  // const [thing] = await client.methodName({
+  // });
+  // console.info(thing);
 }
 doSomething();
 
