@@ -298,7 +298,7 @@ export class ConnectionServiceClient {
   // -------------------
 
   listConnections(
-    request: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+    request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -361,7 +361,7 @@ export class ConnectionServiceClient {
    *   for more details and examples.
    */
   listConnections(
-    request: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
+    request?: protos.google.cloud.apigeeconnect.v1.IListConnectionsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
