@@ -224,14 +224,13 @@ export class WorkflowsServiceV2BetaClient {
     const workflowsServiceV2BetaStubMethods = ['runPipeline'];
     for (const methodName of workflowsServiceV2BetaStubMethods) {
       const callPromise = this.workflowsServiceV2BetaStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -431,10 +430,11 @@ export class WorkflowsServiceV2BetaClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        parent: request.parent || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      parent: request.parent || '',
+    });
     this.initialize();
     return this.innerApiCalls.runPipeline(request, options, callback);
   }

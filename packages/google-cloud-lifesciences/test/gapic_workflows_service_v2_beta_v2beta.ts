@@ -26,9 +26,10 @@ import * as workflowsservicev2betaModule from '../src';
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (
-    instance.constructor as typeof protobuf.Message
-  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
+    instance as protobuf.Message<T>,
+    {defaults: true}
+  );
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -95,46 +96,49 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client =
-      new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient();
+    const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client =
-      new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+    const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+      {
         fallback: true,
-      });
+      }
+    );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client =
-      new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+    const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     assert.strictEqual(client.workflowsServiceV2BetaStub, undefined);
     await client.initialize();
     assert(client.workflowsServiceV2BetaStub);
   });
 
   it('has close method', () => {
-    const client =
-      new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+    const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+    const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -143,11 +147,12 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client =
-      new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+    const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+      {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      });
+      }
+    );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -166,11 +171,12 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
 
   describe('runPipeline', () => {
     it('invokes runPipeline without error', async () => {
-      const client =
-        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+      const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.lifesciences.v2beta.RunPipelineRequest()
@@ -199,11 +205,12 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     });
 
     it('invokes runPipeline without error using callback', async () => {
-      const client =
-        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+      const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.lifesciences.v2beta.RunPipelineRequest()
@@ -220,8 +227,9 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.longrunning.Operation()
       );
-      client.innerApiCalls.runPipeline =
-        stubLongRunningCallWithCallback(expectedResponse);
+      client.innerApiCalls.runPipeline = stubLongRunningCallWithCallback(
+        expectedResponse
+      );
       const promise = new Promise((resolve, reject) => {
         client.runPipeline(
           request,
@@ -254,11 +262,12 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     });
 
     it('invokes runPipeline with call error', async () => {
-      const client =
-        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+      const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.lifesciences.v2beta.RunPipelineRequest()
@@ -286,11 +295,12 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     });
 
     it('invokes runPipeline with LRO error', async () => {
-      const client =
-        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+      const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.lifesciences.v2beta.RunPipelineRequest()
@@ -320,11 +330,12 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     });
 
     it('invokes checkRunPipelineProgress without error', async () => {
-      const client =
-        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+      const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -343,11 +354,12 @@ describe('v2beta.WorkflowsServiceV2BetaClient', () => {
     });
 
     it('invokes checkRunPipelineProgress with error', async () => {
-      const client =
-        new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient({
+      const client = new workflowsservicev2betaModule.v2beta.WorkflowsServiceV2BetaClient(
+        {
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        });
+        }
+      );
       client.initialize();
       const expectedError = new Error('expected');
 
