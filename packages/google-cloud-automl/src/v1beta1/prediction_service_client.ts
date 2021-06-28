@@ -329,7 +329,7 @@ export class PredictionServiceClient {
   // -- Service calls --
   // -------------------
   predict(
-    request: protos.google.cloud.automl.v1beta1.IPredictRequest,
+    request?: protos.google.cloud.automl.v1beta1.IPredictRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -415,7 +415,7 @@ export class PredictionServiceClient {
    * const [response] = await client.predict(request);
    */
   predict(
-    request: protos.google.cloud.automl.v1beta1.IPredictRequest,
+    request?: protos.google.cloud.automl.v1beta1.IPredictRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -455,7 +455,7 @@ export class PredictionServiceClient {
   }
 
   batchPredict(
-    request: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
+    request?: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -598,7 +598,7 @@ export class PredictionServiceClient {
    * const [response] = await operation.promise();
    */
   batchPredict(
-    request: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
+    request?: protos.google.cloud.automl.v1beta1.IBatchPredictRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
