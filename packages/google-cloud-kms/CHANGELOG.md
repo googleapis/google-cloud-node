@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-kms/compare/v2.4.0...v2.4.1) (2021-06-25)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#466](https://www.github.com/googleapis/nodejs-kms/issues/466)) ([bba9a58](https://www.github.com/googleapis/nodejs-kms/commit/bba9a58b087c96ff66adbde8702599aac05fc4a1))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.3.3...v2.4.0) (2021-06-14)
 
 
