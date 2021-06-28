@@ -64,6 +64,7 @@ objects to users via direct download.
   * [Get Default Event Based Hold](#get-default-event-based-hold)
   * [Get Metadata](#get-metadata)
   * [Get Metadata Notifications](#get-metadata-notifications)
+  * [Get Public Access Prevention](#get-public-access-prevention)
   * [Get Requester Pays Status](#get-requester-pays-status)
   * [Get Retention Policy](#get-retention-policy)
   * [Storage Get Service Account.](#storage-get-service-account.)
@@ -103,6 +104,8 @@ objects to users via direct download.
   * [Rename File](#rename-file)
   * [Rotate Encryption Key](#rotate-encryption-key)
   * [Set Event Based Hold](#set-event-based-hold)
+  * [Set Public Access Prevention Enforced](#set-public-access-prevention-enforced)
+  * [Set Public Access Prevention Unspecified](#set-public-access-prevention-unspecified)
   * [Set Retention Policy](#set-retention-policy)
   * [Set Temporary Hold](#set-temporary-hold)
   * [Upload a directory to a bucket.](#upload-a-directory-to-a-bucket.)
@@ -938,6 +941,23 @@ __Usage:__
 
 
 
+### Get Public Access Prevention
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/getPublicAccessPrevention.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/getPublicAccessPrevention.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getPublicAccessPrevention.js`
+
+
+-----
+
+
+
+
 ### Get Requester Pays Status
 
 View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/getRequesterPaysStatus.js).
@@ -1618,6 +1638,40 @@ __Usage:__
 
 
 `node samples/setEventBasedHold.js`
+
+
+-----
+
+
+
+
+### Set Public Access Prevention Enforced
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/setPublicAccessPreventionEnforced.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/setPublicAccessPreventionEnforced.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/setPublicAccessPreventionEnforced.js`
+
+
+-----
+
+
+
+
+### Set Public Access Prevention Unspecified
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/setPublicAccessPreventionUnspecified.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/setPublicAccessPreventionUnspecified.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/setPublicAccessPreventionUnspecified.js`
 
 
 -----

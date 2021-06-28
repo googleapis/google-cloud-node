@@ -31,6 +31,9 @@ const bucketWithClassAndLocation = storage.bucket(
   bucketNameWithClassAndLocation
 );
 
+const PUBLIC_ACCESS_PREVENTION_UNSPECIFIED = 'unspecified';
+const PUBLIC_ACCESS_PREVENTION_ENFORCED = 'enforced';
+
 after(async () => {
   await bucket.delete().catch(console.error);
   await bucketWithClassAndLocation.delete().catch(console.error);
@@ -145,6 +148,56 @@ it('should remove a bucket cors configuration', async () => {
   );
   await bucket.getMetadata();
   assert.ok(!bucket.metadata.cors);
+});
+
+it('should set public access prevention to enforced', async () => {
+  const output = execSync(
+    `node setPublicAccessPreventionEnforced.js ${bucketName}`
+  );
+  assert.match(
+    output,
+    new RegExp(`Public access prevention is set to enforced for ${bucketName}.`)
+  );
+
+  const metadata = await bucket.getMetadata();
+  assert.strictEqual(
+    metadata[0].iamConfiguration.publicAccessPrevention,
+    PUBLIC_ACCESS_PREVENTION_ENFORCED
+  );
+});
+
+it("should get a bucket's public access prevention metadata", async () => {
+  await storage.bucket(bucketName).setMetadata({
+    iamConfiguration: {
+      publicAccessPrevention: PUBLIC_ACCESS_PREVENTION_ENFORCED,
+    },
+  });
+
+  const output = execSync(`node getPublicAccessPrevention.js ${bucketName}`);
+
+  assert.match(
+    output,
+    new RegExp(`Public access prevention is enforced for ${bucketName}.`)
+  );
+
+  const [metadata] = await bucket.getMetadata();
+  assert.ok(metadata.iamConfiguration.publicAccessPrevention);
+});
+
+it('should set public access prevention to unspecified', async () => {
+  const output = execSync(
+    `node setPublicAccessPreventionUnspecified.js ${bucketName}`
+  );
+  assert.match(
+    output,
+    new RegExp(`Public access prevention is 'unspecified' for ${bucketName}.`)
+  );
+
+  const metadata = await bucket.getMetadata();
+  assert.strictEqual(
+    metadata[0].iamConfiguration.publicAccessPrevention,
+    PUBLIC_ACCESS_PREVENTION_UNSPECIFIED
+  );
 });
 
 it("should add a bucket's website configuration", async () => {
