@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/container",
   "description": "Google Container Engine API client for Node.js",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {

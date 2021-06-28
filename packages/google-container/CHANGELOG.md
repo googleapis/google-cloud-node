@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.3.0...v2.3.1) (2021-06-25)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#454](https://www.github.com/googleapis/nodejs-cloud-container/issues/454)) ([65ac281](https://www.github.com/googleapis/nodejs-cloud-container/commit/65ac2813d05cf21d234e42a52b73dae2f723de0f))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.2.2...v2.3.0) (2021-06-09)
 
 
