@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.4](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.3...v2.3.4) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#191](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/191)) ([88b6413](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/88b6413a83bb2594f1f7371073940e37118fdcbb))
+
 ### [2.3.3](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.2...v2.3.3) (2021-06-22)
 
 
