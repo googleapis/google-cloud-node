@@ -900,6 +900,7 @@
                          * Properties of a RunBuildTriggerRequest.
                          * @memberof google.devtools.cloudbuild.v1
                          * @interface IRunBuildTriggerRequest
+                         * @property {string|null} [name] RunBuildTriggerRequest name
                          * @property {string|null} [projectId] RunBuildTriggerRequest projectId
                          * @property {string|null} [triggerId] RunBuildTriggerRequest triggerId
                          * @property {google.devtools.cloudbuild.v1.IRepoSource|null} [source] RunBuildTriggerRequest source
@@ -919,6 +920,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * RunBuildTriggerRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.cloudbuild.v1.RunBuildTriggerRequest
+                         * @instance
+                         */
+                        RunBuildTriggerRequest.prototype.name = "";
     
                         /**
                          * RunBuildTriggerRequest projectId.
@@ -974,6 +983,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.triggerId);
                             if (message.source != null && Object.hasOwnProperty.call(message, "source"))
                                 $root.google.devtools.cloudbuild.v1.RepoSource.encode(message.source, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
                             return writer;
                         };
     
@@ -1008,6 +1019,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 4:
+                                    message.name = reader.string();
+                                    break;
                                 case 1:
                                     message.projectId = reader.string();
                                     break;
@@ -1052,6 +1066,9 @@
                         RunBuildTriggerRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 if (!$util.isString(message.projectId))
                                     return "projectId: string expected";
@@ -1078,6 +1095,8 @@
                             if (object instanceof $root.google.devtools.cloudbuild.v1.RunBuildTriggerRequest)
                                 return object;
                             var message = new $root.google.devtools.cloudbuild.v1.RunBuildTriggerRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
                             if (object.triggerId != null)
@@ -1107,6 +1126,7 @@
                                 object.projectId = "";
                                 object.triggerId = "";
                                 object.source = null;
+                                object.name = "";
                             }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
@@ -1114,6 +1134,8 @@
                                 object.triggerId = message.triggerId;
                             if (message.source != null && message.hasOwnProperty("source"))
                                 object.source = $root.google.devtools.cloudbuild.v1.RepoSource.toObject(message.source, options);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             return object;
                         };
     
@@ -3998,6 +4020,7 @@
                          * @property {Object.<string,google.devtools.cloudbuild.v1.ITimeSpan>|null} [timing] Build timing
                          * @property {string|null} [serviceAccount] Build serviceAccount
                          * @property {google.devtools.cloudbuild.v1.ISecrets|null} [availableSecrets] Build availableSecrets
+                         * @property {Array.<google.devtools.cloudbuild.v1.Build.IWarning>|null} [warnings] Build warnings
                          */
     
                         /**
@@ -4015,6 +4038,7 @@
                             this.tags = [];
                             this.secrets = [];
                             this.timing = {};
+                            this.warnings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -4230,6 +4254,14 @@
                         Build.prototype.availableSecrets = null;
     
                         /**
+                         * Build warnings.
+                         * @member {Array.<google.devtools.cloudbuild.v1.Build.IWarning>} warnings
+                         * @memberof google.devtools.cloudbuild.v1.Build
+                         * @instance
+                         */
+                        Build.prototype.warnings = $util.emptyArray;
+    
+                        /**
                          * Creates a new Build instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.Build
@@ -4313,6 +4345,9 @@
                                 writer.uint32(/* id 45, wireType 2 =*/362).string(message.name);
                             if (message.availableSecrets != null && Object.hasOwnProperty.call(message, "availableSecrets"))
                                 $root.google.devtools.cloudbuild.v1.Secrets.encode(message.availableSecrets, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
+                            if (message.warnings != null && message.warnings.length)
+                                for (var i = 0; i < message.warnings.length; ++i)
+                                    $root.google.devtools.cloudbuild.v1.Build.Warning.encode(message.warnings[i], writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
                             return writer;
                         };
     
@@ -4470,6 +4505,11 @@
                                     break;
                                 case 47:
                                     message.availableSecrets = $root.google.devtools.cloudbuild.v1.Secrets.decode(reader, reader.uint32());
+                                    break;
+                                case 49:
+                                    if (!(message.warnings && message.warnings.length))
+                                        message.warnings = [];
+                                    message.warnings.push($root.google.devtools.cloudbuild.v1.Build.Warning.decode(reader, reader.uint32()));
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4650,6 +4690,15 @@
                                 if (error)
                                     return "availableSecrets." + error;
                             }
+                            if (message.warnings != null && message.hasOwnProperty("warnings")) {
+                                if (!Array.isArray(message.warnings))
+                                    return "warnings: array expected";
+                                for (var i = 0; i < message.warnings.length; ++i) {
+                                    var error = $root.google.devtools.cloudbuild.v1.Build.Warning.verify(message.warnings[i]);
+                                    if (error)
+                                        return "warnings." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -4825,6 +4874,16 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.Build.availableSecrets: object expected");
                                 message.availableSecrets = $root.google.devtools.cloudbuild.v1.Secrets.fromObject(object.availableSecrets);
                             }
+                            if (object.warnings) {
+                                if (!Array.isArray(object.warnings))
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Build.warnings: array expected");
+                                message.warnings = [];
+                                for (var i = 0; i < object.warnings.length; ++i) {
+                                    if (typeof object.warnings[i] !== "object")
+                                        throw TypeError(".google.devtools.cloudbuild.v1.Build.warnings: object expected");
+                                    message.warnings[i] = $root.google.devtools.cloudbuild.v1.Build.Warning.fromObject(object.warnings[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -4846,6 +4905,7 @@
                                 object.images = [];
                                 object.tags = [];
                                 object.secrets = [];
+                                object.warnings = [];
                             }
                             if (options.objects || options.defaults) {
                                 object.substitutions = {};
@@ -4944,6 +5004,11 @@
                                 object.name = message.name;
                             if (message.availableSecrets != null && message.hasOwnProperty("availableSecrets"))
                                 object.availableSecrets = $root.google.devtools.cloudbuild.v1.Secrets.toObject(message.availableSecrets, options);
+                            if (message.warnings && message.warnings.length) {
+                                object.warnings = [];
+                                for (var j = 0; j < message.warnings.length; ++j)
+                                    object.warnings[j] = $root.google.devtools.cloudbuild.v1.Build.Warning.toObject(message.warnings[j], options);
+                            }
                             return object;
                         };
     
@@ -4957,6 +5022,257 @@
                         Build.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        Build.Warning = (function() {
+    
+                            /**
+                             * Properties of a Warning.
+                             * @memberof google.devtools.cloudbuild.v1.Build
+                             * @interface IWarning
+                             * @property {string|null} [text] Warning text
+                             * @property {google.devtools.cloudbuild.v1.Build.Warning.Priority|null} [priority] Warning priority
+                             */
+    
+                            /**
+                             * Constructs a new Warning.
+                             * @memberof google.devtools.cloudbuild.v1.Build
+                             * @classdesc Represents a Warning.
+                             * @implements IWarning
+                             * @constructor
+                             * @param {google.devtools.cloudbuild.v1.Build.IWarning=} [properties] Properties to set
+                             */
+                            function Warning(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Warning text.
+                             * @member {string} text
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @instance
+                             */
+                            Warning.prototype.text = "";
+    
+                            /**
+                             * Warning priority.
+                             * @member {google.devtools.cloudbuild.v1.Build.Warning.Priority} priority
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @instance
+                             */
+                            Warning.prototype.priority = 0;
+    
+                            /**
+                             * Creates a new Warning instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Build.IWarning=} [properties] Properties to set
+                             * @returns {google.devtools.cloudbuild.v1.Build.Warning} Warning instance
+                             */
+                            Warning.create = function create(properties) {
+                                return new Warning(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Warning message. Does not implicitly {@link google.devtools.cloudbuild.v1.Build.Warning.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Build.IWarning} message Warning message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Warning.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.text != null && Object.hasOwnProperty.call(message, "text"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.text);
+                                if (message.priority != null && Object.hasOwnProperty.call(message, "priority"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.priority);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Warning message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Build.Warning.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Build.IWarning} message Warning message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Warning.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a Warning message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.cloudbuild.v1.Build.Warning} Warning
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Warning.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Build.Warning();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.text = reader.string();
+                                        break;
+                                    case 2:
+                                        message.priority = reader.int32();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a Warning message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.cloudbuild.v1.Build.Warning} Warning
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Warning.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a Warning message.
+                             * @function verify
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Warning.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.text != null && message.hasOwnProperty("text"))
+                                    if (!$util.isString(message.text))
+                                        return "text: string expected";
+                                if (message.priority != null && message.hasOwnProperty("priority"))
+                                    switch (message.priority) {
+                                    default:
+                                        return "priority: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a Warning message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.cloudbuild.v1.Build.Warning} Warning
+                             */
+                            Warning.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.cloudbuild.v1.Build.Warning)
+                                    return object;
+                                var message = new $root.google.devtools.cloudbuild.v1.Build.Warning();
+                                if (object.text != null)
+                                    message.text = String(object.text);
+                                switch (object.priority) {
+                                case "PRIORITY_UNSPECIFIED":
+                                case 0:
+                                    message.priority = 0;
+                                    break;
+                                case "INFO":
+                                case 1:
+                                    message.priority = 1;
+                                    break;
+                                case "WARNING":
+                                case 2:
+                                    message.priority = 2;
+                                    break;
+                                case "ALERT":
+                                case 3:
+                                    message.priority = 3;
+                                    break;
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a Warning message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Build.Warning} message Warning
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Warning.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.text = "";
+                                    object.priority = options.enums === String ? "PRIORITY_UNSPECIFIED" : 0;
+                                }
+                                if (message.text != null && message.hasOwnProperty("text"))
+                                    object.text = message.text;
+                                if (message.priority != null && message.hasOwnProperty("priority"))
+                                    object.priority = options.enums === String ? $root.google.devtools.cloudbuild.v1.Build.Warning.Priority[message.priority] : message.priority;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Warning to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.cloudbuild.v1.Build.Warning
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Warning.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Priority enum.
+                             * @name google.devtools.cloudbuild.v1.Build.Warning.Priority
+                             * @enum {number}
+                             * @property {number} PRIORITY_UNSPECIFIED=0 PRIORITY_UNSPECIFIED value
+                             * @property {number} INFO=1 INFO value
+                             * @property {number} WARNING=2 WARNING value
+                             * @property {number} ALERT=3 ALERT value
+                             */
+                            Warning.Priority = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "PRIORITY_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "INFO"] = 1;
+                                values[valuesById[2] = "WARNING"] = 2;
+                                values[valuesById[3] = "ALERT"] = 3;
+                                return values;
+                            })();
+    
+                            return Warning;
+                        })();
     
                         /**
                          * Status enum.
@@ -8831,6 +9147,7 @@
                          * Properties of a BuildTrigger.
                          * @memberof google.devtools.cloudbuild.v1
                          * @interface IBuildTrigger
+                         * @property {string|null} [resourceName] BuildTrigger resourceName
                          * @property {string|null} [id] BuildTrigger id
                          * @property {string|null} [description] BuildTrigger description
                          * @property {string|null} [name] BuildTrigger name
@@ -8838,6 +9155,8 @@
                          * @property {google.devtools.cloudbuild.v1.IRepoSource|null} [triggerTemplate] BuildTrigger triggerTemplate
                          * @property {google.devtools.cloudbuild.v1.IGitHubEventsConfig|null} [github] BuildTrigger github
                          * @property {google.devtools.cloudbuild.v1.IPubsubConfig|null} [pubsubConfig] BuildTrigger pubsubConfig
+                         * @property {google.devtools.cloudbuild.v1.IWebhookConfig|null} [webhookConfig] BuildTrigger webhookConfig
+                         * @property {boolean|null} [autodetect] BuildTrigger autodetect
                          * @property {google.devtools.cloudbuild.v1.IBuild|null} [build] BuildTrigger build
                          * @property {string|null} [filename] BuildTrigger filename
                          * @property {google.protobuf.ITimestamp|null} [createTime] BuildTrigger createTime
@@ -8866,6 +9185,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * BuildTrigger resourceName.
+                         * @member {string} resourceName
+                         * @memberof google.devtools.cloudbuild.v1.BuildTrigger
+                         * @instance
+                         */
+                        BuildTrigger.prototype.resourceName = "";
     
                         /**
                          * BuildTrigger id.
@@ -8922,6 +9249,22 @@
                          * @instance
                          */
                         BuildTrigger.prototype.pubsubConfig = null;
+    
+                        /**
+                         * BuildTrigger webhookConfig.
+                         * @member {google.devtools.cloudbuild.v1.IWebhookConfig|null|undefined} webhookConfig
+                         * @memberof google.devtools.cloudbuild.v1.BuildTrigger
+                         * @instance
+                         */
+                        BuildTrigger.prototype.webhookConfig = null;
+    
+                        /**
+                         * BuildTrigger autodetect.
+                         * @member {boolean|null|undefined} autodetect
+                         * @memberof google.devtools.cloudbuild.v1.BuildTrigger
+                         * @instance
+                         */
+                        BuildTrigger.prototype.autodetect = null;
     
                         /**
                          * BuildTrigger build.
@@ -8992,12 +9335,12 @@
     
                         /**
                          * BuildTrigger buildTemplate.
-                         * @member {"build"|"filename"|undefined} buildTemplate
+                         * @member {"autodetect"|"build"|"filename"|undefined} buildTemplate
                          * @memberof google.devtools.cloudbuild.v1.BuildTrigger
                          * @instance
                          */
                         Object.defineProperty(BuildTrigger.prototype, "buildTemplate", {
-                            get: $util.oneOfGetter($oneOfFields = ["build", "filename"]),
+                            get: $util.oneOfGetter($oneOfFields = ["autodetect", "build", "filename"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -9050,6 +9393,8 @@
                             if (message.includedFiles != null && message.includedFiles.length)
                                 for (var i = 0; i < message.includedFiles.length; ++i)
                                     writer.uint32(/* id 16, wireType 2 =*/130).string(message.includedFiles[i]);
+                            if (message.autodetect != null && Object.hasOwnProperty.call(message, "autodetect"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.autodetect);
                             if (message.tags != null && message.tags.length)
                                 for (var i = 0; i < message.tags.length; ++i)
                                     writer.uint32(/* id 19, wireType 2 =*/154).string(message.tags[i]);
@@ -9059,6 +9404,10 @@
                                 $root.google.devtools.cloudbuild.v1.PubsubConfig.encode(message.pubsubConfig, writer.uint32(/* id 29, wireType 2 =*/234).fork()).ldelim();
                             if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
                                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.filter);
+                            if (message.webhookConfig != null && Object.hasOwnProperty.call(message, "webhookConfig"))
+                                $root.google.devtools.cloudbuild.v1.WebhookConfig.encode(message.webhookConfig, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.resourceName != null && Object.hasOwnProperty.call(message, "resourceName"))
+                                writer.uint32(/* id 34, wireType 2 =*/274).string(message.resourceName);
                             return writer;
                         };
     
@@ -9093,6 +9442,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 34:
+                                    message.resourceName = reader.string();
+                                    break;
                                 case 1:
                                     message.id = reader.string();
                                     break;
@@ -9115,6 +9467,12 @@
                                     break;
                                 case 29:
                                     message.pubsubConfig = $root.google.devtools.cloudbuild.v1.PubsubConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 31:
+                                    message.webhookConfig = $root.google.devtools.cloudbuild.v1.WebhookConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 18:
+                                    message.autodetect = reader.bool();
                                     break;
                                 case 4:
                                     message.build = $root.google.devtools.cloudbuild.v1.Build.decode(reader, reader.uint32());
@@ -9199,6 +9557,9 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                if (!$util.isString(message.resourceName))
+                                    return "resourceName: string expected";
                             if (message.id != null && message.hasOwnProperty("id"))
                                 if (!$util.isString(message.id))
                                     return "id: string expected";
@@ -9230,7 +9591,19 @@
                                 if (error)
                                     return "pubsubConfig." + error;
                             }
+                            if (message.webhookConfig != null && message.hasOwnProperty("webhookConfig")) {
+                                var error = $root.google.devtools.cloudbuild.v1.WebhookConfig.verify(message.webhookConfig);
+                                if (error)
+                                    return "webhookConfig." + error;
+                            }
+                            if (message.autodetect != null && message.hasOwnProperty("autodetect")) {
+                                properties.buildTemplate = 1;
+                                if (typeof message.autodetect !== "boolean")
+                                    return "autodetect: boolean expected";
+                            }
                             if (message.build != null && message.hasOwnProperty("build")) {
+                                if (properties.buildTemplate === 1)
+                                    return "buildTemplate: multiple values";
                                 properties.buildTemplate = 1;
                                 {
                                     var error = $root.google.devtools.cloudbuild.v1.Build.verify(message.build);
@@ -9293,6 +9666,8 @@
                             if (object instanceof $root.google.devtools.cloudbuild.v1.BuildTrigger)
                                 return object;
                             var message = new $root.google.devtools.cloudbuild.v1.BuildTrigger();
+                            if (object.resourceName != null)
+                                message.resourceName = String(object.resourceName);
                             if (object.id != null)
                                 message.id = String(object.id);
                             if (object.description != null)
@@ -9321,6 +9696,13 @@
                                     throw TypeError(".google.devtools.cloudbuild.v1.BuildTrigger.pubsubConfig: object expected");
                                 message.pubsubConfig = $root.google.devtools.cloudbuild.v1.PubsubConfig.fromObject(object.pubsubConfig);
                             }
+                            if (object.webhookConfig != null) {
+                                if (typeof object.webhookConfig !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.BuildTrigger.webhookConfig: object expected");
+                                message.webhookConfig = $root.google.devtools.cloudbuild.v1.WebhookConfig.fromObject(object.webhookConfig);
+                            }
+                            if (object.autodetect != null)
+                                message.autodetect = Boolean(object.autodetect);
                             if (object.build != null) {
                                 if (typeof object.build !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.BuildTrigger.build: object expected");
@@ -9391,6 +9773,8 @@
                                 object.name = "";
                                 object.pubsubConfig = null;
                                 object.filter = "";
+                                object.webhookConfig = null;
+                                object.resourceName = "";
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
@@ -9430,6 +9814,11 @@
                                 for (var j = 0; j < message.includedFiles.length; ++j)
                                     object.includedFiles[j] = message.includedFiles[j];
                             }
+                            if (message.autodetect != null && message.hasOwnProperty("autodetect")) {
+                                object.autodetect = message.autodetect;
+                                if (options.oneofs)
+                                    object.buildTemplate = "autodetect";
+                            }
                             if (message.tags && message.tags.length) {
                                 object.tags = [];
                                 for (var j = 0; j < message.tags.length; ++j)
@@ -9441,6 +9830,10 @@
                                 object.pubsubConfig = $root.google.devtools.cloudbuild.v1.PubsubConfig.toObject(message.pubsubConfig, options);
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 object.filter = message.filter;
+                            if (message.webhookConfig != null && message.hasOwnProperty("webhookConfig"))
+                                object.webhookConfig = $root.google.devtools.cloudbuild.v1.WebhookConfig.toObject(message.webhookConfig, options);
+                            if (message.resourceName != null && message.hasOwnProperty("resourceName"))
+                                object.resourceName = message.resourceName;
                             return object;
                         };
     
@@ -10087,6 +10480,268 @@
                         return PubsubConfig;
                     })();
     
+                    v1.WebhookConfig = (function() {
+    
+                        /**
+                         * Properties of a WebhookConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IWebhookConfig
+                         * @property {string|null} [secret] WebhookConfig secret
+                         * @property {google.devtools.cloudbuild.v1.WebhookConfig.State|null} [state] WebhookConfig state
+                         */
+    
+                        /**
+                         * Constructs a new WebhookConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a WebhookConfig.
+                         * @implements IWebhookConfig
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IWebhookConfig=} [properties] Properties to set
+                         */
+                        function WebhookConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * WebhookConfig secret.
+                         * @member {string|null|undefined} secret
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @instance
+                         */
+                        WebhookConfig.prototype.secret = null;
+    
+                        /**
+                         * WebhookConfig state.
+                         * @member {google.devtools.cloudbuild.v1.WebhookConfig.State} state
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @instance
+                         */
+                        WebhookConfig.prototype.state = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * WebhookConfig authMethod.
+                         * @member {"secret"|undefined} authMethod
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @instance
+                         */
+                        Object.defineProperty(WebhookConfig.prototype, "authMethod", {
+                            get: $util.oneOfGetter($oneOfFields = ["secret"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new WebhookConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IWebhookConfig=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.WebhookConfig} WebhookConfig instance
+                         */
+                        WebhookConfig.create = function create(properties) {
+                            return new WebhookConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified WebhookConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.WebhookConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IWebhookConfig} message WebhookConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WebhookConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.secret != null && Object.hasOwnProperty.call(message, "secret"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.secret);
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified WebhookConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.WebhookConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IWebhookConfig} message WebhookConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        WebhookConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a WebhookConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.WebhookConfig} WebhookConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WebhookConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.WebhookConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 3:
+                                    message.secret = reader.string();
+                                    break;
+                                case 4:
+                                    message.state = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a WebhookConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.WebhookConfig} WebhookConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        WebhookConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a WebhookConfig message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        WebhookConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.secret != null && message.hasOwnProperty("secret")) {
+                                properties.authMethod = 1;
+                                if (!$util.isString(message.secret))
+                                    return "secret: string expected";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a WebhookConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.WebhookConfig} WebhookConfig
+                         */
+                        WebhookConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.WebhookConfig)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.WebhookConfig();
+                            if (object.secret != null)
+                                message.secret = String(object.secret);
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "OK":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SECRET_DELETED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a WebhookConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.WebhookConfig} message WebhookConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        WebhookConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            if (message.secret != null && message.hasOwnProperty("secret")) {
+                                object.secret = message.secret;
+                                if (options.oneofs)
+                                    object.authMethod = "secret";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.devtools.cloudbuild.v1.WebhookConfig.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this WebhookConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.WebhookConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        WebhookConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.devtools.cloudbuild.v1.WebhookConfig.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} OK=1 OK value
+                         * @property {number} SECRET_DELETED=2 SECRET_DELETED value
+                         */
+                        WebhookConfig.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "OK"] = 1;
+                            values[valuesById[2] = "SECRET_DELETED"] = 2;
+                            return values;
+                        })();
+    
+                        return WebhookConfig;
+                    })();
+    
                     v1.PullRequestFilter = (function() {
     
                         /**
@@ -10634,6 +11289,7 @@
                          * Properties of a CreateBuildTriggerRequest.
                          * @memberof google.devtools.cloudbuild.v1
                          * @interface ICreateBuildTriggerRequest
+                         * @property {string|null} [parent] CreateBuildTriggerRequest parent
                          * @property {string|null} [projectId] CreateBuildTriggerRequest projectId
                          * @property {google.devtools.cloudbuild.v1.IBuildTrigger|null} [trigger] CreateBuildTriggerRequest trigger
                          */
@@ -10652,6 +11308,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * CreateBuildTriggerRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.cloudbuild.v1.CreateBuildTriggerRequest
+                         * @instance
+                         */
+                        CreateBuildTriggerRequest.prototype.parent = "";
     
                         /**
                          * CreateBuildTriggerRequest projectId.
@@ -10697,6 +11361,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
                             if (message.trigger != null && Object.hasOwnProperty.call(message, "trigger"))
                                 $root.google.devtools.cloudbuild.v1.BuildTrigger.encode(message.trigger, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.parent);
                             return writer;
                         };
     
@@ -10731,6 +11397,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 3:
+                                    message.parent = reader.string();
+                                    break;
                                 case 1:
                                     message.projectId = reader.string();
                                     break;
@@ -10772,6 +11441,9 @@
                         CreateBuildTriggerRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 if (!$util.isString(message.projectId))
                                     return "projectId: string expected";
@@ -10795,6 +11467,8 @@
                             if (object instanceof $root.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest)
                                 return object;
                             var message = new $root.google.devtools.cloudbuild.v1.CreateBuildTriggerRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
                             if (object.trigger != null) {
@@ -10821,11 +11495,14 @@
                             if (options.defaults) {
                                 object.projectId = "";
                                 object.trigger = null;
+                                object.parent = "";
                             }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
                             if (message.trigger != null && message.hasOwnProperty("trigger"))
                                 object.trigger = $root.google.devtools.cloudbuild.v1.BuildTrigger.toObject(message.trigger, options);
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
                             return object;
                         };
     
@@ -10849,6 +11526,7 @@
                          * Properties of a GetBuildTriggerRequest.
                          * @memberof google.devtools.cloudbuild.v1
                          * @interface IGetBuildTriggerRequest
+                         * @property {string|null} [name] GetBuildTriggerRequest name
                          * @property {string|null} [projectId] GetBuildTriggerRequest projectId
                          * @property {string|null} [triggerId] GetBuildTriggerRequest triggerId
                          */
@@ -10867,6 +11545,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * GetBuildTriggerRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.cloudbuild.v1.GetBuildTriggerRequest
+                         * @instance
+                         */
+                        GetBuildTriggerRequest.prototype.name = "";
     
                         /**
                          * GetBuildTriggerRequest projectId.
@@ -10912,6 +11598,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
                             if (message.triggerId != null && Object.hasOwnProperty.call(message, "triggerId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.triggerId);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
                             return writer;
                         };
     
@@ -10946,6 +11634,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 3:
+                                    message.name = reader.string();
+                                    break;
                                 case 1:
                                     message.projectId = reader.string();
                                     break;
@@ -10987,6 +11678,9 @@
                         GetBuildTriggerRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 if (!$util.isString(message.projectId))
                                     return "projectId: string expected";
@@ -11008,6 +11702,8 @@
                             if (object instanceof $root.google.devtools.cloudbuild.v1.GetBuildTriggerRequest)
                                 return object;
                             var message = new $root.google.devtools.cloudbuild.v1.GetBuildTriggerRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
                             if (object.triggerId != null)
@@ -11031,11 +11727,14 @@
                             if (options.defaults) {
                                 object.projectId = "";
                                 object.triggerId = "";
+                                object.name = "";
                             }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
                             if (message.triggerId != null && message.hasOwnProperty("triggerId"))
                                 object.triggerId = message.triggerId;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             return object;
                         };
     
@@ -11059,6 +11758,7 @@
                          * Properties of a ListBuildTriggersRequest.
                          * @memberof google.devtools.cloudbuild.v1
                          * @interface IListBuildTriggersRequest
+                         * @property {string|null} [parent] ListBuildTriggersRequest parent
                          * @property {string|null} [projectId] ListBuildTriggersRequest projectId
                          * @property {number|null} [pageSize] ListBuildTriggersRequest pageSize
                          * @property {string|null} [pageToken] ListBuildTriggersRequest pageToken
@@ -11078,6 +11778,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ListBuildTriggersRequest parent.
+                         * @member {string} parent
+                         * @memberof google.devtools.cloudbuild.v1.ListBuildTriggersRequest
+                         * @instance
+                         */
+                        ListBuildTriggersRequest.prototype.parent = "";
     
                         /**
                          * ListBuildTriggersRequest projectId.
@@ -11133,6 +11841,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.parent);
                             return writer;
                         };
     
@@ -11167,6 +11877,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 4:
+                                    message.parent = reader.string();
+                                    break;
                                 case 1:
                                     message.projectId = reader.string();
                                     break;
@@ -11211,6 +11924,9 @@
                         ListBuildTriggersRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 if (!$util.isString(message.projectId))
                                     return "projectId: string expected";
@@ -11235,6 +11951,8 @@
                             if (object instanceof $root.google.devtools.cloudbuild.v1.ListBuildTriggersRequest)
                                 return object;
                             var message = new $root.google.devtools.cloudbuild.v1.ListBuildTriggersRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
                             if (object.pageSize != null)
@@ -11261,6 +11979,7 @@
                                 object.projectId = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.parent = "";
                             }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
@@ -11268,6 +11987,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
                             return object;
                         };
     
@@ -11522,6 +12243,7 @@
                          * Properties of a DeleteBuildTriggerRequest.
                          * @memberof google.devtools.cloudbuild.v1
                          * @interface IDeleteBuildTriggerRequest
+                         * @property {string|null} [name] DeleteBuildTriggerRequest name
                          * @property {string|null} [projectId] DeleteBuildTriggerRequest projectId
                          * @property {string|null} [triggerId] DeleteBuildTriggerRequest triggerId
                          */
@@ -11540,6 +12262,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * DeleteBuildTriggerRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest
+                         * @instance
+                         */
+                        DeleteBuildTriggerRequest.prototype.name = "";
     
                         /**
                          * DeleteBuildTriggerRequest projectId.
@@ -11585,6 +12315,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.projectId);
                             if (message.triggerId != null && Object.hasOwnProperty.call(message, "triggerId"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.triggerId);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
                             return writer;
                         };
     
@@ -11619,6 +12351,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 3:
+                                    message.name = reader.string();
+                                    break;
                                 case 1:
                                     message.projectId = reader.string();
                                     break;
@@ -11660,6 +12395,9 @@
                         DeleteBuildTriggerRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 if (!$util.isString(message.projectId))
                                     return "projectId: string expected";
@@ -11681,6 +12419,8 @@
                             if (object instanceof $root.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest)
                                 return object;
                             var message = new $root.google.devtools.cloudbuild.v1.DeleteBuildTriggerRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
                             if (object.projectId != null)
                                 message.projectId = String(object.projectId);
                             if (object.triggerId != null)
@@ -11704,11 +12444,14 @@
                             if (options.defaults) {
                                 object.projectId = "";
                                 object.triggerId = "";
+                                object.name = "";
                             }
                             if (message.projectId != null && message.hasOwnProperty("projectId"))
                                 object.projectId = message.projectId;
                             if (message.triggerId != null && message.hasOwnProperty("triggerId"))
                                 object.triggerId = message.triggerId;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             return object;
                         };
     
@@ -12703,6 +13446,7 @@
                          * Properties of a ReceiveTriggerWebhookRequest.
                          * @memberof google.devtools.cloudbuild.v1
                          * @interface IReceiveTriggerWebhookRequest
+                         * @property {string|null} [name] ReceiveTriggerWebhookRequest name
                          * @property {google.api.IHttpBody|null} [body] ReceiveTriggerWebhookRequest body
                          * @property {string|null} [projectId] ReceiveTriggerWebhookRequest projectId
                          * @property {string|null} [trigger] ReceiveTriggerWebhookRequest trigger
@@ -12723,6 +13467,14 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
+    
+                        /**
+                         * ReceiveTriggerWebhookRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest
+                         * @instance
+                         */
+                        ReceiveTriggerWebhookRequest.prototype.name = "";
     
                         /**
                          * ReceiveTriggerWebhookRequest body.
@@ -12788,6 +13540,8 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.trigger);
                             if (message.secret != null && Object.hasOwnProperty.call(message, "secret"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.secret);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.name);
                             return writer;
                         };
     
@@ -12822,6 +13576,9 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 5:
+                                    message.name = reader.string();
+                                    break;
                                 case 1:
                                     message.body = $root.google.api.HttpBody.decode(reader, reader.uint32());
                                     break;
@@ -12869,6 +13626,9 @@
                         ReceiveTriggerWebhookRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
                             if (message.body != null && message.hasOwnProperty("body")) {
                                 var error = $root.google.api.HttpBody.verify(message.body);
                                 if (error)
@@ -12898,6 +13658,8 @@
                             if (object instanceof $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest)
                                 return object;
                             var message = new $root.google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
                             if (object.body != null) {
                                 if (typeof object.body !== "object")
                                     throw TypeError(".google.devtools.cloudbuild.v1.ReceiveTriggerWebhookRequest.body: object expected");
@@ -12930,6 +13692,7 @@
                                 object.projectId = "";
                                 object.trigger = "";
                                 object.secret = "";
+                                object.name = "";
                             }
                             if (message.body != null && message.hasOwnProperty("body"))
                                 object.body = $root.google.api.HttpBody.toObject(message.body, options);
@@ -12939,6 +13702,8 @@
                                 object.trigger = message.trigger;
                             if (message.secret != null && message.hasOwnProperty("secret"))
                                 object.secret = message.secret;
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
                             return object;
                         };
     

@@ -168,13 +168,19 @@
                           "options": {
                             "(google.api.http).post": "/v1/projects/{project_id}/triggers",
                             "(google.api.http).body": "trigger",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/triggers",
+                            "(google.api.http).additional_bindings.body": "trigger",
                             "(google.api.method_signature)": "project_id,trigger"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/projects/{project_id}/triggers",
-                                "body": "trigger"
+                                "body": "trigger",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=projects/*/locations/*}/triggers",
+                                  "body": "trigger"
+                                }
                               }
                             },
                             {
@@ -187,12 +193,16 @@
                           "responseType": "BuildTrigger",
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/triggers/{trigger_id}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/triggers/*}",
                             "(google.api.method_signature)": "project_id,trigger_id"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/projects/{project_id}/triggers/{trigger_id}"
+                                "get": "/v1/projects/{project_id}/triggers/{trigger_id}",
+                                "additional_bindings": {
+                                  "get": "/v1/{name=projects/*/locations/*/triggers/*}"
+                                }
                               }
                             },
                             {
@@ -205,12 +215,16 @@
                           "responseType": "ListBuildTriggersResponse",
                           "options": {
                             "(google.api.http).get": "/v1/projects/{project_id}/triggers",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*}/triggers",
                             "(google.api.method_signature)": "project_id"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "get": "/v1/projects/{project_id}/triggers"
+                                "get": "/v1/projects/{project_id}/triggers",
+                                "additional_bindings": {
+                                  "get": "/v1/{parent=projects/*/locations/*}/triggers"
+                                }
                               }
                             },
                             {
@@ -223,12 +237,16 @@
                           "responseType": "google.protobuf.Empty",
                           "options": {
                             "(google.api.http).delete": "/v1/projects/{project_id}/triggers/{trigger_id}",
+                            "(google.api.http).additional_bindings.delete": "/v1/{name=projects/*/locations/*/triggers/*}",
                             "(google.api.method_signature)": "project_id,trigger_id"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
-                                "delete": "/v1/projects/{project_id}/triggers/{trigger_id}"
+                                "delete": "/v1/projects/{project_id}/triggers/{trigger_id}",
+                                "additional_bindings": {
+                                  "delete": "/v1/{name=projects/*/locations/*/triggers/*}"
+                                }
                               }
                             },
                             {
@@ -242,13 +260,19 @@
                           "options": {
                             "(google.api.http).patch": "/v1/projects/{project_id}/triggers/{trigger_id}",
                             "(google.api.http).body": "trigger",
+                            "(google.api.http).additional_bindings.patch": "/v1/{trigger.resource_name=projects/*/locations/*/triggers/*}",
+                            "(google.api.http).additional_bindings.body": "trigger",
                             "(google.api.method_signature)": "project_id,trigger_id,trigger"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "patch": "/v1/projects/{project_id}/triggers/{trigger_id}",
-                                "body": "trigger"
+                                "body": "trigger",
+                                "additional_bindings": {
+                                  "patch": "/v1/{trigger.resource_name=projects/*/locations/*/triggers/*}",
+                                  "body": "trigger"
+                                }
                               }
                             },
                             {
@@ -262,6 +286,8 @@
                           "options": {
                             "(google.api.http).post": "/v1/projects/{project_id}/triggers/{trigger_id}:run",
                             "(google.api.http).body": "source",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/locations/*/triggers/*}:run",
+                            "(google.api.http).additional_bindings.body": "*",
                             "(google.api.method_signature)": "project_id,trigger_id,source",
                             "(google.longrunning.operation_info).response_type": "Build",
                             "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
@@ -270,7 +296,11 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1/projects/{project_id}/triggers/{trigger_id}:run",
-                                "body": "source"
+                                "body": "source",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=projects/*/locations/*/triggers/*}:run",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
@@ -289,13 +319,19 @@
                           "responseType": "ReceiveTriggerWebhookResponse",
                           "options": {
                             "(google.api.http).post": "/v1/projects/{project_id}/triggers/{trigger}:webhook",
-                            "(google.api.http).body": "body"
+                            "(google.api.http).body": "body",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/locations/*/triggers/*}:webhook",
+                            "(google.api.http).additional_bindings.body": "body"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/projects/{project_id}/triggers/{trigger}:webhook",
-                                "body": "body"
+                                "body": "body",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=projects/*/locations/*/triggers/*}:webhook",
+                                  "body": "body"
+                                }
                               }
                             }
                           ]
@@ -349,6 +385,13 @@
                     },
                     "RunBuildTriggerRequest": {
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/BuildTrigger"
+                          }
+                        },
                         "projectId": {
                           "type": "string",
                           "id": 1,
@@ -774,9 +817,39 @@
                         "availableSecrets": {
                           "type": "Secrets",
                           "id": 47
+                        },
+                        "warnings": {
+                          "rule": "repeated",
+                          "type": "Warning",
+                          "id": 49,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
+                        "Warning": {
+                          "fields": {
+                            "text": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "priority": {
+                              "type": "Priority",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Priority": {
+                              "values": {
+                                "PRIORITY_UNSPECIFIED": 0,
+                                "INFO": 1,
+                                "WARNING": 2,
+                                "ALERT": 3
+                              }
+                            }
+                          }
+                        },
                         "Status": {
                           "values": {
                             "STATUS_UNKNOWN": 0,
@@ -1080,17 +1153,24 @@
                     "BuildTrigger": {
                       "options": {
                         "(google.api.resource).type": "cloudbuild.googleapis.com/BuildTrigger",
-                        "(google.api.resource).pattern": "projects/{project}/triggers/{trigger}"
+                        "(google.api.resource).plural": "triggers",
+                        "(google.api.resource).singular": "trigger",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/triggers/{trigger}"
                       },
                       "oneofs": {
                         "buildTemplate": {
                           "oneof": [
+                            "autodetect",
                             "build",
                             "filename"
                           ]
                         }
                       },
                       "fields": {
+                        "resourceName": {
+                          "type": "string",
+                          "id": 34
+                        },
                         "id": {
                           "type": "string",
                           "id": 1,
@@ -1121,10 +1201,15 @@
                         },
                         "pubsubConfig": {
                           "type": "PubsubConfig",
-                          "id": 29,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
+                          "id": 29
+                        },
+                        "webhookConfig": {
+                          "type": "WebhookConfig",
+                          "id": 31
+                        },
+                        "autodetect": {
+                          "type": "bool",
+                          "id": 18
                         },
                         "build": {
                           "type": "Build",
@@ -1245,6 +1330,38 @@
                         }
                       }
                     },
+                    "WebhookConfig": {
+                      "oneofs": {
+                        "authMethod": {
+                          "oneof": [
+                            "secret"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "secret": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "OK": 1,
+                            "SECRET_DELETED": 2
+                          }
+                        }
+                      }
+                    },
                     "PullRequestFilter": {
                       "oneofs": {
                         "gitRef": {
@@ -1303,6 +1420,13 @@
                     },
                     "CreateBuildTriggerRequest": {
                       "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).child_type": "cloudbuild.googleapis.com/BuildTrigger"
+                          }
+                        },
                         "projectId": {
                           "type": "string",
                           "id": 1,
@@ -1321,6 +1445,13 @@
                     },
                     "GetBuildTriggerRequest": {
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/BuildTrigger"
+                          }
+                        },
                         "projectId": {
                           "type": "string",
                           "id": 1,
@@ -1339,6 +1470,13 @@
                     },
                     "ListBuildTriggersRequest": {
                       "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.resource_reference).child_type": "cloudbuild.googleapis.com/BuildTrigger"
+                          }
+                        },
                         "projectId": {
                           "type": "string",
                           "id": 1,
@@ -1371,6 +1509,13 @@
                     },
                     "DeleteBuildTriggerRequest": {
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/BuildTrigger"
+                          }
+                        },
                         "projectId": {
                           "type": "string",
                           "id": 1,
@@ -1510,6 +1655,10 @@
                     },
                     "ReceiveTriggerWebhookRequest": {
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "body": {
                           "type": "google.api.HttpBody",
                           "id": 1

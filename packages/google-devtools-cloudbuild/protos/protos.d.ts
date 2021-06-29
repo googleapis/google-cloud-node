@@ -512,6 +512,9 @@ export namespace google {
                 /** Properties of a RunBuildTriggerRequest. */
                 interface IRunBuildTriggerRequest {
 
+                    /** RunBuildTriggerRequest name */
+                    name?: (string|null);
+
                     /** RunBuildTriggerRequest projectId */
                     projectId?: (string|null);
 
@@ -530,6 +533,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IRunBuildTriggerRequest);
+
+                    /** RunBuildTriggerRequest name. */
+                    public name: string;
 
                     /** RunBuildTriggerRequest projectId. */
                     public projectId: string;
@@ -1711,6 +1717,9 @@ export namespace google {
 
                     /** Build availableSecrets */
                     availableSecrets?: (google.devtools.cloudbuild.v1.ISecrets|null);
+
+                    /** Build warnings */
+                    warnings?: (google.devtools.cloudbuild.v1.Build.IWarning[]|null);
                 }
 
                 /** Represents a Build. */
@@ -1800,6 +1809,9 @@ export namespace google {
                     /** Build availableSecrets. */
                     public availableSecrets?: (google.devtools.cloudbuild.v1.ISecrets|null);
 
+                    /** Build warnings. */
+                    public warnings: google.devtools.cloudbuild.v1.Build.IWarning[];
+
                     /**
                      * Creates a new Build instance using the specified properties.
                      * @param [properties] Properties to set
@@ -1872,6 +1884,113 @@ export namespace google {
                 }
 
                 namespace Build {
+
+                    /** Properties of a Warning. */
+                    interface IWarning {
+
+                        /** Warning text */
+                        text?: (string|null);
+
+                        /** Warning priority */
+                        priority?: (google.devtools.cloudbuild.v1.Build.Warning.Priority|keyof typeof google.devtools.cloudbuild.v1.Build.Warning.Priority|null);
+                    }
+
+                    /** Represents a Warning. */
+                    class Warning implements IWarning {
+
+                        /**
+                         * Constructs a new Warning.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.devtools.cloudbuild.v1.Build.IWarning);
+
+                        /** Warning text. */
+                        public text: string;
+
+                        /** Warning priority. */
+                        public priority: (google.devtools.cloudbuild.v1.Build.Warning.Priority|keyof typeof google.devtools.cloudbuild.v1.Build.Warning.Priority);
+
+                        /**
+                         * Creates a new Warning instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Warning instance
+                         */
+                        public static create(properties?: google.devtools.cloudbuild.v1.Build.IWarning): google.devtools.cloudbuild.v1.Build.Warning;
+
+                        /**
+                         * Encodes the specified Warning message. Does not implicitly {@link google.devtools.cloudbuild.v1.Build.Warning.verify|verify} messages.
+                         * @param message Warning message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.devtools.cloudbuild.v1.Build.IWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Warning message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Build.Warning.verify|verify} messages.
+                         * @param message Warning message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.devtools.cloudbuild.v1.Build.IWarning, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Warning message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Warning
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.Build.Warning;
+
+                        /**
+                         * Decodes a Warning message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Warning
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.Build.Warning;
+
+                        /**
+                         * Verifies a Warning message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Warning message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Warning
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.Build.Warning;
+
+                        /**
+                         * Creates a plain object from a Warning message. Also converts values to other types if specified.
+                         * @param message Warning
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.devtools.cloudbuild.v1.Build.Warning, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Warning to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Warning {
+
+                        /** Priority enum. */
+                        enum Priority {
+                            PRIORITY_UNSPECIFIED = 0,
+                            INFO = 1,
+                            WARNING = 2,
+                            ALERT = 3
+                        }
+                    }
 
                     /** Status enum. */
                     enum Status {
@@ -3481,6 +3600,9 @@ export namespace google {
                 /** Properties of a BuildTrigger. */
                 interface IBuildTrigger {
 
+                    /** BuildTrigger resourceName */
+                    resourceName?: (string|null);
+
                     /** BuildTrigger id */
                     id?: (string|null);
 
@@ -3501,6 +3623,12 @@ export namespace google {
 
                     /** BuildTrigger pubsubConfig */
                     pubsubConfig?: (google.devtools.cloudbuild.v1.IPubsubConfig|null);
+
+                    /** BuildTrigger webhookConfig */
+                    webhookConfig?: (google.devtools.cloudbuild.v1.IWebhookConfig|null);
+
+                    /** BuildTrigger autodetect */
+                    autodetect?: (boolean|null);
 
                     /** BuildTrigger build */
                     build?: (google.devtools.cloudbuild.v1.IBuild|null);
@@ -3536,6 +3664,9 @@ export namespace google {
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IBuildTrigger);
 
+                    /** BuildTrigger resourceName. */
+                    public resourceName: string;
+
                     /** BuildTrigger id. */
                     public id: string;
 
@@ -3556,6 +3687,12 @@ export namespace google {
 
                     /** BuildTrigger pubsubConfig. */
                     public pubsubConfig?: (google.devtools.cloudbuild.v1.IPubsubConfig|null);
+
+                    /** BuildTrigger webhookConfig. */
+                    public webhookConfig?: (google.devtools.cloudbuild.v1.IWebhookConfig|null);
+
+                    /** BuildTrigger autodetect. */
+                    public autodetect?: (boolean|null);
 
                     /** BuildTrigger build. */
                     public build?: (google.devtools.cloudbuild.v1.IBuild|null);
@@ -3582,7 +3719,7 @@ export namespace google {
                     public filter: string;
 
                     /** BuildTrigger buildTemplate. */
-                    public buildTemplate?: ("build"|"filename");
+                    public buildTemplate?: ("autodetect"|"build"|"filename");
 
                     /**
                      * Creates a new BuildTrigger instance using the specified properties.
@@ -3892,6 +4029,115 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a WebhookConfig. */
+                interface IWebhookConfig {
+
+                    /** WebhookConfig secret */
+                    secret?: (string|null);
+
+                    /** WebhookConfig state */
+                    state?: (google.devtools.cloudbuild.v1.WebhookConfig.State|keyof typeof google.devtools.cloudbuild.v1.WebhookConfig.State|null);
+                }
+
+                /** Represents a WebhookConfig. */
+                class WebhookConfig implements IWebhookConfig {
+
+                    /**
+                     * Constructs a new WebhookConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IWebhookConfig);
+
+                    /** WebhookConfig secret. */
+                    public secret?: (string|null);
+
+                    /** WebhookConfig state. */
+                    public state: (google.devtools.cloudbuild.v1.WebhookConfig.State|keyof typeof google.devtools.cloudbuild.v1.WebhookConfig.State);
+
+                    /** WebhookConfig authMethod. */
+                    public authMethod?: "secret";
+
+                    /**
+                     * Creates a new WebhookConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns WebhookConfig instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IWebhookConfig): google.devtools.cloudbuild.v1.WebhookConfig;
+
+                    /**
+                     * Encodes the specified WebhookConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.WebhookConfig.verify|verify} messages.
+                     * @param message WebhookConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IWebhookConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified WebhookConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.WebhookConfig.verify|verify} messages.
+                     * @param message WebhookConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IWebhookConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a WebhookConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns WebhookConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.WebhookConfig;
+
+                    /**
+                     * Decodes a WebhookConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns WebhookConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.WebhookConfig;
+
+                    /**
+                     * Verifies a WebhookConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a WebhookConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns WebhookConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.WebhookConfig;
+
+                    /**
+                     * Creates a plain object from a WebhookConfig message. Also converts values to other types if specified.
+                     * @param message WebhookConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.WebhookConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this WebhookConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace WebhookConfig {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        OK = 1,
+                        SECRET_DELETED = 2
+                    }
+                }
+
                 /** Properties of a PullRequestFilter. */
                 interface IPullRequestFilter {
 
@@ -4115,6 +4361,9 @@ export namespace google {
                 /** Properties of a CreateBuildTriggerRequest. */
                 interface ICreateBuildTriggerRequest {
 
+                    /** CreateBuildTriggerRequest parent */
+                    parent?: (string|null);
+
                     /** CreateBuildTriggerRequest projectId */
                     projectId?: (string|null);
 
@@ -4130,6 +4379,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.ICreateBuildTriggerRequest);
+
+                    /** CreateBuildTriggerRequest parent. */
+                    public parent: string;
 
                     /** CreateBuildTriggerRequest projectId. */
                     public projectId: string;
@@ -4211,6 +4463,9 @@ export namespace google {
                 /** Properties of a GetBuildTriggerRequest. */
                 interface IGetBuildTriggerRequest {
 
+                    /** GetBuildTriggerRequest name */
+                    name?: (string|null);
+
                     /** GetBuildTriggerRequest projectId */
                     projectId?: (string|null);
 
@@ -4226,6 +4481,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IGetBuildTriggerRequest);
+
+                    /** GetBuildTriggerRequest name. */
+                    public name: string;
 
                     /** GetBuildTriggerRequest projectId. */
                     public projectId: string;
@@ -4307,6 +4565,9 @@ export namespace google {
                 /** Properties of a ListBuildTriggersRequest. */
                 interface IListBuildTriggersRequest {
 
+                    /** ListBuildTriggersRequest parent */
+                    parent?: (string|null);
+
                     /** ListBuildTriggersRequest projectId */
                     projectId?: (string|null);
 
@@ -4325,6 +4586,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IListBuildTriggersRequest);
+
+                    /** ListBuildTriggersRequest parent. */
+                    public parent: string;
 
                     /** ListBuildTriggersRequest projectId. */
                     public projectId: string;
@@ -4505,6 +4769,9 @@ export namespace google {
                 /** Properties of a DeleteBuildTriggerRequest. */
                 interface IDeleteBuildTriggerRequest {
 
+                    /** DeleteBuildTriggerRequest name */
+                    name?: (string|null);
+
                     /** DeleteBuildTriggerRequest projectId */
                     projectId?: (string|null);
 
@@ -4520,6 +4787,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IDeleteBuildTriggerRequest);
+
+                    /** DeleteBuildTriggerRequest name. */
+                    public name: string;
 
                     /** DeleteBuildTriggerRequest projectId. */
                     public projectId: string;
@@ -4900,6 +5170,9 @@ export namespace google {
                 /** Properties of a ReceiveTriggerWebhookRequest. */
                 interface IReceiveTriggerWebhookRequest {
 
+                    /** ReceiveTriggerWebhookRequest name */
+                    name?: (string|null);
+
                     /** ReceiveTriggerWebhookRequest body */
                     body?: (google.api.IHttpBody|null);
 
@@ -4921,6 +5194,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.devtools.cloudbuild.v1.IReceiveTriggerWebhookRequest);
+
+                    /** ReceiveTriggerWebhookRequest name. */
+                    public name: string;
 
                     /** ReceiveTriggerWebhookRequest body. */
                     public body?: (google.api.IHttpBody|null);
