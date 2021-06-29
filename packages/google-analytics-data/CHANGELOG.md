@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.4.3](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.4.2...v2.4.3) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#121](https://www.github.com/googleapis/nodejs-analytics-data/issues/121)) ([9cbad79](https://www.github.com/googleapis/nodejs-analytics-data/commit/9cbad79ce05892ec18841613557c75fab75aaa36))
+* make request optional in all cases ([#117](https://www.github.com/googleapis/nodejs-analytics-data/issues/117)) ([2c5ce79](https://www.github.com/googleapis/nodejs-analytics-data/commit/2c5ce79fb49dbce9e1c4315b8850fa6cbaffe5ce))
+
 ### [2.4.2](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.4.1...v2.4.2) (2021-05-25)
 
 
