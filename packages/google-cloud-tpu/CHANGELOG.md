@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.0...v1.0.1) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#13](https://www.github.com/googleapis/nodejs-cloud-tpu/issues/13)) ([a162ec4](https://www.github.com/googleapis/nodejs-cloud-tpu/commit/a162ec451cab0ccd68353d3863c60ce7073ead1a))
+* make request optional in all cases ([#9](https://www.github.com/googleapis/nodejs-cloud-tpu/issues/9)) ([b8bde22](https://www.github.com/googleapis/nodejs-cloud-tpu/commit/b8bde2285a9c855f14c9bd5552ea3141aa820a97))
+
 ## 1.0.0 (2021-06-09)
 
 
