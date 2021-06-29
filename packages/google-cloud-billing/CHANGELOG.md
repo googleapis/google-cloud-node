@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.4](https://www.github.com/googleapis/nodejs-billing/compare/v2.2.3...v2.2.4) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#164](https://www.github.com/googleapis/nodejs-billing/issues/164)) ([f07c6b0](https://www.github.com/googleapis/nodejs-billing/commit/f07c6b0128e7d4962d98f2ae8f0c2f60d91c289f))
+
 ### [2.2.3](https://www.github.com/googleapis/nodejs-billing/compare/v2.2.2...v2.2.3) (2021-06-24)
 
 
