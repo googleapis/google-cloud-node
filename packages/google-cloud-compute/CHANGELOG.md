@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.5.1...v2.6.0) (2021-06-29)
+
+
+### Features
+
+* Adding implementation of startWithEncryptionKey api call ([#539](https://www.github.com/googleapis/nodejs-compute/issues/539)) ([f8018a6](https://www.github.com/googleapis/nodejs-compute/commit/f8018a61bf0b986d6ad2d5a9216c5bcfb4bdcc6f))
+
 ### [2.5.1](https://www.github.com/googleapis/nodejs-compute/compare/v2.5.0...v2.5.1) (2021-06-10)
 
 
