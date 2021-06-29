@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.4](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.3...v1.2.4) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#73](https://www.github.com/googleapis/nodejs-area120-tables/issues/73)) ([9d19f45](https://www.github.com/googleapis/nodejs-area120-tables/commit/9d19f45724f4cf1ef3b6e5f98658d4560669239a))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.2...v1.2.3) (2021-06-22)
 
 
