@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.4...v1.0.5) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#64](https://www.github.com/googleapis/nodejs-iam-credentials/issues/64)) ([25b6664](https://www.github.com/googleapis/nodejs-iam-credentials/commit/25b66647296c00cf25884245caec519305bd4588))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.3...v1.0.4) (2021-06-22)
 
 
