@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.5](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.4...v2.3.5) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#192](https://www.github.com/googleapis/nodejs-game-servers/issues/192)) ([4d37a74](https://www.github.com/googleapis/nodejs-game-servers/commit/4d37a7497ebe77cbfabc5e2bb0ea925e7ac138bb))
+
 ### [2.3.4](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.3...v2.3.4) (2021-06-22)
 
 

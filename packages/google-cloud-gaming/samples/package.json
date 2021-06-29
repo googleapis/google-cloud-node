@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/game-servers": "^2.3.4"
+    "@google-cloud/game-servers": "^2.3.5"
   },
   "devDependencies": {
     "c8": "^7.2.1",
