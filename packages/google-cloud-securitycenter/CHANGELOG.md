@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [5.3.2](https://www.github.com/googleapis/nodejs-security-center/compare/v5.3.1...v5.3.2) (2021-06-25)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#396](https://www.github.com/googleapis/nodejs-security-center/issues/396)) ([871b0d3](https://www.github.com/googleapis/nodejs-security-center/commit/871b0d3c26878f1a836ec186fb66be08073ed899))
+
 ### [5.3.1](https://www.github.com/googleapis/nodejs-security-center/compare/v5.3.0...v5.3.1) (2021-05-25)
 
 
