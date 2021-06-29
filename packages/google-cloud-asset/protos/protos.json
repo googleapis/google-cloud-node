@@ -738,6 +738,21 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "assetTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -1288,9 +1303,22 @@
                           "type": "string",
                           "id": 1
                         },
+                        "assetType": {
+                          "type": "string",
+                          "id": 5
+                        },
                         "project": {
                           "type": "string",
                           "id": 2
+                        },
+                        "folders": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "organization": {
+                          "type": "string",
+                          "id": 7
                         },
                         "policy": {
                           "type": "google.iam.v1.Policy",
