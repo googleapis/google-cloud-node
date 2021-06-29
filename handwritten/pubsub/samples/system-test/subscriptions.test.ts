@@ -12,15 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
-
-const {PubSub} = require('@google-cloud/pubsub');
-const {assert} = require('chai');
-const {describe, it, before, after} = require('mocha');
-const cp = require('child_process');
-const uuid = require('uuid');
-
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+import {PubSub} from '@google-cloud/pubsub';
+import {assert} from 'chai';
+import {describe, it, before, after} from 'mocha';
+import {execSync, commandFor} from './common';
+import * as uuid from 'uuid';
 
 describe('subscriptions', () => {
   const projectId = process.env.GCLOUD_PROJECT;
@@ -41,10 +37,6 @@ describe('subscriptions', () => {
   const fullSubscriptionNameOne = `projects/${projectId}/subscriptions/${subscriptionNameOne}`;
   const fullSubscriptionNameTwo = `projects/${projectId}/subscriptions/${subscriptionNameTwo}`;
   const fullSubscriptionNameFour = `projects/${projectId}/subscriptions/${subscriptionNameFour}`;
-
-  function commandFor(action) {
-    return `node ${action}.js`;
-  }
 
   before(async () => {
     return Promise.all([
@@ -132,7 +124,7 @@ describe('subscriptions', () => {
       .topic(topicNameOne)
       .publish(Buffer.from('Hello, world!'));
     const output = execSync(
-      `${commandFor('listenForMessages')} ${subscriptionNameOne}`
+      `${commandFor('listenForMessages')} ${subscriptionNameOne} 10`
     );
     assert.match(output, new RegExp(`Received message ${messageIds}:`));
   });
@@ -142,7 +134,7 @@ describe('subscriptions', () => {
       .topic(topicNameOne)
       .publish(Buffer.from('Hello, world!'), {attr: 'value'});
     const output = execSync(
-      `${commandFor('listenWithCustomAttributes')} ${subscriptionNameOne}`
+      `${commandFor('listenWithCustomAttributes')} ${subscriptionNameOne} 10`
     );
     assert.match(
       output,
@@ -272,7 +264,7 @@ describe('subscriptions', () => {
       .subscription(subscriptionNameFive)
       .get();
     assert.strictEqual(
-      subscription.metadata.deadLetterPolicy.maxDeliveryAttempts,
+      subscription.metadata?.deadLetterPolicy?.maxDeliveryAttempts,
       10
     );
   });
@@ -295,16 +287,17 @@ describe('subscriptions', () => {
     assert.match(output, /Delivery Attempt: 1/);
   });
 
-  it('should update a subscription with dead lettter policy.', async () => {
-    await pubsub
+  it('should update a subscription with dead letter policy.', async () => {
+    const [presub] = await pubsub
       .topic(topicNameOne)
-      .subscription(subscriptionNameSeven, {
-        deadLetterPolicy: {
-          deadLetterTopic: pubsub.topic(topicNameThree).name,
-          maxDeliveryAttempts: 10,
-        },
-      })
+      .subscription(subscriptionNameSeven)
       .get({autoCreate: true});
+    await presub.setMetadata({
+      deadLetterPolicy: {
+        deadLetterTopic: pubsub.topic(topicNameThree).name,
+        maxDeliveryAttempts: 10,
+      },
+    });
 
     execSync(
       `${commandFor(
@@ -317,21 +310,22 @@ describe('subscriptions', () => {
       .subscription(subscriptionNameSeven)
       .get();
     assert.equal(
-      subscription.metadata.deadLetterPolicy.maxDeliveryAttempts,
+      subscription.metadata?.deadLetterPolicy?.maxDeliveryAttempts,
       15
     );
   });
 
   it('should remove dead letter policy.', async () => {
-    await pubsub
+    const [presub] = await pubsub
       .topic(topicNameOne)
-      .subscription(subscriptionNameSeven, {
-        deadLetterPolicy: {
-          deadLetterTopic: pubsub.topic(topicNameThree).name,
-          maxDeliveryAttempts: 10,
-        },
-      })
+      .subscription(subscriptionNameSeven)
       .get({autoCreate: true});
+    await presub.setMetadata({
+      deadLetterPolicy: {
+        deadLetterTopic: pubsub.topic(topicNameThree).name,
+        maxDeliveryAttempts: 10,
+      },
+    });
 
     execSync(
       `${commandFor(
@@ -343,7 +337,7 @@ describe('subscriptions', () => {
       .topic(topicNameOne)
       .subscription(subscriptionNameSeven)
       .get();
-    assert.isNull(subscription.metadata.deadLetterPolicy);
+    assert.isNull(subscription.metadata?.deadLetterPolicy);
   });
 
   it('should create a subscription with ordering enabled.', async () => {
@@ -360,6 +354,6 @@ describe('subscriptions', () => {
       .topic(topicNameTwo)
       .subscription(subscriptionNameEight)
       .get();
-    assert.strictEqual(subscription.metadata.enableMessageOrdering, true);
+    assert.strictEqual(subscription.metadata?.enableMessageOrdering, true);
   });
 });

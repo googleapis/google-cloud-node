@@ -1,4 +1,4 @@
-// Copyright 2019-2020 Google LLC
+// Copyright 2019-2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,15 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-'use strict';
-
-const {PubSub} = require('@google-cloud/pubsub');
-const {assert} = require('chai');
-const {describe, it, before, after} = require('mocha');
-const cp = require('child_process');
-const uuid = require('uuid');
-
-const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
+import {Message, PubSub, Subscription} from '@google-cloud/pubsub';
+import {assert} from 'chai';
+import {describe, it, before, after} from 'mocha';
+import {execSync, commandFor} from './common';
+import * as uuid from 'uuid';
 
 describe('topics', () => {
   const projectId = process.env.GCLOUD_PROJECT;
@@ -38,10 +34,6 @@ describe('topics', () => {
   const fullTopicNameOne = `projects/${projectId}/topics/${topicNameOne}`;
   const fullTopicNameThree = `projects/${projectId}/topics/${topicNameThree}`;
   const expectedMessage = {data: 'Hello, world!'};
-
-  function commandFor(action) {
-    return `node ${action}.js`;
-  }
 
   before(async () => {
     // topicNameOne is created during the createTopic test.
@@ -66,7 +58,7 @@ describe('topics', () => {
 
   // Helper function to pull one message.
   // Times out after 55 seconds.
-  const _pullOneMessage = subscriptionObj => {
+  const _pullOneMessage = (subscriptionObj: Subscription): Promise<Message> => {
     return new Promise((resolve, reject) => {
       const timeoutHandler = setTimeout(() => {
         reject(new Error('_pullOneMessage timed out'));

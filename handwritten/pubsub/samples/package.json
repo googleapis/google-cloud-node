@@ -17,9 +17,8 @@
     "tsc": "tsc -p .",
     "simplifier": "node ./utils/simplifier.js post build/typescript/build/*.js",
     "copybuilt": "cp *.js build/ && cp build/typescript/build/*.js build/",
-    "copytests": "cp -p system-test/*.js build/system-test",
     "sampletsc": "cd typescript && tsc -p . && cd ..",
-    "compile": "npm run tsc && npm run sampletsc && npm run simplifier && npm run copybuilt && npm run copytests",
+    "compile": "npm run tsc && npm run sampletsc && npm run simplifier && npm run copybuilt",
     "clean": "gts clean && rm -rf build/",
     "precompile": "npm run clean && node ./utils/simplifier.js commentify typescript/*.ts",
     "updatejs": "cp build/*.js ."
