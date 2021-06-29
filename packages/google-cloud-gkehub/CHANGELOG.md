@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.1.2...v1.1.3) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#65](https://www.github.com/googleapis/nodejs-gke-hub/issues/65)) ([66afee5](https://www.github.com/googleapis/nodejs-gke-hub/commit/66afee52d48894b8dbca3a744b852728f246af95))
+* make request optional in all cases ([#59](https://www.github.com/googleapis/nodejs-gke-hub/issues/59)) ([96a0455](https://www.github.com/googleapis/nodejs-gke-hub/commit/96a04553050731b76fd54ae8093285efb23d324e))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.1.1...v1.1.2) (2021-05-25)
 
 
