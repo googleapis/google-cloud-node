@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.7.3](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.2...v1.7.3) (2021-06-29)
+
+
+### Bug Fixes
+
+* add C#, PHP and Ruby options for all AI Platform protos ([#158](https://www.github.com/googleapis/nodejs-ai-platform/issues/158)) ([da0babf](https://www.github.com/googleapis/nodejs-ai-platform/commit/da0babf54c6b074b8dc3d0354f8a57b9bc0cefc1))
+* **deps:** google-gax v2.17.0 with mTLS ([#161](https://www.github.com/googleapis/nodejs-ai-platform/issues/161)) ([8e7d46f](https://www.github.com/googleapis/nodejs-ai-platform/commit/8e7d46f1252c4e89a663dd28b70b49bf269f091a))
+
 ### [1.7.2](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.1...v1.7.2) (2021-06-22)
 
 
