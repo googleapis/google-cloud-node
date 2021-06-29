@@ -6158,6 +6158,8 @@
                          * @property {string|null} [query] SearchAllIamPoliciesRequest query
                          * @property {number|null} [pageSize] SearchAllIamPoliciesRequest pageSize
                          * @property {string|null} [pageToken] SearchAllIamPoliciesRequest pageToken
+                         * @property {Array.<string>|null} [assetTypes] SearchAllIamPoliciesRequest assetTypes
+                         * @property {string|null} [orderBy] SearchAllIamPoliciesRequest orderBy
                          */
     
                         /**
@@ -6169,6 +6171,7 @@
                          * @param {google.cloud.asset.v1.ISearchAllIamPoliciesRequest=} [properties] Properties to set
                          */
                         function SearchAllIamPoliciesRequest(properties) {
+                            this.assetTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -6208,6 +6211,22 @@
                         SearchAllIamPoliciesRequest.prototype.pageToken = "";
     
                         /**
+                         * SearchAllIamPoliciesRequest assetTypes.
+                         * @member {Array.<string>} assetTypes
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @instance
+                         */
+                        SearchAllIamPoliciesRequest.prototype.assetTypes = $util.emptyArray;
+    
+                        /**
+                         * SearchAllIamPoliciesRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
+                         * @instance
+                         */
+                        SearchAllIamPoliciesRequest.prototype.orderBy = "";
+    
+                        /**
                          * Creates a new SearchAllIamPoliciesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.SearchAllIamPoliciesRequest
@@ -6239,6 +6258,11 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                            if (message.assetTypes != null && message.assetTypes.length)
+                                for (var i = 0; i < message.assetTypes.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.assetTypes[i]);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.orderBy);
                             return writer;
                         };
     
@@ -6284,6 +6308,14 @@
                                     break;
                                 case 4:
                                     message.pageToken = reader.string();
+                                    break;
+                                case 5:
+                                    if (!(message.assetTypes && message.assetTypes.length))
+                                        message.assetTypes = [];
+                                    message.assetTypes.push(reader.string());
+                                    break;
+                                case 7:
+                                    message.orderBy = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -6332,6 +6364,16 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.assetTypes != null && message.hasOwnProperty("assetTypes")) {
+                                if (!Array.isArray(message.assetTypes))
+                                    return "assetTypes: array expected";
+                                for (var i = 0; i < message.assetTypes.length; ++i)
+                                    if (!$util.isString(message.assetTypes[i]))
+                                        return "assetTypes: string[] expected";
+                            }
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
                             return null;
                         };
     
@@ -6355,6 +6397,15 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.assetTypes) {
+                                if (!Array.isArray(object.assetTypes))
+                                    throw TypeError(".google.cloud.asset.v1.SearchAllIamPoliciesRequest.assetTypes: array expected");
+                                message.assetTypes = [];
+                                for (var i = 0; i < object.assetTypes.length; ++i)
+                                    message.assetTypes[i] = String(object.assetTypes[i]);
+                            }
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
                             return message;
                         };
     
@@ -6371,11 +6422,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.assetTypes = [];
                             if (options.defaults) {
                                 object.scope = "";
                                 object.query = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.orderBy = "";
                             }
                             if (message.scope != null && message.hasOwnProperty("scope"))
                                 object.scope = message.scope;
@@ -6385,6 +6439,13 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.assetTypes && message.assetTypes.length) {
+                                object.assetTypes = [];
+                                for (var j = 0; j < message.assetTypes.length; ++j)
+                                    object.assetTypes[j] = message.assetTypes[j];
+                            }
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
                             return object;
                         };
     
@@ -12010,7 +12071,10 @@
                          * @memberof google.cloud.asset.v1
                          * @interface IIamPolicySearchResult
                          * @property {string|null} [resource] IamPolicySearchResult resource
+                         * @property {string|null} [assetType] IamPolicySearchResult assetType
                          * @property {string|null} [project] IamPolicySearchResult project
+                         * @property {Array.<string>|null} [folders] IamPolicySearchResult folders
+                         * @property {string|null} [organization] IamPolicySearchResult organization
                          * @property {google.iam.v1.IPolicy|null} [policy] IamPolicySearchResult policy
                          * @property {google.cloud.asset.v1.IamPolicySearchResult.IExplanation|null} [explanation] IamPolicySearchResult explanation
                          */
@@ -12024,6 +12088,7 @@
                          * @param {google.cloud.asset.v1.IIamPolicySearchResult=} [properties] Properties to set
                          */
                         function IamPolicySearchResult(properties) {
+                            this.folders = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -12039,12 +12104,36 @@
                         IamPolicySearchResult.prototype.resource = "";
     
                         /**
+                         * IamPolicySearchResult assetType.
+                         * @member {string} assetType
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @instance
+                         */
+                        IamPolicySearchResult.prototype.assetType = "";
+    
+                        /**
                          * IamPolicySearchResult project.
                          * @member {string} project
                          * @memberof google.cloud.asset.v1.IamPolicySearchResult
                          * @instance
                          */
                         IamPolicySearchResult.prototype.project = "";
+    
+                        /**
+                         * IamPolicySearchResult folders.
+                         * @member {Array.<string>} folders
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @instance
+                         */
+                        IamPolicySearchResult.prototype.folders = $util.emptyArray;
+    
+                        /**
+                         * IamPolicySearchResult organization.
+                         * @member {string} organization
+                         * @memberof google.cloud.asset.v1.IamPolicySearchResult
+                         * @instance
+                         */
+                        IamPolicySearchResult.prototype.organization = "";
     
                         /**
                          * IamPolicySearchResult policy.
@@ -12094,6 +12183,13 @@
                                 $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.explanation != null && Object.hasOwnProperty.call(message, "explanation"))
                                 $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.encode(message.explanation, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.assetType != null && Object.hasOwnProperty.call(message, "assetType"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.assetType);
+                            if (message.folders != null && message.folders.length)
+                                for (var i = 0; i < message.folders.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.folders[i]);
+                            if (message.organization != null && Object.hasOwnProperty.call(message, "organization"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.organization);
                             return writer;
                         };
     
@@ -12131,8 +12227,19 @@
                                 case 1:
                                     message.resource = reader.string();
                                     break;
+                                case 5:
+                                    message.assetType = reader.string();
+                                    break;
                                 case 2:
                                     message.project = reader.string();
+                                    break;
+                                case 6:
+                                    if (!(message.folders && message.folders.length))
+                                        message.folders = [];
+                                    message.folders.push(reader.string());
+                                    break;
+                                case 7:
+                                    message.organization = reader.string();
                                     break;
                                 case 3:
                                     message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
@@ -12178,9 +12285,22 @@
                             if (message.resource != null && message.hasOwnProperty("resource"))
                                 if (!$util.isString(message.resource))
                                     return "resource: string expected";
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                if (!$util.isString(message.assetType))
+                                    return "assetType: string expected";
                             if (message.project != null && message.hasOwnProperty("project"))
                                 if (!$util.isString(message.project))
                                     return "project: string expected";
+                            if (message.folders != null && message.hasOwnProperty("folders")) {
+                                if (!Array.isArray(message.folders))
+                                    return "folders: array expected";
+                                for (var i = 0; i < message.folders.length; ++i)
+                                    if (!$util.isString(message.folders[i]))
+                                        return "folders: string[] expected";
+                            }
+                            if (message.organization != null && message.hasOwnProperty("organization"))
+                                if (!$util.isString(message.organization))
+                                    return "organization: string expected";
                             if (message.policy != null && message.hasOwnProperty("policy")) {
                                 var error = $root.google.iam.v1.Policy.verify(message.policy);
                                 if (error)
@@ -12208,8 +12328,19 @@
                             var message = new $root.google.cloud.asset.v1.IamPolicySearchResult();
                             if (object.resource != null)
                                 message.resource = String(object.resource);
+                            if (object.assetType != null)
+                                message.assetType = String(object.assetType);
                             if (object.project != null)
                                 message.project = String(object.project);
+                            if (object.folders) {
+                                if (!Array.isArray(object.folders))
+                                    throw TypeError(".google.cloud.asset.v1.IamPolicySearchResult.folders: array expected");
+                                message.folders = [];
+                                for (var i = 0; i < object.folders.length; ++i)
+                                    message.folders[i] = String(object.folders[i]);
+                            }
+                            if (object.organization != null)
+                                message.organization = String(object.organization);
                             if (object.policy != null) {
                                 if (typeof object.policy !== "object")
                                     throw TypeError(".google.cloud.asset.v1.IamPolicySearchResult.policy: object expected");
@@ -12236,11 +12367,15 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.folders = [];
                             if (options.defaults) {
                                 object.resource = "";
                                 object.project = "";
                                 object.policy = null;
                                 object.explanation = null;
+                                object.assetType = "";
+                                object.organization = "";
                             }
                             if (message.resource != null && message.hasOwnProperty("resource"))
                                 object.resource = message.resource;
@@ -12250,6 +12385,15 @@
                                 object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
                             if (message.explanation != null && message.hasOwnProperty("explanation"))
                                 object.explanation = $root.google.cloud.asset.v1.IamPolicySearchResult.Explanation.toObject(message.explanation, options);
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                object.assetType = message.assetType;
+                            if (message.folders && message.folders.length) {
+                                object.folders = [];
+                                for (var j = 0; j < message.folders.length; ++j)
+                                    object.folders[j] = message.folders[j];
+                            }
+                            if (message.organization != null && message.hasOwnProperty("organization"))
+                                object.organization = message.organization;
                             return object;
                         };
     

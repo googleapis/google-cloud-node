@@ -64,13 +64,13 @@
           "retry_params_name": "default"
         },
         "SearchAllResources": {
-          "timeout_millis": 15000,
-          "retry_codes_name": "idempotent",
+          "timeout_millis": 30000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "SearchAllIamPolicies": {
-          "timeout_millis": 15000,
-          "retry_codes_name": "idempotent",
+          "timeout_millis": 30000,
+          "retry_codes_name": "unavailable",
           "retry_params_name": "default"
         },
         "AnalyzeIamPolicy": {

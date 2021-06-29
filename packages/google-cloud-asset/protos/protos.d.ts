@@ -2624,6 +2624,12 @@ export namespace google {
 
                     /** SearchAllIamPoliciesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** SearchAllIamPoliciesRequest assetTypes */
+                    assetTypes?: (string[]|null);
+
+                    /** SearchAllIamPoliciesRequest orderBy */
+                    orderBy?: (string|null);
                 }
 
                 /** Represents a SearchAllIamPoliciesRequest. */
@@ -2646,6 +2652,12 @@ export namespace google {
 
                     /** SearchAllIamPoliciesRequest pageToken. */
                     public pageToken: string;
+
+                    /** SearchAllIamPoliciesRequest assetTypes. */
+                    public assetTypes: string[];
+
+                    /** SearchAllIamPoliciesRequest orderBy. */
+                    public orderBy: string;
 
                     /**
                      * Creates a new SearchAllIamPoliciesRequest instance using the specified properties.
@@ -4927,8 +4939,17 @@ export namespace google {
                     /** IamPolicySearchResult resource */
                     resource?: (string|null);
 
+                    /** IamPolicySearchResult assetType */
+                    assetType?: (string|null);
+
                     /** IamPolicySearchResult project */
                     project?: (string|null);
+
+                    /** IamPolicySearchResult folders */
+                    folders?: (string[]|null);
+
+                    /** IamPolicySearchResult organization */
+                    organization?: (string|null);
 
                     /** IamPolicySearchResult policy */
                     policy?: (google.iam.v1.IPolicy|null);
@@ -4949,8 +4970,17 @@ export namespace google {
                     /** IamPolicySearchResult resource. */
                     public resource: string;
 
+                    /** IamPolicySearchResult assetType. */
+                    public assetType: string;
+
                     /** IamPolicySearchResult project. */
                     public project: string;
+
+                    /** IamPolicySearchResult folders. */
+                    public folders: string[];
+
+                    /** IamPolicySearchResult organization. */
+                    public organization: string;
 
                     /** IamPolicySearchResult policy. */
                     public policy?: (google.iam.v1.IPolicy|null);
