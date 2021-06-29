@@ -986,6 +986,58 @@ class VM extends common.ServiceObject {
     );
   }
   /**
+   * Start an instance with customer encrypted disks.
+   *
+   * @see [Instances: start API Documentation]{@link https://cloud.google.com/compute/docs/reference/rest/v1/instances/startWithEncryptionKey}
+   *
+   * @param {object[]} disks - An array of the encrypted disks and their keys.
+   * @param {function=} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {Operation} callback.operation - An operation object
+   *     that can be used to check the status of the request.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('zone-name');
+   * const vm = zone.vm('vm-name');
+   *
+   * var disks = [
+   *  {
+   *    source: 'disk_name',
+   *    diskEncryptionKey: {
+   *      rawKey: '...'
+   *    }
+   *  }
+   * ]
+   *
+   * vm.startWithEncryptionKey(disks, function(err, operation, apiResponse) {
+   *   // `operation` is an Operation object that can be used to check the status
+   *   // of the request.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * vm.startWithEncryptionKey(disks).then(function(data) {
+   *   const operation = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  startWithEncryptionKey(disks, callback) {
+    this.request(
+      {
+        method: 'POST',
+        uri: '/startWithEncryptionKey',
+        json: {
+          disks,
+        },
+      },
+      callback || common.util.noop
+    );
+  }
+  /**
    * Stop the instance.
    *
    * @see [Instances: stop API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/stop}

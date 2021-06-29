@@ -941,6 +941,33 @@ describe('VM', () => {
     });
   });
 
+  describe('startWithEncryptionKey', () => {
+    const DISKS = [];
+
+    it('should make the correct API request', done => {
+      vm.request = function (reqOpts, callback) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/startWithEncryptionKey');
+        assert.strictEqual(reqOpts.json.disks, DISKS);
+
+        callback();
+      };
+
+      vm.startWithEncryptionKey(DISKS, done);
+    });
+
+    it('should not require a callback', done => {
+      vm.request = function (reqOpts, callback) {
+        assert.doesNotThrow(() => {
+          callback();
+          done();
+        });
+      };
+
+      vm.start();
+    });
+  });
+
   describe('stop', () => {
     it('should make the correct API request', done => {
       vm.request = function (reqOpts, callback) {
