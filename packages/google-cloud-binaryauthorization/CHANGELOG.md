@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.2...v1.1.3) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#69](https://www.github.com/googleapis/nodejs-binary-authorization/issues/69)) ([3204b13](https://www.github.com/googleapis/nodejs-binary-authorization/commit/3204b13efb5ff3f75d8dec0a393c7b86200c8d28))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.1...v1.1.2) (2021-06-22)
 
 
