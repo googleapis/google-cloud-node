@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.4](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.3...v1.4.4) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#131](https://www.github.com/googleapis/nodejs-memcache/issues/131)) ([f475455](https://www.github.com/googleapis/nodejs-memcache/commit/f47545548fe2bc478984a7ab715995fc32aee7cd))
+
 ### [1.4.3](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.2...v1.4.3) (2021-06-22)
 
 
