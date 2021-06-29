@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.4...v1.0.5) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#50](https://www.github.com/googleapis/nodejs-data-qna/issues/50)) ([458d196](https://www.github.com/googleapis/nodejs-data-qna/commit/458d1966ee8cb9cdbe13357a5cb4f0f7549100df))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.3...v1.0.4) (2021-06-22)
 
 
