@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [3.4.3](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.2...v3.4.3) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#274](https://www.github.com/googleapis/nodejs-grafeas/issues/274)) ([0555a47](https://www.github.com/googleapis/nodejs-grafeas/commit/0555a47a964fc89ef7c43f14523f2429536018f0))
+* make request optional in all cases ([#270](https://www.github.com/googleapis/nodejs-grafeas/issues/270)) ([4be58c5](https://www.github.com/googleapis/nodejs-grafeas/commit/4be58c5a6260e02bc3f85ac606449ef27a53ebc4))
+
 ### [3.4.2](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.1...v3.4.2) (2021-05-25)
 
 
