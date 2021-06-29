@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.1.4](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.3...v3.1.4) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#629](https://www.github.com/googleapis/nodejs-dlp/issues/629)) ([e8b89d0](https://www.github.com/googleapis/nodejs-dlp/commit/e8b89d08986c7d3815741e39f057d8f99ea21df0))
+
 ### [3.1.3](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.2...v3.1.3) (2021-06-22)
 
 
