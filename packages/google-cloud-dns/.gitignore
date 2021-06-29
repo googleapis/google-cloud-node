@@ -10,3 +10,4 @@ system-test/*key.json
 package-lock.json
 build/
 __pycache__
+.DS_Store
