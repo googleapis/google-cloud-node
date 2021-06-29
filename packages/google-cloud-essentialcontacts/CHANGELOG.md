@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.2...v1.0.3) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#22](https://www.github.com/googleapis/nodejs-essential-contacts/issues/22)) ([144d0a1](https://www.github.com/googleapis/nodejs-essential-contacts/commit/144d0a1224adb7ffe6efcde45a48d9b751611b01))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.1...v1.0.2) (2021-06-23)
 
 
