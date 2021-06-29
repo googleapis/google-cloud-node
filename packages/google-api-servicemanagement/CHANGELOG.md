@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.3](https://www.github.com/googleapis/nodejs-service-management/compare/v0.2.2...v0.2.3) (2021-06-25)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#61](https://www.github.com/googleapis/nodejs-service-management/issues/61)) ([8ba608c](https://www.github.com/googleapis/nodejs-service-management/commit/8ba608caad06f54c0f4fb650b18948a1143440f4))
+
 ### [0.2.2](https://www.github.com/googleapis/nodejs-service-management/compare/v0.2.1...v0.2.2) (2021-05-25)
 
 
