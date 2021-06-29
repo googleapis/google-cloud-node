@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.2...v1.0.3) (2021-06-25)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#37](https://www.github.com/googleapis/nodejs-org-policy/issues/37)) ([4129413](https://www.github.com/googleapis/nodejs-org-policy/commit/4129413f5cb8a6efd6bc205a337d0a69549920d0))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.1...v1.0.2) (2021-05-25)
 
 
