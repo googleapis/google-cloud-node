@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [3.2.3](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.2...v3.2.3) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#462](https://www.github.com/googleapis/nodejs-os-login/issues/462)) ([cd8da67](https://www.github.com/googleapis/nodejs-os-login/commit/cd8da670380e2550c19da03bb29cfb639ff3bcc4))
+* make request optional in all cases ([#458](https://www.github.com/googleapis/nodejs-os-login/issues/458)) ([f1e43fa](https://www.github.com/googleapis/nodejs-os-login/commit/f1e43fa48e715199ab53ca552dc276adaf2c8f0d))
+
 ### [3.2.2](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.1...v3.2.2) (2021-05-25)
 
 
