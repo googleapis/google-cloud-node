@@ -42,16 +42,9 @@ let vm;
 // Some of these tests can take an extremely long time, and occasionally
 // timeout, see:
 // "Timeout of 180000ms exceeded. For async tests and hooks".
-const delay = async test => {
-  const retries = test.currentRetry();
-  if (retries === 0) return; // no retry on the first failure.
-  // see: https://cloud.google.com/storage/docs/exponential-backoff:
-  const ms = Math.pow(2, retries) * 1000 + Math.random() * 2000;
-  return new Promise(done => {
-    console.info(`retrying "${test.title}" in ${ms}ms`);
-    setTimeout(done, ms);
-  });
-};
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 describe('quickstart sample tests', () => {
   before(async () => {
@@ -67,13 +60,17 @@ describe('quickstart sample tests', () => {
     await vm.delete();
   });
 
-  it('should export assets to specified path', async function () {
-    this.retries(2);
-    await delay(this.test);
+  it('should export assets to specified path', async () => {
     const dumpFilePath = `gs://${bucketName}/my-assets.txt`;
     execSync(`node exportAssets ${dumpFilePath}`);
-    const file = await bucket.file('my-assets.txt');
-    const exists = await file.exists();
+    let waitMs = 1000;
+    let exists = false;
+    let file;
+    for (let retry = 0; retry < 3 && !exists; ++retry) {
+      await sleep((waitMs *= 2));
+      file = await bucket.file('my-assets.txt');
+      exists = await file.exists();
+    }
     assert.ok(exists);
     await file.delete();
   });
@@ -115,33 +112,49 @@ describe('quickstart sample tests', () => {
     assert.include(stdout, '//cloudresourcemanager.googleapis.com/projects');
   });
 
-  it('should analyze iam policy and write analysis results to gcs successfully', async function () {
-    this.retries(2);
-    await delay(this.test);
+  it('should analyze iam policy and write analysis results to gcs successfully', async () => {
     const uri = `gs://${bucketName}/my-analysis.json`;
     execSync(`node analyzeIamPolicyLongrunningGcs ${uri}`);
-    const file = await bucket.file('my-analysis.json');
-    const exists = await file.exists();
+    let waitMs = 1000;
+    let exists = false;
+    let file;
+    for (let retry = 0; retry < 3 && !exists; ++retry) {
+      await sleep((waitMs *= 2));
+      file = await bucket.file('my-analysis.json');
+      exists = await file.exists();
+    }
     assert.ok(exists);
     await file.delete();
   });
 
-  it('should analyze iam policy and write analysis results to bigquery successfully', async function () {
-    this.retries(2);
-    await delay(this.test);
+  it('should analyze iam policy and write analysis results to bigquery successfully', async () => {
     const tablePrefix = 'analysis_nodejs';
     execSync(
       `node analyzeIamPolicyLongrunningBigquery ${datasetId} ${tablePrefix}`
     );
-    const metadataTable = await bigquery
-      .dataset(datasetId)
-      .table('analysis_nodejs_analysis');
-    const metadataTable_exists = await metadataTable.exists();
+    let waitMs = 1000;
+    let metadataTable;
+    let metadataTable_exists = false;
+    let resultsTable;
+    let resultsTable_exists = false;
+
+    for (
+      let retry = 0;
+      retry < 3 && !(metadataTable_exists || resultsTable_exists);
+      ++retry
+    ) {
+      await sleep((waitMs *= 2));
+      metadataTable = await bigquery
+        .dataset(datasetId)
+        .table('analysis_nodejs_analysis');
+      metadataTable_exists = await metadataTable.exists();
+      resultsTable = await bigquery
+        .dataset(datasetId)
+        .table('analysis_nodejs_analysis_result');
+      resultsTable_exists = await resultsTable.exists();
+    }
+
     assert.ok(metadataTable_exists);
-    const resultsTable = await bigquery
-      .dataset(datasetId)
-      .table('analysis_nodejs_analysis_result');
-    const resultsTable_exists = await resultsTable.exists();
     assert.ok(resultsTable_exists);
     await metadataTable.delete();
     await resultsTable.delete();
