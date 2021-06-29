@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.3...v1.0.4) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#53](https://www.github.com/googleapis/nodejs-domains/issues/53)) ([0522960](https://www.github.com/googleapis/nodejs-domains/commit/0522960d9504498991a05a2a5ffe3a2095c12ca4))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.2...v1.0.3) (2021-06-25)
 
 
