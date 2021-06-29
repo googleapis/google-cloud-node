@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.1...v1.2.2) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#66](https://www.github.com/googleapis/nodejs-channel/issues/66)) ([2bb861e](https://www.github.com/googleapis/nodejs-channel/commit/2bb861ecafe3851d97429aca7fdb9dbc47f1c4d5))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.0...v1.2.1) (2021-06-22)
 
 
