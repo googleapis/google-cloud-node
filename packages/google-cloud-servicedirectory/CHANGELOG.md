@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.1.3...v3.2.0) (2021-06-25)
+
+
+### Features
+
+* Update Service Directory v1beta1 protos to include VPC Network field, and create/modify timestamp fields ([#155](https://www.github.com/googleapis/nodejs-service-directory/issues/155)) ([cd103d7](https://www.github.com/googleapis/nodejs-service-directory/commit/cd103d7d7c567e0a4b18890797e43cbde616db5f))
+
 ### [3.1.3](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.1.2...v3.1.3) (2021-06-23)
 
 
