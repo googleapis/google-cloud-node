@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [2.4.3](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.2...v2.4.3) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#508](https://www.github.com/googleapis/nodejs-dataproc/issues/508)) ([e03b476](https://www.github.com/googleapis/nodejs-dataproc/commit/e03b47670de476c14a48b99cbb8c0dcd2c0c813c))
+* make request optional in all cases ([#504](https://www.github.com/googleapis/nodejs-dataproc/issues/504)) ([c14a8a8](https://www.github.com/googleapis/nodejs-dataproc/commit/c14a8a8dc6d672cc05b23cf255486be4b865ac6e))
+
 ### [2.4.2](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.1...v2.4.2) (2021-05-29)
 
 
