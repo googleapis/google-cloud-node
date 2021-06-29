@@ -2220,6 +2220,10 @@ export class AssetServiceClient {
    *   * `resource:(instance1 OR instance2) policy:amy` to find
    *     IAM policy bindings that are set on resources "instance1" or
    *     "instance2" and also specify user "amy".
+   *   * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+   *     Compute Admin role.
+   *   * `memberTypes:user` to find IAM policy bindings that contain the "user"
+   *     member type.
    * @param {number} [request.pageSize]
    *   Optional. The page size for search result pagination. Page size is capped at 500 even
    *   if a larger value is given. If set to zero, server will pick an appropriate
@@ -2230,6 +2234,34 @@ export class AssetServiceClient {
    *   this method. `page_token` must be the value of `next_page_token` from the
    *   previous response. The values of all other method parameters must be
    *   identical to those in the previous call.
+   * @param {string[]} [request.assetTypes]
+   *   Optional. A list of asset types that the IAM policies are attached to. If empty, it
+   *   will search the IAM policies that are attached to all the [searchable asset
+   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   *
+   *   Regular expressions are also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+   *   starts with "compute.googleapis.com".
+   *   * ".*Instance" snapshots IAM policies attached to asset type ends with
+   *   "Instance".
+   *   * ".*Instance.*" snapshots IAM policies attached to asset type contains
+   *   "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields specifying the sorting order of the
+   *   results. The default order is ascending. Add " DESC" after the field name
+   *   to indicate descending order. Redundant space characters are ignored.
+   *   Example: "assetType DESC, resource".
+   *   Only singular primitive fields in the response are sortable:
+   *     * resource
+   *     * assetType
+   *     * project
+   *   All the other fields such as repeated fields (e.g., `folders`) and
+   *   non-primitive fields (e.g., `policy`) are not supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2343,6 +2375,10 @@ export class AssetServiceClient {
    *   * `resource:(instance1 OR instance2) policy:amy` to find
    *     IAM policy bindings that are set on resources "instance1" or
    *     "instance2" and also specify user "amy".
+   *   * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+   *     Compute Admin role.
+   *   * `memberTypes:user` to find IAM policy bindings that contain the "user"
+   *     member type.
    * @param {number} [request.pageSize]
    *   Optional. The page size for search result pagination. Page size is capped at 500 even
    *   if a larger value is given. If set to zero, server will pick an appropriate
@@ -2353,6 +2389,34 @@ export class AssetServiceClient {
    *   this method. `page_token` must be the value of `next_page_token` from the
    *   previous response. The values of all other method parameters must be
    *   identical to those in the previous call.
+   * @param {string[]} [request.assetTypes]
+   *   Optional. A list of asset types that the IAM policies are attached to. If empty, it
+   *   will search the IAM policies that are attached to all the [searchable asset
+   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   *
+   *   Regular expressions are also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+   *   starts with "compute.googleapis.com".
+   *   * ".*Instance" snapshots IAM policies attached to asset type ends with
+   *   "Instance".
+   *   * ".*Instance.*" snapshots IAM policies attached to asset type contains
+   *   "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields specifying the sorting order of the
+   *   results. The default order is ascending. Add " DESC" after the field name
+   *   to indicate descending order. Redundant space characters are ignored.
+   *   Example: "assetType DESC, resource".
+   *   Only singular primitive fields in the response are sortable:
+   *     * resource
+   *     * assetType
+   *     * project
+   *   All the other fields such as repeated fields (e.g., `folders`) and
+   *   non-primitive fields (e.g., `policy`) are not supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2444,6 +2508,10 @@ export class AssetServiceClient {
    *   * `resource:(instance1 OR instance2) policy:amy` to find
    *     IAM policy bindings that are set on resources "instance1" or
    *     "instance2" and also specify user "amy".
+   *   * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+   *     Compute Admin role.
+   *   * `memberTypes:user` to find IAM policy bindings that contain the "user"
+   *     member type.
    * @param {number} [request.pageSize]
    *   Optional. The page size for search result pagination. Page size is capped at 500 even
    *   if a larger value is given. If set to zero, server will pick an appropriate
@@ -2454,6 +2522,34 @@ export class AssetServiceClient {
    *   this method. `page_token` must be the value of `next_page_token` from the
    *   previous response. The values of all other method parameters must be
    *   identical to those in the previous call.
+   * @param {string[]} [request.assetTypes]
+   *   Optional. A list of asset types that the IAM policies are attached to. If empty, it
+   *   will search the IAM policies that are attached to all the [searchable asset
+   *   types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
+   *
+   *   Regular expressions are also supported. For example:
+   *
+   *   * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+   *   starts with "compute.googleapis.com".
+   *   * ".*Instance" snapshots IAM policies attached to asset type ends with
+   *   "Instance".
+   *   * ".*Instance.*" snapshots IAM policies attached to asset type contains
+   *   "Instance".
+   *
+   *   See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
+   *   regular expression syntax. If the regular expression does not match any
+   *   supported asset type, an INVALID_ARGUMENT error will be returned.
+   * @param {string} [request.orderBy]
+   *   Optional. A comma-separated list of fields specifying the sorting order of the
+   *   results. The default order is ascending. Add " DESC" after the field name
+   *   to indicate descending order. Redundant space characters are ignored.
+   *   Example: "assetType DESC, resource".
+   *   Only singular primitive fields in the response are sortable:
+   *     * resource
+   *     * assetType
+   *     * project
+   *   All the other fields such as repeated fields (e.g., `folders`) and
+   *   non-primitive fields (e.g., `policy`) are not supported.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
