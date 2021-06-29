@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.1...v1.1.2) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#44](https://www.github.com/googleapis/nodejs-api-gateway/issues/44)) ([669d327](https://www.github.com/googleapis/nodejs-api-gateway/commit/669d32783d642d1bd6b2ee743200f2002878ab79))
+* make request optional in all cases ([#40](https://www.github.com/googleapis/nodejs-api-gateway/issues/40)) ([9e00d1a](https://www.github.com/googleapis/nodejs-api-gateway/commit/9e00d1a4f8207880ceefa0717ddd68a1d61f45e6))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.0...v1.1.1) (2021-05-25)
 
 
