@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.3...v1.1.4) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#65](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/65)) ([8840a84](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/8840a847a81a8c23c7d3273953a47a9add34f4c1))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.2...v1.1.3) (2021-06-23)
 
 
