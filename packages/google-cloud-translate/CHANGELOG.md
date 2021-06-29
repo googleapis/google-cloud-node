@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.2.4](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.3...v6.2.4) (2021-06-29)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#691](https://www.github.com/googleapis/nodejs-translate/issues/691)) ([5de0327](https://www.github.com/googleapis/nodejs-translate/commit/5de03274c69ae1e0be252e32d42b4fc4554d8e64))
+
 ### [6.2.3](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.2...v6.2.3) (2021-06-24)
 
 
