@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.1](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.2.0...v3.2.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#159](https://www.github.com/googleapis/nodejs-service-directory/issues/159)) ([02861a1](https://www.github.com/googleapis/nodejs-service-directory/commit/02861a17ec3f9bfedb83ded18190e6ee1d7b901f))
+
 ## [3.2.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.1.3...v3.2.0) (2021-06-25)
 
 
