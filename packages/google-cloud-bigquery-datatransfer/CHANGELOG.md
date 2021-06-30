@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.2.1...v2.2.2) (2021-06-30)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#467](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/467)) ([30a0585](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/30a05858eaff80ac57fc9b4d59c129750ee01082))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.2.0...v2.2.1) (2021-06-07)
 
 
