@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.4](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.3...v2.3.4) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#102](https://www.github.com/googleapis/nodejs-security-private-ca/issues/102)) ([16e36ee](https://www.github.com/googleapis/nodejs-security-private-ca/commit/16e36ee26015aac15526fb8a1f5f6b0bc4e368b0))
+
 ### [2.3.3](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.2...v2.3.3) (2021-06-25)
 
 
