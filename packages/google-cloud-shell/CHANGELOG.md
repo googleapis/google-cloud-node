@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-cloud-shell/compare/v1.0.0...v1.0.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#16](https://www.github.com/googleapis/nodejs-cloud-shell/issues/16)) ([8a0d38d](https://www.github.com/googleapis/nodejs-cloud-shell/commit/8a0d38df49000efdaa011f82cdc0f26af9c0468d))
+
 ## 1.0.0 (2021-06-08)
 
 
