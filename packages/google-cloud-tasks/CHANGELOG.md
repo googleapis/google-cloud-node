@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.2...v2.3.3) (2021-06-30)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#539](https://www.github.com/googleapis/nodejs-tasks/issues/539)) ([7c50042](https://www.github.com/googleapis/nodejs-tasks/commit/7c50042bca636dddc0e4407ef1d33ac01f1413da))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.1...v2.3.2) (2021-05-25)
 
 
