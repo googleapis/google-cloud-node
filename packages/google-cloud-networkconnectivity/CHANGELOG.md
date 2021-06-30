@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.3...v1.1.4) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#59](https://www.github.com/googleapis/nodejs-network-connectivity/issues/59)) ([3f81f41](https://www.github.com/googleapis/nodejs-network-connectivity/commit/3f81f4139e316a97a76b5482478d44d5a8cc173a))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.2...v1.1.3) (2021-06-23)
 
 
