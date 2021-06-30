@@ -1749,6 +1749,7 @@ promisifyAll(Datastore, {
     'double',
     'isDouble',
     'geoPoint',
+    'getProjectId',
     'isGeoPoint',
     'index',
     'int',

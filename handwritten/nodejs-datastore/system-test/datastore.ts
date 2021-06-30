@@ -60,6 +60,11 @@ describe('Datastore', () => {
     assert.ok(keys);
   });
 
+  it('should get the project id', async () => {
+    const projectId = await datastore.getProjectId();
+    assert.notEqual(projectId, null);
+  });
+
   describe('create, retrieve and delete', () => {
     const post = {
       title: 'How to make the perfect pizza in your grill',
