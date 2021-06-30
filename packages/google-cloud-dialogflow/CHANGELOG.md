@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [4.1.1](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.1.0...v4.1.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#837](https://www.github.com/googleapis/nodejs-dialogflow/issues/837)) ([05819be](https://www.github.com/googleapis/nodejs-dialogflow/commit/05819be5b6592c0c377f522ae56bf3a3bdd8dbde))
+* make request optional in all cases ([#830](https://www.github.com/googleapis/nodejs-dialogflow/issues/830)) ([08ef5e5](https://www.github.com/googleapis/nodejs-dialogflow/commit/08ef5e59076b498fb423279059ab11de95a54e58))
+
 ## [4.1.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.0.0...v4.1.0) (2021-06-15)
 
 
