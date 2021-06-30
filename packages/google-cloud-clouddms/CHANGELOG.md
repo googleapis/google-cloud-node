@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-dms/compare/v1.0.0...v1.0.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#22](https://www.github.com/googleapis/nodejs-dms/issues/22)) ([cbee80d](https://www.github.com/googleapis/nodejs-dms/commit/cbee80d1db4e8a3982630a9a863f82e98ffeddf2))
+
 ## 1.0.0 (2021-05-25)
 
 
