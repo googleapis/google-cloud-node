@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.3...v1.0.4) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#41](https://www.github.com/googleapis/nodejs-org-policy/issues/41)) ([e5b7d66](https://www.github.com/googleapis/nodejs-org-policy/commit/e5b7d66e9284bb2f7ac14bb1196fc05f7c7f1bc4))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.2...v1.0.3) (2021-06-25)
 
 
