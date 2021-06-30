@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.7.3](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.7.2...v3.7.3) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#273](https://www.github.com/googleapis/nodejs-secret-manager/issues/273)) ([9988608](https://www.github.com/googleapis/nodejs-secret-manager/commit/9988608f48b46485d0f5177f2a2e02e5997528cf))
+
 ### [3.7.2](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.7.1...v3.7.2) (2021-06-24)
 
 
