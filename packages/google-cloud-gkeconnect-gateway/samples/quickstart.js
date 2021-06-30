@@ -14,29 +14,13 @@
 'use strict';
 
 async function main() {
-
   // [START nodejs_connect_gateway_quickstart]
   // Imports the Google Cloud client library
 
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
-  const {GatewayServiceClient} = require('@google-cloud/connect-gateway');
-
-  // TODO(developer): replace with your prefered project ID.
-  // const projectId = 'my-project'
+  const {GatewayServiceClient} = require('@google-cloud/gke-connect-gateway');
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {GatewayServiceClient}();
-
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-   console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
-   // const [thing] = await client.methodName({
-   // });
-   // console.info(thing);
-  }
-  doSomething();
+  new GatewayServiceClient();
   // [END nodejs_connect_gateway_quickstart]
 }
 
