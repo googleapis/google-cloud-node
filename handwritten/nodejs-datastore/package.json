@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/datastore",
-  "version": "6.4.3",
+  "version": "6.4.4",
   "description": "Cloud Datastore Client Library for Node.js",
   "keywords": [
     "google apis client",

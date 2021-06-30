@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [6.4.4](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.3...v6.4.4) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#849](https://www.github.com/googleapis/nodejs-datastore/issues/849)) ([76fa921](https://www.github.com/googleapis/nodejs-datastore/commit/76fa9217732060e2e408a49d9b6aaa7606ce13e6))
+
 ### [6.4.3](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.2...v6.4.3) (2021-06-30)
 
 
