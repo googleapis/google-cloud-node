@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.1.0...v1.1.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#27](https://www.github.com/googleapis/nodejs-service-usage/issues/27)) ([c1738e8](https://www.github.com/googleapis/nodejs-service-usage/commit/c1738e82d175c921178a3d52b75197fbd791df02))
+* make request optional in all cases ([#19](https://www.github.com/googleapis/nodejs-service-usage/issues/19)) ([fcdb1a5](https://www.github.com/googleapis/nodejs-service-usage/commit/fcdb1a5900b7bac5ae1b8b0e211d024b2b7e9579))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.0.0...v1.1.0) (2021-05-29)
 
 
