@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.3.1...v2.3.2) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#459](https://www.github.com/googleapis/nodejs-cloud-container/issues/459)) ([d8ba534](https://www.github.com/googleapis/nodejs-cloud-container/commit/d8ba534408f9573f1da21d337081975fe80f68fa))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.3.0...v2.3.1) (2021-06-25)
 
 
