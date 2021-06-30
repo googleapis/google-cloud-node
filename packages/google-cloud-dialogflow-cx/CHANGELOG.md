@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.12.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.11.0...v2.12.0) (2021-06-30)
+
+
+### Features
+
+* mark agent.default_language_code as required feat: add return_partial response to Fulfillment docs: add notes to train agent before sending queries ([#140](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/140)) ([eae8f44](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/eae8f4409cf5832c5fd28e2e676847a4722997b9))
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#145](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/145)) ([d5f2918](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/d5f291886d1418ad43684d3db7b0a2d12cd8c219))
+* make request optional in all cases ([#139](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/139)) ([ad950f0](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/ad950f057f413b9c094b6d23a21ada0d64887206))
+
 ## [2.11.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.10.0...v2.11.0) (2021-06-21)
 
 
