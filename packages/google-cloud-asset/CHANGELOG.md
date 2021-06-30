@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.15.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.15.0...v3.15.1) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#514](https://www.github.com/googleapis/nodejs-asset/issues/514)) ([85e0ebd](https://www.github.com/googleapis/nodejs-asset/commit/85e0ebd92f326ce52f3a920a8cea9d392ff821b5))
+
 ## [3.15.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.14.1...v3.15.0) (2021-06-30)
 
 
