@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.15.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.14.1...v3.15.0) (2021-06-30)
+
+
+### Features
+
+* add new searchable fields (memberTypes, roles, project, folders and organization), new request fields (assetTypes and orderBy) and new response fields (assetType, folders and organization) in SearchAllIamPolicies ([#511](https://www.github.com/googleapis/nodejs-asset/issues/511)) ([1dfb0e9](https://www.github.com/googleapis/nodejs-asset/commit/1dfb0e95c58fdfbca2807744ea22c52d3c6e7651))
+
 ### [3.14.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.14.0...v3.14.1) (2021-06-22)
 
 
