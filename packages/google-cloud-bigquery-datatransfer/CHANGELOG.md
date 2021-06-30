@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+### [2.2.3](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.2.2...v2.2.3) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#472](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/472)) ([9f43f07](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/9f43f07aa530741ee7690d4dcc0c6d15023e7cb1))
+
 ### [2.2.2](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.2.1...v2.2.2) (2021-06-30)
 
 
