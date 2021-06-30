@@ -60,27 +60,22 @@ npm install @google-cloud/life-sciences
 ```javascript
 // Imports the Google Cloud client library
 
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
 const {WorkflowsServiceV2BetaClient} = require('@google-cloud/life-sciences');
 
-// TODO(developer): replace with your prefered project ID.
-// const projectId = 'my-project'
+// const pipeline = 'name-of-pipeline', i.e., 1234
+// const projectId = your-project-id
+// const location = your-pipeline-location
 
 // Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new {WorkflowsServiceV2BetaClient}();
+const client = new WorkflowsServiceV2BetaClient();
 
-//TODO(library generator): write the actual function you will be testing
-async function doSomething() {
-  console.log(
-    'DPE! Change this code so that it shows how to use the library! See comments below on structure.'
+async function checkPipelineProgress() {
+  const status = await client.checkRunPipelineProgress(
+    `projects/${projectId}/locations/${location}/operations/${pipeline}`
   );
-  // const [thing] = await client.methodName({
-  // });
-  // console.info(thing);
+  console.info(status);
 }
-doSomething();
+checkPipelineProgress();
 
 ```
 

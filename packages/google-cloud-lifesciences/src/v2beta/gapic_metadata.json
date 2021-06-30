@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.lifesciences.v2beta",
-  "libraryPackage": "@google-cloud/lifesciences",
+  "libraryPackage": "@google-cloud/life-sciences",
   "services": {
     "WorkflowsServiceV2Beta": {
       "clients": {

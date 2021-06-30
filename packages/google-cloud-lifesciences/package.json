@@ -2,7 +2,7 @@
   "name": "@google-cloud/life-sciences",
   "version": "0.1.0",
   "description": "lifesciences client for Node.js",
-  "repository": "googleapis/googleapis/nodejs-life-sciences",
+  "repository": "googleapis/nodejs-life-sciences",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "main": "build/src/index.js",
