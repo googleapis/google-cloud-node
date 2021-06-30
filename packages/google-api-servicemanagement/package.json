@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/service-management",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Service management client for Node.js",
   "repository": "googleapis/nodejs-service-management",
   "license": "Apache-2.0",
