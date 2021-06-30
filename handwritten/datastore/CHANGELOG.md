@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [6.4.3](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.2...v6.4.3) (2021-06-30)
+
+
+### Bug Fixes
+
+* Resolve getProjectId ([#848](https://www.github.com/googleapis/nodejs-datastore/issues/848)) ([9bfa885](https://www.github.com/googleapis/nodejs-datastore/commit/9bfa8857e832435112a38c8ab35f21d9054fbaa5))
+
 ### [6.4.2](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.1...v6.4.2) (2021-06-23)
 
 
