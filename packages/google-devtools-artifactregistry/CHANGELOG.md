@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.3...v1.0.4) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#58](https://www.github.com/googleapis/nodejs-artifact-registry/issues/58)) ([09cd77b](https://www.github.com/googleapis/nodejs-artifact-registry/commit/09cd77bd7e4f7b543c5796003a35a1f05ee14429))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.2...v1.0.3) (2021-06-23)
 
 
