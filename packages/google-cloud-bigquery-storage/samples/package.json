@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/bigquery-storage": "^2.5.1",
+    "@google-cloud/bigquery-storage": "^2.5.2",
     "avsc": "^5.4.18",
     "snappy": "^6.2.3"
   },
