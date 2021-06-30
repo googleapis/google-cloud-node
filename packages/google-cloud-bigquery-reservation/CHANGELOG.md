@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.3...v1.1.4) (2021-06-30)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#84](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/84)) ([42c4bcb](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/42c4bcb09e5f1c7b604e923a89b05fa895f663c8))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.2...v1.1.3) (2021-06-25)
 
 
