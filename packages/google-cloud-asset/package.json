@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/asset",
   "description": "Cloud Asset API client for Node.js",
-  "version": "3.15.0",
+  "version": "3.15.1",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
