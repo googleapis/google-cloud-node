@@ -1,8 +1,8 @@
 {
   "name": "resourcesettings",
   "name_pretty": "Resource Settings API",
-  "product_documentation": "null",
-  "client_documentation": "https://cloud.google.com/resource-manager/docs/reference/resource-settings/rest",
+  "product_documentation": "https://cloud.google.com/resource-manager/docs/reference/resource-settings/rest",
+  "client_documentation": "https://googleapis.dev/nodejs/dataflow/latest/index.html",
   "issue_tracker": "https://github.com/googleapis/nodejs-resource-settings/issues",
   "release_level": "BETA",
   "language": "nodejs",

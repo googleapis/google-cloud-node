@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {ResourceSettingsServiceClient} from '@google-cloud/resourcesettings';
+import {ResourceSettingsServiceClient} from '@google-cloud/resource-settings';
 
 // check that the client class type name can be used
 function doStuffWithResourceSettingsServiceClient(

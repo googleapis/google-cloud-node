@@ -13,30 +13,27 @@
 
 'use strict';
 
-async function main() {
-
+async function main(projectId) {
   // [START nodejs_resource_settings_quickstart]
   // Imports the Google Cloud client library
 
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
-  const {ResourceSettingsServiceClient} = require('@google-cloud/resource-settings');
+  const {
+    ResourceSettingsServiceClient,
+  } = require('@google-cloud/resource-settings');
 
   // TODO(developer): replace with your prefered project ID.
   // const projectId = 'my-project'
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {ResourceSettingsServiceClient}();
+  const client = new ResourceSettingsServiceClient();
 
-  //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-   console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
-   // const [thing] = await client.methodName({
-   // });
-   // console.info(thing);
+  async function listSettings() {
+    const settings = await client.listSettings({
+      parent: `projects/${projectId}`,
+    });
+    console.info(settings);
   }
-  doSomething();
+  listSettings();
   // [END nodejs_resource_settings_quickstart]
 }
 

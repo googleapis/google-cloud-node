@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -55,6 +55,40 @@ npm install @google-cloud/resource-settings
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+
+const {
+  ResourceSettingsServiceClient,
+} = require('@google-cloud/resource-settings');
+
+// TODO(developer): replace with your prefered project ID.
+// const projectId = 'my-project'
+
+// Creates a client
+const client = new ResourceSettingsServiceClient();
+
+async function listSettings() {
+  const settings = await client.listSettings({
+    parent: `projects/${projectId}`,
+  });
+  console.info(settings);
+}
+listSettings();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-resource-settings/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-resource-settings/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource-settings&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -111,8 +145,8 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-resource-settings/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/resource-manager/docs/reference/resource-settings/rest
-[product-docs]: null
+[client-docs]: https://googleapis.dev/nodejs/dataflow/latest/index.html
+[product-docs]: https://cloud.google.com/resource-manager/docs/reference/resource-settings/rest
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
