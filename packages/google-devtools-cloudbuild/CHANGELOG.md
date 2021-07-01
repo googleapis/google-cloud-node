@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.5](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.4...v2.2.5) (2021-07-01)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#245](https://www.github.com/googleapis/nodejs-cloudbuild/issues/245)) ([2fbba81](https://www.github.com/googleapis/nodejs-cloudbuild/commit/2fbba81b99e000ff104b76e20f0c37f3f9ea585d))
+
 ### [2.2.4](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.3...v2.2.4) (2021-06-24)
 
 
