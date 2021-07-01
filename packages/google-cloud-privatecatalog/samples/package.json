@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/private-catalog": "^1.0.0"
+    "@google-cloud/private-catalog": "^1.0.1"
   },
   "devDependencies": {
     "c8": "^7.1.0",
