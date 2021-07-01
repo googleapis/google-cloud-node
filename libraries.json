@@ -1095,6 +1095,21 @@
     "support_documentation": "https://cloud.google.com/ai-platform/notebooks/docs/getting-support"
   },
   {
+    "name": "apigateway",
+    "name_pretty": "API Gateway",
+    "product_documentation": "https://cloud.google.com/api-gateway/",
+    "client_documentation": "https://cloud.google.com/anthos/multicluster-management/gateway/using",
+    "issue_tracker": "https://github.com/googleapis/nodejs-gke-connect-gateway/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-gke-connect-gateway",
+    "distribution_name": "@google-cloud/gke-connect-gateway",
+    "api_id": "gateway.googleapis.com",
+    "default_version": "v1beta1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/api-gateway/docs/getting-support"
+  },
+  {
     "name": "apigeeconnect",
     "name_pretty": "Apigee Connect API",
     "product_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/",
