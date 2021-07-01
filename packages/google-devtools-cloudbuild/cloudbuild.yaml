@@ -1,7 +1,7 @@
 steps:
-- name: node:13
+- name: node:16
   entrypoint: npm
   args: ['install']
-- name: node:13
+- name: node:16
   entrypoint: npm
   args: ['test']
