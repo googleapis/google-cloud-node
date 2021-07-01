@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.privatecatalog.v1beta1",
-  "libraryPackage": "@google-cloud/privatecatalog",
+  "libraryPackage": "@google-cloud/private-catalog",
   "services": {
     "PrivateCatalog": {
       "clients": {

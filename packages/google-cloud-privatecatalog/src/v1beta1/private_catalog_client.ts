@@ -339,7 +339,7 @@ export class PrivateCatalogClient {
   // -------------------
 
   searchCatalogs(
-    request: protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest,
+    request?: protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -404,7 +404,7 @@ export class PrivateCatalogClient {
    *   for more details and examples.
    */
   searchCatalogs(
-    request: protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest,
+    request?: protos.google.cloud.privatecatalog.v1beta1.ISearchCatalogsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -558,7 +558,7 @@ export class PrivateCatalogClient {
     ) as AsyncIterable<protos.google.cloud.privatecatalog.v1beta1.ICatalog>;
   }
   searchProducts(
-    request: protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest,
+    request?: protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -624,7 +624,7 @@ export class PrivateCatalogClient {
    *   for more details and examples.
    */
   searchProducts(
-    request: protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest,
+    request?: protos.google.cloud.privatecatalog.v1beta1.ISearchProductsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
@@ -780,7 +780,7 @@ export class PrivateCatalogClient {
     ) as AsyncIterable<protos.google.cloud.privatecatalog.v1beta1.IProduct>;
   }
   searchVersions(
-    request: protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest,
+    request?: protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -846,7 +846,7 @@ export class PrivateCatalogClient {
    *   for more details and examples.
    */
   searchVersions(
-    request: protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest,
+    request?: protos.google.cloud.privatecatalog.v1beta1.ISearchVersionsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
