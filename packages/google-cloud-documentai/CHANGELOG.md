@@ -1,5 +1,26 @@
 # Changelog
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.10.0...v3.0.0) (2021-07-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* The default version of the API has changed from `v1beta3` to `v1`.
+
+### Features
+
+* default to v1 of the API ([#220](https://www.github.com/googleapis/nodejs-document-ai/issues/220)) ([5b370d0](https://www.github.com/googleapis/nodejs-document-ai/commit/5b370d06dd0edeefc05d70d99e2ae25890c8546d))
+* update document.proto, add the processor management methods. ([#236](https://www.github.com/googleapis/nodejs-document-ai/issues/236)) ([ddc147f](https://www.github.com/googleapis/nodejs-document-ai/commit/ddc147f4ca253e52eb1d419219b5124ba00c93cd))
+* update ReviewDocumentRequest to allow set priority and enable validation ([#238](https://www.github.com/googleapis/nodejs-document-ai/issues/238)) ([a39d9d5](https://www.github.com/googleapis/nodejs-document-ai/commit/a39d9d53fc9c25f0ba0f7046704ef9807116120b))
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#241](https://www.github.com/googleapis/nodejs-document-ai/issues/241)) ([2576761](https://www.github.com/googleapis/nodejs-document-ai/commit/25767610bc0161ff98c984e6f08a29ff401ff6e4))
+* GoogleAdsError missing using generator version after 1.3.0 ([#224](https://www.github.com/googleapis/nodejs-document-ai/issues/224)) ([087b081](https://www.github.com/googleapis/nodejs-document-ai/commit/087b0814467e340e8a1c5e2f860ebe8c083be734))
+* make request optional in all cases ([#237](https://www.github.com/googleapis/nodejs-document-ai/issues/237)) ([10e12bb](https://www.github.com/googleapis/nodejs-document-ai/commit/10e12bbcd85818040cf85d9b70fbbaa63bde14e3))
+* update default host to documentai.googleapis.com ([#217](https://www.github.com/googleapis/nodejs-document-ai/issues/217)) ([2d30ad0](https://www.github.com/googleapis/nodejs-document-ai/commit/2d30ad0f29e06d3fc83abba7e46f8d53c24762e7))
+
 ## [2.10.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.9.0...v2.10.0) (2021-05-12)
 
 
