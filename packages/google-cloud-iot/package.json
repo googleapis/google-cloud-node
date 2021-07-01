@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/iot",
   "description": "Cloud IoT API client for Node.js",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
