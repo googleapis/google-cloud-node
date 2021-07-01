@@ -30,7 +30,7 @@ function main(bucketName = 'my-bucket', fileName = 'test.txt') {
   // The ID of your GCS bucket
   // const bucketName = 'your-unique-bucket-name';
 
-  // The ID of your GCS file
+  // The full path of your file inside the GCS bucket, e.g. 'yourFile.jpg' or 'folder1/folder2/yourFile.jpg'
   // const fileName = 'your-file-name';
 
   // Imports the Google Cloud client library
