@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [3.1.5](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.4...v3.1.5) (2021-06-30)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#318](https://www.github.com/googleapis/nodejs-containeranalysis/issues/318)) ([35e8196](https://www.github.com/googleapis/nodejs-containeranalysis/commit/35e81964f971d4272b0c14f4e8b6e790229ba803))
+
 ### [3.1.4](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.3...v3.1.4) (2021-05-25)
 
 
