@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.3...v1.1.4) (2021-07-01)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#69](https://www.github.com/googleapis/nodejs-notebooks/issues/69)) ([d4d8d8d](https://www.github.com/googleapis/nodejs-notebooks/commit/d4d8d8dd5981fca6117417d2d259a28150e62a9a))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.2...v1.1.3) (2021-06-23)
 
 
