@@ -60,8 +60,6 @@ npm install @google-cloud/contact-center-insights
 ```javascript
 // Imports the Google Cloud client library
 
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
 const {
   ContactCenterInsightsClient,
 } = require('@google-cloud/contact-center-insights');
