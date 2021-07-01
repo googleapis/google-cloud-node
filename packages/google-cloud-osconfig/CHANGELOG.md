@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.6.3](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.2...v1.6.3) (2021-07-01)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#123](https://www.github.com/googleapis/nodejs-os-config/issues/123)) ([29f562b](https://www.github.com/googleapis/nodejs-os-config/commit/29f562b5f3489e2bfd2d2ae797d3f0212375fe01))
+
 ### [1.6.2](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.1...v1.6.2) (2021-06-22)
 
 

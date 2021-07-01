@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/os-config",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "description": "Osconfig client for Node.js",
   "repository": "googleapis/nodejs-os-config",
   "license": "Apache-2.0",
