@@ -1203,6 +1203,21 @@
     "support_documentation": "https://cloud.google.com/certificate-authority-service/docs/getting-support"
   },
   {
+    "name": "contactcenterinsights",
+    "name_pretty": "Contact Center AI Insights API",
+    "product_documentation": "https://cloud.google.com/dialogflow/priv/docs/insights/",
+    "client_documentation": "https://cloud.google.com/solutions/contact-center",
+    "issue_tracker": "https://github.com/googleapis/nodejs-contact-center-insights/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-contact-center-insights",
+    "distribution_name": "@google-cloud/contact-center-insights",
+    "api_id": "contactcenterinsights.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/dialogflow/priv/docs/insights/"
+  },
+  {
     "default_version": "v1beta1",
     "release_level": "beta",
     "requires_billing": true,
@@ -1368,6 +1383,21 @@
     "support_documentation": "https://cloud.google.com/compute/docs/getting-support"
   },
   {
+    "name": "lifesciences",
+    "name_pretty": "Life Sciences",
+    "product_documentation": "https://cloud.google.com/life-sciences/",
+    "client_documentation": "https://cloud.google.com/life-sciences",
+    "issue_tracker": "https://github.com/googleapis/nodejs-life-sciences/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-life-sciences",
+    "distribution_name": "@google-cloud/life-sciences",
+    "api_id": "lifesciences.googleapis.com",
+    "default_version": "v2beta",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/life-sciences/docs/getting-support"
+  },
+  {
     "client_documentation": "https://googleapis.dev/nodejs/mediatranslation/latest",
     "api_id": "mediatranslation.googleapis.com",
     "distribution_name": "@google-cloud/media-translation",
@@ -1438,6 +1468,21 @@
     "repo": "googleapis/nodejs-resource-manager",
     "distribution_name": "@google-cloud/resource-manager",
     "api_id": "cloudresourcemanager.googleapis.com",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
+  },
+  {
+    "name": "resourcesettings",
+    "name_pretty": "Resource Settings API",
+    "product_documentation": "https://cloud.google.com/resource-manager/docs/reference/resource-settings/rest",
+    "client_documentation": "https://googleapis.dev/nodejs/dataflow/latest/index.html",
+    "issue_tracker": "https://github.com/googleapis/nodejs-resource-settings/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-resource-settings",
+    "distribution_name": "@google-cloud/resource-settings",
+    "api_id": "resourcesettings.googleapis.com",
+    "default_version": "v1",
     "requires_billing": true,
     "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
   },
