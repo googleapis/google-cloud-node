@@ -325,9 +325,14 @@ export class LoggingBunyan extends Writable {
       }
     }
     if (encoding !== null) {
-      return super.write.call(this, record, encoding, callback as Callback);
+      return super.write.call(
+        this,
+        record,
+        encoding as BufferEncoding,
+        callback as Callback
+      );
     } else {
-      return super.write.call(this, record, callback as string);
+      return super.write.call(this, record, callback as BufferEncoding);
     }
   }
 
