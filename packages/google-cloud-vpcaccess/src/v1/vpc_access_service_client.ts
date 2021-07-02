@@ -350,7 +350,7 @@ export class VpcAccessServiceClient {
   // -- Service calls --
   // -------------------
   getConnector(
-    request: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
+    request?: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -395,7 +395,7 @@ export class VpcAccessServiceClient {
    * const [response] = await client.getConnector(request);
    */
   getConnector(
-    request: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
+    request?: protos.google.cloud.vpcaccess.v1.IGetConnectorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -437,7 +437,7 @@ export class VpcAccessServiceClient {
   }
 
   createConnector(
-    request: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
+    request?: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -498,7 +498,7 @@ export class VpcAccessServiceClient {
    * const [response] = await operation.promise();
    */
   createConnector(
-    request: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
+    request?: protos.google.cloud.vpcaccess.v1.ICreateConnectorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -583,7 +583,7 @@ export class VpcAccessServiceClient {
     >;
   }
   deleteConnector(
-    request: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
+    request?: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -640,7 +640,7 @@ export class VpcAccessServiceClient {
    * const [response] = await operation.promise();
    */
   deleteConnector(
-    request: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
+    request?: protos.google.cloud.vpcaccess.v1.IDeleteConnectorRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -725,7 +725,7 @@ export class VpcAccessServiceClient {
     >;
   }
   listConnectors(
-    request: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+    request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -780,7 +780,7 @@ export class VpcAccessServiceClient {
    *   for more details and examples.
    */
   listConnectors(
-    request: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
+    request?: protos.google.cloud.vpcaccess.v1.IListConnectorsRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
