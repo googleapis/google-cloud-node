@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.0.1...v1.0.2) (2021-07-02)
+
+
+### Bug Fixes
+
+* make request optional in all cases ([#10](https://www.github.com/googleapis/nodejs-vpc-access/issues/10)) ([d358404](https://www.github.com/googleapis/nodejs-vpc-access/commit/d358404f42c0cd9bd2f19600b5c55ce5f88776a4))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.0.0...v1.0.1) (2021-06-29)
 
 
