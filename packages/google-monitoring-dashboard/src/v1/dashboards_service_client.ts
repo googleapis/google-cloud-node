@@ -154,6 +154,9 @@ export class DashboardsServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      alertPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/alertPolicies/{alert_policy}'
+      ),
       dashboardPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/dashboards/{dashboard}'
       ),
@@ -344,12 +347,8 @@ export class DashboardsServiceClient {
     >
   ): void;
   /**
-   * Creates a new custom dashboard. For examples on how you can use this API to
-   * create dashboards, see [Managing dashboards by
-   * API](https://cloud.google.com/monitoring/dashboards/api-dashboard). This method requires the
-   * `monitoring.dashboards.create` permission on the specified project. For
-   * more information about permissions, see [Cloud Identity and Access
-   * Management](https://cloud.google.com/iam).
+   * Creates a new custom dashboard. For examples on how you can use this API to create dashboards, see [Managing dashboards by API](/monitoring/dashboards/api-dashboard).
+   * This method requires the `monitoring.dashboards.create` permission on the specified project. For more information about permissions, see [Cloud Identity and Access Management](/iam).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -361,6 +360,9 @@ export class DashboardsServiceClient {
    *   The `[PROJECT_ID_OR_NUMBER]` must match the dashboard resource name.
    * @param {google.monitoring.dashboard.v1.Dashboard} request.dashboard
    *   Required. The initial dashboard specification.
+   * @param {boolean} request.validateOnly
+   *   If set, validate the request and preview the review, but do not actually
+   *   save it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -652,6 +654,9 @@ export class DashboardsServiceClient {
    *   The request object that will be sent.
    * @param {google.monitoring.dashboard.v1.Dashboard} request.dashboard
    *   Required. The dashboard that will replace the existing dashboard.
+   * @param {boolean} request.validateOnly
+   *   If set, validate the request and preview the review, but do not actually
+   *   save it.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -919,6 +924,44 @@ export class DashboardsServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified alertPolicy resource name string.
+   *
+   * @param {string} project
+   * @param {string} alert_policy
+   * @returns {string} Resource name string.
+   */
+  alertPolicyPath(project: string, alertPolicy: string) {
+    return this.pathTemplates.alertPolicyPathTemplate.render({
+      project: project,
+      alert_policy: alertPolicy,
+    });
+  }
+
+  /**
+   * Parse the project from AlertPolicy resource.
+   *
+   * @param {string} alertPolicyName
+   *   A fully-qualified path representing AlertPolicy resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromAlertPolicyName(alertPolicyName: string) {
+    return this.pathTemplates.alertPolicyPathTemplate.match(alertPolicyName)
+      .project;
+  }
+
+  /**
+   * Parse the alert_policy from AlertPolicy resource.
+   *
+   * @param {string} alertPolicyName
+   *   A fully-qualified path representing AlertPolicy resource.
+   * @returns {string} A string representing the alert_policy.
+   */
+  matchAlertPolicyFromAlertPolicyName(alertPolicyName: string) {
+    return this.pathTemplates.alertPolicyPathTemplate.match(alertPolicyName)
+      .alert_policy;
+  }
 
   /**
    * Return a fully-qualified dashboard resource name string.

@@ -2,6 +2,1227 @@
   "nested": {
     "google": {
       "nested": {
+        "monitoring": {
+          "nested": {
+            "dashboard": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "go_package": "google.golang.org/genproto/googleapis/monitoring/dashboard/v1;dashboard",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "ServiceMonitoringProto",
+                    "java_package": "com.google.monitoring.dashboard.v1",
+                    "php_namespace": "Google\\Cloud\\Monitoring\\Dashboard\\V1",
+                    "ruby_package": "Google::Cloud::Monitoring::Dashboard::V1"
+                  },
+                  "nested": {
+                    "AlertChart": {
+                      "options": {
+                        "(google.api.resource).type": "monitoring.googleapis.com/AlertPolicy",
+                        "(google.api.resource).pattern": "projects/{project}/alertPolicies/{alert_policy}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Aggregation": {
+                      "fields": {
+                        "alignmentPeriod": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1
+                        },
+                        "perSeriesAligner": {
+                          "type": "Aligner",
+                          "id": 2
+                        },
+                        "crossSeriesReducer": {
+                          "type": "Reducer",
+                          "id": 4
+                        },
+                        "groupByFields": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Aligner": {
+                          "values": {
+                            "ALIGN_NONE": 0,
+                            "ALIGN_DELTA": 1,
+                            "ALIGN_RATE": 2,
+                            "ALIGN_INTERPOLATE": 3,
+                            "ALIGN_NEXT_OLDER": 4,
+                            "ALIGN_MIN": 10,
+                            "ALIGN_MAX": 11,
+                            "ALIGN_MEAN": 12,
+                            "ALIGN_COUNT": 13,
+                            "ALIGN_SUM": 14,
+                            "ALIGN_STDDEV": 15,
+                            "ALIGN_COUNT_TRUE": 16,
+                            "ALIGN_COUNT_FALSE": 24,
+                            "ALIGN_FRACTION_TRUE": 17,
+                            "ALIGN_PERCENTILE_99": 18,
+                            "ALIGN_PERCENTILE_95": 19,
+                            "ALIGN_PERCENTILE_50": 20,
+                            "ALIGN_PERCENTILE_05": 21,
+                            "ALIGN_PERCENT_CHANGE": 23
+                          }
+                        },
+                        "Reducer": {
+                          "values": {
+                            "REDUCE_NONE": 0,
+                            "REDUCE_MEAN": 1,
+                            "REDUCE_MIN": 2,
+                            "REDUCE_MAX": 3,
+                            "REDUCE_SUM": 4,
+                            "REDUCE_STDDEV": 5,
+                            "REDUCE_COUNT": 6,
+                            "REDUCE_COUNT_TRUE": 7,
+                            "REDUCE_COUNT_FALSE": 15,
+                            "REDUCE_FRACTION_TRUE": 8,
+                            "REDUCE_PERCENTILE_99": 9,
+                            "REDUCE_PERCENTILE_95": 10,
+                            "REDUCE_PERCENTILE_50": 11,
+                            "REDUCE_PERCENTILE_05": 12
+                          }
+                        }
+                      }
+                    },
+                    "PickTimeSeriesFilter": {
+                      "fields": {
+                        "rankingMethod": {
+                          "type": "Method",
+                          "id": 1
+                        },
+                        "numTimeSeries": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "direction": {
+                          "type": "Direction",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Method": {
+                          "values": {
+                            "METHOD_UNSPECIFIED": 0,
+                            "METHOD_MEAN": 1,
+                            "METHOD_MAX": 2,
+                            "METHOD_MIN": 3,
+                            "METHOD_SUM": 4,
+                            "METHOD_LATEST": 5
+                          }
+                        },
+                        "Direction": {
+                          "values": {
+                            "DIRECTION_UNSPECIFIED": 0,
+                            "TOP": 1,
+                            "BOTTOM": 2
+                          }
+                        }
+                      }
+                    },
+                    "StatisticalTimeSeriesFilter": {
+                      "fields": {
+                        "rankingMethod": {
+                          "type": "Method",
+                          "id": 1
+                        },
+                        "numTimeSeries": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Method": {
+                          "values": {
+                            "METHOD_UNSPECIFIED": 0,
+                            "METHOD_CLUSTER_OUTLIER": 1
+                          }
+                        }
+                      }
+                    },
+                    "Dashboard": {
+                      "options": {
+                        "(google.api.resource).type": "monitoring.googleapis.com/Dashboard",
+                        "(google.api.resource).pattern": "projects/{project}/dashboards/{dashboard}"
+                      },
+                      "oneofs": {
+                        "layout": {
+                          "oneof": [
+                            "gridLayout",
+                            "mosaicLayout",
+                            "rowLayout",
+                            "columnLayout"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "gridLayout": {
+                          "type": "GridLayout",
+                          "id": 5
+                        },
+                        "mosaicLayout": {
+                          "type": "MosaicLayout",
+                          "id": 6
+                        },
+                        "rowLayout": {
+                          "type": "RowLayout",
+                          "id": 8
+                        },
+                        "columnLayout": {
+                          "type": "ColumnLayout",
+                          "id": 9
+                        }
+                      }
+                    },
+                    "GridLayout": {
+                      "fields": {
+                        "columns": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "widgets": {
+                          "rule": "repeated",
+                          "type": "Widget",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "MosaicLayout": {
+                      "fields": {
+                        "columns": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "tiles": {
+                          "rule": "repeated",
+                          "type": "Tile",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "Tile": {
+                          "fields": {
+                            "xPos": {
+                              "type": "int32",
+                              "id": 1
+                            },
+                            "yPos": {
+                              "type": "int32",
+                              "id": 2
+                            },
+                            "width": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "height": {
+                              "type": "int32",
+                              "id": 4
+                            },
+                            "widget": {
+                              "type": "Widget",
+                              "id": 5
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "RowLayout": {
+                      "fields": {
+                        "rows": {
+                          "rule": "repeated",
+                          "type": "Row",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Row": {
+                          "fields": {
+                            "weight": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "widgets": {
+                              "rule": "repeated",
+                              "type": "Widget",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ColumnLayout": {
+                      "fields": {
+                        "columns": {
+                          "rule": "repeated",
+                          "type": "Column",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Column": {
+                          "fields": {
+                            "weight": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "widgets": {
+                              "rule": "repeated",
+                              "type": "Widget",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Widget": {
+                      "oneofs": {
+                        "content": {
+                          "oneof": [
+                            "xyChart",
+                            "scorecard",
+                            "text",
+                            "blank",
+                            "alertChart"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "title": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "xyChart": {
+                          "type": "XyChart",
+                          "id": 2
+                        },
+                        "scorecard": {
+                          "type": "Scorecard",
+                          "id": 3
+                        },
+                        "text": {
+                          "type": "Text",
+                          "id": 4
+                        },
+                        "blank": {
+                          "type": "google.protobuf.Empty",
+                          "id": 5
+                        },
+                        "alertChart": {
+                          "type": "AlertChart",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "Scorecard": {
+                      "oneofs": {
+                        "dataView": {
+                          "oneof": [
+                            "gaugeView",
+                            "sparkChartView"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "timeSeriesQuery": {
+                          "type": "TimeSeriesQuery",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "gaugeView": {
+                          "type": "GaugeView",
+                          "id": 4
+                        },
+                        "sparkChartView": {
+                          "type": "SparkChartView",
+                          "id": 5
+                        },
+                        "thresholds": {
+                          "rule": "repeated",
+                          "type": "Threshold",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "GaugeView": {
+                          "fields": {
+                            "lowerBound": {
+                              "type": "double",
+                              "id": 1
+                            },
+                            "upperBound": {
+                              "type": "double",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SparkChartView": {
+                          "fields": {
+                            "sparkChartType": {
+                              "type": "SparkChartType",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "minAlignmentPeriod": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "TimeSeriesQuery": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "timeSeriesFilter",
+                            "timeSeriesFilterRatio",
+                            "timeSeriesQueryLanguage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "timeSeriesFilter": {
+                          "type": "TimeSeriesFilter",
+                          "id": 1
+                        },
+                        "timeSeriesFilterRatio": {
+                          "type": "TimeSeriesFilterRatio",
+                          "id": 2
+                        },
+                        "timeSeriesQueryLanguage": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "unitOverride": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "TimeSeriesFilter": {
+                      "oneofs": {
+                        "outputFilter": {
+                          "oneof": [
+                            "pickTimeSeriesFilter",
+                            "statisticalTimeSeriesFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "aggregation": {
+                          "type": "Aggregation",
+                          "id": 2
+                        },
+                        "secondaryAggregation": {
+                          "type": "Aggregation",
+                          "id": 3
+                        },
+                        "pickTimeSeriesFilter": {
+                          "type": "PickTimeSeriesFilter",
+                          "id": 4
+                        },
+                        "statisticalTimeSeriesFilter": {
+                          "type": "StatisticalTimeSeriesFilter",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        }
+                      }
+                    },
+                    "TimeSeriesFilterRatio": {
+                      "oneofs": {
+                        "outputFilter": {
+                          "oneof": [
+                            "pickTimeSeriesFilter",
+                            "statisticalTimeSeriesFilter"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "numerator": {
+                          "type": "RatioPart",
+                          "id": 1
+                        },
+                        "denominator": {
+                          "type": "RatioPart",
+                          "id": 2
+                        },
+                        "secondaryAggregation": {
+                          "type": "Aggregation",
+                          "id": 3
+                        },
+                        "pickTimeSeriesFilter": {
+                          "type": "PickTimeSeriesFilter",
+                          "id": 4
+                        },
+                        "statisticalTimeSeriesFilter": {
+                          "type": "StatisticalTimeSeriesFilter",
+                          "id": 5,
+                          "options": {
+                            "deprecated": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RatioPart": {
+                          "fields": {
+                            "filter": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "aggregation": {
+                              "type": "Aggregation",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "Threshold": {
+                      "fields": {
+                        "label": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "value": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "color": {
+                          "type": "Color",
+                          "id": 3
+                        },
+                        "direction": {
+                          "type": "Direction",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Color": {
+                          "values": {
+                            "COLOR_UNSPECIFIED": 0,
+                            "YELLOW": 4,
+                            "RED": 6
+                          }
+                        },
+                        "Direction": {
+                          "values": {
+                            "DIRECTION_UNSPECIFIED": 0,
+                            "ABOVE": 1,
+                            "BELOW": 2
+                          }
+                        }
+                      }
+                    },
+                    "SparkChartType": {
+                      "values": {
+                        "SPARK_CHART_TYPE_UNSPECIFIED": 0,
+                        "SPARK_LINE": 1,
+                        "SPARK_BAR": 2
+                      }
+                    },
+                    "Text": {
+                      "fields": {
+                        "content": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "format": {
+                          "type": "Format",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Format": {
+                          "values": {
+                            "FORMAT_UNSPECIFIED": 0,
+                            "MARKDOWN": 1,
+                            "RAW": 2
+                          }
+                        }
+                      }
+                    },
+                    "XyChart": {
+                      "fields": {
+                        "dataSets": {
+                          "rule": "repeated",
+                          "type": "DataSet",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "timeshiftDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 4
+                        },
+                        "thresholds": {
+                          "rule": "repeated",
+                          "type": "Threshold",
+                          "id": 5
+                        },
+                        "xAxis": {
+                          "type": "Axis",
+                          "id": 6
+                        },
+                        "yAxis": {
+                          "type": "Axis",
+                          "id": 7
+                        },
+                        "chartOptions": {
+                          "type": "ChartOptions",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "DataSet": {
+                          "fields": {
+                            "timeSeriesQuery": {
+                              "type": "TimeSeriesQuery",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "plotType": {
+                              "type": "PlotType",
+                              "id": 2
+                            },
+                            "legendTemplate": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "minAlignmentPeriod": {
+                              "type": "google.protobuf.Duration",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "PlotType": {
+                              "values": {
+                                "PLOT_TYPE_UNSPECIFIED": 0,
+                                "LINE": 1,
+                                "STACKED_AREA": 2,
+                                "STACKED_BAR": 3,
+                                "HEATMAP": 4
+                              }
+                            }
+                          }
+                        },
+                        "Axis": {
+                          "fields": {
+                            "label": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "scale": {
+                              "type": "Scale",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Scale": {
+                              "values": {
+                                "SCALE_UNSPECIFIED": 0,
+                                "LINEAR": 1,
+                                "LOG10": 2
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "ChartOptions": {
+                      "fields": {
+                        "mode": {
+                          "type": "Mode",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Mode": {
+                          "values": {
+                            "MODE_UNSPECIFIED": 0,
+                            "COLOR": 1,
+                            "X_RAY": 2,
+                            "STATS": 3
+                          }
+                        }
+                      }
+                    },
+                    "DashboardsService": {
+                      "options": {
+                        "(google.api.default_host)": "monitoring.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read,https://www.googleapis.com/auth/monitoring.write"
+                      },
+                      "methods": {
+                        "CreateDashboard": {
+                          "requestType": "CreateDashboardRequest",
+                          "responseType": "Dashboard",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*}/dashboards",
+                            "(google.api.http).body": "dashboard"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*}/dashboards",
+                                "body": "dashboard"
+                              }
+                            }
+                          ]
+                        },
+                        "ListDashboards": {
+                          "requestType": "ListDashboardsRequest",
+                          "responseType": "ListDashboardsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*}/dashboards"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*}/dashboards"
+                              }
+                            }
+                          ]
+                        },
+                        "GetDashboard": {
+                          "requestType": "GetDashboardRequest",
+                          "responseType": "Dashboard",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/dashboards/*}"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/dashboards/*}"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteDashboard": {
+                          "requestType": "DeleteDashboardRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/dashboards/*}"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/dashboards/*}"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateDashboard": {
+                          "requestType": "UpdateDashboardRequest",
+                          "responseType": "Dashboard",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{dashboard.name=projects/*/dashboards/*}",
+                            "(google.api.http).body": "dashboard"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{dashboard.name=projects/*/dashboards/*}",
+                                "body": "dashboard"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CreateDashboardRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "dashboard": {
+                          "type": "Dashboard",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDashboardsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListDashboardsResponse": {
+                      "fields": {
+                        "dashboards": {
+                          "rule": "repeated",
+                          "type": "Dashboard",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetDashboardRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "monitoring.googleapis.com/Dashboard"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteDashboardRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "monitoring.googleapis.com/Dashboard"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateDashboardRequest": {
+                      "fields": {
+                        "dashboard": {
+                          "type": "Dashboard",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "ClientProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "Distribution": {
+              "fields": {
+                "count": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "mean": {
+                  "type": "double",
+                  "id": 2
+                },
+                "sumOfSquaredDeviation": {
+                  "type": "double",
+                  "id": 3
+                },
+                "range": {
+                  "type": "Range",
+                  "id": 4
+                },
+                "bucketOptions": {
+                  "type": "BucketOptions",
+                  "id": 6
+                },
+                "bucketCounts": {
+                  "rule": "repeated",
+                  "type": "int64",
+                  "id": 7
+                },
+                "exemplars": {
+                  "rule": "repeated",
+                  "type": "Exemplar",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "Range": {
+                  "fields": {
+                    "min": {
+                      "type": "double",
+                      "id": 1
+                    },
+                    "max": {
+                      "type": "double",
+                      "id": 2
+                    }
+                  }
+                },
+                "BucketOptions": {
+                  "oneofs": {
+                    "options": {
+                      "oneof": [
+                        "linearBuckets",
+                        "exponentialBuckets",
+                        "explicitBuckets"
+                      ]
+                    }
+                  },
+                  "fields": {
+                    "linearBuckets": {
+                      "type": "Linear",
+                      "id": 1
+                    },
+                    "exponentialBuckets": {
+                      "type": "Exponential",
+                      "id": 2
+                    },
+                    "explicitBuckets": {
+                      "type": "Explicit",
+                      "id": 3
+                    }
+                  },
+                  "nested": {
+                    "Linear": {
+                      "fields": {
+                        "numFiniteBuckets": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "width": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "offset": {
+                          "type": "double",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Exponential": {
+                      "fields": {
+                        "numFiniteBuckets": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "growthFactor": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "scale": {
+                          "type": "double",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "Explicit": {
+                      "fields": {
+                        "bounds": {
+                          "rule": "repeated",
+                          "type": "double",
+                          "id": 1
+                        }
+                      }
+                    }
+                  }
+                },
+                "Exemplar": {
+                  "fields": {
+                    "value": {
+                      "type": "double",
+                      "id": 1
+                    },
+                    "timestamp": {
+                      "type": "google.protobuf.Timestamp",
+                      "id": 2
+                    },
+                    "attachments": {
+                      "rule": "repeated",
+                      "type": "google.protobuf.Any",
+                      "id": 3
+                    }
+                  }
+                }
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            }
+          }
+        },
         "protobuf": {
           "options": {
             "go_package": "google.golang.org/protobuf/types/descriptorpb",
@@ -13,42 +1234,6 @@
             "optimize_for": "SPEED"
           },
           "nested": {
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
-            "Timestamp": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 2
-                }
-              }
-            },
             "FileDescriptorSet": {
               "fields": {
                 "file": {
@@ -933,6 +2118,42 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Empty": {
               "fields": {}
             },
@@ -944,1199 +2165,6 @@
                   "id": 1
                 }
               }
-            }
-          }
-        },
-        "monitoring": {
-          "nested": {
-            "dashboard": {
-              "nested": {
-                "v1": {
-                  "options": {
-                    "go_package": "google.golang.org/genproto/googleapis/monitoring/dashboard/v1;dashboard",
-                    "java_multiple_files": true,
-                    "java_outer_classname": "ServiceMonitoringProto",
-                    "java_package": "com.google.monitoring.dashboard.v1",
-                    "php_namespace": "Google\\Cloud\\Monitoring\\Dashboard\\V1",
-                    "ruby_package": "Google::Cloud::Monitoring::Dashboard::V1"
-                  },
-                  "nested": {
-                    "Aggregation": {
-                      "fields": {
-                        "alignmentPeriod": {
-                          "type": "google.protobuf.Duration",
-                          "id": 1
-                        },
-                        "perSeriesAligner": {
-                          "type": "Aligner",
-                          "id": 2
-                        },
-                        "crossSeriesReducer": {
-                          "type": "Reducer",
-                          "id": 4
-                        },
-                        "groupByFields": {
-                          "rule": "repeated",
-                          "type": "string",
-                          "id": 5
-                        }
-                      },
-                      "nested": {
-                        "Aligner": {
-                          "values": {
-                            "ALIGN_NONE": 0,
-                            "ALIGN_DELTA": 1,
-                            "ALIGN_RATE": 2,
-                            "ALIGN_INTERPOLATE": 3,
-                            "ALIGN_NEXT_OLDER": 4,
-                            "ALIGN_MIN": 10,
-                            "ALIGN_MAX": 11,
-                            "ALIGN_MEAN": 12,
-                            "ALIGN_COUNT": 13,
-                            "ALIGN_SUM": 14,
-                            "ALIGN_STDDEV": 15,
-                            "ALIGN_COUNT_TRUE": 16,
-                            "ALIGN_COUNT_FALSE": 24,
-                            "ALIGN_FRACTION_TRUE": 17,
-                            "ALIGN_PERCENTILE_99": 18,
-                            "ALIGN_PERCENTILE_95": 19,
-                            "ALIGN_PERCENTILE_50": 20,
-                            "ALIGN_PERCENTILE_05": 21,
-                            "ALIGN_PERCENT_CHANGE": 23
-                          }
-                        },
-                        "Reducer": {
-                          "values": {
-                            "REDUCE_NONE": 0,
-                            "REDUCE_MEAN": 1,
-                            "REDUCE_MIN": 2,
-                            "REDUCE_MAX": 3,
-                            "REDUCE_SUM": 4,
-                            "REDUCE_STDDEV": 5,
-                            "REDUCE_COUNT": 6,
-                            "REDUCE_COUNT_TRUE": 7,
-                            "REDUCE_COUNT_FALSE": 15,
-                            "REDUCE_FRACTION_TRUE": 8,
-                            "REDUCE_PERCENTILE_99": 9,
-                            "REDUCE_PERCENTILE_95": 10,
-                            "REDUCE_PERCENTILE_50": 11,
-                            "REDUCE_PERCENTILE_05": 12
-                          }
-                        }
-                      }
-                    },
-                    "PickTimeSeriesFilter": {
-                      "fields": {
-                        "rankingMethod": {
-                          "type": "Method",
-                          "id": 1
-                        },
-                        "numTimeSeries": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "direction": {
-                          "type": "Direction",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "Method": {
-                          "values": {
-                            "METHOD_UNSPECIFIED": 0,
-                            "METHOD_MEAN": 1,
-                            "METHOD_MAX": 2,
-                            "METHOD_MIN": 3,
-                            "METHOD_SUM": 4,
-                            "METHOD_LATEST": 5
-                          }
-                        },
-                        "Direction": {
-                          "values": {
-                            "DIRECTION_UNSPECIFIED": 0,
-                            "TOP": 1,
-                            "BOTTOM": 2
-                          }
-                        }
-                      }
-                    },
-                    "StatisticalTimeSeriesFilter": {
-                      "fields": {
-                        "rankingMethod": {
-                          "type": "Method",
-                          "id": 1
-                        },
-                        "numTimeSeries": {
-                          "type": "int32",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "Method": {
-                          "values": {
-                            "METHOD_UNSPECIFIED": 0,
-                            "METHOD_CLUSTER_OUTLIER": 1
-                          }
-                        }
-                      }
-                    },
-                    "Dashboard": {
-                      "options": {
-                        "(google.api.resource).type": "monitoring.googleapis.com/Dashboard",
-                        "(google.api.resource).pattern": "projects/{project}/dashboards/{dashboard}"
-                      },
-                      "oneofs": {
-                        "layout": {
-                          "oneof": [
-                            "gridLayout",
-                            "mosaicLayout",
-                            "rowLayout",
-                            "columnLayout"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "IMMUTABLE"
-                          }
-                        },
-                        "displayName": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "etag": {
-                          "type": "string",
-                          "id": 4
-                        },
-                        "gridLayout": {
-                          "type": "GridLayout",
-                          "id": 5
-                        },
-                        "mosaicLayout": {
-                          "type": "MosaicLayout",
-                          "id": 6
-                        },
-                        "rowLayout": {
-                          "type": "RowLayout",
-                          "id": 8
-                        },
-                        "columnLayout": {
-                          "type": "ColumnLayout",
-                          "id": 9
-                        }
-                      }
-                    },
-                    "GridLayout": {
-                      "fields": {
-                        "columns": {
-                          "type": "int64",
-                          "id": 1
-                        },
-                        "widgets": {
-                          "rule": "repeated",
-                          "type": "Widget",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "MosaicLayout": {
-                      "fields": {
-                        "columns": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "tiles": {
-                          "rule": "repeated",
-                          "type": "Tile",
-                          "id": 3
-                        }
-                      },
-                      "nested": {
-                        "Tile": {
-                          "fields": {
-                            "xPos": {
-                              "type": "int32",
-                              "id": 1
-                            },
-                            "yPos": {
-                              "type": "int32",
-                              "id": 2
-                            },
-                            "width": {
-                              "type": "int32",
-                              "id": 3
-                            },
-                            "height": {
-                              "type": "int32",
-                              "id": 4
-                            },
-                            "widget": {
-                              "type": "Widget",
-                              "id": 5
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "RowLayout": {
-                      "fields": {
-                        "rows": {
-                          "rule": "repeated",
-                          "type": "Row",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "Row": {
-                          "fields": {
-                            "weight": {
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "widgets": {
-                              "rule": "repeated",
-                              "type": "Widget",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ColumnLayout": {
-                      "fields": {
-                        "columns": {
-                          "rule": "repeated",
-                          "type": "Column",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "Column": {
-                          "fields": {
-                            "weight": {
-                              "type": "int64",
-                              "id": 1
-                            },
-                            "widgets": {
-                              "rule": "repeated",
-                              "type": "Widget",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "Widget": {
-                      "oneofs": {
-                        "content": {
-                          "oneof": [
-                            "xyChart",
-                            "scorecard",
-                            "text",
-                            "blank"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "title": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        },
-                        "xyChart": {
-                          "type": "XyChart",
-                          "id": 2
-                        },
-                        "scorecard": {
-                          "type": "Scorecard",
-                          "id": 3
-                        },
-                        "text": {
-                          "type": "Text",
-                          "id": 4
-                        },
-                        "blank": {
-                          "type": "google.protobuf.Empty",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "Scorecard": {
-                      "oneofs": {
-                        "dataView": {
-                          "oneof": [
-                            "gaugeView",
-                            "sparkChartView"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "timeSeriesQuery": {
-                          "type": "TimeSeriesQuery",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "gaugeView": {
-                          "type": "GaugeView",
-                          "id": 4
-                        },
-                        "sparkChartView": {
-                          "type": "SparkChartView",
-                          "id": 5
-                        },
-                        "thresholds": {
-                          "rule": "repeated",
-                          "type": "Threshold",
-                          "id": 6
-                        }
-                      },
-                      "nested": {
-                        "GaugeView": {
-                          "fields": {
-                            "lowerBound": {
-                              "type": "double",
-                              "id": 1
-                            },
-                            "upperBound": {
-                              "type": "double",
-                              "id": 2
-                            }
-                          }
-                        },
-                        "SparkChartView": {
-                          "fields": {
-                            "sparkChartType": {
-                              "type": "SparkChartType",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "minAlignmentPeriod": {
-                              "type": "google.protobuf.Duration",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "TimeSeriesQuery": {
-                      "oneofs": {
-                        "source": {
-                          "oneof": [
-                            "timeSeriesFilter",
-                            "timeSeriesFilterRatio",
-                            "timeSeriesQueryLanguage"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "timeSeriesFilter": {
-                          "type": "TimeSeriesFilter",
-                          "id": 1
-                        },
-                        "timeSeriesFilterRatio": {
-                          "type": "TimeSeriesFilterRatio",
-                          "id": 2
-                        },
-                        "timeSeriesQueryLanguage": {
-                          "type": "string",
-                          "id": 3
-                        },
-                        "unitOverride": {
-                          "type": "string",
-                          "id": 5
-                        }
-                      }
-                    },
-                    "TimeSeriesFilter": {
-                      "oneofs": {
-                        "outputFilter": {
-                          "oneof": [
-                            "pickTimeSeriesFilter",
-                            "statisticalTimeSeriesFilter"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "filter": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "aggregation": {
-                          "type": "Aggregation",
-                          "id": 2
-                        },
-                        "secondaryAggregation": {
-                          "type": "Aggregation",
-                          "id": 3
-                        },
-                        "pickTimeSeriesFilter": {
-                          "type": "PickTimeSeriesFilter",
-                          "id": 4
-                        },
-                        "statisticalTimeSeriesFilter": {
-                          "type": "StatisticalTimeSeriesFilter",
-                          "id": 5,
-                          "options": {
-                            "deprecated": true
-                          }
-                        }
-                      }
-                    },
-                    "TimeSeriesFilterRatio": {
-                      "oneofs": {
-                        "outputFilter": {
-                          "oneof": [
-                            "pickTimeSeriesFilter",
-                            "statisticalTimeSeriesFilter"
-                          ]
-                        }
-                      },
-                      "fields": {
-                        "numerator": {
-                          "type": "RatioPart",
-                          "id": 1
-                        },
-                        "denominator": {
-                          "type": "RatioPart",
-                          "id": 2
-                        },
-                        "secondaryAggregation": {
-                          "type": "Aggregation",
-                          "id": 3
-                        },
-                        "pickTimeSeriesFilter": {
-                          "type": "PickTimeSeriesFilter",
-                          "id": 4
-                        },
-                        "statisticalTimeSeriesFilter": {
-                          "type": "StatisticalTimeSeriesFilter",
-                          "id": 5,
-                          "options": {
-                            "deprecated": true
-                          }
-                        }
-                      },
-                      "nested": {
-                        "RatioPart": {
-                          "fields": {
-                            "filter": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "aggregation": {
-                              "type": "Aggregation",
-                              "id": 2
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "Threshold": {
-                      "fields": {
-                        "label": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "value": {
-                          "type": "double",
-                          "id": 2
-                        },
-                        "color": {
-                          "type": "Color",
-                          "id": 3
-                        },
-                        "direction": {
-                          "type": "Direction",
-                          "id": 4
-                        }
-                      },
-                      "nested": {
-                        "Color": {
-                          "values": {
-                            "COLOR_UNSPECIFIED": 0,
-                            "YELLOW": 4,
-                            "RED": 6
-                          }
-                        },
-                        "Direction": {
-                          "values": {
-                            "DIRECTION_UNSPECIFIED": 0,
-                            "ABOVE": 1,
-                            "BELOW": 2
-                          }
-                        }
-                      }
-                    },
-                    "SparkChartType": {
-                      "values": {
-                        "SPARK_CHART_TYPE_UNSPECIFIED": 0,
-                        "SPARK_LINE": 1,
-                        "SPARK_BAR": 2
-                      }
-                    },
-                    "Text": {
-                      "fields": {
-                        "content": {
-                          "type": "string",
-                          "id": 1
-                        },
-                        "format": {
-                          "type": "Format",
-                          "id": 2
-                        }
-                      },
-                      "nested": {
-                        "Format": {
-                          "values": {
-                            "FORMAT_UNSPECIFIED": 0,
-                            "MARKDOWN": 1,
-                            "RAW": 2
-                          }
-                        }
-                      }
-                    },
-                    "XyChart": {
-                      "fields": {
-                        "dataSets": {
-                          "rule": "repeated",
-                          "type": "DataSet",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "timeshiftDuration": {
-                          "type": "google.protobuf.Duration",
-                          "id": 4
-                        },
-                        "thresholds": {
-                          "rule": "repeated",
-                          "type": "Threshold",
-                          "id": 5
-                        },
-                        "xAxis": {
-                          "type": "Axis",
-                          "id": 6
-                        },
-                        "yAxis": {
-                          "type": "Axis",
-                          "id": 7
-                        },
-                        "chartOptions": {
-                          "type": "ChartOptions",
-                          "id": 8
-                        }
-                      },
-                      "nested": {
-                        "DataSet": {
-                          "fields": {
-                            "timeSeriesQuery": {
-                              "type": "TimeSeriesQuery",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "plotType": {
-                              "type": "PlotType",
-                              "id": 2
-                            },
-                            "legendTemplate": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "minAlignmentPeriod": {
-                              "type": "google.protobuf.Duration",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          },
-                          "nested": {
-                            "PlotType": {
-                              "values": {
-                                "PLOT_TYPE_UNSPECIFIED": 0,
-                                "LINE": 1,
-                                "STACKED_AREA": 2,
-                                "STACKED_BAR": 3,
-                                "HEATMAP": 4
-                              }
-                            }
-                          }
-                        },
-                        "Axis": {
-                          "fields": {
-                            "label": {
-                              "type": "string",
-                              "id": 1
-                            },
-                            "scale": {
-                              "type": "Scale",
-                              "id": 2
-                            }
-                          },
-                          "nested": {
-                            "Scale": {
-                              "values": {
-                                "SCALE_UNSPECIFIED": 0,
-                                "LINEAR": 1,
-                                "LOG10": 2
-                              }
-                            }
-                          }
-                        }
-                      }
-                    },
-                    "ChartOptions": {
-                      "fields": {
-                        "mode": {
-                          "type": "Mode",
-                          "id": 1
-                        }
-                      },
-                      "nested": {
-                        "Mode": {
-                          "values": {
-                            "MODE_UNSPECIFIED": 0,
-                            "COLOR": 1,
-                            "X_RAY": 2,
-                            "STATS": 3
-                          }
-                        }
-                      }
-                    },
-                    "DashboardsService": {
-                      "options": {
-                        "(google.api.default_host)": "monitoring.googleapis.com",
-                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/monitoring.read,https://www.googleapis.com/auth/monitoring.write"
-                      },
-                      "methods": {
-                        "CreateDashboard": {
-                          "requestType": "CreateDashboardRequest",
-                          "responseType": "Dashboard",
-                          "options": {
-                            "(google.api.http).post": "/v1/{parent=projects/*}/dashboards",
-                            "(google.api.http).body": "dashboard"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1/{parent=projects/*}/dashboards",
-                                "body": "dashboard"
-                              }
-                            }
-                          ]
-                        },
-                        "ListDashboards": {
-                          "requestType": "ListDashboardsRequest",
-                          "responseType": "ListDashboardsResponse",
-                          "options": {
-                            "(google.api.http).get": "/v1/{parent=projects/*}/dashboards"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1/{parent=projects/*}/dashboards"
-                              }
-                            }
-                          ]
-                        },
-                        "GetDashboard": {
-                          "requestType": "GetDashboardRequest",
-                          "responseType": "Dashboard",
-                          "options": {
-                            "(google.api.http).get": "/v1/{name=projects/*/dashboards/*}"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "get": "/v1/{name=projects/*/dashboards/*}"
-                              }
-                            }
-                          ]
-                        },
-                        "DeleteDashboard": {
-                          "requestType": "DeleteDashboardRequest",
-                          "responseType": "google.protobuf.Empty",
-                          "options": {
-                            "(google.api.http).delete": "/v1/{name=projects/*/dashboards/*}"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "delete": "/v1/{name=projects/*/dashboards/*}"
-                              }
-                            }
-                          ]
-                        },
-                        "UpdateDashboard": {
-                          "requestType": "UpdateDashboardRequest",
-                          "responseType": "Dashboard",
-                          "options": {
-                            "(google.api.http).patch": "/v1/{dashboard.name=projects/*/dashboards/*}",
-                            "(google.api.http).body": "dashboard"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "patch": "/v1/{dashboard.name=projects/*/dashboards/*}",
-                                "body": "dashboard"
-                              }
-                            }
-                          ]
-                        }
-                      }
-                    },
-                    "CreateDashboardRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        },
-                        "dashboard": {
-                          "type": "Dashboard",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    },
-                    "ListDashboardsRequest": {
-                      "fields": {
-                        "parent": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "cloudresourcemanager.googleapis.com/Project"
-                          }
-                        },
-                        "pageSize": {
-                          "type": "int32",
-                          "id": 2
-                        },
-                        "pageToken": {
-                          "type": "string",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "ListDashboardsResponse": {
-                      "fields": {
-                        "dashboards": {
-                          "rule": "repeated",
-                          "type": "Dashboard",
-                          "id": 1
-                        },
-                        "nextPageToken": {
-                          "type": "string",
-                          "id": 2
-                        }
-                      }
-                    },
-                    "GetDashboardRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "monitoring.googleapis.com/Dashboard"
-                          }
-                        }
-                      }
-                    },
-                    "DeleteDashboardRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "monitoring.googleapis.com/Dashboard"
-                          }
-                        }
-                      }
-                    },
-                    "UpdateDashboardRequest": {
-                      "fields": {
-                        "dashboard": {
-                          "type": "Dashboard",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "api": {
-          "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
-            "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
-            "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI",
-            "cc_enable_arenas": true
-          },
-          "nested": {
-            "Distribution": {
-              "fields": {
-                "count": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "mean": {
-                  "type": "double",
-                  "id": 2
-                },
-                "sumOfSquaredDeviation": {
-                  "type": "double",
-                  "id": 3
-                },
-                "range": {
-                  "type": "Range",
-                  "id": 4
-                },
-                "bucketOptions": {
-                  "type": "BucketOptions",
-                  "id": 6
-                },
-                "bucketCounts": {
-                  "rule": "repeated",
-                  "type": "int64",
-                  "id": 7
-                },
-                "exemplars": {
-                  "rule": "repeated",
-                  "type": "Exemplar",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "Range": {
-                  "fields": {
-                    "min": {
-                      "type": "double",
-                      "id": 1
-                    },
-                    "max": {
-                      "type": "double",
-                      "id": 2
-                    }
-                  }
-                },
-                "BucketOptions": {
-                  "oneofs": {
-                    "options": {
-                      "oneof": [
-                        "linearBuckets",
-                        "exponentialBuckets",
-                        "explicitBuckets"
-                      ]
-                    }
-                  },
-                  "fields": {
-                    "linearBuckets": {
-                      "type": "Linear",
-                      "id": 1
-                    },
-                    "exponentialBuckets": {
-                      "type": "Exponential",
-                      "id": 2
-                    },
-                    "explicitBuckets": {
-                      "type": "Explicit",
-                      "id": 3
-                    }
-                  },
-                  "nested": {
-                    "Linear": {
-                      "fields": {
-                        "numFiniteBuckets": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "width": {
-                          "type": "double",
-                          "id": 2
-                        },
-                        "offset": {
-                          "type": "double",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "Exponential": {
-                      "fields": {
-                        "numFiniteBuckets": {
-                          "type": "int32",
-                          "id": 1
-                        },
-                        "growthFactor": {
-                          "type": "double",
-                          "id": 2
-                        },
-                        "scale": {
-                          "type": "double",
-                          "id": 3
-                        }
-                      }
-                    },
-                    "Explicit": {
-                      "fields": {
-                        "bounds": {
-                          "rule": "repeated",
-                          "type": "double",
-                          "id": 1
-                        }
-                      }
-                    }
-                  }
-                },
-                "Exemplar": {
-                  "fields": {
-                    "value": {
-                      "type": "double",
-                      "id": 1
-                    },
-                    "timestamp": {
-                      "type": "google.protobuf.Timestamp",
-                      "id": 2
-                    },
-                    "attachments": {
-                      "rule": "repeated",
-                      "type": "google.protobuf.Any",
-                      "id": 3
-                    }
-                  }
-                }
-              }
-            },
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "http": {
-              "type": "HttpRule",
-              "id": 72295728,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "Http": {
-              "fields": {
-                "rules": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 1
-                },
-                "fullyDecodeReservedExpansion": {
-                  "type": "bool",
-                  "id": 2
-                }
-              }
-            },
-            "HttpRule": {
-              "oneofs": {
-                "pattern": {
-                  "oneof": [
-                    "get",
-                    "put",
-                    "post",
-                    "delete",
-                    "patch",
-                    "custom"
-                  ]
-                }
-              },
-              "fields": {
-                "selector": {
-                  "type": "string",
-                  "id": 1
-                },
-                "get": {
-                  "type": "string",
-                  "id": 2
-                },
-                "put": {
-                  "type": "string",
-                  "id": 3
-                },
-                "post": {
-                  "type": "string",
-                  "id": 4
-                },
-                "delete": {
-                  "type": "string",
-                  "id": 5
-                },
-                "patch": {
-                  "type": "string",
-                  "id": 6
-                },
-                "custom": {
-                  "type": "CustomHttpPattern",
-                  "id": 8
-                },
-                "body": {
-                  "type": "string",
-                  "id": 7
-                },
-                "responseBody": {
-                  "type": "string",
-                  "id": 12
-                },
-                "additionalBindings": {
-                  "rule": "repeated",
-                  "type": "HttpRule",
-                  "id": 11
-                }
-              }
-            },
-            "CustomHttpPattern": {
-              "fields": {
-                "kind": {
-                  "type": "string",
-                  "id": 1
-                },
-                "path": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "methodSignature": {
-              "rule": "repeated",
-              "type": "string",
-              "id": 1051,
-              "extend": "google.protobuf.MethodOptions"
-            },
-            "defaultHost": {
-              "type": "string",
-              "id": 1049,
-              "extend": "google.protobuf.ServiceOptions"
-            },
-            "oauthScopes": {
-              "type": "string",
-              "id": 1050,
-              "extend": "google.protobuf.ServiceOptions"
             }
           }
         }

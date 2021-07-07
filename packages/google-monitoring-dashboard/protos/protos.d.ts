@@ -17,296 +17,4892 @@ import {protobuf as $protobuf} from "google-gax";
 /** Namespace google. */
 export namespace google {
 
+    /** Namespace monitoring. */
+    namespace monitoring {
+
+        /** Namespace dashboard. */
+        namespace dashboard {
+
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of an AlertChart. */
+                interface IAlertChart {
+
+                    /** AlertChart name */
+                    name?: (string|null);
+                }
+
+                /** Represents an AlertChart. */
+                class AlertChart implements IAlertChart {
+
+                    /**
+                     * Constructs a new AlertChart.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IAlertChart);
+
+                    /** AlertChart name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new AlertChart instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AlertChart instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IAlertChart): google.monitoring.dashboard.v1.AlertChart;
+
+                    /**
+                     * Encodes the specified AlertChart message. Does not implicitly {@link google.monitoring.dashboard.v1.AlertChart.verify|verify} messages.
+                     * @param message AlertChart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IAlertChart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AlertChart message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.AlertChart.verify|verify} messages.
+                     * @param message AlertChart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IAlertChart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AlertChart message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AlertChart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.AlertChart;
+
+                    /**
+                     * Decodes an AlertChart message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AlertChart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.AlertChart;
+
+                    /**
+                     * Verifies an AlertChart message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AlertChart message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AlertChart
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.AlertChart;
+
+                    /**
+                     * Creates a plain object from an AlertChart message. Also converts values to other types if specified.
+                     * @param message AlertChart
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.AlertChart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AlertChart to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Aggregation. */
+                interface IAggregation {
+
+                    /** Aggregation alignmentPeriod */
+                    alignmentPeriod?: (google.protobuf.IDuration|null);
+
+                    /** Aggregation perSeriesAligner */
+                    perSeriesAligner?: (google.monitoring.dashboard.v1.Aggregation.Aligner|keyof typeof google.monitoring.dashboard.v1.Aggregation.Aligner|null);
+
+                    /** Aggregation crossSeriesReducer */
+                    crossSeriesReducer?: (google.monitoring.dashboard.v1.Aggregation.Reducer|keyof typeof google.monitoring.dashboard.v1.Aggregation.Reducer|null);
+
+                    /** Aggregation groupByFields */
+                    groupByFields?: (string[]|null);
+                }
+
+                /** Represents an Aggregation. */
+                class Aggregation implements IAggregation {
+
+                    /**
+                     * Constructs a new Aggregation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IAggregation);
+
+                    /** Aggregation alignmentPeriod. */
+                    public alignmentPeriod?: (google.protobuf.IDuration|null);
+
+                    /** Aggregation perSeriesAligner. */
+                    public perSeriesAligner: (google.monitoring.dashboard.v1.Aggregation.Aligner|keyof typeof google.monitoring.dashboard.v1.Aggregation.Aligner);
+
+                    /** Aggregation crossSeriesReducer. */
+                    public crossSeriesReducer: (google.monitoring.dashboard.v1.Aggregation.Reducer|keyof typeof google.monitoring.dashboard.v1.Aggregation.Reducer);
+
+                    /** Aggregation groupByFields. */
+                    public groupByFields: string[];
+
+                    /**
+                     * Creates a new Aggregation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Aggregation instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IAggregation): google.monitoring.dashboard.v1.Aggregation;
+
+                    /**
+                     * Encodes the specified Aggregation message. Does not implicitly {@link google.monitoring.dashboard.v1.Aggregation.verify|verify} messages.
+                     * @param message Aggregation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IAggregation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Aggregation message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Aggregation.verify|verify} messages.
+                     * @param message Aggregation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IAggregation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Aggregation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Aggregation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Aggregation;
+
+                    /**
+                     * Decodes an Aggregation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Aggregation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Aggregation;
+
+                    /**
+                     * Verifies an Aggregation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Aggregation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Aggregation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Aggregation;
+
+                    /**
+                     * Creates a plain object from an Aggregation message. Also converts values to other types if specified.
+                     * @param message Aggregation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.Aggregation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Aggregation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Aggregation {
+
+                    /** Aligner enum. */
+                    enum Aligner {
+                        ALIGN_NONE = 0,
+                        ALIGN_DELTA = 1,
+                        ALIGN_RATE = 2,
+                        ALIGN_INTERPOLATE = 3,
+                        ALIGN_NEXT_OLDER = 4,
+                        ALIGN_MIN = 10,
+                        ALIGN_MAX = 11,
+                        ALIGN_MEAN = 12,
+                        ALIGN_COUNT = 13,
+                        ALIGN_SUM = 14,
+                        ALIGN_STDDEV = 15,
+                        ALIGN_COUNT_TRUE = 16,
+                        ALIGN_COUNT_FALSE = 24,
+                        ALIGN_FRACTION_TRUE = 17,
+                        ALIGN_PERCENTILE_99 = 18,
+                        ALIGN_PERCENTILE_95 = 19,
+                        ALIGN_PERCENTILE_50 = 20,
+                        ALIGN_PERCENTILE_05 = 21,
+                        ALIGN_PERCENT_CHANGE = 23
+                    }
+
+                    /** Reducer enum. */
+                    enum Reducer {
+                        REDUCE_NONE = 0,
+                        REDUCE_MEAN = 1,
+                        REDUCE_MIN = 2,
+                        REDUCE_MAX = 3,
+                        REDUCE_SUM = 4,
+                        REDUCE_STDDEV = 5,
+                        REDUCE_COUNT = 6,
+                        REDUCE_COUNT_TRUE = 7,
+                        REDUCE_COUNT_FALSE = 15,
+                        REDUCE_FRACTION_TRUE = 8,
+                        REDUCE_PERCENTILE_99 = 9,
+                        REDUCE_PERCENTILE_95 = 10,
+                        REDUCE_PERCENTILE_50 = 11,
+                        REDUCE_PERCENTILE_05 = 12
+                    }
+                }
+
+                /** Properties of a PickTimeSeriesFilter. */
+                interface IPickTimeSeriesFilter {
+
+                    /** PickTimeSeriesFilter rankingMethod */
+                    rankingMethod?: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|null);
+
+                    /** PickTimeSeriesFilter numTimeSeries */
+                    numTimeSeries?: (number|null);
+
+                    /** PickTimeSeriesFilter direction */
+                    direction?: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|null);
+                }
+
+                /** Represents a PickTimeSeriesFilter. */
+                class PickTimeSeriesFilter implements IPickTimeSeriesFilter {
+
+                    /**
+                     * Constructs a new PickTimeSeriesFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IPickTimeSeriesFilter);
+
+                    /** PickTimeSeriesFilter rankingMethod. */
+                    public rankingMethod: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method);
+
+                    /** PickTimeSeriesFilter numTimeSeries. */
+                    public numTimeSeries: number;
+
+                    /** PickTimeSeriesFilter direction. */
+                    public direction: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction);
+
+                    /**
+                     * Creates a new PickTimeSeriesFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PickTimeSeriesFilter instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IPickTimeSeriesFilter): google.monitoring.dashboard.v1.PickTimeSeriesFilter;
+
+                    /**
+                     * Encodes the specified PickTimeSeriesFilter message. Does not implicitly {@link google.monitoring.dashboard.v1.PickTimeSeriesFilter.verify|verify} messages.
+                     * @param message PickTimeSeriesFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IPickTimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PickTimeSeriesFilter message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.PickTimeSeriesFilter.verify|verify} messages.
+                     * @param message PickTimeSeriesFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IPickTimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PickTimeSeriesFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PickTimeSeriesFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.PickTimeSeriesFilter;
+
+                    /**
+                     * Decodes a PickTimeSeriesFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PickTimeSeriesFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.PickTimeSeriesFilter;
+
+                    /**
+                     * Verifies a PickTimeSeriesFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PickTimeSeriesFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PickTimeSeriesFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.PickTimeSeriesFilter;
+
+                    /**
+                     * Creates a plain object from a PickTimeSeriesFilter message. Also converts values to other types if specified.
+                     * @param message PickTimeSeriesFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.PickTimeSeriesFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PickTimeSeriesFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace PickTimeSeriesFilter {
+
+                    /** Method enum. */
+                    enum Method {
+                        METHOD_UNSPECIFIED = 0,
+                        METHOD_MEAN = 1,
+                        METHOD_MAX = 2,
+                        METHOD_MIN = 3,
+                        METHOD_SUM = 4,
+                        METHOD_LATEST = 5
+                    }
+
+                    /** Direction enum. */
+                    enum Direction {
+                        DIRECTION_UNSPECIFIED = 0,
+                        TOP = 1,
+                        BOTTOM = 2
+                    }
+                }
+
+                /** Properties of a StatisticalTimeSeriesFilter. */
+                interface IStatisticalTimeSeriesFilter {
+
+                    /** StatisticalTimeSeriesFilter rankingMethod */
+                    rankingMethod?: (google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|null);
+
+                    /** StatisticalTimeSeriesFilter numTimeSeries */
+                    numTimeSeries?: (number|null);
+                }
+
+                /** Represents a StatisticalTimeSeriesFilter. */
+                class StatisticalTimeSeriesFilter implements IStatisticalTimeSeriesFilter {
+
+                    /**
+                     * Constructs a new StatisticalTimeSeriesFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter);
+
+                    /** StatisticalTimeSeriesFilter rankingMethod. */
+                    public rankingMethod: (google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method);
+
+                    /** StatisticalTimeSeriesFilter numTimeSeries. */
+                    public numTimeSeries: number;
+
+                    /**
+                     * Creates a new StatisticalTimeSeriesFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StatisticalTimeSeriesFilter instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter): google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter;
+
+                    /**
+                     * Encodes the specified StatisticalTimeSeriesFilter message. Does not implicitly {@link google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.verify|verify} messages.
+                     * @param message StatisticalTimeSeriesFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StatisticalTimeSeriesFilter message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.verify|verify} messages.
+                     * @param message StatisticalTimeSeriesFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StatisticalTimeSeriesFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StatisticalTimeSeriesFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter;
+
+                    /**
+                     * Decodes a StatisticalTimeSeriesFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StatisticalTimeSeriesFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter;
+
+                    /**
+                     * Verifies a StatisticalTimeSeriesFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StatisticalTimeSeriesFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StatisticalTimeSeriesFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter;
+
+                    /**
+                     * Creates a plain object from a StatisticalTimeSeriesFilter message. Also converts values to other types if specified.
+                     * @param message StatisticalTimeSeriesFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StatisticalTimeSeriesFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace StatisticalTimeSeriesFilter {
+
+                    /** Method enum. */
+                    enum Method {
+                        METHOD_UNSPECIFIED = 0,
+                        METHOD_CLUSTER_OUTLIER = 1
+                    }
+                }
+
+                /** Properties of a Dashboard. */
+                interface IDashboard {
+
+                    /** Dashboard name */
+                    name?: (string|null);
+
+                    /** Dashboard displayName */
+                    displayName?: (string|null);
+
+                    /** Dashboard etag */
+                    etag?: (string|null);
+
+                    /** Dashboard gridLayout */
+                    gridLayout?: (google.monitoring.dashboard.v1.IGridLayout|null);
+
+                    /** Dashboard mosaicLayout */
+                    mosaicLayout?: (google.monitoring.dashboard.v1.IMosaicLayout|null);
+
+                    /** Dashboard rowLayout */
+                    rowLayout?: (google.monitoring.dashboard.v1.IRowLayout|null);
+
+                    /** Dashboard columnLayout */
+                    columnLayout?: (google.monitoring.dashboard.v1.IColumnLayout|null);
+                }
+
+                /** Represents a Dashboard. */
+                class Dashboard implements IDashboard {
+
+                    /**
+                     * Constructs a new Dashboard.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IDashboard);
+
+                    /** Dashboard name. */
+                    public name: string;
+
+                    /** Dashboard displayName. */
+                    public displayName: string;
+
+                    /** Dashboard etag. */
+                    public etag: string;
+
+                    /** Dashboard gridLayout. */
+                    public gridLayout?: (google.monitoring.dashboard.v1.IGridLayout|null);
+
+                    /** Dashboard mosaicLayout. */
+                    public mosaicLayout?: (google.monitoring.dashboard.v1.IMosaicLayout|null);
+
+                    /** Dashboard rowLayout. */
+                    public rowLayout?: (google.monitoring.dashboard.v1.IRowLayout|null);
+
+                    /** Dashboard columnLayout. */
+                    public columnLayout?: (google.monitoring.dashboard.v1.IColumnLayout|null);
+
+                    /** Dashboard layout. */
+                    public layout?: ("gridLayout"|"mosaicLayout"|"rowLayout"|"columnLayout");
+
+                    /**
+                     * Creates a new Dashboard instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Dashboard instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IDashboard): google.monitoring.dashboard.v1.Dashboard;
+
+                    /**
+                     * Encodes the specified Dashboard message. Does not implicitly {@link google.monitoring.dashboard.v1.Dashboard.verify|verify} messages.
+                     * @param message Dashboard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IDashboard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Dashboard message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Dashboard.verify|verify} messages.
+                     * @param message Dashboard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IDashboard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Dashboard message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Dashboard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Dashboard;
+
+                    /**
+                     * Decodes a Dashboard message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Dashboard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Dashboard;
+
+                    /**
+                     * Verifies a Dashboard message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Dashboard message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Dashboard
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Dashboard;
+
+                    /**
+                     * Creates a plain object from a Dashboard message. Also converts values to other types if specified.
+                     * @param message Dashboard
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.Dashboard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Dashboard to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GridLayout. */
+                interface IGridLayout {
+
+                    /** GridLayout columns */
+                    columns?: (number|Long|string|null);
+
+                    /** GridLayout widgets */
+                    widgets?: (google.monitoring.dashboard.v1.IWidget[]|null);
+                }
+
+                /** Represents a GridLayout. */
+                class GridLayout implements IGridLayout {
+
+                    /**
+                     * Constructs a new GridLayout.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IGridLayout);
+
+                    /** GridLayout columns. */
+                    public columns: (number|Long|string);
+
+                    /** GridLayout widgets. */
+                    public widgets: google.monitoring.dashboard.v1.IWidget[];
+
+                    /**
+                     * Creates a new GridLayout instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GridLayout instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IGridLayout): google.monitoring.dashboard.v1.GridLayout;
+
+                    /**
+                     * Encodes the specified GridLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.GridLayout.verify|verify} messages.
+                     * @param message GridLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IGridLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GridLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.GridLayout.verify|verify} messages.
+                     * @param message GridLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IGridLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GridLayout message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GridLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.GridLayout;
+
+                    /**
+                     * Decodes a GridLayout message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GridLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.GridLayout;
+
+                    /**
+                     * Verifies a GridLayout message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GridLayout message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GridLayout
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.GridLayout;
+
+                    /**
+                     * Creates a plain object from a GridLayout message. Also converts values to other types if specified.
+                     * @param message GridLayout
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.GridLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GridLayout to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MosaicLayout. */
+                interface IMosaicLayout {
+
+                    /** MosaicLayout columns */
+                    columns?: (number|null);
+
+                    /** MosaicLayout tiles */
+                    tiles?: (google.monitoring.dashboard.v1.MosaicLayout.ITile[]|null);
+                }
+
+                /** Represents a MosaicLayout. */
+                class MosaicLayout implements IMosaicLayout {
+
+                    /**
+                     * Constructs a new MosaicLayout.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IMosaicLayout);
+
+                    /** MosaicLayout columns. */
+                    public columns: number;
+
+                    /** MosaicLayout tiles. */
+                    public tiles: google.monitoring.dashboard.v1.MosaicLayout.ITile[];
+
+                    /**
+                     * Creates a new MosaicLayout instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MosaicLayout instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IMosaicLayout): google.monitoring.dashboard.v1.MosaicLayout;
+
+                    /**
+                     * Encodes the specified MosaicLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.verify|verify} messages.
+                     * @param message MosaicLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IMosaicLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MosaicLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.verify|verify} messages.
+                     * @param message MosaicLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IMosaicLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MosaicLayout message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MosaicLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.MosaicLayout;
+
+                    /**
+                     * Decodes a MosaicLayout message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MosaicLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.MosaicLayout;
+
+                    /**
+                     * Verifies a MosaicLayout message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MosaicLayout message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MosaicLayout
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.MosaicLayout;
+
+                    /**
+                     * Creates a plain object from a MosaicLayout message. Also converts values to other types if specified.
+                     * @param message MosaicLayout
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.MosaicLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MosaicLayout to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace MosaicLayout {
+
+                    /** Properties of a Tile. */
+                    interface ITile {
+
+                        /** Tile xPos */
+                        xPos?: (number|null);
+
+                        /** Tile yPos */
+                        yPos?: (number|null);
+
+                        /** Tile width */
+                        width?: (number|null);
+
+                        /** Tile height */
+                        height?: (number|null);
+
+                        /** Tile widget */
+                        widget?: (google.monitoring.dashboard.v1.IWidget|null);
+                    }
+
+                    /** Represents a Tile. */
+                    class Tile implements ITile {
+
+                        /**
+                         * Constructs a new Tile.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.MosaicLayout.ITile);
+
+                        /** Tile xPos. */
+                        public xPos: number;
+
+                        /** Tile yPos. */
+                        public yPos: number;
+
+                        /** Tile width. */
+                        public width: number;
+
+                        /** Tile height. */
+                        public height: number;
+
+                        /** Tile widget. */
+                        public widget?: (google.monitoring.dashboard.v1.IWidget|null);
+
+                        /**
+                         * Creates a new Tile instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Tile instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.MosaicLayout.ITile): google.monitoring.dashboard.v1.MosaicLayout.Tile;
+
+                        /**
+                         * Encodes the specified Tile message. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.Tile.verify|verify} messages.
+                         * @param message Tile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.MosaicLayout.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Tile message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.Tile.verify|verify} messages.
+                         * @param message Tile message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.MosaicLayout.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Tile message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Tile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.MosaicLayout.Tile;
+
+                        /**
+                         * Decodes a Tile message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Tile
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.MosaicLayout.Tile;
+
+                        /**
+                         * Verifies a Tile message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Tile message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Tile
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.MosaicLayout.Tile;
+
+                        /**
+                         * Creates a plain object from a Tile message. Also converts values to other types if specified.
+                         * @param message Tile
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.MosaicLayout.Tile, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Tile to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a RowLayout. */
+                interface IRowLayout {
+
+                    /** RowLayout rows */
+                    rows?: (google.monitoring.dashboard.v1.RowLayout.IRow[]|null);
+                }
+
+                /** Represents a RowLayout. */
+                class RowLayout implements IRowLayout {
+
+                    /**
+                     * Constructs a new RowLayout.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IRowLayout);
+
+                    /** RowLayout rows. */
+                    public rows: google.monitoring.dashboard.v1.RowLayout.IRow[];
+
+                    /**
+                     * Creates a new RowLayout instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RowLayout instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IRowLayout): google.monitoring.dashboard.v1.RowLayout;
+
+                    /**
+                     * Encodes the specified RowLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.verify|verify} messages.
+                     * @param message RowLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IRowLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RowLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.verify|verify} messages.
+                     * @param message RowLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IRowLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RowLayout message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RowLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.RowLayout;
+
+                    /**
+                     * Decodes a RowLayout message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RowLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.RowLayout;
+
+                    /**
+                     * Verifies a RowLayout message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RowLayout message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RowLayout
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.RowLayout;
+
+                    /**
+                     * Creates a plain object from a RowLayout message. Also converts values to other types if specified.
+                     * @param message RowLayout
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.RowLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RowLayout to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace RowLayout {
+
+                    /** Properties of a Row. */
+                    interface IRow {
+
+                        /** Row weight */
+                        weight?: (number|Long|string|null);
+
+                        /** Row widgets */
+                        widgets?: (google.monitoring.dashboard.v1.IWidget[]|null);
+                    }
+
+                    /** Represents a Row. */
+                    class Row implements IRow {
+
+                        /**
+                         * Constructs a new Row.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.RowLayout.IRow);
+
+                        /** Row weight. */
+                        public weight: (number|Long|string);
+
+                        /** Row widgets. */
+                        public widgets: google.monitoring.dashboard.v1.IWidget[];
+
+                        /**
+                         * Creates a new Row instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Row instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.RowLayout.IRow): google.monitoring.dashboard.v1.RowLayout.Row;
+
+                        /**
+                         * Encodes the specified Row message. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.Row.verify|verify} messages.
+                         * @param message Row message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.RowLayout.IRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Row message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.Row.verify|verify} messages.
+                         * @param message Row message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.RowLayout.IRow, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Row message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Row
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.RowLayout.Row;
+
+                        /**
+                         * Decodes a Row message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Row
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.RowLayout.Row;
+
+                        /**
+                         * Verifies a Row message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Row message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Row
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.RowLayout.Row;
+
+                        /**
+                         * Creates a plain object from a Row message. Also converts values to other types if specified.
+                         * @param message Row
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.RowLayout.Row, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Row to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a ColumnLayout. */
+                interface IColumnLayout {
+
+                    /** ColumnLayout columns */
+                    columns?: (google.monitoring.dashboard.v1.ColumnLayout.IColumn[]|null);
+                }
+
+                /** Represents a ColumnLayout. */
+                class ColumnLayout implements IColumnLayout {
+
+                    /**
+                     * Constructs a new ColumnLayout.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IColumnLayout);
+
+                    /** ColumnLayout columns. */
+                    public columns: google.monitoring.dashboard.v1.ColumnLayout.IColumn[];
+
+                    /**
+                     * Creates a new ColumnLayout instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ColumnLayout instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IColumnLayout): google.monitoring.dashboard.v1.ColumnLayout;
+
+                    /**
+                     * Encodes the specified ColumnLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.verify|verify} messages.
+                     * @param message ColumnLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IColumnLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ColumnLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.verify|verify} messages.
+                     * @param message ColumnLayout message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IColumnLayout, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ColumnLayout message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ColumnLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ColumnLayout;
+
+                    /**
+                     * Decodes a ColumnLayout message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ColumnLayout
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ColumnLayout;
+
+                    /**
+                     * Verifies a ColumnLayout message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ColumnLayout message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ColumnLayout
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ColumnLayout;
+
+                    /**
+                     * Creates a plain object from a ColumnLayout message. Also converts values to other types if specified.
+                     * @param message ColumnLayout
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.ColumnLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ColumnLayout to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ColumnLayout {
+
+                    /** Properties of a Column. */
+                    interface IColumn {
+
+                        /** Column weight */
+                        weight?: (number|Long|string|null);
+
+                        /** Column widgets */
+                        widgets?: (google.monitoring.dashboard.v1.IWidget[]|null);
+                    }
+
+                    /** Represents a Column. */
+                    class Column implements IColumn {
+
+                        /**
+                         * Constructs a new Column.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.ColumnLayout.IColumn);
+
+                        /** Column weight. */
+                        public weight: (number|Long|string);
+
+                        /** Column widgets. */
+                        public widgets: google.monitoring.dashboard.v1.IWidget[];
+
+                        /**
+                         * Creates a new Column instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Column instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.ColumnLayout.IColumn): google.monitoring.dashboard.v1.ColumnLayout.Column;
+
+                        /**
+                         * Encodes the specified Column message. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.Column.verify|verify} messages.
+                         * @param message Column message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.ColumnLayout.IColumn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Column message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.Column.verify|verify} messages.
+                         * @param message Column message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.ColumnLayout.IColumn, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a Column message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Column
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ColumnLayout.Column;
+
+                        /**
+                         * Decodes a Column message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Column
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ColumnLayout.Column;
+
+                        /**
+                         * Verifies a Column message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a Column message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Column
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ColumnLayout.Column;
+
+                        /**
+                         * Creates a plain object from a Column message. Also converts values to other types if specified.
+                         * @param message Column
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.ColumnLayout.Column, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Column to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a Widget. */
+                interface IWidget {
+
+                    /** Widget title */
+                    title?: (string|null);
+
+                    /** Widget xyChart */
+                    xyChart?: (google.monitoring.dashboard.v1.IXyChart|null);
+
+                    /** Widget scorecard */
+                    scorecard?: (google.monitoring.dashboard.v1.IScorecard|null);
+
+                    /** Widget text */
+                    text?: (google.monitoring.dashboard.v1.IText|null);
+
+                    /** Widget blank */
+                    blank?: (google.protobuf.IEmpty|null);
+
+                    /** Widget alertChart */
+                    alertChart?: (google.monitoring.dashboard.v1.IAlertChart|null);
+                }
+
+                /** Represents a Widget. */
+                class Widget implements IWidget {
+
+                    /**
+                     * Constructs a new Widget.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IWidget);
+
+                    /** Widget title. */
+                    public title: string;
+
+                    /** Widget xyChart. */
+                    public xyChart?: (google.monitoring.dashboard.v1.IXyChart|null);
+
+                    /** Widget scorecard. */
+                    public scorecard?: (google.monitoring.dashboard.v1.IScorecard|null);
+
+                    /** Widget text. */
+                    public text?: (google.monitoring.dashboard.v1.IText|null);
+
+                    /** Widget blank. */
+                    public blank?: (google.protobuf.IEmpty|null);
+
+                    /** Widget alertChart. */
+                    public alertChart?: (google.monitoring.dashboard.v1.IAlertChart|null);
+
+                    /** Widget content. */
+                    public content?: ("xyChart"|"scorecard"|"text"|"blank"|"alertChart");
+
+                    /**
+                     * Creates a new Widget instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Widget instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IWidget): google.monitoring.dashboard.v1.Widget;
+
+                    /**
+                     * Encodes the specified Widget message. Does not implicitly {@link google.monitoring.dashboard.v1.Widget.verify|verify} messages.
+                     * @param message Widget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IWidget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Widget message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Widget.verify|verify} messages.
+                     * @param message Widget message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IWidget, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Widget message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Widget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Widget;
+
+                    /**
+                     * Decodes a Widget message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Widget
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Widget;
+
+                    /**
+                     * Verifies a Widget message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Widget message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Widget
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Widget;
+
+                    /**
+                     * Creates a plain object from a Widget message. Also converts values to other types if specified.
+                     * @param message Widget
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.Widget, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Widget to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a Scorecard. */
+                interface IScorecard {
+
+                    /** Scorecard timeSeriesQuery */
+                    timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
+
+                    /** Scorecard gaugeView */
+                    gaugeView?: (google.monitoring.dashboard.v1.Scorecard.IGaugeView|null);
+
+                    /** Scorecard sparkChartView */
+                    sparkChartView?: (google.monitoring.dashboard.v1.Scorecard.ISparkChartView|null);
+
+                    /** Scorecard thresholds */
+                    thresholds?: (google.monitoring.dashboard.v1.IThreshold[]|null);
+                }
+
+                /** Represents a Scorecard. */
+                class Scorecard implements IScorecard {
+
+                    /**
+                     * Constructs a new Scorecard.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IScorecard);
+
+                    /** Scorecard timeSeriesQuery. */
+                    public timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
+
+                    /** Scorecard gaugeView. */
+                    public gaugeView?: (google.monitoring.dashboard.v1.Scorecard.IGaugeView|null);
+
+                    /** Scorecard sparkChartView. */
+                    public sparkChartView?: (google.monitoring.dashboard.v1.Scorecard.ISparkChartView|null);
+
+                    /** Scorecard thresholds. */
+                    public thresholds: google.monitoring.dashboard.v1.IThreshold[];
+
+                    /** Scorecard dataView. */
+                    public dataView?: ("gaugeView"|"sparkChartView");
+
+                    /**
+                     * Creates a new Scorecard instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Scorecard instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IScorecard): google.monitoring.dashboard.v1.Scorecard;
+
+                    /**
+                     * Encodes the specified Scorecard message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.verify|verify} messages.
+                     * @param message Scorecard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IScorecard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Scorecard message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.verify|verify} messages.
+                     * @param message Scorecard message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IScorecard, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Scorecard message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Scorecard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Scorecard;
+
+                    /**
+                     * Decodes a Scorecard message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Scorecard
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Scorecard;
+
+                    /**
+                     * Verifies a Scorecard message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Scorecard message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Scorecard
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Scorecard;
+
+                    /**
+                     * Creates a plain object from a Scorecard message. Also converts values to other types if specified.
+                     * @param message Scorecard
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.Scorecard, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Scorecard to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Scorecard {
+
+                    /** Properties of a GaugeView. */
+                    interface IGaugeView {
+
+                        /** GaugeView lowerBound */
+                        lowerBound?: (number|null);
+
+                        /** GaugeView upperBound */
+                        upperBound?: (number|null);
+                    }
+
+                    /** Represents a GaugeView. */
+                    class GaugeView implements IGaugeView {
+
+                        /**
+                         * Constructs a new GaugeView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.Scorecard.IGaugeView);
+
+                        /** GaugeView lowerBound. */
+                        public lowerBound: number;
+
+                        /** GaugeView upperBound. */
+                        public upperBound: number;
+
+                        /**
+                         * Creates a new GaugeView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GaugeView instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.Scorecard.IGaugeView): google.monitoring.dashboard.v1.Scorecard.GaugeView;
+
+                        /**
+                         * Encodes the specified GaugeView message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.GaugeView.verify|verify} messages.
+                         * @param message GaugeView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.Scorecard.IGaugeView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GaugeView message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.GaugeView.verify|verify} messages.
+                         * @param message GaugeView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.Scorecard.IGaugeView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GaugeView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GaugeView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Scorecard.GaugeView;
+
+                        /**
+                         * Decodes a GaugeView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GaugeView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Scorecard.GaugeView;
+
+                        /**
+                         * Verifies a GaugeView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GaugeView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GaugeView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Scorecard.GaugeView;
+
+                        /**
+                         * Creates a plain object from a GaugeView message. Also converts values to other types if specified.
+                         * @param message GaugeView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.Scorecard.GaugeView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GaugeView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a SparkChartView. */
+                    interface ISparkChartView {
+
+                        /** SparkChartView sparkChartType */
+                        sparkChartType?: (google.monitoring.dashboard.v1.SparkChartType|keyof typeof google.monitoring.dashboard.v1.SparkChartType|null);
+
+                        /** SparkChartView minAlignmentPeriod */
+                        minAlignmentPeriod?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a SparkChartView. */
+                    class SparkChartView implements ISparkChartView {
+
+                        /**
+                         * Constructs a new SparkChartView.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.Scorecard.ISparkChartView);
+
+                        /** SparkChartView sparkChartType. */
+                        public sparkChartType: (google.monitoring.dashboard.v1.SparkChartType|keyof typeof google.monitoring.dashboard.v1.SparkChartType);
+
+                        /** SparkChartView minAlignmentPeriod. */
+                        public minAlignmentPeriod?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new SparkChartView instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SparkChartView instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.Scorecard.ISparkChartView): google.monitoring.dashboard.v1.Scorecard.SparkChartView;
+
+                        /**
+                         * Encodes the specified SparkChartView message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify|verify} messages.
+                         * @param message SparkChartView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.Scorecard.ISparkChartView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SparkChartView message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify|verify} messages.
+                         * @param message SparkChartView message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.Scorecard.ISparkChartView, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SparkChartView message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SparkChartView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Scorecard.SparkChartView;
+
+                        /**
+                         * Decodes a SparkChartView message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SparkChartView
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Scorecard.SparkChartView;
+
+                        /**
+                         * Verifies a SparkChartView message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SparkChartView message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SparkChartView
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Scorecard.SparkChartView;
+
+                        /**
+                         * Creates a plain object from a SparkChartView message. Also converts values to other types if specified.
+                         * @param message SparkChartView
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.Scorecard.SparkChartView, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SparkChartView to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a TimeSeriesQuery. */
+                interface ITimeSeriesQuery {
+
+                    /** TimeSeriesQuery timeSeriesFilter */
+                    timeSeriesFilter?: (google.monitoring.dashboard.v1.ITimeSeriesFilter|null);
+
+                    /** TimeSeriesQuery timeSeriesFilterRatio */
+                    timeSeriesFilterRatio?: (google.monitoring.dashboard.v1.ITimeSeriesFilterRatio|null);
+
+                    /** TimeSeriesQuery timeSeriesQueryLanguage */
+                    timeSeriesQueryLanguage?: (string|null);
+
+                    /** TimeSeriesQuery unitOverride */
+                    unitOverride?: (string|null);
+                }
+
+                /** Represents a TimeSeriesQuery. */
+                class TimeSeriesQuery implements ITimeSeriesQuery {
+
+                    /**
+                     * Constructs a new TimeSeriesQuery.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.ITimeSeriesQuery);
+
+                    /** TimeSeriesQuery timeSeriesFilter. */
+                    public timeSeriesFilter?: (google.monitoring.dashboard.v1.ITimeSeriesFilter|null);
+
+                    /** TimeSeriesQuery timeSeriesFilterRatio. */
+                    public timeSeriesFilterRatio?: (google.monitoring.dashboard.v1.ITimeSeriesFilterRatio|null);
+
+                    /** TimeSeriesQuery timeSeriesQueryLanguage. */
+                    public timeSeriesQueryLanguage?: (string|null);
+
+                    /** TimeSeriesQuery unitOverride. */
+                    public unitOverride: string;
+
+                    /** TimeSeriesQuery source. */
+                    public source?: ("timeSeriesFilter"|"timeSeriesFilterRatio"|"timeSeriesQueryLanguage");
+
+                    /**
+                     * Creates a new TimeSeriesQuery instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimeSeriesQuery instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.ITimeSeriesQuery): google.monitoring.dashboard.v1.TimeSeriesQuery;
+
+                    /**
+                     * Encodes the specified TimeSeriesQuery message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesQuery.verify|verify} messages.
+                     * @param message TimeSeriesQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.ITimeSeriesQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimeSeriesQuery message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesQuery.verify|verify} messages.
+                     * @param message TimeSeriesQuery message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.ITimeSeriesQuery, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimeSeriesQuery message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimeSeriesQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.TimeSeriesQuery;
+
+                    /**
+                     * Decodes a TimeSeriesQuery message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimeSeriesQuery
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.TimeSeriesQuery;
+
+                    /**
+                     * Verifies a TimeSeriesQuery message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimeSeriesQuery message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimeSeriesQuery
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.TimeSeriesQuery;
+
+                    /**
+                     * Creates a plain object from a TimeSeriesQuery message. Also converts values to other types if specified.
+                     * @param message TimeSeriesQuery
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.TimeSeriesQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimeSeriesQuery to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TimeSeriesFilter. */
+                interface ITimeSeriesFilter {
+
+                    /** TimeSeriesFilter filter */
+                    filter?: (string|null);
+
+                    /** TimeSeriesFilter aggregation */
+                    aggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
+
+                    /** TimeSeriesFilter secondaryAggregation */
+                    secondaryAggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
+
+                    /** TimeSeriesFilter pickTimeSeriesFilter */
+                    pickTimeSeriesFilter?: (google.monitoring.dashboard.v1.IPickTimeSeriesFilter|null);
+
+                    /** TimeSeriesFilter statisticalTimeSeriesFilter */
+                    statisticalTimeSeriesFilter?: (google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter|null);
+                }
+
+                /** Represents a TimeSeriesFilter. */
+                class TimeSeriesFilter implements ITimeSeriesFilter {
+
+                    /**
+                     * Constructs a new TimeSeriesFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.ITimeSeriesFilter);
+
+                    /** TimeSeriesFilter filter. */
+                    public filter: string;
+
+                    /** TimeSeriesFilter aggregation. */
+                    public aggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
+
+                    /** TimeSeriesFilter secondaryAggregation. */
+                    public secondaryAggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
+
+                    /** TimeSeriesFilter pickTimeSeriesFilter. */
+                    public pickTimeSeriesFilter?: (google.monitoring.dashboard.v1.IPickTimeSeriesFilter|null);
+
+                    /** TimeSeriesFilter statisticalTimeSeriesFilter. */
+                    public statisticalTimeSeriesFilter?: (google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter|null);
+
+                    /** TimeSeriesFilter outputFilter. */
+                    public outputFilter?: ("pickTimeSeriesFilter"|"statisticalTimeSeriesFilter");
+
+                    /**
+                     * Creates a new TimeSeriesFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimeSeriesFilter instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.ITimeSeriesFilter): google.monitoring.dashboard.v1.TimeSeriesFilter;
+
+                    /**
+                     * Encodes the specified TimeSeriesFilter message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilter.verify|verify} messages.
+                     * @param message TimeSeriesFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.ITimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimeSeriesFilter message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilter.verify|verify} messages.
+                     * @param message TimeSeriesFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.ITimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimeSeriesFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimeSeriesFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.TimeSeriesFilter;
+
+                    /**
+                     * Decodes a TimeSeriesFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimeSeriesFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.TimeSeriesFilter;
+
+                    /**
+                     * Verifies a TimeSeriesFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimeSeriesFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimeSeriesFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.TimeSeriesFilter;
+
+                    /**
+                     * Creates a plain object from a TimeSeriesFilter message. Also converts values to other types if specified.
+                     * @param message TimeSeriesFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.TimeSeriesFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimeSeriesFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TimeSeriesFilterRatio. */
+                interface ITimeSeriesFilterRatio {
+
+                    /** TimeSeriesFilterRatio numerator */
+                    numerator?: (google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart|null);
+
+                    /** TimeSeriesFilterRatio denominator */
+                    denominator?: (google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart|null);
+
+                    /** TimeSeriesFilterRatio secondaryAggregation */
+                    secondaryAggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
+
+                    /** TimeSeriesFilterRatio pickTimeSeriesFilter */
+                    pickTimeSeriesFilter?: (google.monitoring.dashboard.v1.IPickTimeSeriesFilter|null);
+
+                    /** TimeSeriesFilterRatio statisticalTimeSeriesFilter */
+                    statisticalTimeSeriesFilter?: (google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter|null);
+                }
+
+                /** Represents a TimeSeriesFilterRatio. */
+                class TimeSeriesFilterRatio implements ITimeSeriesFilterRatio {
+
+                    /**
+                     * Constructs a new TimeSeriesFilterRatio.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.ITimeSeriesFilterRatio);
+
+                    /** TimeSeriesFilterRatio numerator. */
+                    public numerator?: (google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart|null);
+
+                    /** TimeSeriesFilterRatio denominator. */
+                    public denominator?: (google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart|null);
+
+                    /** TimeSeriesFilterRatio secondaryAggregation. */
+                    public secondaryAggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
+
+                    /** TimeSeriesFilterRatio pickTimeSeriesFilter. */
+                    public pickTimeSeriesFilter?: (google.monitoring.dashboard.v1.IPickTimeSeriesFilter|null);
+
+                    /** TimeSeriesFilterRatio statisticalTimeSeriesFilter. */
+                    public statisticalTimeSeriesFilter?: (google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter|null);
+
+                    /** TimeSeriesFilterRatio outputFilter. */
+                    public outputFilter?: ("pickTimeSeriesFilter"|"statisticalTimeSeriesFilter");
+
+                    /**
+                     * Creates a new TimeSeriesFilterRatio instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TimeSeriesFilterRatio instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.ITimeSeriesFilterRatio): google.monitoring.dashboard.v1.TimeSeriesFilterRatio;
+
+                    /**
+                     * Encodes the specified TimeSeriesFilterRatio message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilterRatio.verify|verify} messages.
+                     * @param message TimeSeriesFilterRatio message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.ITimeSeriesFilterRatio, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TimeSeriesFilterRatio message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilterRatio.verify|verify} messages.
+                     * @param message TimeSeriesFilterRatio message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.ITimeSeriesFilterRatio, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TimeSeriesFilterRatio message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TimeSeriesFilterRatio
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.TimeSeriesFilterRatio;
+
+                    /**
+                     * Decodes a TimeSeriesFilterRatio message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TimeSeriesFilterRatio
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.TimeSeriesFilterRatio;
+
+                    /**
+                     * Verifies a TimeSeriesFilterRatio message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TimeSeriesFilterRatio message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TimeSeriesFilterRatio
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.TimeSeriesFilterRatio;
+
+                    /**
+                     * Creates a plain object from a TimeSeriesFilterRatio message. Also converts values to other types if specified.
+                     * @param message TimeSeriesFilterRatio
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.TimeSeriesFilterRatio, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TimeSeriesFilterRatio to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace TimeSeriesFilterRatio {
+
+                    /** Properties of a RatioPart. */
+                    interface IRatioPart {
+
+                        /** RatioPart filter */
+                        filter?: (string|null);
+
+                        /** RatioPart aggregation */
+                        aggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
+                    }
+
+                    /** Represents a RatioPart. */
+                    class RatioPart implements IRatioPart {
+
+                        /**
+                         * Constructs a new RatioPart.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart);
+
+                        /** RatioPart filter. */
+                        public filter: string;
+
+                        /** RatioPart aggregation. */
+                        public aggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
+
+                        /**
+                         * Creates a new RatioPart instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RatioPart instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart): google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart;
+
+                        /**
+                         * Encodes the specified RatioPart message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart.verify|verify} messages.
+                         * @param message RatioPart message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RatioPart message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart.verify|verify} messages.
+                         * @param message RatioPart message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RatioPart message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RatioPart
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart;
+
+                        /**
+                         * Decodes a RatioPart message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RatioPart
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart;
+
+                        /**
+                         * Verifies a RatioPart message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RatioPart message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RatioPart
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart;
+
+                        /**
+                         * Creates a plain object from a RatioPart message. Also converts values to other types if specified.
+                         * @param message RatioPart
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RatioPart to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+                }
+
+                /** Properties of a Threshold. */
+                interface IThreshold {
+
+                    /** Threshold label */
+                    label?: (string|null);
+
+                    /** Threshold value */
+                    value?: (number|null);
+
+                    /** Threshold color */
+                    color?: (google.monitoring.dashboard.v1.Threshold.Color|keyof typeof google.monitoring.dashboard.v1.Threshold.Color|null);
+
+                    /** Threshold direction */
+                    direction?: (google.monitoring.dashboard.v1.Threshold.Direction|keyof typeof google.monitoring.dashboard.v1.Threshold.Direction|null);
+                }
+
+                /** Represents a Threshold. */
+                class Threshold implements IThreshold {
+
+                    /**
+                     * Constructs a new Threshold.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IThreshold);
+
+                    /** Threshold label. */
+                    public label: string;
+
+                    /** Threshold value. */
+                    public value: number;
+
+                    /** Threshold color. */
+                    public color: (google.monitoring.dashboard.v1.Threshold.Color|keyof typeof google.monitoring.dashboard.v1.Threshold.Color);
+
+                    /** Threshold direction. */
+                    public direction: (google.monitoring.dashboard.v1.Threshold.Direction|keyof typeof google.monitoring.dashboard.v1.Threshold.Direction);
+
+                    /**
+                     * Creates a new Threshold instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Threshold instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IThreshold): google.monitoring.dashboard.v1.Threshold;
+
+                    /**
+                     * Encodes the specified Threshold message. Does not implicitly {@link google.monitoring.dashboard.v1.Threshold.verify|verify} messages.
+                     * @param message Threshold message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IThreshold, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Threshold message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Threshold.verify|verify} messages.
+                     * @param message Threshold message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IThreshold, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Threshold message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Threshold
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Threshold;
+
+                    /**
+                     * Decodes a Threshold message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Threshold
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Threshold;
+
+                    /**
+                     * Verifies a Threshold message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Threshold message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Threshold
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Threshold;
+
+                    /**
+                     * Creates a plain object from a Threshold message. Also converts values to other types if specified.
+                     * @param message Threshold
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.Threshold, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Threshold to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Threshold {
+
+                    /** Color enum. */
+                    enum Color {
+                        COLOR_UNSPECIFIED = 0,
+                        YELLOW = 4,
+                        RED = 6
+                    }
+
+                    /** Direction enum. */
+                    enum Direction {
+                        DIRECTION_UNSPECIFIED = 0,
+                        ABOVE = 1,
+                        BELOW = 2
+                    }
+                }
+
+                /** SparkChartType enum. */
+                enum SparkChartType {
+                    SPARK_CHART_TYPE_UNSPECIFIED = 0,
+                    SPARK_LINE = 1,
+                    SPARK_BAR = 2
+                }
+
+                /** Properties of a Text. */
+                interface IText {
+
+                    /** Text content */
+                    content?: (string|null);
+
+                    /** Text format */
+                    format?: (google.monitoring.dashboard.v1.Text.Format|keyof typeof google.monitoring.dashboard.v1.Text.Format|null);
+                }
+
+                /** Represents a Text. */
+                class Text implements IText {
+
+                    /**
+                     * Constructs a new Text.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IText);
+
+                    /** Text content. */
+                    public content: string;
+
+                    /** Text format. */
+                    public format: (google.monitoring.dashboard.v1.Text.Format|keyof typeof google.monitoring.dashboard.v1.Text.Format);
+
+                    /**
+                     * Creates a new Text instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Text instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IText): google.monitoring.dashboard.v1.Text;
+
+                    /**
+                     * Encodes the specified Text message. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
+                     * @param message Text message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Text message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
+                     * @param message Text message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IText, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Text message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Text
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Text;
+
+                    /**
+                     * Decodes a Text message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Text
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Text;
+
+                    /**
+                     * Verifies a Text message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Text message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Text
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Text;
+
+                    /**
+                     * Creates a plain object from a Text message. Also converts values to other types if specified.
+                     * @param message Text
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.Text, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Text to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Text {
+
+                    /** Format enum. */
+                    enum Format {
+                        FORMAT_UNSPECIFIED = 0,
+                        MARKDOWN = 1,
+                        RAW = 2
+                    }
+                }
+
+                /** Properties of a XyChart. */
+                interface IXyChart {
+
+                    /** XyChart dataSets */
+                    dataSets?: (google.monitoring.dashboard.v1.XyChart.IDataSet[]|null);
+
+                    /** XyChart timeshiftDuration */
+                    timeshiftDuration?: (google.protobuf.IDuration|null);
+
+                    /** XyChart thresholds */
+                    thresholds?: (google.monitoring.dashboard.v1.IThreshold[]|null);
+
+                    /** XyChart xAxis */
+                    xAxis?: (google.monitoring.dashboard.v1.XyChart.IAxis|null);
+
+                    /** XyChart yAxis */
+                    yAxis?: (google.monitoring.dashboard.v1.XyChart.IAxis|null);
+
+                    /** XyChart chartOptions */
+                    chartOptions?: (google.monitoring.dashboard.v1.IChartOptions|null);
+                }
+
+                /** Represents a XyChart. */
+                class XyChart implements IXyChart {
+
+                    /**
+                     * Constructs a new XyChart.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IXyChart);
+
+                    /** XyChart dataSets. */
+                    public dataSets: google.monitoring.dashboard.v1.XyChart.IDataSet[];
+
+                    /** XyChart timeshiftDuration. */
+                    public timeshiftDuration?: (google.protobuf.IDuration|null);
+
+                    /** XyChart thresholds. */
+                    public thresholds: google.monitoring.dashboard.v1.IThreshold[];
+
+                    /** XyChart xAxis. */
+                    public xAxis?: (google.monitoring.dashboard.v1.XyChart.IAxis|null);
+
+                    /** XyChart yAxis. */
+                    public yAxis?: (google.monitoring.dashboard.v1.XyChart.IAxis|null);
+
+                    /** XyChart chartOptions. */
+                    public chartOptions?: (google.monitoring.dashboard.v1.IChartOptions|null);
+
+                    /**
+                     * Creates a new XyChart instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns XyChart instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IXyChart): google.monitoring.dashboard.v1.XyChart;
+
+                    /**
+                     * Encodes the specified XyChart message. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.verify|verify} messages.
+                     * @param message XyChart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IXyChart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified XyChart message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.verify|verify} messages.
+                     * @param message XyChart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IXyChart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a XyChart message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns XyChart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.XyChart;
+
+                    /**
+                     * Decodes a XyChart message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns XyChart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.XyChart;
+
+                    /**
+                     * Verifies a XyChart message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a XyChart message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns XyChart
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.XyChart;
+
+                    /**
+                     * Creates a plain object from a XyChart message. Also converts values to other types if specified.
+                     * @param message XyChart
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.XyChart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this XyChart to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace XyChart {
+
+                    /** Properties of a DataSet. */
+                    interface IDataSet {
+
+                        /** DataSet timeSeriesQuery */
+                        timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
+
+                        /** DataSet plotType */
+                        plotType?: (google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|keyof typeof google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|null);
+
+                        /** DataSet legendTemplate */
+                        legendTemplate?: (string|null);
+
+                        /** DataSet minAlignmentPeriod */
+                        minAlignmentPeriod?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a DataSet. */
+                    class DataSet implements IDataSet {
+
+                        /**
+                         * Constructs a new DataSet.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.XyChart.IDataSet);
+
+                        /** DataSet timeSeriesQuery. */
+                        public timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
+
+                        /** DataSet plotType. */
+                        public plotType: (google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|keyof typeof google.monitoring.dashboard.v1.XyChart.DataSet.PlotType);
+
+                        /** DataSet legendTemplate. */
+                        public legendTemplate: string;
+
+                        /** DataSet minAlignmentPeriod. */
+                        public minAlignmentPeriod?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new DataSet instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DataSet instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.XyChart.IDataSet): google.monitoring.dashboard.v1.XyChart.DataSet;
+
+                        /**
+                         * Encodes the specified DataSet message. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.DataSet.verify|verify} messages.
+                         * @param message DataSet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.XyChart.IDataSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DataSet message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.DataSet.verify|verify} messages.
+                         * @param message DataSet message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.XyChart.IDataSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DataSet message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DataSet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.XyChart.DataSet;
+
+                        /**
+                         * Decodes a DataSet message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DataSet
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.XyChart.DataSet;
+
+                        /**
+                         * Verifies a DataSet message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DataSet message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DataSet
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.XyChart.DataSet;
+
+                        /**
+                         * Creates a plain object from a DataSet message. Also converts values to other types if specified.
+                         * @param message DataSet
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.XyChart.DataSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DataSet to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace DataSet {
+
+                        /** PlotType enum. */
+                        enum PlotType {
+                            PLOT_TYPE_UNSPECIFIED = 0,
+                            LINE = 1,
+                            STACKED_AREA = 2,
+                            STACKED_BAR = 3,
+                            HEATMAP = 4
+                        }
+                    }
+
+                    /** Properties of an Axis. */
+                    interface IAxis {
+
+                        /** Axis label */
+                        label?: (string|null);
+
+                        /** Axis scale */
+                        scale?: (google.monitoring.dashboard.v1.XyChart.Axis.Scale|keyof typeof google.monitoring.dashboard.v1.XyChart.Axis.Scale|null);
+                    }
+
+                    /** Represents an Axis. */
+                    class Axis implements IAxis {
+
+                        /**
+                         * Constructs a new Axis.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.monitoring.dashboard.v1.XyChart.IAxis);
+
+                        /** Axis label. */
+                        public label: string;
+
+                        /** Axis scale. */
+                        public scale: (google.monitoring.dashboard.v1.XyChart.Axis.Scale|keyof typeof google.monitoring.dashboard.v1.XyChart.Axis.Scale);
+
+                        /**
+                         * Creates a new Axis instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Axis instance
+                         */
+                        public static create(properties?: google.monitoring.dashboard.v1.XyChart.IAxis): google.monitoring.dashboard.v1.XyChart.Axis;
+
+                        /**
+                         * Encodes the specified Axis message. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.Axis.verify|verify} messages.
+                         * @param message Axis message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.monitoring.dashboard.v1.XyChart.IAxis, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Axis message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.Axis.verify|verify} messages.
+                         * @param message Axis message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.monitoring.dashboard.v1.XyChart.IAxis, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Axis message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Axis
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.XyChart.Axis;
+
+                        /**
+                         * Decodes an Axis message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Axis
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.XyChart.Axis;
+
+                        /**
+                         * Verifies an Axis message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Axis message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Axis
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.XyChart.Axis;
+
+                        /**
+                         * Creates a plain object from an Axis message. Also converts values to other types if specified.
+                         * @param message Axis
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.monitoring.dashboard.v1.XyChart.Axis, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Axis to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Axis {
+
+                        /** Scale enum. */
+                        enum Scale {
+                            SCALE_UNSPECIFIED = 0,
+                            LINEAR = 1,
+                            LOG10 = 2
+                        }
+                    }
+                }
+
+                /** Properties of a ChartOptions. */
+                interface IChartOptions {
+
+                    /** ChartOptions mode */
+                    mode?: (google.monitoring.dashboard.v1.ChartOptions.Mode|keyof typeof google.monitoring.dashboard.v1.ChartOptions.Mode|null);
+                }
+
+                /** Represents a ChartOptions. */
+                class ChartOptions implements IChartOptions {
+
+                    /**
+                     * Constructs a new ChartOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IChartOptions);
+
+                    /** ChartOptions mode. */
+                    public mode: (google.monitoring.dashboard.v1.ChartOptions.Mode|keyof typeof google.monitoring.dashboard.v1.ChartOptions.Mode);
+
+                    /**
+                     * Creates a new ChartOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ChartOptions instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IChartOptions): google.monitoring.dashboard.v1.ChartOptions;
+
+                    /**
+                     * Encodes the specified ChartOptions message. Does not implicitly {@link google.monitoring.dashboard.v1.ChartOptions.verify|verify} messages.
+                     * @param message ChartOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IChartOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ChartOptions message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ChartOptions.verify|verify} messages.
+                     * @param message ChartOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IChartOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ChartOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ChartOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ChartOptions;
+
+                    /**
+                     * Decodes a ChartOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ChartOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ChartOptions;
+
+                    /**
+                     * Verifies a ChartOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ChartOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ChartOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ChartOptions;
+
+                    /**
+                     * Creates a plain object from a ChartOptions message. Also converts values to other types if specified.
+                     * @param message ChartOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.ChartOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ChartOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ChartOptions {
+
+                    /** Mode enum. */
+                    enum Mode {
+                        MODE_UNSPECIFIED = 0,
+                        COLOR = 1,
+                        X_RAY = 2,
+                        STATS = 3
+                    }
+                }
+
+                /** Represents a DashboardsService */
+                class DashboardsService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new DashboardsService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new DashboardsService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DashboardsService;
+
+                    /**
+                     * Calls CreateDashboard.
+                     * @param request CreateDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Dashboard
+                     */
+                    public createDashboard(request: google.monitoring.dashboard.v1.ICreateDashboardRequest, callback: google.monitoring.dashboard.v1.DashboardsService.CreateDashboardCallback): void;
+
+                    /**
+                     * Calls CreateDashboard.
+                     * @param request CreateDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDashboard(request: google.monitoring.dashboard.v1.ICreateDashboardRequest): Promise<google.monitoring.dashboard.v1.Dashboard>;
+
+                    /**
+                     * Calls ListDashboards.
+                     * @param request ListDashboardsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDashboardsResponse
+                     */
+                    public listDashboards(request: google.monitoring.dashboard.v1.IListDashboardsRequest, callback: google.monitoring.dashboard.v1.DashboardsService.ListDashboardsCallback): void;
+
+                    /**
+                     * Calls ListDashboards.
+                     * @param request ListDashboardsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDashboards(request: google.monitoring.dashboard.v1.IListDashboardsRequest): Promise<google.monitoring.dashboard.v1.ListDashboardsResponse>;
+
+                    /**
+                     * Calls GetDashboard.
+                     * @param request GetDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Dashboard
+                     */
+                    public getDashboard(request: google.monitoring.dashboard.v1.IGetDashboardRequest, callback: google.monitoring.dashboard.v1.DashboardsService.GetDashboardCallback): void;
+
+                    /**
+                     * Calls GetDashboard.
+                     * @param request GetDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDashboard(request: google.monitoring.dashboard.v1.IGetDashboardRequest): Promise<google.monitoring.dashboard.v1.Dashboard>;
+
+                    /**
+                     * Calls DeleteDashboard.
+                     * @param request DeleteDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Empty
+                     */
+                    public deleteDashboard(request: google.monitoring.dashboard.v1.IDeleteDashboardRequest, callback: google.monitoring.dashboard.v1.DashboardsService.DeleteDashboardCallback): void;
+
+                    /**
+                     * Calls DeleteDashboard.
+                     * @param request DeleteDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDashboard(request: google.monitoring.dashboard.v1.IDeleteDashboardRequest): Promise<google.protobuf.Empty>;
+
+                    /**
+                     * Calls UpdateDashboard.
+                     * @param request UpdateDashboardRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Dashboard
+                     */
+                    public updateDashboard(request: google.monitoring.dashboard.v1.IUpdateDashboardRequest, callback: google.monitoring.dashboard.v1.DashboardsService.UpdateDashboardCallback): void;
+
+                    /**
+                     * Calls UpdateDashboard.
+                     * @param request UpdateDashboardRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateDashboard(request: google.monitoring.dashboard.v1.IUpdateDashboardRequest): Promise<google.monitoring.dashboard.v1.Dashboard>;
+                }
+
+                namespace DashboardsService {
+
+                    /**
+                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#createDashboard}.
+                     * @param error Error, if any
+                     * @param [response] Dashboard
+                     */
+                    type CreateDashboardCallback = (error: (Error|null), response?: google.monitoring.dashboard.v1.Dashboard) => void;
+
+                    /**
+                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#listDashboards}.
+                     * @param error Error, if any
+                     * @param [response] ListDashboardsResponse
+                     */
+                    type ListDashboardsCallback = (error: (Error|null), response?: google.monitoring.dashboard.v1.ListDashboardsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#getDashboard}.
+                     * @param error Error, if any
+                     * @param [response] Dashboard
+                     */
+                    type GetDashboardCallback = (error: (Error|null), response?: google.monitoring.dashboard.v1.Dashboard) => void;
+
+                    /**
+                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#deleteDashboard}.
+                     * @param error Error, if any
+                     * @param [response] Empty
+                     */
+                    type DeleteDashboardCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#updateDashboard}.
+                     * @param error Error, if any
+                     * @param [response] Dashboard
+                     */
+                    type UpdateDashboardCallback = (error: (Error|null), response?: google.monitoring.dashboard.v1.Dashboard) => void;
+                }
+
+                /** Properties of a CreateDashboardRequest. */
+                interface ICreateDashboardRequest {
+
+                    /** CreateDashboardRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDashboardRequest dashboard */
+                    dashboard?: (google.monitoring.dashboard.v1.IDashboard|null);
+
+                    /** CreateDashboardRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents a CreateDashboardRequest. */
+                class CreateDashboardRequest implements ICreateDashboardRequest {
+
+                    /**
+                     * Constructs a new CreateDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.ICreateDashboardRequest);
+
+                    /** CreateDashboardRequest parent. */
+                    public parent: string;
+
+                    /** CreateDashboardRequest dashboard. */
+                    public dashboard?: (google.monitoring.dashboard.v1.IDashboard|null);
+
+                    /** CreateDashboardRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new CreateDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDashboardRequest instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.ICreateDashboardRequest): google.monitoring.dashboard.v1.CreateDashboardRequest;
+
+                    /**
+                     * Encodes the specified CreateDashboardRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.CreateDashboardRequest.verify|verify} messages.
+                     * @param message CreateDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.ICreateDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDashboardRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.CreateDashboardRequest.verify|verify} messages.
+                     * @param message CreateDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.ICreateDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.CreateDashboardRequest;
+
+                    /**
+                     * Decodes a CreateDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.CreateDashboardRequest;
+
+                    /**
+                     * Verifies a CreateDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.CreateDashboardRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDashboardRequest message. Also converts values to other types if specified.
+                     * @param message CreateDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.CreateDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListDashboardsRequest. */
+                interface IListDashboardsRequest {
+
+                    /** ListDashboardsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDashboardsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDashboardsRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDashboardsRequest. */
+                class ListDashboardsRequest implements IListDashboardsRequest {
+
+                    /**
+                     * Constructs a new ListDashboardsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IListDashboardsRequest);
+
+                    /** ListDashboardsRequest parent. */
+                    public parent: string;
+
+                    /** ListDashboardsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDashboardsRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDashboardsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDashboardsRequest instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IListDashboardsRequest): google.monitoring.dashboard.v1.ListDashboardsRequest;
+
+                    /**
+                     * Encodes the specified ListDashboardsRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.ListDashboardsRequest.verify|verify} messages.
+                     * @param message ListDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IListDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDashboardsRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ListDashboardsRequest.verify|verify} messages.
+                     * @param message ListDashboardsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IListDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDashboardsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ListDashboardsRequest;
+
+                    /**
+                     * Decodes a ListDashboardsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDashboardsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ListDashboardsRequest;
+
+                    /**
+                     * Verifies a ListDashboardsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDashboardsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDashboardsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ListDashboardsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDashboardsRequest message. Also converts values to other types if specified.
+                     * @param message ListDashboardsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.ListDashboardsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDashboardsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListDashboardsResponse. */
+                interface IListDashboardsResponse {
+
+                    /** ListDashboardsResponse dashboards */
+                    dashboards?: (google.monitoring.dashboard.v1.IDashboard[]|null);
+
+                    /** ListDashboardsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDashboardsResponse. */
+                class ListDashboardsResponse implements IListDashboardsResponse {
+
+                    /**
+                     * Constructs a new ListDashboardsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IListDashboardsResponse);
+
+                    /** ListDashboardsResponse dashboards. */
+                    public dashboards: google.monitoring.dashboard.v1.IDashboard[];
+
+                    /** ListDashboardsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDashboardsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDashboardsResponse instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IListDashboardsResponse): google.monitoring.dashboard.v1.ListDashboardsResponse;
+
+                    /**
+                     * Encodes the specified ListDashboardsResponse message. Does not implicitly {@link google.monitoring.dashboard.v1.ListDashboardsResponse.verify|verify} messages.
+                     * @param message ListDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IListDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDashboardsResponse message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ListDashboardsResponse.verify|verify} messages.
+                     * @param message ListDashboardsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IListDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDashboardsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ListDashboardsResponse;
+
+                    /**
+                     * Decodes a ListDashboardsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDashboardsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ListDashboardsResponse;
+
+                    /**
+                     * Verifies a ListDashboardsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDashboardsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDashboardsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ListDashboardsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDashboardsResponse message. Also converts values to other types if specified.
+                     * @param message ListDashboardsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.ListDashboardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDashboardsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetDashboardRequest. */
+                interface IGetDashboardRequest {
+
+                    /** GetDashboardRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDashboardRequest. */
+                class GetDashboardRequest implements IGetDashboardRequest {
+
+                    /**
+                     * Constructs a new GetDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IGetDashboardRequest);
+
+                    /** GetDashboardRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDashboardRequest instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IGetDashboardRequest): google.monitoring.dashboard.v1.GetDashboardRequest;
+
+                    /**
+                     * Encodes the specified GetDashboardRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.GetDashboardRequest.verify|verify} messages.
+                     * @param message GetDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IGetDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDashboardRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.GetDashboardRequest.verify|verify} messages.
+                     * @param message GetDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IGetDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.GetDashboardRequest;
+
+                    /**
+                     * Decodes a GetDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.GetDashboardRequest;
+
+                    /**
+                     * Verifies a GetDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.GetDashboardRequest;
+
+                    /**
+                     * Creates a plain object from a GetDashboardRequest message. Also converts values to other types if specified.
+                     * @param message GetDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.GetDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteDashboardRequest. */
+                interface IDeleteDashboardRequest {
+
+                    /** DeleteDashboardRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a DeleteDashboardRequest. */
+                class DeleteDashboardRequest implements IDeleteDashboardRequest {
+
+                    /**
+                     * Constructs a new DeleteDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IDeleteDashboardRequest);
+
+                    /** DeleteDashboardRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new DeleteDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDashboardRequest instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IDeleteDashboardRequest): google.monitoring.dashboard.v1.DeleteDashboardRequest;
+
+                    /**
+                     * Encodes the specified DeleteDashboardRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.DeleteDashboardRequest.verify|verify} messages.
+                     * @param message DeleteDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IDeleteDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDashboardRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.DeleteDashboardRequest.verify|verify} messages.
+                     * @param message DeleteDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IDeleteDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.DeleteDashboardRequest;
+
+                    /**
+                     * Decodes a DeleteDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.DeleteDashboardRequest;
+
+                    /**
+                     * Verifies a DeleteDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.DeleteDashboardRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDashboardRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.DeleteDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateDashboardRequest. */
+                interface IUpdateDashboardRequest {
+
+                    /** UpdateDashboardRequest dashboard */
+                    dashboard?: (google.monitoring.dashboard.v1.IDashboard|null);
+
+                    /** UpdateDashboardRequest validateOnly */
+                    validateOnly?: (boolean|null);
+                }
+
+                /** Represents an UpdateDashboardRequest. */
+                class UpdateDashboardRequest implements IUpdateDashboardRequest {
+
+                    /**
+                     * Constructs a new UpdateDashboardRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.monitoring.dashboard.v1.IUpdateDashboardRequest);
+
+                    /** UpdateDashboardRequest dashboard. */
+                    public dashboard?: (google.monitoring.dashboard.v1.IDashboard|null);
+
+                    /** UpdateDashboardRequest validateOnly. */
+                    public validateOnly: boolean;
+
+                    /**
+                     * Creates a new UpdateDashboardRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateDashboardRequest instance
+                     */
+                    public static create(properties?: google.monitoring.dashboard.v1.IUpdateDashboardRequest): google.monitoring.dashboard.v1.UpdateDashboardRequest;
+
+                    /**
+                     * Encodes the specified UpdateDashboardRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.UpdateDashboardRequest.verify|verify} messages.
+                     * @param message UpdateDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.monitoring.dashboard.v1.IUpdateDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateDashboardRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.UpdateDashboardRequest.verify|verify} messages.
+                     * @param message UpdateDashboardRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IUpdateDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateDashboardRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.UpdateDashboardRequest;
+
+                    /**
+                     * Decodes an UpdateDashboardRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateDashboardRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.UpdateDashboardRequest;
+
+                    /**
+                     * Verifies an UpdateDashboardRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateDashboardRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateDashboardRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.UpdateDashboardRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateDashboardRequest message. Also converts values to other types if specified.
+                     * @param message UpdateDashboardRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.monitoring.dashboard.v1.UpdateDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateDashboardRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+        }
+    }
+
+    /** Namespace api. */
+    namespace api {
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Distribution. */
+        interface IDistribution {
+
+            /** Distribution count */
+            count?: (number|Long|string|null);
+
+            /** Distribution mean */
+            mean?: (number|null);
+
+            /** Distribution sumOfSquaredDeviation */
+            sumOfSquaredDeviation?: (number|null);
+
+            /** Distribution range */
+            range?: (google.api.Distribution.IRange|null);
+
+            /** Distribution bucketOptions */
+            bucketOptions?: (google.api.Distribution.IBucketOptions|null);
+
+            /** Distribution bucketCounts */
+            bucketCounts?: ((number|Long|string)[]|null);
+
+            /** Distribution exemplars */
+            exemplars?: (google.api.Distribution.IExemplar[]|null);
+        }
+
+        /** Represents a Distribution. */
+        class Distribution implements IDistribution {
+
+            /**
+             * Constructs a new Distribution.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IDistribution);
+
+            /** Distribution count. */
+            public count: (number|Long|string);
+
+            /** Distribution mean. */
+            public mean: number;
+
+            /** Distribution sumOfSquaredDeviation. */
+            public sumOfSquaredDeviation: number;
+
+            /** Distribution range. */
+            public range?: (google.api.Distribution.IRange|null);
+
+            /** Distribution bucketOptions. */
+            public bucketOptions?: (google.api.Distribution.IBucketOptions|null);
+
+            /** Distribution bucketCounts. */
+            public bucketCounts: (number|Long|string)[];
+
+            /** Distribution exemplars. */
+            public exemplars: google.api.Distribution.IExemplar[];
+
+            /**
+             * Creates a new Distribution instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Distribution instance
+             */
+            public static create(properties?: google.api.IDistribution): google.api.Distribution;
+
+            /**
+             * Encodes the specified Distribution message. Does not implicitly {@link google.api.Distribution.verify|verify} messages.
+             * @param message Distribution message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Distribution message, length delimited. Does not implicitly {@link google.api.Distribution.verify|verify} messages.
+             * @param message Distribution message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Distribution message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Distribution
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution;
+
+            /**
+             * Decodes a Distribution message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Distribution
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution;
+
+            /**
+             * Verifies a Distribution message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Distribution message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Distribution
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Distribution;
+
+            /**
+             * Creates a plain object from a Distribution message. Also converts values to other types if specified.
+             * @param message Distribution
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Distribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Distribution to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        namespace Distribution {
+
+            /** Properties of a Range. */
+            interface IRange {
+
+                /** Range min */
+                min?: (number|null);
+
+                /** Range max */
+                max?: (number|null);
+            }
+
+            /** Represents a Range. */
+            class Range implements IRange {
+
+                /**
+                 * Constructs a new Range.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.Distribution.IRange);
+
+                /** Range min. */
+                public min: number;
+
+                /** Range max. */
+                public max: number;
+
+                /**
+                 * Creates a new Range instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Range instance
+                 */
+                public static create(properties?: google.api.Distribution.IRange): google.api.Distribution.Range;
+
+                /**
+                 * Encodes the specified Range message. Does not implicitly {@link google.api.Distribution.Range.verify|verify} messages.
+                 * @param message Range message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.Distribution.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Range message, length delimited. Does not implicitly {@link google.api.Distribution.Range.verify|verify} messages.
+                 * @param message Range message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.Distribution.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Range message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Range
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.Range;
+
+                /**
+                 * Decodes a Range message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Range
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.Range;
+
+                /**
+                 * Verifies a Range message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Range message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Range
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.Distribution.Range;
+
+                /**
+                 * Creates a plain object from a Range message. Also converts values to other types if specified.
+                 * @param message Range
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.Distribution.Range, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Range to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            /** Properties of a BucketOptions. */
+            interface IBucketOptions {
+
+                /** BucketOptions linearBuckets */
+                linearBuckets?: (google.api.Distribution.BucketOptions.ILinear|null);
+
+                /** BucketOptions exponentialBuckets */
+                exponentialBuckets?: (google.api.Distribution.BucketOptions.IExponential|null);
+
+                /** BucketOptions explicitBuckets */
+                explicitBuckets?: (google.api.Distribution.BucketOptions.IExplicit|null);
+            }
+
+            /** Represents a BucketOptions. */
+            class BucketOptions implements IBucketOptions {
+
+                /**
+                 * Constructs a new BucketOptions.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.Distribution.IBucketOptions);
+
+                /** BucketOptions linearBuckets. */
+                public linearBuckets?: (google.api.Distribution.BucketOptions.ILinear|null);
+
+                /** BucketOptions exponentialBuckets. */
+                public exponentialBuckets?: (google.api.Distribution.BucketOptions.IExponential|null);
+
+                /** BucketOptions explicitBuckets. */
+                public explicitBuckets?: (google.api.Distribution.BucketOptions.IExplicit|null);
+
+                /** BucketOptions options. */
+                public options?: ("linearBuckets"|"exponentialBuckets"|"explicitBuckets");
+
+                /**
+                 * Creates a new BucketOptions instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BucketOptions instance
+                 */
+                public static create(properties?: google.api.Distribution.IBucketOptions): google.api.Distribution.BucketOptions;
+
+                /**
+                 * Encodes the specified BucketOptions message. Does not implicitly {@link google.api.Distribution.BucketOptions.verify|verify} messages.
+                 * @param message BucketOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.Distribution.IBucketOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BucketOptions message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.verify|verify} messages.
+                 * @param message BucketOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.Distribution.IBucketOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BucketOptions message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BucketOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions;
+
+                /**
+                 * Decodes a BucketOptions message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BucketOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions;
+
+                /**
+                 * Verifies a BucketOptions message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BucketOptions message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BucketOptions
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions;
+
+                /**
+                 * Creates a plain object from a BucketOptions message. Also converts values to other types if specified.
+                 * @param message BucketOptions
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.Distribution.BucketOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BucketOptions to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+
+            namespace BucketOptions {
+
+                /** Properties of a Linear. */
+                interface ILinear {
+
+                    /** Linear numFiniteBuckets */
+                    numFiniteBuckets?: (number|null);
+
+                    /** Linear width */
+                    width?: (number|null);
+
+                    /** Linear offset */
+                    offset?: (number|null);
+                }
+
+                /** Represents a Linear. */
+                class Linear implements ILinear {
+
+                    /**
+                     * Constructs a new Linear.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.Distribution.BucketOptions.ILinear);
+
+                    /** Linear numFiniteBuckets. */
+                    public numFiniteBuckets: number;
+
+                    /** Linear width. */
+                    public width: number;
+
+                    /** Linear offset. */
+                    public offset: number;
+
+                    /**
+                     * Creates a new Linear instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Linear instance
+                     */
+                    public static create(properties?: google.api.Distribution.BucketOptions.ILinear): google.api.Distribution.BucketOptions.Linear;
+
+                    /**
+                     * Encodes the specified Linear message. Does not implicitly {@link google.api.Distribution.BucketOptions.Linear.verify|verify} messages.
+                     * @param message Linear message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.Distribution.BucketOptions.ILinear, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Linear message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Linear.verify|verify} messages.
+                     * @param message Linear message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.Distribution.BucketOptions.ILinear, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Linear message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Linear
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions.Linear;
+
+                    /**
+                     * Decodes a Linear message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Linear
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions.Linear;
+
+                    /**
+                     * Verifies a Linear message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Linear message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Linear
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions.Linear;
+
+                    /**
+                     * Creates a plain object from a Linear message. Also converts values to other types if specified.
+                     * @param message Linear
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.Distribution.BucketOptions.Linear, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Linear to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Exponential. */
+                interface IExponential {
+
+                    /** Exponential numFiniteBuckets */
+                    numFiniteBuckets?: (number|null);
+
+                    /** Exponential growthFactor */
+                    growthFactor?: (number|null);
+
+                    /** Exponential scale */
+                    scale?: (number|null);
+                }
+
+                /** Represents an Exponential. */
+                class Exponential implements IExponential {
+
+                    /**
+                     * Constructs a new Exponential.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.Distribution.BucketOptions.IExponential);
+
+                    /** Exponential numFiniteBuckets. */
+                    public numFiniteBuckets: number;
+
+                    /** Exponential growthFactor. */
+                    public growthFactor: number;
+
+                    /** Exponential scale. */
+                    public scale: number;
+
+                    /**
+                     * Creates a new Exponential instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Exponential instance
+                     */
+                    public static create(properties?: google.api.Distribution.BucketOptions.IExponential): google.api.Distribution.BucketOptions.Exponential;
+
+                    /**
+                     * Encodes the specified Exponential message. Does not implicitly {@link google.api.Distribution.BucketOptions.Exponential.verify|verify} messages.
+                     * @param message Exponential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.Distribution.BucketOptions.IExponential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Exponential message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Exponential.verify|verify} messages.
+                     * @param message Exponential message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.Distribution.BucketOptions.IExponential, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Exponential message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Exponential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions.Exponential;
+
+                    /**
+                     * Decodes an Exponential message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Exponential
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions.Exponential;
+
+                    /**
+                     * Verifies an Exponential message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Exponential message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Exponential
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions.Exponential;
+
+                    /**
+                     * Creates a plain object from an Exponential message. Also converts values to other types if specified.
+                     * @param message Exponential
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.Distribution.BucketOptions.Exponential, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Exponential to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an Explicit. */
+                interface IExplicit {
+
+                    /** Explicit bounds */
+                    bounds?: (number[]|null);
+                }
+
+                /** Represents an Explicit. */
+                class Explicit implements IExplicit {
+
+                    /**
+                     * Constructs a new Explicit.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.api.Distribution.BucketOptions.IExplicit);
+
+                    /** Explicit bounds. */
+                    public bounds: number[];
+
+                    /**
+                     * Creates a new Explicit instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Explicit instance
+                     */
+                    public static create(properties?: google.api.Distribution.BucketOptions.IExplicit): google.api.Distribution.BucketOptions.Explicit;
+
+                    /**
+                     * Encodes the specified Explicit message. Does not implicitly {@link google.api.Distribution.BucketOptions.Explicit.verify|verify} messages.
+                     * @param message Explicit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.api.Distribution.BucketOptions.IExplicit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Explicit message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Explicit.verify|verify} messages.
+                     * @param message Explicit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.api.Distribution.BucketOptions.IExplicit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Explicit message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Explicit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions.Explicit;
+
+                    /**
+                     * Decodes an Explicit message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Explicit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions.Explicit;
+
+                    /**
+                     * Verifies an Explicit message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Explicit message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Explicit
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions.Explicit;
+
+                    /**
+                     * Creates a plain object from an Explicit message. Also converts values to other types if specified.
+                     * @param message Explicit
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.api.Distribution.BucketOptions.Explicit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Explicit to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
+            /** Properties of an Exemplar. */
+            interface IExemplar {
+
+                /** Exemplar value */
+                value?: (number|null);
+
+                /** Exemplar timestamp */
+                timestamp?: (google.protobuf.ITimestamp|null);
+
+                /** Exemplar attachments */
+                attachments?: (google.protobuf.IAny[]|null);
+            }
+
+            /** Represents an Exemplar. */
+            class Exemplar implements IExemplar {
+
+                /**
+                 * Constructs a new Exemplar.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.Distribution.IExemplar);
+
+                /** Exemplar value. */
+                public value: number;
+
+                /** Exemplar timestamp. */
+                public timestamp?: (google.protobuf.ITimestamp|null);
+
+                /** Exemplar attachments. */
+                public attachments: google.protobuf.IAny[];
+
+                /**
+                 * Creates a new Exemplar instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Exemplar instance
+                 */
+                public static create(properties?: google.api.Distribution.IExemplar): google.api.Distribution.Exemplar;
+
+                /**
+                 * Encodes the specified Exemplar message. Does not implicitly {@link google.api.Distribution.Exemplar.verify|verify} messages.
+                 * @param message Exemplar message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.Distribution.IExemplar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Exemplar message, length delimited. Does not implicitly {@link google.api.Distribution.Exemplar.verify|verify} messages.
+                 * @param message Exemplar message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.Distribution.IExemplar, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Exemplar message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Exemplar
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.Exemplar;
+
+                /**
+                 * Decodes an Exemplar message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Exemplar
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.Exemplar;
+
+                /**
+                 * Verifies an Exemplar message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an Exemplar message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Exemplar
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.Distribution.Exemplar;
+
+                /**
+                 * Creates a plain object from an Exemplar message. Also converts values to other types if specified.
+                 * @param message Exemplar
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.Distribution.Exemplar, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Exemplar to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+            }
+        }
+
+        /** Properties of a Http. */
+        interface IHttp {
+
+            /** Http rules */
+            rules?: (google.api.IHttpRule[]|null);
+
+            /** Http fullyDecodeReservedExpansion */
+            fullyDecodeReservedExpansion?: (boolean|null);
+        }
+
+        /** Represents a Http. */
+        class Http implements IHttp {
+
+            /**
+             * Constructs a new Http.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IHttp);
+
+            /** Http rules. */
+            public rules: google.api.IHttpRule[];
+
+            /** Http fullyDecodeReservedExpansion. */
+            public fullyDecodeReservedExpansion: boolean;
+
+            /**
+             * Creates a new Http instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Http instance
+             */
+            public static create(properties?: google.api.IHttp): google.api.Http;
+
+            /**
+             * Encodes the specified Http message. Does not implicitly {@link google.api.Http.verify|verify} messages.
+             * @param message Http message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IHttp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Http message, length delimited. Does not implicitly {@link google.api.Http.verify|verify} messages.
+             * @param message Http message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IHttp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Http message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Http
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Http;
+
+            /**
+             * Decodes a Http message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Http
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Http;
+
+            /**
+             * Verifies a Http message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Http message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Http
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.Http;
+
+            /**
+             * Creates a plain object from a Http message. Also converts values to other types if specified.
+             * @param message Http
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.Http, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Http to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a HttpRule. */
+        interface IHttpRule {
+
+            /** HttpRule selector */
+            selector?: (string|null);
+
+            /** HttpRule get */
+            get?: (string|null);
+
+            /** HttpRule put */
+            put?: (string|null);
+
+            /** HttpRule post */
+            post?: (string|null);
+
+            /** HttpRule delete */
+            "delete"?: (string|null);
+
+            /** HttpRule patch */
+            patch?: (string|null);
+
+            /** HttpRule custom */
+            custom?: (google.api.ICustomHttpPattern|null);
+
+            /** HttpRule body */
+            body?: (string|null);
+
+            /** HttpRule responseBody */
+            responseBody?: (string|null);
+
+            /** HttpRule additionalBindings */
+            additionalBindings?: (google.api.IHttpRule[]|null);
+        }
+
+        /** Represents a HttpRule. */
+        class HttpRule implements IHttpRule {
+
+            /**
+             * Constructs a new HttpRule.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IHttpRule);
+
+            /** HttpRule selector. */
+            public selector: string;
+
+            /** HttpRule get. */
+            public get?: (string|null);
+
+            /** HttpRule put. */
+            public put?: (string|null);
+
+            /** HttpRule post. */
+            public post?: (string|null);
+
+            /** HttpRule delete. */
+            public delete?: (string|null);
+
+            /** HttpRule patch. */
+            public patch?: (string|null);
+
+            /** HttpRule custom. */
+            public custom?: (google.api.ICustomHttpPattern|null);
+
+            /** HttpRule body. */
+            public body: string;
+
+            /** HttpRule responseBody. */
+            public responseBody: string;
+
+            /** HttpRule additionalBindings. */
+            public additionalBindings: google.api.IHttpRule[];
+
+            /** HttpRule pattern. */
+            public pattern?: ("get"|"put"|"post"|"delete"|"patch"|"custom");
+
+            /**
+             * Creates a new HttpRule instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns HttpRule instance
+             */
+            public static create(properties?: google.api.IHttpRule): google.api.HttpRule;
+
+            /**
+             * Encodes the specified HttpRule message. Does not implicitly {@link google.api.HttpRule.verify|verify} messages.
+             * @param message HttpRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IHttpRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified HttpRule message, length delimited. Does not implicitly {@link google.api.HttpRule.verify|verify} messages.
+             * @param message HttpRule message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IHttpRule, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a HttpRule message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns HttpRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.HttpRule;
+
+            /**
+             * Decodes a HttpRule message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns HttpRule
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.HttpRule;
+
+            /**
+             * Verifies a HttpRule message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a HttpRule message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns HttpRule
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.HttpRule;
+
+            /**
+             * Creates a plain object from a HttpRule message. Also converts values to other types if specified.
+             * @param message HttpRule
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.HttpRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this HttpRule to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a CustomHttpPattern. */
+        interface ICustomHttpPattern {
+
+            /** CustomHttpPattern kind */
+            kind?: (string|null);
+
+            /** CustomHttpPattern path */
+            path?: (string|null);
+        }
+
+        /** Represents a CustomHttpPattern. */
+        class CustomHttpPattern implements ICustomHttpPattern {
+
+            /**
+             * Constructs a new CustomHttpPattern.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ICustomHttpPattern);
+
+            /** CustomHttpPattern kind. */
+            public kind: string;
+
+            /** CustomHttpPattern path. */
+            public path: string;
+
+            /**
+             * Creates a new CustomHttpPattern instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns CustomHttpPattern instance
+             */
+            public static create(properties?: google.api.ICustomHttpPattern): google.api.CustomHttpPattern;
+
+            /**
+             * Encodes the specified CustomHttpPattern message. Does not implicitly {@link google.api.CustomHttpPattern.verify|verify} messages.
+             * @param message CustomHttpPattern message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ICustomHttpPattern, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified CustomHttpPattern message, length delimited. Does not implicitly {@link google.api.CustomHttpPattern.verify|verify} messages.
+             * @param message CustomHttpPattern message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ICustomHttpPattern, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a CustomHttpPattern message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns CustomHttpPattern
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.CustomHttpPattern;
+
+            /**
+             * Decodes a CustomHttpPattern message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns CustomHttpPattern
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.CustomHttpPattern;
+
+            /**
+             * Verifies a CustomHttpPattern message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a CustomHttpPattern message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns CustomHttpPattern
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.CustomHttpPattern;
+
+            /**
+             * Creates a plain object from a CustomHttpPattern message. Also converts values to other types if specified.
+             * @param message CustomHttpPattern
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.CustomHttpPattern, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this CustomHttpPattern to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+    }
+
     /** Namespace protobuf. */
     namespace protobuf {
-
-        /** Properties of an Any. */
-        interface IAny {
-
-            /** Any type_url */
-            type_url?: (string|null);
-
-            /** Any value */
-            value?: (Uint8Array|string|null);
-        }
-
-        /** Represents an Any. */
-        class Any implements IAny {
-
-            /**
-             * Constructs a new Any.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IAny);
-
-            /** Any type_url. */
-            public type_url: string;
-
-            /** Any value. */
-            public value: (Uint8Array|string);
-
-            /**
-             * Creates a new Any instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Any instance
-             */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
-
-            /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
-
-            /**
-             * Verifies an Any message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Any
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
-
-            /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Timestamp. */
-        interface ITimestamp {
-
-            /** Timestamp seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Timestamp nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Timestamp. */
-        class Timestamp implements ITimestamp {
-
-            /**
-             * Constructs a new Timestamp.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.ITimestamp);
-
-            /** Timestamp seconds. */
-            public seconds: (number|Long|string);
-
-            /** Timestamp nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Timestamp instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Timestamp instance
-             */
-            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
-
-            /**
-             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
-             * @param message Timestamp message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
-
-            /**
-             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Timestamp
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
-
-            /**
-             * Verifies a Timestamp message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Timestamp
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
-
-            /**
-             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
-             * @param message Timestamp
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Timestamp to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Duration. */
-        class Duration implements IDuration {
-
-            /**
-             * Constructs a new Duration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDuration);
-
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Duration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Duration instance
-             */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
-
-            /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
-
-            /**
-             * Verifies a Duration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Duration
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
-
-            /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Duration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
 
         /** Properties of a FileDescriptorSet. */
         interface IFileDescriptorSet {
@@ -3434,6 +8030,294 @@ export namespace google {
             }
         }
 
+        /** Properties of an Any. */
+        interface IAny {
+
+            /** Any type_url */
+            type_url?: (string|null);
+
+            /** Any value */
+            value?: (Uint8Array|string|null);
+        }
+
+        /** Represents an Any. */
+        class Any implements IAny {
+
+            /**
+             * Constructs a new Any.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IAny);
+
+            /** Any type_url. */
+            public type_url: string;
+
+            /** Any value. */
+            public value: (Uint8Array|string);
+
+            /**
+             * Creates a new Any instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Any instance
+             */
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
+
+            /**
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
+
+            /**
+             * Decodes an Any message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Any
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
+
+            /**
+             * Verifies an Any message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Any
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
+
+            /**
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Any to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Timestamp. */
+        interface ITimestamp {
+
+            /** Timestamp seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Timestamp nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Timestamp. */
+        class Timestamp implements ITimestamp {
+
+            /**
+             * Constructs a new Timestamp.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.ITimestamp);
+
+            /** Timestamp seconds. */
+            public seconds: (number|Long|string);
+
+            /** Timestamp nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Timestamp instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Timestamp instance
+             */
+            public static create(properties?: google.protobuf.ITimestamp): google.protobuf.Timestamp;
+
+            /**
+             * Encodes the specified Timestamp message. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Timestamp message, length delimited. Does not implicitly {@link google.protobuf.Timestamp.verify|verify} messages.
+             * @param message Timestamp message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.ITimestamp, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Timestamp;
+
+            /**
+             * Decodes a Timestamp message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Timestamp
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Timestamp;
+
+            /**
+             * Verifies a Timestamp message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Timestamp message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Timestamp
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Timestamp;
+
+            /**
+             * Creates a plain object from a Timestamp message. Also converts values to other types if specified.
+             * @param message Timestamp
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Timestamp, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Timestamp to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of an Empty. */
         interface IEmpty {
         }
@@ -3603,4782 +8487,6 @@ export namespace google {
 
             /**
              * Converts this FieldMask to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-    }
-
-    /** Namespace monitoring. */
-    namespace monitoring {
-
-        /** Namespace dashboard. */
-        namespace dashboard {
-
-            /** Namespace v1. */
-            namespace v1 {
-
-                /** Properties of an Aggregation. */
-                interface IAggregation {
-
-                    /** Aggregation alignmentPeriod */
-                    alignmentPeriod?: (google.protobuf.IDuration|null);
-
-                    /** Aggregation perSeriesAligner */
-                    perSeriesAligner?: (google.monitoring.dashboard.v1.Aggregation.Aligner|keyof typeof google.monitoring.dashboard.v1.Aggregation.Aligner|null);
-
-                    /** Aggregation crossSeriesReducer */
-                    crossSeriesReducer?: (google.monitoring.dashboard.v1.Aggregation.Reducer|keyof typeof google.monitoring.dashboard.v1.Aggregation.Reducer|null);
-
-                    /** Aggregation groupByFields */
-                    groupByFields?: (string[]|null);
-                }
-
-                /** Represents an Aggregation. */
-                class Aggregation implements IAggregation {
-
-                    /**
-                     * Constructs a new Aggregation.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IAggregation);
-
-                    /** Aggregation alignmentPeriod. */
-                    public alignmentPeriod?: (google.protobuf.IDuration|null);
-
-                    /** Aggregation perSeriesAligner. */
-                    public perSeriesAligner: (google.monitoring.dashboard.v1.Aggregation.Aligner|keyof typeof google.monitoring.dashboard.v1.Aggregation.Aligner);
-
-                    /** Aggregation crossSeriesReducer. */
-                    public crossSeriesReducer: (google.monitoring.dashboard.v1.Aggregation.Reducer|keyof typeof google.monitoring.dashboard.v1.Aggregation.Reducer);
-
-                    /** Aggregation groupByFields. */
-                    public groupByFields: string[];
-
-                    /**
-                     * Creates a new Aggregation instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Aggregation instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IAggregation): google.monitoring.dashboard.v1.Aggregation;
-
-                    /**
-                     * Encodes the specified Aggregation message. Does not implicitly {@link google.monitoring.dashboard.v1.Aggregation.verify|verify} messages.
-                     * @param message Aggregation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IAggregation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Aggregation message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Aggregation.verify|verify} messages.
-                     * @param message Aggregation message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IAggregation, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an Aggregation message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Aggregation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Aggregation;
-
-                    /**
-                     * Decodes an Aggregation message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Aggregation
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Aggregation;
-
-                    /**
-                     * Verifies an Aggregation message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an Aggregation message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Aggregation
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Aggregation;
-
-                    /**
-                     * Creates a plain object from an Aggregation message. Also converts values to other types if specified.
-                     * @param message Aggregation
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.Aggregation, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Aggregation to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace Aggregation {
-
-                    /** Aligner enum. */
-                    enum Aligner {
-                        ALIGN_NONE = 0,
-                        ALIGN_DELTA = 1,
-                        ALIGN_RATE = 2,
-                        ALIGN_INTERPOLATE = 3,
-                        ALIGN_NEXT_OLDER = 4,
-                        ALIGN_MIN = 10,
-                        ALIGN_MAX = 11,
-                        ALIGN_MEAN = 12,
-                        ALIGN_COUNT = 13,
-                        ALIGN_SUM = 14,
-                        ALIGN_STDDEV = 15,
-                        ALIGN_COUNT_TRUE = 16,
-                        ALIGN_COUNT_FALSE = 24,
-                        ALIGN_FRACTION_TRUE = 17,
-                        ALIGN_PERCENTILE_99 = 18,
-                        ALIGN_PERCENTILE_95 = 19,
-                        ALIGN_PERCENTILE_50 = 20,
-                        ALIGN_PERCENTILE_05 = 21,
-                        ALIGN_PERCENT_CHANGE = 23
-                    }
-
-                    /** Reducer enum. */
-                    enum Reducer {
-                        REDUCE_NONE = 0,
-                        REDUCE_MEAN = 1,
-                        REDUCE_MIN = 2,
-                        REDUCE_MAX = 3,
-                        REDUCE_SUM = 4,
-                        REDUCE_STDDEV = 5,
-                        REDUCE_COUNT = 6,
-                        REDUCE_COUNT_TRUE = 7,
-                        REDUCE_COUNT_FALSE = 15,
-                        REDUCE_FRACTION_TRUE = 8,
-                        REDUCE_PERCENTILE_99 = 9,
-                        REDUCE_PERCENTILE_95 = 10,
-                        REDUCE_PERCENTILE_50 = 11,
-                        REDUCE_PERCENTILE_05 = 12
-                    }
-                }
-
-                /** Properties of a PickTimeSeriesFilter. */
-                interface IPickTimeSeriesFilter {
-
-                    /** PickTimeSeriesFilter rankingMethod */
-                    rankingMethod?: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|null);
-
-                    /** PickTimeSeriesFilter numTimeSeries */
-                    numTimeSeries?: (number|null);
-
-                    /** PickTimeSeriesFilter direction */
-                    direction?: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|null);
-                }
-
-                /** Represents a PickTimeSeriesFilter. */
-                class PickTimeSeriesFilter implements IPickTimeSeriesFilter {
-
-                    /**
-                     * Constructs a new PickTimeSeriesFilter.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IPickTimeSeriesFilter);
-
-                    /** PickTimeSeriesFilter rankingMethod. */
-                    public rankingMethod: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Method);
-
-                    /** PickTimeSeriesFilter numTimeSeries. */
-                    public numTimeSeries: number;
-
-                    /** PickTimeSeriesFilter direction. */
-                    public direction: (google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction|keyof typeof google.monitoring.dashboard.v1.PickTimeSeriesFilter.Direction);
-
-                    /**
-                     * Creates a new PickTimeSeriesFilter instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns PickTimeSeriesFilter instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IPickTimeSeriesFilter): google.monitoring.dashboard.v1.PickTimeSeriesFilter;
-
-                    /**
-                     * Encodes the specified PickTimeSeriesFilter message. Does not implicitly {@link google.monitoring.dashboard.v1.PickTimeSeriesFilter.verify|verify} messages.
-                     * @param message PickTimeSeriesFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IPickTimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified PickTimeSeriesFilter message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.PickTimeSeriesFilter.verify|verify} messages.
-                     * @param message PickTimeSeriesFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IPickTimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a PickTimeSeriesFilter message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns PickTimeSeriesFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.PickTimeSeriesFilter;
-
-                    /**
-                     * Decodes a PickTimeSeriesFilter message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns PickTimeSeriesFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.PickTimeSeriesFilter;
-
-                    /**
-                     * Verifies a PickTimeSeriesFilter message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a PickTimeSeriesFilter message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns PickTimeSeriesFilter
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.PickTimeSeriesFilter;
-
-                    /**
-                     * Creates a plain object from a PickTimeSeriesFilter message. Also converts values to other types if specified.
-                     * @param message PickTimeSeriesFilter
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.PickTimeSeriesFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this PickTimeSeriesFilter to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace PickTimeSeriesFilter {
-
-                    /** Method enum. */
-                    enum Method {
-                        METHOD_UNSPECIFIED = 0,
-                        METHOD_MEAN = 1,
-                        METHOD_MAX = 2,
-                        METHOD_MIN = 3,
-                        METHOD_SUM = 4,
-                        METHOD_LATEST = 5
-                    }
-
-                    /** Direction enum. */
-                    enum Direction {
-                        DIRECTION_UNSPECIFIED = 0,
-                        TOP = 1,
-                        BOTTOM = 2
-                    }
-                }
-
-                /** Properties of a StatisticalTimeSeriesFilter. */
-                interface IStatisticalTimeSeriesFilter {
-
-                    /** StatisticalTimeSeriesFilter rankingMethod */
-                    rankingMethod?: (google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|null);
-
-                    /** StatisticalTimeSeriesFilter numTimeSeries */
-                    numTimeSeries?: (number|null);
-                }
-
-                /** Represents a StatisticalTimeSeriesFilter. */
-                class StatisticalTimeSeriesFilter implements IStatisticalTimeSeriesFilter {
-
-                    /**
-                     * Constructs a new StatisticalTimeSeriesFilter.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter);
-
-                    /** StatisticalTimeSeriesFilter rankingMethod. */
-                    public rankingMethod: (google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method|keyof typeof google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.Method);
-
-                    /** StatisticalTimeSeriesFilter numTimeSeries. */
-                    public numTimeSeries: number;
-
-                    /**
-                     * Creates a new StatisticalTimeSeriesFilter instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns StatisticalTimeSeriesFilter instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter): google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter;
-
-                    /**
-                     * Encodes the specified StatisticalTimeSeriesFilter message. Does not implicitly {@link google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.verify|verify} messages.
-                     * @param message StatisticalTimeSeriesFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified StatisticalTimeSeriesFilter message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter.verify|verify} messages.
-                     * @param message StatisticalTimeSeriesFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a StatisticalTimeSeriesFilter message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns StatisticalTimeSeriesFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter;
-
-                    /**
-                     * Decodes a StatisticalTimeSeriesFilter message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns StatisticalTimeSeriesFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter;
-
-                    /**
-                     * Verifies a StatisticalTimeSeriesFilter message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a StatisticalTimeSeriesFilter message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns StatisticalTimeSeriesFilter
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter;
-
-                    /**
-                     * Creates a plain object from a StatisticalTimeSeriesFilter message. Also converts values to other types if specified.
-                     * @param message StatisticalTimeSeriesFilter
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.StatisticalTimeSeriesFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this StatisticalTimeSeriesFilter to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace StatisticalTimeSeriesFilter {
-
-                    /** Method enum. */
-                    enum Method {
-                        METHOD_UNSPECIFIED = 0,
-                        METHOD_CLUSTER_OUTLIER = 1
-                    }
-                }
-
-                /** Properties of a Dashboard. */
-                interface IDashboard {
-
-                    /** Dashboard name */
-                    name?: (string|null);
-
-                    /** Dashboard displayName */
-                    displayName?: (string|null);
-
-                    /** Dashboard etag */
-                    etag?: (string|null);
-
-                    /** Dashboard gridLayout */
-                    gridLayout?: (google.monitoring.dashboard.v1.IGridLayout|null);
-
-                    /** Dashboard mosaicLayout */
-                    mosaicLayout?: (google.monitoring.dashboard.v1.IMosaicLayout|null);
-
-                    /** Dashboard rowLayout */
-                    rowLayout?: (google.monitoring.dashboard.v1.IRowLayout|null);
-
-                    /** Dashboard columnLayout */
-                    columnLayout?: (google.monitoring.dashboard.v1.IColumnLayout|null);
-                }
-
-                /** Represents a Dashboard. */
-                class Dashboard implements IDashboard {
-
-                    /**
-                     * Constructs a new Dashboard.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IDashboard);
-
-                    /** Dashboard name. */
-                    public name: string;
-
-                    /** Dashboard displayName. */
-                    public displayName: string;
-
-                    /** Dashboard etag. */
-                    public etag: string;
-
-                    /** Dashboard gridLayout. */
-                    public gridLayout?: (google.monitoring.dashboard.v1.IGridLayout|null);
-
-                    /** Dashboard mosaicLayout. */
-                    public mosaicLayout?: (google.monitoring.dashboard.v1.IMosaicLayout|null);
-
-                    /** Dashboard rowLayout. */
-                    public rowLayout?: (google.monitoring.dashboard.v1.IRowLayout|null);
-
-                    /** Dashboard columnLayout. */
-                    public columnLayout?: (google.monitoring.dashboard.v1.IColumnLayout|null);
-
-                    /** Dashboard layout. */
-                    public layout?: ("gridLayout"|"mosaicLayout"|"rowLayout"|"columnLayout");
-
-                    /**
-                     * Creates a new Dashboard instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Dashboard instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IDashboard): google.monitoring.dashboard.v1.Dashboard;
-
-                    /**
-                     * Encodes the specified Dashboard message. Does not implicitly {@link google.monitoring.dashboard.v1.Dashboard.verify|verify} messages.
-                     * @param message Dashboard message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IDashboard, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Dashboard message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Dashboard.verify|verify} messages.
-                     * @param message Dashboard message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IDashboard, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Dashboard message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Dashboard
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Dashboard;
-
-                    /**
-                     * Decodes a Dashboard message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Dashboard
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Dashboard;
-
-                    /**
-                     * Verifies a Dashboard message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Dashboard message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Dashboard
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Dashboard;
-
-                    /**
-                     * Creates a plain object from a Dashboard message. Also converts values to other types if specified.
-                     * @param message Dashboard
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.Dashboard, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Dashboard to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GridLayout. */
-                interface IGridLayout {
-
-                    /** GridLayout columns */
-                    columns?: (number|Long|string|null);
-
-                    /** GridLayout widgets */
-                    widgets?: (google.monitoring.dashboard.v1.IWidget[]|null);
-                }
-
-                /** Represents a GridLayout. */
-                class GridLayout implements IGridLayout {
-
-                    /**
-                     * Constructs a new GridLayout.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IGridLayout);
-
-                    /** GridLayout columns. */
-                    public columns: (number|Long|string);
-
-                    /** GridLayout widgets. */
-                    public widgets: google.monitoring.dashboard.v1.IWidget[];
-
-                    /**
-                     * Creates a new GridLayout instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GridLayout instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IGridLayout): google.monitoring.dashboard.v1.GridLayout;
-
-                    /**
-                     * Encodes the specified GridLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.GridLayout.verify|verify} messages.
-                     * @param message GridLayout message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IGridLayout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GridLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.GridLayout.verify|verify} messages.
-                     * @param message GridLayout message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IGridLayout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GridLayout message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GridLayout
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.GridLayout;
-
-                    /**
-                     * Decodes a GridLayout message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GridLayout
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.GridLayout;
-
-                    /**
-                     * Verifies a GridLayout message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GridLayout message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GridLayout
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.GridLayout;
-
-                    /**
-                     * Creates a plain object from a GridLayout message. Also converts values to other types if specified.
-                     * @param message GridLayout
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.GridLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GridLayout to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a MosaicLayout. */
-                interface IMosaicLayout {
-
-                    /** MosaicLayout columns */
-                    columns?: (number|null);
-
-                    /** MosaicLayout tiles */
-                    tiles?: (google.monitoring.dashboard.v1.MosaicLayout.ITile[]|null);
-                }
-
-                /** Represents a MosaicLayout. */
-                class MosaicLayout implements IMosaicLayout {
-
-                    /**
-                     * Constructs a new MosaicLayout.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IMosaicLayout);
-
-                    /** MosaicLayout columns. */
-                    public columns: number;
-
-                    /** MosaicLayout tiles. */
-                    public tiles: google.monitoring.dashboard.v1.MosaicLayout.ITile[];
-
-                    /**
-                     * Creates a new MosaicLayout instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns MosaicLayout instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IMosaicLayout): google.monitoring.dashboard.v1.MosaicLayout;
-
-                    /**
-                     * Encodes the specified MosaicLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.verify|verify} messages.
-                     * @param message MosaicLayout message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IMosaicLayout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified MosaicLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.verify|verify} messages.
-                     * @param message MosaicLayout message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IMosaicLayout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a MosaicLayout message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns MosaicLayout
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.MosaicLayout;
-
-                    /**
-                     * Decodes a MosaicLayout message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns MosaicLayout
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.MosaicLayout;
-
-                    /**
-                     * Verifies a MosaicLayout message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a MosaicLayout message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns MosaicLayout
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.MosaicLayout;
-
-                    /**
-                     * Creates a plain object from a MosaicLayout message. Also converts values to other types if specified.
-                     * @param message MosaicLayout
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.MosaicLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this MosaicLayout to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace MosaicLayout {
-
-                    /** Properties of a Tile. */
-                    interface ITile {
-
-                        /** Tile xPos */
-                        xPos?: (number|null);
-
-                        /** Tile yPos */
-                        yPos?: (number|null);
-
-                        /** Tile width */
-                        width?: (number|null);
-
-                        /** Tile height */
-                        height?: (number|null);
-
-                        /** Tile widget */
-                        widget?: (google.monitoring.dashboard.v1.IWidget|null);
-                    }
-
-                    /** Represents a Tile. */
-                    class Tile implements ITile {
-
-                        /**
-                         * Constructs a new Tile.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.monitoring.dashboard.v1.MosaicLayout.ITile);
-
-                        /** Tile xPos. */
-                        public xPos: number;
-
-                        /** Tile yPos. */
-                        public yPos: number;
-
-                        /** Tile width. */
-                        public width: number;
-
-                        /** Tile height. */
-                        public height: number;
-
-                        /** Tile widget. */
-                        public widget?: (google.monitoring.dashboard.v1.IWidget|null);
-
-                        /**
-                         * Creates a new Tile instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Tile instance
-                         */
-                        public static create(properties?: google.monitoring.dashboard.v1.MosaicLayout.ITile): google.monitoring.dashboard.v1.MosaicLayout.Tile;
-
-                        /**
-                         * Encodes the specified Tile message. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.Tile.verify|verify} messages.
-                         * @param message Tile message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.monitoring.dashboard.v1.MosaicLayout.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Tile message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.MosaicLayout.Tile.verify|verify} messages.
-                         * @param message Tile message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.monitoring.dashboard.v1.MosaicLayout.ITile, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Tile message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Tile
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.MosaicLayout.Tile;
-
-                        /**
-                         * Decodes a Tile message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Tile
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.MosaicLayout.Tile;
-
-                        /**
-                         * Verifies a Tile message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Tile message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Tile
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.MosaicLayout.Tile;
-
-                        /**
-                         * Creates a plain object from a Tile message. Also converts values to other types if specified.
-                         * @param message Tile
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.monitoring.dashboard.v1.MosaicLayout.Tile, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Tile to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-                }
-
-                /** Properties of a RowLayout. */
-                interface IRowLayout {
-
-                    /** RowLayout rows */
-                    rows?: (google.monitoring.dashboard.v1.RowLayout.IRow[]|null);
-                }
-
-                /** Represents a RowLayout. */
-                class RowLayout implements IRowLayout {
-
-                    /**
-                     * Constructs a new RowLayout.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IRowLayout);
-
-                    /** RowLayout rows. */
-                    public rows: google.monitoring.dashboard.v1.RowLayout.IRow[];
-
-                    /**
-                     * Creates a new RowLayout instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns RowLayout instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IRowLayout): google.monitoring.dashboard.v1.RowLayout;
-
-                    /**
-                     * Encodes the specified RowLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.verify|verify} messages.
-                     * @param message RowLayout message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IRowLayout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified RowLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.verify|verify} messages.
-                     * @param message RowLayout message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IRowLayout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a RowLayout message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns RowLayout
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.RowLayout;
-
-                    /**
-                     * Decodes a RowLayout message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns RowLayout
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.RowLayout;
-
-                    /**
-                     * Verifies a RowLayout message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a RowLayout message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns RowLayout
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.RowLayout;
-
-                    /**
-                     * Creates a plain object from a RowLayout message. Also converts values to other types if specified.
-                     * @param message RowLayout
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.RowLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this RowLayout to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace RowLayout {
-
-                    /** Properties of a Row. */
-                    interface IRow {
-
-                        /** Row weight */
-                        weight?: (number|Long|string|null);
-
-                        /** Row widgets */
-                        widgets?: (google.monitoring.dashboard.v1.IWidget[]|null);
-                    }
-
-                    /** Represents a Row. */
-                    class Row implements IRow {
-
-                        /**
-                         * Constructs a new Row.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.monitoring.dashboard.v1.RowLayout.IRow);
-
-                        /** Row weight. */
-                        public weight: (number|Long|string);
-
-                        /** Row widgets. */
-                        public widgets: google.monitoring.dashboard.v1.IWidget[];
-
-                        /**
-                         * Creates a new Row instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Row instance
-                         */
-                        public static create(properties?: google.monitoring.dashboard.v1.RowLayout.IRow): google.monitoring.dashboard.v1.RowLayout.Row;
-
-                        /**
-                         * Encodes the specified Row message. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.Row.verify|verify} messages.
-                         * @param message Row message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.monitoring.dashboard.v1.RowLayout.IRow, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Row message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.RowLayout.Row.verify|verify} messages.
-                         * @param message Row message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.monitoring.dashboard.v1.RowLayout.IRow, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Row message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Row
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.RowLayout.Row;
-
-                        /**
-                         * Decodes a Row message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Row
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.RowLayout.Row;
-
-                        /**
-                         * Verifies a Row message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Row message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Row
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.RowLayout.Row;
-
-                        /**
-                         * Creates a plain object from a Row message. Also converts values to other types if specified.
-                         * @param message Row
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.monitoring.dashboard.v1.RowLayout.Row, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Row to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-                }
-
-                /** Properties of a ColumnLayout. */
-                interface IColumnLayout {
-
-                    /** ColumnLayout columns */
-                    columns?: (google.monitoring.dashboard.v1.ColumnLayout.IColumn[]|null);
-                }
-
-                /** Represents a ColumnLayout. */
-                class ColumnLayout implements IColumnLayout {
-
-                    /**
-                     * Constructs a new ColumnLayout.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IColumnLayout);
-
-                    /** ColumnLayout columns. */
-                    public columns: google.monitoring.dashboard.v1.ColumnLayout.IColumn[];
-
-                    /**
-                     * Creates a new ColumnLayout instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ColumnLayout instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IColumnLayout): google.monitoring.dashboard.v1.ColumnLayout;
-
-                    /**
-                     * Encodes the specified ColumnLayout message. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.verify|verify} messages.
-                     * @param message ColumnLayout message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IColumnLayout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ColumnLayout message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.verify|verify} messages.
-                     * @param message ColumnLayout message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IColumnLayout, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ColumnLayout message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ColumnLayout
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ColumnLayout;
-
-                    /**
-                     * Decodes a ColumnLayout message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ColumnLayout
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ColumnLayout;
-
-                    /**
-                     * Verifies a ColumnLayout message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ColumnLayout message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ColumnLayout
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ColumnLayout;
-
-                    /**
-                     * Creates a plain object from a ColumnLayout message. Also converts values to other types if specified.
-                     * @param message ColumnLayout
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.ColumnLayout, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ColumnLayout to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace ColumnLayout {
-
-                    /** Properties of a Column. */
-                    interface IColumn {
-
-                        /** Column weight */
-                        weight?: (number|Long|string|null);
-
-                        /** Column widgets */
-                        widgets?: (google.monitoring.dashboard.v1.IWidget[]|null);
-                    }
-
-                    /** Represents a Column. */
-                    class Column implements IColumn {
-
-                        /**
-                         * Constructs a new Column.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.monitoring.dashboard.v1.ColumnLayout.IColumn);
-
-                        /** Column weight. */
-                        public weight: (number|Long|string);
-
-                        /** Column widgets. */
-                        public widgets: google.monitoring.dashboard.v1.IWidget[];
-
-                        /**
-                         * Creates a new Column instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Column instance
-                         */
-                        public static create(properties?: google.monitoring.dashboard.v1.ColumnLayout.IColumn): google.monitoring.dashboard.v1.ColumnLayout.Column;
-
-                        /**
-                         * Encodes the specified Column message. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.Column.verify|verify} messages.
-                         * @param message Column message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.monitoring.dashboard.v1.ColumnLayout.IColumn, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Column message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ColumnLayout.Column.verify|verify} messages.
-                         * @param message Column message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.monitoring.dashboard.v1.ColumnLayout.IColumn, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a Column message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Column
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ColumnLayout.Column;
-
-                        /**
-                         * Decodes a Column message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Column
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ColumnLayout.Column;
-
-                        /**
-                         * Verifies a Column message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a Column message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Column
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ColumnLayout.Column;
-
-                        /**
-                         * Creates a plain object from a Column message. Also converts values to other types if specified.
-                         * @param message Column
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.monitoring.dashboard.v1.ColumnLayout.Column, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Column to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-                }
-
-                /** Properties of a Widget. */
-                interface IWidget {
-
-                    /** Widget title */
-                    title?: (string|null);
-
-                    /** Widget xyChart */
-                    xyChart?: (google.monitoring.dashboard.v1.IXyChart|null);
-
-                    /** Widget scorecard */
-                    scorecard?: (google.monitoring.dashboard.v1.IScorecard|null);
-
-                    /** Widget text */
-                    text?: (google.monitoring.dashboard.v1.IText|null);
-
-                    /** Widget blank */
-                    blank?: (google.protobuf.IEmpty|null);
-                }
-
-                /** Represents a Widget. */
-                class Widget implements IWidget {
-
-                    /**
-                     * Constructs a new Widget.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IWidget);
-
-                    /** Widget title. */
-                    public title: string;
-
-                    /** Widget xyChart. */
-                    public xyChart?: (google.monitoring.dashboard.v1.IXyChart|null);
-
-                    /** Widget scorecard. */
-                    public scorecard?: (google.monitoring.dashboard.v1.IScorecard|null);
-
-                    /** Widget text. */
-                    public text?: (google.monitoring.dashboard.v1.IText|null);
-
-                    /** Widget blank. */
-                    public blank?: (google.protobuf.IEmpty|null);
-
-                    /** Widget content. */
-                    public content?: ("xyChart"|"scorecard"|"text"|"blank");
-
-                    /**
-                     * Creates a new Widget instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Widget instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IWidget): google.monitoring.dashboard.v1.Widget;
-
-                    /**
-                     * Encodes the specified Widget message. Does not implicitly {@link google.monitoring.dashboard.v1.Widget.verify|verify} messages.
-                     * @param message Widget message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IWidget, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Widget message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Widget.verify|verify} messages.
-                     * @param message Widget message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IWidget, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Widget message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Widget
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Widget;
-
-                    /**
-                     * Decodes a Widget message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Widget
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Widget;
-
-                    /**
-                     * Verifies a Widget message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Widget message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Widget
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Widget;
-
-                    /**
-                     * Creates a plain object from a Widget message. Also converts values to other types if specified.
-                     * @param message Widget
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.Widget, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Widget to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a Scorecard. */
-                interface IScorecard {
-
-                    /** Scorecard timeSeriesQuery */
-                    timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
-
-                    /** Scorecard gaugeView */
-                    gaugeView?: (google.monitoring.dashboard.v1.Scorecard.IGaugeView|null);
-
-                    /** Scorecard sparkChartView */
-                    sparkChartView?: (google.monitoring.dashboard.v1.Scorecard.ISparkChartView|null);
-
-                    /** Scorecard thresholds */
-                    thresholds?: (google.monitoring.dashboard.v1.IThreshold[]|null);
-                }
-
-                /** Represents a Scorecard. */
-                class Scorecard implements IScorecard {
-
-                    /**
-                     * Constructs a new Scorecard.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IScorecard);
-
-                    /** Scorecard timeSeriesQuery. */
-                    public timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
-
-                    /** Scorecard gaugeView. */
-                    public gaugeView?: (google.monitoring.dashboard.v1.Scorecard.IGaugeView|null);
-
-                    /** Scorecard sparkChartView. */
-                    public sparkChartView?: (google.monitoring.dashboard.v1.Scorecard.ISparkChartView|null);
-
-                    /** Scorecard thresholds. */
-                    public thresholds: google.monitoring.dashboard.v1.IThreshold[];
-
-                    /** Scorecard dataView. */
-                    public dataView?: ("gaugeView"|"sparkChartView");
-
-                    /**
-                     * Creates a new Scorecard instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Scorecard instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IScorecard): google.monitoring.dashboard.v1.Scorecard;
-
-                    /**
-                     * Encodes the specified Scorecard message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.verify|verify} messages.
-                     * @param message Scorecard message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IScorecard, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Scorecard message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.verify|verify} messages.
-                     * @param message Scorecard message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IScorecard, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Scorecard message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Scorecard
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Scorecard;
-
-                    /**
-                     * Decodes a Scorecard message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Scorecard
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Scorecard;
-
-                    /**
-                     * Verifies a Scorecard message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Scorecard message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Scorecard
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Scorecard;
-
-                    /**
-                     * Creates a plain object from a Scorecard message. Also converts values to other types if specified.
-                     * @param message Scorecard
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.Scorecard, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Scorecard to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace Scorecard {
-
-                    /** Properties of a GaugeView. */
-                    interface IGaugeView {
-
-                        /** GaugeView lowerBound */
-                        lowerBound?: (number|null);
-
-                        /** GaugeView upperBound */
-                        upperBound?: (number|null);
-                    }
-
-                    /** Represents a GaugeView. */
-                    class GaugeView implements IGaugeView {
-
-                        /**
-                         * Constructs a new GaugeView.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.monitoring.dashboard.v1.Scorecard.IGaugeView);
-
-                        /** GaugeView lowerBound. */
-                        public lowerBound: number;
-
-                        /** GaugeView upperBound. */
-                        public upperBound: number;
-
-                        /**
-                         * Creates a new GaugeView instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns GaugeView instance
-                         */
-                        public static create(properties?: google.monitoring.dashboard.v1.Scorecard.IGaugeView): google.monitoring.dashboard.v1.Scorecard.GaugeView;
-
-                        /**
-                         * Encodes the specified GaugeView message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.GaugeView.verify|verify} messages.
-                         * @param message GaugeView message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.monitoring.dashboard.v1.Scorecard.IGaugeView, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified GaugeView message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.GaugeView.verify|verify} messages.
-                         * @param message GaugeView message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.monitoring.dashboard.v1.Scorecard.IGaugeView, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a GaugeView message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns GaugeView
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Scorecard.GaugeView;
-
-                        /**
-                         * Decodes a GaugeView message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns GaugeView
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Scorecard.GaugeView;
-
-                        /**
-                         * Verifies a GaugeView message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a GaugeView message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns GaugeView
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Scorecard.GaugeView;
-
-                        /**
-                         * Creates a plain object from a GaugeView message. Also converts values to other types if specified.
-                         * @param message GaugeView
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.monitoring.dashboard.v1.Scorecard.GaugeView, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this GaugeView to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    /** Properties of a SparkChartView. */
-                    interface ISparkChartView {
-
-                        /** SparkChartView sparkChartType */
-                        sparkChartType?: (google.monitoring.dashboard.v1.SparkChartType|keyof typeof google.monitoring.dashboard.v1.SparkChartType|null);
-
-                        /** SparkChartView minAlignmentPeriod */
-                        minAlignmentPeriod?: (google.protobuf.IDuration|null);
-                    }
-
-                    /** Represents a SparkChartView. */
-                    class SparkChartView implements ISparkChartView {
-
-                        /**
-                         * Constructs a new SparkChartView.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.monitoring.dashboard.v1.Scorecard.ISparkChartView);
-
-                        /** SparkChartView sparkChartType. */
-                        public sparkChartType: (google.monitoring.dashboard.v1.SparkChartType|keyof typeof google.monitoring.dashboard.v1.SparkChartType);
-
-                        /** SparkChartView minAlignmentPeriod. */
-                        public minAlignmentPeriod?: (google.protobuf.IDuration|null);
-
-                        /**
-                         * Creates a new SparkChartView instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns SparkChartView instance
-                         */
-                        public static create(properties?: google.monitoring.dashboard.v1.Scorecard.ISparkChartView): google.monitoring.dashboard.v1.Scorecard.SparkChartView;
-
-                        /**
-                         * Encodes the specified SparkChartView message. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify|verify} messages.
-                         * @param message SparkChartView message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.monitoring.dashboard.v1.Scorecard.ISparkChartView, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified SparkChartView message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Scorecard.SparkChartView.verify|verify} messages.
-                         * @param message SparkChartView message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.monitoring.dashboard.v1.Scorecard.ISparkChartView, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a SparkChartView message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns SparkChartView
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Scorecard.SparkChartView;
-
-                        /**
-                         * Decodes a SparkChartView message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns SparkChartView
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Scorecard.SparkChartView;
-
-                        /**
-                         * Verifies a SparkChartView message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a SparkChartView message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns SparkChartView
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Scorecard.SparkChartView;
-
-                        /**
-                         * Creates a plain object from a SparkChartView message. Also converts values to other types if specified.
-                         * @param message SparkChartView
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.monitoring.dashboard.v1.Scorecard.SparkChartView, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this SparkChartView to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-                }
-
-                /** Properties of a TimeSeriesQuery. */
-                interface ITimeSeriesQuery {
-
-                    /** TimeSeriesQuery timeSeriesFilter */
-                    timeSeriesFilter?: (google.monitoring.dashboard.v1.ITimeSeriesFilter|null);
-
-                    /** TimeSeriesQuery timeSeriesFilterRatio */
-                    timeSeriesFilterRatio?: (google.monitoring.dashboard.v1.ITimeSeriesFilterRatio|null);
-
-                    /** TimeSeriesQuery timeSeriesQueryLanguage */
-                    timeSeriesQueryLanguage?: (string|null);
-
-                    /** TimeSeriesQuery unitOverride */
-                    unitOverride?: (string|null);
-                }
-
-                /** Represents a TimeSeriesQuery. */
-                class TimeSeriesQuery implements ITimeSeriesQuery {
-
-                    /**
-                     * Constructs a new TimeSeriesQuery.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.ITimeSeriesQuery);
-
-                    /** TimeSeriesQuery timeSeriesFilter. */
-                    public timeSeriesFilter?: (google.monitoring.dashboard.v1.ITimeSeriesFilter|null);
-
-                    /** TimeSeriesQuery timeSeriesFilterRatio. */
-                    public timeSeriesFilterRatio?: (google.monitoring.dashboard.v1.ITimeSeriesFilterRatio|null);
-
-                    /** TimeSeriesQuery timeSeriesQueryLanguage. */
-                    public timeSeriesQueryLanguage?: (string|null);
-
-                    /** TimeSeriesQuery unitOverride. */
-                    public unitOverride: string;
-
-                    /** TimeSeriesQuery source. */
-                    public source?: ("timeSeriesFilter"|"timeSeriesFilterRatio"|"timeSeriesQueryLanguage");
-
-                    /**
-                     * Creates a new TimeSeriesQuery instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TimeSeriesQuery instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.ITimeSeriesQuery): google.monitoring.dashboard.v1.TimeSeriesQuery;
-
-                    /**
-                     * Encodes the specified TimeSeriesQuery message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesQuery.verify|verify} messages.
-                     * @param message TimeSeriesQuery message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.ITimeSeriesQuery, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TimeSeriesQuery message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesQuery.verify|verify} messages.
-                     * @param message TimeSeriesQuery message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.ITimeSeriesQuery, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TimeSeriesQuery message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TimeSeriesQuery
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.TimeSeriesQuery;
-
-                    /**
-                     * Decodes a TimeSeriesQuery message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TimeSeriesQuery
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.TimeSeriesQuery;
-
-                    /**
-                     * Verifies a TimeSeriesQuery message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TimeSeriesQuery message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TimeSeriesQuery
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.TimeSeriesQuery;
-
-                    /**
-                     * Creates a plain object from a TimeSeriesQuery message. Also converts values to other types if specified.
-                     * @param message TimeSeriesQuery
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.TimeSeriesQuery, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TimeSeriesQuery to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a TimeSeriesFilter. */
-                interface ITimeSeriesFilter {
-
-                    /** TimeSeriesFilter filter */
-                    filter?: (string|null);
-
-                    /** TimeSeriesFilter aggregation */
-                    aggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
-
-                    /** TimeSeriesFilter secondaryAggregation */
-                    secondaryAggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
-
-                    /** TimeSeriesFilter pickTimeSeriesFilter */
-                    pickTimeSeriesFilter?: (google.monitoring.dashboard.v1.IPickTimeSeriesFilter|null);
-
-                    /** TimeSeriesFilter statisticalTimeSeriesFilter */
-                    statisticalTimeSeriesFilter?: (google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter|null);
-                }
-
-                /** Represents a TimeSeriesFilter. */
-                class TimeSeriesFilter implements ITimeSeriesFilter {
-
-                    /**
-                     * Constructs a new TimeSeriesFilter.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.ITimeSeriesFilter);
-
-                    /** TimeSeriesFilter filter. */
-                    public filter: string;
-
-                    /** TimeSeriesFilter aggregation. */
-                    public aggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
-
-                    /** TimeSeriesFilter secondaryAggregation. */
-                    public secondaryAggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
-
-                    /** TimeSeriesFilter pickTimeSeriesFilter. */
-                    public pickTimeSeriesFilter?: (google.monitoring.dashboard.v1.IPickTimeSeriesFilter|null);
-
-                    /** TimeSeriesFilter statisticalTimeSeriesFilter. */
-                    public statisticalTimeSeriesFilter?: (google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter|null);
-
-                    /** TimeSeriesFilter outputFilter. */
-                    public outputFilter?: ("pickTimeSeriesFilter"|"statisticalTimeSeriesFilter");
-
-                    /**
-                     * Creates a new TimeSeriesFilter instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TimeSeriesFilter instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.ITimeSeriesFilter): google.monitoring.dashboard.v1.TimeSeriesFilter;
-
-                    /**
-                     * Encodes the specified TimeSeriesFilter message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilter.verify|verify} messages.
-                     * @param message TimeSeriesFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.ITimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TimeSeriesFilter message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilter.verify|verify} messages.
-                     * @param message TimeSeriesFilter message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.ITimeSeriesFilter, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TimeSeriesFilter message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TimeSeriesFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.TimeSeriesFilter;
-
-                    /**
-                     * Decodes a TimeSeriesFilter message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TimeSeriesFilter
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.TimeSeriesFilter;
-
-                    /**
-                     * Verifies a TimeSeriesFilter message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TimeSeriesFilter message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TimeSeriesFilter
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.TimeSeriesFilter;
-
-                    /**
-                     * Creates a plain object from a TimeSeriesFilter message. Also converts values to other types if specified.
-                     * @param message TimeSeriesFilter
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.TimeSeriesFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TimeSeriesFilter to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a TimeSeriesFilterRatio. */
-                interface ITimeSeriesFilterRatio {
-
-                    /** TimeSeriesFilterRatio numerator */
-                    numerator?: (google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart|null);
-
-                    /** TimeSeriesFilterRatio denominator */
-                    denominator?: (google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart|null);
-
-                    /** TimeSeriesFilterRatio secondaryAggregation */
-                    secondaryAggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
-
-                    /** TimeSeriesFilterRatio pickTimeSeriesFilter */
-                    pickTimeSeriesFilter?: (google.monitoring.dashboard.v1.IPickTimeSeriesFilter|null);
-
-                    /** TimeSeriesFilterRatio statisticalTimeSeriesFilter */
-                    statisticalTimeSeriesFilter?: (google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter|null);
-                }
-
-                /** Represents a TimeSeriesFilterRatio. */
-                class TimeSeriesFilterRatio implements ITimeSeriesFilterRatio {
-
-                    /**
-                     * Constructs a new TimeSeriesFilterRatio.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.ITimeSeriesFilterRatio);
-
-                    /** TimeSeriesFilterRatio numerator. */
-                    public numerator?: (google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart|null);
-
-                    /** TimeSeriesFilterRatio denominator. */
-                    public denominator?: (google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart|null);
-
-                    /** TimeSeriesFilterRatio secondaryAggregation. */
-                    public secondaryAggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
-
-                    /** TimeSeriesFilterRatio pickTimeSeriesFilter. */
-                    public pickTimeSeriesFilter?: (google.monitoring.dashboard.v1.IPickTimeSeriesFilter|null);
-
-                    /** TimeSeriesFilterRatio statisticalTimeSeriesFilter. */
-                    public statisticalTimeSeriesFilter?: (google.monitoring.dashboard.v1.IStatisticalTimeSeriesFilter|null);
-
-                    /** TimeSeriesFilterRatio outputFilter. */
-                    public outputFilter?: ("pickTimeSeriesFilter"|"statisticalTimeSeriesFilter");
-
-                    /**
-                     * Creates a new TimeSeriesFilterRatio instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns TimeSeriesFilterRatio instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.ITimeSeriesFilterRatio): google.monitoring.dashboard.v1.TimeSeriesFilterRatio;
-
-                    /**
-                     * Encodes the specified TimeSeriesFilterRatio message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilterRatio.verify|verify} messages.
-                     * @param message TimeSeriesFilterRatio message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.ITimeSeriesFilterRatio, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified TimeSeriesFilterRatio message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilterRatio.verify|verify} messages.
-                     * @param message TimeSeriesFilterRatio message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.ITimeSeriesFilterRatio, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a TimeSeriesFilterRatio message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns TimeSeriesFilterRatio
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.TimeSeriesFilterRatio;
-
-                    /**
-                     * Decodes a TimeSeriesFilterRatio message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns TimeSeriesFilterRatio
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.TimeSeriesFilterRatio;
-
-                    /**
-                     * Verifies a TimeSeriesFilterRatio message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a TimeSeriesFilterRatio message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns TimeSeriesFilterRatio
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.TimeSeriesFilterRatio;
-
-                    /**
-                     * Creates a plain object from a TimeSeriesFilterRatio message. Also converts values to other types if specified.
-                     * @param message TimeSeriesFilterRatio
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.TimeSeriesFilterRatio, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this TimeSeriesFilterRatio to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace TimeSeriesFilterRatio {
-
-                    /** Properties of a RatioPart. */
-                    interface IRatioPart {
-
-                        /** RatioPart filter */
-                        filter?: (string|null);
-
-                        /** RatioPart aggregation */
-                        aggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
-                    }
-
-                    /** Represents a RatioPart. */
-                    class RatioPart implements IRatioPart {
-
-                        /**
-                         * Constructs a new RatioPart.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart);
-
-                        /** RatioPart filter. */
-                        public filter: string;
-
-                        /** RatioPart aggregation. */
-                        public aggregation?: (google.monitoring.dashboard.v1.IAggregation|null);
-
-                        /**
-                         * Creates a new RatioPart instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns RatioPart instance
-                         */
-                        public static create(properties?: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart): google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart;
-
-                        /**
-                         * Encodes the specified RatioPart message. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart.verify|verify} messages.
-                         * @param message RatioPart message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified RatioPart message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart.verify|verify} messages.
-                         * @param message RatioPart message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.IRatioPart, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a RatioPart message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns RatioPart
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart;
-
-                        /**
-                         * Decodes a RatioPart message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns RatioPart
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart;
-
-                        /**
-                         * Verifies a RatioPart message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a RatioPart message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns RatioPart
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart;
-
-                        /**
-                         * Creates a plain object from a RatioPart message. Also converts values to other types if specified.
-                         * @param message RatioPart
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.monitoring.dashboard.v1.TimeSeriesFilterRatio.RatioPart, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this RatioPart to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-                }
-
-                /** Properties of a Threshold. */
-                interface IThreshold {
-
-                    /** Threshold label */
-                    label?: (string|null);
-
-                    /** Threshold value */
-                    value?: (number|null);
-
-                    /** Threshold color */
-                    color?: (google.monitoring.dashboard.v1.Threshold.Color|keyof typeof google.monitoring.dashboard.v1.Threshold.Color|null);
-
-                    /** Threshold direction */
-                    direction?: (google.monitoring.dashboard.v1.Threshold.Direction|keyof typeof google.monitoring.dashboard.v1.Threshold.Direction|null);
-                }
-
-                /** Represents a Threshold. */
-                class Threshold implements IThreshold {
-
-                    /**
-                     * Constructs a new Threshold.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IThreshold);
-
-                    /** Threshold label. */
-                    public label: string;
-
-                    /** Threshold value. */
-                    public value: number;
-
-                    /** Threshold color. */
-                    public color: (google.monitoring.dashboard.v1.Threshold.Color|keyof typeof google.monitoring.dashboard.v1.Threshold.Color);
-
-                    /** Threshold direction. */
-                    public direction: (google.monitoring.dashboard.v1.Threshold.Direction|keyof typeof google.monitoring.dashboard.v1.Threshold.Direction);
-
-                    /**
-                     * Creates a new Threshold instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Threshold instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IThreshold): google.monitoring.dashboard.v1.Threshold;
-
-                    /**
-                     * Encodes the specified Threshold message. Does not implicitly {@link google.monitoring.dashboard.v1.Threshold.verify|verify} messages.
-                     * @param message Threshold message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IThreshold, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Threshold message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Threshold.verify|verify} messages.
-                     * @param message Threshold message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IThreshold, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Threshold message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Threshold
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Threshold;
-
-                    /**
-                     * Decodes a Threshold message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Threshold
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Threshold;
-
-                    /**
-                     * Verifies a Threshold message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Threshold message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Threshold
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Threshold;
-
-                    /**
-                     * Creates a plain object from a Threshold message. Also converts values to other types if specified.
-                     * @param message Threshold
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.Threshold, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Threshold to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace Threshold {
-
-                    /** Color enum. */
-                    enum Color {
-                        COLOR_UNSPECIFIED = 0,
-                        YELLOW = 4,
-                        RED = 6
-                    }
-
-                    /** Direction enum. */
-                    enum Direction {
-                        DIRECTION_UNSPECIFIED = 0,
-                        ABOVE = 1,
-                        BELOW = 2
-                    }
-                }
-
-                /** SparkChartType enum. */
-                enum SparkChartType {
-                    SPARK_CHART_TYPE_UNSPECIFIED = 0,
-                    SPARK_LINE = 1,
-                    SPARK_BAR = 2
-                }
-
-                /** Properties of a Text. */
-                interface IText {
-
-                    /** Text content */
-                    content?: (string|null);
-
-                    /** Text format */
-                    format?: (google.monitoring.dashboard.v1.Text.Format|keyof typeof google.monitoring.dashboard.v1.Text.Format|null);
-                }
-
-                /** Represents a Text. */
-                class Text implements IText {
-
-                    /**
-                     * Constructs a new Text.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IText);
-
-                    /** Text content. */
-                    public content: string;
-
-                    /** Text format. */
-                    public format: (google.monitoring.dashboard.v1.Text.Format|keyof typeof google.monitoring.dashboard.v1.Text.Format);
-
-                    /**
-                     * Creates a new Text instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Text instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IText): google.monitoring.dashboard.v1.Text;
-
-                    /**
-                     * Encodes the specified Text message. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
-                     * @param message Text message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IText, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Text message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.Text.verify|verify} messages.
-                     * @param message Text message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IText, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Text message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Text
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.Text;
-
-                    /**
-                     * Decodes a Text message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Text
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.Text;
-
-                    /**
-                     * Verifies a Text message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Text message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Text
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.Text;
-
-                    /**
-                     * Creates a plain object from a Text message. Also converts values to other types if specified.
-                     * @param message Text
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.Text, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Text to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace Text {
-
-                    /** Format enum. */
-                    enum Format {
-                        FORMAT_UNSPECIFIED = 0,
-                        MARKDOWN = 1,
-                        RAW = 2
-                    }
-                }
-
-                /** Properties of a XyChart. */
-                interface IXyChart {
-
-                    /** XyChart dataSets */
-                    dataSets?: (google.monitoring.dashboard.v1.XyChart.IDataSet[]|null);
-
-                    /** XyChart timeshiftDuration */
-                    timeshiftDuration?: (google.protobuf.IDuration|null);
-
-                    /** XyChart thresholds */
-                    thresholds?: (google.monitoring.dashboard.v1.IThreshold[]|null);
-
-                    /** XyChart xAxis */
-                    xAxis?: (google.monitoring.dashboard.v1.XyChart.IAxis|null);
-
-                    /** XyChart yAxis */
-                    yAxis?: (google.monitoring.dashboard.v1.XyChart.IAxis|null);
-
-                    /** XyChart chartOptions */
-                    chartOptions?: (google.monitoring.dashboard.v1.IChartOptions|null);
-                }
-
-                /** Represents a XyChart. */
-                class XyChart implements IXyChart {
-
-                    /**
-                     * Constructs a new XyChart.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IXyChart);
-
-                    /** XyChart dataSets. */
-                    public dataSets: google.monitoring.dashboard.v1.XyChart.IDataSet[];
-
-                    /** XyChart timeshiftDuration. */
-                    public timeshiftDuration?: (google.protobuf.IDuration|null);
-
-                    /** XyChart thresholds. */
-                    public thresholds: google.monitoring.dashboard.v1.IThreshold[];
-
-                    /** XyChart xAxis. */
-                    public xAxis?: (google.monitoring.dashboard.v1.XyChart.IAxis|null);
-
-                    /** XyChart yAxis. */
-                    public yAxis?: (google.monitoring.dashboard.v1.XyChart.IAxis|null);
-
-                    /** XyChart chartOptions. */
-                    public chartOptions?: (google.monitoring.dashboard.v1.IChartOptions|null);
-
-                    /**
-                     * Creates a new XyChart instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns XyChart instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IXyChart): google.monitoring.dashboard.v1.XyChart;
-
-                    /**
-                     * Encodes the specified XyChart message. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.verify|verify} messages.
-                     * @param message XyChart message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IXyChart, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified XyChart message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.verify|verify} messages.
-                     * @param message XyChart message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IXyChart, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a XyChart message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns XyChart
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.XyChart;
-
-                    /**
-                     * Decodes a XyChart message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns XyChart
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.XyChart;
-
-                    /**
-                     * Verifies a XyChart message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a XyChart message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns XyChart
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.XyChart;
-
-                    /**
-                     * Creates a plain object from a XyChart message. Also converts values to other types if specified.
-                     * @param message XyChart
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.XyChart, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this XyChart to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace XyChart {
-
-                    /** Properties of a DataSet. */
-                    interface IDataSet {
-
-                        /** DataSet timeSeriesQuery */
-                        timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
-
-                        /** DataSet plotType */
-                        plotType?: (google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|keyof typeof google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|null);
-
-                        /** DataSet legendTemplate */
-                        legendTemplate?: (string|null);
-
-                        /** DataSet minAlignmentPeriod */
-                        minAlignmentPeriod?: (google.protobuf.IDuration|null);
-                    }
-
-                    /** Represents a DataSet. */
-                    class DataSet implements IDataSet {
-
-                        /**
-                         * Constructs a new DataSet.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.monitoring.dashboard.v1.XyChart.IDataSet);
-
-                        /** DataSet timeSeriesQuery. */
-                        public timeSeriesQuery?: (google.monitoring.dashboard.v1.ITimeSeriesQuery|null);
-
-                        /** DataSet plotType. */
-                        public plotType: (google.monitoring.dashboard.v1.XyChart.DataSet.PlotType|keyof typeof google.monitoring.dashboard.v1.XyChart.DataSet.PlotType);
-
-                        /** DataSet legendTemplate. */
-                        public legendTemplate: string;
-
-                        /** DataSet minAlignmentPeriod. */
-                        public minAlignmentPeriod?: (google.protobuf.IDuration|null);
-
-                        /**
-                         * Creates a new DataSet instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns DataSet instance
-                         */
-                        public static create(properties?: google.monitoring.dashboard.v1.XyChart.IDataSet): google.monitoring.dashboard.v1.XyChart.DataSet;
-
-                        /**
-                         * Encodes the specified DataSet message. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.DataSet.verify|verify} messages.
-                         * @param message DataSet message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.monitoring.dashboard.v1.XyChart.IDataSet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified DataSet message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.DataSet.verify|verify} messages.
-                         * @param message DataSet message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.monitoring.dashboard.v1.XyChart.IDataSet, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a DataSet message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns DataSet
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.XyChart.DataSet;
-
-                        /**
-                         * Decodes a DataSet message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns DataSet
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.XyChart.DataSet;
-
-                        /**
-                         * Verifies a DataSet message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a DataSet message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns DataSet
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.XyChart.DataSet;
-
-                        /**
-                         * Creates a plain object from a DataSet message. Also converts values to other types if specified.
-                         * @param message DataSet
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.monitoring.dashboard.v1.XyChart.DataSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this DataSet to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace DataSet {
-
-                        /** PlotType enum. */
-                        enum PlotType {
-                            PLOT_TYPE_UNSPECIFIED = 0,
-                            LINE = 1,
-                            STACKED_AREA = 2,
-                            STACKED_BAR = 3,
-                            HEATMAP = 4
-                        }
-                    }
-
-                    /** Properties of an Axis. */
-                    interface IAxis {
-
-                        /** Axis label */
-                        label?: (string|null);
-
-                        /** Axis scale */
-                        scale?: (google.monitoring.dashboard.v1.XyChart.Axis.Scale|keyof typeof google.monitoring.dashboard.v1.XyChart.Axis.Scale|null);
-                    }
-
-                    /** Represents an Axis. */
-                    class Axis implements IAxis {
-
-                        /**
-                         * Constructs a new Axis.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.monitoring.dashboard.v1.XyChart.IAxis);
-
-                        /** Axis label. */
-                        public label: string;
-
-                        /** Axis scale. */
-                        public scale: (google.monitoring.dashboard.v1.XyChart.Axis.Scale|keyof typeof google.monitoring.dashboard.v1.XyChart.Axis.Scale);
-
-                        /**
-                         * Creates a new Axis instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns Axis instance
-                         */
-                        public static create(properties?: google.monitoring.dashboard.v1.XyChart.IAxis): google.monitoring.dashboard.v1.XyChart.Axis;
-
-                        /**
-                         * Encodes the specified Axis message. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.Axis.verify|verify} messages.
-                         * @param message Axis message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.monitoring.dashboard.v1.XyChart.IAxis, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified Axis message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.XyChart.Axis.verify|verify} messages.
-                         * @param message Axis message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.monitoring.dashboard.v1.XyChart.IAxis, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes an Axis message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns Axis
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.XyChart.Axis;
-
-                        /**
-                         * Decodes an Axis message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns Axis
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.XyChart.Axis;
-
-                        /**
-                         * Verifies an Axis message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates an Axis message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns Axis
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.XyChart.Axis;
-
-                        /**
-                         * Creates a plain object from an Axis message. Also converts values to other types if specified.
-                         * @param message Axis
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.monitoring.dashboard.v1.XyChart.Axis, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this Axis to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-                    }
-
-                    namespace Axis {
-
-                        /** Scale enum. */
-                        enum Scale {
-                            SCALE_UNSPECIFIED = 0,
-                            LINEAR = 1,
-                            LOG10 = 2
-                        }
-                    }
-                }
-
-                /** Properties of a ChartOptions. */
-                interface IChartOptions {
-
-                    /** ChartOptions mode */
-                    mode?: (google.monitoring.dashboard.v1.ChartOptions.Mode|keyof typeof google.monitoring.dashboard.v1.ChartOptions.Mode|null);
-                }
-
-                /** Represents a ChartOptions. */
-                class ChartOptions implements IChartOptions {
-
-                    /**
-                     * Constructs a new ChartOptions.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IChartOptions);
-
-                    /** ChartOptions mode. */
-                    public mode: (google.monitoring.dashboard.v1.ChartOptions.Mode|keyof typeof google.monitoring.dashboard.v1.ChartOptions.Mode);
-
-                    /**
-                     * Creates a new ChartOptions instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ChartOptions instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IChartOptions): google.monitoring.dashboard.v1.ChartOptions;
-
-                    /**
-                     * Encodes the specified ChartOptions message. Does not implicitly {@link google.monitoring.dashboard.v1.ChartOptions.verify|verify} messages.
-                     * @param message ChartOptions message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IChartOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ChartOptions message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ChartOptions.verify|verify} messages.
-                     * @param message ChartOptions message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IChartOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ChartOptions message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ChartOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ChartOptions;
-
-                    /**
-                     * Decodes a ChartOptions message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ChartOptions
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ChartOptions;
-
-                    /**
-                     * Verifies a ChartOptions message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ChartOptions message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ChartOptions
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ChartOptions;
-
-                    /**
-                     * Creates a plain object from a ChartOptions message. Also converts values to other types if specified.
-                     * @param message ChartOptions
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.ChartOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ChartOptions to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                namespace ChartOptions {
-
-                    /** Mode enum. */
-                    enum Mode {
-                        MODE_UNSPECIFIED = 0,
-                        COLOR = 1,
-                        X_RAY = 2,
-                        STATS = 3
-                    }
-                }
-
-                /** Represents a DashboardsService */
-                class DashboardsService extends $protobuf.rpc.Service {
-
-                    /**
-                     * Constructs a new DashboardsService service.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     */
-                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
-
-                    /**
-                     * Creates new DashboardsService service using the specified rpc implementation.
-                     * @param rpcImpl RPC implementation
-                     * @param [requestDelimited=false] Whether requests are length-delimited
-                     * @param [responseDelimited=false] Whether responses are length-delimited
-                     * @returns RPC service. Useful where requests and/or responses are streamed.
-                     */
-                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): DashboardsService;
-
-                    /**
-                     * Calls CreateDashboard.
-                     * @param request CreateDashboardRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Dashboard
-                     */
-                    public createDashboard(request: google.monitoring.dashboard.v1.ICreateDashboardRequest, callback: google.monitoring.dashboard.v1.DashboardsService.CreateDashboardCallback): void;
-
-                    /**
-                     * Calls CreateDashboard.
-                     * @param request CreateDashboardRequest message or plain object
-                     * @returns Promise
-                     */
-                    public createDashboard(request: google.monitoring.dashboard.v1.ICreateDashboardRequest): Promise<google.monitoring.dashboard.v1.Dashboard>;
-
-                    /**
-                     * Calls ListDashboards.
-                     * @param request ListDashboardsRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and ListDashboardsResponse
-                     */
-                    public listDashboards(request: google.monitoring.dashboard.v1.IListDashboardsRequest, callback: google.monitoring.dashboard.v1.DashboardsService.ListDashboardsCallback): void;
-
-                    /**
-                     * Calls ListDashboards.
-                     * @param request ListDashboardsRequest message or plain object
-                     * @returns Promise
-                     */
-                    public listDashboards(request: google.monitoring.dashboard.v1.IListDashboardsRequest): Promise<google.monitoring.dashboard.v1.ListDashboardsResponse>;
-
-                    /**
-                     * Calls GetDashboard.
-                     * @param request GetDashboardRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Dashboard
-                     */
-                    public getDashboard(request: google.monitoring.dashboard.v1.IGetDashboardRequest, callback: google.monitoring.dashboard.v1.DashboardsService.GetDashboardCallback): void;
-
-                    /**
-                     * Calls GetDashboard.
-                     * @param request GetDashboardRequest message or plain object
-                     * @returns Promise
-                     */
-                    public getDashboard(request: google.monitoring.dashboard.v1.IGetDashboardRequest): Promise<google.monitoring.dashboard.v1.Dashboard>;
-
-                    /**
-                     * Calls DeleteDashboard.
-                     * @param request DeleteDashboardRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Empty
-                     */
-                    public deleteDashboard(request: google.monitoring.dashboard.v1.IDeleteDashboardRequest, callback: google.monitoring.dashboard.v1.DashboardsService.DeleteDashboardCallback): void;
-
-                    /**
-                     * Calls DeleteDashboard.
-                     * @param request DeleteDashboardRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deleteDashboard(request: google.monitoring.dashboard.v1.IDeleteDashboardRequest): Promise<google.protobuf.Empty>;
-
-                    /**
-                     * Calls UpdateDashboard.
-                     * @param request UpdateDashboardRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Dashboard
-                     */
-                    public updateDashboard(request: google.monitoring.dashboard.v1.IUpdateDashboardRequest, callback: google.monitoring.dashboard.v1.DashboardsService.UpdateDashboardCallback): void;
-
-                    /**
-                     * Calls UpdateDashboard.
-                     * @param request UpdateDashboardRequest message or plain object
-                     * @returns Promise
-                     */
-                    public updateDashboard(request: google.monitoring.dashboard.v1.IUpdateDashboardRequest): Promise<google.monitoring.dashboard.v1.Dashboard>;
-                }
-
-                namespace DashboardsService {
-
-                    /**
-                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#createDashboard}.
-                     * @param error Error, if any
-                     * @param [response] Dashboard
-                     */
-                    type CreateDashboardCallback = (error: (Error|null), response?: google.monitoring.dashboard.v1.Dashboard) => void;
-
-                    /**
-                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#listDashboards}.
-                     * @param error Error, if any
-                     * @param [response] ListDashboardsResponse
-                     */
-                    type ListDashboardsCallback = (error: (Error|null), response?: google.monitoring.dashboard.v1.ListDashboardsResponse) => void;
-
-                    /**
-                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#getDashboard}.
-                     * @param error Error, if any
-                     * @param [response] Dashboard
-                     */
-                    type GetDashboardCallback = (error: (Error|null), response?: google.monitoring.dashboard.v1.Dashboard) => void;
-
-                    /**
-                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#deleteDashboard}.
-                     * @param error Error, if any
-                     * @param [response] Empty
-                     */
-                    type DeleteDashboardCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
-
-                    /**
-                     * Callback as used by {@link google.monitoring.dashboard.v1.DashboardsService#updateDashboard}.
-                     * @param error Error, if any
-                     * @param [response] Dashboard
-                     */
-                    type UpdateDashboardCallback = (error: (Error|null), response?: google.monitoring.dashboard.v1.Dashboard) => void;
-                }
-
-                /** Properties of a CreateDashboardRequest. */
-                interface ICreateDashboardRequest {
-
-                    /** CreateDashboardRequest parent */
-                    parent?: (string|null);
-
-                    /** CreateDashboardRequest dashboard */
-                    dashboard?: (google.monitoring.dashboard.v1.IDashboard|null);
-                }
-
-                /** Represents a CreateDashboardRequest. */
-                class CreateDashboardRequest implements ICreateDashboardRequest {
-
-                    /**
-                     * Constructs a new CreateDashboardRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.ICreateDashboardRequest);
-
-                    /** CreateDashboardRequest parent. */
-                    public parent: string;
-
-                    /** CreateDashboardRequest dashboard. */
-                    public dashboard?: (google.monitoring.dashboard.v1.IDashboard|null);
-
-                    /**
-                     * Creates a new CreateDashboardRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CreateDashboardRequest instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.ICreateDashboardRequest): google.monitoring.dashboard.v1.CreateDashboardRequest;
-
-                    /**
-                     * Encodes the specified CreateDashboardRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.CreateDashboardRequest.verify|verify} messages.
-                     * @param message CreateDashboardRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.ICreateDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CreateDashboardRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.CreateDashboardRequest.verify|verify} messages.
-                     * @param message CreateDashboardRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.ICreateDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CreateDashboardRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CreateDashboardRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.CreateDashboardRequest;
-
-                    /**
-                     * Decodes a CreateDashboardRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CreateDashboardRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.CreateDashboardRequest;
-
-                    /**
-                     * Verifies a CreateDashboardRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CreateDashboardRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CreateDashboardRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.CreateDashboardRequest;
-
-                    /**
-                     * Creates a plain object from a CreateDashboardRequest message. Also converts values to other types if specified.
-                     * @param message CreateDashboardRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.CreateDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CreateDashboardRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListDashboardsRequest. */
-                interface IListDashboardsRequest {
-
-                    /** ListDashboardsRequest parent */
-                    parent?: (string|null);
-
-                    /** ListDashboardsRequest pageSize */
-                    pageSize?: (number|null);
-
-                    /** ListDashboardsRequest pageToken */
-                    pageToken?: (string|null);
-                }
-
-                /** Represents a ListDashboardsRequest. */
-                class ListDashboardsRequest implements IListDashboardsRequest {
-
-                    /**
-                     * Constructs a new ListDashboardsRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IListDashboardsRequest);
-
-                    /** ListDashboardsRequest parent. */
-                    public parent: string;
-
-                    /** ListDashboardsRequest pageSize. */
-                    public pageSize: number;
-
-                    /** ListDashboardsRequest pageToken. */
-                    public pageToken: string;
-
-                    /**
-                     * Creates a new ListDashboardsRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListDashboardsRequest instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IListDashboardsRequest): google.monitoring.dashboard.v1.ListDashboardsRequest;
-
-                    /**
-                     * Encodes the specified ListDashboardsRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.ListDashboardsRequest.verify|verify} messages.
-                     * @param message ListDashboardsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IListDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListDashboardsRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ListDashboardsRequest.verify|verify} messages.
-                     * @param message ListDashboardsRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IListDashboardsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListDashboardsRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListDashboardsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ListDashboardsRequest;
-
-                    /**
-                     * Decodes a ListDashboardsRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListDashboardsRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ListDashboardsRequest;
-
-                    /**
-                     * Verifies a ListDashboardsRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListDashboardsRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListDashboardsRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ListDashboardsRequest;
-
-                    /**
-                     * Creates a plain object from a ListDashboardsRequest message. Also converts values to other types if specified.
-                     * @param message ListDashboardsRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.ListDashboardsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListDashboardsRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a ListDashboardsResponse. */
-                interface IListDashboardsResponse {
-
-                    /** ListDashboardsResponse dashboards */
-                    dashboards?: (google.monitoring.dashboard.v1.IDashboard[]|null);
-
-                    /** ListDashboardsResponse nextPageToken */
-                    nextPageToken?: (string|null);
-                }
-
-                /** Represents a ListDashboardsResponse. */
-                class ListDashboardsResponse implements IListDashboardsResponse {
-
-                    /**
-                     * Constructs a new ListDashboardsResponse.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IListDashboardsResponse);
-
-                    /** ListDashboardsResponse dashboards. */
-                    public dashboards: google.monitoring.dashboard.v1.IDashboard[];
-
-                    /** ListDashboardsResponse nextPageToken. */
-                    public nextPageToken: string;
-
-                    /**
-                     * Creates a new ListDashboardsResponse instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ListDashboardsResponse instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IListDashboardsResponse): google.monitoring.dashboard.v1.ListDashboardsResponse;
-
-                    /**
-                     * Encodes the specified ListDashboardsResponse message. Does not implicitly {@link google.monitoring.dashboard.v1.ListDashboardsResponse.verify|verify} messages.
-                     * @param message ListDashboardsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IListDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ListDashboardsResponse message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.ListDashboardsResponse.verify|verify} messages.
-                     * @param message ListDashboardsResponse message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IListDashboardsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ListDashboardsResponse message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ListDashboardsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.ListDashboardsResponse;
-
-                    /**
-                     * Decodes a ListDashboardsResponse message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ListDashboardsResponse
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.ListDashboardsResponse;
-
-                    /**
-                     * Verifies a ListDashboardsResponse message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ListDashboardsResponse message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ListDashboardsResponse
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.ListDashboardsResponse;
-
-                    /**
-                     * Creates a plain object from a ListDashboardsResponse message. Also converts values to other types if specified.
-                     * @param message ListDashboardsResponse
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.ListDashboardsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ListDashboardsResponse to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a GetDashboardRequest. */
-                interface IGetDashboardRequest {
-
-                    /** GetDashboardRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a GetDashboardRequest. */
-                class GetDashboardRequest implements IGetDashboardRequest {
-
-                    /**
-                     * Constructs a new GetDashboardRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IGetDashboardRequest);
-
-                    /** GetDashboardRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new GetDashboardRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns GetDashboardRequest instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IGetDashboardRequest): google.monitoring.dashboard.v1.GetDashboardRequest;
-
-                    /**
-                     * Encodes the specified GetDashboardRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.GetDashboardRequest.verify|verify} messages.
-                     * @param message GetDashboardRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IGetDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified GetDashboardRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.GetDashboardRequest.verify|verify} messages.
-                     * @param message GetDashboardRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IGetDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a GetDashboardRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns GetDashboardRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.GetDashboardRequest;
-
-                    /**
-                     * Decodes a GetDashboardRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns GetDashboardRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.GetDashboardRequest;
-
-                    /**
-                     * Verifies a GetDashboardRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a GetDashboardRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns GetDashboardRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.GetDashboardRequest;
-
-                    /**
-                     * Creates a plain object from a GetDashboardRequest message. Also converts values to other types if specified.
-                     * @param message GetDashboardRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.GetDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this GetDashboardRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a DeleteDashboardRequest. */
-                interface IDeleteDashboardRequest {
-
-                    /** DeleteDashboardRequest name */
-                    name?: (string|null);
-                }
-
-                /** Represents a DeleteDashboardRequest. */
-                class DeleteDashboardRequest implements IDeleteDashboardRequest {
-
-                    /**
-                     * Constructs a new DeleteDashboardRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IDeleteDashboardRequest);
-
-                    /** DeleteDashboardRequest name. */
-                    public name: string;
-
-                    /**
-                     * Creates a new DeleteDashboardRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeleteDashboardRequest instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IDeleteDashboardRequest): google.monitoring.dashboard.v1.DeleteDashboardRequest;
-
-                    /**
-                     * Encodes the specified DeleteDashboardRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.DeleteDashboardRequest.verify|verify} messages.
-                     * @param message DeleteDashboardRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IDeleteDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeleteDashboardRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.DeleteDashboardRequest.verify|verify} messages.
-                     * @param message DeleteDashboardRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IDeleteDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeleteDashboardRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeleteDashboardRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.DeleteDashboardRequest;
-
-                    /**
-                     * Decodes a DeleteDashboardRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeleteDashboardRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.DeleteDashboardRequest;
-
-                    /**
-                     * Verifies a DeleteDashboardRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeleteDashboardRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeleteDashboardRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.DeleteDashboardRequest;
-
-                    /**
-                     * Creates a plain object from a DeleteDashboardRequest message. Also converts values to other types if specified.
-                     * @param message DeleteDashboardRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.DeleteDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeleteDashboardRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an UpdateDashboardRequest. */
-                interface IUpdateDashboardRequest {
-
-                    /** UpdateDashboardRequest dashboard */
-                    dashboard?: (google.monitoring.dashboard.v1.IDashboard|null);
-                }
-
-                /** Represents an UpdateDashboardRequest. */
-                class UpdateDashboardRequest implements IUpdateDashboardRequest {
-
-                    /**
-                     * Constructs a new UpdateDashboardRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.monitoring.dashboard.v1.IUpdateDashboardRequest);
-
-                    /** UpdateDashboardRequest dashboard. */
-                    public dashboard?: (google.monitoring.dashboard.v1.IDashboard|null);
-
-                    /**
-                     * Creates a new UpdateDashboardRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns UpdateDashboardRequest instance
-                     */
-                    public static create(properties?: google.monitoring.dashboard.v1.IUpdateDashboardRequest): google.monitoring.dashboard.v1.UpdateDashboardRequest;
-
-                    /**
-                     * Encodes the specified UpdateDashboardRequest message. Does not implicitly {@link google.monitoring.dashboard.v1.UpdateDashboardRequest.verify|verify} messages.
-                     * @param message UpdateDashboardRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.monitoring.dashboard.v1.IUpdateDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified UpdateDashboardRequest message, length delimited. Does not implicitly {@link google.monitoring.dashboard.v1.UpdateDashboardRequest.verify|verify} messages.
-                     * @param message UpdateDashboardRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.monitoring.dashboard.v1.IUpdateDashboardRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an UpdateDashboardRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns UpdateDashboardRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.monitoring.dashboard.v1.UpdateDashboardRequest;
-
-                    /**
-                     * Decodes an UpdateDashboardRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns UpdateDashboardRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.monitoring.dashboard.v1.UpdateDashboardRequest;
-
-                    /**
-                     * Verifies an UpdateDashboardRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an UpdateDashboardRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns UpdateDashboardRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.monitoring.dashboard.v1.UpdateDashboardRequest;
-
-                    /**
-                     * Creates a plain object from an UpdateDashboardRequest message. Also converts values to other types if specified.
-                     * @param message UpdateDashboardRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.monitoring.dashboard.v1.UpdateDashboardRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this UpdateDashboardRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-            }
-        }
-    }
-
-    /** Namespace api. */
-    namespace api {
-
-        /** Properties of a Distribution. */
-        interface IDistribution {
-
-            /** Distribution count */
-            count?: (number|Long|string|null);
-
-            /** Distribution mean */
-            mean?: (number|null);
-
-            /** Distribution sumOfSquaredDeviation */
-            sumOfSquaredDeviation?: (number|null);
-
-            /** Distribution range */
-            range?: (google.api.Distribution.IRange|null);
-
-            /** Distribution bucketOptions */
-            bucketOptions?: (google.api.Distribution.IBucketOptions|null);
-
-            /** Distribution bucketCounts */
-            bucketCounts?: ((number|Long|string)[]|null);
-
-            /** Distribution exemplars */
-            exemplars?: (google.api.Distribution.IExemplar[]|null);
-        }
-
-        /** Represents a Distribution. */
-        class Distribution implements IDistribution {
-
-            /**
-             * Constructs a new Distribution.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IDistribution);
-
-            /** Distribution count. */
-            public count: (number|Long|string);
-
-            /** Distribution mean. */
-            public mean: number;
-
-            /** Distribution sumOfSquaredDeviation. */
-            public sumOfSquaredDeviation: number;
-
-            /** Distribution range. */
-            public range?: (google.api.Distribution.IRange|null);
-
-            /** Distribution bucketOptions. */
-            public bucketOptions?: (google.api.Distribution.IBucketOptions|null);
-
-            /** Distribution bucketCounts. */
-            public bucketCounts: (number|Long|string)[];
-
-            /** Distribution exemplars. */
-            public exemplars: google.api.Distribution.IExemplar[];
-
-            /**
-             * Creates a new Distribution instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Distribution instance
-             */
-            public static create(properties?: google.api.IDistribution): google.api.Distribution;
-
-            /**
-             * Encodes the specified Distribution message. Does not implicitly {@link google.api.Distribution.verify|verify} messages.
-             * @param message Distribution message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Distribution message, length delimited. Does not implicitly {@link google.api.Distribution.verify|verify} messages.
-             * @param message Distribution message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IDistribution, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Distribution message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Distribution
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution;
-
-            /**
-             * Decodes a Distribution message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Distribution
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution;
-
-            /**
-             * Verifies a Distribution message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Distribution message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Distribution
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Distribution;
-
-            /**
-             * Creates a plain object from a Distribution message. Also converts values to other types if specified.
-             * @param message Distribution
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Distribution, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Distribution to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace Distribution {
-
-            /** Properties of a Range. */
-            interface IRange {
-
-                /** Range min */
-                min?: (number|null);
-
-                /** Range max */
-                max?: (number|null);
-            }
-
-            /** Represents a Range. */
-            class Range implements IRange {
-
-                /**
-                 * Constructs a new Range.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.api.Distribution.IRange);
-
-                /** Range min. */
-                public min: number;
-
-                /** Range max. */
-                public max: number;
-
-                /**
-                 * Creates a new Range instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Range instance
-                 */
-                public static create(properties?: google.api.Distribution.IRange): google.api.Distribution.Range;
-
-                /**
-                 * Encodes the specified Range message. Does not implicitly {@link google.api.Distribution.Range.verify|verify} messages.
-                 * @param message Range message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.api.Distribution.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Range message, length delimited. Does not implicitly {@link google.api.Distribution.Range.verify|verify} messages.
-                 * @param message Range message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.api.Distribution.IRange, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a Range message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Range
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.Range;
-
-                /**
-                 * Decodes a Range message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Range
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.Range;
-
-                /**
-                 * Verifies a Range message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a Range message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Range
-                 */
-                public static fromObject(object: { [k: string]: any }): google.api.Distribution.Range;
-
-                /**
-                 * Creates a plain object from a Range message. Also converts values to other types if specified.
-                 * @param message Range
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.api.Distribution.Range, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Range to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
-
-            /** Properties of a BucketOptions. */
-            interface IBucketOptions {
-
-                /** BucketOptions linearBuckets */
-                linearBuckets?: (google.api.Distribution.BucketOptions.ILinear|null);
-
-                /** BucketOptions exponentialBuckets */
-                exponentialBuckets?: (google.api.Distribution.BucketOptions.IExponential|null);
-
-                /** BucketOptions explicitBuckets */
-                explicitBuckets?: (google.api.Distribution.BucketOptions.IExplicit|null);
-            }
-
-            /** Represents a BucketOptions. */
-            class BucketOptions implements IBucketOptions {
-
-                /**
-                 * Constructs a new BucketOptions.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.api.Distribution.IBucketOptions);
-
-                /** BucketOptions linearBuckets. */
-                public linearBuckets?: (google.api.Distribution.BucketOptions.ILinear|null);
-
-                /** BucketOptions exponentialBuckets. */
-                public exponentialBuckets?: (google.api.Distribution.BucketOptions.IExponential|null);
-
-                /** BucketOptions explicitBuckets. */
-                public explicitBuckets?: (google.api.Distribution.BucketOptions.IExplicit|null);
-
-                /** BucketOptions options. */
-                public options?: ("linearBuckets"|"exponentialBuckets"|"explicitBuckets");
-
-                /**
-                 * Creates a new BucketOptions instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns BucketOptions instance
-                 */
-                public static create(properties?: google.api.Distribution.IBucketOptions): google.api.Distribution.BucketOptions;
-
-                /**
-                 * Encodes the specified BucketOptions message. Does not implicitly {@link google.api.Distribution.BucketOptions.verify|verify} messages.
-                 * @param message BucketOptions message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.api.Distribution.IBucketOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified BucketOptions message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.verify|verify} messages.
-                 * @param message BucketOptions message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.api.Distribution.IBucketOptions, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a BucketOptions message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns BucketOptions
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions;
-
-                /**
-                 * Decodes a BucketOptions message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns BucketOptions
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions;
-
-                /**
-                 * Verifies a BucketOptions message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a BucketOptions message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns BucketOptions
-                 */
-                public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions;
-
-                /**
-                 * Creates a plain object from a BucketOptions message. Also converts values to other types if specified.
-                 * @param message BucketOptions
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.api.Distribution.BucketOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this BucketOptions to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
-
-            namespace BucketOptions {
-
-                /** Properties of a Linear. */
-                interface ILinear {
-
-                    /** Linear numFiniteBuckets */
-                    numFiniteBuckets?: (number|null);
-
-                    /** Linear width */
-                    width?: (number|null);
-
-                    /** Linear offset */
-                    offset?: (number|null);
-                }
-
-                /** Represents a Linear. */
-                class Linear implements ILinear {
-
-                    /**
-                     * Constructs a new Linear.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.api.Distribution.BucketOptions.ILinear);
-
-                    /** Linear numFiniteBuckets. */
-                    public numFiniteBuckets: number;
-
-                    /** Linear width. */
-                    public width: number;
-
-                    /** Linear offset. */
-                    public offset: number;
-
-                    /**
-                     * Creates a new Linear instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Linear instance
-                     */
-                    public static create(properties?: google.api.Distribution.BucketOptions.ILinear): google.api.Distribution.BucketOptions.Linear;
-
-                    /**
-                     * Encodes the specified Linear message. Does not implicitly {@link google.api.Distribution.BucketOptions.Linear.verify|verify} messages.
-                     * @param message Linear message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.api.Distribution.BucketOptions.ILinear, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Linear message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Linear.verify|verify} messages.
-                     * @param message Linear message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.api.Distribution.BucketOptions.ILinear, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Linear message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Linear
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions.Linear;
-
-                    /**
-                     * Decodes a Linear message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Linear
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions.Linear;
-
-                    /**
-                     * Verifies a Linear message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Linear message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Linear
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions.Linear;
-
-                    /**
-                     * Creates a plain object from a Linear message. Also converts values to other types if specified.
-                     * @param message Linear
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.api.Distribution.BucketOptions.Linear, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Linear to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an Exponential. */
-                interface IExponential {
-
-                    /** Exponential numFiniteBuckets */
-                    numFiniteBuckets?: (number|null);
-
-                    /** Exponential growthFactor */
-                    growthFactor?: (number|null);
-
-                    /** Exponential scale */
-                    scale?: (number|null);
-                }
-
-                /** Represents an Exponential. */
-                class Exponential implements IExponential {
-
-                    /**
-                     * Constructs a new Exponential.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.api.Distribution.BucketOptions.IExponential);
-
-                    /** Exponential numFiniteBuckets. */
-                    public numFiniteBuckets: number;
-
-                    /** Exponential growthFactor. */
-                    public growthFactor: number;
-
-                    /** Exponential scale. */
-                    public scale: number;
-
-                    /**
-                     * Creates a new Exponential instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Exponential instance
-                     */
-                    public static create(properties?: google.api.Distribution.BucketOptions.IExponential): google.api.Distribution.BucketOptions.Exponential;
-
-                    /**
-                     * Encodes the specified Exponential message. Does not implicitly {@link google.api.Distribution.BucketOptions.Exponential.verify|verify} messages.
-                     * @param message Exponential message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.api.Distribution.BucketOptions.IExponential, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Exponential message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Exponential.verify|verify} messages.
-                     * @param message Exponential message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.api.Distribution.BucketOptions.IExponential, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an Exponential message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Exponential
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions.Exponential;
-
-                    /**
-                     * Decodes an Exponential message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Exponential
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions.Exponential;
-
-                    /**
-                     * Verifies an Exponential message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an Exponential message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Exponential
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions.Exponential;
-
-                    /**
-                     * Creates a plain object from an Exponential message. Also converts values to other types if specified.
-                     * @param message Exponential
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.api.Distribution.BucketOptions.Exponential, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Exponential to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an Explicit. */
-                interface IExplicit {
-
-                    /** Explicit bounds */
-                    bounds?: (number[]|null);
-                }
-
-                /** Represents an Explicit. */
-                class Explicit implements IExplicit {
-
-                    /**
-                     * Constructs a new Explicit.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.api.Distribution.BucketOptions.IExplicit);
-
-                    /** Explicit bounds. */
-                    public bounds: number[];
-
-                    /**
-                     * Creates a new Explicit instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Explicit instance
-                     */
-                    public static create(properties?: google.api.Distribution.BucketOptions.IExplicit): google.api.Distribution.BucketOptions.Explicit;
-
-                    /**
-                     * Encodes the specified Explicit message. Does not implicitly {@link google.api.Distribution.BucketOptions.Explicit.verify|verify} messages.
-                     * @param message Explicit message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.api.Distribution.BucketOptions.IExplicit, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Explicit message, length delimited. Does not implicitly {@link google.api.Distribution.BucketOptions.Explicit.verify|verify} messages.
-                     * @param message Explicit message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.api.Distribution.BucketOptions.IExplicit, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an Explicit message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Explicit
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.BucketOptions.Explicit;
-
-                    /**
-                     * Decodes an Explicit message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Explicit
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.BucketOptions.Explicit;
-
-                    /**
-                     * Verifies an Explicit message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an Explicit message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Explicit
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.api.Distribution.BucketOptions.Explicit;
-
-                    /**
-                     * Creates a plain object from an Explicit message. Also converts values to other types if specified.
-                     * @param message Explicit
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.api.Distribution.BucketOptions.Explicit, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Explicit to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-            }
-
-            /** Properties of an Exemplar. */
-            interface IExemplar {
-
-                /** Exemplar value */
-                value?: (number|null);
-
-                /** Exemplar timestamp */
-                timestamp?: (google.protobuf.ITimestamp|null);
-
-                /** Exemplar attachments */
-                attachments?: (google.protobuf.IAny[]|null);
-            }
-
-            /** Represents an Exemplar. */
-            class Exemplar implements IExemplar {
-
-                /**
-                 * Constructs a new Exemplar.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.api.Distribution.IExemplar);
-
-                /** Exemplar value. */
-                public value: number;
-
-                /** Exemplar timestamp. */
-                public timestamp?: (google.protobuf.ITimestamp|null);
-
-                /** Exemplar attachments. */
-                public attachments: google.protobuf.IAny[];
-
-                /**
-                 * Creates a new Exemplar instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns Exemplar instance
-                 */
-                public static create(properties?: google.api.Distribution.IExemplar): google.api.Distribution.Exemplar;
-
-                /**
-                 * Encodes the specified Exemplar message. Does not implicitly {@link google.api.Distribution.Exemplar.verify|verify} messages.
-                 * @param message Exemplar message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.api.Distribution.IExemplar, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified Exemplar message, length delimited. Does not implicitly {@link google.api.Distribution.Exemplar.verify|verify} messages.
-                 * @param message Exemplar message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.api.Distribution.IExemplar, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an Exemplar message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns Exemplar
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Distribution.Exemplar;
-
-                /**
-                 * Decodes an Exemplar message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns Exemplar
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Distribution.Exemplar;
-
-                /**
-                 * Verifies an Exemplar message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an Exemplar message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns Exemplar
-                 */
-                public static fromObject(object: { [k: string]: any }): google.api.Distribution.Exemplar;
-
-                /**
-                 * Creates a plain object from an Exemplar message. Also converts values to other types if specified.
-                 * @param message Exemplar
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.api.Distribution.Exemplar, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this Exemplar to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-            }
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Http. */
-        interface IHttp {
-
-            /** Http rules */
-            rules?: (google.api.IHttpRule[]|null);
-
-            /** Http fullyDecodeReservedExpansion */
-            fullyDecodeReservedExpansion?: (boolean|null);
-        }
-
-        /** Represents a Http. */
-        class Http implements IHttp {
-
-            /**
-             * Constructs a new Http.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IHttp);
-
-            /** Http rules. */
-            public rules: google.api.IHttpRule[];
-
-            /** Http fullyDecodeReservedExpansion. */
-            public fullyDecodeReservedExpansion: boolean;
-
-            /**
-             * Creates a new Http instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Http instance
-             */
-            public static create(properties?: google.api.IHttp): google.api.Http;
-
-            /**
-             * Encodes the specified Http message. Does not implicitly {@link google.api.Http.verify|verify} messages.
-             * @param message Http message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IHttp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Http message, length delimited. Does not implicitly {@link google.api.Http.verify|verify} messages.
-             * @param message Http message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IHttp, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Http message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Http
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.Http;
-
-            /**
-             * Decodes a Http message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Http
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.Http;
-
-            /**
-             * Verifies a Http message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Http message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Http
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.Http;
-
-            /**
-             * Creates a plain object from a Http message. Also converts values to other types if specified.
-             * @param message Http
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.Http, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Http to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a HttpRule. */
-        interface IHttpRule {
-
-            /** HttpRule selector */
-            selector?: (string|null);
-
-            /** HttpRule get */
-            get?: (string|null);
-
-            /** HttpRule put */
-            put?: (string|null);
-
-            /** HttpRule post */
-            post?: (string|null);
-
-            /** HttpRule delete */
-            "delete"?: (string|null);
-
-            /** HttpRule patch */
-            patch?: (string|null);
-
-            /** HttpRule custom */
-            custom?: (google.api.ICustomHttpPattern|null);
-
-            /** HttpRule body */
-            body?: (string|null);
-
-            /** HttpRule responseBody */
-            responseBody?: (string|null);
-
-            /** HttpRule additionalBindings */
-            additionalBindings?: (google.api.IHttpRule[]|null);
-        }
-
-        /** Represents a HttpRule. */
-        class HttpRule implements IHttpRule {
-
-            /**
-             * Constructs a new HttpRule.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IHttpRule);
-
-            /** HttpRule selector. */
-            public selector: string;
-
-            /** HttpRule get. */
-            public get?: (string|null);
-
-            /** HttpRule put. */
-            public put?: (string|null);
-
-            /** HttpRule post. */
-            public post?: (string|null);
-
-            /** HttpRule delete. */
-            public delete?: (string|null);
-
-            /** HttpRule patch. */
-            public patch?: (string|null);
-
-            /** HttpRule custom. */
-            public custom?: (google.api.ICustomHttpPattern|null);
-
-            /** HttpRule body. */
-            public body: string;
-
-            /** HttpRule responseBody. */
-            public responseBody: string;
-
-            /** HttpRule additionalBindings. */
-            public additionalBindings: google.api.IHttpRule[];
-
-            /** HttpRule pattern. */
-            public pattern?: ("get"|"put"|"post"|"delete"|"patch"|"custom");
-
-            /**
-             * Creates a new HttpRule instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns HttpRule instance
-             */
-            public static create(properties?: google.api.IHttpRule): google.api.HttpRule;
-
-            /**
-             * Encodes the specified HttpRule message. Does not implicitly {@link google.api.HttpRule.verify|verify} messages.
-             * @param message HttpRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IHttpRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified HttpRule message, length delimited. Does not implicitly {@link google.api.HttpRule.verify|verify} messages.
-             * @param message HttpRule message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IHttpRule, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a HttpRule message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns HttpRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.HttpRule;
-
-            /**
-             * Decodes a HttpRule message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns HttpRule
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.HttpRule;
-
-            /**
-             * Verifies a HttpRule message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a HttpRule message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns HttpRule
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.HttpRule;
-
-            /**
-             * Creates a plain object from a HttpRule message. Also converts values to other types if specified.
-             * @param message HttpRule
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.HttpRule, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this HttpRule to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a CustomHttpPattern. */
-        interface ICustomHttpPattern {
-
-            /** CustomHttpPattern kind */
-            kind?: (string|null);
-
-            /** CustomHttpPattern path */
-            path?: (string|null);
-        }
-
-        /** Represents a CustomHttpPattern. */
-        class CustomHttpPattern implements ICustomHttpPattern {
-
-            /**
-             * Constructs a new CustomHttpPattern.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ICustomHttpPattern);
-
-            /** CustomHttpPattern kind. */
-            public kind: string;
-
-            /** CustomHttpPattern path. */
-            public path: string;
-
-            /**
-             * Creates a new CustomHttpPattern instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns CustomHttpPattern instance
-             */
-            public static create(properties?: google.api.ICustomHttpPattern): google.api.CustomHttpPattern;
-
-            /**
-             * Encodes the specified CustomHttpPattern message. Does not implicitly {@link google.api.CustomHttpPattern.verify|verify} messages.
-             * @param message CustomHttpPattern message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ICustomHttpPattern, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified CustomHttpPattern message, length delimited. Does not implicitly {@link google.api.CustomHttpPattern.verify|verify} messages.
-             * @param message CustomHttpPattern message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ICustomHttpPattern, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a CustomHttpPattern message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns CustomHttpPattern
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.CustomHttpPattern;
-
-            /**
-             * Decodes a CustomHttpPattern message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns CustomHttpPattern
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.CustomHttpPattern;
-
-            /**
-             * Verifies a CustomHttpPattern message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a CustomHttpPattern message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns CustomHttpPattern
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.CustomHttpPattern;
-
-            /**
-             * Creates a plain object from a CustomHttpPattern message. Also converts values to other types if specified.
-             * @param message CustomHttpPattern
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.CustomHttpPattern, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this CustomHttpPattern to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

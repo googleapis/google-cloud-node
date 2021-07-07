@@ -949,6 +949,58 @@ describe('v1.DashboardsServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('alertPolicy', () => {
+      const fakePath = '/rendered/path/alertPolicy';
+      const expectedParameters = {
+        project: 'projectValue',
+        alert_policy: 'alertPolicyValue',
+      };
+      const client = new dashboardsserviceModule.v1.DashboardsServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.alertPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.alertPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('alertPolicyPath', () => {
+        const result = client.alertPolicyPath(
+          'projectValue',
+          'alertPolicyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.alertPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromAlertPolicyName', () => {
+        const result = client.matchProjectFromAlertPolicyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.alertPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAlertPolicyFromAlertPolicyName', () => {
+        const result = client.matchAlertPolicyFromAlertPolicyName(fakePath);
+        assert.strictEqual(result, 'alertPolicyValue');
+        assert(
+          (client.pathTemplates.alertPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('dashboard', () => {
       const fakePath = '/rendered/path/dashboard';
       const expectedParameters = {

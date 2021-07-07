@@ -1,4 +1,5 @@
 [
+  "../../protos/google/monitoring/dashboard/v1/alertchart.proto",
   "../../protos/google/monitoring/dashboard/v1/common.proto",
   "../../protos/google/monitoring/dashboard/v1/dashboard.proto",
   "../../protos/google/monitoring/dashboard/v1/dashboards_service.proto",
