@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.4...v2.4.0) (2021-07-07)
+
+
+### Features
+
+* added validation only mode when writing dashboards feat: added alert chart widget ([#194](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/194)) ([867a08c](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/867a08cabca0f96701f5f8975c6f6e5d0522189f))
+
 ### [2.3.4](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.3...v2.3.4) (2021-06-29)
 
 
