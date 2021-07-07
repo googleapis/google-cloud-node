@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.vpcaccess.v1",
-  "libraryPackage": "@google-cloud/vpcaccess",
+  "libraryPackage": "@google-cloud/vpc-access",
   "services": {
     "VpcAccessService": {
       "clients": {
