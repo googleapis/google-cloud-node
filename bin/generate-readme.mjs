@@ -22,15 +22,14 @@ import parseLinkHeader from 'parse-link-header';
 const token = process.env.GITHUB_TOKEN;
 const smokeTest = !!process.env.SMOKE_TEST;
 
-if (!token) {
-  throw new Error('Please include a GITHUB_TOKEN env var.');
+const headers = {};
+if (token) {
+  headers.authorization = `token ${token}`;
+} else {
+  console.warn('Please provide GITHUB_TOKEN env var for increased quota.');
 }
 const baseUrl = 'https://api.github.com';
-const github = new Gaxios({
-  headers: {
-    authorization: `token ${token}`
-  }
-});
+const github = new Gaxios({ headers });
 
 function checkpoint (message, success = true) {
   const prefix = success ? chalk.green(figures.tick) : chalk.red(figures.cross);
