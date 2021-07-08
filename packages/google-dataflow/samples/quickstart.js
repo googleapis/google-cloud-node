@@ -13,30 +13,32 @@
 
 'use strict';
 
-async function main() {
-
+async function main(
+  projectId,
+  gcsPath = 'gs://dataflow-templates/latest/PubSub_Subscription_to_BigQuery'
+) {
   // [START nodejs_dataflow_quickstart]
   // Imports the Google Cloud client library
 
-  // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
   const {TemplatesServiceClient} = require('@google-cloud/dataflow');
 
   // TODO(developer): replace with your prefered project ID.
   // const projectId = 'my-project'
+  // TODO(developer): replace with your bucket path.
+  // const gcsPath = 'gs://<bucket>/path'
 
   // Creates a client
-  // eslint-disable-next-line no-unused-vars
-  const client = new {TemplatesServiceClient}();
+  const client = new TemplatesServiceClient();
 
   //TODO(library generator): write the actual function you will be testing
-  async function doSomething() {
-   console.log('DPE! Change this code so that it shows how to use the library! See comments below on structure.')
-   // const [thing] = await client.methodName({
-   // });
-   // console.info(thing);
+  async function getTemplate() {
+    const template = await client.getTemplate({
+      projectId,
+      gcsPath,
+    });
+    console.info(template);
   }
-  doSomething();
+  getTemplate();
   // [END nodejs_dataflow_quickstart]
 }
 
