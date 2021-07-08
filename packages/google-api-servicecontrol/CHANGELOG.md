@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-service-control/compare/v1.1.0...v1.1.1) (2021-07-05)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.17.0 ([#54](https://www.github.com/googleapis/nodejs-service-control/issues/54)) ([05e8422](https://www.github.com/googleapis/nodejs-service-control/commit/05e84223d4a5950da7d365e81dc1aaa830956976))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-service-control/compare/v1.0.0...v1.1.0) (2021-06-25)
 
 
