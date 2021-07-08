@@ -13,22 +13,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const chalk = require('chalk');
-const { request, Gaxios } = require('gaxios');
-const figures = require('figures');
-const { readFileSync, writeFileSync } = require('fs');
-const parseLinkHeader = require('parse-link-header');
+import chalk from 'chalk';
+import { request, Gaxios } from 'gaxios';
+import figures from 'figures';
+import { readFileSync, writeFileSync } from 'fs';
+import parseLinkHeader from 'parse-link-header';
 
 const token = process.env.GITHUB_TOKEN;
-if (!token) {
-  throw new Error('Please include a GITHUB_TOKEN env var.');
+const smokeTest = !!process.env.SMOKE_TEST;
+
+const headers = {};
+if (token) {
+  headers.authorization = `token ${token}`;
+} else {
+  console.warn('Please provide GITHUB_TOKEN env var for increased quota.');
 }
 const baseUrl = 'https://api.github.com';
-const github = new Gaxios({
-  headers: {
-    authorization: `token ${token}`
-  }
-});
+const github = new Gaxios({ headers });
 
 function checkpoint (message, success = true) {
   const prefix = success ? chalk.green(figures.tick) : chalk.red(figures.cross);
@@ -70,7 +71,7 @@ async function downloadRepoMetadata () {
     try {
       await github.request({
         url: `https://registry.npmjs.org/${packageName}`,
-        method: 'HEAD',
+        method: 'HEAD'
       });
     } catch (err) {
       if (!err.response || err.response.status !== 404) {
@@ -83,6 +84,8 @@ async function downloadRepoMetadata () {
     // we have metadata, and the package is published!
     repoMetadata[repo] = meta;
     checkpoint(`${repo} found .repo-metadata.json`);
+    // on smoke test, just confirm that we can generate README with a single library:
+    if (smokeTest) break;
   }
   const libraries = await processMetadata(repoMetadata);
   return libraries;
@@ -93,7 +96,7 @@ async function downloadRepoMetadata () {
  * APIs, and to use the appropriate product support url.
  * Write the resulting file to disk.
  */
-async function processMetadata(repoMetadata) {
+async function processMetadata (repoMetadata) {
   const gaLibraries = [];
   const previewLibraries = [];
 
@@ -169,7 +172,7 @@ async function generateReadme (libraries) {
   let partial = '';
   for (const lib of libraries) {
     let stability = '';
-    switch(lib.release_level) {
+    switch (lib.release_level) {
       case 'ga':
         stability = '[![GA][ga-stability]][launch-stages]';
         break;
@@ -197,8 +200,8 @@ async function getRepos () {
     const res = await github.request({ url: url.href });
     repos.push(...res.data.filter(r => (r.language === 'TypeScript' || r.language === 'JavaScript') && r.archived === false && r.private === false).map(r => r.full_name));
     url = null;
-    if (res.headers['link']) {
-      const link = parseLinkHeader(res.headers['link']);
+    if (res.headers.link) {
+      const link = parseLinkHeader(res.headers.link);
       if (link.next) {
         url = new URL(link.next.url);
       }
@@ -225,4 +228,7 @@ async function main () {
   }
   await generateReadme(libraries);
 }
-main().catch(console.error);
+main().catch((err) => {
+  console.error(err.message);
+  process.exitCode = 1;
+});

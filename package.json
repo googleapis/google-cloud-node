@@ -2,14 +2,15 @@
   "name": "google-cloud-node",
   "private": true,
   "description": "Google Cloud client libraries for Node.js",
-  "bin": "bin/generate-readme.js",
+  "bin": "bin/generate-readme.mjs",
   "directories": {
     "doc": "docs"
   },
   "scripts": {
     "fix": "semistandard --fix",
     "test": "semistandard",
-    "generate": "./bin/generate-readme.js",
+    "test-generate": "SMOKE_TEST=true node ./bin/generate-readme.mjs",
+    "generate": "./bin/generate-readme.mjs",
     "lint": "semistandard",
     "clean": "gts clean",
     "precompile": "gts clean",
@@ -41,6 +42,6 @@
     "semistandard": "^16.0.0"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=14"
   }
 }
