@@ -32,7 +32,7 @@
   },
   "homepage": "https://github.com/googleapis/google-cloud-node#readme",
   "dependencies": {
-    "chalk": "^2.4.2",
+    "chalk": "^4.0.0",
     "figures": "^4.0.0",
     "gaxios": "^4.0.0",
     "parse-link-header": "^1.0.1"
