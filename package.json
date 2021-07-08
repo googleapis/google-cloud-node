@@ -34,7 +34,7 @@
   "dependencies": {
     "chalk": "^2.4.2",
     "figures": "^4.0.0",
-    "gaxios": "^3.0.3",
+    "gaxios": "^4.0.0",
     "parse-link-header": "^1.0.1"
   },
   "devDependencies": {
