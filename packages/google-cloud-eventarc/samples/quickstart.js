@@ -18,16 +18,14 @@ async function main(projectId) {
   // Imports the Google Cloud client library
 
   // remove this line after package is released
-  // eslint-disable-next-line node/no-missing-require
   const {EventarcClient} = require('@google-cloud/eventarc');
 
-  // TODO(developer): replace with your prefered project ID.
+  // TODO: replace with your prefered project ID.
   // const projectId = 'my-project'
 
   // Creates a client
   const client = new EventarcClient();
 
-  //TODO(library generator): write the actual function you will be testing
   async function doSomething() {
     for await (const trigger of await client.listTriggersAsync({
       parent: client.locationPath(projectId, 'us-central1'),
