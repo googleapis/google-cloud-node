@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -55,6 +55,42 @@ npm install @google-cloud/eventarc
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+
+// remove this line after package is released
+// eslint-disable-next-line node/no-missing-require
+const {EventarcClient} = require('@google-cloud/eventarc');
+
+// TODO(developer): replace with your prefered project ID.
+// const projectId = 'my-project'
+
+// Creates a client
+const client = new EventarcClient();
+
+//TODO(library generator): write the actual function you will be testing
+async function doSomething() {
+  for await (const trigger of await client.listTriggersAsync({
+    parent: client.locationPath(projectId, 'us-central1'),
+  })) {
+    console.info(trigger.name);
+  }
+}
+doSomething();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-eventarc/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-eventarc/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-eventarc&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -87,6 +123,11 @@ _Legacy Node.js versions are supported as a best effort:_
 This library follows [Semantic Versioning](http://semver.org/).
 
 
+
+This library is considered to be in **beta**. This means it is expected to be
+mostly stable while we work toward a general availability release; however,
+complete stability is not guaranteed. We will address issues and requests
+against beta libraries with a high priority.
 
 
 

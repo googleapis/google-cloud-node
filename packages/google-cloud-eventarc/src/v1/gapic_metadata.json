@@ -1,0 +1,77 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.eventarc.v1",
+  "libraryPackage": "@google-cloud/eventarc",
+  "services": {
+    "Eventarc": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EventarcClient",
+          "rpcs": {
+            "GetTrigger": {
+              "methods": [
+                "getTrigger"
+              ]
+            },
+            "CreateTrigger": {
+              "methods": [
+                "createTrigger"
+              ]
+            },
+            "UpdateTrigger": {
+              "methods": [
+                "updateTrigger"
+              ]
+            },
+            "DeleteTrigger": {
+              "methods": [
+                "deleteTrigger"
+              ]
+            },
+            "ListTriggers": {
+              "methods": [
+                "listTriggers",
+                "listTriggersStream",
+                "listTriggersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EventarcClient",
+          "rpcs": {
+            "GetTrigger": {
+              "methods": [
+                "getTrigger"
+              ]
+            },
+            "CreateTrigger": {
+              "methods": [
+                "createTrigger"
+              ]
+            },
+            "UpdateTrigger": {
+              "methods": [
+                "updateTrigger"
+              ]
+            },
+            "DeleteTrigger": {
+              "methods": [
+                "deleteTrigger"
+              ]
+            },
+            "ListTriggers": {
+              "methods": [
+                "listTriggers",
+                "listTriggersStream",
+                "listTriggersAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

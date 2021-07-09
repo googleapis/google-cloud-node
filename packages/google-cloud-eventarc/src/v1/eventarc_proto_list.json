@@ -1,0 +1,4 @@
+[
+  "../../protos/google/cloud/eventarc/v1/eventarc.proto",
+  "../../protos/google/cloud/eventarc/v1/trigger.proto"
+]
