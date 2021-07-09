@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.3.2...v2.4.0) (2021-07-09)
+
+
+### Features
+
+* allow updating security group on existing clusters ([#464](https://www.github.com/googleapis/nodejs-cloud-container/issues/464)) ([ed09e02](https://www.github.com/googleapis/nodejs-cloud-container/commit/ed09e028126d308cf131f26453fe6c73a73cec6d))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.3.1...v2.3.2) (2021-06-30)
 
 
