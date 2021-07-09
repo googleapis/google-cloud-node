@@ -8933,6 +8933,7 @@
                      * @property {google.container.v1.IIntraNodeVisibilityConfig|null} [desiredIntraNodeVisibilityConfig] ClusterUpdate desiredIntraNodeVisibilityConfig
                      * @property {google.container.v1.IDefaultSnatStatus|null} [desiredDefaultSnatStatus] ClusterUpdate desiredDefaultSnatStatus
                      * @property {google.container.v1.IReleaseChannel|null} [desiredReleaseChannel] ClusterUpdate desiredReleaseChannel
+                     * @property {google.container.v1.IAuthenticatorGroupsConfig|null} [desiredAuthenticatorGroupsConfig] ClusterUpdate desiredAuthenticatorGroupsConfig
                      * @property {string|null} [desiredMasterVersion] ClusterUpdate desiredMasterVersion
                      */
     
@@ -9113,6 +9114,14 @@
                     ClusterUpdate.prototype.desiredReleaseChannel = null;
     
                     /**
+                     * ClusterUpdate desiredAuthenticatorGroupsConfig.
+                     * @member {google.container.v1.IAuthenticatorGroupsConfig|null|undefined} desiredAuthenticatorGroupsConfig
+                     * @memberof google.container.v1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredAuthenticatorGroupsConfig = null;
+    
+                    /**
                      * ClusterUpdate desiredMasterVersion.
                      * @member {string} desiredMasterVersion
                      * @memberof google.container.v1.ClusterUpdate
@@ -9185,6 +9194,8 @@
                             $root.google.container.v1.WorkloadIdentityConfig.encode(message.desiredWorkloadIdentityConfig, writer.uint32(/* id 47, wireType 2 =*/378).fork()).ldelim();
                         if (message.desiredShieldedNodes != null && Object.hasOwnProperty.call(message, "desiredShieldedNodes"))
                             $root.google.container.v1.ShieldedNodes.encode(message.desiredShieldedNodes, writer.uint32(/* id 48, wireType 2 =*/386).fork()).ldelim();
+                        if (message.desiredAuthenticatorGroupsConfig != null && Object.hasOwnProperty.call(message, "desiredAuthenticatorGroupsConfig"))
+                            $root.google.container.v1.AuthenticatorGroupsConfig.encode(message.desiredAuthenticatorGroupsConfig, writer.uint32(/* id 63, wireType 2 =*/506).fork()).ldelim();
                         if (message.desiredMasterVersion != null && Object.hasOwnProperty.call(message, "desiredMasterVersion"))
                             writer.uint32(/* id 100, wireType 2 =*/802).string(message.desiredMasterVersion);
                         return writer;
@@ -9282,6 +9293,9 @@
                                 break;
                             case 31:
                                 message.desiredReleaseChannel = $root.google.container.v1.ReleaseChannel.decode(reader, reader.uint32());
+                                break;
+                            case 63:
+                                message.desiredAuthenticatorGroupsConfig = $root.google.container.v1.AuthenticatorGroupsConfig.decode(reader, reader.uint32());
                                 break;
                             case 100:
                                 message.desiredMasterVersion = reader.string();
@@ -9413,6 +9427,11 @@
                             if (error)
                                 return "desiredReleaseChannel." + error;
                         }
+                        if (message.desiredAuthenticatorGroupsConfig != null && message.hasOwnProperty("desiredAuthenticatorGroupsConfig")) {
+                            var error = $root.google.container.v1.AuthenticatorGroupsConfig.verify(message.desiredAuthenticatorGroupsConfig);
+                            if (error)
+                                return "desiredAuthenticatorGroupsConfig." + error;
+                        }
                         if (message.desiredMasterVersion != null && message.hasOwnProperty("desiredMasterVersion"))
                             if (!$util.isString(message.desiredMasterVersion))
                                 return "desiredMasterVersion: string expected";
@@ -9518,6 +9537,11 @@
                                 throw TypeError(".google.container.v1.ClusterUpdate.desiredReleaseChannel: object expected");
                             message.desiredReleaseChannel = $root.google.container.v1.ReleaseChannel.fromObject(object.desiredReleaseChannel);
                         }
+                        if (object.desiredAuthenticatorGroupsConfig != null) {
+                            if (typeof object.desiredAuthenticatorGroupsConfig !== "object")
+                                throw TypeError(".google.container.v1.ClusterUpdate.desiredAuthenticatorGroupsConfig: object expected");
+                            message.desiredAuthenticatorGroupsConfig = $root.google.container.v1.AuthenticatorGroupsConfig.fromObject(object.desiredAuthenticatorGroupsConfig);
+                        }
                         if (object.desiredMasterVersion != null)
                             message.desiredMasterVersion = String(object.desiredMasterVersion);
                         return message;
@@ -9558,6 +9582,7 @@
                             object.desiredDatabaseEncryption = null;
                             object.desiredWorkloadIdentityConfig = null;
                             object.desiredShieldedNodes = null;
+                            object.desiredAuthenticatorGroupsConfig = null;
                             object.desiredMasterVersion = "";
                         }
                         if (message.desiredNodeVersion != null && message.hasOwnProperty("desiredNodeVersion"))
@@ -9603,6 +9628,8 @@
                             object.desiredWorkloadIdentityConfig = $root.google.container.v1.WorkloadIdentityConfig.toObject(message.desiredWorkloadIdentityConfig, options);
                         if (message.desiredShieldedNodes != null && message.hasOwnProperty("desiredShieldedNodes"))
                             object.desiredShieldedNodes = $root.google.container.v1.ShieldedNodes.toObject(message.desiredShieldedNodes, options);
+                        if (message.desiredAuthenticatorGroupsConfig != null && message.hasOwnProperty("desiredAuthenticatorGroupsConfig"))
+                            object.desiredAuthenticatorGroupsConfig = $root.google.container.v1.AuthenticatorGroupsConfig.toObject(message.desiredAuthenticatorGroupsConfig, options);
                         if (message.desiredMasterVersion != null && message.hasOwnProperty("desiredMasterVersion"))
                             object.desiredMasterVersion = message.desiredMasterVersion;
                         return object;

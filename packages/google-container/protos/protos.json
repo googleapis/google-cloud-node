@@ -1671,6 +1671,10 @@
                       "type": "ReleaseChannel",
                       "id": 31
                     },
+                    "desiredAuthenticatorGroupsConfig": {
+                      "type": "AuthenticatorGroupsConfig",
+                      "id": 63
+                    },
                     "desiredMasterVersion": {
                       "type": "string",
                       "id": 100

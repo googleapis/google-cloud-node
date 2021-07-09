@@ -3747,6 +3747,9 @@ export namespace google {
                 /** ClusterUpdate desiredReleaseChannel */
                 desiredReleaseChannel?: (google.container.v1.IReleaseChannel|null);
 
+                /** ClusterUpdate desiredAuthenticatorGroupsConfig */
+                desiredAuthenticatorGroupsConfig?: (google.container.v1.IAuthenticatorGroupsConfig|null);
+
                 /** ClusterUpdate desiredMasterVersion */
                 desiredMasterVersion?: (string|null);
             }
@@ -3819,6 +3822,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredReleaseChannel. */
                 public desiredReleaseChannel?: (google.container.v1.IReleaseChannel|null);
+
+                /** ClusterUpdate desiredAuthenticatorGroupsConfig. */
+                public desiredAuthenticatorGroupsConfig?: (google.container.v1.IAuthenticatorGroupsConfig|null);
 
                 /** ClusterUpdate desiredMasterVersion. */
                 public desiredMasterVersion: string;
