@@ -1249,6 +1249,21 @@
     "support_documentation": "https://cloud.google.com/bigquery/docs/getting-support"
   },
   {
+    "name": "dataflow",
+    "name_pretty": "Dataflow",
+    "product_documentation": "https://cloud.google.com/dataflow/",
+    "client_documentation": "https://cloud.google.com/dataflow",
+    "issue_tracker": "https://github.com/googleapis/nodejs-dataflow/issues",
+    "release_level": "beta",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-dataflow",
+    "distribution_name": "@google-cloud/dataflow",
+    "api_id": "dataflow.googleapis.com",
+    "default_version": "v1beta3",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/dataflow/"
+  },
+  {
     "client_documentation": "https://cloud.google.com/dataproc-metastore/docs",
     "api_id": "metastore.googleapis.com",
     "distribution_name": "@google-cloud/dataproc-metastore",
