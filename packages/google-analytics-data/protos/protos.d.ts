@@ -6713,6 +6713,9 @@ export namespace google {
 
                     /** RunRealtimeReportRequest returnPropertyQuota */
                     returnPropertyQuota?: (boolean|null);
+
+                    /** RunRealtimeReportRequest minuteRanges */
+                    minuteRanges?: (google.analytics.data.v1beta.IMinuteRange[]|null);
                 }
 
                 /** Represents a RunRealtimeReportRequest. */
@@ -6750,6 +6753,9 @@ export namespace google {
 
                     /** RunRealtimeReportRequest returnPropertyQuota. */
                     public returnPropertyQuota: boolean;
+
+                    /** RunRealtimeReportRequest minuteRanges. */
+                    public minuteRanges: google.analytics.data.v1beta.IMinuteRange[];
 
                     /**
                      * Creates a new RunRealtimeReportRequest instance using the specified properties.
@@ -7057,6 +7063,114 @@ export namespace google {
 
                     /**
                      * Converts this DateRange to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MinuteRange. */
+                interface IMinuteRange {
+
+                    /** MinuteRange startMinutesAgo */
+                    startMinutesAgo?: (number|null);
+
+                    /** MinuteRange endMinutesAgo */
+                    endMinutesAgo?: (number|null);
+
+                    /** MinuteRange name */
+                    name?: (string|null);
+                }
+
+                /** Represents a MinuteRange. */
+                class MinuteRange implements IMinuteRange {
+
+                    /**
+                     * Constructs a new MinuteRange.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IMinuteRange);
+
+                    /** MinuteRange startMinutesAgo. */
+                    public startMinutesAgo?: (number|null);
+
+                    /** MinuteRange endMinutesAgo. */
+                    public endMinutesAgo?: (number|null);
+
+                    /** MinuteRange name. */
+                    public name: string;
+
+                    /** MinuteRange _startMinutesAgo. */
+                    public _startMinutesAgo?: "startMinutesAgo";
+
+                    /** MinuteRange _endMinutesAgo. */
+                    public _endMinutesAgo?: "endMinutesAgo";
+
+                    /**
+                     * Creates a new MinuteRange instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MinuteRange instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IMinuteRange): google.analytics.data.v1beta.MinuteRange;
+
+                    /**
+                     * Encodes the specified MinuteRange message. Does not implicitly {@link google.analytics.data.v1beta.MinuteRange.verify|verify} messages.
+                     * @param message MinuteRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IMinuteRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MinuteRange message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MinuteRange.verify|verify} messages.
+                     * @param message MinuteRange message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IMinuteRange, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MinuteRange message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MinuteRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.MinuteRange;
+
+                    /**
+                     * Decodes a MinuteRange message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MinuteRange
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.MinuteRange;
+
+                    /**
+                     * Verifies a MinuteRange message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MinuteRange message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MinuteRange
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.MinuteRange;
+
+                    /**
+                     * Creates a plain object from a MinuteRange message. Also converts values to other types if specified.
+                     * @param message MinuteRange
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.MinuteRange, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MinuteRange to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

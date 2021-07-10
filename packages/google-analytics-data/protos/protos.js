@@ -17767,6 +17767,7 @@
                          * @property {Array.<google.analytics.data.v1beta.MetricAggregation>|null} [metricAggregations] RunRealtimeReportRequest metricAggregations
                          * @property {Array.<google.analytics.data.v1beta.IOrderBy>|null} [orderBys] RunRealtimeReportRequest orderBys
                          * @property {boolean|null} [returnPropertyQuota] RunRealtimeReportRequest returnPropertyQuota
+                         * @property {Array.<google.analytics.data.v1beta.IMinuteRange>|null} [minuteRanges] RunRealtimeReportRequest minuteRanges
                          */
     
                         /**
@@ -17782,6 +17783,7 @@
                             this.metrics = [];
                             this.metricAggregations = [];
                             this.orderBys = [];
+                            this.minuteRanges = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -17861,6 +17863,14 @@
                         RunRealtimeReportRequest.prototype.returnPropertyQuota = false;
     
                         /**
+                         * RunRealtimeReportRequest minuteRanges.
+                         * @member {Array.<google.analytics.data.v1beta.IMinuteRange>} minuteRanges
+                         * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
+                         * @instance
+                         */
+                        RunRealtimeReportRequest.prototype.minuteRanges = $util.emptyArray;
+    
+                        /**
                          * Creates a new RunRealtimeReportRequest instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1beta.RunRealtimeReportRequest
@@ -17909,6 +17919,9 @@
                                     $root.google.analytics.data.v1beta.OrderBy.encode(message.orderBys[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.returnPropertyQuota != null && Object.hasOwnProperty.call(message, "returnPropertyQuota"))
                                 writer.uint32(/* id 9, wireType 0 =*/72).bool(message.returnPropertyQuota);
+                            if (message.minuteRanges != null && message.minuteRanges.length)
+                                for (var i = 0; i < message.minuteRanges.length; ++i)
+                                    $root.google.analytics.data.v1beta.MinuteRange.encode(message.minuteRanges[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -17982,6 +17995,11 @@
                                     break;
                                 case 9:
                                     message.returnPropertyQuota = reader.bool();
+                                    break;
+                                case 10:
+                                    if (!(message.minuteRanges && message.minuteRanges.length))
+                                        message.minuteRanges = [];
+                                    message.minuteRanges.push($root.google.analytics.data.v1beta.MinuteRange.decode(reader, reader.uint32()));
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -18079,6 +18097,15 @@
                             if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
                                 if (typeof message.returnPropertyQuota !== "boolean")
                                     return "returnPropertyQuota: boolean expected";
+                            if (message.minuteRanges != null && message.hasOwnProperty("minuteRanges")) {
+                                if (!Array.isArray(message.minuteRanges))
+                                    return "minuteRanges: array expected";
+                                for (var i = 0; i < message.minuteRanges.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.MinuteRange.verify(message.minuteRanges[i]);
+                                    if (error)
+                                        return "minuteRanges." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -18176,6 +18203,16 @@
                             }
                             if (object.returnPropertyQuota != null)
                                 message.returnPropertyQuota = Boolean(object.returnPropertyQuota);
+                            if (object.minuteRanges) {
+                                if (!Array.isArray(object.minuteRanges))
+                                    throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.minuteRanges: array expected");
+                                message.minuteRanges = [];
+                                for (var i = 0; i < object.minuteRanges.length; ++i) {
+                                    if (typeof object.minuteRanges[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.RunRealtimeReportRequest.minuteRanges: object expected");
+                                    message.minuteRanges[i] = $root.google.analytics.data.v1beta.MinuteRange.fromObject(object.minuteRanges[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -18197,6 +18234,7 @@
                                 object.metrics = [];
                                 object.metricAggregations = [];
                                 object.orderBys = [];
+                                object.minuteRanges = [];
                             }
                             if (options.defaults) {
                                 object.property = "";
@@ -18242,6 +18280,11 @@
                             }
                             if (message.returnPropertyQuota != null && message.hasOwnProperty("returnPropertyQuota"))
                                 object.returnPropertyQuota = message.returnPropertyQuota;
+                            if (message.minuteRanges && message.minuteRanges.length) {
+                                object.minuteRanges = [];
+                                for (var j = 0; j < message.minuteRanges.length; ++j)
+                                    object.minuteRanges[j] = $root.google.analytics.data.v1beta.MinuteRange.toObject(message.minuteRanges[j], options);
+                            }
                             return object;
                         };
     
@@ -18986,6 +19029,271 @@
                         };
     
                         return DateRange;
+                    })();
+    
+                    v1beta.MinuteRange = (function() {
+    
+                        /**
+                         * Properties of a MinuteRange.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IMinuteRange
+                         * @property {number|null} [startMinutesAgo] MinuteRange startMinutesAgo
+                         * @property {number|null} [endMinutesAgo] MinuteRange endMinutesAgo
+                         * @property {string|null} [name] MinuteRange name
+                         */
+    
+                        /**
+                         * Constructs a new MinuteRange.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a MinuteRange.
+                         * @implements IMinuteRange
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IMinuteRange=} [properties] Properties to set
+                         */
+                        function MinuteRange(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MinuteRange startMinutesAgo.
+                         * @member {number|null|undefined} startMinutesAgo
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @instance
+                         */
+                        MinuteRange.prototype.startMinutesAgo = null;
+    
+                        /**
+                         * MinuteRange endMinutesAgo.
+                         * @member {number|null|undefined} endMinutesAgo
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @instance
+                         */
+                        MinuteRange.prototype.endMinutesAgo = null;
+    
+                        /**
+                         * MinuteRange name.
+                         * @member {string} name
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @instance
+                         */
+                        MinuteRange.prototype.name = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MinuteRange _startMinutesAgo.
+                         * @member {"startMinutesAgo"|undefined} _startMinutesAgo
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @instance
+                         */
+                        Object.defineProperty(MinuteRange.prototype, "_startMinutesAgo", {
+                            get: $util.oneOfGetter($oneOfFields = ["startMinutesAgo"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * MinuteRange _endMinutesAgo.
+                         * @member {"endMinutesAgo"|undefined} _endMinutesAgo
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @instance
+                         */
+                        Object.defineProperty(MinuteRange.prototype, "_endMinutesAgo", {
+                            get: $util.oneOfGetter($oneOfFields = ["endMinutesAgo"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MinuteRange instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMinuteRange=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.MinuteRange} MinuteRange instance
+                         */
+                        MinuteRange.create = function create(properties) {
+                            return new MinuteRange(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MinuteRange message. Does not implicitly {@link google.analytics.data.v1beta.MinuteRange.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMinuteRange} message MinuteRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MinuteRange.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.startMinutesAgo != null && Object.hasOwnProperty.call(message, "startMinutesAgo"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.startMinutesAgo);
+                            if (message.endMinutesAgo != null && Object.hasOwnProperty.call(message, "endMinutesAgo"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.endMinutesAgo);
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MinuteRange message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MinuteRange.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMinuteRange} message MinuteRange message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MinuteRange.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MinuteRange message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.MinuteRange} MinuteRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MinuteRange.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.MinuteRange();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.startMinutesAgo = reader.int32();
+                                    break;
+                                case 2:
+                                    message.endMinutesAgo = reader.int32();
+                                    break;
+                                case 3:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MinuteRange message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.MinuteRange} MinuteRange
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MinuteRange.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MinuteRange message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MinuteRange.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.startMinutesAgo != null && message.hasOwnProperty("startMinutesAgo")) {
+                                properties._startMinutesAgo = 1;
+                                if (!$util.isInteger(message.startMinutesAgo))
+                                    return "startMinutesAgo: integer expected";
+                            }
+                            if (message.endMinutesAgo != null && message.hasOwnProperty("endMinutesAgo")) {
+                                properties._endMinutesAgo = 1;
+                                if (!$util.isInteger(message.endMinutesAgo))
+                                    return "endMinutesAgo: integer expected";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MinuteRange message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.MinuteRange} MinuteRange
+                         */
+                        MinuteRange.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.MinuteRange)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.MinuteRange();
+                            if (object.startMinutesAgo != null)
+                                message.startMinutesAgo = object.startMinutesAgo | 0;
+                            if (object.endMinutesAgo != null)
+                                message.endMinutesAgo = object.endMinutesAgo | 0;
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MinuteRange message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @static
+                         * @param {google.analytics.data.v1beta.MinuteRange} message MinuteRange
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MinuteRange.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.startMinutesAgo != null && message.hasOwnProperty("startMinutesAgo")) {
+                                object.startMinutesAgo = message.startMinutesAgo;
+                                if (options.oneofs)
+                                    object._startMinutesAgo = "startMinutesAgo";
+                            }
+                            if (message.endMinutesAgo != null && message.hasOwnProperty("endMinutesAgo")) {
+                                object.endMinutesAgo = message.endMinutesAgo;
+                                if (options.oneofs)
+                                    object._endMinutesAgo = "endMinutesAgo";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MinuteRange to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.MinuteRange
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MinuteRange.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MinuteRange;
                     })();
     
                     v1beta.Dimension = (function() {

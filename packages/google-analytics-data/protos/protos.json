@@ -1605,6 +1605,11 @@
                         "returnPropertyQuota": {
                           "type": "bool",
                           "id": 9
+                        },
+                        "minuteRanges": {
+                          "rule": "repeated",
+                          "type": "MinuteRange",
+                          "id": 10
                         }
                       }
                     },
@@ -1663,6 +1668,40 @@
                         "endDate": {
                           "type": "string",
                           "id": 2
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "MinuteRange": {
+                      "oneofs": {
+                        "_startMinutesAgo": {
+                          "oneof": [
+                            "startMinutesAgo"
+                          ]
+                        },
+                        "_endMinutesAgo": {
+                          "oneof": [
+                            "endMinutesAgo"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "startMinutesAgo": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "endMinutesAgo": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "name": {
                           "type": "string",

@@ -978,6 +978,12 @@ export class BetaAnalyticsDataClient {
    * @param {boolean} request.returnPropertyQuota
    *   Toggles whether to return the current state of this Analytics Property's
    *   Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+   * @param {number[]} request.minuteRanges
+   *   The minute ranges of event data to read. If unspecified, one minute range
+   *   for the last 30 minutes will be used. If multiple minute ranges are
+   *   requested, each response row will contain a zero based minute range index.
+   *   If two minute ranges overlap, the event data for the overlapping minutes is
+   *   included in the response rows for both minute ranges.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
