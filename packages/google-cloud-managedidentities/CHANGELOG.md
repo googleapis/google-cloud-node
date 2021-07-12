@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.4...v1.0.5) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#66](https://www.github.com/googleapis/nodejs-managed-identities/issues/66)) ([6d78b78](https://www.github.com/googleapis/nodejs-managed-identities/commit/6d78b78f9c441006d8f61e711f3304c84b3aa5b6))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.3...v1.0.4) (2021-06-29)
 
 
