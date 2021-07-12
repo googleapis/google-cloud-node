@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [4.2.7](https://www.github.com/googleapis/nodejs-language/compare/v4.2.6...v4.2.7) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#598](https://www.github.com/googleapis/nodejs-language/issues/598)) ([47f9295](https://www.github.com/googleapis/nodejs-language/commit/47f9295ae17d4f9f87c32a40276eb1588f2cca55))
+
 ### [4.2.6](https://www.github.com/googleapis/nodejs-language/compare/v4.2.5...v4.2.6) (2021-06-30)
 
 
