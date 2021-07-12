@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.4...v1.0.5) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#62](https://www.github.com/googleapis/nodejs-access-approval/issues/62)) ([919c005](https://www.github.com/googleapis/nodejs-access-approval/commit/919c005a4a494cbf7af6df19b86494529ce41fb7))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.3...v1.0.4) (2021-06-29)
 
 
