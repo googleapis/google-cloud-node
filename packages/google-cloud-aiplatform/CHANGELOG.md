@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.4](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.3...v1.7.4) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#164](https://www.github.com/googleapis/nodejs-ai-platform/issues/164)) ([1ec11fc](https://www.github.com/googleapis/nodejs-ai-platform/commit/1ec11fc4fac373ee1a28ac10676fbfe9fc5535d1))
+
 ### [1.7.3](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.2...v1.7.3) (2021-06-29)
 
 
