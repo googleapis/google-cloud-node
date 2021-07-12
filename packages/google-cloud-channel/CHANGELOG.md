@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.3](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.2...v1.2.3) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#69](https://www.github.com/googleapis/nodejs-channel/issues/69)) ([28ec9c7](https://www.github.com/googleapis/nodejs-channel/commit/28ec9c77e2ff3d87a51a6acd82dc0ea09c4a399a))
+
 ### [1.2.2](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.1...v1.2.2) (2021-06-29)
 
 
