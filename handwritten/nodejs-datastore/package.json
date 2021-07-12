@@ -45,7 +45,7 @@
     "arrify": "^2.0.1",
     "concat-stream": "^2.0.0",
     "extend": "^3.0.2",
-    "google-gax": "^2.17.0",
+    "google-gax": "^2.17.1",
     "is": "^3.3.0",
     "pumpify": "^2.0.1",
     "split-array-stream": "^2.0.0",
