@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.5.4](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.3...v4.5.4) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#774](https://www.github.com/googleapis/nodejs-speech/issues/774)) ([a30fb11](https://www.github.com/googleapis/nodejs-speech/commit/a30fb114f5c0cec095b1b1bd1f1678e2e3dba6fd))
+
 ### [4.5.3](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.2...v4.5.3) (2021-06-29)
 
 
