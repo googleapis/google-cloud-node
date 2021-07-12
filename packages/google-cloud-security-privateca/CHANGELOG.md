@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.5](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.4...v2.3.5) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#105](https://www.github.com/googleapis/nodejs-security-private-ca/issues/105)) ([860efe6](https://www.github.com/googleapis/nodejs-security-private-ca/commit/860efe6bc751b42e652e4b6ec22364fd30e6b2cd))
+
 ### [2.3.4](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.3...v2.3.4) (2021-06-30)
 
 
