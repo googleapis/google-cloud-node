@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.0.0...v1.0.1) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#11](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/11)) ([27ad1af](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/27ad1af2a8daed27b3f391003c64ad57239cbe52))
+
 ## 1.0.0 (2021-07-01)
 
 
