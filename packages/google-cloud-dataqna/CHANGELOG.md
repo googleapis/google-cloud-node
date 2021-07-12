@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.6](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.5...v1.0.6) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#53](https://www.github.com/googleapis/nodejs-data-qna/issues/53)) ([977a8c3](https://www.github.com/googleapis/nodejs-data-qna/commit/977a8c3daf153a2e090a7e29780f498b4ec2ff20))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.4...v1.0.5) (2021-06-29)
 
 
