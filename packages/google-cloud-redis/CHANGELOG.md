@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [2.2.4](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.3...v2.2.4) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#496](https://www.github.com/googleapis/nodejs-redis/issues/496)) ([479b07a](https://www.github.com/googleapis/nodejs-redis/commit/479b07aa9bbbbc154a54999706b0699e90e1fe9c))
+* **deps:** google-gax v2.17.1 ([#499](https://www.github.com/googleapis/nodejs-redis/issues/499)) ([61d5d83](https://www.github.com/googleapis/nodejs-redis/commit/61d5d8348ba0403147af65975386325273f974eb))
+
 ### [2.2.3](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.2...v2.2.3) (2021-06-22)
 
 
