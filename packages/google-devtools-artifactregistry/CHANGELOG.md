@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.4...v1.0.5) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#61](https://www.github.com/googleapis/nodejs-artifact-registry/issues/61)) ([f0d00e2](https://www.github.com/googleapis/nodejs-artifact-registry/commit/f0d00e2a818964158440f97d37a6c00a56ec582b))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.3...v1.0.4) (2021-06-30)
 
 
