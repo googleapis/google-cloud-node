@@ -25,7 +25,7 @@
     "Google Cloud Data Catalog API"
   ],
   "dependencies": {
-    "google-gax": "^2.17.0"
+    "google-gax": "^2.17.1"
   },
   "devDependencies": {
     "@types/mocha": "^8.0.0",
