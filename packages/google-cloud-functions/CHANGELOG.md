@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.1.7](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.6...v1.1.7) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.0 with mTLS ([#89](https://www.github.com/googleapis/nodejs-functions/issues/89)) ([2beef03](https://www.github.com/googleapis/nodejs-functions/commit/2beef033c8c134d812e05f12186c7d1285f7e70b))
+* **deps:** google-gax v2.17.1 ([#92](https://www.github.com/googleapis/nodejs-functions/issues/92)) ([4024ee5](https://www.github.com/googleapis/nodejs-functions/commit/4024ee5bebfdd8d2fb1c7a3431906773e2510d5b))
+
 ### [1.1.6](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.5...v1.1.6) (2021-06-24)
 
 
