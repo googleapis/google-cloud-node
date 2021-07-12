@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.3...v1.0.4) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#65](https://www.github.com/googleapis/nodejs-appengine-admin/issues/65)) ([dd73dd5](https://www.github.com/googleapis/nodejs-appengine-admin/commit/dd73dd52d0fbc1ac08c9b03292f286a20a2f4db3))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.2...v1.0.3) (2021-06-30)
 
 
