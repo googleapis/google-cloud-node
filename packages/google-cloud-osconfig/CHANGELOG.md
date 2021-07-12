@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.6.4](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.3...v1.6.4) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#126](https://www.github.com/googleapis/nodejs-os-config/issues/126)) ([a2744c6](https://www.github.com/googleapis/nodejs-os-config/commit/a2744c63a4d39a76e33f8a99d92c4027f25fc3a7))
+
 ### [1.6.3](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.2...v1.6.3) (2021-07-01)
 
 
