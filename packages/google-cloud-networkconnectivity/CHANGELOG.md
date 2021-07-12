@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.5](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.4...v1.1.5) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#62](https://www.github.com/googleapis/nodejs-network-connectivity/issues/62)) ([7156523](https://www.github.com/googleapis/nodejs-network-connectivity/commit/7156523ebe8d49457d2d57b77db048ce3ab47d4f))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.3...v1.1.4) (2021-06-30)
 
 
