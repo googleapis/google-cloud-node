@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.0.3...v1.0.4) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#60](https://www.github.com/googleapis/nodejs-policy-troubleshooter/issues/60)) ([de32784](https://www.github.com/googleapis/nodejs-policy-troubleshooter/commit/de32784b45be401f2fec066e2778f7334f89201b))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.0.2...v1.0.3) (2021-06-29)
 
 

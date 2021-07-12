@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/policy-troubleshooter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Policytroubleshooter client for Node.js",
   "repository": "googleapis/nodejs-policy-troubleshooter",
   "license": "Apache-2.0",
