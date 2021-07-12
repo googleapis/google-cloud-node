@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.2.5](https://www.github.com/googleapis/nodejs-service-management/compare/v0.2.4...v0.2.5) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#70](https://www.github.com/googleapis/nodejs-service-management/issues/70)) ([fc4f996](https://www.github.com/googleapis/nodejs-service-management/commit/fc4f99666252f8f06f399438aedebb6e5502f2e9))
+
 ### [0.2.4](https://www.github.com/googleapis/nodejs-service-management/compare/v0.2.3...v0.2.4) (2021-06-30)
 
 
