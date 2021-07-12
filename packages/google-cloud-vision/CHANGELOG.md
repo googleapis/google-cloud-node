@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [2.3.6](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.5...v2.3.6) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#926](https://www.github.com/googleapis/nodejs-vision/issues/926)) ([6853428](https://www.github.com/googleapis/nodejs-vision/commit/68534284ff975a3a1c950b6727358b77dac4fc83))
+
 ### [2.3.5](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.4...v2.3.5) (2021-06-29)
 
 
