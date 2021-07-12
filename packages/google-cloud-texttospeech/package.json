@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/text-to-speech",
   "description": "Cloud Text-to-Speech API client for Node.js",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {

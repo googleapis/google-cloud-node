@@ -14,7 +14,7 @@
     "test": "mocha --timeout=60000"
   },
   "dependencies": {
-    "@google-cloud/text-to-speech": "^3.2.4",
+    "@google-cloud/text-to-speech": "^3.2.5",
     "yargs": "^16.0.0"
   },
   "devDependencies": {
