@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-recaptcha-enterprise",
   "name": "@google-cloud/recaptcha-enterprise",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "author": "Google LLC",
   "description": "reCAPTCHA Enterprise API client for Node.js",
   "main": "build/src/index.js",
