@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-life-sciences/compare/v1.0.0...v1.0.1) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#13](https://www.github.com/googleapis/nodejs-life-sciences/issues/13)) ([80d5d58](https://www.github.com/googleapis/nodejs-life-sciences/commit/80d5d583602f27319172fb4e4d2ed7c7493a2eba))
+
 ## 1.0.0 (2021-06-30)
 
 
