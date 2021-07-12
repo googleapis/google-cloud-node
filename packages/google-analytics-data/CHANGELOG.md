@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.4.3...v2.5.0) (2021-07-12)
+
+
+### Features
+
+* add `minute_ranges` field to `RunRealtimeReportRequest` object which can be used to specify the time range (in minutes) for realtime report queries docs: document the increase from 8 to 9 of the number of allowed dimensions in a report query ([#123](https://www.github.com/googleapis/nodejs-analytics-data/issues/123)) ([975776b](https://www.github.com/googleapis/nodejs-analytics-data/commit/975776ba58c5bfe98f53e73fd0af3e00ebd8ab2b))
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#125](https://www.github.com/googleapis/nodejs-analytics-data/issues/125)) ([9db78d0](https://www.github.com/googleapis/nodejs-analytics-data/commit/9db78d0663438c2c887a219e807e24fa90431fe5))
+
 ### [2.4.3](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.4.2...v2.4.3) (2021-06-29)
 
 
