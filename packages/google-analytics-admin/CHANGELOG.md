@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.0.3](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v3.0.2...v3.0.3) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#133](https://www.github.com/googleapis/nodejs-analytics-admin/issues/133)) ([ad5ad4d](https://www.github.com/googleapis/nodejs-analytics-admin/commit/ad5ad4da8348f36364cb1f67751bee70161d6c61))
+
 ### [3.0.2](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v3.0.1...v3.0.2) (2021-06-29)
 
 
