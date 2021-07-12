@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/resource-settings",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "resourcesettings client for Node.js",
   "repository": "googleapis/nodejs-resource-settings",
   "license": "Apache-2.0",
