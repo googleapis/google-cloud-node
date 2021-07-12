@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.4](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.3...v1.2.4) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#78](https://www.github.com/googleapis/nodejs-workflows/issues/78)) ([5e2c265](https://www.github.com/googleapis/nodejs-workflows/commit/5e2c2659d25c2927db2e93091ccd426909a079e5))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.2...v1.2.3) (2021-06-29)
 
 
