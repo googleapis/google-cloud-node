@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.4.0...v2.4.1) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#196](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/196)) ([c6c2ae0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/c6c2ae00ea49c80da7668f8383b62cfd17258159))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.3.4...v2.4.0) (2021-07-07)
 
 
