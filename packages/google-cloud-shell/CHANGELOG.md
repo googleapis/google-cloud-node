@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-cloud-shell/compare/v1.0.1...v1.0.2) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#19](https://www.github.com/googleapis/nodejs-cloud-shell/issues/19)) ([f241f55](https://www.github.com/googleapis/nodejs-cloud-shell/commit/f241f55a0bd87224b297a7724c3db38593a3f94b))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-cloud-shell/compare/v1.0.0...v1.0.1) (2021-06-30)
 
 
