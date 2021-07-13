@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.8.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.7.3...v3.8.0) (2021-07-12)
+
+
+### Features
+
+* Tune Secret Manager auto retry parameters ([#276](https://www.github.com/googleapis/nodejs-secret-manager/issues/276)) ([60e48cc](https://www.github.com/googleapis/nodejs-secret-manager/commit/60e48ccb96bc95b693358afb2bef4a2e03810ea8))
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#278](https://www.github.com/googleapis/nodejs-secret-manager/issues/278)) ([6fc709a](https://www.github.com/googleapis/nodejs-secret-manager/commit/6fc709a795f049cd0bb0d016b26279302892ad19))
+
 ### [3.7.3](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.7.2...v3.7.3) (2021-06-30)
 
 
