@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.2](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.2.1...v3.2.2) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#162](https://www.github.com/googleapis/nodejs-service-directory/issues/162)) ([8d2cf25](https://www.github.com/googleapis/nodejs-service-directory/commit/8d2cf25e43c7d53a3d7ebea5732590308112a608))
+
 ### [3.2.1](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.2.0...v3.2.1) (2021-06-30)
 
 
