@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/dms",
   "description": "Cloud Database Migration API client for Node.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
