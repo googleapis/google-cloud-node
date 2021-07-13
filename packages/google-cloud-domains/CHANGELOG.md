@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.4...v1.0.5) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#56](https://www.github.com/googleapis/nodejs-domains/issues/56)) ([4a09020](https://www.github.com/googleapis/nodejs-domains/commit/4a090203e334403c7f4ef520834de61d53d400f6))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.3...v1.0.4) (2021-06-29)
 
 
