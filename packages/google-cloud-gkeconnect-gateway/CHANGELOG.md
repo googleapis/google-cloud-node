@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.0.0...v1.0.1) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#8](https://www.github.com/googleapis/nodejs-gke-connect-gateway/issues/8)) ([eeedac9](https://www.github.com/googleapis/nodejs-gke-connect-gateway/commit/eeedac9d30407e6fccee6e149246c63dfb9d4b3e))
+
 ## 1.0.0 (2021-06-30)
 
 
