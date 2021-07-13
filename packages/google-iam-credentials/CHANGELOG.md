@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.6](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.5...v1.0.6) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#67](https://www.github.com/googleapis/nodejs-iam-credentials/issues/67)) ([734a959](https://www.github.com/googleapis/nodejs-iam-credentials/commit/734a9599eac8ddfe24463cf580c29c5b28236667))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.4...v1.0.5) (2021-06-29)
 
 
