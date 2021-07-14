@@ -1701,6 +1701,7 @@
                              * @property {string|null} [description] Connection description
                              * @property {google.cloud.bigquery.connection.v1.ICloudSqlProperties|null} [cloudSql] Connection cloudSql
                              * @property {google.cloud.bigquery.connection.v1.IAwsProperties|null} [aws] Connection aws
+                             * @property {google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null} [cloudSpanner] Connection cloudSpanner
                              * @property {number|Long|null} [creationTime] Connection creationTime
                              * @property {number|Long|null} [lastModifiedTime] Connection lastModifiedTime
                              * @property {boolean|null} [hasCredential] Connection hasCredential
@@ -1762,6 +1763,14 @@
                             Connection.prototype.aws = null;
     
                             /**
+                             * Connection cloudSpanner.
+                             * @member {google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null|undefined} cloudSpanner
+                             * @memberof google.cloud.bigquery.connection.v1.Connection
+                             * @instance
+                             */
+                            Connection.prototype.cloudSpanner = null;
+    
+                            /**
                              * Connection creationTime.
                              * @member {number|Long} creationTime
                              * @memberof google.cloud.bigquery.connection.v1.Connection
@@ -1790,12 +1799,12 @@
     
                             /**
                              * Connection properties.
-                             * @member {"cloudSql"|"aws"|undefined} properties
+                             * @member {"cloudSql"|"aws"|"cloudSpanner"|undefined} properties
                              * @memberof google.cloud.bigquery.connection.v1.Connection
                              * @instance
                              */
                             Object.defineProperty(Connection.prototype, "properties", {
-                                get: $util.oneOfGetter($oneOfFields = ["cloudSql", "aws"]),
+                                get: $util.oneOfGetter($oneOfFields = ["cloudSql", "aws", "cloudSpanner"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -1839,6 +1848,8 @@
                                     writer.uint32(/* id 7, wireType 0 =*/56).bool(message.hasCredential);
                                 if (message.aws != null && Object.hasOwnProperty.call(message, "aws"))
                                     $root.google.cloud.bigquery.connection.v1.AwsProperties.encode(message.aws, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.cloudSpanner != null && Object.hasOwnProperty.call(message, "cloudSpanner"))
+                                    $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties.encode(message.cloudSpanner, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1887,6 +1898,9 @@
                                         break;
                                     case 8:
                                         message.aws = $root.google.cloud.bigquery.connection.v1.AwsProperties.decode(reader, reader.uint32());
+                                        break;
+                                    case 21:
+                                        message.cloudSpanner = $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties.decode(reader, reader.uint32());
                                         break;
                                     case 5:
                                         message.creationTime = reader.int64();
@@ -1960,6 +1974,16 @@
                                             return "aws." + error;
                                     }
                                 }
+                                if (message.cloudSpanner != null && message.hasOwnProperty("cloudSpanner")) {
+                                    if (properties.properties === 1)
+                                        return "properties: multiple values";
+                                    properties.properties = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties.verify(message.cloudSpanner);
+                                        if (error)
+                                            return "cloudSpanner." + error;
+                                    }
+                                }
                                 if (message.creationTime != null && message.hasOwnProperty("creationTime"))
                                     if (!$util.isInteger(message.creationTime) && !(message.creationTime && $util.isInteger(message.creationTime.low) && $util.isInteger(message.creationTime.high)))
                                         return "creationTime: integer|Long expected";
@@ -1999,6 +2023,11 @@
                                     if (typeof object.aws !== "object")
                                         throw TypeError(".google.cloud.bigquery.connection.v1.Connection.aws: object expected");
                                     message.aws = $root.google.cloud.bigquery.connection.v1.AwsProperties.fromObject(object.aws);
+                                }
+                                if (object.cloudSpanner != null) {
+                                    if (typeof object.cloudSpanner !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1.Connection.cloudSpanner: object expected");
+                                    message.cloudSpanner = $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties.fromObject(object.cloudSpanner);
                                 }
                                 if (object.creationTime != null)
                                     if ($util.Long)
@@ -2079,6 +2108,11 @@
                                     object.aws = $root.google.cloud.bigquery.connection.v1.AwsProperties.toObject(message.aws, options);
                                     if (options.oneofs)
                                         object.properties = "aws";
+                                }
+                                if (message.cloudSpanner != null && message.hasOwnProperty("cloudSpanner")) {
+                                    object.cloudSpanner = $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties.toObject(message.cloudSpanner, options);
+                                    if (options.oneofs)
+                                        object.properties = "cloudSpanner";
                                 }
                                 return object;
                             };
@@ -2600,6 +2634,216 @@
                             return CloudSqlCredential;
                         })();
     
+                        v1.CloudSpannerProperties = (function() {
+    
+                            /**
+                             * Properties of a CloudSpannerProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @interface ICloudSpannerProperties
+                             * @property {string|null} [database] CloudSpannerProperties database
+                             * @property {boolean|null} [useParallelism] CloudSpannerProperties useParallelism
+                             */
+    
+                            /**
+                             * Constructs a new CloudSpannerProperties.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @classdesc Represents a CloudSpannerProperties.
+                             * @implements ICloudSpannerProperties
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1.ICloudSpannerProperties=} [properties] Properties to set
+                             */
+                            function CloudSpannerProperties(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CloudSpannerProperties database.
+                             * @member {string} database
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @instance
+                             */
+                            CloudSpannerProperties.prototype.database = "";
+    
+                            /**
+                             * CloudSpannerProperties useParallelism.
+                             * @member {boolean} useParallelism
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @instance
+                             */
+                            CloudSpannerProperties.prototype.useParallelism = false;
+    
+                            /**
+                             * Creates a new CloudSpannerProperties instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ICloudSpannerProperties=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1.CloudSpannerProperties} CloudSpannerProperties instance
+                             */
+                            CloudSpannerProperties.create = function create(properties) {
+                                return new CloudSpannerProperties(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CloudSpannerProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.CloudSpannerProperties.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ICloudSpannerProperties} message CloudSpannerProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudSpannerProperties.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.database != null && Object.hasOwnProperty.call(message, "database"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.database);
+                                if (message.useParallelism != null && Object.hasOwnProperty.call(message, "useParallelism"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.useParallelism);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CloudSpannerProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.CloudSpannerProperties.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.ICloudSpannerProperties} message CloudSpannerProperties message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CloudSpannerProperties.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CloudSpannerProperties message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1.CloudSpannerProperties} CloudSpannerProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudSpannerProperties.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.database = reader.string();
+                                        break;
+                                    case 2:
+                                        message.useParallelism = reader.bool();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CloudSpannerProperties message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1.CloudSpannerProperties} CloudSpannerProperties
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CloudSpannerProperties.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CloudSpannerProperties message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CloudSpannerProperties.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.database != null && message.hasOwnProperty("database"))
+                                    if (!$util.isString(message.database))
+                                        return "database: string expected";
+                                if (message.useParallelism != null && message.hasOwnProperty("useParallelism"))
+                                    if (typeof message.useParallelism !== "boolean")
+                                        return "useParallelism: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CloudSpannerProperties message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1.CloudSpannerProperties} CloudSpannerProperties
+                             */
+                            CloudSpannerProperties.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1.CloudSpannerProperties();
+                                if (object.database != null)
+                                    message.database = String(object.database);
+                                if (object.useParallelism != null)
+                                    message.useParallelism = Boolean(object.useParallelism);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CloudSpannerProperties message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.CloudSpannerProperties} message CloudSpannerProperties
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CloudSpannerProperties.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.database = "";
+                                    object.useParallelism = false;
+                                }
+                                if (message.database != null && message.hasOwnProperty("database"))
+                                    object.database = message.database;
+                                if (message.useParallelism != null && message.hasOwnProperty("useParallelism"))
+                                    object.useParallelism = message.useParallelism;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CloudSpannerProperties to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1.CloudSpannerProperties
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CloudSpannerProperties.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return CloudSpannerProperties;
+                        })();
+    
                         v1.AwsProperties = (function() {
     
                             /**
@@ -2607,6 +2851,7 @@
                              * @memberof google.cloud.bigquery.connection.v1
                              * @interface IAwsProperties
                              * @property {google.cloud.bigquery.connection.v1.IAwsCrossAccountRole|null} [crossAccountRole] AwsProperties crossAccountRole
+                             * @property {google.cloud.bigquery.connection.v1.IAwsAccessRole|null} [accessRole] AwsProperties accessRole
                              */
     
                             /**
@@ -2632,17 +2877,25 @@
                              */
                             AwsProperties.prototype.crossAccountRole = null;
     
+                            /**
+                             * AwsProperties accessRole.
+                             * @member {google.cloud.bigquery.connection.v1.IAwsAccessRole|null|undefined} accessRole
+                             * @memberof google.cloud.bigquery.connection.v1.AwsProperties
+                             * @instance
+                             */
+                            AwsProperties.prototype.accessRole = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * AwsProperties authenticationMethod.
-                             * @member {"crossAccountRole"|undefined} authenticationMethod
+                             * @member {"crossAccountRole"|"accessRole"|undefined} authenticationMethod
                              * @memberof google.cloud.bigquery.connection.v1.AwsProperties
                              * @instance
                              */
                             Object.defineProperty(AwsProperties.prototype, "authenticationMethod", {
-                                get: $util.oneOfGetter($oneOfFields = ["crossAccountRole"]),
+                                get: $util.oneOfGetter($oneOfFields = ["crossAccountRole", "accessRole"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -2672,6 +2925,8 @@
                                     writer = $Writer.create();
                                 if (message.crossAccountRole != null && Object.hasOwnProperty.call(message, "crossAccountRole"))
                                     $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole.encode(message.crossAccountRole, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.accessRole != null && Object.hasOwnProperty.call(message, "accessRole"))
+                                    $root.google.cloud.bigquery.connection.v1.AwsAccessRole.encode(message.accessRole, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 return writer;
                             };
     
@@ -2708,6 +2963,9 @@
                                     switch (tag >>> 3) {
                                     case 2:
                                         message.crossAccountRole = $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole.decode(reader, reader.uint32());
+                                        break;
+                                    case 3:
+                                        message.accessRole = $root.google.cloud.bigquery.connection.v1.AwsAccessRole.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -2753,6 +3011,16 @@
                                             return "crossAccountRole." + error;
                                     }
                                 }
+                                if (message.accessRole != null && message.hasOwnProperty("accessRole")) {
+                                    if (properties.authenticationMethod === 1)
+                                        return "authenticationMethod: multiple values";
+                                    properties.authenticationMethod = 1;
+                                    {
+                                        var error = $root.google.cloud.bigquery.connection.v1.AwsAccessRole.verify(message.accessRole);
+                                        if (error)
+                                            return "accessRole." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -2772,6 +3040,11 @@
                                     if (typeof object.crossAccountRole !== "object")
                                         throw TypeError(".google.cloud.bigquery.connection.v1.AwsProperties.crossAccountRole: object expected");
                                     message.crossAccountRole = $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole.fromObject(object.crossAccountRole);
+                                }
+                                if (object.accessRole != null) {
+                                    if (typeof object.accessRole !== "object")
+                                        throw TypeError(".google.cloud.bigquery.connection.v1.AwsProperties.accessRole: object expected");
+                                    message.accessRole = $root.google.cloud.bigquery.connection.v1.AwsAccessRole.fromObject(object.accessRole);
                                 }
                                 return message;
                             };
@@ -2793,6 +3066,11 @@
                                     object.crossAccountRole = $root.google.cloud.bigquery.connection.v1.AwsCrossAccountRole.toObject(message.crossAccountRole, options);
                                     if (options.oneofs)
                                         object.authenticationMethod = "crossAccountRole";
+                                }
+                                if (message.accessRole != null && message.hasOwnProperty("accessRole")) {
+                                    object.accessRole = $root.google.cloud.bigquery.connection.v1.AwsAccessRole.toObject(message.accessRole, options);
+                                    if (options.oneofs)
+                                        object.authenticationMethod = "accessRole";
                                 }
                                 return object;
                             };
@@ -3041,6 +3319,216 @@
                             };
     
                             return AwsCrossAccountRole;
+                        })();
+    
+                        v1.AwsAccessRole = (function() {
+    
+                            /**
+                             * Properties of an AwsAccessRole.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @interface IAwsAccessRole
+                             * @property {string|null} [iamRoleId] AwsAccessRole iamRoleId
+                             * @property {string|null} [identity] AwsAccessRole identity
+                             */
+    
+                            /**
+                             * Constructs a new AwsAccessRole.
+                             * @memberof google.cloud.bigquery.connection.v1
+                             * @classdesc Represents an AwsAccessRole.
+                             * @implements IAwsAccessRole
+                             * @constructor
+                             * @param {google.cloud.bigquery.connection.v1.IAwsAccessRole=} [properties] Properties to set
+                             */
+                            function AwsAccessRole(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * AwsAccessRole iamRoleId.
+                             * @member {string} iamRoleId
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @instance
+                             */
+                            AwsAccessRole.prototype.iamRoleId = "";
+    
+                            /**
+                             * AwsAccessRole identity.
+                             * @member {string} identity
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @instance
+                             */
+                            AwsAccessRole.prototype.identity = "";
+    
+                            /**
+                             * Creates a new AwsAccessRole instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAwsAccessRole=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.connection.v1.AwsAccessRole} AwsAccessRole instance
+                             */
+                            AwsAccessRole.create = function create(properties) {
+                                return new AwsAccessRole(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified AwsAccessRole message. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsAccessRole.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAwsAccessRole} message AwsAccessRole message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AwsAccessRole.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.iamRoleId != null && Object.hasOwnProperty.call(message, "iamRoleId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.iamRoleId);
+                                if (message.identity != null && Object.hasOwnProperty.call(message, "identity"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.identity);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified AwsAccessRole message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsAccessRole.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.IAwsAccessRole} message AwsAccessRole message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            AwsAccessRole.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an AwsAccessRole message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.connection.v1.AwsAccessRole} AwsAccessRole
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AwsAccessRole.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.connection.v1.AwsAccessRole();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.iamRoleId = reader.string();
+                                        break;
+                                    case 2:
+                                        message.identity = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an AwsAccessRole message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.connection.v1.AwsAccessRole} AwsAccessRole
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            AwsAccessRole.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an AwsAccessRole message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            AwsAccessRole.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.iamRoleId != null && message.hasOwnProperty("iamRoleId"))
+                                    if (!$util.isString(message.iamRoleId))
+                                        return "iamRoleId: string expected";
+                                if (message.identity != null && message.hasOwnProperty("identity"))
+                                    if (!$util.isString(message.identity))
+                                        return "identity: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an AwsAccessRole message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.connection.v1.AwsAccessRole} AwsAccessRole
+                             */
+                            AwsAccessRole.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.connection.v1.AwsAccessRole)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.connection.v1.AwsAccessRole();
+                                if (object.iamRoleId != null)
+                                    message.iamRoleId = String(object.iamRoleId);
+                                if (object.identity != null)
+                                    message.identity = String(object.identity);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an AwsAccessRole message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @static
+                             * @param {google.cloud.bigquery.connection.v1.AwsAccessRole} message AwsAccessRole
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            AwsAccessRole.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.iamRoleId = "";
+                                    object.identity = "";
+                                }
+                                if (message.iamRoleId != null && message.hasOwnProperty("iamRoleId"))
+                                    object.iamRoleId = message.iamRoleId;
+                                if (message.identity != null && message.hasOwnProperty("identity"))
+                                    object.identity = message.identity;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this AwsAccessRole to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.connection.v1.AwsAccessRole
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            AwsAccessRole.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return AwsAccessRole;
                         })();
     
                         return v1;

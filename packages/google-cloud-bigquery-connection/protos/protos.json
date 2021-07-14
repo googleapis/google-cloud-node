@@ -300,7 +300,8 @@
                             "properties": {
                               "oneof": [
                                 "cloudSql",
-                                "aws"
+                                "aws",
+                                "cloudSpanner"
                               ]
                             }
                           },
@@ -324,6 +325,10 @@
                             "aws": {
                               "type": "AwsProperties",
                               "id": 8
+                            },
+                            "cloudSpanner": {
+                              "type": "CloudSpannerProperties",
+                              "id": 21
                             },
                             "creationTime": {
                               "type": "int64",
@@ -392,11 +397,24 @@
                             }
                           }
                         },
+                        "CloudSpannerProperties": {
+                          "fields": {
+                            "database": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "useParallelism": {
+                              "type": "bool",
+                              "id": 2
+                            }
+                          }
+                        },
                         "AwsProperties": {
                           "oneofs": {
                             "authenticationMethod": {
                               "oneof": [
-                                "crossAccountRole"
+                                "crossAccountRole",
+                                "accessRole"
                               ]
                             }
                           },
@@ -404,6 +422,10 @@
                             "crossAccountRole": {
                               "type": "AwsCrossAccountRole",
                               "id": 2
+                            },
+                            "accessRole": {
+                              "type": "AwsAccessRole",
+                              "id": 3
                             }
                           }
                         },
@@ -426,6 +448,18 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            }
+                          }
+                        },
+                        "AwsAccessRole": {
+                          "fields": {
+                            "iamRoleId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "identity": {
+                              "type": "string",
+                              "id": 2
                             }
                           }
                         }

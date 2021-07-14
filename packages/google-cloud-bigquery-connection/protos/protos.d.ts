@@ -821,6 +821,9 @@ export namespace google {
                         /** Connection aws */
                         aws?: (google.cloud.bigquery.connection.v1.IAwsProperties|null);
 
+                        /** Connection cloudSpanner */
+                        cloudSpanner?: (google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null);
+
                         /** Connection creationTime */
                         creationTime?: (number|Long|string|null);
 
@@ -855,6 +858,9 @@ export namespace google {
                         /** Connection aws. */
                         public aws?: (google.cloud.bigquery.connection.v1.IAwsProperties|null);
 
+                        /** Connection cloudSpanner. */
+                        public cloudSpanner?: (google.cloud.bigquery.connection.v1.ICloudSpannerProperties|null);
+
                         /** Connection creationTime. */
                         public creationTime: (number|Long|string);
 
@@ -865,7 +871,7 @@ export namespace google {
                         public hasCredential: boolean;
 
                         /** Connection properties. */
-                        public properties?: ("cloudSql"|"aws");
+                        public properties?: ("cloudSql"|"aws"|"cloudSpanner");
 
                         /**
                          * Creates a new Connection instance using the specified properties.
@@ -1152,11 +1158,110 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of a CloudSpannerProperties. */
+                    interface ICloudSpannerProperties {
+
+                        /** CloudSpannerProperties database */
+                        database?: (string|null);
+
+                        /** CloudSpannerProperties useParallelism */
+                        useParallelism?: (boolean|null);
+                    }
+
+                    /** Represents a CloudSpannerProperties. */
+                    class CloudSpannerProperties implements ICloudSpannerProperties {
+
+                        /**
+                         * Constructs a new CloudSpannerProperties.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.connection.v1.ICloudSpannerProperties);
+
+                        /** CloudSpannerProperties database. */
+                        public database: string;
+
+                        /** CloudSpannerProperties useParallelism. */
+                        public useParallelism: boolean;
+
+                        /**
+                         * Creates a new CloudSpannerProperties instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CloudSpannerProperties instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.connection.v1.ICloudSpannerProperties): google.cloud.bigquery.connection.v1.CloudSpannerProperties;
+
+                        /**
+                         * Encodes the specified CloudSpannerProperties message. Does not implicitly {@link google.cloud.bigquery.connection.v1.CloudSpannerProperties.verify|verify} messages.
+                         * @param message CloudSpannerProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.connection.v1.ICloudSpannerProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CloudSpannerProperties message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.CloudSpannerProperties.verify|verify} messages.
+                         * @param message CloudSpannerProperties message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.connection.v1.ICloudSpannerProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CloudSpannerProperties message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CloudSpannerProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.connection.v1.CloudSpannerProperties;
+
+                        /**
+                         * Decodes a CloudSpannerProperties message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CloudSpannerProperties
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.connection.v1.CloudSpannerProperties;
+
+                        /**
+                         * Verifies a CloudSpannerProperties message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CloudSpannerProperties message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CloudSpannerProperties
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.connection.v1.CloudSpannerProperties;
+
+                        /**
+                         * Creates a plain object from a CloudSpannerProperties message. Also converts values to other types if specified.
+                         * @param message CloudSpannerProperties
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.connection.v1.CloudSpannerProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CloudSpannerProperties to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** Properties of an AwsProperties. */
                     interface IAwsProperties {
 
                         /** AwsProperties crossAccountRole */
                         crossAccountRole?: (google.cloud.bigquery.connection.v1.IAwsCrossAccountRole|null);
+
+                        /** AwsProperties accessRole */
+                        accessRole?: (google.cloud.bigquery.connection.v1.IAwsAccessRole|null);
                     }
 
                     /** Represents an AwsProperties. */
@@ -1171,8 +1276,11 @@ export namespace google {
                         /** AwsProperties crossAccountRole. */
                         public crossAccountRole?: (google.cloud.bigquery.connection.v1.IAwsCrossAccountRole|null);
 
+                        /** AwsProperties accessRole. */
+                        public accessRole?: (google.cloud.bigquery.connection.v1.IAwsAccessRole|null);
+
                         /** AwsProperties authenticationMethod. */
-                        public authenticationMethod?: "crossAccountRole";
+                        public authenticationMethod?: ("crossAccountRole"|"accessRole");
 
                         /**
                          * Creates a new AwsProperties instance using the specified properties.
@@ -1342,6 +1450,102 @@ export namespace google {
 
                         /**
                          * Converts this AwsCrossAccountRole to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of an AwsAccessRole. */
+                    interface IAwsAccessRole {
+
+                        /** AwsAccessRole iamRoleId */
+                        iamRoleId?: (string|null);
+
+                        /** AwsAccessRole identity */
+                        identity?: (string|null);
+                    }
+
+                    /** Represents an AwsAccessRole. */
+                    class AwsAccessRole implements IAwsAccessRole {
+
+                        /**
+                         * Constructs a new AwsAccessRole.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.connection.v1.IAwsAccessRole);
+
+                        /** AwsAccessRole iamRoleId. */
+                        public iamRoleId: string;
+
+                        /** AwsAccessRole identity. */
+                        public identity: string;
+
+                        /**
+                         * Creates a new AwsAccessRole instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AwsAccessRole instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.connection.v1.IAwsAccessRole): google.cloud.bigquery.connection.v1.AwsAccessRole;
+
+                        /**
+                         * Encodes the specified AwsAccessRole message. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsAccessRole.verify|verify} messages.
+                         * @param message AwsAccessRole message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.connection.v1.IAwsAccessRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AwsAccessRole message, length delimited. Does not implicitly {@link google.cloud.bigquery.connection.v1.AwsAccessRole.verify|verify} messages.
+                         * @param message AwsAccessRole message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.connection.v1.IAwsAccessRole, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AwsAccessRole message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AwsAccessRole
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.connection.v1.AwsAccessRole;
+
+                        /**
+                         * Decodes an AwsAccessRole message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AwsAccessRole
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.connection.v1.AwsAccessRole;
+
+                        /**
+                         * Verifies an AwsAccessRole message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AwsAccessRole message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AwsAccessRole
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.connection.v1.AwsAccessRole;
+
+                        /**
+                         * Creates a plain object from an AwsAccessRole message. Also converts values to other types if specified.
+                         * @param message AwsAccessRole
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.connection.v1.AwsAccessRole, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AwsAccessRole to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
