@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.4...v1.8.0) (2021-07-14)
+
+
+### Features
+
+* Removes AcceleratorType.TPU_V2 and TPU_V3 constants ([#167](https://www.github.com/googleapis/nodejs-ai-platform/issues/167)) ([72d153e](https://www.github.com/googleapis/nodejs-ai-platform/commit/72d153ea7732a0d4b73a4ab8d727679523adf6df))
+
 ### [1.7.4](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.3...v1.7.4) (2021-07-12)
 
 
