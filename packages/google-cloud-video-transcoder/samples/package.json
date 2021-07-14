@@ -14,7 +14,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/video-transcoder": "^1.4.3"
+    "@google-cloud/video-transcoder": "^1.4.4"
   },
   "devDependencies": {
     "@google-cloud/storage": "^5.4.0",
