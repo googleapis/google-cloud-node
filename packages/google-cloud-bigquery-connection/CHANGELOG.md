@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.3.5...v1.4.0) (2021-07-14)
+
+
+### Features
+
+* add cloud spanner connection support ([#110](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/110)) ([18924ba](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/18924bade9c347ca3775ace87dc140743aea4a86))
+
 ### [1.3.5](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.3.4...v1.3.5) (2021-07-12)
 
 
