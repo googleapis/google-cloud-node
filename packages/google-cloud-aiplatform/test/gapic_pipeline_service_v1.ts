@@ -569,6 +569,339 @@ describe('v1.PipelineServiceClient', () => {
     });
   });
 
+  describe('createPipelineJob', () => {
+    it('invokes createPipelineJob without error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.PipelineJob()
+      );
+      client.innerApiCalls.createPipelineJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.createPipelineJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createPipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createPipelineJob without error using callback', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.PipelineJob()
+      );
+      client.innerApiCalls.createPipelineJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createPipelineJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IPipelineJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createPipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createPipelineJob with error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreatePipelineJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createPipelineJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createPipelineJob(request), expectedError);
+      assert(
+        (client.innerApiCalls.createPipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getPipelineJob', () => {
+    it('invokes getPipelineJob without error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.PipelineJob()
+      );
+      client.innerApiCalls.getPipelineJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.getPipelineJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getPipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getPipelineJob without error using callback', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.PipelineJob()
+      );
+      client.innerApiCalls.getPipelineJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getPipelineJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IPipelineJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getPipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getPipelineJob with error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetPipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getPipelineJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getPipelineJob(request), expectedError);
+      assert(
+        (client.innerApiCalls.getPipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('cancelPipelineJob', () => {
+    it('invokes cancelPipelineJob without error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.cancelPipelineJob = stubSimpleCall(expectedResponse);
+      const [response] = await client.cancelPipelineJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.cancelPipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes cancelPipelineJob without error using callback', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.cancelPipelineJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.cancelPipelineJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.cancelPipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes cancelPipelineJob with error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CancelPipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.cancelPipelineJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.cancelPipelineJob(request), expectedError);
+      assert(
+        (client.innerApiCalls.cancelPipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('deleteTrainingPipeline', () => {
     it('invokes deleteTrainingPipeline without error', async () => {
       const client = new pipelineserviceModule.v1.PipelineServiceClient({
@@ -760,6 +1093,200 @@ describe('v1.PipelineServiceClient', () => {
       );
       await assert.rejects(
         client.checkDeleteTrainingPipelineProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deletePipelineJob', () => {
+    it('invokes deletePipelineJob without error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deletePipelineJob =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deletePipelineJob(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deletePipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deletePipelineJob without error using callback', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deletePipelineJob =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deletePipelineJob(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deletePipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deletePipelineJob with call error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deletePipelineJob = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deletePipelineJob(request), expectedError);
+      assert(
+        (client.innerApiCalls.deletePipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deletePipelineJob with LRO error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeletePipelineJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deletePipelineJob = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deletePipelineJob(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.deletePipelineJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkDeletePipelineJobProgress without error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeletePipelineJobProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeletePipelineJobProgress with error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeletePipelineJobProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1093,6 +1620,311 @@ describe('v1.PipelineServiceClient', () => {
     });
   });
 
+  describe('listPipelineJobs', () => {
+    it('invokes listPipelineJobs without error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+      ];
+      client.innerApiCalls.listPipelineJobs = stubSimpleCall(expectedResponse);
+      const [response] = await client.listPipelineJobs(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listPipelineJobs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listPipelineJobs without error using callback', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+      ];
+      client.innerApiCalls.listPipelineJobs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPipelineJobs(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IPipelineJob[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listPipelineJobs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listPipelineJobs with error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPipelineJobs = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listPipelineJobs(request), expectedError);
+      assert(
+        (client.innerApiCalls.listPipelineJobs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listPipelineJobsStream without error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+      ];
+      client.descriptors.page.listPipelineJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listPipelineJobsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.PipelineJob[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1.PipelineJob) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPipelineJobs, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listPipelineJobs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listPipelineJobsStream with error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPipelineJobs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listPipelineJobsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.PipelineJob[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.aiplatform.v1.PipelineJob) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listPipelineJobs.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listPipelineJobs, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listPipelineJobs.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listPipelineJobs without error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.PipelineJob()
+        ),
+      ];
+      client.descriptors.page.listPipelineJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.IPipelineJob[] = [];
+      const iterable = client.listPipelineJobsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listPipelineJobs with error', async () => {
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListPipelineJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listPipelineJobs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listPipelineJobsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1.IPipelineJob[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listPipelineJobs.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('annotation', () => {
       const fakePath = '/rendered/path/annotation';
@@ -1259,6 +2091,82 @@ describe('v1.PipelineServiceClient', () => {
       });
     });
 
+    describe('artifact', () => {
+      const fakePath = '/rendered/path/artifact';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        artifact: 'artifactValue',
+      };
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.artifactPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.artifactPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('artifactPath', () => {
+        const result = client.artifactPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'artifactValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.artifactPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromArtifactName', () => {
+        const result = client.matchProjectFromArtifactName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromArtifactName', () => {
+        const result = client.matchLocationFromArtifactName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromArtifactName', () => {
+        const result = client.matchMetadataStoreFromArtifactName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchArtifactFromArtifactName', () => {
+        const result = client.matchArtifactFromArtifactName(fakePath);
+        assert.strictEqual(result, 'artifactValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('batchPredictionJob', () => {
       const fakePath = '/rendered/path/batchPredictionJob';
       const expectedParameters = {
@@ -1330,6 +2238,82 @@ describe('v1.PipelineServiceClient', () => {
             client.pathTemplates.batchPredictionJobPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('context', () => {
+      const fakePath = '/rendered/path/context';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        context: 'contextValue',
+      };
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.contextPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.contextPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('contextPath', () => {
+        const result = client.contextPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'contextValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.contextPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromContextName', () => {
+        const result = client.matchProjectFromContextName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromContextName', () => {
+        const result = client.matchLocationFromContextName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromContextName', () => {
+        const result = client.matchMetadataStoreFromContextName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchContextFromContextName', () => {
+        const result = client.matchContextFromContextName(fakePath);
+        assert.strictEqual(result, 'contextValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -1663,6 +2647,82 @@ describe('v1.PipelineServiceClient', () => {
         assert.strictEqual(result, 'endpointValue');
         assert(
           (client.pathTemplates.endpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('execution', () => {
+      const fakePath = '/rendered/path/execution';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        execution: 'executionValue',
+      };
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.executionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.executionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('executionPath', () => {
+        const result = client.executionPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'executionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.executionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExecutionName', () => {
+        const result = client.matchProjectFromExecutionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExecutionName', () => {
+        const result = client.matchLocationFromExecutionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromExecutionName', () => {
+        const result = client.matchMetadataStoreFromExecutionName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExecutionFromExecutionName', () => {
+        const result = client.matchExecutionFromExecutionName(fakePath);
+        assert.strictEqual(result, 'executionValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -2042,6 +3102,70 @@ describe('v1.PipelineServiceClient', () => {
             client.pathTemplates.modelEvaluationSlicePathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('pipelineJob', () => {
+      const fakePath = '/rendered/path/pipelineJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        pipeline_job: 'pipelineJobValue',
+      };
+      const client = new pipelineserviceModule.v1.PipelineServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.pipelineJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pipelineJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pipelineJobPath', () => {
+        const result = client.pipelineJobPath(
+          'projectValue',
+          'locationValue',
+          'pipelineJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPipelineJobName', () => {
+        const result = client.matchProjectFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPipelineJobName', () => {
+        const result = client.matchLocationFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPipelineJobFromPipelineJobName', () => {
+        const result = client.matchPipelineJobFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'pipelineJobValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

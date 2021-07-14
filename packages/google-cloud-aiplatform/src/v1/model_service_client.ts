@@ -161,8 +161,14 @@ export class ModelServiceClient {
       annotationSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
+      artifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}'
+      ),
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
+      ),
+      contextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
       ),
       customJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/customJobs/{custom_job}'
@@ -179,6 +185,9 @@ export class ModelServiceClient {
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
+      executionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
+      ),
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
       ),
@@ -193,6 +202,9 @@ export class ModelServiceClient {
       ),
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
+      ),
+      pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
@@ -2106,6 +2118,74 @@ export class ModelServiceClient {
   }
 
   /**
+   * Return a fully-qualified artifact resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} artifact
+   * @returns {string} Resource name string.
+   */
+  artifactPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    artifact: string
+  ) {
+    return this.pathTemplates.artifactPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      artifact: artifact,
+    });
+  }
+
+  /**
+   * Parse the project from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).project;
+  }
+
+  /**
+   * Parse the location from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).location;
+  }
+
+  /**
+   * Parse the metadata_store from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the artifact from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the artifact.
+   */
+  matchArtifactFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).artifact;
+  }
+
+  /**
    * Return a fully-qualified batchPredictionJob resource name string.
    *
    * @param {string} project
@@ -2164,6 +2244,74 @@ export class ModelServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified context resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  contextPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    context: string
+  ) {
+    return this.pathTemplates.contextPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      context: context,
+    });
+  }
+
+  /**
+   * Parse the project from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).project;
+  }
+
+  /**
+   * Parse the location from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).location;
+  }
+
+  /**
+   * Parse the metadata_store from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the context from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).context;
   }
 
   /**
@@ -2441,6 +2589,77 @@ export class ModelServiceClient {
    */
   matchEndpointFromEndpointName(endpointName: string) {
     return this.pathTemplates.endpointPathTemplate.match(endpointName).endpoint;
+  }
+
+  /**
+   * Return a fully-qualified execution resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} execution
+   * @returns {string} Resource name string.
+   */
+  executionPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    execution: string
+  ) {
+    return this.pathTemplates.executionPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      execution: execution,
+    });
+  }
+
+  /**
+   * Parse the project from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .location;
+  }
+
+  /**
+   * Parse the metadata_store from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the execution from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the execution.
+   */
+  matchExecutionFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .execution;
   }
 
   /**
@@ -2759,6 +2978,58 @@ export class ModelServiceClient {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
       modelEvaluationSliceName
     ).slice;
+  }
+
+  /**
+   * Return a fully-qualified pipelineJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} pipeline_job
+   * @returns {string} Resource name string.
+   */
+  pipelineJobPath(project: string, location: string, pipelineJob: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.render({
+      project: project,
+      location: location,
+      pipeline_job: pipelineJob,
+    });
+  }
+
+  /**
+   * Parse the project from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .location;
+  }
+
+  /**
+   * Parse the pipeline_job from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the pipeline_job.
+   */
+  matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .pipeline_job;
   }
 
   /**

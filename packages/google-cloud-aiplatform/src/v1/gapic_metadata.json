@@ -633,9 +633,29 @@
                 "cancelTrainingPipeline"
               ]
             },
+            "CreatePipelineJob": {
+              "methods": [
+                "createPipelineJob"
+              ]
+            },
+            "GetPipelineJob": {
+              "methods": [
+                "getPipelineJob"
+              ]
+            },
+            "CancelPipelineJob": {
+              "methods": [
+                "cancelPipelineJob"
+              ]
+            },
             "DeleteTrainingPipeline": {
               "methods": [
                 "deleteTrainingPipeline"
+              ]
+            },
+            "DeletePipelineJob": {
+              "methods": [
+                "deletePipelineJob"
               ]
             },
             "ListTrainingPipelines": {
@@ -643,6 +663,13 @@
                 "listTrainingPipelines",
                 "listTrainingPipelinesStream",
                 "listTrainingPipelinesAsync"
+              ]
+            },
+            "ListPipelineJobs": {
+              "methods": [
+                "listPipelineJobs",
+                "listPipelineJobsStream",
+                "listPipelineJobsAsync"
               ]
             }
           }
@@ -665,9 +692,29 @@
                 "cancelTrainingPipeline"
               ]
             },
+            "CreatePipelineJob": {
+              "methods": [
+                "createPipelineJob"
+              ]
+            },
+            "GetPipelineJob": {
+              "methods": [
+                "getPipelineJob"
+              ]
+            },
+            "CancelPipelineJob": {
+              "methods": [
+                "cancelPipelineJob"
+              ]
+            },
             "DeleteTrainingPipeline": {
               "methods": [
                 "deleteTrainingPipeline"
+              ]
+            },
+            "DeletePipelineJob": {
+              "methods": [
+                "deletePipelineJob"
               ]
             },
             "ListTrainingPipelines": {
@@ -675,6 +722,13 @@
                 "listTrainingPipelines",
                 "listTrainingPipelinesStream",
                 "listTrainingPipelinesAsync"
+              ]
+            },
+            "ListPipelineJobs": {
+              "methods": [
+                "listPipelineJobs",
+                "listPipelineJobsStream",
+                "listPipelineJobsAsync"
               ]
             }
           }

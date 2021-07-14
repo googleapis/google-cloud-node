@@ -163,8 +163,14 @@ export class PipelineServiceClient {
       annotationSpecPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/datasets/{dataset}/annotationSpecs/{annotation_spec}'
       ),
+      artifactPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}'
+      ),
       batchPredictionJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/batchPredictionJobs/{batch_prediction_job}'
+      ),
+      contextPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}'
       ),
       customJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/customJobs/{custom_job}'
@@ -181,6 +187,9 @@ export class PipelineServiceClient {
       endpointPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/endpoints/{endpoint}'
       ),
+      executionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}'
+      ),
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
       ),
@@ -195,6 +204,9 @@ export class PipelineServiceClient {
       ),
       modelEvaluationSlicePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}/slices/{slice}'
+      ),
+      pipelineJobPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}'
       ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
@@ -216,6 +228,11 @@ export class PipelineServiceClient {
         'nextPageToken',
         'trainingPipelines'
       ),
+      listPipelineJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'pipelineJobs'
+      ),
     };
 
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
@@ -236,6 +253,12 @@ export class PipelineServiceClient {
     const deleteTrainingPipelineMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
+    const deletePipelineJobResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deletePipelineJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteTrainingPipeline: new this._gaxModule.LongrunningDescriptor(
@@ -246,6 +269,11 @@ export class PipelineServiceClient {
         deleteTrainingPipelineMetadata.decode.bind(
           deleteTrainingPipelineMetadata
         )
+      ),
+      deletePipelineJob: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deletePipelineJobResponse.decode.bind(deletePipelineJobResponse),
+        deletePipelineJobMetadata.decode.bind(deletePipelineJobMetadata)
       ),
     };
 
@@ -300,6 +328,11 @@ export class PipelineServiceClient {
       'listTrainingPipelines',
       'deleteTrainingPipeline',
       'cancelTrainingPipeline',
+      'createPipelineJob',
+      'getPipelineJob',
+      'listPipelineJobs',
+      'deletePipelineJob',
+      'cancelPipelineJob',
     ];
     for (const methodName of pipelineServiceStubMethods) {
       const callPromise = this.pipelineServiceStub.then(
@@ -695,6 +728,302 @@ export class PipelineServiceClient {
       callback
     );
   }
+  createPipelineJob(
+    request?: protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  createPipelineJob(
+    request: protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      | protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createPipelineJob(
+    request: protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      | protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a PipelineJob. A PipelineJob will run immediately when created.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to create the PipelineJob in.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.PipelineJob} request.pipelineJob
+   *   Required. The PipelineJob to create.
+   * @param {string} request.pipelineJobId
+   *   The ID to use for the PipelineJob, which will become the final component of
+   *   the PipelineJob name. If not provided, an ID will be automatically
+   *   generated.
+   *
+   *   This value should be less than 128 characters, and valid characters
+   *   are /{@link 0-9|a-z}-/.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PipelineJob]{@link google.cloud.aiplatform.v1.PipelineJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createPipelineJob(request);
+   */
+  createPipelineJob(
+    request?: protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IPipelineJob,
+          | protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      | protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      protos.google.cloud.aiplatform.v1.ICreatePipelineJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createPipelineJob(request, options, callback);
+  }
+  getPipelineJob(
+    request?: protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getPipelineJob(
+    request: protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      | protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getPipelineJob(
+    request: protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      | protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets a PipelineJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the PipelineJob resource.
+   *   Format:
+   *   `projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [PipelineJob]{@link google.cloud.aiplatform.v1.PipelineJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getPipelineJob(request);
+   */
+  getPipelineJob(
+    request?: protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IPipelineJob,
+          | protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      | protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IPipelineJob,
+      protos.google.cloud.aiplatform.v1.IGetPipelineJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getPipelineJob(request, options, callback);
+  }
+  cancelPipelineJob(
+    request?: protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  cancelPipelineJob(
+    request: protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  cancelPipelineJob(
+    request: protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Cancels a PipelineJob.
+   * Starts asynchronous cancellation on the PipelineJob. The server
+   * makes a best effort to cancel the pipeline, but success is not
+   * guaranteed. Clients can use {@link google.cloud.aiplatform.v1.PipelineService.GetPipelineJob|PipelineService.GetPipelineJob} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * pipeline completed despite cancellation. On successful cancellation,
+   * the PipelineJob is not deleted; instead it becomes a pipeline with
+   * a {@link google.cloud.aiplatform.v1.PipelineJob.error|PipelineJob.error} value with a {@link google.rpc.Status.code|google.rpc.Status.code} of 1,
+   * corresponding to `Code.CANCELLED`, and {@link google.cloud.aiplatform.v1.PipelineJob.state|PipelineJob.state} is set to
+   * `CANCELLED`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the PipelineJob to cancel.
+   *   Format:
+   *   `projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.cancelPipelineJob(request);
+   */
+  cancelPipelineJob(
+    request?: protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.aiplatform.v1.ICancelPipelineJobRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.cancelPipelineJob(request, options, callback);
+  }
 
   deleteTrainingPipeline(
     request?: protos.google.cloud.aiplatform.v1.IDeleteTrainingPipelineRequest,
@@ -843,6 +1172,149 @@ export class PipelineServiceClient {
       protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
     >;
   }
+  deletePipelineJob(
+    request?: protos.google.cloud.aiplatform.v1.IDeletePipelineJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deletePipelineJob(
+    request: protos.google.cloud.aiplatform.v1.IDeletePipelineJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deletePipelineJob(
+    request: protos.google.cloud.aiplatform.v1.IDeletePipelineJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a PipelineJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the PipelineJob resource to be deleted.
+   *   Format:
+   *   `projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deletePipelineJob(request);
+   * const [response] = await operation.promise();
+   */
+  deletePipelineJob(
+    request?: protos.google.cloud.aiplatform.v1.IDeletePipelineJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deletePipelineJob(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deletePipelineJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeletePipelineJobProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeletePipelineJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deletePipelineJob,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
+  }
   listTrainingPipelines(
     request?: protos.google.cloud.aiplatform.v1.IListTrainingPipelinesRequest,
     options?: CallOptions
@@ -883,22 +1355,32 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the TrainingPipelines from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
-   *   Supported fields:
+   *   Lists the PipelineJobs that match the filter expression. The following
+   *   fields are supported:
    *
-   *     * `display_name` supports = and !=.
+   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
    *
-   *     * `state` supports = and !=.
+   *   Filter expressions can be combined together using logical operators
+   *   (`AND` & `OR`).
+   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
    *
-   *   Some examples of using the filter are:
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   Examples:
    *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *   * `create_time>"2021-05-18T00:00:00Z" OR
+   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+   *     after 2020-05-18 00:00:00 UTC.
+   *   * `labels.env = "prod"`
+   *     PipelineJobs with label "env" set to "prod".
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -973,22 +1455,32 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the TrainingPipelines from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
-   *   Supported fields:
+   *   Lists the PipelineJobs that match the filter expression. The following
+   *   fields are supported:
    *
-   *     * `display_name` supports = and !=.
+   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
    *
-   *     * `state` supports = and !=.
+   *   Filter expressions can be combined together using logical operators
+   *   (`AND` & `OR`).
+   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
    *
-   *   Some examples of using the filter are:
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   Examples:
    *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *   * `create_time>"2021-05-18T00:00:00Z" OR
+   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+   *     after 2020-05-18 00:00:00 UTC.
+   *   * `labels.env = "prod"`
+   *     PipelineJobs with label "env" set to "prod".
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1041,22 +1533,32 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the TrainingPipelines from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
-   *   Supported fields:
+   *   Lists the PipelineJobs that match the filter expression. The following
+   *   fields are supported:
    *
-   *     * `display_name` supports = and !=.
+   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
    *
-   *     * `state` supports = and !=.
+   *   Filter expressions can be combined together using logical operators
+   *   (`AND` & `OR`).
+   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
    *
-   *   Some examples of using the filter are:
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   Examples:
    *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *   * `create_time>"2021-05-18T00:00:00Z" OR
+   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+   *     after 2020-05-18 00:00:00 UTC.
+   *   * `labels.env = "prod"`
+   *     PipelineJobs with label "env" set to "prod".
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1102,6 +1604,248 @@ export class PipelineServiceClient {
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.ITrainingPipeline>;
+  }
+  listPipelineJobs(
+    request?: protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IPipelineJob[],
+      protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListPipelineJobsResponse
+    ]
+  >;
+  listPipelineJobs(
+    request: protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListPipelineJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IPipelineJob
+    >
+  ): void;
+  listPipelineJobs(
+    request: protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListPipelineJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IPipelineJob
+    >
+  ): void;
+  /**
+   * Lists PipelineJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the PipelineJobs from.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *   Supported fields:
+   *
+   *   * `display_name` supports `=` and `!=`.
+   *   * `state` supports `=` and `!=`.
+   *
+   *   The following examples demonstrate how to filter the list of PipelineJobs:
+   *
+   *   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+   *   * `NOT display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_FAILED"`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token} of the previous
+   *   {@link google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs} call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [PipelineJob]{@link google.cloud.aiplatform.v1.PipelineJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listPipelineJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPipelineJobs(
+    request?: protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListPipelineJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IPipelineJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListPipelineJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IPipelineJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IPipelineJob[],
+      protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListPipelineJobsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listPipelineJobs(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the PipelineJobs from.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *   Supported fields:
+   *
+   *   * `display_name` supports `=` and `!=`.
+   *   * `state` supports `=` and `!=`.
+   *
+   *   The following examples demonstrate how to filter the list of PipelineJobs:
+   *
+   *   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+   *   * `NOT display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_FAILED"`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token} of the previous
+   *   {@link google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs} call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [PipelineJob]{@link google.cloud.aiplatform.v1.PipelineJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listPipelineJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listPipelineJobsStream(
+    request?: protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listPipelineJobs.createStream(
+      this.innerApiCalls.listPipelineJobs as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listPipelineJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the Location to list the PipelineJobs from.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   *   Supported fields:
+   *
+   *   * `display_name` supports `=` and `!=`.
+   *   * `state` supports `=` and `!=`.
+   *
+   *   The following examples demonstrate how to filter the list of PipelineJobs:
+   *
+   *   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+   *   * `NOT display_name="my_pipeline"`
+   *   * `state="PIPELINE_STATE_FAILED"`
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   *   Typically obtained via
+   *   {@link google.cloud.aiplatform.v1.ListPipelineJobsResponse.next_page_token|ListPipelineJobsResponse.next_page_token} of the previous
+   *   {@link google.cloud.aiplatform.v1.PipelineService.ListPipelineJobs|PipelineService.ListPipelineJobs} call.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [PipelineJob]{@link google.cloud.aiplatform.v1.PipelineJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listPipelineJobsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listPipelineJobsAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListPipelineJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IPipelineJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listPipelineJobs.asyncIterate(
+      this.innerApiCalls['listPipelineJobs'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IPipelineJob>;
   }
   // --------------------
   // -- Path templates --
@@ -1269,6 +2013,74 @@ export class PipelineServiceClient {
   }
 
   /**
+   * Return a fully-qualified artifact resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} artifact
+   * @returns {string} Resource name string.
+   */
+  artifactPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    artifact: string
+  ) {
+    return this.pathTemplates.artifactPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      artifact: artifact,
+    });
+  }
+
+  /**
+   * Parse the project from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).project;
+  }
+
+  /**
+   * Parse the location from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).location;
+  }
+
+  /**
+   * Parse the metadata_store from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the artifact from Artifact resource.
+   *
+   * @param {string} artifactName
+   *   A fully-qualified path representing Artifact resource.
+   * @returns {string} A string representing the artifact.
+   */
+  matchArtifactFromArtifactName(artifactName: string) {
+    return this.pathTemplates.artifactPathTemplate.match(artifactName).artifact;
+  }
+
+  /**
    * Return a fully-qualified batchPredictionJob resource name string.
    *
    * @param {string} project
@@ -1327,6 +2139,74 @@ export class PipelineServiceClient {
     return this.pathTemplates.batchPredictionJobPathTemplate.match(
       batchPredictionJobName
     ).batch_prediction_job;
+  }
+
+  /**
+   * Return a fully-qualified context resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} context
+   * @returns {string} Resource name string.
+   */
+  contextPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    context: string
+  ) {
+    return this.pathTemplates.contextPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      context: context,
+    });
+  }
+
+  /**
+   * Parse the project from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).project;
+  }
+
+  /**
+   * Parse the location from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).location;
+  }
+
+  /**
+   * Parse the metadata_store from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the context from Context resource.
+   *
+   * @param {string} contextName
+   *   A fully-qualified path representing Context resource.
+   * @returns {string} A string representing the context.
+   */
+  matchContextFromContextName(contextName: string) {
+    return this.pathTemplates.contextPathTemplate.match(contextName).context;
   }
 
   /**
@@ -1604,6 +2484,77 @@ export class PipelineServiceClient {
    */
   matchEndpointFromEndpointName(endpointName: string) {
     return this.pathTemplates.endpointPathTemplate.match(endpointName).endpoint;
+  }
+
+  /**
+   * Return a fully-qualified execution resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} metadata_store
+   * @param {string} execution
+   * @returns {string} Resource name string.
+   */
+  executionPath(
+    project: string,
+    location: string,
+    metadataStore: string,
+    execution: string
+  ) {
+    return this.pathTemplates.executionPathTemplate.render({
+      project: project,
+      location: location,
+      metadata_store: metadataStore,
+      execution: execution,
+    });
+  }
+
+  /**
+   * Parse the project from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .location;
+  }
+
+  /**
+   * Parse the metadata_store from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the metadata_store.
+   */
+  matchMetadataStoreFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .metadata_store;
+  }
+
+  /**
+   * Parse the execution from Execution resource.
+   *
+   * @param {string} executionName
+   *   A fully-qualified path representing Execution resource.
+   * @returns {string} A string representing the execution.
+   */
+  matchExecutionFromExecutionName(executionName: string) {
+    return this.pathTemplates.executionPathTemplate.match(executionName)
+      .execution;
   }
 
   /**
@@ -1922,6 +2873,58 @@ export class PipelineServiceClient {
     return this.pathTemplates.modelEvaluationSlicePathTemplate.match(
       modelEvaluationSliceName
     ).slice;
+  }
+
+  /**
+   * Return a fully-qualified pipelineJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} pipeline_job
+   * @returns {string} Resource name string.
+   */
+  pipelineJobPath(project: string, location: string, pipelineJob: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.render({
+      project: project,
+      location: location,
+      pipeline_job: pipelineJob,
+    });
+  }
+
+  /**
+   * Parse the project from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .project;
+  }
+
+  /**
+   * Parse the location from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .location;
+  }
+
+  /**
+   * Parse the pipeline_job from PipelineJob resource.
+   *
+   * @param {string} pipelineJobName
+   *   A fully-qualified path representing PipelineJob resource.
+   * @returns {string} A string representing the pipeline_job.
+   */
+  matchPipelineJobFromPipelineJobName(pipelineJobName: string) {
+    return this.pathTemplates.pipelineJobPathTemplate.match(pipelineJobName)
+      .pipeline_job;
   }
 
   /**

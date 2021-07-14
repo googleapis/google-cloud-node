@@ -2,8 +2,10 @@
   "../../protos/google/cloud/aiplatform/v1/accelerator_type.proto",
   "../../protos/google/cloud/aiplatform/v1/annotation.proto",
   "../../protos/google/cloud/aiplatform/v1/annotation_spec.proto",
+  "../../protos/google/cloud/aiplatform/v1/artifact.proto",
   "../../protos/google/cloud/aiplatform/v1/batch_prediction_job.proto",
   "../../protos/google/cloud/aiplatform/v1/completion_stats.proto",
+  "../../protos/google/cloud/aiplatform/v1/context.proto",
   "../../protos/google/cloud/aiplatform/v1/custom_job.proto",
   "../../protos/google/cloud/aiplatform/v1/data_item.proto",
   "../../protos/google/cloud/aiplatform/v1/data_labeling_job.proto",
@@ -14,6 +16,7 @@
   "../../protos/google/cloud/aiplatform/v1/endpoint.proto",
   "../../protos/google/cloud/aiplatform/v1/endpoint_service.proto",
   "../../protos/google/cloud/aiplatform/v1/env_var.proto",
+  "../../protos/google/cloud/aiplatform/v1/execution.proto",
   "../../protos/google/cloud/aiplatform/v1/hyperparameter_tuning_job.proto",
   "../../protos/google/cloud/aiplatform/v1/io.proto",
   "../../protos/google/cloud/aiplatform/v1/job_service.proto",
@@ -27,6 +30,7 @@
   "../../protos/google/cloud/aiplatform/v1/model_evaluation_slice.proto",
   "../../protos/google/cloud/aiplatform/v1/model_service.proto",
   "../../protos/google/cloud/aiplatform/v1/operation.proto",
+  "../../protos/google/cloud/aiplatform/v1/pipeline_job.proto",
   "../../protos/google/cloud/aiplatform/v1/pipeline_service.proto",
   "../../protos/google/cloud/aiplatform/v1/pipeline_state.proto",
   "../../protos/google/cloud/aiplatform/v1/prediction_service.proto",
@@ -70,5 +74,6 @@
   "../../protos/google/cloud/aiplatform/v1/specialist_pool_service.proto",
   "../../protos/google/cloud/aiplatform/v1/study.proto",
   "../../protos/google/cloud/aiplatform/v1/training_pipeline.proto",
-  "../../protos/google/cloud/aiplatform/v1/user_action_reference.proto"
+  "../../protos/google/cloud/aiplatform/v1/user_action_reference.proto",
+  "../../protos/google/cloud/aiplatform/v1/value.proto"
 ]

@@ -15,8 +15,8 @@
                     "java_package": "com.google.cloud.aiplatform.v1",
                     "php_namespace": "Google\\Cloud\\AIPlatform\\V1",
                     "ruby_package": "Google::Cloud::AIPlatform::V1",
-                    "(google.api.resource_definition).type": "datalabeling.googleapis.com/AnnotatedDataset",
-                    "(google.api.resource_definition).pattern": "projects/{project}/datasets/{dataset}/annotatedDatasets/{annotated_dataset}"
+                    "(google.api.resource_definition).type": "compute.googleapis.com/Network",
+                    "(google.api.resource_definition).pattern": "projects/{project}/global/networks/{network}"
                   },
                   "nested": {
                     "AcceleratorType": {
@@ -27,8 +27,7 @@
                         "NVIDIA_TESLA_V100": 3,
                         "NVIDIA_TESLA_P4": 4,
                         "NVIDIA_TESLA_T4": 5,
-                        "TPU_V2": 6,
-                        "TPU_V3": 7
+                        "NVIDIA_TESLA_A100": 8
                       }
                     },
                     "Annotation": {
@@ -160,6 +159,90 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        }
+                      }
+                    },
+                    "Artifact": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/Artifact",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/metadataStores/{metadata_store}/artifacts/{artifact}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 13
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "LIVE": 2
+                          }
+                        }
+                      }
+                    },
+                    "Value": {
+                      "oneofs": {
+                        "value": {
+                          "oneof": [
+                            "intValue",
+                            "doubleValue",
+                            "stringValue"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "intValue": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "doubleValue": {
+                          "type": "double",
+                          "id": 2
+                        },
+                        "stringValue": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -379,6 +462,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "bigqueryOutputTable": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         }
@@ -486,7 +576,8 @@
                         "JOB_STATE_FAILED": 5,
                         "JOB_STATE_CANCELLING": 6,
                         "JOB_STATE_CANCELLED": 7,
-                        "JOB_STATE_PAUSED": 8
+                        "JOB_STATE_PAUSED": 8,
+                        "JOB_STATE_EXPIRED": 9
                       }
                     },
                     "MachineSpec": {
@@ -530,6 +621,14 @@
                         "maxReplicaCount": {
                           "type": "int32",
                           "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "autoscalingMetricSpecs": {
+                          "rule": "repeated",
+                          "type": "AutoscalingMetricSpec",
+                          "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
                           }
@@ -602,6 +701,21 @@
                         }
                       }
                     },
+                    "AutoscalingMetricSpec": {
+                      "fields": {
+                        "metricName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "target": {
+                          "type": "int32",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ManualBatchTuningParameters": {
                       "fields": {
                         "batchSize": {
@@ -609,6 +723,57 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "Context": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/Context",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/metadataStores/{metadata_store}/contexts/{context}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 9
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "parentContexts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Context"
                           }
                         }
                       }
@@ -713,7 +878,10 @@
                         },
                         "network": {
                           "type": "string",
-                          "id": 5
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
                         },
                         "baseOutputDirectory": {
                           "type": "GcsDestination",
@@ -2830,6 +2998,65 @@
                         }
                       }
                     },
+                    "Execution": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/Execution",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/metadataStores/{metadata_store}/executions/{execution}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 6
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 10
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "NEW": 1,
+                            "RUNNING": 2,
+                            "COMPLETE": 3,
+                            "FAILED": 4,
+                            "CACHED": 5,
+                            "CANCELLED": 6
+                          }
+                        }
+                      }
+                    },
                     "HyperparameterTuningJob": {
                       "options": {
                         "(google.api.resource).type": "aiplatform.googleapis.com/HyperparameterTuningJob",
@@ -2949,6 +3176,13 @@
                         "(google.api.resource).pattern": "projects/{project}/locations/{location}/studies/{study}/trials/{trial}"
                       },
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "id": {
                           "type": "string",
                           "id": 2,
@@ -2978,6 +3212,14 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "measurements": {
+                          "rule": "repeated",
+                          "type": "Measurement",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "startTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 7,
@@ -2988,6 +3230,20 @@
                         "endTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "clientId": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "infeasibleReason": {
+                          "type": "string",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -3138,6 +3394,13 @@
                           },
                           "nested": {
                             "DoubleValueSpec": {
+                              "oneofs": {
+                                "_defaultValue": {
+                                  "oneof": [
+                                    "defaultValue"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "minValue": {
                                   "type": "double",
@@ -3151,11 +3414,25 @@
                                   "id": 2,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "defaultValue": {
+                                  "type": "double",
+                                  "id": 4,
+                                  "options": {
+                                    "proto3_optional": true
                                   }
                                 }
                               }
                             },
                             "IntegerValueSpec": {
+                              "oneofs": {
+                                "_defaultValue": {
+                                  "oneof": [
+                                    "defaultValue"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "minValue": {
                                   "type": "int64",
@@ -3170,10 +3447,24 @@
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
+                                },
+                                "defaultValue": {
+                                  "type": "int64",
+                                  "id": 4,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
                                 }
                               }
                             },
                             "CategoricalValueSpec": {
+                              "oneofs": {
+                                "_defaultValue": {
+                                  "oneof": [
+                                    "defaultValue"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "values": {
                                   "rule": "repeated",
@@ -3182,10 +3473,24 @@
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
                                   }
+                                },
+                                "defaultValue": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
                                 }
                               }
                             },
                             "DiscreteValueSpec": {
+                              "oneofs": {
+                                "_defaultValue": {
+                                  "oneof": [
+                                    "defaultValue"
+                                  ]
+                                }
+                              },
                               "fields": {
                                 "values": {
                                   "rule": "repeated",
@@ -3193,6 +3498,13 @@
                                   "id": 1,
                                   "options": {
                                     "(google.api.field_behavior)": "REQUIRED"
+                                  }
+                                },
+                                "defaultValue": {
+                                  "type": "double",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
                                   }
                                 }
                               }
@@ -3302,6 +3614,13 @@
                     },
                     "Measurement": {
                       "fields": {
+                        "elapsedDuration": {
+                          "type": "google.protobuf.Duration",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "stepCount": {
                           "type": "int64",
                           "id": 2,
@@ -5253,6 +5572,331 @@
                         }
                       }
                     },
+                    "PipelineJob": {
+                      "options": {
+                        "(google.api.resource).type": "aiplatform.googleapis.com/PipelineJob",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/pipelineJobs/{pipeline_job}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pipelineSpec": {
+                          "type": "google.protobuf.Struct",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "state": {
+                          "type": "PipelineState",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "jobDetail": {
+                          "type": "PipelineJobDetail",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 11
+                        },
+                        "runtimeConfig": {
+                          "type": "RuntimeConfig",
+                          "id": 12
+                        },
+                        "encryptionSpec": {
+                          "type": "EncryptionSpec",
+                          "id": 16
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 17
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 18,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RuntimeConfig": {
+                          "fields": {
+                            "parameters": {
+                              "keyType": "string",
+                              "type": "google.cloud.aiplatform.v1.Value",
+                              "id": 1
+                            },
+                            "gcsOutputDirectory": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "PipelineJobDetail": {
+                      "fields": {
+                        "pipelineContext": {
+                          "type": "google.cloud.aiplatform.v1.Context",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "pipelineRunContext": {
+                          "type": "google.cloud.aiplatform.v1.Context",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "taskDetails": {
+                          "rule": "repeated",
+                          "type": "PipelineTaskDetail",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "PipelineTaskDetail": {
+                      "fields": {
+                        "taskId": {
+                          "type": "int64",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "parentTaskId": {
+                          "type": "int64",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "taskName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "executorDetail": {
+                          "type": "PipelineTaskExecutorDetail",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "execution": {
+                          "type": "google.cloud.aiplatform.v1.Execution",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "inputs": {
+                          "keyType": "string",
+                          "type": "ArtifactList",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "outputs": {
+                          "keyType": "string",
+                          "type": "ArtifactList",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ArtifactList": {
+                          "fields": {
+                            "artifacts": {
+                              "rule": "repeated",
+                              "type": "google.cloud.aiplatform.v1.Artifact",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "RUNNING": 2,
+                            "SUCCEEDED": 3,
+                            "CANCEL_PENDING": 4,
+                            "CANCELLING": 5,
+                            "CANCELLED": 6,
+                            "FAILED": 7,
+                            "SKIPPED": 8,
+                            "NOT_TRIGGERED": 9
+                          }
+                        }
+                      }
+                    },
+                    "PipelineTaskExecutorDetail": {
+                      "oneofs": {
+                        "details": {
+                          "oneof": [
+                            "containerDetail",
+                            "customJobDetail"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "containerDetail": {
+                          "type": "ContainerDetail",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customJobDetail": {
+                          "type": "CustomJobDetail",
+                          "id": 2,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ContainerDetail": {
+                          "fields": {
+                            "mainJob": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/CustomJob"
+                              }
+                            },
+                            "preCachingCheckJob": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/CustomJob"
+                              }
+                            }
+                          }
+                        },
+                        "CustomJobDetail": {
+                          "options": {
+                            "deprecated": true
+                          },
+                          "fields": {
+                            "job": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.resource_reference).type": "aiplatform.googleapis.com/CustomJob"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "PipelineService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
@@ -5360,6 +6004,108 @@
                               "(google.api.method_signature)": "name"
                             }
                           ]
+                        },
+                        "CreatePipelineJob": {
+                          "requestType": "CreatePipelineJobRequest",
+                          "responseType": "google.cloud.aiplatform.v1.PipelineJob",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/pipelineJobs",
+                            "(google.api.http).body": "pipeline_job",
+                            "(google.api.method_signature)": "parent,pipeline_job,pipeline_job_id"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/pipelineJobs",
+                                "body": "pipeline_job"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,pipeline_job,pipeline_job_id"
+                            }
+                          ]
+                        },
+                        "GetPipelineJob": {
+                          "requestType": "GetPipelineJobRequest",
+                          "responseType": "google.cloud.aiplatform.v1.PipelineJob",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/pipelineJobs/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/pipelineJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "ListPipelineJobs": {
+                          "requestType": "ListPipelineJobsRequest",
+                          "responseType": "ListPipelineJobsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/pipelineJobs",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/pipelineJobs"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "DeletePipelineJob": {
+                          "requestType": "DeletePipelineJobRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/pipelineJobs/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/pipelineJobs/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CancelPipelineJob": {
+                          "requestType": "CancelPipelineJobRequest",
+                          "responseType": "google.protobuf.Empty",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/pipelineJobs/*}:cancel",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/pipelineJobs/*}:cancel",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         }
                       }
                     },
@@ -5459,6 +6205,102 @@
                         }
                       }
                     },
+                    "CreatePipelineJobRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pipelineJob": {
+                          "type": "google.cloud.aiplatform.v1.PipelineJob",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pipelineJobId": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetPipelineJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
+                          }
+                        }
+                      }
+                    },
+                    "ListPipelineJobsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "ListPipelineJobsResponse": {
+                      "fields": {
+                        "pipelineJobs": {
+                          "rule": "repeated",
+                          "type": "google.cloud.aiplatform.v1.PipelineJob",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeletePipelineJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
+                          }
+                        }
+                      }
+                    },
+                    "CancelPipelineJobRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/PipelineJob"
+                          }
+                        }
+                      }
+                    },
                     "PredictionService": {
                       "options": {
                         "(google.api.default_host)": "aiplatform.googleapis.com",
@@ -5471,17 +6313,23 @@
                           "options": {
                             "(google.api.http).post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
                             "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "endpoint,instances,parameters"
+                            "(google.api.http).additional_bindings.post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predictInternal",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "endpoint,parameters,instances"
                           },
                           "parsedOptions": [
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predict",
-                                "body": "*"
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{endpoint=projects/*/locations/*/endpoints/*}:predictInternal",
+                                  "body": "*"
+                                }
                               }
                             },
                             {
-                              "(google.api.method_signature)": "endpoint,instances,parameters"
+                              "(google.api.method_signature)": "endpoint,parameters,instances"
                             }
                           ]
                         }
@@ -6281,6 +7129,11 @@
                                     "exportEvaluatedDataItemsConfig": {
                                       "type": "ExportEvaluatedDataItemsConfig",
                                       "id": 10
+                                    },
+                                    "additionalExperiments": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 11
                                     }
                                   },
                                   "nested": {
@@ -6501,7 +7354,9 @@
                                       "values": {
                                         "MODEL_TYPE_UNSPECIFIED": 0,
                                         "CLOUD": 1,
-                                        "MOBILE_VERSATILE_1": 2
+                                        "MOBILE_VERSATILE_1": 2,
+                                        "MOBILE_JETSON_VERSATILE_1": 3,
+                                        "MOBILE_CORAL_VERSATILE_1": 4
                                       }
                                     }
                                   }
@@ -22755,9 +23610,9 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "go_package": "google.golang.org/genproto/googleapis/api/httpbody;httpbody",
             "java_multiple_files": true,
-            "java_outer_classname": "ClientProto",
+            "java_outer_classname": "HttpBodyProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
@@ -22959,6 +23814,23 @@
               "type": "string",
               "id": 1050,
               "extend": "google.protobuf.ServiceOptions"
+            },
+            "HttpBody": {
+              "fields": {
+                "contentType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "data": {
+                  "type": "bytes",
+                  "id": 2
+                },
+                "extensions": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
             }
           }
         },

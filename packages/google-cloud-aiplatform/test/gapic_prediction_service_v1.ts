@@ -406,6 +406,82 @@ describe('v1.PredictionServiceClient', () => {
       });
     });
 
+    describe('artifact', () => {
+      const fakePath = '/rendered/path/artifact';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        artifact: 'artifactValue',
+      };
+      const client = new predictionserviceModule.v1.PredictionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.artifactPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.artifactPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('artifactPath', () => {
+        const result = client.artifactPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'artifactValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.artifactPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromArtifactName', () => {
+        const result = client.matchProjectFromArtifactName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromArtifactName', () => {
+        const result = client.matchLocationFromArtifactName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromArtifactName', () => {
+        const result = client.matchMetadataStoreFromArtifactName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchArtifactFromArtifactName', () => {
+        const result = client.matchArtifactFromArtifactName(fakePath);
+        assert.strictEqual(result, 'artifactValue');
+        assert(
+          (client.pathTemplates.artifactPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('batchPredictionJob', () => {
       const fakePath = '/rendered/path/batchPredictionJob';
       const expectedParameters = {
@@ -477,6 +553,82 @@ describe('v1.PredictionServiceClient', () => {
             client.pathTemplates.batchPredictionJobPathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('context', () => {
+      const fakePath = '/rendered/path/context';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        context: 'contextValue',
+      };
+      const client = new predictionserviceModule.v1.PredictionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.contextPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.contextPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('contextPath', () => {
+        const result = client.contextPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'contextValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.contextPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromContextName', () => {
+        const result = client.matchProjectFromContextName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromContextName', () => {
+        const result = client.matchLocationFromContextName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromContextName', () => {
+        const result = client.matchMetadataStoreFromContextName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchContextFromContextName', () => {
+        const result = client.matchContextFromContextName(fakePath);
+        assert.strictEqual(result, 'contextValue');
+        assert(
+          (client.pathTemplates.contextPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -816,6 +968,82 @@ describe('v1.PredictionServiceClient', () => {
       });
     });
 
+    describe('execution', () => {
+      const fakePath = '/rendered/path/execution';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        metadata_store: 'metadataStoreValue',
+        execution: 'executionValue',
+      };
+      const client = new predictionserviceModule.v1.PredictionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.executionPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.executionPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('executionPath', () => {
+        const result = client.executionPath(
+          'projectValue',
+          'locationValue',
+          'metadataStoreValue',
+          'executionValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.executionPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromExecutionName', () => {
+        const result = client.matchProjectFromExecutionName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromExecutionName', () => {
+        const result = client.matchLocationFromExecutionName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchMetadataStoreFromExecutionName', () => {
+        const result = client.matchMetadataStoreFromExecutionName(fakePath);
+        assert.strictEqual(result, 'metadataStoreValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchExecutionFromExecutionName', () => {
+        const result = client.matchExecutionFromExecutionName(fakePath);
+        assert.strictEqual(result, 'executionValue');
+        assert(
+          (client.pathTemplates.executionPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('hyperparameterTuningJob', () => {
       const fakePath = '/rendered/path/hyperparameterTuningJob';
       const expectedParameters = {
@@ -1140,6 +1368,70 @@ describe('v1.PredictionServiceClient', () => {
             client.pathTemplates.modelEvaluationSlicePathTemplate
               .match as SinonStub
           )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('pipelineJob', () => {
+      const fakePath = '/rendered/path/pipelineJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        pipeline_job: 'pipelineJobValue',
+      };
+      const client = new predictionserviceModule.v1.PredictionServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.pipelineJobPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.pipelineJobPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('pipelineJobPath', () => {
+        const result = client.pipelineJobPath(
+          'projectValue',
+          'locationValue',
+          'pipelineJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromPipelineJobName', () => {
+        const result = client.matchProjectFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromPipelineJobName', () => {
+        const result = client.matchLocationFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchPipelineJobFromPipelineJobName', () => {
+        const result = client.matchPipelineJobFromPipelineJobName(fakePath);
+        assert.strictEqual(result, 'pipelineJobValue');
+        assert(
+          (client.pathTemplates.pipelineJobPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
