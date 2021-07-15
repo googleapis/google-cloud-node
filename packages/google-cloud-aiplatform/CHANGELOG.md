@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.8.0...v1.9.0) (2021-07-15)
+
+
+### Features
+
+* Adds additional_experiments field to AutoMlTablesInputs ([#170](https://www.github.com/googleapis/nodejs-ai-platform/issues/170)) ([4a0a502](https://www.github.com/googleapis/nodejs-ai-platform/commit/4a0a502bb1a01efb701202098524f0020d1faad4))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.7.4...v1.8.0) (2021-07-14)
 
 
