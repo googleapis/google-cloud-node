@@ -20751,6 +20751,11 @@
                                     "exportEvaluatedDataItemsConfig": {
                                       "type": "ExportEvaluatedDataItemsConfig",
                                       "id": 10
+                                    },
+                                    "additionalExperiments": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 11
                                     }
                                   },
                                   "nested": {
@@ -21033,6 +21038,11 @@
                                     "validationOptions": {
                                       "type": "string",
                                       "id": 17
+                                    },
+                                    "additionalExperiments": {
+                                      "rule": "repeated",
+                                      "type": "string",
+                                      "id": 25
                                     }
                                   },
                                   "nested": {
@@ -21159,7 +21169,9 @@
                                       "values": {
                                         "MODEL_TYPE_UNSPECIFIED": 0,
                                         "CLOUD": 1,
-                                        "MOBILE_VERSATILE_1": 2
+                                        "MOBILE_VERSATILE_1": 2,
+                                        "MOBILE_JETSON_VERSATILE_1": 3,
+                                        "MOBILE_CORAL_VERSATILE_1": 4
                                       }
                                     }
                                   }
