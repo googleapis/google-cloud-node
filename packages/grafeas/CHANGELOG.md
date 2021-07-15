@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [3.4.4](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.3...v3.4.4) (2021-07-12)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#276](https://www.github.com/googleapis/nodejs-grafeas/issues/276)) ([77c20ba](https://www.github.com/googleapis/nodejs-grafeas/commit/77c20baf72fb222bad038dd61c14f8a16e1f9052))
+
 ### [3.4.3](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.2...v3.4.3) (2021-06-29)
 
 
