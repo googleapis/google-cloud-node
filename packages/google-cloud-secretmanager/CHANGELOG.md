@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.8.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.8.0...v3.8.1) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#279](https://www.github.com/googleapis/nodejs-secret-manager/issues/279)) ([06f7829](https://www.github.com/googleapis/nodejs-secret-manager/commit/06f78290cff9e46f05704494e3605dc0328bcedb))
+
 ## [3.8.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.7.3...v3.8.0) (2021-07-12)
 
 
