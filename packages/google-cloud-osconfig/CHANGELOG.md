@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.6.5](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.4...v1.6.5) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#128](https://www.github.com/googleapis/nodejs-os-config/issues/128)) ([4d7deda](https://www.github.com/googleapis/nodejs-os-config/commit/4d7deda72a06ecdfa2e88a9c2373fb3ec6365b77))
+
 ### [1.6.4](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.3...v1.6.4) (2021-07-12)
 
 
