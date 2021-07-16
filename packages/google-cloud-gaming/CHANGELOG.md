@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.7](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.6...v2.3.7) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#198](https://www.github.com/googleapis/nodejs-game-servers/issues/198)) ([17d6e3f](https://www.github.com/googleapis/nodejs-game-servers/commit/17d6e3f6ff5d7f116572290a9d05cbcd69be0871))
+
 ### [2.3.6](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.5...v2.3.6) (2021-07-12)
 
 
