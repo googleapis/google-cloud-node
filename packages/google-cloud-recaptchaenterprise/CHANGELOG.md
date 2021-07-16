@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+### [2.1.6](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.1.5...v2.1.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#299](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/299)) ([6787e23](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/6787e23374c3ef97b4f267bf629ae03bf58f321a))
+
 ### [2.1.5](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.1.4...v2.1.5) (2021-07-12)
 
 
