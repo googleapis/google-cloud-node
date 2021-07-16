@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.6](https://www.github.com/googleapis/nodejs-retail/compare/v1.1.5...v1.1.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#73](https://www.github.com/googleapis/nodejs-retail/issues/73)) ([9ba9a09](https://www.github.com/googleapis/nodejs-retail/commit/9ba9a09c270b0ed2ef3eae76a284bb19af789317))
+
 ### [1.1.5](https://www.github.com/googleapis/nodejs-retail/compare/v1.1.4...v1.1.5) (2021-07-13)
 
 
