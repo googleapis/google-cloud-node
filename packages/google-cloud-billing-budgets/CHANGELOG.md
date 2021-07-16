@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.6](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.5...v3.2.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#250](https://www.github.com/googleapis/nodejs-billing-budgets/issues/250)) ([ccb5d40](https://www.github.com/googleapis/nodejs-billing-budgets/commit/ccb5d40677f2bcbd02a7079c9732077ee5198d2b))
+
 ### [3.2.5](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.4...v3.2.5) (2021-07-12)
 
 
