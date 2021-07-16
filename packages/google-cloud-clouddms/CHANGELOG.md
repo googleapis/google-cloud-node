@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-dms/compare/v1.0.2...v1.0.3) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#27](https://www.github.com/googleapis/nodejs-dms/issues/27)) ([c3858dc](https://www.github.com/googleapis/nodejs-dms/commit/c3858dcfbf41d4a4eaf3eecd9056a72b6623a14b))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-dms/compare/v1.0.1...v1.0.2) (2021-07-12)
 
 
