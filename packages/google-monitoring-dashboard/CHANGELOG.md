@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.4.2](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.4.1...v2.4.2) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#199](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/199)) ([273c85d](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/273c85d6d33d54e1ff880dad1127cf4c8f69fbbc))
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.4.0...v2.4.1) (2021-07-12)
 
 

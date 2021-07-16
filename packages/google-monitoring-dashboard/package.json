@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/monitoring-dashboards",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "description": "interact with dashboards for viewing and analyzing metric data",
   "repository": "googleapis/nodejs-monitoring-dashboards",
   "license": "Apache-2.0",
