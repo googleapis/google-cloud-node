@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.7](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.6...v1.0.7) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#69](https://www.github.com/googleapis/nodejs-iam-credentials/issues/69)) ([061adde](https://www.github.com/googleapis/nodejs-iam-credentials/commit/061addeaade74ed3260d00bc6214aecd03f226ba))
+
 ### [1.0.6](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.5...v1.0.6) (2021-07-12)
 
 
