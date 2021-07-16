@@ -1,6 +1,6 @@
 {
   "name": "@google/area120-tables",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Tables client for Node.js",
   "repository": "googleapis/nodejs-area120-tables",
   "license": "Apache-2.0",

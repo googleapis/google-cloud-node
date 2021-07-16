@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.6](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.5...v1.2.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#78](https://www.github.com/googleapis/nodejs-area120-tables/issues/78)) ([b598d8b](https://www.github.com/googleapis/nodejs-area120-tables/commit/b598d8b97cedb9b5de38c805ed0e8a8263b20e06))
+
 ### [1.2.5](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.4...v1.2.5) (2021-07-12)
 
 
