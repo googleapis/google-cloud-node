@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.2...v1.0.3) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#17](https://www.github.com/googleapis/nodejs-cloud-tpu/issues/17)) ([3fdf1bf](https://www.github.com/googleapis/nodejs-cloud-tpu/commit/3fdf1bfa1ca06ca496cc2d600dc855f51ac48344))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.1...v1.0.2) (2021-07-12)
 
 
