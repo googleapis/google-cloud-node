@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.6](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.5...v2.3.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#108](https://www.github.com/googleapis/nodejs-security-private-ca/issues/108)) ([526d6f3](https://www.github.com/googleapis/nodejs-security-private-ca/commit/526d6f33c6354236adb416a5ff256d53319f8d88))
+
 ### [2.3.5](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.4...v2.3.5) (2021-07-12)
 
 

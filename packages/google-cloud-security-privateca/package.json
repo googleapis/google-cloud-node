@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/security-private-ca",
-  "version": "2.3.5",
+  "version": "2.3.6",
   "description": "Privateca client for Node.js",
   "repository": "googleapis/nodejs-security-private-ca",
   "license": "Apache-2.0",
