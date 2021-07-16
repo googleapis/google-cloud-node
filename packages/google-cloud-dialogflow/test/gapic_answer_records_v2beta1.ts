@@ -201,6 +201,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetAnswerRecordRequest()
@@ -219,6 +220,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
       );
       client.innerApiCalls.getAnswerRecord = stubSimpleCall(expectedResponse);
       const [response] = await client.getAnswerRecord(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.getAnswerRecord as SinonStub)
@@ -232,6 +234,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetAnswerRecordRequest()
@@ -266,6 +269,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.getAnswerRecord as SinonStub)
@@ -279,6 +283,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.dialogflow.v2beta1.GetAnswerRecordRequest()
@@ -298,6 +303,7 @@ describe('v2beta1.AnswerRecordsClient', () => {
         expectedError
       );
       await assert.rejects(client.getAnswerRecord(request), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.getAnswerRecord as SinonStub)
           .getCall(0)
