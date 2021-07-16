@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.6](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.5...v1.0.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#64](https://www.github.com/googleapis/nodejs-web-security-scanner/issues/64)) ([d22bb5d](https://www.github.com/googleapis/nodejs-web-security-scanner/commit/d22bb5d52449ee2329f603d2b7c5667e4a74a7f6))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.4...v1.0.5) (2021-07-12)
 
 
