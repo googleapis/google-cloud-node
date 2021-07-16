@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.6](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.5...v1.1.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#64](https://www.github.com/googleapis/nodejs-network-connectivity/issues/64)) ([dea7b0e](https://www.github.com/googleapis/nodejs-network-connectivity/commit/dea7b0e623a99483d05fec6a1b7ea422f686e86c))
+
 ### [1.1.5](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.4...v1.1.5) (2021-07-12)
 
 
