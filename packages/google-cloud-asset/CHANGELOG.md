@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.15.3](https://www.github.com/googleapis/nodejs-asset/compare/v3.15.2...v3.15.3) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#522](https://www.github.com/googleapis/nodejs-asset/issues/522)) ([015b801](https://www.github.com/googleapis/nodejs-asset/commit/015b80196ecd3b6a0cba17ea0971f4c585b8f972))
+
 ### [3.15.2](https://www.github.com/googleapis/nodejs-asset/compare/v3.15.1...v3.15.2) (2021-07-12)
 
 
