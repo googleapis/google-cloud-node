@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.4.4...v1.5.0) (2021-07-16)
+
+
+### Features
+
+* Enables generation of client libraries for C#, php and ruby. ([#82](https://www.github.com/googleapis/nodejs-video-transcoder/issues/82)) ([721a9f9](https://www.github.com/googleapis/nodejs-video-transcoder/commit/721a9f92f1ca280077c728129550977638b6ef3f))
+* Initial commit for the Transcoder V1 client libraries ([#86](https://www.github.com/googleapis/nodejs-video-transcoder/issues/86)) ([578abcb](https://www.github.com/googleapis/nodejs-video-transcoder/commit/578abcb2fd5957f4845e5078af9c881120220288))
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#87](https://www.github.com/googleapis/nodejs-video-transcoder/issues/87)) ([00b82af](https://www.github.com/googleapis/nodejs-video-transcoder/commit/00b82af26623a90c65dd3618e070693ec5df5db5))
+
 ### [1.4.4](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.4.3...v1.4.4) (2021-07-12)
 
 

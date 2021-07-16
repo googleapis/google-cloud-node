@@ -3,7 +3,7 @@
   "product_documentation": "https://googleapis.dev/nodejs/transcoder/latest",
   "name": "transcoder",
   "requires_billing": true,
-  "release_level": "beta",
+  "release_level": "ga",
   "language": "nodejs",
   "api_id": "transcoder.googleapis.com",
   "distribution_name": "@google-cloud/video-transcoder",
