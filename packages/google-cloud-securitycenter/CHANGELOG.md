@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [5.3.5](https://www.github.com/googleapis/nodejs-security-center/compare/v5.3.4...v5.3.5) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#405](https://www.github.com/googleapis/nodejs-security-center/issues/405)) ([91dacef](https://www.github.com/googleapis/nodejs-security-center/commit/91dacef6d656cf1cd41803b337524c417498de1e))
+
 ### [5.3.4](https://www.github.com/googleapis/nodejs-security-center/compare/v5.3.3...v5.3.4) (2021-07-12)
 
 
