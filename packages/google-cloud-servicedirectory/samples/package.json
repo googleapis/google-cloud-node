@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/service-directory": "^3.2.2",
+    "@google-cloud/service-directory": "^3.2.3",
     "eslint": "^7.0.0",
     "json-schema": "^0.3.0",
     "uuid": "^8.0.0"

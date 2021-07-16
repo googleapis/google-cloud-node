@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.3](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.2.2...v3.2.3) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#164](https://www.github.com/googleapis/nodejs-service-directory/issues/164)) ([717c929](https://www.github.com/googleapis/nodejs-service-directory/commit/717c929fbe9d62981c714931c3fa21fd69a45b0d))
+
 ### [3.2.2](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.2.1...v3.2.2) (2021-07-12)
 
 
