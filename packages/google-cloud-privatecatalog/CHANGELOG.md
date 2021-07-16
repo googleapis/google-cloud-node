@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-private-catalog/compare/v1.0.2...v1.0.3) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#24](https://www.github.com/googleapis/nodejs-private-catalog/issues/24)) ([1b28824](https://www.github.com/googleapis/nodejs-private-catalog/commit/1b288240c644adadb8b6b330353875d08221e965))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-private-catalog/compare/v1.0.1...v1.0.2) (2021-07-12)
 
 
