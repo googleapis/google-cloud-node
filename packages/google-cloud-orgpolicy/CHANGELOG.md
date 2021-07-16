@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.6](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.5...v1.0.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#46](https://www.github.com/googleapis/nodejs-org-policy/issues/46)) ([d63afc5](https://www.github.com/googleapis/nodejs-org-policy/commit/d63afc5cf696d28498e272e94f63f1706d2f7f00))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.4...v1.0.5) (2021-07-12)
 
 
