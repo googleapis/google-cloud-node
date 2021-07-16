@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.4.4](https://www.github.com/googleapis/nodejs-kms/compare/v2.4.3...v2.4.4) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#476](https://www.github.com/googleapis/nodejs-kms/issues/476)) ([5332b9f](https://www.github.com/googleapis/nodejs-kms/commit/5332b9f924b3102aeb0c6fb704c8fe451746ce84))
+
 ### [2.4.3](https://www.github.com/googleapis/nodejs-kms/compare/v2.4.2...v2.4.3) (2021-07-12)
 
 
