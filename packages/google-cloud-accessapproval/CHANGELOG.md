@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.6](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.5...v1.0.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#64](https://www.github.com/googleapis/nodejs-access-approval/issues/64)) ([03f40c1](https://www.github.com/googleapis/nodejs-access-approval/commit/03f40c1f1bbbda37467dacf8748a89ac41993015))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.4...v1.0.5) (2021-07-12)
 
 
