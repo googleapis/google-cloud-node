@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+### [2.4.6](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.5...v2.4.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#326](https://www.github.com/googleapis/nodejs-phishing-protection/issues/326)) ([729ef44](https://www.github.com/googleapis/nodejs-phishing-protection/commit/729ef44c3f353c5c7b173df9bf4b6b8da065ef42))
+
 ### [2.4.5](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.4...v2.4.5) (2021-06-22)
 
 
