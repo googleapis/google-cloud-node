@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.0.4...v1.0.5) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#62](https://www.github.com/googleapis/nodejs-policy-troubleshooter/issues/62)) ([6ec256b](https://www.github.com/googleapis/nodejs-policy-troubleshooter/commit/6ec256b64e1b95b369fc6a7dc22a1f0c37df1202))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.0.3...v1.0.4) (2021-07-12)
 
 
