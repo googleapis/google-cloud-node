@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.1](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.5.0...v2.5.1) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#126](https://www.github.com/googleapis/nodejs-analytics-data/issues/126)) ([7272509](https://www.github.com/googleapis/nodejs-analytics-data/commit/72725092f75b90366884f484b305643e6716086f))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.4.3...v2.5.0) (2021-07-12)
 
 
