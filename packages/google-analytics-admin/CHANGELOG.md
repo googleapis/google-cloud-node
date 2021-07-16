@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.0.4](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v3.0.3...v3.0.4) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#136](https://www.github.com/googleapis/nodejs-analytics-admin/issues/136)) ([2518d10](https://www.github.com/googleapis/nodejs-analytics-admin/commit/2518d10d640a60e2577f3af0cd517e4f52ed185a))
+
 ### [3.0.3](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v3.0.2...v3.0.3) (2021-07-12)
 
 
