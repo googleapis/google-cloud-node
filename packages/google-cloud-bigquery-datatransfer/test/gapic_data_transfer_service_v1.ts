@@ -794,6 +794,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
@@ -813,6 +814,7 @@ describe('v1.DataTransferServiceClient', () => {
       client.innerApiCalls.scheduleTransferRuns =
         stubSimpleCall(expectedResponse);
       const [response] = await client.scheduleTransferRuns(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.scheduleTransferRuns as SinonStub)
@@ -828,6 +830,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
@@ -862,6 +865,7 @@ describe('v1.DataTransferServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.scheduleTransferRuns as SinonStub)
@@ -877,6 +881,7 @@ describe('v1.DataTransferServiceClient', () => {
           projectId: 'bogus',
         }
       );
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.datatransfer.v1.ScheduleTransferRunsRequest()
@@ -896,6 +901,7 @@ describe('v1.DataTransferServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.scheduleTransferRuns(request), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.scheduleTransferRuns as SinonStub)
           .getCall(0)
