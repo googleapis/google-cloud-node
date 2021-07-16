@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [3.2.5](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.4...v3.2.5) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#466](https://www.github.com/googleapis/nodejs-os-login/issues/466)) ([a500bc5](https://www.github.com/googleapis/nodejs-os-login/commit/a500bc585737edf483e6645b7e64dc36c9ca743b))
+
 ### [3.2.4](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.3...v3.2.4) (2021-07-12)
 
 
