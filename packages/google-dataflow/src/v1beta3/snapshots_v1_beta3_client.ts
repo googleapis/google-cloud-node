@@ -39,6 +39,7 @@ const version = require('../../../package.json').version;
 export class SnapshotsV1Beta3Client {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -50,6 +51,7 @@ export class SnapshotsV1Beta3Client {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   snapshotsV1Beta3Stub?: Promise<{[name: string]: Function}>;
 
@@ -92,6 +94,9 @@ export class SnapshotsV1Beta3Client {
     const staticMembers = this.constructor as typeof SnapshotsV1Beta3Client;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
     const fallback =
@@ -151,6 +156,9 @@ export class SnapshotsV1Beta3Client {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = gax.warn;
   }
 
   /**
@@ -179,7 +187,8 @@ export class SnapshotsV1Beta3Client {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.dataflow.v1beta3.SnapshotsV1Beta3,
-      this._opts
+      this._opts,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
