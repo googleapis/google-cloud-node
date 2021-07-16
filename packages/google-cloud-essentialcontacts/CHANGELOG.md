@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.4...v1.0.5) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#28](https://www.github.com/googleapis/nodejs-essential-contacts/issues/28)) ([0f07b63](https://www.github.com/googleapis/nodejs-essential-contacts/commit/0f07b63f26176f1b6b4315443cfa1cddeb5cf6cd))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.3...v1.0.4) (2021-07-12)
 
 
