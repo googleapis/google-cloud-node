@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.0.3...v1.0.4) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#21](https://www.github.com/googleapis/nodejs-vpc-access/issues/21)) ([ac91c39](https://www.github.com/googleapis/nodejs-vpc-access/commit/ac91c39fce0bdb52b0dcc1ab2909e4752f65fe0a))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.0.2...v1.0.3) (2021-07-12)
 
 
