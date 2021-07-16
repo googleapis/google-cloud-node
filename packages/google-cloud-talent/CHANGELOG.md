@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [3.2.6](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.5...v3.2.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#347](https://www.github.com/googleapis/nodejs-talent/issues/347)) ([cd75d00](https://www.github.com/googleapis/nodejs-talent/commit/cd75d006a631ebad4c4c4390a326fe30af074802))
+
 ### [3.2.5](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.4...v3.2.5) (2021-07-12)
 
 
