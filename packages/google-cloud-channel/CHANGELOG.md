@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.4](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.3...v1.2.4) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#71](https://www.github.com/googleapis/nodejs-channel/issues/71)) ([096ac96](https://www.github.com/googleapis/nodejs-channel/commit/096ac96502d91645cf5c539bc94bcf46599d9533))
+
 ### [1.2.3](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.2...v1.2.3) (2021-07-12)
 
 
