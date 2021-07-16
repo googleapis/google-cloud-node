@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.1.6](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.5...v3.1.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#634](https://www.github.com/googleapis/nodejs-dlp/issues/634)) ([862a027](https://www.github.com/googleapis/nodejs-dlp/commit/862a0271213154d519c333a02f5fbc9cb5071e6d))
+
 ### [3.1.5](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.4...v3.1.5) (2021-07-12)
 
 
