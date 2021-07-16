@@ -3467,7 +3467,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
           (
             err?: Error | null,
             result?: LROperation<
-              protos.google.cloud.security.privateca.v1.ICaPool,
+              protos.google.protobuf.IEmpty,
               protos.google.cloud.security.privateca.v1.IOperationMetadata
             > | null
           ) => {
@@ -3480,7 +3480,7 @@ describe('v1.CertificateAuthorityServiceClient', () => {
         );
       });
       const operation = (await promise) as LROperation<
-        protos.google.cloud.security.privateca.v1.ICaPool,
+        protos.google.protobuf.IEmpty,
         protos.google.cloud.security.privateca.v1.IOperationMetadata
       >;
       const [response] = await operation.promise();

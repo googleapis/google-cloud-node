@@ -265,14 +265,14 @@
                                   "type": "bool",
                                   "id": 1,
                                   "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 },
                                 "publishCrl": {
                                   "type": "bool",
                                   "id": 2,
                                   "options": {
-                                    "(google.api.field_behavior)": "REQUIRED"
+                                    "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 }
                               }
@@ -391,14 +391,14 @@
                                       "type": "bool",
                                       "id": 1,
                                       "options": {
-                                        "(google.api.field_behavior)": "REQUIRED"
+                                        "(google.api.field_behavior)": "OPTIONAL"
                                       }
                                     },
                                     "allowConfigBasedIssuance": {
                                       "type": "bool",
                                       "id": 2,
                                       "options": {
-                                        "(google.api.field_behavior)": "REQUIRED"
+                                        "(google.api.field_behavior)": "OPTIONAL"
                                       }
                                     }
                                   }
@@ -1021,7 +1021,7 @@
                               "type": "bool",
                               "id": 2,
                               "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "value": {
@@ -1724,7 +1724,7 @@
                               "options": {
                                 "(google.api.http).delete": "/v1/{name=projects/*/locations/*/caPools/*}",
                                 "(google.api.method_signature)": "name",
-                                "(google.longrunning.operation_info).response_type": "CaPool",
+                                "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
                                 "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
                               },
                               "parsedOptions": [
@@ -1738,7 +1738,7 @@
                                 },
                                 {
                                   "(google.longrunning.operation_info)": {
-                                    "response_type": "CaPool",
+                                    "response_type": "google.protobuf.Empty",
                                     "metadata_type": "OperationMetadata"
                                   }
                                 }
