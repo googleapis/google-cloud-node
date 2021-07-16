@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [2.1.6](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.5...v2.1.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#266](https://www.github.com/googleapis/nodejs-web-risk/issues/266)) ([726ecdc](https://www.github.com/googleapis/nodejs-web-risk/commit/726ecdc38e570415556f32aa5eb437bd5e9261cf))
+
 ### [2.1.5](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.4...v2.1.5) (2021-07-12)
 
 
