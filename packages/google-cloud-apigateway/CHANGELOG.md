@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.3...v1.1.4) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#48](https://www.github.com/googleapis/nodejs-api-gateway/issues/48)) ([92a65a5](https://www.github.com/googleapis/nodejs-api-gateway/commit/92a65a5be258a685cbed2780f70db0ecf91b65fd))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.2...v1.1.3) (2021-07-12)
 
 
