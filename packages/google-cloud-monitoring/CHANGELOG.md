@@ -11,6 +11,13 @@
 
 * **deps:** require google-gax v2.17.1 ([#558](https://www.github.com/googleapis/nodejs-monitoring/issues/558)) ([e15ade6](https://www.github.com/googleapis/nodejs-monitoring/commit/e15ade6476338ada88e31fe07f480d73739073ad))
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.3.2...v2.3.3) (2021-07-16)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.17.1 ([#558](https://www.github.com/googleapis/nodejs-monitoring/issues/558)) ([e15ade6](https://www.github.com/googleapis/nodejs-monitoring/commit/e15ade6476338ada88e31fe07f480d73739073ad))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.3.1...v2.3.2) (2021-06-29)
 
 
