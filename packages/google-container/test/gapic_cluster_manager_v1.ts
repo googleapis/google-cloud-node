@@ -1232,6 +1232,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
@@ -1251,6 +1252,7 @@ describe('v1.ClusterManagerClient', () => {
       );
       client.innerApiCalls.setLocations = stubSimpleCall(expectedResponse);
       const [response] = await client.setLocations(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.setLocations as SinonStub)
@@ -1264,6 +1266,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
@@ -1299,6 +1302,7 @@ describe('v1.ClusterManagerClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.setLocations as SinonStub)
@@ -1312,6 +1316,7 @@ describe('v1.ClusterManagerClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.container.v1.SetLocationsRequest()
@@ -1332,6 +1337,7 @@ describe('v1.ClusterManagerClient', () => {
         expectedError
       );
       await assert.rejects(client.setLocations(request), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.setLocations as SinonStub)
           .getCall(0)
