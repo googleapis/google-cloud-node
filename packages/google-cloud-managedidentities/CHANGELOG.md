@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.6](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.5...v1.0.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#68](https://www.github.com/googleapis/nodejs-managed-identities/issues/68)) ([c20fd86](https://www.github.com/googleapis/nodejs-managed-identities/commit/c20fd865b86823464b8539c4150307df465636fe))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.4...v1.0.5) (2021-07-12)
 
 
