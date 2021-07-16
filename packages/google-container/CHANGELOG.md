@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [2.4.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.4.1...v2.4.2) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#468](https://www.github.com/googleapis/nodejs-cloud-container/issues/468)) ([2257eff](https://www.github.com/googleapis/nodejs-cloud-container/commit/2257eff6c1d5a50728fecc2fa27881b2addaba68))
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.4.0...v2.4.1) (2021-07-12)
 
 
