@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.6](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.5...v1.0.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#58](https://www.github.com/googleapis/nodejs-domains/issues/58)) ([5c35455](https://www.github.com/googleapis/nodejs-domains/commit/5c35455f992ecdfb0fb71d74265dede9151bbd2b))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.4...v1.0.5) (2021-07-12)
 
 
