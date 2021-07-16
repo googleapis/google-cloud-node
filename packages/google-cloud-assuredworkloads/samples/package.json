@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/assured-workloads": "^1.4.5"
+    "@google-cloud/assured-workloads": "^1.4.6"
   },
   "devDependencies": {
     "c8": "^7.3.0",

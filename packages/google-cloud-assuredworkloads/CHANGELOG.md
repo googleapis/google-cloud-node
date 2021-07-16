@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.6](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.5...v1.4.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#86](https://www.github.com/googleapis/nodejs-assured-workloads/issues/86)) ([b68bfe0](https://www.github.com/googleapis/nodejs-assured-workloads/commit/b68bfe00fdaec8c68028a1aa0ff5074da324dbd7))
+
 ### [1.4.5](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.4...v1.4.5) (2021-07-12)
 
 
