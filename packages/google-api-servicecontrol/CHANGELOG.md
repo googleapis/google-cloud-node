@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-service-control/compare/v1.1.2...v1.1.3) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#59](https://www.github.com/googleapis/nodejs-service-control/issues/59)) ([23d1f95](https://www.github.com/googleapis/nodejs-service-control/commit/23d1f95107ad50c82cac555fbc476e00dc7bba08))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-service-control/compare/v1.1.1...v1.1.2) (2021-07-12)
 
 
