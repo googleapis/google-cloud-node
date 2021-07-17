@@ -7,6 +7,13 @@
 
 * Updating WORKSPACE files to use the newest version of the Typescript generator. ([#18](https://www.github.com/googleapis/nodejs-apigee-connect/issues/18)) ([a1ec264](https://www.github.com/googleapis/nodejs-apigee-connect/commit/a1ec26422107c2e78ddb45aa89827db052017a54))
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.0.2...v1.0.3) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#18](https://www.github.com/googleapis/nodejs-apigee-connect/issues/18)) ([a1ec264](https://www.github.com/googleapis/nodejs-apigee-connect/commit/a1ec26422107c2e78ddb45aa89827db052017a54))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.0.1...v1.0.2) (2021-07-12)
 
 
