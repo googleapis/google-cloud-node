@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [6.4.6](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.5...v6.4.6) (2021-07-19)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#855](https://www.github.com/googleapis/nodejs-datastore/issues/855)) ([1cdba8c](https://www.github.com/googleapis/nodejs-datastore/commit/1cdba8cc446b592170a8e404b24e09845524f50a))
+
 ### [6.4.5](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.4...v6.4.5) (2021-07-12)
 
 
