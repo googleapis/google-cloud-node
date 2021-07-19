@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [2.3.6](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.5...v2.3.6) (2021-07-16)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#549](https://www.github.com/googleapis/nodejs-tasks/issues/549)) ([96c505e](https://www.github.com/googleapis/nodejs-tasks/commit/96c505e04209689c7f1351a71eac270c9f68ca86))
+
 ### [2.3.5](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.4...v2.3.5) (2021-07-12)
 
 
