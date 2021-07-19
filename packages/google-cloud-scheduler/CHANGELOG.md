@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+### [2.2.5](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.4...v2.2.5) (2021-07-16)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#388](https://www.github.com/googleapis/nodejs-scheduler/issues/388)) ([89b6188](https://www.github.com/googleapis/nodejs-scheduler/commit/89b6188b1e8f669d9979224c34eaffd74ea76f38))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#390](https://www.github.com/googleapis/nodejs-scheduler/issues/390)) ([c3bd830](https://www.github.com/googleapis/nodejs-scheduler/commit/c3bd8307c717b43d309c123ac2c2b1c839d78dcb))
+
 ### [2.2.4](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.3...v2.2.4) (2021-06-30)
 
 
