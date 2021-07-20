@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/profiler?activeTab=versions
 
+### [4.1.3](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.2...v4.1.3) (2021-07-20)
+
+
+### Bug Fixes
+
+* **deps:** update dependency pprof to v3.2.0 ([#754](https://www.github.com/googleapis/cloud-profiler-nodejs/issues/754)) ([fc48f9a](https://www.github.com/googleapis/cloud-profiler-nodejs/commit/fc48f9aee74a3638d98086e0b404e299ae31b592))
+
 ### [4.1.2](https://www.github.com/googleapis/cloud-profiler-nodejs/compare/v4.1.1...v4.1.2) (2021-05-05)
 
 
