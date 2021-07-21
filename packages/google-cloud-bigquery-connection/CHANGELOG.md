@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.4.0...v1.4.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#112](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/112)) ([9a2b5bb](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/9a2b5bb9796be07bd13ca886061f30151c5ba235))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.3.5...v1.4.0) (2021-07-14)
 
 
