@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+### [3.1.7](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.6...v3.1.7) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#326](https://www.github.com/googleapis/nodejs-containeranalysis/issues/326)) ([9e3f627](https://www.github.com/googleapis/nodejs-containeranalysis/commit/9e3f62734cecd16c7bae394665b50e7212f55158))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#329](https://www.github.com/googleapis/nodejs-containeranalysis/issues/329)) ([5403fb4](https://www.github.com/googleapis/nodejs-containeranalysis/commit/5403fb42c84354d439ea8f6414b6b7e28c57f5c1))
+
 ### [3.1.6](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.5...v3.1.6) (2021-07-01)
 
 
