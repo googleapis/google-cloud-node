@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-dataflow/compare/v1.0.0...v1.0.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#6](https://www.github.com/googleapis/nodejs-dataflow/issues/6)) ([c689196](https://www.github.com/googleapis/nodejs-dataflow/commit/c689196fd00e35fe702e16a6642e7fb06c9907b2))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#8](https://www.github.com/googleapis/nodejs-dataflow/issues/8)) ([ce940c1](https://www.github.com/googleapis/nodejs-dataflow/commit/ce940c13c9730f7ede30ad5dfc10cceb56c6953b))
+
 ## 1.0.0 (2021-07-08)
 
 
