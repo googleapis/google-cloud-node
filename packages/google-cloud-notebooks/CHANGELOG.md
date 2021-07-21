@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.6](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.5...v1.1.6) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#74](https://www.github.com/googleapis/nodejs-notebooks/issues/74)) ([497f853](https://www.github.com/googleapis/nodejs-notebooks/commit/497f853592ede51ab126837bf7fc2860f3cd2c5f))
+
 ### [1.1.5](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.4...v1.1.5) (2021-07-12)
 
 
