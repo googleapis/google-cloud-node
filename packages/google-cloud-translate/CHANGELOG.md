@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.2.6](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.5...v6.2.6) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#699](https://www.github.com/googleapis/nodejs-translate/issues/699)) ([41e7ba3](https://www.github.com/googleapis/nodejs-translate/commit/41e7ba31041a2138c7068ce0e14528d044cb3606))
+
 ### [6.2.5](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.4...v6.2.5) (2021-07-12)
 
 
