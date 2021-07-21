@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+### [2.3.7](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.6...v2.3.7) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#928](https://www.github.com/googleapis/nodejs-vision/issues/928)) ([f5cddc5](https://www.github.com/googleapis/nodejs-vision/commit/f5cddc5086a96ddc4255017366422df40a6efaf5))
+
 ### [2.3.6](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.5...v2.3.6) (2021-07-12)
 
 
