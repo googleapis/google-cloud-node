@@ -1,0 +1,87 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.networkmanagement.v1",
+  "libraryPackage": "@google-cloud/networkmanagement",
+  "services": {
+    "ReachabilityService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReachabilityServiceClient",
+          "rpcs": {
+            "GetConnectivityTest": {
+              "methods": [
+                "getConnectivityTest"
+              ]
+            },
+            "CreateConnectivityTest": {
+              "methods": [
+                "createConnectivityTest"
+              ]
+            },
+            "UpdateConnectivityTest": {
+              "methods": [
+                "updateConnectivityTest"
+              ]
+            },
+            "RerunConnectivityTest": {
+              "methods": [
+                "rerunConnectivityTest"
+              ]
+            },
+            "DeleteConnectivityTest": {
+              "methods": [
+                "deleteConnectivityTest"
+              ]
+            },
+            "ListConnectivityTests": {
+              "methods": [
+                "listConnectivityTests",
+                "listConnectivityTestsStream",
+                "listConnectivityTestsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReachabilityServiceClient",
+          "rpcs": {
+            "GetConnectivityTest": {
+              "methods": [
+                "getConnectivityTest"
+              ]
+            },
+            "CreateConnectivityTest": {
+              "methods": [
+                "createConnectivityTest"
+              ]
+            },
+            "UpdateConnectivityTest": {
+              "methods": [
+                "updateConnectivityTest"
+              ]
+            },
+            "RerunConnectivityTest": {
+              "methods": [
+                "rerunConnectivityTest"
+              ]
+            },
+            "DeleteConnectivityTest": {
+              "methods": [
+                "deleteConnectivityTest"
+              ]
+            },
+            "ListConnectivityTests": {
+              "methods": [
+                "listConnectivityTests",
+                "listConnectivityTestsStream",
+                "listConnectivityTestsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

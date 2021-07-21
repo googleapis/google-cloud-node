@@ -1,0 +1,3843 @@
+{
+  "nested": {
+    "google": {
+      "nested": {
+        "cloud": {
+          "nested": {
+            "networkmanagement": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.NetworkManagement.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/networkmanagement/v1;networkmanagement",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "ReachabilityServiceProto",
+                    "java_package": "com.google.cloud.networkmanagement.v1",
+                    "php_namespace": "Google\\Cloud\\NetworkManagement\\V1",
+                    "ruby_package": "Google::Cloud::NetworkManagement::V1"
+                  },
+                  "nested": {
+                    "ConnectivityTest": {
+                      "options": {
+                        "(google.api.resource).type": "networkmanagement.googleapis.com/ConnectivityTest",
+                        "(google.api.resource).pattern": "projects/{project}/locations/global/connectivityTests/{test}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "source": {
+                          "type": "Endpoint",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "destination": {
+                          "type": "Endpoint",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "relatedProjects": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reachabilityDetails": {
+                          "type": "ReachabilityDetails",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Endpoint": {
+                      "fields": {
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "port": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "gkeMasterCluster": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "cloudSqlInstance": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "networkType": {
+                          "type": "NetworkType",
+                          "id": 5
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "NetworkType": {
+                          "values": {
+                            "NETWORK_TYPE_UNSPECIFIED": 0,
+                            "GCP_NETWORK": 1,
+                            "NON_GCP_NETWORK": 2
+                          }
+                        }
+                      }
+                    },
+                    "ReachabilityDetails": {
+                      "fields": {
+                        "result": {
+                          "type": "Result",
+                          "id": 1
+                        },
+                        "verifyTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 3
+                        },
+                        "traces": {
+                          "rule": "repeated",
+                          "type": "Trace",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Result": {
+                          "values": {
+                            "RESULT_UNSPECIFIED": 0,
+                            "REACHABLE": 1,
+                            "UNREACHABLE": 2,
+                            "AMBIGUOUS": 4,
+                            "UNDETERMINED": 5
+                          }
+                        }
+                      }
+                    },
+                    "Trace": {
+                      "fields": {
+                        "endpointInfo": {
+                          "type": "EndpointInfo",
+                          "id": 1
+                        },
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "Step",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Step": {
+                      "oneofs": {
+                        "stepInfo": {
+                          "oneof": [
+                            "instance",
+                            "firewall",
+                            "route",
+                            "endpoint",
+                            "forwardingRule",
+                            "vpnGateway",
+                            "vpnTunnel",
+                            "deliver",
+                            "forward",
+                            "abort",
+                            "drop",
+                            "loadBalancer",
+                            "network",
+                            "gkeMaster",
+                            "cloudSqlInstance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2
+                        },
+                        "causesDrop": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "instance": {
+                          "type": "InstanceInfo",
+                          "id": 5
+                        },
+                        "firewall": {
+                          "type": "FirewallInfo",
+                          "id": 6
+                        },
+                        "route": {
+                          "type": "RouteInfo",
+                          "id": 7
+                        },
+                        "endpoint": {
+                          "type": "EndpointInfo",
+                          "id": 8
+                        },
+                        "forwardingRule": {
+                          "type": "ForwardingRuleInfo",
+                          "id": 9
+                        },
+                        "vpnGateway": {
+                          "type": "VpnGatewayInfo",
+                          "id": 10
+                        },
+                        "vpnTunnel": {
+                          "type": "VpnTunnelInfo",
+                          "id": 11
+                        },
+                        "deliver": {
+                          "type": "DeliverInfo",
+                          "id": 12
+                        },
+                        "forward": {
+                          "type": "ForwardInfo",
+                          "id": 13
+                        },
+                        "abort": {
+                          "type": "AbortInfo",
+                          "id": 14
+                        },
+                        "drop": {
+                          "type": "DropInfo",
+                          "id": 15
+                        },
+                        "loadBalancer": {
+                          "type": "LoadBalancerInfo",
+                          "id": 16
+                        },
+                        "network": {
+                          "type": "NetworkInfo",
+                          "id": 17
+                        },
+                        "gkeMaster": {
+                          "type": "GKEMasterInfo",
+                          "id": 18
+                        },
+                        "cloudSqlInstance": {
+                          "type": "CloudSQLInstanceInfo",
+                          "id": 19
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "START_FROM_INSTANCE": 1,
+                            "START_FROM_INTERNET": 2,
+                            "START_FROM_PRIVATE_NETWORK": 3,
+                            "START_FROM_GKE_MASTER": 21,
+                            "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "APPLY_INGRESS_FIREWALL_RULE": 4,
+                            "APPLY_EGRESS_FIREWALL_RULE": 5,
+                            "APPLY_ROUTE": 6,
+                            "APPLY_FORWARDING_RULE": 7,
+                            "SPOOFING_APPROVED": 8,
+                            "ARRIVE_AT_INSTANCE": 9,
+                            "ARRIVE_AT_INTERNAL_LOAD_BALANCER": 10,
+                            "ARRIVE_AT_EXTERNAL_LOAD_BALANCER": 11,
+                            "ARRIVE_AT_VPN_GATEWAY": 12,
+                            "ARRIVE_AT_VPN_TUNNEL": 13,
+                            "NAT": 14,
+                            "PROXY_CONNECTION": 15,
+                            "DELIVER": 16,
+                            "DROP": 17,
+                            "FORWARD": 18,
+                            "ABORT": 19,
+                            "VIEWER_PERMISSION_MISSING": 20
+                          }
+                        }
+                      }
+                    },
+                    "InstanceInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "interface": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "internalIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "externalIp": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "deprecated": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworkInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchedIpRange": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "FirewallInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "direction": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "action": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "priority": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "targetTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "targetServiceAccounts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "policy": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "firewallRuleType": {
+                          "type": "FirewallRuleType",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "FirewallRuleType": {
+                          "values": {
+                            "FIREWALL_RULE_TYPE_UNSPECIFIED": 0,
+                            "HIERARCHICAL_FIREWALL_POLICY_RULE": 1,
+                            "VPC_FIREWALL_RULE": 2,
+                            "IMPLIED_VPC_FIREWALL_RULE": 3
+                          }
+                        }
+                      }
+                    },
+                    "RouteInfo": {
+                      "fields": {
+                        "routeType": {
+                          "type": "RouteType",
+                          "id": 8
+                        },
+                        "nextHopType": {
+                          "type": "NextHopType",
+                          "id": 9
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "destIpRange": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "nextHop": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "priority": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "instanceTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "RouteType": {
+                          "values": {
+                            "ROUTE_TYPE_UNSPECIFIED": 0,
+                            "SUBNET": 1,
+                            "STATIC": 2,
+                            "DYNAMIC": 3,
+                            "PEERING_SUBNET": 4,
+                            "PEERING_STATIC": 5,
+                            "PEERING_DYNAMIC": 6
+                          }
+                        },
+                        "NextHopType": {
+                          "values": {
+                            "NEXT_HOP_TYPE_UNSPECIFIED": 0,
+                            "NEXT_HOP_IP": 1,
+                            "NEXT_HOP_INSTANCE": 2,
+                            "NEXT_HOP_NETWORK": 3,
+                            "NEXT_HOP_PEERING": 4,
+                            "NEXT_HOP_INTERCONNECT": 5,
+                            "NEXT_HOP_VPN_TUNNEL": 6,
+                            "NEXT_HOP_VPN_GATEWAY": 7,
+                            "NEXT_HOP_INTERNET_GATEWAY": 8,
+                            "NEXT_HOP_BLACKHOLE": 9,
+                            "NEXT_HOP_ILB": 10
+                          }
+                        }
+                      }
+                    },
+                    "ForwardingRuleInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchedProtocol": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "matchedPortRange": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "vip": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "LoadBalancerInfo": {
+                      "fields": {
+                        "loadBalancerType": {
+                          "type": "LoadBalancerType",
+                          "id": 1
+                        },
+                        "healthCheckUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "backends": {
+                          "rule": "repeated",
+                          "type": "LoadBalancerBackend",
+                          "id": 3
+                        },
+                        "backendType": {
+                          "type": "BackendType",
+                          "id": 4
+                        },
+                        "backendUri": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "LoadBalancerType": {
+                          "values": {
+                            "LOAD_BALANCER_TYPE_UNSPECIFIED": 0,
+                            "INTERNAL_TCP_UDP": 1,
+                            "NETWORK_TCP_UDP": 2,
+                            "HTTP_PROXY": 3,
+                            "TCP_PROXY": 4,
+                            "SSL_PROXY": 5
+                          }
+                        },
+                        "BackendType": {
+                          "values": {
+                            "BACKEND_TYPE_UNSPECIFIED": 0,
+                            "BACKEND_SERVICE": 1,
+                            "TARGET_POOL": 2
+                          }
+                        }
+                      }
+                    },
+                    "LoadBalancerBackend": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "healthCheckFirewallState": {
+                          "type": "HealthCheckFirewallState",
+                          "id": 3
+                        },
+                        "healthCheckAllowingFirewallRules": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "healthCheckBlockingFirewallRules": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "HealthCheckFirewallState": {
+                          "values": {
+                            "HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED": 0,
+                            "CONFIGURED": 1,
+                            "MISCONFIGURED": 2
+                          }
+                        }
+                      }
+                    },
+                    "VpnGatewayInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "vpnTunnelUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "VpnTunnelInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sourceGateway": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "remoteGateway": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "remoteGatewayIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "sourceGatewayIp": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "routingType": {
+                          "type": "RoutingType",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "RoutingType": {
+                          "values": {
+                            "ROUTING_TYPE_UNSPECIFIED": 0,
+                            "ROUTE_BASED": 1,
+                            "POLICY_BASED": 2,
+                            "DYNAMIC": 3
+                          }
+                        }
+                      }
+                    },
+                    "EndpointInfo": {
+                      "fields": {
+                        "sourceIp": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "destinationIp": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "sourcePort": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "destinationPort": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "sourceNetworkUri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "destinationNetworkUri": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "DeliverInfo": {
+                      "fields": {
+                        "target": {
+                          "type": "Target",
+                          "id": 1
+                        },
+                        "resourceUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Target": {
+                          "values": {
+                            "TARGET_UNSPECIFIED": 0,
+                            "INSTANCE": 1,
+                            "INTERNET": 2,
+                            "GOOGLE_API": 3,
+                            "GKE_MASTER": 4,
+                            "CLOUD_SQL_INSTANCE": 5
+                          }
+                        }
+                      }
+                    },
+                    "ForwardInfo": {
+                      "fields": {
+                        "target": {
+                          "type": "Target",
+                          "id": 1
+                        },
+                        "resourceUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Target": {
+                          "values": {
+                            "TARGET_UNSPECIFIED": 0,
+                            "PEERING_VPC": 1,
+                            "VPN_GATEWAY": 2,
+                            "INTERCONNECT": 3,
+                            "GKE_MASTER": 4,
+                            "IMPORTED_CUSTOM_ROUTE_NEXT_HOP": 5,
+                            "CLOUD_SQL_INSTANCE": 6
+                          }
+                        }
+                      }
+                    },
+                    "AbortInfo": {
+                      "fields": {
+                        "cause": {
+                          "type": "Cause",
+                          "id": 1
+                        },
+                        "resourceUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Cause": {
+                          "values": {
+                            "CAUSE_UNSPECIFIED": 0,
+                            "UNKNOWN_NETWORK": 1,
+                            "UNKNOWN_IP": 2,
+                            "UNKNOWN_PROJECT": 3,
+                            "PERMISSION_DENIED": 4,
+                            "NO_SOURCE_LOCATION": 5,
+                            "INVALID_ARGUMENT": 6,
+                            "NO_EXTERNAL_IP": 7,
+                            "UNINTENDED_DESTINATION": 8,
+                            "TRACE_TOO_LONG": 9,
+                            "INTERNAL_ERROR": 10,
+                            "SOURCE_ENDPOINT_NOT_FOUND": 11,
+                            "MISMATCHED_SOURCE_NETWORK": 12,
+                            "DESTINATION_ENDPOINT_NOT_FOUND": 13,
+                            "MISMATCHED_DESTINATION_NETWORK": 14
+                          }
+                        }
+                      }
+                    },
+                    "DropInfo": {
+                      "fields": {
+                        "cause": {
+                          "type": "Cause",
+                          "id": 1
+                        },
+                        "resourceUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Cause": {
+                          "values": {
+                            "CAUSE_UNSPECIFIED": 0,
+                            "UNKNOWN_EXTERNAL_ADDRESS": 1,
+                            "FOREIGN_IP_DISALLOWED": 2,
+                            "FIREWALL_RULE": 3,
+                            "NO_ROUTE": 4,
+                            "ROUTE_BLACKHOLE": 5,
+                            "ROUTE_WRONG_NETWORK": 6,
+                            "PRIVATE_TRAFFIC_TO_INTERNET": 7,
+                            "PRIVATE_GOOGLE_ACCESS_DISALLOWED": 8,
+                            "NO_EXTERNAL_ADDRESS": 9,
+                            "UNKNOWN_INTERNAL_ADDRESS": 10,
+                            "FORWARDING_RULE_MISMATCH": 11,
+                            "FORWARDING_RULE_NO_INSTANCES": 12,
+                            "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK": 13,
+                            "INSTANCE_NOT_RUNNING": 14,
+                            "TRAFFIC_TYPE_BLOCKED": 15,
+                            "GKE_MASTER_UNAUTHORIZED_ACCESS": 16,
+                            "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS": 17,
+                            "DROPPED_INSIDE_GKE_SERVICE": 18,
+                            "DROPPED_INSIDE_CLOUD_SQL_SERVICE": 19,
+                            "GOOGLE_MANAGED_SERVICE_NO_PEERING": 20,
+                            "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS": 21
+                          }
+                        }
+                      }
+                    },
+                    "GKEMasterInfo": {
+                      "fields": {
+                        "clusterUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "clusterNetworkUri": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "internalIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "externalIp": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "CloudSQLInstanceInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "internalIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "externalIp": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "ReachabilityService": {
+                      "options": {
+                        "(google.api.default_host)": "networkmanagement.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListConnectivityTests": {
+                          "requestType": "ListConnectivityTestsRequest",
+                          "responseType": "ListConnectivityTestsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/global}/connectivityTests",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/global}/connectivityTests"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetConnectivityTest": {
+                          "requestType": "GetConnectivityTestRequest",
+                          "responseType": "ConnectivityTest",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/global/connectivityTests/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/global/connectivityTests/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateConnectivityTest": {
+                          "requestType": "CreateConnectivityTestRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/global}/connectivityTests",
+                            "(google.api.http).body": "resource",
+                            "(google.api.method_signature)": "parent,test_id,resource",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.networkmanagement.v1.ConnectivityTest",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/global}/connectivityTests",
+                                "body": "resource"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,test_id,resource"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.networkmanagement.v1.ConnectivityTest",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateConnectivityTest": {
+                          "requestType": "UpdateConnectivityTestRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{resource.name=projects/*/locations/global/connectivityTests/*}",
+                            "(google.api.http).body": "resource",
+                            "(google.api.method_signature)": "update_mask,resource",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.networkmanagement.v1.ConnectivityTest",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{resource.name=projects/*/locations/global/connectivityTests/*}",
+                                "body": "resource"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "update_mask,resource"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.networkmanagement.v1.ConnectivityTest",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RerunConnectivityTest": {
+                          "requestType": "RerunConnectivityTestRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/global/connectivityTests/*}:rerun",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.networkmanagement.v1.ConnectivityTest",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/global/connectivityTests/*}:rerun",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.networkmanagement.v1.ConnectivityTest",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteConnectivityTest": {
+                          "requestType": "DeleteConnectivityTestRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/global/connectivityTests/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/global/connectivityTests/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListConnectivityTestsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListConnectivityTestsResponse": {
+                      "fields": {
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "ConnectivityTest",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetConnectivityTestRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConnectivityTestRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "ConnectivityTest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateConnectivityTestRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "ConnectivityTest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteConnectivityTestRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RerunConnectivityTestRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "statusDetail": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "cancelRequested": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    }
+                  }
+                },
+                "v1beta1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.NetworkManagement.V1Beta1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/networkmanagement/v1beta1;networkmanagement",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "ReachabilityServiceProto",
+                    "java_package": "com.google.cloud.networkmanagement.v1beta1",
+                    "php_namespace": "Google\\Cloud\\NetworkManagement\\V1beta1",
+                    "ruby_package": "Google::Cloud::NetworkManagement::V1beta1"
+                  },
+                  "nested": {
+                    "ConnectivityTest": {
+                      "options": {
+                        "(google.api.resource).type": "networkmanagement.googleapis.com/ConnectivityTest",
+                        "(google.api.resource).pattern": "projects/{project}/locations/global/connectivityTests/{test}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "source": {
+                          "type": "Endpoint",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "destination": {
+                          "type": "Endpoint",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "relatedProjects": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reachabilityDetails": {
+                          "type": "ReachabilityDetails",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "probingDetails": {
+                          "type": "ProbingDetails",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "Endpoint": {
+                      "fields": {
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "port": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "instance": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "gkeMasterCluster": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "cloudSqlInstance": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "networkType": {
+                          "type": "NetworkType",
+                          "id": 5
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "NetworkType": {
+                          "values": {
+                            "NETWORK_TYPE_UNSPECIFIED": 0,
+                            "GCP_NETWORK": 1,
+                            "NON_GCP_NETWORK": 2
+                          }
+                        }
+                      }
+                    },
+                    "ReachabilityDetails": {
+                      "fields": {
+                        "result": {
+                          "type": "Result",
+                          "id": 1
+                        },
+                        "verifyTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 3
+                        },
+                        "traces": {
+                          "rule": "repeated",
+                          "type": "Trace",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "Result": {
+                          "values": {
+                            "RESULT_UNSPECIFIED": 0,
+                            "REACHABLE": 1,
+                            "UNREACHABLE": 2,
+                            "AMBIGUOUS": 4,
+                            "UNDETERMINED": 5
+                          }
+                        }
+                      }
+                    },
+                    "LatencyPercentile": {
+                      "fields": {
+                        "percent": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "latencyMicros": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "LatencyDistribution": {
+                      "fields": {
+                        "latencyPercentiles": {
+                          "rule": "repeated",
+                          "type": "LatencyPercentile",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ProbingDetails": {
+                      "fields": {
+                        "result": {
+                          "type": "ProbingResult",
+                          "id": 1
+                        },
+                        "verifyTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "error": {
+                          "type": "google.rpc.Status",
+                          "id": 3
+                        },
+                        "abortCause": {
+                          "type": "ProbingAbortCause",
+                          "id": 4
+                        },
+                        "sentProbeCount": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "successfulProbeCount": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "endpointInfo": {
+                          "type": "EndpointInfo",
+                          "id": 7
+                        },
+                        "probingLatency": {
+                          "type": "LatencyDistribution",
+                          "id": 8
+                        }
+                      },
+                      "nested": {
+                        "ProbingResult": {
+                          "values": {
+                            "PROBING_RESULT_UNSPECIFIED": 0,
+                            "REACHABLE": 1,
+                            "UNREACHABLE": 2,
+                            "REACHABILITY_INCONSISTENT": 3,
+                            "UNDETERMINED": 4
+                          }
+                        },
+                        "ProbingAbortCause": {
+                          "values": {
+                            "PROBING_ABORT_CAUSE_UNSPECIFIED": 0,
+                            "PERMISSION_DENIED": 1,
+                            "NO_SOURCE_LOCATION": 2
+                          }
+                        }
+                      }
+                    },
+                    "Trace": {
+                      "fields": {
+                        "endpointInfo": {
+                          "type": "EndpointInfo",
+                          "id": 1
+                        },
+                        "steps": {
+                          "rule": "repeated",
+                          "type": "Step",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Step": {
+                      "oneofs": {
+                        "stepInfo": {
+                          "oneof": [
+                            "instance",
+                            "firewall",
+                            "route",
+                            "endpoint",
+                            "forwardingRule",
+                            "vpnGateway",
+                            "vpnTunnel",
+                            "deliver",
+                            "forward",
+                            "abort",
+                            "drop",
+                            "loadBalancer",
+                            "network",
+                            "gkeMaster",
+                            "cloudSqlInstance"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 2
+                        },
+                        "causesDrop": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "projectId": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "instance": {
+                          "type": "InstanceInfo",
+                          "id": 5
+                        },
+                        "firewall": {
+                          "type": "FirewallInfo",
+                          "id": 6
+                        },
+                        "route": {
+                          "type": "RouteInfo",
+                          "id": 7
+                        },
+                        "endpoint": {
+                          "type": "EndpointInfo",
+                          "id": 8
+                        },
+                        "forwardingRule": {
+                          "type": "ForwardingRuleInfo",
+                          "id": 9
+                        },
+                        "vpnGateway": {
+                          "type": "VpnGatewayInfo",
+                          "id": 10
+                        },
+                        "vpnTunnel": {
+                          "type": "VpnTunnelInfo",
+                          "id": 11
+                        },
+                        "deliver": {
+                          "type": "DeliverInfo",
+                          "id": 12
+                        },
+                        "forward": {
+                          "type": "ForwardInfo",
+                          "id": 13
+                        },
+                        "abort": {
+                          "type": "AbortInfo",
+                          "id": 14
+                        },
+                        "drop": {
+                          "type": "DropInfo",
+                          "id": 15
+                        },
+                        "loadBalancer": {
+                          "type": "LoadBalancerInfo",
+                          "id": 16
+                        },
+                        "network": {
+                          "type": "NetworkInfo",
+                          "id": 17
+                        },
+                        "gkeMaster": {
+                          "type": "GKEMasterInfo",
+                          "id": 18
+                        },
+                        "cloudSqlInstance": {
+                          "type": "CloudSQLInstanceInfo",
+                          "id": 19
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "START_FROM_INSTANCE": 1,
+                            "START_FROM_INTERNET": 2,
+                            "START_FROM_PRIVATE_NETWORK": 3,
+                            "START_FROM_GKE_MASTER": 21,
+                            "START_FROM_CLOUD_SQL_INSTANCE": 22,
+                            "APPLY_INGRESS_FIREWALL_RULE": 4,
+                            "APPLY_EGRESS_FIREWALL_RULE": 5,
+                            "APPLY_ROUTE": 6,
+                            "APPLY_FORWARDING_RULE": 7,
+                            "SPOOFING_APPROVED": 8,
+                            "ARRIVE_AT_INSTANCE": 9,
+                            "ARRIVE_AT_INTERNAL_LOAD_BALANCER": 10,
+                            "ARRIVE_AT_EXTERNAL_LOAD_BALANCER": 11,
+                            "ARRIVE_AT_VPN_GATEWAY": 12,
+                            "ARRIVE_AT_VPN_TUNNEL": 13,
+                            "NAT": 14,
+                            "PROXY_CONNECTION": 15,
+                            "DELIVER": 16,
+                            "DROP": 17,
+                            "FORWARD": 18,
+                            "ABORT": 19,
+                            "VIEWER_PERMISSION_MISSING": 20
+                          }
+                        }
+                      }
+                    },
+                    "InstanceInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "interface": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "internalIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "externalIp": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "networkTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "deprecated": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworkInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchedIpRange": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "FirewallInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "direction": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "action": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "priority": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "targetTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        },
+                        "targetServiceAccounts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 8
+                        },
+                        "policy": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "firewallRuleType": {
+                          "type": "FirewallRuleType",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "FirewallRuleType": {
+                          "values": {
+                            "FIREWALL_RULE_TYPE_UNSPECIFIED": 0,
+                            "HIERARCHICAL_FIREWALL_POLICY_RULE": 1,
+                            "VPC_FIREWALL_RULE": 2,
+                            "IMPLIED_VPC_FIREWALL_RULE": 3
+                          }
+                        }
+                      }
+                    },
+                    "RouteInfo": {
+                      "fields": {
+                        "routeType": {
+                          "type": "RouteType",
+                          "id": 8
+                        },
+                        "nextHopType": {
+                          "type": "NextHopType",
+                          "id": 9
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "destIpRange": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "nextHop": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "priority": {
+                          "type": "int32",
+                          "id": 6
+                        },
+                        "instanceTags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "RouteType": {
+                          "values": {
+                            "ROUTE_TYPE_UNSPECIFIED": 0,
+                            "SUBNET": 1,
+                            "STATIC": 2,
+                            "DYNAMIC": 3,
+                            "PEERING_SUBNET": 4,
+                            "PEERING_STATIC": 5,
+                            "PEERING_DYNAMIC": 6
+                          }
+                        },
+                        "NextHopType": {
+                          "values": {
+                            "NEXT_HOP_TYPE_UNSPECIFIED": 0,
+                            "NEXT_HOP_IP": 1,
+                            "NEXT_HOP_INSTANCE": 2,
+                            "NEXT_HOP_NETWORK": 3,
+                            "NEXT_HOP_PEERING": 4,
+                            "NEXT_HOP_INTERCONNECT": 5,
+                            "NEXT_HOP_VPN_TUNNEL": 6,
+                            "NEXT_HOP_VPN_GATEWAY": 7,
+                            "NEXT_HOP_INTERNET_GATEWAY": 8,
+                            "NEXT_HOP_BLACKHOLE": 9,
+                            "NEXT_HOP_ILB": 10
+                          }
+                        }
+                      }
+                    },
+                    "ForwardingRuleInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "matchedProtocol": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "matchedPortRange": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "vip": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "LoadBalancerInfo": {
+                      "fields": {
+                        "loadBalancerType": {
+                          "type": "LoadBalancerType",
+                          "id": 1
+                        },
+                        "healthCheckUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "backends": {
+                          "rule": "repeated",
+                          "type": "LoadBalancerBackend",
+                          "id": 3
+                        },
+                        "backendType": {
+                          "type": "BackendType",
+                          "id": 4
+                        },
+                        "backendUri": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "LoadBalancerType": {
+                          "values": {
+                            "LOAD_BALANCER_TYPE_UNSPECIFIED": 0,
+                            "INTERNAL_TCP_UDP": 1,
+                            "NETWORK_TCP_UDP": 2,
+                            "HTTP_PROXY": 3,
+                            "TCP_PROXY": 4,
+                            "SSL_PROXY": 5
+                          }
+                        },
+                        "BackendType": {
+                          "values": {
+                            "BACKEND_TYPE_UNSPECIFIED": 0,
+                            "BACKEND_SERVICE": 1,
+                            "TARGET_POOL": 2
+                          }
+                        }
+                      }
+                    },
+                    "LoadBalancerBackend": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "healthCheckFirewallState": {
+                          "type": "HealthCheckFirewallState",
+                          "id": 3
+                        },
+                        "healthCheckAllowingFirewallRules": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "healthCheckBlockingFirewallRules": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5
+                        }
+                      },
+                      "nested": {
+                        "HealthCheckFirewallState": {
+                          "values": {
+                            "HEALTH_CHECK_FIREWALL_STATE_UNSPECIFIED": 0,
+                            "CONFIGURED": 1,
+                            "MISCONFIGURED": 2
+                          }
+                        }
+                      }
+                    },
+                    "VpnGatewayInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "vpnTunnelUri": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "VpnTunnelInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "sourceGateway": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "remoteGateway": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "remoteGatewayIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "sourceGatewayIp": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "routingType": {
+                          "type": "RoutingType",
+                          "id": 9
+                        }
+                      },
+                      "nested": {
+                        "RoutingType": {
+                          "values": {
+                            "ROUTING_TYPE_UNSPECIFIED": 0,
+                            "ROUTE_BASED": 1,
+                            "POLICY_BASED": 2,
+                            "DYNAMIC": 3
+                          }
+                        }
+                      }
+                    },
+                    "EndpointInfo": {
+                      "fields": {
+                        "sourceIp": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "destinationIp": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "protocol": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "sourcePort": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "destinationPort": {
+                          "type": "int32",
+                          "id": 5
+                        },
+                        "sourceNetworkUri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "destinationNetworkUri": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "DeliverInfo": {
+                      "fields": {
+                        "target": {
+                          "type": "Target",
+                          "id": 1
+                        },
+                        "resourceUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Target": {
+                          "values": {
+                            "TARGET_UNSPECIFIED": 0,
+                            "INSTANCE": 1,
+                            "INTERNET": 2,
+                            "GOOGLE_API": 3,
+                            "GKE_MASTER": 4,
+                            "CLOUD_SQL_INSTANCE": 5
+                          }
+                        }
+                      }
+                    },
+                    "ForwardInfo": {
+                      "fields": {
+                        "target": {
+                          "type": "Target",
+                          "id": 1
+                        },
+                        "resourceUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Target": {
+                          "values": {
+                            "TARGET_UNSPECIFIED": 0,
+                            "PEERING_VPC": 1,
+                            "VPN_GATEWAY": 2,
+                            "INTERCONNECT": 3,
+                            "GKE_MASTER": 4,
+                            "IMPORTED_CUSTOM_ROUTE_NEXT_HOP": 5,
+                            "CLOUD_SQL_INSTANCE": 6
+                          }
+                        }
+                      }
+                    },
+                    "AbortInfo": {
+                      "fields": {
+                        "cause": {
+                          "type": "Cause",
+                          "id": 1
+                        },
+                        "resourceUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Cause": {
+                          "values": {
+                            "CAUSE_UNSPECIFIED": 0,
+                            "UNKNOWN_NETWORK": 1,
+                            "UNKNOWN_IP": 2,
+                            "UNKNOWN_PROJECT": 3,
+                            "PERMISSION_DENIED": 4,
+                            "NO_SOURCE_LOCATION": 5,
+                            "INVALID_ARGUMENT": 6,
+                            "NO_EXTERNAL_IP": 7,
+                            "UNINTENDED_DESTINATION": 8,
+                            "TRACE_TOO_LONG": 9,
+                            "INTERNAL_ERROR": 10,
+                            "SOURCE_ENDPOINT_NOT_FOUND": 11,
+                            "MISMATCHED_SOURCE_NETWORK": 12,
+                            "DESTINATION_ENDPOINT_NOT_FOUND": 13,
+                            "MISMATCHED_DESTINATION_NETWORK": 14
+                          }
+                        }
+                      }
+                    },
+                    "DropInfo": {
+                      "fields": {
+                        "cause": {
+                          "type": "Cause",
+                          "id": 1
+                        },
+                        "resourceUri": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Cause": {
+                          "values": {
+                            "CAUSE_UNSPECIFIED": 0,
+                            "UNKNOWN_EXTERNAL_ADDRESS": 1,
+                            "FOREIGN_IP_DISALLOWED": 2,
+                            "FIREWALL_RULE": 3,
+                            "NO_ROUTE": 4,
+                            "ROUTE_BLACKHOLE": 5,
+                            "ROUTE_WRONG_NETWORK": 6,
+                            "PRIVATE_TRAFFIC_TO_INTERNET": 7,
+                            "PRIVATE_GOOGLE_ACCESS_DISALLOWED": 8,
+                            "NO_EXTERNAL_ADDRESS": 9,
+                            "UNKNOWN_INTERNAL_ADDRESS": 10,
+                            "FORWARDING_RULE_MISMATCH": 11,
+                            "FORWARDING_RULE_NO_INSTANCES": 12,
+                            "FIREWALL_BLOCKING_LOAD_BALANCER_BACKEND_HEALTH_CHECK": 13,
+                            "INSTANCE_NOT_RUNNING": 14,
+                            "TRAFFIC_TYPE_BLOCKED": 15,
+                            "GKE_MASTER_UNAUTHORIZED_ACCESS": 16,
+                            "CLOUD_SQL_INSTANCE_UNAUTHORIZED_ACCESS": 17,
+                            "DROPPED_INSIDE_GKE_SERVICE": 18,
+                            "DROPPED_INSIDE_CLOUD_SQL_SERVICE": 19,
+                            "GOOGLE_MANAGED_SERVICE_NO_PEERING": 20,
+                            "CLOUD_SQL_INSTANCE_NO_IP_ADDRESS": 21
+                          }
+                        }
+                      }
+                    },
+                    "GKEMasterInfo": {
+                      "fields": {
+                        "clusterUri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "clusterNetworkUri": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "internalIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "externalIp": {
+                          "type": "string",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "CloudSQLInstanceInfo": {
+                      "fields": {
+                        "displayName": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "networkUri": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "internalIp": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "externalIp": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "ReachabilityService": {
+                      "options": {
+                        "(google.api.default_host)": "networkmanagement.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListConnectivityTests": {
+                          "requestType": "ListConnectivityTestsRequest",
+                          "responseType": "ListConnectivityTestsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{parent=projects/*/locations/global}/connectivityTests"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{parent=projects/*/locations/global}/connectivityTests"
+                              }
+                            }
+                          ]
+                        },
+                        "GetConnectivityTest": {
+                          "requestType": "GetConnectivityTestRequest",
+                          "responseType": "ConnectivityTest",
+                          "options": {
+                            "(google.api.http).get": "/v1beta1/{name=projects/*/locations/global/connectivityTests/*}"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1beta1/{name=projects/*/locations/global/connectivityTests/*}"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateConnectivityTest": {
+                          "requestType": "CreateConnectivityTestRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{parent=projects/*/locations/global}/connectivityTests",
+                            "(google.api.http).body": "resource",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.networkmanagement.v1beta1.ConnectivityTest",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{parent=projects/*/locations/global}/connectivityTests",
+                                "body": "resource"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.networkmanagement.v1beta1.ConnectivityTest",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateConnectivityTest": {
+                          "requestType": "UpdateConnectivityTestRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1beta1/{resource.name=projects/*/locations/global/connectivityTests/*}",
+                            "(google.api.http).body": "resource",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.networkmanagement.v1beta1.ConnectivityTest",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1beta1/{resource.name=projects/*/locations/global/connectivityTests/*}",
+                                "body": "resource"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.networkmanagement.v1beta1.ConnectivityTest",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RerunConnectivityTest": {
+                          "requestType": "RerunConnectivityTestRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{name=projects/*/locations/global/connectivityTests/*}:rerun",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "google.cloud.networkmanagement.v1beta1.ConnectivityTest",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{name=projects/*/locations/global/connectivityTests/*}:rerun",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.cloud.networkmanagement.v1beta1.ConnectivityTest",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteConnectivityTest": {
+                          "requestType": "DeleteConnectivityTestRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1beta1/{name=projects/*/locations/global/connectivityTests/*}",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1beta1/{name=projects/*/locations/global/connectivityTests/*}"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListConnectivityTestsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListConnectivityTestsResponse": {
+                      "fields": {
+                        "resources": {
+                          "rule": "repeated",
+                          "type": "ConnectivityTest",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetConnectivityTestRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateConnectivityTestRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "ConnectivityTest",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateConnectivityTestRequest": {
+                      "fields": {
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "ConnectivityTest",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteConnectivityTestRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RerunConnectivityTestRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "statusDetail": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "cancelRequested": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
+            "java_multiple_files": true,
+            "java_outer_classname": "ClientProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            }
+          }
+        },
+        "protobuf": {
+          "options": {
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "DescriptorProtos",
+            "csharp_namespace": "Google.Protobuf.Reflection",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED"
+          },
+          "nested": {
+            "FileDescriptorSet": {
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "FileDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "publicDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "weakDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11,
+                  "options": {
+                    "packed": false
+                  }
+                },
+                "messageType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "sourceCodeInfo": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                }
+              }
+            },
+            "DescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nestedType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extensionRange": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneofDecl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ExtensionRangeOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "FieldDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "typeName": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                },
+                "proto3Optional": {
+                  "type": "bool",
+                  "id": 17
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REQUIRED": 2,
+                    "LABEL_REPEATED": 3
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "outputType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "clientStreaming": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "serverStreaming": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
+                }
+              }
+            },
+            "FileOptions": {
+              "fields": {
+                "javaPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "javaOuterClassname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "javaMultipleFiles": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenerateEqualsAndHash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "javaStringCheckUtf8": {
+                  "type": "bool",
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "optimizeFor": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "goPackage": {
+                  "type": "string",
+                  "id": 11
+                },
+                "ccGenericServices": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenericServices": {
+                  "type": "bool",
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "pyGenericServices": {
+                  "type": "bool",
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "phpGenericServices": {
+                  "type": "bool",
+                  "id": 42,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "ccEnableArenas": {
+                  "type": "bool",
+                  "id": 31,
+                  "options": {
+                    "default": true
+                  }
+                },
+                "objcClassPrefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharpNamespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "swiftPrefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "phpClassPrefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "phpNamespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "phpMetadataNamespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "rubyPackage": {
+                  "type": "string",
+                  "id": 45
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "fields": {
+                "messageSetWireFormat": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "noStandardDescriptorAccessor": {
+                  "type": "bool",
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "mapEntry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  8,
+                  8
+                ],
+                [
+                  9,
+                  9
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "fields": {
+                "allowAlias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotencyLevel": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
+            },
+            "UninterpretedOption": {
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifierValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positiveIntValue": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negativeIntValue": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "doubleValue": {
+                  "type": "double",
+                  "id": 6
+                },
+                "stringValue": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregateValue": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "namePart": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "isExtension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "leadingComments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailingComments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leadingDetachedComments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "sourceFile": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Empty": {
+              "fields": {}
+            },
+            "FieldMask": {
+              "fields": {
+                "paths": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            }
+          }
+        },
+        "rpc": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/rpc/status;status",
+            "java_multiple_files": true,
+            "java_outer_classname": "StatusProto",
+            "java_package": "com.google.rpc",
+            "objc_class_prefix": "RPC"
+          },
+          "nested": {
+            "Status": {
+              "fields": {
+                "code": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "message": {
+                  "type": "string",
+                  "id": 2
+                },
+                "details": {
+                  "rule": "repeated",
+                  "type": "google.protobuf.Any",
+                  "id": 3
+                }
+              }
+            }
+          }
+        },
+        "longrunning": {
+          "options": {
+            "cc_enable_arenas": true,
+            "csharp_namespace": "Google.LongRunning",
+            "go_package": "google.golang.org/genproto/googleapis/longrunning;longrunning",
+            "java_multiple_files": true,
+            "java_outer_classname": "OperationsProto",
+            "java_package": "com.google.longrunning",
+            "php_namespace": "Google\\LongRunning"
+          },
+          "nested": {
+            "operationInfo": {
+              "type": "google.longrunning.OperationInfo",
+              "id": 1049,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Operations": {
+              "options": {
+                "(google.api.default_host)": "longrunning.googleapis.com"
+              },
+              "methods": {
+                "ListOperations": {
+                  "requestType": "ListOperationsRequest",
+                  "responseType": "ListOperationsResponse",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations}",
+                    "(google.api.method_signature)": "name,filter"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name,filter"
+                    }
+                  ]
+                },
+                "GetOperation": {
+                  "requestType": "GetOperationRequest",
+                  "responseType": "Operation",
+                  "options": {
+                    "(google.api.http).get": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "get": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "DeleteOperation": {
+                  "requestType": "DeleteOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).delete": "/v1/{name=operations/**}",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "delete": "/v1/{name=operations/**}"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "CancelOperation": {
+                  "requestType": "CancelOperationRequest",
+                  "responseType": "google.protobuf.Empty",
+                  "options": {
+                    "(google.api.http).post": "/v1/{name=operations/**}:cancel",
+                    "(google.api.http).body": "*",
+                    "(google.api.method_signature)": "name"
+                  },
+                  "parsedOptions": [
+                    {
+                      "(google.api.http)": {
+                        "post": "/v1/{name=operations/**}:cancel",
+                        "body": "*"
+                      }
+                    },
+                    {
+                      "(google.api.method_signature)": "name"
+                    }
+                  ]
+                },
+                "WaitOperation": {
+                  "requestType": "WaitOperationRequest",
+                  "responseType": "Operation"
+                }
+              }
+            },
+            "Operation": {
+              "oneofs": {
+                "result": {
+                  "oneof": [
+                    "error",
+                    "response"
+                  ]
+                }
+              },
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadata": {
+                  "type": "google.protobuf.Any",
+                  "id": 2
+                },
+                "done": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "error": {
+                  "type": "google.rpc.Status",
+                  "id": 4
+                },
+                "response": {
+                  "type": "google.protobuf.Any",
+                  "id": 5
+                }
+              }
+            },
+            "GetOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "ListOperationsRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 4
+                },
+                "filter": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pageSize": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "pageToken": {
+                  "type": "string",
+                  "id": 3
+                }
+              }
+            },
+            "ListOperationsResponse": {
+              "fields": {
+                "operations": {
+                  "rule": "repeated",
+                  "type": "Operation",
+                  "id": 1
+                },
+                "nextPageToken": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "CancelOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "DeleteOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                }
+              }
+            },
+            "WaitOperationRequest": {
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "timeout": {
+                  "type": "google.protobuf.Duration",
+                  "id": 2
+                }
+              }
+            },
+            "OperationInfo": {
+              "fields": {
+                "responseType": {
+                  "type": "string",
+                  "id": 1
+                },
+                "metadataType": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

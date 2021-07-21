@@ -1,0 +1,5 @@
+[
+  "../../protos/google/cloud/networkmanagement/v1/connectivity_test.proto",
+  "../../protos/google/cloud/networkmanagement/v1/reachability.proto",
+  "../../protos/google/cloud/networkmanagement/v1/trace.proto"
+]
