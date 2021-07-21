@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.5](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.4...v1.2.5) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#80](https://www.github.com/googleapis/nodejs-workflows/issues/80)) ([0b782cf](https://www.github.com/googleapis/nodejs-workflows/commit/0b782cff0eddcd158fcbd272c76e54e35b6d336c))
+
 ### [1.2.4](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.3...v1.2.4) (2021-07-12)
 
 
