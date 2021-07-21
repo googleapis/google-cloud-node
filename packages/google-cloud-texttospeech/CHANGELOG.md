@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [3.2.6](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.2.5...v3.2.6) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#534](https://www.github.com/googleapis/nodejs-text-to-speech/issues/534)) ([dee8dc2](https://www.github.com/googleapis/nodejs-text-to-speech/commit/dee8dc23024f67d5ad3888e2ea4b6829cbd4cae6))
+
 ### [3.2.5](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.2.4...v3.2.5) (2021-07-12)
 
 
