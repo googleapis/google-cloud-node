@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-eventarc/compare/v1.0.1...v1.0.2) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#9](https://www.github.com/googleapis/nodejs-eventarc/issues/9)) ([8b5a101](https://www.github.com/googleapis/nodejs-eventarc/commit/8b5a101bc9c00aecdc387a93051e0b27b4dee121))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-eventarc/compare/v1.0.0...v1.0.1) (2021-07-12)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/eventarc",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "eventarc client for Node.js",
   "repository": "googleapis/nodejs-eventarc",
   "license": "Apache-2.0",
