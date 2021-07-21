@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+### [3.4.5](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.4...v3.4.5) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#278](https://www.github.com/googleapis/nodejs-grafeas/issues/278)) ([95ff28c](https://www.github.com/googleapis/nodejs-grafeas/commit/95ff28cbde6a6b1ff89831d15ee8b0e370164109))
+
 ### [3.4.4](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.3...v3.4.4) (2021-07-12)
 
 
