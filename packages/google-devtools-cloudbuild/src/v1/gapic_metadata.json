@@ -45,29 +45,9 @@
                 "receiveTriggerWebhook"
               ]
             },
-            "CreateWorkerPool": {
-              "methods": [
-                "createWorkerPool"
-              ]
-            },
             "GetWorkerPool": {
               "methods": [
                 "getWorkerPool"
-              ]
-            },
-            "DeleteWorkerPool": {
-              "methods": [
-                "deleteWorkerPool"
-              ]
-            },
-            "UpdateWorkerPool": {
-              "methods": [
-                "updateWorkerPool"
-              ]
-            },
-            "ListWorkerPools": {
-              "methods": [
-                "listWorkerPools"
               ]
             },
             "CreateBuild": {
@@ -85,6 +65,21 @@
                 "runBuildTrigger"
               ]
             },
+            "CreateWorkerPool": {
+              "methods": [
+                "createWorkerPool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "deleteWorkerPool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "updateWorkerPool"
+              ]
+            },
             "ListBuilds": {
               "methods": [
                 "listBuilds",
@@ -97,6 +92,13 @@
                 "listBuildTriggers",
                 "listBuildTriggersStream",
                 "listBuildTriggersAsync"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "listWorkerPools",
+                "listWorkerPoolsStream",
+                "listWorkerPoolsAsync"
               ]
             }
           }
@@ -139,29 +141,9 @@
                 "receiveTriggerWebhook"
               ]
             },
-            "CreateWorkerPool": {
-              "methods": [
-                "createWorkerPool"
-              ]
-            },
             "GetWorkerPool": {
               "methods": [
                 "getWorkerPool"
-              ]
-            },
-            "DeleteWorkerPool": {
-              "methods": [
-                "deleteWorkerPool"
-              ]
-            },
-            "UpdateWorkerPool": {
-              "methods": [
-                "updateWorkerPool"
-              ]
-            },
-            "ListWorkerPools": {
-              "methods": [
-                "listWorkerPools"
               ]
             },
             "CreateBuild": {
@@ -179,6 +161,21 @@
                 "runBuildTrigger"
               ]
             },
+            "CreateWorkerPool": {
+              "methods": [
+                "createWorkerPool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "deleteWorkerPool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "updateWorkerPool"
+              ]
+            },
             "ListBuilds": {
               "methods": [
                 "listBuilds",
@@ -191,6 +188,13 @@
                 "listBuildTriggers",
                 "listBuildTriggersStream",
                 "listBuildTriggersAsync"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "listWorkerPools",
+                "listWorkerPoolsStream",
+                "listWorkerPoolsAsync"
               ]
             }
           }

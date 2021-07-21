@@ -1030,93 +1030,6 @@ describe('v1.CloudBuildClient', () => {
     });
   });
 
-  describe('createWorkerPool', () => {
-    it('invokes createWorkerPool without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.WorkerPool()
-      );
-      client.innerApiCalls.createWorkerPool = stubSimpleCall(expectedResponse);
-      const [response] = await client.createWorkerPool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes createWorkerPool without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.WorkerPool()
-      );
-      client.innerApiCalls.createWorkerPool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.createWorkerPool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IWorkerPool | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes createWorkerPool with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
-      );
-      const expectedOptions = {};
-      const expectedError = new Error('expected');
-      client.innerApiCalls.createWorkerPool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.createWorkerPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.createWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
   describe('getWorkerPool', () => {
     it('invokes getWorkerPool without error', async () => {
       const client = new cloudbuildModule.v1.CloudBuildClient({
@@ -1127,7 +1040,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const expectedOptions = {};
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.WorkerPool()
       );
@@ -1150,7 +1071,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const expectedOptions = {};
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedResponse = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.WorkerPool()
       );
@@ -1189,7 +1118,15 @@ describe('v1.CloudBuildClient', () => {
       const request = generateSampleMessage(
         new protos.google.devtools.cloudbuild.v1.GetWorkerPoolRequest()
       );
-      const expectedOptions = {};
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
       client.innerApiCalls.getWorkerPool = stubSimpleCall(
         undefined,
@@ -1198,267 +1135,6 @@ describe('v1.CloudBuildClient', () => {
       await assert.rejects(client.getWorkerPool(request), expectedError);
       assert(
         (client.innerApiCalls.getWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('deleteWorkerPool', () => {
-    it('invokes deleteWorkerPool without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteWorkerPool = stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteWorkerPool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes deleteWorkerPool without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.protobuf.Empty()
-      );
-      client.innerApiCalls.deleteWorkerPool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteWorkerPool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.protobuf.IEmpty | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes deleteWorkerPool with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
-      );
-      const expectedOptions = {};
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteWorkerPool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteWorkerPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('updateWorkerPool', () => {
-    it('invokes updateWorkerPool without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.WorkerPool()
-      );
-      client.innerApiCalls.updateWorkerPool = stubSimpleCall(expectedResponse);
-      const [response] = await client.updateWorkerPool(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes updateWorkerPool without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.WorkerPool()
-      );
-      client.innerApiCalls.updateWorkerPool =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.updateWorkerPool(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IWorkerPool | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes updateWorkerPool with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
-      );
-      const expectedOptions = {};
-      const expectedError = new Error('expected');
-      client.innerApiCalls.updateWorkerPool = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.updateWorkerPool(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateWorkerPool as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('listWorkerPools', () => {
-    it('invokes listWorkerPools without error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsResponse()
-      );
-      client.innerApiCalls.listWorkerPools = stubSimpleCall(expectedResponse);
-      const [response] = await client.listWorkerPools(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkerPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listWorkerPools without error using callback', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      const expectedOptions = {};
-      const expectedResponse = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsResponse()
-      );
-      client.innerApiCalls.listWorkerPools =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listWorkerPools(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listWorkerPools as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes listWorkerPools with error', async () => {
-      const client = new cloudbuildModule.v1.CloudBuildClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
-      );
-      const expectedOptions = {};
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listWorkerPools = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.listWorkerPools(request), expectedError);
-      assert(
-        (client.innerApiCalls.listWorkerPools as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -2045,6 +1721,592 @@ describe('v1.CloudBuildClient', () => {
       );
       await assert.rejects(
         client.checkRunBuildTriggerProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('createWorkerPool', () => {
+    it('invokes createWorkerPool without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createWorkerPool =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.createWorkerPool(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createWorkerPool without error using callback', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.createWorkerPool =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createWorkerPool(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.devtools.cloudbuild.v1.IWorkerPool,
+              protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createWorkerPool with call error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createWorkerPool = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.createWorkerPool(request), expectedError);
+      assert(
+        (client.innerApiCalls.createWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createWorkerPool with LRO error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.CreateWorkerPoolRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createWorkerPool = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.createWorkerPool(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.createWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkCreateWorkerPoolProgress without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkCreateWorkerPoolProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkCreateWorkerPoolProgress with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkCreateWorkerPoolProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteWorkerPool', () => {
+    it('invokes deleteWorkerPool without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteWorkerPool =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteWorkerPool(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteWorkerPool without error using callback', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteWorkerPool =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteWorkerPool(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteWorkerPool with call error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.deleteWorkerPool(request), expectedError);
+      assert(
+        (client.innerApiCalls.deleteWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteWorkerPool with LRO error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteWorkerPool = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.deleteWorkerPool(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.deleteWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkDeleteWorkerPoolProgress without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkDeleteWorkerPoolProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteWorkerPoolProgress with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteWorkerPoolProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateWorkerPool', () => {
+    it('invokes updateWorkerPool without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
+      );
+      request.workerPool = {};
+      request.workerPool.name = '';
+      const expectedHeaderRequestParams = 'worker_pool.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateWorkerPool =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateWorkerPool(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateWorkerPool without error using callback', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
+      );
+      request.workerPool = {};
+      request.workerPool.name = '';
+      const expectedHeaderRequestParams = 'worker_pool.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateWorkerPool =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateWorkerPool(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.devtools.cloudbuild.v1.IWorkerPool,
+              protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateWorkerPool with call error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
+      );
+      request.workerPool = {};
+      request.workerPool.name = '';
+      const expectedHeaderRequestParams = 'worker_pool.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateWorkerPool = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.updateWorkerPool(request), expectedError);
+      assert(
+        (client.innerApiCalls.updateWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateWorkerPool with LRO error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolRequest()
+      );
+      request.workerPool = {};
+      request.workerPool.name = '';
+      const expectedHeaderRequestParams = 'worker_pool.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateWorkerPool = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.updateWorkerPool(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.updateWorkerPool as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkUpdateWorkerPoolProgress without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkUpdateWorkerPoolProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateWorkerPoolProgress with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateWorkerPoolProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -2659,6 +2921,312 @@ describe('v1.CloudBuildClient', () => {
     });
   });
 
+  describe('listWorkerPools', () => {
+    it('invokes listWorkerPools without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+      ];
+      client.innerApiCalls.listWorkerPools = stubSimpleCall(expectedResponse);
+      const [response] = await client.listWorkerPools(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listWorkerPools as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listWorkerPools without error using callback', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+      ];
+      client.innerApiCalls.listWorkerPools =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listWorkerPools(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.devtools.cloudbuild.v1.IWorkerPool[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listWorkerPools as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listWorkerPools with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listWorkerPools = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listWorkerPools(request), expectedError);
+      assert(
+        (client.innerApiCalls.listWorkerPools as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listWorkerPoolsStream without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+      ];
+      client.descriptors.page.listWorkerPools.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listWorkerPoolsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devtools.cloudbuild.v1.WorkerPool[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.devtools.cloudbuild.v1.WorkerPool) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listWorkerPools.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listWorkerPools, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listWorkerPools.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listWorkerPoolsStream with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listWorkerPools.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listWorkerPoolsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.devtools.cloudbuild.v1.WorkerPool[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.devtools.cloudbuild.v1.WorkerPool) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listWorkerPools.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listWorkerPools, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listWorkerPools.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listWorkerPools without error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+        generateSampleMessage(
+          new protos.google.devtools.cloudbuild.v1.WorkerPool()
+        ),
+      ];
+      client.descriptors.page.listWorkerPools.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.devtools.cloudbuild.v1.IWorkerPool[] = [];
+      const iterable = client.listWorkerPoolsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listWorkerPools.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listWorkerPools.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listWorkerPools with error', async () => {
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.devtools.cloudbuild.v1.ListWorkerPoolsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listWorkerPools.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listWorkerPoolsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.devtools.cloudbuild.v1.IWorkerPool[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listWorkerPools.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listWorkerPools.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('cryptoKey', () => {
       const fakePath = '/rendered/path/cryptoKey';
@@ -2730,6 +3298,55 @@ describe('v1.CloudBuildClient', () => {
         assert.strictEqual(result, 'keyValue');
         assert(
           (client.pathTemplates.cryptoKeyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('location', () => {
+      const fakePath = '/rendered/path/location';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.locationPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.locationPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('locationPath', () => {
+        const result = client.locationPath('projectValue', 'locationValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.locationPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromLocationName', () => {
+        const result = client.matchProjectFromLocationName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromLocationName', () => {
+        const result = client.matchLocationFromLocationName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.locationPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3244,6 +3861,70 @@ describe('v1.CloudBuildClient', () => {
         assert.strictEqual(result, 'topicValue');
         assert(
           (client.pathTemplates.topicPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('workerPool', () => {
+      const fakePath = '/rendered/path/workerPool';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        worker_pool: 'workerPoolValue',
+      };
+      const client = new cloudbuildModule.v1.CloudBuildClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.workerPoolPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.workerPoolPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('workerPoolPath', () => {
+        const result = client.workerPoolPath(
+          'projectValue',
+          'locationValue',
+          'workerPoolValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.workerPoolPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromWorkerPoolName', () => {
+        const result = client.matchProjectFromWorkerPoolName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromWorkerPoolName', () => {
+        const result = client.matchLocationFromWorkerPoolName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchWorkerPoolFromWorkerPoolName', () => {
+        const result = client.matchWorkerPoolFromWorkerPoolName(fakePath);
+        assert.strictEqual(result, 'workerPoolValue');
+        assert(
+          (client.pathTemplates.workerPoolPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

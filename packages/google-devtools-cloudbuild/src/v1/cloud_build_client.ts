@@ -170,6 +170,9 @@ export class CloudBuildClient {
       cryptoKeyPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}'
       ),
+      locationPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}'
+      ),
       projectPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}'
       ),
@@ -197,6 +200,9 @@ export class CloudBuildClient {
       topicPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/topics/{topic}'
       ),
+      workerPoolPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/workerPools/{worker_pool}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -212,6 +218,11 @@ export class CloudBuildClient {
         'pageToken',
         'nextPageToken',
         'triggers'
+      ),
+      listWorkerPools: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'workerPools'
       ),
     };
 
@@ -245,6 +256,24 @@ export class CloudBuildClient {
     const runBuildTriggerMetadata = protoFilesRoot.lookup(
       '.google.devtools.cloudbuild.v1.BuildOperationMetadata'
     ) as gax.protobuf.Type;
+    const createWorkerPoolResponse = protoFilesRoot.lookup(
+      '.google.devtools.cloudbuild.v1.WorkerPool'
+    ) as gax.protobuf.Type;
+    const createWorkerPoolMetadata = protoFilesRoot.lookup(
+      '.google.devtools.cloudbuild.v1.CreateWorkerPoolOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteWorkerPoolResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteWorkerPoolMetadata = protoFilesRoot.lookup(
+      '.google.devtools.cloudbuild.v1.DeleteWorkerPoolOperationMetadata'
+    ) as gax.protobuf.Type;
+    const updateWorkerPoolResponse = protoFilesRoot.lookup(
+      '.google.devtools.cloudbuild.v1.WorkerPool'
+    ) as gax.protobuf.Type;
+    const updateWorkerPoolMetadata = protoFilesRoot.lookup(
+      '.google.devtools.cloudbuild.v1.UpdateWorkerPoolOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createBuild: new this._gaxModule.LongrunningDescriptor(
@@ -261,6 +290,21 @@ export class CloudBuildClient {
         this.operationsClient,
         runBuildTriggerResponse.decode.bind(runBuildTriggerResponse),
         runBuildTriggerMetadata.decode.bind(runBuildTriggerMetadata)
+      ),
+      createWorkerPool: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createWorkerPoolResponse.decode.bind(createWorkerPoolResponse),
+        createWorkerPoolMetadata.decode.bind(createWorkerPoolMetadata)
+      ),
+      deleteWorkerPool: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteWorkerPoolResponse.decode.bind(deleteWorkerPoolResponse),
+        deleteWorkerPoolMetadata.decode.bind(deleteWorkerPoolMetadata)
+      ),
+      updateWorkerPool: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateWorkerPoolResponse.decode.bind(updateWorkerPoolResponse),
+        updateWorkerPoolMetadata.decode.bind(updateWorkerPoolMetadata)
       ),
     };
 
@@ -1128,95 +1172,6 @@ export class CloudBuildClient {
     this.initialize();
     return this.innerApiCalls.receiveTriggerWebhook(request, options, callback);
   }
-  createWorkerPool(
-    request?: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  createWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      | protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      | protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates a `WorkerPool` to run the builds, and returns the new worker pool.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   ID of the parent project.
-   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
-   *   `WorkerPool` resource to create.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createWorkerPool(request);
-   */
-  createWorkerPool(
-    request?: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.devtools.cloudbuild.v1.IWorkerPool,
-          | protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      | protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    this.initialize();
-    return this.innerApiCalls.createWorkerPool(request, options, callback);
-  }
   getWorkerPool(
     request?: protos.google.devtools.cloudbuild.v1.IGetWorkerPoolRequest,
     options?: CallOptions
@@ -1249,15 +1204,13 @@ export class CloudBuildClient {
     >
   ): void;
   /**
-   * Returns information about a `WorkerPool`.
-   *
-   * This API is experimental.
+   * Returns details of a `WorkerPool`.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
-   *   "projects/project-1/workerPools/workerpool-name"
+   *   Required. The name of the `WorkerPool` to retrieve.
+   *   Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1302,273 +1255,14 @@ export class CloudBuildClient {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
     this.initialize();
     return this.innerApiCalls.getWorkerPool(request, options, callback);
-  }
-  deleteWorkerPool(
-    request?: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  deleteWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
-    callback: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes a `WorkerPool` by its project ID and WorkerPool name.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
-   *   "projects/project-1/workerPools/workerpool-name"
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteWorkerPool(request);
-   */
-  deleteWorkerPool(
-    request?: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.protobuf.IEmpty,
-          | protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.protobuf.IEmpty,
-      | protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.protobuf.IEmpty,
-      protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    this.initialize();
-    return this.innerApiCalls.deleteWorkerPool(request, options, callback);
-  }
-  updateWorkerPool(
-    request?: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  updateWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      | protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updateWorkerPool(
-    request: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      | protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Update a `WorkerPool`.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   The field will contain name of the resource requested, for example:
-   *   "projects/project-1/workerPools/workerpool-name"
-   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
-   *   `WorkerPool` resource to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updateWorkerPool(request);
-   */
-  updateWorkerPool(
-    request?: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.devtools.cloudbuild.v1.IWorkerPool,
-          | protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      | protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v1.IWorkerPool,
-      protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    this.initialize();
-    return this.innerApiCalls.updateWorkerPool(request, options, callback);
-  }
-  listWorkerPools(
-    request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
-      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  listWorkerPools(
-    request: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
-      | protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listWorkerPools(
-    request: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
-    callback: Callback<
-      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
-      | protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * List project's `WorkerPools`.
-   *
-   * This API is experimental.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.parent
-   *   ID of the parent project.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [ListWorkerPoolsResponse]{@link google.devtools.cloudbuild.v1.ListWorkerPoolsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listWorkerPools(request);
-   */
-  listWorkerPools(
-    request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
-          | protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
-      | protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse,
-      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    this.initialize();
-    return this.innerApiCalls.listWorkerPools(request, options, callback);
   }
 
   createBuild(
@@ -2044,6 +1738,460 @@ export class CloudBuildClient {
       protos.google.devtools.cloudbuild.v1.BuildOperationMetadata
     >;
   }
+  createWorkerPool(
+    request?: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createWorkerPool(
+    request: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createWorkerPool(
+    request: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a `WorkerPool`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource where this worker pool will be created.
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
+   *   Required. `WorkerPool` resource to create.
+   * @param {string} request.workerPoolId
+   *   Required. Immutable. The ID to use for the `WorkerPool`, which will become
+   *   the final component of the resource name.
+   *
+   *   This value should be 1-63 characters, and valid characters
+   *   are /{@link 0-9|a-z}-/.
+   * @param {boolean} request.validateOnly
+   *   If set, validate the request and preview the response, but do not actually
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createWorkerPool(request);
+   * const [response] = await operation.promise();
+   */
+  createWorkerPool(
+    request?: protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IWorkerPool,
+            protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.ICreateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createWorkerPool(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createWorkerPool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateWorkerPoolProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkCreateWorkerPoolProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.devtools.cloudbuild.v1.WorkerPool,
+      protos.google.devtools.cloudbuild.v1.CreateWorkerPoolOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createWorkerPool,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.devtools.cloudbuild.v1.WorkerPool,
+      protos.google.devtools.cloudbuild.v1.CreateWorkerPoolOperationMetadata
+    >;
+  }
+  deleteWorkerPool(
+    request?: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteWorkerPool(
+    request: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteWorkerPool(
+    request: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a `WorkerPool`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the `WorkerPool` to delete.
+   *   Format:
+   *   `projects/{project}/locations/{workerPool}/workerPools/{workerPool}`.
+   * @param {string} request.etag
+   *   Optional. If this is provided, it must match the server's etag on the
+   *   workerpool for the request to be processed.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the `WorkerPool` is not found, the request will succeed
+   *   but no action will be taken on the server.
+   * @param {boolean} request.validateOnly
+   *   If set, validate the request and preview the response, but do not actually
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteWorkerPool(request);
+   * const [response] = await operation.promise();
+   */
+  deleteWorkerPool(
+    request?: protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.devtools.cloudbuild.v1.IDeleteWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteWorkerPool(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteWorkerPool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteWorkerPoolProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteWorkerPoolProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteWorkerPool,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.devtools.cloudbuild.v1.DeleteWorkerPoolOperationMetadata
+    >;
+  }
+  updateWorkerPool(
+    request?: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateWorkerPool(
+    request: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateWorkerPool(
+    request: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates a `WorkerPool`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.devtools.cloudbuild.v1.WorkerPool} request.workerPool
+   *   Required. The `WorkerPool` to update.
+   *
+   *   The `name` field is used to identify the `WorkerPool` to update.
+   *   Format: `projects/{project}/locations/{location}/workerPools/{workerPool}`.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   A mask specifying which fields in `worker_pool` to update.
+   * @param {boolean} request.validateOnly
+   *   If set, validate the request and preview the response, but do not actually
+   *   post it.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.updateWorkerPool(request);
+   * const [response] = await operation.promise();
+   */
+  updateWorkerPool(
+    request?: protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.devtools.cloudbuild.v1.IWorkerPool,
+            protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.devtools.cloudbuild.v1.IWorkerPool,
+        protos.google.devtools.cloudbuild.v1.IUpdateWorkerPoolOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'worker_pool.name': request.workerPool!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateWorkerPool(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `updateWorkerPool()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpdateWorkerPoolProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkUpdateWorkerPoolProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.devtools.cloudbuild.v1.WorkerPool,
+      protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateWorkerPool,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.devtools.cloudbuild.v1.WorkerPool,
+      protos.google.devtools.cloudbuild.v1.UpdateWorkerPoolOperationMetadata
+    >;
+  }
   listBuilds(
     request?: protos.google.devtools.cloudbuild.v1.IListBuildsRequest,
     options?: CallOptions
@@ -2485,6 +2633,206 @@ export class CloudBuildClient {
       callSettings
     ) as AsyncIterable<protos.google.devtools.cloudbuild.v1.IBuildTrigger>;
   }
+  listWorkerPools(
+    request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.devtools.cloudbuild.v1.IWorkerPool[],
+      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest | null,
+      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse
+    ]
+  >;
+  listWorkerPools(
+    request: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+      | protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse
+      | null
+      | undefined,
+      protos.google.devtools.cloudbuild.v1.IWorkerPool
+    >
+  ): void;
+  listWorkerPools(
+    request: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+    callback: PaginationCallback<
+      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+      | protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse
+      | null
+      | undefined,
+      protos.google.devtools.cloudbuild.v1.IWorkerPool
+    >
+  ): void;
+  /**
+   * Lists `WorkerPool`s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the collection of `WorkerPools`.
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} request.pageSize
+   *   The maximum number of `WorkerPool`s to return. The service may return
+   *   fewer than this value. If omitted, the server will use a sensible default.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkerPools` call. Provide this
+   *   to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listWorkerPoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listWorkerPools(
+    request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+          | protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse
+          | null
+          | undefined,
+          protos.google.devtools.cloudbuild.v1.IWorkerPool
+        >,
+    callback?: PaginationCallback<
+      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+      | protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse
+      | null
+      | undefined,
+      protos.google.devtools.cloudbuild.v1.IWorkerPool
+    >
+  ): Promise<
+    [
+      protos.google.devtools.cloudbuild.v1.IWorkerPool[],
+      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest | null,
+      protos.google.devtools.cloudbuild.v1.IListWorkerPoolsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listWorkerPools(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the collection of `WorkerPools`.
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} request.pageSize
+   *   The maximum number of `WorkerPool`s to return. The service may return
+   *   fewer than this value. If omitted, the server will use a sensible default.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkerPools` call. Provide this
+   *   to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listWorkerPoolsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listWorkerPoolsStream(
+    request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listWorkerPools.createStream(
+      this.innerApiCalls.listWorkerPools as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listWorkerPools`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the collection of `WorkerPools`.
+   *   Format: `projects/{project}/locations/{location}`.
+   * @param {number} request.pageSize
+   *   The maximum number of `WorkerPool`s to return. The service may return
+   *   fewer than this value. If omitted, the server will use a sensible default.
+   * @param {string} request.pageToken
+   *   A page token, received from a previous `ListWorkerPools` call. Provide this
+   *   to retrieve the subsequent page.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [WorkerPool]{@link google.devtools.cloudbuild.v1.WorkerPool}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listWorkerPoolsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listWorkerPoolsAsync(
+    request?: protos.google.devtools.cloudbuild.v1.IListWorkerPoolsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.devtools.cloudbuild.v1.IWorkerPool> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listWorkerPools.asyncIterate(
+      this.innerApiCalls['listWorkerPools'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.devtools.cloudbuild.v1.IWorkerPool>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -2557,6 +2905,42 @@ export class CloudBuildClient {
    */
   matchKeyFromCryptoKeyName(cryptoKeyName: string) {
     return this.pathTemplates.cryptoKeyPathTemplate.match(cryptoKeyName).key;
+  }
+
+  /**
+   * Return a fully-qualified location resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  locationPath(project: string, location: string) {
+    return this.pathTemplates.locationPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).project;
+  }
+
+  /**
+   * Parse the location from Location resource.
+   *
+   * @param {string} locationName
+   *   A fully-qualified path representing Location resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLocationName(locationName: string) {
+    return this.pathTemplates.locationPathTemplate.match(locationName).location;
   }
 
   /**
@@ -2944,6 +3328,58 @@ export class CloudBuildClient {
    */
   matchTopicFromTopicName(topicName: string) {
     return this.pathTemplates.topicPathTemplate.match(topicName).topic;
+  }
+
+  /**
+   * Return a fully-qualified workerPool resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} worker_pool
+   * @returns {string} Resource name string.
+   */
+  workerPoolPath(project: string, location: string, workerPool: string) {
+    return this.pathTemplates.workerPoolPathTemplate.render({
+      project: project,
+      location: location,
+      worker_pool: workerPool,
+    });
+  }
+
+  /**
+   * Parse the project from WorkerPool resource.
+   *
+   * @param {string} workerPoolName
+   *   A fully-qualified path representing WorkerPool resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromWorkerPoolName(workerPoolName: string) {
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName)
+      .project;
+  }
+
+  /**
+   * Parse the location from WorkerPool resource.
+   *
+   * @param {string} workerPoolName
+   *   A fully-qualified path representing WorkerPool resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromWorkerPoolName(workerPoolName: string) {
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName)
+      .location;
+  }
+
+  /**
+   * Parse the worker_pool from WorkerPool resource.
+   *
+   * @param {string} workerPoolName
+   *   A fully-qualified path representing WorkerPool resource.
+   * @returns {string} A string representing the worker_pool.
+   */
+  matchWorkerPoolFromWorkerPoolName(workerPoolName: string) {
+    return this.pathTemplates.workerPoolPathTemplate.match(workerPoolName)
+      .worker_pool;
   }
 
   /**

@@ -338,23 +338,121 @@
                         },
                         "CreateWorkerPool": {
                           "requestType": "CreateWorkerPoolRequest",
-                          "responseType": "WorkerPool"
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/workerPools",
+                            "(google.api.http).body": "worker_pool",
+                            "(google.api.method_signature)": "parent,worker_pool,worker_pool_id",
+                            "(google.longrunning.operation_info).response_type": "WorkerPool",
+                            "(google.longrunning.operation_info).metadata_type": "CreateWorkerPoolOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/workerPools",
+                                "body": "worker_pool"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,worker_pool,worker_pool_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkerPool",
+                                "metadata_type": "CreateWorkerPoolOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "GetWorkerPool": {
                           "requestType": "GetWorkerPoolRequest",
-                          "responseType": "WorkerPool"
+                          "responseType": "WorkerPool",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/workerPools/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/workerPools/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
                         },
                         "DeleteWorkerPool": {
                           "requestType": "DeleteWorkerPoolRequest",
-                          "responseType": "google.protobuf.Empty"
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/workerPools/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteWorkerPoolOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/workerPools/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteWorkerPoolOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "UpdateWorkerPool": {
                           "requestType": "UpdateWorkerPoolRequest",
-                          "responseType": "WorkerPool"
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{worker_pool.name=projects/*/locations/*/workerPools/*}",
+                            "(google.api.http).body": "worker_pool",
+                            "(google.api.method_signature)": "worker_pool,update_mask",
+                            "(google.longrunning.operation_info).response_type": "WorkerPool",
+                            "(google.longrunning.operation_info).metadata_type": "UpdateWorkerPoolOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{worker_pool.name=projects/*/locations/*/workerPools/*}",
+                                "body": "worker_pool"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "worker_pool,update_mask"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "WorkerPool",
+                                "metadata_type": "UpdateWorkerPoolOperationMetadata"
+                              }
+                            }
+                          ]
                         },
                         "ListWorkerPools": {
                           "requestType": "ListWorkerPoolsRequest",
-                          "responseType": "ListWorkerPoolsResponse"
+                          "responseType": "ListWorkerPoolsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/workerPools",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/workerPools"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
                         }
                       }
                     },
@@ -1590,7 +1688,17 @@
                         },
                         "workerPool": {
                           "type": "string",
-                          "id": 7
+                          "id": 7,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "pool": {
+                          "type": "PoolOption",
+                          "id": 19,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         },
                         "logging": {
                           "type": "LoggingMode",
@@ -1613,6 +1721,17 @@
                         }
                       },
                       "nested": {
+                        "PoolOption": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                              }
+                            }
+                          }
+                        },
                         "VerifyOption": {
                           "values": {
                             "NOT_VERIFIED": 0,
@@ -1681,62 +1800,88 @@
                       "fields": {}
                     },
                     "WorkerPool": {
+                      "options": {
+                        "(google.api.resource).type": "cloudbuild.googleapis.com/WorkerPool",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/workerPools/{worker_pool}",
+                        "(google.api.resource).plural": "workerPools",
+                        "(google.api.resource).singular": "workerPool",
+                        "(google.api.resource).style": "DECLARATIVE_FRIENDLY"
+                      },
+                      "oneofs": {
+                        "config": {
+                          "oneof": [
+                            "privatePoolV1Config"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 14
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
-                        "projectId": {
+                        "displayName": {
                           "type": "string",
                           "id": 2
                         },
-                        "serviceAccountEmail": {
+                        "uid": {
                           "type": "string",
-                          "id": 3
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
-                        "workerCount": {
-                          "type": "int64",
+                        "annotations": {
+                          "keyType": "string",
+                          "type": "string",
                           "id": 4
-                        },
-                        "workerConfig": {
-                          "type": "WorkerConfig",
-                          "id": 16
-                        },
-                        "regions": {
-                          "rule": "repeated",
-                          "type": "Region",
-                          "id": 9
                         },
                         "createTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 11
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
-                          "id": 17
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "deleteTime": {
                           "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "privatePoolV1Config": {
+                          "type": "PrivatePoolV1Config",
                           "id": 12
                         },
-                        "status": {
-                          "type": "Status",
-                          "id": 13
+                        "etag": {
+                          "type": "string",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
-                        "Region": {
+                        "State": {
                           "values": {
-                            "REGION_UNSPECIFIED": 0,
-                            "US_CENTRAL1": 1,
-                            "US_WEST1": 2,
-                            "US_EAST1": 3,
-                            "US_EAST4": 4
-                          }
-                        },
-                        "Status": {
-                          "values": {
-                            "STATUS_UNSPECIFIED": 0,
+                            "STATE_UNSPECIFIED": 0,
                             "CREATING": 1,
                             "RUNNING": 2,
                             "DELETING": 3,
@@ -1745,39 +1890,54 @@
                         }
                       }
                     },
-                    "WorkerConfig": {
+                    "PrivatePoolV1Config": {
                       "fields": {
-                        "machineType": {
-                          "type": "string",
+                        "workerConfig": {
+                          "type": "WorkerConfig",
                           "id": 1
                         },
-                        "diskSizeGb": {
-                          "type": "int64",
+                        "networkConfig": {
+                          "type": "NetworkConfig",
                           "id": 2
-                        },
-                        "network": {
-                          "type": "Network",
-                          "id": 3
-                        },
-                        "tag": {
-                          "type": "string",
-                          "id": 4
                         }
-                      }
-                    },
-                    "Network": {
-                      "fields": {
-                        "projectId": {
-                          "type": "string",
-                          "id": 1
+                      },
+                      "nested": {
+                        "WorkerConfig": {
+                          "fields": {
+                            "machineType": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "diskSizeGb": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
                         },
-                        "network": {
-                          "type": "string",
-                          "id": 2
-                        },
-                        "subnetwork": {
-                          "type": "string",
-                          "id": 3
+                        "NetworkConfig": {
+                          "fields": {
+                            "peeredNetwork": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                              }
+                            },
+                            "egressOption": {
+                              "type": "EgressOption",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "EgressOption": {
+                              "values": {
+                                "EGRESS_OPTION_UNSPECIFIED": 0,
+                                "NO_PUBLIC_EGRESS": 1,
+                                "PUBLIC_EGRESS": 2
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -1785,11 +1945,29 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
                         },
                         "workerPool": {
                           "type": "WorkerPool",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "workerPoolId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },
@@ -1797,7 +1975,11 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                          }
                         }
                       }
                     },
@@ -1805,19 +1987,42 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                          }
+                        },
+                        "etag": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "allowMissing": {
+                          "type": "bool",
+                          "id": 3
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },
                     "UpdateWorkerPoolRequest": {
                       "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 2
-                        },
                         "workerPool": {
                           "type": "WorkerPool",
-                          "id": 3
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4
                         }
                       }
                     },
@@ -1825,7 +2030,19 @@
                       "fields": {
                         "parent": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -1835,6 +2052,67 @@
                           "rule": "repeated",
                           "type": "WorkerPool",
                           "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CreateWorkerPoolOperationMetadata": {
+                      "fields": {
+                        "workerPool": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "completeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateWorkerPoolOperationMetadata": {
+                      "fields": {
+                        "workerPool": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "completeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeleteWorkerPoolOperationMetadata": {
+                      "fields": {
+                        "workerPool": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudbuild.googleapis.com/WorkerPool"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "completeTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3
                         }
                       }
                     }
