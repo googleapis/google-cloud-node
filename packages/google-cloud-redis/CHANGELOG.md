@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [2.2.5](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.4...v2.2.5) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#500](https://www.github.com/googleapis/nodejs-redis/issues/500)) ([e19ae5a](https://www.github.com/googleapis/nodejs-redis/commit/e19ae5a3371fba34b0a59f769609e64582e00da4))
+
 ### [2.2.4](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.3...v2.2.4) (2021-07-12)
 
 
