@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [4.2.8](https://www.github.com/googleapis/nodejs-language/compare/v4.2.7...v4.2.8) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#600](https://www.github.com/googleapis/nodejs-language/issues/600)) ([9f31d3f](https://www.github.com/googleapis/nodejs-language/commit/9f31d3f510c1628d610633d4ec749abdf66d73f3))
+
 ### [4.2.7](https://www.github.com/googleapis/nodejs-language/compare/v4.2.6...v4.2.7) (2021-07-12)
 
 
