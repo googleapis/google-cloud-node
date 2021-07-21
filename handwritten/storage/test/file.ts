@@ -14,6 +14,7 @@
 
 import {
   ApiError,
+  BodyResponseCallback,
   DecorateRequestOptions,
   ServiceObject,
   ServiceObjectConfig,
@@ -28,7 +29,6 @@ import * as dateFormat from 'date-and-time';
 import * as duplexify from 'duplexify';
 import * as extend from 'extend';
 import * as fs from 'fs';
-import * as gaxios from 'gaxios';
 import * as os from 'os';
 import * as path from 'path';
 import * as proxyquire from 'proxyquire';
@@ -74,8 +74,12 @@ const fakeUtil = Object.assign({}, util, {
   makeWritableStream(...args: Array<{}>) {
     (makeWritableStreamOverride || util.makeWritableStream)(...args);
   },
-  shouldRetryRequest(err: HTTPError) {
-    return err.code === 500;
+  makeRequest(
+    reqOpts: DecorateRequestOptions,
+    config: object,
+    callback: BodyResponseCallback
+  ) {
+    callback(null);
   },
 });
 
@@ -228,6 +232,16 @@ describe('File', () => {
       },
       bucket(name: string) {
         return new Bucket(this, name);
+      },
+      retryOptions: {
+        autoRetry: true,
+        maxRetries: 3,
+        retryDelayMultipier: 2,
+        totalTimeout: 600,
+        maxRetryDelay: 60,
+        retryableErrorFn: (err: HTTPError) => {
+          return err.code === 500;
+        },
       },
     };
 
@@ -1663,6 +1677,13 @@ describe('File', () => {
         private: 'private',
         public: 'public',
         userProject: 'user-project-id',
+        retryOptions: {
+          autoRetry: true,
+          maxRetries: 3,
+          maxRetryDelay: 60,
+          retryDelayMultipier: 2,
+          totalTimeout: 600,
+        },
       };
 
       file.generation = 3;
@@ -1689,6 +1710,26 @@ describe('File', () => {
           assert.strictEqual(opts.private, options.private);
           assert.strictEqual(opts.public, options.public);
           assert.strictEqual(opts.userProject, options.userProject);
+          assert.strictEqual(
+            opts.retryOptions.autoRetry,
+            options.retryOptions.autoRetry
+          );
+          assert.strictEqual(
+            opts.retryOptions.maxRetries,
+            options.retryOptions.maxRetries
+          );
+          assert.strictEqual(
+            opts.retryOptions.maxRetryDelay,
+            options.retryOptions.maxRetryDelay
+          );
+          assert.strictEqual(
+            opts.retryOptions.retryDelayMultipier,
+            options.retryOptions.retryDelayMultipier
+          );
+          assert.strictEqual(
+            opts.retryOptions.totalTimeout,
+            options.retryOptions.totalTimeout
+          );
 
           callback();
         },
@@ -2293,6 +2334,7 @@ describe('File', () => {
           assert.strictEqual(opts.bucket, file.bucket.name);
           assert.strictEqual(opts.file, file.name);
           assert.strictEqual(opts.generation, file.generation);
+          assert.strictEqual(opts.retryOptions, file.storage.retryOptions);
 
           return {
             deleteConfig: () => {
@@ -3612,8 +3654,7 @@ describe('File', () => {
     afterEach(() => sandbox.restore());
 
     it('should execute callback with `true` in response', done => {
-      sandbox.stub(gaxios, 'request').resolves();
-      file.isPublic((err: gaxios.GaxiosError, resp: boolean) => {
+      file.isPublic((err: ApiError, resp: boolean) => {
         assert.ifError(err);
         assert.strictEqual(resp, true);
         done();
@@ -3621,8 +3662,16 @@ describe('File', () => {
     });
 
     it('should execute callback with `false` in response', done => {
-      sandbox.stub(gaxios, 'request').rejects({code: '403'});
-      file.isPublic((err: gaxios.GaxiosError, resp: boolean) => {
+      fakeUtil.makeRequest = function (
+        reqOpts: DecorateRequestOptions,
+        config: object,
+        callback: BodyResponseCallback
+      ) {
+        const error = new ApiError('Permission Denied.');
+        error.code = 403;
+        callback(error);
+      };
+      file.isPublic((err: ApiError, resp: boolean) => {
         assert.ifError(err);
         assert.strictEqual(resp, false);
         done();
@@ -3630,32 +3679,52 @@ describe('File', () => {
     });
 
     it('should propagate non-403 errors to user', done => {
-      const error = {code: '400'};
-      sandbox.stub(gaxios, 'request').rejects(error as gaxios.GaxiosError);
-      file.isPublic((err: gaxios.GaxiosError) => {
+      const error = new ApiError('400 Error.');
+      error.code = 400;
+      fakeUtil.makeRequest = function (
+        reqOpts: DecorateRequestOptions,
+        config: object,
+        callback: BodyResponseCallback
+      ) {
+        callback(error);
+      };
+      file.isPublic((err: ApiError) => {
         assert.strictEqual(err, error);
         done();
       });
     });
 
     it('should correctly send a HEAD request', done => {
-      const spy = sandbox.spy(gaxios, 'request');
-      file.isPublic((err: gaxios.GaxiosError) => {
+      fakeUtil.makeRequest = function (
+        reqOpts: DecorateRequestOptions,
+        config: object,
+        callback: BodyResponseCallback
+      ) {
+        assert.strictEqual(reqOpts.method, 'HEAD');
+        callback(null);
+      };
+      file.isPublic((err: ApiError) => {
         assert.ifError(err);
-        assert.strictEqual(spy.calledWithMatch({method: 'HEAD'}), true);
         done();
       });
     });
 
     it('should correctly format URL in the request', done => {
       file = new File(BUCKET, 'my#file$.png');
-      const expecterURL = `http://${
+      const expectedURL = `http://${
         BUCKET.name
       }.storage.googleapis.com/${encodeURIComponent(file.name)}`;
-      const spy = sandbox.spy(gaxios, 'request');
-      file.isPublic((err: gaxios.GaxiosError) => {
+
+      fakeUtil.makeRequest = function (
+        reqOpts: DecorateRequestOptions,
+        config: object,
+        callback: BodyResponseCallback
+      ) {
+        assert.strictEqual(reqOpts.uri, expectedURL);
+        callback(null);
+      };
+      file.isPublic((err: ApiError) => {
         assert.ifError(err);
-        assert.strictEqual(spy.calledWithMatch({url: expecterURL}), true);
         done();
       });
     });
@@ -4324,13 +4393,13 @@ describe('File', () => {
         file.kmsKeyName = 'kms-key-name';
 
         const customRequestInterceptors = [
-          (reqOpts: gaxios.GaxiosOptions) => {
+          (reqOpts: DecorateRequestOptions) => {
             reqOpts.headers = Object.assign({}, reqOpts.headers, {
               a: 'b',
             });
             return reqOpts;
           },
-          (reqOpts: gaxios.GaxiosOptions) => {
+          (reqOpts: DecorateRequestOptions) => {
             reqOpts.headers = Object.assign({}, reqOpts.headers, {
               c: 'd',
             });
@@ -4368,6 +4437,7 @@ describe('File', () => {
             assert.strictEqual(opts.public, options.public);
             assert.strictEqual(opts.uri, options.uri);
             assert.strictEqual(opts.userProject, options.userProject);
+            assert.strictEqual(opts.retryOptions, storage.retryOptions);
 
             setImmediate(done);
             return new PassThrough();

@@ -12,10 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Metadata, Service, ServiceOptions} from '@google-cloud/common';
+import {
+  ApiError,
+  Metadata,
+  Service,
+  ServiceOptions,
+} from '@google-cloud/common';
 import {paginator} from '@google-cloud/paginator';
 import {promisifyAll} from '@google-cloud/promisify';
-
 import arrify = require('arrify');
 import {Readable} from 'stream';
 
@@ -45,9 +49,19 @@ export interface CreateBucketQuery {
   userProject: string;
 }
 
-export interface StorageOptions extends ServiceOptions {
+export interface RetryOptions {
+  retryDelayMultiplier?: number;
+  totalTimeout?: number;
+  maxRetryDelay?: number;
   autoRetry?: boolean;
   maxRetries?: number;
+  retryableErrorFn?: (err: ApiError) => boolean;
+}
+
+export interface StorageOptions extends ServiceOptions {
+  retryOptions?: RetryOptions;
+  autoRetry?: boolean; //Deprecated. Use retryOptions instead.
+  maxRetries?: number; //Deprecated. Use retryOptions instead.
   /**
    * **This option is deprecated.**
    * @todo Remove in next major release.
@@ -162,6 +176,77 @@ export interface GetHmacKeysCallback {
 export type GetHmacKeysResponse = [HmacKey[]];
 
 export const PROTOCOL_REGEX = /^(\w*):\/\//;
+
+/**
+ * Default behavior: Automatically retry retriable server errors.
+ *
+ * @const {boolean}
+ * @private
+ */
+const AUTO_RETRY_DEFAULT = true;
+
+/**
+ * Default behavior: Only attempt to retry retriable errors 3 times.
+ *
+ * @const {number}
+ * @private
+ */
+const MAX_RETRY_DEFAULT = 3;
+
+/**
+ * Default behavior: Wait twice as long as previous retry before retrying.
+ *
+ * @const {number}
+ * @private
+ */
+const RETRY_DELAY_MULTIPLIER_DEFAULT = 2;
+
+/**
+ * Default behavior: If the operation doesn't succeed after 600 seconds,
+ *  stop retrying.
+ *
+ * @const {number}
+ * @private
+ */
+const TOTAL_TIMEOUT_DEFAULT = 600;
+
+/**
+ * Default behavior: Wait no more than 64 seconds between retries.
+ *
+ * @const {number}
+ * @private
+ */
+const MAX_RETRY_DELAY_DEFAULT = 64;
+
+/**
+ * Returns true if the API request should be retried, given the error that was
+ * given the first time the request was attempted.
+ * @const
+ * @private
+ * @param {error} err - The API error to check if it is appropriate to retry.
+ * @return {boolean} True if the API request should be retried, false otherwise.
+ */
+const RETRYABLE_ERR_FN_DEFAULT = function (err?: ApiError) {
+  if (err) {
+    if ([408, 429, 500, 502, 503, 504].indexOf(err.code!) !== -1) {
+      return true;
+    }
+
+    if (err.errors) {
+      for (const e of err.errors) {
+        const reason = e.reason?.toLowerCase();
+        if (
+          (reason && reason.includes('eai_again')) || //DNS lookup error
+          reason === 'connection reset by peer' ||
+          reason === 'unexpected connection closure'
+        ) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+};
 
 /*! Developer Documentation
  *
@@ -350,6 +435,8 @@ export class Storage extends Service {
   getBucketsStream: () => Readable;
   getHmacKeysStream: () => Readable;
 
+  retryOptions: RetryOptions;
+
   /**
    * @typedef {object} StorageOptions
    * @property {string} [projectId] The project ID from the Google Developer's
@@ -368,11 +455,26 @@ export class Storage extends Service {
    * @property {object} [credentials] Credentials object.
    * @property {string} [credentials.client_email]
    * @property {string} [credentials.private_key]
-   * @property {boolean} [autoRetry=true] Automatically retry requests if the
+   * @property {object} [retryOptions] Options for customizing retries. Retriable server errors
+   *     will be retried with exponential delay between them dictated by the formula
+   *     max(maxRetryDelay, retryDelayMultiplier*retryNumber) until maxRetries or totalTimeout
+   *     has been reached. Retries will only happen if autoRetry is set to true.
+   * @property {boolean} [retryOptions.autoRetry=true] Automatically retry requests if the
    *     response is related to rate limits or certain intermittent server
    * errors. We will exponentially backoff subsequent requests by default.
-   * @property {number} [maxRetries=3] Maximum number of automatic retries
+   * @property {number} [retryOptions.retryDelayMultiplier = 2] the multiplier by which to
+   *   increase the delay time between the completion of failed requests, and the
+   *   initiation of the subsequent retrying request.
+   * @property {number} [retryOptions.totalTimeout = 600] The total time, starting from
+   *  when the initial request is sent, after which an error will
+   *   be returned, regardless of the retrying attempts made meanwhile.
+   * @property {number} [retryOptions.maxRetryDelay = 64] The maximum delay time between requests.
+   *   When this value is reached, ``retryDelayMultiplier`` will no longer be used to
+   *   increase delay time.
+   * @property {number} [retryOptions.maxRetries=3] Maximum number of automatic retries
    *     attempted before returning the error.
+   * @property {function} [retryOptions.retryableErrorFn] Function that returns true if a given
+   *     error should be retried and false otherwise.
    * @property {string} [userAgent] The value to be prepended to the User-Agent
    *     header in API requests.
    */
@@ -413,10 +515,49 @@ export class Storage extends Service {
     // Note: EMULATOR_HOST is an experimental configuration variable. Use apiEndpoint instead.
     const baseUrl = EMULATOR_HOST || `${options.apiEndpoint}/storage/v1`;
 
+    let autoRetryValue = AUTO_RETRY_DEFAULT;
+    if (
+      options.autoRetry !== undefined &&
+      options.retryOptions?.autoRetry !== undefined
+    ) {
+      throw new ApiError(
+        'autoRetry is deprecated. Use retryOptions.autoRetry instead.'
+      );
+    } else if (options.autoRetry !== undefined) {
+      autoRetryValue = options.autoRetry;
+    } else if (options.retryOptions?.autoRetry !== undefined) {
+      autoRetryValue = options.retryOptions.autoRetry;
+    }
+
+    let maxRetryValue = MAX_RETRY_DEFAULT;
+    if (options.maxRetries && options.retryOptions?.maxRetries) {
+      throw new ApiError(
+        'maxRetries is deprecated. Use retryOptions.maxRetries instead.'
+      );
+    } else if (options.maxRetries) {
+      maxRetryValue = options.maxRetries;
+    } else if (options.retryOptions?.maxRetries) {
+      maxRetryValue = options.retryOptions.maxRetries;
+    }
+
     const config = {
       apiEndpoint: options.apiEndpoint!,
-      autoRetry: options.autoRetry,
-      maxRetries: options.maxRetries,
+      retryOptions: {
+        autoRetry: autoRetryValue,
+        maxRetries: maxRetryValue,
+        retryDelayMultiplier: options.retryOptions?.retryDelayMultiplier
+          ? options.retryOptions?.retryDelayMultiplier
+          : RETRY_DELAY_MULTIPLIER_DEFAULT,
+        totalTimeout: options.retryOptions?.totalTimeout
+          ? options.retryOptions?.totalTimeout
+          : TOTAL_TIMEOUT_DEFAULT,
+        maxRetryDelay: options.retryOptions?.maxRetryDelay
+          ? options.retryOptions?.maxRetryDelay
+          : MAX_RETRY_DELAY_DEFAULT,
+        retryableErrorFn: options.retryOptions?.retryableErrorFn
+          ? options.retryOptions?.retryableErrorFn
+          : RETRYABLE_ERR_FN_DEFAULT,
+      },
       baseUrl,
       customEndpoint,
       projectIdRequired: false,
@@ -437,6 +578,8 @@ export class Storage extends Service {
      * @see Storage.acl
      */
     this.acl = Storage.acl;
+
+    this.retryOptions = config.retryOptions;
 
     this.getBucketsStream = paginator.streamify('getBuckets');
     this.getHmacKeysStream = paginator.streamify('getHmacKeys');

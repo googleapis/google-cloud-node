@@ -63,7 +63,6 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const duplexify: DuplexifyConstructor = require('duplexify');
 import {normalize, objectKeyToLowercase, unicodeJSONStringify} from './util';
-import {GaxiosError, Headers, request as gaxiosRequest} from 'gaxios';
 import retry = require('async-retry');
 
 export type GetExpirationDateResponse = [Date];
@@ -1254,6 +1253,10 @@ class File extends ServiceObject<File> {
         query.userProject = options.userProject;
       }
 
+      interface Headers {
+        [index: string]: string;
+      }
+
       const headers = {
         'Accept-Encoding': 'gzip',
         'Cache-Control': 'no-store',
@@ -1560,6 +1563,7 @@ class File extends ServiceObject<File> {
         private: options.private,
         public: options.public,
         userProject: options.userProject || this.userProject,
+        retryOptions: this.storage.retryOptions,
       },
       callback!
     );
@@ -1962,6 +1966,7 @@ class File extends ServiceObject<File> {
       bucket: this.bucket.name,
       file: this.name,
       generation: this.generation,
+      retryOptions: this.storage.retryOptions,
     });
     uploadStream.deleteConfig();
   }
@@ -2993,18 +2998,26 @@ class File extends ServiceObject<File> {
    */
 
   isPublic(callback?: IsPublicCallback): Promise<IsPublicResponse> | void {
-    gaxiosRequest({
-      method: 'HEAD',
-      url: `http://${
-        this.bucket.name
-      }.storage.googleapis.com/${encodeURIComponent(this.name)}`,
-    }).then(
-      () => callback!(null, true),
-      (err: GaxiosError) => {
-        if (err.code === '403') {
-          callback!(null, false);
+    util.makeRequest(
+      {
+        method: 'HEAD',
+        uri: `http://${
+          this.bucket.name
+        }.storage.googleapis.com/${encodeURIComponent(this.name)}`,
+      },
+      {
+        retryOptions: this.storage.retryOptions,
+      },
+      (err: Error | ApiError | null) => {
+        if (err) {
+          const apiError = err as ApiError;
+          if (apiError.code === 403) {
+            callback!(null, false);
+          } else {
+            callback!(err);
+          }
         } else {
-          callback!(err);
+          callback!(null, true);
         }
       }
     );
@@ -3611,7 +3624,11 @@ class File extends ServiceObject<File> {
         await new Promise<void>((resolve, reject) => {
           const writable = this.createWriteStream(options)
             .on('error', err => {
-              if (isMultipart && util.shouldRetryRequest(err)) {
+              if (
+                isMultipart &&
+                this.storage.retryOptions.autoRetry &&
+                this.storage.retryOptions.retryableErrorFn!(err)
+              ) {
                 return reject(err);
               } else {
                 return bail(err);
@@ -3627,7 +3644,10 @@ class File extends ServiceObject<File> {
         });
       },
       {
-        retries: 3,
+        retries: this.storage.retryOptions.maxRetries,
+        factor: this.storage.retryOptions.retryDelayMultiplier,
+        maxTimeout: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
+        maxRetryTime: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
       }
     );
     if (!callback) {
@@ -3793,6 +3813,7 @@ class File extends ServiceObject<File> {
       public: options.public,
       uri: options.uri,
       userProject: options.userProject || this.userProject,
+      retryOptions: this.storage.retryOptions,
     });
 
     uploadStream
