@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.8](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.7...v1.1.8) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#93](https://www.github.com/googleapis/nodejs-functions/issues/93)) ([6125f4f](https://www.github.com/googleapis/nodejs-functions/commit/6125f4fe7846f67e4ad436b63d4914a2175f9672))
+
 ### [1.1.7](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.6...v1.1.7) (2021-07-12)
 
 
