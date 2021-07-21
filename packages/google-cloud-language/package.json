@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/language",
   "description": "Google Cloud Natural Language API client for Node.js",
-  "version": "4.2.7",
+  "version": "4.2.8",
   "license": "Apache-2.0",
   "author": "Google Inc",
   "engines": {
