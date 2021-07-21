@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.4...v1.0.5) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#67](https://www.github.com/googleapis/nodejs-appengine-admin/issues/67)) ([e4c206c](https://www.github.com/googleapis/nodejs-appengine-admin/commit/e4c206c55eef567387bdf8f9c7a342986b85c146))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.3...v1.0.4) (2021-07-12)
 
 
