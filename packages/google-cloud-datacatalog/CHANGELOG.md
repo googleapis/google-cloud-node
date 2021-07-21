@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [2.3.4](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.3.3...v2.3.4) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#272](https://www.github.com/googleapis/nodejs-datacatalog/issues/272)) ([62ffcc6](https://www.github.com/googleapis/nodejs-datacatalog/commit/62ffcc6fd9a5b68936a57c1ac5a041527e38fec3))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#274](https://www.github.com/googleapis/nodejs-datacatalog/issues/274)) ([3ebafcd](https://www.github.com/googleapis/nodejs-datacatalog/commit/3ebafcdbfaf50ff96f9d828e33cc355af33a7000))
+
 ### [2.3.3](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.3.2...v2.3.3) (2021-06-30)
 
 
