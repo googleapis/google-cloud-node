@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [2.4.3](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.2...v2.4.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#526](https://www.github.com/googleapis/nodejs-automl/issues/526)) ([8911d45](https://www.github.com/googleapis/nodejs-automl/commit/8911d457513f2c0c9cca6d2b7473b314ac3a4efd))
+* **deps:** require google-gax v2.17.0 ([#524](https://www.github.com/googleapis/nodejs-automl/issues/524)) ([5863c54](https://www.github.com/googleapis/nodejs-automl/commit/5863c5440bf94fa2fd986b5c8f5265b86fd4497e))
+* make request optional in all cases ([#521](https://www.github.com/googleapis/nodejs-automl/issues/521)) ([a45622a](https://www.github.com/googleapis/nodejs-automl/commit/a45622a9f53683a73fd2057ef5a2ccf22e7da946))
+* REST fallback client header ([#513](https://www.github.com/googleapis/nodejs-automl/issues/513)) ([833d2d7](https://www.github.com/googleapis/nodejs-automl/commit/833d2d70ff1828a69e7f9482f58189f5d484751f))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#527](https://www.github.com/googleapis/nodejs-automl/issues/527)) ([dfb504e](https://www.github.com/googleapis/nodejs-automl/commit/dfb504e12075136707e5915b1db6f65ed72d5aa9))
+
 ### [2.4.2](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.1...v2.4.2) (2021-05-12)
 
 
