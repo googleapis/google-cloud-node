@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [4.1.3](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.1.2...v4.1.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#842](https://www.github.com/googleapis/nodejs-dialogflow/issues/842)) ([ecaa1d9](https://www.github.com/googleapis/nodejs-dialogflow/commit/ecaa1d960b147bf24160b17c8d82ad85f7085d4a))
+
 ### [4.1.2](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.1.1...v4.1.2) (2021-07-12)
 
 
