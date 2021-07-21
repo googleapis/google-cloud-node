@@ -1,5 +1,13 @@
 # Changelog
 
+### [3.0.1](https://www.github.com/googleapis/nodejs-document-ai/compare/v3.0.0...v3.0.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#243](https://www.github.com/googleapis/nodejs-document-ai/issues/243)) ([a9e4efd](https://www.github.com/googleapis/nodejs-document-ai/commit/a9e4efd2478def845376a951c40b76e3384a8b29))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#245](https://www.github.com/googleapis/nodejs-document-ai/issues/245)) ([06bf319](https://www.github.com/googleapis/nodejs-document-ai/commit/06bf3190cad3c9ce98e13aff718bb11db85dd4e5))
+
 ## [3.0.0](https://www.github.com/googleapis/nodejs-document-ai/compare/v2.10.0...v3.0.0) (2021-07-01)
 
 
