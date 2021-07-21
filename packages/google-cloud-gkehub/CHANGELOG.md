@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.1.4...v1.2.0) (2021-07-21)
+
+
+### Features
+
+* added v1alpha messages and client for gkehub ([f781301](https://www.github.com/googleapis/nodejs-gke-hub/commit/f781301f79b5e1fab40d693503dc8e2e452cbde1))
+* added v1beta, v1 messages and client for gkehub ([f781301](https://www.github.com/googleapis/nodejs-gke-hub/commit/f781301f79b5e1fab40d693503dc8e2e452cbde1))
+
+
+### Bug Fixes
+
+* add missing dependency configmanagement.proto ([f781301](https://www.github.com/googleapis/nodejs-gke-hub/commit/f781301f79b5e1fab40d693503dc8e2e452cbde1))
+* add missing dependency configmanagement.proto, cloudauditlogging.proto, metering.proto, multiclusteringress.proto, servicemesh.proto to v1alpha client ([#74](https://www.github.com/googleapis/nodejs-gke-hub/issues/74)) ([f781301](https://www.github.com/googleapis/nodejs-gke-hub/commit/f781301f79b5e1fab40d693503dc8e2e452cbde1))
+* add missing dependency configmanagement.proto, metering.proto, multiclusteringress.proto to v1beta client ([f781301](https://www.github.com/googleapis/nodejs-gke-hub/commit/f781301f79b5e1fab40d693503dc8e2e452cbde1))
+* add missing dependency multiclusteringress https://github.com/googleapis/nodejs-gke-hub/pull/67 ([f781301](https://www.github.com/googleapis/nodejs-gke-hub/commit/f781301f79b5e1fab40d693503dc8e2e452cbde1))
+* Updating WORKSPACE files to use the newest version of the Typescript generator ([f781301](https://www.github.com/googleapis/nodejs-gke-hub/commit/f781301f79b5e1fab40d693503dc8e2e452cbde1))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.1.3...v1.1.4) (2021-07-12)
 
 
