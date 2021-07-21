@@ -1,0 +1,141 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.gkehub.v1",
+  "libraryPackage": "@google-cloud/gkehub",
+  "services": {
+    "GkeHub": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GkeHubClient",
+          "rpcs": {
+            "GetMembership": {
+              "methods": [
+                "getMembership"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "GenerateConnectManifest": {
+              "methods": [
+                "generateConnectManifest"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "createMembership"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "deleteMembership"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "ListMemberships": {
+              "methods": [
+                "listMemberships",
+                "listMembershipsStream",
+                "listMembershipsAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GkeHubClient",
+          "rpcs": {
+            "GetMembership": {
+              "methods": [
+                "getMembership"
+              ]
+            },
+            "GetFeature": {
+              "methods": [
+                "getFeature"
+              ]
+            },
+            "GenerateConnectManifest": {
+              "methods": [
+                "generateConnectManifest"
+              ]
+            },
+            "CreateMembership": {
+              "methods": [
+                "createMembership"
+              ]
+            },
+            "CreateFeature": {
+              "methods": [
+                "createFeature"
+              ]
+            },
+            "DeleteMembership": {
+              "methods": [
+                "deleteMembership"
+              ]
+            },
+            "DeleteFeature": {
+              "methods": [
+                "deleteFeature"
+              ]
+            },
+            "UpdateMembership": {
+              "methods": [
+                "updateMembership"
+              ]
+            },
+            "UpdateFeature": {
+              "methods": [
+                "updateFeature"
+              ]
+            },
+            "ListMemberships": {
+              "methods": [
+                "listMemberships",
+                "listMembershipsStream",
+                "listMembershipsAsync"
+              ]
+            },
+            "ListFeatures": {
+              "methods": [
+                "listFeatures",
+                "listFeaturesStream",
+                "listFeaturesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
