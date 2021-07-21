@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.7](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.6...v1.0.7) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#55](https://www.github.com/googleapis/nodejs-data-qna/issues/55)) ([1fd0307](https://www.github.com/googleapis/nodejs-data-qna/commit/1fd0307ddd711128e4e4b31f2b8836095f1588db))
+
 ### [1.0.6](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.5...v1.0.6) (2021-07-12)
 
 
