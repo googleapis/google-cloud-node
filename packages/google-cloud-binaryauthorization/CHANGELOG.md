@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.5](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.4...v1.1.5) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#74](https://www.github.com/googleapis/nodejs-binary-authorization/issues/74)) ([15b75a9](https://www.github.com/googleapis/nodejs-binary-authorization/commit/15b75a9136ecd8131b4fea24de8be69bfbfb989d))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.3...v1.1.4) (2021-07-12)
 
 
