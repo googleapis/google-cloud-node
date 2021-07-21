@@ -1,0 +1,14 @@
+{
+  "name": "filestore",
+  "name_pretty": "Filestore",
+  "product_documentation": "https://cloud.google.com/filestore/",
+  "client_documentation": "https://googleapis.dev/nodejs/filestore/latest",
+  "issue_tracker": "https://github.com/googleapis/nodejs-filestore/issues",
+  "release_level": "ga",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-filestore",
+  "distribution_name": "@google-cloud/filestore",
+  "api_id": "file.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true
+}
