@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [2.2.6](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.5...v2.2.6) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#296](https://www.github.com/googleapis/nodejs-datalabeling/issues/296)) ([b67af5c](https://www.github.com/googleapis/nodejs-datalabeling/commit/b67af5c6eea1142d6b1f08f7dd9213a7078a4d59))
+
 ### [2.2.5](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.4...v2.2.5) (2021-07-12)
 
 
