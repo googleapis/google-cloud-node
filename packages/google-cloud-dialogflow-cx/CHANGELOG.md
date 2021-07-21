@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.12.1](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.12.0...v2.12.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#148](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/148)) ([5e1ec0a](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/5e1ec0a77db21c219531800d2c54c5edd4f54fba))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#150](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/150)) ([8974183](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/8974183edd156e9adb9e9d11557931bda03c1d3c))
+
 ## [2.12.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.11.0...v2.12.0) (2021-06-30)
 
 
