@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.6](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.5...v1.4.6) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#136](https://www.github.com/googleapis/nodejs-memcache/issues/136)) ([619f23e](https://www.github.com/googleapis/nodejs-memcache/commit/619f23ec0c25c8e5dd97894ada5f65ae763d2721))
+
 ### [1.4.5](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.4...v1.4.5) (2021-07-12)
 
 
