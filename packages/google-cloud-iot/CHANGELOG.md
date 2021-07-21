@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.3.5](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.4...v2.3.5) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#496](https://www.github.com/googleapis/nodejs-iot/issues/496)) ([dc278eb](https://www.github.com/googleapis/nodejs-iot/commit/dc278eb4d8ce23454a582fda121766fa0f47e619))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#499](https://www.github.com/googleapis/nodejs-iot/issues/499)) ([0e5967f](https://www.github.com/googleapis/nodejs-iot/commit/0e5967f873ff7db59f400ac651f2b0590650e42f))
+
 ### [2.3.4](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.3...v2.3.4) (2021-07-01)
 
 
