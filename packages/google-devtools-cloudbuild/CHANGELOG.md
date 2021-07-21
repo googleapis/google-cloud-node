@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.2.7](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.6...v2.2.7) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#251](https://www.github.com/googleapis/nodejs-cloudbuild/issues/251)) ([7bc5f7f](https://www.github.com/googleapis/nodejs-cloudbuild/commit/7bc5f7ff6c1485baaf1444a608d8ebb88ad20cfe))
+
 ### [2.2.6](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.5...v2.2.6) (2021-07-12)
 
 
