@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.5.3](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.5.2...v2.5.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.17.1 ([#188](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/188)) ([e49f7ee](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/e49f7ee0413948779842b3b9d4faf5addc4c4db6))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#190](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/190)) ([8649cc6](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/8649cc6ae0a4e6ae807ba9e5af438ca0ffc9592a))
+
 ### [2.5.2](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.5.1...v2.5.2) (2021-06-30)
 
 
