@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.6](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.5...v1.1.6) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#89](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/89)) ([b7b0b92](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/b7b0b9263f2f8fd0fcb8fd977fc7f24727138b29))
+
 ### [1.1.5](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.4...v1.1.5) (2021-07-12)
 
 
