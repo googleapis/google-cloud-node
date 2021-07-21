@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.9.1](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.9.0...v1.9.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#172](https://www.github.com/googleapis/nodejs-ai-platform/issues/172)) ([d22eceb](https://www.github.com/googleapis/nodejs-ai-platform/commit/d22ecebc4693b63516a69753c19fa7a7a400464f))
+
 ## [1.9.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.8.0...v1.9.0) (2021-07-15)
 
 
