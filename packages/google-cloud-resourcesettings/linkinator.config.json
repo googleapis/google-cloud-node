@@ -1,8 +1,6 @@
 {
   "recurse": true,
   "skip": [
-    "https://github.com/googleapis/nodejs-resource-settings/blob/master/CHANGELOG.md",
-    "https://googleapis.dev/nodejs/dataflow/latest/index.html",
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
     "img.shields.io"

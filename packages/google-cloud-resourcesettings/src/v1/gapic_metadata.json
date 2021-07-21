@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.resourcesettings.v1",
-  "libraryPackage": "@google-cloud/resourcesettings",
+  "libraryPackage": "@google-cloud/resource-settings",
   "services": {
     "ResourceSettingsService": {
       "clients": {

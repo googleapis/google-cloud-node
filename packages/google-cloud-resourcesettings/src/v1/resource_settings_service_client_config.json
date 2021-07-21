@@ -35,12 +35,14 @@
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetSetting": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "UpdateSetting": {
-          "retry_codes_name": "non_idempotent",
-          "retry_params_name": "default"
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         }
       }
     }
