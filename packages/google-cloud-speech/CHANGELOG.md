@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.5.5](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.4...v4.5.5) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#777](https://www.github.com/googleapis/nodejs-speech/issues/777)) ([8911be0](https://www.github.com/googleapis/nodejs-speech/commit/8911be0cc600b4d16af5a809800118be07f8483b))
+
 ### [4.5.4](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.3...v4.5.4) (2021-07-12)
 
 
