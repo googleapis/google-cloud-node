@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.9.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.5...v5.9.0) (2021-07-21)
+
+
+### Features
+
+* customize retry behavior implementation ([#1474](https://www.github.com/googleapis/nodejs-storage/issues/1474)) ([#1493](https://www.github.com/googleapis/nodejs-storage/issues/1493)) ([49008e3](https://www.github.com/googleapis/nodejs-storage/commit/49008e313b89ce6035543bf2cf1e60e253404520))
+
 ### [5.8.5](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.4...v5.8.5) (2021-05-04)
 
 
