@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.3](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.3.2...v2.3.3) (2021-07-21)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#166](https://www.github.com/googleapis/nodejs-media-translation/issues/166)) ([a1899d2](https://www.github.com/googleapis/nodejs-media-translation/commit/a1899d2f2f7bfa0894c0b1823ce75759638ff91b))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.3.1...v2.3.2) (2021-07-12)
 
 
