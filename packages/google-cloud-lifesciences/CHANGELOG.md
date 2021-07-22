@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-life-sciences/compare/v1.0.1...v1.0.2) (2021-07-22)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator ([fc315eb](https://www.github.com/googleapis/nodejs-life-sciences/commit/fc315ebafb6ce1124a7c5dcca98af617acf8e16c))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-life-sciences/compare/v1.0.0...v1.0.1) (2021-07-12)
 
 
