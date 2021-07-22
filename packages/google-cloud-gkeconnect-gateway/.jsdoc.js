@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2021 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/gateway',
+    systemName: '@google-cloud/gke-connect-gateway',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
