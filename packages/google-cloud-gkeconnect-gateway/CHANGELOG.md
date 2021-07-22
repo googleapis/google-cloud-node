@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.0.1...v1.0.2) (2021-07-22)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator ([0592deb](https://www.github.com/googleapis/nodejs-gke-connect-gateway/commit/0592deb506d1ec6493c25c110b1ba45d20f188b5))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.0.0...v1.0.1) (2021-07-12)
 
 
