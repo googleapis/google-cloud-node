@@ -17,6 +17,6 @@
   },
   "devDependencies": {
     "c8": "^7.3.0",
-    "mocha": "^8.1.1"
+    "mocha": "^9.0.0"
   }
 }
