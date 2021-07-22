@@ -4021,6 +4021,7 @@
                          * @property {string|null} [serviceAccount] Build serviceAccount
                          * @property {google.devtools.cloudbuild.v1.ISecrets|null} [availableSecrets] Build availableSecrets
                          * @property {Array.<google.devtools.cloudbuild.v1.Build.IWarning>|null} [warnings] Build warnings
+                         * @property {google.devtools.cloudbuild.v1.Build.IFailureInfo|null} [failureInfo] Build failureInfo
                          */
     
                         /**
@@ -4262,6 +4263,14 @@
                         Build.prototype.warnings = $util.emptyArray;
     
                         /**
+                         * Build failureInfo.
+                         * @member {google.devtools.cloudbuild.v1.Build.IFailureInfo|null|undefined} failureInfo
+                         * @memberof google.devtools.cloudbuild.v1.Build
+                         * @instance
+                         */
+                        Build.prototype.failureInfo = null;
+    
+                        /**
                          * Creates a new Build instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.Build
@@ -4348,6 +4357,8 @@
                             if (message.warnings != null && message.warnings.length)
                                 for (var i = 0; i < message.warnings.length; ++i)
                                     $root.google.devtools.cloudbuild.v1.Build.Warning.encode(message.warnings[i], writer.uint32(/* id 49, wireType 2 =*/394).fork()).ldelim();
+                            if (message.failureInfo != null && Object.hasOwnProperty.call(message, "failureInfo"))
+                                $root.google.devtools.cloudbuild.v1.Build.FailureInfo.encode(message.failureInfo, writer.uint32(/* id 51, wireType 2 =*/410).fork()).ldelim();
                             return writer;
                         };
     
@@ -4510,6 +4521,9 @@
                                     if (!(message.warnings && message.warnings.length))
                                         message.warnings = [];
                                     message.warnings.push($root.google.devtools.cloudbuild.v1.Build.Warning.decode(reader, reader.uint32()));
+                                    break;
+                                case 51:
+                                    message.failureInfo = $root.google.devtools.cloudbuild.v1.Build.FailureInfo.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4699,6 +4713,11 @@
                                         return "warnings." + error;
                                 }
                             }
+                            if (message.failureInfo != null && message.hasOwnProperty("failureInfo")) {
+                                var error = $root.google.devtools.cloudbuild.v1.Build.FailureInfo.verify(message.failureInfo);
+                                if (error)
+                                    return "failureInfo." + error;
+                            }
                             return null;
                         };
     
@@ -4884,6 +4903,11 @@
                                     message.warnings[i] = $root.google.devtools.cloudbuild.v1.Build.Warning.fromObject(object.warnings[i]);
                                 }
                             }
+                            if (object.failureInfo != null) {
+                                if (typeof object.failureInfo !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Build.failureInfo: object expected");
+                                message.failureInfo = $root.google.devtools.cloudbuild.v1.Build.FailureInfo.fromObject(object.failureInfo);
+                            }
                             return message;
                         };
     
@@ -4932,6 +4956,7 @@
                                 object.serviceAccount = "";
                                 object.name = "";
                                 object.availableSecrets = null;
+                                object.failureInfo = null;
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
                                 object.id = message.id;
@@ -5009,6 +5034,8 @@
                                 for (var j = 0; j < message.warnings.length; ++j)
                                     object.warnings[j] = $root.google.devtools.cloudbuild.v1.Build.Warning.toObject(message.warnings[j], options);
                             }
+                            if (message.failureInfo != null && message.hasOwnProperty("failureInfo"))
+                                object.failureInfo = $root.google.devtools.cloudbuild.v1.Build.FailureInfo.toObject(message.failureInfo, options);
                             return object;
                         };
     
@@ -5272,6 +5299,278 @@
                             })();
     
                             return Warning;
+                        })();
+    
+                        Build.FailureInfo = (function() {
+    
+                            /**
+                             * Properties of a FailureInfo.
+                             * @memberof google.devtools.cloudbuild.v1.Build
+                             * @interface IFailureInfo
+                             * @property {google.devtools.cloudbuild.v1.Build.FailureInfo.FailureType|null} [type] FailureInfo type
+                             * @property {string|null} [detail] FailureInfo detail
+                             */
+    
+                            /**
+                             * Constructs a new FailureInfo.
+                             * @memberof google.devtools.cloudbuild.v1.Build
+                             * @classdesc Represents a FailureInfo.
+                             * @implements IFailureInfo
+                             * @constructor
+                             * @param {google.devtools.cloudbuild.v1.Build.IFailureInfo=} [properties] Properties to set
+                             */
+                            function FailureInfo(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * FailureInfo type.
+                             * @member {google.devtools.cloudbuild.v1.Build.FailureInfo.FailureType} type
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @instance
+                             */
+                            FailureInfo.prototype.type = 0;
+    
+                            /**
+                             * FailureInfo detail.
+                             * @member {string} detail
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @instance
+                             */
+                            FailureInfo.prototype.detail = "";
+    
+                            /**
+                             * Creates a new FailureInfo instance using the specified properties.
+                             * @function create
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Build.IFailureInfo=} [properties] Properties to set
+                             * @returns {google.devtools.cloudbuild.v1.Build.FailureInfo} FailureInfo instance
+                             */
+                            FailureInfo.create = function create(properties) {
+                                return new FailureInfo(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified FailureInfo message. Does not implicitly {@link google.devtools.cloudbuild.v1.Build.FailureInfo.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Build.IFailureInfo} message FailureInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FailureInfo.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.type);
+                                if (message.detail != null && Object.hasOwnProperty.call(message, "detail"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.detail);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified FailureInfo message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.Build.FailureInfo.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Build.IFailureInfo} message FailureInfo message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            FailureInfo.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a FailureInfo message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.devtools.cloudbuild.v1.Build.FailureInfo} FailureInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FailureInfo.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.Build.FailureInfo();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.type = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.detail = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a FailureInfo message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.devtools.cloudbuild.v1.Build.FailureInfo} FailureInfo
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            FailureInfo.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a FailureInfo message.
+                             * @function verify
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            FailureInfo.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    switch (message.type) {
+                                    default:
+                                        return "type: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                    case 4:
+                                    case 5:
+                                    case 6:
+                                        break;
+                                    }
+                                if (message.detail != null && message.hasOwnProperty("detail"))
+                                    if (!$util.isString(message.detail))
+                                        return "detail: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a FailureInfo message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.devtools.cloudbuild.v1.Build.FailureInfo} FailureInfo
+                             */
+                            FailureInfo.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.devtools.cloudbuild.v1.Build.FailureInfo)
+                                    return object;
+                                var message = new $root.google.devtools.cloudbuild.v1.Build.FailureInfo();
+                                switch (object.type) {
+                                case "FAILURE_TYPE_UNSPECIFIED":
+                                case 0:
+                                    message.type = 0;
+                                    break;
+                                case "PUSH_FAILED":
+                                case 1:
+                                    message.type = 1;
+                                    break;
+                                case "PUSH_IMAGE_NOT_FOUND":
+                                case 2:
+                                    message.type = 2;
+                                    break;
+                                case "PUSH_NOT_AUTHORIZED":
+                                case 3:
+                                    message.type = 3;
+                                    break;
+                                case "LOGGING_FAILURE":
+                                case 4:
+                                    message.type = 4;
+                                    break;
+                                case "USER_BUILD_STEP":
+                                case 5:
+                                    message.type = 5;
+                                    break;
+                                case "FETCH_SOURCE_FAILED":
+                                case 6:
+                                    message.type = 6;
+                                    break;
+                                }
+                                if (object.detail != null)
+                                    message.detail = String(object.detail);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a FailureInfo message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @static
+                             * @param {google.devtools.cloudbuild.v1.Build.FailureInfo} message FailureInfo
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            FailureInfo.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.type = options.enums === String ? "FAILURE_TYPE_UNSPECIFIED" : 0;
+                                    object.detail = "";
+                                }
+                                if (message.type != null && message.hasOwnProperty("type"))
+                                    object.type = options.enums === String ? $root.google.devtools.cloudbuild.v1.Build.FailureInfo.FailureType[message.type] : message.type;
+                                if (message.detail != null && message.hasOwnProperty("detail"))
+                                    object.detail = message.detail;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this FailureInfo to JSON.
+                             * @function toJSON
+                             * @memberof google.devtools.cloudbuild.v1.Build.FailureInfo
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            FailureInfo.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * FailureType enum.
+                             * @name google.devtools.cloudbuild.v1.Build.FailureInfo.FailureType
+                             * @enum {number}
+                             * @property {number} FAILURE_TYPE_UNSPECIFIED=0 FAILURE_TYPE_UNSPECIFIED value
+                             * @property {number} PUSH_FAILED=1 PUSH_FAILED value
+                             * @property {number} PUSH_IMAGE_NOT_FOUND=2 PUSH_IMAGE_NOT_FOUND value
+                             * @property {number} PUSH_NOT_AUTHORIZED=3 PUSH_NOT_AUTHORIZED value
+                             * @property {number} LOGGING_FAILURE=4 LOGGING_FAILURE value
+                             * @property {number} USER_BUILD_STEP=5 USER_BUILD_STEP value
+                             * @property {number} FETCH_SOURCE_FAILED=6 FETCH_SOURCE_FAILED value
+                             */
+                            FailureInfo.FailureType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "FAILURE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "PUSH_FAILED"] = 1;
+                                values[valuesById[2] = "PUSH_IMAGE_NOT_FOUND"] = 2;
+                                values[valuesById[3] = "PUSH_NOT_AUTHORIZED"] = 3;
+                                values[valuesById[4] = "LOGGING_FAILURE"] = 4;
+                                values[valuesById[5] = "USER_BUILD_STEP"] = 5;
+                                values[valuesById[6] = "FETCH_SOURCE_FAILED"] = 6;
+                                return values;
+                            })();
+    
+                            return FailureInfo;
                         })();
     
                         /**

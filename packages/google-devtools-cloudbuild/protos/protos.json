@@ -923,6 +923,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "failureInfo": {
+                          "type": "FailureInfo",
+                          "id": 51,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -944,6 +951,31 @@
                                 "INFO": 1,
                                 "WARNING": 2,
                                 "ALERT": 3
+                              }
+                            }
+                          }
+                        },
+                        "FailureInfo": {
+                          "fields": {
+                            "type": {
+                              "type": "FailureType",
+                              "id": 1
+                            },
+                            "detail": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "FailureType": {
+                              "values": {
+                                "FAILURE_TYPE_UNSPECIFIED": 0,
+                                "PUSH_FAILED": 1,
+                                "PUSH_IMAGE_NOT_FOUND": 2,
+                                "PUSH_NOT_AUTHORIZED": 3,
+                                "LOGGING_FAILURE": 4,
+                                "USER_BUILD_STEP": 5,
+                                "FETCH_SOURCE_FAILED": 6
                               }
                             }
                           }
