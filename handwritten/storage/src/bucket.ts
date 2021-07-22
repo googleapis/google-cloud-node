@@ -34,6 +34,7 @@ import * as mime from 'mime-types';
 import * as path from 'path';
 import pLimit = require('p-limit');
 import {promisify} from 'util';
+import retry = require('async-retry');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const snakeize = require('snakeize');
@@ -3723,6 +3724,54 @@ class Bucket extends ServiceObject {
     optionsOrCallback?: UploadOptions | UploadCallback,
     callback?: UploadCallback
   ): Promise<UploadResponse> | void {
+    const upload = () => {
+      const isMultipart = options.resumable === false;
+      const returnValue = retry(
+        async (bail: (err: Error) => void) => {
+          await new Promise<void>((resolve, reject) => {
+            const writable = newFile.createWriteStream(options);
+            if (options.onUploadProgress) {
+              writable.on('progress', options.onUploadProgress);
+            }
+            fs.createReadStream(pathString)
+              .pipe(writable)
+              .on('error', err => {
+                if (
+                  isMultipart &&
+                  this.storage.retryOptions.autoRetry &&
+                  this.storage.retryOptions.retryableErrorFn!(err)
+                ) {
+                  return reject(err);
+                } else {
+                  return bail(err);
+                }
+              })
+              .on('finish', () => {
+                return resolve();
+              });
+          });
+        },
+        {
+          retries: this.storage.retryOptions.maxRetries,
+          factor: this.storage.retryOptions.retryDelayMultiplier,
+          maxTimeout: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
+          maxRetryTime: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
+        }
+      );
+
+      if (!callback) {
+        return returnValue;
+      } else {
+        return returnValue
+          .then(() => {
+            if (callback) {
+              return callback!(null, newFile, newFile.metadata);
+            }
+          })
+          .catch(callback);
+      }
+    };
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if ((global as any)['GCLOUD_SANDBOX_ENV']) {
       return;
@@ -3778,20 +3827,6 @@ class Bucket extends ServiceObject {
 
         upload();
       });
-    }
-
-    function upload() {
-      const writable = newFile.createWriteStream(options);
-      if (options.onUploadProgress) {
-        writable.on('progress', options.onUploadProgress);
-      }
-      fs.createReadStream(pathString)
-        .on('error', callback!)
-        .pipe(writable)
-        .on('error', callback!)
-        .on('finish', () => {
-          callback!(null, newFile, newFile.metadata);
-        });
     }
   }
 
