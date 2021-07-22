@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.10.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.9.0...v5.10.0) (2021-07-22)
+
+
+### Features
+
+* retry multipart Bucket.upload ([#1509](https://www.github.com/googleapis/nodejs-storage/issues/1509)) ([730d0a0](https://www.github.com/googleapis/nodejs-storage/commit/730d0a0d4a6aa5192d998c54292d3423d3ddeaaa))
+
 ## [5.9.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.8.5...v5.9.0) (2021-07-21)
 
 
