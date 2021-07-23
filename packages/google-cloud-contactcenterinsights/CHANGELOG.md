@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.0.1...v1.0.2) (2021-07-22)
+
+
+### Bug Fixes
+
+* Updating WORKSPACE files to use the newest version of the Typescript generator ([412f847](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/412f8476941e3e78c9e1bb3f1395ce7acfd3e2a8))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.0.0...v1.0.1) (2021-07-12)
 
 
