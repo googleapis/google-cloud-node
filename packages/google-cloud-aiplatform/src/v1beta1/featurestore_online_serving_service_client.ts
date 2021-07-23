@@ -516,11 +516,12 @@ export class FeaturestoreOnlineServingServiceClient {
    *   for a machine learning model predicting user clicks on a website, an
    *   EntityType ID could be "user".
    * @param {string[]} request.entityIds
-   *   Required. IDs of entities to read Feature values of. For example,
-   *   for a machine learning model predicting user clicks on a website, an
-   *   entity ID could be "user_123".
+   *   Required. IDs of entities to read Feature values of. The maximum number of IDs is
+   *   100. For example, for a machine learning model predicting user clicks on a
+   *   website, an entity ID could be "user_123".
    * @param {google.cloud.aiplatform.v1beta1.FeatureSelector} request.featureSelector
-   *   Required. Selector choosing Features of the target EntityType.
+   *   Required. Selector choosing Features of the target EntityType. Feature IDs will be
+   *   deduplicated.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}

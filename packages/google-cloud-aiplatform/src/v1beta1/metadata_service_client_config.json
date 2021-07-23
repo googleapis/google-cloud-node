@@ -60,6 +60,14 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "DeleteArtifact": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PurgeArtifacts": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "CreateContext": {
           "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
@@ -82,6 +90,10 @@
         },
         "DeleteContext": {
           "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PurgeContexts": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -117,6 +129,14 @@
         },
         "UpdateExecution": {
           "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteExecution": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "PurgeExecutions": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

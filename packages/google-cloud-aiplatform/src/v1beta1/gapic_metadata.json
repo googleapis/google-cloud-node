@@ -1057,9 +1057,34 @@
                 "deleteMetadataStore"
               ]
             },
+            "DeleteArtifact": {
+              "methods": [
+                "deleteArtifact"
+              ]
+            },
+            "PurgeArtifacts": {
+              "methods": [
+                "purgeArtifacts"
+              ]
+            },
             "DeleteContext": {
               "methods": [
                 "deleteContext"
+              ]
+            },
+            "PurgeContexts": {
+              "methods": [
+                "purgeContexts"
+              ]
+            },
+            "DeleteExecution": {
+              "methods": [
+                "deleteExecution"
+              ]
+            },
+            "PurgeExecutions": {
+              "methods": [
+                "purgeExecutions"
               ]
             },
             "ListMetadataStores": {
@@ -1202,9 +1227,34 @@
                 "deleteMetadataStore"
               ]
             },
+            "DeleteArtifact": {
+              "methods": [
+                "deleteArtifact"
+              ]
+            },
+            "PurgeArtifacts": {
+              "methods": [
+                "purgeArtifacts"
+              ]
+            },
             "DeleteContext": {
               "methods": [
                 "deleteContext"
+              ]
+            },
+            "PurgeContexts": {
+              "methods": [
+                "purgeContexts"
+              ]
+            },
+            "DeleteExecution": {
+              "methods": [
+                "deleteExecution"
+              ]
+            },
+            "PurgeExecutions": {
+              "methods": [
+                "purgeExecutions"
               ]
             },
             "ListMetadataStores": {

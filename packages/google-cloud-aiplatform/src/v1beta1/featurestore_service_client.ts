@@ -2558,17 +2558,27 @@ export class FeaturestoreServiceClient {
    *
    *   Values in the timestamp column must use the RFC 3339 format, e.g.
    *   `2012-07-30T10:43:17.123Z`.
+   * @param {google.cloud.aiplatform.v1beta1.BigQuerySource} request.bigqueryReadInstances
+   *   Similar to csv_read_instances, but from BigQuery source.
    * @param {string} request.featurestore
    *   Required. The resource name of the Featurestore from which to query Feature values.
    *   Format:
    *   `projects/{project}/locations/{location}/featurestores/{featurestore}`
    * @param {google.cloud.aiplatform.v1beta1.FeatureValueDestination} request.destination
    *   Required. Specifies output location and format.
+   * @param {number[]} request.passThroughFields
+   *   When not empty, the specified fields in the *_read_instances source will be
+   *   joined as-is in the output, in addition to those fields from the
+   *   Featurestore Entity.
+   *
+   *   For BigQuery source, the type of the pass-through values will be
+   *   automatically inferred. For CSV source, the pass-through values will be
+   *   passed as opaque bytes.
    * @param {number[]} request.entityTypeSpecs
    *   Required. Specifies EntityType grouping Features to read values of and settings.
    *   Each EntityType referenced in
    *   [BatchReadFeatureValuesRequest.entity_type_specs] must have a column
-   *   specifying entity IDs in tha EntityType in
+   *   specifying entity IDs in the EntityType in
    *   {@link |BatchReadFeatureValuesRequest.request} .
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

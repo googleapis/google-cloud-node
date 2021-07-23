@@ -1422,22 +1422,32 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the TrainingPipelines from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
-   *   Supported fields:
+   *   Lists the PipelineJobs that match the filter expression. The following
+   *   fields are supported:
    *
-   *     * `display_name` supports = and !=.
+   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
    *
-   *     * `state` supports = and !=.
+   *   Filter expressions can be combined together using logical operators
+   *   (`AND` & `OR`).
+   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
    *
-   *   Some examples of using the filter are:
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   Examples:
    *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *   * `create_time>"2021-05-18T00:00:00Z" OR
+   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+   *     after 2020-05-18 00:00:00 UTC.
+   *   * `labels.env = "prod"`
+   *     PipelineJobs with label "env" set to "prod".
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1512,22 +1522,32 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the TrainingPipelines from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
-   *   Supported fields:
+   *   Lists the PipelineJobs that match the filter expression. The following
+   *   fields are supported:
    *
-   *     * `display_name` supports = and !=.
+   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
    *
-   *     * `state` supports = and !=.
+   *   Filter expressions can be combined together using logical operators
+   *   (`AND` & `OR`).
+   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
    *
-   *   Some examples of using the filter are:
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   Examples:
    *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *   * `create_time>"2021-05-18T00:00:00Z" OR
+   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+   *     after 2020-05-18 00:00:00 UTC.
+   *   * `labels.env = "prod"`
+   *     PipelineJobs with label "env" set to "prod".
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1580,22 +1600,32 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the TrainingPipelines from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
-   *   Supported fields:
+   *   Lists the PipelineJobs that match the filter expression. The following
+   *   fields are supported:
    *
-   *     * `display_name` supports = and !=.
+   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
    *
-   *     * `state` supports = and !=.
+   *   Filter expressions can be combined together using logical operators
+   *   (`AND` & `OR`).
+   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
    *
-   *   Some examples of using the filter are:
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
    *
-   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
+   *   Examples:
    *
-   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *
-   *    * `NOT display_name="my_pipeline"`
-   *
-   *    * `state="PIPELINE_STATE_FAILED"`
+   *   * `create_time>"2021-05-18T00:00:00Z" OR
+   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+   *     after 2020-05-18 00:00:00 UTC.
+   *   * `labels.env = "prod"`
+   *     PipelineJobs with label "env" set to "prod".
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken

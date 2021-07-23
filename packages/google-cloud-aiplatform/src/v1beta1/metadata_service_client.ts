@@ -320,11 +320,41 @@ export class MetadataServiceClient {
     const deleteMetadataStoreMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreOperationMetadata'
     ) as gax.protobuf.Type;
+    const deleteArtifactResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteArtifactMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
+    const purgeArtifactsResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.PurgeArtifactsResponse'
+    ) as gax.protobuf.Type;
+    const purgeArtifactsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.PurgeArtifactsMetadata'
+    ) as gax.protobuf.Type;
     const deleteContextResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
     const deleteContextMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
+    const purgeContextsResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.PurgeContextsResponse'
+    ) as gax.protobuf.Type;
+    const purgeContextsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.PurgeContextsMetadata'
+    ) as gax.protobuf.Type;
+    const deleteExecutionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteExecutionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
+    const purgeExecutionsResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.PurgeExecutionsResponse'
+    ) as gax.protobuf.Type;
+    const purgeExecutionsMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1beta1.PurgeExecutionsMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -338,10 +368,35 @@ export class MetadataServiceClient {
         deleteMetadataStoreResponse.decode.bind(deleteMetadataStoreResponse),
         deleteMetadataStoreMetadata.decode.bind(deleteMetadataStoreMetadata)
       ),
+      deleteArtifact: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteArtifactResponse.decode.bind(deleteArtifactResponse),
+        deleteArtifactMetadata.decode.bind(deleteArtifactMetadata)
+      ),
+      purgeArtifacts: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeArtifactsResponse.decode.bind(purgeArtifactsResponse),
+        purgeArtifactsMetadata.decode.bind(purgeArtifactsMetadata)
+      ),
       deleteContext: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         deleteContextResponse.decode.bind(deleteContextResponse),
         deleteContextMetadata.decode.bind(deleteContextMetadata)
+      ),
+      purgeContexts: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeContextsResponse.decode.bind(purgeContextsResponse),
+        purgeContextsMetadata.decode.bind(purgeContextsMetadata)
+      ),
+      deleteExecution: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteExecutionResponse.decode.bind(deleteExecutionResponse),
+        deleteExecutionMetadata.decode.bind(deleteExecutionMetadata)
+      ),
+      purgeExecutions: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        purgeExecutionsResponse.decode.bind(purgeExecutionsResponse),
+        purgeExecutionsMetadata.decode.bind(purgeExecutionsMetadata)
       ),
     };
 
@@ -403,11 +458,14 @@ export class MetadataServiceClient {
       'getArtifact',
       'listArtifacts',
       'updateArtifact',
+      'deleteArtifact',
+      'purgeArtifacts',
       'createContext',
       'getContext',
       'listContexts',
       'updateContext',
       'deleteContext',
+      'purgeContexts',
       'addContextArtifactsAndExecutions',
       'addContextChildren',
       'queryContextLineageSubgraph',
@@ -415,6 +473,8 @@ export class MetadataServiceClient {
       'getExecution',
       'listExecutions',
       'updateExecution',
+      'deleteExecution',
+      'purgeExecutions',
       'addExecutionEvents',
       'queryExecutionInputsAndOutputs',
       'createMetadataSchema',
@@ -2701,6 +2761,303 @@ export class MetadataServiceClient {
       protos.google.cloud.aiplatform.v1beta1.DeleteMetadataStoreOperationMetadata
     >;
   }
+  deleteArtifact(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteArtifact(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteArtifact(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes an Artifact.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Artifact to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}
+   * @param {string} [request.etag]
+   *   Optional. The etag of the Artifact to delete.
+   *   If this is provided, it must match the server's etag. Otherwise, the
+   *   request will fail with a FAILED_PRECONDITION.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteArtifact(request);
+   * const [response] = await operation.promise();
+   */
+  deleteArtifact(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteArtifactRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteArtifact(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteArtifact()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteArtifactProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteArtifactProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteArtifact,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  purgeArtifacts(
+    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  purgeArtifacts(
+    request: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeArtifacts(
+    request: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Purges Artifacts.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The metadata store to purge Artifacts from.
+   *   Format:
+   *   projects/{project}/locations/{location}/metadataStores/{metadatastore}
+   * @param {string} request.filter
+   *   Required. A required filter matching the Artifacts to be purged.
+   *   E.g., update_time <= 2020-11-19T11:30:00-04:00.
+   * @param {boolean} [request.force]
+   *   Optional. Flag to indicate to actually perform the purge.
+   *   If `force` is set to false, the method will return a sample of
+   *   Artifact names that would be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.purgeArtifacts(request);
+   * const [response] = await operation.promise();
+   */
+  purgeArtifacts(
+    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
+            protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeArtifactsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeArtifacts(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeArtifacts()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkPurgeArtifactsProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkPurgeArtifactsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsResponse,
+      protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.purgeArtifacts,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsResponse,
+      protos.google.cloud.aiplatform.v1beta1.PurgeArtifactsMetadata
+    >;
+  }
   deleteContext(
     request?: protos.google.cloud.aiplatform.v1beta1.IDeleteContextRequest,
     options?: CallOptions
@@ -2743,14 +3100,16 @@ export class MetadataServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The resource name of the Context to retrieve.
+   *   Required. The resource name of the Context to delete.
    *   Format:
    *   projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}
    * @param {boolean} request.force
-   *   If set to true, any child resources of this Context will be deleted.
-   *   (Otherwise, the request will fail with a FAILED_PRECONDITION error if the
-   *   Context has any child resources, such as another Context, Artifact, or
-   *   Execution).
+   *   The force deletion semantics is still undefined.
+   *   Users should not use this field.
+   * @param {string} [request.etag]
+   *   Optional. The etag of the Context to delete.
+   *   If this is provided, it must match the server's etag. Otherwise, the
+   *   request will fail with a FAILED_PRECONDITION.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2847,6 +3206,453 @@ export class MetadataServiceClient {
     return decodeOperation as LROperation<
       protos.google.protobuf.Empty,
       protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  purgeContexts(
+    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  purgeContexts(
+    request: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeContexts(
+    request: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Purges Contexts.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The metadata store to purge Contexts from.
+   *   Format:
+   *   projects/{project}/locations/{location}/metadataStores/{metadatastore}
+   * @param {string} request.filter
+   *   Required. A required filter matching the Contexts to be purged.
+   *   E.g., update_time <= 2020-11-19T11:30:00-04:00.
+   * @param {boolean} [request.force]
+   *   Optional. Flag to indicate to actually perform the purge.
+   *   If `force` is set to false, the method will return a sample of
+   *   Context names that would be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.purgeContexts(request);
+   * const [response] = await operation.promise();
+   */
+  purgeContexts(
+    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeContextsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
+            protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeContextsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeContexts(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeContexts()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkPurgeContextsProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkPurgeContextsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.PurgeContextsResponse,
+      protos.google.cloud.aiplatform.v1beta1.PurgeContextsMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.purgeContexts,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.PurgeContextsResponse,
+      protos.google.cloud.aiplatform.v1beta1.PurgeContextsMetadata
+    >;
+  }
+  deleteExecution(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteExecution(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteExecution(
+    request: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes an Execution.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the Execution to delete.
+   *   Format:
+   *   projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}
+   * @param {string} [request.etag]
+   *   Optional. The etag of the Execution to delete.
+   *   If this is provided, it must match the server's etag. Otherwise, the
+   *   request will fail with a FAILED_PRECONDITION.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteExecution(request);
+   * const [response] = await operation.promise();
+   */
+  deleteExecution(
+    request?: protos.google.cloud.aiplatform.v1beta1.IDeleteExecutionRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1beta1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteExecution(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteExecution()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteExecutionProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteExecutionProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteExecution,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1beta1.DeleteOperationMetadata
+    >;
+  }
+  purgeExecutions(
+    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  purgeExecutions(
+    request: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  purgeExecutions(
+    request: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Purges Executions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The metadata store to purge Executions from.
+   *   Format:
+   *   projects/{project}/locations/{location}/metadataStores/{metadatastore}
+   * @param {string} request.filter
+   *   Required. A required filter matching the Executions to be purged.
+   *   E.g., update_time <= 2020-11-19T11:30:00-04:00.
+   * @param {boolean} [request.force]
+   *   Optional. Flag to indicate to actually perform the purge.
+   *   If `force` is set to false, the method will return a sample of
+   *   Execution names that would be deleted.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.purgeExecutions(request);
+   * const [response] = await operation.promise();
+   */
+  purgeExecutions(
+    request?: protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
+            protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsResponse,
+        protos.google.cloud.aiplatform.v1beta1.IPurgeExecutionsMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.purgeExecutions(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `purgeExecutions()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkPurgeExecutionsProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkPurgeExecutionsProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsResponse,
+      protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.purgeExecutions,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsResponse,
+      protos.google.cloud.aiplatform.v1beta1.PurgeExecutionsMetadata
     >;
   }
   listMetadataStores(
