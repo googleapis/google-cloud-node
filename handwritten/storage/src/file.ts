@@ -3618,14 +3618,12 @@ class File extends ServiceObject<File> {
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
-    const isMultipart = options.resumable === false;
     const returnValue = retry(
       async (bail: (err: Error) => void) => {
         await new Promise<void>((resolve, reject) => {
           const writable = this.createWriteStream(options)
             .on('error', err => {
               if (
-                isMultipart &&
                 this.storage.retryOptions.autoRetry &&
                 this.storage.retryOptions.retryableErrorFn!(err)
               ) {

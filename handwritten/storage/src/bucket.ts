@@ -3725,7 +3725,6 @@ class Bucket extends ServiceObject {
     callback?: UploadCallback
   ): Promise<UploadResponse> | void {
     const upload = () => {
-      const isMultipart = options.resumable === false;
       const returnValue = retry(
         async (bail: (err: Error) => void) => {
           await new Promise<void>((resolve, reject) => {
@@ -3737,7 +3736,6 @@ class Bucket extends ServiceObject {
               .pipe(writable)
               .on('error', err => {
                 if (
-                  isMultipart &&
                   this.storage.retryOptions.autoRetry &&
                   this.storage.retryOptions.retryableErrorFn!(err)
                 ) {

@@ -240,7 +240,7 @@ describe('File', () => {
         totalTimeout: 600,
         maxRetryDelay: 60,
         retryableErrorFn: (err: HTTPError) => {
-          return err.code === 500;
+          return err?.code === 500;
         },
       },
     };
@@ -4107,19 +4107,16 @@ describe('File', () => {
         assert.ok(retryCount === 2);
       });
 
-      it('non-multipart upload should not retry', async () => {
+      it('resumable upload should retry', async () => {
         const options = {resumable: true};
         let retryCount = 0;
         file.createWriteStream = () => {
           retryCount++;
           return new DelayedStream500Error(retryCount);
         };
-        try {
-          await file.save(DATA, options);
-          throw Error('unreachable');
-        } catch (e) {
-          assert.strictEqual(e.message, 'first error');
-        }
+
+        await file.save(BUFFER_DATA, options);
+        assert.ok(retryCount === 2);
       });
     });
 

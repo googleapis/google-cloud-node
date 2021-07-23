@@ -2440,6 +2440,24 @@ describe('Bucket', () => {
     });
 
     describe('resumable uploads', () => {
+      class DelayedStream500Error extends Transform {
+        retryCount: number;
+        constructor(retryCount: number) {
+          super();
+          this.retryCount = retryCount;
+        }
+        _transform(chunk: string | Buffer, _encoding: string, done: Function) {
+          this.push(chunk);
+          setTimeout(() => {
+            if (this.retryCount === 1) {
+              done(new HTTPError('first error', 500));
+            } else {
+              done();
+            }
+          }, 5);
+        }
+      }
+
       beforeEach(() => {
         fsStatOverride = (path: string, callback: Function) => {
           callback(null, {size: 1}); // Small size to guarantee simple upload
@@ -2493,6 +2511,62 @@ describe('Bucket', () => {
           return ws;
         };
         bucket.upload(filepath, options, assert.ifError);
+      });
+
+      it('should not retry a nonretryable error code', done => {
+        const fakeFile = new FakeFile(bucket, 'file-name');
+        const options = {destination: fakeFile, resumable: true};
+        let retryCount = 0;
+        fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+          class DelayedStream403Error extends Transform {
+            _transform(
+              chunk: string | Buffer,
+              _encoding: string,
+              done: Function
+            ) {
+              this.push(chunk);
+              setTimeout(() => {
+                retryCount++;
+                if (retryCount === 1) {
+                  done(new HTTPError('first error', 403));
+                } else {
+                  done();
+                }
+              }, 5);
+            }
+          }
+          setImmediate(() => {
+            assert.strictEqual(options_.resumable, true);
+            retryCount++;
+            done();
+          });
+          return new DelayedStream403Error();
+        };
+
+        bucket.upload(filepath, options, (err: Error) => {
+          assert.strictEqual(err.message, 'first error');
+          assert.ok(retryCount === 2);
+          done();
+        });
+      });
+
+      it('resumable upload should retry', done => {
+        const fakeFile = new FakeFile(bucket, 'file-name');
+        const options = {destination: fakeFile, resumable: true};
+        let retryCount = 0;
+        fakeFile.createWriteStream = (options_: CreateWriteStreamOptions) => {
+          setImmediate(() => {
+            assert.strictEqual(options_.resumable, true);
+            retryCount++;
+            done();
+          });
+          return new DelayedStream500Error(retryCount);
+        };
+        bucket.upload(filepath, options, (err: Error) => {
+          assert.strictEqual(err.message, 'first error');
+          assert.ok(retryCount === 1);
+          done();
+        });
       });
     });
 
