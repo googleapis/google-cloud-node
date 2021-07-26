@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+### [6.4.7](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.6...v6.4.7) (2021-07-26)
+
+
+### Bug Fixes
+
+* drop dependency on pumpify ([#860](https://www.github.com/googleapis/nodejs-datastore/issues/860)) ([f3d4fd9](https://www.github.com/googleapis/nodejs-datastore/commit/f3d4fd97de3c90550977a096667088d063b51623))
+
 ### [6.4.6](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.5...v6.4.6) (2021-07-19)
 
 
