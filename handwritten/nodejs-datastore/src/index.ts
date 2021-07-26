@@ -37,9 +37,7 @@ import {
   ServiceError,
 } from 'google-gax';
 import * as is from 'is';
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const pumpify = require('pumpify');
-import {Transform} from 'stream';
+import {Transform, pipeline} from 'stream';
 
 import {entity, Entities, Entity, EntityProto, ValueProto} from './entity';
 import Key = entity.Key;
@@ -651,8 +649,7 @@ class Datastore extends DatastoreRequest {
    */
   getIndexesStream(options?: GetIndexesOptions): NodeJS.ReadableStream {
     const {gaxOptions, ...reqOpts} = options || {};
-
-    return pumpify.obj([
+    return pipeline(
       this.requestStream_({
         client: 'DatastoreAdminClient',
         method: 'listIndexesStream',
@@ -667,7 +664,8 @@ class Datastore extends DatastoreRequest {
           next(null, indexInstance);
         },
       }),
-    ]);
+      () => {}
+    );
   }
 
   getProjectId(): Promise<string> {
