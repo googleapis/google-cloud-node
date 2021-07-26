@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.11.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.10.0...v5.11.0) (2021-07-23)
+
+
+### Features
+
+* retries for resumable bucket.upload and file.save ([#1511](https://www.github.com/googleapis/nodejs-storage/issues/1511)) ([9bf163c](https://www.github.com/googleapis/nodejs-storage/commit/9bf163c3e3569bad1440940ff1a6bfd42404bb32))
+
 ## [5.10.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.9.0...v5.10.0) (2021-07-22)
 
 
