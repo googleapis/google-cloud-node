@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.10.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.9.1...v1.10.0) (2021-07-23)
+
+
+### Features
+
+* Adds BigQuery output table field to batch prediction job output config ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds CustomJob.web_access_uris, CustomJob.enable_web_access fields ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds Endpoint.network, Endpoint.private_endpoints fields and PrivateEndpoints message ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds Execution.State constants: CACHED and CANCELLED ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds Feature Store features ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds fields to Study message ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds IndexEndpoint.private_ip_ranges field ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds IndexEndpointService.deployed_index_id field ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds MetadataService.DeleteArtifact and DeleteExecution methods ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds ModelMonitoringObjectConfig.explanation_config field and ModelMonitoringObjectConfig.ExplanationConfig message ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Adds ModelMonitoringObjectiveConfig.TrainingPredictionSkewDetectionConfig.attribution_score_skew_thresholds and ModelMonitoringObjectiveConfig.PredictionDriftDetectionConfig.attribution_score_drift_threshold fields ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+* Removes breaking change from v1 version of AI Platform protos ([22f1f67](https://www.github.com/googleapis/nodejs-ai-platform/commit/22f1f673b9feeb3230e07a03253912261238b956))
+
 ### [1.9.1](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.9.0...v1.9.1) (2021-07-21)
 
 
