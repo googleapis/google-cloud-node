@@ -15,7 +15,7 @@ Web Risk API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-web-risk/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-web-risk/blob/main/CHANGELOG.md).
 
 * [Web Risk API Node.js Client API Reference][client-docs]
 * [Web Risk API Documentation][product-docs]
@@ -89,11 +89,11 @@ async function quickstart(uri) {
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-web-risk/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-web-risk/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-web-risk/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-web-risk&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-web-risk/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-web-risk&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -142,7 +142,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-web-risk/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-web-risk/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -154,7 +154,7 @@ to its template in this
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-web-risk/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-web-risk/blob/main/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/web-risk/latest
 [product-docs]: https://cloud.google.com/web-risk/docs/
