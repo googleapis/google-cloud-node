@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.4.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.3.5...v5.4.0) (2021-07-30)
+
+
+### Features
+
+* add finding_class and indicator fields in Finding ([#409](https://www.github.com/googleapis/nodejs-security-center/issues/409)) ([d0abd01](https://www.github.com/googleapis/nodejs-security-center/commit/d0abd013b359b1876c16e7f4ee6b8c873acc5014))
+
 ### [5.3.5](https://www.github.com/googleapis/nodejs-security-center/compare/v5.3.4...v5.3.5) (2021-07-16)
 
 
