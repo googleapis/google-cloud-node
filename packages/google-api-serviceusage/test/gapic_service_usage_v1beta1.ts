@@ -233,6 +233,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
@@ -251,6 +252,7 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       client.innerApiCalls.getService = stubSimpleCall(expectedResponse);
       const [response] = await client.getService(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.getService as SinonStub)
@@ -264,6 +266,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
@@ -298,6 +301,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.getService as SinonStub)
@@ -311,6 +315,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.GetServiceRequest()
@@ -330,6 +335,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         expectedError
       );
       await assert.rejects(client.getService(request), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.getService as SinonStub)
           .getCall(0)
@@ -574,6 +580,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
@@ -594,6 +601,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.enableService(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.enableService as SinonStub)
@@ -607,6 +615,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
@@ -648,6 +657,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.enableService as SinonStub)
@@ -661,6 +671,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
@@ -680,6 +691,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         expectedError
       );
       await assert.rejects(client.enableService(request), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.enableService as SinonStub)
           .getCall(0)
@@ -692,6 +704,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.EnableServiceRequest()
@@ -713,6 +726,7 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.enableService(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.enableService as SinonStub)
           .getCall(0)
@@ -725,6 +739,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -737,6 +752,7 @@ describe('v1beta1.ServiceUsageClient', () => {
       const decodedOperation = await client.checkEnableServiceProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -747,6 +763,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -758,6 +775,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.checkEnableServiceProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -768,6 +786,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
@@ -788,6 +807,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.disableService(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.disableService as SinonStub)
@@ -801,6 +821,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
@@ -842,6 +863,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.disableService as SinonStub)
@@ -855,6 +877,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
@@ -874,6 +897,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         expectedError
       );
       await assert.rejects(client.disableService(request), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.disableService as SinonStub)
           .getCall(0)
@@ -886,6 +910,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.DisableServiceRequest()
@@ -907,6 +932,7 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.disableService(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.disableService as SinonStub)
           .getCall(0)
@@ -919,6 +945,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -931,6 +958,7 @@ describe('v1beta1.ServiceUsageClient', () => {
       const decodedOperation = await client.checkDisableServiceProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -941,6 +969,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -952,6 +981,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.checkDisableServiceProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -962,6 +992,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
@@ -982,6 +1013,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         stubLongRunningCall(expectedResponse);
       const [operation] = await client.batchEnableServices(request);
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.batchEnableServices as SinonStub)
@@ -995,6 +1027,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
@@ -1036,6 +1069,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         protos.google.api.serviceusage.v1beta1.IOperationMetadata
       >;
       const [response] = await operation.promise();
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.batchEnableServices as SinonStub)
@@ -1049,6 +1083,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
@@ -1068,6 +1103,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         expectedError
       );
       await assert.rejects(client.batchEnableServices(request), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.batchEnableServices as SinonStub)
           .getCall(0)
@@ -1080,6 +1116,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.BatchEnableServicesRequest()
@@ -1101,6 +1138,7 @@ describe('v1beta1.ServiceUsageClient', () => {
       );
       const [operation] = await client.batchEnableServices(request);
       await assert.rejects(operation.promise(), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.batchEnableServices as SinonStub)
           .getCall(0)
@@ -1113,6 +1151,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedResponse = generateSampleMessage(
         new operationsProtos.google.longrunning.Operation()
@@ -1125,6 +1164,7 @@ describe('v1beta1.ServiceUsageClient', () => {
       const decodedOperation = await client.checkBatchEnableServicesProgress(
         expectedResponse.name
       );
+      assert(stub.calledOnce);
       assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
       assert(decodedOperation.metadata);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -1135,6 +1175,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const expectedError = new Error('expected');
 
@@ -1146,6 +1187,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         client.checkBatchEnableServicesProgress(''),
         expectedError
       );
+      assert(stub.calledOnce);
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
     });
   });
@@ -2919,6 +2961,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
@@ -2945,6 +2988,7 @@ describe('v1beta1.ServiceUsageClient', () => {
       ];
       client.innerApiCalls.listServices = stubSimpleCall(expectedResponse);
       const [response] = await client.listServices(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.listServices as SinonStub)
@@ -2958,6 +3002,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
@@ -3000,6 +3045,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.listServices as SinonStub)
@@ -3013,6 +3059,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
@@ -3032,6 +3079,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         expectedError
       );
       await assert.rejects(client.listServices(request), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.listServices as SinonStub)
           .getCall(0)
@@ -3044,6 +3092,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
@@ -3080,6 +3129,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
@@ -3099,6 +3149,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
@@ -3127,6 +3178,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.listServices.createStream as SinonStub)
           .getCall(0)
@@ -3145,6 +3197,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
@@ -3169,6 +3222,7 @@ describe('v1beta1.ServiceUsageClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -3189,6 +3243,7 @@ describe('v1beta1.ServiceUsageClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.api.serviceusage.v1beta1.ListServicesRequest()
@@ -3205,6 +3260,7 @@ describe('v1beta1.ServiceUsageClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.listServices.asyncIterate as SinonStub
