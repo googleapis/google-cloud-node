@@ -4,7 +4,7 @@
 
 # [Identity-Aware Proxy: Node.js Client](https://github.com/googleapis/nodejs-iap)
 
-[![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/iap.svg)](https://www.npmjs.org/package/@google-cloud/iap)
 [![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-iap/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-iap)
 
@@ -32,8 +32,8 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-
-
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
@@ -55,6 +55,39 @@ npm install @google-cloud/iap
 ```
 
 
+### Using the client library
+
+```javascript
+// Imports the Google Cloud client library
+
+// remove this line after package is released
+// eslint-disable-next-line node/no-missing-require
+const {IdentityAwareProxyOAuthServiceClient} = require('@google-cloud/iap');
+
+// const projectId = 'my-project'
+
+// Creates a client
+const client = new IdentityAwareProxyOAuthServiceClient();
+
+async function listBrands() {
+  const [brands] = await client.listBrands({
+    parent: `projects/${projectId}`,
+  });
+  console.info(brands);
+}
+listBrands();
+
+```
+
+
+
+## Samples
+
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-iap/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-iap/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-iap&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -86,6 +119,12 @@ _Legacy Node.js versions are supported as a best effort:_
 
 This library follows [Semantic Versioning](http://semver.org/).
 
+
+This library is considered to be **General Availability (GA)**. This means it
+is stable; the code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **GA** libraries
+are addressed with the highest priority.
 
 
 

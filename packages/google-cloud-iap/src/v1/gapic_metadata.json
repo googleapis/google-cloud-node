@@ -1,0 +1,171 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.iap.v1",
+  "libraryPackage": "@google-cloud/iap",
+  "services": {
+    "IdentityAwareProxyAdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IdentityAwareProxyAdminServiceClient",
+          "rpcs": {
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetIapSettings": {
+              "methods": [
+                "getIapSettings"
+              ]
+            },
+            "UpdateIapSettings": {
+              "methods": [
+                "updateIapSettings"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IdentityAwareProxyAdminServiceClient",
+          "rpcs": {
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "GetIapSettings": {
+              "methods": [
+                "getIapSettings"
+              ]
+            },
+            "UpdateIapSettings": {
+              "methods": [
+                "updateIapSettings"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "IdentityAwareProxyOAuthService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IdentityAwareProxyOAuthServiceClient",
+          "rpcs": {
+            "ListBrands": {
+              "methods": [
+                "listBrands"
+              ]
+            },
+            "CreateBrand": {
+              "methods": [
+                "createBrand"
+              ]
+            },
+            "GetBrand": {
+              "methods": [
+                "getBrand"
+              ]
+            },
+            "CreateIdentityAwareProxyClient": {
+              "methods": [
+                "createIdentityAwareProxyClient"
+              ]
+            },
+            "GetIdentityAwareProxyClient": {
+              "methods": [
+                "getIdentityAwareProxyClient"
+              ]
+            },
+            "ResetIdentityAwareProxyClientSecret": {
+              "methods": [
+                "resetIdentityAwareProxyClientSecret"
+              ]
+            },
+            "DeleteIdentityAwareProxyClient": {
+              "methods": [
+                "deleteIdentityAwareProxyClient"
+              ]
+            },
+            "ListIdentityAwareProxyClients": {
+              "methods": [
+                "listIdentityAwareProxyClients",
+                "listIdentityAwareProxyClientsStream",
+                "listIdentityAwareProxyClientsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IdentityAwareProxyOAuthServiceClient",
+          "rpcs": {
+            "ListBrands": {
+              "methods": [
+                "listBrands"
+              ]
+            },
+            "CreateBrand": {
+              "methods": [
+                "createBrand"
+              ]
+            },
+            "GetBrand": {
+              "methods": [
+                "getBrand"
+              ]
+            },
+            "CreateIdentityAwareProxyClient": {
+              "methods": [
+                "createIdentityAwareProxyClient"
+              ]
+            },
+            "GetIdentityAwareProxyClient": {
+              "methods": [
+                "getIdentityAwareProxyClient"
+              ]
+            },
+            "ResetIdentityAwareProxyClientSecret": {
+              "methods": [
+                "resetIdentityAwareProxyClientSecret"
+              ]
+            },
+            "DeleteIdentityAwareProxyClient": {
+              "methods": [
+                "deleteIdentityAwareProxyClient"
+              ]
+            },
+            "ListIdentityAwareProxyClients": {
+              "methods": [
+                "listIdentityAwareProxyClients",
+                "listIdentityAwareProxyClientsStream",
+                "listIdentityAwareProxyClientsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

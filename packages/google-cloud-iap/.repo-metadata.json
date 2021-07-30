@@ -1,0 +1,15 @@
+{
+  "name": "iap",
+  "name_pretty": "Identity-Aware Proxy",
+  "product_documentation": "https://cloud.google.com/iap/",
+  "client_documentation": "https://googleapis.dev/nodejs/iap/latest/index.html",
+  "issue_tracker": "https://github.com/googleapis/nodejs-iap/issues",
+  "release_level": "ga",
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-iap",
+  "distribution_name": "@google-cloud/iap",
+  "api_id": "iap.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true
+}
+
