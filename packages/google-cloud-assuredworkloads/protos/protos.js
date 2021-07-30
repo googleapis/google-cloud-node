@@ -2002,6 +2002,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -2139,6 +2140,10 @@
                             case "HITRUST":
                             case 7:
                                 message.complianceRegime = 7;
+                                break;
+                            case "EU_REGIONS_AND_SUPPORT":
+                            case 8:
+                                message.complianceRegime = 8;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -3778,6 +3783,7 @@
                          * @property {number} US_REGIONAL_ACCESS=5 US_REGIONAL_ACCESS value
                          * @property {number} HIPAA=6 HIPAA value
                          * @property {number} HITRUST=7 HITRUST value
+                         * @property {number} EU_REGIONS_AND_SUPPORT=8 EU_REGIONS_AND_SUPPORT value
                          */
                         Workload.ComplianceRegime = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3789,6 +3795,7 @@
                             values[valuesById[5] = "US_REGIONAL_ACCESS"] = 5;
                             values[valuesById[6] = "HIPAA"] = 6;
                             values[valuesById[7] = "HITRUST"] = 7;
+                            values[valuesById[8] = "EU_REGIONS_AND_SUPPORT"] = 8;
                             return values;
                         })();
     
@@ -3990,6 +3997,7 @@
                                 case 5:
                                 case 6:
                                 case 7:
+                                case 8:
                                     break;
                                 }
                             return null;
@@ -4048,6 +4056,10 @@
                             case "HITRUST":
                             case 7:
                                 message.complianceRegime = 7;
+                                break;
+                            case "EU_REGIONS_AND_SUPPORT":
+                            case 8:
+                                message.complianceRegime = 8;
                                 break;
                             }
                             return message;

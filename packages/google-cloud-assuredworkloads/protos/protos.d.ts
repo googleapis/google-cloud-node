@@ -1589,7 +1589,8 @@ export namespace google {
                         FEDRAMP_MODERATE = 4,
                         US_REGIONAL_ACCESS = 5,
                         HIPAA = 6,
-                        HITRUST = 7
+                        HITRUST = 7,
+                        EU_REGIONS_AND_SUPPORT = 8
                     }
                 }
 
