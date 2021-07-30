@@ -23,6 +23,2496 @@ export namespace google {
         /** Namespace networkconnectivity. */
         namespace networkconnectivity {
 
+            /** Namespace v1. */
+            namespace v1 {
+
+                /** Properties of an OperationMetadata. */
+                interface IOperationMetadata {
+
+                    /** OperationMetadata createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target */
+                    target?: (string|null);
+
+                    /** OperationMetadata verb */
+                    verb?: (string|null);
+
+                    /** OperationMetadata statusMessage */
+                    statusMessage?: (string|null);
+
+                    /** OperationMetadata requestedCancellation */
+                    requestedCancellation?: (boolean|null);
+
+                    /** OperationMetadata apiVersion */
+                    apiVersion?: (string|null);
+                }
+
+                /** Represents an OperationMetadata. */
+                class OperationMetadata implements IOperationMetadata {
+
+                    /**
+                     * Constructs a new OperationMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IOperationMetadata);
+
+                    /** OperationMetadata createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OperationMetadata target. */
+                    public target: string;
+
+                    /** OperationMetadata verb. */
+                    public verb: string;
+
+                    /** OperationMetadata statusMessage. */
+                    public statusMessage: string;
+
+                    /** OperationMetadata requestedCancellation. */
+                    public requestedCancellation: boolean;
+
+                    /** OperationMetadata apiVersion. */
+                    public apiVersion: string;
+
+                    /**
+                     * Creates a new OperationMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OperationMetadata instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IOperationMetadata): google.cloud.networkconnectivity.v1.OperationMetadata;
+
+                    /**
+                     * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.networkconnectivity.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.OperationMetadata.verify|verify} messages.
+                     * @param message OperationMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IOperationMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.OperationMetadata;
+
+                    /**
+                     * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OperationMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.OperationMetadata;
+
+                    /**
+                     * Verifies an OperationMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OperationMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.OperationMetadata;
+
+                    /**
+                     * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                     * @param message OperationMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.OperationMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OperationMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Represents a HubService */
+                class HubService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new HubService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new HubService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): HubService;
+
+                    /**
+                     * Calls ListHubs.
+                     * @param request ListHubsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListHubsResponse
+                     */
+                    public listHubs(request: google.cloud.networkconnectivity.v1.IListHubsRequest, callback: google.cloud.networkconnectivity.v1.HubService.ListHubsCallback): void;
+
+                    /**
+                     * Calls ListHubs.
+                     * @param request ListHubsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listHubs(request: google.cloud.networkconnectivity.v1.IListHubsRequest): Promise<google.cloud.networkconnectivity.v1.ListHubsResponse>;
+
+                    /**
+                     * Calls GetHub.
+                     * @param request GetHubRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Hub
+                     */
+                    public getHub(request: google.cloud.networkconnectivity.v1.IGetHubRequest, callback: google.cloud.networkconnectivity.v1.HubService.GetHubCallback): void;
+
+                    /**
+                     * Calls GetHub.
+                     * @param request GetHubRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getHub(request: google.cloud.networkconnectivity.v1.IGetHubRequest): Promise<google.cloud.networkconnectivity.v1.Hub>;
+
+                    /**
+                     * Calls CreateHub.
+                     * @param request CreateHubRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createHub(request: google.cloud.networkconnectivity.v1.ICreateHubRequest, callback: google.cloud.networkconnectivity.v1.HubService.CreateHubCallback): void;
+
+                    /**
+                     * Calls CreateHub.
+                     * @param request CreateHubRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createHub(request: google.cloud.networkconnectivity.v1.ICreateHubRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateHub.
+                     * @param request UpdateHubRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateHub(request: google.cloud.networkconnectivity.v1.IUpdateHubRequest, callback: google.cloud.networkconnectivity.v1.HubService.UpdateHubCallback): void;
+
+                    /**
+                     * Calls UpdateHub.
+                     * @param request UpdateHubRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateHub(request: google.cloud.networkconnectivity.v1.IUpdateHubRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteHub.
+                     * @param request DeleteHubRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteHub(request: google.cloud.networkconnectivity.v1.IDeleteHubRequest, callback: google.cloud.networkconnectivity.v1.HubService.DeleteHubCallback): void;
+
+                    /**
+                     * Calls DeleteHub.
+                     * @param request DeleteHubRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteHub(request: google.cloud.networkconnectivity.v1.IDeleteHubRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListSpokes.
+                     * @param request ListSpokesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListSpokesResponse
+                     */
+                    public listSpokes(request: google.cloud.networkconnectivity.v1.IListSpokesRequest, callback: google.cloud.networkconnectivity.v1.HubService.ListSpokesCallback): void;
+
+                    /**
+                     * Calls ListSpokes.
+                     * @param request ListSpokesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listSpokes(request: google.cloud.networkconnectivity.v1.IListSpokesRequest): Promise<google.cloud.networkconnectivity.v1.ListSpokesResponse>;
+
+                    /**
+                     * Calls GetSpoke.
+                     * @param request GetSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Spoke
+                     */
+                    public getSpoke(request: google.cloud.networkconnectivity.v1.IGetSpokeRequest, callback: google.cloud.networkconnectivity.v1.HubService.GetSpokeCallback): void;
+
+                    /**
+                     * Calls GetSpoke.
+                     * @param request GetSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getSpoke(request: google.cloud.networkconnectivity.v1.IGetSpokeRequest): Promise<google.cloud.networkconnectivity.v1.Spoke>;
+
+                    /**
+                     * Calls CreateSpoke.
+                     * @param request CreateSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createSpoke(request: google.cloud.networkconnectivity.v1.ICreateSpokeRequest, callback: google.cloud.networkconnectivity.v1.HubService.CreateSpokeCallback): void;
+
+                    /**
+                     * Calls CreateSpoke.
+                     * @param request CreateSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createSpoke(request: google.cloud.networkconnectivity.v1.ICreateSpokeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateSpoke.
+                     * @param request UpdateSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateSpoke(request: google.cloud.networkconnectivity.v1.IUpdateSpokeRequest, callback: google.cloud.networkconnectivity.v1.HubService.UpdateSpokeCallback): void;
+
+                    /**
+                     * Calls UpdateSpoke.
+                     * @param request UpdateSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateSpoke(request: google.cloud.networkconnectivity.v1.IUpdateSpokeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeactivateSpoke.
+                     * @param request DeactivateSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deactivateSpoke(request: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest, callback: google.cloud.networkconnectivity.v1.HubService.DeactivateSpokeCallback): void;
+
+                    /**
+                     * Calls DeactivateSpoke.
+                     * @param request DeactivateSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deactivateSpoke(request: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ActivateSpoke.
+                     * @param request ActivateSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public activateSpoke(request: google.cloud.networkconnectivity.v1.IActivateSpokeRequest, callback: google.cloud.networkconnectivity.v1.HubService.ActivateSpokeCallback): void;
+
+                    /**
+                     * Calls ActivateSpoke.
+                     * @param request ActivateSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public activateSpoke(request: google.cloud.networkconnectivity.v1.IActivateSpokeRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteSpoke.
+                     * @param request DeleteSpokeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteSpoke(request: google.cloud.networkconnectivity.v1.IDeleteSpokeRequest, callback: google.cloud.networkconnectivity.v1.HubService.DeleteSpokeCallback): void;
+
+                    /**
+                     * Calls DeleteSpoke.
+                     * @param request DeleteSpokeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteSpoke(request: google.cloud.networkconnectivity.v1.IDeleteSpokeRequest): Promise<google.longrunning.Operation>;
+                }
+
+                namespace HubService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#listHubs}.
+                     * @param error Error, if any
+                     * @param [response] ListHubsResponse
+                     */
+                    type ListHubsCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1.ListHubsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#getHub}.
+                     * @param error Error, if any
+                     * @param [response] Hub
+                     */
+                    type GetHubCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1.Hub) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#createHub}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateHubCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#updateHub}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateHubCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#deleteHub}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteHubCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#listSpokes}.
+                     * @param error Error, if any
+                     * @param [response] ListSpokesResponse
+                     */
+                    type ListSpokesCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1.ListSpokesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#getSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Spoke
+                     */
+                    type GetSpokeCallback = (error: (Error|null), response?: google.cloud.networkconnectivity.v1.Spoke) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#createSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#updateSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#deactivateSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeactivateSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#activateSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ActivateSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#deleteSpoke}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+                }
+
+                /** Properties of a Hub. */
+                interface IHub {
+
+                    /** Hub name */
+                    name?: (string|null);
+
+                    /** Hub createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hub updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hub labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Hub description */
+                    description?: (string|null);
+
+                    /** Hub uniqueId */
+                    uniqueId?: (string|null);
+
+                    /** Hub state */
+                    state?: (google.cloud.networkconnectivity.v1.State|keyof typeof google.cloud.networkconnectivity.v1.State|null);
+                }
+
+                /** Represents a Hub. */
+                class Hub implements IHub {
+
+                    /**
+                     * Constructs a new Hub.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IHub);
+
+                    /** Hub name. */
+                    public name: string;
+
+                    /** Hub createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hub updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Hub labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Hub description. */
+                    public description: string;
+
+                    /** Hub uniqueId. */
+                    public uniqueId: string;
+
+                    /** Hub state. */
+                    public state: (google.cloud.networkconnectivity.v1.State|keyof typeof google.cloud.networkconnectivity.v1.State);
+
+                    /**
+                     * Creates a new Hub instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Hub instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IHub): google.cloud.networkconnectivity.v1.Hub;
+
+                    /**
+                     * Encodes the specified Hub message. Does not implicitly {@link google.cloud.networkconnectivity.v1.Hub.verify|verify} messages.
+                     * @param message Hub message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IHub, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Hub message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.Hub.verify|verify} messages.
+                     * @param message Hub message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IHub, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Hub message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Hub
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.Hub;
+
+                    /**
+                     * Decodes a Hub message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Hub
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.Hub;
+
+                    /**
+                     * Verifies a Hub message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Hub message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Hub
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.Hub;
+
+                    /**
+                     * Creates a plain object from a Hub message. Also converts values to other types if specified.
+                     * @param message Hub
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.Hub, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Hub to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** State enum. */
+                enum State {
+                    STATE_UNSPECIFIED = 0,
+                    CREATING = 1,
+                    ACTIVE = 2,
+                    DELETING = 3
+                }
+
+                /** Properties of a Spoke. */
+                interface ISpoke {
+
+                    /** Spoke name */
+                    name?: (string|null);
+
+                    /** Spoke createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Spoke updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Spoke labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** Spoke description */
+                    description?: (string|null);
+
+                    /** Spoke hub */
+                    hub?: (string|null);
+
+                    /** Spoke linkedVpnTunnels */
+                    linkedVpnTunnels?: (google.cloud.networkconnectivity.v1.ILinkedVpnTunnels|null);
+
+                    /** Spoke linkedInterconnectAttachments */
+                    linkedInterconnectAttachments?: (google.cloud.networkconnectivity.v1.ILinkedInterconnectAttachments|null);
+
+                    /** Spoke linkedRouterApplianceInstances */
+                    linkedRouterApplianceInstances?: (google.cloud.networkconnectivity.v1.ILinkedRouterApplianceInstances|null);
+
+                    /** Spoke uniqueId */
+                    uniqueId?: (string|null);
+
+                    /** Spoke state */
+                    state?: (google.cloud.networkconnectivity.v1.State|keyof typeof google.cloud.networkconnectivity.v1.State|null);
+                }
+
+                /** Represents a Spoke. */
+                class Spoke implements ISpoke {
+
+                    /**
+                     * Constructs a new Spoke.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.ISpoke);
+
+                    /** Spoke name. */
+                    public name: string;
+
+                    /** Spoke createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Spoke updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Spoke labels. */
+                    public labels: { [k: string]: string };
+
+                    /** Spoke description. */
+                    public description: string;
+
+                    /** Spoke hub. */
+                    public hub: string;
+
+                    /** Spoke linkedVpnTunnels. */
+                    public linkedVpnTunnels?: (google.cloud.networkconnectivity.v1.ILinkedVpnTunnels|null);
+
+                    /** Spoke linkedInterconnectAttachments. */
+                    public linkedInterconnectAttachments?: (google.cloud.networkconnectivity.v1.ILinkedInterconnectAttachments|null);
+
+                    /** Spoke linkedRouterApplianceInstances. */
+                    public linkedRouterApplianceInstances?: (google.cloud.networkconnectivity.v1.ILinkedRouterApplianceInstances|null);
+
+                    /** Spoke uniqueId. */
+                    public uniqueId: string;
+
+                    /** Spoke state. */
+                    public state: (google.cloud.networkconnectivity.v1.State|keyof typeof google.cloud.networkconnectivity.v1.State);
+
+                    /**
+                     * Creates a new Spoke instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Spoke instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.ISpoke): google.cloud.networkconnectivity.v1.Spoke;
+
+                    /**
+                     * Encodes the specified Spoke message. Does not implicitly {@link google.cloud.networkconnectivity.v1.Spoke.verify|verify} messages.
+                     * @param message Spoke message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.ISpoke, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Spoke message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.Spoke.verify|verify} messages.
+                     * @param message Spoke message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.ISpoke, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Spoke message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Spoke
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.Spoke;
+
+                    /**
+                     * Decodes a Spoke message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Spoke
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.Spoke;
+
+                    /**
+                     * Verifies a Spoke message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Spoke message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Spoke
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.Spoke;
+
+                    /**
+                     * Creates a plain object from a Spoke message. Also converts values to other types if specified.
+                     * @param message Spoke
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.Spoke, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Spoke to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListHubsRequest. */
+                interface IListHubsRequest {
+
+                    /** ListHubsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListHubsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListHubsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListHubsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListHubsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListHubsRequest. */
+                class ListHubsRequest implements IListHubsRequest {
+
+                    /**
+                     * Constructs a new ListHubsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IListHubsRequest);
+
+                    /** ListHubsRequest parent. */
+                    public parent: string;
+
+                    /** ListHubsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListHubsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListHubsRequest filter. */
+                    public filter: string;
+
+                    /** ListHubsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListHubsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListHubsRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IListHubsRequest): google.cloud.networkconnectivity.v1.ListHubsRequest;
+
+                    /**
+                     * Encodes the specified ListHubsRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListHubsRequest.verify|verify} messages.
+                     * @param message ListHubsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IListHubsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListHubsRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListHubsRequest.verify|verify} messages.
+                     * @param message ListHubsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IListHubsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListHubsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListHubsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.ListHubsRequest;
+
+                    /**
+                     * Decodes a ListHubsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListHubsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.ListHubsRequest;
+
+                    /**
+                     * Verifies a ListHubsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListHubsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListHubsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.ListHubsRequest;
+
+                    /**
+                     * Creates a plain object from a ListHubsRequest message. Also converts values to other types if specified.
+                     * @param message ListHubsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.ListHubsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListHubsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListHubsResponse. */
+                interface IListHubsResponse {
+
+                    /** ListHubsResponse hubs */
+                    hubs?: (google.cloud.networkconnectivity.v1.IHub[]|null);
+
+                    /** ListHubsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListHubsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListHubsResponse. */
+                class ListHubsResponse implements IListHubsResponse {
+
+                    /**
+                     * Constructs a new ListHubsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IListHubsResponse);
+
+                    /** ListHubsResponse hubs. */
+                    public hubs: google.cloud.networkconnectivity.v1.IHub[];
+
+                    /** ListHubsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListHubsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListHubsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListHubsResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IListHubsResponse): google.cloud.networkconnectivity.v1.ListHubsResponse;
+
+                    /**
+                     * Encodes the specified ListHubsResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListHubsResponse.verify|verify} messages.
+                     * @param message ListHubsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IListHubsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListHubsResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListHubsResponse.verify|verify} messages.
+                     * @param message ListHubsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IListHubsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListHubsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListHubsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.ListHubsResponse;
+
+                    /**
+                     * Decodes a ListHubsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListHubsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.ListHubsResponse;
+
+                    /**
+                     * Verifies a ListHubsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListHubsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListHubsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.ListHubsResponse;
+
+                    /**
+                     * Creates a plain object from a ListHubsResponse message. Also converts values to other types if specified.
+                     * @param message ListHubsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.ListHubsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListHubsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetHubRequest. */
+                interface IGetHubRequest {
+
+                    /** GetHubRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetHubRequest. */
+                class GetHubRequest implements IGetHubRequest {
+
+                    /**
+                     * Constructs a new GetHubRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IGetHubRequest);
+
+                    /** GetHubRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetHubRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetHubRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IGetHubRequest): google.cloud.networkconnectivity.v1.GetHubRequest;
+
+                    /**
+                     * Encodes the specified GetHubRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetHubRequest.verify|verify} messages.
+                     * @param message GetHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IGetHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetHubRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetHubRequest.verify|verify} messages.
+                     * @param message GetHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IGetHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetHubRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.GetHubRequest;
+
+                    /**
+                     * Decodes a GetHubRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.GetHubRequest;
+
+                    /**
+                     * Verifies a GetHubRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetHubRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetHubRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.GetHubRequest;
+
+                    /**
+                     * Creates a plain object from a GetHubRequest message. Also converts values to other types if specified.
+                     * @param message GetHubRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.GetHubRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetHubRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateHubRequest. */
+                interface ICreateHubRequest {
+
+                    /** CreateHubRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateHubRequest hubId */
+                    hubId?: (string|null);
+
+                    /** CreateHubRequest hub */
+                    hub?: (google.cloud.networkconnectivity.v1.IHub|null);
+
+                    /** CreateHubRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateHubRequest. */
+                class CreateHubRequest implements ICreateHubRequest {
+
+                    /**
+                     * Constructs a new CreateHubRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.ICreateHubRequest);
+
+                    /** CreateHubRequest parent. */
+                    public parent: string;
+
+                    /** CreateHubRequest hubId. */
+                    public hubId: string;
+
+                    /** CreateHubRequest hub. */
+                    public hub?: (google.cloud.networkconnectivity.v1.IHub|null);
+
+                    /** CreateHubRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateHubRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateHubRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.ICreateHubRequest): google.cloud.networkconnectivity.v1.CreateHubRequest;
+
+                    /**
+                     * Encodes the specified CreateHubRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateHubRequest.verify|verify} messages.
+                     * @param message CreateHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.ICreateHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateHubRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateHubRequest.verify|verify} messages.
+                     * @param message CreateHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.ICreateHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateHubRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.CreateHubRequest;
+
+                    /**
+                     * Decodes a CreateHubRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.CreateHubRequest;
+
+                    /**
+                     * Verifies a CreateHubRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateHubRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateHubRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.CreateHubRequest;
+
+                    /**
+                     * Creates a plain object from a CreateHubRequest message. Also converts values to other types if specified.
+                     * @param message CreateHubRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.CreateHubRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateHubRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateHubRequest. */
+                interface IUpdateHubRequest {
+
+                    /** UpdateHubRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateHubRequest hub */
+                    hub?: (google.cloud.networkconnectivity.v1.IHub|null);
+
+                    /** UpdateHubRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateHubRequest. */
+                class UpdateHubRequest implements IUpdateHubRequest {
+
+                    /**
+                     * Constructs a new UpdateHubRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IUpdateHubRequest);
+
+                    /** UpdateHubRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateHubRequest hub. */
+                    public hub?: (google.cloud.networkconnectivity.v1.IHub|null);
+
+                    /** UpdateHubRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateHubRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateHubRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IUpdateHubRequest): google.cloud.networkconnectivity.v1.UpdateHubRequest;
+
+                    /**
+                     * Encodes the specified UpdateHubRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateHubRequest.verify|verify} messages.
+                     * @param message UpdateHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IUpdateHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateHubRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateHubRequest.verify|verify} messages.
+                     * @param message UpdateHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IUpdateHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateHubRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.UpdateHubRequest;
+
+                    /**
+                     * Decodes an UpdateHubRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.UpdateHubRequest;
+
+                    /**
+                     * Verifies an UpdateHubRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateHubRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateHubRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.UpdateHubRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateHubRequest message. Also converts values to other types if specified.
+                     * @param message UpdateHubRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.UpdateHubRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateHubRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteHubRequest. */
+                interface IDeleteHubRequest {
+
+                    /** DeleteHubRequest name */
+                    name?: (string|null);
+
+                    /** DeleteHubRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteHubRequest. */
+                class DeleteHubRequest implements IDeleteHubRequest {
+
+                    /**
+                     * Constructs a new DeleteHubRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IDeleteHubRequest);
+
+                    /** DeleteHubRequest name. */
+                    public name: string;
+
+                    /** DeleteHubRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteHubRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteHubRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IDeleteHubRequest): google.cloud.networkconnectivity.v1.DeleteHubRequest;
+
+                    /**
+                     * Encodes the specified DeleteHubRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteHubRequest.verify|verify} messages.
+                     * @param message DeleteHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IDeleteHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteHubRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteHubRequest.verify|verify} messages.
+                     * @param message DeleteHubRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IDeleteHubRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteHubRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.DeleteHubRequest;
+
+                    /**
+                     * Decodes a DeleteHubRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteHubRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.DeleteHubRequest;
+
+                    /**
+                     * Verifies a DeleteHubRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteHubRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteHubRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.DeleteHubRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteHubRequest message. Also converts values to other types if specified.
+                     * @param message DeleteHubRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.DeleteHubRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteHubRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListSpokesRequest. */
+                interface IListSpokesRequest {
+
+                    /** ListSpokesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListSpokesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListSpokesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListSpokesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListSpokesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListSpokesRequest. */
+                class ListSpokesRequest implements IListSpokesRequest {
+
+                    /**
+                     * Constructs a new ListSpokesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IListSpokesRequest);
+
+                    /** ListSpokesRequest parent. */
+                    public parent: string;
+
+                    /** ListSpokesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListSpokesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListSpokesRequest filter. */
+                    public filter: string;
+
+                    /** ListSpokesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListSpokesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSpokesRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IListSpokesRequest): google.cloud.networkconnectivity.v1.ListSpokesRequest;
+
+                    /**
+                     * Encodes the specified ListSpokesRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListSpokesRequest.verify|verify} messages.
+                     * @param message ListSpokesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IListSpokesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSpokesRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListSpokesRequest.verify|verify} messages.
+                     * @param message ListSpokesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IListSpokesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSpokesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSpokesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.ListSpokesRequest;
+
+                    /**
+                     * Decodes a ListSpokesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSpokesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.ListSpokesRequest;
+
+                    /**
+                     * Verifies a ListSpokesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSpokesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSpokesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.ListSpokesRequest;
+
+                    /**
+                     * Creates a plain object from a ListSpokesRequest message. Also converts values to other types if specified.
+                     * @param message ListSpokesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.ListSpokesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSpokesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListSpokesResponse. */
+                interface IListSpokesResponse {
+
+                    /** ListSpokesResponse spokes */
+                    spokes?: (google.cloud.networkconnectivity.v1.ISpoke[]|null);
+
+                    /** ListSpokesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListSpokesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListSpokesResponse. */
+                class ListSpokesResponse implements IListSpokesResponse {
+
+                    /**
+                     * Constructs a new ListSpokesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IListSpokesResponse);
+
+                    /** ListSpokesResponse spokes. */
+                    public spokes: google.cloud.networkconnectivity.v1.ISpoke[];
+
+                    /** ListSpokesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListSpokesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListSpokesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListSpokesResponse instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IListSpokesResponse): google.cloud.networkconnectivity.v1.ListSpokesResponse;
+
+                    /**
+                     * Encodes the specified ListSpokesResponse message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListSpokesResponse.verify|verify} messages.
+                     * @param message ListSpokesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IListSpokesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListSpokesResponse message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ListSpokesResponse.verify|verify} messages.
+                     * @param message ListSpokesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IListSpokesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListSpokesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListSpokesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.ListSpokesResponse;
+
+                    /**
+                     * Decodes a ListSpokesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListSpokesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.ListSpokesResponse;
+
+                    /**
+                     * Verifies a ListSpokesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListSpokesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListSpokesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.ListSpokesResponse;
+
+                    /**
+                     * Creates a plain object from a ListSpokesResponse message. Also converts values to other types if specified.
+                     * @param message ListSpokesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.ListSpokesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListSpokesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetSpokeRequest. */
+                interface IGetSpokeRequest {
+
+                    /** GetSpokeRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetSpokeRequest. */
+                class GetSpokeRequest implements IGetSpokeRequest {
+
+                    /**
+                     * Constructs a new GetSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IGetSpokeRequest);
+
+                    /** GetSpokeRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IGetSpokeRequest): google.cloud.networkconnectivity.v1.GetSpokeRequest;
+
+                    /**
+                     * Encodes the specified GetSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetSpokeRequest.verify|verify} messages.
+                     * @param message GetSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IGetSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.GetSpokeRequest.verify|verify} messages.
+                     * @param message GetSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IGetSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.GetSpokeRequest;
+
+                    /**
+                     * Decodes a GetSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.GetSpokeRequest;
+
+                    /**
+                     * Verifies a GetSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.GetSpokeRequest;
+
+                    /**
+                     * Creates a plain object from a GetSpokeRequest message. Also converts values to other types if specified.
+                     * @param message GetSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.GetSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateSpokeRequest. */
+                interface ICreateSpokeRequest {
+
+                    /** CreateSpokeRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateSpokeRequest spokeId */
+                    spokeId?: (string|null);
+
+                    /** CreateSpokeRequest spoke */
+                    spoke?: (google.cloud.networkconnectivity.v1.ISpoke|null);
+
+                    /** CreateSpokeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateSpokeRequest. */
+                class CreateSpokeRequest implements ICreateSpokeRequest {
+
+                    /**
+                     * Constructs a new CreateSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.ICreateSpokeRequest);
+
+                    /** CreateSpokeRequest parent. */
+                    public parent: string;
+
+                    /** CreateSpokeRequest spokeId. */
+                    public spokeId: string;
+
+                    /** CreateSpokeRequest spoke. */
+                    public spoke?: (google.cloud.networkconnectivity.v1.ISpoke|null);
+
+                    /** CreateSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.ICreateSpokeRequest): google.cloud.networkconnectivity.v1.CreateSpokeRequest;
+
+                    /**
+                     * Encodes the specified CreateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateSpokeRequest.verify|verify} messages.
+                     * @param message CreateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.ICreateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.CreateSpokeRequest.verify|verify} messages.
+                     * @param message CreateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.ICreateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.CreateSpokeRequest;
+
+                    /**
+                     * Decodes a CreateSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.CreateSpokeRequest;
+
+                    /**
+                     * Verifies a CreateSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.CreateSpokeRequest;
+
+                    /**
+                     * Creates a plain object from a CreateSpokeRequest message. Also converts values to other types if specified.
+                     * @param message CreateSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.CreateSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an UpdateSpokeRequest. */
+                interface IUpdateSpokeRequest {
+
+                    /** UpdateSpokeRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSpokeRequest spoke */
+                    spoke?: (google.cloud.networkconnectivity.v1.ISpoke|null);
+
+                    /** UpdateSpokeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateSpokeRequest. */
+                class UpdateSpokeRequest implements IUpdateSpokeRequest {
+
+                    /**
+                     * Constructs a new UpdateSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IUpdateSpokeRequest);
+
+                    /** UpdateSpokeRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateSpokeRequest spoke. */
+                    public spoke?: (google.cloud.networkconnectivity.v1.ISpoke|null);
+
+                    /** UpdateSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IUpdateSpokeRequest): google.cloud.networkconnectivity.v1.UpdateSpokeRequest;
+
+                    /**
+                     * Encodes the specified UpdateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateSpokeRequest.verify|verify} messages.
+                     * @param message UpdateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IUpdateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.UpdateSpokeRequest.verify|verify} messages.
+                     * @param message UpdateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IUpdateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.UpdateSpokeRequest;
+
+                    /**
+                     * Decodes an UpdateSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.UpdateSpokeRequest;
+
+                    /**
+                     * Verifies an UpdateSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.UpdateSpokeRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateSpokeRequest message. Also converts values to other types if specified.
+                     * @param message UpdateSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.UpdateSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteSpokeRequest. */
+                interface IDeleteSpokeRequest {
+
+                    /** DeleteSpokeRequest name */
+                    name?: (string|null);
+
+                    /** DeleteSpokeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteSpokeRequest. */
+                class DeleteSpokeRequest implements IDeleteSpokeRequest {
+
+                    /**
+                     * Constructs a new DeleteSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IDeleteSpokeRequest);
+
+                    /** DeleteSpokeRequest name. */
+                    public name: string;
+
+                    /** DeleteSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IDeleteSpokeRequest): google.cloud.networkconnectivity.v1.DeleteSpokeRequest;
+
+                    /**
+                     * Encodes the specified DeleteSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteSpokeRequest.verify|verify} messages.
+                     * @param message DeleteSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IDeleteSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeleteSpokeRequest.verify|verify} messages.
+                     * @param message DeleteSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IDeleteSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.DeleteSpokeRequest;
+
+                    /**
+                     * Decodes a DeleteSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.DeleteSpokeRequest;
+
+                    /**
+                     * Verifies a DeleteSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.DeleteSpokeRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteSpokeRequest message. Also converts values to other types if specified.
+                     * @param message DeleteSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.DeleteSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeactivateSpokeRequest. */
+                interface IDeactivateSpokeRequest {
+
+                    /** DeactivateSpokeRequest name */
+                    name?: (string|null);
+
+                    /** DeactivateSpokeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeactivateSpokeRequest. */
+                class DeactivateSpokeRequest implements IDeactivateSpokeRequest {
+
+                    /**
+                     * Constructs a new DeactivateSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest);
+
+                    /** DeactivateSpokeRequest name. */
+                    public name: string;
+
+                    /** DeactivateSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeactivateSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeactivateSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest): google.cloud.networkconnectivity.v1.DeactivateSpokeRequest;
+
+                    /**
+                     * Encodes the specified DeactivateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeactivateSpokeRequest.verify|verify} messages.
+                     * @param message DeactivateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeactivateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeactivateSpokeRequest.verify|verify} messages.
+                     * @param message DeactivateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeactivateSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeactivateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.DeactivateSpokeRequest;
+
+                    /**
+                     * Decodes a DeactivateSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeactivateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.DeactivateSpokeRequest;
+
+                    /**
+                     * Verifies a DeactivateSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeactivateSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeactivateSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.DeactivateSpokeRequest;
+
+                    /**
+                     * Creates a plain object from a DeactivateSpokeRequest message. Also converts values to other types if specified.
+                     * @param message DeactivateSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.DeactivateSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeactivateSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ActivateSpokeRequest. */
+                interface IActivateSpokeRequest {
+
+                    /** ActivateSpokeRequest name */
+                    name?: (string|null);
+
+                    /** ActivateSpokeRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an ActivateSpokeRequest. */
+                class ActivateSpokeRequest implements IActivateSpokeRequest {
+
+                    /**
+                     * Constructs a new ActivateSpokeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IActivateSpokeRequest);
+
+                    /** ActivateSpokeRequest name. */
+                    public name: string;
+
+                    /** ActivateSpokeRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new ActivateSpokeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ActivateSpokeRequest instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IActivateSpokeRequest): google.cloud.networkconnectivity.v1.ActivateSpokeRequest;
+
+                    /**
+                     * Encodes the specified ActivateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ActivateSpokeRequest.verify|verify} messages.
+                     * @param message ActivateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IActivateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ActivateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ActivateSpokeRequest.verify|verify} messages.
+                     * @param message ActivateSpokeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IActivateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ActivateSpokeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ActivateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.ActivateSpokeRequest;
+
+                    /**
+                     * Decodes an ActivateSpokeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ActivateSpokeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.ActivateSpokeRequest;
+
+                    /**
+                     * Verifies an ActivateSpokeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ActivateSpokeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ActivateSpokeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.ActivateSpokeRequest;
+
+                    /**
+                     * Creates a plain object from an ActivateSpokeRequest message. Also converts values to other types if specified.
+                     * @param message ActivateSpokeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.ActivateSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ActivateSpokeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a LinkedVpnTunnels. */
+                interface ILinkedVpnTunnels {
+
+                    /** LinkedVpnTunnels uris */
+                    uris?: (string[]|null);
+
+                    /** LinkedVpnTunnels siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+                }
+
+                /** Represents a LinkedVpnTunnels. */
+                class LinkedVpnTunnels implements ILinkedVpnTunnels {
+
+                    /**
+                     * Constructs a new LinkedVpnTunnels.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.ILinkedVpnTunnels);
+
+                    /** LinkedVpnTunnels uris. */
+                    public uris: string[];
+
+                    /** LinkedVpnTunnels siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /**
+                     * Creates a new LinkedVpnTunnels instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkedVpnTunnels instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.ILinkedVpnTunnels): google.cloud.networkconnectivity.v1.LinkedVpnTunnels;
+
+                    /**
+                     * Encodes the specified LinkedVpnTunnels message. Does not implicitly {@link google.cloud.networkconnectivity.v1.LinkedVpnTunnels.verify|verify} messages.
+                     * @param message LinkedVpnTunnels message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.ILinkedVpnTunnels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkedVpnTunnels message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.LinkedVpnTunnels.verify|verify} messages.
+                     * @param message LinkedVpnTunnels message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.ILinkedVpnTunnels, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkedVpnTunnels message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkedVpnTunnels
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.LinkedVpnTunnels;
+
+                    /**
+                     * Decodes a LinkedVpnTunnels message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkedVpnTunnels
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.LinkedVpnTunnels;
+
+                    /**
+                     * Verifies a LinkedVpnTunnels message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkedVpnTunnels message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkedVpnTunnels
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.LinkedVpnTunnels;
+
+                    /**
+                     * Creates a plain object from a LinkedVpnTunnels message. Also converts values to other types if specified.
+                     * @param message LinkedVpnTunnels
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.LinkedVpnTunnels, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkedVpnTunnels to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a LinkedInterconnectAttachments. */
+                interface ILinkedInterconnectAttachments {
+
+                    /** LinkedInterconnectAttachments uris */
+                    uris?: (string[]|null);
+
+                    /** LinkedInterconnectAttachments siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+                }
+
+                /** Represents a LinkedInterconnectAttachments. */
+                class LinkedInterconnectAttachments implements ILinkedInterconnectAttachments {
+
+                    /**
+                     * Constructs a new LinkedInterconnectAttachments.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.ILinkedInterconnectAttachments);
+
+                    /** LinkedInterconnectAttachments uris. */
+                    public uris: string[];
+
+                    /** LinkedInterconnectAttachments siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /**
+                     * Creates a new LinkedInterconnectAttachments instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkedInterconnectAttachments instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.ILinkedInterconnectAttachments): google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments;
+
+                    /**
+                     * Encodes the specified LinkedInterconnectAttachments message. Does not implicitly {@link google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments.verify|verify} messages.
+                     * @param message LinkedInterconnectAttachments message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.ILinkedInterconnectAttachments, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkedInterconnectAttachments message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments.verify|verify} messages.
+                     * @param message LinkedInterconnectAttachments message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.ILinkedInterconnectAttachments, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkedInterconnectAttachments message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkedInterconnectAttachments
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments;
+
+                    /**
+                     * Decodes a LinkedInterconnectAttachments message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkedInterconnectAttachments
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments;
+
+                    /**
+                     * Verifies a LinkedInterconnectAttachments message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkedInterconnectAttachments message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkedInterconnectAttachments
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments;
+
+                    /**
+                     * Creates a plain object from a LinkedInterconnectAttachments message. Also converts values to other types if specified.
+                     * @param message LinkedInterconnectAttachments
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.LinkedInterconnectAttachments, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkedInterconnectAttachments to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a LinkedRouterApplianceInstances. */
+                interface ILinkedRouterApplianceInstances {
+
+                    /** LinkedRouterApplianceInstances instances */
+                    instances?: (google.cloud.networkconnectivity.v1.IRouterApplianceInstance[]|null);
+
+                    /** LinkedRouterApplianceInstances siteToSiteDataTransfer */
+                    siteToSiteDataTransfer?: (boolean|null);
+                }
+
+                /** Represents a LinkedRouterApplianceInstances. */
+                class LinkedRouterApplianceInstances implements ILinkedRouterApplianceInstances {
+
+                    /**
+                     * Constructs a new LinkedRouterApplianceInstances.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.ILinkedRouterApplianceInstances);
+
+                    /** LinkedRouterApplianceInstances instances. */
+                    public instances: google.cloud.networkconnectivity.v1.IRouterApplianceInstance[];
+
+                    /** LinkedRouterApplianceInstances siteToSiteDataTransfer. */
+                    public siteToSiteDataTransfer: boolean;
+
+                    /**
+                     * Creates a new LinkedRouterApplianceInstances instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns LinkedRouterApplianceInstances instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.ILinkedRouterApplianceInstances): google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances;
+
+                    /**
+                     * Encodes the specified LinkedRouterApplianceInstances message. Does not implicitly {@link google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances.verify|verify} messages.
+                     * @param message LinkedRouterApplianceInstances message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.ILinkedRouterApplianceInstances, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified LinkedRouterApplianceInstances message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances.verify|verify} messages.
+                     * @param message LinkedRouterApplianceInstances message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.ILinkedRouterApplianceInstances, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a LinkedRouterApplianceInstances message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns LinkedRouterApplianceInstances
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances;
+
+                    /**
+                     * Decodes a LinkedRouterApplianceInstances message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns LinkedRouterApplianceInstances
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances;
+
+                    /**
+                     * Verifies a LinkedRouterApplianceInstances message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a LinkedRouterApplianceInstances message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns LinkedRouterApplianceInstances
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances;
+
+                    /**
+                     * Creates a plain object from a LinkedRouterApplianceInstances message. Also converts values to other types if specified.
+                     * @param message LinkedRouterApplianceInstances
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.LinkedRouterApplianceInstances, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this LinkedRouterApplianceInstances to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RouterApplianceInstance. */
+                interface IRouterApplianceInstance {
+
+                    /** RouterApplianceInstance virtualMachine */
+                    virtualMachine?: (string|null);
+
+                    /** RouterApplianceInstance ipAddress */
+                    ipAddress?: (string|null);
+                }
+
+                /** Represents a RouterApplianceInstance. */
+                class RouterApplianceInstance implements IRouterApplianceInstance {
+
+                    /**
+                     * Constructs a new RouterApplianceInstance.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IRouterApplianceInstance);
+
+                    /** RouterApplianceInstance virtualMachine. */
+                    public virtualMachine: string;
+
+                    /** RouterApplianceInstance ipAddress. */
+                    public ipAddress: string;
+
+                    /**
+                     * Creates a new RouterApplianceInstance instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RouterApplianceInstance instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IRouterApplianceInstance): google.cloud.networkconnectivity.v1.RouterApplianceInstance;
+
+                    /**
+                     * Encodes the specified RouterApplianceInstance message. Does not implicitly {@link google.cloud.networkconnectivity.v1.RouterApplianceInstance.verify|verify} messages.
+                     * @param message RouterApplianceInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IRouterApplianceInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RouterApplianceInstance message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.RouterApplianceInstance.verify|verify} messages.
+                     * @param message RouterApplianceInstance message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IRouterApplianceInstance, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RouterApplianceInstance message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RouterApplianceInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.RouterApplianceInstance;
+
+                    /**
+                     * Decodes a RouterApplianceInstance message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RouterApplianceInstance
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.RouterApplianceInstance;
+
+                    /**
+                     * Verifies a RouterApplianceInstance message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RouterApplianceInstance message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RouterApplianceInstance
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.RouterApplianceInstance;
+
+                    /**
+                     * Creates a plain object from a RouterApplianceInstance message. Also converts values to other types if specified.
+                     * @param message RouterApplianceInstance
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.RouterApplianceInstance, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RouterApplianceInstance to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+            }
+
             /** Namespace v1alpha1. */
             namespace v1alpha1 {
 

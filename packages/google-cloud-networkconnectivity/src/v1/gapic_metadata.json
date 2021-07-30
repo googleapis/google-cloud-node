@@ -1,0 +1,151 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.networkconnectivity.v1",
+  "libraryPackage": "@google-cloud/networkconnectivity",
+  "services": {
+    "HubService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "HubServiceClient",
+          "rpcs": {
+            "GetHub": {
+              "methods": [
+                "getHub"
+              ]
+            },
+            "GetSpoke": {
+              "methods": [
+                "getSpoke"
+              ]
+            },
+            "CreateHub": {
+              "methods": [
+                "createHub"
+              ]
+            },
+            "UpdateHub": {
+              "methods": [
+                "updateHub"
+              ]
+            },
+            "DeleteHub": {
+              "methods": [
+                "deleteHub"
+              ]
+            },
+            "CreateSpoke": {
+              "methods": [
+                "createSpoke"
+              ]
+            },
+            "UpdateSpoke": {
+              "methods": [
+                "updateSpoke"
+              ]
+            },
+            "DeactivateSpoke": {
+              "methods": [
+                "deactivateSpoke"
+              ]
+            },
+            "ActivateSpoke": {
+              "methods": [
+                "activateSpoke"
+              ]
+            },
+            "DeleteSpoke": {
+              "methods": [
+                "deleteSpoke"
+              ]
+            },
+            "ListHubs": {
+              "methods": [
+                "listHubs",
+                "listHubsStream",
+                "listHubsAsync"
+              ]
+            },
+            "ListSpokes": {
+              "methods": [
+                "listSpokes",
+                "listSpokesStream",
+                "listSpokesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "HubServiceClient",
+          "rpcs": {
+            "GetHub": {
+              "methods": [
+                "getHub"
+              ]
+            },
+            "GetSpoke": {
+              "methods": [
+                "getSpoke"
+              ]
+            },
+            "CreateHub": {
+              "methods": [
+                "createHub"
+              ]
+            },
+            "UpdateHub": {
+              "methods": [
+                "updateHub"
+              ]
+            },
+            "DeleteHub": {
+              "methods": [
+                "deleteHub"
+              ]
+            },
+            "CreateSpoke": {
+              "methods": [
+                "createSpoke"
+              ]
+            },
+            "UpdateSpoke": {
+              "methods": [
+                "updateSpoke"
+              ]
+            },
+            "DeactivateSpoke": {
+              "methods": [
+                "deactivateSpoke"
+              ]
+            },
+            "ActivateSpoke": {
+              "methods": [
+                "activateSpoke"
+              ]
+            },
+            "DeleteSpoke": {
+              "methods": [
+                "deleteSpoke"
+              ]
+            },
+            "ListHubs": {
+              "methods": [
+                "listHubs",
+                "listHubsStream",
+                "listHubsAsync"
+              ]
+            },
+            "ListSpokes": {
+              "methods": [
+                "listSpokes",
+                "listSpokesStream",
+                "listSpokesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
