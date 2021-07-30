@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.6...v1.5.0) (2021-07-30)
+
+
+### Features
+
+* Add EU Regions And Support compliance regime ([#90](https://www.github.com/googleapis/nodejs-assured-workloads/issues/90)) ([c3d9957](https://www.github.com/googleapis/nodejs-assured-workloads/commit/c3d9957097e9fe638885fb42fd205b82fb62e02d))
+
 ### [1.4.6](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.5...v1.4.6) (2021-07-16)
 
 
