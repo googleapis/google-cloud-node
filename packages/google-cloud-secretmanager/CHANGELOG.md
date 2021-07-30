@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.9.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.8.1...v3.9.0) (2021-07-30)
+
+
+### Features
+
+* In Secret Manager, users can now use filter to customize the output of ListSecrets/ListSecretVersions calls ([#283](https://www.github.com/googleapis/nodejs-secret-manager/issues/283)) ([063691a](https://www.github.com/googleapis/nodejs-secret-manager/commit/063691a87291fab82037e9b444812dcf0724eb0c))
+
 ### [3.8.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.8.0...v3.8.1) (2021-07-16)
 
 
