@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.6...v1.2.0) (2021-07-30)
+
+
+### Features
+
+* Add files for Network Connectivity v1 API. ([#68](https://www.github.com/googleapis/nodejs-network-connectivity/issues/68)) ([5028509](https://www.github.com/googleapis/nodejs-network-connectivity/commit/5028509d9a0ec649596b11a60906d23e68ff684d))
+
 ### [1.1.6](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.1.5...v1.1.6) (2021-07-16)
 
 
