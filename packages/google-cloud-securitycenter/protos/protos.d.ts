@@ -625,6 +625,12 @@ export namespace google {
 
                     /** Finding canonicalName */
                     canonicalName?: (string|null);
+
+                    /** Finding findingClass */
+                    findingClass?: (google.cloud.securitycenter.v1.Finding.FindingClass|keyof typeof google.cloud.securitycenter.v1.Finding.FindingClass|null);
+
+                    /** Finding indicator */
+                    indicator?: (google.cloud.securitycenter.v1.IIndicator|null);
                 }
 
                 /** Represents a Finding. */
@@ -671,6 +677,12 @@ export namespace google {
 
                     /** Finding canonicalName. */
                     public canonicalName: string;
+
+                    /** Finding findingClass. */
+                    public findingClass: (google.cloud.securitycenter.v1.Finding.FindingClass|keyof typeof google.cloud.securitycenter.v1.Finding.FindingClass);
+
+                    /** Finding indicator. */
+                    public indicator?: (google.cloud.securitycenter.v1.IIndicator|null);
 
                     /**
                      * Creates a new Finding instance using the specified properties.
@@ -760,6 +772,111 @@ export namespace google {
                         MEDIUM = 3,
                         LOW = 4
                     }
+
+                    /** FindingClass enum. */
+                    enum FindingClass {
+                        FINDING_CLASS_UNSPECIFIED = 0,
+                        THREAT = 1,
+                        VULNERABILITY = 2,
+                        MISCONFIGURATION = 3,
+                        OBSERVATION = 4
+                    }
+                }
+
+                /** Properties of an Indicator. */
+                interface IIndicator {
+
+                    /** Indicator ipAddresses */
+                    ipAddresses?: (string[]|null);
+
+                    /** Indicator domains */
+                    domains?: (string[]|null);
+                }
+
+                /** Represents an Indicator. */
+                class Indicator implements IIndicator {
+
+                    /**
+                     * Constructs a new Indicator.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.securitycenter.v1.IIndicator);
+
+                    /** Indicator ipAddresses. */
+                    public ipAddresses: string[];
+
+                    /** Indicator domains. */
+                    public domains: string[];
+
+                    /**
+                     * Creates a new Indicator instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Indicator instance
+                     */
+                    public static create(properties?: google.cloud.securitycenter.v1.IIndicator): google.cloud.securitycenter.v1.Indicator;
+
+                    /**
+                     * Encodes the specified Indicator message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.verify|verify} messages.
+                     * @param message Indicator message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.securitycenter.v1.IIndicator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Indicator message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.verify|verify} messages.
+                     * @param message Indicator message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.securitycenter.v1.IIndicator, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an Indicator message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Indicator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.securitycenter.v1.Indicator;
+
+                    /**
+                     * Decodes an Indicator message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Indicator
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.securitycenter.v1.Indicator;
+
+                    /**
+                     * Verifies an Indicator message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an Indicator message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Indicator
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.securitycenter.v1.Indicator;
+
+                    /**
+                     * Creates a plain object from an Indicator message. Also converts values to other types if specified.
+                     * @param message Indicator
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.securitycenter.v1.Indicator, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Indicator to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a NotificationConfig. */

@@ -202,6 +202,14 @@
                         "canonicalName": {
                           "type": "string",
                           "id": 14
+                        },
+                        "findingClass": {
+                          "type": "FindingClass",
+                          "id": 17
+                        },
+                        "indicator": {
+                          "type": "Indicator",
+                          "id": 18
                         }
                       },
                       "nested": {
@@ -220,6 +228,29 @@
                             "MEDIUM": 3,
                             "LOW": 4
                           }
+                        },
+                        "FindingClass": {
+                          "values": {
+                            "FINDING_CLASS_UNSPECIFIED": 0,
+                            "THREAT": 1,
+                            "VULNERABILITY": 2,
+                            "MISCONFIGURATION": 3,
+                            "OBSERVATION": 4
+                          }
+                        }
+                      }
+                    },
+                    "Indicator": {
+                      "fields": {
+                        "ipAddresses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        },
+                        "domains": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

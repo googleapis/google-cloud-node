@@ -1562,6 +1562,8 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] Finding createTime
                          * @property {google.cloud.securitycenter.v1.Finding.Severity|null} [severity] Finding severity
                          * @property {string|null} [canonicalName] Finding canonicalName
+                         * @property {google.cloud.securitycenter.v1.Finding.FindingClass|null} [findingClass] Finding findingClass
+                         * @property {google.cloud.securitycenter.v1.IIndicator|null} [indicator] Finding indicator
                          */
     
                         /**
@@ -1677,6 +1679,22 @@
                         Finding.prototype.canonicalName = "";
     
                         /**
+                         * Finding findingClass.
+                         * @member {google.cloud.securitycenter.v1.Finding.FindingClass} findingClass
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.findingClass = 0;
+    
+                        /**
+                         * Finding indicator.
+                         * @member {google.cloud.securitycenter.v1.IIndicator|null|undefined} indicator
+                         * @memberof google.cloud.securitycenter.v1.Finding
+                         * @instance
+                         */
+                        Finding.prototype.indicator = null;
+    
+                        /**
                          * Creates a new Finding instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.securitycenter.v1.Finding
@@ -1727,6 +1745,10 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.severity);
                             if (message.canonicalName != null && Object.hasOwnProperty.call(message, "canonicalName"))
                                 writer.uint32(/* id 14, wireType 2 =*/114).string(message.canonicalName);
+                            if (message.findingClass != null && Object.hasOwnProperty.call(message, "findingClass"))
+                                writer.uint32(/* id 17, wireType 0 =*/136).int32(message.findingClass);
+                            if (message.indicator != null && Object.hasOwnProperty.call(message, "indicator"))
+                                $root.google.cloud.securitycenter.v1.Indicator.encode(message.indicator, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
                             return writer;
                         };
     
@@ -1815,6 +1837,12 @@
                                     break;
                                 case 14:
                                     message.canonicalName = reader.string();
+                                    break;
+                                case 17:
+                                    message.findingClass = reader.int32();
+                                    break;
+                                case 18:
+                                    message.indicator = $root.google.cloud.securitycenter.v1.Indicator.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1914,6 +1942,22 @@
                             if (message.canonicalName != null && message.hasOwnProperty("canonicalName"))
                                 if (!$util.isString(message.canonicalName))
                                     return "canonicalName: string expected";
+                            if (message.findingClass != null && message.hasOwnProperty("findingClass"))
+                                switch (message.findingClass) {
+                                default:
+                                    return "findingClass: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            if (message.indicator != null && message.hasOwnProperty("indicator")) {
+                                var error = $root.google.cloud.securitycenter.v1.Indicator.verify(message.indicator);
+                                if (error)
+                                    return "indicator." + error;
+                            }
                             return null;
                         };
     
@@ -2002,6 +2046,33 @@
                             }
                             if (object.canonicalName != null)
                                 message.canonicalName = String(object.canonicalName);
+                            switch (object.findingClass) {
+                            case "FINDING_CLASS_UNSPECIFIED":
+                            case 0:
+                                message.findingClass = 0;
+                                break;
+                            case "THREAT":
+                            case 1:
+                                message.findingClass = 1;
+                                break;
+                            case "VULNERABILITY":
+                            case 2:
+                                message.findingClass = 2;
+                                break;
+                            case "MISCONFIGURATION":
+                            case 3:
+                                message.findingClass = 3;
+                                break;
+                            case "OBSERVATION":
+                            case 4:
+                                message.findingClass = 4;
+                                break;
+                            }
+                            if (object.indicator != null) {
+                                if (typeof object.indicator !== "object")
+                                    throw TypeError(".google.cloud.securitycenter.v1.Finding.indicator: object expected");
+                                message.indicator = $root.google.cloud.securitycenter.v1.Indicator.fromObject(object.indicator);
+                            }
                             return message;
                         };
     
@@ -2032,6 +2103,8 @@
                                 object.createTime = null;
                                 object.severity = options.enums === String ? "SEVERITY_UNSPECIFIED" : 0;
                                 object.canonicalName = "";
+                                object.findingClass = options.enums === String ? "FINDING_CLASS_UNSPECIFIED" : 0;
+                                object.indicator = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2061,6 +2134,10 @@
                                 object.severity = options.enums === String ? $root.google.cloud.securitycenter.v1.Finding.Severity[message.severity] : message.severity;
                             if (message.canonicalName != null && message.hasOwnProperty("canonicalName"))
                                 object.canonicalName = message.canonicalName;
+                            if (message.findingClass != null && message.hasOwnProperty("findingClass"))
+                                object.findingClass = options.enums === String ? $root.google.cloud.securitycenter.v1.Finding.FindingClass[message.findingClass] : message.findingClass;
+                            if (message.indicator != null && message.hasOwnProperty("indicator"))
+                                object.indicator = $root.google.cloud.securitycenter.v1.Indicator.toObject(message.indicator, options);
                             return object;
                         };
     
@@ -2111,7 +2188,269 @@
                             return values;
                         })();
     
+                        /**
+                         * FindingClass enum.
+                         * @name google.cloud.securitycenter.v1.Finding.FindingClass
+                         * @enum {number}
+                         * @property {number} FINDING_CLASS_UNSPECIFIED=0 FINDING_CLASS_UNSPECIFIED value
+                         * @property {number} THREAT=1 THREAT value
+                         * @property {number} VULNERABILITY=2 VULNERABILITY value
+                         * @property {number} MISCONFIGURATION=3 MISCONFIGURATION value
+                         * @property {number} OBSERVATION=4 OBSERVATION value
+                         */
+                        Finding.FindingClass = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "FINDING_CLASS_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "THREAT"] = 1;
+                            values[valuesById[2] = "VULNERABILITY"] = 2;
+                            values[valuesById[3] = "MISCONFIGURATION"] = 3;
+                            values[valuesById[4] = "OBSERVATION"] = 4;
+                            return values;
+                        })();
+    
                         return Finding;
+                    })();
+    
+                    v1.Indicator = (function() {
+    
+                        /**
+                         * Properties of an Indicator.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @interface IIndicator
+                         * @property {Array.<string>|null} [ipAddresses] Indicator ipAddresses
+                         * @property {Array.<string>|null} [domains] Indicator domains
+                         */
+    
+                        /**
+                         * Constructs a new Indicator.
+                         * @memberof google.cloud.securitycenter.v1
+                         * @classdesc Represents an Indicator.
+                         * @implements IIndicator
+                         * @constructor
+                         * @param {google.cloud.securitycenter.v1.IIndicator=} [properties] Properties to set
+                         */
+                        function Indicator(properties) {
+                            this.ipAddresses = [];
+                            this.domains = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Indicator ipAddresses.
+                         * @member {Array.<string>} ipAddresses
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @instance
+                         */
+                        Indicator.prototype.ipAddresses = $util.emptyArray;
+    
+                        /**
+                         * Indicator domains.
+                         * @member {Array.<string>} domains
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @instance
+                         */
+                        Indicator.prototype.domains = $util.emptyArray;
+    
+                        /**
+                         * Creates a new Indicator instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IIndicator=} [properties] Properties to set
+                         * @returns {google.cloud.securitycenter.v1.Indicator} Indicator instance
+                         */
+                        Indicator.create = function create(properties) {
+                            return new Indicator(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Indicator message. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IIndicator} message Indicator message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Indicator.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.ipAddresses != null && message.ipAddresses.length)
+                                for (var i = 0; i < message.ipAddresses.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.ipAddresses[i]);
+                            if (message.domains != null && message.domains.length)
+                                for (var i = 0; i < message.domains.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.domains[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Indicator message, length delimited. Does not implicitly {@link google.cloud.securitycenter.v1.Indicator.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.IIndicator} message Indicator message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Indicator.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Indicator message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.securitycenter.v1.Indicator} Indicator
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Indicator.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.securitycenter.v1.Indicator();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.ipAddresses && message.ipAddresses.length))
+                                        message.ipAddresses = [];
+                                    message.ipAddresses.push(reader.string());
+                                    break;
+                                case 2:
+                                    if (!(message.domains && message.domains.length))
+                                        message.domains = [];
+                                    message.domains.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Indicator message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.securitycenter.v1.Indicator} Indicator
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Indicator.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Indicator message.
+                         * @function verify
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Indicator.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.ipAddresses != null && message.hasOwnProperty("ipAddresses")) {
+                                if (!Array.isArray(message.ipAddresses))
+                                    return "ipAddresses: array expected";
+                                for (var i = 0; i < message.ipAddresses.length; ++i)
+                                    if (!$util.isString(message.ipAddresses[i]))
+                                        return "ipAddresses: string[] expected";
+                            }
+                            if (message.domains != null && message.hasOwnProperty("domains")) {
+                                if (!Array.isArray(message.domains))
+                                    return "domains: array expected";
+                                for (var i = 0; i < message.domains.length; ++i)
+                                    if (!$util.isString(message.domains[i]))
+                                        return "domains: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Indicator message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.securitycenter.v1.Indicator} Indicator
+                         */
+                        Indicator.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.securitycenter.v1.Indicator)
+                                return object;
+                            var message = new $root.google.cloud.securitycenter.v1.Indicator();
+                            if (object.ipAddresses) {
+                                if (!Array.isArray(object.ipAddresses))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Indicator.ipAddresses: array expected");
+                                message.ipAddresses = [];
+                                for (var i = 0; i < object.ipAddresses.length; ++i)
+                                    message.ipAddresses[i] = String(object.ipAddresses[i]);
+                            }
+                            if (object.domains) {
+                                if (!Array.isArray(object.domains))
+                                    throw TypeError(".google.cloud.securitycenter.v1.Indicator.domains: array expected");
+                                message.domains = [];
+                                for (var i = 0; i < object.domains.length; ++i)
+                                    message.domains[i] = String(object.domains[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Indicator message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @static
+                         * @param {google.cloud.securitycenter.v1.Indicator} message Indicator
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Indicator.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.ipAddresses = [];
+                                object.domains = [];
+                            }
+                            if (message.ipAddresses && message.ipAddresses.length) {
+                                object.ipAddresses = [];
+                                for (var j = 0; j < message.ipAddresses.length; ++j)
+                                    object.ipAddresses[j] = message.ipAddresses[j];
+                            }
+                            if (message.domains && message.domains.length) {
+                                object.domains = [];
+                                for (var j = 0; j < message.domains.length; ++j)
+                                    object.domains[j] = message.domains[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Indicator to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.securitycenter.v1.Indicator
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Indicator.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return Indicator;
                     })();
     
                     v1.NotificationConfig = (function() {
