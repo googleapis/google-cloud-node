@@ -30,6 +30,11 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "ListProducts": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "UpdateProduct": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
@@ -41,6 +46,21 @@
           "retry_params_name": "default"
         },
         "ImportProducts": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "SetInventory": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "AddFulfillmentPlaces": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "RemoveFulfillmentPlaces": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"

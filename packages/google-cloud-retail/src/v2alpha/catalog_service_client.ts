@@ -158,6 +158,9 @@ export class CatalogServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      branchPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/catalogs/{catalog}/branches/{branch}'
+      ),
       catalogPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/catalogs/{catalog}'
       ),
@@ -229,7 +232,12 @@ export class CatalogServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const catalogServiceStubMethods = ['listCatalogs', 'updateCatalog'];
+    const catalogServiceStubMethods = [
+      'listCatalogs',
+      'updateCatalog',
+      'setDefaultBranch',
+      'getDefaultBranch',
+    ];
     for (const methodName of catalogServiceStubMethods) {
       const callPromise = this.catalogServiceStub.then(
         stub =>
@@ -358,10 +366,7 @@ export class CatalogServiceClient {
    *   exist, a NOT_FOUND error is returned.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided
-   *   {@link google.cloud.retail.v2alpha.Catalog|Catalog} to update. If not set, will
-   *   only update the
-   *   {@link google.cloud.retail.v2alpha.Catalog.product_level_config|Catalog.product_level_config}
-   *   field, which is also the only currently supported field to update.
+   *   {@link google.cloud.retail.v2alpha.Catalog|Catalog} to update.
    *
    *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *   is returned.
@@ -417,6 +422,244 @@ export class CatalogServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateCatalog(request, options, callback);
+  }
+  setDefaultBranch(
+    request?: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  setDefaultBranch(
+    request: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setDefaultBranch(
+    request: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Set a specified branch id as default branch. API methods such as
+   * {@link google.cloud.retail.v2alpha.SearchService.Search|SearchService.Search},
+   * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|ProductService.GetProduct},
+   * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}
+   * will treat requests using "default_branch" to the actual branch id set as
+   * default.
+   *
+   * For example, if `projects/* /locations/* /catalogs/* /branches/1` is set as
+   * default, setting
+   * {@link google.cloud.retail.v2alpha.SearchRequest.branch|SearchRequest.branch} to
+   * `projects/* /locations/* /catalogs/* /branches/default_branch` is equivalent
+   * to setting
+   * {@link google.cloud.retail.v2alpha.SearchRequest.branch|SearchRequest.branch} to
+   * `projects/* /locations/* /catalogs/* /branches/1`.
+   *
+   * Using multiple branches can be useful when developers would like
+   * to have a staging branch to test and verify for future usage. When it
+   * becomes ready, developers switch on the staging branch using this API while
+   * keeping using `projects/* /locations/* /catalogs/* /branches/default_branch`
+   * as {@link google.cloud.retail.v2alpha.SearchRequest.branch|SearchRequest.branch}
+   * to route the traffic to this staging branch.
+   *
+   * CAUTION: If you have live predict/search traffic, switching the default
+   * branch could potentially cause outages if the ID space of the new branch is
+   * very different from the old one.
+   *
+   * More specifically:
+   *
+   * * PredictionService will only return product IDs from branch {newBranch}.
+   * * SearchService will only return product IDs from branch {newBranch}
+   *   (if branch is not explicitly set).
+   * * UserEventService will only join events with products from branch
+   *   {newBranch}.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Contact Retail Support (retail-search-support@google.com) if you are
+   * interested in using Retail Search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.catalog
+   *   Full resource name of the catalog, such as
+   *   `projects/* /locations/global/catalogs/default_catalog`.
+   * @param {string} request.branchId
+   *   The final component of the resource name of a branch.
+   *
+   *   This field must be one of "0", "1" or "2". Otherwise, an INVALID_ARGUMENT
+   *   error is returned.
+   * @param {string} request.note
+   *   Some note on this request, this can be retrieved by
+   *   {@link google.cloud.retail.v2alpha.CatalogService.GetDefaultBranch|CatalogService.GetDefaultBranch}
+   *   before next valid default branch set occurs.
+   *
+   *   This field must be a UTF-8 encoded string with a length limit of 1,000
+   *   characters. Otherwise, an INVALID_ARGUMENT error is returned.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.setDefaultBranch(request);
+   */
+  setDefaultBranch(
+    request?: protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      protos.google.cloud.retail.v2alpha.ISetDefaultBranchRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        catalog: request.catalog || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setDefaultBranch(request, options, callback);
+  }
+  getDefaultBranch(
+    request?: protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2alpha.IGetDefaultBranchResponse,
+      protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getDefaultBranch(
+    request: protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.retail.v2alpha.IGetDefaultBranchResponse,
+      | protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getDefaultBranch(
+    request: protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest,
+    callback: Callback<
+      protos.google.cloud.retail.v2alpha.IGetDefaultBranchResponse,
+      | protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Get which branch is currently default branch set by
+   * {@link google.cloud.retail.v2alpha.CatalogService.SetDefaultBranch|CatalogService.SetDefaultBranch}
+   * method under a specified parent catalog.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Contact Retail Support (retail-search-support@google.com) if you are
+   * interested in using Retail Search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.catalog
+   *   The parent catalog resource name, such as
+   *   `projects/* /locations/global/catalogs/default_catalog`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [GetDefaultBranchResponse]{@link google.cloud.retail.v2alpha.GetDefaultBranchResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getDefaultBranch(request);
+   */
+  getDefaultBranch(
+    request?: protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.retail.v2alpha.IGetDefaultBranchResponse,
+          | protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.retail.v2alpha.IGetDefaultBranchResponse,
+      | protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2alpha.IGetDefaultBranchResponse,
+      protos.google.cloud.retail.v2alpha.IGetDefaultBranchRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        catalog: request.catalog || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getDefaultBranch(request, options, callback);
   }
 
   listCatalogs(
@@ -668,6 +911,73 @@ export class CatalogServiceClient {
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified branch resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} catalog
+   * @param {string} branch
+   * @returns {string} Resource name string.
+   */
+  branchPath(
+    project: string,
+    location: string,
+    catalog: string,
+    branch: string
+  ) {
+    return this.pathTemplates.branchPathTemplate.render({
+      project: project,
+      location: location,
+      catalog: catalog,
+      branch: branch,
+    });
+  }
+
+  /**
+   * Parse the project from Branch resource.
+   *
+   * @param {string} branchName
+   *   A fully-qualified path representing Branch resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBranchName(branchName: string) {
+    return this.pathTemplates.branchPathTemplate.match(branchName).project;
+  }
+
+  /**
+   * Parse the location from Branch resource.
+   *
+   * @param {string} branchName
+   *   A fully-qualified path representing Branch resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBranchName(branchName: string) {
+    return this.pathTemplates.branchPathTemplate.match(branchName).location;
+  }
+
+  /**
+   * Parse the catalog from Branch resource.
+   *
+   * @param {string} branchName
+   *   A fully-qualified path representing Branch resource.
+   * @returns {string} A string representing the catalog.
+   */
+  matchCatalogFromBranchName(branchName: string) {
+    return this.pathTemplates.branchPathTemplate.match(branchName).catalog;
+  }
+
+  /**
+   * Parse the branch from Branch resource.
+   *
+   * @param {string} branchName
+   *   A fully-qualified path representing Branch resource.
+   * @returns {string} A string representing the branch.
+   */
+  matchBranchFromBranchName(branchName: string) {
+    return this.pathTemplates.branchPathTemplate.match(branchName).branch;
+  }
 
   /**
    * Return a fully-qualified catalog resource name string.

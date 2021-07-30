@@ -18,8 +18,10 @@
 
 import {
   CatalogServiceClient,
+  CompletionServiceClient,
   PredictionServiceClient,
   ProductServiceClient,
+  SearchServiceClient,
   UserEventServiceClient,
 } from '@google-cloud/retail';
 
@@ -27,10 +29,16 @@ import {
 function doStuffWithCatalogServiceClient(client: CatalogServiceClient) {
   client.close();
 }
+function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
+  client.close();
+}
 function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
   client.close();
 }
 function doStuffWithProductServiceClient(client: ProductServiceClient) {
+  client.close();
+}
+function doStuffWithSearchServiceClient(client: SearchServiceClient) {
   client.close();
 }
 function doStuffWithUserEventServiceClient(client: UserEventServiceClient) {
@@ -42,11 +50,17 @@ function main() {
   const catalogServiceClient = new CatalogServiceClient();
   doStuffWithCatalogServiceClient(catalogServiceClient);
   // check that the client instance can be created
+  const completionServiceClient = new CompletionServiceClient();
+  doStuffWithCompletionServiceClient(completionServiceClient);
+  // check that the client instance can be created
   const predictionServiceClient = new PredictionServiceClient();
   doStuffWithPredictionServiceClient(predictionServiceClient);
   // check that the client instance can be created
   const productServiceClient = new ProductServiceClient();
   doStuffWithProductServiceClient(productServiceClient);
+  // check that the client instance can be created
+  const searchServiceClient = new SearchServiceClient();
+  doStuffWithSearchServiceClient(searchServiceClient);
   // check that the client instance can be created
   const userEventServiceClient = new UserEventServiceClient();
   doStuffWithUserEventServiceClient(userEventServiceClient);

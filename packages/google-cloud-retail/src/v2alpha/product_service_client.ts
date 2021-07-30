@@ -24,8 +24,12 @@ import {
   Descriptors,
   ClientOptions,
   LROperation,
+  PaginationCallback,
+  GaxCall,
 } from 'google-gax';
 
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -168,6 +172,17 @@ export class ProductServiceClient {
       ),
     };
 
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      listProducts: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'products'
+      ),
+    };
+
     const protoFilesRoot = this._gaxModule.protobuf.Root.fromJSON(jsonProtos);
 
     // This API contains "long-running operations", which return a
@@ -186,12 +201,49 @@ export class ProductServiceClient {
     const importProductsMetadata = protoFilesRoot.lookup(
       '.google.cloud.retail.v2alpha.ImportMetadata'
     ) as gax.protobuf.Type;
+    const setInventoryResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.SetInventoryResponse'
+    ) as gax.protobuf.Type;
+    const setInventoryMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.SetInventoryMetadata'
+    ) as gax.protobuf.Type;
+    const addFulfillmentPlacesResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.AddFulfillmentPlacesResponse'
+    ) as gax.protobuf.Type;
+    const addFulfillmentPlacesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.AddFulfillmentPlacesMetadata'
+    ) as gax.protobuf.Type;
+    const removeFulfillmentPlacesResponse = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesResponse'
+    ) as gax.protobuf.Type;
+    const removeFulfillmentPlacesMetadata = protoFilesRoot.lookup(
+      '.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       importProducts: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         importProductsResponse.decode.bind(importProductsResponse),
         importProductsMetadata.decode.bind(importProductsMetadata)
+      ),
+      setInventory: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        setInventoryResponse.decode.bind(setInventoryResponse),
+        setInventoryMetadata.decode.bind(setInventoryMetadata)
+      ),
+      addFulfillmentPlaces: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        addFulfillmentPlacesResponse.decode.bind(addFulfillmentPlacesResponse),
+        addFulfillmentPlacesMetadata.decode.bind(addFulfillmentPlacesMetadata)
+      ),
+      removeFulfillmentPlaces: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        removeFulfillmentPlacesResponse.decode.bind(
+          removeFulfillmentPlacesResponse
+        ),
+        removeFulfillmentPlacesMetadata.decode.bind(
+          removeFulfillmentPlacesMetadata
+        )
       ),
     };
 
@@ -247,9 +299,13 @@ export class ProductServiceClient {
     const productServiceStubMethods = [
       'createProduct',
       'getProduct',
+      'listProducts',
       'updateProduct',
       'deleteProduct',
       'importProducts',
+      'setInventory',
+      'addFulfillmentPlaces',
+      'removeFulfillmentPlaces',
     ];
     for (const methodName of productServiceStubMethods) {
       const callPromise = this.productServiceStub.then(
@@ -266,7 +322,10 @@ export class ProductServiceClient {
         }
       );
 
-      const descriptor = this.descriptors.longrunning[methodName] || undefined;
+      const descriptor =
+        this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -370,7 +429,7 @@ export class ProductServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent catalog resource name, such as
-   *   "projects/* /locations/global/catalogs/default_catalog/branches/default_branch".
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch`.
    * @param {google.cloud.retail.v2alpha.Product} request.product
    *   Required. The {@link google.cloud.retail.v2alpha.Product|Product} to create.
    * @param {string} request.productId
@@ -477,7 +536,7 @@ export class ProductServiceClient {
    * @param {string} request.name
    *   Required. Full resource name of
    *   {@link google.cloud.retail.v2alpha.Product|Product}, such as
-   *   "projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id".
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *
    *   If the caller does not have permission to access the
    *   {@link google.cloud.retail.v2alpha.Product|Product}, regardless of whether or
@@ -580,7 +639,9 @@ export class ProductServiceClient {
    *   not it exists, a PERMISSION_DENIED error is returned.
    *
    *   If the {@link google.cloud.retail.v2alpha.Product|Product} to update does not
-   *   exist, a NOT_FOUND error is returned.
+   *   exist and
+   *   {@link google.cloud.retail.v2alpha.UpdateProductRequest.allow_missing|allow_missing}
+   *   is not set, a NOT_FOUND error is returned.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided
    *   {@link google.cloud.retail.v2alpha.Product|Product} to update. The immutable and
@@ -589,6 +650,10 @@ export class ProductServiceClient {
    *
    *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
    *   is returned.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the {@link google.cloud.retail.v2alpha.Product|Product} is
+   *   not found, a new {@link google.cloud.retail.v2alpha.Product|Product} will be
+   *   created. In this situation, `update_mask` is ignored.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -681,7 +746,7 @@ export class ProductServiceClient {
    * @param {string} request.name
    *   Required. Full resource name of
    *   {@link google.cloud.retail.v2alpha.Product|Product}, such as
-   *   "projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id".
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
    *
    *   If the caller does not have permission to delete the
    *   {@link google.cloud.retail.v2alpha.Product|Product}, regardless of whether or
@@ -689,6 +754,18 @@ export class ProductServiceClient {
    *
    *   If the {@link google.cloud.retail.v2alpha.Product|Product} to delete does not
    *   exist, a NOT_FOUND error is returned.
+   *
+   *   The {@link google.cloud.retail.v2alpha.Product|Product} to delete can neither be
+   *   a
+   *   {@link google.cloud.retail.v2alpha.Product.Type.COLLECTION|Product.Type.COLLECTION}
+   *   {@link google.cloud.retail.v2alpha.Product|Product} member nor a
+   *   {@link google.cloud.retail.v2alpha.Product.Type.PRIMARY|Product.Type.PRIMARY}
+   *   {@link google.cloud.retail.v2alpha.Product|Product} with more than one
+   *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|variants}. Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   *
+   *   All inventory information for the named
+   *   {@link google.cloud.retail.v2alpha.Product|Product} will be deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -792,10 +869,20 @@ export class ProductServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required.
-   *   "projects/1234/locations/global/catalogs/default_catalog/branches/default_branch"
+   *   `projects/1234/locations/global/catalogs/default_catalog/branches/default_branch`
    *
    *   If no updateMask is specified, requires products.create permission.
    *   If updateMask is specified, requires products.update permission.
+   * @param {string} request.requestId
+   *   Unique identifier provided by client, within the ancestor
+   *   dataset scope. Ensures idempotency and used for request deduplication.
+   *   Server-generated if unspecified. Up to 128 characters long and must match
+   *   the pattern: "{@link |a-zA-Z0-9_]+". This is returned as [Operation.name} in
+   *   {@link google.cloud.retail.v2alpha.ImportMetadata|ImportMetadata}.
+   *
+   *   Only supported when
+   *   {@link google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
+   *   is set to `FULL`.
    * @param {google.cloud.retail.v2alpha.ProductInputConfig} request.inputConfig
    *   Required. The desired input location of the data.
    * @param {google.cloud.retail.v2alpha.ImportErrorsConfig} request.errorsConfig
@@ -803,6 +890,20 @@ export class ProductServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Indicates which fields in the provided imported 'products' to update. If
    *   not set, will by default update all fields.
+   * @param {google.cloud.retail.v2alpha.ImportProductsRequest.ReconciliationMode} request.reconciliationMode
+   *   The mode of reconciliation between existing products and the products to be
+   *   imported. Defaults to
+   *   {@link google.cloud.retail.v2alpha.ImportProductsRequest.ReconciliationMode.INCREMENTAL|ReconciliationMode.INCREMENTAL}.
+   * @param {string} request.notificationPubsubTopic
+   *   Pub/Sub topic for receiving notification. If this field is set,
+   *   when the import is finished, a notification will be sent to
+   *   specified Pub/Sub topic. The message data will be JSON string of a
+   *   {@link google.longrunning.Operation|Operation}.
+   *   Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
+   *
+   *   Only supported when
+   *   {@link google.cloud.retail.v2alpha.ImportProductsRequest.reconciliation_mode|ImportProductsRequest.reconciliation_mode}
+   *   is set to `FULL`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -900,6 +1001,1077 @@ export class ProductServiceClient {
       protos.google.cloud.retail.v2alpha.ImportProductsResponse,
       protos.google.cloud.retail.v2alpha.ImportMetadata
     >;
+  }
+  setInventory(
+    request?: protos.google.cloud.retail.v2alpha.ISetInventoryRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.ISetInventoryResponse,
+        protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  setInventory(
+    request: protos.google.cloud.retail.v2alpha.ISetInventoryRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.ISetInventoryResponse,
+        protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setInventory(
+    request: protos.google.cloud.retail.v2alpha.ISetInventoryRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.ISetInventoryResponse,
+        protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates inventory information for a
+   * {@link google.cloud.retail.v2alpha.Product|Product} while respecting the last
+   * update timestamps of each inventory field.
+   *
+   * This process is asynchronous and does not require the
+   * {@link google.cloud.retail.v2alpha.Product|Product} to exist before updating
+   * fulfillment information. If the request is valid, the update will be
+   * enqueued and processed downstream. As a consequence, when a response is
+   * returned, updates are not immediately manifested in the
+   * {@link google.cloud.retail.v2alpha.Product|Product} queried by
+   * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|GetProduct} or
+   * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
+   *
+   * When inventory is updated with
+   * {@link google.cloud.retail.v2alpha.ProductService.CreateProduct|CreateProduct}
+   * and
+   * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|UpdateProduct},
+   * the specified inventory field value(s) will overwrite any existing value(s)
+   * while ignoring the last update time for this field. Furthermore, the last
+   * update time for the specified inventory fields will be overwritten to the
+   * time of the
+   * {@link google.cloud.retail.v2alpha.ProductService.CreateProduct|CreateProduct}
+   * or
+   * {@link google.cloud.retail.v2alpha.ProductService.UpdateProduct|UpdateProduct}
+   * request.
+   *
+   * If no inventory fields are set in
+   * {@link google.cloud.retail.v2alpha.CreateProductRequest.product|CreateProductRequest.product},
+   * then any pre-existing inventory information for this product will be used.
+   *
+   * If no inventory fields are set in {@link |UpdateProductRequest.set_mask},
+   * then any existing inventory information will be preserved.
+   *
+   * Pre-existing inventory information can only be updated with
+   * {@link google.cloud.retail.v2alpha.ProductService.SetInventory|SetInventory},
+   * {@link google.cloud.retail.v2alpha.ProductService.AddFulfillmentPlaces|AddFulfillmentPlaces},
+   * and
+   * {@link google.cloud.retail.v2alpha.ProductService.RemoveFulfillmentPlaces|RemoveFulfillmentPlaces}.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Contact Retail Support (retail-search-support@google.com) if you are
+   * interested in using Retail Search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.retail.v2alpha.Product} request.inventory
+   *   Required. The inventory information to update. The allowable fields to
+   *   update are:
+   *   * {@link google.cloud.retail.v2alpha.Product.price_info|Product.price_info}
+   *   * {@link google.cloud.retail.v2alpha.Product.availability|Product.availability}
+   *   * {@link google.cloud.retail.v2alpha.Product.available_quantity|Product.available_quantity}
+   *   * {@link google.cloud.retail.v2alpha.Product.fulfillment_info|Product.fulfillment_info}
+   *   The updated inventory fields must be specified in
+   *   {@link google.cloud.retail.v2alpha.SetInventoryRequest.set_mask|SetInventoryRequest.set_mask}.
+   *
+   *   If {@link |SetInventoryRequest.inventory.name} is empty or invalid, an
+   *   INVALID_ARGUMENT error is returned.
+   *
+   *   If the caller does not have permission to update the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} named in
+   *   {@link google.cloud.retail.v2alpha.Product.name|Product.name}, regardless of
+   *   whether or not it exists, a PERMISSION_DENIED error is returned.
+   *
+   *   If the {@link google.cloud.retail.v2alpha.Product|Product} to update does not
+   *   have existing inventory information, the provided inventory information
+   *   will be inserted.
+   *
+   *   If the {@link google.cloud.retail.v2alpha.Product|Product} to update has
+   *   existing inventory information, the provided inventory information will be
+   *   merged while respecting the last update time for each inventory field,
+   *   using the provided or default value for
+   *   {@link google.cloud.retail.v2alpha.SetInventoryRequest.set_time|SetInventoryRequest.set_time}.
+   *
+   *   The last update time is recorded for the following inventory fields:
+   *   * {@link google.cloud.retail.v2alpha.Product.price_info|Product.price_info}
+   *   * {@link google.cloud.retail.v2alpha.Product.availability|Product.availability}
+   *   * {@link google.cloud.retail.v2alpha.Product.available_quantity|Product.available_quantity}
+   *   * {@link google.cloud.retail.v2alpha.Product.fulfillment_info|Product.fulfillment_info}
+   *
+   *   If a full overwrite of inventory information while ignoring timestamps is
+   *   needed, {@link |UpdateProduct} should be invoked instead.
+   * @param {google.protobuf.FieldMask} request.setMask
+   *   Indicates which inventory fields in the provided
+   *   {@link google.cloud.retail.v2alpha.Product|Product} to update. If not set or set
+   *   with empty paths, all inventory fields will be updated.
+   *
+   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+   *   is returned and the entire update will be ignored.
+   * @param {google.protobuf.Timestamp} request.setTime
+   *   The time when the request is issued, used to prevent
+   *   out-of-order updates on inventory fields with the last update time
+   *   recorded. If not provided, the internal system time will be used.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the {@link google.cloud.retail.v2alpha.Product|Product} with
+   *   name {@link google.cloud.retail.v2alpha.Product.name|Product.name} is not found,
+   *   the inventory update will still be processed and retained for at most 1 day
+   *   until the {@link google.cloud.retail.v2alpha.Product|Product} is created. If set
+   *   to false, an INVALID_ARGUMENT error is returned if the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} is not found.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.setInventory(request);
+   * const [response] = await operation.promise();
+   */
+  setInventory(
+    request?: protos.google.cloud.retail.v2alpha.ISetInventoryRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.ISetInventoryResponse,
+            protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.ISetInventoryResponse,
+        protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.ISetInventoryResponse,
+        protos.google.cloud.retail.v2alpha.ISetInventoryMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'inventory.name': request.inventory!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setInventory(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `setInventory()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkSetInventoryProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkSetInventoryProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2alpha.SetInventoryResponse,
+      protos.google.cloud.retail.v2alpha.SetInventoryMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.setInventory,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2alpha.SetInventoryResponse,
+      protos.google.cloud.retail.v2alpha.SetInventoryMetadata
+    >;
+  }
+  addFulfillmentPlaces(
+    request?: protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  addFulfillmentPlaces(
+    request: protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  addFulfillmentPlaces(
+    request: protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Incrementally adds place IDs to
+   * {@link google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|Product.fulfillment_info.place_ids}.
+   *
+   * This process is asynchronous and does not require the
+   * {@link google.cloud.retail.v2alpha.Product|Product} to exist before updating
+   * fulfillment information. If the request is valid, the update will be
+   * enqueued and processed downstream. As a consequence, when a response is
+   * returned, the added place IDs are not immediately manifested in the
+   * {@link google.cloud.retail.v2alpha.Product|Product} queried by
+   * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|GetProduct} or
+   * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Contact Retail Support (retail-search-support@google.com) if you are
+   * interested in using Retail Search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.product
+   *   Required. Full resource name of
+   *   {@link google.cloud.retail.v2alpha.Product|Product}, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
+   *
+   *   If the caller does not have permission to access the
+   *   {@link google.cloud.retail.v2alpha.Product|Product}, regardless of whether or
+   *   not it exists, a PERMISSION_DENIED error is returned.
+   * @param {string} request.type
+   *   Required. The fulfillment type, including commonly used types (such as
+   *   pickup in store and same day delivery), and custom types.
+   *
+   *   Supported values:
+   *
+   *   * "pickup-in-store"
+   *   * "ship-to-store"
+   *   * "same-day-delivery"
+   *   * "next-day-delivery"
+   *   * "custom-type-1"
+   *   * "custom-type-2"
+   *   * "custom-type-3"
+   *   * "custom-type-4"
+   *   * "custom-type-5"
+   *
+   *   If this field is set to an invalid value other than these, an
+   *   INVALID_ARGUMENT error is returned.
+   *
+   *   This field directly corresponds to {@link |Product.fulfillment_info.type}.
+   * @param {string[]} request.placeIds
+   *   Required. The IDs for this
+   *   {@link google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type|type}, such
+   *   as the store IDs for "pickup-in-store" or the region IDs for
+   *   "same-day-delivery" to be added for this
+   *   {@link google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type|type}.
+   *   Duplicate IDs will be automatically ignored.
+   *
+   *   At least 1 value is required, and a maximum of 2000 values are allowed.
+   *   Each value must be a string with a length limit of 10 characters, matching
+   *   the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   *
+   *   If the total number of place IDs exceeds 2000 for this
+   *   {@link google.cloud.retail.v2alpha.AddFulfillmentPlacesRequest.type|type} after
+   *   adding, then the update will be rejected.
+   * @param {google.protobuf.Timestamp} request.addTime
+   *   The time when the fulfillment updates are issued, used to prevent
+   *   out-of-order updates on fulfillment information. If not provided, the
+   *   internal system time will be used.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the {@link google.cloud.retail.v2alpha.Product|Product} is
+   *   not found, the fulfillment information will still be processed and retained
+   *   for at most 1 day and processed once the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} is created. If set to false,
+   *   an INVALID_ARGUMENT error is returned if the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} is not found.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.addFulfillmentPlaces(request);
+   * const [response] = await operation.promise();
+   */
+  addFulfillmentPlaces(
+    request?: protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesResponse,
+            protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IAddFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        product: request.product || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.addFulfillmentPlaces(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `addFulfillmentPlaces()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkAddFulfillmentPlacesProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkAddFulfillmentPlacesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesResponse,
+      protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.addFulfillmentPlaces,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesResponse,
+      protos.google.cloud.retail.v2alpha.AddFulfillmentPlacesMetadata
+    >;
+  }
+  removeFulfillmentPlaces(
+    request?: protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  removeFulfillmentPlaces(
+    request: protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  removeFulfillmentPlaces(
+    request: protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Incrementally removes place IDs from a
+   * {@link google.cloud.retail.v2alpha.FulfillmentInfo.place_ids|Product.fulfillment_info.place_ids}.
+   *
+   * This process is asynchronous and does not require the
+   * {@link google.cloud.retail.v2alpha.Product|Product} to exist before updating
+   * fulfillment information. If the request is valid, the update will be
+   * enqueued and processed downstream. As a consequence, when a response is
+   * returned, the removed place IDs are not immediately manifested in the
+   * {@link google.cloud.retail.v2alpha.Product|Product} queried by
+   * {@link google.cloud.retail.v2alpha.ProductService.GetProduct|GetProduct} or
+   * {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ListProducts}.
+   *
+   * This feature is only available for users who have Retail Search enabled.
+   * Contact Retail Support (retail-search-support@google.com) if you are
+   * interested in using Retail Search.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.product
+   *   Required. Full resource name of
+   *   {@link google.cloud.retail.v2alpha.Product|Product}, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/default_branch/products/some_product_id`.
+   *
+   *   If the caller does not have permission to access the
+   *   {@link google.cloud.retail.v2alpha.Product|Product}, regardless of whether or
+   *   not it exists, a PERMISSION_DENIED error is returned.
+   * @param {string} request.type
+   *   Required. The fulfillment type, including commonly used types (such as
+   *   pickup in store and same day delivery), and custom types.
+   *
+   *   Supported values:
+   *
+   *   * "pickup-in-store"
+   *   * "ship-to-store"
+   *   * "same-day-delivery"
+   *   * "next-day-delivery"
+   *   * "custom-type-1"
+   *   * "custom-type-2"
+   *   * "custom-type-3"
+   *   * "custom-type-4"
+   *   * "custom-type-5"
+   *
+   *   If this field is set to an invalid value other than these, an
+   *   INVALID_ARGUMENT error is returned.
+   *
+   *   This field directly corresponds to {@link |Product.fulfillment_info.type}.
+   * @param {string[]} request.placeIds
+   *   Required. The IDs for this
+   *   {@link google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest.type|type},
+   *   such as the store IDs for "pickup-in-store" or the region IDs for
+   *   "same-day-delivery", to be removed for this
+   *   {@link google.cloud.retail.v2alpha.RemoveFulfillmentPlacesRequest.type|type}.
+   *
+   *   At least 1 value is required, and a maximum of 2000 values are allowed.
+   *   Each value must be a string with a length limit of 10 characters, matching
+   *   the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {google.protobuf.Timestamp} request.removeTime
+   *   The time when the fulfillment updates are issued, used to prevent
+   *   out-of-order updates on fulfillment information. If not provided, the
+   *   internal system time will be used.
+   * @param {boolean} request.allowMissing
+   *   If set to true, and the {@link google.cloud.retail.v2alpha.Product|Product} is
+   *   not found, the fulfillment information will still be processed and retained
+   *   for at most 1 day and processed once the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} is created. If set to false,
+   *   an INVALID_ARGUMENT error is returned if the
+   *   {@link google.cloud.retail.v2alpha.Product|Product} is not found.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.removeFulfillmentPlaces(request);
+   * const [response] = await operation.promise();
+   */
+  removeFulfillmentPlaces(
+    request?: protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesResponse,
+            protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2alpha.IRemoveFulfillmentPlacesMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        product: request.product || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.removeFulfillmentPlaces(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `removeFulfillmentPlaces()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkRemoveFulfillmentPlacesProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkRemoveFulfillmentPlacesProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesResponse,
+      protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.removeFulfillmentPlaces,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesResponse,
+      protos.google.cloud.retail.v2alpha.RemoveFulfillmentPlacesMetadata
+    >;
+  }
+  listProducts(
+    request?: protos.google.cloud.retail.v2alpha.IListProductsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2alpha.IProduct[],
+      protos.google.cloud.retail.v2alpha.IListProductsRequest | null,
+      protos.google.cloud.retail.v2alpha.IListProductsResponse
+    ]
+  >;
+  listProducts(
+    request: protos.google.cloud.retail.v2alpha.IListProductsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.retail.v2alpha.IListProductsRequest,
+      | protos.google.cloud.retail.v2alpha.IListProductsResponse
+      | null
+      | undefined,
+      protos.google.cloud.retail.v2alpha.IProduct
+    >
+  ): void;
+  listProducts(
+    request: protos.google.cloud.retail.v2alpha.IListProductsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.retail.v2alpha.IListProductsRequest,
+      | protos.google.cloud.retail.v2alpha.IListProductsResponse
+      | null
+      | undefined,
+      protos.google.cloud.retail.v2alpha.IProduct
+    >
+  ): void;
+  /**
+   * Gets a list of {@link google.cloud.retail.v2alpha.Product|Product}s.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent branch resource name, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/0`. Use
+   *   `default_branch` as the branch ID, to list products under the default
+   *   branch.
+   *
+   *   If the caller does not have permission to list
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s under this branch,
+   *   regardless of whether or not this branch exists, a PERMISSION_DENIED error
+   *   is returned.
+   * @param {number} request.pageSize
+   *   Maximum number of {@link google.cloud.retail.v2alpha.Product|Product}s to
+   *   return. If unspecified, defaults to 100. The maximum allowed value is 1000.
+   *   Values above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   * @param {string} request.pageToken
+   *   A page token
+   *   {@link google.cloud.retail.v2alpha.ListProductsResponse.next_page_token|ListProductsResponse.next_page_token},
+   *   received from a previous
+   *   {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}
+   *   must match the call that provided the page token. Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {string} request.filter
+   *   A filter to apply on the list results. Supported features:
+   *
+   *   * List all the products under the parent branch if
+   *   {@link google.cloud.retail.v2alpha.ListProductsRequest.filter|filter} is unset.
+   *   * List
+   *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|Product.Type.VARIANT}
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s sharing the same
+   *     {@link google.cloud.retail.v2alpha.Product.Type.PRIMARY|Product.Type.PRIMARY}
+   *     {@link google.cloud.retail.v2alpha.Product|Product}. For example:
+   *       `primary_product_id = "some_product_id"`
+   *   * List {@link google.cloud.retail.v2alpha.Product|Product}s bundled in a
+   *   {@link google.cloud.retail.v2alpha.Product.Type.COLLECTION|Product.Type.COLLECTION}
+   *   {@link google.cloud.retail.v2alpha.Product|Product}.
+   *     For example:
+   *       `collection_product_id = "some_product_id"`
+   *   * List {@link google.cloud.retail.v2alpha.Product|Product}s with a partibular
+   *   type. For example:
+   *       `type = "PRIMARY"`
+   *       `type = "VARIANT"`
+   *       `type = "COLLECTION"`
+   *
+   *   If the field is unrecognizable, an INVALID_ARGUMENT error is returned.
+   *
+   *   If the specified
+   *   {@link google.cloud.retail.v2alpha.Product.Type.PRIMARY|Product.Type.PRIMARY}
+   *   {@link google.cloud.retail.v2alpha.Product|Product} or
+   *   {@link google.cloud.retail.v2alpha.Product.Type.COLLECTION|Product.Type.COLLECTION}
+   *   {@link google.cloud.retail.v2alpha.Product|Product} does not exist, a NOT_FOUND
+   *   error is returned.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   The fields of {@link google.cloud.retail.v2alpha.Product|Product} to return in
+   *   the responses. If not set or empty, the following fields are returned:
+   *
+   *   * {@link google.cloud.retail.v2alpha.Product.name|Product.name}
+   *   * {@link google.cloud.retail.v2alpha.Product.id|Product.id}
+   *   * {@link google.cloud.retail.v2alpha.Product.title|Product.title}
+   *   * {@link google.cloud.retail.v2alpha.Product.uri|Product.uri}
+   *   * {@link google.cloud.retail.v2alpha.Product.images|Product.images}
+   *   * {@link google.cloud.retail.v2alpha.Product.price_info|Product.price_info}
+   *   * {@link google.cloud.retail.v2alpha.Product.brands|Product.brands}
+   *
+   *   If "*" is provided, all fields are returned.
+   *   {@link google.cloud.retail.v2alpha.Product.name|Product.name} is always returned
+   *   no matter what mask is set.
+   *
+   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+   *   is returned.
+   * @param {boolean} request.requireTotalSize
+   *   If true and
+   *   {@link google.cloud.retail.v2alpha.ListProductsRequest.page_token|page_token} is
+   *   empty,
+   *   {@link google.cloud.retail.v2alpha.ListProductsResponse.total_size|ListProductsResponse.total_size}
+   *   is set to the total count of matched items irrespective of pagination.
+   *
+   *   Notice that setting this field to true affects the performance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Product]{@link google.cloud.retail.v2alpha.Product}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listProductsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listProducts(
+    request?: protos.google.cloud.retail.v2alpha.IListProductsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.retail.v2alpha.IListProductsRequest,
+          | protos.google.cloud.retail.v2alpha.IListProductsResponse
+          | null
+          | undefined,
+          protos.google.cloud.retail.v2alpha.IProduct
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.retail.v2alpha.IListProductsRequest,
+      | protos.google.cloud.retail.v2alpha.IListProductsResponse
+      | null
+      | undefined,
+      protos.google.cloud.retail.v2alpha.IProduct
+    >
+  ): Promise<
+    [
+      protos.google.cloud.retail.v2alpha.IProduct[],
+      protos.google.cloud.retail.v2alpha.IListProductsRequest | null,
+      protos.google.cloud.retail.v2alpha.IListProductsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listProducts(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent branch resource name, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/0`. Use
+   *   `default_branch` as the branch ID, to list products under the default
+   *   branch.
+   *
+   *   If the caller does not have permission to list
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s under this branch,
+   *   regardless of whether or not this branch exists, a PERMISSION_DENIED error
+   *   is returned.
+   * @param {number} request.pageSize
+   *   Maximum number of {@link google.cloud.retail.v2alpha.Product|Product}s to
+   *   return. If unspecified, defaults to 100. The maximum allowed value is 1000.
+   *   Values above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   * @param {string} request.pageToken
+   *   A page token
+   *   {@link google.cloud.retail.v2alpha.ListProductsResponse.next_page_token|ListProductsResponse.next_page_token},
+   *   received from a previous
+   *   {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}
+   *   must match the call that provided the page token. Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {string} request.filter
+   *   A filter to apply on the list results. Supported features:
+   *
+   *   * List all the products under the parent branch if
+   *   {@link google.cloud.retail.v2alpha.ListProductsRequest.filter|filter} is unset.
+   *   * List
+   *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|Product.Type.VARIANT}
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s sharing the same
+   *     {@link google.cloud.retail.v2alpha.Product.Type.PRIMARY|Product.Type.PRIMARY}
+   *     {@link google.cloud.retail.v2alpha.Product|Product}. For example:
+   *       `primary_product_id = "some_product_id"`
+   *   * List {@link google.cloud.retail.v2alpha.Product|Product}s bundled in a
+   *   {@link google.cloud.retail.v2alpha.Product.Type.COLLECTION|Product.Type.COLLECTION}
+   *   {@link google.cloud.retail.v2alpha.Product|Product}.
+   *     For example:
+   *       `collection_product_id = "some_product_id"`
+   *   * List {@link google.cloud.retail.v2alpha.Product|Product}s with a partibular
+   *   type. For example:
+   *       `type = "PRIMARY"`
+   *       `type = "VARIANT"`
+   *       `type = "COLLECTION"`
+   *
+   *   If the field is unrecognizable, an INVALID_ARGUMENT error is returned.
+   *
+   *   If the specified
+   *   {@link google.cloud.retail.v2alpha.Product.Type.PRIMARY|Product.Type.PRIMARY}
+   *   {@link google.cloud.retail.v2alpha.Product|Product} or
+   *   {@link google.cloud.retail.v2alpha.Product.Type.COLLECTION|Product.Type.COLLECTION}
+   *   {@link google.cloud.retail.v2alpha.Product|Product} does not exist, a NOT_FOUND
+   *   error is returned.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   The fields of {@link google.cloud.retail.v2alpha.Product|Product} to return in
+   *   the responses. If not set or empty, the following fields are returned:
+   *
+   *   * {@link google.cloud.retail.v2alpha.Product.name|Product.name}
+   *   * {@link google.cloud.retail.v2alpha.Product.id|Product.id}
+   *   * {@link google.cloud.retail.v2alpha.Product.title|Product.title}
+   *   * {@link google.cloud.retail.v2alpha.Product.uri|Product.uri}
+   *   * {@link google.cloud.retail.v2alpha.Product.images|Product.images}
+   *   * {@link google.cloud.retail.v2alpha.Product.price_info|Product.price_info}
+   *   * {@link google.cloud.retail.v2alpha.Product.brands|Product.brands}
+   *
+   *   If "*" is provided, all fields are returned.
+   *   {@link google.cloud.retail.v2alpha.Product.name|Product.name} is always returned
+   *   no matter what mask is set.
+   *
+   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+   *   is returned.
+   * @param {boolean} request.requireTotalSize
+   *   If true and
+   *   {@link google.cloud.retail.v2alpha.ListProductsRequest.page_token|page_token} is
+   *   empty,
+   *   {@link google.cloud.retail.v2alpha.ListProductsResponse.total_size|ListProductsResponse.total_size}
+   *   is set to the total count of matched items irrespective of pagination.
+   *
+   *   Notice that setting this field to true affects the performance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Product]{@link google.cloud.retail.v2alpha.Product} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listProductsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listProductsStream(
+    request?: protos.google.cloud.retail.v2alpha.IListProductsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listProducts.createStream(
+      this.innerApiCalls.listProducts as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listProducts`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent branch resource name, such as
+   *   `projects/* /locations/global/catalogs/default_catalog/branches/0`. Use
+   *   `default_branch` as the branch ID, to list products under the default
+   *   branch.
+   *
+   *   If the caller does not have permission to list
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s under this branch,
+   *   regardless of whether or not this branch exists, a PERMISSION_DENIED error
+   *   is returned.
+   * @param {number} request.pageSize
+   *   Maximum number of {@link google.cloud.retail.v2alpha.Product|Product}s to
+   *   return. If unspecified, defaults to 100. The maximum allowed value is 1000.
+   *   Values above 1000 will be coerced to 1000.
+   *
+   *   If this field is negative, an INVALID_ARGUMENT error is returned.
+   * @param {string} request.pageToken
+   *   A page token
+   *   {@link google.cloud.retail.v2alpha.ListProductsResponse.next_page_token|ListProductsResponse.next_page_token},
+   *   received from a previous
+   *   {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}
+   *   call. Provide this to retrieve the subsequent page.
+   *
+   *   When paginating, all other parameters provided to
+   *   {@link google.cloud.retail.v2alpha.ProductService.ListProducts|ProductService.ListProducts}
+   *   must match the call that provided the page token. Otherwise, an
+   *   INVALID_ARGUMENT error is returned.
+   * @param {string} request.filter
+   *   A filter to apply on the list results. Supported features:
+   *
+   *   * List all the products under the parent branch if
+   *   {@link google.cloud.retail.v2alpha.ListProductsRequest.filter|filter} is unset.
+   *   * List
+   *   {@link google.cloud.retail.v2alpha.Product.Type.VARIANT|Product.Type.VARIANT}
+   *   {@link google.cloud.retail.v2alpha.Product|Product}s sharing the same
+   *     {@link google.cloud.retail.v2alpha.Product.Type.PRIMARY|Product.Type.PRIMARY}
+   *     {@link google.cloud.retail.v2alpha.Product|Product}. For example:
+   *       `primary_product_id = "some_product_id"`
+   *   * List {@link google.cloud.retail.v2alpha.Product|Product}s bundled in a
+   *   {@link google.cloud.retail.v2alpha.Product.Type.COLLECTION|Product.Type.COLLECTION}
+   *   {@link google.cloud.retail.v2alpha.Product|Product}.
+   *     For example:
+   *       `collection_product_id = "some_product_id"`
+   *   * List {@link google.cloud.retail.v2alpha.Product|Product}s with a partibular
+   *   type. For example:
+   *       `type = "PRIMARY"`
+   *       `type = "VARIANT"`
+   *       `type = "COLLECTION"`
+   *
+   *   If the field is unrecognizable, an INVALID_ARGUMENT error is returned.
+   *
+   *   If the specified
+   *   {@link google.cloud.retail.v2alpha.Product.Type.PRIMARY|Product.Type.PRIMARY}
+   *   {@link google.cloud.retail.v2alpha.Product|Product} or
+   *   {@link google.cloud.retail.v2alpha.Product.Type.COLLECTION|Product.Type.COLLECTION}
+   *   {@link google.cloud.retail.v2alpha.Product|Product} does not exist, a NOT_FOUND
+   *   error is returned.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   The fields of {@link google.cloud.retail.v2alpha.Product|Product} to return in
+   *   the responses. If not set or empty, the following fields are returned:
+   *
+   *   * {@link google.cloud.retail.v2alpha.Product.name|Product.name}
+   *   * {@link google.cloud.retail.v2alpha.Product.id|Product.id}
+   *   * {@link google.cloud.retail.v2alpha.Product.title|Product.title}
+   *   * {@link google.cloud.retail.v2alpha.Product.uri|Product.uri}
+   *   * {@link google.cloud.retail.v2alpha.Product.images|Product.images}
+   *   * {@link google.cloud.retail.v2alpha.Product.price_info|Product.price_info}
+   *   * {@link google.cloud.retail.v2alpha.Product.brands|Product.brands}
+   *
+   *   If "*" is provided, all fields are returned.
+   *   {@link google.cloud.retail.v2alpha.Product.name|Product.name} is always returned
+   *   no matter what mask is set.
+   *
+   *   If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
+   *   is returned.
+   * @param {boolean} request.requireTotalSize
+   *   If true and
+   *   {@link google.cloud.retail.v2alpha.ListProductsRequest.page_token|page_token} is
+   *   empty,
+   *   {@link google.cloud.retail.v2alpha.ListProductsResponse.total_size|ListProductsResponse.total_size}
+   *   is set to the total count of matched items irrespective of pagination.
+   *
+   *   Notice that setting this field to true affects the performance.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Product]{@link google.cloud.retail.v2alpha.Product}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listProductsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listProductsAsync(
+    request?: protos.google.cloud.retail.v2alpha.IListProductsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.retail.v2alpha.IProduct> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listProducts.asyncIterate(
+      this.innerApiCalls['listProducts'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.retail.v2alpha.IProduct>;
   }
   // --------------------
   // -- Path templates --

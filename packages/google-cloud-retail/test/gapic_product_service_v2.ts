@@ -23,6 +23,8 @@ import {SinonStub} from 'sinon';
 import {describe, it} from 'mocha';
 import * as productserviceModule from '../src';
 
+import {PassThrough} from 'stream';
+
 import {protobuf, LROperation, operationsProtos} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
@@ -79,6 +81,67 @@ function stubLongRunningCallWithCallback<ResponseType>(
   return callError
     ? sinon.stub().callsArgWith(2, callError)
     : sinon.stub().callsArgWith(2, null, mockOperation);
+}
+
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
 }
 
 describe('v2.ProductServiceClient', () => {
@@ -802,6 +865,869 @@ describe('v2.ProductServiceClient', () => {
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('setInventory', () => {
+    it('invokes setInventory without error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.SetInventoryRequest()
+      );
+      request.inventory = {};
+      request.inventory.name = '';
+      const expectedHeaderRequestParams = 'inventory.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.setInventory = stubLongRunningCall(expectedResponse);
+      const [operation] = await client.setInventory(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setInventory as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setInventory without error using callback', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.SetInventoryRequest()
+      );
+      request.inventory = {};
+      request.inventory.name = '';
+      const expectedHeaderRequestParams = 'inventory.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.setInventory =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setInventory(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.retail.v2.ISetInventoryResponse,
+              protos.google.cloud.retail.v2.ISetInventoryMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.retail.v2.ISetInventoryResponse,
+        protos.google.cloud.retail.v2.ISetInventoryMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setInventory as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setInventory with call error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.SetInventoryRequest()
+      );
+      request.inventory = {};
+      request.inventory.name = '';
+      const expectedHeaderRequestParams = 'inventory.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setInventory = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.setInventory(request), expectedError);
+      assert(
+        (client.innerApiCalls.setInventory as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setInventory with LRO error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.SetInventoryRequest()
+      );
+      request.inventory = {};
+      request.inventory.name = '';
+      const expectedHeaderRequestParams = 'inventory.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setInventory = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.setInventory(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.setInventory as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkSetInventoryProgress without error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkSetInventoryProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkSetInventoryProgress with error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkSetInventoryProgress(''), expectedError);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('addFulfillmentPlaces', () => {
+    it('invokes addFulfillmentPlaces without error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.AddFulfillmentPlacesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.addFulfillmentPlaces =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.addFulfillmentPlaces(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.addFulfillmentPlaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes addFulfillmentPlaces without error using callback', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.AddFulfillmentPlacesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.addFulfillmentPlaces =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addFulfillmentPlaces(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.retail.v2.IAddFulfillmentPlacesResponse,
+              protos.google.cloud.retail.v2.IAddFulfillmentPlacesMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.retail.v2.IAddFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2.IAddFulfillmentPlacesMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.addFulfillmentPlaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes addFulfillmentPlaces with call error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.AddFulfillmentPlacesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addFulfillmentPlaces = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.addFulfillmentPlaces(request), expectedError);
+      assert(
+        (client.innerApiCalls.addFulfillmentPlaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes addFulfillmentPlaces with LRO error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.AddFulfillmentPlacesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addFulfillmentPlaces = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.addFulfillmentPlaces(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.addFulfillmentPlaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkAddFulfillmentPlacesProgress without error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation = await client.checkAddFulfillmentPlacesProgress(
+        expectedResponse.name
+      );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkAddFulfillmentPlacesProgress with error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkAddFulfillmentPlacesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('removeFulfillmentPlaces', () => {
+    it('invokes removeFulfillmentPlaces without error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.RemoveFulfillmentPlacesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.removeFulfillmentPlaces =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.removeFulfillmentPlaces(request);
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.removeFulfillmentPlaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes removeFulfillmentPlaces without error using callback', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.RemoveFulfillmentPlacesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.removeFulfillmentPlaces =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeFulfillmentPlaces(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.retail.v2.IRemoveFulfillmentPlacesResponse,
+              protos.google.cloud.retail.v2.IRemoveFulfillmentPlacesMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.retail.v2.IRemoveFulfillmentPlacesResponse,
+        protos.google.cloud.retail.v2.IRemoveFulfillmentPlacesMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.removeFulfillmentPlaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes removeFulfillmentPlaces with call error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.RemoveFulfillmentPlacesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeFulfillmentPlaces = stubLongRunningCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.removeFulfillmentPlaces(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.removeFulfillmentPlaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes removeFulfillmentPlaces with LRO error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.RemoveFulfillmentPlacesRequest()
+      );
+      request.product = '';
+      const expectedHeaderRequestParams = 'product=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeFulfillmentPlaces = stubLongRunningCall(
+        undefined,
+        undefined,
+        expectedError
+      );
+      const [operation] = await client.removeFulfillmentPlaces(request);
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.removeFulfillmentPlaces as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkRemoveFulfillmentPlacesProgress without error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkRemoveFulfillmentPlacesProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkRemoveFulfillmentPlacesProgress with error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkRemoveFulfillmentPlacesProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('listProducts', () => {
+    it('invokes listProducts without error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.ListProductsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+      ];
+      client.innerApiCalls.listProducts = stubSimpleCall(expectedResponse);
+      const [response] = await client.listProducts(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listProducts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listProducts without error using callback', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.ListProductsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+      ];
+      client.innerApiCalls.listProducts =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listProducts(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.retail.v2.IProduct[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listProducts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listProducts with error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.ListProductsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listProducts = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.listProducts(request), expectedError);
+      assert(
+        (client.innerApiCalls.listProducts as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listProductsStream without error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.ListProductsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+      ];
+      client.descriptors.page.listProducts.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listProductsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.retail.v2.Product[] = [];
+        stream.on('data', (response: protos.google.cloud.retail.v2.Product) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.listProducts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProducts, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listProducts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listProductsStream with error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.ListProductsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProducts.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listProductsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.retail.v2.Product[] = [];
+        stream.on('data', (response: protos.google.cloud.retail.v2.Product) => {
+          responses.push(response);
+        });
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.listProducts.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.listProducts, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listProducts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listProducts without error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.ListProductsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+        generateSampleMessage(new protos.google.cloud.retail.v2.Product()),
+      ];
+      client.descriptors.page.listProducts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.retail.v2.IProduct[] = [];
+      const iterable = client.listProductsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listProducts with error', async () => {
+      const client = new productserviceModule.v2.ProductServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2.ListProductsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listProducts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listProductsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.retail.v2.IProduct[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listProducts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
     });
   });
 

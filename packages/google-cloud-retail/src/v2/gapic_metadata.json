@@ -15,6 +15,16 @@
                 "updateCatalog"
               ]
             },
+            "SetDefaultBranch": {
+              "methods": [
+                "setDefaultBranch"
+              ]
+            },
+            "GetDefaultBranch": {
+              "methods": [
+                "getDefaultBranch"
+              ]
+            },
             "ListCatalogs": {
               "methods": [
                 "listCatalogs",
@@ -32,11 +42,55 @@
                 "updateCatalog"
               ]
             },
+            "SetDefaultBranch": {
+              "methods": [
+                "setDefaultBranch"
+              ]
+            },
+            "GetDefaultBranch": {
+              "methods": [
+                "getDefaultBranch"
+              ]
+            },
             "ListCatalogs": {
               "methods": [
                 "listCatalogs",
                 "listCatalogsStream",
                 "listCatalogsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CompletionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CompletionServiceClient",
+          "rpcs": {
+            "CompleteQuery": {
+              "methods": [
+                "completeQuery"
+              ]
+            },
+            "ImportCompletionData": {
+              "methods": [
+                "importCompletionData"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CompletionServiceClient",
+          "rpcs": {
+            "CompleteQuery": {
+              "methods": [
+                "completeQuery"
+              ]
+            },
+            "ImportCompletionData": {
+              "methods": [
+                "importCompletionData"
               ]
             }
           }
@@ -96,6 +150,28 @@
               "methods": [
                 "importProducts"
               ]
+            },
+            "SetInventory": {
+              "methods": [
+                "setInventory"
+              ]
+            },
+            "AddFulfillmentPlaces": {
+              "methods": [
+                "addFulfillmentPlaces"
+              ]
+            },
+            "RemoveFulfillmentPlaces": {
+              "methods": [
+                "removeFulfillmentPlaces"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "listProducts",
+                "listProductsStream",
+                "listProductsAsync"
+              ]
             }
           }
         },
@@ -125,6 +201,56 @@
             "ImportProducts": {
               "methods": [
                 "importProducts"
+              ]
+            },
+            "SetInventory": {
+              "methods": [
+                "setInventory"
+              ]
+            },
+            "AddFulfillmentPlaces": {
+              "methods": [
+                "addFulfillmentPlaces"
+              ]
+            },
+            "RemoveFulfillmentPlaces": {
+              "methods": [
+                "removeFulfillmentPlaces"
+              ]
+            },
+            "ListProducts": {
+              "methods": [
+                "listProducts",
+                "listProductsStream",
+                "listProductsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SearchService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SearchServiceClient",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search",
+                "searchStream",
+                "searchAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SearchServiceClient",
+          "rpcs": {
+            "Search": {
+              "methods": [
+                "search",
+                "searchStream",
+                "searchAsync"
               ]
             }
           }

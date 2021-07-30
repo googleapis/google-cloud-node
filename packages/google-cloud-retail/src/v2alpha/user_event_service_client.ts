@@ -388,7 +388,7 @@ export class UserEventServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent catalog resource name, such as
-   *   "projects/1234/locations/global/catalogs/default_catalog".
+   *   `projects/1234/locations/global/catalogs/default_catalog`.
    * @param {google.cloud.retail.v2alpha.UserEvent} request.userEvent
    *   Required. User event to write.
    * @param {object} [options]
@@ -486,7 +486,7 @@ export class UserEventServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent catalog name, such as
-   *   "projects/1234/locations/global/catalogs/default_catalog".
+   *   `projects/1234/locations/global/catalogs/default_catalog`.
    * @param {string} request.userEvent
    *   Required. URL encoded UserEvent proto with a length limit of 2,000,000
    *   characters.
@@ -600,7 +600,7 @@ export class UserEventServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the catalog under which the events are
    *   created. The format is
-   *   "projects/${projectId}/locations/global/catalogs/${catalogId}"
+   *   `projects/${projectId}/locations/global/catalogs/${catalogId}`
    * @param {string} request.filter
    *   Required. The filter string to specify the events to be deleted with a
    *   length limit of 5,000 characters. Empty string filter is not allowed. The
@@ -776,7 +776,7 @@ export class UserEventServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. "projects/1234/locations/global/catalogs/default_catalog"
+   *   Required. `projects/1234/locations/global/catalogs/default_catalog`
    * @param {google.cloud.retail.v2alpha.UserEventInputConfig} request.inputConfig
    *   Required. The desired input location of the data.
    * @param {google.cloud.retail.v2alpha.ImportErrorsConfig} request.errorsConfig
@@ -929,7 +929,7 @@ export class UserEventServiceClient {
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The parent catalog resource name, such as
-   *   "projects/1234/locations/global/catalogs/default_catalog".
+   *   `projects/1234/locations/global/catalogs/default_catalog`.
    * @param {google.cloud.retail.v2alpha.RejoinUserEventsRequest.UserEventRejoinScope} request.userEventRejoinScope
    *   The type of the user event rejoin to define the scope and range of the user
    *   events to be rejoined with the latest product catalog. Defaults to

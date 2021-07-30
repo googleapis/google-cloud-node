@@ -2,11 +2,14 @@
   "../../protos/google/cloud/retail/v2alpha/catalog.proto",
   "../../protos/google/cloud/retail/v2alpha/catalog_service.proto",
   "../../protos/google/cloud/retail/v2alpha/common.proto",
+  "../../protos/google/cloud/retail/v2alpha/completion_service.proto",
+  "../../protos/google/cloud/retail/v2alpha/export_config.proto",
   "../../protos/google/cloud/retail/v2alpha/import_config.proto",
   "../../protos/google/cloud/retail/v2alpha/prediction_service.proto",
   "../../protos/google/cloud/retail/v2alpha/product.proto",
   "../../protos/google/cloud/retail/v2alpha/product_service.proto",
   "../../protos/google/cloud/retail/v2alpha/purge_config.proto",
+  "../../protos/google/cloud/retail/v2alpha/search_service.proto",
   "../../protos/google/cloud/retail/v2alpha/user_event.proto",
   "../../protos/google/cloud/retail/v2alpha/user_event_service.proto"
 ]

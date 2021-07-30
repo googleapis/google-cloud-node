@@ -309,6 +309,228 @@ describe('v2alpha.CatalogServiceClient', () => {
     });
   });
 
+  describe('setDefaultBranch', () => {
+    it('invokes setDefaultBranch without error', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.SetDefaultBranchRequest()
+      );
+      request.catalog = '';
+      const expectedHeaderRequestParams = 'catalog=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.setDefaultBranch = stubSimpleCall(expectedResponse);
+      const [response] = await client.setDefaultBranch(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setDefaultBranch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setDefaultBranch without error using callback', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.SetDefaultBranchRequest()
+      );
+      request.catalog = '';
+      const expectedHeaderRequestParams = 'catalog=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.setDefaultBranch =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setDefaultBranch(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setDefaultBranch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setDefaultBranch with error', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.SetDefaultBranchRequest()
+      );
+      request.catalog = '';
+      const expectedHeaderRequestParams = 'catalog=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setDefaultBranch = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.setDefaultBranch(request), expectedError);
+      assert(
+        (client.innerApiCalls.setDefaultBranch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getDefaultBranch', () => {
+    it('invokes getDefaultBranch without error', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetDefaultBranchRequest()
+      );
+      request.catalog = '';
+      const expectedHeaderRequestParams = 'catalog=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetDefaultBranchResponse()
+      );
+      client.innerApiCalls.getDefaultBranch = stubSimpleCall(expectedResponse);
+      const [response] = await client.getDefaultBranch(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getDefaultBranch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getDefaultBranch without error using callback', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetDefaultBranchRequest()
+      );
+      request.catalog = '';
+      const expectedHeaderRequestParams = 'catalog=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetDefaultBranchResponse()
+      );
+      client.innerApiCalls.getDefaultBranch =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getDefaultBranch(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.retail.v2alpha.IGetDefaultBranchResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getDefaultBranch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getDefaultBranch with error', async () => {
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.retail.v2alpha.GetDefaultBranchRequest()
+      );
+      request.catalog = '';
+      const expectedHeaderRequestParams = 'catalog=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getDefaultBranch = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getDefaultBranch(request), expectedError);
+      assert(
+        (client.innerApiCalls.getDefaultBranch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('listCatalogs', () => {
     it('invokes listCatalogs without error', async () => {
       const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
@@ -593,6 +815,82 @@ describe('v2alpha.CatalogServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('branch', () => {
+      const fakePath = '/rendered/path/branch';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        catalog: 'catalogValue',
+        branch: 'branchValue',
+      };
+      const client = new catalogserviceModule.v2alpha.CatalogServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.branchPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.branchPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('branchPath', () => {
+        const result = client.branchPath(
+          'projectValue',
+          'locationValue',
+          'catalogValue',
+          'branchValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.branchPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromBranchName', () => {
+        const result = client.matchProjectFromBranchName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.branchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromBranchName', () => {
+        const result = client.matchLocationFromBranchName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.branchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchCatalogFromBranchName', () => {
+        const result = client.matchCatalogFromBranchName(fakePath);
+        assert.strictEqual(result, 'catalogValue');
+        assert(
+          (client.pathTemplates.branchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchBranchFromBranchName', () => {
+        const result = client.matchBranchFromBranchName(fakePath);
+        assert.strictEqual(result, 'branchValue');
+        assert(
+          (client.pathTemplates.branchPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('catalog', () => {
       const fakePath = '/rendered/path/catalog';
       const expectedParameters = {
