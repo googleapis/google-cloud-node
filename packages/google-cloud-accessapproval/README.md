@@ -144,7 +144,7 @@ Apache Version 2.0
 See [LICENSE](https://github.com/googleapis/nodejs-access-approval/blob/master/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/accessapproval/latest/
-[product-docs]: https://cloud.google.com/access-approval/
+[product-docs]: https://cloud.google.com/access-approval/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
