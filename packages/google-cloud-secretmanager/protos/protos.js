@@ -4130,6 +4130,7 @@
                          * @property {string|null} [parent] ListSecretsRequest parent
                          * @property {number|null} [pageSize] ListSecretsRequest pageSize
                          * @property {string|null} [pageToken] ListSecretsRequest pageToken
+                         * @property {string|null} [filter] ListSecretsRequest filter
                          */
     
                         /**
@@ -4172,6 +4173,14 @@
                         ListSecretsRequest.prototype.pageToken = "";
     
                         /**
+                         * ListSecretsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.secretmanager.v1.ListSecretsRequest
+                         * @instance
+                         */
+                        ListSecretsRequest.prototype.filter = "";
+    
+                        /**
                          * Creates a new ListSecretsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.secretmanager.v1.ListSecretsRequest
@@ -4201,6 +4210,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
                             return writer;
                         };
     
@@ -4243,6 +4254,9 @@
                                     break;
                                 case 3:
                                     message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4288,6 +4302,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -4309,6 +4326,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -4329,6 +4348,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.filter = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -4336,6 +4356,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     
@@ -5255,6 +5277,7 @@
                          * @property {string|null} [parent] ListSecretVersionsRequest parent
                          * @property {number|null} [pageSize] ListSecretVersionsRequest pageSize
                          * @property {string|null} [pageToken] ListSecretVersionsRequest pageToken
+                         * @property {string|null} [filter] ListSecretVersionsRequest filter
                          */
     
                         /**
@@ -5297,6 +5320,14 @@
                         ListSecretVersionsRequest.prototype.pageToken = "";
     
                         /**
+                         * ListSecretVersionsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.secretmanager.v1.ListSecretVersionsRequest
+                         * @instance
+                         */
+                        ListSecretVersionsRequest.prototype.filter = "";
+    
+                        /**
                          * Creates a new ListSecretVersionsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.secretmanager.v1.ListSecretVersionsRequest
@@ -5326,6 +5357,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
                             return writer;
                         };
     
@@ -5368,6 +5401,9 @@
                                     break;
                                 case 3:
                                     message.pageToken = reader.string();
+                                    break;
+                                case 4:
+                                    message.filter = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5413,6 +5449,9 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
                             return null;
                         };
     
@@ -5434,6 +5473,8 @@
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
                             return message;
                         };
     
@@ -5454,6 +5495,7 @@
                                 object.parent = "";
                                 object.pageSize = 0;
                                 object.pageToken = "";
+                                object.filter = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -5461,6 +5503,8 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
                             return object;
                         };
     

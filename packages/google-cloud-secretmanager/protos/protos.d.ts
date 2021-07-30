@@ -1866,6 +1866,9 @@ export namespace google {
 
                     /** ListSecretsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListSecretsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListSecretsRequest. */
@@ -1885,6 +1888,9 @@ export namespace google {
 
                     /** ListSecretsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListSecretsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListSecretsRequest instance using the specified properties.
@@ -2358,6 +2364,9 @@ export namespace google {
 
                     /** ListSecretVersionsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListSecretVersionsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListSecretVersionsRequest. */
@@ -2377,6 +2386,9 @@ export namespace google {
 
                     /** ListSecretVersionsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListSecretVersionsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListSecretVersionsRequest instance using the specified properties.

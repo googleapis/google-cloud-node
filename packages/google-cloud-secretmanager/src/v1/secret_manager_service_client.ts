@@ -1652,6 +1652,12 @@ export class SecretManagerServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
    *   {@link google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
+   * @param {string} [request.filter]
+   *   Optional. Filter string, adhering to the rules in
+   *   [List-operation
+   *   filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+   *   only secrets matching the filter. If filter is empty, all secrets are
+   *   listed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1723,6 +1729,12 @@ export class SecretManagerServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
    *   {@link google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
+   * @param {string} [request.filter]
+   *   Optional. Filter string, adhering to the rules in
+   *   [List-operation
+   *   filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+   *   only secrets matching the filter. If filter is empty, all secrets are
+   *   listed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1772,6 +1784,12 @@ export class SecretManagerServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
    *   {@link google.cloud.secretmanager.v1.ListSecretsResponse.next_page_token|ListSecretsResponse.next_page_token}.
+   * @param {string} [request.filter]
+   *   Optional. Filter string, adhering to the rules in
+   *   [List-operation
+   *   filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+   *   only secrets matching the filter. If filter is empty, all secrets are
+   *   listed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1857,6 +1875,12 @@ export class SecretManagerServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
    *   ListSecretVersionsResponse.next_page_token][].
+   * @param {string} [request.filter]
+   *   Optional. Filter string, adhering to the rules in
+   *   [List-operation
+   *   filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+   *   only secret versions matching the filter. If filter is empty, all secret
+   *   versions are listed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1929,6 +1953,12 @@ export class SecretManagerServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
    *   ListSecretVersionsResponse.next_page_token][].
+   * @param {string} [request.filter]
+   *   Optional. Filter string, adhering to the rules in
+   *   [List-operation
+   *   filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+   *   only secret versions matching the filter. If filter is empty, all secret
+   *   versions are listed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1979,6 +2009,12 @@ export class SecretManagerServiceClient {
    * @param {string} [request.pageToken]
    *   Optional. Pagination token, returned earlier via
    *   ListSecretVersionsResponse.next_page_token][].
+   * @param {string} [request.filter]
+   *   Optional. Filter string, adhering to the rules in
+   *   [List-operation
+   *   filtering](https://cloud.google.com/secret-manager/docs/filtering). List
+   *   only secret versions matching the filter. If filter is empty, all secret
+   *   versions are listed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
