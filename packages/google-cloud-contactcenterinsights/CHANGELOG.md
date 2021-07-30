@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.0.2...v1.1.0) (2021-07-30)
+
+
+### Features
+
+* update CCAI Insights protos. change nesting of Conversation.Transcript.Participant to ConversationParticipant and remove AnnotationBoundary.time_offset ([#19](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/19)) ([7501a27](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/7501a276f8159fb7fdc21aad1a19d108fde61c8a))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.0.1...v1.0.2) (2021-07-22)
 
 
