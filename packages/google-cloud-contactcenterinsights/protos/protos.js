@@ -1065,6 +1065,7 @@
                          * @property {Object.<string,number>|null} [smartHighlighterMatches] CalculateStatsResponse smartHighlighterMatches
                          * @property {Object.<string,number>|null} [customHighlighterMatches] CalculateStatsResponse customHighlighterMatches
                          * @property {Object.<string,number>|null} [issueMatches] CalculateStatsResponse issueMatches
+                         * @property {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries|null} [conversationCountTimeSeries] CalculateStatsResponse conversationCountTimeSeries
                          */
     
                         /**
@@ -1134,6 +1135,14 @@
                         CalculateStatsResponse.prototype.issueMatches = $util.emptyObject;
     
                         /**
+                         * CalculateStatsResponse conversationCountTimeSeries.
+                         * @member {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries|null|undefined} conversationCountTimeSeries
+                         * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse
+                         * @instance
+                         */
+                        CalculateStatsResponse.prototype.conversationCountTimeSeries = null;
+    
+                        /**
                          * Creates a new CalculateStatsResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse
@@ -1172,6 +1181,8 @@
                             if (message.issueMatches != null && Object.hasOwnProperty.call(message, "issueMatches"))
                                 for (var keys = Object.keys(message.issueMatches), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 0 =*/16).int32(message.issueMatches[keys[i]]).ldelim();
+                            if (message.conversationCountTimeSeries != null && Object.hasOwnProperty.call(message, "conversationCountTimeSeries"))
+                                $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.encode(message.conversationCountTimeSeries, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -1281,6 +1292,9 @@
                                     }
                                     message.issueMatches[key] = value;
                                     break;
+                                case 7:
+                                    message.conversationCountTimeSeries = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.decode(reader, reader.uint32());
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1351,6 +1365,11 @@
                                     if (!$util.isInteger(message.issueMatches[key[i]]))
                                         return "issueMatches: integer{k:string} expected";
                             }
+                            if (message.conversationCountTimeSeries != null && message.hasOwnProperty("conversationCountTimeSeries")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.verify(message.conversationCountTimeSeries);
+                                if (error)
+                                    return "conversationCountTimeSeries." + error;
+                            }
                             return null;
                         };
     
@@ -1396,6 +1415,11 @@
                                 for (var keys = Object.keys(object.issueMatches), i = 0; i < keys.length; ++i)
                                     message.issueMatches[keys[i]] = object.issueMatches[keys[i]] | 0;
                             }
+                            if (object.conversationCountTimeSeries != null) {
+                                if (typeof object.conversationCountTimeSeries !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.CalculateStatsResponse.conversationCountTimeSeries: object expected");
+                                message.conversationCountTimeSeries = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.fromObject(object.conversationCountTimeSeries);
+                            }
                             return message;
                         };
     
@@ -1421,6 +1445,7 @@
                                 object.averageDuration = null;
                                 object.averageTurnCount = 0;
                                 object.conversationCount = 0;
+                                object.conversationCountTimeSeries = null;
                             }
                             if (message.averageDuration != null && message.hasOwnProperty("averageDuration"))
                                 object.averageDuration = $root.google.protobuf.Duration.toObject(message.averageDuration, options);
@@ -1444,6 +1469,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.issueMatches[keys2[j]] = message.issueMatches[keys2[j]];
                             }
+                            if (message.conversationCountTimeSeries != null && message.hasOwnProperty("conversationCountTimeSeries"))
+                                object.conversationCountTimeSeries = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.toObject(message.conversationCountTimeSeries, options);
                             return object;
                         };
     
@@ -1457,6 +1484,457 @@
                         CalculateStatsResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        CalculateStatsResponse.TimeSeries = (function() {
+    
+                            /**
+                             * Properties of a TimeSeries.
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse
+                             * @interface ITimeSeries
+                             * @property {google.protobuf.IDuration|null} [intervalDuration] TimeSeries intervalDuration
+                             * @property {Array.<google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval>|null} [points] TimeSeries points
+                             */
+    
+                            /**
+                             * Constructs a new TimeSeries.
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse
+                             * @classdesc Represents a TimeSeries.
+                             * @implements ITimeSeries
+                             * @constructor
+                             * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries=} [properties] Properties to set
+                             */
+                            function TimeSeries(properties) {
+                                this.points = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * TimeSeries intervalDuration.
+                             * @member {google.protobuf.IDuration|null|undefined} intervalDuration
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @instance
+                             */
+                            TimeSeries.prototype.intervalDuration = null;
+    
+                            /**
+                             * TimeSeries points.
+                             * @member {Array.<google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval>} points
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @instance
+                             */
+                            TimeSeries.prototype.points = $util.emptyArray;
+    
+                            /**
+                             * Creates a new TimeSeries instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries=} [properties] Properties to set
+                             * @returns {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries} TimeSeries instance
+                             */
+                            TimeSeries.create = function create(properties) {
+                                return new TimeSeries(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified TimeSeries message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries} message TimeSeries message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TimeSeries.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.intervalDuration != null && Object.hasOwnProperty.call(message, "intervalDuration"))
+                                    $root.google.protobuf.Duration.encode(message.intervalDuration, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.points != null && message.points.length)
+                                    for (var i = 0; i < message.points.length; ++i)
+                                        $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.encode(message.points[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified TimeSeries message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries} message TimeSeries message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            TimeSeries.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a TimeSeries message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries} TimeSeries
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TimeSeries.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.intervalDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    case 2:
+                                        if (!(message.points && message.points.length))
+                                            message.points = [];
+                                        message.points.push($root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.decode(reader, reader.uint32()));
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a TimeSeries message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries} TimeSeries
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            TimeSeries.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a TimeSeries message.
+                             * @function verify
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            TimeSeries.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.intervalDuration != null && message.hasOwnProperty("intervalDuration")) {
+                                    var error = $root.google.protobuf.Duration.verify(message.intervalDuration);
+                                    if (error)
+                                        return "intervalDuration." + error;
+                                }
+                                if (message.points != null && message.hasOwnProperty("points")) {
+                                    if (!Array.isArray(message.points))
+                                        return "points: array expected";
+                                    for (var i = 0; i < message.points.length; ++i) {
+                                        var error = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.verify(message.points[i]);
+                                        if (error)
+                                            return "points." + error;
+                                    }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a TimeSeries message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries} TimeSeries
+                             */
+                            TimeSeries.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries)
+                                    return object;
+                                var message = new $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries();
+                                if (object.intervalDuration != null) {
+                                    if (typeof object.intervalDuration !== "object")
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.intervalDuration: object expected");
+                                    message.intervalDuration = $root.google.protobuf.Duration.fromObject(object.intervalDuration);
+                                }
+                                if (object.points) {
+                                    if (!Array.isArray(object.points))
+                                        throw TypeError(".google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.points: array expected");
+                                    message.points = [];
+                                    for (var i = 0; i < object.points.length; ++i) {
+                                        if (typeof object.points[i] !== "object")
+                                            throw TypeError(".google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.points: object expected");
+                                        message.points[i] = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.fromObject(object.points[i]);
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a TimeSeries message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries} message TimeSeries
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            TimeSeries.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.points = [];
+                                if (options.defaults)
+                                    object.intervalDuration = null;
+                                if (message.intervalDuration != null && message.hasOwnProperty("intervalDuration"))
+                                    object.intervalDuration = $root.google.protobuf.Duration.toObject(message.intervalDuration, options);
+                                if (message.points && message.points.length) {
+                                    object.points = [];
+                                    for (var j = 0; j < message.points.length; ++j)
+                                        object.points[j] = $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.toObject(message.points[j], options);
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this TimeSeries to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            TimeSeries.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            TimeSeries.Interval = (function() {
+    
+                                /**
+                                 * Properties of an Interval.
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                                 * @interface IInterval
+                                 * @property {google.protobuf.ITimestamp|null} [startTime] Interval startTime
+                                 * @property {number|null} [conversationCount] Interval conversationCount
+                                 */
+    
+                                /**
+                                 * Constructs a new Interval.
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries
+                                 * @classdesc Represents an Interval.
+                                 * @implements IInterval
+                                 * @constructor
+                                 * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval=} [properties] Properties to set
+                                 */
+                                function Interval(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Interval startTime.
+                                 * @member {google.protobuf.ITimestamp|null|undefined} startTime
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @instance
+                                 */
+                                Interval.prototype.startTime = null;
+    
+                                /**
+                                 * Interval conversationCount.
+                                 * @member {number} conversationCount
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @instance
+                                 */
+                                Interval.prototype.conversationCount = 0;
+    
+                                /**
+                                 * Creates a new Interval instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @static
+                                 * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval=} [properties] Properties to set
+                                 * @returns {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval} Interval instance
+                                 */
+                                Interval.create = function create(properties) {
+                                    return new Interval(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Interval message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @static
+                                 * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval} message Interval message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Interval.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.startTime != null && Object.hasOwnProperty.call(message, "startTime"))
+                                        $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                    if (message.conversationCount != null && Object.hasOwnProperty.call(message, "conversationCount"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.conversationCount);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @static
+                                 * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval} message Interval message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Interval.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes an Interval message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval} Interval
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Interval.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.startTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                            break;
+                                        case 2:
+                                            message.conversationCount = reader.int32();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes an Interval message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval} Interval
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Interval.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies an Interval message.
+                                 * @function verify
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Interval.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.startTime != null && message.hasOwnProperty("startTime")) {
+                                        var error = $root.google.protobuf.Timestamp.verify(message.startTime);
+                                        if (error)
+                                            return "startTime." + error;
+                                    }
+                                    if (message.conversationCount != null && message.hasOwnProperty("conversationCount"))
+                                        if (!$util.isInteger(message.conversationCount))
+                                            return "conversationCount: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval} Interval
+                                 */
+                                Interval.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval)
+                                        return object;
+                                    var message = new $root.google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval();
+                                    if (object.startTime != null) {
+                                        if (typeof object.startTime !== "object")
+                                            throw TypeError(".google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.startTime: object expected");
+                                        message.startTime = $root.google.protobuf.Timestamp.fromObject(object.startTime);
+                                    }
+                                    if (object.conversationCount != null)
+                                        message.conversationCount = object.conversationCount | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from an Interval message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @static
+                                 * @param {google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval} message Interval
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Interval.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.startTime = null;
+                                        object.conversationCount = 0;
+                                    }
+                                    if (message.startTime != null && message.hasOwnProperty("startTime"))
+                                        object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
+                                    if (message.conversationCount != null && message.hasOwnProperty("conversationCount"))
+                                        object.conversationCount = message.conversationCount;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Interval to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Interval.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return Interval;
+                            })();
+    
+                            return TimeSeries;
+                        })();
     
                         return CalculateStatsResponse;
                     })();
@@ -4479,6 +4957,7 @@
                              * Properties of a BigQueryDestination.
                              * @memberof google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest
                              * @interface IBigQueryDestination
+                             * @property {string|null} [projectId] BigQueryDestination projectId
                              * @property {string|null} [dataset] BigQueryDestination dataset
                              * @property {string|null} [table] BigQueryDestination table
                              */
@@ -4497,6 +4976,14 @@
                                         if (properties[keys[i]] != null)
                                             this[keys[i]] = properties[keys[i]];
                             }
+    
+                            /**
+                             * BigQueryDestination projectId.
+                             * @member {string} projectId
+                             * @memberof google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.BigQueryDestination
+                             * @instance
+                             */
+                            BigQueryDestination.prototype.projectId = "";
     
                             /**
                              * BigQueryDestination dataset.
@@ -4542,6 +5029,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.dataset);
                                 if (message.table != null && Object.hasOwnProperty.call(message, "table"))
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.table);
+                                if (message.projectId != null && Object.hasOwnProperty.call(message, "projectId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.projectId);
                                 return writer;
                             };
     
@@ -4576,6 +5065,9 @@
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     switch (tag >>> 3) {
+                                    case 3:
+                                        message.projectId = reader.string();
+                                        break;
                                     case 1:
                                         message.dataset = reader.string();
                                         break;
@@ -4617,6 +5109,9 @@
                             BigQueryDestination.verify = function verify(message) {
                                 if (typeof message !== "object" || message === null)
                                     return "object expected";
+                                if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                    if (!$util.isString(message.projectId))
+                                        return "projectId: string expected";
                                 if (message.dataset != null && message.hasOwnProperty("dataset"))
                                     if (!$util.isString(message.dataset))
                                         return "dataset: string expected";
@@ -4638,6 +5133,8 @@
                                 if (object instanceof $root.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.BigQueryDestination)
                                     return object;
                                 var message = new $root.google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.BigQueryDestination();
+                                if (object.projectId != null)
+                                    message.projectId = String(object.projectId);
                                 if (object.dataset != null)
                                     message.dataset = String(object.dataset);
                                 if (object.table != null)
@@ -4661,11 +5158,14 @@
                                 if (options.defaults) {
                                     object.dataset = "";
                                     object.table = "";
+                                    object.projectId = "";
                                 }
                                 if (message.dataset != null && message.hasOwnProperty("dataset"))
                                     object.dataset = message.dataset;
                                 if (message.table != null && message.hasOwnProperty("table"))
                                     object.table = message.table;
+                                if (message.projectId != null && message.hasOwnProperty("projectId"))
+                                    object.projectId = message.projectId;
                                 return object;
                             };
     
@@ -9357,7 +9857,7 @@
                                  * @property {Array.<google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IWordInfo>|null} [words] TranscriptSegment words
                                  * @property {string|null} [languageCode] TranscriptSegment languageCode
                                  * @property {number|null} [channelTag] TranscriptSegment channelTag
-                                 * @property {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant|null} [participant] TranscriptSegment participant
+                                 * @property {google.cloud.contactcenterinsights.v1.IConversationParticipant|null} [segmentParticipant] TranscriptSegment segmentParticipant
                                  */
     
                                 /**
@@ -9417,12 +9917,12 @@
                                 TranscriptSegment.prototype.channelTag = 0;
     
                                 /**
-                                 * TranscriptSegment participant.
-                                 * @member {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant|null|undefined} participant
+                                 * TranscriptSegment segmentParticipant.
+                                 * @member {google.cloud.contactcenterinsights.v1.IConversationParticipant|null|undefined} segmentParticipant
                                  * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment
                                  * @instance
                                  */
-                                TranscriptSegment.prototype.participant = null;
+                                TranscriptSegment.prototype.segmentParticipant = null;
     
                                 /**
                                  * Creates a new TranscriptSegment instance using the specified properties.
@@ -9459,8 +9959,8 @@
                                         writer.uint32(/* id 4, wireType 2 =*/34).string(message.languageCode);
                                     if (message.channelTag != null && Object.hasOwnProperty.call(message, "channelTag"))
                                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.channelTag);
-                                    if (message.participant != null && Object.hasOwnProperty.call(message, "participant"))
-                                        $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.encode(message.participant, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                    if (message.segmentParticipant != null && Object.hasOwnProperty.call(message, "segmentParticipant"))
+                                        $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.encode(message.segmentParticipant, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                     return writer;
                                 };
     
@@ -9512,8 +10012,8 @@
                                         case 5:
                                             message.channelTag = reader.int32();
                                             break;
-                                        case 8:
-                                            message.participant = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.decode(reader, reader.uint32());
+                                        case 9:
+                                            message.segmentParticipant = $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.decode(reader, reader.uint32());
                                             break;
                                         default:
                                             reader.skipType(tag & 7);
@@ -9571,10 +10071,10 @@
                                     if (message.channelTag != null && message.hasOwnProperty("channelTag"))
                                         if (!$util.isInteger(message.channelTag))
                                             return "channelTag: integer expected";
-                                    if (message.participant != null && message.hasOwnProperty("participant")) {
-                                        var error = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.verify(message.participant);
+                                    if (message.segmentParticipant != null && message.hasOwnProperty("segmentParticipant")) {
+                                        var error = $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.verify(message.segmentParticipant);
                                         if (error)
-                                            return "participant." + error;
+                                            return "segmentParticipant." + error;
                                     }
                                     return null;
                                 };
@@ -9609,10 +10109,10 @@
                                         message.languageCode = String(object.languageCode);
                                     if (object.channelTag != null)
                                         message.channelTag = object.channelTag | 0;
-                                    if (object.participant != null) {
-                                        if (typeof object.participant !== "object")
-                                            throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.participant: object expected");
-                                        message.participant = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.fromObject(object.participant);
+                                    if (object.segmentParticipant != null) {
+                                        if (typeof object.segmentParticipant !== "object")
+                                            throw TypeError(".google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.segmentParticipant: object expected");
+                                        message.segmentParticipant = $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.fromObject(object.segmentParticipant);
                                     }
                                     return message;
                                 };
@@ -9637,7 +10137,7 @@
                                         object.confidence = 0;
                                         object.languageCode = "";
                                         object.channelTag = 0;
-                                        object.participant = null;
+                                        object.segmentParticipant = null;
                                     }
                                     if (message.text != null && message.hasOwnProperty("text"))
                                         object.text = message.text;
@@ -9652,8 +10152,8 @@
                                         object.languageCode = message.languageCode;
                                     if (message.channelTag != null && message.hasOwnProperty("channelTag"))
                                         object.channelTag = message.channelTag;
-                                    if (message.participant != null && message.hasOwnProperty("participant"))
-                                        object.participant = $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.toObject(message.participant, options);
+                                    if (message.segmentParticipant != null && message.hasOwnProperty("segmentParticipant"))
+                                        object.segmentParticipant = $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.toObject(message.segmentParticipant, options);
                                     return object;
                                 };
     
@@ -9930,257 +10430,6 @@
                                     };
     
                                     return WordInfo;
-                                })();
-    
-                                TranscriptSegment.Participant = (function() {
-    
-                                    /**
-                                     * Properties of a Participant.
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment
-                                     * @interface IParticipant
-                                     * @property {string|null} [dialogflowParticipant] Participant dialogflowParticipant
-                                     * @property {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.Role|null} [role] Participant role
-                                     */
-    
-                                    /**
-                                     * Constructs a new Participant.
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment
-                                     * @classdesc Represents a Participant.
-                                     * @implements IParticipant
-                                     * @constructor
-                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant=} [properties] Properties to set
-                                     */
-                                    function Participant(properties) {
-                                        if (properties)
-                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                                if (properties[keys[i]] != null)
-                                                    this[keys[i]] = properties[keys[i]];
-                                    }
-    
-                                    /**
-                                     * Participant dialogflowParticipant.
-                                     * @member {string} dialogflowParticipant
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @instance
-                                     */
-                                    Participant.prototype.dialogflowParticipant = "";
-    
-                                    /**
-                                     * Participant role.
-                                     * @member {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.Role} role
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @instance
-                                     */
-                                    Participant.prototype.role = 0;
-    
-                                    /**
-                                     * Creates a new Participant instance using the specified properties.
-                                     * @function create
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @static
-                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant=} [properties] Properties to set
-                                     * @returns {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant} Participant instance
-                                     */
-                                    Participant.create = function create(properties) {
-                                        return new Participant(properties);
-                                    };
-    
-                                    /**
-                                     * Encodes the specified Participant message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.verify|verify} messages.
-                                     * @function encode
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @static
-                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant} message Participant message or plain object to encode
-                                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                                     * @returns {$protobuf.Writer} Writer
-                                     */
-                                    Participant.encode = function encode(message, writer) {
-                                        if (!writer)
-                                            writer = $Writer.create();
-                                        if (message.dialogflowParticipant != null && Object.hasOwnProperty.call(message, "dialogflowParticipant"))
-                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.dialogflowParticipant);
-                                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
-                                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.role);
-                                        return writer;
-                                    };
-    
-                                    /**
-                                     * Encodes the specified Participant message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.verify|verify} messages.
-                                     * @function encodeDelimited
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @static
-                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant} message Participant message or plain object to encode
-                                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                                     * @returns {$protobuf.Writer} Writer
-                                     */
-                                    Participant.encodeDelimited = function encodeDelimited(message, writer) {
-                                        return this.encode(message, writer).ldelim();
-                                    };
-    
-                                    /**
-                                     * Decodes a Participant message from the specified reader or buffer.
-                                     * @function decode
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @static
-                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                     * @param {number} [length] Message length if known beforehand
-                                     * @returns {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant} Participant
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    Participant.decode = function decode(reader, length) {
-                                        if (!(reader instanceof $Reader))
-                                            reader = $Reader.create(reader);
-                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant();
-                                        while (reader.pos < end) {
-                                            var tag = reader.uint32();
-                                            switch (tag >>> 3) {
-                                            case 1:
-                                                message.dialogflowParticipant = reader.string();
-                                                break;
-                                            case 2:
-                                                message.role = reader.int32();
-                                                break;
-                                            default:
-                                                reader.skipType(tag & 7);
-                                                break;
-                                            }
-                                        }
-                                        return message;
-                                    };
-    
-                                    /**
-                                     * Decodes a Participant message from the specified reader or buffer, length delimited.
-                                     * @function decodeDelimited
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @static
-                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                                     * @returns {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant} Participant
-                                     * @throws {Error} If the payload is not a reader or valid buffer
-                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                     */
-                                    Participant.decodeDelimited = function decodeDelimited(reader) {
-                                        if (!(reader instanceof $Reader))
-                                            reader = new $Reader(reader);
-                                        return this.decode(reader, reader.uint32());
-                                    };
-    
-                                    /**
-                                     * Verifies a Participant message.
-                                     * @function verify
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @static
-                                     * @param {Object.<string,*>} message Plain object to verify
-                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                                     */
-                                    Participant.verify = function verify(message) {
-                                        if (typeof message !== "object" || message === null)
-                                            return "object expected";
-                                        if (message.dialogflowParticipant != null && message.hasOwnProperty("dialogflowParticipant"))
-                                            if (!$util.isString(message.dialogflowParticipant))
-                                                return "dialogflowParticipant: string expected";
-                                        if (message.role != null && message.hasOwnProperty("role"))
-                                            switch (message.role) {
-                                            default:
-                                                return "role: enum value expected";
-                                            case 0:
-                                            case 1:
-                                            case 2:
-                                            case 3:
-                                                break;
-                                            }
-                                        return null;
-                                    };
-    
-                                    /**
-                                     * Creates a Participant message from a plain object. Also converts values to their respective internal types.
-                                     * @function fromObject
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @static
-                                     * @param {Object.<string,*>} object Plain object
-                                     * @returns {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant} Participant
-                                     */
-                                    Participant.fromObject = function fromObject(object) {
-                                        if (object instanceof $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant)
-                                            return object;
-                                        var message = new $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant();
-                                        if (object.dialogflowParticipant != null)
-                                            message.dialogflowParticipant = String(object.dialogflowParticipant);
-                                        switch (object.role) {
-                                        case "ROLE_UNSPECIFIED":
-                                        case 0:
-                                            message.role = 0;
-                                            break;
-                                        case "HUMAN_AGENT":
-                                        case 1:
-                                            message.role = 1;
-                                            break;
-                                        case "AUTOMATED_AGENT":
-                                        case 2:
-                                            message.role = 2;
-                                            break;
-                                        case "END_USER":
-                                        case 3:
-                                            message.role = 3;
-                                            break;
-                                        }
-                                        return message;
-                                    };
-    
-                                    /**
-                                     * Creates a plain object from a Participant message. Also converts values to other types if specified.
-                                     * @function toObject
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @static
-                                     * @param {google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant} message Participant
-                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                                     * @returns {Object.<string,*>} Plain object
-                                     */
-                                    Participant.toObject = function toObject(message, options) {
-                                        if (!options)
-                                            options = {};
-                                        var object = {};
-                                        if (options.defaults) {
-                                            object.dialogflowParticipant = "";
-                                            object.role = options.enums === String ? "ROLE_UNSPECIFIED" : 0;
-                                        }
-                                        if (message.dialogflowParticipant != null && message.hasOwnProperty("dialogflowParticipant"))
-                                            object.dialogflowParticipant = message.dialogflowParticipant;
-                                        if (message.role != null && message.hasOwnProperty("role"))
-                                            object.role = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.Role[message.role] : message.role;
-                                        return object;
-                                    };
-    
-                                    /**
-                                     * Converts this Participant to JSON.
-                                     * @function toJSON
-                                     * @memberof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant
-                                     * @instance
-                                     * @returns {Object.<string,*>} JSON object
-                                     */
-                                    Participant.prototype.toJSON = function toJSON() {
-                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                                    };
-    
-                                    /**
-                                     * Role enum.
-                                     * @name google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.Role
-                                     * @enum {number}
-                                     * @property {number} ROLE_UNSPECIFIED=0 ROLE_UNSPECIFIED value
-                                     * @property {number} HUMAN_AGENT=1 HUMAN_AGENT value
-                                     * @property {number} AUTOMATED_AGENT=2 AUTOMATED_AGENT value
-                                     * @property {number} END_USER=3 END_USER value
-                                     */
-                                    Participant.Role = (function() {
-                                        var valuesById = {}, values = Object.create(valuesById);
-                                        values[valuesById[0] = "ROLE_UNSPECIFIED"] = 0;
-                                        values[valuesById[1] = "HUMAN_AGENT"] = 1;
-                                        values[valuesById[2] = "AUTOMATED_AGENT"] = 2;
-                                        values[valuesById[3] = "END_USER"] = 3;
-                                        return values;
-                                    })();
-    
-                                    return Participant;
                                 })();
     
                                 return TranscriptSegment;
@@ -13008,7 +13257,6 @@
                          * Properties of an AnnotationBoundary.
                          * @memberof google.cloud.contactcenterinsights.v1
                          * @interface IAnnotationBoundary
-                         * @property {google.protobuf.IDuration|null} [timeOffset] AnnotationBoundary timeOffset
                          * @property {number|null} [wordIndex] AnnotationBoundary wordIndex
                          * @property {number|null} [transcriptIndex] AnnotationBoundary transcriptIndex
                          */
@@ -13027,14 +13275,6 @@
                                     if (properties[keys[i]] != null)
                                         this[keys[i]] = properties[keys[i]];
                         }
-    
-                        /**
-                         * AnnotationBoundary timeOffset.
-                         * @member {google.protobuf.IDuration|null|undefined} timeOffset
-                         * @memberof google.cloud.contactcenterinsights.v1.AnnotationBoundary
-                         * @instance
-                         */
-                        AnnotationBoundary.prototype.timeOffset = null;
     
                         /**
                          * AnnotationBoundary wordIndex.
@@ -13057,12 +13297,12 @@
     
                         /**
                          * AnnotationBoundary detailedBoundary.
-                         * @member {"timeOffset"|"wordIndex"|undefined} detailedBoundary
+                         * @member {"wordIndex"|undefined} detailedBoundary
                          * @memberof google.cloud.contactcenterinsights.v1.AnnotationBoundary
                          * @instance
                          */
                         Object.defineProperty(AnnotationBoundary.prototype, "detailedBoundary", {
-                            get: $util.oneOfGetter($oneOfFields = ["timeOffset", "wordIndex"]),
+                            get: $util.oneOfGetter($oneOfFields = ["wordIndex"]),
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
@@ -13092,8 +13332,6 @@
                                 writer = $Writer.create();
                             if (message.transcriptIndex != null && Object.hasOwnProperty.call(message, "transcriptIndex"))
                                 writer.uint32(/* id 1, wireType 0 =*/8).int32(message.transcriptIndex);
-                            if (message.timeOffset != null && Object.hasOwnProperty.call(message, "timeOffset"))
-                                $root.google.protobuf.Duration.encode(message.timeOffset, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.wordIndex != null && Object.hasOwnProperty.call(message, "wordIndex"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.wordIndex);
                             return writer;
@@ -13130,9 +13368,6 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
-                                case 2:
-                                    message.timeOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                                    break;
                                 case 3:
                                     message.wordIndex = reader.int32();
                                     break;
@@ -13175,17 +13410,7 @@
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             var properties = {};
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset")) {
-                                properties.detailedBoundary = 1;
-                                {
-                                    var error = $root.google.protobuf.Duration.verify(message.timeOffset);
-                                    if (error)
-                                        return "timeOffset." + error;
-                                }
-                            }
                             if (message.wordIndex != null && message.hasOwnProperty("wordIndex")) {
-                                if (properties.detailedBoundary === 1)
-                                    return "detailedBoundary: multiple values";
                                 properties.detailedBoundary = 1;
                                 if (!$util.isInteger(message.wordIndex))
                                     return "wordIndex: integer expected";
@@ -13208,11 +13433,6 @@
                             if (object instanceof $root.google.cloud.contactcenterinsights.v1.AnnotationBoundary)
                                 return object;
                             var message = new $root.google.cloud.contactcenterinsights.v1.AnnotationBoundary();
-                            if (object.timeOffset != null) {
-                                if (typeof object.timeOffset !== "object")
-                                    throw TypeError(".google.cloud.contactcenterinsights.v1.AnnotationBoundary.timeOffset: object expected");
-                                message.timeOffset = $root.google.protobuf.Duration.fromObject(object.timeOffset);
-                            }
                             if (object.wordIndex != null)
                                 message.wordIndex = object.wordIndex | 0;
                             if (object.transcriptIndex != null)
@@ -13237,11 +13457,6 @@
                                 object.transcriptIndex = 0;
                             if (message.transcriptIndex != null && message.hasOwnProperty("transcriptIndex"))
                                 object.transcriptIndex = message.transcriptIndex;
-                            if (message.timeOffset != null && message.hasOwnProperty("timeOffset")) {
-                                object.timeOffset = $root.google.protobuf.Duration.toObject(message.timeOffset, options);
-                                if (options.oneofs)
-                                    object.detailedBoundary = "timeOffset";
-                            }
                             if (message.wordIndex != null && message.hasOwnProperty("wordIndex")) {
                                 object.wordIndex = message.wordIndex;
                                 if (options.oneofs)
@@ -16614,6 +16829,7 @@
                          * @property {boolean|null} [active] PhraseMatcher active
                          * @property {Array.<google.cloud.contactcenterinsights.v1.IPhraseMatchRuleGroup>|null} [phraseMatchRuleGroups] PhraseMatcher phraseMatchRuleGroups
                          * @property {google.protobuf.ITimestamp|null} [activationUpdateTime] PhraseMatcher activationUpdateTime
+                         * @property {google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null} [roleMatch] PhraseMatcher roleMatch
                          */
     
                         /**
@@ -16705,6 +16921,14 @@
                         PhraseMatcher.prototype.activationUpdateTime = null;
     
                         /**
+                         * PhraseMatcher roleMatch.
+                         * @member {google.cloud.contactcenterinsights.v1.ConversationParticipant.Role} roleMatch
+                         * @memberof google.cloud.contactcenterinsights.v1.PhraseMatcher
+                         * @instance
+                         */
+                        PhraseMatcher.prototype.roleMatch = 0;
+    
+                        /**
                          * Creates a new PhraseMatcher instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.PhraseMatcher
@@ -16747,6 +16971,8 @@
                                     $root.google.cloud.contactcenterinsights.v1.PhraseMatchRuleGroup.encode(message.phraseMatchRuleGroups[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.activationUpdateTime != null && Object.hasOwnProperty.call(message, "activationUpdateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.activationUpdateTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.roleMatch != null && Object.hasOwnProperty.call(message, "roleMatch"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.roleMatch);
                             return writer;
                         };
     
@@ -16809,6 +17035,9 @@
                                     break;
                                 case 9:
                                     message.activationUpdateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.roleMatch = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -16888,6 +17117,17 @@
                                 if (error)
                                     return "activationUpdateTime." + error;
                             }
+                            if (message.roleMatch != null && message.hasOwnProperty("roleMatch"))
+                                switch (message.roleMatch) {
+                                default:
+                                    return "roleMatch: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -16947,6 +17187,28 @@
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.PhraseMatcher.activationUpdateTime: object expected");
                                 message.activationUpdateTime = $root.google.protobuf.Timestamp.fromObject(object.activationUpdateTime);
                             }
+                            switch (object.roleMatch) {
+                            case "ROLE_UNSPECIFIED":
+                            case 0:
+                                message.roleMatch = 0;
+                                break;
+                            case "HUMAN_AGENT":
+                            case 1:
+                                message.roleMatch = 1;
+                                break;
+                            case "AUTOMATED_AGENT":
+                            case 2:
+                                message.roleMatch = 2;
+                                break;
+                            case "END_USER":
+                            case 3:
+                                message.roleMatch = 3;
+                                break;
+                            case "ANY_AGENT":
+                            case 4:
+                                message.roleMatch = 4;
+                                break;
+                            }
                             return message;
                         };
     
@@ -16974,6 +17236,7 @@
                                 object.type = options.enums === String ? "PHRASE_MATCHER_TYPE_UNSPECIFIED" : 0;
                                 object.active = false;
                                 object.activationUpdateTime = null;
+                                object.roleMatch = options.enums === String ? "ROLE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -16996,6 +17259,8 @@
                             }
                             if (message.activationUpdateTime != null && message.hasOwnProperty("activationUpdateTime"))
                                 object.activationUpdateTime = $root.google.protobuf.Timestamp.toObject(message.activationUpdateTime, options);
+                            if (message.roleMatch != null && message.hasOwnProperty("roleMatch"))
+                                object.roleMatch = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.roleMatch] : message.roleMatch;
                             return object;
                         };
     
@@ -20700,6 +20965,264 @@
                         };
     
                         return DialogflowInteractionData;
+                    })();
+    
+                    v1.ConversationParticipant = (function() {
+    
+                        /**
+                         * Properties of a ConversationParticipant.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IConversationParticipant
+                         * @property {string|null} [dialogflowParticipant] ConversationParticipant dialogflowParticipant
+                         * @property {google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null} [role] ConversationParticipant role
+                         */
+    
+                        /**
+                         * Constructs a new ConversationParticipant.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a ConversationParticipant.
+                         * @implements IConversationParticipant
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationParticipant=} [properties] Properties to set
+                         */
+                        function ConversationParticipant(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConversationParticipant dialogflowParticipant.
+                         * @member {string} dialogflowParticipant
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @instance
+                         */
+                        ConversationParticipant.prototype.dialogflowParticipant = "";
+    
+                        /**
+                         * ConversationParticipant role.
+                         * @member {google.cloud.contactcenterinsights.v1.ConversationParticipant.Role} role
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @instance
+                         */
+                        ConversationParticipant.prototype.role = 0;
+    
+                        /**
+                         * Creates a new ConversationParticipant instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationParticipant=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationParticipant} ConversationParticipant instance
+                         */
+                        ConversationParticipant.create = function create(properties) {
+                            return new ConversationParticipant(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationParticipant message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationParticipant.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationParticipant} message ConversationParticipant message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationParticipant.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dialogflowParticipant != null && Object.hasOwnProperty.call(message, "dialogflowParticipant"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.dialogflowParticipant);
+                            if (message.role != null && Object.hasOwnProperty.call(message, "role"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.role);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConversationParticipant message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationParticipant.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IConversationParticipant} message ConversationParticipant message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConversationParticipant.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConversationParticipant message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationParticipant} ConversationParticipant
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationParticipant.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.ConversationParticipant();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.dialogflowParticipant = reader.string();
+                                    break;
+                                case 2:
+                                    message.role = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConversationParticipant message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationParticipant} ConversationParticipant
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConversationParticipant.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConversationParticipant message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConversationParticipant.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dialogflowParticipant != null && message.hasOwnProperty("dialogflowParticipant"))
+                                if (!$util.isString(message.dialogflowParticipant))
+                                    return "dialogflowParticipant: string expected";
+                            if (message.role != null && message.hasOwnProperty("role"))
+                                switch (message.role) {
+                                default:
+                                    return "role: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConversationParticipant message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.ConversationParticipant} ConversationParticipant
+                         */
+                        ConversationParticipant.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.ConversationParticipant)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.ConversationParticipant();
+                            if (object.dialogflowParticipant != null)
+                                message.dialogflowParticipant = String(object.dialogflowParticipant);
+                            switch (object.role) {
+                            case "ROLE_UNSPECIFIED":
+                            case 0:
+                                message.role = 0;
+                                break;
+                            case "HUMAN_AGENT":
+                            case 1:
+                                message.role = 1;
+                                break;
+                            case "AUTOMATED_AGENT":
+                            case 2:
+                                message.role = 2;
+                                break;
+                            case "END_USER":
+                            case 3:
+                                message.role = 3;
+                                break;
+                            case "ANY_AGENT":
+                            case 4:
+                                message.role = 4;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConversationParticipant message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ConversationParticipant} message ConversationParticipant
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConversationParticipant.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.dialogflowParticipant = "";
+                                object.role = options.enums === String ? "ROLE_UNSPECIFIED" : 0;
+                            }
+                            if (message.dialogflowParticipant != null && message.hasOwnProperty("dialogflowParticipant"))
+                                object.dialogflowParticipant = message.dialogflowParticipant;
+                            if (message.role != null && message.hasOwnProperty("role"))
+                                object.role = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.role] : message.role;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConversationParticipant to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConversationParticipant.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Role enum.
+                         * @name google.cloud.contactcenterinsights.v1.ConversationParticipant.Role
+                         * @enum {number}
+                         * @property {number} ROLE_UNSPECIFIED=0 ROLE_UNSPECIFIED value
+                         * @property {number} HUMAN_AGENT=1 HUMAN_AGENT value
+                         * @property {number} AUTOMATED_AGENT=2 AUTOMATED_AGENT value
+                         * @property {number} END_USER=3 END_USER value
+                         * @property {number} ANY_AGENT=4 ANY_AGENT value
+                         */
+                        ConversationParticipant.Role = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ROLE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "HUMAN_AGENT"] = 1;
+                            values[valuesById[2] = "AUTOMATED_AGENT"] = 2;
+                            values[valuesById[3] = "END_USER"] = 3;
+                            values[valuesById[4] = "ANY_AGENT"] = 4;
+                            return values;
+                        })();
+    
+                        return ConversationParticipant;
                     })();
     
                     return v1;

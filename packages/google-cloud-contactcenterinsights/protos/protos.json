@@ -14,7 +14,9 @@
                     "java_outer_classname": "ResourcesProto",
                     "java_package": "com.google.cloud.contactcenterinsights.v1",
                     "php_namespace": "Google\\Cloud\\ContactCenterInsights\\V1",
-                    "ruby_package": "Google::Cloud::ContactCenterInsights::V1"
+                    "ruby_package": "Google::Cloud::ContactCenterInsights::V1",
+                    "(google.api.resource_definition).type": "dialogflow.googleapis.com/Participant",
+                    "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/conversations/{conversation}/participants/{participant}"
                   },
                   "nested": {
                     "ContactCenterInsights": {
@@ -500,6 +502,39 @@
                           "keyType": "string",
                           "type": "int32",
                           "id": 6
+                        },
+                        "conversationCountTimeSeries": {
+                          "type": "TimeSeries",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "TimeSeries": {
+                          "fields": {
+                            "intervalDuration": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1
+                            },
+                            "points": {
+                              "rule": "repeated",
+                              "type": "Interval",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "Interval": {
+                              "fields": {
+                                "startTime": {
+                                  "type": "google.protobuf.Timestamp",
+                                  "id": 1
+                                },
+                                "conversationCount": {
+                                  "type": "int32",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -753,6 +788,10 @@
                       "nested": {
                         "BigQueryDestination": {
                           "fields": {
+                            "projectId": {
+                              "type": "string",
+                              "id": 3
+                            },
                             "dataset": {
                               "type": "string",
                               "id": 1,
@@ -1167,9 +1206,9 @@
                                   "type": "int32",
                                   "id": 5
                                 },
-                                "participant": {
-                                  "type": "Participant",
-                                  "id": 8
+                                "segmentParticipant": {
+                                  "type": "ConversationParticipant",
+                                  "id": 9
                                 }
                               },
                               "nested": {
@@ -1190,28 +1229,6 @@
                                     "confidence": {
                                       "type": "float",
                                       "id": 4
-                                    }
-                                  }
-                                },
-                                "Participant": {
-                                  "fields": {
-                                    "dialogflowParticipant": {
-                                      "type": "string",
-                                      "id": 1
-                                    },
-                                    "role": {
-                                      "type": "Role",
-                                      "id": 2
-                                    }
-                                  },
-                                  "nested": {
-                                    "Role": {
-                                      "values": {
-                                        "ROLE_UNSPECIFIED": 0,
-                                        "HUMAN_AGENT": 1,
-                                        "AUTOMATED_AGENT": 2,
-                                        "END_USER": 3
-                                      }
                                     }
                                   }
                                 }
@@ -1466,19 +1483,11 @@
                       "oneofs": {
                         "detailedBoundary": {
                           "oneof": [
-                            "timeOffset",
                             "wordIndex"
                           ]
                         }
                       },
                       "fields": {
-                        "timeOffset": {
-                          "type": "google.protobuf.Duration",
-                          "id": 2,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
                         "wordIndex": {
                           "type": "int32",
                           "id": 3
@@ -1796,6 +1805,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "roleMatch": {
+                          "type": "ConversationParticipant.Role",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -2121,6 +2134,29 @@
                         "confidence": {
                           "type": "float",
                           "id": 2
+                        }
+                      }
+                    },
+                    "ConversationParticipant": {
+                      "fields": {
+                        "dialogflowParticipant": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "role": {
+                          "type": "Role",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Role": {
+                          "values": {
+                            "ROLE_UNSPECIFIED": 0,
+                            "HUMAN_AGENT": 1,
+                            "AUTOMATED_AGENT": 2,
+                            "END_USER": 3,
+                            "ANY_AGENT": 4
+                          }
                         }
                       }
                     }

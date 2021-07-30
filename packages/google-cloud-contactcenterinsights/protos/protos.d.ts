@@ -635,6 +635,9 @@ export namespace google {
 
                     /** CalculateStatsResponse issueMatches */
                     issueMatches?: ({ [k: string]: number }|null);
+
+                    /** CalculateStatsResponse conversationCountTimeSeries */
+                    conversationCountTimeSeries?: (google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries|null);
                 }
 
                 /** Represents a CalculateStatsResponse. */
@@ -663,6 +666,9 @@ export namespace google {
 
                     /** CalculateStatsResponse issueMatches. */
                     public issueMatches: { [k: string]: number };
+
+                    /** CalculateStatsResponse conversationCountTimeSeries. */
+                    public conversationCountTimeSeries?: (google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries|null);
 
                     /**
                      * Creates a new CalculateStatsResponse instance using the specified properties.
@@ -733,6 +739,204 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace CalculateStatsResponse {
+
+                    /** Properties of a TimeSeries. */
+                    interface ITimeSeries {
+
+                        /** TimeSeries intervalDuration */
+                        intervalDuration?: (google.protobuf.IDuration|null);
+
+                        /** TimeSeries points */
+                        points?: (google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval[]|null);
+                    }
+
+                    /** Represents a TimeSeries. */
+                    class TimeSeries implements ITimeSeries {
+
+                        /**
+                         * Constructs a new TimeSeries.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries);
+
+                        /** TimeSeries intervalDuration. */
+                        public intervalDuration?: (google.protobuf.IDuration|null);
+
+                        /** TimeSeries points. */
+                        public points: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval[];
+
+                        /**
+                         * Creates a new TimeSeries instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns TimeSeries instance
+                         */
+                        public static create(properties?: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries): google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries;
+
+                        /**
+                         * Encodes the specified TimeSeries message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.verify|verify} messages.
+                         * @param message TimeSeries message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified TimeSeries message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.verify|verify} messages.
+                         * @param message TimeSeries message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.ITimeSeries, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a TimeSeries message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns TimeSeries
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries;
+
+                        /**
+                         * Decodes a TimeSeries message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns TimeSeries
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries;
+
+                        /**
+                         * Verifies a TimeSeries message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a TimeSeries message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns TimeSeries
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries;
+
+                        /**
+                         * Creates a plain object from a TimeSeries message. Also converts values to other types if specified.
+                         * @param message TimeSeries
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this TimeSeries to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace TimeSeries {
+
+                        /** Properties of an Interval. */
+                        interface IInterval {
+
+                            /** Interval startTime */
+                            startTime?: (google.protobuf.ITimestamp|null);
+
+                            /** Interval conversationCount */
+                            conversationCount?: (number|null);
+                        }
+
+                        /** Represents an Interval. */
+                        class Interval implements IInterval {
+
+                            /**
+                             * Constructs a new Interval.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval);
+
+                            /** Interval startTime. */
+                            public startTime?: (google.protobuf.ITimestamp|null);
+
+                            /** Interval conversationCount. */
+                            public conversationCount: number;
+
+                            /**
+                             * Creates a new Interval instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Interval instance
+                             */
+                            public static create(properties?: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval): google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval;
+
+                            /**
+                             * Encodes the specified Interval message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.verify|verify} messages.
+                             * @param message Interval message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval.verify|verify} messages.
+                             * @param message Interval message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an Interval message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Interval
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval;
+
+                            /**
+                             * Decodes an Interval message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Interval
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval;
+
+                            /**
+                             * Verifies an Interval message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Interval
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval;
+
+                            /**
+                             * Creates a plain object from an Interval message. Also converts values to other types if specified.
+                             * @param message Interval
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Interval to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
                 }
 
                 /** Properties of a CreateAnalysisOperationMetadata. */
@@ -2033,6 +2237,9 @@ export namespace google {
                     /** Properties of a BigQueryDestination. */
                     interface IBigQueryDestination {
 
+                        /** BigQueryDestination projectId */
+                        projectId?: (string|null);
+
                         /** BigQueryDestination dataset */
                         dataset?: (string|null);
 
@@ -2048,6 +2255,9 @@ export namespace google {
                          * @param [properties] Properties to set
                          */
                         constructor(properties?: google.cloud.contactcenterinsights.v1.ExportInsightsDataRequest.IBigQueryDestination);
+
+                        /** BigQueryDestination projectId. */
+                        public projectId: string;
 
                         /** BigQueryDestination dataset. */
                         public dataset: string;
@@ -4111,8 +4321,8 @@ export namespace google {
                             /** TranscriptSegment channelTag */
                             channelTag?: (number|null);
 
-                            /** TranscriptSegment participant */
-                            participant?: (google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant|null);
+                            /** TranscriptSegment segmentParticipant */
+                            segmentParticipant?: (google.cloud.contactcenterinsights.v1.IConversationParticipant|null);
                         }
 
                         /** Represents a TranscriptSegment. */
@@ -4139,8 +4349,8 @@ export namespace google {
                             /** TranscriptSegment channelTag. */
                             public channelTag: number;
 
-                            /** TranscriptSegment participant. */
-                            public participant?: (google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant|null);
+                            /** TranscriptSegment segmentParticipant. */
+                            public segmentParticipant?: (google.cloud.contactcenterinsights.v1.IConversationParticipant|null);
 
                             /**
                              * Creates a new TranscriptSegment instance using the specified properties.
@@ -4321,113 +4531,6 @@ export namespace google {
                                  * @returns JSON object
                                  */
                                 public toJSON(): { [k: string]: any };
-                            }
-
-                            /** Properties of a Participant. */
-                            interface IParticipant {
-
-                                /** Participant dialogflowParticipant */
-                                dialogflowParticipant?: (string|null);
-
-                                /** Participant role */
-                                role?: (google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.Role|keyof typeof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.Role|null);
-                            }
-
-                            /** Represents a Participant. */
-                            class Participant implements IParticipant {
-
-                                /**
-                                 * Constructs a new Participant.
-                                 * @param [properties] Properties to set
-                                 */
-                                constructor(properties?: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant);
-
-                                /** Participant dialogflowParticipant. */
-                                public dialogflowParticipant: string;
-
-                                /** Participant role. */
-                                public role: (google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.Role|keyof typeof google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.Role);
-
-                                /**
-                                 * Creates a new Participant instance using the specified properties.
-                                 * @param [properties] Properties to set
-                                 * @returns Participant instance
-                                 */
-                                public static create(properties?: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant): google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant;
-
-                                /**
-                                 * Encodes the specified Participant message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.verify|verify} messages.
-                                 * @param message Participant message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encode(message: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Encodes the specified Participant message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant.verify|verify} messages.
-                                 * @param message Participant message or plain object to encode
-                                 * @param [writer] Writer to encode to
-                                 * @returns Writer
-                                 */
-                                public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.IParticipant, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                                /**
-                                 * Decodes a Participant message from the specified reader or buffer.
-                                 * @param reader Reader or buffer to decode from
-                                 * @param [length] Message length if known beforehand
-                                 * @returns Participant
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant;
-
-                                /**
-                                 * Decodes a Participant message from the specified reader or buffer, length delimited.
-                                 * @param reader Reader or buffer to decode from
-                                 * @returns Participant
-                                 * @throws {Error} If the payload is not a reader or valid buffer
-                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                                 */
-                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant;
-
-                                /**
-                                 * Verifies a Participant message.
-                                 * @param message Plain object to verify
-                                 * @returns `null` if valid, otherwise the reason why it is not
-                                 */
-                                public static verify(message: { [k: string]: any }): (string|null);
-
-                                /**
-                                 * Creates a Participant message from a plain object. Also converts values to their respective internal types.
-                                 * @param object Plain object
-                                 * @returns Participant
-                                 */
-                                public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant;
-
-                                /**
-                                 * Creates a plain object from a Participant message. Also converts values to other types if specified.
-                                 * @param message Participant
-                                 * @param [options] Conversion options
-                                 * @returns Plain object
-                                 */
-                                public static toObject(message: google.cloud.contactcenterinsights.v1.Conversation.Transcript.TranscriptSegment.Participant, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                                /**
-                                 * Converts this Participant to JSON.
-                                 * @returns JSON object
-                                 */
-                                public toJSON(): { [k: string]: any };
-                            }
-
-                            namespace Participant {
-
-                                /** Role enum. */
-                                enum Role {
-                                    ROLE_UNSPECIFIED = 0,
-                                    HUMAN_AGENT = 1,
-                                    AUTOMATED_AGENT = 2,
-                                    END_USER = 3
-                                }
                             }
                         }
                     }
@@ -5499,9 +5602,6 @@ export namespace google {
                 /** Properties of an AnnotationBoundary. */
                 interface IAnnotationBoundary {
 
-                    /** AnnotationBoundary timeOffset */
-                    timeOffset?: (google.protobuf.IDuration|null);
-
                     /** AnnotationBoundary wordIndex */
                     wordIndex?: (number|null);
 
@@ -5518,9 +5618,6 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.contactcenterinsights.v1.IAnnotationBoundary);
 
-                    /** AnnotationBoundary timeOffset. */
-                    public timeOffset?: (google.protobuf.IDuration|null);
-
                     /** AnnotationBoundary wordIndex. */
                     public wordIndex?: (number|null);
 
@@ -5528,7 +5625,7 @@ export namespace google {
                     public transcriptIndex: number;
 
                     /** AnnotationBoundary detailedBoundary. */
-                    public detailedBoundary?: ("timeOffset"|"wordIndex");
+                    public detailedBoundary?: "wordIndex";
 
                     /**
                      * Creates a new AnnotationBoundary instance using the specified properties.
@@ -7038,6 +7135,9 @@ export namespace google {
 
                     /** PhraseMatcher activationUpdateTime */
                     activationUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PhraseMatcher roleMatch */
+                    roleMatch?: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null);
                 }
 
                 /** Represents a PhraseMatcher. */
@@ -7075,6 +7175,9 @@ export namespace google {
 
                     /** PhraseMatcher activationUpdateTime. */
                     public activationUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PhraseMatcher roleMatch. */
+                    public roleMatch: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role);
 
                     /**
                      * Creates a new PhraseMatcher instance using the specified properties.
@@ -8577,6 +8680,114 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ConversationParticipant. */
+                interface IConversationParticipant {
+
+                    /** ConversationParticipant dialogflowParticipant */
+                    dialogflowParticipant?: (string|null);
+
+                    /** ConversationParticipant role */
+                    role?: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null);
+                }
+
+                /** Represents a ConversationParticipant. */
+                class ConversationParticipant implements IConversationParticipant {
+
+                    /**
+                     * Constructs a new ConversationParticipant.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.contactcenterinsights.v1.IConversationParticipant);
+
+                    /** ConversationParticipant dialogflowParticipant. */
+                    public dialogflowParticipant: string;
+
+                    /** ConversationParticipant role. */
+                    public role: (google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|keyof typeof google.cloud.contactcenterinsights.v1.ConversationParticipant.Role);
+
+                    /**
+                     * Creates a new ConversationParticipant instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ConversationParticipant instance
+                     */
+                    public static create(properties?: google.cloud.contactcenterinsights.v1.IConversationParticipant): google.cloud.contactcenterinsights.v1.ConversationParticipant;
+
+                    /**
+                     * Encodes the specified ConversationParticipant message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationParticipant.verify|verify} messages.
+                     * @param message ConversationParticipant message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.contactcenterinsights.v1.IConversationParticipant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ConversationParticipant message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.ConversationParticipant.verify|verify} messages.
+                     * @param message ConversationParticipant message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.contactcenterinsights.v1.IConversationParticipant, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ConversationParticipant message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ConversationParticipant
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.contactcenterinsights.v1.ConversationParticipant;
+
+                    /**
+                     * Decodes a ConversationParticipant message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ConversationParticipant
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.contactcenterinsights.v1.ConversationParticipant;
+
+                    /**
+                     * Verifies a ConversationParticipant message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ConversationParticipant message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ConversationParticipant
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.contactcenterinsights.v1.ConversationParticipant;
+
+                    /**
+                     * Creates a plain object from a ConversationParticipant message. Also converts values to other types if specified.
+                     * @param message ConversationParticipant
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.contactcenterinsights.v1.ConversationParticipant, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ConversationParticipant to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ConversationParticipant {
+
+                    /** Role enum. */
+                    enum Role {
+                        ROLE_UNSPECIFIED = 0,
+                        HUMAN_AGENT = 1,
+                        AUTOMATED_AGENT = 2,
+                        END_USER = 3,
+                        ANY_AGENT = 4
+                    }
                 }
             }
         }
