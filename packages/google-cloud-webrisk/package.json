@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-web-risk",
   "name": "@google-cloud/web-risk",
-  "version": "2.1.6",
+  "version": "2.1.7",
   "author": "Google LLC",
   "description": "Web Risk API client for Node.js",
   "main": "build/src/index.js",

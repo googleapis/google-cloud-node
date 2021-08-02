@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [2.1.7](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.6...v2.1.7) (2021-08-02)
+
+
+### Bug Fixes
+
+* update branch to main ([#270](https://www.github.com/googleapis/nodejs-web-risk/issues/270)) ([c95d1c2](https://www.github.com/googleapis/nodejs-web-risk/commit/c95d1c290379c9d788d4074db8f43b4f4f3f4a1f))
+
 ### [2.1.6](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.5...v2.1.6) (2021-07-16)
 
 
