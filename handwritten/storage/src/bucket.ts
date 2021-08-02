@@ -1710,6 +1710,7 @@ class Bucket extends ServiceObject {
         uri: '/notificationConfigs',
         json: snakeize(body),
         qs: query,
+        maxRetries: 0, //explicitly set this value since this is a non-idempotent function
       },
       (err, apiResponse) => {
         if (err) {

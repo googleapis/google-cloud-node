@@ -950,6 +950,7 @@ export class Storage extends Service {
         method: 'POST',
         uri: `/projects/${projectId}/hmacKeys`,
         qs: query,
+        maxRetries: 0, //explicitly set this value since this is a non-idempotent function
       },
       (err, resp: HmacKeyResourceResponse) => {
         if (err) {
