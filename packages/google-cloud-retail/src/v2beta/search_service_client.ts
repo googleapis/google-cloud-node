@@ -407,8 +407,7 @@ export class SearchServiceClient {
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the products being filtered. Filter
-   *   expression is case-sensitive. See more details at this [user
-   *   guide](/retail/private/docs/filter-and-order#filter).
+   *   expression is case-sensitive.
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
@@ -424,9 +423,7 @@ export class SearchServiceClient {
    * @param {string} request.orderBy
    *   The order in which products are returned. Products can be ordered by
    *   a field in an {@link google.cloud.retail.v2beta.Product|Product} object. Leave
-   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. See
-   *   more details at this [user
-   *   guide](/retail/private/docs/filter-and-order#order).
+   *   it unset if ordered by relevance. OrderBy expression is case-sensitive.
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {number[]} request.facetSpecs
@@ -442,12 +439,10 @@ export class SearchServiceClient {
    *   (retail-search-support@google.com) if you are interested in using dynamic
    *   facet feature.
    * @param {google.cloud.retail.v2beta.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain products. See more details at this
-   *   [user guide](/retail/private/docs/boosting).
+   *   Boost specification to boost certain products.
    * @param {google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
-   *   query expansion will occur. See more details at this [user
-   *   guide](/retail/private/docs/result-size#query_expansion).
+   *   query expansion will occur.
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
@@ -620,8 +615,7 @@ export class SearchServiceClient {
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the products being filtered. Filter
-   *   expression is case-sensitive. See more details at this [user
-   *   guide](/retail/private/docs/filter-and-order#filter).
+   *   expression is case-sensitive.
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
@@ -637,9 +631,7 @@ export class SearchServiceClient {
    * @param {string} request.orderBy
    *   The order in which products are returned. Products can be ordered by
    *   a field in an {@link google.cloud.retail.v2beta.Product|Product} object. Leave
-   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. See
-   *   more details at this [user
-   *   guide](/retail/private/docs/filter-and-order#order).
+   *   it unset if ordered by relevance. OrderBy expression is case-sensitive.
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {number[]} request.facetSpecs
@@ -655,12 +647,10 @@ export class SearchServiceClient {
    *   (retail-search-support@google.com) if you are interested in using dynamic
    *   facet feature.
    * @param {google.cloud.retail.v2beta.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain products. See more details at this
-   *   [user guide](/retail/private/docs/boosting).
+   *   Boost specification to boost certain products.
    * @param {google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
-   *   query expansion will occur. See more details at this [user
-   *   guide](/retail/private/docs/result-size#query_expansion).
+   *   query expansion will occur.
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
@@ -815,8 +805,7 @@ export class SearchServiceClient {
    * @param {string} request.filter
    *   The filter syntax consists of an expression language for constructing a
    *   predicate from one or more fields of the products being filtered. Filter
-   *   expression is case-sensitive. See more details at this [user
-   *   guide](/retail/private/docs/filter-and-order#filter).
+   *   expression is case-sensitive.
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {string} request.canonicalFilter
@@ -832,9 +821,7 @@ export class SearchServiceClient {
    * @param {string} request.orderBy
    *   The order in which products are returned. Products can be ordered by
    *   a field in an {@link google.cloud.retail.v2beta.Product|Product} object. Leave
-   *   it unset if ordered by relevance. OrderBy expression is case-sensitive. See
-   *   more details at this [user
-   *   guide](/retail/private/docs/filter-and-order#order).
+   *   it unset if ordered by relevance. OrderBy expression is case-sensitive.
    *
    *   If this field is unrecognizable, an INVALID_ARGUMENT is returned.
    * @param {number[]} request.facetSpecs
@@ -850,12 +837,10 @@ export class SearchServiceClient {
    *   (retail-search-support@google.com) if you are interested in using dynamic
    *   facet feature.
    * @param {google.cloud.retail.v2beta.SearchRequest.BoostSpec} request.boostSpec
-   *   Boost specification to boost certain products. See more details at this
-   *   [user guide](/retail/private/docs/boosting).
+   *   Boost specification to boost certain products.
    * @param {google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec} request.queryExpansionSpec
    *   The query expansion specification that specifies the conditions under which
-   *   query expansion will occur. See more details at this [user
-   *   guide](/retail/private/docs/result-size#query_expansion).
+   *   query expansion will occur.
    * @param {string[]} request.variantRollupKeys
    *   The keys to fetch and rollup the matching
    *   {@link google.cloud.retail.v2beta.Product.Type.VARIANT|variant}
