@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-retail/compare/v1.1.6...v1.2.0) (2021-08-02)
+
+
+### Features
+
+* Add restricted Retail Search features for Retail API v2 ([b8279f4](https://www.github.com/googleapis/nodejs-retail/commit/b8279f4b3e90150d349ddd2071d8e25c51c07ec4))
+* Add restricted Retail Search features for Retail API v2alpha ([b8279f4](https://www.github.com/googleapis/nodejs-retail/commit/b8279f4b3e90150d349ddd2071d8e25c51c07ec4))
+* Add restricted Retail Search features for Retail API v2beta. ([#79](https://www.github.com/googleapis/nodejs-retail/issues/79)) ([b8279f4](https://www.github.com/googleapis/nodejs-retail/commit/b8279f4b3e90150d349ddd2071d8e25c51c07ec4))
+
 ### [1.1.6](https://www.github.com/googleapis/nodejs-retail/compare/v1.1.5...v1.1.6) (2021-07-16)
 
 
