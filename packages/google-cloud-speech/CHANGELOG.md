@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.5.6](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.5...v4.5.6) (2021-08-02)
+
+
+### Bug Fixes
+
+* failing tests for LRO check methods ([#784](https://www.github.com/googleapis/nodejs-speech/issues/784)) ([08e4276](https://www.github.com/googleapis/nodejs-speech/commit/08e4276a39a74a45300041278dc3c63602971c10))
+
 ### [4.5.5](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.4...v4.5.5) (2021-07-21)
 
 
