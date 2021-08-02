@@ -938,6 +938,10 @@
                           "rule": "repeated",
                           "type": "SpeechRecognitionResult",
                           "id": 2
+                        },
+                        "totalBilledTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
                         }
                       }
                     },
@@ -947,6 +951,10 @@
                           "rule": "repeated",
                           "type": "SpeechRecognitionResult",
                           "id": 2
+                        },
+                        "totalBilledTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
                         },
                         "outputConfig": {
                           "type": "TranscriptOutputConfig",
@@ -1002,6 +1010,10 @@
                         "speechEventType": {
                           "type": "SpeechEventType",
                           "id": 4
+                        },
+                        "totalBilledTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
                         }
                       },
                       "nested": {
@@ -1185,7 +1197,10 @@
                         "phraseSetReferences": {
                           "rule": "repeated",
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.resource_reference).type": "speech.googleapis.com/PhraseSet"
+                          }
                         },
                         "customClasses": {
                           "rule": "repeated",
@@ -1402,7 +1417,10 @@
                         },
                         "phraseSetId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "phraseSet": {
                           "type": "PhraseSet",
@@ -1497,7 +1515,10 @@
                         },
                         "customClassId": {
                           "type": "string",
-                          "id": 2
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "customClass": {
                           "type": "CustomClass",

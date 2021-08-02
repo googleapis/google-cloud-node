@@ -8346,6 +8346,7 @@
                          * @memberof google.cloud.speech.v1p1beta1
                          * @interface IRecognizeResponse
                          * @property {Array.<google.cloud.speech.v1p1beta1.ISpeechRecognitionResult>|null} [results] RecognizeResponse results
+                         * @property {google.protobuf.IDuration|null} [totalBilledTime] RecognizeResponse totalBilledTime
                          */
     
                         /**
@@ -8371,6 +8372,14 @@
                          * @instance
                          */
                         RecognizeResponse.prototype.results = $util.emptyArray;
+    
+                        /**
+                         * RecognizeResponse totalBilledTime.
+                         * @member {google.protobuf.IDuration|null|undefined} totalBilledTime
+                         * @memberof google.cloud.speech.v1p1beta1.RecognizeResponse
+                         * @instance
+                         */
+                        RecognizeResponse.prototype.totalBilledTime = null;
     
                         /**
                          * Creates a new RecognizeResponse instance using the specified properties.
@@ -8399,6 +8408,8 @@
                             if (message.results != null && message.results.length)
                                 for (var i = 0; i < message.results.length; ++i)
                                     $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.encode(message.results[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.totalBilledTime != null && Object.hasOwnProperty.call(message, "totalBilledTime"))
+                                $root.google.protobuf.Duration.encode(message.totalBilledTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
@@ -8437,6 +8448,9 @@
                                     if (!(message.results && message.results.length))
                                         message.results = [];
                                     message.results.push($root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    message.totalBilledTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -8482,6 +8496,11 @@
                                         return "results." + error;
                                 }
                             }
+                            if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime")) {
+                                var error = $root.google.protobuf.Duration.verify(message.totalBilledTime);
+                                if (error)
+                                    return "totalBilledTime." + error;
+                            }
                             return null;
                         };
     
@@ -8507,6 +8526,11 @@
                                     message.results[i] = $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.fromObject(object.results[i]);
                                 }
                             }
+                            if (object.totalBilledTime != null) {
+                                if (typeof object.totalBilledTime !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.RecognizeResponse.totalBilledTime: object expected");
+                                message.totalBilledTime = $root.google.protobuf.Duration.fromObject(object.totalBilledTime);
+                            }
                             return message;
                         };
     
@@ -8525,11 +8549,15 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.results = [];
+                            if (options.defaults)
+                                object.totalBilledTime = null;
                             if (message.results && message.results.length) {
                                 object.results = [];
                                 for (var j = 0; j < message.results.length; ++j)
                                     object.results[j] = $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.toObject(message.results[j], options);
                             }
+                            if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
+                                object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
                             return object;
                         };
     
@@ -8554,6 +8582,7 @@
                          * @memberof google.cloud.speech.v1p1beta1
                          * @interface ILongRunningRecognizeResponse
                          * @property {Array.<google.cloud.speech.v1p1beta1.ISpeechRecognitionResult>|null} [results] LongRunningRecognizeResponse results
+                         * @property {google.protobuf.IDuration|null} [totalBilledTime] LongRunningRecognizeResponse totalBilledTime
                          * @property {google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null} [outputConfig] LongRunningRecognizeResponse outputConfig
                          * @property {google.rpc.IStatus|null} [outputError] LongRunningRecognizeResponse outputError
                          */
@@ -8581,6 +8610,14 @@
                          * @instance
                          */
                         LongRunningRecognizeResponse.prototype.results = $util.emptyArray;
+    
+                        /**
+                         * LongRunningRecognizeResponse totalBilledTime.
+                         * @member {google.protobuf.IDuration|null|undefined} totalBilledTime
+                         * @memberof google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse
+                         * @instance
+                         */
+                        LongRunningRecognizeResponse.prototype.totalBilledTime = null;
     
                         /**
                          * LongRunningRecognizeResponse outputConfig.
@@ -8625,6 +8662,8 @@
                             if (message.results != null && message.results.length)
                                 for (var i = 0; i < message.results.length; ++i)
                                     $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.encode(message.results[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.totalBilledTime != null && Object.hasOwnProperty.call(message, "totalBilledTime"))
+                                $root.google.protobuf.Duration.encode(message.totalBilledTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
                                 $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.encode(message.outputConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.outputError != null && Object.hasOwnProperty.call(message, "outputError"))
@@ -8667,6 +8706,9 @@
                                     if (!(message.results && message.results.length))
                                         message.results = [];
                                     message.results.push($root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    message.totalBilledTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
                                 case 6:
                                     message.outputConfig = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.decode(reader, reader.uint32());
@@ -8718,6 +8760,11 @@
                                         return "results." + error;
                                 }
                             }
+                            if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime")) {
+                                var error = $root.google.protobuf.Duration.verify(message.totalBilledTime);
+                                if (error)
+                                    return "totalBilledTime." + error;
+                            }
                             if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
                                 var error = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.verify(message.outputConfig);
                                 if (error)
@@ -8753,6 +8800,11 @@
                                     message.results[i] = $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.fromObject(object.results[i]);
                                 }
                             }
+                            if (object.totalBilledTime != null) {
+                                if (typeof object.totalBilledTime !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse.totalBilledTime: object expected");
+                                message.totalBilledTime = $root.google.protobuf.Duration.fromObject(object.totalBilledTime);
+                            }
                             if (object.outputConfig != null) {
                                 if (typeof object.outputConfig !== "object")
                                     throw TypeError(".google.cloud.speech.v1p1beta1.LongRunningRecognizeResponse.outputConfig: object expected");
@@ -8782,6 +8834,7 @@
                             if (options.arrays || options.defaults)
                                 object.results = [];
                             if (options.defaults) {
+                                object.totalBilledTime = null;
                                 object.outputConfig = null;
                                 object.outputError = null;
                             }
@@ -8790,6 +8843,8 @@
                                 for (var j = 0; j < message.results.length; ++j)
                                     object.results[j] = $root.google.cloud.speech.v1p1beta1.SpeechRecognitionResult.toObject(message.results[j], options);
                             }
+                            if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
+                                object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
                             if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
                                 object.outputConfig = $root.google.cloud.speech.v1p1beta1.TranscriptOutputConfig.toObject(message.outputConfig, options);
                             if (message.outputError != null && message.hasOwnProperty("outputError"))
@@ -9111,6 +9166,7 @@
                          * @property {google.rpc.IStatus|null} [error] StreamingRecognizeResponse error
                          * @property {Array.<google.cloud.speech.v1p1beta1.IStreamingRecognitionResult>|null} [results] StreamingRecognizeResponse results
                          * @property {google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType|null} [speechEventType] StreamingRecognizeResponse speechEventType
+                         * @property {google.protobuf.IDuration|null} [totalBilledTime] StreamingRecognizeResponse totalBilledTime
                          */
     
                         /**
@@ -9154,6 +9210,14 @@
                         StreamingRecognizeResponse.prototype.speechEventType = 0;
     
                         /**
+                         * StreamingRecognizeResponse totalBilledTime.
+                         * @member {google.protobuf.IDuration|null|undefined} totalBilledTime
+                         * @memberof google.cloud.speech.v1p1beta1.StreamingRecognizeResponse
+                         * @instance
+                         */
+                        StreamingRecognizeResponse.prototype.totalBilledTime = null;
+    
+                        /**
                          * Creates a new StreamingRecognizeResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.speech.v1p1beta1.StreamingRecognizeResponse
@@ -9184,6 +9248,8 @@
                                     $root.google.cloud.speech.v1p1beta1.StreamingRecognitionResult.encode(message.results[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.speechEventType != null && Object.hasOwnProperty.call(message, "speechEventType"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.speechEventType);
+                            if (message.totalBilledTime != null && Object.hasOwnProperty.call(message, "totalBilledTime"))
+                                $root.google.protobuf.Duration.encode(message.totalBilledTime, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -9228,6 +9294,9 @@
                                     break;
                                 case 4:
                                     message.speechEventType = reader.int32();
+                                    break;
+                                case 5:
+                                    message.totalBilledTime = $root.google.protobuf.Duration.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -9286,6 +9355,11 @@
                                 case 1:
                                     break;
                                 }
+                            if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime")) {
+                                var error = $root.google.protobuf.Duration.verify(message.totalBilledTime);
+                                if (error)
+                                    return "totalBilledTime." + error;
+                            }
                             return null;
                         };
     
@@ -9326,6 +9400,11 @@
                                 message.speechEventType = 1;
                                 break;
                             }
+                            if (object.totalBilledTime != null) {
+                                if (typeof object.totalBilledTime !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.totalBilledTime: object expected");
+                                message.totalBilledTime = $root.google.protobuf.Duration.fromObject(object.totalBilledTime);
+                            }
                             return message;
                         };
     
@@ -9347,6 +9426,7 @@
                             if (options.defaults) {
                                 object.error = null;
                                 object.speechEventType = options.enums === String ? "SPEECH_EVENT_UNSPECIFIED" : 0;
+                                object.totalBilledTime = null;
                             }
                             if (message.error != null && message.hasOwnProperty("error"))
                                 object.error = $root.google.rpc.Status.toObject(message.error, options);
@@ -9357,6 +9437,8 @@
                             }
                             if (message.speechEventType != null && message.hasOwnProperty("speechEventType"))
                                 object.speechEventType = options.enums === String ? $root.google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType[message.speechEventType] : message.speechEventType;
+                            if (message.totalBilledTime != null && message.hasOwnProperty("totalBilledTime"))
+                                object.totalBilledTime = $root.google.protobuf.Duration.toObject(message.totalBilledTime, options);
                             return object;
                         };
     

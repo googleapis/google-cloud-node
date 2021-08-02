@@ -3277,6 +3277,9 @@ export namespace google {
 
                     /** RecognizeResponse results */
                     results?: (google.cloud.speech.v1p1beta1.ISpeechRecognitionResult[]|null);
+
+                    /** RecognizeResponse totalBilledTime */
+                    totalBilledTime?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a RecognizeResponse. */
@@ -3290,6 +3293,9 @@ export namespace google {
 
                     /** RecognizeResponse results. */
                     public results: google.cloud.speech.v1p1beta1.ISpeechRecognitionResult[];
+
+                    /** RecognizeResponse totalBilledTime. */
+                    public totalBilledTime?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new RecognizeResponse instance using the specified properties.
@@ -3368,6 +3374,9 @@ export namespace google {
                     /** LongRunningRecognizeResponse results */
                     results?: (google.cloud.speech.v1p1beta1.ISpeechRecognitionResult[]|null);
 
+                    /** LongRunningRecognizeResponse totalBilledTime */
+                    totalBilledTime?: (google.protobuf.IDuration|null);
+
                     /** LongRunningRecognizeResponse outputConfig */
                     outputConfig?: (google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null);
 
@@ -3386,6 +3395,9 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse results. */
                     public results: google.cloud.speech.v1p1beta1.ISpeechRecognitionResult[];
+
+                    /** LongRunningRecognizeResponse totalBilledTime. */
+                    public totalBilledTime?: (google.protobuf.IDuration|null);
 
                     /** LongRunningRecognizeResponse outputConfig. */
                     public outputConfig?: (google.cloud.speech.v1p1beta1.ITranscriptOutputConfig|null);
@@ -3589,6 +3601,9 @@ export namespace google {
 
                     /** StreamingRecognizeResponse speechEventType */
                     speechEventType?: (google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType|keyof typeof google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType|null);
+
+                    /** StreamingRecognizeResponse totalBilledTime */
+                    totalBilledTime?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a StreamingRecognizeResponse. */
@@ -3608,6 +3623,9 @@ export namespace google {
 
                     /** StreamingRecognizeResponse speechEventType. */
                     public speechEventType: (google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType|keyof typeof google.cloud.speech.v1p1beta1.StreamingRecognizeResponse.SpeechEventType);
+
+                    /** StreamingRecognizeResponse totalBilledTime. */
+                    public totalBilledTime?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new StreamingRecognizeResponse instance using the specified properties.
