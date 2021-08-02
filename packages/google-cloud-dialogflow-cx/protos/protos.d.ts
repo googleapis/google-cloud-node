@@ -29,6 +29,195 @@ export namespace google {
                 /** Namespace v3. */
                 namespace v3 {
 
+                    /** Properties of an AdvancedSettings. */
+                    interface IAdvancedSettings {
+
+                        /** AdvancedSettings loggingSettings */
+                        loggingSettings?: (google.cloud.dialogflow.cx.v3.AdvancedSettings.ILoggingSettings|null);
+                    }
+
+                    /** Represents an AdvancedSettings. */
+                    class AdvancedSettings implements IAdvancedSettings {
+
+                        /**
+                         * Constructs a new AdvancedSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IAdvancedSettings);
+
+                        /** AdvancedSettings loggingSettings. */
+                        public loggingSettings?: (google.cloud.dialogflow.cx.v3.AdvancedSettings.ILoggingSettings|null);
+
+                        /**
+                         * Creates a new AdvancedSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AdvancedSettings instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IAdvancedSettings): google.cloud.dialogflow.cx.v3.AdvancedSettings;
+
+                        /**
+                         * Encodes the specified AdvancedSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AdvancedSettings.verify|verify} messages.
+                         * @param message AdvancedSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IAdvancedSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AdvancedSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AdvancedSettings.verify|verify} messages.
+                         * @param message AdvancedSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IAdvancedSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AdvancedSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AdvancedSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.AdvancedSettings;
+
+                        /**
+                         * Decodes an AdvancedSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AdvancedSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.AdvancedSettings;
+
+                        /**
+                         * Verifies an AdvancedSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AdvancedSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AdvancedSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.AdvancedSettings;
+
+                        /**
+                         * Creates a plain object from an AdvancedSettings message. Also converts values to other types if specified.
+                         * @param message AdvancedSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.AdvancedSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AdvancedSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace AdvancedSettings {
+
+                        /** Properties of a LoggingSettings. */
+                        interface ILoggingSettings {
+
+                            /** LoggingSettings enableStackdriverLogging */
+                            enableStackdriverLogging?: (boolean|null);
+
+                            /** LoggingSettings enableInteractionLogging */
+                            enableInteractionLogging?: (boolean|null);
+                        }
+
+                        /** Represents a LoggingSettings. */
+                        class LoggingSettings implements ILoggingSettings {
+
+                            /**
+                             * Constructs a new LoggingSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.AdvancedSettings.ILoggingSettings);
+
+                            /** LoggingSettings enableStackdriverLogging. */
+                            public enableStackdriverLogging: boolean;
+
+                            /** LoggingSettings enableInteractionLogging. */
+                            public enableInteractionLogging: boolean;
+
+                            /**
+                             * Creates a new LoggingSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LoggingSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.AdvancedSettings.ILoggingSettings): google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings;
+
+                            /**
+                             * Encodes the specified LoggingSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings.verify|verify} messages.
+                             * @param message LoggingSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.AdvancedSettings.ILoggingSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LoggingSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings.verify|verify} messages.
+                             * @param message LoggingSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.AdvancedSettings.ILoggingSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LoggingSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LoggingSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings;
+
+                            /**
+                             * Decodes a LoggingSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LoggingSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings;
+
+                            /**
+                             * Verifies a LoggingSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LoggingSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LoggingSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings;
+
+                            /**
+                             * Creates a plain object from a LoggingSettings message. Also converts values to other types if specified.
+                             * @param message LoggingSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.AdvancedSettings.LoggingSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LoggingSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
                     /** Represents an Agents */
                     class Agents extends $protobuf.rpc.Service {
 
@@ -370,6 +559,9 @@ export namespace google {
 
                         /** Agent enableSpellCorrection */
                         enableSpellCorrection?: (boolean|null);
+
+                        /** Agent advancedSettings */
+                        advancedSettings?: (google.cloud.dialogflow.cx.v3.IAdvancedSettings|null);
                     }
 
                     /** Represents an Agent. */
@@ -416,6 +608,9 @@ export namespace google {
 
                         /** Agent enableSpellCorrection. */
                         public enableSpellCorrection: boolean;
+
+                        /** Agent advancedSettings. */
+                        public advancedSettings?: (google.cloud.dialogflow.cx.v3.IAdvancedSettings|null);
 
                         /**
                          * Creates a new Agent instance using the specified properties.
@@ -7324,6 +7519,9 @@ export namespace google {
 
                         /** SecuritySettings purgeDataTypes */
                         purgeDataTypes?: (google.cloud.dialogflow.cx.v3.SecuritySettings.PurgeDataType[]|null);
+
+                        /** SecuritySettings insightsExportSettings */
+                        insightsExportSettings?: (google.cloud.dialogflow.cx.v3.SecuritySettings.IInsightsExportSettings|null);
                     }
 
                     /** Represents a SecuritySettings. */
@@ -7355,6 +7553,9 @@ export namespace google {
 
                         /** SecuritySettings purgeDataTypes. */
                         public purgeDataTypes: google.cloud.dialogflow.cx.v3.SecuritySettings.PurgeDataType[];
+
+                        /** SecuritySettings insightsExportSettings. */
+                        public insightsExportSettings?: (google.cloud.dialogflow.cx.v3.SecuritySettings.IInsightsExportSettings|null);
 
                         /** SecuritySettings dataRetention. */
                         public dataRetention?: "retentionWindowDays";
@@ -7432,6 +7633,96 @@ export namespace google {
 
                     namespace SecuritySettings {
 
+                        /** Properties of an InsightsExportSettings. */
+                        interface IInsightsExportSettings {
+
+                            /** InsightsExportSettings enableInsightsExport */
+                            enableInsightsExport?: (boolean|null);
+                        }
+
+                        /** Represents an InsightsExportSettings. */
+                        class InsightsExportSettings implements IInsightsExportSettings {
+
+                            /**
+                             * Constructs a new InsightsExportSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.SecuritySettings.IInsightsExportSettings);
+
+                            /** InsightsExportSettings enableInsightsExport. */
+                            public enableInsightsExport: boolean;
+
+                            /**
+                             * Creates a new InsightsExportSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns InsightsExportSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.SecuritySettings.IInsightsExportSettings): google.cloud.dialogflow.cx.v3.SecuritySettings.InsightsExportSettings;
+
+                            /**
+                             * Encodes the specified InsightsExportSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SecuritySettings.InsightsExportSettings.verify|verify} messages.
+                             * @param message InsightsExportSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.SecuritySettings.IInsightsExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified InsightsExportSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.SecuritySettings.InsightsExportSettings.verify|verify} messages.
+                             * @param message InsightsExportSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.SecuritySettings.IInsightsExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an InsightsExportSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns InsightsExportSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.SecuritySettings.InsightsExportSettings;
+
+                            /**
+                             * Decodes an InsightsExportSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns InsightsExportSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.SecuritySettings.InsightsExportSettings;
+
+                            /**
+                             * Verifies an InsightsExportSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an InsightsExportSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns InsightsExportSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.SecuritySettings.InsightsExportSettings;
+
+                            /**
+                             * Creates a plain object from an InsightsExportSettings message. Also converts values to other types if specified.
+                             * @param message InsightsExportSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.SecuritySettings.InsightsExportSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this InsightsExportSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
                         /** RedactionStrategy enum. */
                         enum RedactionStrategy {
                             REDACTION_STRATEGY_UNSPECIFIED = 0,
@@ -7449,18 +7740,6 @@ export namespace google {
                             PURGE_DATA_TYPE_UNSPECIFIED = 0,
                             DIALOGFLOW_HISTORY = 1
                         }
-                    }
-
-                    /** AudioEncoding enum. */
-                    enum AudioEncoding {
-                        AUDIO_ENCODING_UNSPECIFIED = 0,
-                        AUDIO_ENCODING_LINEAR_16 = 1,
-                        AUDIO_ENCODING_FLAC = 2,
-                        AUDIO_ENCODING_MULAW = 3,
-                        AUDIO_ENCODING_AMR = 4,
-                        AUDIO_ENCODING_AMR_WB = 5,
-                        AUDIO_ENCODING_OGG_OPUS = 6,
-                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                     }
 
                     /** Properties of a SpeechWordInfo. */
@@ -7569,6 +7848,18 @@ export namespace google {
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
+                    }
+
+                    /** AudioEncoding enum. */
+                    enum AudioEncoding {
+                        AUDIO_ENCODING_UNSPECIFIED = 0,
+                        AUDIO_ENCODING_LINEAR_16 = 1,
+                        AUDIO_ENCODING_FLAC = 2,
+                        AUDIO_ENCODING_MULAW = 3,
+                        AUDIO_ENCODING_AMR = 4,
+                        AUDIO_ENCODING_AMR_WB = 5,
+                        AUDIO_ENCODING_OGG_OPUS = 6,
+                        AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                     }
 
                     /** Properties of an InputAudioConfig. */
@@ -16939,6 +17230,9 @@ export namespace google {
 
                         /** StreamingRecognitionResult speechEndOffset */
                         speechEndOffset?: (google.protobuf.IDuration|null);
+
+                        /** StreamingRecognitionResult languageCode */
+                        languageCode?: (string|null);
                     }
 
                     /** Represents a StreamingRecognitionResult. */
@@ -16970,6 +17264,9 @@ export namespace google {
 
                         /** StreamingRecognitionResult speechEndOffset. */
                         public speechEndOffset?: (google.protobuf.IDuration|null);
+
+                        /** StreamingRecognitionResult languageCode. */
+                        public languageCode: string;
 
                         /**
                          * Creates a new StreamingRecognitionResult instance using the specified properties.
@@ -17081,6 +17378,9 @@ export namespace google {
 
                         /** QueryParameters webhookHeaders */
                         webhookHeaders?: ({ [k: string]: string }|null);
+
+                        /** QueryParameters flowVersions */
+                        flowVersions?: (string[]|null);
                     }
 
                     /** Represents a QueryParameters. */
@@ -17118,6 +17418,9 @@ export namespace google {
 
                         /** QueryParameters webhookHeaders. */
                         public webhookHeaders: { [k: string]: string };
+
+                        /** QueryParameters flowVersions. */
+                        public flowVersions: string[];
 
                         /**
                          * Creates a new QueryParameters instance using the specified properties.
@@ -20448,6 +20751,15 @@ export namespace google {
                         /** Experiment definition */
                         definition?: (google.cloud.dialogflow.cx.v3.Experiment.IDefinition|null);
 
+                        /** Experiment rolloutConfig */
+                        rolloutConfig?: (google.cloud.dialogflow.cx.v3.IRolloutConfig|null);
+
+                        /** Experiment rolloutState */
+                        rolloutState?: (google.cloud.dialogflow.cx.v3.IRolloutState|null);
+
+                        /** Experiment rolloutFailureReason */
+                        rolloutFailureReason?: (string|null);
+
                         /** Experiment result */
                         result?: (google.cloud.dialogflow.cx.v3.Experiment.IResult|null);
 
@@ -20493,6 +20805,15 @@ export namespace google {
 
                         /** Experiment definition. */
                         public definition?: (google.cloud.dialogflow.cx.v3.Experiment.IDefinition|null);
+
+                        /** Experiment rolloutConfig. */
+                        public rolloutConfig?: (google.cloud.dialogflow.cx.v3.IRolloutConfig|null);
+
+                        /** Experiment rolloutState. */
+                        public rolloutState?: (google.cloud.dialogflow.cx.v3.IRolloutState|null);
+
+                        /** Experiment rolloutFailureReason. */
+                        public rolloutFailureReason: string;
 
                         /** Experiment result. */
                         public result?: (google.cloud.dialogflow.cx.v3.Experiment.IResult|null);
@@ -21136,7 +21457,8 @@ export namespace google {
                             STATE_UNSPECIFIED = 0,
                             DRAFT = 1,
                             RUNNING = 2,
-                            DONE = 3
+                            DONE = 3,
+                            ROLLOUT_FAILED = 4
                         }
                     }
 
@@ -21429,6 +21751,315 @@ export namespace google {
 
                         /**
                          * Converts this VariantsHistory to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a RolloutConfig. */
+                    interface IRolloutConfig {
+
+                        /** RolloutConfig rolloutSteps */
+                        rolloutSteps?: (google.cloud.dialogflow.cx.v3.RolloutConfig.IRolloutStep[]|null);
+
+                        /** RolloutConfig rolloutCondition */
+                        rolloutCondition?: (string|null);
+
+                        /** RolloutConfig failureCondition */
+                        failureCondition?: (string|null);
+                    }
+
+                    /** Represents a RolloutConfig. */
+                    class RolloutConfig implements IRolloutConfig {
+
+                        /**
+                         * Constructs a new RolloutConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IRolloutConfig);
+
+                        /** RolloutConfig rolloutSteps. */
+                        public rolloutSteps: google.cloud.dialogflow.cx.v3.RolloutConfig.IRolloutStep[];
+
+                        /** RolloutConfig rolloutCondition. */
+                        public rolloutCondition: string;
+
+                        /** RolloutConfig failureCondition. */
+                        public failureCondition: string;
+
+                        /**
+                         * Creates a new RolloutConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RolloutConfig instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IRolloutConfig): google.cloud.dialogflow.cx.v3.RolloutConfig;
+
+                        /**
+                         * Encodes the specified RolloutConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RolloutConfig.verify|verify} messages.
+                         * @param message RolloutConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IRolloutConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RolloutConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RolloutConfig.verify|verify} messages.
+                         * @param message RolloutConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IRolloutConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RolloutConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RolloutConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RolloutConfig;
+
+                        /**
+                         * Decodes a RolloutConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RolloutConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RolloutConfig;
+
+                        /**
+                         * Verifies a RolloutConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RolloutConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RolloutConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RolloutConfig;
+
+                        /**
+                         * Creates a plain object from a RolloutConfig message. Also converts values to other types if specified.
+                         * @param message RolloutConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.RolloutConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RolloutConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace RolloutConfig {
+
+                        /** Properties of a RolloutStep. */
+                        interface IRolloutStep {
+
+                            /** RolloutStep displayName */
+                            displayName?: (string|null);
+
+                            /** RolloutStep trafficPercent */
+                            trafficPercent?: (number|null);
+
+                            /** RolloutStep minDuration */
+                            minDuration?: (google.protobuf.IDuration|null);
+                        }
+
+                        /** Represents a RolloutStep. */
+                        class RolloutStep implements IRolloutStep {
+
+                            /**
+                             * Constructs a new RolloutStep.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3.RolloutConfig.IRolloutStep);
+
+                            /** RolloutStep displayName. */
+                            public displayName: string;
+
+                            /** RolloutStep trafficPercent. */
+                            public trafficPercent: number;
+
+                            /** RolloutStep minDuration. */
+                            public minDuration?: (google.protobuf.IDuration|null);
+
+                            /**
+                             * Creates a new RolloutStep instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RolloutStep instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3.RolloutConfig.IRolloutStep): google.cloud.dialogflow.cx.v3.RolloutConfig.RolloutStep;
+
+                            /**
+                             * Encodes the specified RolloutStep message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RolloutConfig.RolloutStep.verify|verify} messages.
+                             * @param message RolloutStep message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3.RolloutConfig.IRolloutStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RolloutStep message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RolloutConfig.RolloutStep.verify|verify} messages.
+                             * @param message RolloutStep message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.RolloutConfig.IRolloutStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RolloutStep message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RolloutStep
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RolloutConfig.RolloutStep;
+
+                            /**
+                             * Decodes a RolloutStep message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RolloutStep
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RolloutConfig.RolloutStep;
+
+                            /**
+                             * Verifies a RolloutStep message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RolloutStep message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RolloutStep
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RolloutConfig.RolloutStep;
+
+                            /**
+                             * Creates a plain object from a RolloutStep message. Also converts values to other types if specified.
+                             * @param message RolloutStep
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3.RolloutConfig.RolloutStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RolloutStep to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a RolloutState. */
+                    interface IRolloutState {
+
+                        /** RolloutState step */
+                        step?: (string|null);
+
+                        /** RolloutState stepIndex */
+                        stepIndex?: (number|null);
+
+                        /** RolloutState startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a RolloutState. */
+                    class RolloutState implements IRolloutState {
+
+                        /**
+                         * Constructs a new RolloutState.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3.IRolloutState);
+
+                        /** RolloutState step. */
+                        public step: string;
+
+                        /** RolloutState stepIndex. */
+                        public stepIndex: number;
+
+                        /** RolloutState startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new RolloutState instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RolloutState instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3.IRolloutState): google.cloud.dialogflow.cx.v3.RolloutState;
+
+                        /**
+                         * Encodes the specified RolloutState message. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RolloutState.verify|verify} messages.
+                         * @param message RolloutState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3.IRolloutState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RolloutState message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3.RolloutState.verify|verify} messages.
+                         * @param message RolloutState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3.IRolloutState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RolloutState message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RolloutState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3.RolloutState;
+
+                        /**
+                         * Decodes a RolloutState message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RolloutState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3.RolloutState;
+
+                        /**
+                         * Verifies a RolloutState message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RolloutState message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RolloutState
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3.RolloutState;
+
+                        /**
+                         * Creates a plain object from a RolloutState message. Also converts values to other types if specified.
+                         * @param message RolloutState
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3.RolloutState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RolloutState to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
@@ -25466,6 +26097,195 @@ export namespace google {
                 /** Namespace v3beta1. */
                 namespace v3beta1 {
 
+                    /** Properties of an AdvancedSettings. */
+                    interface IAdvancedSettings {
+
+                        /** AdvancedSettings loggingSettings */
+                        loggingSettings?: (google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.ILoggingSettings|null);
+                    }
+
+                    /** Represents an AdvancedSettings. */
+                    class AdvancedSettings implements IAdvancedSettings {
+
+                        /**
+                         * Constructs a new AdvancedSettings.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings);
+
+                        /** AdvancedSettings loggingSettings. */
+                        public loggingSettings?: (google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.ILoggingSettings|null);
+
+                        /**
+                         * Creates a new AdvancedSettings instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns AdvancedSettings instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings): google.cloud.dialogflow.cx.v3beta1.AdvancedSettings;
+
+                        /**
+                         * Encodes the specified AdvancedSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.verify|verify} messages.
+                         * @param message AdvancedSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified AdvancedSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.verify|verify} messages.
+                         * @param message AdvancedSettings message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an AdvancedSettings message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns AdvancedSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.AdvancedSettings;
+
+                        /**
+                         * Decodes an AdvancedSettings message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns AdvancedSettings
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.AdvancedSettings;
+
+                        /**
+                         * Verifies an AdvancedSettings message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an AdvancedSettings message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns AdvancedSettings
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.AdvancedSettings;
+
+                        /**
+                         * Creates a plain object from an AdvancedSettings message. Also converts values to other types if specified.
+                         * @param message AdvancedSettings
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.AdvancedSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this AdvancedSettings to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace AdvancedSettings {
+
+                        /** Properties of a LoggingSettings. */
+                        interface ILoggingSettings {
+
+                            /** LoggingSettings enableStackdriverLogging */
+                            enableStackdriverLogging?: (boolean|null);
+
+                            /** LoggingSettings enableInteractionLogging */
+                            enableInteractionLogging?: (boolean|null);
+                        }
+
+                        /** Represents a LoggingSettings. */
+                        class LoggingSettings implements ILoggingSettings {
+
+                            /**
+                             * Constructs a new LoggingSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.ILoggingSettings);
+
+                            /** LoggingSettings enableStackdriverLogging. */
+                            public enableStackdriverLogging: boolean;
+
+                            /** LoggingSettings enableInteractionLogging. */
+                            public enableInteractionLogging: boolean;
+
+                            /**
+                             * Creates a new LoggingSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns LoggingSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.ILoggingSettings): google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.LoggingSettings;
+
+                            /**
+                             * Encodes the specified LoggingSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.LoggingSettings.verify|verify} messages.
+                             * @param message LoggingSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.ILoggingSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified LoggingSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.LoggingSettings.verify|verify} messages.
+                             * @param message LoggingSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.ILoggingSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a LoggingSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns LoggingSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.LoggingSettings;
+
+                            /**
+                             * Decodes a LoggingSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns LoggingSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.LoggingSettings;
+
+                            /**
+                             * Verifies a LoggingSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a LoggingSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns LoggingSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.LoggingSettings;
+
+                            /**
+                             * Creates a plain object from a LoggingSettings message. Also converts values to other types if specified.
+                             * @param message LoggingSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.AdvancedSettings.LoggingSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this LoggingSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
                     /** Represents an Agents */
                     class Agents extends $protobuf.rpc.Service {
 
@@ -25807,6 +26627,9 @@ export namespace google {
 
                         /** Agent enableSpellCorrection */
                         enableSpellCorrection?: (boolean|null);
+
+                        /** Agent advancedSettings */
+                        advancedSettings?: (google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null);
                     }
 
                     /** Represents an Agent. */
@@ -25853,6 +26676,9 @@ export namespace google {
 
                         /** Agent enableSpellCorrection. */
                         public enableSpellCorrection: boolean;
+
+                        /** Agent advancedSettings. */
+                        public advancedSettings?: (google.cloud.dialogflow.cx.v3beta1.IAdvancedSettings|null);
 
                         /**
                          * Creates a new Agent instance using the specified properties.
@@ -32761,6 +33587,9 @@ export namespace google {
 
                         /** SecuritySettings purgeDataTypes */
                         purgeDataTypes?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.PurgeDataType[]|null);
+
+                        /** SecuritySettings insightsExportSettings */
+                        insightsExportSettings?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IInsightsExportSettings|null);
                     }
 
                     /** Represents a SecuritySettings. */
@@ -32792,6 +33621,9 @@ export namespace google {
 
                         /** SecuritySettings purgeDataTypes. */
                         public purgeDataTypes: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.PurgeDataType[];
+
+                        /** SecuritySettings insightsExportSettings. */
+                        public insightsExportSettings?: (google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IInsightsExportSettings|null);
 
                         /** SecuritySettings dataRetention. */
                         public dataRetention?: "retentionWindowDays";
@@ -32868,6 +33700,96 @@ export namespace google {
                     }
 
                     namespace SecuritySettings {
+
+                        /** Properties of an InsightsExportSettings. */
+                        interface IInsightsExportSettings {
+
+                            /** InsightsExportSettings enableInsightsExport */
+                            enableInsightsExport?: (boolean|null);
+                        }
+
+                        /** Represents an InsightsExportSettings. */
+                        class InsightsExportSettings implements IInsightsExportSettings {
+
+                            /**
+                             * Constructs a new InsightsExportSettings.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IInsightsExportSettings);
+
+                            /** InsightsExportSettings enableInsightsExport. */
+                            public enableInsightsExport: boolean;
+
+                            /**
+                             * Creates a new InsightsExportSettings instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns InsightsExportSettings instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IInsightsExportSettings): google.cloud.dialogflow.cx.v3beta1.SecuritySettings.InsightsExportSettings;
+
+                            /**
+                             * Encodes the specified InsightsExportSettings message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings.InsightsExportSettings.verify|verify} messages.
+                             * @param message InsightsExportSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IInsightsExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified InsightsExportSettings message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.SecuritySettings.InsightsExportSettings.verify|verify} messages.
+                             * @param message InsightsExportSettings message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.IInsightsExportSettings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an InsightsExportSettings message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns InsightsExportSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.SecuritySettings.InsightsExportSettings;
+
+                            /**
+                             * Decodes an InsightsExportSettings message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns InsightsExportSettings
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.SecuritySettings.InsightsExportSettings;
+
+                            /**
+                             * Verifies an InsightsExportSettings message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an InsightsExportSettings message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns InsightsExportSettings
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.SecuritySettings.InsightsExportSettings;
+
+                            /**
+                             * Creates a plain object from an InsightsExportSettings message. Also converts values to other types if specified.
+                             * @param message InsightsExportSettings
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.SecuritySettings.InsightsExportSettings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this InsightsExportSettings to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
 
                         /** RedactionStrategy enum. */
                         enum RedactionStrategy {
@@ -42376,6 +43298,9 @@ export namespace google {
 
                         /** StreamingRecognitionResult speechEndOffset */
                         speechEndOffset?: (google.protobuf.IDuration|null);
+
+                        /** StreamingRecognitionResult languageCode */
+                        languageCode?: (string|null);
                     }
 
                     /** Represents a StreamingRecognitionResult. */
@@ -42407,6 +43332,9 @@ export namespace google {
 
                         /** StreamingRecognitionResult speechEndOffset. */
                         public speechEndOffset?: (google.protobuf.IDuration|null);
+
+                        /** StreamingRecognitionResult languageCode. */
+                        public languageCode: string;
 
                         /**
                          * Creates a new StreamingRecognitionResult instance using the specified properties.
@@ -42518,6 +43446,9 @@ export namespace google {
 
                         /** QueryParameters webhookHeaders */
                         webhookHeaders?: ({ [k: string]: string }|null);
+
+                        /** QueryParameters flowVersions */
+                        flowVersions?: (string[]|null);
                     }
 
                     /** Represents a QueryParameters. */
@@ -42555,6 +43486,9 @@ export namespace google {
 
                         /** QueryParameters webhookHeaders. */
                         public webhookHeaders: { [k: string]: string };
+
+                        /** QueryParameters flowVersions. */
+                        public flowVersions: string[];
 
                         /**
                          * Creates a new QueryParameters instance using the specified properties.
@@ -45885,6 +46819,15 @@ export namespace google {
                         /** Experiment definition */
                         definition?: (google.cloud.dialogflow.cx.v3beta1.Experiment.IDefinition|null);
 
+                        /** Experiment rolloutConfig */
+                        rolloutConfig?: (google.cloud.dialogflow.cx.v3beta1.IRolloutConfig|null);
+
+                        /** Experiment rolloutState */
+                        rolloutState?: (google.cloud.dialogflow.cx.v3beta1.IRolloutState|null);
+
+                        /** Experiment rolloutFailureReason */
+                        rolloutFailureReason?: (string|null);
+
                         /** Experiment result */
                         result?: (google.cloud.dialogflow.cx.v3beta1.Experiment.IResult|null);
 
@@ -45930,6 +46873,15 @@ export namespace google {
 
                         /** Experiment definition. */
                         public definition?: (google.cloud.dialogflow.cx.v3beta1.Experiment.IDefinition|null);
+
+                        /** Experiment rolloutConfig. */
+                        public rolloutConfig?: (google.cloud.dialogflow.cx.v3beta1.IRolloutConfig|null);
+
+                        /** Experiment rolloutState. */
+                        public rolloutState?: (google.cloud.dialogflow.cx.v3beta1.IRolloutState|null);
+
+                        /** Experiment rolloutFailureReason. */
+                        public rolloutFailureReason: string;
 
                         /** Experiment result. */
                         public result?: (google.cloud.dialogflow.cx.v3beta1.Experiment.IResult|null);
@@ -46573,7 +47525,8 @@ export namespace google {
                             STATE_UNSPECIFIED = 0,
                             DRAFT = 1,
                             RUNNING = 2,
-                            DONE = 3
+                            DONE = 3,
+                            ROLLOUT_FAILED = 4
                         }
                     }
 
@@ -46770,6 +47723,315 @@ export namespace google {
                              */
                             public toJSON(): { [k: string]: any };
                         }
+                    }
+
+                    /** Properties of a RolloutConfig. */
+                    interface IRolloutConfig {
+
+                        /** RolloutConfig rolloutSteps */
+                        rolloutSteps?: (google.cloud.dialogflow.cx.v3beta1.RolloutConfig.IRolloutStep[]|null);
+
+                        /** RolloutConfig rolloutCondition */
+                        rolloutCondition?: (string|null);
+
+                        /** RolloutConfig failureCondition */
+                        failureCondition?: (string|null);
+                    }
+
+                    /** Represents a RolloutConfig. */
+                    class RolloutConfig implements IRolloutConfig {
+
+                        /**
+                         * Constructs a new RolloutConfig.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IRolloutConfig);
+
+                        /** RolloutConfig rolloutSteps. */
+                        public rolloutSteps: google.cloud.dialogflow.cx.v3beta1.RolloutConfig.IRolloutStep[];
+
+                        /** RolloutConfig rolloutCondition. */
+                        public rolloutCondition: string;
+
+                        /** RolloutConfig failureCondition. */
+                        public failureCondition: string;
+
+                        /**
+                         * Creates a new RolloutConfig instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RolloutConfig instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IRolloutConfig): google.cloud.dialogflow.cx.v3beta1.RolloutConfig;
+
+                        /**
+                         * Encodes the specified RolloutConfig message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RolloutConfig.verify|verify} messages.
+                         * @param message RolloutConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IRolloutConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RolloutConfig message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RolloutConfig.verify|verify} messages.
+                         * @param message RolloutConfig message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IRolloutConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RolloutConfig message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RolloutConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.RolloutConfig;
+
+                        /**
+                         * Decodes a RolloutConfig message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RolloutConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.RolloutConfig;
+
+                        /**
+                         * Verifies a RolloutConfig message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RolloutConfig message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RolloutConfig
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.RolloutConfig;
+
+                        /**
+                         * Creates a plain object from a RolloutConfig message. Also converts values to other types if specified.
+                         * @param message RolloutConfig
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.RolloutConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RolloutConfig to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace RolloutConfig {
+
+                        /** Properties of a RolloutStep. */
+                        interface IRolloutStep {
+
+                            /** RolloutStep displayName */
+                            displayName?: (string|null);
+
+                            /** RolloutStep trafficPercent */
+                            trafficPercent?: (number|null);
+
+                            /** RolloutStep minDuration */
+                            minDuration?: (google.protobuf.IDuration|null);
+                        }
+
+                        /** Represents a RolloutStep. */
+                        class RolloutStep implements IRolloutStep {
+
+                            /**
+                             * Constructs a new RolloutStep.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.dialogflow.cx.v3beta1.RolloutConfig.IRolloutStep);
+
+                            /** RolloutStep displayName. */
+                            public displayName: string;
+
+                            /** RolloutStep trafficPercent. */
+                            public trafficPercent: number;
+
+                            /** RolloutStep minDuration. */
+                            public minDuration?: (google.protobuf.IDuration|null);
+
+                            /**
+                             * Creates a new RolloutStep instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns RolloutStep instance
+                             */
+                            public static create(properties?: google.cloud.dialogflow.cx.v3beta1.RolloutConfig.IRolloutStep): google.cloud.dialogflow.cx.v3beta1.RolloutConfig.RolloutStep;
+
+                            /**
+                             * Encodes the specified RolloutStep message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RolloutConfig.RolloutStep.verify|verify} messages.
+                             * @param message RolloutStep message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.dialogflow.cx.v3beta1.RolloutConfig.IRolloutStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified RolloutStep message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RolloutConfig.RolloutStep.verify|verify} messages.
+                             * @param message RolloutStep message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.RolloutConfig.IRolloutStep, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a RolloutStep message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns RolloutStep
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.RolloutConfig.RolloutStep;
+
+                            /**
+                             * Decodes a RolloutStep message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns RolloutStep
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.RolloutConfig.RolloutStep;
+
+                            /**
+                             * Verifies a RolloutStep message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a RolloutStep message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns RolloutStep
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.RolloutConfig.RolloutStep;
+
+                            /**
+                             * Creates a plain object from a RolloutStep message. Also converts values to other types if specified.
+                             * @param message RolloutStep
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.dialogflow.cx.v3beta1.RolloutConfig.RolloutStep, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this RolloutStep to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+                    }
+
+                    /** Properties of a RolloutState. */
+                    interface IRolloutState {
+
+                        /** RolloutState step */
+                        step?: (string|null);
+
+                        /** RolloutState stepIndex */
+                        stepIndex?: (number|null);
+
+                        /** RolloutState startTime */
+                        startTime?: (google.protobuf.ITimestamp|null);
+                    }
+
+                    /** Represents a RolloutState. */
+                    class RolloutState implements IRolloutState {
+
+                        /**
+                         * Constructs a new RolloutState.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.dialogflow.cx.v3beta1.IRolloutState);
+
+                        /** RolloutState step. */
+                        public step: string;
+
+                        /** RolloutState stepIndex. */
+                        public stepIndex: number;
+
+                        /** RolloutState startTime. */
+                        public startTime?: (google.protobuf.ITimestamp|null);
+
+                        /**
+                         * Creates a new RolloutState instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns RolloutState instance
+                         */
+                        public static create(properties?: google.cloud.dialogflow.cx.v3beta1.IRolloutState): google.cloud.dialogflow.cx.v3beta1.RolloutState;
+
+                        /**
+                         * Encodes the specified RolloutState message. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RolloutState.verify|verify} messages.
+                         * @param message RolloutState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.dialogflow.cx.v3beta1.IRolloutState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified RolloutState message, length delimited. Does not implicitly {@link google.cloud.dialogflow.cx.v3beta1.RolloutState.verify|verify} messages.
+                         * @param message RolloutState message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.dialogflow.cx.v3beta1.IRolloutState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a RolloutState message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns RolloutState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dialogflow.cx.v3beta1.RolloutState;
+
+                        /**
+                         * Decodes a RolloutState message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns RolloutState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dialogflow.cx.v3beta1.RolloutState;
+
+                        /**
+                         * Verifies a RolloutState message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a RolloutState message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns RolloutState
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.dialogflow.cx.v3beta1.RolloutState;
+
+                        /**
+                         * Creates a plain object from a RolloutState message. Also converts values to other types if specified.
+                         * @param message RolloutState
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.dialogflow.cx.v3beta1.RolloutState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this RolloutState to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
                     }
 
                     /** Properties of a VariantsHistory. */
@@ -50906,6 +52168,17 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6
+        }
+
         /** Properties of a Http. */
         interface IHttp {
 
@@ -51243,17 +52516,6 @@ export namespace google {
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
-        }
-
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -54627,6 +55889,102 @@ export namespace google {
             }
         }
 
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
         /** Properties of a Struct. */
         interface IStruct {
 
@@ -55200,102 +56558,6 @@ export namespace google {
 
             /**
              * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a Duration. */
-        interface IDuration {
-
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
-
-            /** Duration nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a Duration. */
-        class Duration implements IDuration {
-
-            /**
-             * Constructs a new Duration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IDuration);
-
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
-
-            /** Duration nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new Duration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Duration instance
-             */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
-
-            /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
-
-            /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Duration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
-
-            /**
-             * Verifies a Duration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Duration
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
-
-            /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Duration to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };

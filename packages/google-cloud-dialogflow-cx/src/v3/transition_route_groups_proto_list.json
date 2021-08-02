@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/dialogflow/cx/v3/advanced_settings.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/agent.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/audio_config.proto",
   "../../protos/google/cloud/dialogflow/cx/v3/entity_type.proto",
