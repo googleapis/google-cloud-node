@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.11.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.11.0...v5.11.1) (2021-08-02)
+
+
+### Bug Fixes
+
+* don't retry non-idempotent functions ([#1517](https://www.github.com/googleapis/nodejs-storage/issues/1517)) ([c938795](https://www.github.com/googleapis/nodejs-storage/commit/c938795e8a5f14ba7724f2d0e334310dd8e8f207))
+
 ## [5.11.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.10.0...v5.11.0) (2021-07-23)
 
 
