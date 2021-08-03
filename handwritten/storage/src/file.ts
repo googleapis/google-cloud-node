@@ -43,7 +43,7 @@ import * as xdgBasedir from 'xdg-basedir';
 import * as zlib from 'zlib';
 import * as http from 'http';
 
-import {Storage} from './storage';
+import {PreconditionOptions, Storage} from './storage';
 import {Bucket} from './bucket';
 import {Acl} from './acl';
 import {
@@ -200,6 +200,7 @@ export interface CreateResumableUploadOptions {
   public?: boolean;
   uri?: string;
   userProject?: string;
+  preconditionOpts?: PreconditionOptions;
 }
 
 export type CreateResumableUploadResponse = [string];
@@ -1564,6 +1565,7 @@ class File extends ServiceObject<File> {
         public: options.public,
         userProject: options.userProject || this.userProject,
         retryOptions: this.storage.retryOptions,
+        params: options.preconditionOpts,
       },
       callback!
     );
@@ -3812,6 +3814,7 @@ class File extends ServiceObject<File> {
       uri: options.uri,
       userProject: options.userProject || this.userProject,
       retryOptions: this.storage.retryOptions,
+      params: options.preconditionOpts,
     });
 
     uploadStream

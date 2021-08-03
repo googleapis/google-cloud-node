@@ -58,6 +58,13 @@ export interface RetryOptions {
   retryableErrorFn?: (err: ApiError) => boolean;
 }
 
+export interface PreconditionOptions {
+  ifGenerationMatch?: number;
+  ifGenerationNotMatch?: number;
+  ifMetagenerationMatch?: number;
+  ifMetagenerationNotMatch?: number;
+}
+
 export interface StorageOptions extends ServiceOptions {
   retryOptions?: RetryOptions;
   autoRetry?: boolean; //Deprecated. Use retryOptions instead.

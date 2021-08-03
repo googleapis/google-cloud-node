@@ -1684,6 +1684,9 @@ describe('File', () => {
           retryDelayMultipier: 2,
           totalTimeout: 600,
         },
+        preconditionOpts: {
+          ifGenerationMatch: 100,
+        },
       };
 
       file.generation = 3;
@@ -1730,6 +1733,7 @@ describe('File', () => {
             opts.retryOptions.totalTimeout,
             options.retryOptions.totalTimeout
           );
+          assert.strictEqual(opts.params, options.preconditionOpts);
 
           callback();
         },
@@ -2335,6 +2339,7 @@ describe('File', () => {
           assert.strictEqual(opts.file, file.name);
           assert.strictEqual(opts.generation, file.generation);
           assert.strictEqual(opts.retryOptions, file.storage.retryOptions);
+          assert.strictEqual(opts.params, file.preconditionOpts);
 
           return {
             deleteConfig: () => {
@@ -4435,6 +4440,7 @@ describe('File', () => {
             assert.strictEqual(opts.uri, options.uri);
             assert.strictEqual(opts.userProject, options.userProject);
             assert.strictEqual(opts.retryOptions, storage.retryOptions);
+            assert.strictEqual(opts.params, storage.preconditionOpts);
 
             setImmediate(done);
             return new PassThrough();
