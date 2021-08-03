@@ -1,0 +1,107 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.storagetransfer.v1",
+  "libraryPackage": "@google-cloud/storage-transfer",
+  "services": {
+    "StorageTransferService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "StorageTransferServiceClient",
+          "rpcs": {
+            "GetGoogleServiceAccount": {
+              "methods": [
+                "getGoogleServiceAccount"
+              ]
+            },
+            "CreateTransferJob": {
+              "methods": [
+                "createTransferJob"
+              ]
+            },
+            "UpdateTransferJob": {
+              "methods": [
+                "updateTransferJob"
+              ]
+            },
+            "GetTransferJob": {
+              "methods": [
+                "getTransferJob"
+              ]
+            },
+            "PauseTransferOperation": {
+              "methods": [
+                "pauseTransferOperation"
+              ]
+            },
+            "ResumeTransferOperation": {
+              "methods": [
+                "resumeTransferOperation"
+              ]
+            },
+            "RunTransferJob": {
+              "methods": [
+                "runTransferJob"
+              ]
+            },
+            "ListTransferJobs": {
+              "methods": [
+                "listTransferJobs",
+                "listTransferJobsStream",
+                "listTransferJobsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "StorageTransferServiceClient",
+          "rpcs": {
+            "GetGoogleServiceAccount": {
+              "methods": [
+                "getGoogleServiceAccount"
+              ]
+            },
+            "CreateTransferJob": {
+              "methods": [
+                "createTransferJob"
+              ]
+            },
+            "UpdateTransferJob": {
+              "methods": [
+                "updateTransferJob"
+              ]
+            },
+            "GetTransferJob": {
+              "methods": [
+                "getTransferJob"
+              ]
+            },
+            "PauseTransferOperation": {
+              "methods": [
+                "pauseTransferOperation"
+              ]
+            },
+            "ResumeTransferOperation": {
+              "methods": [
+                "resumeTransferOperation"
+              ]
+            },
+            "RunTransferJob": {
+              "methods": [
+                "runTransferJob"
+              ]
+            },
+            "ListTransferJobs": {
+              "methods": [
+                "listTransferJobs",
+                "listTransferJobsStream",
+                "listTransferJobsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
