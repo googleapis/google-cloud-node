@@ -2,7 +2,7 @@
   {
     "name": "accessapproval",
     "name_pretty": "Access Approval",
-    "product_documentation": "https://cloud.google.com/access-approval/",
+    "product_documentation": "https://cloud.google.com/access-approval/docs",
     "client_documentation": "https://googleapis.dev/nodejs/accessapproval/latest/",
     "issue_tracker": "https://github.com/googleapis/nodejs-access-approval/issues",
     "release_level": "ga",
@@ -12,7 +12,7 @@
     "api_id": "accessapproval.googleapis.com",
     "requires_billing": true,
     "default_version": "v1",
-    "support_documentation": "https://cloud.google.com/access-approval/"
+    "support_documentation": "https://cloud.google.com/access-approval/docs"
   },
   {
     "requires_billing": true,
@@ -502,6 +502,21 @@
     "issue_tracker": "https://github.com/googleapis/nodejs-iam-credentials/issues"
   },
   {
+    "name": "iap",
+    "name_pretty": "Identity-Aware Proxy",
+    "product_documentation": "https://cloud.google.com/iap/",
+    "client_documentation": "https://googleapis.dev/nodejs/iap/latest/index.html",
+    "issue_tracker": "https://github.com/googleapis/nodejs-iap/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-iap",
+    "distribution_name": "@google-cloud/iap",
+    "api_id": "iap.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/iap/docs/getting-support"
+  },
+  {
     "client_documentation": "https://googleapis.dev/nodejs/iot/latest",
     "api_id": "cloudiot.googleapis.com",
     "codeowner_team": "@googleapis/api-iot",
@@ -954,6 +969,21 @@
     "support_documentation": "https://cloud.google.com/storage/docs/getting-support"
   },
   {
+    "name": "storagetransfer",
+    "name_pretty": "Storage Transfer Service",
+    "product_documentation": "https://cloud.google.com/storage-transfer/",
+    "client_documentation": "https://googleapis.dev/nodejs/storagetransfer/latest/index.html",
+    "issue_tracker": "https://github.com/googleapis/nodejs-storage-transfer/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-storage-transfer",
+    "distribution_name": "@google-cloud/storage-transfer",
+    "api_id": "storagetransfer.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/storage-transfer/docs/getting-support"
+  },
+  {
     "client_documentation": "https://googleapis.dev/nodejs/talent/latest",
     "api_id": "jobs.googleapis.com",
     "distribution_name": "@google-cloud/talent",
@@ -1235,7 +1265,7 @@
   {
     "name": "contactcenterinsights",
     "name_pretty": "Contact Center AI Insights API",
-    "product_documentation": "https://cloud.google.com/dialogflow/priv/docs/insights/",
+    "product_documentation": "https://cloud.google.com/solutions/contact-center",
     "client_documentation": "https://cloud.google.com/solutions/contact-center",
     "issue_tracker": "https://github.com/googleapis/nodejs-contact-center-insights/issues",
     "release_level": "beta",
@@ -1245,7 +1275,7 @@
     "api_id": "contactcenterinsights.googleapis.com",
     "default_version": "v1",
     "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/dialogflow/priv/docs/insights/"
+    "support_documentation": "https://cloud.google.com/solutions/contact-center"
   },
   {
     "default_version": "v1beta1",
