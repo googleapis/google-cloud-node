@@ -14,7 +14,13 @@ and a variety of common application components including Cassandra, Nginx, Apach
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Alerts.backup Policies](#alerts.backup-policies)
+  * [Alerts.delete Channels](#alerts.delete-channels)
+  * [Alerts.enable Policies](#alerts.enable-policies)
   * [Alerts](#alerts)
+  * [Alerts.list Policies](#alerts.list-policies)
+  * [Alerts.replace Channels](#alerts.replace-channels)
+  * [Alerts.restore Policies](#alerts.restore-policies)
   * [Metrics](#metrics)
   * [Quickstart](#quickstart)
   * [Uptime](#uptime)
@@ -34,6 +40,57 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
+### Alerts.backup Policies
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.backupPolicies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.backupPolicies.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/alerts.backupPolicies.js`
+
+
+-----
+
+
+
+
+### Alerts.delete Channels
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.deleteChannels.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.deleteChannels.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/alerts.deleteChannels.js`
+
+
+-----
+
+
+
+
+### Alerts.enable Policies
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.enablePolicies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.enablePolicies.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/alerts.enablePolicies.js`
+
+
+-----
+
+
+
+
 ### Alerts
 
 View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.js).
@@ -44,6 +101,57 @@ __Usage:__
 
 
 `node samples/alerts.js`
+
+
+-----
+
+
+
+
+### Alerts.list Policies
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.listPolicies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.listPolicies.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/alerts.listPolicies.js`
+
+
+-----
+
+
+
+
+### Alerts.replace Channels
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.replaceChannels.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.replaceChannels.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/alerts.replaceChannels.js`
+
+
+-----
+
+
+
+
+### Alerts.restore Policies
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.restorePolicies.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.restorePolicies.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/alerts.restorePolicies.js`
 
 
 -----

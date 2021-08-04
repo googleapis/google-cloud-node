@@ -15,8 +15,11 @@
 'use strict';
 
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
+const {describe, it, before} = require('mocha');
 const cp = require('child_process');
+const monitoring = require('@google-cloud/monitoring');
+
+const client = new monitoring.AlertPolicyServiceClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 // Tests in this suite can trigger the upstream error,
@@ -33,10 +36,14 @@ const delay = async test => {
   });
 };
 describe('quickstart', () => {
+  let projectId;
+  before(async () => {
+    projectId = await client.getProjectId();
+  });
   it('should run the quickstart', async function () {
     this.retries(8);
     await delay(this.test); // delay the start of the test, if this is a retry.
-    const result = execSync('node quickstart');
+    const result = execSync(`node quickstart.js ${projectId}`);
     assert.match(result, /Done writing time series data/);
   });
 });

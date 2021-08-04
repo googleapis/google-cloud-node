@@ -64,14 +64,11 @@ npm install @google-cloud/monitoring
 const monitoring = require('@google-cloud/monitoring');
 
 async function quickstart() {
-  // Your Google Cloud Platform project ID
-  const projectId =
-    process.env.GCLOUD_PROJECT ||
-    process.env.GOOGLE_CLOUD_PROJECT ||
-    'YOUR_PROJECT_ID';
-
   // Creates a client
   const client = new monitoring.MetricServiceClient();
+
+  // TODO(developer): Uncomment and set the following variables
+  // const projectId = "PROJECT_ID"
 
   // Prepares an individual data point
   const dataPoint = {
@@ -113,6 +110,7 @@ async function quickstart() {
   const [result] = await client.createTimeSeries(request);
   console.log('Done writing time series data.', result);
 }
+quickstart();
 
 ```
 
@@ -124,7 +122,13 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-monitoring/
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Alerts.backup Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.backupPolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.backupPolicies.js,samples/README.md) |
+| Alerts.delete Channels | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.deleteChannels.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.deleteChannels.js,samples/README.md) |
+| Alerts.enable Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.enablePolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.enablePolicies.js,samples/README.md) |
 | Alerts | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.js,samples/README.md) |
+| Alerts.list Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.listPolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.listPolicies.js,samples/README.md) |
+| Alerts.replace Channels | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.replaceChannels.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.replaceChannels.js,samples/README.md) |
+| Alerts.restore Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.restorePolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.restorePolicies.js,samples/README.md) |
 | Metrics | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 | Uptime | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/uptime.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/uptime.js,samples/README.md) |

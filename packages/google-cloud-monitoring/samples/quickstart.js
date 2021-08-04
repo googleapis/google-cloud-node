@@ -14,60 +14,64 @@
 
 'use strict';
 
-// [START monitoring_quickstart]
-// Imports the Google Cloud client library
-const monitoring = require('@google-cloud/monitoring');
+async function main(projectId) {
+  // [START monitoring_quickstart]
+  // Imports the Google Cloud client library
+  const monitoring = require('@google-cloud/monitoring');
 
-async function quickstart() {
-  // Your Google Cloud Platform project ID
-  const projectId =
-    process.env.GCLOUD_PROJECT ||
-    process.env.GOOGLE_CLOUD_PROJECT ||
-    'YOUR_PROJECT_ID';
+  async function quickstart() {
+    // Creates a client
+    const client = new monitoring.MetricServiceClient();
 
-  // Creates a client
-  const client = new monitoring.MetricServiceClient();
+    // TODO(developer): Uncomment and set the following variables
+    // const projectId = "PROJECT_ID"
 
-  // Prepares an individual data point
-  const dataPoint = {
-    interval: {
-      endTime: {
-        seconds: Date.now() / 1000,
-      },
-    },
-    value: {
-      // The amount of sales
-      doubleValue: 123.45,
-    },
-  };
-
-  // Prepares the time series request
-  const request = {
-    name: client.projectPath(projectId),
-    timeSeries: [
-      {
-        // Ties the data point to a custom metric
-        metric: {
-          type: 'custom.googleapis.com/stores/daily_sales',
-          labels: {
-            store_id: 'Pittsburgh',
-          },
+    // Prepares an individual data point
+    const dataPoint = {
+      interval: {
+        endTime: {
+          seconds: Date.now() / 1000,
         },
-        resource: {
-          type: 'global',
-          labels: {
-            project_id: projectId,
-          },
-        },
-        points: [dataPoint],
       },
-    ],
-  };
+      value: {
+        // The amount of sales
+        doubleValue: 123.45,
+      },
+    };
 
-  // Writes time series data
-  const [result] = await client.createTimeSeries(request);
-  console.log('Done writing time series data.', result);
+    // Prepares the time series request
+    const request = {
+      name: client.projectPath(projectId),
+      timeSeries: [
+        {
+          // Ties the data point to a custom metric
+          metric: {
+            type: 'custom.googleapis.com/stores/daily_sales',
+            labels: {
+              store_id: 'Pittsburgh',
+            },
+          },
+          resource: {
+            type: 'global',
+            labels: {
+              project_id: projectId,
+            },
+          },
+          points: [dataPoint],
+        },
+      ],
+    };
+
+    // Writes time series data
+    const [result] = await client.createTimeSeries(request);
+    console.log('Done writing time series data.', result);
+  }
+  quickstart();
+  // [END monitoring_quickstart]
 }
-// [END monitoring_quickstart]
 
-quickstart().catch(console.error);
+process.on('unhandledRejection', err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
+main(...process.argv.slice(2));
