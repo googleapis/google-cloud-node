@@ -204,7 +204,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-media-translation/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/mediatranslation/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/media-translation/latest
 [product-docs]: https://cloud.google.com/translate/media/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
