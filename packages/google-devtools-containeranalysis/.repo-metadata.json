@@ -6,7 +6,7 @@
   "api_id": "containeranalysis.googleapis.com",
   "release_level": "ga",
   "name": "containeranalysis",
-  "client_documentation": "https://googleapis.dev/nodejs/containeranalysis/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/containeranalysis/latest",
   "requires_billing": true,
   "distribution_name": "@google-cloud/containeranalysis",
   "name_pretty": "Google Container Analysis",
