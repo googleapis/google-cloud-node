@@ -10,6 +10,6 @@
   "product_documentation": "https://area120.google.com/",
   "codeowner_team": "@googleapis/area120-tables",
   "name_pretty": "Area120 Tables API",
-  "client_documentation": "https://googleapis.dev/nodejs/area120tables/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/area120-tables/latest",
   "release_level": "alpha"
 }

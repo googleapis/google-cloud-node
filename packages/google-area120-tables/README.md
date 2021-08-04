@@ -146,7 +146,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-area120-tables/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/area120tables/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
 [product-docs]: https://area120.google.com/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
