@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://cloud.google.com/dataproc-metastore/docs",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataproc-metastore/latest",
   "api_id": "metastore.googleapis.com",
   "distribution_name": "@google-cloud/dataproc-metastore",
   "release_level": "BETA",

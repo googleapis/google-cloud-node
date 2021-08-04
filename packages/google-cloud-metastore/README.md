@@ -144,7 +144,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-dataproc-metastore/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/dataproc-metastore/docs
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/dataproc-metastore/latest
 [product-docs]: https://cloud.google.com/dataproc-metastore/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
