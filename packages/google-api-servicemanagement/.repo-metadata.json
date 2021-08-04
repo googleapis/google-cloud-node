@@ -1,7 +1,7 @@
 {
   "issue_tracker": "https://github.com/googleapis/nodejs-service-management/issues",
   "distribution_name": "@google-cloud/service-management",
-  "client_documentation": "https://cloud.google.com/service-infrastructure/docs/service-management/reference",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/service-management/latest",
   "product_documentation": "https://cloud.google.com/service-infrastructure/docs/overview/",
   "name_pretty": "Service Management API",
   "release_level": "GA",

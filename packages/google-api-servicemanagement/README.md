@@ -143,7 +143,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-service-management/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/service-infrastructure/docs/service-management/reference
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/service-management/latest
 [product-docs]: https://cloud.google.com/service-infrastructure/docs/overview/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
