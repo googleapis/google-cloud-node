@@ -164,7 +164,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-video-transcoder/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/transcoder/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/video-transcoder/latest
 [product-docs]: https://googleapis.dev/nodejs/transcoder/latest
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
