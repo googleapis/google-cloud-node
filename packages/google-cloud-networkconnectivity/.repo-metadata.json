@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/network-connectivity/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/network-connectivity/latest",
   "api_id": "networkconnectivity.googleapis.com",
   "distribution_name": "@google-cloud/network-connectivity",
   "release_level": "alpha",
