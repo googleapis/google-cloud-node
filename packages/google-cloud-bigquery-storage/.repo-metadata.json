@@ -7,7 +7,7 @@
   "language": "nodejs",
   "requires_billing": true,
   "issue_tracker": "https://b.corp.google.com/savedsearches/559654",
-  "client_documentation": "https://googleapis.dev/nodejs/bigquerystorage/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-storage/latest",
   "name": "bigquerystorage",
   "name_pretty": "Google BigQuery Storage",
   "api_id": "bigquerystorage.googleapis.com",
