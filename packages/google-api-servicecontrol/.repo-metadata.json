@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://cloud.google.com/service-infrastructure/docs/service-control/reference",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/service-control/latest",
   "requires_billing": true,
   "distribution_name": "@google-cloud/service-control",
   "release_level": "GA",
