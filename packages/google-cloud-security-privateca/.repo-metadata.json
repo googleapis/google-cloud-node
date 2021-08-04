@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/security-private-ca/latest/index.html",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/security-private-ca/latest",
   "api_id": "privateca.googleapis.com",
   "distribution_name": "@google-cloud/security-private-ca",
   "release_level": "beta",
