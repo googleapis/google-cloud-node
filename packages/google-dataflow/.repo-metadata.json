@@ -2,7 +2,7 @@
   "name": "dataflow",
   "name_pretty": "Dataflow",
   "product_documentation": "https://cloud.google.com/dataflow/",
-  "client_documentation": "https://cloud.google.com/dataflow",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataflow/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-dataflow/issues",
   "release_level": "BETA",
   "language": "nodejs",
@@ -12,4 +12,3 @@
   "default_version": "v1beta3",
   "requires_billing": true
 }
-
