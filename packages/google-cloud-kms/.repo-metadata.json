@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/kms/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/kms/latest",
   "api_id": "kms.googleapis.com",
   "distribution_name": "@google-cloud/kms",
   "release_level": "ga",
