@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/websecurityscanner/latest/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/web-security-scanner/latest",
   "api_id": "websecurityscanner.googleapis.com",
   "distribution_name": "@google-cloud/web-security-scanner",
   "release_level": "GA",
