@@ -3,7 +3,7 @@
   "distribution_name": "@google-cloud/functions",
   "product_documentation": "https://cloud.google.com/functions",
   "api_id": "cloudfunctions.googleapis.com",
-  "client_documentation": "https://googleapis.dev/nodejs/nodejs-functions/latest/index.html",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/functions/latest",
   "repo": "googleapis/nodejs-functions",
   "release_level": "ga",
   "requires_billing": false,
