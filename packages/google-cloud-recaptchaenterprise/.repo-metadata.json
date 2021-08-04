@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/recaptcha-enterprise/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/recaptcha-enterprise/latest",
   "api_id": "recaptchaenterprise.googleapis.com",
   "distribution_name": "@google-cloud/recaptcha-enterprise",
   "release_level": "ga",
