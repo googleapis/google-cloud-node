@@ -4908,18 +4908,6 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
-                /** AudioEncoding enum. */
-                enum AudioEncoding {
-                    AUDIO_ENCODING_UNSPECIFIED = 0,
-                    AUDIO_ENCODING_LINEAR_16 = 1,
-                    AUDIO_ENCODING_FLAC = 2,
-                    AUDIO_ENCODING_MULAW = 3,
-                    AUDIO_ENCODING_AMR = 4,
-                    AUDIO_ENCODING_AMR_WB = 5,
-                    AUDIO_ENCODING_OGG_OPUS = 6,
-                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
-                }
-
                 /** Properties of a SpeechContext. */
                 interface ISpeechContext {
 
@@ -5014,6 +5002,18 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** AudioEncoding enum. */
+                enum AudioEncoding {
+                    AUDIO_ENCODING_UNSPECIFIED = 0,
+                    AUDIO_ENCODING_LINEAR_16 = 1,
+                    AUDIO_ENCODING_FLAC = 2,
+                    AUDIO_ENCODING_MULAW = 3,
+                    AUDIO_ENCODING_AMR = 4,
+                    AUDIO_ENCODING_AMR_WB = 5,
+                    AUDIO_ENCODING_OGG_OPUS = 6,
+                    AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE = 7
                 }
 
                 /** Properties of a SpeechWordInfo. */
@@ -6679,6 +6679,9 @@ export namespace google {
 
                     /** StreamingRecognitionResult speechEndOffset */
                     speechEndOffset?: (google.protobuf.IDuration|null);
+
+                    /** StreamingRecognitionResult languageCode */
+                    languageCode?: (string|null);
                 }
 
                 /** Represents a StreamingRecognitionResult. */
@@ -6707,6 +6710,9 @@ export namespace google {
 
                     /** StreamingRecognitionResult speechEndOffset. */
                     public speechEndOffset?: (google.protobuf.IDuration|null);
+
+                    /** StreamingRecognitionResult languageCode. */
+                    public languageCode: string;
 
                     /**
                      * Creates a new StreamingRecognitionResult instance using the specified properties.
