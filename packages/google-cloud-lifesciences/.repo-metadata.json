@@ -2,7 +2,7 @@
   "name": "lifesciences",
   "name_pretty": "Cloud Life Sciences",
   "product_documentation": "https://cloud.google.com/life-sciences/",
-  "client_documentation": "https://cloud.google.com/life-sciences",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/life-sciences/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-life-sciences/issues",
   "release_level": "BETA",
   "language": "nodejs",

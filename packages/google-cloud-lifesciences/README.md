@@ -144,7 +144,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-life-sciences/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/life-sciences
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/life-sciences/latest
 [product-docs]: https://cloud.google.com/life-sciences/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
