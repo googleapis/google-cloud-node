@@ -10,6 +10,6 @@
   "product_documentation": "https://cloud.google.com/kubernetes-engine",
   "codeowner_team": "@googleapis/anthos-dpe",
   "name_pretty": "Kubernetes Engine Cluster Manager API",
-  "client_documentation": "https://googleapis.dev/nodejs/container/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/container/latest",
   "release_level": "ga"
 }
