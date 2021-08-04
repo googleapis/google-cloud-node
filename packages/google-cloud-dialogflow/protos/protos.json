@@ -8398,7 +8398,8 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Version"
                           }
                         },
                         "state": {
@@ -10926,6 +10927,10 @@
                         "speechEndOffset": {
                           "type": "google.protobuf.Duration",
                           "id": 8
+                        },
+                        "languageCode": {
+                          "type": "string",
+                          "id": 10
                         },
                         "dtmfDigits": {
                           "type": "TelephonyDtmfEvents",
@@ -14495,6 +14500,17 @@
                         "languageCode": {
                           "type": "string",
                           "id": 10
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 14
+                        },
+                        "securitySettings": {
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/CXSecuritySettings"
+                          }
                         }
                       }
                     },

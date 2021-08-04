@@ -660,6 +660,10 @@ export class EntityTypesClient {
   /**
    * Creates an entity type in the specified agent.
    *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -768,6 +772,10 @@ export class EntityTypesClient {
   /**
    * Updates the specified entity type.
    *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.dialogflow.v2beta1.EntityType} request.entityType
@@ -873,6 +881,10 @@ export class EntityTypesClient {
   /**
    * Deletes the specified entity type.
    *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -976,7 +988,10 @@ export class EntityTypesClient {
   ): void;
   /**
    * Updates/Creates multiple entity types in the specified agent.
-   * Operation <response: {@link google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse|BatchUpdateEntityTypesResponse}>
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1140,7 +1155,10 @@ export class EntityTypesClient {
   ): void;
   /**
    * Deletes entity types in the specified agent.
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   *
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1290,7 +1308,9 @@ export class EntityTypesClient {
   /**
    * Creates multiple new entities in the specified entity type.
    *
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1444,7 +1464,9 @@ export class EntityTypesClient {
    * method does not affect entities in the entity type that aren't explicitly
    * specified in the request.
    *
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1598,7 +1620,9 @@ export class EntityTypesClient {
   /**
    * Deletes entities in the specified entity type.
    *
-   * Operation <response: {@link google.protobuf.Empty|google.protobuf.Empty}>
+   * Note: You should always train an agent prior to sending it queries. See the
+   * [training
+   * documentation](https://cloud.google.com/dialogflow/es/docs/training).
    *
    * @param {Object} request
    *   The request object that will be sent.

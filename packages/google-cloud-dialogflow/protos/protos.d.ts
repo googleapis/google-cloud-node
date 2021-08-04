@@ -35538,6 +35538,9 @@ export namespace google {
                     /** StreamingRecognitionResult speechEndOffset */
                     speechEndOffset?: (google.protobuf.IDuration|null);
 
+                    /** StreamingRecognitionResult languageCode */
+                    languageCode?: (string|null);
+
                     /** StreamingRecognitionResult dtmfDigits */
                     dtmfDigits?: (google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents|null);
                 }
@@ -35571,6 +35574,9 @@ export namespace google {
 
                     /** StreamingRecognitionResult speechEndOffset. */
                     public speechEndOffset?: (google.protobuf.IDuration|null);
+
+                    /** StreamingRecognitionResult languageCode. */
+                    public languageCode: string;
 
                     /** StreamingRecognitionResult dtmfDigits. */
                     public dtmfDigits?: (google.cloud.dialogflow.v2beta1.ITelephonyDtmfEvents|null);
@@ -47507,6 +47513,12 @@ export namespace google {
 
                     /** ConversationProfile languageCode */
                     languageCode?: (string|null);
+
+                    /** ConversationProfile timeZone */
+                    timeZone?: (string|null);
+
+                    /** ConversationProfile securitySettings */
+                    securitySettings?: (string|null);
                 }
 
                 /** Represents a ConversationProfile. */
@@ -47553,6 +47565,12 @@ export namespace google {
 
                     /** ConversationProfile languageCode. */
                     public languageCode: string;
+
+                    /** ConversationProfile timeZone. */
+                    public timeZone: string;
+
+                    /** ConversationProfile securitySettings. */
+                    public securitySettings: string;
 
                     /**
                      * Creates a new ConversationProfile instance using the specified properties.
