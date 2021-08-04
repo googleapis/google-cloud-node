@@ -9,6 +9,6 @@
   "release_level": "ga",
   "distribution_name": "@google-cloud/os-config",
   "name": "osconfig",
-  "client_documentation": "https://googleapis.dev/nodejs/osconfig/latest/index.html",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/os-config/latest",
   "api_id": "osconfig.googleapis.com"
 }

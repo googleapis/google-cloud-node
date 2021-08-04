@@ -147,7 +147,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-os-config/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/osconfig/latest/index.html
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/os-config/latest
 [product-docs]: https://cloud.google.com/compute/docs/os-patch-management
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
