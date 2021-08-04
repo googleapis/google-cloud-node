@@ -10,6 +10,6 @@
   "product_documentation": "https://cloud.google.com/recommender/docs",
   "codeowner_team": "@googleapis/ml-apis",
   "name_pretty": "Recommender",
-  "client_documentation": "https://googleapis.dev/nodejs/recommender/latest/index.html",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/recommender/latest",
   "release_level": "ga"
 }
