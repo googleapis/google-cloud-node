@@ -151,7 +151,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-essential-contacts/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/resource-manager/docs/reference/essentialcontacts/rest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/essential-contacts/latest
 [product-docs]: https://cloud.google.com/resource-manager/docs/managing-notification-contacts/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
