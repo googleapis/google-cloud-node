@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/iot/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/iot/latest",
   "api_id": "cloudiot.googleapis.com",
   "codeowner_team": "@googleapis/api-iot",
   "distribution_name": "@google-cloud/iot",
