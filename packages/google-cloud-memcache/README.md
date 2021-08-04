@@ -139,7 +139,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-memcache/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/memcache/latest/index.html
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/memcache/latest
 [product-docs]: https://cloud.google.com/memorystore/docs/memcached
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
