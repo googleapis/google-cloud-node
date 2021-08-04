@@ -159,7 +159,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-language/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/language/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/language/latest
 [product-docs]: https://cloud.google.com/natural-language/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
