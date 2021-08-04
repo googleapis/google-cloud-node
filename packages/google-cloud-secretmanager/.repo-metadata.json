@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/secretmanager/latest/index.html",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/secret-manager/latest",
   "api_id": "secretmanager.googleapis.com",
   "distribution_name": "@google-cloud/secret-manager",
   "release_level": "ga",
