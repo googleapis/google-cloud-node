@@ -9,6 +9,6 @@
   "default_version": "v1",
   "release_level": "ga",
   "repo": "googleapis/nodejs-redis",
-  "client_documentation": "https://googleapis.dev/nodejs/redis/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/redis/latest",
   "requires_billing": true
 }
