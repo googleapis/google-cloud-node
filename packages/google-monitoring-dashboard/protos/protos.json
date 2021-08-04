@@ -8,6 +8,7 @@
               "nested": {
                 "v1": {
                   "options": {
+                    "csharp_namespace": "Google.Cloud.Monitoring.Dashboard.V1",
                     "go_package": "google.golang.org/genproto/googleapis/monitoring/dashboard/v1;dashboard",
                     "java_multiple_files": true,
                     "java_outer_classname": "ServiceMonitoringProto",
