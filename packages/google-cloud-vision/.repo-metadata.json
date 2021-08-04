@@ -3,7 +3,7 @@
   "distribution_name": "@google-cloud/vision",
   "product_documentation": "https://cloud.google.com/vision",
   "api_id": "vision.googleapis.com",
-  "client_documentation": "https://googleapis.dev/nodejs/vision/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vision/latest",
   "repo": "googleapis/nodejs-vision",
   "release_level": "ga",
   "requires_billing": true,
