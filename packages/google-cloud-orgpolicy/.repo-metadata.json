@@ -8,7 +8,7 @@
   "release_level": "GA",
   "distribution_name": "@google-cloud/org-policy",
   "name": "org-policy",
-  "client_documentation": "https://googleapis.dev/nodejs/org-policy/latest/index.html",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/org-policy/latest",
   "api_id": "orgpolicy.googleapis.com",
   "issue_tracker": "https://github.com/googleapis/nodejs-org-policy/issues"
 }
