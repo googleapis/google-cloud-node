@@ -127,7 +127,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-paginator/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/paginator/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/paginator/latest
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
