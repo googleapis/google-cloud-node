@@ -2,7 +2,7 @@
   "name": "networkmanagement",
   "name_pretty": "Network Management API",
   "product_documentation": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest/",
-  "client_documentation": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/network-management/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-network-management/issues",
   "release_level": "BETA",
   "language": "nodejs",
@@ -12,4 +12,3 @@
   "default_version": "v1",
   "requires_billing": true
 }
-
