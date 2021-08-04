@@ -145,7 +145,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-resource-settings/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/dataflow/latest/index.html
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/resource-settings/latest
 [product-docs]: https://cloud.google.com/resource-manager/docs/reference/resource-settings/rest
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
