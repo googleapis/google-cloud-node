@@ -132,7 +132,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-gke-connect-gateway/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/anthos/multicluster-management/gateway/using
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/gke-connect-gateway/latest
 [product-docs]: https://cloud.google.com/api-gateway/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
