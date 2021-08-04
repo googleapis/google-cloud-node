@@ -2,7 +2,7 @@
   "default_version": "v1beta1",
   "release_level": "beta",
   "requires_billing": true,
-  "client_documentation": "https://googleapis.dev/nodejs/datalabeling/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datalabeling/latest",
   "codeowner_team": "@googleapis/ml-apis",
   "language": "nodejs",
   "issue_tracker": "",
