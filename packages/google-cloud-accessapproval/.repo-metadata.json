@@ -2,7 +2,7 @@
   "name": "accessapproval",
   "name_pretty": "Access Approval",
   "product_documentation": "https://cloud.google.com/access-approval/docs",
-  "client_documentation": "https://googleapis.dev/nodejs/accessapproval/latest/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/access-approval/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-access-approval/issues",
   "release_level": "GA",
   "language": "nodejs",
@@ -12,4 +12,3 @@
   "requires_billing": true,
   "default_version": "v1"
 }
-
