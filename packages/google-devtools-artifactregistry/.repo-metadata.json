@@ -2,7 +2,7 @@
   "default_version": "v1beta2",
   "release_level": "BETA",
   "requires_billing": true,
-  "client_documentation": "https://googleapis.dev/nodejs/artifactregistry/latest/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/artifact-registry/latest",
   "codeowner_team": "@googleapis/cicd",
   "language": "nodejs",
   "issue_tracker": "https://github.com/googleapis/nodejs-artifact-registry/issues",
