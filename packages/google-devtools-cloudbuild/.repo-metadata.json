@@ -4,7 +4,7 @@
   "requires_billing": true,
   "name": "cloudbuild",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5226584",
-  "client_documentation": "https://googleapis.dev/nodejs/cloudbuild/latest/index.html",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/cloudbuild/latest",
   "language": "nodejs",
   "release_level": "ga",
   "product_documentation": "https://cloud.google.com/cloud-build/docs/",
