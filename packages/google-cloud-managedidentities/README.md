@@ -149,7 +149,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-managed-identities/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/managedidentities/latest/
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/managed-identities/latest
 [product-docs]: https://cloud.google.com/managed-microsoft-ad/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
