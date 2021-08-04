@@ -145,7 +145,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-domains/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/domains/docs/overview
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/domains/latest
 [product-docs]: https://cloud.google.com/domains/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
