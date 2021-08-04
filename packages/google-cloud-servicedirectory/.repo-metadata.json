@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/servicedirectory/latest/index.html",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/service-directory/latest",
   "api_id": "servicedirectory.googleapis.com",
   "distribution_name": "@google-cloud/service-directory",
   "release_level": "ga",
