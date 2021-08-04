@@ -10,6 +10,6 @@
   "product_documentation": "https://cloud.google.com/bigquery/docs/reference/reservations",
   "codeowner_team": "@googleapis/api-bigquery",
   "name_pretty": "Google BigQuery Reservation",
-  "client_documentation": "https://googleapis.dev/nodejs/bigqueryreservation/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-reservation/latest",
   "release_level": "ga"
 }
