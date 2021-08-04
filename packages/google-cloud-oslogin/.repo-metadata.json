@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/oslogin/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/os-login/latest",
   "api_id": "oslogin.googleapis.com",
   "distribution_name": "@google-cloud/os-login",
   "release_level": "ga",
