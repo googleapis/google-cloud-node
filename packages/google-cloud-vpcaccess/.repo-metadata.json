@@ -2,7 +2,7 @@
   "name": "vpcaccess",
   "name_pretty": "Virtual Private Cloud",
   "product_documentation": "https://cloud.google.com/vpc/",
-  "client_documentation": "https://cloud.google.com/vpc",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vpc-access/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-vpc-access/issues",
   "release_level": "BETA",
   "language": "nodejs",
@@ -12,4 +12,3 @@
   "default_version": "v1",
   "requires_billing": true
 }
-
