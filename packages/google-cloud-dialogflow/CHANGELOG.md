@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+### [4.1.4](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.1.3...v4.1.4) (2021-08-04)
+
+
+### Bug Fixes
+
+* fix validation result docs feat: add language code to streaming recognition result docs: update environment docs ([#853](https://www.github.com/googleapis/nodejs-dialogflow/issues/853)) ([d2eb1bd](https://www.github.com/googleapis/nodejs-dialogflow/commit/d2eb1bdaf886493952163bcb41291ad492a7bfb8))
+* fix validation result docs feat: add language code to streaming recognition result feat: add time zone and security settings to conversation profile docs: update agent docs docs: update entity type docs docs: update intent docs ([#854](https://www.github.com/googleapis/nodejs-dialogflow/issues/854)) ([cda7ff3](https://www.github.com/googleapis/nodejs-dialogflow/commit/cda7ff335abad989612c104e990be1f6a55c89b5))
+
 ### [4.1.3](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.1.2...v4.1.3) (2021-07-21)
 
 
