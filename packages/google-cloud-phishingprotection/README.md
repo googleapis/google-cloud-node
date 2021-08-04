@@ -146,7 +146,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-phishing-protection/blob/main/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/phishing-protection/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/phishing-protection/latest
 [product-docs]: https://cloud.google.com/phishing-protection/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
