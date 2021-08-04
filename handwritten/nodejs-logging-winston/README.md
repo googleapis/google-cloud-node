@@ -338,7 +338,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-logging-winston/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/logging-winston/latest
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/logging-winston/latest
 [product-docs]: https://cloud.google.com/logging
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
