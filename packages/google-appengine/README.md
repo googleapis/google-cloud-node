@@ -143,7 +143,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-appengine-admin/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/appengine/docs/admin-api
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/appengine-admin/latest
 [product-docs]: https://cloud.google.com/appengine/docs/admin-api/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
