@@ -146,7 +146,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-apigee-connect/blob/master/LICENSE)
 
-[client-docs]: https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/apigee-connect/latest
 [product-docs]: https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
