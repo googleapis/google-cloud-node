@@ -1,7 +1,7 @@
 {
   "default_version": "v1",
   "release_level": "ga",
-  "client_documentation": "https://googleapis.dev/nodejs/datacatalog/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datacatalog/latest",
   "name": "datacatalog",
   "product_documentation": "https://cloud.google.com/data-catalog/",
   "distribution_name": "@google-cloud/datacatalog",
