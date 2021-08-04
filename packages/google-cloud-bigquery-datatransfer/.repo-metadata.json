@@ -2,7 +2,7 @@
   "default_version": "v1",
   "release_level": "ga",
   "requires_billing": true,
-  "client_documentation": "https://googleapis.dev/nodejs/bigquery-data-transfer/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/bigquery-data-transfer/latest",
   "codeowner_team": "@googleapis/api-bigquery",
   "language": "nodejs",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559654",
