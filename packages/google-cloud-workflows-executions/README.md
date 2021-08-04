@@ -149,7 +149,7 @@ Apache Version 2.0
 
 See [LICENSE](https://github.com/googleapis/nodejs-workflows/blob/master/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/workflows/latest/index.html
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/workflows/latest
 [product-docs]: https://cloud.google.com/workflows/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
