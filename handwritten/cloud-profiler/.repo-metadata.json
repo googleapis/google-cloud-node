@@ -2,7 +2,7 @@
   "name": "profiler",
   "name_pretty": "Cloud Profiler",
   "product_documentation": "https://cloud.google.com/profiler",
-  "client_documentation": "https://googleapis.dev/nodejs/profiler/latest/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/profiler/latest",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5116474",
   "release_level": "ga",
   "language": "nodejs",
