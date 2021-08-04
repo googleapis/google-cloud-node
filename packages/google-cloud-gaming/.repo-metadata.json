@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/game-servers/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/game-servers/latest",
   "product_documentation": "https://cloud.google.com/game-servers/",
   "name": "game-servers",
   "requires_billing": true,
