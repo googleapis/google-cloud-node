@@ -2,7 +2,7 @@
   "default_version": "v1",
   "release_level": "ga",
   "requires_billing": false,
-  "client_documentation": "https://googleapis.dev/nodejs/scheduler/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/scheduler/latest",
   "codeowner_team": "@googleapis/serverless-team",
   "language": "nodejs",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5411429",
