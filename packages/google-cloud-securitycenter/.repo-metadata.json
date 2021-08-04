@@ -6,7 +6,7 @@
   "distribution_name": "@google-cloud/security-center",
   "default_version": "v1",
   "name": "security-center",
-  "client_documentation": "https://googleapis.dev/nodejs/security-center/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/security-center/latest",
   "requires_billing": true,
   "name_pretty": "Google Cloud Security Command Center",
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559748",
