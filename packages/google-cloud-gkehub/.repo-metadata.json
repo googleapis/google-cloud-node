@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/gke-hub/latest/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/gke-hub/latest",
   "api_id": "gkehub.googleapis.com",
   "distribution_name": "@google-cloud/gke-hub",
   "release_level": "BETA",
