@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.4.4...v2.5.0) (2021-08-05)
+
+
+### Features
+
+* add support for HMAC, Variable Key Destruction, and GenerateRandom ([#484](https://www.github.com/googleapis/nodejs-kms/issues/484)) ([c207423](https://www.github.com/googleapis/nodejs-kms/commit/c207423806e36057d74244e1c79294f595e5a740))
+
 ### [2.4.4](https://www.github.com/googleapis/nodejs-kms/compare/v2.4.3...v2.4.4) (2021-07-16)
 
 
