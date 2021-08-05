@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.4.2...v2.5.0) (2021-08-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* Specify a C# namespace option to be consistent with other Cloud APIs (#205)
+
+### Bug Fixes
+
+* **build:** c# change is not breaking for Node.js ([#207](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/207)) ([5402d8d](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/5402d8d81c0336544afabbb818f7aa085bfd8917))
+* Specify a C# namespace option to be consistent with other Cloud APIs ([#205](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/205)) ([8eee840](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/8eee8403fe71ec18f41cc47afc41620b470d3323))
+
 ### [2.4.2](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.4.1...v2.4.2) (2021-07-16)
 
 
