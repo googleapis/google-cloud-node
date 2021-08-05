@@ -1593,6 +1593,360 @@ describe('v1.KeyManagementServiceClient', () => {
     });
   });
 
+  describe('updateCryptoKeyPrimaryVersion', () => {
+    it('invokes updateCryptoKeyPrimaryVersion without error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CryptoKey()
+      );
+      client.innerApiCalls.updateCryptoKeyPrimaryVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.updateCryptoKeyPrimaryVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateCryptoKeyPrimaryVersion without error using callback', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CryptoKey()
+      );
+      client.innerApiCalls.updateCryptoKeyPrimaryVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateCryptoKeyPrimaryVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.ICryptoKey | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateCryptoKeyPrimaryVersion with error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateCryptoKeyPrimaryVersion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.updateCryptoKeyPrimaryVersion(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('destroyCryptoKeyVersion', () => {
+    it('invokes destroyCryptoKeyVersion without error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CryptoKeyVersion()
+      );
+      client.innerApiCalls.destroyCryptoKeyVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.destroyCryptoKeyVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes destroyCryptoKeyVersion without error using callback', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CryptoKeyVersion()
+      );
+      client.innerApiCalls.destroyCryptoKeyVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.destroyCryptoKeyVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.ICryptoKeyVersion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes destroyCryptoKeyVersion with error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.destroyCryptoKeyVersion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.destroyCryptoKeyVersion(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('restoreCryptoKeyVersion', () => {
+    it('invokes restoreCryptoKeyVersion without error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CryptoKeyVersion()
+      );
+      client.innerApiCalls.restoreCryptoKeyVersion =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.restoreCryptoKeyVersion(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes restoreCryptoKeyVersion without error using callback', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.kms.v1.CryptoKeyVersion()
+      );
+      client.innerApiCalls.restoreCryptoKeyVersion =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.restoreCryptoKeyVersion(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.kms.v1.ICryptoKeyVersion | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes restoreCryptoKeyVersion with error', async () => {
+      const client =
+        new keymanagementserviceModule.v1.KeyManagementServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.restoreCryptoKeyVersion = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.restoreCryptoKeyVersion(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('encrypt', () => {
     it('invokes encrypt without error', async () => {
       const client =
@@ -2043,8 +2397,8 @@ describe('v1.KeyManagementServiceClient', () => {
     });
   });
 
-  describe('updateCryptoKeyPrimaryVersion', () => {
-    it('invokes updateCryptoKeyPrimaryVersion without error', async () => {
+  describe('macSign', () => {
+    it('invokes macSign without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -2052,7 +2406,7 @@ describe('v1.KeyManagementServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
+        new protos.google.cloud.kms.v1.MacSignRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2064,20 +2418,19 @@ describe('v1.KeyManagementServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CryptoKey()
+        new protos.google.cloud.kms.v1.MacSignResponse()
       );
-      client.innerApiCalls.updateCryptoKeyPrimaryVersion =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.updateCryptoKeyPrimaryVersion(request);
+      client.innerApiCalls.macSign = stubSimpleCall(expectedResponse);
+      const [response] = await client.macSign(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
+        (client.innerApiCalls.macSign as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes updateCryptoKeyPrimaryVersion without error using callback', async () => {
+    it('invokes macSign without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -2085,7 +2438,7 @@ describe('v1.KeyManagementServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
+        new protos.google.cloud.kms.v1.MacSignRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2097,16 +2450,16 @@ describe('v1.KeyManagementServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CryptoKey()
+        new protos.google.cloud.kms.v1.MacSignResponse()
       );
-      client.innerApiCalls.updateCryptoKeyPrimaryVersion =
+      client.innerApiCalls.macSign =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.updateCryptoKeyPrimaryVersion(
+        client.macSign(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.kms.v1.ICryptoKey | null
+            result?: protos.google.cloud.kms.v1.IMacSignResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -2119,13 +2472,13 @@ describe('v1.KeyManagementServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
+        (client.innerApiCalls.macSign as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes updateCryptoKeyPrimaryVersion with error', async () => {
+    it('invokes macSign with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -2133,7 +2486,7 @@ describe('v1.KeyManagementServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest()
+        new protos.google.cloud.kms.v1.MacSignRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2145,24 +2498,18 @@ describe('v1.KeyManagementServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.updateCryptoKeyPrimaryVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.updateCryptoKeyPrimaryVersion(request),
-        expectedError
-      );
+      client.innerApiCalls.macSign = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.macSign(request), expectedError);
       assert(
-        (client.innerApiCalls.updateCryptoKeyPrimaryVersion as SinonStub)
+        (client.innerApiCalls.macSign as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('destroyCryptoKeyVersion', () => {
-    it('invokes destroyCryptoKeyVersion without error', async () => {
+  describe('macVerify', () => {
+    it('invokes macVerify without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -2170,7 +2517,7 @@ describe('v1.KeyManagementServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
+        new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2182,20 +2529,19 @@ describe('v1.KeyManagementServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CryptoKeyVersion()
+        new protos.google.cloud.kms.v1.MacVerifyResponse()
       );
-      client.innerApiCalls.destroyCryptoKeyVersion =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.destroyCryptoKeyVersion(request);
+      client.innerApiCalls.macVerify = stubSimpleCall(expectedResponse);
+      const [response] = await client.macVerify(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
+        (client.innerApiCalls.macVerify as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes destroyCryptoKeyVersion without error using callback', async () => {
+    it('invokes macVerify without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -2203,7 +2549,7 @@ describe('v1.KeyManagementServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
+        new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2215,16 +2561,16 @@ describe('v1.KeyManagementServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CryptoKeyVersion()
+        new protos.google.cloud.kms.v1.MacVerifyResponse()
       );
-      client.innerApiCalls.destroyCryptoKeyVersion =
+      client.innerApiCalls.macVerify =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.destroyCryptoKeyVersion(
+        client.macVerify(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.kms.v1.ICryptoKeyVersion | null
+            result?: protos.google.cloud.kms.v1.IMacVerifyResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -2237,13 +2583,13 @@ describe('v1.KeyManagementServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
+        (client.innerApiCalls.macVerify as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes destroyCryptoKeyVersion with error', async () => {
+    it('invokes macVerify with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -2251,7 +2597,7 @@ describe('v1.KeyManagementServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest()
+        new protos.google.cloud.kms.v1.MacVerifyRequest()
       );
       request.name = '';
       const expectedHeaderRequestParams = 'name=';
@@ -2263,24 +2609,18 @@ describe('v1.KeyManagementServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.destroyCryptoKeyVersion = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.destroyCryptoKeyVersion(request),
-        expectedError
-      );
+      client.innerApiCalls.macVerify = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.macVerify(request), expectedError);
       assert(
-        (client.innerApiCalls.destroyCryptoKeyVersion as SinonStub)
+        (client.innerApiCalls.macVerify as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('restoreCryptoKeyVersion', () => {
-    it('invokes restoreCryptoKeyVersion without error', async () => {
+  describe('generateRandomBytes', () => {
+    it('invokes generateRandomBytes without error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -2288,10 +2628,10 @@ describe('v1.KeyManagementServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
+        new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2300,20 +2640,20 @@ describe('v1.KeyManagementServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CryptoKeyVersion()
+        new protos.google.cloud.kms.v1.GenerateRandomBytesResponse()
       );
-      client.innerApiCalls.restoreCryptoKeyVersion =
+      client.innerApiCalls.generateRandomBytes =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.restoreCryptoKeyVersion(request);
+      const [response] = await client.generateRandomBytes(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
+        (client.innerApiCalls.generateRandomBytes as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes restoreCryptoKeyVersion without error using callback', async () => {
+    it('invokes generateRandomBytes without error using callback', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -2321,10 +2661,10 @@ describe('v1.KeyManagementServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
+        new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2333,16 +2673,16 @@ describe('v1.KeyManagementServiceClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.kms.v1.CryptoKeyVersion()
+        new protos.google.cloud.kms.v1.GenerateRandomBytesResponse()
       );
-      client.innerApiCalls.restoreCryptoKeyVersion =
+      client.innerApiCalls.generateRandomBytes =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.restoreCryptoKeyVersion(
+        client.generateRandomBytes(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.kms.v1.ICryptoKeyVersion | null
+            result?: protos.google.cloud.kms.v1.IGenerateRandomBytesResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -2355,13 +2695,13 @@ describe('v1.KeyManagementServiceClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
+        (client.innerApiCalls.generateRandomBytes as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes restoreCryptoKeyVersion with error', async () => {
+    it('invokes generateRandomBytes with error', async () => {
       const client =
         new keymanagementserviceModule.v1.KeyManagementServiceClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -2369,10 +2709,10 @@ describe('v1.KeyManagementServiceClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest()
+        new protos.google.cloud.kms.v1.GenerateRandomBytesRequest()
       );
-      request.name = '';
-      const expectedHeaderRequestParams = 'name=';
+      request.location = '';
+      const expectedHeaderRequestParams = 'location=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -2381,16 +2721,13 @@ describe('v1.KeyManagementServiceClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.restoreCryptoKeyVersion = stubSimpleCall(
+      client.innerApiCalls.generateRandomBytes = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.restoreCryptoKeyVersion(request),
-        expectedError
-      );
+      await assert.rejects(client.generateRandomBytes(request), expectedError);
       assert(
-        (client.innerApiCalls.restoreCryptoKeyVersion as SinonStub)
+        (client.innerApiCalls.generateRandomBytes as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );

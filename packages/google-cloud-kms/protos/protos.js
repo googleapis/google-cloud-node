@@ -295,6 +295,8 @@
                          * @property {google.protobuf.IDuration|null} [rotationPeriod] CryptoKey rotationPeriod
                          * @property {google.cloud.kms.v1.ICryptoKeyVersionTemplate|null} [versionTemplate] CryptoKey versionTemplate
                          * @property {Object.<string,string>|null} [labels] CryptoKey labels
+                         * @property {boolean|null} [importOnly] CryptoKey importOnly
+                         * @property {google.protobuf.IDuration|null} [destroyScheduledDuration] CryptoKey destroyScheduledDuration
                          */
     
                         /**
@@ -377,6 +379,22 @@
                          */
                         CryptoKey.prototype.labels = $util.emptyObject;
     
+                        /**
+                         * CryptoKey importOnly.
+                         * @member {boolean} importOnly
+                         * @memberof google.cloud.kms.v1.CryptoKey
+                         * @instance
+                         */
+                        CryptoKey.prototype.importOnly = false;
+    
+                        /**
+                         * CryptoKey destroyScheduledDuration.
+                         * @member {google.protobuf.IDuration|null|undefined} destroyScheduledDuration
+                         * @memberof google.cloud.kms.v1.CryptoKey
+                         * @instance
+                         */
+                        CryptoKey.prototype.destroyScheduledDuration = null;
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -432,6 +450,10 @@
                                     writer.uint32(/* id 10, wireType 2 =*/82).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                             if (message.versionTemplate != null && Object.hasOwnProperty.call(message, "versionTemplate"))
                                 $root.google.cloud.kms.v1.CryptoKeyVersionTemplate.encode(message.versionTemplate, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.importOnly != null && Object.hasOwnProperty.call(message, "importOnly"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).bool(message.importOnly);
+                            if (message.destroyScheduledDuration != null && Object.hasOwnProperty.call(message, "destroyScheduledDuration"))
+                                $root.google.protobuf.Duration.encode(message.destroyScheduledDuration, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
                             return writer;
                         };
     
@@ -509,6 +531,12 @@
                                     }
                                     message.labels[key] = value;
                                     break;
+                                case 13:
+                                    message.importOnly = reader.bool();
+                                    break;
+                                case 14:
+                                    message.destroyScheduledDuration = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -561,6 +589,7 @@
                                 case 1:
                                 case 5:
                                 case 6:
+                                case 9:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -593,6 +622,14 @@
                                 for (var i = 0; i < key.length; ++i)
                                     if (!$util.isString(message.labels[key[i]]))
                                         return "labels: string{k:string} expected";
+                            }
+                            if (message.importOnly != null && message.hasOwnProperty("importOnly"))
+                                if (typeof message.importOnly !== "boolean")
+                                    return "importOnly: boolean expected";
+                            if (message.destroyScheduledDuration != null && message.hasOwnProperty("destroyScheduledDuration")) {
+                                var error = $root.google.protobuf.Duration.verify(message.destroyScheduledDuration);
+                                if (error)
+                                    return "destroyScheduledDuration." + error;
                             }
                             return null;
                         };
@@ -633,6 +670,10 @@
                             case 6:
                                 message.purpose = 6;
                                 break;
+                            case "MAC":
+                            case 9:
+                                message.purpose = 9;
+                                break;
                             }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
@@ -661,6 +702,13 @@
                                 for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
                                     message.labels[keys[i]] = String(object.labels[keys[i]]);
                             }
+                            if (object.importOnly != null)
+                                message.importOnly = Boolean(object.importOnly);
+                            if (object.destroyScheduledDuration != null) {
+                                if (typeof object.destroyScheduledDuration !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.CryptoKey.destroyScheduledDuration: object expected");
+                                message.destroyScheduledDuration = $root.google.protobuf.Duration.fromObject(object.destroyScheduledDuration);
+                            }
                             return message;
                         };
     
@@ -686,6 +734,8 @@
                                 object.createTime = null;
                                 object.nextRotationTime = null;
                                 object.versionTemplate = null;
+                                object.importOnly = false;
+                                object.destroyScheduledDuration = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -710,6 +760,10 @@
                             }
                             if (message.versionTemplate != null && message.hasOwnProperty("versionTemplate"))
                                 object.versionTemplate = $root.google.cloud.kms.v1.CryptoKeyVersionTemplate.toObject(message.versionTemplate, options);
+                            if (message.importOnly != null && message.hasOwnProperty("importOnly"))
+                                object.importOnly = message.importOnly;
+                            if (message.destroyScheduledDuration != null && message.hasOwnProperty("destroyScheduledDuration"))
+                                object.destroyScheduledDuration = $root.google.protobuf.Duration.toObject(message.destroyScheduledDuration, options);
                             return object;
                         };
     
@@ -732,6 +786,7 @@
                          * @property {number} ENCRYPT_DECRYPT=1 ENCRYPT_DECRYPT value
                          * @property {number} ASYMMETRIC_SIGN=5 ASYMMETRIC_SIGN value
                          * @property {number} ASYMMETRIC_DECRYPT=6 ASYMMETRIC_DECRYPT value
+                         * @property {number} MAC=9 MAC value
                          */
                         CryptoKey.CryptoKeyPurpose = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -739,6 +794,7 @@
                             values[valuesById[1] = "ENCRYPT_DECRYPT"] = 1;
                             values[valuesById[5] = "ASYMMETRIC_SIGN"] = 5;
                             values[valuesById[6] = "ASYMMETRIC_DECRYPT"] = 6;
+                            values[valuesById[9] = "MAC"] = 9;
                             return values;
                         })();
     
@@ -920,6 +976,7 @@
                                 case 12:
                                 case 13:
                                 case 31:
+                                case 32:
                                 case 18:
                                     break;
                                 }
@@ -1024,6 +1081,10 @@
                             case "EC_SIGN_SECP256K1_SHA256":
                             case 31:
                                 message.algorithm = 31;
+                                break;
+                            case "HMAC_SHA256":
+                            case 32:
+                                message.algorithm = 32;
                                 break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
@@ -1670,6 +1731,7 @@
                                 case 12:
                                 case 13:
                                 case 31:
+                                case 32:
                                 case 18:
                                     break;
                                 }
@@ -1852,6 +1914,10 @@
                             case 31:
                                 message.algorithm = 31;
                                 break;
+                            case "HMAC_SHA256":
+                            case 32:
+                                message.algorithm = 32;
+                                break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
@@ -1988,6 +2054,7 @@
                          * @property {number} EC_SIGN_P256_SHA256=12 EC_SIGN_P256_SHA256 value
                          * @property {number} EC_SIGN_P384_SHA384=13 EC_SIGN_P384_SHA384 value
                          * @property {number} EC_SIGN_SECP256K1_SHA256=31 EC_SIGN_SECP256K1_SHA256 value
+                         * @property {number} HMAC_SHA256=32 HMAC_SHA256 value
                          * @property {number} EXTERNAL_SYMMETRIC_ENCRYPTION=18 EXTERNAL_SYMMETRIC_ENCRYPTION value
                          */
                         CryptoKeyVersion.CryptoKeyVersionAlgorithm = (function() {
@@ -2009,6 +2076,7 @@
                             values[valuesById[12] = "EC_SIGN_P256_SHA256"] = 12;
                             values[valuesById[13] = "EC_SIGN_P384_SHA384"] = 13;
                             values[valuesById[31] = "EC_SIGN_SECP256K1_SHA256"] = 31;
+                            values[valuesById[32] = "HMAC_SHA256"] = 32;
                             values[valuesById[18] = "EXTERNAL_SYMMETRIC_ENCRYPTION"] = 18;
                             return values;
                         })();
@@ -2066,6 +2134,7 @@
                          * @property {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null} [algorithm] PublicKey algorithm
                          * @property {google.protobuf.IInt64Value|null} [pemCrc32c] PublicKey pemCrc32c
                          * @property {string|null} [name] PublicKey name
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] PublicKey protectionLevel
                          */
     
                         /**
@@ -2116,6 +2185,14 @@
                         PublicKey.prototype.name = "";
     
                         /**
+                         * PublicKey protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.PublicKey
+                         * @instance
+                         */
+                        PublicKey.prototype.protectionLevel = 0;
+    
+                        /**
                          * Creates a new PublicKey instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.PublicKey
@@ -2147,6 +2224,8 @@
                                 $root.google.protobuf.Int64Value.encode(message.pemCrc32c, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.protectionLevel);
                             return writer;
                         };
     
@@ -2192,6 +2271,9 @@
                                     break;
                                 case 4:
                                     message.name = reader.string();
+                                    break;
+                                case 5:
+                                    message.protectionLevel = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2252,6 +2334,7 @@
                                 case 12:
                                 case 13:
                                 case 31:
+                                case 32:
                                 case 18:
                                     break;
                                 }
@@ -2263,6 +2346,16 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -2349,6 +2442,10 @@
                             case 31:
                                 message.algorithm = 31;
                                 break;
+                            case "HMAC_SHA256":
+                            case 32:
+                                message.algorithm = 32;
+                                break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
                                 message.algorithm = 18;
@@ -2361,6 +2458,24 @@
                             }
                             if (object.name != null)
                                 message.name = String(object.name);
+                            switch (object.protectionLevel) {
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -2382,6 +2497,7 @@
                                 object.algorithm = options.enums === String ? "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED" : 0;
                                 object.pemCrc32c = null;
                                 object.name = "";
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                             }
                             if (message.pem != null && message.hasOwnProperty("pem"))
                                 object.pem = message.pem;
@@ -2391,6 +2507,8 @@
                                 object.pemCrc32c = $root.google.protobuf.Int64Value.toObject(message.pemCrc32c, options);
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             return object;
                         };
     
@@ -3875,6 +3993,105 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#updateCryptoKeyPrimaryVersion}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef UpdateCryptoKeyPrimaryVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.CryptoKey} [response] CryptoKey
+                         */
+    
+                        /**
+                         * Calls UpdateCryptoKeyPrimaryVersion.
+                         * @function updateCryptoKeyPrimaryVersion
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest} request UpdateCryptoKeyPrimaryVersionRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyPrimaryVersionCallback} callback Node-style callback called with the error, if any, and CryptoKey
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.updateCryptoKeyPrimaryVersion = function updateCryptoKeyPrimaryVersion(request, callback) {
+                            return this.rpcCall(updateCryptoKeyPrimaryVersion, $root.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest, $root.google.cloud.kms.v1.CryptoKey, request, callback);
+                        }, "name", { value: "UpdateCryptoKeyPrimaryVersion" });
+    
+                        /**
+                         * Calls UpdateCryptoKeyPrimaryVersion.
+                         * @function updateCryptoKeyPrimaryVersion
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest} request UpdateCryptoKeyPrimaryVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.CryptoKey>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#destroyCryptoKeyVersion}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef DestroyCryptoKeyVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.CryptoKeyVersion} [response] CryptoKeyVersion
+                         */
+    
+                        /**
+                         * Calls DestroyCryptoKeyVersion.
+                         * @function destroyCryptoKeyVersion
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest} request DestroyCryptoKeyVersionRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersionCallback} callback Node-style callback called with the error, if any, and CryptoKeyVersion
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.destroyCryptoKeyVersion = function destroyCryptoKeyVersion(request, callback) {
+                            return this.rpcCall(destroyCryptoKeyVersion, $root.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest, $root.google.cloud.kms.v1.CryptoKeyVersion, request, callback);
+                        }, "name", { value: "DestroyCryptoKeyVersion" });
+    
+                        /**
+                         * Calls DestroyCryptoKeyVersion.
+                         * @function destroyCryptoKeyVersion
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest} request DestroyCryptoKeyVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.CryptoKeyVersion>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#restoreCryptoKeyVersion}.
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @typedef RestoreCryptoKeyVersionCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.kms.v1.CryptoKeyVersion} [response] CryptoKeyVersion
+                         */
+    
+                        /**
+                         * Calls RestoreCryptoKeyVersion.
+                         * @function restoreCryptoKeyVersion
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest} request RestoreCryptoKeyVersionRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersionCallback} callback Node-style callback called with the error, if any, and CryptoKeyVersion
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(KeyManagementService.prototype.restoreCryptoKeyVersion = function restoreCryptoKeyVersion(request, callback) {
+                            return this.rpcCall(restoreCryptoKeyVersion, $root.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest, $root.google.cloud.kms.v1.CryptoKeyVersion, request, callback);
+                        }, "name", { value: "RestoreCryptoKeyVersion" });
+    
+                        /**
+                         * Calls RestoreCryptoKeyVersion.
+                         * @function restoreCryptoKeyVersion
+                         * @memberof google.cloud.kms.v1.KeyManagementService
+                         * @instance
+                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest} request RestoreCryptoKeyVersionRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.CryptoKeyVersion>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#encrypt}.
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @typedef EncryptCallback
@@ -4007,101 +4224,101 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#updateCryptoKeyPrimaryVersion}.
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#macSign}.
                          * @memberof google.cloud.kms.v1.KeyManagementService
-                         * @typedef UpdateCryptoKeyPrimaryVersionCallback
+                         * @typedef MacSignCallback
                          * @type {function}
                          * @param {Error|null} error Error, if any
-                         * @param {google.cloud.kms.v1.CryptoKey} [response] CryptoKey
+                         * @param {google.cloud.kms.v1.MacSignResponse} [response] MacSignResponse
                          */
     
                         /**
-                         * Calls UpdateCryptoKeyPrimaryVersion.
-                         * @function updateCryptoKeyPrimaryVersion
+                         * Calls MacSign.
+                         * @function macSign
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @instance
-                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest} request UpdateCryptoKeyPrimaryVersionRequest message or plain object
-                         * @param {google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyPrimaryVersionCallback} callback Node-style callback called with the error, if any, and CryptoKey
+                         * @param {google.cloud.kms.v1.IMacSignRequest} request MacSignRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.MacSignCallback} callback Node-style callback called with the error, if any, and MacSignResponse
                          * @returns {undefined}
                          * @variation 1
                          */
-                        Object.defineProperty(KeyManagementService.prototype.updateCryptoKeyPrimaryVersion = function updateCryptoKeyPrimaryVersion(request, callback) {
-                            return this.rpcCall(updateCryptoKeyPrimaryVersion, $root.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest, $root.google.cloud.kms.v1.CryptoKey, request, callback);
-                        }, "name", { value: "UpdateCryptoKeyPrimaryVersion" });
+                        Object.defineProperty(KeyManagementService.prototype.macSign = function macSign(request, callback) {
+                            return this.rpcCall(macSign, $root.google.cloud.kms.v1.MacSignRequest, $root.google.cloud.kms.v1.MacSignResponse, request, callback);
+                        }, "name", { value: "MacSign" });
     
                         /**
-                         * Calls UpdateCryptoKeyPrimaryVersion.
-                         * @function updateCryptoKeyPrimaryVersion
+                         * Calls MacSign.
+                         * @function macSign
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @instance
-                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest} request UpdateCryptoKeyPrimaryVersionRequest message or plain object
-                         * @returns {Promise<google.cloud.kms.v1.CryptoKey>} Promise
+                         * @param {google.cloud.kms.v1.IMacSignRequest} request MacSignRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.MacSignResponse>} Promise
                          * @variation 2
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#destroyCryptoKeyVersion}.
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#macVerify}.
                          * @memberof google.cloud.kms.v1.KeyManagementService
-                         * @typedef DestroyCryptoKeyVersionCallback
+                         * @typedef MacVerifyCallback
                          * @type {function}
                          * @param {Error|null} error Error, if any
-                         * @param {google.cloud.kms.v1.CryptoKeyVersion} [response] CryptoKeyVersion
+                         * @param {google.cloud.kms.v1.MacVerifyResponse} [response] MacVerifyResponse
                          */
     
                         /**
-                         * Calls DestroyCryptoKeyVersion.
-                         * @function destroyCryptoKeyVersion
+                         * Calls MacVerify.
+                         * @function macVerify
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @instance
-                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest} request DestroyCryptoKeyVersionRequest message or plain object
-                         * @param {google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersionCallback} callback Node-style callback called with the error, if any, and CryptoKeyVersion
+                         * @param {google.cloud.kms.v1.IMacVerifyRequest} request MacVerifyRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.MacVerifyCallback} callback Node-style callback called with the error, if any, and MacVerifyResponse
                          * @returns {undefined}
                          * @variation 1
                          */
-                        Object.defineProperty(KeyManagementService.prototype.destroyCryptoKeyVersion = function destroyCryptoKeyVersion(request, callback) {
-                            return this.rpcCall(destroyCryptoKeyVersion, $root.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest, $root.google.cloud.kms.v1.CryptoKeyVersion, request, callback);
-                        }, "name", { value: "DestroyCryptoKeyVersion" });
+                        Object.defineProperty(KeyManagementService.prototype.macVerify = function macVerify(request, callback) {
+                            return this.rpcCall(macVerify, $root.google.cloud.kms.v1.MacVerifyRequest, $root.google.cloud.kms.v1.MacVerifyResponse, request, callback);
+                        }, "name", { value: "MacVerify" });
     
                         /**
-                         * Calls DestroyCryptoKeyVersion.
-                         * @function destroyCryptoKeyVersion
+                         * Calls MacVerify.
+                         * @function macVerify
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @instance
-                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest} request DestroyCryptoKeyVersionRequest message or plain object
-                         * @returns {Promise<google.cloud.kms.v1.CryptoKeyVersion>} Promise
+                         * @param {google.cloud.kms.v1.IMacVerifyRequest} request MacVerifyRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.MacVerifyResponse>} Promise
                          * @variation 2
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#restoreCryptoKeyVersion}.
+                         * Callback as used by {@link google.cloud.kms.v1.KeyManagementService#generateRandomBytes}.
                          * @memberof google.cloud.kms.v1.KeyManagementService
-                         * @typedef RestoreCryptoKeyVersionCallback
+                         * @typedef GenerateRandomBytesCallback
                          * @type {function}
                          * @param {Error|null} error Error, if any
-                         * @param {google.cloud.kms.v1.CryptoKeyVersion} [response] CryptoKeyVersion
+                         * @param {google.cloud.kms.v1.GenerateRandomBytesResponse} [response] GenerateRandomBytesResponse
                          */
     
                         /**
-                         * Calls RestoreCryptoKeyVersion.
-                         * @function restoreCryptoKeyVersion
+                         * Calls GenerateRandomBytes.
+                         * @function generateRandomBytes
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @instance
-                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest} request RestoreCryptoKeyVersionRequest message or plain object
-                         * @param {google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersionCallback} callback Node-style callback called with the error, if any, and CryptoKeyVersion
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesRequest} request GenerateRandomBytesRequest message or plain object
+                         * @param {google.cloud.kms.v1.KeyManagementService.GenerateRandomBytesCallback} callback Node-style callback called with the error, if any, and GenerateRandomBytesResponse
                          * @returns {undefined}
                          * @variation 1
                          */
-                        Object.defineProperty(KeyManagementService.prototype.restoreCryptoKeyVersion = function restoreCryptoKeyVersion(request, callback) {
-                            return this.rpcCall(restoreCryptoKeyVersion, $root.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest, $root.google.cloud.kms.v1.CryptoKeyVersion, request, callback);
-                        }, "name", { value: "RestoreCryptoKeyVersion" });
+                        Object.defineProperty(KeyManagementService.prototype.generateRandomBytes = function generateRandomBytes(request, callback) {
+                            return this.rpcCall(generateRandomBytes, $root.google.cloud.kms.v1.GenerateRandomBytesRequest, $root.google.cloud.kms.v1.GenerateRandomBytesResponse, request, callback);
+                        }, "name", { value: "GenerateRandomBytes" });
     
                         /**
-                         * Calls RestoreCryptoKeyVersion.
-                         * @function restoreCryptoKeyVersion
+                         * Calls GenerateRandomBytes.
+                         * @function generateRandomBytes
                          * @memberof google.cloud.kms.v1.KeyManagementService
                          * @instance
-                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest} request RestoreCryptoKeyVersionRequest message or plain object
-                         * @returns {Promise<google.cloud.kms.v1.CryptoKeyVersion>} Promise
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesRequest} request GenerateRandomBytesRequest message or plain object
+                         * @returns {Promise<google.cloud.kms.v1.GenerateRandomBytesResponse>} Promise
                          * @variation 2
                          */
     
@@ -8155,6 +8372,7 @@
                                 case 12:
                                 case 13:
                                 case 31:
+                                case 32:
                                 case 18:
                                     break;
                                 }
@@ -8251,6 +8469,10 @@
                             case "EC_SIGN_SECP256K1_SHA256":
                             case 31:
                                 message.algorithm = 31;
+                                break;
+                            case "HMAC_SHA256":
+                            case 32:
+                                message.algorithm = 32;
                                 break;
                             case "EXTERNAL_SYMMETRIC_ENCRYPTION":
                             case 18:
@@ -8988,6 +9210,590 @@
                         };
     
                         return UpdateCryptoKeyVersionRequest;
+                    })();
+    
+                    v1.UpdateCryptoKeyPrimaryVersionRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateCryptoKeyPrimaryVersionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IUpdateCryptoKeyPrimaryVersionRequest
+                         * @property {string|null} [name] UpdateCryptoKeyPrimaryVersionRequest name
+                         * @property {string|null} [cryptoKeyVersionId] UpdateCryptoKeyPrimaryVersionRequest cryptoKeyVersionId
+                         */
+    
+                        /**
+                         * Constructs a new UpdateCryptoKeyPrimaryVersionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents an UpdateCryptoKeyPrimaryVersionRequest.
+                         * @implements IUpdateCryptoKeyPrimaryVersionRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest=} [properties] Properties to set
+                         */
+                        function UpdateCryptoKeyPrimaryVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateCryptoKeyPrimaryVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @instance
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.prototype.name = "";
+    
+                        /**
+                         * UpdateCryptoKeyPrimaryVersionRequest cryptoKeyVersionId.
+                         * @member {string} cryptoKeyVersionId
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @instance
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.prototype.cryptoKeyVersionId = "";
+    
+                        /**
+                         * Creates a new UpdateCryptoKeyPrimaryVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} UpdateCryptoKeyPrimaryVersionRequest instance
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.create = function create(properties) {
+                            return new UpdateCryptoKeyPrimaryVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCryptoKeyPrimaryVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest} message UpdateCryptoKeyPrimaryVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.cryptoKeyVersionId != null && Object.hasOwnProperty.call(message, "cryptoKeyVersionId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.cryptoKeyVersionId);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateCryptoKeyPrimaryVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest} message UpdateCryptoKeyPrimaryVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateCryptoKeyPrimaryVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} UpdateCryptoKeyPrimaryVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.cryptoKeyVersionId = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateCryptoKeyPrimaryVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} UpdateCryptoKeyPrimaryVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateCryptoKeyPrimaryVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.cryptoKeyVersionId != null && message.hasOwnProperty("cryptoKeyVersionId"))
+                                if (!$util.isString(message.cryptoKeyVersionId))
+                                    return "cryptoKeyVersionId: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateCryptoKeyPrimaryVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} UpdateCryptoKeyPrimaryVersionRequest
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.cryptoKeyVersionId != null)
+                                message.cryptoKeyVersionId = String(object.cryptoKeyVersionId);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateCryptoKeyPrimaryVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} message UpdateCryptoKeyPrimaryVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.cryptoKeyVersionId = "";
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.cryptoKeyVersionId != null && message.hasOwnProperty("cryptoKeyVersionId"))
+                                object.cryptoKeyVersionId = message.cryptoKeyVersionId;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateCryptoKeyPrimaryVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateCryptoKeyPrimaryVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateCryptoKeyPrimaryVersionRequest;
+                    })();
+    
+                    v1.DestroyCryptoKeyVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a DestroyCryptoKeyVersionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDestroyCryptoKeyVersionRequest
+                         * @property {string|null} [name] DestroyCryptoKeyVersionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DestroyCryptoKeyVersionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DestroyCryptoKeyVersionRequest.
+                         * @implements IDestroyCryptoKeyVersionRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest=} [properties] Properties to set
+                         */
+                        function DestroyCryptoKeyVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DestroyCryptoKeyVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @instance
+                         */
+                        DestroyCryptoKeyVersionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DestroyCryptoKeyVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} DestroyCryptoKeyVersionRequest instance
+                         */
+                        DestroyCryptoKeyVersionRequest.create = function create(properties) {
+                            return new DestroyCryptoKeyVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DestroyCryptoKeyVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.DestroyCryptoKeyVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest} message DestroyCryptoKeyVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DestroyCryptoKeyVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DestroyCryptoKeyVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DestroyCryptoKeyVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest} message DestroyCryptoKeyVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DestroyCryptoKeyVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DestroyCryptoKeyVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} DestroyCryptoKeyVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DestroyCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DestroyCryptoKeyVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} DestroyCryptoKeyVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DestroyCryptoKeyVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DestroyCryptoKeyVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DestroyCryptoKeyVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DestroyCryptoKeyVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} DestroyCryptoKeyVersionRequest
+                         */
+                        DestroyCryptoKeyVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DestroyCryptoKeyVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} message DestroyCryptoKeyVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DestroyCryptoKeyVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DestroyCryptoKeyVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DestroyCryptoKeyVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DestroyCryptoKeyVersionRequest;
+                    })();
+    
+                    v1.RestoreCryptoKeyVersionRequest = (function() {
+    
+                        /**
+                         * Properties of a RestoreCryptoKeyVersionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IRestoreCryptoKeyVersionRequest
+                         * @property {string|null} [name] RestoreCryptoKeyVersionRequest name
+                         */
+    
+                        /**
+                         * Constructs a new RestoreCryptoKeyVersionRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a RestoreCryptoKeyVersionRequest.
+                         * @implements IRestoreCryptoKeyVersionRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest=} [properties] Properties to set
+                         */
+                        function RestoreCryptoKeyVersionRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RestoreCryptoKeyVersionRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @instance
+                         */
+                        RestoreCryptoKeyVersionRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new RestoreCryptoKeyVersionRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} RestoreCryptoKeyVersionRequest instance
+                         */
+                        RestoreCryptoKeyVersionRequest.create = function create(properties) {
+                            return new RestoreCryptoKeyVersionRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RestoreCryptoKeyVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.RestoreCryptoKeyVersionRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest} message RestoreCryptoKeyVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestoreCryptoKeyVersionRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RestoreCryptoKeyVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RestoreCryptoKeyVersionRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest} message RestoreCryptoKeyVersionRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RestoreCryptoKeyVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RestoreCryptoKeyVersionRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} RestoreCryptoKeyVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestoreCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RestoreCryptoKeyVersionRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} RestoreCryptoKeyVersionRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RestoreCryptoKeyVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RestoreCryptoKeyVersionRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RestoreCryptoKeyVersionRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RestoreCryptoKeyVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} RestoreCryptoKeyVersionRequest
+                         */
+                        RestoreCryptoKeyVersionRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RestoreCryptoKeyVersionRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} message RestoreCryptoKeyVersionRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RestoreCryptoKeyVersionRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RestoreCryptoKeyVersionRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RestoreCryptoKeyVersionRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RestoreCryptoKeyVersionRequest;
                     })();
     
                     v1.EncryptRequest = (function() {
@@ -10086,25 +10892,26 @@
                         return AsymmetricDecryptRequest;
                     })();
     
-                    v1.DecryptResponse = (function() {
+                    v1.MacSignRequest = (function() {
     
                         /**
-                         * Properties of a DecryptResponse.
+                         * Properties of a MacSignRequest.
                          * @memberof google.cloud.kms.v1
-                         * @interface IDecryptResponse
-                         * @property {Uint8Array|null} [plaintext] DecryptResponse plaintext
-                         * @property {google.protobuf.IInt64Value|null} [plaintextCrc32c] DecryptResponse plaintextCrc32c
+                         * @interface IMacSignRequest
+                         * @property {string|null} [name] MacSignRequest name
+                         * @property {Uint8Array|null} [data] MacSignRequest data
+                         * @property {google.protobuf.IInt64Value|null} [dataCrc32c] MacSignRequest dataCrc32c
                          */
     
                         /**
-                         * Constructs a new DecryptResponse.
+                         * Constructs a new MacSignRequest.
                          * @memberof google.cloud.kms.v1
-                         * @classdesc Represents a DecryptResponse.
-                         * @implements IDecryptResponse
+                         * @classdesc Represents a MacSignRequest.
+                         * @implements IMacSignRequest
                          * @constructor
-                         * @param {google.cloud.kms.v1.IDecryptResponse=} [properties] Properties to set
+                         * @param {google.cloud.kms.v1.IMacSignRequest=} [properties] Properties to set
                          */
-                        function DecryptResponse(properties) {
+                        function MacSignRequest(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -10112,88 +10919,101 @@
                         }
     
                         /**
-                         * DecryptResponse plaintext.
-                         * @member {Uint8Array} plaintext
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * MacSignRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @instance
                          */
-                        DecryptResponse.prototype.plaintext = $util.newBuffer([]);
+                        MacSignRequest.prototype.name = "";
     
                         /**
-                         * DecryptResponse plaintextCrc32c.
-                         * @member {google.protobuf.IInt64Value|null|undefined} plaintextCrc32c
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * MacSignRequest data.
+                         * @member {Uint8Array} data
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @instance
                          */
-                        DecryptResponse.prototype.plaintextCrc32c = null;
+                        MacSignRequest.prototype.data = $util.newBuffer([]);
     
                         /**
-                         * Creates a new DecryptResponse instance using the specified properties.
+                         * MacSignRequest dataCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} dataCrc32c
+                         * @memberof google.cloud.kms.v1.MacSignRequest
+                         * @instance
+                         */
+                        MacSignRequest.prototype.dataCrc32c = null;
+    
+                        /**
+                         * Creates a new MacSignRequest instance using the specified properties.
                          * @function create
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @static
-                         * @param {google.cloud.kms.v1.IDecryptResponse=} [properties] Properties to set
-                         * @returns {google.cloud.kms.v1.DecryptResponse} DecryptResponse instance
+                         * @param {google.cloud.kms.v1.IMacSignRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.MacSignRequest} MacSignRequest instance
                          */
-                        DecryptResponse.create = function create(properties) {
-                            return new DecryptResponse(properties);
+                        MacSignRequest.create = function create(properties) {
+                            return new MacSignRequest(properties);
                         };
     
                         /**
-                         * Encodes the specified DecryptResponse message. Does not implicitly {@link google.cloud.kms.v1.DecryptResponse.verify|verify} messages.
+                         * Encodes the specified MacSignRequest message. Does not implicitly {@link google.cloud.kms.v1.MacSignRequest.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @static
-                         * @param {google.cloud.kms.v1.IDecryptResponse} message DecryptResponse message or plain object to encode
+                         * @param {google.cloud.kms.v1.IMacSignRequest} message MacSignRequest message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        DecryptResponse.encode = function encode(message, writer) {
+                        MacSignRequest.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.plaintext != null && Object.hasOwnProperty.call(message, "plaintext"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.plaintext);
-                            if (message.plaintextCrc32c != null && Object.hasOwnProperty.call(message, "plaintextCrc32c"))
-                                $root.google.protobuf.Int64Value.encode(message.plaintextCrc32c, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
+                            if (message.dataCrc32c != null && Object.hasOwnProperty.call(message, "dataCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.dataCrc32c, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified DecryptResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecryptResponse.verify|verify} messages.
+                         * Encodes the specified MacSignRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.MacSignRequest.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @static
-                         * @param {google.cloud.kms.v1.IDecryptResponse} message DecryptResponse message or plain object to encode
+                         * @param {google.cloud.kms.v1.IMacSignRequest} message MacSignRequest message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        DecryptResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        MacSignRequest.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a DecryptResponse message from the specified reader or buffer.
+                         * Decodes a MacSignRequest message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.kms.v1.DecryptResponse} DecryptResponse
+                         * @returns {google.cloud.kms.v1.MacSignRequest} MacSignRequest
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DecryptResponse.decode = function decode(reader, length) {
+                        MacSignRequest.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DecryptResponse();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.MacSignRequest();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    message.plaintext = reader.bytes();
+                                    message.name = reader.string();
                                     break;
                                 case 2:
-                                    message.plaintextCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                    message.data = reader.bytes();
+                                    break;
+                                case 3:
+                                    message.dataCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10204,110 +11024,677 @@
                         };
     
                         /**
-                         * Decodes a DecryptResponse message from the specified reader or buffer, length delimited.
+                         * Decodes a MacSignRequest message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.kms.v1.DecryptResponse} DecryptResponse
+                         * @returns {google.cloud.kms.v1.MacSignRequest} MacSignRequest
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DecryptResponse.decodeDelimited = function decodeDelimited(reader) {
+                        MacSignRequest.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a DecryptResponse message.
+                         * Verifies a MacSignRequest message.
                          * @function verify
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        DecryptResponse.verify = function verify(message) {
+                        MacSignRequest.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.plaintext != null && message.hasOwnProperty("plaintext"))
-                                if (!(message.plaintext && typeof message.plaintext.length === "number" || $util.isString(message.plaintext)))
-                                    return "plaintext: buffer expected";
-                            if (message.plaintextCrc32c != null && message.hasOwnProperty("plaintextCrc32c")) {
-                                var error = $root.google.protobuf.Int64Value.verify(message.plaintextCrc32c);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                    return "data: buffer expected";
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.dataCrc32c);
                                 if (error)
-                                    return "plaintextCrc32c." + error;
+                                    return "dataCrc32c." + error;
                             }
                             return null;
                         };
     
                         /**
-                         * Creates a DecryptResponse message from a plain object. Also converts values to their respective internal types.
+                         * Creates a MacSignRequest message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.kms.v1.DecryptResponse} DecryptResponse
+                         * @returns {google.cloud.kms.v1.MacSignRequest} MacSignRequest
                          */
-                        DecryptResponse.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.kms.v1.DecryptResponse)
+                        MacSignRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.MacSignRequest)
                                 return object;
-                            var message = new $root.google.cloud.kms.v1.DecryptResponse();
-                            if (object.plaintext != null)
-                                if (typeof object.plaintext === "string")
-                                    $util.base64.decode(object.plaintext, message.plaintext = $util.newBuffer($util.base64.length(object.plaintext)), 0);
-                                else if (object.plaintext.length)
-                                    message.plaintext = object.plaintext;
-                            if (object.plaintextCrc32c != null) {
-                                if (typeof object.plaintextCrc32c !== "object")
-                                    throw TypeError(".google.cloud.kms.v1.DecryptResponse.plaintextCrc32c: object expected");
-                                message.plaintextCrc32c = $root.google.protobuf.Int64Value.fromObject(object.plaintextCrc32c);
+                            var message = new $root.google.cloud.kms.v1.MacSignRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.data != null)
+                                if (typeof object.data === "string")
+                                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                else if (object.data.length)
+                                    message.data = object.data;
+                            if (object.dataCrc32c != null) {
+                                if (typeof object.dataCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.MacSignRequest.dataCrc32c: object expected");
+                                message.dataCrc32c = $root.google.protobuf.Int64Value.fromObject(object.dataCrc32c);
                             }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a DecryptResponse message. Also converts values to other types if specified.
+                         * Creates a plain object from a MacSignRequest message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @static
-                         * @param {google.cloud.kms.v1.DecryptResponse} message DecryptResponse
+                         * @param {google.cloud.kms.v1.MacSignRequest} message MacSignRequest
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        DecryptResponse.toObject = function toObject(message, options) {
+                        MacSignRequest.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
                             if (options.defaults) {
+                                object.name = "";
                                 if (options.bytes === String)
-                                    object.plaintext = "";
+                                    object.data = "";
                                 else {
-                                    object.plaintext = [];
+                                    object.data = [];
                                     if (options.bytes !== Array)
-                                        object.plaintext = $util.newBuffer(object.plaintext);
+                                        object.data = $util.newBuffer(object.data);
                                 }
-                                object.plaintextCrc32c = null;
+                                object.dataCrc32c = null;
                             }
-                            if (message.plaintext != null && message.hasOwnProperty("plaintext"))
-                                object.plaintext = options.bytes === String ? $util.base64.encode(message.plaintext, 0, message.plaintext.length) : options.bytes === Array ? Array.prototype.slice.call(message.plaintext) : message.plaintext;
-                            if (message.plaintextCrc32c != null && message.hasOwnProperty("plaintextCrc32c"))
-                                object.plaintextCrc32c = $root.google.protobuf.Int64Value.toObject(message.plaintextCrc32c, options);
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c"))
+                                object.dataCrc32c = $root.google.protobuf.Int64Value.toObject(message.dataCrc32c, options);
                             return object;
                         };
     
                         /**
-                         * Converts this DecryptResponse to JSON.
+                         * Converts this MacSignRequest to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @memberof google.cloud.kms.v1.MacSignRequest
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        DecryptResponse.prototype.toJSON = function toJSON() {
+                        MacSignRequest.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        return DecryptResponse;
+                        return MacSignRequest;
+                    })();
+    
+                    v1.MacVerifyRequest = (function() {
+    
+                        /**
+                         * Properties of a MacVerifyRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IMacVerifyRequest
+                         * @property {string|null} [name] MacVerifyRequest name
+                         * @property {Uint8Array|null} [data] MacVerifyRequest data
+                         * @property {google.protobuf.IInt64Value|null} [dataCrc32c] MacVerifyRequest dataCrc32c
+                         * @property {Uint8Array|null} [mac] MacVerifyRequest mac
+                         * @property {google.protobuf.IInt64Value|null} [macCrc32c] MacVerifyRequest macCrc32c
+                         */
+    
+                        /**
+                         * Constructs a new MacVerifyRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a MacVerifyRequest.
+                         * @implements IMacVerifyRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IMacVerifyRequest=} [properties] Properties to set
+                         */
+                        function MacVerifyRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MacVerifyRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @instance
+                         */
+                        MacVerifyRequest.prototype.name = "";
+    
+                        /**
+                         * MacVerifyRequest data.
+                         * @member {Uint8Array} data
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @instance
+                         */
+                        MacVerifyRequest.prototype.data = $util.newBuffer([]);
+    
+                        /**
+                         * MacVerifyRequest dataCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} dataCrc32c
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @instance
+                         */
+                        MacVerifyRequest.prototype.dataCrc32c = null;
+    
+                        /**
+                         * MacVerifyRequest mac.
+                         * @member {Uint8Array} mac
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @instance
+                         */
+                        MacVerifyRequest.prototype.mac = $util.newBuffer([]);
+    
+                        /**
+                         * MacVerifyRequest macCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} macCrc32c
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @instance
+                         */
+                        MacVerifyRequest.prototype.macCrc32c = null;
+    
+                        /**
+                         * Creates a new MacVerifyRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IMacVerifyRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.MacVerifyRequest} MacVerifyRequest instance
+                         */
+                        MacVerifyRequest.create = function create(properties) {
+                            return new MacVerifyRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MacVerifyRequest message. Does not implicitly {@link google.cloud.kms.v1.MacVerifyRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IMacVerifyRequest} message MacVerifyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MacVerifyRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.data);
+                            if (message.dataCrc32c != null && Object.hasOwnProperty.call(message, "dataCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.dataCrc32c, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.mac != null && Object.hasOwnProperty.call(message, "mac"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).bytes(message.mac);
+                            if (message.macCrc32c != null && Object.hasOwnProperty.call(message, "macCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.macCrc32c, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MacVerifyRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.MacVerifyRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IMacVerifyRequest} message MacVerifyRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MacVerifyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MacVerifyRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.MacVerifyRequest} MacVerifyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MacVerifyRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.MacVerifyRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.data = reader.bytes();
+                                    break;
+                                case 3:
+                                    message.dataCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.mac = reader.bytes();
+                                    break;
+                                case 5:
+                                    message.macCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MacVerifyRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.MacVerifyRequest} MacVerifyRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MacVerifyRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MacVerifyRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MacVerifyRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                    return "data: buffer expected";
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.dataCrc32c);
+                                if (error)
+                                    return "dataCrc32c." + error;
+                            }
+                            if (message.mac != null && message.hasOwnProperty("mac"))
+                                if (!(message.mac && typeof message.mac.length === "number" || $util.isString(message.mac)))
+                                    return "mac: buffer expected";
+                            if (message.macCrc32c != null && message.hasOwnProperty("macCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.macCrc32c);
+                                if (error)
+                                    return "macCrc32c." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MacVerifyRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.MacVerifyRequest} MacVerifyRequest
+                         */
+                        MacVerifyRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.MacVerifyRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.MacVerifyRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.data != null)
+                                if (typeof object.data === "string")
+                                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                else if (object.data.length)
+                                    message.data = object.data;
+                            if (object.dataCrc32c != null) {
+                                if (typeof object.dataCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.MacVerifyRequest.dataCrc32c: object expected");
+                                message.dataCrc32c = $root.google.protobuf.Int64Value.fromObject(object.dataCrc32c);
+                            }
+                            if (object.mac != null)
+                                if (typeof object.mac === "string")
+                                    $util.base64.decode(object.mac, message.mac = $util.newBuffer($util.base64.length(object.mac)), 0);
+                                else if (object.mac.length)
+                                    message.mac = object.mac;
+                            if (object.macCrc32c != null) {
+                                if (typeof object.macCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.MacVerifyRequest.macCrc32c: object expected");
+                                message.macCrc32c = $root.google.protobuf.Int64Value.fromObject(object.macCrc32c);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MacVerifyRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.MacVerifyRequest} message MacVerifyRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MacVerifyRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                if (options.bytes === String)
+                                    object.data = "";
+                                else {
+                                    object.data = [];
+                                    if (options.bytes !== Array)
+                                        object.data = $util.newBuffer(object.data);
+                                }
+                                object.dataCrc32c = null;
+                                if (options.bytes === String)
+                                    object.mac = "";
+                                else {
+                                    object.mac = [];
+                                    if (options.bytes !== Array)
+                                        object.mac = $util.newBuffer(object.mac);
+                                }
+                                object.macCrc32c = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c"))
+                                object.dataCrc32c = $root.google.protobuf.Int64Value.toObject(message.dataCrc32c, options);
+                            if (message.mac != null && message.hasOwnProperty("mac"))
+                                object.mac = options.bytes === String ? $util.base64.encode(message.mac, 0, message.mac.length) : options.bytes === Array ? Array.prototype.slice.call(message.mac) : message.mac;
+                            if (message.macCrc32c != null && message.hasOwnProperty("macCrc32c"))
+                                object.macCrc32c = $root.google.protobuf.Int64Value.toObject(message.macCrc32c, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MacVerifyRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.MacVerifyRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MacVerifyRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MacVerifyRequest;
+                    })();
+    
+                    v1.GenerateRandomBytesRequest = (function() {
+    
+                        /**
+                         * Properties of a GenerateRandomBytesRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IGenerateRandomBytesRequest
+                         * @property {string|null} [location] GenerateRandomBytesRequest location
+                         * @property {number|null} [lengthBytes] GenerateRandomBytesRequest lengthBytes
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] GenerateRandomBytesRequest protectionLevel
+                         */
+    
+                        /**
+                         * Constructs a new GenerateRandomBytesRequest.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a GenerateRandomBytesRequest.
+                         * @implements IGenerateRandomBytesRequest
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesRequest=} [properties] Properties to set
+                         */
+                        function GenerateRandomBytesRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GenerateRandomBytesRequest location.
+                         * @member {string} location
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @instance
+                         */
+                        GenerateRandomBytesRequest.prototype.location = "";
+    
+                        /**
+                         * GenerateRandomBytesRequest lengthBytes.
+                         * @member {number} lengthBytes
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @instance
+                         */
+                        GenerateRandomBytesRequest.prototype.lengthBytes = 0;
+    
+                        /**
+                         * GenerateRandomBytesRequest protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @instance
+                         */
+                        GenerateRandomBytesRequest.prototype.protectionLevel = 0;
+    
+                        /**
+                         * Creates a new GenerateRandomBytesRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesRequest=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.GenerateRandomBytesRequest} GenerateRandomBytesRequest instance
+                         */
+                        GenerateRandomBytesRequest.create = function create(properties) {
+                            return new GenerateRandomBytesRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateRandomBytesRequest message. Does not implicitly {@link google.cloud.kms.v1.GenerateRandomBytesRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesRequest} message GenerateRandomBytesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateRandomBytesRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.location);
+                            if (message.lengthBytes != null && Object.hasOwnProperty.call(message, "lengthBytes"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.lengthBytes);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.protectionLevel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateRandomBytesRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GenerateRandomBytesRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesRequest} message GenerateRandomBytesRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateRandomBytesRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GenerateRandomBytesRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.GenerateRandomBytesRequest} GenerateRandomBytesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateRandomBytesRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GenerateRandomBytesRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.location = reader.string();
+                                    break;
+                                case 2:
+                                    message.lengthBytes = reader.int32();
+                                    break;
+                                case 3:
+                                    message.protectionLevel = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GenerateRandomBytesRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.GenerateRandomBytesRequest} GenerateRandomBytesRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateRandomBytesRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GenerateRandomBytesRequest message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GenerateRandomBytesRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                if (!$util.isString(message.location))
+                                    return "location: string expected";
+                            if (message.lengthBytes != null && message.hasOwnProperty("lengthBytes"))
+                                if (!$util.isInteger(message.lengthBytes))
+                                    return "lengthBytes: integer expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GenerateRandomBytesRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.GenerateRandomBytesRequest} GenerateRandomBytesRequest
+                         */
+                        GenerateRandomBytesRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.GenerateRandomBytesRequest)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.GenerateRandomBytesRequest();
+                            if (object.location != null)
+                                message.location = String(object.location);
+                            if (object.lengthBytes != null)
+                                message.lengthBytes = object.lengthBytes | 0;
+                            switch (object.protectionLevel) {
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GenerateRandomBytesRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @static
+                         * @param {google.cloud.kms.v1.GenerateRandomBytesRequest} message GenerateRandomBytesRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GenerateRandomBytesRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.location = "";
+                                object.lengthBytes = 0;
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
+                            }
+                            if (message.location != null && message.hasOwnProperty("location"))
+                                object.location = message.location;
+                            if (message.lengthBytes != null && message.hasOwnProperty("lengthBytes"))
+                                object.lengthBytes = message.lengthBytes;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GenerateRandomBytesRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GenerateRandomBytesRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return GenerateRandomBytesRequest;
                     })();
     
                     v1.EncryptResponse = (function() {
@@ -10321,6 +11708,7 @@
                          * @property {google.protobuf.IInt64Value|null} [ciphertextCrc32c] EncryptResponse ciphertextCrc32c
                          * @property {boolean|null} [verifiedPlaintextCrc32c] EncryptResponse verifiedPlaintextCrc32c
                          * @property {boolean|null} [verifiedAdditionalAuthenticatedDataCrc32c] EncryptResponse verifiedAdditionalAuthenticatedDataCrc32c
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] EncryptResponse protectionLevel
                          */
     
                         /**
@@ -10379,6 +11767,14 @@
                         EncryptResponse.prototype.verifiedAdditionalAuthenticatedDataCrc32c = false;
     
                         /**
+                         * EncryptResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.EncryptResponse
+                         * @instance
+                         */
+                        EncryptResponse.prototype.protectionLevel = 0;
+    
+                        /**
                          * Creates a new EncryptResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.EncryptResponse
@@ -10412,6 +11808,8 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.verifiedPlaintextCrc32c);
                             if (message.verifiedAdditionalAuthenticatedDataCrc32c != null && Object.hasOwnProperty.call(message, "verifiedAdditionalAuthenticatedDataCrc32c"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).bool(message.verifiedAdditionalAuthenticatedDataCrc32c);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.protectionLevel);
                             return writer;
                         };
     
@@ -10460,6 +11858,9 @@
                                     break;
                                 case 6:
                                     message.verifiedAdditionalAuthenticatedDataCrc32c = reader.bool();
+                                    break;
+                                case 7:
+                                    message.protectionLevel = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10513,6 +11914,16 @@
                             if (message.verifiedAdditionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("verifiedAdditionalAuthenticatedDataCrc32c"))
                                 if (typeof message.verifiedAdditionalAuthenticatedDataCrc32c !== "boolean")
                                     return "verifiedAdditionalAuthenticatedDataCrc32c: boolean expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -10544,6 +11955,24 @@
                                 message.verifiedPlaintextCrc32c = Boolean(object.verifiedPlaintextCrc32c);
                             if (object.verifiedAdditionalAuthenticatedDataCrc32c != null)
                                 message.verifiedAdditionalAuthenticatedDataCrc32c = Boolean(object.verifiedAdditionalAuthenticatedDataCrc32c);
+                            switch (object.protectionLevel) {
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -10572,6 +12001,7 @@
                                 object.ciphertextCrc32c = null;
                                 object.verifiedPlaintextCrc32c = false;
                                 object.verifiedAdditionalAuthenticatedDataCrc32c = false;
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10583,6 +12013,8 @@
                                 object.verifiedPlaintextCrc32c = message.verifiedPlaintextCrc32c;
                             if (message.verifiedAdditionalAuthenticatedDataCrc32c != null && message.hasOwnProperty("verifiedAdditionalAuthenticatedDataCrc32c"))
                                 object.verifiedAdditionalAuthenticatedDataCrc32c = message.verifiedAdditionalAuthenticatedDataCrc32c;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             return object;
                         };
     
@@ -10600,6 +12032,297 @@
                         return EncryptResponse;
                     })();
     
+                    v1.DecryptResponse = (function() {
+    
+                        /**
+                         * Properties of a DecryptResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @interface IDecryptResponse
+                         * @property {Uint8Array|null} [plaintext] DecryptResponse plaintext
+                         * @property {google.protobuf.IInt64Value|null} [plaintextCrc32c] DecryptResponse plaintextCrc32c
+                         * @property {boolean|null} [usedPrimary] DecryptResponse usedPrimary
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] DecryptResponse protectionLevel
+                         */
+    
+                        /**
+                         * Constructs a new DecryptResponse.
+                         * @memberof google.cloud.kms.v1
+                         * @classdesc Represents a DecryptResponse.
+                         * @implements IDecryptResponse
+                         * @constructor
+                         * @param {google.cloud.kms.v1.IDecryptResponse=} [properties] Properties to set
+                         */
+                        function DecryptResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DecryptResponse plaintext.
+                         * @member {Uint8Array} plaintext
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @instance
+                         */
+                        DecryptResponse.prototype.plaintext = $util.newBuffer([]);
+    
+                        /**
+                         * DecryptResponse plaintextCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} plaintextCrc32c
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @instance
+                         */
+                        DecryptResponse.prototype.plaintextCrc32c = null;
+    
+                        /**
+                         * DecryptResponse usedPrimary.
+                         * @member {boolean} usedPrimary
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @instance
+                         */
+                        DecryptResponse.prototype.usedPrimary = false;
+    
+                        /**
+                         * DecryptResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @instance
+                         */
+                        DecryptResponse.prototype.protectionLevel = 0;
+    
+                        /**
+                         * Creates a new DecryptResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecryptResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.DecryptResponse} DecryptResponse instance
+                         */
+                        DecryptResponse.create = function create(properties) {
+                            return new DecryptResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DecryptResponse message. Does not implicitly {@link google.cloud.kms.v1.DecryptResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecryptResponse} message DecryptResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecryptResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.plaintext != null && Object.hasOwnProperty.call(message, "plaintext"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.plaintext);
+                            if (message.plaintextCrc32c != null && Object.hasOwnProperty.call(message, "plaintextCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.plaintextCrc32c, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.usedPrimary != null && Object.hasOwnProperty.call(message, "usedPrimary"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.usedPrimary);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.protectionLevel);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DecryptResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecryptResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IDecryptResponse} message DecryptResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DecryptResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DecryptResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.kms.v1.DecryptResponse} DecryptResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecryptResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DecryptResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.plaintext = reader.bytes();
+                                    break;
+                                case 2:
+                                    message.plaintextCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.usedPrimary = reader.bool();
+                                    break;
+                                case 4:
+                                    message.protectionLevel = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DecryptResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.kms.v1.DecryptResponse} DecryptResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DecryptResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DecryptResponse message.
+                         * @function verify
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DecryptResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.plaintext != null && message.hasOwnProperty("plaintext"))
+                                if (!(message.plaintext && typeof message.plaintext.length === "number" || $util.isString(message.plaintext)))
+                                    return "plaintext: buffer expected";
+                            if (message.plaintextCrc32c != null && message.hasOwnProperty("plaintextCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.plaintextCrc32c);
+                                if (error)
+                                    return "plaintextCrc32c." + error;
+                            }
+                            if (message.usedPrimary != null && message.hasOwnProperty("usedPrimary"))
+                                if (typeof message.usedPrimary !== "boolean")
+                                    return "usedPrimary: boolean expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DecryptResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.kms.v1.DecryptResponse} DecryptResponse
+                         */
+                        DecryptResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.DecryptResponse)
+                                return object;
+                            var message = new $root.google.cloud.kms.v1.DecryptResponse();
+                            if (object.plaintext != null)
+                                if (typeof object.plaintext === "string")
+                                    $util.base64.decode(object.plaintext, message.plaintext = $util.newBuffer($util.base64.length(object.plaintext)), 0);
+                                else if (object.plaintext.length)
+                                    message.plaintext = object.plaintext;
+                            if (object.plaintextCrc32c != null) {
+                                if (typeof object.plaintextCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.DecryptResponse.plaintextCrc32c: object expected");
+                                message.plaintextCrc32c = $root.google.protobuf.Int64Value.fromObject(object.plaintextCrc32c);
+                            }
+                            if (object.usedPrimary != null)
+                                message.usedPrimary = Boolean(object.usedPrimary);
+                            switch (object.protectionLevel) {
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DecryptResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.DecryptResponse} message DecryptResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DecryptResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.plaintext = "";
+                                else {
+                                    object.plaintext = [];
+                                    if (options.bytes !== Array)
+                                        object.plaintext = $util.newBuffer(object.plaintext);
+                                }
+                                object.plaintextCrc32c = null;
+                                object.usedPrimary = false;
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
+                            }
+                            if (message.plaintext != null && message.hasOwnProperty("plaintext"))
+                                object.plaintext = options.bytes === String ? $util.base64.encode(message.plaintext, 0, message.plaintext.length) : options.bytes === Array ? Array.prototype.slice.call(message.plaintext) : message.plaintext;
+                            if (message.plaintextCrc32c != null && message.hasOwnProperty("plaintextCrc32c"))
+                                object.plaintextCrc32c = $root.google.protobuf.Int64Value.toObject(message.plaintextCrc32c, options);
+                            if (message.usedPrimary != null && message.hasOwnProperty("usedPrimary"))
+                                object.usedPrimary = message.usedPrimary;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DecryptResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.kms.v1.DecryptResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DecryptResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DecryptResponse;
+                    })();
+    
                     v1.AsymmetricSignResponse = (function() {
     
                         /**
@@ -10610,6 +12333,7 @@
                          * @property {google.protobuf.IInt64Value|null} [signatureCrc32c] AsymmetricSignResponse signatureCrc32c
                          * @property {boolean|null} [verifiedDigestCrc32c] AsymmetricSignResponse verifiedDigestCrc32c
                          * @property {string|null} [name] AsymmetricSignResponse name
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] AsymmetricSignResponse protectionLevel
                          */
     
                         /**
@@ -10660,6 +12384,14 @@
                         AsymmetricSignResponse.prototype.name = "";
     
                         /**
+                         * AsymmetricSignResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.AsymmetricSignResponse
+                         * @instance
+                         */
+                        AsymmetricSignResponse.prototype.protectionLevel = 0;
+    
+                        /**
                          * Creates a new AsymmetricSignResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.AsymmetricSignResponse
@@ -10691,6 +12423,8 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.verifiedDigestCrc32c);
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.name);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.protectionLevel);
                             return writer;
                         };
     
@@ -10736,6 +12470,9 @@
                                     break;
                                 case 4:
                                     message.name = reader.string();
+                                    break;
+                                case 6:
+                                    message.protectionLevel = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -10786,6 +12523,16 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -10815,6 +12562,24 @@
                                 message.verifiedDigestCrc32c = Boolean(object.verifiedDigestCrc32c);
                             if (object.name != null)
                                 message.name = String(object.name);
+                            switch (object.protectionLevel) {
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -10842,6 +12607,7 @@
                                 object.signatureCrc32c = null;
                                 object.verifiedDigestCrc32c = false;
                                 object.name = "";
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                             }
                             if (message.signature != null && message.hasOwnProperty("signature"))
                                 object.signature = options.bytes === String ? $util.base64.encode(message.signature, 0, message.signature.length) : options.bytes === Array ? Array.prototype.slice.call(message.signature) : message.signature;
@@ -10851,6 +12617,8 @@
                                 object.verifiedDigestCrc32c = message.verifiedDigestCrc32c;
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             return object;
                         };
     
@@ -10877,6 +12645,7 @@
                          * @property {Uint8Array|null} [plaintext] AsymmetricDecryptResponse plaintext
                          * @property {google.protobuf.IInt64Value|null} [plaintextCrc32c] AsymmetricDecryptResponse plaintextCrc32c
                          * @property {boolean|null} [verifiedCiphertextCrc32c] AsymmetricDecryptResponse verifiedCiphertextCrc32c
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] AsymmetricDecryptResponse protectionLevel
                          */
     
                         /**
@@ -10919,6 +12688,14 @@
                         AsymmetricDecryptResponse.prototype.verifiedCiphertextCrc32c = false;
     
                         /**
+                         * AsymmetricDecryptResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.AsymmetricDecryptResponse
+                         * @instance
+                         */
+                        AsymmetricDecryptResponse.prototype.protectionLevel = 0;
+    
+                        /**
                          * Creates a new AsymmetricDecryptResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.AsymmetricDecryptResponse
@@ -10948,6 +12725,8 @@
                                 $root.google.protobuf.Int64Value.encode(message.plaintextCrc32c, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.verifiedCiphertextCrc32c != null && Object.hasOwnProperty.call(message, "verifiedCiphertextCrc32c"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).bool(message.verifiedCiphertextCrc32c);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.protectionLevel);
                             return writer;
                         };
     
@@ -10990,6 +12769,9 @@
                                     break;
                                 case 3:
                                     message.verifiedCiphertextCrc32c = reader.bool();
+                                    break;
+                                case 4:
+                                    message.protectionLevel = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -11037,6 +12819,16 @@
                             if (message.verifiedCiphertextCrc32c != null && message.hasOwnProperty("verifiedCiphertextCrc32c"))
                                 if (typeof message.verifiedCiphertextCrc32c !== "boolean")
                                     return "verifiedCiphertextCrc32c: boolean expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -11064,6 +12856,24 @@
                             }
                             if (object.verifiedCiphertextCrc32c != null)
                                 message.verifiedCiphertextCrc32c = Boolean(object.verifiedCiphertextCrc32c);
+                            switch (object.protectionLevel) {
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            }
                             return message;
                         };
     
@@ -11090,6 +12900,7 @@
                                 }
                                 object.plaintextCrc32c = null;
                                 object.verifiedCiphertextCrc32c = false;
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                             }
                             if (message.plaintext != null && message.hasOwnProperty("plaintext"))
                                 object.plaintext = options.bytes === String ? $util.base64.encode(message.plaintext, 0, message.plaintext.length) : options.bytes === Array ? Array.prototype.slice.call(message.plaintext) : message.plaintext;
@@ -11097,6 +12908,8 @@
                                 object.plaintextCrc32c = $root.google.protobuf.Int64Value.toObject(message.plaintextCrc32c, options);
                             if (message.verifiedCiphertextCrc32c != null && message.hasOwnProperty("verifiedCiphertextCrc32c"))
                                 object.verifiedCiphertextCrc32c = message.verifiedCiphertextCrc32c;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             return object;
                         };
     
@@ -11114,25 +12927,28 @@
                         return AsymmetricDecryptResponse;
                     })();
     
-                    v1.UpdateCryptoKeyPrimaryVersionRequest = (function() {
+                    v1.MacSignResponse = (function() {
     
                         /**
-                         * Properties of an UpdateCryptoKeyPrimaryVersionRequest.
+                         * Properties of a MacSignResponse.
                          * @memberof google.cloud.kms.v1
-                         * @interface IUpdateCryptoKeyPrimaryVersionRequest
-                         * @property {string|null} [name] UpdateCryptoKeyPrimaryVersionRequest name
-                         * @property {string|null} [cryptoKeyVersionId] UpdateCryptoKeyPrimaryVersionRequest cryptoKeyVersionId
+                         * @interface IMacSignResponse
+                         * @property {string|null} [name] MacSignResponse name
+                         * @property {Uint8Array|null} [mac] MacSignResponse mac
+                         * @property {google.protobuf.IInt64Value|null} [macCrc32c] MacSignResponse macCrc32c
+                         * @property {boolean|null} [verifiedDataCrc32c] MacSignResponse verifiedDataCrc32c
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] MacSignResponse protectionLevel
                          */
     
                         /**
-                         * Constructs a new UpdateCryptoKeyPrimaryVersionRequest.
+                         * Constructs a new MacSignResponse.
                          * @memberof google.cloud.kms.v1
-                         * @classdesc Represents an UpdateCryptoKeyPrimaryVersionRequest.
-                         * @implements IUpdateCryptoKeyPrimaryVersionRequest
+                         * @classdesc Represents a MacSignResponse.
+                         * @implements IMacSignResponse
                          * @constructor
-                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest=} [properties] Properties to set
+                         * @param {google.cloud.kms.v1.IMacSignResponse=} [properties] Properties to set
                          */
-                        function UpdateCryptoKeyPrimaryVersionRequest(properties) {
+                        function MacSignResponse(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11140,80 +12956,110 @@
                         }
     
                         /**
-                         * UpdateCryptoKeyPrimaryVersionRequest name.
+                         * MacSignResponse name.
                          * @member {string} name
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @instance
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.prototype.name = "";
+                        MacSignResponse.prototype.name = "";
     
                         /**
-                         * UpdateCryptoKeyPrimaryVersionRequest cryptoKeyVersionId.
-                         * @member {string} cryptoKeyVersionId
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * MacSignResponse mac.
+                         * @member {Uint8Array} mac
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @instance
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.prototype.cryptoKeyVersionId = "";
+                        MacSignResponse.prototype.mac = $util.newBuffer([]);
     
                         /**
-                         * Creates a new UpdateCryptoKeyPrimaryVersionRequest instance using the specified properties.
+                         * MacSignResponse macCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} macCrc32c
+                         * @memberof google.cloud.kms.v1.MacSignResponse
+                         * @instance
+                         */
+                        MacSignResponse.prototype.macCrc32c = null;
+    
+                        /**
+                         * MacSignResponse verifiedDataCrc32c.
+                         * @member {boolean} verifiedDataCrc32c
+                         * @memberof google.cloud.kms.v1.MacSignResponse
+                         * @instance
+                         */
+                        MacSignResponse.prototype.verifiedDataCrc32c = false;
+    
+                        /**
+                         * MacSignResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.MacSignResponse
+                         * @instance
+                         */
+                        MacSignResponse.prototype.protectionLevel = 0;
+    
+                        /**
+                         * Creates a new MacSignResponse instance using the specified properties.
                          * @function create
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @static
-                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest=} [properties] Properties to set
-                         * @returns {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} UpdateCryptoKeyPrimaryVersionRequest instance
+                         * @param {google.cloud.kms.v1.IMacSignResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.MacSignResponse} MacSignResponse instance
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.create = function create(properties) {
-                            return new UpdateCryptoKeyPrimaryVersionRequest(properties);
+                        MacSignResponse.create = function create(properties) {
+                            return new MacSignResponse(properties);
                         };
     
                         /**
-                         * Encodes the specified UpdateCryptoKeyPrimaryVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest.verify|verify} messages.
+                         * Encodes the specified MacSignResponse message. Does not implicitly {@link google.cloud.kms.v1.MacSignResponse.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @static
-                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest} message UpdateCryptoKeyPrimaryVersionRequest message or plain object to encode
+                         * @param {google.cloud.kms.v1.IMacSignResponse} message MacSignResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.encode = function encode(message, writer) {
+                        MacSignResponse.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.cryptoKeyVersionId != null && Object.hasOwnProperty.call(message, "cryptoKeyVersionId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.cryptoKeyVersionId);
+                            if (message.mac != null && Object.hasOwnProperty.call(message, "mac"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.mac);
+                            if (message.macCrc32c != null && Object.hasOwnProperty.call(message, "macCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.macCrc32c, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.verifiedDataCrc32c != null && Object.hasOwnProperty.call(message, "verifiedDataCrc32c"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.verifiedDataCrc32c);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.protectionLevel);
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified UpdateCryptoKeyPrimaryVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest.verify|verify} messages.
+                         * Encodes the specified MacSignResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.MacSignResponse.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @static
-                         * @param {google.cloud.kms.v1.IUpdateCryptoKeyPrimaryVersionRequest} message UpdateCryptoKeyPrimaryVersionRequest message or plain object to encode
+                         * @param {google.cloud.kms.v1.IMacSignResponse} message MacSignResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        MacSignResponse.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes an UpdateCryptoKeyPrimaryVersionRequest message from the specified reader or buffer.
+                         * Decodes a MacSignResponse message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} UpdateCryptoKeyPrimaryVersionRequest
+                         * @returns {google.cloud.kms.v1.MacSignResponse} MacSignResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.decode = function decode(reader, length) {
+                        MacSignResponse.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.MacSignResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
@@ -11221,7 +13067,16 @@
                                     message.name = reader.string();
                                     break;
                                 case 2:
-                                    message.cryptoKeyVersionId = reader.string();
+                                    message.mac = reader.bytes();
+                                    break;
+                                case 3:
+                                    message.macCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.verifiedDataCrc32c = reader.bool();
+                                    break;
+                                case 5:
+                                    message.protectionLevel = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -11232,116 +13087,182 @@
                         };
     
                         /**
-                         * Decodes an UpdateCryptoKeyPrimaryVersionRequest message from the specified reader or buffer, length delimited.
+                         * Decodes a MacSignResponse message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} UpdateCryptoKeyPrimaryVersionRequest
+                         * @returns {google.cloud.kms.v1.MacSignResponse} MacSignResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                        MacSignResponse.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies an UpdateCryptoKeyPrimaryVersionRequest message.
+                         * Verifies a MacSignResponse message.
                          * @function verify
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.verify = function verify(message) {
+                        MacSignResponse.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
-                            if (message.cryptoKeyVersionId != null && message.hasOwnProperty("cryptoKeyVersionId"))
-                                if (!$util.isString(message.cryptoKeyVersionId))
-                                    return "cryptoKeyVersionId: string expected";
+                            if (message.mac != null && message.hasOwnProperty("mac"))
+                                if (!(message.mac && typeof message.mac.length === "number" || $util.isString(message.mac)))
+                                    return "mac: buffer expected";
+                            if (message.macCrc32c != null && message.hasOwnProperty("macCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.macCrc32c);
+                                if (error)
+                                    return "macCrc32c." + error;
+                            }
+                            if (message.verifiedDataCrc32c != null && message.hasOwnProperty("verifiedDataCrc32c"))
+                                if (typeof message.verifiedDataCrc32c !== "boolean")
+                                    return "verifiedDataCrc32c: boolean expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
                         /**
-                         * Creates an UpdateCryptoKeyPrimaryVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * Creates a MacSignResponse message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} UpdateCryptoKeyPrimaryVersionRequest
+                         * @returns {google.cloud.kms.v1.MacSignResponse} MacSignResponse
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest)
+                        MacSignResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.MacSignResponse)
                                 return object;
-                            var message = new $root.google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest();
+                            var message = new $root.google.cloud.kms.v1.MacSignResponse();
                             if (object.name != null)
                                 message.name = String(object.name);
-                            if (object.cryptoKeyVersionId != null)
-                                message.cryptoKeyVersionId = String(object.cryptoKeyVersionId);
+                            if (object.mac != null)
+                                if (typeof object.mac === "string")
+                                    $util.base64.decode(object.mac, message.mac = $util.newBuffer($util.base64.length(object.mac)), 0);
+                                else if (object.mac.length)
+                                    message.mac = object.mac;
+                            if (object.macCrc32c != null) {
+                                if (typeof object.macCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.MacSignResponse.macCrc32c: object expected");
+                                message.macCrc32c = $root.google.protobuf.Int64Value.fromObject(object.macCrc32c);
+                            }
+                            if (object.verifiedDataCrc32c != null)
+                                message.verifiedDataCrc32c = Boolean(object.verifiedDataCrc32c);
+                            switch (object.protectionLevel) {
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from an UpdateCryptoKeyPrimaryVersionRequest message. Also converts values to other types if specified.
+                         * Creates a plain object from a MacSignResponse message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @static
-                         * @param {google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest} message UpdateCryptoKeyPrimaryVersionRequest
+                         * @param {google.cloud.kms.v1.MacSignResponse} message MacSignResponse
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.toObject = function toObject(message, options) {
+                        MacSignResponse.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
                             if (options.defaults) {
                                 object.name = "";
-                                object.cryptoKeyVersionId = "";
+                                if (options.bytes === String)
+                                    object.mac = "";
+                                else {
+                                    object.mac = [];
+                                    if (options.bytes !== Array)
+                                        object.mac = $util.newBuffer(object.mac);
+                                }
+                                object.macCrc32c = null;
+                                object.verifiedDataCrc32c = false;
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
-                            if (message.cryptoKeyVersionId != null && message.hasOwnProperty("cryptoKeyVersionId"))
-                                object.cryptoKeyVersionId = message.cryptoKeyVersionId;
+                            if (message.mac != null && message.hasOwnProperty("mac"))
+                                object.mac = options.bytes === String ? $util.base64.encode(message.mac, 0, message.mac.length) : options.bytes === Array ? Array.prototype.slice.call(message.mac) : message.mac;
+                            if (message.macCrc32c != null && message.hasOwnProperty("macCrc32c"))
+                                object.macCrc32c = $root.google.protobuf.Int64Value.toObject(message.macCrc32c, options);
+                            if (message.verifiedDataCrc32c != null && message.hasOwnProperty("verifiedDataCrc32c"))
+                                object.verifiedDataCrc32c = message.verifiedDataCrc32c;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             return object;
                         };
     
                         /**
-                         * Converts this UpdateCryptoKeyPrimaryVersionRequest to JSON.
+                         * Converts this MacSignResponse to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.kms.v1.UpdateCryptoKeyPrimaryVersionRequest
+                         * @memberof google.cloud.kms.v1.MacSignResponse
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        UpdateCryptoKeyPrimaryVersionRequest.prototype.toJSON = function toJSON() {
+                        MacSignResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        return UpdateCryptoKeyPrimaryVersionRequest;
+                        return MacSignResponse;
                     })();
     
-                    v1.DestroyCryptoKeyVersionRequest = (function() {
+                    v1.MacVerifyResponse = (function() {
     
                         /**
-                         * Properties of a DestroyCryptoKeyVersionRequest.
+                         * Properties of a MacVerifyResponse.
                          * @memberof google.cloud.kms.v1
-                         * @interface IDestroyCryptoKeyVersionRequest
-                         * @property {string|null} [name] DestroyCryptoKeyVersionRequest name
+                         * @interface IMacVerifyResponse
+                         * @property {string|null} [name] MacVerifyResponse name
+                         * @property {boolean|null} [success] MacVerifyResponse success
+                         * @property {boolean|null} [verifiedDataCrc32c] MacVerifyResponse verifiedDataCrc32c
+                         * @property {boolean|null} [verifiedMacCrc32c] MacVerifyResponse verifiedMacCrc32c
+                         * @property {boolean|null} [verifiedSuccessIntegrity] MacVerifyResponse verifiedSuccessIntegrity
+                         * @property {google.cloud.kms.v1.ProtectionLevel|null} [protectionLevel] MacVerifyResponse protectionLevel
                          */
     
                         /**
-                         * Constructs a new DestroyCryptoKeyVersionRequest.
+                         * Constructs a new MacVerifyResponse.
                          * @memberof google.cloud.kms.v1
-                         * @classdesc Represents a DestroyCryptoKeyVersionRequest.
-                         * @implements IDestroyCryptoKeyVersionRequest
+                         * @classdesc Represents a MacVerifyResponse.
+                         * @implements IMacVerifyResponse
                          * @constructor
-                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest=} [properties] Properties to set
+                         * @param {google.cloud.kms.v1.IMacVerifyResponse=} [properties] Properties to set
                          */
-                        function DestroyCryptoKeyVersionRequest(properties) {
+                        function MacVerifyResponse(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11349,75 +13270,140 @@
                         }
     
                         /**
-                         * DestroyCryptoKeyVersionRequest name.
+                         * MacVerifyResponse name.
                          * @member {string} name
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
                          * @instance
                          */
-                        DestroyCryptoKeyVersionRequest.prototype.name = "";
+                        MacVerifyResponse.prototype.name = "";
     
                         /**
-                         * Creates a new DestroyCryptoKeyVersionRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
-                         * @static
-                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest=} [properties] Properties to set
-                         * @returns {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} DestroyCryptoKeyVersionRequest instance
+                         * MacVerifyResponse success.
+                         * @member {boolean} success
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
+                         * @instance
                          */
-                        DestroyCryptoKeyVersionRequest.create = function create(properties) {
-                            return new DestroyCryptoKeyVersionRequest(properties);
+                        MacVerifyResponse.prototype.success = false;
+    
+                        /**
+                         * MacVerifyResponse verifiedDataCrc32c.
+                         * @member {boolean} verifiedDataCrc32c
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
+                         * @instance
+                         */
+                        MacVerifyResponse.prototype.verifiedDataCrc32c = false;
+    
+                        /**
+                         * MacVerifyResponse verifiedMacCrc32c.
+                         * @member {boolean} verifiedMacCrc32c
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
+                         * @instance
+                         */
+                        MacVerifyResponse.prototype.verifiedMacCrc32c = false;
+    
+                        /**
+                         * MacVerifyResponse verifiedSuccessIntegrity.
+                         * @member {boolean} verifiedSuccessIntegrity
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
+                         * @instance
+                         */
+                        MacVerifyResponse.prototype.verifiedSuccessIntegrity = false;
+    
+                        /**
+                         * MacVerifyResponse protectionLevel.
+                         * @member {google.cloud.kms.v1.ProtectionLevel} protectionLevel
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
+                         * @instance
+                         */
+                        MacVerifyResponse.prototype.protectionLevel = 0;
+    
+                        /**
+                         * Creates a new MacVerifyResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IMacVerifyResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.MacVerifyResponse} MacVerifyResponse instance
+                         */
+                        MacVerifyResponse.create = function create(properties) {
+                            return new MacVerifyResponse(properties);
                         };
     
                         /**
-                         * Encodes the specified DestroyCryptoKeyVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.DestroyCryptoKeyVersionRequest.verify|verify} messages.
+                         * Encodes the specified MacVerifyResponse message. Does not implicitly {@link google.cloud.kms.v1.MacVerifyResponse.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
                          * @static
-                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest} message DestroyCryptoKeyVersionRequest message or plain object to encode
+                         * @param {google.cloud.kms.v1.IMacVerifyResponse} message MacVerifyResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        DestroyCryptoKeyVersionRequest.encode = function encode(message, writer) {
+                        MacVerifyResponse.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.success != null && Object.hasOwnProperty.call(message, "success"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.success);
+                            if (message.verifiedDataCrc32c != null && Object.hasOwnProperty.call(message, "verifiedDataCrc32c"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.verifiedDataCrc32c);
+                            if (message.verifiedMacCrc32c != null && Object.hasOwnProperty.call(message, "verifiedMacCrc32c"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).bool(message.verifiedMacCrc32c);
+                            if (message.verifiedSuccessIntegrity != null && Object.hasOwnProperty.call(message, "verifiedSuccessIntegrity"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.verifiedSuccessIntegrity);
+                            if (message.protectionLevel != null && Object.hasOwnProperty.call(message, "protectionLevel"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.protectionLevel);
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified DestroyCryptoKeyVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DestroyCryptoKeyVersionRequest.verify|verify} messages.
+                         * Encodes the specified MacVerifyResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.MacVerifyResponse.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
                          * @static
-                         * @param {google.cloud.kms.v1.IDestroyCryptoKeyVersionRequest} message DestroyCryptoKeyVersionRequest message or plain object to encode
+                         * @param {google.cloud.kms.v1.IMacVerifyResponse} message MacVerifyResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        DestroyCryptoKeyVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        MacVerifyResponse.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a DestroyCryptoKeyVersionRequest message from the specified reader or buffer.
+                         * Decodes a MacVerifyResponse message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} DestroyCryptoKeyVersionRequest
+                         * @returns {google.cloud.kms.v1.MacVerifyResponse} MacVerifyResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DestroyCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                        MacVerifyResponse.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.MacVerifyResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.success = reader.bool();
+                                    break;
+                                case 3:
+                                    message.verifiedDataCrc32c = reader.bool();
+                                    break;
+                                case 4:
+                                    message.verifiedMacCrc32c = reader.bool();
+                                    break;
+                                case 5:
+                                    message.verifiedSuccessIntegrity = reader.bool();
+                                    break;
+                                case 6:
+                                    message.protectionLevel = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -11428,107 +13414,172 @@
                         };
     
                         /**
-                         * Decodes a DestroyCryptoKeyVersionRequest message from the specified reader or buffer, length delimited.
+                         * Decodes a MacVerifyResponse message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} DestroyCryptoKeyVersionRequest
+                         * @returns {google.cloud.kms.v1.MacVerifyResponse} MacVerifyResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        DestroyCryptoKeyVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                        MacVerifyResponse.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a DestroyCryptoKeyVersionRequest message.
+                         * Verifies a MacVerifyResponse message.
                          * @function verify
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        DestroyCryptoKeyVersionRequest.verify = function verify(message) {
+                        MacVerifyResponse.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.success != null && message.hasOwnProperty("success"))
+                                if (typeof message.success !== "boolean")
+                                    return "success: boolean expected";
+                            if (message.verifiedDataCrc32c != null && message.hasOwnProperty("verifiedDataCrc32c"))
+                                if (typeof message.verifiedDataCrc32c !== "boolean")
+                                    return "verifiedDataCrc32c: boolean expected";
+                            if (message.verifiedMacCrc32c != null && message.hasOwnProperty("verifiedMacCrc32c"))
+                                if (typeof message.verifiedMacCrc32c !== "boolean")
+                                    return "verifiedMacCrc32c: boolean expected";
+                            if (message.verifiedSuccessIntegrity != null && message.hasOwnProperty("verifiedSuccessIntegrity"))
+                                if (typeof message.verifiedSuccessIntegrity !== "boolean")
+                                    return "verifiedSuccessIntegrity: boolean expected";
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                switch (message.protectionLevel) {
+                                default:
+                                    return "protectionLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                    break;
+                                }
                             return null;
                         };
     
                         /**
-                         * Creates a DestroyCryptoKeyVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * Creates a MacVerifyResponse message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} DestroyCryptoKeyVersionRequest
+                         * @returns {google.cloud.kms.v1.MacVerifyResponse} MacVerifyResponse
                          */
-                        DestroyCryptoKeyVersionRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest)
+                        MacVerifyResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.MacVerifyResponse)
                                 return object;
-                            var message = new $root.google.cloud.kms.v1.DestroyCryptoKeyVersionRequest();
+                            var message = new $root.google.cloud.kms.v1.MacVerifyResponse();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            if (object.success != null)
+                                message.success = Boolean(object.success);
+                            if (object.verifiedDataCrc32c != null)
+                                message.verifiedDataCrc32c = Boolean(object.verifiedDataCrc32c);
+                            if (object.verifiedMacCrc32c != null)
+                                message.verifiedMacCrc32c = Boolean(object.verifiedMacCrc32c);
+                            if (object.verifiedSuccessIntegrity != null)
+                                message.verifiedSuccessIntegrity = Boolean(object.verifiedSuccessIntegrity);
+                            switch (object.protectionLevel) {
+                            case "PROTECTION_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.protectionLevel = 0;
+                                break;
+                            case "SOFTWARE":
+                            case 1:
+                                message.protectionLevel = 1;
+                                break;
+                            case "HSM":
+                            case 2:
+                                message.protectionLevel = 2;
+                                break;
+                            case "EXTERNAL":
+                            case 3:
+                                message.protectionLevel = 3;
+                                break;
+                            }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a DestroyCryptoKeyVersionRequest message. Also converts values to other types if specified.
+                         * Creates a plain object from a MacVerifyResponse message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
                          * @static
-                         * @param {google.cloud.kms.v1.DestroyCryptoKeyVersionRequest} message DestroyCryptoKeyVersionRequest
+                         * @param {google.cloud.kms.v1.MacVerifyResponse} message MacVerifyResponse
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        DestroyCryptoKeyVersionRequest.toObject = function toObject(message, options) {
+                        MacVerifyResponse.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.success = false;
+                                object.verifiedDataCrc32c = false;
+                                object.verifiedMacCrc32c = false;
+                                object.verifiedSuccessIntegrity = false;
+                                object.protectionLevel = options.enums === String ? "PROTECTION_LEVEL_UNSPECIFIED" : 0;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.success != null && message.hasOwnProperty("success"))
+                                object.success = message.success;
+                            if (message.verifiedDataCrc32c != null && message.hasOwnProperty("verifiedDataCrc32c"))
+                                object.verifiedDataCrc32c = message.verifiedDataCrc32c;
+                            if (message.verifiedMacCrc32c != null && message.hasOwnProperty("verifiedMacCrc32c"))
+                                object.verifiedMacCrc32c = message.verifiedMacCrc32c;
+                            if (message.verifiedSuccessIntegrity != null && message.hasOwnProperty("verifiedSuccessIntegrity"))
+                                object.verifiedSuccessIntegrity = message.verifiedSuccessIntegrity;
+                            if (message.protectionLevel != null && message.hasOwnProperty("protectionLevel"))
+                                object.protectionLevel = options.enums === String ? $root.google.cloud.kms.v1.ProtectionLevel[message.protectionLevel] : message.protectionLevel;
                             return object;
                         };
     
                         /**
-                         * Converts this DestroyCryptoKeyVersionRequest to JSON.
+                         * Converts this MacVerifyResponse to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.kms.v1.DestroyCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.MacVerifyResponse
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        DestroyCryptoKeyVersionRequest.prototype.toJSON = function toJSON() {
+                        MacVerifyResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        return DestroyCryptoKeyVersionRequest;
+                        return MacVerifyResponse;
                     })();
     
-                    v1.RestoreCryptoKeyVersionRequest = (function() {
+                    v1.GenerateRandomBytesResponse = (function() {
     
                         /**
-                         * Properties of a RestoreCryptoKeyVersionRequest.
+                         * Properties of a GenerateRandomBytesResponse.
                          * @memberof google.cloud.kms.v1
-                         * @interface IRestoreCryptoKeyVersionRequest
-                         * @property {string|null} [name] RestoreCryptoKeyVersionRequest name
+                         * @interface IGenerateRandomBytesResponse
+                         * @property {Uint8Array|null} [data] GenerateRandomBytesResponse data
+                         * @property {google.protobuf.IInt64Value|null} [dataCrc32c] GenerateRandomBytesResponse dataCrc32c
                          */
     
                         /**
-                         * Constructs a new RestoreCryptoKeyVersionRequest.
+                         * Constructs a new GenerateRandomBytesResponse.
                          * @memberof google.cloud.kms.v1
-                         * @classdesc Represents a RestoreCryptoKeyVersionRequest.
-                         * @implements IRestoreCryptoKeyVersionRequest
+                         * @classdesc Represents a GenerateRandomBytesResponse.
+                         * @implements IGenerateRandomBytesResponse
                          * @constructor
-                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest=} [properties] Properties to set
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesResponse=} [properties] Properties to set
                          */
-                        function RestoreCryptoKeyVersionRequest(properties) {
+                        function GenerateRandomBytesResponse(properties) {
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11536,75 +13587,88 @@
                         }
     
                         /**
-                         * RestoreCryptoKeyVersionRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * GenerateRandomBytesResponse data.
+                         * @member {Uint8Array} data
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
                          * @instance
                          */
-                        RestoreCryptoKeyVersionRequest.prototype.name = "";
+                        GenerateRandomBytesResponse.prototype.data = $util.newBuffer([]);
     
                         /**
-                         * Creates a new RestoreCryptoKeyVersionRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
-                         * @static
-                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest=} [properties] Properties to set
-                         * @returns {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} RestoreCryptoKeyVersionRequest instance
+                         * GenerateRandomBytesResponse dataCrc32c.
+                         * @member {google.protobuf.IInt64Value|null|undefined} dataCrc32c
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
+                         * @instance
                          */
-                        RestoreCryptoKeyVersionRequest.create = function create(properties) {
-                            return new RestoreCryptoKeyVersionRequest(properties);
+                        GenerateRandomBytesResponse.prototype.dataCrc32c = null;
+    
+                        /**
+                         * Creates a new GenerateRandomBytesResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
+                         * @static
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesResponse=} [properties] Properties to set
+                         * @returns {google.cloud.kms.v1.GenerateRandomBytesResponse} GenerateRandomBytesResponse instance
+                         */
+                        GenerateRandomBytesResponse.create = function create(properties) {
+                            return new GenerateRandomBytesResponse(properties);
                         };
     
                         /**
-                         * Encodes the specified RestoreCryptoKeyVersionRequest message. Does not implicitly {@link google.cloud.kms.v1.RestoreCryptoKeyVersionRequest.verify|verify} messages.
+                         * Encodes the specified GenerateRandomBytesResponse message. Does not implicitly {@link google.cloud.kms.v1.GenerateRandomBytesResponse.verify|verify} messages.
                          * @function encode
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
                          * @static
-                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest} message RestoreCryptoKeyVersionRequest message or plain object to encode
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesResponse} message GenerateRandomBytesResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        RestoreCryptoKeyVersionRequest.encode = function encode(message, writer) {
+                        GenerateRandomBytesResponse.encode = function encode(message, writer) {
                             if (!writer)
                                 writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.data != null && Object.hasOwnProperty.call(message, "data"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.data);
+                            if (message.dataCrc32c != null && Object.hasOwnProperty.call(message, "dataCrc32c"))
+                                $root.google.protobuf.Int64Value.encode(message.dataCrc32c, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             return writer;
                         };
     
                         /**
-                         * Encodes the specified RestoreCryptoKeyVersionRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.RestoreCryptoKeyVersionRequest.verify|verify} messages.
+                         * Encodes the specified GenerateRandomBytesResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.GenerateRandomBytesResponse.verify|verify} messages.
                          * @function encodeDelimited
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
                          * @static
-                         * @param {google.cloud.kms.v1.IRestoreCryptoKeyVersionRequest} message RestoreCryptoKeyVersionRequest message or plain object to encode
+                         * @param {google.cloud.kms.v1.IGenerateRandomBytesResponse} message GenerateRandomBytesResponse message or plain object to encode
                          * @param {$protobuf.Writer} [writer] Writer to encode to
                          * @returns {$protobuf.Writer} Writer
                          */
-                        RestoreCryptoKeyVersionRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        GenerateRandomBytesResponse.encodeDelimited = function encodeDelimited(message, writer) {
                             return this.encode(message, writer).ldelim();
                         };
     
                         /**
-                         * Decodes a RestoreCryptoKeyVersionRequest message from the specified reader or buffer.
+                         * Decodes a GenerateRandomBytesResponse message from the specified reader or buffer.
                          * @function decode
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
                          * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} RestoreCryptoKeyVersionRequest
+                         * @returns {google.cloud.kms.v1.GenerateRandomBytesResponse} GenerateRandomBytesResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RestoreCryptoKeyVersionRequest.decode = function decode(reader, length) {
+                        GenerateRandomBytesResponse.decode = function decode(reader, length) {
                             if (!(reader instanceof $Reader))
                                 reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest();
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.kms.v1.GenerateRandomBytesResponse();
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
                                 case 1:
-                                    message.name = reader.string();
+                                    message.data = reader.bytes();
+                                    break;
+                                case 3:
+                                    message.dataCrc32c = $root.google.protobuf.Int64Value.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -11615,87 +13679,110 @@
                         };
     
                         /**
-                         * Decodes a RestoreCryptoKeyVersionRequest message from the specified reader or buffer, length delimited.
+                         * Decodes a GenerateRandomBytesResponse message from the specified reader or buffer, length delimited.
                          * @function decodeDelimited
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
                          * @static
                          * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} RestoreCryptoKeyVersionRequest
+                         * @returns {google.cloud.kms.v1.GenerateRandomBytesResponse} GenerateRandomBytesResponse
                          * @throws {Error} If the payload is not a reader or valid buffer
                          * @throws {$protobuf.util.ProtocolError} If required fields are missing
                          */
-                        RestoreCryptoKeyVersionRequest.decodeDelimited = function decodeDelimited(reader) {
+                        GenerateRandomBytesResponse.decodeDelimited = function decodeDelimited(reader) {
                             if (!(reader instanceof $Reader))
                                 reader = new $Reader(reader);
                             return this.decode(reader, reader.uint32());
                         };
     
                         /**
-                         * Verifies a RestoreCryptoKeyVersionRequest message.
+                         * Verifies a GenerateRandomBytesResponse message.
                          * @function verify
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
                          * @static
                          * @param {Object.<string,*>} message Plain object to verify
                          * @returns {string|null} `null` if valid, otherwise the reason why it is not
                          */
-                        RestoreCryptoKeyVersionRequest.verify = function verify(message) {
+                        GenerateRandomBytesResponse.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                if (!(message.data && typeof message.data.length === "number" || $util.isString(message.data)))
+                                    return "data: buffer expected";
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c")) {
+                                var error = $root.google.protobuf.Int64Value.verify(message.dataCrc32c);
+                                if (error)
+                                    return "dataCrc32c." + error;
+                            }
                             return null;
                         };
     
                         /**
-                         * Creates a RestoreCryptoKeyVersionRequest message from a plain object. Also converts values to their respective internal types.
+                         * Creates a GenerateRandomBytesResponse message from a plain object. Also converts values to their respective internal types.
                          * @function fromObject
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
                          * @static
                          * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} RestoreCryptoKeyVersionRequest
+                         * @returns {google.cloud.kms.v1.GenerateRandomBytesResponse} GenerateRandomBytesResponse
                          */
-                        RestoreCryptoKeyVersionRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest)
+                        GenerateRandomBytesResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.kms.v1.GenerateRandomBytesResponse)
                                 return object;
-                            var message = new $root.google.cloud.kms.v1.RestoreCryptoKeyVersionRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
+                            var message = new $root.google.cloud.kms.v1.GenerateRandomBytesResponse();
+                            if (object.data != null)
+                                if (typeof object.data === "string")
+                                    $util.base64.decode(object.data, message.data = $util.newBuffer($util.base64.length(object.data)), 0);
+                                else if (object.data.length)
+                                    message.data = object.data;
+                            if (object.dataCrc32c != null) {
+                                if (typeof object.dataCrc32c !== "object")
+                                    throw TypeError(".google.cloud.kms.v1.GenerateRandomBytesResponse.dataCrc32c: object expected");
+                                message.dataCrc32c = $root.google.protobuf.Int64Value.fromObject(object.dataCrc32c);
+                            }
                             return message;
                         };
     
                         /**
-                         * Creates a plain object from a RestoreCryptoKeyVersionRequest message. Also converts values to other types if specified.
+                         * Creates a plain object from a GenerateRandomBytesResponse message. Also converts values to other types if specified.
                          * @function toObject
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
                          * @static
-                         * @param {google.cloud.kms.v1.RestoreCryptoKeyVersionRequest} message RestoreCryptoKeyVersionRequest
+                         * @param {google.cloud.kms.v1.GenerateRandomBytesResponse} message GenerateRandomBytesResponse
                          * @param {$protobuf.IConversionOptions} [options] Conversion options
                          * @returns {Object.<string,*>} Plain object
                          */
-                        RestoreCryptoKeyVersionRequest.toObject = function toObject(message, options) {
+                        GenerateRandomBytesResponse.toObject = function toObject(message, options) {
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
-                                object.name = "";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
+                            if (options.defaults) {
+                                if (options.bytes === String)
+                                    object.data = "";
+                                else {
+                                    object.data = [];
+                                    if (options.bytes !== Array)
+                                        object.data = $util.newBuffer(object.data);
+                                }
+                                object.dataCrc32c = null;
+                            }
+                            if (message.data != null && message.hasOwnProperty("data"))
+                                object.data = options.bytes === String ? $util.base64.encode(message.data, 0, message.data.length) : options.bytes === Array ? Array.prototype.slice.call(message.data) : message.data;
+                            if (message.dataCrc32c != null && message.hasOwnProperty("dataCrc32c"))
+                                object.dataCrc32c = $root.google.protobuf.Int64Value.toObject(message.dataCrc32c, options);
                             return object;
                         };
     
                         /**
-                         * Converts this RestoreCryptoKeyVersionRequest to JSON.
+                         * Converts this GenerateRandomBytesResponse to JSON.
                          * @function toJSON
-                         * @memberof google.cloud.kms.v1.RestoreCryptoKeyVersionRequest
+                         * @memberof google.cloud.kms.v1.GenerateRandomBytesResponse
                          * @instance
                          * @returns {Object.<string,*>} JSON object
                          */
-                        RestoreCryptoKeyVersionRequest.prototype.toJSON = function toJSON() {
+                        GenerateRandomBytesResponse.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
     
-                        return RestoreCryptoKeyVersionRequest;
+                        return GenerateRandomBytesResponse;
                     })();
     
                     v1.Digest = (function() {

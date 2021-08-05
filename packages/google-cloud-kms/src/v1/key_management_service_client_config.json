@@ -100,6 +100,21 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "UpdateCryptoKeyPrimaryVersion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "DestroyCryptoKeyVersion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
+        "RestoreCryptoKeyVersion": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "default"
+        },
         "Encrypt": {
           "timeout_millis": 60000,
           "retry_codes_name": "idempotent",
@@ -120,19 +135,16 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
-        "UpdateCryptoKeyPrimaryVersion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+        "MacSign": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "DestroyCryptoKeyVersion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+        "MacVerify": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
-        "RestoreCryptoKeyVersion": {
-          "timeout_millis": 60000,
-          "retry_codes_name": "idempotent",
+        "GenerateRandomBytes": {
+          "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }
       }

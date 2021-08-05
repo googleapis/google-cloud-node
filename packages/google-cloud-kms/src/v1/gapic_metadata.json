@@ -70,6 +70,21 @@
                 "updateCryptoKeyVersion"
               ]
             },
+            "UpdateCryptoKeyPrimaryVersion": {
+              "methods": [
+                "updateCryptoKeyPrimaryVersion"
+              ]
+            },
+            "DestroyCryptoKeyVersion": {
+              "methods": [
+                "destroyCryptoKeyVersion"
+              ]
+            },
+            "RestoreCryptoKeyVersion": {
+              "methods": [
+                "restoreCryptoKeyVersion"
+              ]
+            },
             "Encrypt": {
               "methods": [
                 "encrypt"
@@ -90,19 +105,19 @@
                 "asymmetricDecrypt"
               ]
             },
-            "UpdateCryptoKeyPrimaryVersion": {
+            "MacSign": {
               "methods": [
-                "updateCryptoKeyPrimaryVersion"
+                "macSign"
               ]
             },
-            "DestroyCryptoKeyVersion": {
+            "MacVerify": {
               "methods": [
-                "destroyCryptoKeyVersion"
+                "macVerify"
               ]
             },
-            "RestoreCryptoKeyVersion": {
+            "GenerateRandomBytes": {
               "methods": [
-                "restoreCryptoKeyVersion"
+                "generateRandomBytes"
               ]
             },
             "ListKeyRings": {
@@ -198,6 +213,21 @@
                 "updateCryptoKeyVersion"
               ]
             },
+            "UpdateCryptoKeyPrimaryVersion": {
+              "methods": [
+                "updateCryptoKeyPrimaryVersion"
+              ]
+            },
+            "DestroyCryptoKeyVersion": {
+              "methods": [
+                "destroyCryptoKeyVersion"
+              ]
+            },
+            "RestoreCryptoKeyVersion": {
+              "methods": [
+                "restoreCryptoKeyVersion"
+              ]
+            },
             "Encrypt": {
               "methods": [
                 "encrypt"
@@ -218,19 +248,19 @@
                 "asymmetricDecrypt"
               ]
             },
-            "UpdateCryptoKeyPrimaryVersion": {
+            "MacSign": {
               "methods": [
-                "updateCryptoKeyPrimaryVersion"
+                "macSign"
               ]
             },
-            "DestroyCryptoKeyVersion": {
+            "MacVerify": {
               "methods": [
-                "destroyCryptoKeyVersion"
+                "macVerify"
               ]
             },
-            "RestoreCryptoKeyVersion": {
+            "GenerateRandomBytes": {
               "methods": [
-                "restoreCryptoKeyVersion"
+                "generateRandomBytes"
               ]
             },
             "ListKeyRings": {
