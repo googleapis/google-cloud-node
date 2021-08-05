@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.3.4...v2.4.0) (2021-08-05)
+
+
+### Features
+
+* Added support for BigQuery connections entries feat: Added support for BigQuery routines entries feat: Added usage_signal field feat: Added labels field feat: Added ReplaceTaxonomy in Policy Tag Manager Serialization API feat: Added support for p... ([#277](https://www.github.com/googleapis/nodejs-datacatalog/issues/277)) ([328cc11](https://www.github.com/googleapis/nodejs-datacatalog/commit/328cc1126374a26f20273a312e8b781b845af401))
+
 ### [2.3.4](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.3.3...v2.3.4) (2021-07-21)
 
 
