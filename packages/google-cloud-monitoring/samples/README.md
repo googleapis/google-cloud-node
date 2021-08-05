@@ -17,7 +17,6 @@ and a variety of common application components including Cassandra, Nginx, Apach
   * [Alerts.backup Policies](#alerts.backup-policies)
   * [Alerts.delete Channels](#alerts.delete-channels)
   * [Alerts.enable Policies](#alerts.enable-policies)
-  * [Alerts](#alerts)
   * [Alerts.list Policies](#alerts.list-policies)
   * [Alerts.replace Channels](#alerts.replace-channels)
   * [Alerts.restore Policies](#alerts.restore-policies)
@@ -84,23 +83,6 @@ __Usage:__
 
 
 `node samples/alerts.enablePolicies.js`
-
-
------
-
-
-
-
-### Alerts
-
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/alerts.js`
 
 
 -----
