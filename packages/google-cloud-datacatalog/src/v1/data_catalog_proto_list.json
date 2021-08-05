@@ -1,4 +1,5 @@
 [
+  "../../protos/google/cloud/datacatalog/v1/bigquery.proto",
   "../../protos/google/cloud/datacatalog/v1/common.proto",
   "../../protos/google/cloud/datacatalog/v1/data_source.proto",
   "../../protos/google/cloud/datacatalog/v1/datacatalog.proto",
@@ -9,5 +10,6 @@
   "../../protos/google/cloud/datacatalog/v1/search.proto",
   "../../protos/google/cloud/datacatalog/v1/table_spec.proto",
   "../../protos/google/cloud/datacatalog/v1/tags.proto",
-  "../../protos/google/cloud/datacatalog/v1/timestamps.proto"
+  "../../protos/google/cloud/datacatalog/v1/timestamps.proto",
+  "../../protos/google/cloud/datacatalog/v1/usage.proto"
 ]

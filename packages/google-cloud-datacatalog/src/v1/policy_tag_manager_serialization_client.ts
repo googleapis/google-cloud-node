@@ -32,9 +32,10 @@ import * as gapicConfig from './policy_tag_manager_serialization_client_config.j
 const version = require('../../../package.json').version;
 
 /**
- *  Policy Tag Manager serialization API service allows clients to manipulate
- *  their policy tags and taxonomies in serialized format, where taxonomy is a
- *  hierarchical group of policy tags.
+ *  Policy Tag Manager Serialization API service allows you to manipulate
+ *  your policy tags and taxonomies in a serialized format.
+ *
+ *  Taxonomy is a hierarchical group of policy tags.
  * @class
  * @memberof v1
  */
@@ -232,6 +233,7 @@ export class PolicyTagManagerSerializationClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const policyTagManagerSerializationStubMethods = [
+      'replaceTaxonomy',
       'importTaxonomies',
       'exportTaxonomies',
     ];
@@ -316,6 +318,111 @@ export class PolicyTagManagerSerializationClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  replaceTaxonomy(
+    request?: protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.ITaxonomy,
+      protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  replaceTaxonomy(
+    request: protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  replaceTaxonomy(
+    request: protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest,
+    callback: Callback<
+      protos.google.cloud.datacatalog.v1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Replaces (updates) a taxonomy and all its policy tags.
+   *
+   * The taxonomy and its entire hierarchy of policy tags must be
+   * represented literally by `SerializedTaxonomy` and the nested
+   * `SerializedPolicyTag` messages.
+   *
+   * This operation automatically does the following:
+   *
+   * - Deletes the existing policy tags that are missing from the
+   *   `SerializedPolicyTag`.
+   * - Creates policy tags that don't have resource names. They are considered
+   *   new.
+   * - Updates policy tags with valid resources names accordingly.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. Resource name of the taxonomy to update.
+   * @param {google.cloud.datacatalog.v1.SerializedTaxonomy} request.serializedTaxonomy
+   *   Required. Taxonomy to update along with its child policy tags.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Taxonomy]{@link google.cloud.datacatalog.v1.Taxonomy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.replaceTaxonomy(request);
+   */
+  replaceTaxonomy(
+    request?: protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.datacatalog.v1.ITaxonomy,
+          | protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.datacatalog.v1.ITaxonomy,
+      | protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.datacatalog.v1.ITaxonomy,
+      protos.google.cloud.datacatalog.v1.IReplaceTaxonomyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.replaceTaxonomy(request, options, callback);
+  }
   importTaxonomies(
     request?: protos.google.cloud.datacatalog.v1.IImportTaxonomiesRequest,
     options?: CallOptions
@@ -348,24 +455,23 @@ export class PolicyTagManagerSerializationClient {
     >
   ): void;
   /**
-   * Creates new taxonomies (including their policy tags) by importing from
-   * inlined source or cross-regional source. New taxonomies will be created in
-   * a given parent project.
+   * Creates new taxonomies (including their policy tags) in a given project
+   * by importing from inlined or cross-regional sources.
    *
-   * If using the cross-regional source, a new taxonomy is created by copying
+   * For a cross-regional source, new taxonomies are created by copying
    * from a source in another region.
    *
-   * If using the inlined source, this method provides a way to bulk create
-   * taxonomies and policy tags using nested proto structure.
+   * For an inlined source, taxonomies and policy tags are created in bulk using
+   * nested protocol buffer structures.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of project that the imported taxonomies will belong to.
    * @param {google.cloud.datacatalog.v1.InlineSource} request.inlineSource
-   *   Inline source used for taxonomies import.
+   *   Inline source taxonomy to import.
    * @param {google.cloud.datacatalog.v1.CrossRegionalSource} request.crossRegionalSource
-   *   Cross-regional source taxonomy to be imported.
+   *   Cross-regional source taxonomy to import.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -451,22 +557,22 @@ export class PolicyTagManagerSerializationClient {
     >
   ): void;
   /**
-   * Exports taxonomies as the requested type and returns the taxonomies
-   * including their policy tags. The requested taxonomies must belong to one
-   * project.
+   * Exports taxonomies in the requested type and returns them,
+   * including their policy tags. The requested taxonomies must belong to the
+   * same project.
    *
-   * SerializedTaxonomy protos with nested policy tags that are generated by
-   * this method can be used as input for future ImportTaxonomies calls.
+   * This method generates `SerializedTaxonomy` protocol buffers with nested
+   * policy tags that can be used as input for `ImportTaxonomies` calls.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the project that the exported taxonomies belong to.
    * @param {string[]} request.taxonomies
-   *   Required. Resource names of the taxonomies to be exported.
+   *   Required. Resource names of the taxonomies to export.
    * @param {boolean} request.serializedTaxonomies
-   *   Export taxonomies as serialized taxonomies, which contain all the policy
-   *   tags as nested protos.
+   *   Serialized export taxonomies that contain all the policy
+   *   tags as nested protocol buffers.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

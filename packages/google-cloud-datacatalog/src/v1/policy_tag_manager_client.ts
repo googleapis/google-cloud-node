@@ -41,7 +41,7 @@ import * as gapicConfig from './policy_tag_manager_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Policy Tag Manager API service allows clients to manage their policy tags and
+ *  Policy Tag Manager API service allows you to manage your policy tags and
  *  taxonomies.
  *
  *  Policy tags are used to tag BigQuery columns and apply additional access
@@ -385,15 +385,16 @@ export class PolicyTagManagerClient {
     >
   ): void;
   /**
-   * Creates a taxonomy in a specified project. The taxonomy is initially empty,
-   * i.e., does not contain policy tags.
+   * Creates a taxonomy in a specified project.
+   *
+   * The taxonomy is initially empty, that is, it doesn't contain policy tags.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the project that the taxonomy will belong to.
    * @param {google.cloud.datacatalog.v1.Taxonomy} request.taxonomy
-   *   The taxonomy to be created.
+   *   The taxonomy to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -479,15 +480,16 @@ export class PolicyTagManagerClient {
     >
   ): void;
   /**
-   * Deletes a taxonomy. This method will also delete all policy tags in this
+   * Deletes a taxonomy, including all policy tags in this
    * taxonomy, their associated policies, and the policy tags references from
    * BigQuery columns.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the taxonomy to be deleted. All policy tags in
-   *   this taxonomy will also be deleted.
+   *   Required. Resource name of the taxonomy to delete.
+   *
+   *   Note: All policy tags in this taxonomy are also deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -573,19 +575,20 @@ export class PolicyTagManagerClient {
     >
   ): void;
   /**
-   * Updates a taxonomy. This method can update the taxonomy's display name,
+   * Updates a taxonomy, including its display name,
    * description, and activated policy types.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.Taxonomy} request.taxonomy
-   *   The taxonomy to update. Only description, display_name, and activated
-   *   policy types can be updated.
+   *   The taxonomy to update. You can update only its description, display name,
+   *   and activated policy types.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. For the `FieldMask` definition,
-   *   see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   *   If not set, defaults to all of the fields that are allowed to update.
+   *   Specifies fields to update. If not set, defaults to all fields you can
+   *   update.
+   *
+   *   For more information, see [FieldMask]
+   *   (https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -672,7 +675,7 @@ export class PolicyTagManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the requested taxonomy.
+   *   Required. Resource name of the taxonomy to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -761,9 +764,10 @@ export class PolicyTagManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. Resource name of the taxonomy that the policy tag will belong to.
+   *   Required. Resource name of the taxonomy that the policy tag will belong to.<br /><br
+   *   />
    * @param {google.cloud.datacatalog.v1.PolicyTag} request.policyTag
-   *   The policy tag to be created.
+   *   The policy tag to create.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -849,18 +853,19 @@ export class PolicyTagManagerClient {
     >
   ): void;
   /**
-   * Deletes a policy tag. This method also deletes:
+   * Deletes a policy tag together with the following:
    *
-   * * all of its descendant policy tags, if any
-   * * the policies associated with the policy tag and its descendants
-   * * references from BigQuery table schema of the policy tag and its
-   *   descendants.
+   * * All of its descendant policy tags, if any
+   * * Policies associated with the policy tag and its descendants
+   * * References from BigQuery table schema of the policy tag and its
+   *   descendants
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the policy tag to be deleted. All of its descendant
-   *   policy tags will also be deleted.
+   *   Required. Resource name of the policy tag to delete.
+   *
+   *   Note: All of its descendant policy tags are also deleted.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -946,22 +951,21 @@ export class PolicyTagManagerClient {
     >
   ): void;
   /**
-   * Updates a policy tag. This method can update the policy tag's display
+   * Updates a policy tag, including its display
    * name, description, and parent policy tag.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.PolicyTag} request.policyTag
-   *   The policy tag to update. Only the description, display_name, and
-   *   parent_policy_tag fields can be updated.
+   *   The policy tag to update. You can update only its description, display
+   *   name, and parent policy tag fields.
    * @param {google.protobuf.FieldMask} request.updateMask
-   *   The update mask applies to the resource. Only display_name, description and
-   *   parent_policy_tag can be updated and thus can be listed in the mask. If
-   *   update_mask is not provided, all allowed fields (i.e. display_name,
-   *   description and parent) will be updated. For more information including the
-   *   `FieldMask` definition, see
-   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
-   *   If not set, defaults to all of the fields that are allowed to update.
+   *   Specifies the fields to update.
+   *
+   *   You can update only display name, description, and parent policy tag.
+   *   If not set, defaults to all updatable fields.
+   *   For more information, see [FieldMask]
+   *   (https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1052,7 +1056,7 @@ export class PolicyTagManagerClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. Resource name of the requested policy tag.
+   *   Required. Resource name of the policy tag.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1310,7 +1314,7 @@ export class PolicyTagManagerClient {
     >
   ): void;
   /**
-   * Returns the permissions that a caller has on a specified policy tag or
+   * Returns your permissions on a specified policy tag or
    * taxonomy.
    *
    * @param {Object} request
@@ -1405,19 +1409,21 @@ export class PolicyTagManagerClient {
     >
   ): void;
   /**
-   * Lists all taxonomies in a project in a particular location that the caller
-   * has permission to view.
+   * Lists all taxonomies in a project in a particular location that you
+   * have a permission to view.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. Resource name of the project to list the taxonomies of.
    * @param {number} request.pageSize
-   *   The maximum number of items to return. Must be a value between 1 and 1000.
-   *   If not set, defaults to 50.
+   *   The maximum number of items to return. Must be a value between 1 and 1000
+   *   inclusively. If not set, defaults to 50.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any. If
-   *   not set, defaults to an empty string.
+   *   The pagination token of the next results page. If not set,
+   *   the first page is returned.
+   *
+   *   The token is returned in the response to a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1482,11 +1488,13 @@ export class PolicyTagManagerClient {
    * @param {string} request.parent
    *   Required. Resource name of the project to list the taxonomies of.
    * @param {number} request.pageSize
-   *   The maximum number of items to return. Must be a value between 1 and 1000.
-   *   If not set, defaults to 50.
+   *   The maximum number of items to return. Must be a value between 1 and 1000
+   *   inclusively. If not set, defaults to 50.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any. If
-   *   not set, defaults to an empty string.
+   *   The pagination token of the next results page. If not set,
+   *   the first page is returned.
+   *
+   *   The token is returned in the response to a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1529,11 +1537,13 @@ export class PolicyTagManagerClient {
    * @param {string} request.parent
    *   Required. Resource name of the project to list the taxonomies of.
    * @param {number} request.pageSize
-   *   The maximum number of items to return. Must be a value between 1 and 1000.
-   *   If not set, defaults to 50.
+   *   The maximum number of items to return. Must be a value between 1 and 1000
+   *   inclusively. If not set, defaults to 50.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous list request, if any. If
-   *   not set, defaults to an empty string.
+   *   The pagination token of the next results page. If not set,
+   *   the first page is returned.
+   *
+   *   The token is returned in the response to a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -1610,11 +1620,14 @@ export class PolicyTagManagerClient {
    * @param {string} request.parent
    *   Required. Resource name of the taxonomy to list the policy tags of.
    * @param {number} request.pageSize
-   *   The maximum number of items to return. Must be a value between 1 and 1000.
+   *   The maximum number of items to return. Must be a value between 1 and 1000
+   *   inclusively.
    *   If not set, defaults to 50.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any. If
-   *   not set, defaults to an empty string.
+   *   The pagination token of the next results page. If not set, returns the
+   *   first page.
+   *
+   *   The token is returned in the response to a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1679,11 +1692,14 @@ export class PolicyTagManagerClient {
    * @param {string} request.parent
    *   Required. Resource name of the taxonomy to list the policy tags of.
    * @param {number} request.pageSize
-   *   The maximum number of items to return. Must be a value between 1 and 1000.
+   *   The maximum number of items to return. Must be a value between 1 and 1000
+   *   inclusively.
    *   If not set, defaults to 50.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any. If
-   *   not set, defaults to an empty string.
+   *   The pagination token of the next results page. If not set, returns the
+   *   first page.
+   *
+   *   The token is returned in the response to a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1726,11 +1742,14 @@ export class PolicyTagManagerClient {
    * @param {string} request.parent
    *   Required. Resource name of the taxonomy to list the policy tags of.
    * @param {number} request.pageSize
-   *   The maximum number of items to return. Must be a value between 1 and 1000.
+   *   The maximum number of items to return. Must be a value between 1 and 1000
+   *   inclusively.
    *   If not set, defaults to 50.
    * @param {string} request.pageToken
-   *   The next_page_token value returned from a previous List request, if any. If
-   *   not set, defaults to an empty string.
+   *   The pagination token of the next results page. If not set, returns the
+   *   first page.
+   *
+   *   The token is returned in the response to a previous list request.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

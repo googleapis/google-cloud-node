@@ -12,14 +12,79 @@
                     "csharp_namespace": "Google.Cloud.DataCatalog.V1",
                     "go_package": "google.golang.org/genproto/googleapis/cloud/datacatalog/v1;datacatalog",
                     "java_multiple_files": true,
+                    "java_outer_classname": "PolicyTagManagerSerializationProto",
                     "java_package": "com.google.cloud.datacatalog.v1",
                     "php_namespace": "Google\\Cloud\\DataCatalog\\V1",
                     "ruby_package": "Google::Cloud::DataCatalog::V1",
-                    "java_outer_classname": "PolicyTagManagerSerializationProto",
                     "(google.api.resource_definition).type": "datacatalog.googleapis.com/TagTemplateFieldEnumValue",
                     "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/tagTemplates/{tag_template}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}"
                   },
                   "nested": {
+                    "BigQueryConnectionSpec": {
+                      "oneofs": {
+                        "connectionSpec": {
+                          "oneof": [
+                            "cloudSql"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "connectionType": {
+                          "type": "ConnectionType",
+                          "id": 1
+                        },
+                        "cloudSql": {
+                          "type": "CloudSqlBigQueryConnectionSpec",
+                          "id": 2
+                        },
+                        "hasCredential": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "ConnectionType": {
+                          "values": {
+                            "CONNECTION_TYPE_UNSPECIFIED": 0,
+                            "CLOUD_SQL": 1
+                          }
+                        }
+                      }
+                    },
+                    "CloudSqlBigQueryConnectionSpec": {
+                      "fields": {
+                        "instanceId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "database": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "type": {
+                          "type": "DatabaseType",
+                          "id": 3
+                        }
+                      },
+                      "nested": {
+                        "DatabaseType": {
+                          "values": {
+                            "DATABASE_TYPE_UNSPECIFIED": 0,
+                            "POSTGRES": 1,
+                            "MYSQL": 2
+                          }
+                        }
+                      }
+                    },
+                    "BigQueryRoutineSpec": {
+                      "fields": {
+                        "importedLibraries": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
                     "IntegratedSystem": {
                       "values": {
                         "INTEGRATED_SYSTEM_UNSPECIFIED": 0,
@@ -709,6 +774,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "includePublicTagTemplates": {
+                              "type": "bool",
+                              "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         }
@@ -961,7 +1033,9 @@
                         },
                         "spec": {
                           "oneof": [
-                            "databaseTableSpec"
+                            "databaseTableSpec",
+                            "dataSourceConnectionSpec",
+                            "routineSpec"
                           ]
                         }
                       },
@@ -1017,6 +1091,14 @@
                           "type": "DatabaseTableSpec",
                           "id": 24
                         },
+                        "dataSourceConnectionSpec": {
+                          "type": "DataSourceConnectionSpec",
+                          "id": 27
+                        },
+                        "routineSpec": {
+                          "type": "RoutineSpec",
+                          "id": 28
+                        },
                         "displayName": {
                           "type": "string",
                           "id": 3
@@ -1032,6 +1114,18 @@
                         "sourceSystemTimestamps": {
                           "type": "SystemTimestamps",
                           "id": 7
+                        },
+                        "usageSignal": {
+                          "type": "UsageSignal",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 14
                         },
                         "dataSource": {
                           "type": "DataSource",
@@ -1055,6 +1149,85 @@
                             "TABLE_TYPE_UNSPECIFIED": 0,
                             "NATIVE": 1,
                             "EXTERNAL": 2
+                          }
+                        }
+                      }
+                    },
+                    "DataSourceConnectionSpec": {
+                      "fields": {
+                        "bigqueryConnectionSpec": {
+                          "type": "BigQueryConnectionSpec",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RoutineSpec": {
+                      "oneofs": {
+                        "systemSpec": {
+                          "oneof": [
+                            "bigqueryRoutineSpec"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "routineType": {
+                          "type": "RoutineType",
+                          "id": 1
+                        },
+                        "language": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "routineArguments": {
+                          "rule": "repeated",
+                          "type": "Argument",
+                          "id": 3
+                        },
+                        "returnType": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "definitionBody": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "bigqueryRoutineSpec": {
+                          "type": "BigQueryRoutineSpec",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "Argument": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "mode": {
+                              "type": "Mode",
+                              "id": 2
+                            },
+                            "type": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "Mode": {
+                              "values": {
+                                "MODE_UNSPECIFIED": 0,
+                                "IN": 1,
+                                "OUT": 2,
+                                "INOUT": 3
+                              }
+                            }
+                          }
+                        },
+                        "RoutineType": {
+                          "values": {
+                            "ROUTINE_TYPE_UNSPECIFIED": 0,
+                            "SCALAR_FUNCTION": 1,
+                            "PROCEDURE": 2
                           }
                         }
                       }
@@ -1390,7 +1563,10 @@
                         "MODEL": 5,
                         "DATA_STREAM": 3,
                         "FILESET": 4,
+                        "CLUSTER": 6,
                         "DATABASE": 7,
+                        "DATA_SOURCE_CONNECTION": 8,
+                        "ROUTINE": 9,
                         "SERVICE": 14
                       }
                     },
@@ -1699,7 +1875,8 @@
                             "stringValue",
                             "boolValue",
                             "timestampValue",
-                            "enumValue"
+                            "enumValue",
+                            "richtextValue"
                           ]
                         }
                       },
@@ -1730,6 +1907,10 @@
                         "enumValue": {
                           "type": "EnumValue",
                           "id": 6
+                        },
+                        "richtextValue": {
+                          "type": "string",
+                          "id": 8
                         },
                         "order": {
                           "type": "int32",
@@ -1763,6 +1944,10 @@
                         "displayName": {
                           "type": "string",
                           "id": 2
+                        },
+                        "isPubliclyReadable": {
+                          "type": "bool",
+                          "id": 5
                         },
                         "fields": {
                           "keyType": "string",
@@ -1860,8 +2045,42 @@
                             "DOUBLE": 1,
                             "STRING": 2,
                             "BOOL": 3,
-                            "TIMESTAMP": 4
+                            "TIMESTAMP": 4,
+                            "RICHTEXT": 5
                           }
+                        }
+                      }
+                    },
+                    "UsageStats": {
+                      "fields": {
+                        "totalCompletions": {
+                          "type": "float",
+                          "id": 1
+                        },
+                        "totalFailures": {
+                          "type": "float",
+                          "id": 2
+                        },
+                        "totalCancellations": {
+                          "type": "float",
+                          "id": 3
+                        },
+                        "totalExecutionTimeForCompletionsMillis": {
+                          "type": "float",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "UsageSignal": {
+                      "fields": {
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "usageWithinTimeRange": {
+                          "keyType": "string",
+                          "type": "UsageStats",
+                          "id": 2
                         }
                       }
                     },
@@ -2400,6 +2619,22 @@
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
+                        "ReplaceTaxonomy": {
+                          "requestType": "ReplaceTaxonomyRequest",
+                          "responseType": "Taxonomy",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/taxonomies/*}:replace",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/taxonomies/*}:replace",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "ImportTaxonomies": {
                           "requestType": "ImportTaxonomiesRequest",
                           "responseType": "ImportTaxonomiesResponse",
@@ -2478,6 +2713,25 @@
                           "rule": "repeated",
                           "type": "SerializedPolicyTag",
                           "id": 4
+                        }
+                      }
+                    },
+                    "ReplaceTaxonomyRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "datacatalog.googleapis.com/Taxonomy"
+                          }
+                        },
+                        "serializedTaxonomy": {
+                          "type": "SerializedTaxonomy",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },

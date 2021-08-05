@@ -26,6 +26,322 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Properties of a BigQueryConnectionSpec. */
+                interface IBigQueryConnectionSpec {
+
+                    /** BigQueryConnectionSpec connectionType */
+                    connectionType?: (google.cloud.datacatalog.v1.BigQueryConnectionSpec.ConnectionType|keyof typeof google.cloud.datacatalog.v1.BigQueryConnectionSpec.ConnectionType|null);
+
+                    /** BigQueryConnectionSpec cloudSql */
+                    cloudSql?: (google.cloud.datacatalog.v1.ICloudSqlBigQueryConnectionSpec|null);
+
+                    /** BigQueryConnectionSpec hasCredential */
+                    hasCredential?: (boolean|null);
+                }
+
+                /** Represents a BigQueryConnectionSpec. */
+                class BigQueryConnectionSpec implements IBigQueryConnectionSpec {
+
+                    /**
+                     * Constructs a new BigQueryConnectionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IBigQueryConnectionSpec);
+
+                    /** BigQueryConnectionSpec connectionType. */
+                    public connectionType: (google.cloud.datacatalog.v1.BigQueryConnectionSpec.ConnectionType|keyof typeof google.cloud.datacatalog.v1.BigQueryConnectionSpec.ConnectionType);
+
+                    /** BigQueryConnectionSpec cloudSql. */
+                    public cloudSql?: (google.cloud.datacatalog.v1.ICloudSqlBigQueryConnectionSpec|null);
+
+                    /** BigQueryConnectionSpec hasCredential. */
+                    public hasCredential: boolean;
+
+                    /** BigQueryConnectionSpec connectionSpec. */
+                    public connectionSpec?: "cloudSql";
+
+                    /**
+                     * Creates a new BigQueryConnectionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryConnectionSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IBigQueryConnectionSpec): google.cloud.datacatalog.v1.BigQueryConnectionSpec;
+
+                    /**
+                     * Encodes the specified BigQueryConnectionSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.BigQueryConnectionSpec.verify|verify} messages.
+                     * @param message BigQueryConnectionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IBigQueryConnectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryConnectionSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.BigQueryConnectionSpec.verify|verify} messages.
+                     * @param message BigQueryConnectionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IBigQueryConnectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryConnectionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryConnectionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.BigQueryConnectionSpec;
+
+                    /**
+                     * Decodes a BigQueryConnectionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryConnectionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.BigQueryConnectionSpec;
+
+                    /**
+                     * Verifies a BigQueryConnectionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryConnectionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryConnectionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.BigQueryConnectionSpec;
+
+                    /**
+                     * Creates a plain object from a BigQueryConnectionSpec message. Also converts values to other types if specified.
+                     * @param message BigQueryConnectionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.BigQueryConnectionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryConnectionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace BigQueryConnectionSpec {
+
+                    /** ConnectionType enum. */
+                    enum ConnectionType {
+                        CONNECTION_TYPE_UNSPECIFIED = 0,
+                        CLOUD_SQL = 1
+                    }
+                }
+
+                /** Properties of a CloudSqlBigQueryConnectionSpec. */
+                interface ICloudSqlBigQueryConnectionSpec {
+
+                    /** CloudSqlBigQueryConnectionSpec instanceId */
+                    instanceId?: (string|null);
+
+                    /** CloudSqlBigQueryConnectionSpec database */
+                    database?: (string|null);
+
+                    /** CloudSqlBigQueryConnectionSpec type */
+                    type?: (google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec.DatabaseType|keyof typeof google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec.DatabaseType|null);
+                }
+
+                /** Represents a CloudSqlBigQueryConnectionSpec. */
+                class CloudSqlBigQueryConnectionSpec implements ICloudSqlBigQueryConnectionSpec {
+
+                    /**
+                     * Constructs a new CloudSqlBigQueryConnectionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.ICloudSqlBigQueryConnectionSpec);
+
+                    /** CloudSqlBigQueryConnectionSpec instanceId. */
+                    public instanceId: string;
+
+                    /** CloudSqlBigQueryConnectionSpec database. */
+                    public database: string;
+
+                    /** CloudSqlBigQueryConnectionSpec type. */
+                    public type: (google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec.DatabaseType|keyof typeof google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec.DatabaseType);
+
+                    /**
+                     * Creates a new CloudSqlBigQueryConnectionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudSqlBigQueryConnectionSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.ICloudSqlBigQueryConnectionSpec): google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec;
+
+                    /**
+                     * Encodes the specified CloudSqlBigQueryConnectionSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec.verify|verify} messages.
+                     * @param message CloudSqlBigQueryConnectionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.ICloudSqlBigQueryConnectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudSqlBigQueryConnectionSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec.verify|verify} messages.
+                     * @param message CloudSqlBigQueryConnectionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.ICloudSqlBigQueryConnectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudSqlBigQueryConnectionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudSqlBigQueryConnectionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec;
+
+                    /**
+                     * Decodes a CloudSqlBigQueryConnectionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudSqlBigQueryConnectionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec;
+
+                    /**
+                     * Verifies a CloudSqlBigQueryConnectionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudSqlBigQueryConnectionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudSqlBigQueryConnectionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec;
+
+                    /**
+                     * Creates a plain object from a CloudSqlBigQueryConnectionSpec message. Also converts values to other types if specified.
+                     * @param message CloudSqlBigQueryConnectionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.CloudSqlBigQueryConnectionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudSqlBigQueryConnectionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace CloudSqlBigQueryConnectionSpec {
+
+                    /** DatabaseType enum. */
+                    enum DatabaseType {
+                        DATABASE_TYPE_UNSPECIFIED = 0,
+                        POSTGRES = 1,
+                        MYSQL = 2
+                    }
+                }
+
+                /** Properties of a BigQueryRoutineSpec. */
+                interface IBigQueryRoutineSpec {
+
+                    /** BigQueryRoutineSpec importedLibraries */
+                    importedLibraries?: (string[]|null);
+                }
+
+                /** Represents a BigQueryRoutineSpec. */
+                class BigQueryRoutineSpec implements IBigQueryRoutineSpec {
+
+                    /**
+                     * Constructs a new BigQueryRoutineSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IBigQueryRoutineSpec);
+
+                    /** BigQueryRoutineSpec importedLibraries. */
+                    public importedLibraries: string[];
+
+                    /**
+                     * Creates a new BigQueryRoutineSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BigQueryRoutineSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IBigQueryRoutineSpec): google.cloud.datacatalog.v1.BigQueryRoutineSpec;
+
+                    /**
+                     * Encodes the specified BigQueryRoutineSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.BigQueryRoutineSpec.verify|verify} messages.
+                     * @param message BigQueryRoutineSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IBigQueryRoutineSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BigQueryRoutineSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.BigQueryRoutineSpec.verify|verify} messages.
+                     * @param message BigQueryRoutineSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IBigQueryRoutineSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BigQueryRoutineSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BigQueryRoutineSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.BigQueryRoutineSpec;
+
+                    /**
+                     * Decodes a BigQueryRoutineSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BigQueryRoutineSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.BigQueryRoutineSpec;
+
+                    /**
+                     * Verifies a BigQueryRoutineSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BigQueryRoutineSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BigQueryRoutineSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.BigQueryRoutineSpec;
+
+                    /**
+                     * Creates a plain object from a BigQueryRoutineSpec message. Also converts values to other types if specified.
+                     * @param message BigQueryRoutineSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.BigQueryRoutineSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BigQueryRoutineSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** IntegratedSystem enum. */
                 enum IntegratedSystem {
                     INTEGRATED_SYSTEM_UNSPECIFIED = 0,
@@ -882,6 +1198,9 @@ export namespace google {
 
                         /** Scope restrictedLocations */
                         restrictedLocations?: (string[]|null);
+
+                        /** Scope includePublicTagTemplates */
+                        includePublicTagTemplates?: (boolean|null);
                     }
 
                     /** Represents a Scope. */
@@ -904,6 +1223,9 @@ export namespace google {
 
                         /** Scope restrictedLocations. */
                         public restrictedLocations: string[];
+
+                        /** Scope includePublicTagTemplates. */
+                        public includePublicTagTemplates: boolean;
 
                         /**
                          * Creates a new Scope instance using the specified properties.
@@ -2186,6 +2508,12 @@ export namespace google {
                     /** Entry databaseTableSpec */
                     databaseTableSpec?: (google.cloud.datacatalog.v1.IDatabaseTableSpec|null);
 
+                    /** Entry dataSourceConnectionSpec */
+                    dataSourceConnectionSpec?: (google.cloud.datacatalog.v1.IDataSourceConnectionSpec|null);
+
+                    /** Entry routineSpec */
+                    routineSpec?: (google.cloud.datacatalog.v1.IRoutineSpec|null);
+
                     /** Entry displayName */
                     displayName?: (string|null);
 
@@ -2197,6 +2525,12 @@ export namespace google {
 
                     /** Entry sourceSystemTimestamps */
                     sourceSystemTimestamps?: (google.cloud.datacatalog.v1.ISystemTimestamps|null);
+
+                    /** Entry usageSignal */
+                    usageSignal?: (google.cloud.datacatalog.v1.IUsageSignal|null);
+
+                    /** Entry labels */
+                    labels?: ({ [k: string]: string }|null);
 
                     /** Entry dataSource */
                     dataSource?: (google.cloud.datacatalog.v1.IDataSource|null);
@@ -2244,6 +2578,12 @@ export namespace google {
                     /** Entry databaseTableSpec. */
                     public databaseTableSpec?: (google.cloud.datacatalog.v1.IDatabaseTableSpec|null);
 
+                    /** Entry dataSourceConnectionSpec. */
+                    public dataSourceConnectionSpec?: (google.cloud.datacatalog.v1.IDataSourceConnectionSpec|null);
+
+                    /** Entry routineSpec. */
+                    public routineSpec?: (google.cloud.datacatalog.v1.IRoutineSpec|null);
+
                     /** Entry displayName. */
                     public displayName: string;
 
@@ -2255,6 +2595,12 @@ export namespace google {
 
                     /** Entry sourceSystemTimestamps. */
                     public sourceSystemTimestamps?: (google.cloud.datacatalog.v1.ISystemTimestamps|null);
+
+                    /** Entry usageSignal. */
+                    public usageSignal?: (google.cloud.datacatalog.v1.IUsageSignal|null);
+
+                    /** Entry labels. */
+                    public labels: { [k: string]: string };
 
                     /** Entry dataSource. */
                     public dataSource?: (google.cloud.datacatalog.v1.IDataSource|null);
@@ -2269,7 +2615,7 @@ export namespace google {
                     public typeSpec?: ("gcsFilesetSpec"|"bigqueryTableSpec"|"bigqueryDateShardedSpec");
 
                     /** Entry spec. */
-                    public spec?: "databaseTableSpec";
+                    public spec?: ("databaseTableSpec"|"dataSourceConnectionSpec"|"routineSpec");
 
                     /**
                      * Creates a new Entry instance using the specified properties.
@@ -2439,6 +2785,342 @@ export namespace google {
                         TABLE_TYPE_UNSPECIFIED = 0,
                         NATIVE = 1,
                         EXTERNAL = 2
+                    }
+                }
+
+                /** Properties of a DataSourceConnectionSpec. */
+                interface IDataSourceConnectionSpec {
+
+                    /** DataSourceConnectionSpec bigqueryConnectionSpec */
+                    bigqueryConnectionSpec?: (google.cloud.datacatalog.v1.IBigQueryConnectionSpec|null);
+                }
+
+                /** Represents a DataSourceConnectionSpec. */
+                class DataSourceConnectionSpec implements IDataSourceConnectionSpec {
+
+                    /**
+                     * Constructs a new DataSourceConnectionSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IDataSourceConnectionSpec);
+
+                    /** DataSourceConnectionSpec bigqueryConnectionSpec. */
+                    public bigqueryConnectionSpec?: (google.cloud.datacatalog.v1.IBigQueryConnectionSpec|null);
+
+                    /**
+                     * Creates a new DataSourceConnectionSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataSourceConnectionSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IDataSourceConnectionSpec): google.cloud.datacatalog.v1.DataSourceConnectionSpec;
+
+                    /**
+                     * Encodes the specified DataSourceConnectionSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.DataSourceConnectionSpec.verify|verify} messages.
+                     * @param message DataSourceConnectionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IDataSourceConnectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataSourceConnectionSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.DataSourceConnectionSpec.verify|verify} messages.
+                     * @param message DataSourceConnectionSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IDataSourceConnectionSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataSourceConnectionSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataSourceConnectionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.DataSourceConnectionSpec;
+
+                    /**
+                     * Decodes a DataSourceConnectionSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataSourceConnectionSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.DataSourceConnectionSpec;
+
+                    /**
+                     * Verifies a DataSourceConnectionSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataSourceConnectionSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataSourceConnectionSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.DataSourceConnectionSpec;
+
+                    /**
+                     * Creates a plain object from a DataSourceConnectionSpec message. Also converts values to other types if specified.
+                     * @param message DataSourceConnectionSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.DataSourceConnectionSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataSourceConnectionSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RoutineSpec. */
+                interface IRoutineSpec {
+
+                    /** RoutineSpec routineType */
+                    routineType?: (google.cloud.datacatalog.v1.RoutineSpec.RoutineType|keyof typeof google.cloud.datacatalog.v1.RoutineSpec.RoutineType|null);
+
+                    /** RoutineSpec language */
+                    language?: (string|null);
+
+                    /** RoutineSpec routineArguments */
+                    routineArguments?: (google.cloud.datacatalog.v1.RoutineSpec.IArgument[]|null);
+
+                    /** RoutineSpec returnType */
+                    returnType?: (string|null);
+
+                    /** RoutineSpec definitionBody */
+                    definitionBody?: (string|null);
+
+                    /** RoutineSpec bigqueryRoutineSpec */
+                    bigqueryRoutineSpec?: (google.cloud.datacatalog.v1.IBigQueryRoutineSpec|null);
+                }
+
+                /** Represents a RoutineSpec. */
+                class RoutineSpec implements IRoutineSpec {
+
+                    /**
+                     * Constructs a new RoutineSpec.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IRoutineSpec);
+
+                    /** RoutineSpec routineType. */
+                    public routineType: (google.cloud.datacatalog.v1.RoutineSpec.RoutineType|keyof typeof google.cloud.datacatalog.v1.RoutineSpec.RoutineType);
+
+                    /** RoutineSpec language. */
+                    public language: string;
+
+                    /** RoutineSpec routineArguments. */
+                    public routineArguments: google.cloud.datacatalog.v1.RoutineSpec.IArgument[];
+
+                    /** RoutineSpec returnType. */
+                    public returnType: string;
+
+                    /** RoutineSpec definitionBody. */
+                    public definitionBody: string;
+
+                    /** RoutineSpec bigqueryRoutineSpec. */
+                    public bigqueryRoutineSpec?: (google.cloud.datacatalog.v1.IBigQueryRoutineSpec|null);
+
+                    /** RoutineSpec systemSpec. */
+                    public systemSpec?: "bigqueryRoutineSpec";
+
+                    /**
+                     * Creates a new RoutineSpec instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RoutineSpec instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IRoutineSpec): google.cloud.datacatalog.v1.RoutineSpec;
+
+                    /**
+                     * Encodes the specified RoutineSpec message. Does not implicitly {@link google.cloud.datacatalog.v1.RoutineSpec.verify|verify} messages.
+                     * @param message RoutineSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IRoutineSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RoutineSpec message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.RoutineSpec.verify|verify} messages.
+                     * @param message RoutineSpec message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IRoutineSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RoutineSpec message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RoutineSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.RoutineSpec;
+
+                    /**
+                     * Decodes a RoutineSpec message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RoutineSpec
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.RoutineSpec;
+
+                    /**
+                     * Verifies a RoutineSpec message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RoutineSpec message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RoutineSpec
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.RoutineSpec;
+
+                    /**
+                     * Creates a plain object from a RoutineSpec message. Also converts values to other types if specified.
+                     * @param message RoutineSpec
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.RoutineSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RoutineSpec to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace RoutineSpec {
+
+                    /** Properties of an Argument. */
+                    interface IArgument {
+
+                        /** Argument name */
+                        name?: (string|null);
+
+                        /** Argument mode */
+                        mode?: (google.cloud.datacatalog.v1.RoutineSpec.Argument.Mode|keyof typeof google.cloud.datacatalog.v1.RoutineSpec.Argument.Mode|null);
+
+                        /** Argument type */
+                        type?: (string|null);
+                    }
+
+                    /** Represents an Argument. */
+                    class Argument implements IArgument {
+
+                        /**
+                         * Constructs a new Argument.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.datacatalog.v1.RoutineSpec.IArgument);
+
+                        /** Argument name. */
+                        public name: string;
+
+                        /** Argument mode. */
+                        public mode: (google.cloud.datacatalog.v1.RoutineSpec.Argument.Mode|keyof typeof google.cloud.datacatalog.v1.RoutineSpec.Argument.Mode);
+
+                        /** Argument type. */
+                        public type: string;
+
+                        /**
+                         * Creates a new Argument instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Argument instance
+                         */
+                        public static create(properties?: google.cloud.datacatalog.v1.RoutineSpec.IArgument): google.cloud.datacatalog.v1.RoutineSpec.Argument;
+
+                        /**
+                         * Encodes the specified Argument message. Does not implicitly {@link google.cloud.datacatalog.v1.RoutineSpec.Argument.verify|verify} messages.
+                         * @param message Argument message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.datacatalog.v1.RoutineSpec.IArgument, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Argument message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.RoutineSpec.Argument.verify|verify} messages.
+                         * @param message Argument message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.datacatalog.v1.RoutineSpec.IArgument, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Argument message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Argument
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.RoutineSpec.Argument;
+
+                        /**
+                         * Decodes an Argument message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Argument
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.RoutineSpec.Argument;
+
+                        /**
+                         * Verifies an Argument message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Argument message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Argument
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.RoutineSpec.Argument;
+
+                        /**
+                         * Creates a plain object from an Argument message. Also converts values to other types if specified.
+                         * @param message Argument
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.datacatalog.v1.RoutineSpec.Argument, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Argument to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    namespace Argument {
+
+                        /** Mode enum. */
+                        enum Mode {
+                            MODE_UNSPECIFIED = 0,
+                            IN = 1,
+                            OUT = 2,
+                            INOUT = 3
+                        }
+                    }
+
+                    /** RoutineType enum. */
+                    enum RoutineType {
+                        ROUTINE_TYPE_UNSPECIFIED = 0,
+                        SCALAR_FUNCTION = 1,
+                        PROCEDURE = 2
                     }
                 }
 
@@ -4117,7 +4799,10 @@ export namespace google {
                     MODEL = 5,
                     DATA_STREAM = 3,
                     FILESET = 4,
+                    CLUSTER = 6,
                     DATABASE = 7,
+                    DATA_SOURCE_CONNECTION = 8,
+                    ROUTINE = 9,
                     SERVICE = 14
                 }
 
@@ -5301,6 +5986,9 @@ export namespace google {
                     /** TagField enumValue */
                     enumValue?: (google.cloud.datacatalog.v1.TagField.IEnumValue|null);
 
+                    /** TagField richtextValue */
+                    richtextValue?: (string|null);
+
                     /** TagField order */
                     order?: (number|null);
                 }
@@ -5332,11 +6020,14 @@ export namespace google {
                     /** TagField enumValue. */
                     public enumValue?: (google.cloud.datacatalog.v1.TagField.IEnumValue|null);
 
+                    /** TagField richtextValue. */
+                    public richtextValue?: (string|null);
+
                     /** TagField order. */
                     public order: number;
 
                     /** TagField kind. */
-                    public kind?: ("doubleValue"|"stringValue"|"boolValue"|"timestampValue"|"enumValue");
+                    public kind?: ("doubleValue"|"stringValue"|"boolValue"|"timestampValue"|"enumValue"|"richtextValue");
 
                     /**
                      * Creates a new TagField instance using the specified properties.
@@ -5511,6 +6202,9 @@ export namespace google {
                     /** TagTemplate displayName */
                     displayName?: (string|null);
 
+                    /** TagTemplate isPubliclyReadable */
+                    isPubliclyReadable?: (boolean|null);
+
                     /** TagTemplate fields */
                     fields?: ({ [k: string]: google.cloud.datacatalog.v1.ITagTemplateField }|null);
                 }
@@ -5529,6 +6223,9 @@ export namespace google {
 
                     /** TagTemplate displayName. */
                     public displayName: string;
+
+                    /** TagTemplate isPubliclyReadable. */
+                    public isPubliclyReadable: boolean;
 
                     /** TagTemplate fields. */
                     public fields: { [k: string]: google.cloud.datacatalog.v1.ITagTemplateField };
@@ -6014,8 +6711,213 @@ export namespace google {
                         DOUBLE = 1,
                         STRING = 2,
                         BOOL = 3,
-                        TIMESTAMP = 4
+                        TIMESTAMP = 4,
+                        RICHTEXT = 5
                     }
+                }
+
+                /** Properties of a UsageStats. */
+                interface IUsageStats {
+
+                    /** UsageStats totalCompletions */
+                    totalCompletions?: (number|null);
+
+                    /** UsageStats totalFailures */
+                    totalFailures?: (number|null);
+
+                    /** UsageStats totalCancellations */
+                    totalCancellations?: (number|null);
+
+                    /** UsageStats totalExecutionTimeForCompletionsMillis */
+                    totalExecutionTimeForCompletionsMillis?: (number|null);
+                }
+
+                /** Represents a UsageStats. */
+                class UsageStats implements IUsageStats {
+
+                    /**
+                     * Constructs a new UsageStats.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IUsageStats);
+
+                    /** UsageStats totalCompletions. */
+                    public totalCompletions: number;
+
+                    /** UsageStats totalFailures. */
+                    public totalFailures: number;
+
+                    /** UsageStats totalCancellations. */
+                    public totalCancellations: number;
+
+                    /** UsageStats totalExecutionTimeForCompletionsMillis. */
+                    public totalExecutionTimeForCompletionsMillis: number;
+
+                    /**
+                     * Creates a new UsageStats instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UsageStats instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IUsageStats): google.cloud.datacatalog.v1.UsageStats;
+
+                    /**
+                     * Encodes the specified UsageStats message. Does not implicitly {@link google.cloud.datacatalog.v1.UsageStats.verify|verify} messages.
+                     * @param message UsageStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IUsageStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UsageStats message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.UsageStats.verify|verify} messages.
+                     * @param message UsageStats message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IUsageStats, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UsageStats message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UsageStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.UsageStats;
+
+                    /**
+                     * Decodes a UsageStats message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UsageStats
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.UsageStats;
+
+                    /**
+                     * Verifies a UsageStats message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UsageStats message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UsageStats
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.UsageStats;
+
+                    /**
+                     * Creates a plain object from a UsageStats message. Also converts values to other types if specified.
+                     * @param message UsageStats
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.UsageStats, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UsageStats to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a UsageSignal. */
+                interface IUsageSignal {
+
+                    /** UsageSignal updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UsageSignal usageWithinTimeRange */
+                    usageWithinTimeRange?: ({ [k: string]: google.cloud.datacatalog.v1.IUsageStats }|null);
+                }
+
+                /** Represents a UsageSignal. */
+                class UsageSignal implements IUsageSignal {
+
+                    /**
+                     * Constructs a new UsageSignal.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IUsageSignal);
+
+                    /** UsageSignal updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** UsageSignal usageWithinTimeRange. */
+                    public usageWithinTimeRange: { [k: string]: google.cloud.datacatalog.v1.IUsageStats };
+
+                    /**
+                     * Creates a new UsageSignal instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UsageSignal instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IUsageSignal): google.cloud.datacatalog.v1.UsageSignal;
+
+                    /**
+                     * Encodes the specified UsageSignal message. Does not implicitly {@link google.cloud.datacatalog.v1.UsageSignal.verify|verify} messages.
+                     * @param message UsageSignal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IUsageSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UsageSignal message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.UsageSignal.verify|verify} messages.
+                     * @param message UsageSignal message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IUsageSignal, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UsageSignal message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UsageSignal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.UsageSignal;
+
+                    /**
+                     * Decodes a UsageSignal message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UsageSignal
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.UsageSignal;
+
+                    /**
+                     * Verifies a UsageSignal message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UsageSignal message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UsageSignal
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.UsageSignal;
+
+                    /**
+                     * Creates a plain object from a UsageSignal message. Also converts values to other types if specified.
+                     * @param message UsageSignal
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.UsageSignal, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UsageSignal to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Represents a PolicyTagManager */
@@ -7719,6 +8621,20 @@ export namespace google {
                     public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): PolicyTagManagerSerialization;
 
                     /**
+                     * Calls ReplaceTaxonomy.
+                     * @param request ReplaceTaxonomyRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Taxonomy
+                     */
+                    public replaceTaxonomy(request: google.cloud.datacatalog.v1.IReplaceTaxonomyRequest, callback: google.cloud.datacatalog.v1.PolicyTagManagerSerialization.ReplaceTaxonomyCallback): void;
+
+                    /**
+                     * Calls ReplaceTaxonomy.
+                     * @param request ReplaceTaxonomyRequest message or plain object
+                     * @returns Promise
+                     */
+                    public replaceTaxonomy(request: google.cloud.datacatalog.v1.IReplaceTaxonomyRequest): Promise<google.cloud.datacatalog.v1.Taxonomy>;
+
+                    /**
                      * Calls ImportTaxonomies.
                      * @param request ImportTaxonomiesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ImportTaxonomiesResponse
@@ -7748,6 +8664,13 @@ export namespace google {
                 }
 
                 namespace PolicyTagManagerSerialization {
+
+                    /**
+                     * Callback as used by {@link google.cloud.datacatalog.v1.PolicyTagManagerSerialization#replaceTaxonomy}.
+                     * @param error Error, if any
+                     * @param [response] Taxonomy
+                     */
+                    type ReplaceTaxonomyCallback = (error: (Error|null), response?: google.cloud.datacatalog.v1.Taxonomy) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.datacatalog.v1.PolicyTagManagerSerialization#importTaxonomies}.
@@ -7975,6 +8898,102 @@ export namespace google {
 
                     /**
                      * Converts this SerializedPolicyTag to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ReplaceTaxonomyRequest. */
+                interface IReplaceTaxonomyRequest {
+
+                    /** ReplaceTaxonomyRequest name */
+                    name?: (string|null);
+
+                    /** ReplaceTaxonomyRequest serializedTaxonomy */
+                    serializedTaxonomy?: (google.cloud.datacatalog.v1.ISerializedTaxonomy|null);
+                }
+
+                /** Represents a ReplaceTaxonomyRequest. */
+                class ReplaceTaxonomyRequest implements IReplaceTaxonomyRequest {
+
+                    /**
+                     * Constructs a new ReplaceTaxonomyRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.datacatalog.v1.IReplaceTaxonomyRequest);
+
+                    /** ReplaceTaxonomyRequest name. */
+                    public name: string;
+
+                    /** ReplaceTaxonomyRequest serializedTaxonomy. */
+                    public serializedTaxonomy?: (google.cloud.datacatalog.v1.ISerializedTaxonomy|null);
+
+                    /**
+                     * Creates a new ReplaceTaxonomyRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReplaceTaxonomyRequest instance
+                     */
+                    public static create(properties?: google.cloud.datacatalog.v1.IReplaceTaxonomyRequest): google.cloud.datacatalog.v1.ReplaceTaxonomyRequest;
+
+                    /**
+                     * Encodes the specified ReplaceTaxonomyRequest message. Does not implicitly {@link google.cloud.datacatalog.v1.ReplaceTaxonomyRequest.verify|verify} messages.
+                     * @param message ReplaceTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.datacatalog.v1.IReplaceTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReplaceTaxonomyRequest message, length delimited. Does not implicitly {@link google.cloud.datacatalog.v1.ReplaceTaxonomyRequest.verify|verify} messages.
+                     * @param message ReplaceTaxonomyRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.datacatalog.v1.IReplaceTaxonomyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReplaceTaxonomyRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReplaceTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.datacatalog.v1.ReplaceTaxonomyRequest;
+
+                    /**
+                     * Decodes a ReplaceTaxonomyRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReplaceTaxonomyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.datacatalog.v1.ReplaceTaxonomyRequest;
+
+                    /**
+                     * Verifies a ReplaceTaxonomyRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReplaceTaxonomyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReplaceTaxonomyRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.datacatalog.v1.ReplaceTaxonomyRequest;
+
+                    /**
+                     * Creates a plain object from a ReplaceTaxonomyRequest message. Also converts values to other types if specified.
+                     * @param message ReplaceTaxonomyRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.datacatalog.v1.ReplaceTaxonomyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReplaceTaxonomyRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

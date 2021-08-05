@@ -41,8 +41,8 @@ import * as gapicConfig from './data_catalog_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Data Catalog API service allows clients to discover, understand, and manage
- *  their data.
+ *  Data Catalog API service allows you to discover, understand, and manage
+ *  your data.
  * @class
  * @memberof v1
  */
@@ -409,32 +409,38 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Creates an EntryGroup.
+   * Creates an entry group.
    *
-   * An entry group contains logically related entries together with Cloud
-   * Identity and Access Management policies that specify the users who can
-   * create, edit, and view entries within the entry group.
+   * An entry group contains logically related entries together with [Cloud
+   * Identity and Access Management](/data-catalog/docs/concepts/iam) policies.
+   * These policies specify users who can create, edit, and view entries
+   * within entry groups.
    *
-   * Data Catalog automatically creates an entry group for BigQuery entries
-   * ("@bigquery") and Pub/Sub topics ("@pubsub"). Users create their own entry
-   * group to contain Cloud Storage fileset entries or custom type entries,
-   * and the IAM policies associated with those entries. Entry groups, like
-   * entries, can be searched.
+   * Data Catalog automatically creates entry groups with names that start with
+   * the `@` symbol for the following resources:
+   *
+   * * BigQuery entries (`@bigquery`)
+   * * Pub/Sub topics (`@pubsub`)
+   * * Dataproc Metastore services (`@dataproc_metastore_{SERVICE_NAME_HASH}`)
+   *
+   * You can create your own entry groups for Cloud Storage fileset entries
+   * and custom entries together with the corresponding IAM policies.
+   * User-created entry groups can't contain the `@` symbol, it is reserved
+   * for automatically created groups.
+   *
+   * Entry groups, like entries, can be searched.
    *
    * A maximum of 10,000 entry groups may be created per organization across all
    * locations.
    *
-   * Users should enable the Data Catalog API in the project identified by
-   * the `parent` parameter (see [Data Catalog Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   * You must enable the Data Catalog API in the project identified by
+   * the `parent` parameter. For more information, see [Data Catalog resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the project this entry group belongs to. Example:
-   *
-   *   `projects/{project_id}/locations/{location}`
+   *   Required. The names of the project and location that the new entry group belongs to.
    *
    *   Note: The entry group itself and its child resources might not be
    *   stored in the location specified in its name.
@@ -445,7 +451,7 @@ export class DataCatalogClient {
    *   underscores (_), and must start with a letter or underscore.
    *   The maximum size is 64 bytes when encoded in UTF-8.
    * @param {google.cloud.datacatalog.v1.EntryGroup} request.entryGroup
-   *   The entry group to create. Defaults to an empty entry group.
+   *   The entry group to create. Defaults to empty.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -531,15 +537,14 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Gets an EntryGroup.
+   * Gets an entry group.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the entry group. For example,
-   *   `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
+   *   Required. The name of the entry group to get.
    * @param {google.protobuf.FieldMask} request.readMask
-   *   The fields to return. If not set or empty, all fields are returned.
+   *   The fields to return. If empty or omitted, all fields are returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -625,16 +630,17 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Updates an EntryGroup. The user should enable the Data Catalog API in the
-   * project identified by the `entry_group.name` parameter (see [Data Catalog
-   * Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   * Updates an entry group.
+   *
+   * You must enable the Data Catalog API in the project identified by
+   * the `entry_group.name` parameter. For more information, see [Data Catalog
+   * resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.EntryGroup} request.entryGroup
-   *   Required. The updated entry group. "name" field must be set.
+   *   Required. Updates for the entry group. The `name` field must be set.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Names of fields whose values to overwrite on an entry group.
    *
@@ -726,17 +732,17 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Deletes an EntryGroup. Only entry groups that do not contain entries can be
-   * deleted. Users should enable the Data Catalog API in the project
-   * identified by the `name` parameter (see [Data Catalog Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   * Deletes an entry group.
+   *
+   * You must enable the Data Catalog API in the project
+   * identified by the `name` parameter. For more information, see [Data Catalog
+   * resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the entry group. For example,
-   *   `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`.
+   *   Required. The name of the entry group to delete.
    * @param {boolean} [request.force]
    *   Optional. If true, deletes all entries in the entry group.
    * @param {object} [options]
@@ -820,22 +826,22 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Creates an entry. Only entries of types 'FILESET', 'CLUSTER', 'DATA_STREAM'
-   * or with a user-specified type can be created.
+   * Creates an entry.
    *
-   * Users should enable the Data Catalog API in the project identified by
-   * the `parent` parameter (see [Data Catalog Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   * You can create entries only with 'FILESET', 'CLUSTER', 'DATA_STREAM',
+   * or custom types. Data Catalog automatically creates entries with other
+   * types during metadata ingestion from integrated systems.
    *
-   * A maximum of 100,000 entries may be created per entry group.
+   * You must enable the Data Catalog API in the project identified by
+   * the `parent` parameter. For more information, see [Data Catalog resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
+   *
+   * An entry group can have a maximum of 100,000 entries.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the entry group this entry belongs to. Example:
-   *
-   *   `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}`
+   *   Required. The name of the entry group this entry belongs to.
    *
    *   Note: The entry itself and its child resources might not be stored in
    *   the location specified in its name.
@@ -927,15 +933,16 @@ export class DataCatalogClient {
   ): void;
   /**
    * Updates an existing entry.
-   * Users should enable the Data Catalog API in the project identified by
-   * the `entry.name` parameter (see [Data Catalog Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   *
+   * You must enable the Data Catalog API in the project identified by
+   * the `entry.name` parameter. For more information, see [Data Catalog
+   * resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.Entry} request.entry
-   *   Required. The updated entry. The "name" field must be set.
+   *   Required. Updates for the entry. The `name` field must be set.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Names of fields whose values to overwrite on an entry.
    *
@@ -943,24 +950,29 @@ export class DataCatalogClient {
    *   are overwritten. If such fields are non-required and omitted in the
    *   request body, their values are emptied.
    *
-   *   The following fields are modifiable:
+   *   You can modify only the fields listed below.
    *
-   *   * For entries with type `DATA_STREAM`:
-   *      * `schema`
-   *   * For entries with type `FILESET`:
-   *      * `schema`
-   *      * `display_name`
-   *      * `description`
-   *      * `gcs_fileset_spec`
-   *      * `gcs_fileset_spec.file_patterns`
-   *   * For entries with `user_specified_type`:
-   *      * `schema`
-   *      * `display_name`
-   *      * `description`
-   *      * `user_specified_type`
-   *      * `user_specified_system`
-   *      * `linked_resource`
-   *      * `source_system_timestamps`
+   *   For entries with type `DATA_STREAM`:
+   *
+   *   * `schema`
+   *
+   *   For entries with type `FILESET`:
+   *
+   *   * `schema`
+   *   * `display_name`
+   *   * `description`
+   *   * `gcs_fileset_spec`
+   *   * `gcs_fileset_spec.file_patterns`
+   *
+   *   For entries with `user_specified_type`:
+   *
+   *   * `schema`
+   *   * `display_name`
+   *   * `description`
+   *   * `user_specified_type`
+   *   * `user_specified_system`
+   *   * `linked_resource`
+   *   * `source_system_timestamps`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1040,20 +1052,21 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Deletes an existing entry. Only entries created through
+   * Deletes an existing entry.
+   *
+   * You can delete only the entries created by the
    * {@link google.cloud.datacatalog.v1.DataCatalog.CreateEntry|CreateEntry}
-   * method can be deleted.
-   * Users should enable the Data Catalog API in the project identified by
-   * the `name` parameter (see [Data Catalog Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   * method.
+   *
+   * You must enable the Data Catalog API in the project identified by
+   * the `name` parameter. For more information, see [Data Catalog
+   * resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the entry. Example:
-   *
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   *   Required. The name of the entry to delete.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1138,9 +1151,7 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the entry. Example:
-   *
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   *   Required. The name of the entry to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1220,35 +1231,35 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Get an entry by target resource name. This method allows clients to use
-   * the resource name from the source Google Cloud Platform service to get the
-   * Data Catalog Entry.
+   * Gets an entry by its target resource name.
+   *
+   * The resource name comes from the source Google Cloud Platform service.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.linkedResource
    *   The full name of the Google Cloud Platform resource the Data Catalog
-   *   entry represents. See:
-   *   https://cloud.google.com/apis/design/resource_names#full_resource_name.
-   *   Full names are case-sensitive.
+   *   entry represents. For more information, see [Full Resource Name]
+   *   (https://cloud.google.com/apis/design/resource_names#full_resource_name).
    *
-   *   Examples:
+   *   Full names are case-sensitive. For example:
    *
-   *    * //bigquery.googleapis.com/projects/projectId/datasets/datasetId/tables/tableId
-   *    * //pubsub.googleapis.com/projects/projectId/topics/topicId
+   *    * `//bigquery.googleapis.com/projects/{PROJECT_ID}/datasets/{DATASET_ID}/tables/{TABLE_ID}`
+   *    * `//pubsub.googleapis.com/projects/{PROJECT_ID}/topics/{TOPIC_ID}`
    * @param {string} request.sqlResource
    *   The SQL name of the entry. SQL names are case-sensitive.
    *
    *   Examples:
    *
-   *     * `pubsub.project_id.topic_id`
-   *     * ``pubsub.project_id.`topic.id.with.dots` ``
-   *     * `bigquery.table.project_id.dataset_id.table_id`
-   *     * `bigquery.dataset.project_id.dataset_id`
-   *     * `datacatalog.entry.project_id.location_id.entry_group_id.entry_id`
+   *   * `pubsub.topic.{PROJECT_ID}.{TOPIC_ID}`
+   *   * `pubsub.topic.{PROJECT_ID}.`\``{TOPIC.ID.SEPARATED.WITH.DOTS}`\`
+   *   * `bigquery.table.{PROJECT_ID}.{DATASET_ID}.{TABLE_ID}`
+   *   * `bigquery.dataset.{PROJECT_ID}.{DATASET_ID}`
+   *   * `datacatalog.entry.{PROJECT_ID}.{LOCATION_ID}.{ENTRY_GROUP_ID}.{ENTRY_ID}`
    *
-   *   `*_id`s should satisfy the standard SQL rules for identifiers.
-   *   https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical.
+   *   Identifiers (`*_ID`) should comply with the
+   *   [Lexical structure in Standard SQL]
+   *   (https://cloud.google.com/bigquery/docs/reference/standard-sql/lexical).
    * @param {string} request.fullyQualifiedName
    *   Fully qualified name (FQN) of the resource.
    *
@@ -1264,7 +1275,7 @@ export class DataCatalogClient {
    *
    *   Example for a DPMS table:
    *
-   *   `dataproc_metastore:project_id.location_id.instance_id.database_id.table_id`
+   *   `dataproc_metastore:{PROJECT_ID}.{LOCATION_ID}.{INSTANCE_ID}.{DATABASE_ID}.{TABLE_ID}`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1342,21 +1353,18 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Creates a tag template. The user should enable the Data Catalog API in
-   * the project identified by the `parent` parameter (see [Data Catalog
-   * Resource
-   * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
-   * for more information).
+   * Creates a tag template.
+   *
+   * You must enable the Data Catalog API in the project identified by the
+   * `parent` parameter.
+   * For more information, see [Data Catalog resource project]
+   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project and the template location
    *   [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
-   *
-   *   Example:
-   *
-   *   * projects/{project_id}/locations/us-central1
    * @param {string} request.tagTemplateId
    *   Required. The ID of the tag template to create.
    *
@@ -1455,9 +1463,7 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template. Example:
-   *
-   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
+   *   Required. The name of the tag template to get.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1543,23 +1549,25 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Updates a tag template. This method cannot be used to update the fields of
-   * a template. The tag template fields are represented as separate resources
-   * and should be updated using their own create/update/delete methods.
-   * Users should enable the Data Catalog API in the project identified by
-   * the `tag_template.name` parameter (see [Data Catalog Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   * Updates a tag template.
+   *
+   * You can't update template fields with this method. These fields are
+   * separate resources with their own create, update, and delete methods.
+   *
+   * You must enable the Data Catalog API in the project identified by
+   * the `tag_template.name` parameter. For more information, see [Data Catalog
+   * resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.TagTemplate} request.tagTemplate
-   *   Required. The template to update. The "name" field must be set.
+   *   Required. The template to update. The `name` field must be set.
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Names of fields whose values to overwrite on a tag template. Currently,
    *   only `display_name` can be overwritten.
    *
-   *   In general, if this parameter is absent or empty, all modifiable fields
+   *   If this parameter is absent or empty, all modifiable fields
    *   are overwritten. If such fields are non-required and omitted in the
    *   request body, their values are emptied.
    * @param {object} [options]
@@ -1647,22 +1655,20 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Deletes a tag template and all tags using the template.
-   * Users should enable the Data Catalog API in the project identified by
-   * the `name` parameter (see [Data Catalog Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   * Deletes a tag template and all tags that use it.
+   *
+   * You must enable the Data Catalog API in the project identified by
+   * the `name` parameter. For more information, see [Data Catalog resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template to delete. Example:
-   *
-   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}
+   *   Required. The name of the tag template to delete.
    * @param {boolean} request.force
-   *   Required. Currently, this field must always be set to `true`.
-   *   This confirms the deletion of any possible tags using this template.
-   *   `force = false` will be supported in the future.
+   *   Required. If true, deletes all tags that use this template.
+   *
+   *   Currently, `true` is the only supported value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1751,21 +1757,17 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Creates a field in a tag template. The user should enable the Data Catalog
-   * API in the project identified by the `parent` parameter (see
-   * [Data Catalog Resource
-   * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
-   * for more information).
+   * Creates a field in a tag template.
+   *
+   * You must enable the Data Catalog API in the project identified by
+   * the `parent` parameter. For more information, see [Data Catalog resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
    *   Required. The name of the project and the template location
    *   [region](https://cloud.google.com/data-catalog/docs/concepts/regions).
-   *
-   *   Example:
-   *
-   *   * projects/{project_id}/locations/us-central1/tagTemplates/{tag_template_id}
    * @param {string} request.tagTemplateFieldId
    *   Required. The ID of the tag template field to create.
    *
@@ -1872,27 +1874,28 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Updates a field in a tag template. This method cannot be used to update the
-   * field type. Users should enable the Data Catalog API in the project
-   * identified by the `name` parameter (see [Data Catalog Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   * Updates a field in a tag template.
+   *
+   * You can't update the field type with this method.
+   *
+   * You must enable the Data Catalog API in the project
+   * identified by the `name` parameter. For more information, see [Data Catalog
+   * resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template field. Example:
-   *
-   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
+   *   Required. The name of the tag template field.
    * @param {google.cloud.datacatalog.v1.TagTemplateField} request.tagTemplateField
    *   Required. The template to update.
    * @param {google.protobuf.FieldMask} [request.updateMask]
    *   Optional. Names of fields whose values to overwrite on an individual field of a tag
    *   template. The following fields are modifiable:
    *
-   *     * `display_name`
-   *     * `type.enum_type`
-   *     * `is_required`
+   *   * `display_name`
+   *   * `type.enum_type`
+   *   * `is_required`
    *
    *   If this parameter is absent or empty, all modifiable fields
    *   are overwritten. If such fields are non-required and omitted in the request
@@ -1998,18 +2001,16 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Renames a field in a tag template. The user should enable the Data Catalog
-   * API in the project identified by the `name` parameter (see [Data Catalog
-   * Resource
-   * Project](https://cloud.google.com/data-catalog/docs/concepts/resource-project)
-   * for more information).
+   * Renames a field in a tag template.
+   *
+   * You must enable the Data Catalog API in the project identified by the
+   * `name` parameter. For more information, see [Data Catalog resource project]
+   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template. Example:
-   *
-   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
+   *   Required. The name of the tag template.
    * @param {string} request.newTagTemplateFieldId
    *   Required. The new ID of this tag template field. For example, `my_new_field`.
    * @param {object} [options]
@@ -2107,15 +2108,14 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Renames an enum value in a tag template. The enum values have to be unique
-   * within one enum field.
+   * Renames an enum value in a tag template.
+   *
+   * Within a single enum field, enum values must be unique.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the enum field value. Example:
-   *
-   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}/enumValues/{enum_value_display_name}
+   *   Required. The name of the enum field value.
    * @param {string} request.newEnumValueDisplayName
    *   Required. The new display name of the enum value. For example, `my_new_enum_value`.
    * @param {object} [options]
@@ -2213,22 +2213,21 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Deletes a field in a tag template and all uses of that field.
-   * Users should enable the Data Catalog API in the project identified by
-   * the `name` parameter (see [Data Catalog Resource Project]
-   * (https://cloud.google.com/data-catalog/docs/concepts/resource-project) for
-   * more information).
+   * Deletes a field in a tag template and all uses of this field from the tags
+   * based on this template.
+   *
+   * You must enable the Data Catalog API in the project identified by
+   * the `name` parameter. For more information, see [Data Catalog resource
+   * project](https://cloud.google.com/data-catalog/docs/concepts/resource-project).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag template field to delete. Example:
-   *
-   *   * projects/{project_id}/locations/{location}/tagTemplates/{tag_template_id}/fields/{tag_template_field_id}
+   *   Required. The name of the tag template field to delete.
    * @param {boolean} request.force
-   *   Required. Currently, this field must always be set to `true`.
-   *   This confirms the deletion of this field from any tags using this field.
-   *   `force = false` will be supported in the future.
+   *   Required. If true, deletes this field from any tags that use it.
+   *
+   *   Currently, `true` is the only supported value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2317,21 +2316,26 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Creates a tag on an {@link google.cloud.datacatalog.v1.Entry|Entry}.
-   * Note: The project identified by the `parent` parameter for the
-   * [tag](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters)
-   * and the
-   * [tag
-   * template](https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
-   * used to create the tag must be from the same organization.
+   * Creates a tag and assigns it to:
+   *
+   * * An {@link google.cloud.datacatalog.v1.Entry|Entry} if the method name is
+   *   ``projects.locations.entryGroups.entries.tags.create``.
+   * * Or {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}if the method
+   *   name is ``projects.locations.entryGroups.tags.create``.
+   *
+   * Note: The project identified by the `parent` parameter for the [tag]
+   * (https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.entryGroups.entries.tags/create#path-parameters)
+   * and the [tag template]
+   * (https://cloud.google.com/data-catalog/docs/reference/rest/v1/projects.locations.tagTemplates/create#path-parameters)
+   * used to create the tag must be in the same organization.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the resource to attach this tag to. Tags can be attached to
-   *   entries. An entry can have up to 1000 attached tags. Example:
+   *   Required. The name of the resource to attach this tag to.
    *
-   *   `projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}`
+   *   Tags can be attached to entries or entry groups. An entry can have up to
+   *   1000 attached tags.
    *
    *   Note: The tag and its child resources might not be stored in
    *   the location specified in its name.
@@ -2513,9 +2517,7 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the tag to delete. Example:
-   *
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}/tags/{tag_id}
+   *   Required. The name of the tag to delete.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2595,20 +2597,23 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Sets the access control policy for a resource. Replaces any existing
+   * Sets an access control policy for a resource. Replaces any existing
    * policy.
-   * Supported resources are:
-   *   - Tag templates.
-   *   - Entries.
-   *   - Entry groups.
-   * Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
-   * and any external Google Cloud Platform resources synced to Data Catalog.
    *
-   * Callers must have following Google IAM permission
-   *   - `datacatalog.tagTemplates.setIamPolicy` to set policies on tag
-   *     templates.
-   *   - `datacatalog.entries.setIamPolicy` to set policies on entries.
-   *   - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
+   * Supported resources are:
+   *
+   * - Tag templates
+   * - Entry groups
+   *
+   * Note: This method sets policies only within Data Catalog and can't be
+   * used to manage policies in BigQuery, Pub/Sub, Dataproc Metastore, and any
+   * external Google Cloud Platform resources synced with the Data Catalog.
+   *
+   * To call this method, you must have the following Google IAM permissions:
+   *
+   * - `datacatalog.tagTemplates.setIamPolicy` to set policies on tag
+   *   templates.
+   * - `datacatalog.entryGroups.setIamPolicy` to set policies on entry groups.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2697,22 +2702,27 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Gets the access control policy for a resource. A `NOT_FOUND` error
-   * is returned if the resource does not exist. An empty policy is returned
-   * if the resource exists but does not have a policy set on it.
+   * Gets the access control policy for a resource.
+   *
+   * May return:
+   *
+   * * A`NOT_FOUND` error if the resource doesn't exist or you don't have the
+   *   permission to view it.
+   * * An empty policy if the resource exists but doesn't have a set policy.
    *
    * Supported resources are:
-   *   - Tag templates.
-   *   - Entries.
-   *   - Entry groups.
-   * Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
-   * and any external Google Cloud Platform resources synced to Data Catalog.
    *
-   * Callers must have following Google IAM permission
-   *   - `datacatalog.tagTemplates.getIamPolicy` to get policies on tag
-   *     templates.
-   *   - `datacatalog.entries.getIamPolicy` to get policies on entries.
-   *   - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
+   * - Tag templates
+   * - Entry groups
+   *
+   * Note: This method doesn't get policies from Google Cloud Platform
+   * resources ingested into Data Catalog.
+   *
+   * To call this method, you must have the following Google IAM permissions:
+   *
+   * - `datacatalog.tagTemplates.getIamPolicy` to get policies on tag
+   *   templates.
+   * - `datacatalog.entryGroups.getIamPolicy` to get policies on entry groups.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2799,19 +2809,20 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Returns the caller's permissions on a resource.
-   * If the resource does not exist, an empty set of permissions is returned
-   * (We don't return a `NOT_FOUND` error).
+   * Gets your permissions on a resource.
+   *
+   * Returns an empty set of permissions if the resource doesn't exist.
    *
    * Supported resources are:
-   *   - Tag templates.
-   *   - Entries.
-   *   - Entry groups.
-   * Note, this method cannot be used to manage policies for BigQuery, Pub/Sub
-   * and any external Google Cloud Platform resources synced to Data Catalog.
    *
-   * A caller is not required to have Google IAM permission to make this
-   * request.
+   * - Tag templates
+   * - Entry groups
+   *
+   * Note: This method gets policies only within Data Catalog and can't be
+   * used to get policies from BigQuery, Pub/Sub, Dataproc Metastore, and any
+   * external Google Cloud Platform resources ingested into Data Catalog.
+   *
+   * No Google IAM permissions are required to call this method.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2905,63 +2916,66 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Searches Data Catalog for multiple resources like entries, tags that
+   * Searches Data Catalog for multiple resources like entries and tags that
    * match a query.
    *
-   * This is a custom method
-   * (https://cloud.google.com/apis/design/custom_methods) and does not return
-   * the complete resource, only the resource identifier and high level
-   * fields. Clients can subsequently call `Get` methods.
+   * This is a [Custom Method]
+   * (https://cloud.google.com/apis/design/custom_methods) that doesn't return
+   * all information on a resource, only its ID and high level fields. To get
+   * more information, you can subsequently call specific get methods.
    *
-   * Note that Data Catalog search queries do not guarantee full recall. Query
-   * results that match your query may not be returned, even in subsequent
-   * result pages. Also note that results returned (and not returned) can vary
-   * across repeated search queries.
+   * Note: Data Catalog search queries don't guarantee full recall. Results
+   * that match your query might not be returned, even in subsequent
+   * result pages. Additionally, returned (and not returned) results can vary
+   * if you repeat search queries.
    *
-   * See [Data Catalog Search
-   * Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
-   * for more information.
+   * For more information, see [Data Catalog search syntax]
+   * (https://cloud.google.com/data-catalog/docs/how-to/search-reference).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.SearchCatalogRequest.Scope} request.scope
-   *   Required. The scope of this search request. A `scope` that has empty
-   *   `include_org_ids`, `include_project_ids` AND false
-   *   `include_gcp_public_datasets` is considered invalid. Data Catalog will
-   *   return an error in such a case.
+   *   Required. The scope of this search request.
+   *
+   *   The `scope` is invalid if `include_org_ids`, `include_project_ids` are
+   *   empty AND `include_gcp_public_datasets` is set to `false`. In this case,
+   *   the request returns an error.
    * @param {string} [request.query]
-   *   Optional. The query string in search query syntax. An empty query string will result
-   *   in all data assets (in the specified scope) that the user has access to.
+   *   Optional. The query string with a minimum of 3 characters and specific syntax.
+   *   For more information, see
+   *   [Data Catalog search syntax](/data-catalog/docs/how-to/search-reference).
    *
-   *   Query strings can be simple as "x" or more qualified as:
+   *   An empty query string returns all data assets (in the specified scope)
+   *   that you have access to.
    *
-   *   * name:x
-   *   * column:x
-   *   * description:y
+   *   A query string can be a simple `xyz` or qualified by predicates:
    *
-   *   Note: Query tokens need to have a minimum of 3 characters for substring
-   *   matching to work correctly. See [Data Catalog Search
-   *   Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
-   *   for more information.
+   *   * `name:x`
+   *   * `column:y`
+   *   * `description:z`
    * @param {number} request.pageSize
-   *   Number of results in the search page. If <=0 then defaults to 10. Max limit
-   *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
+   *   Number of results to return in a single search page.
+   *
+   *   Can't be negative or 0, defaults to 10 in this case.
+   *   The maximum number is 1000. If exceeded, throws an "invalid argument"
+   *   exception.
    * @param {string} [request.pageToken]
-   *   Optional. Pagination token returned in an earlier
-   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}, which
-   *   indicates that this is a continuation of a prior
+   *   Optional. Pagination token that, if specified, returns the next page of search
+   *   results. If empty, returns the first page.
+   *
+   *   This token is returned in the {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}
+   *   field of the response to a previous
    *   {@link google.cloud.datacatalog.v1.DataCatalog.SearchCatalog|SearchCatalogRequest}
-   *   call, and that the system should return the next page of data. If empty,
-   *   the first page is returned.
+   *   call.
    * @param {string} request.orderBy
-   *   Specifies the ordering of results, currently supported case-sensitive
-   *   choices are:
+   *   Specifies the order of results.
    *
-   *     * `relevance`, only supports descending
-   *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
-   *       specified
+   *   Currently supported case-sensitive values are:
    *
-   *   If not specified, defaults to `relevance` descending.
+   *   * `relevance` that can only be descending
+   *   * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
+   *
+   *   If this parameter is omitted, it defaults to the descending `relevance`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3018,43 +3032,47 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.SearchCatalogRequest.Scope} request.scope
-   *   Required. The scope of this search request. A `scope` that has empty
-   *   `include_org_ids`, `include_project_ids` AND false
-   *   `include_gcp_public_datasets` is considered invalid. Data Catalog will
-   *   return an error in such a case.
+   *   Required. The scope of this search request.
+   *
+   *   The `scope` is invalid if `include_org_ids`, `include_project_ids` are
+   *   empty AND `include_gcp_public_datasets` is set to `false`. In this case,
+   *   the request returns an error.
    * @param {string} [request.query]
-   *   Optional. The query string in search query syntax. An empty query string will result
-   *   in all data assets (in the specified scope) that the user has access to.
+   *   Optional. The query string with a minimum of 3 characters and specific syntax.
+   *   For more information, see
+   *   [Data Catalog search syntax](/data-catalog/docs/how-to/search-reference).
    *
-   *   Query strings can be simple as "x" or more qualified as:
+   *   An empty query string returns all data assets (in the specified scope)
+   *   that you have access to.
    *
-   *   * name:x
-   *   * column:x
-   *   * description:y
+   *   A query string can be a simple `xyz` or qualified by predicates:
    *
-   *   Note: Query tokens need to have a minimum of 3 characters for substring
-   *   matching to work correctly. See [Data Catalog Search
-   *   Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
-   *   for more information.
+   *   * `name:x`
+   *   * `column:y`
+   *   * `description:z`
    * @param {number} request.pageSize
-   *   Number of results in the search page. If <=0 then defaults to 10. Max limit
-   *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
+   *   Number of results to return in a single search page.
+   *
+   *   Can't be negative or 0, defaults to 10 in this case.
+   *   The maximum number is 1000. If exceeded, throws an "invalid argument"
+   *   exception.
    * @param {string} [request.pageToken]
-   *   Optional. Pagination token returned in an earlier
-   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}, which
-   *   indicates that this is a continuation of a prior
+   *   Optional. Pagination token that, if specified, returns the next page of search
+   *   results. If empty, returns the first page.
+   *
+   *   This token is returned in the {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}
+   *   field of the response to a previous
    *   {@link google.cloud.datacatalog.v1.DataCatalog.SearchCatalog|SearchCatalogRequest}
-   *   call, and that the system should return the next page of data. If empty,
-   *   the first page is returned.
+   *   call.
    * @param {string} request.orderBy
-   *   Specifies the ordering of results, currently supported case-sensitive
-   *   choices are:
+   *   Specifies the order of results.
    *
-   *     * `relevance`, only supports descending
-   *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
-   *       specified
+   *   Currently supported case-sensitive values are:
    *
-   *   If not specified, defaults to `relevance` descending.
+   *   * `relevance` that can only be descending
+   *   * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
+   *
+   *   If this parameter is omitted, it defaults to the descending `relevance`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3089,43 +3107,47 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.datacatalog.v1.SearchCatalogRequest.Scope} request.scope
-   *   Required. The scope of this search request. A `scope` that has empty
-   *   `include_org_ids`, `include_project_ids` AND false
-   *   `include_gcp_public_datasets` is considered invalid. Data Catalog will
-   *   return an error in such a case.
+   *   Required. The scope of this search request.
+   *
+   *   The `scope` is invalid if `include_org_ids`, `include_project_ids` are
+   *   empty AND `include_gcp_public_datasets` is set to `false`. In this case,
+   *   the request returns an error.
    * @param {string} [request.query]
-   *   Optional. The query string in search query syntax. An empty query string will result
-   *   in all data assets (in the specified scope) that the user has access to.
+   *   Optional. The query string with a minimum of 3 characters and specific syntax.
+   *   For more information, see
+   *   [Data Catalog search syntax](/data-catalog/docs/how-to/search-reference).
    *
-   *   Query strings can be simple as "x" or more qualified as:
+   *   An empty query string returns all data assets (in the specified scope)
+   *   that you have access to.
    *
-   *   * name:x
-   *   * column:x
-   *   * description:y
+   *   A query string can be a simple `xyz` or qualified by predicates:
    *
-   *   Note: Query tokens need to have a minimum of 3 characters for substring
-   *   matching to work correctly. See [Data Catalog Search
-   *   Syntax](https://cloud.google.com/data-catalog/docs/how-to/search-reference)
-   *   for more information.
+   *   * `name:x`
+   *   * `column:y`
+   *   * `description:z`
    * @param {number} request.pageSize
-   *   Number of results in the search page. If <=0 then defaults to 10. Max limit
-   *   for page_size is 1000. Throws an invalid argument for page_size > 1000.
+   *   Number of results to return in a single search page.
+   *
+   *   Can't be negative or 0, defaults to 10 in this case.
+   *   The maximum number is 1000. If exceeded, throws an "invalid argument"
+   *   exception.
    * @param {string} [request.pageToken]
-   *   Optional. Pagination token returned in an earlier
-   *   {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}, which
-   *   indicates that this is a continuation of a prior
+   *   Optional. Pagination token that, if specified, returns the next page of search
+   *   results. If empty, returns the first page.
+   *
+   *   This token is returned in the {@link google.cloud.datacatalog.v1.SearchCatalogResponse.next_page_token|SearchCatalogResponse.next_page_token}
+   *   field of the response to a previous
    *   {@link google.cloud.datacatalog.v1.DataCatalog.SearchCatalog|SearchCatalogRequest}
-   *   call, and that the system should return the next page of data. If empty,
-   *   the first page is returned.
+   *   call.
    * @param {string} request.orderBy
-   *   Specifies the ordering of results, currently supported case-sensitive
-   *   choices are:
+   *   Specifies the order of results.
    *
-   *     * `relevance`, only supports descending
-   *     * `last_modified_timestamp [asc|desc]`, defaults to descending if not
-   *       specified
+   *   Currently supported case-sensitive values are:
    *
-   *   If not specified, defaults to `relevance` descending.
+   *   * `relevance` that can only be descending
+   *   * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
+   *
+   *   If this parameter is omitted, it defaults to the descending `relevance`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3194,16 +3216,17 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the location that contains the entry groups, which can be
-   *   provided in URL format. Example:
+   *   Required. The name of the location that contains the entry groups to list.
    *
-   *   * projects/{project_id}/locations/{location}
+   *   Can be provided as a URL.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   Optional. The maximum number of items to return.
+   *
+   *   Default is 10. Maximum limit is 1000.
+   *   Throws an invalid argument if `page_size` is greater than 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Optional. Pagination token that specifies the next page to return.
+   *   If empty, returns the first page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3266,16 +3289,17 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the location that contains the entry groups, which can be
-   *   provided in URL format. Example:
+   *   Required. The name of the location that contains the entry groups to list.
    *
-   *   * projects/{project_id}/locations/{location}
+   *   Can be provided as a URL.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   Optional. The maximum number of items to return.
+   *
+   *   Default is 10. Maximum limit is 1000.
+   *   Throws an invalid argument if `page_size` is greater than 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Optional. Pagination token that specifies the next page to return.
+   *   If empty, returns the first page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3316,16 +3340,17 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the location that contains the entry groups, which can be
-   *   provided in URL format. Example:
+   *   Required. The name of the location that contains the entry groups to list.
    *
-   *   * projects/{project_id}/locations/{location}
+   *   Can be provided as a URL.
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   Optional. The maximum number of items to return.
+   *
+   *   Default is 10. Maximum limit is 1000.
+   *   Throws an invalid argument if `page_size` is greater than 1000.
    * @param {string} [request.pageToken]
-   *   Optional. Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Optional. Pagination token that specifies the next page to return.
+   *   If empty, returns the first page.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3400,21 +3425,21 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the entry group that contains the entries, which can
-   *   be provided in URL format. Example:
+   *   Required. The name of the entry group that contains the entries to list.
    *
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   *   Can be provided in URL format.
    * @param {number} request.pageSize
-   *   The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   The maximum number of items to return. Default is 10. Maximum limit is
+   *   1000. Throws an invalid argument if `page_size` is more than 1000.
    * @param {string} request.pageToken
-   *   Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Pagination token that specifies the next page to return. If empty, the
+   *   first page is returned.
    * @param {google.protobuf.FieldMask} request.readMask
-   *   The fields to return for each Entry. If not set or empty, all
+   *   The fields to return for each entry. If empty or omitted, all
    *   fields are returned.
-   *   For example, setting read_mask to contain only one path "name" will cause
-   *   ListEntries to return a list of Entries with only "name" field.
+   *
+   *   For example, to return a list of entries with only the `name` field,
+   *   set `read_mask` to only one path with the `name` value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3477,21 +3502,21 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the entry group that contains the entries, which can
-   *   be provided in URL format. Example:
+   *   Required. The name of the entry group that contains the entries to list.
    *
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   *   Can be provided in URL format.
    * @param {number} request.pageSize
-   *   The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   The maximum number of items to return. Default is 10. Maximum limit is
+   *   1000. Throws an invalid argument if `page_size` is more than 1000.
    * @param {string} request.pageToken
-   *   Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Pagination token that specifies the next page to return. If empty, the
+   *   first page is returned.
    * @param {google.protobuf.FieldMask} request.readMask
-   *   The fields to return for each Entry. If not set or empty, all
+   *   The fields to return for each entry. If empty or omitted, all
    *   fields are returned.
-   *   For example, setting read_mask to contain only one path "name" will cause
-   *   ListEntries to return a list of Entries with only "name" field.
+   *
+   *   For example, to return a list of entries with only the `name` field,
+   *   set `read_mask` to only one path with the `name` value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3532,21 +3557,21 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the entry group that contains the entries, which can
-   *   be provided in URL format. Example:
+   *   Required. The name of the entry group that contains the entries to list.
    *
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
+   *   Can be provided in URL format.
    * @param {number} request.pageSize
-   *   The maximum number of items to return. Default is 10. Max limit is 1000.
-   *   Throws an invalid argument for `page_size > 1000`.
+   *   The maximum number of items to return. Default is 10. Maximum limit is
+   *   1000. Throws an invalid argument if `page_size` is more than 1000.
    * @param {string} request.pageToken
-   *   Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Pagination token that specifies the next page to return. If empty, the
+   *   first page is returned.
    * @param {google.protobuf.FieldMask} request.readMask
-   *   The fields to return for each Entry. If not set or empty, all
+   *   The fields to return for each entry. If empty or omitted, all
    *   fields are returned.
-   *   For example, setting read_mask to contain only one path "name" will cause
-   *   ListEntries to return a list of Entries with only "name" field.
+   *
+   *   For example, to return a list of entries with only the `name` field,
+   *   set `read_mask` to only one path with the `name` value.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -3612,24 +3637,21 @@ export class DataCatalogClient {
     >
   ): void;
   /**
-   * Lists the tags on an {@link google.cloud.datacatalog.v1.Entry|Entry}.
+   * Lists tags assigned to an {@link google.cloud.datacatalog.v1.Entry|Entry}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Data Catalog resource to list the tags of. The resource
-   *   could be an {@link google.cloud.datacatalog.v1.Entry|Entry} or an
-   *   {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}.
+   *   Required. The name of the Data Catalog resource to list the tags of.
    *
-   *   Examples:
-   *
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   *   The resource can be an {@link google.cloud.datacatalog.v1.Entry|Entry}
+   *   or an {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}
+   *   (without `/entries/{entries}` at the end).
    * @param {number} request.pageSize
-   *   The maximum number of tags to return. Default is 10. Max limit is 1000.
+   *   The maximum number of tags to return. Default is 10. Maximum limit is 1000.
    * @param {string} request.pageToken
-   *   Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Pagination token that specifies the next page to return. If empty, the
+   *   first page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -3690,19 +3712,16 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Data Catalog resource to list the tags of. The resource
-   *   could be an {@link google.cloud.datacatalog.v1.Entry|Entry} or an
-   *   {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}.
+   *   Required. The name of the Data Catalog resource to list the tags of.
    *
-   *   Examples:
-   *
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   *   The resource can be an {@link google.cloud.datacatalog.v1.Entry|Entry}
+   *   or an {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}
+   *   (without `/entries/{entries}` at the end).
    * @param {number} request.pageSize
-   *   The maximum number of tags to return. Default is 10. Max limit is 1000.
+   *   The maximum number of tags to return. Default is 10. Maximum limit is 1000.
    * @param {string} request.pageToken
-   *   Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Pagination token that specifies the next page to return. If empty, the
+   *   first page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -3743,19 +3762,16 @@ export class DataCatalogClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The name of the Data Catalog resource to list the tags of. The resource
-   *   could be an {@link google.cloud.datacatalog.v1.Entry|Entry} or an
-   *   {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}.
+   *   Required. The name of the Data Catalog resource to list the tags of.
    *
-   *   Examples:
-   *
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}
-   *   * projects/{project_id}/locations/{location}/entryGroups/{entry_group_id}/entries/{entry_id}
+   *   The resource can be an {@link google.cloud.datacatalog.v1.Entry|Entry}
+   *   or an {@link google.cloud.datacatalog.v1.EntryGroup|EntryGroup}
+   *   (without `/entries/{entries}` at the end).
    * @param {number} request.pageSize
-   *   The maximum number of tags to return. Default is 10. Max limit is 1000.
+   *   The maximum number of tags to return. Default is 10. Maximum limit is 1000.
    * @param {string} request.pageToken
-   *   Token that specifies which page is requested. If empty, the first page is
-   *   returned.
+   *   Pagination token that specifies the next page to return. If empty, the
+   *   first page is returned.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

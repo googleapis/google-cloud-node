@@ -472,6 +472,11 @@
         "grpc": {
           "libraryClient": "PolicyTagManagerSerializationClient",
           "rpcs": {
+            "ReplaceTaxonomy": {
+              "methods": [
+                "replaceTaxonomy"
+              ]
+            },
             "ImportTaxonomies": {
               "methods": [
                 "importTaxonomies"
@@ -487,6 +492,11 @@
         "grpc-fallback": {
           "libraryClient": "PolicyTagManagerSerializationClient",
           "rpcs": {
+            "ReplaceTaxonomy": {
+              "methods": [
+                "replaceTaxonomy"
+              ]
+            },
             "ImportTaxonomies": {
               "methods": [
                 "importTaxonomies"

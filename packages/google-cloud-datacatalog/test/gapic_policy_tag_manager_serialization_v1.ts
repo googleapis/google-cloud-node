@@ -152,6 +152,126 @@ describe('v1.PolicyTagManagerSerializationClient', () => {
     assert.strictEqual(result, fakeProjectId);
   });
 
+  describe('replaceTaxonomy', () => {
+    it('invokes replaceTaxonomy without error', async () => {
+      const client =
+        new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.ReplaceTaxonomyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.Taxonomy()
+      );
+      client.innerApiCalls.replaceTaxonomy = stubSimpleCall(expectedResponse);
+      const [response] = await client.replaceTaxonomy(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.replaceTaxonomy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes replaceTaxonomy without error using callback', async () => {
+      const client =
+        new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.ReplaceTaxonomyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.Taxonomy()
+      );
+      client.innerApiCalls.replaceTaxonomy =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.replaceTaxonomy(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.datacatalog.v1.ITaxonomy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.replaceTaxonomy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes replaceTaxonomy with error', async () => {
+      const client =
+        new policytagmanagerserializationModule.v1.PolicyTagManagerSerializationClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.datacatalog.v1.ReplaceTaxonomyRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.replaceTaxonomy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.replaceTaxonomy(request), expectedError);
+      assert(
+        (client.innerApiCalls.replaceTaxonomy as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('importTaxonomies', () => {
     it('invokes importTaxonomies without error', async () => {
       const client =
