@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.7...v2.3.0) (2021-08-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* * feat: add a WorkerPools API
+
+### Features
+
+* add a WorkerPools API ([#254](https://www.github.com/googleapis/nodejs-cloudbuild/issues/254)) ([2e5b3f5](https://www.github.com/googleapis/nodejs-cloudbuild/commit/2e5b3f540d9cd2b3a616c4581b07ebcfc444e7c7))
+* Implementation of Build Failure Info: - Added message FailureInfo field ([#255](https://www.github.com/googleapis/nodejs-cloudbuild/issues/255)) ([6f115e2](https://www.github.com/googleapis/nodejs-cloudbuild/commit/6f115e2a4ec78289014c05f398d8464e599b1ef6))
+
+
+### Build System
+
+* force a minor release ([#262](https://www.github.com/googleapis/nodejs-cloudbuild/issues/262)) ([bc43706](https://www.github.com/googleapis/nodejs-cloudbuild/commit/bc4370692e233c265ce45546b205b9b9925d3990))
+
 ### [2.2.7](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.6...v2.2.7) (2021-07-21)
 
 
