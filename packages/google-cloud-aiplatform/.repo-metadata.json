@@ -6,7 +6,7 @@
   "product_documentation": "https://cloud.google.com/vertex-ai/docs",
   "name": "aiplatform",
   "default_version": "v1",
-  "client_documentation": "https://googleapis.dev/nodejs/aiplatform/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/aiplatform/latest",
   "release_level": "beta",
   "api_id": "aiplatform.googleapis.com",
   "repo": "googleapis/nodejs-ai-platform",
