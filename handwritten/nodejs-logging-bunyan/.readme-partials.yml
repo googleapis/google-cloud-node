@@ -61,7 +61,7 @@ body: |-
 
   ### Error Reporting
 
-  Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Cloud Error Reporting][error-reporting] if you have specified a `serviceContext.service` when instatiating a `LoggingBunyan` instance:
+  Any `Error` objects you log at severity `error` or higher can automatically be picked up by [Cloud Error Reporting][error-reporting] if you have specified a `serviceContext.service` when instantiating a `LoggingBunyan` instance:
 
   ```javascript
   const loggingBunyan = new LoggingBunyan({
@@ -110,7 +110,7 @@ body: |-
   }, req.path);
   ```
 
-  The `httpRequest` proprety must be a properly formatted [`HttpRequest`][http-request-message] message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
+  The `httpRequest` property must be a properly formatted [`HttpRequest`][http-request-message] message. (Note: the linked protobuf documentation shows `snake_case` property names, but in JavaScript one needs to provide property names in `camelCase`.)
 
   ### Correlating Logs with Traces
 
