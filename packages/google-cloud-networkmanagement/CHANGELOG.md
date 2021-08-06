@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-network-management/compare/v1.0.0...v1.0.1) (2021-08-06)
+
+
+### Bug Fixes
+
+* failing tests for LRO check methods ([#8](https://www.github.com/googleapis/nodejs-network-management/issues/8)) ([ed5f02f](https://www.github.com/googleapis/nodejs-network-management/commit/ed5f02f07410aefd97d0075e787f7899c28a2b5d))
+
 ## 1.0.0 (2021-07-21)
 
 
