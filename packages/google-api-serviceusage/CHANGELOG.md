@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.3](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.1.2...v1.1.3) (2021-07-30)
+
+
+### Bug Fixes
+
+* failing tests for LRO check methods ([#35](https://www.github.com/googleapis/nodejs-service-usage/issues/35)) ([f961511](https://www.github.com/googleapis/nodejs-service-usage/commit/f961511fe88658592857cca70dce14b92568b725))
+
 ### [1.1.2](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.1.1...v1.1.2) (2021-07-12)
 
 
