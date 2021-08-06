@@ -15,7 +15,7 @@
     "test": "mocha --timeout 600000"
   },
   "dependencies": {
-    "@google-cloud/dns": "^2.2.0"
+    "@google-cloud/dns": "^2.2.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
