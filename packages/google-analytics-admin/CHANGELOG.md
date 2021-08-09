@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.0.5](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v3.0.4...v3.0.5) (2021-08-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#144](https://www.github.com/googleapis/nodejs-analytics-admin/issues/144)) ([537d20a](https://www.github.com/googleapis/nodejs-analytics-admin/commit/537d20a623b026f68e08160af95cac31a7cd52db))
+
 ### [3.0.4](https://www.github.com/googleapis/nodejs-analytics-admin/compare/v3.0.3...v3.0.4) (2021-07-16)
 
 
