@@ -32,7 +32,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -49,7 +49,7 @@ __Usage:__
 
 ### Quickstart_installed_oauth2
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/master/samples/quickstart_installed_oauth2.js).
+View the [source code](https://github.com/googleapis/nodejs-analytics-admin/blob/main/samples/quickstart_installed_oauth2.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-admin&page=editor&open_in_editor=samples/quickstart_installed_oauth2.js,samples/README.md)
 
