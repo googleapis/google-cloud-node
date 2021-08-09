@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.0.3...v1.0.4) (2021-08-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#28](https://www.github.com/googleapis/nodejs-apigee-connect/issues/28)) ([dfcbe26](https://www.github.com/googleapis/nodejs-apigee-connect/commit/dfcbe2672c024a574e2fc1d60b8d668bbdf074b9))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.0.2...v1.0.3) (2021-07-16)
 
 
