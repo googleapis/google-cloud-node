@@ -7,7 +7,7 @@
   "language": "nodejs",
   "requires_billing": true,
   "issue_tracker": "https://issuetracker.google.com/savedsearches/559744",
-  "client_documentation": "https://googleapis.dev/nodejs/automl/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/automl/latest",
   "name": "automl",
   "name_pretty": "Cloud AutoML",
   "api_id": "automl.googleapis.com",
