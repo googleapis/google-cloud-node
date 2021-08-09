@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/apigee-connect.svg)](https://www.npmjs.org/package/@google-cloud/apigee-connect)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-apigee-connect/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-apigee-connect)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-apigee-connect/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-apigee-connect)
 
 
 
@@ -15,7 +15,7 @@ apigeeconnect client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-apigee-connect/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-apigee-connect/blob/main/CHANGELOG.md).
 
 * [Apigee Connect API Node.js Client API Reference][client-docs]
 * [Apigee Connect API Documentation][product-docs]
@@ -85,11 +85,11 @@ listConnections();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-apigee-connect/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-apigee-connect/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-apigee-connect/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-apigee-connect&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-apigee-connect/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-apigee-connect&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -132,19 +132,19 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-apigee-connect/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-apigee-connect/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
 are generated from a central template. To edit one of these files, make an edit
-to its template in this
-[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
+to its templates in
+[directory](https://github.com/googleapis/synthtool).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-apigee-connect/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-apigee-connect/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/apigee-connect/latest
 [product-docs]: https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/
