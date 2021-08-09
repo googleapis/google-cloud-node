@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.2](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.5.1...v2.5.2) (2021-08-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#134](https://www.github.com/googleapis/nodejs-analytics-data/issues/134)) ([1a24d21](https://www.github.com/googleapis/nodejs-analytics-data/commit/1a24d2101ea3c15236f7f6ee2cc6fd8327950c43))
+
 ### [2.5.1](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.5.0...v2.5.1) (2021-07-16)
 
 
