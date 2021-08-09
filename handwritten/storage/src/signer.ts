@@ -64,18 +64,6 @@ interface V2SignedUrlQuery extends SignedUrlQuery {
   Signature: string;
 }
 
-interface V4SignedUrlQuery extends V4UrlQuery {
-  'X-Goog-Signature': string;
-}
-
-interface V4UrlQuery extends SignedUrlQuery {
-  'X-Goog-Algorithm': string;
-  'X-Goog-Credential': string;
-  'X-Goog-Date': string;
-  'X-Goog-Expires': number;
-  'X-Goog-SignedHeaders': string;
-}
-
 export interface SignerGetSignedUrlConfig {
   method: 'GET' | 'PUT' | 'DELETE' | 'POST';
   expires: string | number | Date;
