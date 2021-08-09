@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+## [5.13.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.12.0...v5.13.0) (2021-08-09)
+
+
+### Features
+
+* Precondition checks ([#1523](https://www.github.com/googleapis/nodejs-storage/issues/1523)) ([7c24417](https://www.github.com/googleapis/nodejs-storage/commit/7c244178649f120cfefe58994b515da7ca6b7ffb))
+
 ## [5.12.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.11.1...v5.12.0) (2021-08-03)
 
 
