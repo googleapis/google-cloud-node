@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 Lists all zones in the current project.
 
-View the [source code](https://github.com/googleapis/nodejs-dns/blob/master/samples/listZones.js).
+View the [source code](https://github.com/googleapis/nodejs-dns/blob/main/samples/listZones.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dns&page=editor&open_in_editor=samples/listZones.js,samples/README.md)
 
@@ -53,7 +53,7 @@ __Usage:__
 
 Fetches a list of all available zones.
 
-View the [source code](https://github.com/googleapis/nodejs-dns/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-dns/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dns&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
