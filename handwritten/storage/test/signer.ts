@@ -335,8 +335,6 @@ describe('signer', () => {
       });
 
       describe('composing signed URL', () => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        let v2: sinon.SinonStub;
         const query = {
           GoogleAccessId: CLIENT_EMAIL,
           Expires: NOW.valueOf() + 2000,
@@ -344,10 +342,10 @@ describe('signer', () => {
         };
 
         beforeEach(() => {
-          v2 = sandbox
+          sandbox
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             .stub<any, any>(signer, 'getSignedUrlV2')
-            .resolves(query);
+            .resolves(query) as sinon.SinonStub;
         });
 
         it('shuold insert user-provided queryParams', async () => {
