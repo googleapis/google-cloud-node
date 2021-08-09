@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Quickstart_json_credentials
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/master/samples/quickstart_json_credentials.js).
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/quickstart_json_credentials.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart_json_credentials.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Quickstart_oauth2
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/master/samples/quickstart_oauth2.js).
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/quickstart_oauth2.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/quickstart_oauth2.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Realtime
 
-View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/master/samples/realtime.js).
+View the [source code](https://github.com/googleapis/nodejs-analytics-data/blob/main/samples/realtime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-analytics-data&page=editor&open_in_editor=samples/realtime.js,samples/README.md)
 
