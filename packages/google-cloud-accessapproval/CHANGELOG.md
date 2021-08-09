@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.7](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.6...v1.0.7) (2021-08-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#72](https://www.github.com/googleapis/nodejs-access-approval/issues/72)) ([7a3102f](https://www.github.com/googleapis/nodejs-access-approval/commit/7a3102f5a7f3d5097c4fb2c7f88e709bc4b14404))
+
 ### [1.0.6](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.5...v1.0.6) (2021-07-16)
 
 
