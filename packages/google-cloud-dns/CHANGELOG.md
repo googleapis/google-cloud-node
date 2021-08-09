@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dns?activeTab=versions
 
+### [2.2.2](https://www.github.com/googleapis/nodejs-dns/compare/v2.2.1...v2.2.2) (2021-08-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#478](https://www.github.com/googleapis/nodejs-dns/issues/478)) ([2f19b00](https://www.github.com/googleapis/nodejs-dns/commit/2f19b0066a26910262abff94974c55cda41b3fae))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-dns/compare/v2.2.0...v2.2.1) (2021-08-06)
 
 
