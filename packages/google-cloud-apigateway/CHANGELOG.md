@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.5](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.4...v1.1.5) (2021-08-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#56](https://www.github.com/googleapis/nodejs-api-gateway/issues/56)) ([e7b3909](https://www.github.com/googleapis/nodejs-api-gateway/commit/e7b3909be004b229ae1151514b8b108286a0d6a5))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.3...v1.1.4) (2021-07-16)
 
 
