@@ -31,7 +31,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-access-approval/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-access-approval/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-access-approval&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -47,4 +47,4 @@ __Usage:__
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-access-approval&page=editor&open_in_editor=samples/README.md
-[product-docs]: https://cloud.google.com/access-approval/docs
+[product-docs]: https://cloud.google.com/cloud-provider-access-management/access-approval/docs
