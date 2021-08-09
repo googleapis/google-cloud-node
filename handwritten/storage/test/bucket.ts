@@ -333,6 +333,70 @@ describe('Bucket', () => {
       });
     });
 
+    it('should set the correct query string with ifGenerationMatch', () => {
+      const options = {preconditionOpts: {ifGenerationMatch: 100}};
+      const file = new Bucket(STORAGE, BUCKET_NAME, options);
+
+      const calledWith = file.calledWith_[0];
+
+      assert.deepStrictEqual(calledWith.methods, {
+        create: {reqOpts: {qs: options.preconditionOpts}},
+        delete: {reqOpts: {qs: options.preconditionOpts}},
+        exists: {reqOpts: {qs: options.preconditionOpts}},
+        get: {reqOpts: {qs: options.preconditionOpts}},
+        getMetadata: {reqOpts: {qs: options.preconditionOpts}},
+        setMetadata: {reqOpts: {qs: options.preconditionOpts}},
+      });
+    });
+
+    it('should set the correct query string with ifGenerationNotMatch', () => {
+      const options = {preconditionOpts: {ifGenerationNotMatch: 100}};
+      const file = new Bucket(STORAGE, BUCKET_NAME, options);
+
+      const calledWith = file.calledWith_[0];
+
+      assert.deepStrictEqual(calledWith.methods, {
+        create: {reqOpts: {qs: options.preconditionOpts}},
+        delete: {reqOpts: {qs: options.preconditionOpts}},
+        exists: {reqOpts: {qs: options.preconditionOpts}},
+        get: {reqOpts: {qs: options.preconditionOpts}},
+        getMetadata: {reqOpts: {qs: options.preconditionOpts}},
+        setMetadata: {reqOpts: {qs: options.preconditionOpts}},
+      });
+    });
+
+    it('should set the correct query string with ifMetagenerationMatch', () => {
+      const options = {preconditionOpts: {ifMetagenerationMatch: 100}};
+      const file = new Bucket(STORAGE, BUCKET_NAME, options);
+
+      const calledWith = file.calledWith_[0];
+
+      assert.deepStrictEqual(calledWith.methods, {
+        create: {reqOpts: {qs: options.preconditionOpts}},
+        delete: {reqOpts: {qs: options.preconditionOpts}},
+        exists: {reqOpts: {qs: options.preconditionOpts}},
+        get: {reqOpts: {qs: options.preconditionOpts}},
+        getMetadata: {reqOpts: {qs: options.preconditionOpts}},
+        setMetadata: {reqOpts: {qs: options.preconditionOpts}},
+      });
+    });
+
+    it('should set the correct query string with ifMetagenerationNotMatch', () => {
+      const options = {preconditionOpts: {ifMetagenerationNotMatch: 100}};
+      const file = new Bucket(STORAGE, BUCKET_NAME, options);
+
+      const calledWith = file.calledWith_[0];
+
+      assert.deepStrictEqual(calledWith.methods, {
+        create: {reqOpts: {qs: options.preconditionOpts}},
+        delete: {reqOpts: {qs: options.preconditionOpts}},
+        exists: {reqOpts: {qs: options.preconditionOpts}},
+        get: {reqOpts: {qs: options.preconditionOpts}},
+        getMetadata: {reqOpts: {qs: options.preconditionOpts}},
+        setMetadata: {reqOpts: {qs: options.preconditionOpts}},
+      });
+    });
+
     it('should localize an Iam instance', () => {
       assert(bucket.iam instanceof FakeIam);
       assert.deepStrictEqual(bucket.iam.calledWith_[0], bucket);
@@ -715,6 +779,40 @@ describe('Bucket', () => {
       bucket.combine(sources, destination, options, assert.ifError);
     });
 
+    it('should accept precondition options', done => {
+      const options = {
+        ifGenerationMatch: 100,
+        ifGenerationNotMatch: 101,
+        ifMetagenerationMatch: 102,
+        ifMetagenerationNotMatch: 103,
+      };
+
+      const sources = [bucket.file('1.txt'), bucket.file('2.txt')];
+      const destination = bucket.file('destination.txt');
+
+      destination.request = (reqOpts: DecorateRequestOptions) => {
+        assert.strictEqual(
+          reqOpts.qs.ifGenerationMatch,
+          options.ifGenerationMatch
+        );
+        assert.strictEqual(
+          reqOpts.qs.ifGenerationNotMatch,
+          options.ifGenerationNotMatch
+        );
+        assert.strictEqual(
+          reqOpts.qs.ifMetagenerationMatch,
+          options.ifMetagenerationMatch
+        );
+        assert.strictEqual(
+          reqOpts.qs.ifMetagenerationNotMatch,
+          options.ifMetagenerationNotMatch
+        );
+        done();
+      };
+
+      bucket.combine(sources, destination, options, assert.ifError);
+    });
+
     it('should execute the callback', done => {
       const sources = [bucket.file('1.txt'), bucket.file('2.txt')];
       const destination = bucket.file('destination.txt');
@@ -1058,6 +1156,22 @@ describe('Bucket', () => {
       };
 
       bucket.deleteFiles(done);
+    });
+
+    it('should accept precondition options', done => {
+      const options = {
+        ifGenerationMatch: 100,
+        ifGenerationNotMatch: 101,
+        ifMetagenerationMatch: 102,
+        ifMetagenerationNotMatch: 103,
+      };
+
+      bucket.getFiles = (query: {}) => {
+        assert.deepStrictEqual(query, options);
+        return Promise.all([[]]);
+      };
+
+      bucket.deleteFiles(options, done);
     });
 
     it('should get files from the bucket', done => {
