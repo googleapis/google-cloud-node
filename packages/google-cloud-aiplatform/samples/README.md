@@ -110,7 +110,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Cancel-batch-prediction-job
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/cancel-batch-prediction-job.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/cancel-batch-prediction-job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/cancel-batch-prediction-job.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### Cancel-custom-job
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/cancel-custom-job.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/cancel-custom-job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/cancel-custom-job.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### Create-batch-prediction-job-text-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-text-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-batch-prediction-job-text-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-text-classification.js,samples/README.md)
 
@@ -161,7 +161,7 @@ __Usage:__
 
 ### Create-batch-prediction-job-text-entity-extraction
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-text-entity-extraction.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-batch-prediction-job-text-entity-extraction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-text-entity-extraction.js,samples/README.md)
 
@@ -178,7 +178,7 @@ __Usage:__
 
 ### Create-batch-prediction-job-text-sentiment-analysis
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-text-sentiment-analysis.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-batch-prediction-job-text-sentiment-analysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-text-sentiment-analysis.js,samples/README.md)
 
@@ -195,7 +195,7 @@ __Usage:__
 
 ### Create-batch-prediction-job-video-action-recognition
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-video-action-recognition.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-batch-prediction-job-video-action-recognition.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-video-action-recognition.js,samples/README.md)
 
@@ -212,7 +212,7 @@ __Usage:__
 
 ### Create-batch-prediction-job-video-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-video-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-batch-prediction-job-video-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-video-classification.js,samples/README.md)
 
@@ -229,7 +229,7 @@ __Usage:__
 
 ### Create-batch-prediction-job-video-object-tracking
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-batch-prediction-job-video-object-tracking.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-batch-prediction-job-video-object-tracking.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-batch-prediction-job-video-object-tracking.js,samples/README.md)
 
@@ -246,7 +246,7 @@ __Usage:__
 
 ### Create-custom-job
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-custom-job.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-custom-job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-custom-job.js,samples/README.md)
 
@@ -263,7 +263,7 @@ __Usage:__
 
 ### Create-dataset-image
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-image.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-dataset-image.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-image.js,samples/README.md)
 
@@ -280,7 +280,7 @@ __Usage:__
 
 ### Create-dataset-tabular-bigquery
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-tabular-bigquery.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-dataset-tabular-bigquery.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-tabular-bigquery.js,samples/README.md)
 
@@ -297,7 +297,7 @@ __Usage:__
 
 ### Create-dataset-tabular-gcs
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-tabular-gcs.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-dataset-tabular-gcs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-tabular-gcs.js,samples/README.md)
 
@@ -314,7 +314,7 @@ __Usage:__
 
 ### Create-dataset-text
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-text.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-dataset-text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-text.js,samples/README.md)
 
@@ -331,7 +331,7 @@ __Usage:__
 
 ### Create-dataset-video
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset-video.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-dataset-video.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset-video.js,samples/README.md)
 
@@ -348,7 +348,7 @@ __Usage:__
 
 ### Create-dataset
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-dataset.js,samples/README.md)
 
@@ -365,7 +365,7 @@ __Usage:__
 
 ### Create-endpoint
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-endpoint.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-endpoint.js,samples/README.md)
 
@@ -382,7 +382,7 @@ __Usage:__
 
 ### Create-hyperparameter-tuning-job-sample
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-hyperparameter-tuning-job-sample.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-hyperparameter-tuning-job-sample.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-hyperparameter-tuning-job-sample.js,samples/README.md)
 
@@ -399,7 +399,7 @@ __Usage:__
 
 ### Create-hyperparameter-tuning-job
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-hyperparameter-tuning-job.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-hyperparameter-tuning-job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-hyperparameter-tuning-job.js,samples/README.md)
 
@@ -416,7 +416,7 @@ __Usage:__
 
 ### Create-training-pipeline-image-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-image-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-image-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-image-classification.js,samples/README.md)
 
@@ -433,7 +433,7 @@ __Usage:__
 
 ### Create-training-pipeline-image-object-detection
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-image-object-detection.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-image-object-detection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-image-object-detection.js,samples/README.md)
 
@@ -450,7 +450,7 @@ __Usage:__
 
 ### Create-training-pipeline-tabular-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-tabular-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-tabular-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-tabular-classification.js,samples/README.md)
 
@@ -467,7 +467,7 @@ __Usage:__
 
 ### Create-training-pipeline-tabular-regression
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-tabular-regression.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-tabular-regression.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-tabular-regression.js,samples/README.md)
 
@@ -484,7 +484,7 @@ __Usage:__
 
 ### Create-training-pipeline-text-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-text-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-text-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-text-classification.js,samples/README.md)
 
@@ -501,7 +501,7 @@ __Usage:__
 
 ### Create-training-pipeline-text-entity-extraction
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-text-entity-extraction.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-text-entity-extraction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-text-entity-extraction.js,samples/README.md)
 
@@ -518,7 +518,7 @@ __Usage:__
 
 ### Create-training-pipeline-text-sentiment-analysis
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-text-sentiment-analysis.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-text-sentiment-analysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-text-sentiment-analysis.js,samples/README.md)
 
@@ -535,7 +535,7 @@ __Usage:__
 
 ### Create-training-pipeline-video-action-recognition
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-video-action-recognition.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-video-action-recognition.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-video-action-recognition.js,samples/README.md)
 
@@ -552,7 +552,7 @@ __Usage:__
 
 ### Create-training-pipeline-video-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-video-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-video-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-video-classification.js,samples/README.md)
 
@@ -569,7 +569,7 @@ __Usage:__
 
 ### Create-training-pipeline-video-object-tracking
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/create-training-pipeline-video-object-tracking.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/create-training-pipeline-video-object-tracking.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/create-training-pipeline-video-object-tracking.js,samples/README.md)
 
@@ -586,7 +586,7 @@ __Usage:__
 
 ### Delete-batch-prediction-job
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-batch-prediction-job.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-batch-prediction-job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-batch-prediction-job.js,samples/README.md)
 
@@ -603,7 +603,7 @@ __Usage:__
 
 ### Delete-custom-job
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-custom-job.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-custom-job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-custom-job.js,samples/README.md)
 
@@ -620,7 +620,7 @@ __Usage:__
 
 ### Delete-dataset
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-dataset.js,samples/README.md)
 
@@ -637,7 +637,7 @@ __Usage:__
 
 ### Delete-endpoint
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-endpoint.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-endpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-endpoint.js,samples/README.md)
 
@@ -654,7 +654,7 @@ __Usage:__
 
 ### Delete-export-model
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-export-model.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-export-model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-export-model.js,samples/README.md)
 
@@ -671,7 +671,7 @@ __Usage:__
 
 ### Delete-model
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/delete-model.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/delete-model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/delete-model.js,samples/README.md)
 
@@ -688,7 +688,7 @@ __Usage:__
 
 ### Deploy-model-custom-trained-model
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/deploy-model-custom-trained-model.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/deploy-model-custom-trained-model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/deploy-model-custom-trained-model.js,samples/README.md)
 
@@ -705,7 +705,7 @@ __Usage:__
 
 ### Deploy-model
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/deploy-model.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/deploy-model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/deploy-model.js,samples/README.md)
 
@@ -722,7 +722,7 @@ __Usage:__
 
 ### Export-model-tabular-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/export-model-tabular-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/export-model-tabular-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/export-model-tabular-classification.js,samples/README.md)
 
@@ -739,7 +739,7 @@ __Usage:__
 
 ### Export-model
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/export-model.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/export-model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/export-model.js,samples/README.md)
 
@@ -756,7 +756,7 @@ __Usage:__
 
 ### Get-batch-prediction-job
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-batch-prediction-job.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-batch-prediction-job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-batch-prediction-job.js,samples/README.md)
 
@@ -773,7 +773,7 @@ __Usage:__
 
 ### Get-custom-job
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-custom-job.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-custom-job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-custom-job.js,samples/README.md)
 
@@ -790,7 +790,7 @@ __Usage:__
 
 ### Get-hyperparameter-tuning-job
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-hyperparameter-tuning-job.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-hyperparameter-tuning-job.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-hyperparameter-tuning-job.js,samples/README.md)
 
@@ -807,7 +807,7 @@ __Usage:__
 
 ### Get-model-evaluation-image-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-image-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-image-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-image-classification.js,samples/README.md)
 
@@ -824,7 +824,7 @@ __Usage:__
 
 ### Get-model-evaluation-image-object-detection
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-image-object-detection.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-image-object-detection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-image-object-detection.js,samples/README.md)
 
@@ -841,7 +841,7 @@ __Usage:__
 
 ### Get-model-evaluation-slice
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-slice.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-slice.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-slice.js,samples/README.md)
 
@@ -858,7 +858,7 @@ __Usage:__
 
 ### Get-model-evaluation-tabular-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-tabular-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-tabular-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-tabular-classification.js,samples/README.md)
 
@@ -875,7 +875,7 @@ __Usage:__
 
 ### Get-model-evaluation-tabular-regression
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-tabular-regression.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-tabular-regression.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-tabular-regression.js,samples/README.md)
 
@@ -892,7 +892,7 @@ __Usage:__
 
 ### Get-model-evaluation-text-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-text-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-text-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-text-classification.js,samples/README.md)
 
@@ -909,7 +909,7 @@ __Usage:__
 
 ### Get-model-evaluation-text-entity-extraction
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-text-entity-extraction.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-text-entity-extraction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-text-entity-extraction.js,samples/README.md)
 
@@ -926,7 +926,7 @@ __Usage:__
 
 ### Get-model-evaluation-text-sentiment-analysis
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-text-sentiment-analysis.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-text-sentiment-analysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-text-sentiment-analysis.js,samples/README.md)
 
@@ -943,7 +943,7 @@ __Usage:__
 
 ### Get-model-evaluation-video-action-recognition
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-video-action-recognition.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-video-action-recognition.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-video-action-recognition.js,samples/README.md)
 
@@ -960,7 +960,7 @@ __Usage:__
 
 ### Get-model-evaluation-video-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-video-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-video-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-video-classification.js,samples/README.md)
 
@@ -977,7 +977,7 @@ __Usage:__
 
 ### Get-model-evaluation-video-object-tracking
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation-video-object-tracking.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation-video-object-tracking.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation-video-object-tracking.js,samples/README.md)
 
@@ -994,7 +994,7 @@ __Usage:__
 
 ### Get-model-evaluation
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model-evaluation.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model-evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model-evaluation.js,samples/README.md)
 
@@ -1011,7 +1011,7 @@ __Usage:__
 
 ### Get-model
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-model.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-model.js,samples/README.md)
 
@@ -1028,7 +1028,7 @@ __Usage:__
 
 ### Get-training-pipeline
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/get-training-pipeline.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/get-training-pipeline.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/get-training-pipeline.js,samples/README.md)
 
@@ -1045,7 +1045,7 @@ __Usage:__
 
 ### Import-data-image-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-image-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-data-image-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-image-classification.js,samples/README.md)
 
@@ -1062,7 +1062,7 @@ __Usage:__
 
 ### Import-data-image-object-detection
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-image-object-detection.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-data-image-object-detection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-image-object-detection.js,samples/README.md)
 
@@ -1079,7 +1079,7 @@ __Usage:__
 
 ### Import-data-text-classification-single-label
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-text-classification-single-label.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-data-text-classification-single-label.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-text-classification-single-label.js,samples/README.md)
 
@@ -1096,7 +1096,7 @@ __Usage:__
 
 ### Import-data-text-entity-extraction
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-text-entity-extraction.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-data-text-entity-extraction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-text-entity-extraction.js,samples/README.md)
 
@@ -1113,7 +1113,7 @@ __Usage:__
 
 ### Import-data-text-sentiment-analysis
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-text-sentiment-analysis.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-data-text-sentiment-analysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-text-sentiment-analysis.js,samples/README.md)
 
@@ -1130,7 +1130,7 @@ __Usage:__
 
 ### Import-data-video-action-recognition
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-video-action-recognition.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-data-video-action-recognition.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-video-action-recognition.js,samples/README.md)
 
@@ -1147,7 +1147,7 @@ __Usage:__
 
 ### Import-data-video-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-video-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-data-video-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-video-classification.js,samples/README.md)
 
@@ -1164,7 +1164,7 @@ __Usage:__
 
 ### Import-data-video-object-tracking
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data-video-object-tracking.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-data-video-object-tracking.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data-video-object-tracking.js,samples/README.md)
 
@@ -1181,7 +1181,7 @@ __Usage:__
 
 ### Import-data
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/import-data.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/import-data.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/import-data.js,samples/README.md)
 
@@ -1198,7 +1198,7 @@ __Usage:__
 
 ### List-endpoints
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/list-endpoints.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-endpoints.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-endpoints.js,samples/README.md)
 
@@ -1215,7 +1215,7 @@ __Usage:__
 
 ### List-model-evaluation-slices
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/list-model-evaluation-slices.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/list-model-evaluation-slices.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/list-model-evaluation-slices.js,samples/README.md)
 
@@ -1232,7 +1232,7 @@ __Usage:__
 
 ### Predict-custom-trained-model
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-custom-trained-model.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/predict-custom-trained-model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-custom-trained-model.js,samples/README.md)
 
@@ -1249,7 +1249,7 @@ __Usage:__
 
 ### Predict-image-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-image-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/predict-image-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-image-classification.js,samples/README.md)
 
@@ -1266,7 +1266,7 @@ __Usage:__
 
 ### Predict-image-object-detection
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-image-object-detection.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/predict-image-object-detection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-image-object-detection.js,samples/README.md)
 
@@ -1283,7 +1283,7 @@ __Usage:__
 
 ### Predict-tabular-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-tabular-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/predict-tabular-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-tabular-classification.js,samples/README.md)
 
@@ -1300,7 +1300,7 @@ __Usage:__
 
 ### Predict-tabular-regression
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-tabular-regression.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/predict-tabular-regression.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-tabular-regression.js,samples/README.md)
 
@@ -1317,7 +1317,7 @@ __Usage:__
 
 ### Predict-text-classification
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-text-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/predict-text-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-text-classification.js,samples/README.md)
 
@@ -1334,7 +1334,7 @@ __Usage:__
 
 ### Predict-text-entity-extraction
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-text-entity-extraction.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/predict-text-entity-extraction.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-text-entity-extraction.js,samples/README.md)
 
@@ -1351,7 +1351,7 @@ __Usage:__
 
 ### Predict-text-sentiment-analysis
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/predict-text-sentiment-analysis.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/predict-text-sentiment-analysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/predict-text-sentiment-analysis.js,samples/README.md)
 
@@ -1368,7 +1368,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -1385,7 +1385,7 @@ __Usage:__
 
 ### Undeploy-model
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/undeploy-model.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/undeploy-model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/undeploy-model.js,samples/README.md)
 
@@ -1402,7 +1402,7 @@ __Usage:__
 
 ### Upload-model
 
-View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/master/samples/upload-model.js).
+View the [source code](https://github.com/googleapis/nodejs-ai-platform/blob/main/samples/upload-model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-ai-platform&page=editor&open_in_editor=samples/upload-model.js,samples/README.md)
 
