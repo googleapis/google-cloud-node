@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2021 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/networkmanagement',
+    systemName: '@google-cloud/network-management',
     theme: 'lumen',
     default: {
       outputSourceFiles: false
