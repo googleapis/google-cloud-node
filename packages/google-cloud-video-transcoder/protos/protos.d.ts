@@ -5677,6 +5677,9 @@ export namespace google {
 
                         /** Job endTime */
                         endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Job ttlAfterCompletionDays */
+                        ttlAfterCompletionDays?: (number|null);
                     }
 
                     /** Represents a Job. */
@@ -5729,6 +5732,9 @@ export namespace google {
 
                         /** Job endTime. */
                         public endTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Job ttlAfterCompletionDays. */
+                        public ttlAfterCompletionDays: number;
 
                         /** Job jobConfig. */
                         public jobConfig?: ("templateId"|"config");
@@ -7007,6 +7013,9 @@ export namespace google {
 
                         /** SpriteSheet interval */
                         interval?: (google.protobuf.IDuration|null);
+
+                        /** SpriteSheet quality */
+                        quality?: (number|null);
                     }
 
                     /** Represents a SpriteSheet. */
@@ -7047,6 +7056,9 @@ export namespace google {
 
                         /** SpriteSheet interval. */
                         public interval?: (google.protobuf.IDuration|null);
+
+                        /** SpriteSheet quality. */
+                        public quality: number;
 
                         /** SpriteSheet extractionStrategy. */
                         public extractionStrategy?: ("totalCount"|"interval");
@@ -7839,6 +7851,12 @@ export namespace google {
 
                         /** PreprocessingConfig audio */
                         audio?: (google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IAudio|null);
+
+                        /** PreprocessingConfig crop */
+                        crop?: (google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop|null);
+
+                        /** PreprocessingConfig pad */
+                        pad?: (google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad|null);
                     }
 
                     /** Represents a PreprocessingConfig. */
@@ -7861,6 +7879,12 @@ export namespace google {
 
                         /** PreprocessingConfig audio. */
                         public audio?: (google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IAudio|null);
+
+                        /** PreprocessingConfig crop. */
+                        public crop?: (google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop|null);
+
+                        /** PreprocessingConfig pad. */
+                        public pad?: (google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad|null);
 
                         /**
                          * Creates a new PreprocessingConfig instance using the specified properties.
@@ -8326,6 +8350,222 @@ export namespace google {
 
                             /**
                              * Converts this Audio to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a Crop. */
+                        interface ICrop {
+
+                            /** Crop topPixels */
+                            topPixels?: (number|null);
+
+                            /** Crop bottomPixels */
+                            bottomPixels?: (number|null);
+
+                            /** Crop leftPixels */
+                            leftPixels?: (number|null);
+
+                            /** Crop rightPixels */
+                            rightPixels?: (number|null);
+                        }
+
+                        /** Represents a Crop. */
+                        class Crop implements ICrop {
+
+                            /**
+                             * Constructs a new Crop.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop);
+
+                            /** Crop topPixels. */
+                            public topPixels: number;
+
+                            /** Crop bottomPixels. */
+                            public bottomPixels: number;
+
+                            /** Crop leftPixels. */
+                            public leftPixels: number;
+
+                            /** Crop rightPixels. */
+                            public rightPixels: number;
+
+                            /**
+                             * Creates a new Crop instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Crop instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop): google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop;
+
+                            /**
+                             * Encodes the specified Crop message. Does not implicitly {@link google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop.verify|verify} messages.
+                             * @param message Crop message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Crop message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop.verify|verify} messages.
+                             * @param message Crop message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Crop message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Crop
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop;
+
+                            /**
+                             * Decodes a Crop message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Crop
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop;
+
+                            /**
+                             * Verifies a Crop message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Crop message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Crop
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop;
+
+                            /**
+                             * Creates a plain object from a Crop message. Also converts values to other types if specified.
+                             * @param message Crop
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Crop to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+                        }
+
+                        /** Properties of a Pad. */
+                        interface IPad {
+
+                            /** Pad topPixels */
+                            topPixels?: (number|null);
+
+                            /** Pad bottomPixels */
+                            bottomPixels?: (number|null);
+
+                            /** Pad leftPixels */
+                            leftPixels?: (number|null);
+
+                            /** Pad rightPixels */
+                            rightPixels?: (number|null);
+                        }
+
+                        /** Represents a Pad. */
+                        class Pad implements IPad {
+
+                            /**
+                             * Constructs a new Pad.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad);
+
+                            /** Pad topPixels. */
+                            public topPixels: number;
+
+                            /** Pad bottomPixels. */
+                            public bottomPixels: number;
+
+                            /** Pad leftPixels. */
+                            public leftPixels: number;
+
+                            /** Pad rightPixels. */
+                            public rightPixels: number;
+
+                            /**
+                             * Creates a new Pad instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Pad instance
+                             */
+                            public static create(properties?: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad): google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad;
+
+                            /**
+                             * Encodes the specified Pad message. Does not implicitly {@link google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad.verify|verify} messages.
+                             * @param message Pad message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Pad message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad.verify|verify} messages.
+                             * @param message Pad message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Pad message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Pad
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad;
+
+                            /**
+                             * Decodes a Pad message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Pad
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad;
+
+                            /**
+                             * Verifies a Pad message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Pad message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Pad
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad;
+
+                            /**
+                             * Creates a plain object from a Pad message. Also converts values to other types if specified.
+                             * @param message Pad
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Pad to JSON.
                              * @returns JSON object
                              */
                             public toJSON(): { [k: string]: any };

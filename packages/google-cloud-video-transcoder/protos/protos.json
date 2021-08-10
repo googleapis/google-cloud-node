@@ -1590,6 +1590,10 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "ttlAfterCompletionDays": {
+                              "type": "int32",
+                              "id": 15
                             }
                           },
                           "nested": {
@@ -1893,6 +1897,10 @@
                             "interval": {
                               "type": "google.protobuf.Duration",
                               "id": 10
+                            },
+                            "quality": {
+                              "type": "int32",
+                              "id": 11
                             }
                           }
                         },
@@ -2034,6 +2042,14 @@
                             "audio": {
                               "type": "Audio",
                               "id": 4
+                            },
+                            "crop": {
+                              "type": "Crop",
+                              "id": 5
+                            },
+                            "pad": {
+                              "type": "Pad",
+                              "id": 6
                             }
                           },
                           "nested": {
@@ -2090,6 +2106,46 @@
                                 "lowBoost": {
                                   "type": "bool",
                                   "id": 3
+                                }
+                              }
+                            },
+                            "Crop": {
+                              "fields": {
+                                "topPixels": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "bottomPixels": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "leftPixels": {
+                                  "type": "int32",
+                                  "id": 3
+                                },
+                                "rightPixels": {
+                                  "type": "int32",
+                                  "id": 4
+                                }
+                              }
+                            },
+                            "Pad": {
+                              "fields": {
+                                "topPixels": {
+                                  "type": "int32",
+                                  "id": 1
+                                },
+                                "bottomPixels": {
+                                  "type": "int32",
+                                  "id": 2
+                                },
+                                "leftPixels": {
+                                  "type": "int32",
+                                  "id": 3
+                                },
+                                "rightPixels": {
+                                  "type": "int32",
+                                  "id": 4
                                 }
                               }
                             }
@@ -2474,6 +2530,7 @@
                         },
                         "TranscoderService": {
                           "options": {
+                            "deprecated": true,
                             "(google.api.default_host)": "transcoder.googleapis.com",
                             "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                           },

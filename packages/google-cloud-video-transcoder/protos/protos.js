@@ -13996,6 +13996,7 @@
                              * @property {google.protobuf.ITimestamp|null} [createTime] Job createTime
                              * @property {google.protobuf.ITimestamp|null} [startTime] Job startTime
                              * @property {google.protobuf.ITimestamp|null} [endTime] Job endTime
+                             * @property {number|null} [ttlAfterCompletionDays] Job ttlAfterCompletionDays
                              */
     
                             /**
@@ -14126,6 +14127,14 @@
                              */
                             Job.prototype.endTime = null;
     
+                            /**
+                             * Job ttlAfterCompletionDays.
+                             * @member {number} ttlAfterCompletionDays
+                             * @memberof google.cloud.video.transcoder.v1beta1.Job
+                             * @instance
+                             */
+                            Job.prototype.ttlAfterCompletionDays = 0;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -14193,6 +14202,8 @@
                                     $root.google.protobuf.Timestamp.encode(message.startTime, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                                 if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
                                     $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 14, wireType 2 =*/114).fork()).ldelim();
+                                if (message.ttlAfterCompletionDays != null && Object.hasOwnProperty.call(message, "ttlAfterCompletionDays"))
+                                    writer.uint32(/* id 15, wireType 0 =*/120).int32(message.ttlAfterCompletionDays);
                                 return writer;
                             };
     
@@ -14270,6 +14281,9 @@
                                         break;
                                     case 14:
                                         message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    case 15:
+                                        message.ttlAfterCompletionDays = reader.int32();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -14382,6 +14396,9 @@
                                     if (error)
                                         return "endTime." + error;
                                 }
+                                if (message.ttlAfterCompletionDays != null && message.hasOwnProperty("ttlAfterCompletionDays"))
+                                    if (!$util.isInteger(message.ttlAfterCompletionDays))
+                                        return "ttlAfterCompletionDays: integer expected";
                                 return null;
                             };
     
@@ -14471,6 +14488,8 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1beta1.Job.endTime: object expected");
                                     message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
                                 }
+                                if (object.ttlAfterCompletionDays != null)
+                                    message.ttlAfterCompletionDays = object.ttlAfterCompletionDays | 0;
                                 return message;
                             };
     
@@ -14501,6 +14520,7 @@
                                     object.createTime = null;
                                     object.startTime = null;
                                     object.endTime = null;
+                                    object.ttlAfterCompletionDays = 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -14539,6 +14559,8 @@
                                     object.startTime = $root.google.protobuf.Timestamp.toObject(message.startTime, options);
                                 if (message.endTime != null && message.hasOwnProperty("endTime"))
                                     object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                                if (message.ttlAfterCompletionDays != null && message.hasOwnProperty("ttlAfterCompletionDays"))
+                                    object.ttlAfterCompletionDays = message.ttlAfterCompletionDays;
                                 return object;
                             };
     
@@ -17577,6 +17599,7 @@
                              * @property {google.protobuf.IDuration|null} [endTimeOffset] SpriteSheet endTimeOffset
                              * @property {number|null} [totalCount] SpriteSheet totalCount
                              * @property {google.protobuf.IDuration|null} [interval] SpriteSheet interval
+                             * @property {number|null} [quality] SpriteSheet quality
                              */
     
                             /**
@@ -17674,6 +17697,14 @@
                              */
                             SpriteSheet.prototype.interval = null;
     
+                            /**
+                             * SpriteSheet quality.
+                             * @member {number} quality
+                             * @memberof google.cloud.video.transcoder.v1beta1.SpriteSheet
+                             * @instance
+                             */
+                            SpriteSheet.prototype.quality = 0;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -17732,6 +17763,8 @@
                                     writer.uint32(/* id 9, wireType 0 =*/72).int32(message.totalCount);
                                 if (message.interval != null && Object.hasOwnProperty.call(message, "interval"))
                                     $root.google.protobuf.Duration.encode(message.interval, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.quality != null && Object.hasOwnProperty.call(message, "quality"))
+                                    writer.uint32(/* id 11, wireType 0 =*/88).int32(message.quality);
                                 return writer;
                             };
     
@@ -17795,6 +17828,9 @@
                                         break;
                                     case 10:
                                         message.interval = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                                        break;
+                                    case 11:
+                                        message.quality = reader.int32();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -17875,6 +17911,9 @@
                                             return "interval." + error;
                                     }
                                 }
+                                if (message.quality != null && message.hasOwnProperty("quality"))
+                                    if (!$util.isInteger(message.quality))
+                                        return "quality: integer expected";
                                 return null;
                             };
     
@@ -17919,6 +17958,8 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1beta1.SpriteSheet.interval: object expected");
                                     message.interval = $root.google.protobuf.Duration.fromObject(object.interval);
                                 }
+                                if (object.quality != null)
+                                    message.quality = object.quality | 0;
                                 return message;
                             };
     
@@ -17944,6 +17985,7 @@
                                     object.rowCount = 0;
                                     object.startTimeOffset = null;
                                     object.endTimeOffset = null;
+                                    object.quality = 0;
                                 }
                                 if (message.format != null && message.hasOwnProperty("format"))
                                     object.format = message.format;
@@ -17971,6 +18013,8 @@
                                     if (options.oneofs)
                                         object.extractionStrategy = "interval";
                                 }
+                                if (message.quality != null && message.hasOwnProperty("quality"))
+                                    object.quality = message.quality;
                                 return object;
                             };
     
@@ -19675,6 +19719,8 @@
                              * @property {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IDenoise|null} [denoise] PreprocessingConfig denoise
                              * @property {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IDeblock|null} [deblock] PreprocessingConfig deblock
                              * @property {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IAudio|null} [audio] PreprocessingConfig audio
+                             * @property {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop|null} [crop] PreprocessingConfig crop
+                             * @property {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad|null} [pad] PreprocessingConfig pad
                              */
     
                             /**
@@ -19725,6 +19771,22 @@
                             PreprocessingConfig.prototype.audio = null;
     
                             /**
+                             * PreprocessingConfig crop.
+                             * @member {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop|null|undefined} crop
+                             * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig
+                             * @instance
+                             */
+                            PreprocessingConfig.prototype.crop = null;
+    
+                            /**
+                             * PreprocessingConfig pad.
+                             * @member {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad|null|undefined} pad
+                             * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig
+                             * @instance
+                             */
+                            PreprocessingConfig.prototype.pad = null;
+    
+                            /**
                              * Creates a new PreprocessingConfig instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig
@@ -19756,6 +19818,10 @@
                                     $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Deblock.encode(message.deblock, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                                 if (message.audio != null && Object.hasOwnProperty.call(message, "audio"))
                                     $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Audio.encode(message.audio, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.crop != null && Object.hasOwnProperty.call(message, "crop"))
+                                    $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop.encode(message.crop, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                if (message.pad != null && Object.hasOwnProperty.call(message, "pad"))
+                                    $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad.encode(message.pad, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                                 return writer;
                             };
     
@@ -19801,6 +19867,12 @@
                                         break;
                                     case 4:
                                         message.audio = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Audio.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.crop = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop.decode(reader, reader.uint32());
+                                        break;
+                                    case 6:
+                                        message.pad = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -19857,6 +19929,16 @@
                                     if (error)
                                         return "audio." + error;
                                 }
+                                if (message.crop != null && message.hasOwnProperty("crop")) {
+                                    var error = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop.verify(message.crop);
+                                    if (error)
+                                        return "crop." + error;
+                                }
+                                if (message.pad != null && message.hasOwnProperty("pad")) {
+                                    var error = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad.verify(message.pad);
+                                    if (error)
+                                        return "pad." + error;
+                                }
                                 return null;
                             };
     
@@ -19892,6 +19974,16 @@
                                         throw TypeError(".google.cloud.video.transcoder.v1beta1.PreprocessingConfig.audio: object expected");
                                     message.audio = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Audio.fromObject(object.audio);
                                 }
+                                if (object.crop != null) {
+                                    if (typeof object.crop !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1beta1.PreprocessingConfig.crop: object expected");
+                                    message.crop = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop.fromObject(object.crop);
+                                }
+                                if (object.pad != null) {
+                                    if (typeof object.pad !== "object")
+                                        throw TypeError(".google.cloud.video.transcoder.v1beta1.PreprocessingConfig.pad: object expected");
+                                    message.pad = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad.fromObject(object.pad);
+                                }
                                 return message;
                             };
     
@@ -19913,6 +20005,8 @@
                                     object.denoise = null;
                                     object.deblock = null;
                                     object.audio = null;
+                                    object.crop = null;
+                                    object.pad = null;
                                 }
                                 if (message.color != null && message.hasOwnProperty("color"))
                                     object.color = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Color.toObject(message.color, options);
@@ -19922,6 +20016,10 @@
                                     object.deblock = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Deblock.toObject(message.deblock, options);
                                 if (message.audio != null && message.hasOwnProperty("audio"))
                                     object.audio = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Audio.toObject(message.audio, options);
+                                if (message.crop != null && message.hasOwnProperty("crop"))
+                                    object.crop = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop.toObject(message.crop, options);
+                                if (message.pad != null && message.hasOwnProperty("pad"))
+                                    object.pad = $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad.toObject(message.pad, options);
                                 return object;
                             };
     
@@ -20818,6 +20916,514 @@
                                 };
     
                                 return Audio;
+                            })();
+    
+                            PreprocessingConfig.Crop = (function() {
+    
+                                /**
+                                 * Properties of a Crop.
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig
+                                 * @interface ICrop
+                                 * @property {number|null} [topPixels] Crop topPixels
+                                 * @property {number|null} [bottomPixels] Crop bottomPixels
+                                 * @property {number|null} [leftPixels] Crop leftPixels
+                                 * @property {number|null} [rightPixels] Crop rightPixels
+                                 */
+    
+                                /**
+                                 * Constructs a new Crop.
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig
+                                 * @classdesc Represents a Crop.
+                                 * @implements ICrop
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop=} [properties] Properties to set
+                                 */
+                                function Crop(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Crop topPixels.
+                                 * @member {number} topPixels
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @instance
+                                 */
+                                Crop.prototype.topPixels = 0;
+    
+                                /**
+                                 * Crop bottomPixels.
+                                 * @member {number} bottomPixels
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @instance
+                                 */
+                                Crop.prototype.bottomPixels = 0;
+    
+                                /**
+                                 * Crop leftPixels.
+                                 * @member {number} leftPixels
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @instance
+                                 */
+                                Crop.prototype.leftPixels = 0;
+    
+                                /**
+                                 * Crop rightPixels.
+                                 * @member {number} rightPixels
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @instance
+                                 */
+                                Crop.prototype.rightPixels = 0;
+    
+                                /**
+                                 * Creates a new Crop instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop} Crop instance
+                                 */
+                                Crop.create = function create(properties) {
+                                    return new Crop(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Crop message. Does not implicitly {@link google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop} message Crop message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Crop.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.topPixels != null && Object.hasOwnProperty.call(message, "topPixels"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.topPixels);
+                                    if (message.bottomPixels != null && Object.hasOwnProperty.call(message, "bottomPixels"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.bottomPixels);
+                                    if (message.leftPixels != null && Object.hasOwnProperty.call(message, "leftPixels"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.leftPixels);
+                                    if (message.rightPixels != null && Object.hasOwnProperty.call(message, "rightPixels"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.rightPixels);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Crop message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.ICrop} message Crop message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Crop.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Crop message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop} Crop
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Crop.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.topPixels = reader.int32();
+                                            break;
+                                        case 2:
+                                            message.bottomPixels = reader.int32();
+                                            break;
+                                        case 3:
+                                            message.leftPixels = reader.int32();
+                                            break;
+                                        case 4:
+                                            message.rightPixels = reader.int32();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Crop message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop} Crop
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Crop.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Crop message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Crop.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.topPixels != null && message.hasOwnProperty("topPixels"))
+                                        if (!$util.isInteger(message.topPixels))
+                                            return "topPixels: integer expected";
+                                    if (message.bottomPixels != null && message.hasOwnProperty("bottomPixels"))
+                                        if (!$util.isInteger(message.bottomPixels))
+                                            return "bottomPixels: integer expected";
+                                    if (message.leftPixels != null && message.hasOwnProperty("leftPixels"))
+                                        if (!$util.isInteger(message.leftPixels))
+                                            return "leftPixels: integer expected";
+                                    if (message.rightPixels != null && message.hasOwnProperty("rightPixels"))
+                                        if (!$util.isInteger(message.rightPixels))
+                                            return "rightPixels: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Crop message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop} Crop
+                                 */
+                                Crop.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop)
+                                        return object;
+                                    var message = new $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop();
+                                    if (object.topPixels != null)
+                                        message.topPixels = object.topPixels | 0;
+                                    if (object.bottomPixels != null)
+                                        message.bottomPixels = object.bottomPixels | 0;
+                                    if (object.leftPixels != null)
+                                        message.leftPixels = object.leftPixels | 0;
+                                    if (object.rightPixels != null)
+                                        message.rightPixels = object.rightPixels | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Crop message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop} message Crop
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Crop.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.topPixels = 0;
+                                        object.bottomPixels = 0;
+                                        object.leftPixels = 0;
+                                        object.rightPixels = 0;
+                                    }
+                                    if (message.topPixels != null && message.hasOwnProperty("topPixels"))
+                                        object.topPixels = message.topPixels;
+                                    if (message.bottomPixels != null && message.hasOwnProperty("bottomPixels"))
+                                        object.bottomPixels = message.bottomPixels;
+                                    if (message.leftPixels != null && message.hasOwnProperty("leftPixels"))
+                                        object.leftPixels = message.leftPixels;
+                                    if (message.rightPixels != null && message.hasOwnProperty("rightPixels"))
+                                        object.rightPixels = message.rightPixels;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Crop to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Crop
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Crop.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return Crop;
+                            })();
+    
+                            PreprocessingConfig.Pad = (function() {
+    
+                                /**
+                                 * Properties of a Pad.
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig
+                                 * @interface IPad
+                                 * @property {number|null} [topPixels] Pad topPixels
+                                 * @property {number|null} [bottomPixels] Pad bottomPixels
+                                 * @property {number|null} [leftPixels] Pad leftPixels
+                                 * @property {number|null} [rightPixels] Pad rightPixels
+                                 */
+    
+                                /**
+                                 * Constructs a new Pad.
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig
+                                 * @classdesc Represents a Pad.
+                                 * @implements IPad
+                                 * @constructor
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad=} [properties] Properties to set
+                                 */
+                                function Pad(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Pad topPixels.
+                                 * @member {number} topPixels
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @instance
+                                 */
+                                Pad.prototype.topPixels = 0;
+    
+                                /**
+                                 * Pad bottomPixels.
+                                 * @member {number} bottomPixels
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @instance
+                                 */
+                                Pad.prototype.bottomPixels = 0;
+    
+                                /**
+                                 * Pad leftPixels.
+                                 * @member {number} leftPixels
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @instance
+                                 */
+                                Pad.prototype.leftPixels = 0;
+    
+                                /**
+                                 * Pad rightPixels.
+                                 * @member {number} rightPixels
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @instance
+                                 */
+                                Pad.prototype.rightPixels = 0;
+    
+                                /**
+                                 * Creates a new Pad instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad=} [properties] Properties to set
+                                 * @returns {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad} Pad instance
+                                 */
+                                Pad.create = function create(properties) {
+                                    return new Pad(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Pad message. Does not implicitly {@link google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad} message Pad message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Pad.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.topPixels != null && Object.hasOwnProperty.call(message, "topPixels"))
+                                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.topPixels);
+                                    if (message.bottomPixels != null && Object.hasOwnProperty.call(message, "bottomPixels"))
+                                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.bottomPixels);
+                                    if (message.leftPixels != null && Object.hasOwnProperty.call(message, "leftPixels"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.leftPixels);
+                                    if (message.rightPixels != null && Object.hasOwnProperty.call(message, "rightPixels"))
+                                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.rightPixels);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Pad message, length delimited. Does not implicitly {@link google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.IPad} message Pad message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Pad.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Pad message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad} Pad
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Pad.decode = function decode(reader, length) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        switch (tag >>> 3) {
+                                        case 1:
+                                            message.topPixels = reader.int32();
+                                            break;
+                                        case 2:
+                                            message.bottomPixels = reader.int32();
+                                            break;
+                                        case 3:
+                                            message.leftPixels = reader.int32();
+                                            break;
+                                        case 4:
+                                            message.rightPixels = reader.int32();
+                                            break;
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Pad message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad} Pad
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Pad.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Pad message.
+                                 * @function verify
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Pad.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.topPixels != null && message.hasOwnProperty("topPixels"))
+                                        if (!$util.isInteger(message.topPixels))
+                                            return "topPixels: integer expected";
+                                    if (message.bottomPixels != null && message.hasOwnProperty("bottomPixels"))
+                                        if (!$util.isInteger(message.bottomPixels))
+                                            return "bottomPixels: integer expected";
+                                    if (message.leftPixels != null && message.hasOwnProperty("leftPixels"))
+                                        if (!$util.isInteger(message.leftPixels))
+                                            return "leftPixels: integer expected";
+                                    if (message.rightPixels != null && message.hasOwnProperty("rightPixels"))
+                                        if (!$util.isInteger(message.rightPixels))
+                                            return "rightPixels: integer expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Pad message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad} Pad
+                                 */
+                                Pad.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad)
+                                        return object;
+                                    var message = new $root.google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad();
+                                    if (object.topPixels != null)
+                                        message.topPixels = object.topPixels | 0;
+                                    if (object.bottomPixels != null)
+                                        message.bottomPixels = object.bottomPixels | 0;
+                                    if (object.leftPixels != null)
+                                        message.leftPixels = object.leftPixels | 0;
+                                    if (object.rightPixels != null)
+                                        message.rightPixels = object.rightPixels | 0;
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Pad message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @static
+                                 * @param {google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad} message Pad
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Pad.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.topPixels = 0;
+                                        object.bottomPixels = 0;
+                                        object.leftPixels = 0;
+                                        object.rightPixels = 0;
+                                    }
+                                    if (message.topPixels != null && message.hasOwnProperty("topPixels"))
+                                        object.topPixels = message.topPixels;
+                                    if (message.bottomPixels != null && message.hasOwnProperty("bottomPixels"))
+                                        object.bottomPixels = message.bottomPixels;
+                                    if (message.leftPixels != null && message.hasOwnProperty("leftPixels"))
+                                        object.leftPixels = message.leftPixels;
+                                    if (message.rightPixels != null && message.hasOwnProperty("rightPixels"))
+                                        object.rightPixels = message.rightPixels;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Pad to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.video.transcoder.v1beta1.PreprocessingConfig.Pad
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Pad.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                return Pad;
                             })();
     
                             return PreprocessingConfig;
