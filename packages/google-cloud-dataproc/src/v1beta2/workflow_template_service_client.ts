@@ -882,7 +882,7 @@ export class WorkflowTemplateServiceClient {
    * clusters to be deleted.
    *
    * The {@link google.longrunning.Operation.metadata|Operation.metadata} will be
-   * [WorkflowMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#workflowmetadata).
+   * WorkflowMetadata.
    * Also see [Using
    * WorkflowMetadata](https://cloud.google.com/dataproc/docs/concepts/workflows/debugging#using_workflowmetadata).
    *

@@ -527,7 +527,7 @@ export class ClusterControllerClient {
   /**
    * Creates a cluster in a project. The returned
    * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
-   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+   * ClusterOperationMetadata.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -688,7 +688,7 @@ export class ClusterControllerClient {
   /**
    * Updates a cluster in a project. The returned
    * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
-   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+   * ClusterOperationMetadata.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -922,7 +922,7 @@ export class ClusterControllerClient {
   /**
    * Deletes a cluster in a project. The returned
    * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
-   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+   * ClusterOperationMetadata.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1086,7 +1086,7 @@ export class ClusterControllerClient {
   /**
    * Gets cluster diagnostic information. The returned
    * {@link google.longrunning.Operation.metadata|Operation.metadata} will be
-   * [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1beta2#clusteroperationmetadata).
+   * ClusterOperationMetadata.
    * After the operation completes,
    * {@link google.longrunning.Operation.response|Operation.response}
    * contains

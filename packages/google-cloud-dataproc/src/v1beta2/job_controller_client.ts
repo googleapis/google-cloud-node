@@ -679,9 +679,9 @@ export class JobControllerClient {
   /**
    * Starts a job cancellation request. To access the job resource
    * after cancellation, call
-   * [regions/{region}/jobs.list](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/list)
+   * regions/{region}/jobs.list
    * or
-   * [regions/{region}/jobs.get](https://cloud.google.com/dataproc/docs/reference/rest/v1beta2/projects.regions.jobs/get).
+   * regions/{region}/jobs.get.
    *
    * @param {Object} request
    *   The request object that will be sent.
