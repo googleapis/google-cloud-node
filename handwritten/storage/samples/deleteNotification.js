@@ -21,7 +21,7 @@
  */
 
 function main(bucketName = 'my-bucket', notificationId = '1') {
-  // [START storage_delete_notification]
+  // [START storage_delete_bucket_notification]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -45,6 +45,6 @@ function main(bucketName = 'my-bucket', notificationId = '1') {
   }
 
   deleteNotification().catch(console.error);
-  // [END storage_delete_notification]
+  // [END storage_delete_bucket_notification]
 }
 main(...process.argv.slice(2));

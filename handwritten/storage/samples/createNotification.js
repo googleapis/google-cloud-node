@@ -25,7 +25,7 @@ function main(
   bucketName = 'my-bucket',
   topic = `nodejs-storage-samples-${uuid.v4()}`
 ) {
-  // [START storage_create_notification]
+  // [START storage_create_bucket_notifications]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -49,6 +49,6 @@ function main(
   }
 
   createNotification().catch(console.error);
-  // [END storage_create_notification]
+  // [END storage_create_bucket_notifications]
 }
 main(...process.argv.slice(2));

@@ -21,7 +21,7 @@
  */
 
 function main(bucketName = 'my-bucket', notificationId = '1') {
-  // [START storage_notifications_get_metadata]
+  // [START storage_print_pubsub_bucket_notification]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -56,6 +56,6 @@ function main(bucketName = 'my-bucket', notificationId = '1') {
   }
 
   getMetadata().catch(console.error);
-  // [END storage_notifications_get_metadata]
+  // [END storage_print_pubsub_bucket_notification]
 }
 main(...process.argv.slice(2));

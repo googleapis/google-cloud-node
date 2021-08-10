@@ -21,7 +21,7 @@
  */
 
 function main(bucketName = 'my-bucket') {
-  // [START storage_list_notifications]
+  // [START storage_list_bucket_notifications]
   /**
    * TODO(developer): Uncomment the following lines before running the sample.
    */
@@ -45,6 +45,6 @@ function main(bucketName = 'my-bucket') {
   }
 
   listNotifications().catch(console.error);
-  // [END storage_list_notifications]
+  // [END storage_list_bucket_notifications]
 }
 main(...process.argv.slice(2));
