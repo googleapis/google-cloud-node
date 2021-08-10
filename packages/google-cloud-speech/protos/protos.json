@@ -249,8 +249,8 @@
                           "type": "int32",
                           "id": 5,
                           "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY",
-                            "deprecated": true
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -367,6 +367,10 @@
                           "rule": "repeated",
                           "type": "SpeechRecognitionResult",
                           "id": 2
+                        },
+                        "totalBilledTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
                         }
                       }
                     },
@@ -376,6 +380,10 @@
                           "rule": "repeated",
                           "type": "SpeechRecognitionResult",
                           "id": 2
+                        },
+                        "totalBilledTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 3
                         }
                       }
                     },
@@ -392,6 +400,13 @@
                         "lastUpdateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 3
+                        },
+                        "uri": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -409,6 +424,10 @@
                         "speechEventType": {
                           "type": "SpeechEventType",
                           "id": 4
+                        },
+                        "totalBilledTime": {
+                          "type": "google.protobuf.Duration",
+                          "id": 5
                         }
                       },
                       "nested": {

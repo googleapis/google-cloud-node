@@ -1165,6 +1165,9 @@ export namespace google {
 
                     /** RecognizeResponse results */
                     results?: (google.cloud.speech.v1.ISpeechRecognitionResult[]|null);
+
+                    /** RecognizeResponse totalBilledTime */
+                    totalBilledTime?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a RecognizeResponse. */
@@ -1178,6 +1181,9 @@ export namespace google {
 
                     /** RecognizeResponse results. */
                     public results: google.cloud.speech.v1.ISpeechRecognitionResult[];
+
+                    /** RecognizeResponse totalBilledTime. */
+                    public totalBilledTime?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new RecognizeResponse instance using the specified properties.
@@ -1255,6 +1261,9 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse results */
                     results?: (google.cloud.speech.v1.ISpeechRecognitionResult[]|null);
+
+                    /** LongRunningRecognizeResponse totalBilledTime */
+                    totalBilledTime?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a LongRunningRecognizeResponse. */
@@ -1268,6 +1277,9 @@ export namespace google {
 
                     /** LongRunningRecognizeResponse results. */
                     public results: google.cloud.speech.v1.ISpeechRecognitionResult[];
+
+                    /** LongRunningRecognizeResponse totalBilledTime. */
+                    public totalBilledTime?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new LongRunningRecognizeResponse instance using the specified properties.
@@ -1351,6 +1363,9 @@ export namespace google {
 
                     /** LongRunningRecognizeMetadata lastUpdateTime */
                     lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LongRunningRecognizeMetadata uri */
+                    uri?: (string|null);
                 }
 
                 /** Represents a LongRunningRecognizeMetadata. */
@@ -1370,6 +1385,9 @@ export namespace google {
 
                     /** LongRunningRecognizeMetadata lastUpdateTime. */
                     public lastUpdateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** LongRunningRecognizeMetadata uri. */
+                    public uri: string;
 
                     /**
                      * Creates a new LongRunningRecognizeMetadata instance using the specified properties.
@@ -1453,6 +1471,9 @@ export namespace google {
 
                     /** StreamingRecognizeResponse speechEventType */
                     speechEventType?: (google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType|keyof typeof google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType|null);
+
+                    /** StreamingRecognizeResponse totalBilledTime */
+                    totalBilledTime?: (google.protobuf.IDuration|null);
                 }
 
                 /** Represents a StreamingRecognizeResponse. */
@@ -1472,6 +1493,9 @@ export namespace google {
 
                     /** StreamingRecognizeResponse speechEventType. */
                     public speechEventType: (google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType|keyof typeof google.cloud.speech.v1.StreamingRecognizeResponse.SpeechEventType);
+
+                    /** StreamingRecognizeResponse totalBilledTime. */
+                    public totalBilledTime?: (google.protobuf.IDuration|null);
 
                     /**
                      * Creates a new StreamingRecognizeResponse instance using the specified properties.
