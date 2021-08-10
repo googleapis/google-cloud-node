@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [4.2.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.1.4...v4.2.0) (2021-08-10)
+
+
+### Features
+
+* Expose `Locations` service to get/list avaliable locations of Dialogflow products docs: reorder some fields ([#857](https://www.github.com/googleapis/nodejs-dialogflow/issues/857)) ([4ffc775](https://www.github.com/googleapis/nodejs-dialogflow/commit/4ffc775af328735a00ba075e75e1065c3b1dd308))
+
 ### [4.1.4](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.1.3...v4.1.4) (2021-08-04)
 
 
