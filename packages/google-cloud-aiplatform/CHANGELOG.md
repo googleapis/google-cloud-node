@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.10.1](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.10.0...v1.10.1) (2021-08-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#184](https://www.github.com/googleapis/nodejs-ai-platform/issues/184)) ([5d835fb](https://www.github.com/googleapis/nodejs-ai-platform/commit/5d835fba1163b6cd8b72cf5274e0b0417db8c19e))
+
 ## [1.10.0](https://www.github.com/googleapis/nodejs-ai-platform/compare/v1.9.1...v1.10.0) (2021-07-23)
 
 
