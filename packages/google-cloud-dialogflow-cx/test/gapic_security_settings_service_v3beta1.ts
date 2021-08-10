@@ -1856,6 +1856,182 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
       });
     });
 
+    describe('organizationLocationDeidentifyTemplate', () => {
+      const fakePath = '/rendered/path/organizationLocationDeidentifyTemplate';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        deidentify_template: 'deidentifyTemplateValue',
+      };
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationDeidentifyTemplatePath', () => {
+        const result = client.organizationLocationDeidentifyTemplatePath(
+          'organizationValue',
+          'locationValue',
+          'deidentifyTemplateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationDeidentifyTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationDeidentifyTemplateName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationDeidentifyTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationDeidentifyTemplateName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationDeidentifyTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName', () => {
+        const result =
+          client.matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'deidentifyTemplateValue');
+        assert(
+          (
+            client.pathTemplates
+              .organizationLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('organizationLocationInspectTemplate', () => {
+      const fakePath = '/rendered/path/organizationLocationInspectTemplate';
+      const expectedParameters = {
+        organization: 'organizationValue',
+        location: 'locationValue',
+        inspect_template: 'inspectTemplateValue',
+      };
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.organizationLocationInspectTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.organizationLocationInspectTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('organizationLocationInspectTemplatePath', () => {
+        const result = client.organizationLocationInspectTemplatePath(
+          'organizationValue',
+          'locationValue',
+          'inspectTemplateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.organizationLocationInspectTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchOrganizationFromOrganizationLocationInspectTemplateName', () => {
+        const result =
+          client.matchOrganizationFromOrganizationLocationInspectTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'organizationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromOrganizationLocationInspectTemplateName', () => {
+        const result =
+          client.matchLocationFromOrganizationLocationInspectTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInspectTemplateFromOrganizationLocationInspectTemplateName', () => {
+        const result =
+          client.matchInspectTemplateFromOrganizationLocationInspectTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'inspectTemplateValue');
+        assert(
+          (
+            client.pathTemplates.organizationLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('page', () => {
       const fakePath = '/rendered/path/page';
       const expectedParameters = {
@@ -2257,6 +2433,174 @@ describe('v3beta1.SecuritySettingsServiceClient', () => {
           (
             client.pathTemplates
               .projectLocationAgentSessionEntityTypePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationDeidentifyTemplate', () => {
+      const fakePath = '/rendered/path/projectLocationDeidentifyTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        deidentify_template: 'deidentifyTemplateValue',
+      };
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationDeidentifyTemplatePath', () => {
+        const result = client.projectLocationDeidentifyTemplatePath(
+          'projectValue',
+          'locationValue',
+          'deidentifyTemplateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationDeidentifyTemplateName', () => {
+        const result =
+          client.matchProjectFromProjectLocationDeidentifyTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationDeidentifyTemplateName', () => {
+        const result =
+          client.matchLocationFromProjectLocationDeidentifyTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName', () => {
+        const result =
+          client.matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'deidentifyTemplateValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationDeidentifyTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('projectLocationInspectTemplate', () => {
+      const fakePath = '/rendered/path/projectLocationInspectTemplate';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        inspect_template: 'inspectTemplateValue',
+      };
+      const client =
+        new securitysettingsserviceModule.v3beta1.SecuritySettingsServiceClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
+      client.initialize();
+      client.pathTemplates.projectLocationInspectTemplatePathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.projectLocationInspectTemplatePathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('projectLocationInspectTemplatePath', () => {
+        const result = client.projectLocationInspectTemplatePath(
+          'projectValue',
+          'locationValue',
+          'inspectTemplateValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.projectLocationInspectTemplatePathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromProjectLocationInspectTemplateName', () => {
+        const result =
+          client.matchProjectFromProjectLocationInspectTemplateName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromProjectLocationInspectTemplateName', () => {
+        const result =
+          client.matchLocationFromProjectLocationInspectTemplateName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationInspectTemplatePathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInspectTemplateFromProjectLocationInspectTemplateName', () => {
+        const result =
+          client.matchInspectTemplateFromProjectLocationInspectTemplateName(
+            fakePath
+          );
+        assert.strictEqual(result, 'inspectTemplateValue');
+        assert(
+          (
+            client.pathTemplates.projectLocationInspectTemplatePathTemplate
               .match as SinonStub
           )
             .getCall(-1)

@@ -189,6 +189,14 @@ export class SecuritySettingsServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      organizationLocationDeidentifyTemplatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/deidentifyTemplates/{deidentify_template}'
+        ),
+      organizationLocationInspectTemplatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'organizations/{organization}/locations/{location}/inspectTemplates/{inspect_template}'
+        ),
       pagePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/agents/{agent}/flows/{flow}/pages/{page}'
       ),
@@ -202,6 +210,14 @@ export class SecuritySettingsServiceClient {
       projectLocationAgentSessionEntityTypePathTemplate:
         new this._gaxModule.PathTemplate(
           'projects/{project}/locations/{location}/agents/{agent}/sessions/{session}/entityTypes/{entity_type}'
+        ),
+      projectLocationDeidentifyTemplatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/deidentifyTemplates/{deidentify_template}'
+        ),
+      projectLocationInspectTemplatePathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/inspectTemplates/{inspect_template}'
         ),
       securitySettingsPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/securitySettings/{security_settings}'
@@ -1654,6 +1670,140 @@ export class SecuritySettingsServiceClient {
   }
 
   /**
+   * Return a fully-qualified organizationLocationDeidentifyTemplate resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} deidentify_template
+   * @returns {string} Resource name string.
+   */
+  organizationLocationDeidentifyTemplatePath(
+    organization: string,
+    location: string,
+    deidentifyTemplate: string
+  ) {
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        deidentify_template: deidentifyTemplate,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationDeidentifyTemplate resource.
+   *
+   * @param {string} organizationLocationDeidentifyTemplateName
+   *   A fully-qualified path representing organization_location_deidentify_template resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationDeidentifyTemplateName(
+    organizationLocationDeidentifyTemplateName: string
+  ) {
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
+      organizationLocationDeidentifyTemplateName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationDeidentifyTemplate resource.
+   *
+   * @param {string} organizationLocationDeidentifyTemplateName
+   *   A fully-qualified path representing organization_location_deidentify_template resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationDeidentifyTemplateName(
+    organizationLocationDeidentifyTemplateName: string
+  ) {
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
+      organizationLocationDeidentifyTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the deidentify_template from OrganizationLocationDeidentifyTemplate resource.
+   *
+   * @param {string} organizationLocationDeidentifyTemplateName
+   *   A fully-qualified path representing organization_location_deidentify_template resource.
+   * @returns {string} A string representing the deidentify_template.
+   */
+  matchDeidentifyTemplateFromOrganizationLocationDeidentifyTemplateName(
+    organizationLocationDeidentifyTemplateName: string
+  ) {
+    return this.pathTemplates.organizationLocationDeidentifyTemplatePathTemplate.match(
+      organizationLocationDeidentifyTemplateName
+    ).deidentify_template;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationInspectTemplate resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} inspect_template
+   * @returns {string} Resource name string.
+   */
+  organizationLocationInspectTemplatePath(
+    organization: string,
+    location: string,
+    inspectTemplate: string
+  ) {
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.render(
+      {
+        organization: organization,
+        location: location,
+        inspect_template: inspectTemplate,
+      }
+    );
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationInspectTemplate resource.
+   *
+   * @param {string} organizationLocationInspectTemplateName
+   *   A fully-qualified path representing organization_location_inspect_template resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationInspectTemplateName(
+    organizationLocationInspectTemplateName: string
+  ) {
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
+      organizationLocationInspectTemplateName
+    ).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationInspectTemplate resource.
+   *
+   * @param {string} organizationLocationInspectTemplateName
+   *   A fully-qualified path representing organization_location_inspect_template resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationInspectTemplateName(
+    organizationLocationInspectTemplateName: string
+  ) {
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
+      organizationLocationInspectTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the inspect_template from OrganizationLocationInspectTemplate resource.
+   *
+   * @param {string} organizationLocationInspectTemplateName
+   *   A fully-qualified path representing organization_location_inspect_template resource.
+   * @returns {string} A string representing the inspect_template.
+   */
+  matchInspectTemplateFromOrganizationLocationInspectTemplateName(
+    organizationLocationInspectTemplateName: string
+  ) {
+    return this.pathTemplates.organizationLocationInspectTemplatePathTemplate.match(
+      organizationLocationInspectTemplateName
+    ).inspect_template;
+  }
+
+  /**
    * Return a fully-qualified page resource name string.
    *
    * @param {string} project
@@ -1979,6 +2129,140 @@ export class SecuritySettingsServiceClient {
     return this.pathTemplates.projectLocationAgentSessionEntityTypePathTemplate.match(
       projectLocationAgentSessionEntityTypeName
     ).entity_type;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationDeidentifyTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} deidentify_template
+   * @returns {string} Resource name string.
+   */
+  projectLocationDeidentifyTemplatePath(
+    project: string,
+    location: string,
+    deidentifyTemplate: string
+  ) {
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        deidentify_template: deidentifyTemplate,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationDeidentifyTemplate resource.
+   *
+   * @param {string} projectLocationDeidentifyTemplateName
+   *   A fully-qualified path representing project_location_deidentify_template resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationDeidentifyTemplateName(
+    projectLocationDeidentifyTemplateName: string
+  ) {
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
+      projectLocationDeidentifyTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationDeidentifyTemplate resource.
+   *
+   * @param {string} projectLocationDeidentifyTemplateName
+   *   A fully-qualified path representing project_location_deidentify_template resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationDeidentifyTemplateName(
+    projectLocationDeidentifyTemplateName: string
+  ) {
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
+      projectLocationDeidentifyTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the deidentify_template from ProjectLocationDeidentifyTemplate resource.
+   *
+   * @param {string} projectLocationDeidentifyTemplateName
+   *   A fully-qualified path representing project_location_deidentify_template resource.
+   * @returns {string} A string representing the deidentify_template.
+   */
+  matchDeidentifyTemplateFromProjectLocationDeidentifyTemplateName(
+    projectLocationDeidentifyTemplateName: string
+  ) {
+    return this.pathTemplates.projectLocationDeidentifyTemplatePathTemplate.match(
+      projectLocationDeidentifyTemplateName
+    ).deidentify_template;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationInspectTemplate resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} inspect_template
+   * @returns {string} Resource name string.
+   */
+  projectLocationInspectTemplatePath(
+    project: string,
+    location: string,
+    inspectTemplate: string
+  ) {
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.render(
+      {
+        project: project,
+        location: location,
+        inspect_template: inspectTemplate,
+      }
+    );
+  }
+
+  /**
+   * Parse the project from ProjectLocationInspectTemplate resource.
+   *
+   * @param {string} projectLocationInspectTemplateName
+   *   A fully-qualified path representing project_location_inspect_template resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationInspectTemplateName(
+    projectLocationInspectTemplateName: string
+  ) {
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(
+      projectLocationInspectTemplateName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationInspectTemplate resource.
+   *
+   * @param {string} projectLocationInspectTemplateName
+   *   A fully-qualified path representing project_location_inspect_template resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationInspectTemplateName(
+    projectLocationInspectTemplateName: string
+  ) {
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(
+      projectLocationInspectTemplateName
+    ).location;
+  }
+
+  /**
+   * Parse the inspect_template from ProjectLocationInspectTemplate resource.
+   *
+   * @param {string} projectLocationInspectTemplateName
+   *   A fully-qualified path representing project_location_inspect_template resource.
+   * @returns {string} A string representing the inspect_template.
+   */
+  matchInspectTemplateFromProjectLocationInspectTemplateName(
+    projectLocationInspectTemplateName: string
+  ) {
+    return this.pathTemplates.projectLocationInspectTemplatePathTemplate.match(
+      projectLocationInspectTemplateName
+    ).inspect_template;
   }
 
   /**
