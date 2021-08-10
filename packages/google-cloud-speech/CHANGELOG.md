@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [4.6.0](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.6...v4.6.0) (2021-08-10)
+
+
+### Features
+
+* add total_billed_time response field ([#787](https://www.github.com/googleapis/nodejs-speech/issues/787)) ([171cba0](https://www.github.com/googleapis/nodejs-speech/commit/171cba0bb8f7bd12ab96f296824e0acf7a0698d7))
+
 ### [4.5.6](https://www.github.com/googleapis/nodejs-speech/compare/v4.5.5...v4.5.6) (2021-08-02)
 
 
