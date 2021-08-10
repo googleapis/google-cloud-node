@@ -2878,7 +2878,10 @@
                         },
                         "rootFollowupIntentName": {
                           "type": "string",
-                          "id": 16
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         },
                         "parentFollowupIntentName": {
                           "type": "string",
@@ -2887,7 +2890,10 @@
                         "followupIntentInfo": {
                           "rule": "repeated",
                           "type": "FollowupIntentInfo",
-                          "id": 18
+                          "id": 18,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
