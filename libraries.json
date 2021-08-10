@@ -2,7 +2,7 @@
   {
     "name": "accessapproval",
     "name_pretty": "Access Approval",
-    "product_documentation": "https://cloud.google.com/access-approval/docs",
+    "product_documentation": "https://cloud.google.com/cloud-provider-access-management/access-approval/docs",
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/access-approval/latest",
     "issue_tracker": "https://github.com/googleapis/nodejs-access-approval/issues",
     "release_level": "ga",
@@ -12,7 +12,7 @@
     "api_id": "accessapproval.googleapis.com",
     "requires_billing": true,
     "default_version": "v1",
-    "support_documentation": "https://cloud.google.com/access-approval/docs"
+    "support_documentation": "https://cloud.google.com/cloud-provider-access-management/access-approval/docs/getting-support"
   },
   {
     "requires_billing": true,
@@ -68,7 +68,7 @@
     "language": "nodejs",
     "requires_billing": true,
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559744",
-    "client_documentation": "https://googleapis.dev/nodejs/automl/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/automl/latest",
     "name": "automl",
     "name_pretty": "AutoML",
     "api_id": "automl.googleapis.com",
