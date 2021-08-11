@@ -229,6 +229,30 @@ export class ContactCenterInsightsClient {
     const exportInsightsDataMetadata = protoFilesRoot.lookup(
       '.google.cloud.contactcenterinsights.v1.ExportInsightsDataMetadata'
     ) as gax.protobuf.Type;
+    const createIssueModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.IssueModel'
+    ) as gax.protobuf.Type;
+    const createIssueModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata'
+    ) as gax.protobuf.Type;
+    const deleteIssueModelResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteIssueModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata'
+    ) as gax.protobuf.Type;
+    const deployIssueModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.DeployIssueModelResponse'
+    ) as gax.protobuf.Type;
+    const deployIssueModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata'
+    ) as gax.protobuf.Type;
+    const undeployIssueModelResponse = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse'
+    ) as gax.protobuf.Type;
+    const undeployIssueModelMetadata = protoFilesRoot.lookup(
+      '.google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createAnalysis: new this._gaxModule.LongrunningDescriptor(
@@ -240,6 +264,26 @@ export class ContactCenterInsightsClient {
         this.operationsClient,
         exportInsightsDataResponse.decode.bind(exportInsightsDataResponse),
         exportInsightsDataMetadata.decode.bind(exportInsightsDataMetadata)
+      ),
+      createIssueModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createIssueModelResponse.decode.bind(createIssueModelResponse),
+        createIssueModelMetadata.decode.bind(createIssueModelMetadata)
+      ),
+      deleteIssueModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteIssueModelResponse.decode.bind(deleteIssueModelResponse),
+        deleteIssueModelMetadata.decode.bind(deleteIssueModelMetadata)
+      ),
+      deployIssueModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deployIssueModelResponse.decode.bind(deployIssueModelResponse),
+        deployIssueModelMetadata.decode.bind(deployIssueModelMetadata)
+      ),
+      undeployIssueModel: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        undeployIssueModelResponse.decode.bind(undeployIssueModelResponse),
+        undeployIssueModelMetadata.decode.bind(undeployIssueModelMetadata)
       ),
     };
 
@@ -304,10 +348,16 @@ export class ContactCenterInsightsClient {
       'listAnalyses',
       'deleteAnalysis',
       'exportInsightsData',
+      'createIssueModel',
+      'updateIssueModel',
       'getIssueModel',
       'listIssueModels',
+      'deleteIssueModel',
+      'deployIssueModel',
+      'undeployIssueModel',
       'getIssue',
       'listIssues',
+      'updateIssue',
       'calculateIssueModelStats',
       'createPhraseMatcher',
       'getPhraseMatcher',
@@ -1000,6 +1050,105 @@ export class ContactCenterInsightsClient {
     this.initialize();
     return this.innerApiCalls.deleteAnalysis(request, options, callback);
   }
+  updateIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates an issue model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.IssueModel} request.issueModel
+   *   Required. The new values for the issue model.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [IssueModel]{@link google.cloud.contactcenterinsights.v1.IssueModel}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateIssueModel(request);
+   */
+  updateIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'issue_model.name': request.issueModel!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateIssueModel(request, options, callback);
+  }
   getIssueModel(
     request?: protos.google.cloud.contactcenterinsights.v1.IGetIssueModelRequest,
     options?: CallOptions
@@ -1381,6 +1530,105 @@ export class ContactCenterInsightsClient {
       });
     this.initialize();
     return this.innerApiCalls.listIssues(request, options, callback);
+  }
+  updateIssue(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IIssue,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  updateIssue(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IIssue,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateIssue(
+    request: protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest,
+    callback: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IIssue,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates an issue.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.contactcenterinsights.v1.Issue} request.issue
+   *   Required. The new values for the issue.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   The list of fields to be updated.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Issue]{@link google.cloud.contactcenterinsights.v1.Issue}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updateIssue(request);
+   */
+  updateIssue(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.contactcenterinsights.v1.IIssue,
+          | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.contactcenterinsights.v1.IIssue,
+      | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.contactcenterinsights.v1.IIssue,
+      (
+        | protos.google.cloud.contactcenterinsights.v1.IUpdateIssueRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'issue.name': request.issue!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateIssue(request, options, callback);
   }
   calculateIssueModelStats(
     request?: protos.google.cloud.contactcenterinsights.v1.ICalculateIssueModelStatsRequest,
@@ -2368,6 +2616,574 @@ export class ContactCenterInsightsClient {
     return decodeOperation as LROperation<
       protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataResponse,
       protos.google.cloud.contactcenterinsights.v1.ExportInsightsDataMetadata
+    >;
+  }
+  createIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+        protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+        protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+        protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates an issue model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent resource of the issue model.
+   * @param {google.cloud.contactcenterinsights.v1.IssueModel} request.issueModel
+   *   Required. The issue model to create.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createIssueModel(request);
+   * const [response] = await operation.promise();
+   */
+  createIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+            protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+        protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IIssueModel,
+        protos.google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createIssueModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createIssueModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateIssueModelProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkCreateIssueModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.IssueModel,
+      protos.google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createIssueModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.IssueModel,
+      protos.google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+    >;
+  }
+  deleteIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes an issue model.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The name of the issue model to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteIssueModel(request);
+   * const [response] = await operation.promise();
+   */
+  deleteIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteIssueModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteIssueModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteIssueModelProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteIssueModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteIssueModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+    >;
+  }
+  deployIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deployIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deployIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deploys an issue model. Returns an error if a model is already deployed.
+   * An issue model can only be used in analysis after it has been deployed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The issue model to deploy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deployIssueModel(request);
+   * const [response] = await operation.promise();
+   */
+  deployIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deployIssueModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deployIssueModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeployIssueModelProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeployIssueModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.DeployIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deployIssueModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.DeployIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+    >;
+  }
+  undeployIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  undeployIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  undeployIssueModel(
+    request: protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Undeploys an issue model.
+   * An issue model can not be used in analysis after it has been undeployed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The issue model to undeploy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.undeployIssueModel(request);
+   * const [response] = await operation.promise();
+   */
+  undeployIssueModel(
+    request?: protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse,
+            protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse,
+        protos.google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.undeployIssueModel(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `undeployIssueModel()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUndeployIssueModelProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkUndeployIssueModelProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.undeployIssueModel,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse,
+      protos.google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
     >;
   }
   listConversations(

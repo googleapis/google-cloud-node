@@ -229,6 +229,54 @@
                             }
                           ]
                         },
+                        "CreateIssueModel": {
+                          "requestType": "CreateIssueModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/issueModels",
+                            "(google.api.http).body": "issue_model",
+                            "(google.api.method_signature)": "parent,issue_model",
+                            "(google.longrunning.operation_info).response_type": "IssueModel",
+                            "(google.longrunning.operation_info).metadata_type": "CreateIssueModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/issueModels",
+                                "body": "issue_model"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,issue_model"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "IssueModel",
+                                "metadata_type": "CreateIssueModelMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateIssueModel": {
+                          "requestType": "UpdateIssueModelRequest",
+                          "responseType": "IssueModel",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{issue_model.name=projects/*/locations/*/issueModels/*}",
+                            "(google.api.http).body": "issue_model",
+                            "(google.api.method_signature)": "issue_model,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{issue_model.name=projects/*/locations/*/issueModels/*}",
+                                "body": "issue_model"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "issue_model,update_mask"
+                            }
+                          ]
+                        },
                         "GetIssueModel": {
                           "requestType": "GetIssueModelRequest",
                           "responseType": "IssueModel",
@@ -265,6 +313,88 @@
                             }
                           ]
                         },
+                        "DeleteIssueModel": {
+                          "requestType": "DeleteIssueModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/issueModels/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "DeleteIssueModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/issueModels/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "DeleteIssueModelMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeployIssueModel": {
+                          "requestType": "DeployIssueModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/issueModels/*}:deploy",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "DeployIssueModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "DeployIssueModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/issueModels/*}:deploy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "DeployIssueModelResponse",
+                                "metadata_type": "DeployIssueModelMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UndeployIssueModel": {
+                          "requestType": "UndeployIssueModelRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/issueModels/*}:undeploy",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "UndeployIssueModelResponse",
+                            "(google.longrunning.operation_info).metadata_type": "UndeployIssueModelMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/issueModels/*}:undeploy",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "UndeployIssueModelResponse",
+                                "metadata_type": "UndeployIssueModelMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "GetIssue": {
                           "requestType": "GetIssueRequest",
                           "responseType": "Issue",
@@ -298,6 +428,26 @@
                             },
                             {
                               "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "UpdateIssue": {
+                          "requestType": "UpdateIssueRequest",
+                          "responseType": "Issue",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{issue.name=projects/*/locations/*/issueModels/*/issues/*}",
+                            "(google.api.http).body": "issue",
+                            "(google.api.method_signature)": "issue,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{issue.name=projects/*/locations/*/issueModels/*/issues/*}",
+                                "body": "issue"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "issue,update_mask"
                             }
                           ]
                         },
@@ -837,6 +987,62 @@
                     "ExportInsightsDataResponse": {
                       "fields": {}
                     },
+                    "CreateIssueModelRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "issueModel": {
+                          "type": "IssueModel",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateIssueModelMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "CreateIssueModelRequest",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UpdateIssueModelRequest": {
+                      "fields": {
+                        "issueModel": {
+                          "type": "IssueModel",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
+                        }
+                      }
+                    },
                     "ListIssueModelsRequest": {
                       "fields": {
                         "parent": {
@@ -870,6 +1076,114 @@
                         }
                       }
                     },
+                    "DeleteIssueModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/IssueModel"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteIssueModelMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "DeleteIssueModelRequest",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "DeployIssueModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/IssueModel"
+                          }
+                        }
+                      }
+                    },
+                    "DeployIssueModelResponse": {
+                      "fields": {}
+                    },
+                    "DeployIssueModelMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "DeployIssueModelRequest",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "UndeployIssueModelRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "contactcenterinsights.googleapis.com/IssueModel"
+                          }
+                        }
+                      }
+                    },
+                    "UndeployIssueModelResponse": {
+                      "fields": {}
+                    },
+                    "UndeployIssueModelMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "request": {
+                          "type": "UndeployIssueModelRequest",
+                          "id": 3
+                        }
+                      }
+                    },
                     "GetIssueRequest": {
                       "fields": {
                         "name": {
@@ -900,6 +1214,21 @@
                           "rule": "repeated",
                           "type": "Issue",
                           "id": 1
+                        }
+                      }
+                    },
+                    "UpdateIssueRequest": {
+                      "fields": {
+                        "issue": {
+                          "type": "Issue",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2
                         }
                       }
                     },
@@ -1666,6 +1995,10 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "inputDataConfig": {
+                          "type": "InputDataConfig",
+                          "id": 6
+                        },
                         "trainingStats": {
                           "type": "IssueModelLabelStats",
                           "id": 7,
@@ -1675,6 +2008,24 @@
                         }
                       },
                       "nested": {
+                        "InputDataConfig": {
+                          "fields": {
+                            "medium": {
+                              "type": "Conversation.Medium",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "trainingConversationsCount": {
+                              "type": "int64",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
                         "State": {
                           "values": {
                             "STATE_UNSPECIFIED": 0,
@@ -2138,10 +2489,32 @@
                       }
                     },
                     "ConversationParticipant": {
+                      "oneofs": {
+                        "participant": {
+                          "oneof": [
+                            "dialogflowParticipantName",
+                            "userId"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "dialogflowParticipantName": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.resource_reference).type": "dialogflow.googleapis.com/Participant"
+                          }
+                        },
+                        "userId": {
+                          "type": "string",
+                          "id": 6
+                        },
                         "dialogflowParticipant": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
                         },
                         "role": {
                           "type": "Role",

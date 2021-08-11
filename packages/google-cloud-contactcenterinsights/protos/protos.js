@@ -429,6 +429,72 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#createIssueModel}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef CreateIssueModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateIssueModel.
+                         * @function createIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest} request CreateIssueModelRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.CreateIssueModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.createIssueModel = function createIssueModel(request, callback) {
+                            return this.rpcCall(createIssueModel, $root.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateIssueModel" });
+    
+                        /**
+                         * Calls CreateIssueModel.
+                         * @function createIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest} request CreateIssueModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#updateIssueModel}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef UpdateIssueModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.contactcenterinsights.v1.IssueModel} [response] IssueModel
+                         */
+    
+                        /**
+                         * Calls UpdateIssueModel.
+                         * @function updateIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest} request UpdateIssueModelRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateIssueModelCallback} callback Node-style callback called with the error, if any, and IssueModel
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.updateIssueModel = function updateIssueModel(request, callback) {
+                            return this.rpcCall(updateIssueModel, $root.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest, $root.google.cloud.contactcenterinsights.v1.IssueModel, request, callback);
+                        }, "name", { value: "UpdateIssueModel" });
+    
+                        /**
+                         * Calls UpdateIssueModel.
+                         * @function updateIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest} request UpdateIssueModelRequest message or plain object
+                         * @returns {Promise<google.cloud.contactcenterinsights.v1.IssueModel>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#getIssueModel}.
                          * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
                          * @typedef GetIssueModelCallback
@@ -495,6 +561,105 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#deleteIssueModel}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef DeleteIssueModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteIssueModel.
+                         * @function deleteIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest} request DeleteIssueModelRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeleteIssueModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.deleteIssueModel = function deleteIssueModel(request, callback) {
+                            return this.rpcCall(deleteIssueModel, $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteIssueModel" });
+    
+                        /**
+                         * Calls DeleteIssueModel.
+                         * @function deleteIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest} request DeleteIssueModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#deployIssueModel}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef DeployIssueModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeployIssueModel.
+                         * @function deployIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest} request DeployIssueModelRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.DeployIssueModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.deployIssueModel = function deployIssueModel(request, callback) {
+                            return this.rpcCall(deployIssueModel, $root.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeployIssueModel" });
+    
+                        /**
+                         * Calls DeployIssueModel.
+                         * @function deployIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest} request DeployIssueModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#undeployIssueModel}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef UndeployIssueModelCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UndeployIssueModel.
+                         * @function undeployIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest} request UndeployIssueModelRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.UndeployIssueModelCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.undeployIssueModel = function undeployIssueModel(request, callback) {
+                            return this.rpcCall(undeployIssueModel, $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UndeployIssueModel" });
+    
+                        /**
+                         * Calls UndeployIssueModel.
+                         * @function undeployIssueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest} request UndeployIssueModelRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#getIssue}.
                          * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
                          * @typedef GetIssueCallback
@@ -557,6 +722,39 @@
                          * @instance
                          * @param {google.cloud.contactcenterinsights.v1.IListIssuesRequest} request ListIssuesRequest message or plain object
                          * @returns {Promise<google.cloud.contactcenterinsights.v1.ListIssuesResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.contactcenterinsights.v1.ContactCenterInsights#updateIssue}.
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @typedef UpdateIssueCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.contactcenterinsights.v1.Issue} [response] Issue
+                         */
+    
+                        /**
+                         * Calls UpdateIssue.
+                         * @function updateIssue
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueRequest} request UpdateIssueRequest message or plain object
+                         * @param {google.cloud.contactcenterinsights.v1.ContactCenterInsights.UpdateIssueCallback} callback Node-style callback called with the error, if any, and Issue
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(ContactCenterInsights.prototype.updateIssue = function updateIssue(request, callback) {
+                            return this.rpcCall(updateIssue, $root.google.cloud.contactcenterinsights.v1.UpdateIssueRequest, $root.google.cloud.contactcenterinsights.v1.Issue, request, callback);
+                        }, "name", { value: "UpdateIssue" });
+    
+                        /**
+                         * Calls UpdateIssue.
+                         * @function updateIssue
+                         * @memberof google.cloud.contactcenterinsights.v1.ContactCenterInsights
+                         * @instance
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueRequest} request UpdateIssueRequest message or plain object
+                         * @returns {Promise<google.cloud.contactcenterinsights.v1.Issue>} Promise
                          * @variation 2
                          */
     
@@ -5637,6 +5835,688 @@
                         return ExportInsightsDataResponse;
                     })();
     
+                    v1.CreateIssueModelRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface ICreateIssueModelRequest
+                         * @property {string|null} [parent] CreateIssueModelRequest parent
+                         * @property {google.cloud.contactcenterinsights.v1.IIssueModel|null} [issueModel] CreateIssueModelRequest issueModel
+                         */
+    
+                        /**
+                         * Constructs a new CreateIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a CreateIssueModelRequest.
+                         * @implements ICreateIssueModelRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest=} [properties] Properties to set
+                         */
+                        function CreateIssueModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateIssueModelRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @instance
+                         */
+                        CreateIssueModelRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateIssueModelRequest issueModel.
+                         * @member {google.cloud.contactcenterinsights.v1.IIssueModel|null|undefined} issueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @instance
+                         */
+                        CreateIssueModelRequest.prototype.issueModel = null;
+    
+                        /**
+                         * Creates a new CreateIssueModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.CreateIssueModelRequest} CreateIssueModelRequest instance
+                         */
+                        CreateIssueModelRequest.create = function create(properties) {
+                            return new CreateIssueModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateIssueModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest} message CreateIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateIssueModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.issueModel != null && Object.hasOwnProperty.call(message, "issueModel"))
+                                $root.google.cloud.contactcenterinsights.v1.IssueModel.encode(message.issueModel, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateIssueModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest} message CreateIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateIssueModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateIssueModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.CreateIssueModelRequest} CreateIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateIssueModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.issueModel = $root.google.cloud.contactcenterinsights.v1.IssueModel.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateIssueModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.CreateIssueModelRequest} CreateIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateIssueModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateIssueModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateIssueModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.issueModel != null && message.hasOwnProperty("issueModel")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.IssueModel.verify(message.issueModel);
+                                if (error)
+                                    return "issueModel." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.CreateIssueModelRequest} CreateIssueModelRequest
+                         */
+                        CreateIssueModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.issueModel != null) {
+                                if (typeof object.issueModel !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.CreateIssueModelRequest.issueModel: object expected");
+                                message.issueModel = $root.google.cloud.contactcenterinsights.v1.IssueModel.fromObject(object.issueModel);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateIssueModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.CreateIssueModelRequest} message CreateIssueModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateIssueModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.issueModel = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.issueModel != null && message.hasOwnProperty("issueModel"))
+                                object.issueModel = $root.google.cloud.contactcenterinsights.v1.IssueModel.toObject(message.issueModel, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateIssueModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateIssueModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateIssueModelRequest;
+                    })();
+    
+                    v1.CreateIssueModelMetadata = (function() {
+    
+                        /**
+                         * Properties of a CreateIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface ICreateIssueModelMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] CreateIssueModelMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] CreateIssueModelMetadata endTime
+                         * @property {google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest|null} [request] CreateIssueModelMetadata request
+                         */
+    
+                        /**
+                         * Constructs a new CreateIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a CreateIssueModelMetadata.
+                         * @implements ICreateIssueModelMetadata
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata=} [properties] Properties to set
+                         */
+                        function CreateIssueModelMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateIssueModelMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @instance
+                         */
+                        CreateIssueModelMetadata.prototype.createTime = null;
+    
+                        /**
+                         * CreateIssueModelMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @instance
+                         */
+                        CreateIssueModelMetadata.prototype.endTime = null;
+    
+                        /**
+                         * CreateIssueModelMetadata request.
+                         * @member {google.cloud.contactcenterinsights.v1.ICreateIssueModelRequest|null|undefined} request
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @instance
+                         */
+                        CreateIssueModelMetadata.prototype.request = null;
+    
+                        /**
+                         * Creates a new CreateIssueModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata} CreateIssueModelMetadata instance
+                         */
+                        CreateIssueModelMetadata.create = function create(properties) {
+                            return new CreateIssueModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata} message CreateIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateIssueModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                $root.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.ICreateIssueModelMetadata} message CreateIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateIssueModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateIssueModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata} CreateIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateIssueModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.request = $root.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateIssueModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata} CreateIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateIssueModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateIssueModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateIssueModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.request != null && message.hasOwnProperty("request")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest.verify(message.request);
+                                if (error)
+                                    return "request." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata} CreateIssueModelMetadata
+                         */
+                        CreateIssueModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.request != null) {
+                                if (typeof object.request !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata.request: object expected");
+                                message.request = $root.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest.fromObject(object.request);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateIssueModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata} message CreateIssueModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateIssueModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.request = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.request != null && message.hasOwnProperty("request"))
+                                object.request = $root.google.cloud.contactcenterinsights.v1.CreateIssueModelRequest.toObject(message.request, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateIssueModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.CreateIssueModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateIssueModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CreateIssueModelMetadata;
+                    })();
+    
+                    v1.UpdateIssueModelRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IUpdateIssueModelRequest
+                         * @property {google.cloud.contactcenterinsights.v1.IIssueModel|null} [issueModel] UpdateIssueModelRequest issueModel
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateIssueModelRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an UpdateIssueModelRequest.
+                         * @implements IUpdateIssueModelRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest=} [properties] Properties to set
+                         */
+                        function UpdateIssueModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateIssueModelRequest issueModel.
+                         * @member {google.cloud.contactcenterinsights.v1.IIssueModel|null|undefined} issueModel
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @instance
+                         */
+                        UpdateIssueModelRequest.prototype.issueModel = null;
+    
+                        /**
+                         * UpdateIssueModelRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @instance
+                         */
+                        UpdateIssueModelRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateIssueModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest} UpdateIssueModelRequest instance
+                         */
+                        UpdateIssueModelRequest.create = function create(properties) {
+                            return new UpdateIssueModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest} message UpdateIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateIssueModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.issueModel != null && Object.hasOwnProperty.call(message, "issueModel"))
+                                $root.google.cloud.contactcenterinsights.v1.IssueModel.encode(message.issueModel, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueModelRequest} message UpdateIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateIssueModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateIssueModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest} UpdateIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateIssueModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.issueModel = $root.google.cloud.contactcenterinsights.v1.IssueModel.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateIssueModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest} UpdateIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateIssueModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateIssueModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateIssueModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.issueModel != null && message.hasOwnProperty("issueModel")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.IssueModel.verify(message.issueModel);
+                                if (error)
+                                    return "issueModel." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest} UpdateIssueModelRequest
+                         */
+                        UpdateIssueModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest();
+                            if (object.issueModel != null) {
+                                if (typeof object.issueModel !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest.issueModel: object expected");
+                                message.issueModel = $root.google.cloud.contactcenterinsights.v1.IssueModel.fromObject(object.issueModel);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateIssueModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest} message UpdateIssueModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateIssueModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.issueModel = null;
+                                object.updateMask = null;
+                            }
+                            if (message.issueModel != null && message.hasOwnProperty("issueModel"))
+                                object.issueModel = $root.google.cloud.contactcenterinsights.v1.IssueModel.toObject(message.issueModel, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateIssueModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateIssueModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateIssueModelRequest;
+                    })();
+    
                     v1.ListIssueModelsRequest = (function() {
     
                         /**
@@ -6219,6 +7099,1628 @@
                         return GetIssueModelRequest;
                     })();
     
+                    v1.DeleteIssueModelRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IDeleteIssueModelRequest
+                         * @property {string|null} [name] DeleteIssueModelRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a DeleteIssueModelRequest.
+                         * @implements IDeleteIssueModelRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest=} [properties] Properties to set
+                         */
+                        function DeleteIssueModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteIssueModelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @instance
+                         */
+                        DeleteIssueModelRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteIssueModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest} DeleteIssueModelRequest instance
+                         */
+                        DeleteIssueModelRequest.create = function create(properties) {
+                            return new DeleteIssueModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest} message DeleteIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteIssueModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest} message DeleteIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteIssueModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteIssueModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest} DeleteIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteIssueModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteIssueModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest} DeleteIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteIssueModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteIssueModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteIssueModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest} DeleteIssueModelRequest
+                         */
+                        DeleteIssueModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteIssueModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest} message DeleteIssueModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteIssueModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteIssueModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteIssueModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteIssueModelRequest;
+                    })();
+    
+                    v1.DeleteIssueModelMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeleteIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IDeleteIssueModelMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeleteIssueModelMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] DeleteIssueModelMetadata endTime
+                         * @property {google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest|null} [request] DeleteIssueModelMetadata request
+                         */
+    
+                        /**
+                         * Constructs a new DeleteIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a DeleteIssueModelMetadata.
+                         * @implements IDeleteIssueModelMetadata
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata=} [properties] Properties to set
+                         */
+                        function DeleteIssueModelMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteIssueModelMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @instance
+                         */
+                        DeleteIssueModelMetadata.prototype.createTime = null;
+    
+                        /**
+                         * DeleteIssueModelMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @instance
+                         */
+                        DeleteIssueModelMetadata.prototype.endTime = null;
+    
+                        /**
+                         * DeleteIssueModelMetadata request.
+                         * @member {google.cloud.contactcenterinsights.v1.IDeleteIssueModelRequest|null|undefined} request
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @instance
+                         */
+                        DeleteIssueModelMetadata.prototype.request = null;
+    
+                        /**
+                         * Creates a new DeleteIssueModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata} DeleteIssueModelMetadata instance
+                         */
+                        DeleteIssueModelMetadata.create = function create(properties) {
+                            return new DeleteIssueModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata} message DeleteIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteIssueModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeleteIssueModelMetadata} message DeleteIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteIssueModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteIssueModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata} DeleteIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteIssueModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.request = $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteIssueModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata} DeleteIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteIssueModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteIssueModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteIssueModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.request != null && message.hasOwnProperty("request")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest.verify(message.request);
+                                if (error)
+                                    return "request." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata} DeleteIssueModelMetadata
+                         */
+                        DeleteIssueModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.request != null) {
+                                if (typeof object.request !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata.request: object expected");
+                                message.request = $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest.fromObject(object.request);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteIssueModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata} message DeleteIssueModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteIssueModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.request = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.request != null && message.hasOwnProperty("request"))
+                                object.request = $root.google.cloud.contactcenterinsights.v1.DeleteIssueModelRequest.toObject(message.request, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteIssueModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.DeleteIssueModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteIssueModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeleteIssueModelMetadata;
+                    })();
+    
+                    v1.DeployIssueModelRequest = (function() {
+    
+                        /**
+                         * Properties of a DeployIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IDeployIssueModelRequest
+                         * @property {string|null} [name] DeployIssueModelRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeployIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a DeployIssueModelRequest.
+                         * @implements IDeployIssueModelRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest=} [properties] Properties to set
+                         */
+                        function DeployIssueModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeployIssueModelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @instance
+                         */
+                        DeployIssueModelRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeployIssueModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelRequest} DeployIssueModelRequest instance
+                         */
+                        DeployIssueModelRequest.create = function create(properties) {
+                            return new DeployIssueModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeployIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeployIssueModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest} message DeployIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployIssueModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeployIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeployIssueModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest} message DeployIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployIssueModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeployIssueModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelRequest} DeployIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployIssueModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeployIssueModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelRequest} DeployIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployIssueModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeployIssueModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeployIssueModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeployIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelRequest} DeployIssueModelRequest
+                         */
+                        DeployIssueModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeployIssueModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.DeployIssueModelRequest} message DeployIssueModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeployIssueModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeployIssueModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeployIssueModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeployIssueModelRequest;
+                    })();
+    
+                    v1.DeployIssueModelResponse = (function() {
+    
+                        /**
+                         * Properties of a DeployIssueModelResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IDeployIssueModelResponse
+                         */
+    
+                        /**
+                         * Constructs a new DeployIssueModelResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a DeployIssueModelResponse.
+                         * @implements IDeployIssueModelResponse
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse=} [properties] Properties to set
+                         */
+                        function DeployIssueModelResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new DeployIssueModelResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelResponse} DeployIssueModelResponse instance
+                         */
+                        DeployIssueModelResponse.create = function create(properties) {
+                            return new DeployIssueModelResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeployIssueModelResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeployIssueModelResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse} message DeployIssueModelResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployIssueModelResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeployIssueModelResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeployIssueModelResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelResponse} message DeployIssueModelResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployIssueModelResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeployIssueModelResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelResponse} DeployIssueModelResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployIssueModelResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.DeployIssueModelResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeployIssueModelResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelResponse} DeployIssueModelResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployIssueModelResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeployIssueModelResponse message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeployIssueModelResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeployIssueModelResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelResponse} DeployIssueModelResponse
+                         */
+                        DeployIssueModelResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.DeployIssueModelResponse)
+                                return object;
+                            return new $root.google.cloud.contactcenterinsights.v1.DeployIssueModelResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeployIssueModelResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.DeployIssueModelResponse} message DeployIssueModelResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeployIssueModelResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this DeployIssueModelResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeployIssueModelResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeployIssueModelResponse;
+                    })();
+    
+                    v1.DeployIssueModelMetadata = (function() {
+    
+                        /**
+                         * Properties of a DeployIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IDeployIssueModelMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] DeployIssueModelMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] DeployIssueModelMetadata endTime
+                         * @property {google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest|null} [request] DeployIssueModelMetadata request
+                         */
+    
+                        /**
+                         * Constructs a new DeployIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents a DeployIssueModelMetadata.
+                         * @implements IDeployIssueModelMetadata
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata=} [properties] Properties to set
+                         */
+                        function DeployIssueModelMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeployIssueModelMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @instance
+                         */
+                        DeployIssueModelMetadata.prototype.createTime = null;
+    
+                        /**
+                         * DeployIssueModelMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @instance
+                         */
+                        DeployIssueModelMetadata.prototype.endTime = null;
+    
+                        /**
+                         * DeployIssueModelMetadata request.
+                         * @member {google.cloud.contactcenterinsights.v1.IDeployIssueModelRequest|null|undefined} request
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @instance
+                         */
+                        DeployIssueModelMetadata.prototype.request = null;
+    
+                        /**
+                         * Creates a new DeployIssueModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata} DeployIssueModelMetadata instance
+                         */
+                        DeployIssueModelMetadata.create = function create(properties) {
+                            return new DeployIssueModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeployIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata} message DeployIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployIssueModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                $root.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeployIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IDeployIssueModelMetadata} message DeployIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeployIssueModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeployIssueModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata} DeployIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployIssueModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.request = $root.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeployIssueModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata} DeployIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeployIssueModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeployIssueModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeployIssueModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.request != null && message.hasOwnProperty("request")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest.verify(message.request);
+                                if (error)
+                                    return "request." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeployIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata} DeployIssueModelMetadata
+                         */
+                        DeployIssueModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.request != null) {
+                                if (typeof object.request !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata.request: object expected");
+                                message.request = $root.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest.fromObject(object.request);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeployIssueModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata} message DeployIssueModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeployIssueModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.request = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.request != null && message.hasOwnProperty("request"))
+                                object.request = $root.google.cloud.contactcenterinsights.v1.DeployIssueModelRequest.toObject(message.request, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeployIssueModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.DeployIssueModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeployIssueModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DeployIssueModelMetadata;
+                    })();
+    
+                    v1.UndeployIssueModelRequest = (function() {
+    
+                        /**
+                         * Properties of an UndeployIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IUndeployIssueModelRequest
+                         * @property {string|null} [name] UndeployIssueModelRequest name
+                         */
+    
+                        /**
+                         * Constructs a new UndeployIssueModelRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an UndeployIssueModelRequest.
+                         * @implements IUndeployIssueModelRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest=} [properties] Properties to set
+                         */
+                        function UndeployIssueModelRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UndeployIssueModelRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @instance
+                         */
+                        UndeployIssueModelRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new UndeployIssueModelRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest} UndeployIssueModelRequest instance
+                         */
+                        UndeployIssueModelRequest.create = function create(properties) {
+                            return new UndeployIssueModelRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UndeployIssueModelRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest} message UndeployIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeployIssueModelRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UndeployIssueModelRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest} message UndeployIssueModelRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeployIssueModelRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UndeployIssueModelRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest} UndeployIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeployIssueModelRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UndeployIssueModelRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest} UndeployIssueModelRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeployIssueModelRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UndeployIssueModelRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UndeployIssueModelRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UndeployIssueModelRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest} UndeployIssueModelRequest
+                         */
+                        UndeployIssueModelRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UndeployIssueModelRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest} message UndeployIssueModelRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UndeployIssueModelRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UndeployIssueModelRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UndeployIssueModelRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UndeployIssueModelRequest;
+                    })();
+    
+                    v1.UndeployIssueModelResponse = (function() {
+    
+                        /**
+                         * Properties of an UndeployIssueModelResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IUndeployIssueModelResponse
+                         */
+    
+                        /**
+                         * Constructs a new UndeployIssueModelResponse.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an UndeployIssueModelResponse.
+                         * @implements IUndeployIssueModelResponse
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse=} [properties] Properties to set
+                         */
+                        function UndeployIssueModelResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Creates a new UndeployIssueModelResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse} UndeployIssueModelResponse instance
+                         */
+                        UndeployIssueModelResponse.create = function create(properties) {
+                            return new UndeployIssueModelResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UndeployIssueModelResponse message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse} message UndeployIssueModelResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeployIssueModelResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UndeployIssueModelResponse message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelResponse} message UndeployIssueModelResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeployIssueModelResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UndeployIssueModelResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse} UndeployIssueModelResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeployIssueModelResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UndeployIssueModelResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse} UndeployIssueModelResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeployIssueModelResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UndeployIssueModelResponse message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UndeployIssueModelResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UndeployIssueModelResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse} UndeployIssueModelResponse
+                         */
+                        UndeployIssueModelResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse)
+                                return object;
+                            return new $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse();
+                        };
+    
+                        /**
+                         * Creates a plain object from an UndeployIssueModelResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse} message UndeployIssueModelResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UndeployIssueModelResponse.toObject = function toObject() {
+                            return {};
+                        };
+    
+                        /**
+                         * Converts this UndeployIssueModelResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UndeployIssueModelResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UndeployIssueModelResponse;
+                    })();
+    
+                    v1.UndeployIssueModelMetadata = (function() {
+    
+                        /**
+                         * Properties of an UndeployIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IUndeployIssueModelMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] UndeployIssueModelMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] UndeployIssueModelMetadata endTime
+                         * @property {google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest|null} [request] UndeployIssueModelMetadata request
+                         */
+    
+                        /**
+                         * Constructs a new UndeployIssueModelMetadata.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an UndeployIssueModelMetadata.
+                         * @implements IUndeployIssueModelMetadata
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata=} [properties] Properties to set
+                         */
+                        function UndeployIssueModelMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UndeployIssueModelMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @instance
+                         */
+                        UndeployIssueModelMetadata.prototype.createTime = null;
+    
+                        /**
+                         * UndeployIssueModelMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @instance
+                         */
+                        UndeployIssueModelMetadata.prototype.endTime = null;
+    
+                        /**
+                         * UndeployIssueModelMetadata request.
+                         * @member {google.cloud.contactcenterinsights.v1.IUndeployIssueModelRequest|null|undefined} request
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @instance
+                         */
+                        UndeployIssueModelMetadata.prototype.request = null;
+    
+                        /**
+                         * Creates a new UndeployIssueModelMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata} UndeployIssueModelMetadata instance
+                         */
+                        UndeployIssueModelMetadata.create = function create(properties) {
+                            return new UndeployIssueModelMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UndeployIssueModelMetadata message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata} message UndeployIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeployIssueModelMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.request != null && Object.hasOwnProperty.call(message, "request"))
+                                $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest.encode(message.request, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UndeployIssueModelMetadata message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUndeployIssueModelMetadata} message UndeployIssueModelMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UndeployIssueModelMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UndeployIssueModelMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata} UndeployIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeployIssueModelMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.request = $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UndeployIssueModelMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata} UndeployIssueModelMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UndeployIssueModelMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UndeployIssueModelMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UndeployIssueModelMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.request != null && message.hasOwnProperty("request")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest.verify(message.request);
+                                if (error)
+                                    return "request." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UndeployIssueModelMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata} UndeployIssueModelMetadata
+                         */
+                        UndeployIssueModelMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.request != null) {
+                                if (typeof object.request !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata.request: object expected");
+                                message.request = $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest.fromObject(object.request);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UndeployIssueModelMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata} message UndeployIssueModelMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UndeployIssueModelMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.request = null;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.request != null && message.hasOwnProperty("request"))
+                                object.request = $root.google.cloud.contactcenterinsights.v1.UndeployIssueModelRequest.toObject(message.request, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UndeployIssueModelMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.UndeployIssueModelMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UndeployIssueModelMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UndeployIssueModelMetadata;
+                    })();
+    
                     v1.GetIssueRequest = (function() {
     
                         /**
@@ -6799,6 +9301,226 @@
                         };
     
                         return ListIssuesResponse;
+                    })();
+    
+                    v1.UpdateIssueRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateIssueRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @interface IUpdateIssueRequest
+                         * @property {google.cloud.contactcenterinsights.v1.IIssue|null} [issue] UpdateIssueRequest issue
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateIssueRequest updateMask
+                         */
+    
+                        /**
+                         * Constructs a new UpdateIssueRequest.
+                         * @memberof google.cloud.contactcenterinsights.v1
+                         * @classdesc Represents an UpdateIssueRequest.
+                         * @implements IUpdateIssueRequest
+                         * @constructor
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueRequest=} [properties] Properties to set
+                         */
+                        function UpdateIssueRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateIssueRequest issue.
+                         * @member {google.cloud.contactcenterinsights.v1.IIssue|null|undefined} issue
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @instance
+                         */
+                        UpdateIssueRequest.prototype.issue = null;
+    
+                        /**
+                         * UpdateIssueRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @instance
+                         */
+                        UpdateIssueRequest.prototype.updateMask = null;
+    
+                        /**
+                         * Creates a new UpdateIssueRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueRequest=} [properties] Properties to set
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdateIssueRequest} UpdateIssueRequest instance
+                         */
+                        UpdateIssueRequest.create = function create(properties) {
+                            return new UpdateIssueRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateIssueRequest message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateIssueRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueRequest} message UpdateIssueRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateIssueRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.issue != null && Object.hasOwnProperty.call(message, "issue"))
+                                $root.google.cloud.contactcenterinsights.v1.Issue.encode(message.issue, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateIssueRequest message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.UpdateIssueRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.IUpdateIssueRequest} message UpdateIssueRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateIssueRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateIssueRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdateIssueRequest} UpdateIssueRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateIssueRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.UpdateIssueRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.issue = $root.google.cloud.contactcenterinsights.v1.Issue.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateIssueRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdateIssueRequest} UpdateIssueRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateIssueRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateIssueRequest message.
+                         * @function verify
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateIssueRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.issue != null && message.hasOwnProperty("issue")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.Issue.verify(message.issue);
+                                if (error)
+                                    return "issue." + error;
+                            }
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateIssueRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.contactcenterinsights.v1.UpdateIssueRequest} UpdateIssueRequest
+                         */
+                        UpdateIssueRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.contactcenterinsights.v1.UpdateIssueRequest)
+                                return object;
+                            var message = new $root.google.cloud.contactcenterinsights.v1.UpdateIssueRequest();
+                            if (object.issue != null) {
+                                if (typeof object.issue !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UpdateIssueRequest.issue: object expected");
+                                message.issue = $root.google.cloud.contactcenterinsights.v1.Issue.fromObject(object.issue);
+                            }
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.UpdateIssueRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateIssueRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @static
+                         * @param {google.cloud.contactcenterinsights.v1.UpdateIssueRequest} message UpdateIssueRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateIssueRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.issue = null;
+                                object.updateMask = null;
+                            }
+                            if (message.issue != null && message.hasOwnProperty("issue"))
+                                object.issue = $root.google.cloud.contactcenterinsights.v1.Issue.toObject(message.issue, options);
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateIssueRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.contactcenterinsights.v1.UpdateIssueRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateIssueRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return UpdateIssueRequest;
                     })();
     
                     v1.CalculateIssueModelStatsRequest = (function() {
@@ -15666,6 +18388,7 @@
                          * @property {google.protobuf.ITimestamp|null} [createTime] IssueModel createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] IssueModel updateTime
                          * @property {google.cloud.contactcenterinsights.v1.IssueModel.State|null} [state] IssueModel state
+                         * @property {google.cloud.contactcenterinsights.v1.IssueModel.IInputDataConfig|null} [inputDataConfig] IssueModel inputDataConfig
                          * @property {google.cloud.contactcenterinsights.v1.IIssueModelLabelStats|null} [trainingStats] IssueModel trainingStats
                          */
     
@@ -15725,6 +18448,14 @@
                         IssueModel.prototype.state = 0;
     
                         /**
+                         * IssueModel inputDataConfig.
+                         * @member {google.cloud.contactcenterinsights.v1.IssueModel.IInputDataConfig|null|undefined} inputDataConfig
+                         * @memberof google.cloud.contactcenterinsights.v1.IssueModel
+                         * @instance
+                         */
+                        IssueModel.prototype.inputDataConfig = null;
+    
+                        /**
                          * IssueModel trainingStats.
                          * @member {google.cloud.contactcenterinsights.v1.IIssueModelLabelStats|null|undefined} trainingStats
                          * @memberof google.cloud.contactcenterinsights.v1.IssueModel
@@ -15766,6 +18497,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.state);
+                            if (message.inputDataConfig != null && Object.hasOwnProperty.call(message, "inputDataConfig"))
+                                $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.encode(message.inputDataConfig, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.trainingStats != null && Object.hasOwnProperty.call(message, "trainingStats"))
                                 $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.encode(message.trainingStats, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
@@ -15816,6 +18549,9 @@
                                     break;
                                 case 5:
                                     message.state = reader.int32();
+                                    break;
+                                case 6:
+                                    message.inputDataConfig = $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.decode(reader, reader.uint32());
                                     break;
                                 case 7:
                                     message.trainingStats = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.decode(reader, reader.uint32());
@@ -15883,6 +18619,11 @@
                                 case 5:
                                     break;
                                 }
+                            if (message.inputDataConfig != null && message.hasOwnProperty("inputDataConfig")) {
+                                var error = $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.verify(message.inputDataConfig);
+                                if (error)
+                                    return "inputDataConfig." + error;
+                            }
                             if (message.trainingStats != null && message.hasOwnProperty("trainingStats")) {
                                 var error = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.verify(message.trainingStats);
                                 if (error)
@@ -15943,6 +18684,11 @@
                                 message.state = 5;
                                 break;
                             }
+                            if (object.inputDataConfig != null) {
+                                if (typeof object.inputDataConfig !== "object")
+                                    throw TypeError(".google.cloud.contactcenterinsights.v1.IssueModel.inputDataConfig: object expected");
+                                message.inputDataConfig = $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.fromObject(object.inputDataConfig);
+                            }
                             if (object.trainingStats != null) {
                                 if (typeof object.trainingStats !== "object")
                                     throw TypeError(".google.cloud.contactcenterinsights.v1.IssueModel.trainingStats: object expected");
@@ -15970,6 +18716,7 @@
                                 object.createTime = null;
                                 object.updateTime = null;
                                 object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.inputDataConfig = null;
                                 object.trainingStats = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
@@ -15982,6 +18729,8 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.IssueModel.State[message.state] : message.state;
+                            if (message.inputDataConfig != null && message.hasOwnProperty("inputDataConfig"))
+                                object.inputDataConfig = $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.toObject(message.inputDataConfig, options);
                             if (message.trainingStats != null && message.hasOwnProperty("trainingStats"))
                                 object.trainingStats = $root.google.cloud.contactcenterinsights.v1.IssueModelLabelStats.toObject(message.trainingStats, options);
                             return object;
@@ -15997,6 +18746,248 @@
                         IssueModel.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        IssueModel.InputDataConfig = (function() {
+    
+                            /**
+                             * Properties of an InputDataConfig.
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel
+                             * @interface IInputDataConfig
+                             * @property {google.cloud.contactcenterinsights.v1.Conversation.Medium|null} [medium] InputDataConfig medium
+                             * @property {number|Long|null} [trainingConversationsCount] InputDataConfig trainingConversationsCount
+                             */
+    
+                            /**
+                             * Constructs a new InputDataConfig.
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel
+                             * @classdesc Represents an InputDataConfig.
+                             * @implements IInputDataConfig
+                             * @constructor
+                             * @param {google.cloud.contactcenterinsights.v1.IssueModel.IInputDataConfig=} [properties] Properties to set
+                             */
+                            function InputDataConfig(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * InputDataConfig medium.
+                             * @member {google.cloud.contactcenterinsights.v1.Conversation.Medium} medium
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @instance
+                             */
+                            InputDataConfig.prototype.medium = 0;
+    
+                            /**
+                             * InputDataConfig trainingConversationsCount.
+                             * @member {number|Long} trainingConversationsCount
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @instance
+                             */
+                            InputDataConfig.prototype.trainingConversationsCount = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                            /**
+                             * Creates a new InputDataConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.IssueModel.IInputDataConfig=} [properties] Properties to set
+                             * @returns {google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig} InputDataConfig instance
+                             */
+                            InputDataConfig.create = function create(properties) {
+                                return new InputDataConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified InputDataConfig message. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.IssueModel.IInputDataConfig} message InputDataConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputDataConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.medium != null && Object.hasOwnProperty.call(message, "medium"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int32(message.medium);
+                                if (message.trainingConversationsCount != null && Object.hasOwnProperty.call(message, "trainingConversationsCount"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.trainingConversationsCount);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified InputDataConfig message, length delimited. Does not implicitly {@link google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.IssueModel.IInputDataConfig} message InputDataConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            InputDataConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an InputDataConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig} InputDataConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputDataConfig.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.medium = reader.int32();
+                                        break;
+                                    case 2:
+                                        message.trainingConversationsCount = reader.int64();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an InputDataConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig} InputDataConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            InputDataConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an InputDataConfig message.
+                             * @function verify
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            InputDataConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.medium != null && message.hasOwnProperty("medium"))
+                                    switch (message.medium) {
+                                    default:
+                                        return "medium: enum value expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                        break;
+                                    }
+                                if (message.trainingConversationsCount != null && message.hasOwnProperty("trainingConversationsCount"))
+                                    if (!$util.isInteger(message.trainingConversationsCount) && !(message.trainingConversationsCount && $util.isInteger(message.trainingConversationsCount.low) && $util.isInteger(message.trainingConversationsCount.high)))
+                                        return "trainingConversationsCount: integer|Long expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an InputDataConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig} InputDataConfig
+                             */
+                            InputDataConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig)
+                                    return object;
+                                var message = new $root.google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig();
+                                switch (object.medium) {
+                                case "MEDIUM_UNSPECIFIED":
+                                case 0:
+                                    message.medium = 0;
+                                    break;
+                                case "PHONE_CALL":
+                                case 1:
+                                    message.medium = 1;
+                                    break;
+                                case "CHAT":
+                                case 2:
+                                    message.medium = 2;
+                                    break;
+                                }
+                                if (object.trainingConversationsCount != null)
+                                    if ($util.Long)
+                                        (message.trainingConversationsCount = $util.Long.fromValue(object.trainingConversationsCount)).unsigned = false;
+                                    else if (typeof object.trainingConversationsCount === "string")
+                                        message.trainingConversationsCount = parseInt(object.trainingConversationsCount, 10);
+                                    else if (typeof object.trainingConversationsCount === "number")
+                                        message.trainingConversationsCount = object.trainingConversationsCount;
+                                    else if (typeof object.trainingConversationsCount === "object")
+                                        message.trainingConversationsCount = new $util.LongBits(object.trainingConversationsCount.low >>> 0, object.trainingConversationsCount.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an InputDataConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @static
+                             * @param {google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig} message InputDataConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            InputDataConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.medium = options.enums === String ? "MEDIUM_UNSPECIFIED" : 0;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.trainingConversationsCount = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.trainingConversationsCount = options.longs === String ? "0" : 0;
+                                }
+                                if (message.medium != null && message.hasOwnProperty("medium"))
+                                    object.medium = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.Conversation.Medium[message.medium] : message.medium;
+                                if (message.trainingConversationsCount != null && message.hasOwnProperty("trainingConversationsCount"))
+                                    if (typeof message.trainingConversationsCount === "number")
+                                        object.trainingConversationsCount = options.longs === String ? String(message.trainingConversationsCount) : message.trainingConversationsCount;
+                                    else
+                                        object.trainingConversationsCount = options.longs === String ? $util.Long.prototype.toString.call(message.trainingConversationsCount) : options.longs === Number ? new $util.LongBits(message.trainingConversationsCount.low >>> 0, message.trainingConversationsCount.high >>> 0).toNumber() : message.trainingConversationsCount;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this InputDataConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.contactcenterinsights.v1.IssueModel.InputDataConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            InputDataConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return InputDataConfig;
+                        })();
     
                         /**
                          * State enum.
@@ -20973,6 +23964,8 @@
                          * Properties of a ConversationParticipant.
                          * @memberof google.cloud.contactcenterinsights.v1
                          * @interface IConversationParticipant
+                         * @property {string|null} [dialogflowParticipantName] ConversationParticipant dialogflowParticipantName
+                         * @property {string|null} [userId] ConversationParticipant userId
                          * @property {string|null} [dialogflowParticipant] ConversationParticipant dialogflowParticipant
                          * @property {google.cloud.contactcenterinsights.v1.ConversationParticipant.Role|null} [role] ConversationParticipant role
                          */
@@ -20993,6 +23986,22 @@
                         }
     
                         /**
+                         * ConversationParticipant dialogflowParticipantName.
+                         * @member {string|null|undefined} dialogflowParticipantName
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @instance
+                         */
+                        ConversationParticipant.prototype.dialogflowParticipantName = null;
+    
+                        /**
+                         * ConversationParticipant userId.
+                         * @member {string|null|undefined} userId
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @instance
+                         */
+                        ConversationParticipant.prototype.userId = null;
+    
+                        /**
                          * ConversationParticipant dialogflowParticipant.
                          * @member {string} dialogflowParticipant
                          * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
@@ -21007,6 +24016,20 @@
                          * @instance
                          */
                         ConversationParticipant.prototype.role = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ConversationParticipant participant.
+                         * @member {"dialogflowParticipantName"|"userId"|undefined} participant
+                         * @memberof google.cloud.contactcenterinsights.v1.ConversationParticipant
+                         * @instance
+                         */
+                        Object.defineProperty(ConversationParticipant.prototype, "participant", {
+                            get: $util.oneOfGetter($oneOfFields = ["dialogflowParticipantName", "userId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new ConversationParticipant instance using the specified properties.
@@ -21036,6 +24059,10 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.dialogflowParticipant);
                             if (message.role != null && Object.hasOwnProperty.call(message, "role"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.role);
+                            if (message.dialogflowParticipantName != null && Object.hasOwnProperty.call(message, "dialogflowParticipantName"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.dialogflowParticipantName);
+                            if (message.userId != null && Object.hasOwnProperty.call(message, "userId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.userId);
                             return writer;
                         };
     
@@ -21070,6 +24097,12 @@
                             while (reader.pos < end) {
                                 var tag = reader.uint32();
                                 switch (tag >>> 3) {
+                                case 5:
+                                    message.dialogflowParticipantName = reader.string();
+                                    break;
+                                case 6:
+                                    message.userId = reader.string();
+                                    break;
                                 case 1:
                                     message.dialogflowParticipant = reader.string();
                                     break;
@@ -21111,6 +24144,19 @@
                         ConversationParticipant.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.dialogflowParticipantName != null && message.hasOwnProperty("dialogflowParticipantName")) {
+                                properties.participant = 1;
+                                if (!$util.isString(message.dialogflowParticipantName))
+                                    return "dialogflowParticipantName: string expected";
+                            }
+                            if (message.userId != null && message.hasOwnProperty("userId")) {
+                                if (properties.participant === 1)
+                                    return "participant: multiple values";
+                                properties.participant = 1;
+                                if (!$util.isString(message.userId))
+                                    return "userId: string expected";
+                            }
                             if (message.dialogflowParticipant != null && message.hasOwnProperty("dialogflowParticipant"))
                                 if (!$util.isString(message.dialogflowParticipant))
                                     return "dialogflowParticipant: string expected";
@@ -21140,6 +24186,10 @@
                             if (object instanceof $root.google.cloud.contactcenterinsights.v1.ConversationParticipant)
                                 return object;
                             var message = new $root.google.cloud.contactcenterinsights.v1.ConversationParticipant();
+                            if (object.dialogflowParticipantName != null)
+                                message.dialogflowParticipantName = String(object.dialogflowParticipantName);
+                            if (object.userId != null)
+                                message.userId = String(object.userId);
                             if (object.dialogflowParticipant != null)
                                 message.dialogflowParticipant = String(object.dialogflowParticipant);
                             switch (object.role) {
@@ -21188,6 +24238,16 @@
                                 object.dialogflowParticipant = message.dialogflowParticipant;
                             if (message.role != null && message.hasOwnProperty("role"))
                                 object.role = options.enums === String ? $root.google.cloud.contactcenterinsights.v1.ConversationParticipant.Role[message.role] : message.role;
+                            if (message.dialogflowParticipantName != null && message.hasOwnProperty("dialogflowParticipantName")) {
+                                object.dialogflowParticipantName = message.dialogflowParticipantName;
+                                if (options.oneofs)
+                                    object.participant = "dialogflowParticipantName";
+                            }
+                            if (message.userId != null && message.hasOwnProperty("userId")) {
+                                object.userId = message.userId;
+                                if (options.oneofs)
+                                    object.participant = "userId";
+                            }
                             return object;
                         };
     

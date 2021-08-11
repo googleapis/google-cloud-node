@@ -40,6 +40,11 @@
                 "deleteAnalysis"
               ]
             },
+            "UpdateIssueModel": {
+              "methods": [
+                "updateIssueModel"
+              ]
+            },
             "GetIssueModel": {
               "methods": [
                 "getIssueModel"
@@ -58,6 +63,11 @@
             "ListIssues": {
               "methods": [
                 "listIssues"
+              ]
+            },
+            "UpdateIssue": {
+              "methods": [
+                "updateIssue"
               ]
             },
             "CalculateIssueModelStats": {
@@ -103,6 +113,26 @@
             "ExportInsightsData": {
               "methods": [
                 "exportInsightsData"
+              ]
+            },
+            "CreateIssueModel": {
+              "methods": [
+                "createIssueModel"
+              ]
+            },
+            "DeleteIssueModel": {
+              "methods": [
+                "deleteIssueModel"
+              ]
+            },
+            "DeployIssueModel": {
+              "methods": [
+                "deployIssueModel"
+              ]
+            },
+            "UndeployIssueModel": {
+              "methods": [
+                "undeployIssueModel"
               ]
             },
             "ListConversations": {
@@ -161,6 +191,11 @@
                 "deleteAnalysis"
               ]
             },
+            "UpdateIssueModel": {
+              "methods": [
+                "updateIssueModel"
+              ]
+            },
             "GetIssueModel": {
               "methods": [
                 "getIssueModel"
@@ -179,6 +214,11 @@
             "ListIssues": {
               "methods": [
                 "listIssues"
+              ]
+            },
+            "UpdateIssue": {
+              "methods": [
+                "updateIssue"
               ]
             },
             "CalculateIssueModelStats": {
@@ -224,6 +264,26 @@
             "ExportInsightsData": {
               "methods": [
                 "exportInsightsData"
+              ]
+            },
+            "CreateIssueModel": {
+              "methods": [
+                "createIssueModel"
+              ]
+            },
+            "DeleteIssueModel": {
+              "methods": [
+                "deleteIssueModel"
+              ]
+            },
+            "DeployIssueModel": {
+              "methods": [
+                "deployIssueModel"
+              ]
+            },
+            "UndeployIssueModel": {
+              "methods": [
+                "undeployIssueModel"
               ]
             },
             "ListConversations": {
