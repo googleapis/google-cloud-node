@@ -66,7 +66,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Batch_predict
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/batch_predict.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/batch_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/batch_predict.js,samples/README.md)
 
@@ -83,7 +83,7 @@ __Usage:__
 
 ### Delete_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/delete_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/delete_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/delete_dataset.js,samples/README.md)
 
@@ -100,7 +100,7 @@ __Usage:__
 
 ### Delete_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/delete_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/delete_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/delete_model.js,samples/README.md)
 
@@ -117,7 +117,7 @@ __Usage:__
 
 ### Deploy_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/deploy_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/deploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/deploy_model.js,samples/README.md)
 
@@ -134,7 +134,7 @@ __Usage:__
 
 ### Export_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/export_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/export_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/export_dataset.js,samples/README.md)
 
@@ -151,7 +151,7 @@ __Usage:__
 
 ### Get_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/get_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/get_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/get_dataset.js,samples/README.md)
 
@@ -168,7 +168,7 @@ __Usage:__
 
 ### Get_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/get_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/get_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/get_model.js,samples/README.md)
 
@@ -185,7 +185,7 @@ __Usage:__
 
 ### Get_model_evaluation
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/get_model_evaluation.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/get_model_evaluation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/get_model_evaluation.js,samples/README.md)
 
@@ -202,7 +202,7 @@ __Usage:__
 
 ### Get_operation_status
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/get_operation_status.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/get_operation_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/get_operation_status.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 ### Import_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/import_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/import_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/import_dataset.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 ### Language_entity_extraction_create_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_entity_extraction_create_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/language_entity_extraction_create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_entity_extraction_create_dataset.js,samples/README.md)
 
@@ -253,7 +253,7 @@ __Usage:__
 
 ### Language_entity_extraction_create_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_entity_extraction_create_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/language_entity_extraction_create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_entity_extraction_create_model.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 ### Language_entity_extraction_predict
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_entity_extraction_predict.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/language_entity_extraction_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_entity_extraction_predict.js,samples/README.md)
 
@@ -287,7 +287,7 @@ __Usage:__
 
 ### Language_sentiment_analysis_create_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_sentiment_analysis_create_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/language_sentiment_analysis_create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_sentiment_analysis_create_dataset.js,samples/README.md)
 
@@ -304,7 +304,7 @@ __Usage:__
 
 ### Language_sentiment_analysis_create_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_sentiment_analysis_create_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/language_sentiment_analysis_create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_sentiment_analysis_create_model.js,samples/README.md)
 
@@ -321,7 +321,7 @@ __Usage:__
 
 ### Language_sentiment_analysis_predict
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_sentiment_analysis_predict.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/language_sentiment_analysis_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_sentiment_analysis_predict.js,samples/README.md)
 
@@ -338,7 +338,7 @@ __Usage:__
 
 ### Language_text_classification_create_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_text_classification_create_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/language_text_classification_create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_text_classification_create_dataset.js,samples/README.md)
 
@@ -355,7 +355,7 @@ __Usage:__
 
 ### Language_text_classification_create_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_text_classification_create_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/language_text_classification_create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_text_classification_create_model.js,samples/README.md)
 
@@ -372,7 +372,7 @@ __Usage:__
 
 ### Language_text_classification_predict
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/language_text_classification_predict.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/language_text_classification_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/language_text_classification_predict.js,samples/README.md)
 
@@ -389,7 +389,7 @@ __Usage:__
 
 ### List_datasets
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/list_datasets.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/list_datasets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/list_datasets.js,samples/README.md)
 
@@ -406,7 +406,7 @@ __Usage:__
 
 ### List_model_evaluations
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/list_model_evaluations.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/list_model_evaluations.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/list_model_evaluations.js,samples/README.md)
 
@@ -423,7 +423,7 @@ __Usage:__
 
 ### List_models
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/list_models.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/list_models.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/list_models.js,samples/README.md)
 
@@ -440,7 +440,7 @@ __Usage:__
 
 ### List_operation_status
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/list_operation_status.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/list_operation_status.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/list_operation_status.js,samples/README.md)
 
@@ -457,7 +457,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -474,7 +474,7 @@ __Usage:__
 
 ### Translate_create_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/translate_create_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/translate_create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/translate_create_dataset.js,samples/README.md)
 
@@ -491,7 +491,7 @@ __Usage:__
 
 ### Translate_create_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/translate_create_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/translate_create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/translate_create_model.js,samples/README.md)
 
@@ -508,7 +508,7 @@ __Usage:__
 
 ### Translate_predict
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/translate_predict.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/translate_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/translate_predict.js,samples/README.md)
 
@@ -525,7 +525,7 @@ __Usage:__
 
 ### Undeploy_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/undeploy_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/undeploy_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/undeploy_model.js,samples/README.md)
 
@@ -542,7 +542,7 @@ __Usage:__
 
 ### Vision_classification_create_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_classification_create_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/vision_classification_create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_classification_create_dataset.js,samples/README.md)
 
@@ -559,7 +559,7 @@ __Usage:__
 
 ### Vision_classification_create_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_classification_create_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/vision_classification_create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_classification_create_model.js,samples/README.md)
 
@@ -576,7 +576,7 @@ __Usage:__
 
 ### Vision_classification_deploy_model_node_count
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_classification_deploy_model_node_count.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/vision_classification_deploy_model_node_count.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_classification_deploy_model_node_count.js,samples/README.md)
 
@@ -593,7 +593,7 @@ __Usage:__
 
 ### Vision_classification_predict
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_classification_predict.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/vision_classification_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_classification_predict.js,samples/README.md)
 
@@ -610,7 +610,7 @@ __Usage:__
 
 ### Vision_object_detection_create_dataset
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_object_detection_create_dataset.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/vision_object_detection_create_dataset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_object_detection_create_dataset.js,samples/README.md)
 
@@ -627,7 +627,7 @@ __Usage:__
 
 ### Vision_object_detection_create_model
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_object_detection_create_model.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/vision_object_detection_create_model.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_object_detection_create_model.js,samples/README.md)
 
@@ -644,7 +644,7 @@ __Usage:__
 
 ### Vision_object_detection_deploy_model_node_count
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_object_detection_deploy_model_node_count.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/vision_object_detection_deploy_model_node_count.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_object_detection_deploy_model_node_count.js,samples/README.md)
 
@@ -661,7 +661,7 @@ __Usage:__
 
 ### Vision_object_detection_predict
 
-View the [source code](https://github.com/googleapis/nodejs-automl/blob/master/samples/vision_object_detection_predict.js).
+View the [source code](https://github.com/googleapis/nodejs-automl/blob/main/samples/vision_object_detection_predict.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-automl&page=editor&open_in_editor=samples/vision_object_detection_predict.js,samples/README.md)
 
