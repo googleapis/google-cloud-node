@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.3...v1.0.4) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#25](https://www.github.com/googleapis/nodejs-cloud-tpu/issues/25)) ([67db41d](https://www.github.com/googleapis/nodejs-cloud-tpu/commit/67db41d374fe489f8cef6b6875692446a2178de8))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.2...v1.0.3) (2021-07-16)
 
 
