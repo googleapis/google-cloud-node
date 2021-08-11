@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.1.0...v1.2.0) (2021-08-11)
+
+
+### Features
+
+* add new issue model API methods  ([b73f2e9](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/b73f2e93ddb572519685190643c1f02174813658))
+* support Dialogflow and user-specified participant IDs ([b73f2e9](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/b73f2e93ddb572519685190643c1f02174813658))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.0.2...v1.1.0) (2021-07-30)
 
 
