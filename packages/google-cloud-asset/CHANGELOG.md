@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.15.4](https://www.github.com/googleapis/nodejs-asset/compare/v3.15.3...v3.15.4) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#534](https://www.github.com/googleapis/nodejs-asset/issues/534)) ([30fa2c4](https://www.github.com/googleapis/nodejs-asset/commit/30fa2c48abe3de2a9482ea5bde9a4f315a726b89))
+
 ### [3.15.3](https://www.github.com/googleapis/nodejs-asset/compare/v3.15.2...v3.15.3) (2021-07-16)
 
 
