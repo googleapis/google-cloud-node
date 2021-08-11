@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.5](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.4...v1.2.5) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#81](https://www.github.com/googleapis/nodejs-channel/issues/81)) ([1818a9e](https://www.github.com/googleapis/nodejs-channel/commit/1818a9e5744ddce7799b75d2e094155bb84aa993))
+
 ### [1.2.4](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.3...v1.2.4) (2021-07-16)
 
 
