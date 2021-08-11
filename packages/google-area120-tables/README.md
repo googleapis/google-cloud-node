@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google/area120-tables.svg)](https://www.npmjs.org/package/@google/area120-tables)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-area120-tables/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-area120-tables)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-area120-tables/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-area120-tables)
 
 
 
@@ -15,7 +15,7 @@ Tables client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-area120-tables/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-area120-tables/blob/main/CHANGELOG.md).
 
 * [Area120 Tables API Node.js Client API Reference][client-docs]
 * [Area120 Tables API Documentation][product-docs]
@@ -81,11 +81,11 @@ listTables();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-area120-tables/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-area120-tables/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-area120-tables/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-area120-tables&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-area120-tables/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-area120-tables&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -132,19 +132,19 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-area120-tables/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-area120-tables/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
 are generated from a central template. To edit one of these files, make an edit
-to its template in this
-[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
+to its templates in
+[directory](https://github.com/googleapis/synthtool).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-area120-tables/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-area120-tables/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
 [product-docs]: https://area120.google.com/
