@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-cloud-shell/compare/v1.0.2...v1.0.3) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#28](https://www.github.com/googleapis/nodejs-cloud-shell/issues/28)) ([89f824d](https://www.github.com/googleapis/nodejs-cloud-shell/commit/89f824d75bd1190568c8e28ccef8ee896b86ecdc))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-cloud-shell/compare/v1.0.1...v1.0.2) (2021-07-12)
 
 
