@@ -15,7 +15,7 @@
     "test": "c8 mocha system-test --timeout=800000"
   },
   "dependencies": {
-    "@google-cloud/billing-budgets": "^3.2.6"
+    "@google-cloud/billing-budgets": "^3.2.7"
   },
   "devDependencies": {
     "c8": "^7.0.0",

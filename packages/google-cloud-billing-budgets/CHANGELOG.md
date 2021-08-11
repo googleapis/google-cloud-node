@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.7](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.6...v3.2.7) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#258](https://www.github.com/googleapis/nodejs-billing-budgets/issues/258)) ([164d2c1](https://www.github.com/googleapis/nodejs-billing-budgets/commit/164d2c139bad9cf5cfa030699541e3f380793c35))
+
 ### [3.2.6](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.5...v3.2.6) (2021-07-16)
 
 
