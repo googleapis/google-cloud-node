@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.6](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.5...v1.0.6) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#71](https://www.github.com/googleapis/nodejs-artifact-registry/issues/71)) ([fd38594](https://www.github.com/googleapis/nodejs-artifact-registry/commit/fd385943ba34cda330260fd32cfe934fa068cecf))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#63](https://www.github.com/googleapis/nodejs-artifact-registry/issues/63)) ([277cb11](https://www.github.com/googleapis/nodejs-artifact-registry/commit/277cb116059aebc3f87a0ad749350a80e448ea8f))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.4...v1.0.5) (2021-07-12)
 
 
