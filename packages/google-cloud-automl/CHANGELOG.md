@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [2.4.4](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.3...v2.4.4) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#536](https://www.github.com/googleapis/nodejs-automl/issues/536)) ([1185736](https://www.github.com/googleapis/nodejs-automl/commit/1185736efefca56e2f86ac52ad340d231d92c25f))
+
 ### [2.4.3](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.2...v2.4.3) (2021-07-21)
 
 
