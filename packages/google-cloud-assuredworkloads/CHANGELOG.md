@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.5.0...v1.5.1) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#96](https://www.github.com/googleapis/nodejs-assured-workloads/issues/96)) ([371e12d](https://www.github.com/googleapis/nodejs-assured-workloads/commit/371e12dbc5c0e439eca22b4115c54352ac5b2037))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.4.6...v1.5.0) (2021-07-30)
 
 
