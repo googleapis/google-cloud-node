@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.7](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.6...v1.2.7) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#86](https://www.github.com/googleapis/nodejs-area120-tables/issues/86)) ([e5a7379](https://www.github.com/googleapis/nodejs-area120-tables/commit/e5a7379282b014d44deec4e5c6191dc8537f7a89))
+
 ### [1.2.6](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.5...v1.2.6) (2021-07-16)
 
 
