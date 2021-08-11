@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.2](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.4.1...v1.4.2) (2021-08-11)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#121](https://www.github.com/googleapis/nodejs-bigquery-connection/issues/121)) ([b01f5d9](https://www.github.com/googleapis/nodejs-bigquery-connection/commit/b01f5d9be2bb8574218c25efe4afc4bea8535cf4))
+
 ### [1.4.1](https://www.github.com/googleapis/nodejs-bigquery-connection/compare/v1.4.0...v1.4.1) (2021-07-21)
 
 
