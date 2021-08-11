@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.5.0...v1.6.0) (2021-08-10)
+
+
+### Features
+
+* Add ttl_after_completion_days field to Job ([75ea7d8](https://www.github.com/googleapis/nodejs-video-transcoder/commit/75ea7d8358da15d795556b7d9bb6777bb7ae4b04))
+* Add video cropping feature ([75ea7d8](https://www.github.com/googleapis/nodejs-video-transcoder/commit/75ea7d8358da15d795556b7d9bb6777bb7ae4b04))
+* Add video padding feature ([75ea7d8](https://www.github.com/googleapis/nodejs-video-transcoder/commit/75ea7d8358da15d795556b7d9bb6777bb7ae4b04))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.4.4...v1.5.0) (2021-07-16)
 
 
