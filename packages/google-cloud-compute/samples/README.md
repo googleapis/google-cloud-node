@@ -12,14 +12,18 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Create VM](#create-vm)
-  * [Delete VM](#delete-vm)
-  * [List VMs](#list-vms)
+  * [Create Instance](#create-instance)
+  * [Delete Instance](#delete-instance)
+  * [Disable Usage Export](#disable-usage-export)
+  * [Get Usage Export Bucket](#get-usage-export-bucket)
+  * [List All Instances](#list-all-instances)
+  * [List Images](#list-images)
+  * [List Images By Page](#list-images-by-page)
+  * [List Instances](#list-instances)
   * [Mailjet](#mailjet)
-  * [Quickstart](#quickstart)
   * [Sendgrid](#sendgrid)
-  * [Startup Script](#startup-script)
-  * [Vms](#vms)
+  * [Set Usage Export Bucket](#set-usage-export-bucket)
+  * [Wait For Operation](#wait-for-operation)
 
 ## Before you begin
 
@@ -36,16 +40,16 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Create VM
+### Create Instance
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createVM.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createInstance.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createVM.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstance.js,samples/README.md)
 
 __Usage:__
 
 
-`node createVM <vmName>`
+`node samples/createInstance.js`
 
 
 -----
@@ -53,16 +57,16 @@ __Usage:__
 
 
 
-### Delete VM
+### Delete Instance
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/deleteVM.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/deleteInstance.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/deleteVM.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/deleteInstance.js,samples/README.md)
 
 __Usage:__
 
 
-`node deleteVM <vmName>`
+`node samples/deleteInstance.js`
 
 
 -----
@@ -70,16 +74,101 @@ __Usage:__
 
 
 
-### List VMs
+### Disable Usage Export
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listVMs.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/disableUsageExport.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listVMs.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/disableUsageExport.js,samples/README.md)
 
 __Usage:__
 
 
-`node listVMs`
+`node samples/disableUsageExport.js`
+
+
+-----
+
+
+
+
+### Get Usage Export Bucket
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/getUsageExportBucket.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/getUsageExportBucket.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getUsageExportBucket.js`
+
+
+-----
+
+
+
+
+### List All Instances
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listAllInstances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listAllInstances.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listAllInstances.js`
+
+
+-----
+
+
+
+
+### List Images
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listImages.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImages.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listImages.js`
+
+
+-----
+
+
+
+
+### List Images By Page
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listImagesByPage.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImagesByPage.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listImagesByPage.js`
+
+
+-----
+
+
+
+
+### List Instances
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listInstances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listInstances.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listInstances.js`
 
 
 -----
@@ -104,23 +193,6 @@ __Usage:__
 
 
 
-### Quickstart
-
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/quickstart.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/quickstart.js`
-
-
------
-
-
-
-
 ### Sendgrid
 
 View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/sendgrid.js).
@@ -138,16 +210,16 @@ __Usage:__
 
 
 
-### Startup Script
+### Set Usage Export Bucket
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/startupScript.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/setUsageExportBucket.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startupScript.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/setUsageExportBucket.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/startupScript.js`
+`node samples/setUsageExportBucket.js`
 
 
 -----
@@ -155,16 +227,16 @@ __Usage:__
 
 
 
-### Vms
+### Wait For Operation
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/vms.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/waitForOperation.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/waitForOperation.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/vms.js`
+`node samples/waitForOperation.js`
 
 
 

@@ -14,9 +14,8 @@
 const config = {
   "enable-source-maps": true,
   "throw-deprecation": true,
-  // There seems to be a regression such that overrides are not being
-  // supported by mocha:
-  "timeout": 1200000
+  "timeout": 10000,
+  "recursive": true
 }
 if (process.env.MOCHA_THROW_DEPRECATION === 'false') {
   delete config['throw-deprecation'];

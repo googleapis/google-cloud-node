@@ -1,6 +1,7 @@
 **/*.log
 **/node_modules
 .coverage
+coverage
 .nyc_output
 docs/
 out/
@@ -9,6 +10,5 @@ system-test/secrets.js
 system-test/*key.json
 *.lock
 .DS_Store
-__pycache__
-.vscode
 package-lock.json
+__pycache__
