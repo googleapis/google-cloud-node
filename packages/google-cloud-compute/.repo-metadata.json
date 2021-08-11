@@ -9,5 +9,6 @@
   "repo": "googleapis/nodejs-compute",
   "distribution_name": "@google-cloud/compute",
   "api_id": "compute.googleapis.com",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/api-compute"
 }
