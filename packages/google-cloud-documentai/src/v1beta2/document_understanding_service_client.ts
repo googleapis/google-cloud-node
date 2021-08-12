@@ -265,7 +265,7 @@ export class DocumentUnderstandingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    return 'us-documentai.googleapis.com';
+    return 'documentai.googleapis.com';
   }
 
   /**
@@ -274,7 +274,7 @@ export class DocumentUnderstandingServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    return 'us-documentai.googleapis.com';
+    return 'documentai.googleapis.com';
   }
 
   /**

@@ -2802,7 +2802,7 @@
                     },
                     "DocumentUnderstandingService": {
                       "options": {
-                        "(google.api.default_host)": "us-documentai.googleapis.com",
+                        "(google.api.default_host)": "documentai.googleapis.com",
                         "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
                       },
                       "methods": {
