@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.3.0...v2.3.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#265](https://www.github.com/googleapis/nodejs-cloudbuild/issues/265)) ([e89f829](https://www.github.com/googleapis/nodejs-cloudbuild/commit/e89f829f10c5710ca5fb259a6c8dfae1527071a3))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.2.7...v2.3.0) (2021-08-05)
 
 
