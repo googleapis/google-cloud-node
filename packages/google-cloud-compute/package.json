@@ -122,7 +122,7 @@
   "devDependencies": {
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.13",
-    "@types/sinon": "^9.0.9",
+    "@types/sinon": "^10.0.0",
     "c8": "^7.3.5",
     "chai": "^4.3.4",
     "gts": "^3.1.0",
