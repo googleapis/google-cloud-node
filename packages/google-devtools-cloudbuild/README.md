@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/cloudbuild.svg)](https://www.npmjs.org/package/@google-cloud/cloudbuild)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloudbuild/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloudbuild)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloudbuild/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloudbuild)
 
 
 
@@ -15,7 +15,7 @@ Cloud Build API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-cloudbuild/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-cloudbuild/blob/main/CHANGELOG.md).
 
 * [Cloud Build Node.js Client API Reference][client-docs]
 * [Cloud Build Documentation][product-docs]
@@ -107,12 +107,12 @@ async function quickstart(
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-cloudbuild/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-cloudbuild/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| List Triggers. | [source code](https://github.com/googleapis/nodejs-cloudbuild/blob/master/samples/listBuildTriggers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-cloudbuild&page=editor&open_in_editor=samples/listBuildTriggers.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-cloudbuild/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-cloudbuild&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| List Triggers. | [source code](https://github.com/googleapis/nodejs-cloudbuild/blob/main/samples/listBuildTriggers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-cloudbuild&page=editor&open_in_editor=samples/listBuildTriggers.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-cloudbuild/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-cloudbuild&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -161,19 +161,19 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-cloudbuild/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-cloudbuild/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
 are generated from a central template. To edit one of these files, make an edit
-to its template in this
-[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
+to its templates in
+[directory](https://github.com/googleapis/synthtool).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-cloudbuild/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-cloudbuild/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/cloudbuild/latest
 [product-docs]: https://cloud.google.com/cloud-build/docs/
