@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+### [3.1.7](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.6...v3.1.7) (2021-08-13)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#642](https://www.github.com/googleapis/nodejs-dlp/issues/642)) ([aa74db4](https://www.github.com/googleapis/nodejs-dlp/commit/aa74db437886d914048f8f7bfcdff0e955f72810))
+
 ### [3.1.6](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.5...v3.1.6) (2021-07-16)
 
 
