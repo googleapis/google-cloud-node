@@ -35,7 +35,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Detect-intent-audio
 
-View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect-intent-audio.js).
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-audio.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-audio.js,samples/README.md)
 
@@ -52,7 +52,7 @@ __Usage:__
 
 ### Detect-intent-streaming
 
-View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect-intent-streaming.js).
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-streaming.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-streaming.js,samples/README.md)
 
@@ -69,7 +69,7 @@ __Usage:__
 
 ### Detect-intent-text
 
-View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/detect-intent-text.js).
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/detect-intent-text.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/detect-intent-text.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### List-intents
 
-View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/list-intents.js).
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/list-intents.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/list-intents.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
