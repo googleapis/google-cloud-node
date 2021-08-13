@@ -61,7 +61,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 Computes risk metrics of a column of data in a Google BigQuery table.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/categoricalRiskAnalysis.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/categoricalRiskAnalysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/categoricalRiskAnalysis.js,samples/README.md)
 
@@ -80,7 +80,7 @@ __Usage:__
 
 Create a new DLP inspection configuration template.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/createInspectTemplate.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/createInspectTemplate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/createInspectTemplate.js,samples/README.md)
 
@@ -99,7 +99,7 @@ __Usage:__
 
 Create a Data Loss Prevention API job trigger.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/createTrigger.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/createTrigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/createTrigger.js,samples/README.md)
 
@@ -118,7 +118,7 @@ __Usage:__
 
 Deidentify dates in a CSV file by pseudorandomly shifting them.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deidentifyWithDateShift.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deidentifyWithDateShift.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithDateShift.js,samples/README.md)
 
@@ -137,7 +137,7 @@ __Usage:__
 
 Deidentify sensitive data in a string using Format Preserving Encryption (FPE).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deidentifyWithFpe.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deidentifyWithFpe.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithFpe.js,samples/README.md)
 
@@ -156,7 +156,7 @@ __Usage:__
 
 Deidentify sensitive data in a string by masking it with a character.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deidentifyWithMask.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deidentifyWithMask.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithMask.js,samples/README.md)
 
@@ -175,7 +175,7 @@ __Usage:__
 
 Deidentify sensitive data in a string by replacing it with a given replacement string.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deidentifyWithReplacement.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deidentifyWithReplacement.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deidentifyWithReplacement.js,samples/README.md)
 
@@ -194,7 +194,7 @@ __Usage:__
 
 Delete the DLP inspection configuration template with the specified name.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deleteInspectTemplate.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deleteInspectTemplate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deleteInspectTemplate.js,samples/README.md)
 
@@ -213,7 +213,7 @@ __Usage:__
 
 Delete results of a Data Loss Prevention API job.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deleteJob.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deleteJob.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md)
 
@@ -232,7 +232,7 @@ __Usage:__
 
 Delete results of a Data Loss Prevention API job.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/deleteTrigger.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/deleteTrigger.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/deleteTrigger.js,samples/README.md)
 
@@ -251,7 +251,7 @@ __Usage:__
 
 Inspects a BigQuery table using the Data Loss Prevention API using Pub/Sub for job notifications.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectBigQuery.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectBigQuery.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectBigQuery.js,samples/README.md)
 
@@ -270,7 +270,7 @@ __Usage:__
 
 Inspect a Datastore instance using the Data Loss Prevention API using Pub/Sub for job notifications.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectDatastore.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectDatastore.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectDatastore.js,samples/README.md)
 
@@ -289,7 +289,7 @@ __Usage:__
 
 Inspects a local text, PNG, or JPEG file using the Data Loss Prevention API.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectFile.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectFile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectFile.js,samples/README.md)
 
@@ -308,7 +308,7 @@ __Usage:__
 
 Inspects a text file stored on Google Cloud Storage with the Data Loss Prevention API, using Pub/Sub for job notifications.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectGCSFile.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectGCSFile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectGCSFile.js,samples/README.md)
 
@@ -327,7 +327,7 @@ __Usage:__
 
 Inspect a string using the Data Loss Prevention API.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/inspectString.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/inspectString.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/inspectString.js,samples/README.md)
 
@@ -346,7 +346,7 @@ __Usage:__
 
 Computes the k-anonymity of a column set in a Google BigQuery table
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/kAnonymityAnalysis.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/kAnonymityAnalysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/kAnonymityAnalysis.js,samples/README.md)
 
@@ -365,7 +365,7 @@ __Usage:__
 
 Computes the k-map risk estimation of a column set in a Google BigQuery table.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/kMapEstimationAnalysis.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/kMapEstimationAnalysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/kMapEstimationAnalysis.js,samples/README.md)
 
@@ -384,7 +384,7 @@ __Usage:__
 
 Computes the l-diversity of a column set in a Google BigQuery table.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/lDiversityAnalysis.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/lDiversityAnalysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/lDiversityAnalysis.js,samples/README.md)
 
@@ -403,7 +403,7 @@ __Usage:__
 
 List DLP inspection configuration templates.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/listInspectTemplates.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/listInspectTemplates.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/listInspectTemplates.js,samples/README.md)
 
@@ -422,7 +422,7 @@ __Usage:__
 
 List Data Loss Prevention API jobs corresponding to a given filter.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/listJobs.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/listJobs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/listJobs.js,samples/README.md)
 
@@ -441,7 +441,7 @@ __Usage:__
 
 List Data Loss Prevention API job triggers.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/listTriggers.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/listTriggers.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/listTriggers.js,samples/README.md)
 
@@ -460,7 +460,7 @@ __Usage:__
 
 List the types of sensitive information the DLP API supports
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/metadata.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/metadata.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/metadata.js,samples/README.md)
 
@@ -479,7 +479,7 @@ __Usage:__
 
 Computes risk metrics of a column of numbers in a Google BigQuery table.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/numericalRiskAnalysis.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/numericalRiskAnalysis.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/numericalRiskAnalysis.js,samples/README.md)
 
@@ -498,7 +498,7 @@ __Usage:__
 
 Inspects and assesses a string.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -517,7 +517,7 @@ __Usage:__
 
 Redact sensitive data from an image using the Data Loss Prevention API.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/redactImage.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/redactImage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redactImage.js,samples/README.md)
 
@@ -536,7 +536,7 @@ __Usage:__
 
 Redact sensitive data from text using the Data Loss Prevention API.
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/redactText.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/redactText.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/redactText.js,samples/README.md)
 
@@ -555,7 +555,7 @@ __Usage:__
 
 Reidentify sensitive data in a string using Format Preserving Encryption (FPE).
 
-View the [source code](https://github.com/googleapis/nodejs-dlp/blob/master/samples/reidentifyWithFpe.js).
+View the [source code](https://github.com/googleapis/nodejs-dlp/blob/main/samples/reidentifyWithFpe.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dlp&page=editor&open_in_editor=samples/reidentifyWithFpe.js,samples/README.md)
 
