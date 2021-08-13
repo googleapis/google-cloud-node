@@ -39,7 +39,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 Reports a simple error using explicit credentials.
 
-View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/explicitSetup.js).
+View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/explicitSetup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/explicitSetup.js,samples/README.md)
 
@@ -58,7 +58,7 @@ __Usage:__
 
 Starts and Express service with integrated error reporting.
 
-View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/express.js).
+View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/express.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/express.js,samples/README.md)
 
@@ -77,7 +77,7 @@ __Usage:__
 
 Reports a simple error using implicit credentials.
 
-View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/implicitSetup.js).
+View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/implicitSetup.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/implicitSetup.js,samples/README.md)
 
@@ -96,7 +96,7 @@ __Usage:__
 
 Manually reports errors.
 
-View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/manual.js).
+View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/manual.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/manual.js,samples/README.md)
 
@@ -113,7 +113,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 

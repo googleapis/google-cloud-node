@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/error-reporting.svg)](https://www.npmjs.org/package/@google-cloud/error-reporting)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-error-reporting/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-error-reporting)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-error-reporting/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-error-reporting)
 
 
 
@@ -17,7 +17,7 @@
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-error-reporting/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-error-reporting/blob/main/CHANGELOG.md).
 
 * [Cloud Error Reporting Node.js Client API Reference][client-docs]
 * [Cloud Error Reporting Documentation][product-docs]
@@ -350,15 +350,15 @@ errors.report(err);
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-error-reporting/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-error-reporting/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Explicit setup | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/explicitSetup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/explicitSetup.js,samples/README.md) |
-| Express integration | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/express.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/express.js,samples/README.md) |
-| Implicit setup | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/implicitSetup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/implicitSetup.js,samples/README.md) |
-| Manual reporting | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/manual.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/manual.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Explicit setup | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/explicitSetup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/explicitSetup.js,samples/README.md) |
+| Express integration | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/express.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/express.js,samples/README.md) |
+| Implicit setup | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/implicitSetup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/implicitSetup.js,samples/README.md) |
+| Manual reporting | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/manual.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/manual.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-error-reporting/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-error-reporting&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -406,19 +406,19 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-error-reporting/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-error-reporting/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
 are generated from a central template. To edit one of these files, make an edit
-to its template in this
-[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
+to its templates in
+[directory](https://github.com/googleapis/synthtool).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-error-reporting/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-error-reporting/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/error-reporting/latest
 [product-docs]: https://cloud.google.com/error-reporting
