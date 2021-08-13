@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+### [3.15.5](https://www.github.com/googleapis/nodejs-asset/compare/v3.15.4...v3.15.5) (2021-08-13)
+
+
+### Bug Fixes
+
+* failing tests for LRO check methods ([#530](https://www.github.com/googleapis/nodejs-asset/issues/530)) ([c756cd1](https://www.github.com/googleapis/nodejs-asset/commit/c756cd12f9c5b2133c15ddec68936f737c0fa77c))
+
 ### [3.15.4](https://www.github.com/googleapis/nodejs-asset/compare/v3.15.3...v3.15.4) (2021-08-11)
 
 
