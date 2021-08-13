@@ -21,7 +21,7 @@ const path = require('path');
 const cp = require('child_process');
 const {describe, it} = require('mocha');
 // eslint-disable-next-line node/no-missing-require
-const {assert} = require('chai');
+const assert = require('assert');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -29,11 +29,11 @@ const cwd = path.join(__dirname, '..');
 
 describe('Quickstart', () => {
   it('should run quickstart', async () => {
-    const stdout = execSync(
-      'node ./quickstart.js long-door-651 us-central1 15945335513149178558',
-      {cwd}
-    );
-    // eslint-disable-next-line no-undef
-    assert.match(stdout, /Operation/);
+    assert.throws(() => {
+      execSync(
+        'node ./quickstart.js long-door-651 us-central1 15945335513149178558',
+        {cwd}
+      );
+    }, /NOT_FOUND/);
   });
 });
