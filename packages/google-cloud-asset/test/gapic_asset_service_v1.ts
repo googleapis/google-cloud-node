@@ -1006,6 +1006,117 @@ describe('v1.AssetServiceClient', () => {
     });
   });
 
+  describe('analyzeMove', () => {
+    it('invokes analyzeMove without error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeMoveResponse()
+      );
+      client.innerApiCalls.analyzeMove = stubSimpleCall(expectedResponse);
+      const [response] = await client.analyzeMove(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.analyzeMove as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes analyzeMove without error using callback', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeMoveResponse()
+      );
+      client.innerApiCalls.analyzeMove =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.analyzeMove(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.asset.v1.IAnalyzeMoveResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.analyzeMove as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes analyzeMove with error', async () => {
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.asset.v1.AnalyzeMoveRequest()
+      );
+      request.resource = '';
+      const expectedHeaderRequestParams = 'resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.analyzeMove = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.analyzeMove(request), expectedError);
+      assert(
+        (client.innerApiCalls.analyzeMove as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('exportAssets', () => {
     it('invokes exportAssets without error', async () => {
       const client = new assetserviceModule.v1.AssetServiceClient({
@@ -1262,7 +1373,7 @@ describe('v1.AssetServiceClient', () => {
             err?: Error | null,
             result?: LROperation<
               protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-              protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+              protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
             > | null
           ) => {
             if (err) {
@@ -1275,7 +1386,7 @@ describe('v1.AssetServiceClient', () => {
       });
       const operation = (await promise) as LROperation<
         protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
       >;
       const [response] = await operation.promise();
       assert.deepStrictEqual(response, expectedResponse);
@@ -2300,6 +2411,96 @@ describe('v1.AssetServiceClient', () => {
   });
 
   describe('Path templates', () => {
+    describe('accessLevel', () => {
+      const fakePath = '/rendered/path/accessLevel';
+      const expectedParameters = {
+        access_policy: 'accessPolicyValue',
+        access_level: 'accessLevelValue',
+      };
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.accessLevelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.accessLevelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('accessLevelPath', () => {
+        const result = client.accessLevelPath(
+          'accessPolicyValue',
+          'accessLevelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.accessLevelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccessPolicyFromAccessLevelName', () => {
+        const result = client.matchAccessPolicyFromAccessLevelName(fakePath);
+        assert.strictEqual(result, 'accessPolicyValue');
+        assert(
+          (client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAccessLevelFromAccessLevelName', () => {
+        const result = client.matchAccessLevelFromAccessLevelName(fakePath);
+        assert.strictEqual(result, 'accessLevelValue');
+        assert(
+          (client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('accessPolicy', () => {
+      const fakePath = '/rendered/path/accessPolicy';
+      const expectedParameters = {
+        access_policy: 'accessPolicyValue',
+      };
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.accessPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.accessPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('accessPolicyPath', () => {
+        const result = client.accessPolicyPath('accessPolicyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.accessPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccessPolicyFromAccessPolicyName', () => {
+        const result = client.matchAccessPolicyFromAccessPolicyName(fakePath);
+        assert.strictEqual(result, 'accessPolicyValue');
+        assert(
+          (client.pathTemplates.accessPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('folderFeed', () => {
       const fakePath = '/rendered/path/folderFeed';
       const expectedParameters = {
@@ -2448,6 +2649,63 @@ describe('v1.AssetServiceClient', () => {
         assert.strictEqual(result, 'feedValue');
         assert(
           (client.pathTemplates.projectFeedPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('servicePerimeter', () => {
+      const fakePath = '/rendered/path/servicePerimeter';
+      const expectedParameters = {
+        access_policy: 'accessPolicyValue',
+        service_perimeter: 'servicePerimeterValue',
+      };
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.servicePerimeterPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.servicePerimeterPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('servicePerimeterPath', () => {
+        const result = client.servicePerimeterPath(
+          'accessPolicyValue',
+          'servicePerimeterValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.servicePerimeterPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccessPolicyFromServicePerimeterName', () => {
+        const result =
+          client.matchAccessPolicyFromServicePerimeterName(fakePath);
+        assert.strictEqual(result, 'accessPolicyValue');
+        assert(
+          (client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServicePerimeterFromServicePerimeterName', () => {
+        const result =
+          client.matchServicePerimeterFromServicePerimeterName(fakePath);
+        assert.strictEqual(result, 'servicePerimeterValue');
+        assert(
+          (client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

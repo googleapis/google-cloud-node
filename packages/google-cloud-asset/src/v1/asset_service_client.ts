@@ -160,6 +160,12 @@ export class AssetServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      accessLevelPathTemplate: new this._gaxModule.PathTemplate(
+        'accessPolicies/{access_policy}/accessLevels/{access_level}'
+      ),
+      accessPolicyPathTemplate: new this._gaxModule.PathTemplate(
+        'accessPolicies/{access_policy}'
+      ),
       folderFeedPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/feeds/{feed}'
       ),
@@ -168,6 +174,9 @@ export class AssetServiceClient {
       ),
       projectFeedPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/feeds/{feed}'
+      ),
+      servicePerimeterPathTemplate: new this._gaxModule.PathTemplate(
+        'accessPolicies/{access_policy}/servicePerimeters/{service_perimeter}'
       ),
     };
 
@@ -214,7 +223,7 @@ export class AssetServiceClient {
       '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse'
     ) as gax.protobuf.Type;
     const analyzeIamPolicyLongrunningMetadata = protoFilesRoot.lookup(
-      '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest'
+      '.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata'
     ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
@@ -296,6 +305,7 @@ export class AssetServiceClient {
       'searchAllIamPolicies',
       'analyzeIamPolicy',
       'analyzeIamPolicyLongrunning',
+      'analyzeMove',
     ];
     for (const methodName of assetServiceStubMethods) {
       const callPromise = this.assetServiceStub.then(
@@ -1040,6 +1050,105 @@ export class AssetServiceClient {
     this.initialize();
     return this.innerApiCalls.analyzeIamPolicy(request, options, callback);
   }
+  analyzeMove(
+    request?: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  analyzeMove(
+    request: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  analyzeMove(
+    request: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
+    callback: Callback<
+      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Analyze moving a resource to a specified destination without kicking off
+   * the actual move. The analysis is best effort depending on the user's
+   * permissions of viewing different hierarchical policies and configurations.
+   * The policies and configuration are subject to change before the actual
+   * resource migration takes place.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   Required. Name of the resource to perform the analysis against.
+   *   Only GCP Project are supported as of today. Hence, this can only be Project
+   *   ID (such as "projects/my-project-id") or a Project Number (such as
+   *   "projects/12345").
+   * @param {string} request.destinationParent
+   *   Required. Name of the GCP Folder or Organization to reparent the target
+   *   resource. The analysis will be performed against hypothetically moving the
+   *   resource to this specified desitination parent. This can only be a Folder
+   *   number (such as "folders/123") or an Organization number (such as
+   *   "organizations/123").
+   * @param {google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView} request.view
+   *   Analysis view indicating what information should be included in the
+   *   analysis response. If unspecified, the default view is FULL.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [AnalyzeMoveResponse]{@link google.cloud.asset.v1.AnalyzeMoveResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.analyzeMove(request);
+   */
+  analyzeMove(
+    request?: protos.google.cloud.asset.v1.IAnalyzeMoveRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+          protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.asset.v1.IAnalyzeMoveResponse,
+      protos.google.cloud.asset.v1.IAnalyzeMoveRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        resource: request.resource || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.analyzeMove(request, options, callback);
+  }
 
   exportAssets(
     request?: protos.google.cloud.asset.v1.IExportAssetsRequest,
@@ -1231,7 +1340,7 @@ export class AssetServiceClient {
     [
       LROperation<
         protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1243,7 +1352,7 @@ export class AssetServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1254,7 +1363,7 @@ export class AssetServiceClient {
     callback: Callback<
       LROperation<
         protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1269,7 +1378,7 @@ export class AssetServiceClient {
    * {@link google.longrunning.Operation|google.longrunning.Operation}, which allows you to track the operation
    * status. We recommend intervals of at least 2 seconds with exponential
    * backoff retry to poll the operation result. The metadata contains the
-   * request to help callers to map responses to requests.
+   * metadata for the long-running operation.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1297,7 +1406,7 @@ export class AssetServiceClient {
       | Callback<
           LROperation<
             protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+            protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
           >,
           protos.google.longrunning.IOperation | null | undefined,
           {} | null | undefined
@@ -1305,7 +1414,7 @@ export class AssetServiceClient {
     callback?: Callback<
       LROperation<
         protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
       >,
       protos.google.longrunning.IOperation | null | undefined,
       {} | null | undefined
@@ -1314,7 +1423,7 @@ export class AssetServiceClient {
     [
       LROperation<
         protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningResponse,
-        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningRequest
+        protos.google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata
       >,
       protos.google.longrunning.IOperation | undefined,
       {} | undefined
@@ -1362,7 +1471,7 @@ export class AssetServiceClient {
   ): Promise<
     LROperation<
       protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse,
-      protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest
+      protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
     >
   > {
     const request = new operationsProtos.google.longrunning.GetOperationRequest(
@@ -1376,7 +1485,7 @@ export class AssetServiceClient {
     );
     return decodeOperation as LROperation<
       protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse,
-      protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest
+      protos.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
     >;
   }
   listAssets(
@@ -1741,8 +1850,8 @@ export class AssetServiceClient {
    *     encryption key whose name contains the word "key".
    *   * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
    *     word.
-   *   * `NOT state:ACTIVE` to find {{gcp_name}} resources whose state
-   *     doesn't contain "ACTIVE" as a word.
+   *   * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
+   *     "ACTIVE" as a word.
    *   * `createTime<1609459200` to find Cloud resources that were created before
    *     "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
    *     "2021-01-01 00:00:00 UTC" in seconds.
@@ -1788,6 +1897,7 @@ export class AssetServiceClient {
    *   to indicate descending order. Redundant space characters are ignored.
    *   Example: "location DESC, name".
    *   Only singular primitive fields in the response are sortable:
+   *
    *     * name
    *     * assetType
    *     * project
@@ -1800,9 +1910,39 @@ export class AssetServiceClient {
    *     * state
    *     * parentFullResourceName
    *     * parentAssetType
+   *
    *   All the other fields such as repeated fields (e.g., `networkTags`), map
    *   fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
    *   are not supported.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. A comma-separated list of fields specifying which fields to be returned in
+   *   ResourceSearchResult. Only '*' or combination of top level fields can be
+   *   specified. Field names of both snake_case and camelCase are supported.
+   *   Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+   *
+   *   The read_mask paths must be valid field paths listed but not limited to
+   *   (both snake_case and camelCase are supported):
+   *
+   *     * name
+   *     * assetType
+   *     * project
+   *     * displayName
+   *     * description
+   *     * location
+   *     * labels
+   *     * networkTags
+   *     * kmsKey
+   *     * createTime
+   *     * updateTime
+   *     * state
+   *     * additionalAttributes
+   *     * versionedResources
+   *
+   *   If read_mask is not specified, all fields except versionedResources will
+   *   be returned.
+   *   If only '*' is specified, all fields including versionedResources will be
+   *   returned.
+   *   Any invalid field path will trigger INVALID_ARGUMENT error.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1901,8 +2041,8 @@ export class AssetServiceClient {
    *     encryption key whose name contains the word "key".
    *   * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
    *     word.
-   *   * `NOT state:ACTIVE` to find {{gcp_name}} resources whose state
-   *     doesn't contain "ACTIVE" as a word.
+   *   * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
+   *     "ACTIVE" as a word.
    *   * `createTime<1609459200` to find Cloud resources that were created before
    *     "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
    *     "2021-01-01 00:00:00 UTC" in seconds.
@@ -1948,6 +2088,7 @@ export class AssetServiceClient {
    *   to indicate descending order. Redundant space characters are ignored.
    *   Example: "location DESC, name".
    *   Only singular primitive fields in the response are sortable:
+   *
    *     * name
    *     * assetType
    *     * project
@@ -1960,9 +2101,39 @@ export class AssetServiceClient {
    *     * state
    *     * parentFullResourceName
    *     * parentAssetType
+   *
    *   All the other fields such as repeated fields (e.g., `networkTags`), map
    *   fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
    *   are not supported.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. A comma-separated list of fields specifying which fields to be returned in
+   *   ResourceSearchResult. Only '*' or combination of top level fields can be
+   *   specified. Field names of both snake_case and camelCase are supported.
+   *   Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+   *
+   *   The read_mask paths must be valid field paths listed but not limited to
+   *   (both snake_case and camelCase are supported):
+   *
+   *     * name
+   *     * assetType
+   *     * project
+   *     * displayName
+   *     * description
+   *     * location
+   *     * labels
+   *     * networkTags
+   *     * kmsKey
+   *     * createTime
+   *     * updateTime
+   *     * state
+   *     * additionalAttributes
+   *     * versionedResources
+   *
+   *   If read_mask is not specified, all fields except versionedResources will
+   *   be returned.
+   *   If only '*' is specified, all fields including versionedResources will be
+   *   returned.
+   *   Any invalid field path will trigger INVALID_ARGUMENT error.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -2039,8 +2210,8 @@ export class AssetServiceClient {
    *     encryption key whose name contains the word "key".
    *   * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
    *     word.
-   *   * `NOT state:ACTIVE` to find {{gcp_name}} resources whose state
-   *     doesn't contain "ACTIVE" as a word.
+   *   * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
+   *     "ACTIVE" as a word.
    *   * `createTime<1609459200` to find Cloud resources that were created before
    *     "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
    *     "2021-01-01 00:00:00 UTC" in seconds.
@@ -2086,6 +2257,7 @@ export class AssetServiceClient {
    *   to indicate descending order. Redundant space characters are ignored.
    *   Example: "location DESC, name".
    *   Only singular primitive fields in the response are sortable:
+   *
    *     * name
    *     * assetType
    *     * project
@@ -2098,9 +2270,39 @@ export class AssetServiceClient {
    *     * state
    *     * parentFullResourceName
    *     * parentAssetType
+   *
    *   All the other fields such as repeated fields (e.g., `networkTags`), map
    *   fields (e.g., `labels`) and struct fields (e.g., `additionalAttributes`)
    *   are not supported.
+   * @param {google.protobuf.FieldMask} [request.readMask]
+   *   Optional. A comma-separated list of fields specifying which fields to be returned in
+   *   ResourceSearchResult. Only '*' or combination of top level fields can be
+   *   specified. Field names of both snake_case and camelCase are supported.
+   *   Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+   *
+   *   The read_mask paths must be valid field paths listed but not limited to
+   *   (both snake_case and camelCase are supported):
+   *
+   *     * name
+   *     * assetType
+   *     * project
+   *     * displayName
+   *     * description
+   *     * location
+   *     * labels
+   *     * networkTags
+   *     * kmsKey
+   *     * createTime
+   *     * updateTime
+   *     * state
+   *     * additionalAttributes
+   *     * versionedResources
+   *
+   *   If read_mask is not specified, all fields except versionedResources will
+   *   be returned.
+   *   If only '*' is specified, all fields including versionedResources will be
+   *   returned.
+   *   Any invalid field path will trigger INVALID_ARGUMENT error.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
@@ -2601,6 +2803,68 @@ export class AssetServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified accessLevel resource name string.
+   *
+   * @param {string} access_policy
+   * @param {string} access_level
+   * @returns {string} Resource name string.
+   */
+  accessLevelPath(accessPolicy: string, accessLevel: string) {
+    return this.pathTemplates.accessLevelPathTemplate.render({
+      access_policy: accessPolicy,
+      access_level: accessLevel,
+    });
+  }
+
+  /**
+   * Parse the access_policy from AccessLevel resource.
+   *
+   * @param {string} accessLevelName
+   *   A fully-qualified path representing AccessLevel resource.
+   * @returns {string} A string representing the access_policy.
+   */
+  matchAccessPolicyFromAccessLevelName(accessLevelName: string) {
+    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName)
+      .access_policy;
+  }
+
+  /**
+   * Parse the access_level from AccessLevel resource.
+   *
+   * @param {string} accessLevelName
+   *   A fully-qualified path representing AccessLevel resource.
+   * @returns {string} A string representing the access_level.
+   */
+  matchAccessLevelFromAccessLevelName(accessLevelName: string) {
+    return this.pathTemplates.accessLevelPathTemplate.match(accessLevelName)
+      .access_level;
+  }
+
+  /**
+   * Return a fully-qualified accessPolicy resource name string.
+   *
+   * @param {string} access_policy
+   * @returns {string} Resource name string.
+   */
+  accessPolicyPath(accessPolicy: string) {
+    return this.pathTemplates.accessPolicyPathTemplate.render({
+      access_policy: accessPolicy,
+    });
+  }
+
+  /**
+   * Parse the access_policy from AccessPolicy resource.
+   *
+   * @param {string} accessPolicyName
+   *   A fully-qualified path representing AccessPolicy resource.
+   * @returns {string} A string representing the access_policy.
+   */
+  matchAccessPolicyFromAccessPolicyName(accessPolicyName: string) {
+    return this.pathTemplates.accessPolicyPathTemplate.match(accessPolicyName)
+      .access_policy;
+  }
+
+  /**
    * Return a fully-qualified folderFeed resource name string.
    *
    * @param {string} folder
@@ -2713,6 +2977,46 @@ export class AssetServiceClient {
   matchFeedFromProjectFeedName(projectFeedName: string) {
     return this.pathTemplates.projectFeedPathTemplate.match(projectFeedName)
       .feed;
+  }
+
+  /**
+   * Return a fully-qualified servicePerimeter resource name string.
+   *
+   * @param {string} access_policy
+   * @param {string} service_perimeter
+   * @returns {string} Resource name string.
+   */
+  servicePerimeterPath(accessPolicy: string, servicePerimeter: string) {
+    return this.pathTemplates.servicePerimeterPathTemplate.render({
+      access_policy: accessPolicy,
+      service_perimeter: servicePerimeter,
+    });
+  }
+
+  /**
+   * Parse the access_policy from ServicePerimeter resource.
+   *
+   * @param {string} servicePerimeterName
+   *   A fully-qualified path representing ServicePerimeter resource.
+   * @returns {string} A string representing the access_policy.
+   */
+  matchAccessPolicyFromServicePerimeterName(servicePerimeterName: string) {
+    return this.pathTemplates.servicePerimeterPathTemplate.match(
+      servicePerimeterName
+    ).access_policy;
+  }
+
+  /**
+   * Parse the service_perimeter from ServicePerimeter resource.
+   *
+   * @param {string} servicePerimeterName
+   *   A fully-qualified path representing ServicePerimeter resource.
+   * @returns {string} A string representing the service_perimeter.
+   */
+  matchServicePerimeterFromServicePerimeterName(servicePerimeterName: string) {
+    return this.pathTemplates.servicePerimeterPathTemplate.match(
+      servicePerimeterName
+    ).service_perimeter;
   }
 
   /**
