@@ -68,8 +68,9 @@ function main(
       messages: messages,
     };
 
-    // Retry settings control how the publisher handles retryable failures
-    // Default values are shown
+    // Retry settings control how the publisher handles retryable failures. Default values are shown.
+    // The `retryCodes` array determines which grpc errors will trigger an automatic retry.
+    // The `backoffSettings` object lets you specify the behaviour of retries over time.
     const retrySettings = {
       retryCodes: [
         10, // 'ABORTED'
