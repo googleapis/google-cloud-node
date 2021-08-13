@@ -42,7 +42,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Concepts
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/concepts.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/concepts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/concepts.js,samples/README.md)
 
@@ -59,7 +59,7 @@ __Usage:__
 
 ### Error
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/error.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/error.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/error.js,samples/README.md)
 
@@ -76,7 +76,7 @@ __Usage:__
 
 ### Export
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/export.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/export.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/export.js,samples/README.md)
 
@@ -93,7 +93,7 @@ __Usage:__
 
 ### Import
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/import.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/import.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/import.js,samples/README.md)
 
@@ -110,7 +110,7 @@ __Usage:__
 
 ### Indexes.get
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/indexes.get.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/indexes.get.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/indexes.get.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### Indexes.list
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/indexes.list.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/indexes.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/indexes.list.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 Adds a task with a description <description>.
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.add.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.add.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.add.js,samples/README.md)
 
@@ -182,7 +182,7 @@ __Usage:__
 
 Deletes task <taskId>.
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.delete.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.delete.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.delete.js,samples/README.md)
 
@@ -199,7 +199,7 @@ __Usage:__
 
 ### Legacy Samples
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.js,samples/README.md)
 
@@ -218,7 +218,7 @@ __Usage:__
 
 Lists all tasks ordered by creation time.
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.list.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.list.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.list.js,samples/README.md)
 
@@ -237,7 +237,7 @@ __Usage:__
 
 Marks task <taskId> as Done.
 
-View the [source code](https://github.com/googleapis/nodejs-datastore/blob/master/samples/tasks.markdone.js).
+View the [source code](https://github.com/googleapis/nodejs-datastore/blob/main/samples/tasks.markdone.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datastore&page=editor&open_in_editor=samples/tasks.markdone.js,samples/README.md)
 
