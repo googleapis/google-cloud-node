@@ -479,4 +479,153 @@ describe('v1p5beta1.AssetServiceClient', () => {
       );
     });
   });
+
+  describe('Path templates', () => {
+    describe('accessLevel', () => {
+      const fakePath = '/rendered/path/accessLevel';
+      const expectedParameters = {
+        access_policy: 'accessPolicyValue',
+        access_level: 'accessLevelValue',
+      };
+      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.accessLevelPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.accessLevelPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('accessLevelPath', () => {
+        const result = client.accessLevelPath(
+          'accessPolicyValue',
+          'accessLevelValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.accessLevelPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccessPolicyFromAccessLevelName', () => {
+        const result = client.matchAccessPolicyFromAccessLevelName(fakePath);
+        assert.strictEqual(result, 'accessPolicyValue');
+        assert(
+          (client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchAccessLevelFromAccessLevelName', () => {
+        const result = client.matchAccessLevelFromAccessLevelName(fakePath);
+        assert.strictEqual(result, 'accessLevelValue');
+        assert(
+          (client.pathTemplates.accessLevelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('accessPolicy', () => {
+      const fakePath = '/rendered/path/accessPolicy';
+      const expectedParameters = {
+        access_policy: 'accessPolicyValue',
+      };
+      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.accessPolicyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.accessPolicyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('accessPolicyPath', () => {
+        const result = client.accessPolicyPath('accessPolicyValue');
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.accessPolicyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccessPolicyFromAccessPolicyName', () => {
+        const result = client.matchAccessPolicyFromAccessPolicyName(fakePath);
+        assert.strictEqual(result, 'accessPolicyValue');
+        assert(
+          (client.pathTemplates.accessPolicyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('servicePerimeter', () => {
+      const fakePath = '/rendered/path/servicePerimeter';
+      const expectedParameters = {
+        access_policy: 'accessPolicyValue',
+        service_perimeter: 'servicePerimeterValue',
+      };
+      const client = new assetserviceModule.v1p5beta1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.servicePerimeterPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.servicePerimeterPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('servicePerimeterPath', () => {
+        const result = client.servicePerimeterPath(
+          'accessPolicyValue',
+          'servicePerimeterValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.servicePerimeterPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchAccessPolicyFromServicePerimeterName', () => {
+        const result =
+          client.matchAccessPolicyFromServicePerimeterName(fakePath);
+        assert.strictEqual(result, 'accessPolicyValue');
+        assert(
+          (client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchServicePerimeterFromServicePerimeterName', () => {
+        const result =
+          client.matchServicePerimeterFromServicePerimeterName(fakePath);
+        assert.strictEqual(result, 'servicePerimeterValue');
+        assert(
+          (client.pathTemplates.servicePerimeterPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+  });
 });

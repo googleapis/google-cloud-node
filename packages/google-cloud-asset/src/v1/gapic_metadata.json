@@ -45,6 +45,11 @@
                 "analyzeIamPolicy"
               ]
             },
+            "AnalyzeMove": {
+              "methods": [
+                "analyzeMove"
+              ]
+            },
             "ExportAssets": {
               "methods": [
                 "exportAssets"
@@ -114,6 +119,11 @@
             "AnalyzeIamPolicy": {
               "methods": [
                 "analyzeIamPolicy"
+              ]
+            },
+            "AnalyzeMove": {
+              "methods": [
+                "analyzeMove"
               ]
             },
             "ExportAssets": {
