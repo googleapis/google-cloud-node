@@ -494,7 +494,232 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.cloud.asset.v1.AssetService#analyzeMove}.
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @typedef AnalyzeMoveCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.asset.v1.AnalyzeMoveResponse} [response] AnalyzeMoveResponse
+                         */
+    
+                        /**
+                         * Calls AnalyzeMove.
+                         * @function analyzeMove
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveRequest} request AnalyzeMoveRequest message or plain object
+                         * @param {google.cloud.asset.v1.AssetService.AnalyzeMoveCallback} callback Node-style callback called with the error, if any, and AnalyzeMoveResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(AssetService.prototype.analyzeMove = function analyzeMove(request, callback) {
+                            return this.rpcCall(analyzeMove, $root.google.cloud.asset.v1.AnalyzeMoveRequest, $root.google.cloud.asset.v1.AnalyzeMoveResponse, request, callback);
+                        }, "name", { value: "AnalyzeMove" });
+    
+                        /**
+                         * Calls AnalyzeMove.
+                         * @function analyzeMove
+                         * @memberof google.cloud.asset.v1.AssetService
+                         * @instance
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveRequest} request AnalyzeMoveRequest message or plain object
+                         * @returns {Promise<google.cloud.asset.v1.AnalyzeMoveResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return AssetService;
+                    })();
+    
+                    v1.AnalyzeIamPolicyLongrunningMetadata = (function() {
+    
+                        /**
+                         * Properties of an AnalyzeIamPolicyLongrunningMetadata.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IAnalyzeIamPolicyLongrunningMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] AnalyzeIamPolicyLongrunningMetadata createTime
+                         */
+    
+                        /**
+                         * Constructs a new AnalyzeIamPolicyLongrunningMetadata.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an AnalyzeIamPolicyLongrunningMetadata.
+                         * @implements IAnalyzeIamPolicyLongrunningMetadata
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata=} [properties] Properties to set
+                         */
+                        function AnalyzeIamPolicyLongrunningMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AnalyzeIamPolicyLongrunningMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @instance
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.prototype.createTime = null;
+    
+                        /**
+                         * Creates a new AnalyzeIamPolicyLongrunningMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @static
+                         * @param {google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata} AnalyzeIamPolicyLongrunningMetadata instance
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.create = function create(properties) {
+                            return new AnalyzeIamPolicyLongrunningMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AnalyzeIamPolicyLongrunningMetadata message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @static
+                         * @param {google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata} message AnalyzeIamPolicyLongrunningMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AnalyzeIamPolicyLongrunningMetadata message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @static
+                         * @param {google.cloud.asset.v1.IAnalyzeIamPolicyLongrunningMetadata} message AnalyzeIamPolicyLongrunningMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AnalyzeIamPolicyLongrunningMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata} AnalyzeIamPolicyLongrunningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AnalyzeIamPolicyLongrunningMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata} AnalyzeIamPolicyLongrunningMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AnalyzeIamPolicyLongrunningMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AnalyzeIamPolicyLongrunningMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata} AnalyzeIamPolicyLongrunningMetadata
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AnalyzeIamPolicyLongrunningMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @static
+                         * @param {google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata} message AnalyzeIamPolicyLongrunningMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.createTime = null;
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AnalyzeIamPolicyLongrunningMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.AnalyzeIamPolicyLongrunningMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AnalyzeIamPolicyLongrunningMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AnalyzeIamPolicyLongrunningMetadata;
                     })();
     
                     v1.ExportAssetsRequest = (function() {
@@ -5614,6 +5839,7 @@
                          * @property {number|null} [pageSize] SearchAllResourcesRequest pageSize
                          * @property {string|null} [pageToken] SearchAllResourcesRequest pageToken
                          * @property {string|null} [orderBy] SearchAllResourcesRequest orderBy
+                         * @property {google.protobuf.IFieldMask|null} [readMask] SearchAllResourcesRequest readMask
                          */
     
                         /**
@@ -5681,6 +5907,14 @@
                         SearchAllResourcesRequest.prototype.orderBy = "";
     
                         /**
+                         * SearchAllResourcesRequest readMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} readMask
+                         * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
+                         * @instance
+                         */
+                        SearchAllResourcesRequest.prototype.readMask = null;
+    
+                        /**
                          * Creates a new SearchAllResourcesRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.SearchAllResourcesRequest
@@ -5717,6 +5951,8 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.pageToken);
                             if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.orderBy);
+                            if (message.readMask != null && Object.hasOwnProperty.call(message, "readMask"))
+                                $root.google.protobuf.FieldMask.encode(message.readMask, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             return writer;
                         };
     
@@ -5770,6 +6006,9 @@
                                     break;
                                 case 6:
                                     message.orderBy = reader.string();
+                                    break;
+                                case 8:
+                                    message.readMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5828,6 +6067,11 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 if (!$util.isString(message.orderBy))
                                     return "orderBy: string expected";
+                            if (message.readMask != null && message.hasOwnProperty("readMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.readMask);
+                                if (error)
+                                    return "readMask." + error;
+                            }
                             return null;
                         };
     
@@ -5860,6 +6104,11 @@
                                 message.pageToken = String(object.pageToken);
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
+                            if (object.readMask != null) {
+                                if (typeof object.readMask !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.SearchAllResourcesRequest.readMask: object expected");
+                                message.readMask = $root.google.protobuf.FieldMask.fromObject(object.readMask);
+                            }
                             return message;
                         };
     
@@ -5884,6 +6133,7 @@
                                 object.pageSize = 0;
                                 object.pageToken = "";
                                 object.orderBy = "";
+                                object.readMask = null;
                             }
                             if (message.scope != null && message.hasOwnProperty("scope"))
                                 object.scope = message.scope;
@@ -5900,6 +6150,8 @@
                                 object.pageToken = message.pageToken;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
+                            if (message.readMask != null && message.hasOwnProperty("readMask"))
+                                object.readMask = $root.google.protobuf.FieldMask.toObject(message.readMask, options);
                             return object;
                         };
     
@@ -10017,6 +10269,1187 @@
                         return AnalyzeIamPolicyLongrunningResponse;
                     })();
     
+                    v1.AnalyzeMoveRequest = (function() {
+    
+                        /**
+                         * Properties of an AnalyzeMoveRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IAnalyzeMoveRequest
+                         * @property {string|null} [resource] AnalyzeMoveRequest resource
+                         * @property {string|null} [destinationParent] AnalyzeMoveRequest destinationParent
+                         * @property {google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView|null} [view] AnalyzeMoveRequest view
+                         */
+    
+                        /**
+                         * Constructs a new AnalyzeMoveRequest.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an AnalyzeMoveRequest.
+                         * @implements IAnalyzeMoveRequest
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveRequest=} [properties] Properties to set
+                         */
+                        function AnalyzeMoveRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AnalyzeMoveRequest resource.
+                         * @member {string} resource
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @instance
+                         */
+                        AnalyzeMoveRequest.prototype.resource = "";
+    
+                        /**
+                         * AnalyzeMoveRequest destinationParent.
+                         * @member {string} destinationParent
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @instance
+                         */
+                        AnalyzeMoveRequest.prototype.destinationParent = "";
+    
+                        /**
+                         * AnalyzeMoveRequest view.
+                         * @member {google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView} view
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @instance
+                         */
+                        AnalyzeMoveRequest.prototype.view = 0;
+    
+                        /**
+                         * Creates a new AnalyzeMoveRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveRequest=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.AnalyzeMoveRequest} AnalyzeMoveRequest instance
+                         */
+                        AnalyzeMoveRequest.create = function create(properties) {
+                            return new AnalyzeMoveRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AnalyzeMoveRequest message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeMoveRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveRequest} message AnalyzeMoveRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnalyzeMoveRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                            if (message.destinationParent != null && Object.hasOwnProperty.call(message, "destinationParent"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.destinationParent);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.view);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AnalyzeMoveRequest message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeMoveRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveRequest} message AnalyzeMoveRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnalyzeMoveRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AnalyzeMoveRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.AnalyzeMoveRequest} AnalyzeMoveRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnalyzeMoveRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeMoveRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.resource = reader.string();
+                                    break;
+                                case 2:
+                                    message.destinationParent = reader.string();
+                                    break;
+                                case 3:
+                                    message.view = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AnalyzeMoveRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.AnalyzeMoveRequest} AnalyzeMoveRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnalyzeMoveRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AnalyzeMoveRequest message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AnalyzeMoveRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                if (!$util.isString(message.resource))
+                                    return "resource: string expected";
+                            if (message.destinationParent != null && message.hasOwnProperty("destinationParent"))
+                                if (!$util.isString(message.destinationParent))
+                                    return "destinationParent: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AnalyzeMoveRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.AnalyzeMoveRequest} AnalyzeMoveRequest
+                         */
+                        AnalyzeMoveRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.AnalyzeMoveRequest)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.AnalyzeMoveRequest();
+                            if (object.resource != null)
+                                message.resource = String(object.resource);
+                            if (object.destinationParent != null)
+                                message.destinationParent = String(object.destinationParent);
+                            switch (object.view) {
+                            case "ANALYSIS_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "FULL":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "BASIC":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AnalyzeMoveRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @static
+                         * @param {google.cloud.asset.v1.AnalyzeMoveRequest} message AnalyzeMoveRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AnalyzeMoveRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.resource = "";
+                                object.destinationParent = "";
+                                object.view = options.enums === String ? "ANALYSIS_VIEW_UNSPECIFIED" : 0;
+                            }
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                object.resource = message.resource;
+                            if (message.destinationParent != null && message.hasOwnProperty("destinationParent"))
+                                object.destinationParent = message.destinationParent;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView[message.view] : message.view;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AnalyzeMoveRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AnalyzeMoveRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * AnalysisView enum.
+                         * @name google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView
+                         * @enum {number}
+                         * @property {number} ANALYSIS_VIEW_UNSPECIFIED=0 ANALYSIS_VIEW_UNSPECIFIED value
+                         * @property {number} FULL=1 FULL value
+                         * @property {number} BASIC=2 BASIC value
+                         */
+                        AnalyzeMoveRequest.AnalysisView = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "ANALYSIS_VIEW_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "FULL"] = 1;
+                            values[valuesById[2] = "BASIC"] = 2;
+                            return values;
+                        })();
+    
+                        return AnalyzeMoveRequest;
+                    })();
+    
+                    v1.AnalyzeMoveResponse = (function() {
+    
+                        /**
+                         * Properties of an AnalyzeMoveResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IAnalyzeMoveResponse
+                         * @property {Array.<google.cloud.asset.v1.IMoveAnalysis>|null} [moveAnalysis] AnalyzeMoveResponse moveAnalysis
+                         */
+    
+                        /**
+                         * Constructs a new AnalyzeMoveResponse.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an AnalyzeMoveResponse.
+                         * @implements IAnalyzeMoveResponse
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveResponse=} [properties] Properties to set
+                         */
+                        function AnalyzeMoveResponse(properties) {
+                            this.moveAnalysis = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AnalyzeMoveResponse moveAnalysis.
+                         * @member {Array.<google.cloud.asset.v1.IMoveAnalysis>} moveAnalysis
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @instance
+                         */
+                        AnalyzeMoveResponse.prototype.moveAnalysis = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AnalyzeMoveResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveResponse=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.AnalyzeMoveResponse} AnalyzeMoveResponse instance
+                         */
+                        AnalyzeMoveResponse.create = function create(properties) {
+                            return new AnalyzeMoveResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AnalyzeMoveResponse message. Does not implicitly {@link google.cloud.asset.v1.AnalyzeMoveResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveResponse} message AnalyzeMoveResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnalyzeMoveResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.moveAnalysis != null && message.moveAnalysis.length)
+                                for (var i = 0; i < message.moveAnalysis.length; ++i)
+                                    $root.google.cloud.asset.v1.MoveAnalysis.encode(message.moveAnalysis[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AnalyzeMoveResponse message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AnalyzeMoveResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.IAnalyzeMoveResponse} message AnalyzeMoveResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AnalyzeMoveResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AnalyzeMoveResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.AnalyzeMoveResponse} AnalyzeMoveResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnalyzeMoveResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AnalyzeMoveResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.moveAnalysis && message.moveAnalysis.length))
+                                        message.moveAnalysis = [];
+                                    message.moveAnalysis.push($root.google.cloud.asset.v1.MoveAnalysis.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AnalyzeMoveResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.AnalyzeMoveResponse} AnalyzeMoveResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AnalyzeMoveResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AnalyzeMoveResponse message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AnalyzeMoveResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.moveAnalysis != null && message.hasOwnProperty("moveAnalysis")) {
+                                if (!Array.isArray(message.moveAnalysis))
+                                    return "moveAnalysis: array expected";
+                                for (var i = 0; i < message.moveAnalysis.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.MoveAnalysis.verify(message.moveAnalysis[i]);
+                                    if (error)
+                                        return "moveAnalysis." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AnalyzeMoveResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.AnalyzeMoveResponse} AnalyzeMoveResponse
+                         */
+                        AnalyzeMoveResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.AnalyzeMoveResponse)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.AnalyzeMoveResponse();
+                            if (object.moveAnalysis) {
+                                if (!Array.isArray(object.moveAnalysis))
+                                    throw TypeError(".google.cloud.asset.v1.AnalyzeMoveResponse.moveAnalysis: array expected");
+                                message.moveAnalysis = [];
+                                for (var i = 0; i < object.moveAnalysis.length; ++i) {
+                                    if (typeof object.moveAnalysis[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.AnalyzeMoveResponse.moveAnalysis: object expected");
+                                    message.moveAnalysis[i] = $root.google.cloud.asset.v1.MoveAnalysis.fromObject(object.moveAnalysis[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AnalyzeMoveResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @static
+                         * @param {google.cloud.asset.v1.AnalyzeMoveResponse} message AnalyzeMoveResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AnalyzeMoveResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.moveAnalysis = [];
+                            if (message.moveAnalysis && message.moveAnalysis.length) {
+                                object.moveAnalysis = [];
+                                for (var j = 0; j < message.moveAnalysis.length; ++j)
+                                    object.moveAnalysis[j] = $root.google.cloud.asset.v1.MoveAnalysis.toObject(message.moveAnalysis[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AnalyzeMoveResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.AnalyzeMoveResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AnalyzeMoveResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AnalyzeMoveResponse;
+                    })();
+    
+                    v1.MoveAnalysis = (function() {
+    
+                        /**
+                         * Properties of a MoveAnalysis.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IMoveAnalysis
+                         * @property {string|null} [displayName] MoveAnalysis displayName
+                         * @property {google.cloud.asset.v1.IMoveAnalysisResult|null} [analysis] MoveAnalysis analysis
+                         * @property {google.rpc.IStatus|null} [error] MoveAnalysis error
+                         */
+    
+                        /**
+                         * Constructs a new MoveAnalysis.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a MoveAnalysis.
+                         * @implements IMoveAnalysis
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IMoveAnalysis=} [properties] Properties to set
+                         */
+                        function MoveAnalysis(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MoveAnalysis displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @instance
+                         */
+                        MoveAnalysis.prototype.displayName = "";
+    
+                        /**
+                         * MoveAnalysis analysis.
+                         * @member {google.cloud.asset.v1.IMoveAnalysisResult|null|undefined} analysis
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @instance
+                         */
+                        MoveAnalysis.prototype.analysis = null;
+    
+                        /**
+                         * MoveAnalysis error.
+                         * @member {google.rpc.IStatus|null|undefined} error
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @instance
+                         */
+                        MoveAnalysis.prototype.error = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MoveAnalysis result.
+                         * @member {"analysis"|"error"|undefined} result
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @instance
+                         */
+                        Object.defineProperty(MoveAnalysis.prototype, "result", {
+                            get: $util.oneOfGetter($oneOfFields = ["analysis", "error"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MoveAnalysis instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @static
+                         * @param {google.cloud.asset.v1.IMoveAnalysis=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.MoveAnalysis} MoveAnalysis instance
+                         */
+                        MoveAnalysis.create = function create(properties) {
+                            return new MoveAnalysis(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MoveAnalysis message. Does not implicitly {@link google.cloud.asset.v1.MoveAnalysis.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @static
+                         * @param {google.cloud.asset.v1.IMoveAnalysis} message MoveAnalysis message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveAnalysis.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                            if (message.analysis != null && Object.hasOwnProperty.call(message, "analysis"))
+                                $root.google.cloud.asset.v1.MoveAnalysisResult.encode(message.analysis, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.error != null && Object.hasOwnProperty.call(message, "error"))
+                                $root.google.rpc.Status.encode(message.error, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MoveAnalysis message, length delimited. Does not implicitly {@link google.cloud.asset.v1.MoveAnalysis.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @static
+                         * @param {google.cloud.asset.v1.IMoveAnalysis} message MoveAnalysis message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveAnalysis.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MoveAnalysis message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.MoveAnalysis} MoveAnalysis
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveAnalysis.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.MoveAnalysis();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.displayName = reader.string();
+                                    break;
+                                case 2:
+                                    message.analysis = $root.google.cloud.asset.v1.MoveAnalysisResult.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.error = $root.google.rpc.Status.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MoveAnalysis message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.MoveAnalysis} MoveAnalysis
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveAnalysis.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MoveAnalysis message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MoveAnalysis.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
+                            if (message.analysis != null && message.hasOwnProperty("analysis")) {
+                                properties.result = 1;
+                                {
+                                    var error = $root.google.cloud.asset.v1.MoveAnalysisResult.verify(message.analysis);
+                                    if (error)
+                                        return "analysis." + error;
+                                }
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                if (properties.result === 1)
+                                    return "result: multiple values";
+                                properties.result = 1;
+                                {
+                                    var error = $root.google.rpc.Status.verify(message.error);
+                                    if (error)
+                                        return "error." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MoveAnalysis message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.MoveAnalysis} MoveAnalysis
+                         */
+                        MoveAnalysis.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.MoveAnalysis)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.MoveAnalysis();
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
+                            if (object.analysis != null) {
+                                if (typeof object.analysis !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.MoveAnalysis.analysis: object expected");
+                                message.analysis = $root.google.cloud.asset.v1.MoveAnalysisResult.fromObject(object.analysis);
+                            }
+                            if (object.error != null) {
+                                if (typeof object.error !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.MoveAnalysis.error: object expected");
+                                message.error = $root.google.rpc.Status.fromObject(object.error);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MoveAnalysis message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @static
+                         * @param {google.cloud.asset.v1.MoveAnalysis} message MoveAnalysis
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MoveAnalysis.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.displayName = "";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
+                            if (message.analysis != null && message.hasOwnProperty("analysis")) {
+                                object.analysis = $root.google.cloud.asset.v1.MoveAnalysisResult.toObject(message.analysis, options);
+                                if (options.oneofs)
+                                    object.result = "analysis";
+                            }
+                            if (message.error != null && message.hasOwnProperty("error")) {
+                                object.error = $root.google.rpc.Status.toObject(message.error, options);
+                                if (options.oneofs)
+                                    object.result = "error";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MoveAnalysis to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.MoveAnalysis
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MoveAnalysis.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MoveAnalysis;
+                    })();
+    
+                    v1.MoveAnalysisResult = (function() {
+    
+                        /**
+                         * Properties of a MoveAnalysisResult.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IMoveAnalysisResult
+                         * @property {Array.<google.cloud.asset.v1.IMoveImpact>|null} [blockers] MoveAnalysisResult blockers
+                         * @property {Array.<google.cloud.asset.v1.IMoveImpact>|null} [warnings] MoveAnalysisResult warnings
+                         */
+    
+                        /**
+                         * Constructs a new MoveAnalysisResult.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a MoveAnalysisResult.
+                         * @implements IMoveAnalysisResult
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IMoveAnalysisResult=} [properties] Properties to set
+                         */
+                        function MoveAnalysisResult(properties) {
+                            this.blockers = [];
+                            this.warnings = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MoveAnalysisResult blockers.
+                         * @member {Array.<google.cloud.asset.v1.IMoveImpact>} blockers
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @instance
+                         */
+                        MoveAnalysisResult.prototype.blockers = $util.emptyArray;
+    
+                        /**
+                         * MoveAnalysisResult warnings.
+                         * @member {Array.<google.cloud.asset.v1.IMoveImpact>} warnings
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @instance
+                         */
+                        MoveAnalysisResult.prototype.warnings = $util.emptyArray;
+    
+                        /**
+                         * Creates a new MoveAnalysisResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IMoveAnalysisResult=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.MoveAnalysisResult} MoveAnalysisResult instance
+                         */
+                        MoveAnalysisResult.create = function create(properties) {
+                            return new MoveAnalysisResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MoveAnalysisResult message. Does not implicitly {@link google.cloud.asset.v1.MoveAnalysisResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IMoveAnalysisResult} message MoveAnalysisResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveAnalysisResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.blockers != null && message.blockers.length)
+                                for (var i = 0; i < message.blockers.length; ++i)
+                                    $root.google.cloud.asset.v1.MoveImpact.encode(message.blockers[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.warnings != null && message.warnings.length)
+                                for (var i = 0; i < message.warnings.length; ++i)
+                                    $root.google.cloud.asset.v1.MoveImpact.encode(message.warnings[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MoveAnalysisResult message, length delimited. Does not implicitly {@link google.cloud.asset.v1.MoveAnalysisResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @static
+                         * @param {google.cloud.asset.v1.IMoveAnalysisResult} message MoveAnalysisResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveAnalysisResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MoveAnalysisResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.MoveAnalysisResult} MoveAnalysisResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveAnalysisResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.MoveAnalysisResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.blockers && message.blockers.length))
+                                        message.blockers = [];
+                                    message.blockers.push($root.google.cloud.asset.v1.MoveImpact.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.warnings && message.warnings.length))
+                                        message.warnings = [];
+                                    message.warnings.push($root.google.cloud.asset.v1.MoveImpact.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MoveAnalysisResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.MoveAnalysisResult} MoveAnalysisResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveAnalysisResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MoveAnalysisResult message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MoveAnalysisResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.blockers != null && message.hasOwnProperty("blockers")) {
+                                if (!Array.isArray(message.blockers))
+                                    return "blockers: array expected";
+                                for (var i = 0; i < message.blockers.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.MoveImpact.verify(message.blockers[i]);
+                                    if (error)
+                                        return "blockers." + error;
+                                }
+                            }
+                            if (message.warnings != null && message.hasOwnProperty("warnings")) {
+                                if (!Array.isArray(message.warnings))
+                                    return "warnings: array expected";
+                                for (var i = 0; i < message.warnings.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.MoveImpact.verify(message.warnings[i]);
+                                    if (error)
+                                        return "warnings." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MoveAnalysisResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.MoveAnalysisResult} MoveAnalysisResult
+                         */
+                        MoveAnalysisResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.MoveAnalysisResult)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.MoveAnalysisResult();
+                            if (object.blockers) {
+                                if (!Array.isArray(object.blockers))
+                                    throw TypeError(".google.cloud.asset.v1.MoveAnalysisResult.blockers: array expected");
+                                message.blockers = [];
+                                for (var i = 0; i < object.blockers.length; ++i) {
+                                    if (typeof object.blockers[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.MoveAnalysisResult.blockers: object expected");
+                                    message.blockers[i] = $root.google.cloud.asset.v1.MoveImpact.fromObject(object.blockers[i]);
+                                }
+                            }
+                            if (object.warnings) {
+                                if (!Array.isArray(object.warnings))
+                                    throw TypeError(".google.cloud.asset.v1.MoveAnalysisResult.warnings: array expected");
+                                message.warnings = [];
+                                for (var i = 0; i < object.warnings.length; ++i) {
+                                    if (typeof object.warnings[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.MoveAnalysisResult.warnings: object expected");
+                                    message.warnings[i] = $root.google.cloud.asset.v1.MoveImpact.fromObject(object.warnings[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MoveAnalysisResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @static
+                         * @param {google.cloud.asset.v1.MoveAnalysisResult} message MoveAnalysisResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MoveAnalysisResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.blockers = [];
+                                object.warnings = [];
+                            }
+                            if (message.blockers && message.blockers.length) {
+                                object.blockers = [];
+                                for (var j = 0; j < message.blockers.length; ++j)
+                                    object.blockers[j] = $root.google.cloud.asset.v1.MoveImpact.toObject(message.blockers[j], options);
+                            }
+                            if (message.warnings && message.warnings.length) {
+                                object.warnings = [];
+                                for (var j = 0; j < message.warnings.length; ++j)
+                                    object.warnings[j] = $root.google.cloud.asset.v1.MoveImpact.toObject(message.warnings[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MoveAnalysisResult to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.MoveAnalysisResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MoveAnalysisResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MoveAnalysisResult;
+                    })();
+    
+                    v1.MoveImpact = (function() {
+    
+                        /**
+                         * Properties of a MoveImpact.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IMoveImpact
+                         * @property {string|null} [detail] MoveImpact detail
+                         */
+    
+                        /**
+                         * Constructs a new MoveImpact.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a MoveImpact.
+                         * @implements IMoveImpact
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IMoveImpact=} [properties] Properties to set
+                         */
+                        function MoveImpact(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MoveImpact detail.
+                         * @member {string} detail
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @instance
+                         */
+                        MoveImpact.prototype.detail = "";
+    
+                        /**
+                         * Creates a new MoveImpact instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @static
+                         * @param {google.cloud.asset.v1.IMoveImpact=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.MoveImpact} MoveImpact instance
+                         */
+                        MoveImpact.create = function create(properties) {
+                            return new MoveImpact(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MoveImpact message. Does not implicitly {@link google.cloud.asset.v1.MoveImpact.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @static
+                         * @param {google.cloud.asset.v1.IMoveImpact} message MoveImpact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveImpact.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.detail != null && Object.hasOwnProperty.call(message, "detail"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.detail);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MoveImpact message, length delimited. Does not implicitly {@link google.cloud.asset.v1.MoveImpact.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @static
+                         * @param {google.cloud.asset.v1.IMoveImpact} message MoveImpact message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MoveImpact.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MoveImpact message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.MoveImpact} MoveImpact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveImpact.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.MoveImpact();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.detail = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MoveImpact message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.MoveImpact} MoveImpact
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MoveImpact.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MoveImpact message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MoveImpact.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.detail != null && message.hasOwnProperty("detail"))
+                                if (!$util.isString(message.detail))
+                                    return "detail: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MoveImpact message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.MoveImpact} MoveImpact
+                         */
+                        MoveImpact.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.MoveImpact)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.MoveImpact();
+                            if (object.detail != null)
+                                message.detail = String(object.detail);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MoveImpact message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @static
+                         * @param {google.cloud.asset.v1.MoveImpact} message MoveImpact
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MoveImpact.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.detail = "";
+                            if (message.detail != null && message.hasOwnProperty("detail"))
+                                object.detail = message.detail;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MoveImpact to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.MoveImpact
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MoveImpact.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MoveImpact;
+                    })();
+    
                     /**
                      * ContentType enum.
                      * @name google.cloud.asset.v1.ContentType
@@ -11461,6 +12894,8 @@
                          * @property {string|null} [state] ResourceSearchResult state
                          * @property {google.protobuf.IStruct|null} [additionalAttributes] ResourceSearchResult additionalAttributes
                          * @property {string|null} [parentFullResourceName] ResourceSearchResult parentFullResourceName
+                         * @property {Array.<google.cloud.asset.v1.IVersionedResource>|null} [versionedResources] ResourceSearchResult versionedResources
+                         * @property {Array.<google.cloud.asset.v1.IAttachedResource>|null} [attachedResources] ResourceSearchResult attachedResources
                          * @property {string|null} [parentAssetType] ResourceSearchResult parentAssetType
                          */
     
@@ -11476,6 +12911,8 @@
                             this.folders = [];
                             this.labels = {};
                             this.networkTags = [];
+                            this.versionedResources = [];
+                            this.attachedResources = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -11611,6 +13048,22 @@
                         ResourceSearchResult.prototype.parentFullResourceName = "";
     
                         /**
+                         * ResourceSearchResult versionedResources.
+                         * @member {Array.<google.cloud.asset.v1.IVersionedResource>} versionedResources
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.versionedResources = $util.emptyArray;
+    
+                        /**
+                         * ResourceSearchResult attachedResources.
+                         * @member {Array.<google.cloud.asset.v1.IAttachedResource>} attachedResources
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.attachedResources = $util.emptyArray;
+    
+                        /**
                          * ResourceSearchResult parentAssetType.
                          * @member {string} parentAssetType
                          * @memberof google.cloud.asset.v1.ResourceSearchResult
@@ -11670,6 +13123,9 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.state);
+                            if (message.versionedResources != null && message.versionedResources.length)
+                                for (var i = 0; i < message.versionedResources.length; ++i)
+                                    $root.google.cloud.asset.v1.VersionedResource.encode(message.versionedResources[i], writer.uint32(/* id 16, wireType 2 =*/130).fork()).ldelim();
                             if (message.folders != null && message.folders.length)
                                 for (var i = 0; i < message.folders.length; ++i)
                                     writer.uint32(/* id 17, wireType 2 =*/138).string(message.folders[i]);
@@ -11677,6 +13133,9 @@
                                 writer.uint32(/* id 18, wireType 2 =*/146).string(message.organization);
                             if (message.parentFullResourceName != null && Object.hasOwnProperty.call(message, "parentFullResourceName"))
                                 writer.uint32(/* id 19, wireType 2 =*/154).string(message.parentFullResourceName);
+                            if (message.attachedResources != null && message.attachedResources.length)
+                                for (var i = 0; i < message.attachedResources.length; ++i)
+                                    $root.google.cloud.asset.v1.AttachedResource.encode(message.attachedResources[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                             if (message.parentAssetType != null && Object.hasOwnProperty.call(message, "parentAssetType"))
                                 writer.uint32(/* id 103, wireType 2 =*/826).string(message.parentAssetType);
                             return writer;
@@ -11784,6 +13243,16 @@
                                 case 19:
                                     message.parentFullResourceName = reader.string();
                                     break;
+                                case 16:
+                                    if (!(message.versionedResources && message.versionedResources.length))
+                                        message.versionedResources = [];
+                                    message.versionedResources.push($root.google.cloud.asset.v1.VersionedResource.decode(reader, reader.uint32()));
+                                    break;
+                                case 20:
+                                    if (!(message.attachedResources && message.attachedResources.length))
+                                        message.attachedResources = [];
+                                    message.attachedResources.push($root.google.cloud.asset.v1.AttachedResource.decode(reader, reader.uint32()));
+                                    break;
                                 case 103:
                                     message.parentAssetType = reader.string();
                                     break;
@@ -11889,6 +13358,24 @@
                             if (message.parentFullResourceName != null && message.hasOwnProperty("parentFullResourceName"))
                                 if (!$util.isString(message.parentFullResourceName))
                                     return "parentFullResourceName: string expected";
+                            if (message.versionedResources != null && message.hasOwnProperty("versionedResources")) {
+                                if (!Array.isArray(message.versionedResources))
+                                    return "versionedResources: array expected";
+                                for (var i = 0; i < message.versionedResources.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.VersionedResource.verify(message.versionedResources[i]);
+                                    if (error)
+                                        return "versionedResources." + error;
+                                }
+                            }
+                            if (message.attachedResources != null && message.hasOwnProperty("attachedResources")) {
+                                if (!Array.isArray(message.attachedResources))
+                                    return "attachedResources: array expected";
+                                for (var i = 0; i < message.attachedResources.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.AttachedResource.verify(message.attachedResources[i]);
+                                    if (error)
+                                        return "attachedResources." + error;
+                                }
+                            }
                             if (message.parentAssetType != null && message.hasOwnProperty("parentAssetType"))
                                 if (!$util.isString(message.parentAssetType))
                                     return "parentAssetType: string expected";
@@ -11963,6 +13450,26 @@
                             }
                             if (object.parentFullResourceName != null)
                                 message.parentFullResourceName = String(object.parentFullResourceName);
+                            if (object.versionedResources) {
+                                if (!Array.isArray(object.versionedResources))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.versionedResources: array expected");
+                                message.versionedResources = [];
+                                for (var i = 0; i < object.versionedResources.length; ++i) {
+                                    if (typeof object.versionedResources[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.versionedResources: object expected");
+                                    message.versionedResources[i] = $root.google.cloud.asset.v1.VersionedResource.fromObject(object.versionedResources[i]);
+                                }
+                            }
+                            if (object.attachedResources) {
+                                if (!Array.isArray(object.attachedResources))
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.attachedResources: array expected");
+                                message.attachedResources = [];
+                                for (var i = 0; i < object.attachedResources.length; ++i) {
+                                    if (typeof object.attachedResources[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.attachedResources: object expected");
+                                    message.attachedResources[i] = $root.google.cloud.asset.v1.AttachedResource.fromObject(object.attachedResources[i]);
+                                }
+                            }
                             if (object.parentAssetType != null)
                                 message.parentAssetType = String(object.parentAssetType);
                             return message;
@@ -11983,7 +13490,9 @@
                             var object = {};
                             if (options.arrays || options.defaults) {
                                 object.networkTags = [];
+                                object.versionedResources = [];
                                 object.folders = [];
+                                object.attachedResources = [];
                             }
                             if (options.objects || options.defaults)
                                 object.labels = {};
@@ -12036,6 +13545,11 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = message.state;
+                            if (message.versionedResources && message.versionedResources.length) {
+                                object.versionedResources = [];
+                                for (var j = 0; j < message.versionedResources.length; ++j)
+                                    object.versionedResources[j] = $root.google.cloud.asset.v1.VersionedResource.toObject(message.versionedResources[j], options);
+                            }
                             if (message.folders && message.folders.length) {
                                 object.folders = [];
                                 for (var j = 0; j < message.folders.length; ++j)
@@ -12045,6 +13559,11 @@
                                 object.organization = message.organization;
                             if (message.parentFullResourceName != null && message.hasOwnProperty("parentFullResourceName"))
                                 object.parentFullResourceName = message.parentFullResourceName;
+                            if (message.attachedResources && message.attachedResources.length) {
+                                object.attachedResources = [];
+                                for (var j = 0; j < message.attachedResources.length; ++j)
+                                    object.attachedResources[j] = $root.google.cloud.asset.v1.AttachedResource.toObject(message.attachedResources[j], options);
+                            }
                             if (message.parentAssetType != null && message.hasOwnProperty("parentAssetType"))
                                 object.parentAssetType = message.parentAssetType;
                             return object;
@@ -12062,6 +13581,452 @@
                         };
     
                         return ResourceSearchResult;
+                    })();
+    
+                    v1.VersionedResource = (function() {
+    
+                        /**
+                         * Properties of a VersionedResource.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IVersionedResource
+                         * @property {string|null} [version] VersionedResource version
+                         * @property {google.protobuf.IStruct|null} [resource] VersionedResource resource
+                         */
+    
+                        /**
+                         * Constructs a new VersionedResource.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a VersionedResource.
+                         * @implements IVersionedResource
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IVersionedResource=} [properties] Properties to set
+                         */
+                        function VersionedResource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * VersionedResource version.
+                         * @member {string} version
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @instance
+                         */
+                        VersionedResource.prototype.version = "";
+    
+                        /**
+                         * VersionedResource resource.
+                         * @member {google.protobuf.IStruct|null|undefined} resource
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @instance
+                         */
+                        VersionedResource.prototype.resource = null;
+    
+                        /**
+                         * Creates a new VersionedResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.IVersionedResource=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.VersionedResource} VersionedResource instance
+                         */
+                        VersionedResource.create = function create(properties) {
+                            return new VersionedResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified VersionedResource message. Does not implicitly {@link google.cloud.asset.v1.VersionedResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.IVersionedResource} message VersionedResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VersionedResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.version);
+                            if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                $root.google.protobuf.Struct.encode(message.resource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified VersionedResource message, length delimited. Does not implicitly {@link google.cloud.asset.v1.VersionedResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.IVersionedResource} message VersionedResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        VersionedResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a VersionedResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.VersionedResource} VersionedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VersionedResource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.VersionedResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.version = reader.string();
+                                    break;
+                                case 2:
+                                    message.resource = $root.google.protobuf.Struct.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a VersionedResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.VersionedResource} VersionedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        VersionedResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a VersionedResource message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        VersionedResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.resource != null && message.hasOwnProperty("resource")) {
+                                var error = $root.google.protobuf.Struct.verify(message.resource);
+                                if (error)
+                                    return "resource." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a VersionedResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.VersionedResource} VersionedResource
+                         */
+                        VersionedResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.VersionedResource)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.VersionedResource();
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.resource != null) {
+                                if (typeof object.resource !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.VersionedResource.resource: object expected");
+                                message.resource = $root.google.protobuf.Struct.fromObject(object.resource);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a VersionedResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.VersionedResource} message VersionedResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        VersionedResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.version = "";
+                                object.resource = null;
+                            }
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                object.resource = $root.google.protobuf.Struct.toObject(message.resource, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this VersionedResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.VersionedResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        VersionedResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return VersionedResource;
+                    })();
+    
+                    v1.AttachedResource = (function() {
+    
+                        /**
+                         * Properties of an AttachedResource.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IAttachedResource
+                         * @property {string|null} [assetType] AttachedResource assetType
+                         * @property {Array.<google.cloud.asset.v1.IVersionedResource>|null} [versionedResources] AttachedResource versionedResources
+                         */
+    
+                        /**
+                         * Constructs a new AttachedResource.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents an AttachedResource.
+                         * @implements IAttachedResource
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IAttachedResource=} [properties] Properties to set
+                         */
+                        function AttachedResource(properties) {
+                            this.versionedResources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * AttachedResource assetType.
+                         * @member {string} assetType
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @instance
+                         */
+                        AttachedResource.prototype.assetType = "";
+    
+                        /**
+                         * AttachedResource versionedResources.
+                         * @member {Array.<google.cloud.asset.v1.IVersionedResource>} versionedResources
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @instance
+                         */
+                        AttachedResource.prototype.versionedResources = $util.emptyArray;
+    
+                        /**
+                         * Creates a new AttachedResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.IAttachedResource=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.AttachedResource} AttachedResource instance
+                         */
+                        AttachedResource.create = function create(properties) {
+                            return new AttachedResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified AttachedResource message. Does not implicitly {@link google.cloud.asset.v1.AttachedResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.IAttachedResource} message AttachedResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AttachedResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.assetType != null && Object.hasOwnProperty.call(message, "assetType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.assetType);
+                            if (message.versionedResources != null && message.versionedResources.length)
+                                for (var i = 0; i < message.versionedResources.length; ++i)
+                                    $root.google.cloud.asset.v1.VersionedResource.encode(message.versionedResources[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified AttachedResource message, length delimited. Does not implicitly {@link google.cloud.asset.v1.AttachedResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.IAttachedResource} message AttachedResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        AttachedResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an AttachedResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.AttachedResource} AttachedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AttachedResource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.AttachedResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.assetType = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.versionedResources && message.versionedResources.length))
+                                        message.versionedResources = [];
+                                    message.versionedResources.push($root.google.cloud.asset.v1.VersionedResource.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an AttachedResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.AttachedResource} AttachedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        AttachedResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an AttachedResource message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        AttachedResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                if (!$util.isString(message.assetType))
+                                    return "assetType: string expected";
+                            if (message.versionedResources != null && message.hasOwnProperty("versionedResources")) {
+                                if (!Array.isArray(message.versionedResources))
+                                    return "versionedResources: array expected";
+                                for (var i = 0; i < message.versionedResources.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.VersionedResource.verify(message.versionedResources[i]);
+                                    if (error)
+                                        return "versionedResources." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an AttachedResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.AttachedResource} AttachedResource
+                         */
+                        AttachedResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.AttachedResource)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.AttachedResource();
+                            if (object.assetType != null)
+                                message.assetType = String(object.assetType);
+                            if (object.versionedResources) {
+                                if (!Array.isArray(object.versionedResources))
+                                    throw TypeError(".google.cloud.asset.v1.AttachedResource.versionedResources: array expected");
+                                message.versionedResources = [];
+                                for (var i = 0; i < object.versionedResources.length; ++i) {
+                                    if (typeof object.versionedResources[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.AttachedResource.versionedResources: object expected");
+                                    message.versionedResources[i] = $root.google.cloud.asset.v1.VersionedResource.fromObject(object.versionedResources[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an AttachedResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.AttachedResource} message AttachedResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        AttachedResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.versionedResources = [];
+                            if (options.defaults)
+                                object.assetType = "";
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                object.assetType = message.assetType;
+                            if (message.versionedResources && message.versionedResources.length) {
+                                object.versionedResources = [];
+                                for (var j = 0; j < message.versionedResources.length; ++j)
+                                    object.versionedResources[j] = $root.google.cloud.asset.v1.VersionedResource.toObject(message.versionedResources[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this AttachedResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.AttachedResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        AttachedResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return AttachedResource;
                     })();
     
                     v1.IamPolicySearchResult = (function() {
@@ -42523,225 +44488,6 @@
                 return Timestamp;
             })();
     
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Any;
-            })();
-    
             protobuf.Struct = (function() {
     
                 /**
@@ -43554,6 +45300,225 @@
                 };
     
                 return ListValue;
+            })();
+    
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type_url = reader.string();
+                            break;
+                        case 2:
+                            message.value = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Any;
             })();
     
             protobuf.Duration = (function() {
