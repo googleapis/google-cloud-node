@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.7](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.6...v1.0.7) (2021-08-13)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#66](https://www.github.com/googleapis/nodejs-domains/issues/66)) ([ec3edb2](https://www.github.com/googleapis/nodejs-domains/commit/ec3edb2750b7e393d8452c42f36a20a1c4fc8778))
+
 ### [1.0.6](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.5...v1.0.6) (2021-07-16)
 
 
