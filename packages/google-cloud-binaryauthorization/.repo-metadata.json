@@ -1,5 +1,5 @@
 {
-  "client_documentation": "https://googleapis.dev/nodejs/binaryauthorization/latest/",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/binary-authorization/latest",
   "api_id": "binaryauthorization.googleapis.com",
   "distribution_name": "@google-cloud/binary-authorization",
   "release_level": "beta",
