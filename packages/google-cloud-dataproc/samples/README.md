@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Create Cluster
 
-View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/createCluster.js).
+View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/main/samples/createCluster.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/createCluster.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Instantiate an inline workflow template
 
-View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/instantiateInlineWorkflowTemplate.js).
+View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/main/samples/instantiateInlineWorkflowTemplate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/instantiateInlineWorkflowTemplate.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Submit Job
 
-View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/master/samples/submitJob.js).
+View the [source code](https://github.com/googleapis/nodejs-dataproc/blob/main/samples/submitJob.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dataproc&page=editor&open_in_editor=samples/submitJob.js,samples/README.md)
 
