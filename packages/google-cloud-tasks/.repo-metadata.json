@@ -7,7 +7,7 @@
   "language": "nodejs",
   "requires_billing": true,
   "issue_tracker": "https://issuetracker.google.com/savedsearches/5433985",
-  "client_documentation": "https://googleapis.dev/nodejs/tasks/latest",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/tasks/latest",
   "name": "tasks",
   "name_pretty": "Cloud Tasks",
   "api_id": "tasks.googleapis.com",
