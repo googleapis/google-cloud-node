@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-dms/compare/v1.0.3...v1.0.4) (2021-08-13)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#35](https://www.github.com/googleapis/nodejs-dms/issues/35)) ([7a25f92](https://www.github.com/googleapis/nodejs-dms/commit/7a25f9251f1877877e79f4477c073952de29348e))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-dms/compare/v1.0.2...v1.0.3) (2021-07-16)
 
 
