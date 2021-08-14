@@ -42,7 +42,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Create Instance
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createInstance.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/createInstance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstance.js,samples/README.md)
 
@@ -59,7 +59,7 @@ __Usage:__
 
 ### Delete Instance
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/deleteInstance.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/deleteInstance.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/deleteInstance.js,samples/README.md)
 
@@ -76,7 +76,7 @@ __Usage:__
 
 ### Disable Usage Export
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/disableUsageExport.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/disableUsageExport.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/disableUsageExport.js,samples/README.md)
 
@@ -93,7 +93,7 @@ __Usage:__
 
 ### Get Usage Export Bucket
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/getUsageExportBucket.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/getUsageExportBucket.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/getUsageExportBucket.js,samples/README.md)
 
@@ -110,7 +110,7 @@ __Usage:__
 
 ### List All Instances
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listAllInstances.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/listAllInstances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listAllInstances.js,samples/README.md)
 
@@ -127,7 +127,7 @@ __Usage:__
 
 ### List Images
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listImages.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/listImages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImages.js,samples/README.md)
 
@@ -144,7 +144,7 @@ __Usage:__
 
 ### List Images By Page
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listImagesByPage.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/listImagesByPage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImagesByPage.js,samples/README.md)
 
@@ -161,7 +161,7 @@ __Usage:__
 
 ### List Instances
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listInstances.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/listInstances.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listInstances.js,samples/README.md)
 
@@ -178,7 +178,7 @@ __Usage:__
 
 ### Mailjet
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/mailjet.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/mailjet.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/mailjet.js,samples/README.md)
 
@@ -195,7 +195,7 @@ __Usage:__
 
 ### Sendgrid
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/sendgrid.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/sendgrid.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/sendgrid.js,samples/README.md)
 
@@ -212,7 +212,7 @@ __Usage:__
 
 ### Set Usage Export Bucket
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/setUsageExportBucket.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/setUsageExportBucket.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/setUsageExportBucket.js,samples/README.md)
 
@@ -229,7 +229,7 @@ __Usage:__
 
 ### Wait For Operation
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/waitForOperation.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/waitForOperation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/waitForOperation.js,samples/README.md)
 
