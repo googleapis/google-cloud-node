@@ -46,7 +46,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 Creates a Note with specified ID
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/createNote.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/createNote.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/createNote.js,samples/README.md)
 
@@ -65,7 +65,7 @@ __Usage:__
 
 Creates an Occurrence of a Note and attaches it as a metadata to an image
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/createOccurrence.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/createOccurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/createOccurrence.js,samples/README.md)
 
@@ -84,7 +84,7 @@ __Usage:__
 
 Deletes a specified Note
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/deleteNote.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/deleteNote.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/deleteNote.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 Deletes a specified Occurrence
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/deleteOccurrence.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/deleteOccurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/deleteOccurrence.js,samples/README.md)
 
@@ -122,7 +122,7 @@ __Usage:__
 
 Gets all Discovery Occurrences attached to specified image
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/getDiscoveryInfo.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/getDiscoveryInfo.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/getDiscoveryInfo.js,samples/README.md)
 
@@ -141,7 +141,7 @@ __Usage:__
 
 Retrieves and prints a specified note
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/getNote.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/getNote.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/getNote.js,samples/README.md)
 
@@ -160,7 +160,7 @@ __Usage:__
 
 Retrieves and prints a specified Occurrence
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/getOccurrence.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/getOccurrence.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/getOccurrence.js,samples/README.md)
 
@@ -179,7 +179,7 @@ __Usage:__
 
 Retrieves all Vulnerability Occurrences of High Severity from Specified Image
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/highVulnerabilitiesForImage.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/highVulnerabilitiesForImage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/highVulnerabilitiesForImage.js,samples/README.md)
 
@@ -198,7 +198,7 @@ __Usage:__
 
 Polls a specified PubSub subscription for Occurrences.  Requires a subscription to a topic named 'container-analysis-occurrences-v1'
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/occurrencePubSub.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/occurrencePubSub.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/occurrencePubSub.js,samples/README.md)
 
@@ -217,7 +217,7 @@ __Usage:__
 
 Retrieves all Occurrences attached to the metadata of a specified image
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/occurrencesForImage.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/occurrencesForImage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/occurrencesForImage.js,samples/README.md)
 
@@ -236,7 +236,7 @@ __Usage:__
 
 Retrieves all Occurrences of a specified Note
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/occurrencesForNote.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/occurrencesForNote.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/occurrencesForNote.js,samples/README.md)
 
@@ -255,7 +255,7 @@ __Usage:__
 
 Waits for a Discovery Occurrence to reach a terminal state
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/pollDiscoveryOccurrenceFinished.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/pollDiscoveryOccurrenceFinished.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/pollDiscoveryOccurrenceFinished.js,samples/README.md)
 
@@ -274,7 +274,7 @@ __Usage:__
 
 fetching an instance of Grafeas and creating a note.
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -293,7 +293,7 @@ __Usage:__
 
 Retrieves all Vulnerability Occurrences attached to a specified image
 
-View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/master/samples/vulnerabilityOccurrencesForImage.js).
+View the [source code](https://github.com/googleapis/nodejs-containeranalysis/blob/main/samples/vulnerabilityOccurrencesForImage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-containeranalysis&page=editor&open_in_editor=samples/vulnerabilityOccurrencesForImage.js,samples/README.md)
 
