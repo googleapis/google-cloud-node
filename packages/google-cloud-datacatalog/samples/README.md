@@ -35,7 +35,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Create Custom Entry
 
-View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/master/samples/createCustomEntry.js).
+View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/main/samples/createCustomEntry.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datacatalog&page=editor&open_in_editor=samples/createCustomEntry.js,samples/README.md)
 
@@ -52,7 +52,7 @@ __Usage:__
 
 ### Create Fileset
 
-View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/master/samples/createFileset.js).
+View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/main/samples/createFileset.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datacatalog&page=editor&open_in_editor=samples/createFileset.js,samples/README.md)
 
@@ -69,7 +69,7 @@ __Usage:__
 
 ### Grant Tag Template User Role
 
-View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/master/samples/grantTagTemplateUserRole.js).
+View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/main/samples/grantTagTemplateUserRole.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datacatalog&page=editor&open_in_editor=samples/grantTagTemplateUserRole.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datacatalog&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Search Assets
 
-View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/master/samples/searchAssets.js).
+View the [source code](https://github.com/googleapis/nodejs-datacatalog/blob/main/samples/searchAssets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-datacatalog&page=editor&open_in_editor=samples/searchAssets.js,samples/README.md)
 
