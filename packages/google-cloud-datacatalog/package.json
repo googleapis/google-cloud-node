@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-datacatalog",
   "name": "@google-cloud/datacatalog",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "author": "Google LLC",
   "description": "Google Cloud Data Catalog API client for Node.js",
   "main": "build/src/index.js",

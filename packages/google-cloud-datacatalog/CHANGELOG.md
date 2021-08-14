@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.4.0...v2.4.1) (2021-08-14)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#285](https://www.github.com/googleapis/nodejs-datacatalog/issues/285)) ([b096a25](https://www.github.com/googleapis/nodejs-datacatalog/commit/b096a25ee41b61feb28e262e0024f743f88a6444))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.3.4...v2.4.0) (2021-08-05)
 
 
