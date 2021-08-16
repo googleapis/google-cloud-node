@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.16.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.15.5...v3.16.0) (2021-08-16)
+
+
+### Features
+
+* Release of relationships in v1, Add content type Relationship to support relationship export ([#537](https://www.github.com/googleapis/nodejs-asset/issues/537)) ([873aae6](https://www.github.com/googleapis/nodejs-asset/commit/873aae6f9b846a16b5695b692e8ad668d684dc6c))
+
 ### [3.15.5](https://www.github.com/googleapis/nodejs-asset/compare/v3.15.4...v3.15.5) (2021-08-13)
 
 
