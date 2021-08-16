@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.3.2...v2.4.0) (2021-08-16)
+
+
+### Features
+
+* Add ability to configure BuildTriggers to create Builds that require approval before executing and ApproveBuild API to approve or reject pending Builds ([#267](https://www.github.com/googleapis/nodejs-cloudbuild/issues/267)) ([18ec067](https://www.github.com/googleapis/nodejs-cloudbuild/commit/18ec067ac1e112836c5d56747dda89e04f87c481))
+
 ### [2.3.2](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.3.1...v2.3.2) (2021-08-16)
 
 
