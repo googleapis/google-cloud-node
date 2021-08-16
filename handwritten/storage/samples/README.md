@@ -108,6 +108,7 @@ objects to users via direct download.
   * [Set Public Access Prevention Unspecified](#set-public-access-prevention-unspecified)
   * [Set Retention Policy](#set-retention-policy)
   * [Set Temporary Hold](#set-temporary-hold)
+  * [Stream File Download](#stream-file-download)
   * [Stream File Upload](#stream-file-upload)
   * [Upload a directory to a bucket.](#upload-a-directory-to-a-bucket.)
   * [Upload Encrypted File](#upload-encrypted-file)
@@ -1707,6 +1708,23 @@ __Usage:__
 
 
 `node samples/setTemporaryHold.js`
+
+
+-----
+
+
+
+
+### Stream File Download
+
+View the [source code](https://github.com/googleapis/nodejs-storage/blob/master/samples/streamFileDownload.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-storage&page=editor&open_in_editor=samples/streamFileDownload.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/streamFileDownload.js`
 
 
 -----

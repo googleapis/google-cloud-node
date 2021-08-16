@@ -143,6 +143,19 @@ describe('file', () => {
     fs.statSync(downloadFilePath);
   });
 
+  it('should download a file using a stream', () => {
+    const output = execSync(
+      `node streamFileDownload.js ${bucketName} ${fileName} ${downloadFilePath}`
+    );
+    assert.match(
+      output,
+      new RegExp(
+        `gs://${bucketName}/${fileName} downloaded to ${downloadFilePath}.`
+      )
+    );
+    fs.statSync(downloadFilePath);
+  });
+
   it('should move a file', async () => {
     const output = execSync(
       `node moveFile.js ${bucketName} ${fileName} ${movedFileName}`
