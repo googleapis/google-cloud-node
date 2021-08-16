@@ -303,6 +303,11 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "relationshipTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
                         }
                       }
                     },
@@ -352,6 +357,11 @@
                         "pageToken": {
                           "type": "string",
                           "id": 6
+                        },
+                        "relationshipTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -397,6 +407,14 @@
                         "readTimeWindow": {
                           "type": "TimeWindow",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "relationshipTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -671,6 +689,11 @@
                         "condition": {
                           "type": "google.type.Expr",
                           "id": 6
+                        },
+                        "relationshipTypes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -1195,7 +1218,8 @@
                         "IAM_POLICY": 2,
                         "ORG_POLICY": 4,
                         "ACCESS_POLICY": 5,
-                        "OS_INVENTORY": 6
+                        "OS_INVENTORY": 6,
+                        "RELATIONSHIP": 7
                       }
                     },
                     "TemporalAsset": {
@@ -1301,6 +1325,10 @@
                           "type": "google.cloud.osconfig.v1.Inventory",
                           "id": 12
                         },
+                        "relatedAssets": {
+                          "type": "RelatedAssets",
+                          "id": 13
+                        },
                         "ancestors": {
                           "rule": "repeated",
                           "type": "string",
@@ -1337,6 +1365,59 @@
                         "location": {
                           "type": "string",
                           "id": 8
+                        }
+                      }
+                    },
+                    "RelatedAssets": {
+                      "fields": {
+                        "relationshipAttributes": {
+                          "type": "RelationshipAttributes",
+                          "id": 1
+                        },
+                        "assets": {
+                          "rule": "repeated",
+                          "type": "RelatedAsset",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "RelationshipAttributes": {
+                      "fields": {
+                        "type": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "sourceResourceType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "targetResourceType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "action": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "RelatedAsset": {
+                      "fields": {
+                        "asset": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "cloudasset.googleapis.com/Asset"
+                          }
+                        },
+                        "assetType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "ancestors": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },
@@ -4467,6 +4548,18 @@
                 }
               }
             },
+            "Any": {
+              "fields": {
+                "type_url": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "type": "bytes",
+                  "id": 2
+                }
+              }
+            },
             "Struct": {
               "fields": {
                 "fields": {
@@ -4527,18 +4620,6 @@
                   "rule": "repeated",
                   "type": "Value",
                   "id": 1
-                }
-              }
-            },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
                 }
               }
             },

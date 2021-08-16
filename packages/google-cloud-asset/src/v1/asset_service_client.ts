@@ -455,6 +455,23 @@ export class AssetServiceClient {
    *   If start_time is not set, the snapshot of the assets at end_time will be
    *   returned. The returned results contain all temporal assets whose time
    *   window overlap with read_time_window.
+   * @param {string[]} [request.relationshipTypes]
+   *   Optional. A list of relationship types to output, for example:
+   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+   *   content_type=RELATIONSHIP.
+   *   * If specified:
+   *   it outputs specified relationships' history on the [asset_names]. It
+   *   returns an error if any of the [relationship_types] doesn't belong to the
+   *   supported relationship types of the [asset_names] or if any of the
+   *   [asset_names]'s types doesn't belong to the source types of the
+   *   [relationship_types].
+   *   * Otherwise:
+   *   it outputs the supported relationships' history on the [asset_names] or
+   *   returns an error if any of the [asset_names]'s types has no relationship
+   *   support.
+   *   See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+   *   supported asset types and relationship types.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1235,6 +1252,22 @@ export class AssetServiceClient {
    *   returned.
    * @param {google.cloud.asset.v1.OutputConfig} request.outputConfig
    *   Required. Output configuration indicating where the results will be output to.
+   * @param {string[]} request.relationshipTypes
+   *   A list of relationship types to export, for example:
+   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+   *   content_type=RELATIONSHIP.
+   *   * If specified:
+   *   it snapshots specified relationships. It returns an error if
+   *   any of the [relationship_types] doesn't belong to the supported
+   *   relationship types of the [asset_types] or if any of the [asset_types]
+   *   doesn't belong to the source types of the [relationship_types].
+   *   * Otherwise:
+   *   it snapshots the supported relationships for all [asset_types] or returns
+   *   an error if any of the [asset_types] has no relationship support.
+   *   An unspecified asset types field means all supported asset_types.
+   *   See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+   *   supported asset types and relationship types.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1561,6 +1594,22 @@ export class AssetServiceClient {
    *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
    *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
    *   prior `ListAssets` call, and the API should return the next page of assets.
+   * @param {string[]} request.relationshipTypes
+   *   A list of relationship types to output, for example:
+   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+   *   content_type=RELATIONSHIP.
+   *   * If specified:
+   *   it snapshots specified relationships. It returns an error if
+   *   any of the [relationship_types] doesn't belong to the supported
+   *   relationship types of the [asset_types] or if any of the [asset_types]
+   *   doesn't belong to the source types of the [relationship_types].
+   *   * Otherwise:
+   *   it snapshots the supported relationships for all [asset_types] or returns
+   *   an error if any of the [asset_types] has no relationship support.
+   *   An unspecified asset types field means all supported asset_types.
+   *   See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+   *   for all supported asset types and relationship types.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1658,6 +1707,22 @@ export class AssetServiceClient {
    *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
    *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
    *   prior `ListAssets` call, and the API should return the next page of assets.
+   * @param {string[]} request.relationshipTypes
+   *   A list of relationship types to output, for example:
+   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+   *   content_type=RELATIONSHIP.
+   *   * If specified:
+   *   it snapshots specified relationships. It returns an error if
+   *   any of the [relationship_types] doesn't belong to the supported
+   *   relationship types of the [asset_types] or if any of the [asset_types]
+   *   doesn't belong to the source types of the [relationship_types].
+   *   * Otherwise:
+   *   it snapshots the supported relationships for all [asset_types] or returns
+   *   an error if any of the [asset_types] has no relationship support.
+   *   An unspecified asset types field means all supported asset_types.
+   *   See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+   *   for all supported asset types and relationship types.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1737,6 +1802,22 @@ export class AssetServiceClient {
    *   The `next_page_token` returned from the previous `ListAssetsResponse`, or
    *   unspecified for the first `ListAssetsRequest`. It is a continuation of a
    *   prior `ListAssets` call, and the API should return the next page of assets.
+   * @param {string[]} request.relationshipTypes
+   *   A list of relationship types to output, for example:
+   *   `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
+   *   content_type=RELATIONSHIP.
+   *   * If specified:
+   *   it snapshots specified relationships. It returns an error if
+   *   any of the [relationship_types] doesn't belong to the supported
+   *   relationship types of the [asset_types] or if any of the [asset_types]
+   *   doesn't belong to the source types of the [relationship_types].
+   *   * Otherwise:
+   *   it snapshots the supported relationships for all [asset_types] or returns
+   *   an error if any of the [asset_types] has no relationship support.
+   *   An unspecified asset types field means all supported asset_types.
+   *   See [Introduction to Cloud Asset
+   *   Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+   *   for all supported asset types and relationship types.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}
