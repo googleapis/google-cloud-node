@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/container.svg)](https://www.npmjs.org/package/@google-cloud/container)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloud-container/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloud-container)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-cloud-container/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-cloud-container)
 
 
 
@@ -18,7 +18,7 @@ building and managing container based applications, powered by the open source K
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-cloud-container/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-cloud-container/blob/main/CHANGELOG.md).
 
 * [Kubernetes Engine Cluster Manager API Node.js Client API Reference][client-docs]
 * [Kubernetes Engine Cluster Manager API Documentation][product-docs]
@@ -94,11 +94,11 @@ To run commands against the clusters created, you will need to use the
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-cloud-container/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-cloud-container/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-cloud-container/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-cloud-container&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-cloud-container/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-cloud-container&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -147,19 +147,19 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-cloud-container/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-cloud-container/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
 are generated from a central template. To edit one of these files, make an edit
-to its template in this
-[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
+to its templates in
+[directory](https://github.com/googleapis/synthtool).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-cloud-container/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-cloud-container/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/container/latest
 [product-docs]: https://cloud.google.com/kubernetes-engine
