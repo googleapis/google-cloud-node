@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [4.3.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.2.0...v4.3.0) (2021-08-16)
+
+
+### Features
+
+* expose `Locations` service to get/list avaliable locations of Dialogflow products; fixed some API annotations ([#860](https://www.github.com/googleapis/nodejs-dialogflow/issues/860)) ([05ea702](https://www.github.com/googleapis/nodejs-dialogflow/commit/05ea702372c08d0f0f157419799e59ea983df32a))
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#862](https://www.github.com/googleapis/nodejs-dialogflow/issues/862)) ([ec0635c](https://www.github.com/googleapis/nodejs-dialogflow/commit/ec0635c17384c4fc5661d8a046b50b3fc2920505))
+
 ## [4.2.0](https://www.github.com/googleapis/nodejs-dialogflow/compare/v4.1.4...v4.2.0) (2021-08-10)
 
 
