@@ -12,6 +12,7 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
+  * [Create-agent](#create-agent)
   * [Detect-intent-audio](#detect-intent-audio)
   * [Detect-intent-streaming](#detect-intent-streaming)
   * [Detect-intent-text](#detect-intent-text)
@@ -30,6 +31,23 @@ Before running the samples, make sure you've followed the steps outlined in
 `cd ..`
 
 ## Samples
+
+
+
+### Create-agent
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/create-agent.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/create-agent.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-agent.js`
+
+
+-----
+
 
 
 
