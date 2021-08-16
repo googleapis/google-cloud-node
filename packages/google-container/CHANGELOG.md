@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+### [2.4.3](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.4.2...v2.4.3) (2021-08-16)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#476](https://www.github.com/googleapis/nodejs-cloud-container/issues/476)) ([7440626](https://www.github.com/googleapis/nodejs-cloud-container/commit/7440626c34f9e7dcc16a6e19a71e5db6eee5b6bf))
+
 ### [2.4.2](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.4.1...v2.4.2) (2021-07-16)
 
 
