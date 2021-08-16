@@ -3,7 +3,8 @@
   "skip": [
     "https://codecov.io/gh/googleapis/",
     "www.googleapis.com",
-    "img.shields.io"
+    "img.shields.io",
+    "https://github.com/googleapis/nodejs-dialogflow/blob/master/samples/update-intent.js"
   ],
   "silent": true,
   "concurrency": 10
