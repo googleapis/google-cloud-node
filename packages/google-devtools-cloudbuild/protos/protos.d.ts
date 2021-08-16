@@ -117,6 +117,20 @@ export namespace google {
                     public retryBuild(request: google.devtools.cloudbuild.v1.IRetryBuildRequest): Promise<google.longrunning.Operation>;
 
                     /**
+                     * Calls ApproveBuild.
+                     * @param request ApproveBuildRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public approveBuild(request: google.devtools.cloudbuild.v1.IApproveBuildRequest, callback: google.devtools.cloudbuild.v1.CloudBuild.ApproveBuildCallback): void;
+
+                    /**
+                     * Calls ApproveBuild.
+                     * @param request ApproveBuildRequest message or plain object
+                     * @returns Promise
+                     */
+                    public approveBuild(request: google.devtools.cloudbuild.v1.IApproveBuildRequest): Promise<google.longrunning.Operation>;
+
+                    /**
                      * Calls CreateBuildTrigger.
                      * @param request CreateBuildTriggerRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and BuildTrigger
@@ -321,6 +335,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RetryBuildCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild#approveBuild}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type ApproveBuildCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild#createBuildTrigger}.
@@ -1712,6 +1733,9 @@ export namespace google {
                     /** Build timing */
                     timing?: ({ [k: string]: google.devtools.cloudbuild.v1.ITimeSpan }|null);
 
+                    /** Build approval */
+                    approval?: (google.devtools.cloudbuild.v1.IBuildApproval|null);
+
                     /** Build serviceAccount */
                     serviceAccount?: (string|null);
 
@@ -1805,6 +1829,9 @@ export namespace google {
 
                     /** Build timing. */
                     public timing: { [k: string]: google.devtools.cloudbuild.v1.ITimeSpan };
+
+                    /** Build approval. */
+                    public approval?: (google.devtools.cloudbuild.v1.IBuildApproval|null);
 
                     /** Build serviceAccount. */
                     public serviceAccount: string;
@@ -2111,6 +2138,7 @@ export namespace google {
                     /** Status enum. */
                     enum Status {
                         STATUS_UNKNOWN = 0,
+                        PENDING = 10,
                         QUEUED = 1,
                         WORKING = 2,
                         SUCCESS = 3,
@@ -3711,6 +3739,430 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ApproveBuildRequest. */
+                interface IApproveBuildRequest {
+
+                    /** ApproveBuildRequest name */
+                    name?: (string|null);
+
+                    /** ApproveBuildRequest approvalResult */
+                    approvalResult?: (google.devtools.cloudbuild.v1.IApprovalResult|null);
+                }
+
+                /** Represents an ApproveBuildRequest. */
+                class ApproveBuildRequest implements IApproveBuildRequest {
+
+                    /**
+                     * Constructs a new ApproveBuildRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IApproveBuildRequest);
+
+                    /** ApproveBuildRequest name. */
+                    public name: string;
+
+                    /** ApproveBuildRequest approvalResult. */
+                    public approvalResult?: (google.devtools.cloudbuild.v1.IApprovalResult|null);
+
+                    /**
+                     * Creates a new ApproveBuildRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApproveBuildRequest instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IApproveBuildRequest): google.devtools.cloudbuild.v1.ApproveBuildRequest;
+
+                    /**
+                     * Encodes the specified ApproveBuildRequest message. Does not implicitly {@link google.devtools.cloudbuild.v1.ApproveBuildRequest.verify|verify} messages.
+                     * @param message ApproveBuildRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IApproveBuildRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApproveBuildRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ApproveBuildRequest.verify|verify} messages.
+                     * @param message ApproveBuildRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IApproveBuildRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApproveBuildRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApproveBuildRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.ApproveBuildRequest;
+
+                    /**
+                     * Decodes an ApproveBuildRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApproveBuildRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.ApproveBuildRequest;
+
+                    /**
+                     * Verifies an ApproveBuildRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApproveBuildRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApproveBuildRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.ApproveBuildRequest;
+
+                    /**
+                     * Creates a plain object from an ApproveBuildRequest message. Also converts values to other types if specified.
+                     * @param message ApproveBuildRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.ApproveBuildRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApproveBuildRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BuildApproval. */
+                interface IBuildApproval {
+
+                    /** BuildApproval state */
+                    state?: (google.devtools.cloudbuild.v1.BuildApproval.State|keyof typeof google.devtools.cloudbuild.v1.BuildApproval.State|null);
+
+                    /** BuildApproval config */
+                    config?: (google.devtools.cloudbuild.v1.IApprovalConfig|null);
+
+                    /** BuildApproval result */
+                    result?: (google.devtools.cloudbuild.v1.IApprovalResult|null);
+                }
+
+                /** Represents a BuildApproval. */
+                class BuildApproval implements IBuildApproval {
+
+                    /**
+                     * Constructs a new BuildApproval.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IBuildApproval);
+
+                    /** BuildApproval state. */
+                    public state: (google.devtools.cloudbuild.v1.BuildApproval.State|keyof typeof google.devtools.cloudbuild.v1.BuildApproval.State);
+
+                    /** BuildApproval config. */
+                    public config?: (google.devtools.cloudbuild.v1.IApprovalConfig|null);
+
+                    /** BuildApproval result. */
+                    public result?: (google.devtools.cloudbuild.v1.IApprovalResult|null);
+
+                    /**
+                     * Creates a new BuildApproval instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BuildApproval instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IBuildApproval): google.devtools.cloudbuild.v1.BuildApproval;
+
+                    /**
+                     * Encodes the specified BuildApproval message. Does not implicitly {@link google.devtools.cloudbuild.v1.BuildApproval.verify|verify} messages.
+                     * @param message BuildApproval message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IBuildApproval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BuildApproval message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.BuildApproval.verify|verify} messages.
+                     * @param message BuildApproval message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IBuildApproval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BuildApproval message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BuildApproval
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.BuildApproval;
+
+                    /**
+                     * Decodes a BuildApproval message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BuildApproval
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.BuildApproval;
+
+                    /**
+                     * Verifies a BuildApproval message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BuildApproval message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BuildApproval
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.BuildApproval;
+
+                    /**
+                     * Creates a plain object from a BuildApproval message. Also converts values to other types if specified.
+                     * @param message BuildApproval
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.BuildApproval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BuildApproval to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace BuildApproval {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PENDING = 1,
+                        APPROVED = 2,
+                        REJECTED = 3,
+                        CANCELLED = 5
+                    }
+                }
+
+                /** Properties of an ApprovalConfig. */
+                interface IApprovalConfig {
+
+                    /** ApprovalConfig approvalRequired */
+                    approvalRequired?: (boolean|null);
+                }
+
+                /** Represents an ApprovalConfig. */
+                class ApprovalConfig implements IApprovalConfig {
+
+                    /**
+                     * Constructs a new ApprovalConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IApprovalConfig);
+
+                    /** ApprovalConfig approvalRequired. */
+                    public approvalRequired: boolean;
+
+                    /**
+                     * Creates a new ApprovalConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApprovalConfig instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IApprovalConfig): google.devtools.cloudbuild.v1.ApprovalConfig;
+
+                    /**
+                     * Encodes the specified ApprovalConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.ApprovalConfig.verify|verify} messages.
+                     * @param message ApprovalConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IApprovalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApprovalConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ApprovalConfig.verify|verify} messages.
+                     * @param message ApprovalConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IApprovalConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApprovalConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApprovalConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.ApprovalConfig;
+
+                    /**
+                     * Decodes an ApprovalConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApprovalConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.ApprovalConfig;
+
+                    /**
+                     * Verifies an ApprovalConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApprovalConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApprovalConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.ApprovalConfig;
+
+                    /**
+                     * Creates a plain object from an ApprovalConfig message. Also converts values to other types if specified.
+                     * @param message ApprovalConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.ApprovalConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApprovalConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ApprovalResult. */
+                interface IApprovalResult {
+
+                    /** ApprovalResult approverAccount */
+                    approverAccount?: (string|null);
+
+                    /** ApprovalResult approvalTime */
+                    approvalTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ApprovalResult decision */
+                    decision?: (google.devtools.cloudbuild.v1.ApprovalResult.Decision|keyof typeof google.devtools.cloudbuild.v1.ApprovalResult.Decision|null);
+
+                    /** ApprovalResult comment */
+                    comment?: (string|null);
+
+                    /** ApprovalResult url */
+                    url?: (string|null);
+                }
+
+                /** Represents an ApprovalResult. */
+                class ApprovalResult implements IApprovalResult {
+
+                    /**
+                     * Constructs a new ApprovalResult.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.devtools.cloudbuild.v1.IApprovalResult);
+
+                    /** ApprovalResult approverAccount. */
+                    public approverAccount: string;
+
+                    /** ApprovalResult approvalTime. */
+                    public approvalTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ApprovalResult decision. */
+                    public decision: (google.devtools.cloudbuild.v1.ApprovalResult.Decision|keyof typeof google.devtools.cloudbuild.v1.ApprovalResult.Decision);
+
+                    /** ApprovalResult comment. */
+                    public comment: string;
+
+                    /** ApprovalResult url. */
+                    public url: string;
+
+                    /**
+                     * Creates a new ApprovalResult instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ApprovalResult instance
+                     */
+                    public static create(properties?: google.devtools.cloudbuild.v1.IApprovalResult): google.devtools.cloudbuild.v1.ApprovalResult;
+
+                    /**
+                     * Encodes the specified ApprovalResult message. Does not implicitly {@link google.devtools.cloudbuild.v1.ApprovalResult.verify|verify} messages.
+                     * @param message ApprovalResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.devtools.cloudbuild.v1.IApprovalResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ApprovalResult message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ApprovalResult.verify|verify} messages.
+                     * @param message ApprovalResult message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.devtools.cloudbuild.v1.IApprovalResult, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ApprovalResult message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ApprovalResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.devtools.cloudbuild.v1.ApprovalResult;
+
+                    /**
+                     * Decodes an ApprovalResult message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ApprovalResult
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.devtools.cloudbuild.v1.ApprovalResult;
+
+                    /**
+                     * Verifies an ApprovalResult message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ApprovalResult message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ApprovalResult
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.devtools.cloudbuild.v1.ApprovalResult;
+
+                    /**
+                     * Creates a plain object from an ApprovalResult message. Also converts values to other types if specified.
+                     * @param message ApprovalResult
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.devtools.cloudbuild.v1.ApprovalResult, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ApprovalResult to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace ApprovalResult {
+
+                    /** Decision enum. */
+                    enum Decision {
+                        DECISION_UNSPECIFIED = 0,
+                        APPROVED = 1,
+                        REJECTED = 2
+                    }
                 }
 
                 /** Properties of a BuildTrigger. */

@@ -60,6 +60,11 @@
                 "retryBuild"
               ]
             },
+            "ApproveBuild": {
+              "methods": [
+                "approveBuild"
+              ]
+            },
             "RunBuildTrigger": {
               "methods": [
                 "runBuildTrigger"
@@ -154,6 +159,11 @@
             "RetryBuild": {
               "methods": [
                 "retryBuild"
+              ]
+            },
+            "ApproveBuild": {
+              "methods": [
+                "approveBuild"
               ]
             },
             "RunBuildTrigger": {

@@ -162,6 +162,40 @@
                             }
                           ]
                         },
+                        "ApproveBuild": {
+                          "requestType": "ApproveBuildRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/builds/*}:approve",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{name=projects/*/locations/*/builds/*}:approve",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "name,approval_result",
+                            "(google.longrunning.operation_info).response_type": "Build",
+                            "(google.longrunning.operation_info).metadata_type": "BuildOperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/builds/*}:approve",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{name=projects/*/locations/*/builds/*}:approve",
+                                  "body": "*"
+                                }
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name,approval_result"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Build",
+                                "metadata_type": "BuildOperationMetadata"
+                              }
+                            }
+                          ]
+                        },
                         "CreateBuildTrigger": {
                           "requestType": "CreateBuildTriggerRequest",
                           "responseType": "BuildTrigger",
@@ -905,6 +939,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "approval": {
+                          "type": "BuildApproval",
+                          "id": 44,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "serviceAccount": {
                           "type": "string",
                           "id": 42,
@@ -983,6 +1024,7 @@
                         "Status": {
                           "values": {
                             "STATUS_UNKNOWN": 0,
+                            "PENDING": 10,
                             "QUEUED": 1,
                             "WORKING": 2,
                             "SUCCESS": 3,
@@ -1276,6 +1318,113 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ApproveBuildRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "approvalResult": {
+                          "type": "ApprovalResult",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "BuildApproval": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "config": {
+                          "type": "ApprovalConfig",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "result": {
+                          "type": "ApprovalResult",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "PENDING": 1,
+                            "APPROVED": 2,
+                            "REJECTED": 3,
+                            "CANCELLED": 5
+                          }
+                        }
+                      }
+                    },
+                    "ApprovalConfig": {
+                      "fields": {
+                        "approvalRequired": {
+                          "type": "bool",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ApprovalResult": {
+                      "fields": {
+                        "approverAccount": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "approvalTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "decision": {
+                          "type": "Decision",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "comment": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "url": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Decision": {
+                          "values": {
+                            "DECISION_UNSPECIFIED": 0,
+                            "APPROVED": 1,
+                            "REJECTED": 2
                           }
                         }
                       }

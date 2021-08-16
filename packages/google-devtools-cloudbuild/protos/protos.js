@@ -264,6 +264,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild#approveBuild}.
+                         * @memberof google.devtools.cloudbuild.v1.CloudBuild
+                         * @typedef ApproveBuildCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls ApproveBuild.
+                         * @function approveBuild
+                         * @memberof google.devtools.cloudbuild.v1.CloudBuild
+                         * @instance
+                         * @param {google.devtools.cloudbuild.v1.IApproveBuildRequest} request ApproveBuildRequest message or plain object
+                         * @param {google.devtools.cloudbuild.v1.CloudBuild.ApproveBuildCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudBuild.prototype.approveBuild = function approveBuild(request, callback) {
+                            return this.rpcCall(approveBuild, $root.google.devtools.cloudbuild.v1.ApproveBuildRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "ApproveBuild" });
+    
+                        /**
+                         * Calls ApproveBuild.
+                         * @function approveBuild
+                         * @memberof google.devtools.cloudbuild.v1.CloudBuild
+                         * @instance
+                         * @param {google.devtools.cloudbuild.v1.IApproveBuildRequest} request ApproveBuildRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.devtools.cloudbuild.v1.CloudBuild#createBuildTrigger}.
                          * @memberof google.devtools.cloudbuild.v1.CloudBuild
                          * @typedef CreateBuildTriggerCallback
@@ -2957,6 +2990,7 @@
                                 default:
                                     return "status: enum value expected";
                                 case 0:
+                                case 10:
                                 case 1:
                                 case 2:
                                 case 3:
@@ -3047,6 +3081,10 @@
                             case "STATUS_UNKNOWN":
                             case 0:
                                 message.status = 0;
+                                break;
+                            case "PENDING":
+                            case 10:
+                                message.status = 10;
                                 break;
                             case "QUEUED":
                             case 1:
@@ -4018,6 +4056,7 @@
                          * @property {Array.<string>|null} [tags] Build tags
                          * @property {Array.<google.devtools.cloudbuild.v1.ISecret>|null} [secrets] Build secrets
                          * @property {Object.<string,google.devtools.cloudbuild.v1.ITimeSpan>|null} [timing] Build timing
+                         * @property {google.devtools.cloudbuild.v1.IBuildApproval|null} [approval] Build approval
                          * @property {string|null} [serviceAccount] Build serviceAccount
                          * @property {google.devtools.cloudbuild.v1.ISecrets|null} [availableSecrets] Build availableSecrets
                          * @property {Array.<google.devtools.cloudbuild.v1.Build.IWarning>|null} [warnings] Build warnings
@@ -4239,6 +4278,14 @@
                         Build.prototype.timing = $util.emptyObject;
     
                         /**
+                         * Build approval.
+                         * @member {google.devtools.cloudbuild.v1.IBuildApproval|null|undefined} approval
+                         * @memberof google.devtools.cloudbuild.v1.Build
+                         * @instance
+                         */
+                        Build.prototype.approval = null;
+    
+                        /**
                          * Build serviceAccount.
                          * @member {string} serviceAccount
                          * @memberof google.devtools.cloudbuild.v1.Build
@@ -4350,6 +4397,8 @@
                                 $root.google.protobuf.Duration.encode(message.queueTtl, writer.uint32(/* id 40, wireType 2 =*/322).fork()).ldelim();
                             if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
                                 writer.uint32(/* id 42, wireType 2 =*/338).string(message.serviceAccount);
+                            if (message.approval != null && Object.hasOwnProperty.call(message, "approval"))
+                                $root.google.devtools.cloudbuild.v1.BuildApproval.encode(message.approval, writer.uint32(/* id 44, wireType 2 =*/354).fork()).ldelim();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 45, wireType 2 =*/362).string(message.name);
                             if (message.availableSecrets != null && Object.hasOwnProperty.call(message, "availableSecrets"))
@@ -4511,6 +4560,9 @@
                                     }
                                     message.timing[key] = value;
                                     break;
+                                case 44:
+                                    message.approval = $root.google.devtools.cloudbuild.v1.BuildApproval.decode(reader, reader.uint32());
+                                    break;
                                 case 42:
                                     message.serviceAccount = reader.string();
                                     break;
@@ -4574,6 +4626,7 @@
                                 default:
                                     return "status: enum value expected";
                                 case 0:
+                                case 10:
                                 case 1:
                                 case 2:
                                 case 3:
@@ -4696,6 +4749,11 @@
                                         return "timing." + error;
                                 }
                             }
+                            if (message.approval != null && message.hasOwnProperty("approval")) {
+                                var error = $root.google.devtools.cloudbuild.v1.BuildApproval.verify(message.approval);
+                                if (error)
+                                    return "approval." + error;
+                            }
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 if (!$util.isString(message.serviceAccount))
                                     return "serviceAccount: string expected";
@@ -4743,6 +4801,10 @@
                             case "STATUS_UNKNOWN":
                             case 0:
                                 message.status = 0;
+                                break;
+                            case "PENDING":
+                            case 10:
+                                message.status = 10;
                                 break;
                             case "QUEUED":
                             case 1:
@@ -4886,6 +4948,11 @@
                                     message.timing[keys[i]] = $root.google.devtools.cloudbuild.v1.TimeSpan.fromObject(object.timing[keys[i]]);
                                 }
                             }
+                            if (object.approval != null) {
+                                if (typeof object.approval !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.Build.approval: object expected");
+                                message.approval = $root.google.devtools.cloudbuild.v1.BuildApproval.fromObject(object.approval);
+                            }
                             if (object.serviceAccount != null)
                                 message.serviceAccount = String(object.serviceAccount);
                             if (object.availableSecrets != null) {
@@ -4954,6 +5021,7 @@
                                 object.artifacts = null;
                                 object.queueTtl = null;
                                 object.serviceAccount = "";
+                                object.approval = null;
                                 object.name = "";
                                 object.availableSecrets = null;
                                 object.failureInfo = null;
@@ -5025,6 +5093,8 @@
                                 object.queueTtl = $root.google.protobuf.Duration.toObject(message.queueTtl, options);
                             if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
                                 object.serviceAccount = message.serviceAccount;
+                            if (message.approval != null && message.hasOwnProperty("approval"))
+                                object.approval = $root.google.devtools.cloudbuild.v1.BuildApproval.toObject(message.approval, options);
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
                             if (message.availableSecrets != null && message.hasOwnProperty("availableSecrets"))
@@ -5578,6 +5648,7 @@
                          * @name google.devtools.cloudbuild.v1.Build.Status
                          * @enum {number}
                          * @property {number} STATUS_UNKNOWN=0 STATUS_UNKNOWN value
+                         * @property {number} PENDING=10 PENDING value
                          * @property {number} QUEUED=1 QUEUED value
                          * @property {number} WORKING=2 WORKING value
                          * @property {number} SUCCESS=3 SUCCESS value
@@ -5590,6 +5661,7 @@
                         Build.Status = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "STATUS_UNKNOWN"] = 0;
+                            values[valuesById[10] = "PENDING"] = 10;
                             values[valuesById[1] = "QUEUED"] = 1;
                             values[valuesById[2] = "WORKING"] = 2;
                             values[valuesById[3] = "SUCCESS"] = 3;
@@ -9438,6 +9510,1013 @@
                         };
     
                         return CancelBuildRequest;
+                    })();
+    
+                    v1.ApproveBuildRequest = (function() {
+    
+                        /**
+                         * Properties of an ApproveBuildRequest.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IApproveBuildRequest
+                         * @property {string|null} [name] ApproveBuildRequest name
+                         * @property {google.devtools.cloudbuild.v1.IApprovalResult|null} [approvalResult] ApproveBuildRequest approvalResult
+                         */
+    
+                        /**
+                         * Constructs a new ApproveBuildRequest.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents an ApproveBuildRequest.
+                         * @implements IApproveBuildRequest
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IApproveBuildRequest=} [properties] Properties to set
+                         */
+                        function ApproveBuildRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApproveBuildRequest name.
+                         * @member {string} name
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @instance
+                         */
+                        ApproveBuildRequest.prototype.name = "";
+    
+                        /**
+                         * ApproveBuildRequest approvalResult.
+                         * @member {google.devtools.cloudbuild.v1.IApprovalResult|null|undefined} approvalResult
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @instance
+                         */
+                        ApproveBuildRequest.prototype.approvalResult = null;
+    
+                        /**
+                         * Creates a new ApproveBuildRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IApproveBuildRequest=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.ApproveBuildRequest} ApproveBuildRequest instance
+                         */
+                        ApproveBuildRequest.create = function create(properties) {
+                            return new ApproveBuildRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveBuildRequest message. Does not implicitly {@link google.devtools.cloudbuild.v1.ApproveBuildRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IApproveBuildRequest} message ApproveBuildRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveBuildRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.approvalResult != null && Object.hasOwnProperty.call(message, "approvalResult"))
+                                $root.google.devtools.cloudbuild.v1.ApprovalResult.encode(message.approvalResult, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApproveBuildRequest message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ApproveBuildRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IApproveBuildRequest} message ApproveBuildRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApproveBuildRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApproveBuildRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.ApproveBuildRequest} ApproveBuildRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveBuildRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ApproveBuildRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.name = reader.string();
+                                    break;
+                                case 2:
+                                    message.approvalResult = $root.google.devtools.cloudbuild.v1.ApprovalResult.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApproveBuildRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.ApproveBuildRequest} ApproveBuildRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApproveBuildRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApproveBuildRequest message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApproveBuildRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.approvalResult != null && message.hasOwnProperty("approvalResult")) {
+                                var error = $root.google.devtools.cloudbuild.v1.ApprovalResult.verify(message.approvalResult);
+                                if (error)
+                                    return "approvalResult." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApproveBuildRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.ApproveBuildRequest} ApproveBuildRequest
+                         */
+                        ApproveBuildRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.ApproveBuildRequest)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.ApproveBuildRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.approvalResult != null) {
+                                if (typeof object.approvalResult !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.ApproveBuildRequest.approvalResult: object expected");
+                                message.approvalResult = $root.google.devtools.cloudbuild.v1.ApprovalResult.fromObject(object.approvalResult);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApproveBuildRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ApproveBuildRequest} message ApproveBuildRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApproveBuildRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.approvalResult = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.approvalResult != null && message.hasOwnProperty("approvalResult"))
+                                object.approvalResult = $root.google.devtools.cloudbuild.v1.ApprovalResult.toObject(message.approvalResult, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApproveBuildRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.ApproveBuildRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApproveBuildRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ApproveBuildRequest;
+                    })();
+    
+                    v1.BuildApproval = (function() {
+    
+                        /**
+                         * Properties of a BuildApproval.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IBuildApproval
+                         * @property {google.devtools.cloudbuild.v1.BuildApproval.State|null} [state] BuildApproval state
+                         * @property {google.devtools.cloudbuild.v1.IApprovalConfig|null} [config] BuildApproval config
+                         * @property {google.devtools.cloudbuild.v1.IApprovalResult|null} [result] BuildApproval result
+                         */
+    
+                        /**
+                         * Constructs a new BuildApproval.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents a BuildApproval.
+                         * @implements IBuildApproval
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IBuildApproval=} [properties] Properties to set
+                         */
+                        function BuildApproval(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BuildApproval state.
+                         * @member {google.devtools.cloudbuild.v1.BuildApproval.State} state
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @instance
+                         */
+                        BuildApproval.prototype.state = 0;
+    
+                        /**
+                         * BuildApproval config.
+                         * @member {google.devtools.cloudbuild.v1.IApprovalConfig|null|undefined} config
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @instance
+                         */
+                        BuildApproval.prototype.config = null;
+    
+                        /**
+                         * BuildApproval result.
+                         * @member {google.devtools.cloudbuild.v1.IApprovalResult|null|undefined} result
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @instance
+                         */
+                        BuildApproval.prototype.result = null;
+    
+                        /**
+                         * Creates a new BuildApproval instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IBuildApproval=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.BuildApproval} BuildApproval instance
+                         */
+                        BuildApproval.create = function create(properties) {
+                            return new BuildApproval(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BuildApproval message. Does not implicitly {@link google.devtools.cloudbuild.v1.BuildApproval.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IBuildApproval} message BuildApproval message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BuildApproval.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.config != null && Object.hasOwnProperty.call(message, "config"))
+                                $root.google.devtools.cloudbuild.v1.ApprovalConfig.encode(message.config, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.result != null && Object.hasOwnProperty.call(message, "result"))
+                                $root.google.devtools.cloudbuild.v1.ApprovalResult.encode(message.result, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BuildApproval message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.BuildApproval.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IBuildApproval} message BuildApproval message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BuildApproval.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BuildApproval message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.BuildApproval} BuildApproval
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BuildApproval.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.BuildApproval();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.state = reader.int32();
+                                    break;
+                                case 2:
+                                    message.config = $root.google.devtools.cloudbuild.v1.ApprovalConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.result = $root.google.devtools.cloudbuild.v1.ApprovalResult.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BuildApproval message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.BuildApproval} BuildApproval
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BuildApproval.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BuildApproval message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BuildApproval.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 5:
+                                    break;
+                                }
+                            if (message.config != null && message.hasOwnProperty("config")) {
+                                var error = $root.google.devtools.cloudbuild.v1.ApprovalConfig.verify(message.config);
+                                if (error)
+                                    return "config." + error;
+                            }
+                            if (message.result != null && message.hasOwnProperty("result")) {
+                                var error = $root.google.devtools.cloudbuild.v1.ApprovalResult.verify(message.result);
+                                if (error)
+                                    return "result." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BuildApproval message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.BuildApproval} BuildApproval
+                         */
+                        BuildApproval.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.BuildApproval)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.BuildApproval();
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "PENDING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "APPROVED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "REJECTED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.config != null) {
+                                if (typeof object.config !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.BuildApproval.config: object expected");
+                                message.config = $root.google.devtools.cloudbuild.v1.ApprovalConfig.fromObject(object.config);
+                            }
+                            if (object.result != null) {
+                                if (typeof object.result !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.BuildApproval.result: object expected");
+                                message.result = $root.google.devtools.cloudbuild.v1.ApprovalResult.fromObject(object.result);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BuildApproval message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.BuildApproval} message BuildApproval
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BuildApproval.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                object.config = null;
+                                object.result = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.devtools.cloudbuild.v1.BuildApproval.State[message.state] : message.state;
+                            if (message.config != null && message.hasOwnProperty("config"))
+                                object.config = $root.google.devtools.cloudbuild.v1.ApprovalConfig.toObject(message.config, options);
+                            if (message.result != null && message.hasOwnProperty("result"))
+                                object.result = $root.google.devtools.cloudbuild.v1.ApprovalResult.toObject(message.result, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BuildApproval to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.BuildApproval
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BuildApproval.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.devtools.cloudbuild.v1.BuildApproval.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} PENDING=1 PENDING value
+                         * @property {number} APPROVED=2 APPROVED value
+                         * @property {number} REJECTED=3 REJECTED value
+                         * @property {number} CANCELLED=5 CANCELLED value
+                         */
+                        BuildApproval.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "PENDING"] = 1;
+                            values[valuesById[2] = "APPROVED"] = 2;
+                            values[valuesById[3] = "REJECTED"] = 3;
+                            values[valuesById[5] = "CANCELLED"] = 5;
+                            return values;
+                        })();
+    
+                        return BuildApproval;
+                    })();
+    
+                    v1.ApprovalConfig = (function() {
+    
+                        /**
+                         * Properties of an ApprovalConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IApprovalConfig
+                         * @property {boolean|null} [approvalRequired] ApprovalConfig approvalRequired
+                         */
+    
+                        /**
+                         * Constructs a new ApprovalConfig.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents an ApprovalConfig.
+                         * @implements IApprovalConfig
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IApprovalConfig=} [properties] Properties to set
+                         */
+                        function ApprovalConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApprovalConfig approvalRequired.
+                         * @member {boolean} approvalRequired
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @instance
+                         */
+                        ApprovalConfig.prototype.approvalRequired = false;
+    
+                        /**
+                         * Creates a new ApprovalConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IApprovalConfig=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.ApprovalConfig} ApprovalConfig instance
+                         */
+                        ApprovalConfig.create = function create(properties) {
+                            return new ApprovalConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApprovalConfig message. Does not implicitly {@link google.devtools.cloudbuild.v1.ApprovalConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IApprovalConfig} message ApprovalConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApprovalConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.approvalRequired != null && Object.hasOwnProperty.call(message, "approvalRequired"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).bool(message.approvalRequired);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApprovalConfig message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ApprovalConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IApprovalConfig} message ApprovalConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApprovalConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApprovalConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.ApprovalConfig} ApprovalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApprovalConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ApprovalConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.approvalRequired = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApprovalConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.ApprovalConfig} ApprovalConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApprovalConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApprovalConfig message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApprovalConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.approvalRequired != null && message.hasOwnProperty("approvalRequired"))
+                                if (typeof message.approvalRequired !== "boolean")
+                                    return "approvalRequired: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApprovalConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.ApprovalConfig} ApprovalConfig
+                         */
+                        ApprovalConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.ApprovalConfig)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.ApprovalConfig();
+                            if (object.approvalRequired != null)
+                                message.approvalRequired = Boolean(object.approvalRequired);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApprovalConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ApprovalConfig} message ApprovalConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApprovalConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.approvalRequired = false;
+                            if (message.approvalRequired != null && message.hasOwnProperty("approvalRequired"))
+                                object.approvalRequired = message.approvalRequired;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApprovalConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApprovalConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ApprovalConfig;
+                    })();
+    
+                    v1.ApprovalResult = (function() {
+    
+                        /**
+                         * Properties of an ApprovalResult.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @interface IApprovalResult
+                         * @property {string|null} [approverAccount] ApprovalResult approverAccount
+                         * @property {google.protobuf.ITimestamp|null} [approvalTime] ApprovalResult approvalTime
+                         * @property {google.devtools.cloudbuild.v1.ApprovalResult.Decision|null} [decision] ApprovalResult decision
+                         * @property {string|null} [comment] ApprovalResult comment
+                         * @property {string|null} [url] ApprovalResult url
+                         */
+    
+                        /**
+                         * Constructs a new ApprovalResult.
+                         * @memberof google.devtools.cloudbuild.v1
+                         * @classdesc Represents an ApprovalResult.
+                         * @implements IApprovalResult
+                         * @constructor
+                         * @param {google.devtools.cloudbuild.v1.IApprovalResult=} [properties] Properties to set
+                         */
+                        function ApprovalResult(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ApprovalResult approverAccount.
+                         * @member {string} approverAccount
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @instance
+                         */
+                        ApprovalResult.prototype.approverAccount = "";
+    
+                        /**
+                         * ApprovalResult approvalTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} approvalTime
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @instance
+                         */
+                        ApprovalResult.prototype.approvalTime = null;
+    
+                        /**
+                         * ApprovalResult decision.
+                         * @member {google.devtools.cloudbuild.v1.ApprovalResult.Decision} decision
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @instance
+                         */
+                        ApprovalResult.prototype.decision = 0;
+    
+                        /**
+                         * ApprovalResult comment.
+                         * @member {string} comment
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @instance
+                         */
+                        ApprovalResult.prototype.comment = "";
+    
+                        /**
+                         * ApprovalResult url.
+                         * @member {string} url
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @instance
+                         */
+                        ApprovalResult.prototype.url = "";
+    
+                        /**
+                         * Creates a new ApprovalResult instance using the specified properties.
+                         * @function create
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IApprovalResult=} [properties] Properties to set
+                         * @returns {google.devtools.cloudbuild.v1.ApprovalResult} ApprovalResult instance
+                         */
+                        ApprovalResult.create = function create(properties) {
+                            return new ApprovalResult(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ApprovalResult message. Does not implicitly {@link google.devtools.cloudbuild.v1.ApprovalResult.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IApprovalResult} message ApprovalResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApprovalResult.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.approverAccount != null && Object.hasOwnProperty.call(message, "approverAccount"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.approverAccount);
+                            if (message.approvalTime != null && Object.hasOwnProperty.call(message, "approvalTime"))
+                                $root.google.protobuf.Timestamp.encode(message.approvalTime, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.decision != null && Object.hasOwnProperty.call(message, "decision"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.decision);
+                            if (message.comment != null && Object.hasOwnProperty.call(message, "comment"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.comment);
+                            if (message.url != null && Object.hasOwnProperty.call(message, "url"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.url);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ApprovalResult message, length delimited. Does not implicitly {@link google.devtools.cloudbuild.v1.ApprovalResult.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.IApprovalResult} message ApprovalResult message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ApprovalResult.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ApprovalResult message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.devtools.cloudbuild.v1.ApprovalResult} ApprovalResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApprovalResult.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.devtools.cloudbuild.v1.ApprovalResult();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.approverAccount = reader.string();
+                                    break;
+                                case 3:
+                                    message.approvalTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.decision = reader.int32();
+                                    break;
+                                case 5:
+                                    message.comment = reader.string();
+                                    break;
+                                case 6:
+                                    message.url = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ApprovalResult message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.devtools.cloudbuild.v1.ApprovalResult} ApprovalResult
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ApprovalResult.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ApprovalResult message.
+                         * @function verify
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ApprovalResult.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.approverAccount != null && message.hasOwnProperty("approverAccount"))
+                                if (!$util.isString(message.approverAccount))
+                                    return "approverAccount: string expected";
+                            if (message.approvalTime != null && message.hasOwnProperty("approvalTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.approvalTime);
+                                if (error)
+                                    return "approvalTime." + error;
+                            }
+                            if (message.decision != null && message.hasOwnProperty("decision"))
+                                switch (message.decision) {
+                                default:
+                                    return "decision: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            if (message.comment != null && message.hasOwnProperty("comment"))
+                                if (!$util.isString(message.comment))
+                                    return "comment: string expected";
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                if (!$util.isString(message.url))
+                                    return "url: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ApprovalResult message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.devtools.cloudbuild.v1.ApprovalResult} ApprovalResult
+                         */
+                        ApprovalResult.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.devtools.cloudbuild.v1.ApprovalResult)
+                                return object;
+                            var message = new $root.google.devtools.cloudbuild.v1.ApprovalResult();
+                            if (object.approverAccount != null)
+                                message.approverAccount = String(object.approverAccount);
+                            if (object.approvalTime != null) {
+                                if (typeof object.approvalTime !== "object")
+                                    throw TypeError(".google.devtools.cloudbuild.v1.ApprovalResult.approvalTime: object expected");
+                                message.approvalTime = $root.google.protobuf.Timestamp.fromObject(object.approvalTime);
+                            }
+                            switch (object.decision) {
+                            case "DECISION_UNSPECIFIED":
+                            case 0:
+                                message.decision = 0;
+                                break;
+                            case "APPROVED":
+                            case 1:
+                                message.decision = 1;
+                                break;
+                            case "REJECTED":
+                            case 2:
+                                message.decision = 2;
+                                break;
+                            }
+                            if (object.comment != null)
+                                message.comment = String(object.comment);
+                            if (object.url != null)
+                                message.url = String(object.url);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ApprovalResult message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @static
+                         * @param {google.devtools.cloudbuild.v1.ApprovalResult} message ApprovalResult
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ApprovalResult.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.approverAccount = "";
+                                object.approvalTime = null;
+                                object.decision = options.enums === String ? "DECISION_UNSPECIFIED" : 0;
+                                object.comment = "";
+                                object.url = "";
+                            }
+                            if (message.approverAccount != null && message.hasOwnProperty("approverAccount"))
+                                object.approverAccount = message.approverAccount;
+                            if (message.approvalTime != null && message.hasOwnProperty("approvalTime"))
+                                object.approvalTime = $root.google.protobuf.Timestamp.toObject(message.approvalTime, options);
+                            if (message.decision != null && message.hasOwnProperty("decision"))
+                                object.decision = options.enums === String ? $root.google.devtools.cloudbuild.v1.ApprovalResult.Decision[message.decision] : message.decision;
+                            if (message.comment != null && message.hasOwnProperty("comment"))
+                                object.comment = message.comment;
+                            if (message.url != null && message.hasOwnProperty("url"))
+                                object.url = message.url;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ApprovalResult to JSON.
+                         * @function toJSON
+                         * @memberof google.devtools.cloudbuild.v1.ApprovalResult
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ApprovalResult.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Decision enum.
+                         * @name google.devtools.cloudbuild.v1.ApprovalResult.Decision
+                         * @enum {number}
+                         * @property {number} DECISION_UNSPECIFIED=0 DECISION_UNSPECIFIED value
+                         * @property {number} APPROVED=1 APPROVED value
+                         * @property {number} REJECTED=2 REJECTED value
+                         */
+                        ApprovalResult.Decision = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "DECISION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "APPROVED"] = 1;
+                            values[valuesById[2] = "REJECTED"] = 2;
+                            return values;
+                        })();
+    
+                        return ApprovalResult;
                     })();
     
                     v1.BuildTrigger = (function() {
