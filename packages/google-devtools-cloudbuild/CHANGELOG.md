@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.2](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.3.1...v2.3.2) (2021-08-16)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#268](https://www.github.com/googleapis/nodejs-cloudbuild/issues/268)) ([c26f7f7](https://www.github.com/googleapis/nodejs-cloudbuild/commit/c26f7f726db4f43f3692aea4c516547abcddd0ea))
+
 ### [2.3.1](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.3.0...v2.3.1) (2021-08-12)
 
 
