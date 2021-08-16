@@ -733,6 +733,7 @@
                          * @property {Array.<string>|null} [assetTypes] ExportAssetsRequest assetTypes
                          * @property {google.cloud.asset.v1.ContentType|null} [contentType] ExportAssetsRequest contentType
                          * @property {google.cloud.asset.v1.IOutputConfig|null} [outputConfig] ExportAssetsRequest outputConfig
+                         * @property {Array.<string>|null} [relationshipTypes] ExportAssetsRequest relationshipTypes
                          */
     
                         /**
@@ -745,6 +746,7 @@
                          */
                         function ExportAssetsRequest(properties) {
                             this.assetTypes = [];
+                            this.relationshipTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -792,6 +794,14 @@
                         ExportAssetsRequest.prototype.outputConfig = null;
     
                         /**
+                         * ExportAssetsRequest relationshipTypes.
+                         * @member {Array.<string>} relationshipTypes
+                         * @memberof google.cloud.asset.v1.ExportAssetsRequest
+                         * @instance
+                         */
+                        ExportAssetsRequest.prototype.relationshipTypes = $util.emptyArray;
+    
+                        /**
                          * Creates a new ExportAssetsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.ExportAssetsRequest
@@ -826,6 +836,9 @@
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.contentType);
                             if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
                                 $root.google.cloud.asset.v1.OutputConfig.encode(message.outputConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.relationshipTypes != null && message.relationshipTypes.length)
+                                for (var i = 0; i < message.relationshipTypes.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).string(message.relationshipTypes[i]);
                             return writer;
                         };
     
@@ -876,6 +889,11 @@
                                     break;
                                 case 5:
                                     message.outputConfig = $root.google.cloud.asset.v1.OutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    if (!(message.relationshipTypes && message.relationshipTypes.length))
+                                        message.relationshipTypes = [];
+                                    message.relationshipTypes.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -937,12 +955,20 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
                                 var error = $root.google.cloud.asset.v1.OutputConfig.verify(message.outputConfig);
                                 if (error)
                                     return "outputConfig." + error;
+                            }
+                            if (message.relationshipTypes != null && message.hasOwnProperty("relationshipTypes")) {
+                                if (!Array.isArray(message.relationshipTypes))
+                                    return "relationshipTypes: array expected";
+                                for (var i = 0; i < message.relationshipTypes.length; ++i)
+                                    if (!$util.isString(message.relationshipTypes[i]))
+                                        return "relationshipTypes: string[] expected";
                             }
                             return null;
                         };
@@ -998,11 +1024,22 @@
                             case 6:
                                 message.contentType = 6;
                                 break;
+                            case "RELATIONSHIP":
+                            case 7:
+                                message.contentType = 7;
+                                break;
                             }
                             if (object.outputConfig != null) {
                                 if (typeof object.outputConfig !== "object")
                                     throw TypeError(".google.cloud.asset.v1.ExportAssetsRequest.outputConfig: object expected");
                                 message.outputConfig = $root.google.cloud.asset.v1.OutputConfig.fromObject(object.outputConfig);
+                            }
+                            if (object.relationshipTypes) {
+                                if (!Array.isArray(object.relationshipTypes))
+                                    throw TypeError(".google.cloud.asset.v1.ExportAssetsRequest.relationshipTypes: array expected");
+                                message.relationshipTypes = [];
+                                for (var i = 0; i < object.relationshipTypes.length; ++i)
+                                    message.relationshipTypes[i] = String(object.relationshipTypes[i]);
                             }
                             return message;
                         };
@@ -1020,8 +1057,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.assetTypes = [];
+                                object.relationshipTypes = [];
+                            }
                             if (options.defaults) {
                                 object.parent = "";
                                 object.readTime = null;
@@ -1041,6 +1080,11 @@
                                 object.contentType = options.enums === String ? $root.google.cloud.asset.v1.ContentType[message.contentType] : message.contentType;
                             if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
                                 object.outputConfig = $root.google.cloud.asset.v1.OutputConfig.toObject(message.outputConfig, options);
+                            if (message.relationshipTypes && message.relationshipTypes.length) {
+                                object.relationshipTypes = [];
+                                for (var j = 0; j < message.relationshipTypes.length; ++j)
+                                    object.relationshipTypes[j] = message.relationshipTypes[j];
+                            }
                             return object;
                         };
     
@@ -1317,6 +1361,7 @@
                          * @property {google.cloud.asset.v1.ContentType|null} [contentType] ListAssetsRequest contentType
                          * @property {number|null} [pageSize] ListAssetsRequest pageSize
                          * @property {string|null} [pageToken] ListAssetsRequest pageToken
+                         * @property {Array.<string>|null} [relationshipTypes] ListAssetsRequest relationshipTypes
                          */
     
                         /**
@@ -1329,6 +1374,7 @@
                          */
                         function ListAssetsRequest(properties) {
                             this.assetTypes = [];
+                            this.relationshipTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1384,6 +1430,14 @@
                         ListAssetsRequest.prototype.pageToken = "";
     
                         /**
+                         * ListAssetsRequest relationshipTypes.
+                         * @member {Array.<string>} relationshipTypes
+                         * @memberof google.cloud.asset.v1.ListAssetsRequest
+                         * @instance
+                         */
+                        ListAssetsRequest.prototype.relationshipTypes = $util.emptyArray;
+    
+                        /**
                          * Creates a new ListAssetsRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.ListAssetsRequest
@@ -1420,6 +1474,9 @@
                                 writer.uint32(/* id 5, wireType 0 =*/40).int32(message.pageSize);
                             if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.pageToken);
+                            if (message.relationshipTypes != null && message.relationshipTypes.length)
+                                for (var i = 0; i < message.relationshipTypes.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.relationshipTypes[i]);
                             return writer;
                         };
     
@@ -1473,6 +1530,11 @@
                                     break;
                                 case 6:
                                     message.pageToken = reader.string();
+                                    break;
+                                case 7:
+                                    if (!(message.relationshipTypes && message.relationshipTypes.length))
+                                        message.relationshipTypes = [];
+                                    message.relationshipTypes.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1534,6 +1596,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.pageSize != null && message.hasOwnProperty("pageSize"))
@@ -1542,6 +1605,13 @@
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 if (!$util.isString(message.pageToken))
                                     return "pageToken: string expected";
+                            if (message.relationshipTypes != null && message.hasOwnProperty("relationshipTypes")) {
+                                if (!Array.isArray(message.relationshipTypes))
+                                    return "relationshipTypes: array expected";
+                                for (var i = 0; i < message.relationshipTypes.length; ++i)
+                                    if (!$util.isString(message.relationshipTypes[i]))
+                                        return "relationshipTypes: string[] expected";
+                            }
                             return null;
                         };
     
@@ -1596,11 +1666,22 @@
                             case 6:
                                 message.contentType = 6;
                                 break;
+                            case "RELATIONSHIP":
+                            case 7:
+                                message.contentType = 7;
+                                break;
                             }
                             if (object.pageSize != null)
                                 message.pageSize = object.pageSize | 0;
                             if (object.pageToken != null)
                                 message.pageToken = String(object.pageToken);
+                            if (object.relationshipTypes) {
+                                if (!Array.isArray(object.relationshipTypes))
+                                    throw TypeError(".google.cloud.asset.v1.ListAssetsRequest.relationshipTypes: array expected");
+                                message.relationshipTypes = [];
+                                for (var i = 0; i < object.relationshipTypes.length; ++i)
+                                    message.relationshipTypes[i] = String(object.relationshipTypes[i]);
+                            }
                             return message;
                         };
     
@@ -1617,8 +1698,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.assetTypes = [];
+                                object.relationshipTypes = [];
+                            }
                             if (options.defaults) {
                                 object.parent = "";
                                 object.readTime = null;
@@ -1641,6 +1724,11 @@
                                 object.pageSize = message.pageSize;
                             if (message.pageToken != null && message.hasOwnProperty("pageToken"))
                                 object.pageToken = message.pageToken;
+                            if (message.relationshipTypes && message.relationshipTypes.length) {
+                                object.relationshipTypes = [];
+                                for (var j = 0; j < message.relationshipTypes.length; ++j)
+                                    object.relationshipTypes[j] = message.relationshipTypes[j];
+                            }
                             return object;
                         };
     
@@ -1927,6 +2015,7 @@
                          * @property {Array.<string>|null} [assetNames] BatchGetAssetsHistoryRequest assetNames
                          * @property {google.cloud.asset.v1.ContentType|null} [contentType] BatchGetAssetsHistoryRequest contentType
                          * @property {google.cloud.asset.v1.ITimeWindow|null} [readTimeWindow] BatchGetAssetsHistoryRequest readTimeWindow
+                         * @property {Array.<string>|null} [relationshipTypes] BatchGetAssetsHistoryRequest relationshipTypes
                          */
     
                         /**
@@ -1939,6 +2028,7 @@
                          */
                         function BatchGetAssetsHistoryRequest(properties) {
                             this.assetNames = [];
+                            this.relationshipTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -1978,6 +2068,14 @@
                         BatchGetAssetsHistoryRequest.prototype.readTimeWindow = null;
     
                         /**
+                         * BatchGetAssetsHistoryRequest relationshipTypes.
+                         * @member {Array.<string>} relationshipTypes
+                         * @memberof google.cloud.asset.v1.BatchGetAssetsHistoryRequest
+                         * @instance
+                         */
+                        BatchGetAssetsHistoryRequest.prototype.relationshipTypes = $util.emptyArray;
+    
+                        /**
                          * Creates a new BatchGetAssetsHistoryRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.BatchGetAssetsHistoryRequest
@@ -2010,6 +2108,9 @@
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.contentType);
                             if (message.readTimeWindow != null && Object.hasOwnProperty.call(message, "readTimeWindow"))
                                 $root.google.cloud.asset.v1.TimeWindow.encode(message.readTimeWindow, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.relationshipTypes != null && message.relationshipTypes.length)
+                                for (var i = 0; i < message.relationshipTypes.length; ++i)
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.relationshipTypes[i]);
                             return writer;
                         };
     
@@ -2057,6 +2158,11 @@
                                     break;
                                 case 4:
                                     message.readTimeWindow = $root.google.cloud.asset.v1.TimeWindow.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    if (!(message.relationshipTypes && message.relationshipTypes.length))
+                                        message.relationshipTypes = [];
+                                    message.relationshipTypes.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -2113,12 +2219,20 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.readTimeWindow != null && message.hasOwnProperty("readTimeWindow")) {
                                 var error = $root.google.cloud.asset.v1.TimeWindow.verify(message.readTimeWindow);
                                 if (error)
                                     return "readTimeWindow." + error;
+                            }
+                            if (message.relationshipTypes != null && message.hasOwnProperty("relationshipTypes")) {
+                                if (!Array.isArray(message.relationshipTypes))
+                                    return "relationshipTypes: array expected";
+                                for (var i = 0; i < message.relationshipTypes.length; ++i)
+                                    if (!$util.isString(message.relationshipTypes[i]))
+                                        return "relationshipTypes: string[] expected";
                             }
                             return null;
                         };
@@ -2169,11 +2283,22 @@
                             case 6:
                                 message.contentType = 6;
                                 break;
+                            case "RELATIONSHIP":
+                            case 7:
+                                message.contentType = 7;
+                                break;
                             }
                             if (object.readTimeWindow != null) {
                                 if (typeof object.readTimeWindow !== "object")
                                     throw TypeError(".google.cloud.asset.v1.BatchGetAssetsHistoryRequest.readTimeWindow: object expected");
                                 message.readTimeWindow = $root.google.cloud.asset.v1.TimeWindow.fromObject(object.readTimeWindow);
+                            }
+                            if (object.relationshipTypes) {
+                                if (!Array.isArray(object.relationshipTypes))
+                                    throw TypeError(".google.cloud.asset.v1.BatchGetAssetsHistoryRequest.relationshipTypes: array expected");
+                                message.relationshipTypes = [];
+                                for (var i = 0; i < object.relationshipTypes.length; ++i)
+                                    message.relationshipTypes[i] = String(object.relationshipTypes[i]);
                             }
                             return message;
                         };
@@ -2191,8 +2316,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.assetNames = [];
+                                object.relationshipTypes = [];
+                            }
                             if (options.defaults) {
                                 object.parent = "";
                                 object.contentType = options.enums === String ? "CONTENT_TYPE_UNSPECIFIED" : 0;
@@ -2209,6 +2336,11 @@
                                 object.contentType = options.enums === String ? $root.google.cloud.asset.v1.ContentType[message.contentType] : message.contentType;
                             if (message.readTimeWindow != null && message.hasOwnProperty("readTimeWindow"))
                                 object.readTimeWindow = $root.google.cloud.asset.v1.TimeWindow.toObject(message.readTimeWindow, options);
+                            if (message.relationshipTypes && message.relationshipTypes.length) {
+                                object.relationshipTypes = [];
+                                for (var j = 0; j < message.relationshipTypes.length; ++j)
+                                    object.relationshipTypes[j] = message.relationshipTypes[j];
+                            }
                             return object;
                         };
     
@@ -5464,6 +5596,7 @@
                          * @property {google.cloud.asset.v1.ContentType|null} [contentType] Feed contentType
                          * @property {google.cloud.asset.v1.IFeedOutputConfig|null} [feedOutputConfig] Feed feedOutputConfig
                          * @property {google.type.IExpr|null} [condition] Feed condition
+                         * @property {Array.<string>|null} [relationshipTypes] Feed relationshipTypes
                          */
     
                         /**
@@ -5477,6 +5610,7 @@
                         function Feed(properties) {
                             this.assetNames = [];
                             this.assetTypes = [];
+                            this.relationshipTypes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -5532,6 +5666,14 @@
                         Feed.prototype.condition = null;
     
                         /**
+                         * Feed relationshipTypes.
+                         * @member {Array.<string>} relationshipTypes
+                         * @memberof google.cloud.asset.v1.Feed
+                         * @instance
+                         */
+                        Feed.prototype.relationshipTypes = $util.emptyArray;
+    
+                        /**
                          * Creates a new Feed instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.asset.v1.Feed
@@ -5569,6 +5711,9 @@
                                 $root.google.cloud.asset.v1.FeedOutputConfig.encode(message.feedOutputConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
                                 $root.google.type.Expr.encode(message.condition, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.relationshipTypes != null && message.relationshipTypes.length)
+                                for (var i = 0; i < message.relationshipTypes.length; ++i)
+                                    writer.uint32(/* id 7, wireType 2 =*/58).string(message.relationshipTypes[i]);
                             return writer;
                         };
     
@@ -5624,6 +5769,11 @@
                                     break;
                                 case 6:
                                     message.condition = $root.google.type.Expr.decode(reader, reader.uint32());
+                                    break;
+                                case 7:
+                                    if (!(message.relationshipTypes && message.relationshipTypes.length))
+                                        message.relationshipTypes = [];
+                                    message.relationshipTypes.push(reader.string());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5687,6 +5837,7 @@
                                 case 4:
                                 case 5:
                                 case 6:
+                                case 7:
                                     break;
                                 }
                             if (message.feedOutputConfig != null && message.hasOwnProperty("feedOutputConfig")) {
@@ -5698,6 +5849,13 @@
                                 var error = $root.google.type.Expr.verify(message.condition);
                                 if (error)
                                     return "condition." + error;
+                            }
+                            if (message.relationshipTypes != null && message.hasOwnProperty("relationshipTypes")) {
+                                if (!Array.isArray(message.relationshipTypes))
+                                    return "relationshipTypes: array expected";
+                                for (var i = 0; i < message.relationshipTypes.length; ++i)
+                                    if (!$util.isString(message.relationshipTypes[i]))
+                                        return "relationshipTypes: string[] expected";
                             }
                             return null;
                         };
@@ -5755,6 +5913,10 @@
                             case 6:
                                 message.contentType = 6;
                                 break;
+                            case "RELATIONSHIP":
+                            case 7:
+                                message.contentType = 7;
+                                break;
                             }
                             if (object.feedOutputConfig != null) {
                                 if (typeof object.feedOutputConfig !== "object")
@@ -5765,6 +5927,13 @@
                                 if (typeof object.condition !== "object")
                                     throw TypeError(".google.cloud.asset.v1.Feed.condition: object expected");
                                 message.condition = $root.google.type.Expr.fromObject(object.condition);
+                            }
+                            if (object.relationshipTypes) {
+                                if (!Array.isArray(object.relationshipTypes))
+                                    throw TypeError(".google.cloud.asset.v1.Feed.relationshipTypes: array expected");
+                                message.relationshipTypes = [];
+                                for (var i = 0; i < object.relationshipTypes.length; ++i)
+                                    message.relationshipTypes[i] = String(object.relationshipTypes[i]);
                             }
                             return message;
                         };
@@ -5785,6 +5954,7 @@
                             if (options.arrays || options.defaults) {
                                 object.assetNames = [];
                                 object.assetTypes = [];
+                                object.relationshipTypes = [];
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -5810,6 +5980,11 @@
                                 object.feedOutputConfig = $root.google.cloud.asset.v1.FeedOutputConfig.toObject(message.feedOutputConfig, options);
                             if (message.condition != null && message.hasOwnProperty("condition"))
                                 object.condition = $root.google.type.Expr.toObject(message.condition, options);
+                            if (message.relationshipTypes && message.relationshipTypes.length) {
+                                object.relationshipTypes = [];
+                                for (var j = 0; j < message.relationshipTypes.length; ++j)
+                                    object.relationshipTypes[j] = message.relationshipTypes[j];
+                            }
                             return object;
                         };
     
@@ -11460,6 +11635,7 @@
                      * @property {number} ORG_POLICY=4 ORG_POLICY value
                      * @property {number} ACCESS_POLICY=5 ACCESS_POLICY value
                      * @property {number} OS_INVENTORY=6 OS_INVENTORY value
+                     * @property {number} RELATIONSHIP=7 RELATIONSHIP value
                      */
                     v1.ContentType = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
@@ -11469,6 +11645,7 @@
                         values[valuesById[4] = "ORG_POLICY"] = 4;
                         values[valuesById[5] = "ACCESS_POLICY"] = 5;
                         values[valuesById[6] = "OS_INVENTORY"] = 6;
+                        values[valuesById[7] = "RELATIONSHIP"] = 7;
                         return values;
                     })();
     
@@ -12047,6 +12224,7 @@
                          * @property {google.identity.accesscontextmanager.v1.IAccessLevel|null} [accessLevel] Asset accessLevel
                          * @property {google.identity.accesscontextmanager.v1.IServicePerimeter|null} [servicePerimeter] Asset servicePerimeter
                          * @property {google.cloud.osconfig.v1.IInventory|null} [osInventory] Asset osInventory
+                         * @property {google.cloud.asset.v1.IRelatedAssets|null} [relatedAssets] Asset relatedAssets
                          * @property {Array.<string>|null} [ancestors] Asset ancestors
                          */
     
@@ -12148,6 +12326,14 @@
                         Asset.prototype.osInventory = null;
     
                         /**
+                         * Asset relatedAssets.
+                         * @member {google.cloud.asset.v1.IRelatedAssets|null|undefined} relatedAssets
+                         * @memberof google.cloud.asset.v1.Asset
+                         * @instance
+                         */
+                        Asset.prototype.relatedAssets = null;
+    
+                        /**
                          * Asset ancestors.
                          * @member {Array.<string>} ancestors
                          * @memberof google.cloud.asset.v1.Asset
@@ -12217,6 +12403,8 @@
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             if (message.osInventory != null && Object.hasOwnProperty.call(message, "osInventory"))
                                 $root.google.cloud.osconfig.v1.Inventory.encode(message.osInventory, writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
+                            if (message.relatedAssets != null && Object.hasOwnProperty.call(message, "relatedAssets"))
+                                $root.google.cloud.asset.v1.RelatedAssets.encode(message.relatedAssets, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
                             return writer;
                         };
     
@@ -12282,6 +12470,9 @@
                                     break;
                                 case 12:
                                     message.osInventory = $root.google.cloud.osconfig.v1.Inventory.decode(reader, reader.uint32());
+                                    break;
+                                case 13:
+                                    message.relatedAssets = $root.google.cloud.asset.v1.RelatedAssets.decode(reader, reader.uint32());
                                     break;
                                 case 10:
                                     if (!(message.ancestors && message.ancestors.length))
@@ -12387,6 +12578,11 @@
                                 if (error)
                                     return "osInventory." + error;
                             }
+                            if (message.relatedAssets != null && message.hasOwnProperty("relatedAssets")) {
+                                var error = $root.google.cloud.asset.v1.RelatedAssets.verify(message.relatedAssets);
+                                if (error)
+                                    return "relatedAssets." + error;
+                            }
                             if (message.ancestors != null && message.hasOwnProperty("ancestors")) {
                                 if (!Array.isArray(message.ancestors))
                                     return "ancestors: array expected";
@@ -12458,6 +12654,11 @@
                                     throw TypeError(".google.cloud.asset.v1.Asset.osInventory: object expected");
                                 message.osInventory = $root.google.cloud.osconfig.v1.Inventory.fromObject(object.osInventory);
                             }
+                            if (object.relatedAssets != null) {
+                                if (typeof object.relatedAssets !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.Asset.relatedAssets: object expected");
+                                message.relatedAssets = $root.google.cloud.asset.v1.RelatedAssets.fromObject(object.relatedAssets);
+                            }
                             if (object.ancestors) {
                                 if (!Array.isArray(object.ancestors))
                                     throw TypeError(".google.cloud.asset.v1.Asset.ancestors: array expected");
@@ -12492,6 +12693,7 @@
                                 object.iamPolicy = null;
                                 object.updateTime = null;
                                 object.osInventory = null;
+                                object.relatedAssets = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -12530,6 +12732,8 @@
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.osInventory != null && message.hasOwnProperty("osInventory"))
                                 object.osInventory = $root.google.cloud.osconfig.v1.Inventory.toObject(message.osInventory, options);
+                            if (message.relatedAssets != null && message.hasOwnProperty("relatedAssets"))
+                                object.relatedAssets = $root.google.cloud.asset.v1.RelatedAssets.toObject(message.relatedAssets, options);
                             return object;
                         };
     
@@ -12870,6 +13074,745 @@
                         };
     
                         return Resource;
+                    })();
+    
+                    v1.RelatedAssets = (function() {
+    
+                        /**
+                         * Properties of a RelatedAssets.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IRelatedAssets
+                         * @property {google.cloud.asset.v1.IRelationshipAttributes|null} [relationshipAttributes] RelatedAssets relationshipAttributes
+                         * @property {Array.<google.cloud.asset.v1.IRelatedAsset>|null} [assets] RelatedAssets assets
+                         */
+    
+                        /**
+                         * Constructs a new RelatedAssets.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a RelatedAssets.
+                         * @implements IRelatedAssets
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IRelatedAssets=} [properties] Properties to set
+                         */
+                        function RelatedAssets(properties) {
+                            this.assets = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RelatedAssets relationshipAttributes.
+                         * @member {google.cloud.asset.v1.IRelationshipAttributes|null|undefined} relationshipAttributes
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @instance
+                         */
+                        RelatedAssets.prototype.relationshipAttributes = null;
+    
+                        /**
+                         * RelatedAssets assets.
+                         * @member {Array.<google.cloud.asset.v1.IRelatedAsset>} assets
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @instance
+                         */
+                        RelatedAssets.prototype.assets = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RelatedAssets instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedAssets=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.RelatedAssets} RelatedAssets instance
+                         */
+                        RelatedAssets.create = function create(properties) {
+                            return new RelatedAssets(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedAssets message. Does not implicitly {@link google.cloud.asset.v1.RelatedAssets.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedAssets} message RelatedAssets message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedAssets.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.relationshipAttributes != null && Object.hasOwnProperty.call(message, "relationshipAttributes"))
+                                $root.google.cloud.asset.v1.RelationshipAttributes.encode(message.relationshipAttributes, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.assets != null && message.assets.length)
+                                for (var i = 0; i < message.assets.length; ++i)
+                                    $root.google.cloud.asset.v1.RelatedAsset.encode(message.assets[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedAssets message, length delimited. Does not implicitly {@link google.cloud.asset.v1.RelatedAssets.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedAssets} message RelatedAssets message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedAssets.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RelatedAssets message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.RelatedAssets} RelatedAssets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedAssets.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelatedAssets();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.relationshipAttributes = $root.google.cloud.asset.v1.RelationshipAttributes.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    if (!(message.assets && message.assets.length))
+                                        message.assets = [];
+                                    message.assets.push($root.google.cloud.asset.v1.RelatedAsset.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RelatedAssets message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.RelatedAssets} RelatedAssets
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedAssets.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RelatedAssets message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RelatedAssets.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.relationshipAttributes != null && message.hasOwnProperty("relationshipAttributes")) {
+                                var error = $root.google.cloud.asset.v1.RelationshipAttributes.verify(message.relationshipAttributes);
+                                if (error)
+                                    return "relationshipAttributes." + error;
+                            }
+                            if (message.assets != null && message.hasOwnProperty("assets")) {
+                                if (!Array.isArray(message.assets))
+                                    return "assets: array expected";
+                                for (var i = 0; i < message.assets.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.RelatedAsset.verify(message.assets[i]);
+                                    if (error)
+                                        return "assets." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RelatedAssets message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.RelatedAssets} RelatedAssets
+                         */
+                        RelatedAssets.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.RelatedAssets)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.RelatedAssets();
+                            if (object.relationshipAttributes != null) {
+                                if (typeof object.relationshipAttributes !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.RelatedAssets.relationshipAttributes: object expected");
+                                message.relationshipAttributes = $root.google.cloud.asset.v1.RelationshipAttributes.fromObject(object.relationshipAttributes);
+                            }
+                            if (object.assets) {
+                                if (!Array.isArray(object.assets))
+                                    throw TypeError(".google.cloud.asset.v1.RelatedAssets.assets: array expected");
+                                message.assets = [];
+                                for (var i = 0; i < object.assets.length; ++i) {
+                                    if (typeof object.assets[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.RelatedAssets.assets: object expected");
+                                    message.assets[i] = $root.google.cloud.asset.v1.RelatedAsset.fromObject(object.assets[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RelatedAssets message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @static
+                         * @param {google.cloud.asset.v1.RelatedAssets} message RelatedAssets
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RelatedAssets.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.assets = [];
+                            if (options.defaults)
+                                object.relationshipAttributes = null;
+                            if (message.relationshipAttributes != null && message.hasOwnProperty("relationshipAttributes"))
+                                object.relationshipAttributes = $root.google.cloud.asset.v1.RelationshipAttributes.toObject(message.relationshipAttributes, options);
+                            if (message.assets && message.assets.length) {
+                                object.assets = [];
+                                for (var j = 0; j < message.assets.length; ++j)
+                                    object.assets[j] = $root.google.cloud.asset.v1.RelatedAsset.toObject(message.assets[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RelatedAssets to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.RelatedAssets
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RelatedAssets.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RelatedAssets;
+                    })();
+    
+                    v1.RelationshipAttributes = (function() {
+    
+                        /**
+                         * Properties of a RelationshipAttributes.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IRelationshipAttributes
+                         * @property {string|null} [type] RelationshipAttributes type
+                         * @property {string|null} [sourceResourceType] RelationshipAttributes sourceResourceType
+                         * @property {string|null} [targetResourceType] RelationshipAttributes targetResourceType
+                         * @property {string|null} [action] RelationshipAttributes action
+                         */
+    
+                        /**
+                         * Constructs a new RelationshipAttributes.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a RelationshipAttributes.
+                         * @implements IRelationshipAttributes
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IRelationshipAttributes=} [properties] Properties to set
+                         */
+                        function RelationshipAttributes(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RelationshipAttributes type.
+                         * @member {string} type
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @instance
+                         */
+                        RelationshipAttributes.prototype.type = "";
+    
+                        /**
+                         * RelationshipAttributes sourceResourceType.
+                         * @member {string} sourceResourceType
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @instance
+                         */
+                        RelationshipAttributes.prototype.sourceResourceType = "";
+    
+                        /**
+                         * RelationshipAttributes targetResourceType.
+                         * @member {string} targetResourceType
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @instance
+                         */
+                        RelationshipAttributes.prototype.targetResourceType = "";
+    
+                        /**
+                         * RelationshipAttributes action.
+                         * @member {string} action
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @instance
+                         */
+                        RelationshipAttributes.prototype.action = "";
+    
+                        /**
+                         * Creates a new RelationshipAttributes instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelationshipAttributes=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.RelationshipAttributes} RelationshipAttributes instance
+                         */
+                        RelationshipAttributes.create = function create(properties) {
+                            return new RelationshipAttributes(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RelationshipAttributes message. Does not implicitly {@link google.cloud.asset.v1.RelationshipAttributes.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelationshipAttributes} message RelationshipAttributes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelationshipAttributes.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.sourceResourceType != null && Object.hasOwnProperty.call(message, "sourceResourceType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.sourceResourceType);
+                            if (message.targetResourceType != null && Object.hasOwnProperty.call(message, "targetResourceType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.targetResourceType);
+                            if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.action);
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.type);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RelationshipAttributes message, length delimited. Does not implicitly {@link google.cloud.asset.v1.RelationshipAttributes.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelationshipAttributes} message RelationshipAttributes message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelationshipAttributes.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RelationshipAttributes message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.RelationshipAttributes} RelationshipAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelationshipAttributes.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelationshipAttributes();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 4:
+                                    message.type = reader.string();
+                                    break;
+                                case 1:
+                                    message.sourceResourceType = reader.string();
+                                    break;
+                                case 2:
+                                    message.targetResourceType = reader.string();
+                                    break;
+                                case 3:
+                                    message.action = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RelationshipAttributes message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.RelationshipAttributes} RelationshipAttributes
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelationshipAttributes.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RelationshipAttributes message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RelationshipAttributes.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                if (!$util.isString(message.type))
+                                    return "type: string expected";
+                            if (message.sourceResourceType != null && message.hasOwnProperty("sourceResourceType"))
+                                if (!$util.isString(message.sourceResourceType))
+                                    return "sourceResourceType: string expected";
+                            if (message.targetResourceType != null && message.hasOwnProperty("targetResourceType"))
+                                if (!$util.isString(message.targetResourceType))
+                                    return "targetResourceType: string expected";
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                if (!$util.isString(message.action))
+                                    return "action: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RelationshipAttributes message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.RelationshipAttributes} RelationshipAttributes
+                         */
+                        RelationshipAttributes.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.RelationshipAttributes)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.RelationshipAttributes();
+                            if (object.type != null)
+                                message.type = String(object.type);
+                            if (object.sourceResourceType != null)
+                                message.sourceResourceType = String(object.sourceResourceType);
+                            if (object.targetResourceType != null)
+                                message.targetResourceType = String(object.targetResourceType);
+                            if (object.action != null)
+                                message.action = String(object.action);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RelationshipAttributes message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @static
+                         * @param {google.cloud.asset.v1.RelationshipAttributes} message RelationshipAttributes
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RelationshipAttributes.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.sourceResourceType = "";
+                                object.targetResourceType = "";
+                                object.action = "";
+                                object.type = "";
+                            }
+                            if (message.sourceResourceType != null && message.hasOwnProperty("sourceResourceType"))
+                                object.sourceResourceType = message.sourceResourceType;
+                            if (message.targetResourceType != null && message.hasOwnProperty("targetResourceType"))
+                                object.targetResourceType = message.targetResourceType;
+                            if (message.action != null && message.hasOwnProperty("action"))
+                                object.action = message.action;
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = message.type;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RelationshipAttributes to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.RelationshipAttributes
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RelationshipAttributes.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RelationshipAttributes;
+                    })();
+    
+                    v1.RelatedAsset = (function() {
+    
+                        /**
+                         * Properties of a RelatedAsset.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IRelatedAsset
+                         * @property {string|null} [asset] RelatedAsset asset
+                         * @property {string|null} [assetType] RelatedAsset assetType
+                         * @property {Array.<string>|null} [ancestors] RelatedAsset ancestors
+                         */
+    
+                        /**
+                         * Constructs a new RelatedAsset.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a RelatedAsset.
+                         * @implements IRelatedAsset
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IRelatedAsset=} [properties] Properties to set
+                         */
+                        function RelatedAsset(properties) {
+                            this.ancestors = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RelatedAsset asset.
+                         * @member {string} asset
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @instance
+                         */
+                        RelatedAsset.prototype.asset = "";
+    
+                        /**
+                         * RelatedAsset assetType.
+                         * @member {string} assetType
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @instance
+                         */
+                        RelatedAsset.prototype.assetType = "";
+    
+                        /**
+                         * RelatedAsset ancestors.
+                         * @member {Array.<string>} ancestors
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @instance
+                         */
+                        RelatedAsset.prototype.ancestors = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RelatedAsset instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedAsset=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.RelatedAsset} RelatedAsset instance
+                         */
+                        RelatedAsset.create = function create(properties) {
+                            return new RelatedAsset(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedAsset message. Does not implicitly {@link google.cloud.asset.v1.RelatedAsset.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedAsset} message RelatedAsset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedAsset.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.asset != null && Object.hasOwnProperty.call(message, "asset"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.asset);
+                            if (message.assetType != null && Object.hasOwnProperty.call(message, "assetType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.assetType);
+                            if (message.ancestors != null && message.ancestors.length)
+                                for (var i = 0; i < message.ancestors.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.ancestors[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedAsset message, length delimited. Does not implicitly {@link google.cloud.asset.v1.RelatedAsset.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedAsset} message RelatedAsset message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedAsset.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RelatedAsset message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.RelatedAsset} RelatedAsset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedAsset.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelatedAsset();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.asset = reader.string();
+                                    break;
+                                case 2:
+                                    message.assetType = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.ancestors && message.ancestors.length))
+                                        message.ancestors = [];
+                                    message.ancestors.push(reader.string());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RelatedAsset message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.RelatedAsset} RelatedAsset
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedAsset.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RelatedAsset message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RelatedAsset.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.asset != null && message.hasOwnProperty("asset"))
+                                if (!$util.isString(message.asset))
+                                    return "asset: string expected";
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                if (!$util.isString(message.assetType))
+                                    return "assetType: string expected";
+                            if (message.ancestors != null && message.hasOwnProperty("ancestors")) {
+                                if (!Array.isArray(message.ancestors))
+                                    return "ancestors: array expected";
+                                for (var i = 0; i < message.ancestors.length; ++i)
+                                    if (!$util.isString(message.ancestors[i]))
+                                        return "ancestors: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RelatedAsset message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.RelatedAsset} RelatedAsset
+                         */
+                        RelatedAsset.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.RelatedAsset)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.RelatedAsset();
+                            if (object.asset != null)
+                                message.asset = String(object.asset);
+                            if (object.assetType != null)
+                                message.assetType = String(object.assetType);
+                            if (object.ancestors) {
+                                if (!Array.isArray(object.ancestors))
+                                    throw TypeError(".google.cloud.asset.v1.RelatedAsset.ancestors: array expected");
+                                message.ancestors = [];
+                                for (var i = 0; i < object.ancestors.length; ++i)
+                                    message.ancestors[i] = String(object.ancestors[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RelatedAsset message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @static
+                         * @param {google.cloud.asset.v1.RelatedAsset} message RelatedAsset
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RelatedAsset.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.ancestors = [];
+                            if (options.defaults) {
+                                object.asset = "";
+                                object.assetType = "";
+                            }
+                            if (message.asset != null && message.hasOwnProperty("asset"))
+                                object.asset = message.asset;
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                object.assetType = message.assetType;
+                            if (message.ancestors && message.ancestors.length) {
+                                object.ancestors = [];
+                                for (var j = 0; j < message.ancestors.length; ++j)
+                                    object.ancestors[j] = message.ancestors[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RelatedAsset to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.RelatedAsset
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RelatedAsset.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RelatedAsset;
                     })();
     
                     v1.ResourceSearchResult = (function() {
@@ -44488,6 +45431,225 @@
                 return Timestamp;
             })();
     
+            protobuf.Any = (function() {
+    
+                /**
+                 * Properties of an Any.
+                 * @memberof google.protobuf
+                 * @interface IAny
+                 * @property {string|null} [type_url] Any type_url
+                 * @property {Uint8Array|null} [value] Any value
+                 */
+    
+                /**
+                 * Constructs a new Any.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Any.
+                 * @implements IAny
+                 * @constructor
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 */
+                function Any(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Any type_url.
+                 * @member {string} type_url
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.type_url = "";
+    
+                /**
+                 * Any value.
+                 * @member {Uint8Array} value
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 */
+                Any.prototype.value = $util.newBuffer([]);
+    
+                /**
+                 * Creates a new Any instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny=} [properties] Properties to set
+                 * @returns {google.protobuf.Any} Any instance
+                 */
+                Any.create = function create(properties) {
+                    return new Any(properties);
+                };
+    
+                /**
+                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
+                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.IAny} message Any message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Any.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.type_url = reader.string();
+                            break;
+                        case 2:
+                            message.value = reader.bytes();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Any message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Any} Any
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Any.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Any message.
+                 * @function verify
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Any.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        if (!$util.isString(message.type_url))
+                            return "type_url: string expected";
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
+                            return "value: buffer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Any} Any
+                 */
+                Any.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Any)
+                        return object;
+                    var message = new $root.google.protobuf.Any();
+                    if (object.type_url != null)
+                        message.type_url = String(object.type_url);
+                    if (object.value != null)
+                        if (typeof object.value === "string")
+                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
+                        else if (object.value.length)
+                            message.value = object.value;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Any message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Any
+                 * @static
+                 * @param {google.protobuf.Any} message Any
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Any.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.type_url = "";
+                        if (options.bytes === String)
+                            object.value = "";
+                        else {
+                            object.value = [];
+                            if (options.bytes !== Array)
+                                object.value = $util.newBuffer(object.value);
+                        }
+                    }
+                    if (message.type_url != null && message.hasOwnProperty("type_url"))
+                        object.type_url = message.type_url;
+                    if (message.value != null && message.hasOwnProperty("value"))
+                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Any to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Any
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Any.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Any;
+            })();
+    
             protobuf.Struct = (function() {
     
                 /**
@@ -45300,225 +46462,6 @@
                 };
     
                 return ListValue;
-            })();
-    
-            protobuf.Any = (function() {
-    
-                /**
-                 * Properties of an Any.
-                 * @memberof google.protobuf
-                 * @interface IAny
-                 * @property {string|null} [type_url] Any type_url
-                 * @property {Uint8Array|null} [value] Any value
-                 */
-    
-                /**
-                 * Constructs a new Any.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Any.
-                 * @implements IAny
-                 * @constructor
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 */
-                function Any(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Any type_url.
-                 * @member {string} type_url
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.type_url = "";
-    
-                /**
-                 * Any value.
-                 * @member {Uint8Array} value
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 */
-                Any.prototype.value = $util.newBuffer([]);
-    
-                /**
-                 * Creates a new Any instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny=} [properties] Properties to set
-                 * @returns {google.protobuf.Any} Any instance
-                 */
-                Any.create = function create(properties) {
-                    return new Any(properties);
-                };
-    
-                /**
-                 * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.type_url != null && Object.hasOwnProperty.call(message, "type_url"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.type_url);
-                    if (message.value != null && Object.hasOwnProperty.call(message, "value"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).bytes(message.value);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.IAny} message Any message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Any.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Any();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.type_url = reader.string();
-                            break;
-                        case 2:
-                            message.value = reader.bytes();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Any message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Any} Any
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Any.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Any message.
-                 * @function verify
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Any.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        if (!$util.isString(message.type_url))
-                            return "type_url: string expected";
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        if (!(message.value && typeof message.value.length === "number" || $util.isString(message.value)))
-                            return "value: buffer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Any message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Any} Any
-                 */
-                Any.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Any)
-                        return object;
-                    var message = new $root.google.protobuf.Any();
-                    if (object.type_url != null)
-                        message.type_url = String(object.type_url);
-                    if (object.value != null)
-                        if (typeof object.value === "string")
-                            $util.base64.decode(object.value, message.value = $util.newBuffer($util.base64.length(object.value)), 0);
-                        else if (object.value.length)
-                            message.value = object.value;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from an Any message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Any
-                 * @static
-                 * @param {google.protobuf.Any} message Any
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Any.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.type_url = "";
-                        if (options.bytes === String)
-                            object.value = "";
-                        else {
-                            object.value = [];
-                            if (options.bytes !== Array)
-                                object.value = $util.newBuffer(object.value);
-                        }
-                    }
-                    if (message.type_url != null && message.hasOwnProperty("type_url"))
-                        object.type_url = message.type_url;
-                    if (message.value != null && message.hasOwnProperty("value"))
-                        object.value = options.bytes === String ? $util.base64.encode(message.value, 0, message.value.length) : options.bytes === Array ? Array.prototype.slice.call(message.value) : message.value;
-                    return object;
-                };
-    
-                /**
-                 * Converts this Any to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Any
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Any.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return Any;
             })();
     
             protobuf.Duration = (function() {
