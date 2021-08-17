@@ -1,5 +1,19 @@
 # Changelog
 
+## [2.13.0](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.12.1...v2.13.0) (2021-08-17)
+
+
+### Features
+
+* add advanced settings for agent level feat: add rollout config, state and failure reason for experiment feat: add insights export settings for security setting feat: add language code for streaming recognition result and flow versions for query p... ([#156](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/156)) ([80d2f94](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/80d2f94bcfaa65ea442ee4f8133d850035be04ed))
+* added support for DLP templates; expose `Locations` service to get/list avaliable locations of Dialogflow products ([#162](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/162)) ([b77bde9](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/b77bde9893cde0c9e766b8e844fa4cca61efb5aa))
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#164](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/164)) ([092d69d](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/092d69d76716297aff6a671200088d5740b1fd47))
+* **deps:** google-gax v2.24.1 ([#165](https://www.github.com/googleapis/nodejs-dialogflow-cx/issues/165)) ([6261c37](https://www.github.com/googleapis/nodejs-dialogflow-cx/commit/6261c37019b3ce94a9876bfa4634837132691888))
+
 ### [2.12.1](https://www.github.com/googleapis/nodejs-dialogflow-cx/compare/v2.12.0...v2.12.1) (2021-07-21)
 
 
