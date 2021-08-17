@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.0.4...v1.0.5) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#30](https://www.github.com/googleapis/nodejs-apigee-connect/issues/30)) ([72f263f](https://www.github.com/googleapis/nodejs-apigee-connect/commit/72f263f19d5490a83f963fcd071d0485678c0ba5))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.0.3...v1.0.4) (2021-08-09)
 
 
