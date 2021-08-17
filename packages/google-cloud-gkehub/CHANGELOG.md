@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.2.0...v1.2.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#80](https://www.github.com/googleapis/nodejs-gke-hub/issues/80)) ([d8ceb14](https://www.github.com/googleapis/nodejs-gke-hub/commit/d8ceb140c67f63e203bafa1ed23947e28921f1ed))
+* **deps:** google-gax v2.24.1 ([#82](https://www.github.com/googleapis/nodejs-gke-hub/issues/82)) ([53d0fbd](https://www.github.com/googleapis/nodejs-gke-hub/commit/53d0fbd9b39910f6c6082884c7d4414665b9b0a0))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.1.4...v1.2.0) (2021-07-21)
 
 
