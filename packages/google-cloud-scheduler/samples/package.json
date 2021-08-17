@@ -14,7 +14,7 @@
     "test": "mocha --timeout 10000 --exit"
   },
   "dependencies": {
-    "@google-cloud/scheduler": "^2.2.5",
+    "@google-cloud/scheduler": "^2.2.6",
     "body-parser": "^1.18.3",
     "express": "^4.16.4"
   },
