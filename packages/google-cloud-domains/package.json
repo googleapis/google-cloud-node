@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/domains",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Domains client for Node.js",
   "repository": "googleapis/nodejs-domains",
   "license": "Apache-2.0",
