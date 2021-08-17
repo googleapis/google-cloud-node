@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/data-qna.svg)](https://www.npmjs.org/package/@google-cloud/data-qna)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-data-qna/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-data-qna)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-data-qna/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-data-qna)
 
 
 
@@ -15,7 +15,7 @@ Dataqna client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-data-qna/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-data-qna/blob/main/CHANGELOG.md).
 
 * [Data QnA Node.js Client API Reference][client-docs]
 * [Data QnA Documentation][product-docs]
@@ -101,7 +101,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-data-qna/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-data-qna/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -113,7 +113,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-data-qna/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-data-qna/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/data-qna/latest
 [product-docs]: https://cloud.google.com/bigquery/docs
