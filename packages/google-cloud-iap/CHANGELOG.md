@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.1](https://www.github.com/googleapis/nodejs-iap/compare/v1.0.0...v1.0.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#7](https://www.github.com/googleapis/nodejs-iap/issues/7)) ([69e6fa3](https://www.github.com/googleapis/nodejs-iap/commit/69e6fa3a726cdc5dc9205b470813b67c5712857c))
+
 ## 1.0.0 (2021-07-30)
 
 
