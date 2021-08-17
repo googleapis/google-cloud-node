@@ -1,5 +1,14 @@
 # Changelog
 
+### [3.0.2](https://www.github.com/googleapis/nodejs-document-ai/compare/v3.0.1...v3.0.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#253](https://www.github.com/googleapis/nodejs-document-ai/issues/253)) ([ac879c4](https://www.github.com/googleapis/nodejs-document-ai/commit/ac879c425cb75862508527b2cf7cbd34e958684e))
+* **deps:** google-gax v2.24.1 ([#257](https://www.github.com/googleapis/nodejs-document-ai/issues/257)) ([4ff6b2d](https://www.github.com/googleapis/nodejs-document-ai/commit/4ff6b2dfa2a5cee97f5dee0690c54f606902a38a))
+* Update DocumentUnderstandingService default_host in v1beta2 from a regional endpoint, to non-regional ([#252](https://www.github.com/googleapis/nodejs-document-ai/issues/252)) ([79b8d82](https://www.github.com/googleapis/nodejs-document-ai/commit/79b8d825244748473efcee1d75653aa2b5077055))
+
 ### [3.0.1](https://www.github.com/googleapis/nodejs-document-ai/compare/v3.0.0...v3.0.1) (2021-07-21)
 
 
