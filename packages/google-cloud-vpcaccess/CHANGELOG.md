@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.0.4...v1.0.5) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#29](https://www.github.com/googleapis/nodejs-vpc-access/issues/29)) ([670c82a](https://www.github.com/googleapis/nodejs-vpc-access/commit/670c82af3caf3adef7104dab62842ba46f110c85))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.0.3...v1.0.4) (2021-07-16)
 
 
