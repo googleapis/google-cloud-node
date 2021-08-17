@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.6](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.5...v1.1.6) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#58](https://www.github.com/googleapis/nodejs-api-gateway/issues/58)) ([e5f8604](https://www.github.com/googleapis/nodejs-api-gateway/commit/e5f8604007dfcc0c58c016a0253b9b65616a5ae4))
+
 ### [1.1.5](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.4...v1.1.5) (2021-08-09)
 
 
