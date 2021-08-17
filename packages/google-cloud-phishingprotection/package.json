@@ -1,7 +1,7 @@
 {
   "repository": "googleapis/nodejs-phishing-protection",
   "name": "@google-cloud/phishing-protection",
-  "version": "2.4.6",
+  "version": "2.4.7",
   "author": "Google LLC",
   "description": "Phishing Protection API client for Node.js",
   "main": "build/src/index.js",
