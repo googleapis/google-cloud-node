@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.4](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.5.3...v2.5.4) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#198](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/198)) ([c6f70de](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/c6f70de43641ee7a00237884cf3f40bbf1bed502))
+
 ### [2.5.3](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.5.2...v2.5.3) (2021-07-21)
 
 
