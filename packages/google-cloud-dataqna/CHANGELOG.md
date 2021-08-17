@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.8](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.7...v1.0.8) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#63](https://www.github.com/googleapis/nodejs-data-qna/issues/63)) ([1020177](https://www.github.com/googleapis/nodejs-data-qna/commit/1020177e792a4deed38279fc6b9c74601262342f))
+* **deps:** google-gax v2.24.1 ([#65](https://www.github.com/googleapis/nodejs-data-qna/issues/65)) ([f298787](https://www.github.com/googleapis/nodejs-data-qna/commit/f2987878347e3d3a1f56b70bb5794aada913f246))
+
 ### [1.0.7](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.6...v1.0.7) (2021-07-21)
 
 
