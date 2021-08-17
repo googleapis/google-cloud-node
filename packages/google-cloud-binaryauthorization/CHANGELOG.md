@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.6](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.5...v1.1.6) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#84](https://www.github.com/googleapis/nodejs-binary-authorization/issues/84)) ([4f6cadf](https://www.github.com/googleapis/nodejs-binary-authorization/commit/4f6cadf938a15a6d2e6332b3fd2697696c78106b))
+
 ### [1.1.5](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.4...v1.1.5) (2021-07-21)
 
 
