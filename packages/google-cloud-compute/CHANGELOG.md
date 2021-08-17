@@ -4,6 +4,23 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.6.0...v3.0.0) (2021-08-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* new generated version of compute API (#537)
+
+### Features
+
+* new generated version of compute API ([#537](https://www.github.com/googleapis/nodejs-compute/issues/537)) ([4023676](https://www.github.com/googleapis/nodejs-compute/commit/4023676e121e3b3c71b681dbd77136ab74184e68))
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#609](https://www.github.com/googleapis/nodejs-compute/issues/609)) ([3013bb5](https://www.github.com/googleapis/nodejs-compute/commit/3013bb53258d738e136327fd027b6ea4fae835db))
+* **deps:** google-gax v2.24.1 ([#612](https://www.github.com/googleapis/nodejs-compute/issues/612)) ([8569747](https://www.github.com/googleapis/nodejs-compute/commit/856974738ab7051cdbf05575bc5871c0b6b4ea28))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.5.1...v2.6.0) (2021-06-29)
 
 
