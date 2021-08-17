@@ -250,7 +250,10 @@ export namespace google {
                 enum CommuteMethod {
                     COMMUTE_METHOD_UNSPECIFIED = 0,
                     DRIVING = 1,
-                    TRANSIT = 2
+                    TRANSIT = 2,
+                    WALKING = 3,
+                    CYCLING = 4,
+                    TRANSIT_ACCESSIBLE = 5
                 }
 
                 /** Properties of a Location. */

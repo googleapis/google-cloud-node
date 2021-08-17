@@ -840,6 +840,9 @@ export class JobServiceClient {
    *     "FULL_TIME", "PART_TIME".
    *   * company_size: histogram by {@link google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
    *   "MEDIUM", "BIG".
+   *   * publish_time_in_day: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *     in days.
+   *     Must specify list of numeric buckets in spec.
    *   * publish_time_in_month: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in months.
    *     Must specify list of numeric buckets in spec.
@@ -893,7 +896,7 @@ export class JobServiceClient {
    *   bucket(100000, MAX)])`
    *   * `count(string_custom_attribute["some-string-custom-attribute"])`
    *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the search response.
    *   Defaults to {@link google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if no value is specified.
@@ -1149,6 +1152,9 @@ export class JobServiceClient {
    *     "FULL_TIME", "PART_TIME".
    *   * company_size: histogram by {@link google.cloud.talent.v4.CompanySize|CompanySize}, for example, "SMALL",
    *   "MEDIUM", "BIG".
+   *   * publish_time_in_day: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
+   *     in days.
+   *     Must specify list of numeric buckets in spec.
    *   * publish_time_in_month: histogram by the {@link google.cloud.talent.v4.Job.posting_publish_time|Job.posting_publish_time}
    *     in months.
    *     Must specify list of numeric buckets in spec.
@@ -1202,7 +1208,7 @@ export class JobServiceClient {
    *   bucket(100000, MAX)])`
    *   * `count(string_custom_attribute["some-string-custom-attribute"])`
    *   * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+   *     [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
    * @param {google.cloud.talent.v4.JobView} request.jobView
    *   The desired job attributes returned for jobs in the search response.
    *   Defaults to {@link google.cloud.talent.v4.JobView.JOB_VIEW_SMALL|JobView.JOB_VIEW_SMALL} if no value is specified.
@@ -1865,10 +1871,13 @@ export class JobServiceClient {
    *
    *   The fields eligible for filtering are:
    *
-   *   * `companyName` (Required)
+   *   * `companyName`
    *   * `requisitionId`
    *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
    *   OPEN if no value is specified.
+   *
+   *   At least one of `companyName` and `requisitionId` must present or an
+   *   INVALID_ARGUMENT error is thrown.
    *
    *   Sample Query:
    *
@@ -1877,6 +1886,8 @@ export class JobServiceClient {
    *   requisitionId = "req-1"
    *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   status = "EXPIRED"
+   *   * requisitionId = "req-1"
+   *   * requisitionId = "req-1" AND status = "EXPIRED"
    * @param {string} request.pageToken
    *   The starting point of a query result.
    * @param {number} request.pageSize
@@ -1959,10 +1970,13 @@ export class JobServiceClient {
    *
    *   The fields eligible for filtering are:
    *
-   *   * `companyName` (Required)
+   *   * `companyName`
    *   * `requisitionId`
    *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
    *   OPEN if no value is specified.
+   *
+   *   At least one of `companyName` and `requisitionId` must present or an
+   *   INVALID_ARGUMENT error is thrown.
    *
    *   Sample Query:
    *
@@ -1971,6 +1985,8 @@ export class JobServiceClient {
    *   requisitionId = "req-1"
    *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   status = "EXPIRED"
+   *   * requisitionId = "req-1"
+   *   * requisitionId = "req-1" AND status = "EXPIRED"
    * @param {string} request.pageToken
    *   The starting point of a query result.
    * @param {number} request.pageSize
@@ -2035,10 +2051,13 @@ export class JobServiceClient {
    *
    *   The fields eligible for filtering are:
    *
-   *   * `companyName` (Required)
+   *   * `companyName`
    *   * `requisitionId`
    *   * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
    *   OPEN if no value is specified.
+   *
+   *   At least one of `companyName` and `requisitionId` must present or an
+   *   INVALID_ARGUMENT error is thrown.
    *
    *   Sample Query:
    *
@@ -2047,6 +2066,8 @@ export class JobServiceClient {
    *   requisitionId = "req-1"
    *   * companyName = "projects/foo/tenants/bar/companies/baz" AND
    *   status = "EXPIRED"
+   *   * requisitionId = "req-1"
+   *   * requisitionId = "req-1" AND status = "EXPIRED"
    * @param {string} request.pageToken
    *   The starting point of a query result.
    * @param {number} request.pageSize
