@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.6...v1.2.0) (2021-08-17)
+
+
+### Features
+
+* Added the Backup resource and Backup resource GetIamPolicy/SetIamPolicy to V1 feat: Added the RestoreService method to V1 ([#80](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/80)) ([8d1df0e](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/8d1df0e23894a49e3c2b4ae4a9c1b7c76cd1de8f))
+
 ### [1.1.6](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.5...v1.1.6) (2021-08-17)
 
 
