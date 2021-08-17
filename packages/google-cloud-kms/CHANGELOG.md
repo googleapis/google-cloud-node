@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.5.0...v2.6.0) (2021-08-17)
+
+
+### Features
+
+* **kms:** add samples for new rng and hmac kms apis ([#487](https://www.github.com/googleapis/nodejs-kms/issues/487)) ([5278a8e](https://www.github.com/googleapis/nodejs-kms/commit/5278a8e62c14fcc5cc02e4bd7b36e68a4ed48b72))
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#489](https://www.github.com/googleapis/nodejs-kms/issues/489)) ([f5e8569](https://www.github.com/googleapis/nodejs-kms/commit/f5e85696de33d8870951d684b491338fc3c029f3))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.4.4...v2.5.0) (2021-08-05)
 
 
