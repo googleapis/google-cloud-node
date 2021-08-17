@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/retail",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Retail client for Node.js",
   "repository": "googleapis/nodejs-retail",
   "license": "Apache-2.0",
