@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+### [2.4.2](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.4.1...v2.4.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#291](https://www.github.com/googleapis/nodejs-datacatalog/issues/291)) ([b9f80cd](https://www.github.com/googleapis/nodejs-datacatalog/commit/b9f80cd961a516c967d20c66b3752cadd9ed9546))
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.4.0...v2.4.1) (2021-08-14)
 
 
