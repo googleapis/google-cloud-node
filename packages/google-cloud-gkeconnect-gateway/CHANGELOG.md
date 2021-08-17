@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.0.2...v1.0.3) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#20](https://www.github.com/googleapis/nodejs-gke-connect-gateway/issues/20)) ([f8731f3](https://www.github.com/googleapis/nodejs-gke-connect-gateway/commit/f8731f3b957562977f70e7de6b6737ffbffa81d1))
+* **deps:** google-gax v2.24.1 ([#22](https://www.github.com/googleapis/nodejs-gke-connect-gateway/issues/22)) ([2613add](https://www.github.com/googleapis/nodejs-gke-connect-gateway/commit/2613add6ed97059ef8e76e333c885d69afa4365c))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.0.1...v1.0.2) (2021-07-22)
 
 

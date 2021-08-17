@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/gke-connect-gateway",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "apigateway client for Node.js",
   "repository": "googleapis/nodejs-gke-connect-gateway",
   "license": "Apache-2.0",
