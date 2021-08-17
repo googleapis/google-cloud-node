@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.4](https://www.github.com/googleapis/nodejs-private-catalog/compare/v1.0.3...v1.0.4) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#32](https://www.github.com/googleapis/nodejs-private-catalog/issues/32)) ([20fe51a](https://www.github.com/googleapis/nodejs-private-catalog/commit/20fe51a9f2f588c744847905954cd16cc0e4a2bc))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-private-catalog/compare/v1.0.2...v1.0.3) (2021-07-16)
 
 
