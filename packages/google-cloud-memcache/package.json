@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/memcache",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "description": "Memcache client for Node.js",
   "repository": "googleapis/nodejs-memcache",
   "license": "Apache-2.0",
