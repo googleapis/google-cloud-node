@@ -3,13 +3,11 @@
   "description": "Google Compute Engine Client Library for Node.js",
   "version": "3.0.0-alpha.3",
   "license": "Apache-2.0",
-  "author": "Google Inc.",
+  "author": "Google LLC",
   "engines": {
     "node": ">=10"
   },
   "repository": "googleapis/nodejs-compute",
-  "license": "Apache-2.0",
-  "author": "Google LLC",
   "main": "build/src/index.js",
   "files": [
     "build/src",
@@ -117,7 +115,7 @@
     "precompile": "gts clean"
   },
   "dependencies": {
-    "google-gax": "^2.13.0"
+    "google-gax": "^2.24.1"
   },
   "devDependencies": {
     "@types/mocha": "^8.2.0",
@@ -139,8 +137,5 @@
     "uuid": "^8.0.0",
     "webpack": "^5.10.1",
     "webpack-cli": "^4.2.0"
-  },
-  "engines": {
-    "node": ">=10"
   }
 }
