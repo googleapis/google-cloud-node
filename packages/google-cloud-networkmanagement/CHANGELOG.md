@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-network-management/compare/v1.0.1...v1.0.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#13](https://www.github.com/googleapis/nodejs-network-management/issues/13)) ([93e0818](https://www.github.com/googleapis/nodejs-network-management/commit/93e0818f02f528a6f7ce188822d4f5e67ab4cf2f))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-network-management/compare/v1.0.0...v1.0.1) (2021-08-06)
 
 
