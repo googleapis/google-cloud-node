@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/media-translation",
-  "version": "2.3.3",
+  "version": "2.3.4",
   "description": "Mediatranslation client for Node.js",
   "repository": "googleapis/nodejs-media-translation",
   "license": "Apache-2.0",

@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/media-translation": "^2.3.3",
+    "@google-cloud/media-translation": "^2.3.4",
     "node-record-lpcm16": "1.0.1"
   },
   "devDependencies": {

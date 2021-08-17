@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.4](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.3.3...v2.3.4) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#174](https://www.github.com/googleapis/nodejs-media-translation/issues/174)) ([b90cf10](https://www.github.com/googleapis/nodejs-media-translation/commit/b90cf1034235ab0416011de7a1b77afed5597dfc))
+
 ### [2.3.3](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.3.2...v2.3.3) (2021-07-21)
 
 
