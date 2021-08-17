@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.3.6](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.5...v2.3.6) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#507](https://www.github.com/googleapis/nodejs-iot/issues/507)) ([8fa3d71](https://www.github.com/googleapis/nodejs-iot/commit/8fa3d7180578cab4bc5b29d64a2f8a05a741cdff))
+
 ### [2.3.5](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.4...v2.3.5) (2021-07-21)
 
 
