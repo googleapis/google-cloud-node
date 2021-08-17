@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.4...v1.0.5) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#27](https://www.github.com/googleapis/nodejs-cloud-tpu/issues/27)) ([68a71a9](https://www.github.com/googleapis/nodejs-cloud-tpu/commit/68a71a9919b37cd7043cd1c3e607eedee15240c0))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.3...v1.0.4) (2021-08-11)
 
 
