@@ -4,6 +4,16 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+### [2.4.4](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.3...v2.4.4) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#523](https://www.github.com/googleapis/nodejs-dataproc/issues/523)) ([42b4163](https://www.github.com/googleapis/nodejs-dataproc/commit/42b4163483409a29740878f95cabf2ce617bfa86))
+* **deps:** google-gax v2.24.1 ([#524](https://www.github.com/googleapis/nodejs-dataproc/issues/524)) ([fa82a3a](https://www.github.com/googleapis/nodejs-dataproc/commit/fa82a3a8864de5f88ce4d28445cdc85837413ee3))
+* **deps:** require google-gax v2.17.1 ([#510](https://www.github.com/googleapis/nodejs-dataproc/issues/510)) ([4706b61](https://www.github.com/googleapis/nodejs-dataproc/commit/4706b61bf928f0c6e7a2c811ff203d82da8fa2a1))
+* Updating WORKSPACE files to use the newest version of the Typescript generator. ([#511](https://www.github.com/googleapis/nodejs-dataproc/issues/511)) ([be8cecc](https://www.github.com/googleapis/nodejs-dataproc/commit/be8ceccc36ffa198f983b78ae7918af43d291f42))
+
 ### [2.4.3](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.2...v2.4.3) (2021-06-29)
 
 
