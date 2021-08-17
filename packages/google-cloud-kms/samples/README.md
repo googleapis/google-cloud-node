@@ -16,6 +16,7 @@
   * [Create Key Asymmetric Sign](#create-key-asymmetric-sign)
   * [Create Key Hsm](#create-key-hsm)
   * [Create Key Labels](#create-key-labels)
+  * [Create Key Mac](#create-key-mac)
   * [Create Key Ring](#create-key-ring)
   * [Create Key Rotation Schedule](#create-key-rotation-schedule)
   * [Create Key Symmetric Encrypt Decrypt](#create-key-symmetric-encrypt-decrypt)
@@ -27,6 +28,7 @@
   * [Enable Key Version](#enable-key-version)
   * [Encrypt Asymmetric](#encrypt-asymmetric)
   * [Encrypt Symmetric](#encrypt-symmetric)
+  * [Generate Random Bytes](#generate-random-bytes)
   * [Get Key Labels](#get-key-labels)
   * [Get Key Version Attestation](#get-key-version-attestation)
   * [Get Public Key](#get-public-key)
@@ -36,6 +38,7 @@
   * [Quickstart](#quickstart)
   * [Restore Key Version](#restore-key-version)
   * [Sign Asymmetric](#sign-asymmetric)
+  * [Sign Mac](#sign-mac)
   * [Update Key Add Rotation](#update-key-add-rotation)
   * [Update Key Remove Labels](#update-key-remove-labels)
   * [Update Key Remove Rotation](#update-key-remove-rotation)
@@ -43,6 +46,7 @@
   * [Update Key Update Labels](#update-key-update-labels)
   * [Verify Asymmetric Ec](#verify-asymmetric-ec)
   * [Verify Asymmetric Rsa](#verify-asymmetric-rsa)
+  * [Verify Mac](#verify-mac)
 
 ## Before you begin
 
@@ -120,6 +124,23 @@ __Usage:__
 
 
 `node samples/createKeyLabels.js`
+
+
+-----
+
+
+
+
+### Create Key Mac
+
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeyMac.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeyMac.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/createKeyMac.js`
 
 
 -----
@@ -314,6 +335,23 @@ __Usage:__
 
 
 
+### Generate Random Bytes
+
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/generateRandomBytes.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/generateRandomBytes.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/generateRandomBytes.js`
+
+
+-----
+
+
+
+
 ### Get Key Labels
 
 View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/getKeyLabels.js).
@@ -467,6 +505,23 @@ __Usage:__
 
 
 
+### Sign Mac
+
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/signMac.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/signMac.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/signMac.js`
+
+
+-----
+
+
+
+
 ### Update Key Add Rotation
 
 View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/updateKeyAddRotation.js).
@@ -579,6 +634,23 @@ __Usage:__
 
 
 `node samples/verifyAsymmetricRsa.js`
+
+
+-----
+
+
+
+
+### Verify Mac
+
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/verifyMac.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/verifyMac.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/verifyMac.js`
 
 
 
