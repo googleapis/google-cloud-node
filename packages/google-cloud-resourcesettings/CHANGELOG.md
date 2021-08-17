@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-resource-settings/compare/v1.0.1...v1.0.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#20](https://www.github.com/googleapis/nodejs-resource-settings/issues/20)) ([2b6dfc5](https://www.github.com/googleapis/nodejs-resource-settings/commit/2b6dfc5bd40a6cc101f1d6799dcd6b60123ac540))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-resource-settings/compare/v1.0.0...v1.0.1) (2021-07-12)
 
 
