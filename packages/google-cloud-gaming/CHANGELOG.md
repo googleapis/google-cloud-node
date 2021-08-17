@@ -1,5 +1,13 @@
 # Changelog
 
+### [2.3.8](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.7...v2.3.8) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#206](https://www.github.com/googleapis/nodejs-game-servers/issues/206)) ([04998bf](https://www.github.com/googleapis/nodejs-game-servers/commit/04998bf4f24613792beb12fff9d1a14da795b74b))
+* **deps:** google-gax v2.24.1 ([#208](https://www.github.com/googleapis/nodejs-game-servers/issues/208)) ([8462da4](https://www.github.com/googleapis/nodejs-game-servers/commit/8462da415e3df130356f70e34f97698628f48b2b))
+
 ### [2.3.7](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.6...v2.3.7) (2021-07-16)
 
 
