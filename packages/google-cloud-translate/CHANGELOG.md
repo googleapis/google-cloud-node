@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+### [6.2.7](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.6...v6.2.7) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#711](https://www.github.com/googleapis/nodejs-translate/issues/711)) ([87604a3](https://www.github.com/googleapis/nodejs-translate/commit/87604a30f57186c90e8edfe7a3259c41da8c03d2))
+* increase timeout for batch translate document ([#708](https://www.github.com/googleapis/nodejs-translate/issues/708)) ([ef154ad](https://www.github.com/googleapis/nodejs-translate/commit/ef154ad287820890a4aaedbf40e91b1cb2f798cc))
+
 ### [6.2.6](https://www.github.com/googleapis/nodejs-translate/compare/v6.2.5...v6.2.6) (2021-07-21)
 
 
