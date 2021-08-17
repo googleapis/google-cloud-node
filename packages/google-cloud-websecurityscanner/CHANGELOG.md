@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.7](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.6...v1.0.7) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#72](https://www.github.com/googleapis/nodejs-web-security-scanner/issues/72)) ([3821eed](https://www.github.com/googleapis/nodejs-web-security-scanner/commit/3821eed56dc35cd476ce8042cdb18792cd9f0821))
+
 ### [1.0.6](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.5...v1.0.6) (2021-07-16)
 
 
