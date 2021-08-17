@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.7...v3.3.0) (2021-08-17)
+
+
+### Features
+
+* Add new commute methods in Search APIs feat: Add new histogram type 'publish_time_in_day' feat: Support filtering by requisitionId is ListJobs API ([#356](https://www.github.com/googleapis/nodejs-talent/issues/356)) ([6ff8783](https://www.github.com/googleapis/nodejs-talent/commit/6ff87834432014db8ddcdd0a1342346f85354d51))
+
 ### [3.2.7](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.6...v3.2.7) (2021-08-17)
 
 
