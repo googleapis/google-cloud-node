@@ -43,8 +43,8 @@ const version = require('../../../package.json').version;
 
 /**
  *  Configures and manages metastore services.
- *  Metastore services are fully managed, highly available, auto-scaled,
- *  auto-healing, OSS-native deployments of technical metadata management
+ *  Metastore services are fully managed, highly available, autoscaled,
+ *  autohealing, OSS-native deployments of technical metadata management
  *  software. Each metastore service exposes a network endpoint through which
  *  metadata queries are served. Metadata queries can originate from a variety
  *  of sources, including Apache Hive, Apache Presto, and Apache Spark.
@@ -176,6 +176,9 @@ export class DataprocMetastoreClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      backupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/services/{service}/backups/{backup}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
@@ -203,6 +206,11 @@ export class DataprocMetastoreClient {
         'pageToken',
         'nextPageToken',
         'metadataImports'
+      ),
+      listBackups: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'backups'
       ),
     };
 
@@ -254,6 +262,24 @@ export class DataprocMetastoreClient {
     const exportMetadataMetadata = protoFilesRoot.lookup(
       '.google.cloud.metastore.v1.OperationMetadata'
     ) as gax.protobuf.Type;
+    const restoreServiceResponse = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1.Restore'
+    ) as gax.protobuf.Type;
+    const restoreServiceMetadata = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const createBackupResponse = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1.Backup'
+    ) as gax.protobuf.Type;
+    const createBackupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteBackupResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteBackupMetadata = protoFilesRoot.lookup(
+      '.google.cloud.metastore.v1.OperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       createService: new this._gaxModule.LongrunningDescriptor(
@@ -285,6 +311,21 @@ export class DataprocMetastoreClient {
         this.operationsClient,
         exportMetadataResponse.decode.bind(exportMetadataResponse),
         exportMetadataMetadata.decode.bind(exportMetadataMetadata)
+      ),
+      restoreService: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        restoreServiceResponse.decode.bind(restoreServiceResponse),
+        restoreServiceMetadata.decode.bind(restoreServiceMetadata)
+      ),
+      createBackup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createBackupResponse.decode.bind(createBackupResponse),
+        createBackupMetadata.decode.bind(createBackupMetadata)
+      ),
+      deleteBackup: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteBackupResponse.decode.bind(deleteBackupResponse),
+        deleteBackupMetadata.decode.bind(deleteBackupMetadata)
       ),
     };
 
@@ -348,6 +389,11 @@ export class DataprocMetastoreClient {
       'createMetadataImport',
       'updateMetadataImport',
       'exportMetadata',
+      'restoreService',
+      'listBackups',
+      'getBackup',
+      'createBackup',
+      'deleteBackup',
     ];
     for (const methodName of dataprocMetastoreStubMethods) {
       const callPromise = this.dataprocMetastoreStub.then(
@@ -614,6 +660,92 @@ export class DataprocMetastoreClient {
       });
     this.initialize();
     return this.innerApiCalls.getMetadataImport(request, options, callback);
+  }
+  getBackup(
+    request?: protos.google.cloud.metastore.v1.IGetBackupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.metastore.v1.IBackup,
+      protos.google.cloud.metastore.v1.IGetBackupRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  getBackup(
+    request: protos.google.cloud.metastore.v1.IGetBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.metastore.v1.IBackup,
+      protos.google.cloud.metastore.v1.IGetBackupRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getBackup(
+    request: protos.google.cloud.metastore.v1.IGetBackupRequest,
+    callback: Callback<
+      protos.google.cloud.metastore.v1.IBackup,
+      protos.google.cloud.metastore.v1.IGetBackupRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets details of a single backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The relative resource name of the backup to retrieve, in the
+   *   following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Backup]{@link google.cloud.metastore.v1.Backup}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getBackup(request);
+   */
+  getBackup(
+    request?: protos.google.cloud.metastore.v1.IGetBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.metastore.v1.IBackup,
+          protos.google.cloud.metastore.v1.IGetBackupRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.metastore.v1.IBackup,
+      protos.google.cloud.metastore.v1.IGetBackupRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.metastore.v1.IBackup,
+      protos.google.cloud.metastore.v1.IGetBackupRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getBackup(request, options, callback);
   }
 
   createService(
@@ -1599,6 +1731,494 @@ export class DataprocMetastoreClient {
       protos.google.cloud.metastore.v1.OperationMetadata
     >;
   }
+  restoreService(
+    request?: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IRestore,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  restoreService(
+    request: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IRestore,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  restoreService(
+    request: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IRestore,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Restores a service from a backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.service
+   *   Required. The relative resource name of the metastore service to run restore, in the
+   *   following form:
+   *
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}`.
+   * @param {string} request.backup
+   *   Required. The relative resource name of the metastore service backup to restore
+   *   from, in the following form:
+   *
+   *   `projects/{project_id}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+   * @param {google.cloud.metastore.v1.Restore.RestoreType} [request.restoreType]
+   *   Optional. The type of restore. If unspecified, defaults to `METADATA_ONLY`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+   *   request if it has completed. The server will ignore subsequent requests
+   *   that provide a duplicate request ID for at least 60 minutes after the first
+   *   request.
+   *
+   *   For example, if an initial request times out, followed by another request
+   *   with the same request ID, the server ignores the second request to prevent
+   *   the creation of duplicate commitments.
+   *
+   *   The request ID must be a valid
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format).
+   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.restoreService(request);
+   * const [response] = await operation.promise();
+   */
+  restoreService(
+    request?: protos.google.cloud.metastore.v1.IRestoreServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1.IRestore,
+            protos.google.cloud.metastore.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IRestore,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IRestore,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        service: request.service || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.restoreService(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `restoreService()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkRestoreServiceProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkRestoreServiceProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.metastore.v1.Restore,
+      protos.google.cloud.metastore.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.restoreService,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.metastore.v1.Restore,
+      protos.google.cloud.metastore.v1.OperationMetadata
+    >;
+  }
+  createBackup(
+    request?: protos.google.cloud.metastore.v1.ICreateBackupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IBackup,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  createBackup(
+    request: protos.google.cloud.metastore.v1.ICreateBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IBackup,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createBackup(
+    request: protos.google.cloud.metastore.v1.ICreateBackupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IBackup,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a new backup in a given project and location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The relative resource name of the service in which to create a backup
+   *   of the following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}`.
+   * @param {string} request.backupId
+   *   Required. The ID of the backup, which is used as the final component of the
+   *   backup's name.
+   *
+   *   This value must be between 1 and 64 characters long, begin with a letter,
+   *   end with a letter or number, and consist of alpha-numeric ASCII characters
+   *   or hyphens.
+   * @param {google.cloud.metastore.v1.Backup} request.backup
+   *   Required. The backup to create. The `name` field is ignored. The ID of the created
+   *   backup must be provided in the request's `backup_id` field.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+   *   request if it has completed. The server will ignore subsequent requests
+   *   that provide a duplicate request ID for at least 60 minutes after the first
+   *   request.
+   *
+   *   For example, if an initial request times out, followed by another request
+   *   with the same request ID, the server ignores the second request to prevent
+   *   the creation of duplicate commitments.
+   *
+   *   The request ID must be a valid
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.createBackup(request);
+   * const [response] = await operation.promise();
+   */
+  createBackup(
+    request?: protos.google.cloud.metastore.v1.ICreateBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.metastore.v1.IBackup,
+            protos.google.cloud.metastore.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.metastore.v1.IBackup,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.metastore.v1.IBackup,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createBackup(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `createBackup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkCreateBackupProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkCreateBackupProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.metastore.v1.Backup,
+      protos.google.cloud.metastore.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.createBackup,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.metastore.v1.Backup,
+      protos.google.cloud.metastore.v1.OperationMetadata
+    >;
+  }
+  deleteBackup(
+    request?: protos.google.cloud.metastore.v1.IDeleteBackupRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteBackup(
+    request: protos.google.cloud.metastore.v1.IDeleteBackupRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteBackup(
+    request: protos.google.cloud.metastore.v1.IDeleteBackupRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a single backup.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The relative resource name of the backup to delete, in the
+   *   following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups/{backup_id}`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID. Specify a unique request ID to allow the server to ignore the
+   *   request if it has completed. The server will ignore subsequent requests
+   *   that provide a duplicate request ID for at least 60 minutes after the first
+   *   request.
+   *
+   *   For example, if an initial request times out, followed by another request
+   *   with the same request ID, the server ignores the second request to prevent
+   *   the creation of duplicate commitments.
+   *
+   *   The request ID must be a valid
+   *   [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier#Format)
+   *   A zero UUID (00000000-0000-0000-0000-000000000000) is not supported.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteBackup(request);
+   * const [response] = await operation.promise();
+   */
+  deleteBackup(
+    request?: protos.google.cloud.metastore.v1.IDeleteBackupRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.metastore.v1.IOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.metastore.v1.IOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteBackup(request, options, callback);
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteBackup()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteBackupProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteBackupProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.metastore.v1.OperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteBackup,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.metastore.v1.OperationMetadata
+    >;
+  }
   listServices(
     request?: protos.google.cloud.metastore.v1.IListServicesRequest,
     options?: CallOptions
@@ -2083,9 +2703,315 @@ export class DataprocMetastoreClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.metastore.v1.IMetadataImport>;
   }
+  listBackups(
+    request?: protos.google.cloud.metastore.v1.IListBackupsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.metastore.v1.IBackup[],
+      protos.google.cloud.metastore.v1.IListBackupsRequest | null,
+      protos.google.cloud.metastore.v1.IListBackupsResponse
+    ]
+  >;
+  listBackups(
+    request: protos.google.cloud.metastore.v1.IListBackupsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.metastore.v1.IListBackupsRequest,
+      protos.google.cloud.metastore.v1.IListBackupsResponse | null | undefined,
+      protos.google.cloud.metastore.v1.IBackup
+    >
+  ): void;
+  listBackups(
+    request: protos.google.cloud.metastore.v1.IListBackupsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.metastore.v1.IListBackupsRequest,
+      protos.google.cloud.metastore.v1.IListBackupsResponse | null | undefined,
+      protos.google.cloud.metastore.v1.IBackup
+    >
+  ): void;
+  /**
+   * Lists backups in a service.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The relative resource name of the service whose backups to
+   *   list, in the following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of backups to return. The response may contain less
+   *   than the maximum number. If unspecified, no more than 500 backups are
+   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   call. Provide this token to retrieve the subsequent page.
+   *
+   *   To retrieve the first page, supply an empty page token.
+   *
+   *   When paginating, other parameters provided to
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups} must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. The filter to apply to list results.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify the ordering of results as described in [Sorting
+   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+   *   If not specified, the results will be sorted in the default order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Backup]{@link google.cloud.metastore.v1.Backup}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listBackupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listBackups(
+    request?: protos.google.cloud.metastore.v1.IListBackupsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.metastore.v1.IListBackupsRequest,
+          | protos.google.cloud.metastore.v1.IListBackupsResponse
+          | null
+          | undefined,
+          protos.google.cloud.metastore.v1.IBackup
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.metastore.v1.IListBackupsRequest,
+      protos.google.cloud.metastore.v1.IListBackupsResponse | null | undefined,
+      protos.google.cloud.metastore.v1.IBackup
+    >
+  ): Promise<
+    [
+      protos.google.cloud.metastore.v1.IBackup[],
+      protos.google.cloud.metastore.v1.IListBackupsRequest | null,
+      protos.google.cloud.metastore.v1.IListBackupsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listBackups(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The relative resource name of the service whose backups to
+   *   list, in the following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of backups to return. The response may contain less
+   *   than the maximum number. If unspecified, no more than 500 backups are
+   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   call. Provide this token to retrieve the subsequent page.
+   *
+   *   To retrieve the first page, supply an empty page token.
+   *
+   *   When paginating, other parameters provided to
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups} must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. The filter to apply to list results.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify the ordering of results as described in [Sorting
+   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+   *   If not specified, the results will be sorted in the default order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Backup]{@link google.cloud.metastore.v1.Backup} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listBackupsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listBackupsStream(
+    request?: protos.google.cloud.metastore.v1.IListBackupsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listBackups.createStream(
+      this.innerApiCalls.listBackups as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listBackups`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The relative resource name of the service whose backups to
+   *   list, in the following form:
+   *
+   *   `projects/{project_number}/locations/{location_id}/services/{service_id}/backups`.
+   * @param {number} [request.pageSize]
+   *   Optional. The maximum number of backups to return. The response may contain less
+   *   than the maximum number. If unspecified, no more than 500 backups are
+   *   returned. The maximum value is 1000; values above 1000 are changed to 1000.
+   * @param {string} [request.pageToken]
+   *   Optional. A page token, received from a previous {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups}
+   *   call. Provide this token to retrieve the subsequent page.
+   *
+   *   To retrieve the first page, supply an empty page token.
+   *
+   *   When paginating, other parameters provided to
+   *   {@link google.cloud.metastore.v1.DataprocMetastore.ListBackups|DataprocMetastore.ListBackups} must match the call that provided the
+   *   page token.
+   * @param {string} [request.filter]
+   *   Optional. The filter to apply to list results.
+   * @param {string} [request.orderBy]
+   *   Optional. Specify the ordering of results as described in [Sorting
+   *   Order](https://cloud.google.com/apis/design/design_patterns#sorting_order).
+   *   If not specified, the results will be sorted in the default order.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Backup]{@link google.cloud.metastore.v1.Backup}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listBackupsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listBackupsAsync(
+    request?: protos.google.cloud.metastore.v1.IListBackupsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.metastore.v1.IBackup> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listBackups.asyncIterate(
+      this.innerApiCalls['listBackups'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.metastore.v1.IBackup>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
+
+  /**
+   * Return a fully-qualified backup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} service
+   * @param {string} backup
+   * @returns {string} Resource name string.
+   */
+  backupPath(
+    project: string,
+    location: string,
+    service: string,
+    backup: string
+  ) {
+    return this.pathTemplates.backupPathTemplate.render({
+      project: project,
+      location: location,
+      service: service,
+      backup: backup,
+    });
+  }
+
+  /**
+   * Parse the project from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).project;
+  }
+
+  /**
+   * Parse the location from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).location;
+  }
+
+  /**
+   * Parse the service from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the service.
+   */
+  matchServiceFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).service;
+  }
+
+  /**
+   * Parse the backup from Backup resource.
+   *
+   * @param {string} backupName
+   *   A fully-qualified path representing Backup resource.
+   * @returns {string} A string representing the backup.
+   */
+  matchBackupFromBackupName(backupName: string) {
+    return this.pathTemplates.backupPathTemplate.match(backupName).backup;
+  }
 
   /**
    * Return a fully-qualified location resource name string.

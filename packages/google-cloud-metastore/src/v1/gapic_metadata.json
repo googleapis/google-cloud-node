@@ -20,6 +20,11 @@
                 "getMetadataImport"
               ]
             },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
             "CreateService": {
               "methods": [
                 "createService"
@@ -50,6 +55,21 @@
                 "exportMetadata"
               ]
             },
+            "RestoreService": {
+              "methods": [
+                "restoreService"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
             "ListServices": {
               "methods": [
                 "listServices",
@@ -62,6 +82,13 @@
                 "listMetadataImports",
                 "listMetadataImportsStream",
                 "listMetadataImportsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
               ]
             }
           }
@@ -79,6 +106,11 @@
                 "getMetadataImport"
               ]
             },
+            "GetBackup": {
+              "methods": [
+                "getBackup"
+              ]
+            },
             "CreateService": {
               "methods": [
                 "createService"
@@ -109,6 +141,21 @@
                 "exportMetadata"
               ]
             },
+            "RestoreService": {
+              "methods": [
+                "restoreService"
+              ]
+            },
+            "CreateBackup": {
+              "methods": [
+                "createBackup"
+              ]
+            },
+            "DeleteBackup": {
+              "methods": [
+                "deleteBackup"
+              ]
+            },
             "ListServices": {
               "methods": [
                 "listServices",
@@ -121,6 +168,13 @@
                 "listMetadataImports",
                 "listMetadataImportsStream",
                 "listMetadataImportsAsync"
+              ]
+            },
+            "ListBackups": {
+              "methods": [
+                "listBackups",
+                "listBackupsStream",
+                "listBackupsAsync"
               ]
             }
           }

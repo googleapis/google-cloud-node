@@ -255,6 +255,124 @@
                               }
                             }
                           ]
+                        },
+                        "RestoreService": {
+                          "requestType": "RestoreServiceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{service=projects/*/locations/*/services/*}:restore",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "service,backup",
+                            "(google.longrunning.operation_info).response_type": "Restore",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{service=projects/*/locations/*/services/*}:restore",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "service,backup"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Restore",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListBackups": {
+                          "requestType": "ListBackupsRequest",
+                          "responseType": "ListBackupsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*/services/*}/backups",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*/services/*}/backups"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetBackup": {
+                          "requestType": "GetBackupRequest",
+                          "responseType": "Backup",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/services/*/backups/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/services/*/backups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateBackup": {
+                          "requestType": "CreateBackupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*/services/*}/backups",
+                            "(google.api.http).body": "backup",
+                            "(google.api.method_signature)": "parent,backup,backup_id",
+                            "(google.longrunning.operation_info).response_type": "Backup",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*/services/*}/backups",
+                                "body": "backup"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,backup,backup_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Backup",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteBackup": {
+                          "requestType": "DeleteBackupRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/services/*/backups/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/services/*/backups/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
                         }
                       }
                     },
@@ -472,6 +590,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "restores": {
+                          "rule": "repeated",
+                          "type": "Restore",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -516,6 +642,13 @@
                         "updateTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -623,6 +756,138 @@
                             "SUCCEEDED": 2,
                             "FAILED": 3,
                             "CANCELLED": 4
+                          }
+                        }
+                      }
+                    },
+                    "Backup": {
+                      "options": {
+                        "(google.api.resource).type": "metastore.googleapis.com/Backup",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/services/{service}/backups/{backup}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "serviceRevision": {
+                          "type": "Service",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "restoringServices": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "CREATING": 1,
+                            "DELETING": 2,
+                            "ACTIVE": 3,
+                            "FAILED": 4,
+                            "RESTORING": 5
+                          }
+                        }
+                      }
+                    },
+                    "Restore": {
+                      "fields": {
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "backup": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Backup"
+                          }
+                        },
+                        "type": {
+                          "type": "RestoreType",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "details": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "FAILED": 3,
+                            "CANCELLED": 4
+                          }
+                        },
+                        "RestoreType": {
+                          "values": {
+                            "RESTORE_TYPE_UNSPECIFIED": 0,
+                            "FULL": 1,
+                            "METADATA_ONLY": 2
                           }
                         }
                       }
@@ -902,6 +1167,128 @@
                         }
                       }
                     },
+                    "ListBackupsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListBackupsResponse": {
+                      "fields": {
+                        "backups": {
+                          "rule": "repeated",
+                          "type": "Backup",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetBackupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Backup"
+                          }
+                        }
+                      }
+                    },
+                    "CreateBackupRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "backupId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "backup": {
+                          "type": "Backup",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteBackupRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Backup"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "ExportMetadataRequest": {
                       "oneofs": {
                         "destination": {
@@ -932,6 +1319,40 @@
                         },
                         "databaseDumpType": {
                           "type": "DatabaseDumpSpec.Type",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RestoreServiceRequest": {
+                      "fields": {
+                        "service": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Service"
+                          }
+                        },
+                        "backup": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "metastore.googleapis.com/Backup"
+                          }
+                        },
+                        "restoreType": {
+                          "type": "Restore.RestoreType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
@@ -1021,7 +1442,8 @@
                         "Type": {
                           "values": {
                             "TYPE_UNSPECIFIED": 0,
-                            "MYSQL": 1
+                            "MYSQL": 1,
+                            "AVRO": 2
                           }
                         }
                       }

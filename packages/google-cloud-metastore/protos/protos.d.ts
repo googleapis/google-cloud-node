@@ -185,6 +185,76 @@ export namespace google {
                      * @returns Promise
                      */
                     public exportMetadata(request: google.cloud.metastore.v1.IExportMetadataRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RestoreService.
+                     * @param request RestoreServiceRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public restoreService(request: google.cloud.metastore.v1.IRestoreServiceRequest, callback: google.cloud.metastore.v1.DataprocMetastore.RestoreServiceCallback): void;
+
+                    /**
+                     * Calls RestoreService.
+                     * @param request RestoreServiceRequest message or plain object
+                     * @returns Promise
+                     */
+                    public restoreService(request: google.cloud.metastore.v1.IRestoreServiceRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListBackups.
+                     * @param request ListBackupsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListBackupsResponse
+                     */
+                    public listBackups(request: google.cloud.metastore.v1.IListBackupsRequest, callback: google.cloud.metastore.v1.DataprocMetastore.ListBackupsCallback): void;
+
+                    /**
+                     * Calls ListBackups.
+                     * @param request ListBackupsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listBackups(request: google.cloud.metastore.v1.IListBackupsRequest): Promise<google.cloud.metastore.v1.ListBackupsResponse>;
+
+                    /**
+                     * Calls GetBackup.
+                     * @param request GetBackupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Backup
+                     */
+                    public getBackup(request: google.cloud.metastore.v1.IGetBackupRequest, callback: google.cloud.metastore.v1.DataprocMetastore.GetBackupCallback): void;
+
+                    /**
+                     * Calls GetBackup.
+                     * @param request GetBackupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getBackup(request: google.cloud.metastore.v1.IGetBackupRequest): Promise<google.cloud.metastore.v1.Backup>;
+
+                    /**
+                     * Calls CreateBackup.
+                     * @param request CreateBackupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createBackup(request: google.cloud.metastore.v1.ICreateBackupRequest, callback: google.cloud.metastore.v1.DataprocMetastore.CreateBackupCallback): void;
+
+                    /**
+                     * Calls CreateBackup.
+                     * @param request CreateBackupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createBackup(request: google.cloud.metastore.v1.ICreateBackupRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteBackup.
+                     * @param request DeleteBackupRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteBackup(request: google.cloud.metastore.v1.IDeleteBackupRequest, callback: google.cloud.metastore.v1.DataprocMetastore.DeleteBackupCallback): void;
+
+                    /**
+                     * Calls DeleteBackup.
+                     * @param request DeleteBackupRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteBackup(request: google.cloud.metastore.v1.IDeleteBackupRequest): Promise<google.longrunning.Operation>;
                 }
 
                 namespace DataprocMetastore {
@@ -258,6 +328,41 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type ExportMetadataCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#restoreService}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RestoreServiceCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#listBackups}.
+                     * @param error Error, if any
+                     * @param [response] ListBackupsResponse
+                     */
+                    type ListBackupsCallback = (error: (Error|null), response?: google.cloud.metastore.v1.ListBackupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#getBackup}.
+                     * @param error Error, if any
+                     * @param [response] Backup
+                     */
+                    type GetBackupCallback = (error: (Error|null), response?: google.cloud.metastore.v1.Backup) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#createBackup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.metastore.v1.DataprocMetastore#deleteBackup}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteBackupCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
                 }
 
                 /** Properties of a Service. */
@@ -870,6 +975,9 @@ export namespace google {
 
                     /** MetadataManagementActivity metadataExports */
                     metadataExports?: (google.cloud.metastore.v1.IMetadataExport[]|null);
+
+                    /** MetadataManagementActivity restores */
+                    restores?: (google.cloud.metastore.v1.IRestore[]|null);
                 }
 
                 /** Represents a MetadataManagementActivity. */
@@ -883,6 +991,9 @@ export namespace google {
 
                     /** MetadataManagementActivity metadataExports. */
                     public metadataExports: google.cloud.metastore.v1.IMetadataExport[];
+
+                    /** MetadataManagementActivity restores. */
+                    public restores: google.cloud.metastore.v1.IRestore[];
 
                     /**
                      * Creates a new MetadataManagementActivity instance using the specified properties.
@@ -973,6 +1084,9 @@ export namespace google {
                     /** MetadataImport updateTime */
                     updateTime?: (google.protobuf.ITimestamp|null);
 
+                    /** MetadataImport endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
                     /** MetadataImport state */
                     state?: (google.cloud.metastore.v1.MetadataImport.State|keyof typeof google.cloud.metastore.v1.MetadataImport.State|null);
                 }
@@ -1000,6 +1114,9 @@ export namespace google {
 
                     /** MetadataImport updateTime. */
                     public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** MetadataImport endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
 
                     /** MetadataImport state. */
                     public state: (google.cloud.metastore.v1.MetadataImport.State|keyof typeof google.cloud.metastore.v1.MetadataImport.State);
@@ -1327,6 +1444,284 @@ export namespace google {
                         SUCCEEDED = 2,
                         FAILED = 3,
                         CANCELLED = 4
+                    }
+                }
+
+                /** Properties of a Backup. */
+                interface IBackup {
+
+                    /** Backup name */
+                    name?: (string|null);
+
+                    /** Backup createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup state */
+                    state?: (google.cloud.metastore.v1.Backup.State|keyof typeof google.cloud.metastore.v1.Backup.State|null);
+
+                    /** Backup serviceRevision */
+                    serviceRevision?: (google.cloud.metastore.v1.IService|null);
+
+                    /** Backup description */
+                    description?: (string|null);
+
+                    /** Backup restoringServices */
+                    restoringServices?: (string[]|null);
+                }
+
+                /** Represents a Backup. */
+                class Backup implements IBackup {
+
+                    /**
+                     * Constructs a new Backup.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IBackup);
+
+                    /** Backup name. */
+                    public name: string;
+
+                    /** Backup createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Backup state. */
+                    public state: (google.cloud.metastore.v1.Backup.State|keyof typeof google.cloud.metastore.v1.Backup.State);
+
+                    /** Backup serviceRevision. */
+                    public serviceRevision?: (google.cloud.metastore.v1.IService|null);
+
+                    /** Backup description. */
+                    public description: string;
+
+                    /** Backup restoringServices. */
+                    public restoringServices: string[];
+
+                    /**
+                     * Creates a new Backup instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Backup instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IBackup): google.cloud.metastore.v1.Backup;
+
+                    /**
+                     * Encodes the specified Backup message. Does not implicitly {@link google.cloud.metastore.v1.Backup.verify|verify} messages.
+                     * @param message Backup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IBackup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Backup message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.Backup.verify|verify} messages.
+                     * @param message Backup message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IBackup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Backup message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Backup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.Backup;
+
+                    /**
+                     * Decodes a Backup message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Backup
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.Backup;
+
+                    /**
+                     * Verifies a Backup message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Backup message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Backup
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.Backup;
+
+                    /**
+                     * Creates a plain object from a Backup message. Also converts values to other types if specified.
+                     * @param message Backup
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.Backup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Backup to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Backup {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        CREATING = 1,
+                        DELETING = 2,
+                        ACTIVE = 3,
+                        FAILED = 4,
+                        RESTORING = 5
+                    }
+                }
+
+                /** Properties of a Restore. */
+                interface IRestore {
+
+                    /** Restore startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Restore endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Restore state */
+                    state?: (google.cloud.metastore.v1.Restore.State|keyof typeof google.cloud.metastore.v1.Restore.State|null);
+
+                    /** Restore backup */
+                    backup?: (string|null);
+
+                    /** Restore type */
+                    type?: (google.cloud.metastore.v1.Restore.RestoreType|keyof typeof google.cloud.metastore.v1.Restore.RestoreType|null);
+
+                    /** Restore details */
+                    details?: (string|null);
+                }
+
+                /** Represents a Restore. */
+                class Restore implements IRestore {
+
+                    /**
+                     * Constructs a new Restore.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IRestore);
+
+                    /** Restore startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Restore endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Restore state. */
+                    public state: (google.cloud.metastore.v1.Restore.State|keyof typeof google.cloud.metastore.v1.Restore.State);
+
+                    /** Restore backup. */
+                    public backup: string;
+
+                    /** Restore type. */
+                    public type: (google.cloud.metastore.v1.Restore.RestoreType|keyof typeof google.cloud.metastore.v1.Restore.RestoreType);
+
+                    /** Restore details. */
+                    public details: string;
+
+                    /**
+                     * Creates a new Restore instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Restore instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IRestore): google.cloud.metastore.v1.Restore;
+
+                    /**
+                     * Encodes the specified Restore message. Does not implicitly {@link google.cloud.metastore.v1.Restore.verify|verify} messages.
+                     * @param message Restore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IRestore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Restore message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.Restore.verify|verify} messages.
+                     * @param message Restore message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IRestore, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Restore message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Restore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.Restore;
+
+                    /**
+                     * Decodes a Restore message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Restore
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.Restore;
+
+                    /**
+                     * Verifies a Restore message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Restore message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Restore
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.Restore;
+
+                    /**
+                     * Creates a plain object from a Restore message. Also converts values to other types if specified.
+                     * @param message Restore
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.Restore, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Restore to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace Restore {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3,
+                        CANCELLED = 4
+                    }
+
+                    /** RestoreType enum. */
+                    enum RestoreType {
+                        RESTORE_TYPE_UNSPECIFIED = 0,
+                        FULL = 1,
+                        METADATA_ONLY = 2
                     }
                 }
 
@@ -2458,6 +2853,516 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a ListBackupsRequest. */
+                interface IListBackupsRequest {
+
+                    /** ListBackupsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListBackupsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListBackupsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListBackupsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListBackupsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListBackupsRequest. */
+                class ListBackupsRequest implements IListBackupsRequest {
+
+                    /**
+                     * Constructs a new ListBackupsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IListBackupsRequest);
+
+                    /** ListBackupsRequest parent. */
+                    public parent: string;
+
+                    /** ListBackupsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListBackupsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListBackupsRequest filter. */
+                    public filter: string;
+
+                    /** ListBackupsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListBackupsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupsRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IListBackupsRequest): google.cloud.metastore.v1.ListBackupsRequest;
+
+                    /**
+                     * Encodes the specified ListBackupsRequest message. Does not implicitly {@link google.cloud.metastore.v1.ListBackupsRequest.verify|verify} messages.
+                     * @param message ListBackupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IListBackupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupsRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.ListBackupsRequest.verify|verify} messages.
+                     * @param message ListBackupsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IListBackupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.ListBackupsRequest;
+
+                    /**
+                     * Decodes a ListBackupsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.ListBackupsRequest;
+
+                    /**
+                     * Verifies a ListBackupsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.ListBackupsRequest;
+
+                    /**
+                     * Creates a plain object from a ListBackupsRequest message. Also converts values to other types if specified.
+                     * @param message ListBackupsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.ListBackupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a ListBackupsResponse. */
+                interface IListBackupsResponse {
+
+                    /** ListBackupsResponse backups */
+                    backups?: (google.cloud.metastore.v1.IBackup[]|null);
+
+                    /** ListBackupsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListBackupsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListBackupsResponse. */
+                class ListBackupsResponse implements IListBackupsResponse {
+
+                    /**
+                     * Constructs a new ListBackupsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IListBackupsResponse);
+
+                    /** ListBackupsResponse backups. */
+                    public backups: google.cloud.metastore.v1.IBackup[];
+
+                    /** ListBackupsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListBackupsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListBackupsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListBackupsResponse instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IListBackupsResponse): google.cloud.metastore.v1.ListBackupsResponse;
+
+                    /**
+                     * Encodes the specified ListBackupsResponse message. Does not implicitly {@link google.cloud.metastore.v1.ListBackupsResponse.verify|verify} messages.
+                     * @param message ListBackupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IListBackupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListBackupsResponse message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.ListBackupsResponse.verify|verify} messages.
+                     * @param message ListBackupsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IListBackupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListBackupsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListBackupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.ListBackupsResponse;
+
+                    /**
+                     * Decodes a ListBackupsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListBackupsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.ListBackupsResponse;
+
+                    /**
+                     * Verifies a ListBackupsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListBackupsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListBackupsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.ListBackupsResponse;
+
+                    /**
+                     * Creates a plain object from a ListBackupsResponse message. Also converts values to other types if specified.
+                     * @param message ListBackupsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.ListBackupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListBackupsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a GetBackupRequest. */
+                interface IGetBackupRequest {
+
+                    /** GetBackupRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetBackupRequest. */
+                class GetBackupRequest implements IGetBackupRequest {
+
+                    /**
+                     * Constructs a new GetBackupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IGetBackupRequest);
+
+                    /** GetBackupRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetBackupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetBackupRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IGetBackupRequest): google.cloud.metastore.v1.GetBackupRequest;
+
+                    /**
+                     * Encodes the specified GetBackupRequest message. Does not implicitly {@link google.cloud.metastore.v1.GetBackupRequest.verify|verify} messages.
+                     * @param message GetBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IGetBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetBackupRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.GetBackupRequest.verify|verify} messages.
+                     * @param message GetBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IGetBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetBackupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.GetBackupRequest;
+
+                    /**
+                     * Decodes a GetBackupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.GetBackupRequest;
+
+                    /**
+                     * Verifies a GetBackupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetBackupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetBackupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.GetBackupRequest;
+
+                    /**
+                     * Creates a plain object from a GetBackupRequest message. Also converts values to other types if specified.
+                     * @param message GetBackupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.GetBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetBackupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CreateBackupRequest. */
+                interface ICreateBackupRequest {
+
+                    /** CreateBackupRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateBackupRequest backupId */
+                    backupId?: (string|null);
+
+                    /** CreateBackupRequest backup */
+                    backup?: (google.cloud.metastore.v1.IBackup|null);
+
+                    /** CreateBackupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateBackupRequest. */
+                class CreateBackupRequest implements ICreateBackupRequest {
+
+                    /**
+                     * Constructs a new CreateBackupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.ICreateBackupRequest);
+
+                    /** CreateBackupRequest parent. */
+                    public parent: string;
+
+                    /** CreateBackupRequest backupId. */
+                    public backupId: string;
+
+                    /** CreateBackupRequest backup. */
+                    public backup?: (google.cloud.metastore.v1.IBackup|null);
+
+                    /** CreateBackupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateBackupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateBackupRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.ICreateBackupRequest): google.cloud.metastore.v1.CreateBackupRequest;
+
+                    /**
+                     * Encodes the specified CreateBackupRequest message. Does not implicitly {@link google.cloud.metastore.v1.CreateBackupRequest.verify|verify} messages.
+                     * @param message CreateBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.ICreateBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateBackupRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.CreateBackupRequest.verify|verify} messages.
+                     * @param message CreateBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.ICreateBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateBackupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.CreateBackupRequest;
+
+                    /**
+                     * Decodes a CreateBackupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.CreateBackupRequest;
+
+                    /**
+                     * Verifies a CreateBackupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateBackupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateBackupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.CreateBackupRequest;
+
+                    /**
+                     * Creates a plain object from a CreateBackupRequest message. Also converts values to other types if specified.
+                     * @param message CreateBackupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.CreateBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateBackupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DeleteBackupRequest. */
+                interface IDeleteBackupRequest {
+
+                    /** DeleteBackupRequest name */
+                    name?: (string|null);
+
+                    /** DeleteBackupRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteBackupRequest. */
+                class DeleteBackupRequest implements IDeleteBackupRequest {
+
+                    /**
+                     * Constructs a new DeleteBackupRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IDeleteBackupRequest);
+
+                    /** DeleteBackupRequest name. */
+                    public name: string;
+
+                    /** DeleteBackupRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteBackupRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteBackupRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IDeleteBackupRequest): google.cloud.metastore.v1.DeleteBackupRequest;
+
+                    /**
+                     * Encodes the specified DeleteBackupRequest message. Does not implicitly {@link google.cloud.metastore.v1.DeleteBackupRequest.verify|verify} messages.
+                     * @param message DeleteBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IDeleteBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteBackupRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.DeleteBackupRequest.verify|verify} messages.
+                     * @param message DeleteBackupRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IDeleteBackupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteBackupRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.DeleteBackupRequest;
+
+                    /**
+                     * Decodes a DeleteBackupRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteBackupRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.DeleteBackupRequest;
+
+                    /**
+                     * Verifies a DeleteBackupRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteBackupRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteBackupRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.DeleteBackupRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteBackupRequest message. Also converts values to other types if specified.
+                     * @param message DeleteBackupRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.DeleteBackupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteBackupRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** Properties of an ExportMetadataRequest. */
                 interface IExportMetadataRequest {
 
@@ -2564,6 +3469,114 @@ export namespace google {
 
                     /**
                      * Converts this ExportMetadataRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RestoreServiceRequest. */
+                interface IRestoreServiceRequest {
+
+                    /** RestoreServiceRequest service */
+                    service?: (string|null);
+
+                    /** RestoreServiceRequest backup */
+                    backup?: (string|null);
+
+                    /** RestoreServiceRequest restoreType */
+                    restoreType?: (google.cloud.metastore.v1.Restore.RestoreType|keyof typeof google.cloud.metastore.v1.Restore.RestoreType|null);
+
+                    /** RestoreServiceRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a RestoreServiceRequest. */
+                class RestoreServiceRequest implements IRestoreServiceRequest {
+
+                    /**
+                     * Constructs a new RestoreServiceRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.metastore.v1.IRestoreServiceRequest);
+
+                    /** RestoreServiceRequest service. */
+                    public service: string;
+
+                    /** RestoreServiceRequest backup. */
+                    public backup: string;
+
+                    /** RestoreServiceRequest restoreType. */
+                    public restoreType: (google.cloud.metastore.v1.Restore.RestoreType|keyof typeof google.cloud.metastore.v1.Restore.RestoreType);
+
+                    /** RestoreServiceRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new RestoreServiceRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RestoreServiceRequest instance
+                     */
+                    public static create(properties?: google.cloud.metastore.v1.IRestoreServiceRequest): google.cloud.metastore.v1.RestoreServiceRequest;
+
+                    /**
+                     * Encodes the specified RestoreServiceRequest message. Does not implicitly {@link google.cloud.metastore.v1.RestoreServiceRequest.verify|verify} messages.
+                     * @param message RestoreServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.metastore.v1.IRestoreServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RestoreServiceRequest message, length delimited. Does not implicitly {@link google.cloud.metastore.v1.RestoreServiceRequest.verify|verify} messages.
+                     * @param message RestoreServiceRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.metastore.v1.IRestoreServiceRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RestoreServiceRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RestoreServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.metastore.v1.RestoreServiceRequest;
+
+                    /**
+                     * Decodes a RestoreServiceRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RestoreServiceRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.metastore.v1.RestoreServiceRequest;
+
+                    /**
+                     * Verifies a RestoreServiceRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RestoreServiceRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RestoreServiceRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.metastore.v1.RestoreServiceRequest;
+
+                    /**
+                     * Creates a plain object from a RestoreServiceRequest message. Also converts values to other types if specified.
+                     * @param message RestoreServiceRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.metastore.v1.RestoreServiceRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RestoreServiceRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -2973,7 +3986,8 @@ export namespace google {
                     /** Type enum. */
                     enum Type {
                         TYPE_UNSPECIFIED = 0,
-                        MYSQL = 1
+                        MYSQL = 1,
+                        AVRO = 2
                     }
                 }
             }
