@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.9.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.9.0...v3.9.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#289](https://www.github.com/googleapis/nodejs-secret-manager/issues/289)) ([e802581](https://www.github.com/googleapis/nodejs-secret-manager/commit/e802581bf44ce6175cefdd13e8aeb6e107cb0cd2))
+
 ## [3.9.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.8.1...v3.9.0) (2021-07-30)
 
 
