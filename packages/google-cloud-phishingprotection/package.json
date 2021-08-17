@@ -23,7 +23,7 @@
     "Phishing Protection API"
   ],
   "dependencies": {
-    "google-gax": "^2.12.0"
+    "google-gax": "^2.24.1"
   },
   "devDependencies": {
     "@types/mocha": "^8.0.0",
