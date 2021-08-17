@@ -48,7 +48,7 @@
   "dependencies": {
     "@google-cloud/common": "^3.0.0",
     "@types/pumpify": "^1.4.1",
-    "google-gax": "^2.17.1",
+    "google-gax": "^2.24.1",
     "protobufjs": "^6.8.6",
     "pumpify": "^2.0.0",
     "stream-events": "^1.0.4",
