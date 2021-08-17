@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/automl?activeTab=versions
 
+### [2.4.5](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.4...v2.4.5) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#538](https://www.github.com/googleapis/nodejs-automl/issues/538)) ([aac7447](https://www.github.com/googleapis/nodejs-automl/commit/aac7447912331ea0edc807985f530bca2e8f663c))
+
 ### [2.4.4](https://www.github.com/googleapis/nodejs-automl/compare/v2.4.3...v2.4.4) (2021-08-11)
 
 
