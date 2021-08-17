@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.2](https://www.github.com/googleapis/nodejs-dataflow/compare/v1.0.1...v1.0.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#15](https://www.github.com/googleapis/nodejs-dataflow/issues/15)) ([af1172d](https://www.github.com/googleapis/nodejs-dataflow/commit/af1172da72a97804f9d50ff91b388f20ff90124f))
+* **deps:** google-gax v2.24.1 ([#17](https://www.github.com/googleapis/nodejs-dataflow/issues/17)) ([d177477](https://www.github.com/googleapis/nodejs-dataflow/commit/d177477188036fa675a1b3f32f5d85aca27c4fcc))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-dataflow/compare/v1.0.0...v1.0.1) (2021-07-21)
 
 

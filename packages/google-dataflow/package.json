@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/dataflow",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "dataflow client for Node.js",
   "repository": "googleapis/nodejs-dataflow",
   "license": "Apache-2.0",
