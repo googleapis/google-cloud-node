@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/billing",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "description": "Billing client for Node.js",
   "repository": "googleapis/nodejs-billing",
   "license": "Apache-2.0",
