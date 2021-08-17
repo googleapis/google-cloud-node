@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+### [2.2.7](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.6...v2.2.7) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#304](https://www.github.com/googleapis/nodejs-datalabeling/issues/304)) ([8835988](https://www.github.com/googleapis/nodejs-datalabeling/commit/88359888f303d90d27b0449dd811e42dadebc5d2))
+* **deps:** google-gax v2.24.1 ([#306](https://www.github.com/googleapis/nodejs-datalabeling/issues/306)) ([ea18b87](https://www.github.com/googleapis/nodejs-datalabeling/commit/ea18b87feff1da34b57decb44fea83b3b371b162))
+
 ### [2.2.6](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.5...v2.2.6) (2021-07-21)
 
 
