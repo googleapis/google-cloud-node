@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.3](https://www.github.com/googleapis/nodejs-eventarc/compare/v1.0.2...v1.0.3) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#18](https://www.github.com/googleapis/nodejs-eventarc/issues/18)) ([b79618b](https://www.github.com/googleapis/nodejs-eventarc/commit/b79618b20957262678fa00c85203b045c6e34b63))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-eventarc/compare/v1.0.1...v1.0.2) (2021-07-21)
 
 
