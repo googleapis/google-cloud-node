@@ -14,7 +14,7 @@
     "test": "mocha --timeout 60000"
   },
   "dependencies": {
-    "@google-cloud/bigquery-data-transfer": "^2.2.6"
+    "@google-cloud/bigquery-data-transfer": "^2.2.7"
   },
   "devDependencies": {
     "chai": "^4.2.0",
