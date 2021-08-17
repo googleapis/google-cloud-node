@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+### [2.1.8](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.7...v2.1.8) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#275](https://www.github.com/googleapis/nodejs-web-risk/issues/275)) ([daa0774](https://www.github.com/googleapis/nodejs-web-risk/commit/daa0774aaa6e6a0c274c894e2bfbd8cfc2726d88))
+
 ### [2.1.7](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.6...v2.1.7) (2021-08-02)
 
 
