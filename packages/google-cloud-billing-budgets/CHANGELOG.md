@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.2.8](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.7...v3.2.8) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#260](https://www.github.com/googleapis/nodejs-billing-budgets/issues/260)) ([c026762](https://www.github.com/googleapis/nodejs-billing-budgets/commit/c026762e3b6a5fa7687f43e9dda7c4d12eee46ba))
+
 ### [3.2.7](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.6...v3.2.7) (2021-08-11)
 
 
