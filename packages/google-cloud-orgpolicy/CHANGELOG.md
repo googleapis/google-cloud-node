@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.7](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.6...v1.0.7) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#54](https://www.github.com/googleapis/nodejs-org-policy/issues/54)) ([a833560](https://www.github.com/googleapis/nodejs-org-policy/commit/a83356087f9ac4e51a031eeb13f536d9f30e2946))
+
 ### [1.0.6](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.5...v1.0.6) (2021-07-16)
 
 
