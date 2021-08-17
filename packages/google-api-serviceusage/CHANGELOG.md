@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.4](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.1.3...v1.1.4) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#38](https://www.github.com/googleapis/nodejs-service-usage/issues/38)) ([021b0eb](https://www.github.com/googleapis/nodejs-service-usage/commit/021b0eb4c69c1ed485aac388c2a5583547dbb3ad))
+
 ### [1.1.3](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.1.2...v1.1.3) (2021-07-30)
 
 
