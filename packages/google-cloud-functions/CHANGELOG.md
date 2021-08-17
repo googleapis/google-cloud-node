@@ -1,5 +1,14 @@
 # Changelog
 
+### [1.1.9](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.8...v1.1.9) (2021-08-17)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#103](https://www.github.com/googleapis/nodejs-functions/issues/103)) ([e1955e9](https://www.github.com/googleapis/nodejs-functions/commit/e1955e905b7b4128816bb778450cf60a11ae4b78))
+* **deps:** google-gax v2.24.1 ([#104](https://www.github.com/googleapis/nodejs-functions/issues/104)) ([a419fa4](https://www.github.com/googleapis/nodejs-functions/commit/a419fa46a2056de455989ee8af577fed01ed8fc3))
+* updating behavior of source_upload_url during Get/List function calls ([#100](https://www.github.com/googleapis/nodejs-functions/issues/100)) ([2cb3abe](https://www.github.com/googleapis/nodejs-functions/commit/2cb3abe1b686472610a799235a73f38415ea096f))
+
 ### [1.1.8](https://www.github.com/googleapis/nodejs-functions/compare/v1.1.7...v1.1.8) (2021-07-21)
 
 
