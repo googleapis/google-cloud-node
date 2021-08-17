@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.5.3](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.5.2...v2.5.3) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** google-gax v2.24.1 ([#136](https://www.github.com/googleapis/nodejs-analytics-data/issues/136)) ([ed23bc2](https://www.github.com/googleapis/nodejs-analytics-data/commit/ed23bc2d71db3bbcd60a1771f70fd10a10a3da1b))
+
 ### [2.5.2](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.5.1...v2.5.2) (2021-08-09)
 
 
