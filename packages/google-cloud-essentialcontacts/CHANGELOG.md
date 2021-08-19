@@ -1,5 +1,13 @@
 # Changelog
 
+### [1.0.6](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.5...v1.0.6) (2021-08-19)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#38](https://www.github.com/googleapis/nodejs-essential-contacts/issues/38)) ([600a78b](https://www.github.com/googleapis/nodejs-essential-contacts/commit/600a78b7cae96dbb46f450eb9438b7551b847460))
+* **deps:** google-gax v2.24.1 ([#39](https://www.github.com/googleapis/nodejs-essential-contacts/issues/39)) ([8b55dd2](https://www.github.com/googleapis/nodejs-essential-contacts/commit/8b55dd2bc7ef8ecac7aa3be4441ee46b965b0867))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.4...v1.0.5) (2021-07-16)
 
 
