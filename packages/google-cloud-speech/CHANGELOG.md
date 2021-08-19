@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [4.7.0](https://www.github.com/googleapis/nodejs-speech/compare/v4.6.1...v4.7.0) (2021-08-19)
+
+
+### Features
+
+* Add transcript normalization ([#792](https://www.github.com/googleapis/nodejs-speech/issues/792)) ([08ed5b5](https://www.github.com/googleapis/nodejs-speech/commit/08ed5b51bda6f158d6c5709a6ca3393aa0c61c3d))
+
 ### [4.6.1](https://www.github.com/googleapis/nodejs-speech/compare/v4.6.0...v4.6.1) (2021-08-17)
 
 
