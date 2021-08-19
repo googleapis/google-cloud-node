@@ -2328,6 +2328,18 @@
                 }
               }
             },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Struct": {
               "fields": {
                 "fields": {
@@ -2411,18 +2423,6 @@
                 },
                 "value": {
                   "type": "bytes",
-                  "id": 2
-                }
-              }
-            },
-            "Duration": {
-              "fields": {
-                "seconds": {
-                  "type": "int64",
-                  "id": 1
-                },
-                "nanos": {
-                  "type": "int32",
                   "id": 2
                 }
               }
