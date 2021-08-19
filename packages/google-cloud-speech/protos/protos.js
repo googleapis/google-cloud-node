@@ -6377,6 +6377,7 @@
                          * @property {number|null} [maxAlternatives] RecognitionConfig maxAlternatives
                          * @property {boolean|null} [profanityFilter] RecognitionConfig profanityFilter
                          * @property {google.cloud.speech.v1p1beta1.ISpeechAdaptation|null} [adaptation] RecognitionConfig adaptation
+                         * @property {google.cloud.speech.v1p1beta1.ITranscriptNormalization|null} [transcriptNormalization] RecognitionConfig transcriptNormalization
                          * @property {Array.<google.cloud.speech.v1p1beta1.ISpeechContext>|null} [speechContexts] RecognitionConfig speechContexts
                          * @property {boolean|null} [enableWordTimeOffsets] RecognitionConfig enableWordTimeOffsets
                          * @property {boolean|null} [enableWordConfidence] RecognitionConfig enableWordConfidence
@@ -6479,6 +6480,14 @@
                          * @instance
                          */
                         RecognitionConfig.prototype.adaptation = null;
+    
+                        /**
+                         * RecognitionConfig transcriptNormalization.
+                         * @member {google.cloud.speech.v1p1beta1.ITranscriptNormalization|null|undefined} transcriptNormalization
+                         * @memberof google.cloud.speech.v1p1beta1.RecognitionConfig
+                         * @instance
+                         */
+                        RecognitionConfig.prototype.transcriptNormalization = null;
     
                         /**
                          * RecognitionConfig speechContexts.
@@ -6644,6 +6653,8 @@
                                 $root.google.protobuf.BoolValue.encode(message.enableSpokenPunctuation, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                             if (message.enableSpokenEmojis != null && Object.hasOwnProperty.call(message, "enableSpokenEmojis"))
                                 $root.google.protobuf.BoolValue.encode(message.enableSpokenEmojis, writer.uint32(/* id 23, wireType 2 =*/186).fork()).ldelim();
+                            if (message.transcriptNormalization != null && Object.hasOwnProperty.call(message, "transcriptNormalization"))
+                                $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.encode(message.transcriptNormalization, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
                             return writer;
                         };
     
@@ -6706,6 +6717,9 @@
                                     break;
                                 case 20:
                                     message.adaptation = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.decode(reader, reader.uint32());
+                                    break;
+                                case 24:
+                                    message.transcriptNormalization = $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.decode(reader, reader.uint32());
                                     break;
                                 case 6:
                                     if (!(message.speechContexts && message.speechContexts.length))
@@ -6825,6 +6839,11 @@
                                 var error = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.verify(message.adaptation);
                                 if (error)
                                     return "adaptation." + error;
+                            }
+                            if (message.transcriptNormalization != null && message.hasOwnProperty("transcriptNormalization")) {
+                                var error = $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.verify(message.transcriptNormalization);
+                                if (error)
+                                    return "transcriptNormalization." + error;
                             }
                             if (message.speechContexts != null && message.hasOwnProperty("speechContexts")) {
                                 if (!Array.isArray(message.speechContexts))
@@ -6957,6 +6976,11 @@
                                     throw TypeError(".google.cloud.speech.v1p1beta1.RecognitionConfig.adaptation: object expected");
                                 message.adaptation = $root.google.cloud.speech.v1p1beta1.SpeechAdaptation.fromObject(object.adaptation);
                             }
+                            if (object.transcriptNormalization != null) {
+                                if (typeof object.transcriptNormalization !== "object")
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.RecognitionConfig.transcriptNormalization: object expected");
+                                message.transcriptNormalization = $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.fromObject(object.transcriptNormalization);
+                            }
                             if (object.speechContexts) {
                                 if (!Array.isArray(object.speechContexts))
                                     throw TypeError(".google.cloud.speech.v1p1beta1.RecognitionConfig.speechContexts: array expected");
@@ -7041,6 +7065,7 @@
                                 object.adaptation = null;
                                 object.enableSpokenPunctuation = null;
                                 object.enableSpokenEmojis = null;
+                                object.transcriptNormalization = null;
                             }
                             if (message.encoding != null && message.hasOwnProperty("encoding"))
                                 object.encoding = options.enums === String ? $root.google.cloud.speech.v1p1beta1.RecognitionConfig.AudioEncoding[message.encoding] : message.encoding;
@@ -7090,6 +7115,8 @@
                                 object.enableSpokenPunctuation = $root.google.protobuf.BoolValue.toObject(message.enableSpokenPunctuation, options);
                             if (message.enableSpokenEmojis != null && message.hasOwnProperty("enableSpokenEmojis"))
                                 object.enableSpokenEmojis = $root.google.protobuf.BoolValue.toObject(message.enableSpokenEmojis, options);
+                            if (message.transcriptNormalization != null && message.hasOwnProperty("transcriptNormalization"))
+                                object.transcriptNormalization = $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.toObject(message.transcriptNormalization, options);
                             return object;
                         };
     
@@ -11887,6 +11914,446 @@
                         };
     
                         return SpeechAdaptation;
+                    })();
+    
+                    v1p1beta1.TranscriptNormalization = (function() {
+    
+                        /**
+                         * Properties of a TranscriptNormalization.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @interface ITranscriptNormalization
+                         * @property {Array.<google.cloud.speech.v1p1beta1.TranscriptNormalization.IEntry>|null} [entries] TranscriptNormalization entries
+                         */
+    
+                        /**
+                         * Constructs a new TranscriptNormalization.
+                         * @memberof google.cloud.speech.v1p1beta1
+                         * @classdesc Represents a TranscriptNormalization.
+                         * @implements ITranscriptNormalization
+                         * @constructor
+                         * @param {google.cloud.speech.v1p1beta1.ITranscriptNormalization=} [properties] Properties to set
+                         */
+                        function TranscriptNormalization(properties) {
+                            this.entries = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranscriptNormalization entries.
+                         * @member {Array.<google.cloud.speech.v1p1beta1.TranscriptNormalization.IEntry>} entries
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @instance
+                         */
+                        TranscriptNormalization.prototype.entries = $util.emptyArray;
+    
+                        /**
+                         * Creates a new TranscriptNormalization instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ITranscriptNormalization=} [properties] Properties to set
+                         * @returns {google.cloud.speech.v1p1beta1.TranscriptNormalization} TranscriptNormalization instance
+                         */
+                        TranscriptNormalization.create = function create(properties) {
+                            return new TranscriptNormalization(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranscriptNormalization message. Does not implicitly {@link google.cloud.speech.v1p1beta1.TranscriptNormalization.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ITranscriptNormalization} message TranscriptNormalization message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranscriptNormalization.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.entries != null && message.entries.length)
+                                for (var i = 0; i < message.entries.length; ++i)
+                                    $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry.encode(message.entries[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranscriptNormalization message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.TranscriptNormalization.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.ITranscriptNormalization} message TranscriptNormalization message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranscriptNormalization.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranscriptNormalization message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.speech.v1p1beta1.TranscriptNormalization} TranscriptNormalization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranscriptNormalization.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.TranscriptNormalization();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.entries && message.entries.length))
+                                        message.entries = [];
+                                    message.entries.push($root.google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranscriptNormalization message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.speech.v1p1beta1.TranscriptNormalization} TranscriptNormalization
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranscriptNormalization.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranscriptNormalization message.
+                         * @function verify
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranscriptNormalization.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.entries != null && message.hasOwnProperty("entries")) {
+                                if (!Array.isArray(message.entries))
+                                    return "entries: array expected";
+                                for (var i = 0; i < message.entries.length; ++i) {
+                                    var error = $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry.verify(message.entries[i]);
+                                    if (error)
+                                        return "entries." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranscriptNormalization message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.speech.v1p1beta1.TranscriptNormalization} TranscriptNormalization
+                         */
+                        TranscriptNormalization.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.speech.v1p1beta1.TranscriptNormalization)
+                                return object;
+                            var message = new $root.google.cloud.speech.v1p1beta1.TranscriptNormalization();
+                            if (object.entries) {
+                                if (!Array.isArray(object.entries))
+                                    throw TypeError(".google.cloud.speech.v1p1beta1.TranscriptNormalization.entries: array expected");
+                                message.entries = [];
+                                for (var i = 0; i < object.entries.length; ++i) {
+                                    if (typeof object.entries[i] !== "object")
+                                        throw TypeError(".google.cloud.speech.v1p1beta1.TranscriptNormalization.entries: object expected");
+                                    message.entries[i] = $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry.fromObject(object.entries[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranscriptNormalization message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @static
+                         * @param {google.cloud.speech.v1p1beta1.TranscriptNormalization} message TranscriptNormalization
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranscriptNormalization.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.entries = [];
+                            if (message.entries && message.entries.length) {
+                                object.entries = [];
+                                for (var j = 0; j < message.entries.length; ++j)
+                                    object.entries[j] = $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry.toObject(message.entries[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranscriptNormalization to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranscriptNormalization.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        TranscriptNormalization.Entry = (function() {
+    
+                            /**
+                             * Properties of an Entry.
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                             * @interface IEntry
+                             * @property {string|null} [search] Entry search
+                             * @property {string|null} [replace] Entry replace
+                             * @property {boolean|null} [caseSensitive] Entry caseSensitive
+                             */
+    
+                            /**
+                             * Constructs a new Entry.
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization
+                             * @classdesc Represents an Entry.
+                             * @implements IEntry
+                             * @constructor
+                             * @param {google.cloud.speech.v1p1beta1.TranscriptNormalization.IEntry=} [properties] Properties to set
+                             */
+                            function Entry(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * Entry search.
+                             * @member {string} search
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @instance
+                             */
+                            Entry.prototype.search = "";
+    
+                            /**
+                             * Entry replace.
+                             * @member {string} replace
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @instance
+                             */
+                            Entry.prototype.replace = "";
+    
+                            /**
+                             * Entry caseSensitive.
+                             * @member {boolean} caseSensitive
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @instance
+                             */
+                            Entry.prototype.caseSensitive = false;
+    
+                            /**
+                             * Creates a new Entry instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.TranscriptNormalization.IEntry=} [properties] Properties to set
+                             * @returns {google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry} Entry instance
+                             */
+                            Entry.create = function create(properties) {
+                                return new Entry(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified Entry message. Does not implicitly {@link google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.TranscriptNormalization.IEntry} message Entry message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Entry.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.search != null && Object.hasOwnProperty.call(message, "search"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.search);
+                                if (message.replace != null && Object.hasOwnProperty.call(message, "replace"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.replace);
+                                if (message.caseSensitive != null && Object.hasOwnProperty.call(message, "caseSensitive"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.caseSensitive);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified Entry message, length delimited. Does not implicitly {@link google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.TranscriptNormalization.IEntry} message Entry message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            Entry.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an Entry message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry} Entry
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Entry.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.search = reader.string();
+                                        break;
+                                    case 2:
+                                        message.replace = reader.string();
+                                        break;
+                                    case 3:
+                                        message.caseSensitive = reader.bool();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an Entry message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry} Entry
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            Entry.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an Entry message.
+                             * @function verify
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            Entry.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.search != null && message.hasOwnProperty("search"))
+                                    if (!$util.isString(message.search))
+                                        return "search: string expected";
+                                if (message.replace != null && message.hasOwnProperty("replace"))
+                                    if (!$util.isString(message.replace))
+                                        return "replace: string expected";
+                                if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
+                                    if (typeof message.caseSensitive !== "boolean")
+                                        return "caseSensitive: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an Entry message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry} Entry
+                             */
+                            Entry.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry)
+                                    return object;
+                                var message = new $root.google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry();
+                                if (object.search != null)
+                                    message.search = String(object.search);
+                                if (object.replace != null)
+                                    message.replace = String(object.replace);
+                                if (object.caseSensitive != null)
+                                    message.caseSensitive = Boolean(object.caseSensitive);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an Entry message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @static
+                             * @param {google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry} message Entry
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            Entry.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.search = "";
+                                    object.replace = "";
+                                    object.caseSensitive = false;
+                                }
+                                if (message.search != null && message.hasOwnProperty("search"))
+                                    object.search = message.search;
+                                if (message.replace != null && message.hasOwnProperty("replace"))
+                                    object.replace = message.replace;
+                                if (message.caseSensitive != null && message.hasOwnProperty("caseSensitive"))
+                                    object.caseSensitive = message.caseSensitive;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this Entry to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.speech.v1p1beta1.TranscriptNormalization.Entry
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            Entry.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return Entry;
+                        })();
+    
+                        return TranscriptNormalization;
                     })();
     
                     v1p1beta1.Adaptation = (function() {

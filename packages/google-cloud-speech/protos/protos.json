@@ -737,6 +737,10 @@
                           "type": "SpeechAdaptation",
                           "id": 20
                         },
+                        "transcriptNormalization": {
+                          "type": "TranscriptNormalization",
+                          "id": 24
+                        },
                         "speechContexts": {
                           "rule": "repeated",
                           "type": "SpeechContext",
@@ -1225,6 +1229,33 @@
                           "rule": "repeated",
                           "type": "CustomClass",
                           "id": 3
+                        }
+                      }
+                    },
+                    "TranscriptNormalization": {
+                      "fields": {
+                        "entries": {
+                          "rule": "repeated",
+                          "type": "Entry",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "Entry": {
+                          "fields": {
+                            "search": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "replace": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "caseSensitive": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          }
                         }
                       }
                     },
