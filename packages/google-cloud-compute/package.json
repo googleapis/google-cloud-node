@@ -104,7 +104,7 @@
     "system-test": "mocha build/system-test system-test/*.js",
     "lint": "gts check",
     "fix": "gts fix",
-    "docs": "jsdoc -c .jsdoc.js",
+    "docs": "node --max-old-space-size=8192 ./node_modules/.bin/jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "clean": "gts clean",
     "compile": "tsc -p . && cp -r protos build/",
