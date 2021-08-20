@@ -63,7 +63,8 @@ npm install @google-cloud/video-transcoder
  */
 // const projectId = 'my-project';
 // const location = 'us-central1';
-const {TranscoderServiceClient} = require('@google-cloud/video-transcoder');
+const {TranscoderServiceClient} =
+  require('@google-cloud/video-transcoder').v1;
 const client = new TranscoderServiceClient();
 async function listJobs() {
   const [jobs] = await client.listJobs({
