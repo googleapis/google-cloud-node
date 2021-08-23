@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-dataflow/compare/v1.0.2...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#18](https://www.github.com/googleapis/nodejs-dataflow/issues/18)) ([ac48141](https://www.github.com/googleapis/nodejs-dataflow/commit/ac48141e34e60d95a6037e30d33b28db9467c2b7))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-dataflow/compare/v1.0.1...v1.0.2) (2021-08-17)
 
 
