@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.0](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.7...v1.5.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#147](https://www.github.com/googleapis/nodejs-memcache/issues/147)) ([2914811](https://www.github.com/googleapis/nodejs-memcache/commit/2914811e7094e157af785fb52fe7211d2f4073cb))
+
 ### [1.4.7](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.6...v1.4.7) (2021-08-17)
 
 
