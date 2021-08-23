@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.2.0...v1.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#82](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/82)) ([9f80543](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/9f8054386a3f39a570b0693f851a9aec12c6a739))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.1.6...v1.2.0) (2021-08-17)
 
 
