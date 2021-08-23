@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-storage-transfer/compare/v1.0.1...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#9](https://www.github.com/googleapis/nodejs-storage-transfer/issues/9)) ([47dde37](https://www.github.com/googleapis/nodejs-storage-transfer/commit/47dde3725b8907d1f974dca83b778ccd7e312bef))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-storage-transfer/compare/v1.0.0...v1.0.1) (2021-08-17)
 
 
