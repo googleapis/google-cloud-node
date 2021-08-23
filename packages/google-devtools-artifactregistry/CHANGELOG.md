@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.7...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#74](https://www.github.com/googleapis/nodejs-artifact-registry/issues/74)) ([a4c3f55](https://www.github.com/googleapis/nodejs-artifact-registry/commit/a4c3f556afe45914ce303ac665e56487f6ed8c5d))
+
 ### [1.0.7](https://www.github.com/googleapis/nodejs-artifact-registry/compare/v1.0.6...v1.0.7) (2021-08-17)
 
 
