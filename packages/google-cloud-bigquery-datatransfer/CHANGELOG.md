@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/bigquery-data-transfer?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.2.7...v2.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#490](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/issues/490)) ([18eb020](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/commit/18eb020441195ead30ccb867ab2c5cfc607fd1f2))
+
 ### [2.2.7](https://www.github.com/googleapis/nodejs-bigquery-data-transfer/compare/v2.2.6...v2.2.7) (2021-08-17)
 
 
