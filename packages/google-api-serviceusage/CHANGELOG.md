@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.1.4...v1.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#40](https://www.github.com/googleapis/nodejs-service-usage/issues/40)) ([1474878](https://www.github.com/googleapis/nodejs-service-usage/commit/14748784647a02f42df8cc1fd53ed3ddf9dfe589))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.1.3...v1.1.4) (2021-08-17)
 
 
