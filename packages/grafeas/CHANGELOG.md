@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/grafeas?activeTab=versions
 
+## [3.5.0](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.6...v3.5.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#289](https://www.github.com/googleapis/nodejs-grafeas/issues/289)) ([7a05903](https://www.github.com/googleapis/nodejs-grafeas/commit/7a059030dcf1d392b62d9f31de4408031124c333))
+
 ### [3.4.6](https://www.github.com/googleapis/nodejs-grafeas/compare/v3.4.5...v3.4.6) (2021-08-17)
 
 
