@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.7...v2.4.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#118](https://www.github.com/googleapis/nodejs-security-private-ca/issues/118)) ([8cafa73](https://www.github.com/googleapis/nodejs-security-private-ca/commit/8cafa73b6529a0e90b64977a0d4fe042eb214348))
+
 ### [2.3.7](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.6...v2.3.7) (2021-08-17)
 
 
