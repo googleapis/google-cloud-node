@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-service-control/compare/v1.1.4...v1.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#69](https://www.github.com/googleapis/nodejs-service-control/issues/69)) ([511f88b](https://www.github.com/googleapis/nodejs-service-control/commit/511f88b92881633b55a3528715f4453b23ce1765))
+
 ### [1.1.4](https://www.github.com/googleapis/nodejs-service-control/compare/v1.1.3...v1.1.4) (2021-08-17)
 
 
