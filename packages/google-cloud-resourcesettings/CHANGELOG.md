@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-resource-settings/compare/v1.0.2...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#22](https://www.github.com/googleapis/nodejs-resource-settings/issues/22)) ([cbfc257](https://www.github.com/googleapis/nodejs-resource-settings/commit/cbfc257d37946ae8ed8b3fcf07f9b1673b9d5dd9))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-resource-settings/compare/v1.0.1...v1.0.2) (2021-08-17)
 
 
