@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.5...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#29](https://www.github.com/googleapis/nodejs-cloud-tpu/issues/29)) ([4db100d](https://www.github.com/googleapis/nodejs-cloud-tpu/commit/4db100d7f17f367ebda9614e9b4709236f52fe9e))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.4...v1.0.5) (2021-08-17)
 
 
