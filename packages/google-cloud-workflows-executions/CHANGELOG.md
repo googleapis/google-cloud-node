@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.6...v1.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#89](https://www.github.com/googleapis/nodejs-workflows/issues/89)) ([c17023b](https://www.github.com/googleapis/nodejs-workflows/commit/c17023b8091a2372ff12ee8dd622bf1db82bcefa))
+
 ### [1.2.6](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.5...v1.2.6) (2021-08-17)
 
 
