@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/containeranalysis?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.8...v3.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#339](https://www.github.com/googleapis/nodejs-containeranalysis/issues/339)) ([98de66a](https://www.github.com/googleapis/nodejs-containeranalysis/commit/98de66a7ad503a0b1e5f4d3f8fd94f49ac156dfa))
+
 ### [3.1.8](https://www.github.com/googleapis/nodejs-containeranalysis/compare/v3.1.7...v3.1.8) (2021-08-17)
 
 

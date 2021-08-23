@@ -14,7 +14,7 @@
     "test": "mocha --timeout 100000 test/**.test.js"
   },
   "dependencies": {
-    "@google-cloud/containeranalysis": "^3.1.8",
+    "@google-cloud/containeranalysis": "^3.2.0",
     "@google-cloud/pubsub": "^2.0.0",
     "p-retry": "^4.1.0"
   },
