@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.5.3...v2.6.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#138](https://www.github.com/googleapis/nodejs-analytics-data/issues/138)) ([c7df6d6](https://www.github.com/googleapis/nodejs-analytics-data/commit/c7df6d6468b5ecd433486b5f2b20883ea22a7ab1))
+
 ### [2.5.3](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.5.2...v2.5.3) (2021-08-17)
 
 

@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-analytics/data": "^2.5.3",
+    "@google-analytics/data": "^2.6.0",
     "google-auth-library": "^7.0.0",
     "google-gax": "^2.10.0",
     "http": "^0.0.1-security",
