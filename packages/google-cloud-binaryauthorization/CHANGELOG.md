@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.6...v1.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#87](https://www.github.com/googleapis/nodejs-binary-authorization/issues/87)) ([e61630b](https://www.github.com/googleapis/nodejs-binary-authorization/commit/e61630b2e9b978798a5b01ea7c637bccad6b37e9))
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#82](https://www.github.com/googleapis/nodejs-binary-authorization/issues/82)) ([3f11200](https://www.github.com/googleapis/nodejs-binary-authorization/commit/3f112009748af38f5f3939ceca28e49f527b583b))
+
 ### [1.1.6](https://www.github.com/googleapis/nodejs-binary-authorization/compare/v1.1.5...v1.1.6) (2021-08-17)
 
 
