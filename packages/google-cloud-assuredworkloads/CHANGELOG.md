@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.5.2...v1.6.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#100](https://www.github.com/googleapis/nodejs-assured-workloads/issues/100)) ([5e0e688](https://www.github.com/googleapis/nodejs-assured-workloads/commit/5e0e6882a0f77a59da866fb25f9fd115836c6b76))
+
 ### [1.5.2](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.5.1...v1.5.2) (2021-08-17)
 
 
