@@ -17,6 +17,7 @@
                         "java_outer_classname": "WebhookProto",
                         "java_package": "com.google.cloud.dialogflow.cx.v3",
                         "objc_class_prefix": "DF",
+                        "ruby_package": "Google::Cloud::Dialogflow::CX::V3",
                         "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Service",
                         "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}"
                       },
@@ -7025,6 +7026,7 @@
                         "java_outer_classname": "WebhookProto",
                         "java_package": "com.google.cloud.dialogflow.cx.v3beta1",
                         "objc_class_prefix": "DF",
+                        "ruby_package": "Google::Cloud::Dialogflow::CX::V3beta1",
                         "(google.api.resource_definition).type": "servicedirectory.googleapis.com/Service",
                         "(google.api.resource_definition).pattern": "projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}"
                       },
