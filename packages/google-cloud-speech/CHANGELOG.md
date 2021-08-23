@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+## [4.8.0](https://www.github.com/googleapis/nodejs-speech/compare/v4.7.0...v4.8.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#794](https://www.github.com/googleapis/nodejs-speech/issues/794)) ([8e655cd](https://www.github.com/googleapis/nodejs-speech/commit/8e655cd9efc3515bd452e3ab6349adeb9ddfd104))
+
 ## [4.7.0](https://www.github.com/googleapis/nodejs-speech/compare/v4.6.1...v4.7.0) (2021-08-19)
 
 
