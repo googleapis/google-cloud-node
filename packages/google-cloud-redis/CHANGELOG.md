@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.6...v2.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#510](https://www.github.com/googleapis/nodejs-redis/issues/510)) ([df8af50](https://www.github.com/googleapis/nodejs-redis/commit/df8af509805c4a5d977448d1d6a034c5cbbc79f7))
+
 ### [2.2.6](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.5...v2.2.6) (2021-08-17)
 
 

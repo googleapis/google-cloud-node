@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/redis",
   "description": "Google Cloud Memorystore for Redis API client for Node.js",
-  "version": "2.2.6",
+  "version": "2.3.0",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
