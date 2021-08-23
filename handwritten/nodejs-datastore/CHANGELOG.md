@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datastore?activeTab=versions
 
+## [6.5.0](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.8...v6.5.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#869](https://www.github.com/googleapis/nodejs-datastore/issues/869)) ([a42c88e](https://www.github.com/googleapis/nodejs-datastore/commit/a42c88e1b87ffcf38b1c45e94a846d1defb8fda2))
+
 ### [6.4.8](https://www.github.com/googleapis/nodejs-datastore/compare/v6.4.7...v6.4.8) (2021-08-17)
 
 
