@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/web-risk?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.8...v2.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#277](https://www.github.com/googleapis/nodejs-web-risk/issues/277)) ([ea16d36](https://www.github.com/googleapis/nodejs-web-risk/commit/ea16d364a1ac670f30579bd2483cbfdaafdd0f21))
+
 ### [2.1.8](https://www.github.com/googleapis/nodejs-web-risk/compare/v2.1.7...v2.1.8) (2021-08-17)
 
 
