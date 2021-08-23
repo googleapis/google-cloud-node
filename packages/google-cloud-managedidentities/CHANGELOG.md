@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.7...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#78](https://www.github.com/googleapis/nodejs-managed-identities/issues/78)) ([0c98ad5](https://www.github.com/googleapis/nodejs-managed-identities/commit/0c98ad5ef15b1afc2de4b9e74a14d7366589cfb3))
+
 ### [1.0.7](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.6...v1.0.7) (2021-08-17)
 
 
