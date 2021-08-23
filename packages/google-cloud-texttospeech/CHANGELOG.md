@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.2.7...v3.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#543](https://www.github.com/googleapis/nodejs-text-to-speech/issues/543)) ([bd5ecd3](https://www.github.com/googleapis/nodejs-text-to-speech/commit/bd5ecd31f2cf39486b85c62e1f5d35850cde22b9))
+
 ### [3.2.7](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.2.6...v3.2.7) (2021-08-17)
 
 
