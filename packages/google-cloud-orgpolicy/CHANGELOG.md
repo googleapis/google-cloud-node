@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.7...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#56](https://www.github.com/googleapis/nodejs-org-policy/issues/56)) ([79c838f](https://www.github.com/googleapis/nodejs-org-policy/commit/79c838f5666f033942c4c2d4b65fac32e074a871))
+
 ### [1.0.7](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.6...v1.0.7) (2021-08-17)
 
 
