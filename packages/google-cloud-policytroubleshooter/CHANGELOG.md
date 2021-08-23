@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.0.6...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#72](https://www.github.com/googleapis/nodejs-policy-troubleshooter/issues/72)) ([cb9e610](https://www.github.com/googleapis/nodejs-policy-troubleshooter/commit/cb9e61019ea6ec71201b30de68c84b1e93b1045e))
+
 ### [1.0.6](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.0.5...v1.0.6) (2021-08-17)
 
 
