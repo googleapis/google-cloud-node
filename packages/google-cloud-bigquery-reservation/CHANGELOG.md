@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.6...v1.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#100](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/100)) ([0047223](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/004722310ece662732fe60c8941be1b30214ed6d))
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#97](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/97)) ([2e5a332](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/2e5a332b21067dd73ec6d2b218b87b61b8ebf59e))
+* **deps:** google-gax v2.24.1 ([#99](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/99)) ([3a4cdec](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/3a4cdec8d028f0d6fd6d8ebc3977c00231b290bb))
+
 ### [1.1.6](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.5...v1.1.6) (2021-07-21)
 
 
