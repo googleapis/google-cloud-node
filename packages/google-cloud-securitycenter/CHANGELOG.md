@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+## [5.5.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.4.1...v5.5.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#417](https://www.github.com/googleapis/nodejs-security-center/issues/417)) ([ec4b179](https://www.github.com/googleapis/nodejs-security-center/commit/ec4b17916d42f9ff006b9c9d0c1a6c2dd0743fa7))
+
 ### [5.4.1](https://www.github.com/googleapis/nodejs-security-center/compare/v5.4.0...v5.4.1) (2021-08-17)
 
 
