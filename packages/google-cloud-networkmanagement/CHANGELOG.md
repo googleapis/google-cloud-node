@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-network-management/compare/v1.0.2...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#15](https://www.github.com/googleapis/nodejs-network-management/issues/15)) ([1480b11](https://www.github.com/googleapis/nodejs-network-management/commit/1480b11cfea48ad9b57c0a2735fe2c4dedc35dd5))
+
 ### [1.0.2](https://www.github.com/googleapis/nodejs-network-management/compare/v1.0.1...v1.0.2) (2021-08-17)
 
 
