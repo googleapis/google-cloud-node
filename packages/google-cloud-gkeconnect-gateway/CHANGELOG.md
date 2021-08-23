@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.0.3...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#23](https://www.github.com/googleapis/nodejs-gke-connect-gateway/issues/23)) ([4041bbd](https://www.github.com/googleapis/nodejs-gke-connect-gateway/commit/4041bbd7361a8aecfb86a886d0c7661db52c2e31))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-gke-connect-gateway/compare/v1.0.2...v1.0.3) (2021-08-17)
 
 
