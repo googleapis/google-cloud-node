@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [2.2.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.1.7...v2.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#311](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/311)) ([c12da34](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/c12da3410a4ebc87884d9caaaba7c700b396c6b4))
+
 ### [2.1.7](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.1.6...v2.1.7) (2021-08-17)
 
 
