@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.7.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.6.0...v2.7.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#490](https://www.github.com/googleapis/nodejs-kms/issues/490)) ([3db7ee5](https://www.github.com/googleapis/nodejs-kms/commit/3db7ee57cbf22a27f639df150c4a408107dfcde6))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.5.0...v2.6.0) (2021-08-17)
 
 
