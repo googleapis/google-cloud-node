@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datalabeling?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.7...v2.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#307](https://www.github.com/googleapis/nodejs-datalabeling/issues/307)) ([adbe0cd](https://www.github.com/googleapis/nodejs-datalabeling/commit/adbe0cdef6538df9055a5e5039161e5a680cb336))
+
 ### [2.2.7](https://www.github.com/googleapis/nodejs-datalabeling/compare/v2.2.6...v2.2.7) (2021-08-17)
 
 
