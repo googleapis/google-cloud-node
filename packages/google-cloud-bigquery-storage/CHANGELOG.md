@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.5.4...v2.6.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#200](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/200)) ([ef2206c](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/ef2206cf1087c23d144fbc4b50363efb4c6deab2))
+
 ### [2.5.4](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.5.3...v2.5.4) (2021-08-17)
 
 
