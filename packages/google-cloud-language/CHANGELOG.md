@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+## [4.3.0](https://www.github.com/googleapis/nodejs-language/compare/v4.2.9...v4.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#610](https://www.github.com/googleapis/nodejs-language/issues/610)) ([461baca](https://www.github.com/googleapis/nodejs-language/commit/461bacad4c1c2216e39622b3f82ef634a3665956))
+
 ### [4.2.9](https://www.github.com/googleapis/nodejs-language/compare/v4.2.8...v4.2.9) (2021-08-17)
 
 
