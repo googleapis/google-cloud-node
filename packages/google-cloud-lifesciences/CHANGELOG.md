@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-life-sciences/compare/v1.0.3...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#29](https://www.github.com/googleapis/nodejs-life-sciences/issues/29)) ([c7e5c54](https://www.github.com/googleapis/nodejs-life-sciences/commit/c7e5c542ccdeb6b5085ecc0e93b16cb41dc41c28))
+
 ### [1.0.3](https://www.github.com/googleapis/nodejs-life-sciences/compare/v1.0.2...v1.0.3) (2021-08-17)
 
 

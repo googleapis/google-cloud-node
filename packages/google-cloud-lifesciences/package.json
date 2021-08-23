@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/life-sciences",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "lifesciences client for Node.js",
   "repository": "googleapis/nodejs-life-sciences",
   "license": "Apache-2.0",
