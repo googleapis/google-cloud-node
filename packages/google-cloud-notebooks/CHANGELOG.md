@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.7...v1.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#84](https://www.github.com/googleapis/nodejs-notebooks/issues/84)) ([9aacdd1](https://www.github.com/googleapis/nodejs-notebooks/commit/9aacdd13e029aeedb51a56664998e899078cebc4))
+
 ### [1.1.7](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.6...v1.1.7) (2021-08-17)
 
 
