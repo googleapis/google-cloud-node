@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.4.4...v2.5.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#480](https://www.github.com/googleapis/nodejs-cloud-container/issues/480)) ([f7a7887](https://www.github.com/googleapis/nodejs-cloud-container/commit/f7a7887be1168b8f15e6de556df5774d1da42b32))
+
 ### [2.4.4](https://www.github.com/googleapis/nodejs-cloud-container/compare/v2.4.3...v2.4.4) (2021-08-17)
 
 
