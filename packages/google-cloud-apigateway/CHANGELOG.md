@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.6...v1.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#60](https://www.github.com/googleapis/nodejs-api-gateway/issues/60)) ([2f86035](https://www.github.com/googleapis/nodejs-api-gateway/commit/2f86035d2a76604b0e4dad97272781e25e4fe899))
+
 ### [1.1.6](https://www.github.com/googleapis/nodejs-api-gateway/compare/v1.1.5...v1.1.6) (2021-08-17)
 
 
