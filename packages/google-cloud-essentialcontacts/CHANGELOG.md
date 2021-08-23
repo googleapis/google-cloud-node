@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.6...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#41](https://www.github.com/googleapis/nodejs-essential-contacts/issues/41)) ([1e65471](https://www.github.com/googleapis/nodejs-essential-contacts/commit/1e65471768b57b96bf7e669818be6f53d8e5e6fb))
+
 ### [1.0.6](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.5...v1.0.6) (2021-08-19)
 
 
