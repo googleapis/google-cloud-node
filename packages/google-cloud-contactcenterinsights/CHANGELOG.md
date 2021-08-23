@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.2.1...v1.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#35](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/35)) ([3389497](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/3389497d25bf515b64b8df9e926ce9170c98f8a0))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.2.0...v1.2.1) (2021-08-17)
 
 
