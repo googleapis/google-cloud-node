@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.6...v1.7.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#138](https://www.github.com/googleapis/nodejs-os-config/issues/138)) ([321fc5d](https://www.github.com/googleapis/nodejs-os-config/commit/321fc5d9088ad878d5343735659fc2884a76136a))
+
 ### [1.6.6](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.5...v1.6.6) (2021-08-17)
 
 
