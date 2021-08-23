@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/filestore",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "file client for Node.js",
   "repository": "googleapis/nodejs-filestore",
   "license": "Apache-2.0",

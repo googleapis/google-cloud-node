@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-filestore/compare/v1.0.1...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#14](https://www.github.com/googleapis/nodejs-filestore/issues/14)) ([00c32a4](https://www.github.com/googleapis/nodejs-filestore/commit/00c32a4eaeaf6e4f19559a38e51d2b5ec23197b4))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-filestore/compare/v1.0.0...v1.0.1) (2021-08-17)
 
 
