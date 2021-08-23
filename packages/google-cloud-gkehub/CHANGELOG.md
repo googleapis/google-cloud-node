@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.2.1...v1.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#83](https://www.github.com/googleapis/nodejs-gke-hub/issues/83)) ([55e3fe0](https://www.github.com/googleapis/nodejs-gke-hub/commit/55e3fe0271ed7a6b216feeddf507e1bff1164e18))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-gke-hub/compare/v1.2.0...v1.2.1) (2021-08-17)
 
 
