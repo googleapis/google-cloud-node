@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/datacatalog?activeTab=versions
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.4.2...v2.5.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#294](https://www.github.com/googleapis/nodejs-datacatalog/issues/294)) ([dcf6fb4](https://www.github.com/googleapis/nodejs-datacatalog/commit/dcf6fb45de49e225aeebfec9fc56251db3a702e9))
+
 ### [2.4.2](https://www.github.com/googleapis/nodejs-datacatalog/compare/v2.4.1...v2.4.2) (2021-08-17)
 
 
