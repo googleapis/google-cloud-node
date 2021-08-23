@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.6...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#78](https://www.github.com/googleapis/nodejs-appengine-admin/issues/78)) ([df643dd](https://www.github.com/googleapis/nodejs-appengine-admin/commit/df643dd9f37d966a09490c6f4edfb5fa9d0a0d9f))
+
 ### [1.0.6](https://www.github.com/googleapis/nodejs-appengine-admin/compare/v1.0.5...v1.0.6) (2021-08-17)
 
 
