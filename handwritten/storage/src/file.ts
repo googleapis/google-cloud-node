@@ -32,7 +32,6 @@ import * as fs from 'fs';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const hashStreamValidation = require('hash-stream-validation');
 import * as mime from 'mime';
-import * as once from 'onetime';
 import * as os from 'os';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const pumpify = require('pumpify');
@@ -2092,17 +2091,21 @@ class File extends ServiceObject<File> {
    */
   download(
     optionsOrCallback?: DownloadOptions | DownloadCallback,
-    callback?: DownloadCallback
+    cb?: DownloadCallback
   ): Promise<DownloadResponse> | void {
     let options: DownloadOptions;
     if (typeof optionsOrCallback === 'function') {
-      callback = optionsOrCallback as DownloadCallback;
+      cb = optionsOrCallback as DownloadCallback;
       options = {};
     } else {
       options = optionsOrCallback as DownloadOptions;
     }
 
-    callback = once(callback as DownloadCallback);
+    let called = false;
+    const callback = ((...args) => {
+      if (!called) cb!(...args);
+      called = true;
+    }) as DownloadCallback;
 
     const destination = options.destination;
     delete options.destination;
