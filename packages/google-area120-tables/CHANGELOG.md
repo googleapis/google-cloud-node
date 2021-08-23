@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.8...v1.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#91](https://www.github.com/googleapis/nodejs-area120-tables/issues/91)) ([9e385e6](https://www.github.com/googleapis/nodejs-area120-tables/commit/9e385e6d0aa042960879b39c1159b330c1ce356d))
+
 ### [1.2.8](https://www.github.com/googleapis/nodejs-area120-tables/compare/v1.2.7...v1.2.8) (2021-08-17)
 
 
