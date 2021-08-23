@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.2.1...v1.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#76](https://www.github.com/googleapis/nodejs-network-connectivity/issues/76)) ([9ef53f9](https://www.github.com/googleapis/nodejs-network-connectivity/commit/9ef53f9ecd0fc572824984b9f948a7919384ffe8))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.2.0...v1.2.1) (2021-08-17)
 
 
