@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [3.2.0](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.8...v3.2.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#646](https://www.github.com/googleapis/nodejs-dlp/issues/646)) ([1ff1969](https://www.github.com/googleapis/nodejs-dlp/commit/1ff1969abcba19030711aaf4d69b83cc73cf20ff))
+
 ### [3.1.8](https://www.github.com/googleapis/nodejs-dlp/compare/v3.1.7...v3.1.8) (2021-08-17)
 
 
