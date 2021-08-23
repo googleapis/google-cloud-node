@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.8...v3.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#262](https://www.github.com/googleapis/nodejs-billing-budgets/issues/262)) ([69a7b23](https://www.github.com/googleapis/nodejs-billing-budgets/commit/69a7b23c80bd47acb8326fd544cbd719cd230893))
+
 ### [3.2.8](https://www.github.com/googleapis/nodejs-billing-budgets/compare/v3.2.7...v3.2.8) (2021-08-17)
 
 
