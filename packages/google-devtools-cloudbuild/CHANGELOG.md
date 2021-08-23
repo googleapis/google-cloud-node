@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.4.0...v2.5.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#271](https://www.github.com/googleapis/nodejs-cloudbuild/issues/271)) ([dcb970d](https://www.github.com/googleapis/nodejs-cloudbuild/commit/dcb970d8a6a7d87da553667cd25f8eb1052ba047))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.3.2...v2.4.0) (2021-08-16)
 
 
