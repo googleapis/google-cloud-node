@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.8...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#70](https://www.github.com/googleapis/nodejs-domains/issues/70)) ([ee9565a](https://www.github.com/googleapis/nodejs-domains/commit/ee9565a2a5f0971ea530ccd478cfe55467bfc4d9))
+
 ### [1.0.8](https://www.github.com/googleapis/nodejs-domains/compare/v1.0.7...v1.0.8) (2021-08-17)
 
 
