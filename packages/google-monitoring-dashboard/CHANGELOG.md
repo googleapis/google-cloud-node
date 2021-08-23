@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.5.1...v2.6.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#212](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/212)) ([395b00a](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/395b00a9f531432eb38cb7f10967a30ed8b4f66a))
+
 ### [2.5.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.5.0...v2.5.1) (2021-08-17)
 
 
