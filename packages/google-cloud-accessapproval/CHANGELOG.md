@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.8...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#76](https://www.github.com/googleapis/nodejs-access-approval/issues/76)) ([42edf5a](https://www.github.com/googleapis/nodejs-access-approval/commit/42edf5aebbe0768f1f3cc44c1056b24fc3e2dd1e))
+
 ### [1.0.8](https://www.github.com/googleapis/nodejs-access-approval/compare/v1.0.7...v1.0.8) (2021-08-17)
 
 
