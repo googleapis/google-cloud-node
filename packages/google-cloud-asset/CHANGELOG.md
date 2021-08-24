@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.17.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.16.1...v3.17.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#542](https://www.github.com/googleapis/nodejs-asset/issues/542)) ([4c4137f](https://www.github.com/googleapis/nodejs-asset/commit/4c4137f78ebdd870c027118d2d966149b7beb9b7))
+
 ### [3.16.1](https://www.github.com/googleapis/nodejs-asset/compare/v3.16.0...v3.16.1) (2021-08-17)
 
 
