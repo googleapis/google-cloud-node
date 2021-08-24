@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-private-catalog/compare/v1.0.4...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#34](https://www.github.com/googleapis/nodejs-private-catalog/issues/34)) ([c278f63](https://www.github.com/googleapis/nodejs-private-catalog/commit/c278f635190b42687871e846193eb7b77df3e69f))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-private-catalog/compare/v1.0.3...v1.0.4) (2021-08-17)
 
 
