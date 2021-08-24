@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.10.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.9.1...v3.10.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#291](https://www.github.com/googleapis/nodejs-secret-manager/issues/291)) ([1652c75](https://www.github.com/googleapis/nodejs-secret-manager/commit/1652c75567381bc88c76b1322a73286245994c54))
+
 ### [3.9.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.9.0...v3.9.1) (2021-08-17)
 
 
