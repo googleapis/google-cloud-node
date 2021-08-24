@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/phishing-protection?activeTab=versions
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.7...v2.5.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#335](https://www.github.com/googleapis/nodejs-phishing-protection/issues/335)) ([4187b70](https://www.github.com/googleapis/nodejs-phishing-protection/commit/4187b706e5eb5842719cefb117c1253485a39152))
+
 ### [2.4.7](https://www.github.com/googleapis/nodejs-phishing-protection/compare/v2.4.6...v2.4.7) (2021-08-17)
 
 
