@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-dms/compare/v1.0.5...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#39](https://www.github.com/googleapis/nodejs-dms/issues/39)) ([ab31ef7](https://www.github.com/googleapis/nodejs-dms/commit/ab31ef7135716e3e304cf4988900ec59b0a77bef))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-dms/compare/v1.0.4...v1.0.5) (2021-08-17)
 
 
