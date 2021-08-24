@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/googleapis/nodejs-service-management/compare/v0.2.6...v0.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#81](https://www.github.com/googleapis/nodejs-service-management/issues/81)) ([237698f](https://www.github.com/googleapis/nodejs-service-management/commit/237698f72dfdd14e95d956a2e45f6db423e45e23))
+
 ### [0.2.6](https://www.github.com/googleapis/nodejs-service-management/compare/v0.2.5...v0.2.6) (2021-08-17)
 
 
