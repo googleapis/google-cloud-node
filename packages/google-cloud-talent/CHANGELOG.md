@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [3.4.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.3.0...v3.4.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#359](https://www.github.com/googleapis/nodejs-talent/issues/359)) ([9796041](https://www.github.com/googleapis/nodejs-talent/commit/9796041914464e108afd8581aed7e60d5439e565))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.2.7...v3.3.0) (2021-08-17)
 
 
