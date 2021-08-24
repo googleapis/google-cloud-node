@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.7...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#74](https://www.github.com/googleapis/nodejs-web-security-scanner/issues/74)) ([f806cd5](https://www.github.com/googleapis/nodejs-web-security-scanner/commit/f806cd5c38d8a04927fb3b57199cd425d5beb9b3))
+
 ### [1.0.7](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.6...v1.0.7) (2021-08-17)
 
 
