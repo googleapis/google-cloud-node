@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.6...v1.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#85](https://www.github.com/googleapis/nodejs-channel/issues/85)) ([65dae67](https://www.github.com/googleapis/nodejs-channel/commit/65dae67657fc23358570ff6c0ef8fc7dd39c1cb9))
+
 ### [1.2.6](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.5...v1.2.6) (2021-08-17)
 
 
