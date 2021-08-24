@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/game-servers",
-  "version": "2.3.8",
+  "version": "2.4.0",
   "description": "Game service client for Node.js",
   "repository": "googleapis/nodejs-game-servers",
   "license": "Apache-2.0",

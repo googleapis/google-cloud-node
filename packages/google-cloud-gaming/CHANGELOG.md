@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.8...v2.4.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#209](https://www.github.com/googleapis/nodejs-game-servers/issues/209)) ([014ae7b](https://www.github.com/googleapis/nodejs-game-servers/commit/014ae7b9453372b89fcaffffeabde508650aaec6))
+
 ### [2.3.8](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.7...v2.3.8) (2021-08-17)
 
 
