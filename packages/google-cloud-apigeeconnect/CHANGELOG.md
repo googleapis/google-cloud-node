@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.0.5...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#32](https://www.github.com/googleapis/nodejs-apigee-connect/issues/32)) ([429964d](https://www.github.com/googleapis/nodejs-apigee-connect/commit/429964d038693cb16d37a3d2d23f79be3b73d1a0))
+
 ### [1.0.5](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.0.4...v1.0.5) (2021-08-17)
 
 
