@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-billing/compare/v2.2.7...v2.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#179](https://www.github.com/googleapis/nodejs-billing/issues/179)) ([9ef0c0d](https://www.github.com/googleapis/nodejs-billing/commit/9ef0c0dfb125a57073fb16ff0ea6bf7c7109816d))
+
 ### [2.2.7](https://www.github.com/googleapis/nodejs-billing/compare/v2.2.6...v2.2.7) (2021-08-17)
 
 
