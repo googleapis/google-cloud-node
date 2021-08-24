@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.2.4...v3.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#174](https://www.github.com/googleapis/nodejs-service-directory/issues/174)) ([0fe57fd](https://www.github.com/googleapis/nodejs-service-directory/commit/0fe57fdb1a95115ff2da71c1632cfe3bf501b963))
+
 ### [3.2.4](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.2.3...v3.2.4) (2021-08-17)
 
 
