@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-iap/compare/v1.0.1...v1.1.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#9](https://www.github.com/googleapis/nodejs-iap/issues/9)) ([433b4dc](https://www.github.com/googleapis/nodejs-iap/commit/433b4dcf15296a5760d2aa667ef94485e8993380))
+
 ### [1.0.1](https://www.github.com/googleapis/nodejs-iap/compare/v1.0.0...v1.0.1) (2021-08-17)
 
 
