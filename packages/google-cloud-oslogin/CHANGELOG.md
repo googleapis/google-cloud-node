@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [3.3.0](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.6...v3.3.0) (2021-08-23)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#476](https://www.github.com/googleapis/nodejs-os-login/issues/476)) ([4654c87](https://www.github.com/googleapis/nodejs-os-login/commit/4654c8762819176cf81703beffce92f79424ec86))
+
 ### [3.2.6](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.5...v3.2.6) (2021-08-17)
 
 
