@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.1.0...v1.1.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* flag module as GA ([#44](https://www.github.com/googleapis/nodejs-essential-contacts/issues/44)) ([8d31c91](https://www.github.com/googleapis/nodejs-essential-contacts/commit/8d31c9125ca659842795a42c3cfae41d89ff4cb9))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-essential-contacts/compare/v1.0.6...v1.1.0) (2021-08-23)
 
 
