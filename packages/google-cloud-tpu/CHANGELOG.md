@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.1.0...v1.1.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* flag module as GA ([#32](https://www.github.com/googleapis/nodejs-cloud-tpu/issues/32)) ([80ee7de](https://www.github.com/googleapis/nodejs-cloud-tpu/commit/80ee7deaa87856edab4e65f8a21caaf9b8d49ba7))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-cloud-tpu/compare/v1.0.5...v1.1.0) (2021-08-23)
 
 
