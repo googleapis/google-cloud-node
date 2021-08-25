@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/appengine-admin.svg)](https://www.npmjs.org/package/@google-cloud/appengine-admin)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-appengine-admin/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-appengine-admin)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-appengine-admin/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-appengine-admin)
 
 
 
@@ -134,8 +134,8 @@ Contributions welcome! See the [Contributing Guide](https://github.com/googleapi
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
 are generated from a central template. To edit one of these files, make an edit
-to its template in this
-[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
+to its templates in
+[directory](https://github.com/googleapis/synthtool).
 
 ## License
 
