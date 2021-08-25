@@ -17,53 +17,71 @@
           "rpc_timeout_multiplier": 1,
           "max_rpc_timeout_millis": 60000,
           "total_timeout_millis": 600000
+        },
+        "71ca22c74d2828b200f9ff1cc285a8beb96cc2af": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 30000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        },
+        "49abb7cadc111ff8dd551b61fcad123362c8d090": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 300000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
         }
       },
       "methods": {
         "CreateProduct": {
-          "timeout_millis": 60000,
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "GetProduct": {
-          "timeout_millis": 60000,
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "ListProducts": {
-          "timeout_millis": 60000,
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "UpdateProduct": {
-          "timeout_millis": 60000,
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "DeleteProduct": {
-          "timeout_millis": 60000,
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "ImportProducts": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "49abb7cadc111ff8dd551b61fcad123362c8d090"
         },
         "SetInventory": {
-          "timeout_millis": 60000,
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "AddFulfillmentPlaces": {
-          "timeout_millis": 60000,
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         },
         "RemoveFulfillmentPlaces": {
-          "timeout_millis": 60000,
+          "timeout_millis": 30000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "71ca22c74d2828b200f9ff1cc285a8beb96cc2af"
         }
       }
     }

@@ -2086,6 +2086,10 @@
                             "condition": {
                               "type": "Condition",
                               "id": 1
+                            },
+                            "pinUnexpandedResults": {
+                              "type": "bool",
+                              "id": 2
                             }
                           },
                           "nested": {
@@ -2212,6 +2216,10 @@
                             "expandedQuery": {
                               "type": "bool",
                               "id": 1
+                            },
+                            "pinnedResultCount": {
+                              "type": "int64",
+                              "id": 2
                             }
                           }
                         }
@@ -4586,6 +4594,10 @@
                             "condition": {
                               "type": "Condition",
                               "id": 1
+                            },
+                            "pinUnexpandedResults": {
+                              "type": "bool",
+                              "id": 2
                             }
                           },
                           "nested": {
@@ -4721,6 +4733,10 @@
                             "expandedQuery": {
                               "type": "bool",
                               "id": 1
+                            },
+                            "pinnedResultCount": {
+                              "type": "int64",
+                              "id": 2
                             }
                           }
                         }
@@ -7050,6 +7066,10 @@
                             "condition": {
                               "type": "Condition",
                               "id": 1
+                            },
+                            "pinUnexpandedResults": {
+                              "type": "bool",
+                              "id": 2
                             }
                           },
                           "nested": {
@@ -7176,6 +7196,10 @@
                             "expandedQuery": {
                               "type": "bool",
                               "id": 1
+                            },
+                            "pinnedResultCount": {
+                              "type": "int64",
+                              "id": 2
                             }
                           }
                         }

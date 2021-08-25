@@ -8077,6 +8077,9 @@ export namespace google {
 
                         /** QueryExpansionSpec condition */
                         condition?: (google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition|null);
+
+                        /** QueryExpansionSpec pinUnexpandedResults */
+                        pinUnexpandedResults?: (boolean|null);
                     }
 
                     /** Represents a QueryExpansionSpec. */
@@ -8090,6 +8093,9 @@ export namespace google {
 
                         /** QueryExpansionSpec condition. */
                         public condition: (google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition);
+
+                        /** QueryExpansionSpec pinUnexpandedResults. */
+                        public pinUnexpandedResults: boolean;
 
                         /**
                          * Creates a new QueryExpansionSpec instance using the specified properties.
@@ -8636,6 +8642,9 @@ export namespace google {
 
                         /** QueryExpansionInfo expandedQuery */
                         expandedQuery?: (boolean|null);
+
+                        /** QueryExpansionInfo pinnedResultCount */
+                        pinnedResultCount?: (number|Long|string|null);
                     }
 
                     /** Represents a QueryExpansionInfo. */
@@ -8649,6 +8658,9 @@ export namespace google {
 
                         /** QueryExpansionInfo expandedQuery. */
                         public expandedQuery: boolean;
+
+                        /** QueryExpansionInfo pinnedResultCount. */
+                        public pinnedResultCount: (number|Long|string);
 
                         /**
                          * Creates a new QueryExpansionInfo instance using the specified properties.
@@ -17987,6 +17999,9 @@ export namespace google {
 
                         /** QueryExpansionSpec condition */
                         condition?: (google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec.Condition|null);
+
+                        /** QueryExpansionSpec pinUnexpandedResults */
+                        pinUnexpandedResults?: (boolean|null);
                     }
 
                     /** Represents a QueryExpansionSpec. */
@@ -18000,6 +18015,9 @@ export namespace google {
 
                         /** QueryExpansionSpec condition. */
                         public condition: (google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2alpha.SearchRequest.QueryExpansionSpec.Condition);
+
+                        /** QueryExpansionSpec pinUnexpandedResults. */
+                        public pinUnexpandedResults: boolean;
 
                         /**
                          * Creates a new QueryExpansionSpec instance using the specified properties.
@@ -18555,6 +18573,9 @@ export namespace google {
 
                         /** QueryExpansionInfo expandedQuery */
                         expandedQuery?: (boolean|null);
+
+                        /** QueryExpansionInfo pinnedResultCount */
+                        pinnedResultCount?: (number|Long|string|null);
                     }
 
                     /** Represents a QueryExpansionInfo. */
@@ -18568,6 +18589,9 @@ export namespace google {
 
                         /** QueryExpansionInfo expandedQuery. */
                         public expandedQuery: boolean;
+
+                        /** QueryExpansionInfo pinnedResultCount. */
+                        public pinnedResultCount: (number|Long|string);
 
                         /**
                          * Creates a new QueryExpansionInfo instance using the specified properties.
@@ -27690,6 +27714,9 @@ export namespace google {
 
                         /** QueryExpansionSpec condition */
                         condition?: (google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec.Condition|null);
+
+                        /** QueryExpansionSpec pinUnexpandedResults */
+                        pinUnexpandedResults?: (boolean|null);
                     }
 
                     /** Represents a QueryExpansionSpec. */
@@ -27703,6 +27730,9 @@ export namespace google {
 
                         /** QueryExpansionSpec condition. */
                         public condition: (google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec.Condition|keyof typeof google.cloud.retail.v2beta.SearchRequest.QueryExpansionSpec.Condition);
+
+                        /** QueryExpansionSpec pinUnexpandedResults. */
+                        public pinUnexpandedResults: boolean;
 
                         /**
                          * Creates a new QueryExpansionSpec instance using the specified properties.
@@ -28249,6 +28279,9 @@ export namespace google {
 
                         /** QueryExpansionInfo expandedQuery */
                         expandedQuery?: (boolean|null);
+
+                        /** QueryExpansionInfo pinnedResultCount */
+                        pinnedResultCount?: (number|Long|string|null);
                     }
 
                     /** Represents a QueryExpansionInfo. */
@@ -28262,6 +28295,9 @@ export namespace google {
 
                         /** QueryExpansionInfo expandedQuery. */
                         public expandedQuery: boolean;
+
+                        /** QueryExpansionInfo pinnedResultCount. */
+                        public pinnedResultCount: (number|Long|string);
 
                         /**
                          * Creates a new QueryExpansionInfo instance using the specified properties.

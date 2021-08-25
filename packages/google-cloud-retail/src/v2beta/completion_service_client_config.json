@@ -17,18 +17,27 @@
           "rpc_timeout_multiplier": 1,
           "max_rpc_timeout_millis": 60000,
           "total_timeout_millis": 600000
+        },
+        "319f27672a8be83550d842a373549dd84649a57e": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 5000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
         }
       },
       "methods": {
         "CompleteQuery": {
-          "timeout_millis": 60000,
+          "timeout_millis": 5000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
         },
         "ImportCompletionData": {
-          "timeout_millis": 60000,
+          "timeout_millis": 5000,
           "retry_codes_name": "idempotent",
-          "retry_params_name": "default"
+          "retry_params_name": "319f27672a8be83550d842a373549dd84649a57e"
         }
       }
     }

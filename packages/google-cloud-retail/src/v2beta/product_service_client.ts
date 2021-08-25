@@ -134,6 +134,12 @@ export class ProductServiceClient {
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = staticMembers.servicePath;
+
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
       this.auth.defaultScopes = staticMembers.scopes;
@@ -1078,8 +1084,8 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.ProductService.RemoveFulfillmentPlaces|RemoveFulfillmentPlaces}.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Contact Retail Support (retail-search-support@google.com) if you are
-   * interested in using Retail Search.
+   * Please submit a form [here](https://cloud.google.com/contact) to contact
+   * cloud sales if you are interested in using Retail Search.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1285,8 +1291,8 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Contact Retail Support (retail-search-support@google.com) if you are
-   * interested in using Retail Search.
+   * Please submit a form [here](https://cloud.google.com/contact) to contact
+   * cloud sales if you are interested in using Retail Search.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1493,8 +1499,8 @@ export class ProductServiceClient {
    * {@link google.cloud.retail.v2beta.ProductService.ListProducts|ListProducts}.
    *
    * This feature is only available for users who have Retail Search enabled.
-   * Contact Retail Support (retail-search-support@google.com) if you are
-   * interested in using Retail Search.
+   * Please submit a form [here](https://cloud.google.com/contact) to contact
+   * cloud sales if you are interested in using Retail Search.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -2261,6 +2267,7 @@ export class ProductServiceClient {
       return this.productServiceStub!.then(stub => {
         this._terminated = true;
         stub.close();
+        this.operationsClient.close();
       });
     }
     return Promise.resolve();
