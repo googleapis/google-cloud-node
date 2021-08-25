@@ -2622,6 +2622,7 @@
                          * @property {google.devtools.cloudbuild.v1.ITimeSpan|null} [pullTiming] BuildStep pullTiming
                          * @property {google.protobuf.IDuration|null} [timeout] BuildStep timeout
                          * @property {google.devtools.cloudbuild.v1.Build.Status|null} [status] BuildStep status
+                         * @property {string|null} [script] BuildStep script
                          */
     
                         /**
@@ -2749,6 +2750,14 @@
                         BuildStep.prototype.status = 0;
     
                         /**
+                         * BuildStep script.
+                         * @member {string} script
+                         * @memberof google.devtools.cloudbuild.v1.BuildStep
+                         * @instance
+                         */
+                        BuildStep.prototype.script = "";
+    
+                        /**
                          * Creates a new BuildStep instance using the specified properties.
                          * @function create
                          * @memberof google.devtools.cloudbuild.v1.BuildStep
@@ -2803,6 +2812,8 @@
                                 writer.uint32(/* id 12, wireType 0 =*/96).int32(message.status);
                             if (message.pullTiming != null && Object.hasOwnProperty.call(message, "pullTiming"))
                                 $root.google.devtools.cloudbuild.v1.TimeSpan.encode(message.pullTiming, writer.uint32(/* id 13, wireType 2 =*/106).fork()).ldelim();
+                            if (message.script != null && Object.hasOwnProperty.call(message, "script"))
+                                writer.uint32(/* id 19, wireType 2 =*/154).string(message.script);
                             return writer;
                         };
     
@@ -2885,6 +2896,9 @@
                                     break;
                                 case 12:
                                     message.status = reader.int32();
+                                    break;
+                                case 19:
+                                    message.script = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3001,6 +3015,9 @@
                                 case 9:
                                     break;
                                 }
+                            if (message.script != null && message.hasOwnProperty("script"))
+                                if (!$util.isString(message.script))
+                                    return "script: string expected";
                             return null;
                         };
     
@@ -3119,6 +3136,8 @@
                                 message.status = 9;
                                 break;
                             }
+                            if (object.script != null)
+                                message.script = String(object.script);
                             return message;
                         };
     
@@ -3151,6 +3170,7 @@
                                 object.timeout = null;
                                 object.status = options.enums === String ? "STATUS_UNKNOWN" : 0;
                                 object.pullTiming = null;
+                                object.script = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -3193,6 +3213,8 @@
                                 object.status = options.enums === String ? $root.google.devtools.cloudbuild.v1.Build.Status[message.status] : message.status;
                             if (message.pullTiming != null && message.hasOwnProperty("pullTiming"))
                                 object.pullTiming = $root.google.devtools.cloudbuild.v1.TimeSpan.toObject(message.pullTiming, options);
+                            if (message.script != null && message.hasOwnProperty("script"))
+                                object.script = message.script;
                             return object;
                         };
     

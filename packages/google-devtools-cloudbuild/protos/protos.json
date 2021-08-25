@@ -733,6 +733,10 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "script": {
+                          "type": "string",
+                          "id": 19
                         }
                       }
                     },
