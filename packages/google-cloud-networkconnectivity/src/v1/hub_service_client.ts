@@ -180,6 +180,9 @@ export class HubServiceClient {
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
+      networkPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/global/networks/{resource_id}'
+      ),
       spokePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/spokes/{spoke}'
       ),
@@ -246,18 +249,6 @@ export class HubServiceClient {
     const updateSpokeMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkconnectivity.v1.OperationMetadata'
     ) as gax.protobuf.Type;
-    const deactivateSpokeResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1.Spoke'
-    ) as gax.protobuf.Type;
-    const deactivateSpokeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
-    const activateSpokeResponse = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1.Spoke'
-    ) as gax.protobuf.Type;
-    const activateSpokeMetadata = protoFilesRoot.lookup(
-      '.google.cloud.networkconnectivity.v1.OperationMetadata'
-    ) as gax.protobuf.Type;
     const deleteSpokeResponse = protoFilesRoot.lookup(
       '.google.protobuf.Empty'
     ) as gax.protobuf.Type;
@@ -290,16 +281,6 @@ export class HubServiceClient {
         this.operationsClient,
         updateSpokeResponse.decode.bind(updateSpokeResponse),
         updateSpokeMetadata.decode.bind(updateSpokeMetadata)
-      ),
-      deactivateSpoke: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        deactivateSpokeResponse.decode.bind(deactivateSpokeResponse),
-        deactivateSpokeMetadata.decode.bind(deactivateSpokeMetadata)
-      ),
-      activateSpoke: new this._gaxModule.LongrunningDescriptor(
-        this.operationsClient,
-        activateSpokeResponse.decode.bind(activateSpokeResponse),
-        activateSpokeMetadata.decode.bind(activateSpokeMetadata)
       ),
       deleteSpoke: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
@@ -367,8 +348,6 @@ export class HubServiceClient {
       'getSpoke',
       'createSpoke',
       'updateSpoke',
-      'deactivateSpoke',
-      'activateSpoke',
       'deleteSpoke',
     ];
     for (const methodName of hubServiceStubMethods) {
@@ -1438,321 +1417,6 @@ export class HubServiceClient {
       protos.google.cloud.networkconnectivity.v1.OperationMetadata
     >;
   }
-  deactivateSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  deactivateSpoke(
-    request: protos.google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deactivateSpoke(
-    request: protos.google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deactivates the specified spoke. Deactivating keeps the spoke information
-   * for future re-activation, but disconnects the Google Cloud network from
-   * non-Google-Cloud network.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the spoke to deactivate.
-   * @param {string} [request.requestId]
-   *   Optional. A unique request ID (optional). If you specify this ID, you can use it
-   *   in cases when you need to retry your request. When you need to retry, this
-   *   ID lets the server know that it can ignore the request if it has already
-   *   been completed. The server guarantees that for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check to see whether the original operation
-   *   was received. If it was, the server ignores the second request. This
-   *   behavior prevents clients from mistakenly creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID, with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.deactivateSpoke(request);
-   * const [response] = await operation.promise();
-   */
-  deactivateSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1.ISpoke,
-            protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.deactivateSpoke(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `deactivateSpoke()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkDeactivateSpokeProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
-   */
-  async checkDeactivateSpokeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkconnectivity.v1.Spoke,
-      protos.google.cloud.networkconnectivity.v1.OperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.deactivateSpoke,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkconnectivity.v1.Spoke,
-      protos.google.cloud.networkconnectivity.v1.OperationMetadata
-    >;
-  }
-  activateSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1.IActivateSpokeRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  activateSpoke(
-    request: protos.google.cloud.networkconnectivity.v1.IActivateSpokeRequest,
-    options: CallOptions,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  activateSpoke(
-    request: protos.google.cloud.networkconnectivity.v1.IActivateSpokeRequest,
-    callback: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Activates the specified spoke. Activating reconnects the Google Cloud
-   * network with the non-Google-Cloud network.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.name
-   *   Required. The name of the spoke to activate.
-   * @param {string} [request.requestId]
-   *   Optional. A unique request ID (optional). If you specify this ID, you can use it
-   *   in cases when you need to retry your request. When you need to retry, this
-   *   ID lets the server know that it can ignore the request if it has already
-   *   been completed. The server guarantees that for at least 60 minutes after
-   *   the first request.
-   *
-   *   For example, consider a situation where you make an initial request and
-   *   the request times out. If you make the request again with the same request
-   *   ID, the server can check to see whether the original operation
-   *   was received. If it was, the server ignores the second request. This
-   *   behavior prevents clients from mistakenly creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID, with the exception that zero UUID is
-   *   not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation. Its `promise()` method returns a promise
-   *   you can `await` for.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const [operation] = await client.activateSpoke(request);
-   * const [response] = await operation.promise();
-   */
-  activateSpoke(
-    request?: protos.google.cloud.networkconnectivity.v1.IActivateSpokeRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          LROperation<
-            protos.google.cloud.networkconnectivity.v1.ISpoke,
-            protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-          >,
-          protos.google.longrunning.IOperation | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<
-        protos.google.cloud.networkconnectivity.v1.ISpoke,
-        protos.google.cloud.networkconnectivity.v1.IOperationMetadata
-      >,
-      protos.google.longrunning.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        name: request.name || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.activateSpoke(request, options, callback);
-  }
-  /**
-   * Check the status of the long running operation returned by `activateSpoke()`.
-   * @param {String} name
-   *   The operation name that will be passed.
-   * @returns {Promise} - The promise which resolves to an object.
-   *   The decoded operation object has result and metadata field to get information from.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   * @example
-   * const decodedOperation = await checkActivateSpokeProgress(name);
-   * console.log(decodedOperation.result);
-   * console.log(decodedOperation.done);
-   * console.log(decodedOperation.metadata);
-   */
-  async checkActivateSpokeProgress(
-    name: string
-  ): Promise<
-    LROperation<
-      protos.google.cloud.networkconnectivity.v1.Spoke,
-      protos.google.cloud.networkconnectivity.v1.OperationMetadata
-    >
-  > {
-    const request = new operationsProtos.google.longrunning.GetOperationRequest(
-      {name}
-    );
-    const [operation] = await this.operationsClient.getOperation(request);
-    const decodeOperation = new gax.Operation(
-      operation,
-      this.descriptors.longrunning.activateSpoke,
-      gax.createDefaultBackoffSettings()
-    );
-    return decodeOperation as LROperation<
-      protos.google.cloud.networkconnectivity.v1.Spoke,
-      protos.google.cloud.networkconnectivity.v1.OperationMetadata
-    >;
-  }
   deleteSpoke(
     request?: protos.google.cloud.networkconnectivity.v1.IDeleteSpokeRequest,
     options?: CallOptions
@@ -2503,6 +2167,43 @@ export class HubServiceClient {
    */
   matchLocationFromLocationName(locationName: string) {
     return this.pathTemplates.locationPathTemplate.match(locationName).location;
+  }
+
+  /**
+   * Return a fully-qualified network resource name string.
+   *
+   * @param {string} project
+   * @param {string} resource_id
+   * @returns {string} Resource name string.
+   */
+  networkPath(project: string, resourceId: string) {
+    return this.pathTemplates.networkPathTemplate.render({
+      project: project,
+      resource_id: resourceId,
+    });
+  }
+
+  /**
+   * Parse the project from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName).project;
+  }
+
+  /**
+   * Parse the resource_id from Network resource.
+   *
+   * @param {string} networkName
+   *   A fully-qualified path representing Network resource.
+   * @returns {string} A string representing the resource_id.
+   */
+  matchResourceIdFromNetworkName(networkName: string) {
+    return this.pathTemplates.networkPathTemplate.match(networkName)
+      .resource_id;
   }
 
   /**

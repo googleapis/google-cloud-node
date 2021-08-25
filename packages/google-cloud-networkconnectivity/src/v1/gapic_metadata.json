@@ -45,16 +45,6 @@
                 "updateSpoke"
               ]
             },
-            "DeactivateSpoke": {
-              "methods": [
-                "deactivateSpoke"
-              ]
-            },
-            "ActivateSpoke": {
-              "methods": [
-                "activateSpoke"
-              ]
-            },
             "DeleteSpoke": {
               "methods": [
                 "deleteSpoke"
@@ -112,16 +102,6 @@
             "UpdateSpoke": {
               "methods": [
                 "updateSpoke"
-              ]
-            },
-            "DeactivateSpoke": {
-              "methods": [
-                "deactivateSpoke"
-              ]
-            },
-            "ActivateSpoke": {
-              "methods": [
-                "activateSpoke"
               ]
             },
             "DeleteSpoke": {

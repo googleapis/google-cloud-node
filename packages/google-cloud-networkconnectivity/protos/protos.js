@@ -726,72 +726,6 @@
                          */
     
                         /**
-                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#deactivateSpoke}.
-                         * @memberof google.cloud.networkconnectivity.v1.HubService
-                         * @typedef DeactivateSpokeCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.longrunning.Operation} [response] Operation
-                         */
-    
-                        /**
-                         * Calls DeactivateSpoke.
-                         * @function deactivateSpoke
-                         * @memberof google.cloud.networkconnectivity.v1.HubService
-                         * @instance
-                         * @param {google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest} request DeactivateSpokeRequest message or plain object
-                         * @param {google.cloud.networkconnectivity.v1.HubService.DeactivateSpokeCallback} callback Node-style callback called with the error, if any, and Operation
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(HubService.prototype.deactivateSpoke = function deactivateSpoke(request, callback) {
-                            return this.rpcCall(deactivateSpoke, $root.google.cloud.networkconnectivity.v1.DeactivateSpokeRequest, $root.google.longrunning.Operation, request, callback);
-                        }, "name", { value: "DeactivateSpoke" });
-    
-                        /**
-                         * Calls DeactivateSpoke.
-                         * @function deactivateSpoke
-                         * @memberof google.cloud.networkconnectivity.v1.HubService
-                         * @instance
-                         * @param {google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest} request DeactivateSpokeRequest message or plain object
-                         * @returns {Promise<google.longrunning.Operation>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
-                         * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#activateSpoke}.
-                         * @memberof google.cloud.networkconnectivity.v1.HubService
-                         * @typedef ActivateSpokeCallback
-                         * @type {function}
-                         * @param {Error|null} error Error, if any
-                         * @param {google.longrunning.Operation} [response] Operation
-                         */
-    
-                        /**
-                         * Calls ActivateSpoke.
-                         * @function activateSpoke
-                         * @memberof google.cloud.networkconnectivity.v1.HubService
-                         * @instance
-                         * @param {google.cloud.networkconnectivity.v1.IActivateSpokeRequest} request ActivateSpokeRequest message or plain object
-                         * @param {google.cloud.networkconnectivity.v1.HubService.ActivateSpokeCallback} callback Node-style callback called with the error, if any, and Operation
-                         * @returns {undefined}
-                         * @variation 1
-                         */
-                        Object.defineProperty(HubService.prototype.activateSpoke = function activateSpoke(request, callback) {
-                            return this.rpcCall(activateSpoke, $root.google.cloud.networkconnectivity.v1.ActivateSpokeRequest, $root.google.longrunning.Operation, request, callback);
-                        }, "name", { value: "ActivateSpoke" });
-    
-                        /**
-                         * Calls ActivateSpoke.
-                         * @function activateSpoke
-                         * @memberof google.cloud.networkconnectivity.v1.HubService
-                         * @instance
-                         * @param {google.cloud.networkconnectivity.v1.IActivateSpokeRequest} request ActivateSpokeRequest message or plain object
-                         * @returns {Promise<google.longrunning.Operation>} Promise
-                         * @variation 2
-                         */
-    
-                        /**
                          * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#deleteSpoke}.
                          * @memberof google.cloud.networkconnectivity.v1.HubService
                          * @typedef DeleteSpokeCallback
@@ -840,6 +774,7 @@
                          * @property {string|null} [description] Hub description
                          * @property {string|null} [uniqueId] Hub uniqueId
                          * @property {google.cloud.networkconnectivity.v1.State|null} [state] Hub state
+                         * @property {Array.<google.cloud.networkconnectivity.v1.IRoutingVPC>|null} [routingVpcs] Hub routingVpcs
                          */
     
                         /**
@@ -852,6 +787,7 @@
                          */
                         function Hub(properties) {
                             this.labels = {};
+                            this.routingVpcs = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -915,6 +851,14 @@
                         Hub.prototype.state = 0;
     
                         /**
+                         * Hub routingVpcs.
+                         * @member {Array.<google.cloud.networkconnectivity.v1.IRoutingVPC>} routingVpcs
+                         * @memberof google.cloud.networkconnectivity.v1.Hub
+                         * @instance
+                         */
+                        Hub.prototype.routingVpcs = $util.emptyArray;
+    
+                        /**
                          * Creates a new Hub instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.networkconnectivity.v1.Hub
@@ -953,6 +897,9 @@
                                 writer.uint32(/* id 8, wireType 2 =*/66).string(message.uniqueId);
                             if (message.state != null && Object.hasOwnProperty.call(message, "state"))
                                 writer.uint32(/* id 9, wireType 0 =*/72).int32(message.state);
+                            if (message.routingVpcs != null && message.routingVpcs.length)
+                                for (var i = 0; i < message.routingVpcs.length; ++i)
+                                    $root.google.cloud.networkconnectivity.v1.RoutingVPC.encode(message.routingVpcs[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             return writer;
                         };
     
@@ -1027,6 +974,11 @@
                                 case 9:
                                     message.state = reader.int32();
                                     break;
+                                case 10:
+                                    if (!(message.routingVpcs && message.routingVpcs.length))
+                                        message.routingVpcs = [];
+                                    message.routingVpcs.push($root.google.cloud.networkconnectivity.v1.RoutingVPC.decode(reader, reader.uint32()));
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1099,6 +1051,15 @@
                                 case 3:
                                     break;
                                 }
+                            if (message.routingVpcs != null && message.hasOwnProperty("routingVpcs")) {
+                                if (!Array.isArray(message.routingVpcs))
+                                    return "routingVpcs: array expected";
+                                for (var i = 0; i < message.routingVpcs.length; ++i) {
+                                    var error = $root.google.cloud.networkconnectivity.v1.RoutingVPC.verify(message.routingVpcs[i]);
+                                    if (error)
+                                        return "routingVpcs." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -1155,6 +1116,16 @@
                                 message.state = 3;
                                 break;
                             }
+                            if (object.routingVpcs) {
+                                if (!Array.isArray(object.routingVpcs))
+                                    throw TypeError(".google.cloud.networkconnectivity.v1.Hub.routingVpcs: array expected");
+                                message.routingVpcs = [];
+                                for (var i = 0; i < object.routingVpcs.length; ++i) {
+                                    if (typeof object.routingVpcs[i] !== "object")
+                                        throw TypeError(".google.cloud.networkconnectivity.v1.Hub.routingVpcs: object expected");
+                                    message.routingVpcs[i] = $root.google.cloud.networkconnectivity.v1.RoutingVPC.fromObject(object.routingVpcs[i]);
+                                }
+                            }
                             return message;
                         };
     
@@ -1171,6 +1142,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.routingVpcs = [];
                             if (options.objects || options.defaults)
                                 object.labels = {};
                             if (options.defaults) {
@@ -1199,6 +1172,11 @@
                                 object.uniqueId = message.uniqueId;
                             if (message.state != null && message.hasOwnProperty("state"))
                                 object.state = options.enums === String ? $root.google.cloud.networkconnectivity.v1.State[message.state] : message.state;
+                            if (message.routingVpcs && message.routingVpcs.length) {
+                                object.routingVpcs = [];
+                                for (var j = 0; j < message.routingVpcs.length; ++j)
+                                    object.routingVpcs[j] = $root.google.cloud.networkconnectivity.v1.RoutingVPC.toObject(message.routingVpcs[j], options);
+                            }
                             return object;
                         };
     
@@ -1232,6 +1210,193 @@
                         values[valuesById[2] = "ACTIVE"] = 2;
                         values[valuesById[3] = "DELETING"] = 3;
                         return values;
+                    })();
+    
+                    v1.RoutingVPC = (function() {
+    
+                        /**
+                         * Properties of a RoutingVPC.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @interface IRoutingVPC
+                         * @property {string|null} [uri] RoutingVPC uri
+                         */
+    
+                        /**
+                         * Constructs a new RoutingVPC.
+                         * @memberof google.cloud.networkconnectivity.v1
+                         * @classdesc Represents a RoutingVPC.
+                         * @implements IRoutingVPC
+                         * @constructor
+                         * @param {google.cloud.networkconnectivity.v1.IRoutingVPC=} [properties] Properties to set
+                         */
+                        function RoutingVPC(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RoutingVPC uri.
+                         * @member {string} uri
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @instance
+                         */
+                        RoutingVPC.prototype.uri = "";
+    
+                        /**
+                         * Creates a new RoutingVPC instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRoutingVPC=} [properties] Properties to set
+                         * @returns {google.cloud.networkconnectivity.v1.RoutingVPC} RoutingVPC instance
+                         */
+                        RoutingVPC.create = function create(properties) {
+                            return new RoutingVPC(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RoutingVPC message. Does not implicitly {@link google.cloud.networkconnectivity.v1.RoutingVPC.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRoutingVPC} message RoutingVPC message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RoutingVPC.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.uri);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RoutingVPC message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.RoutingVPC.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.IRoutingVPC} message RoutingVPC message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RoutingVPC.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RoutingVPC message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.networkconnectivity.v1.RoutingVPC} RoutingVPC
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RoutingVPC.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.RoutingVPC();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.uri = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RoutingVPC message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.networkconnectivity.v1.RoutingVPC} RoutingVPC
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RoutingVPC.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RoutingVPC message.
+                         * @function verify
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RoutingVPC.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                if (!$util.isString(message.uri))
+                                    return "uri: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RoutingVPC message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.networkconnectivity.v1.RoutingVPC} RoutingVPC
+                         */
+                        RoutingVPC.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.networkconnectivity.v1.RoutingVPC)
+                                return object;
+                            var message = new $root.google.cloud.networkconnectivity.v1.RoutingVPC();
+                            if (object.uri != null)
+                                message.uri = String(object.uri);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RoutingVPC message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @static
+                         * @param {google.cloud.networkconnectivity.v1.RoutingVPC} message RoutingVPC
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RoutingVPC.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.uri = "";
+                            if (message.uri != null && message.hasOwnProperty("uri"))
+                                object.uri = message.uri;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RoutingVPC to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.networkconnectivity.v1.RoutingVPC
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RoutingVPC.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RoutingVPC;
                     })();
     
                     v1.Spoke = (function() {
@@ -4612,426 +4777,6 @@
                         };
     
                         return DeleteSpokeRequest;
-                    })();
-    
-                    v1.DeactivateSpokeRequest = (function() {
-    
-                        /**
-                         * Properties of a DeactivateSpokeRequest.
-                         * @memberof google.cloud.networkconnectivity.v1
-                         * @interface IDeactivateSpokeRequest
-                         * @property {string|null} [name] DeactivateSpokeRequest name
-                         * @property {string|null} [requestId] DeactivateSpokeRequest requestId
-                         */
-    
-                        /**
-                         * Constructs a new DeactivateSpokeRequest.
-                         * @memberof google.cloud.networkconnectivity.v1
-                         * @classdesc Represents a DeactivateSpokeRequest.
-                         * @implements IDeactivateSpokeRequest
-                         * @constructor
-                         * @param {google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest=} [properties] Properties to set
-                         */
-                        function DeactivateSpokeRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DeactivateSpokeRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @instance
-                         */
-                        DeactivateSpokeRequest.prototype.name = "";
-    
-                        /**
-                         * DeactivateSpokeRequest requestId.
-                         * @member {string} requestId
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @instance
-                         */
-                        DeactivateSpokeRequest.prototype.requestId = "";
-    
-                        /**
-                         * Creates a new DeactivateSpokeRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @static
-                         * @param {google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest=} [properties] Properties to set
-                         * @returns {google.cloud.networkconnectivity.v1.DeactivateSpokeRequest} DeactivateSpokeRequest instance
-                         */
-                        DeactivateSpokeRequest.create = function create(properties) {
-                            return new DeactivateSpokeRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DeactivateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeactivateSpokeRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @static
-                         * @param {google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest} message DeactivateSpokeRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeactivateSpokeRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DeactivateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeactivateSpokeRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @static
-                         * @param {google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest} message DeactivateSpokeRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DeactivateSpokeRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DeactivateSpokeRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.networkconnectivity.v1.DeactivateSpokeRequest} DeactivateSpokeRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeactivateSpokeRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.DeactivateSpokeRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DeactivateSpokeRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.networkconnectivity.v1.DeactivateSpokeRequest} DeactivateSpokeRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DeactivateSpokeRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DeactivateSpokeRequest message.
-                         * @function verify
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DeactivateSpokeRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                if (!$util.isString(message.requestId))
-                                    return "requestId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DeactivateSpokeRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.networkconnectivity.v1.DeactivateSpokeRequest} DeactivateSpokeRequest
-                         */
-                        DeactivateSpokeRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.networkconnectivity.v1.DeactivateSpokeRequest)
-                                return object;
-                            var message = new $root.google.cloud.networkconnectivity.v1.DeactivateSpokeRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.requestId != null)
-                                message.requestId = String(object.requestId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DeactivateSpokeRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @static
-                         * @param {google.cloud.networkconnectivity.v1.DeactivateSpokeRequest} message DeactivateSpokeRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DeactivateSpokeRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.requestId = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                object.requestId = message.requestId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DeactivateSpokeRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.networkconnectivity.v1.DeactivateSpokeRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DeactivateSpokeRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return DeactivateSpokeRequest;
-                    })();
-    
-                    v1.ActivateSpokeRequest = (function() {
-    
-                        /**
-                         * Properties of an ActivateSpokeRequest.
-                         * @memberof google.cloud.networkconnectivity.v1
-                         * @interface IActivateSpokeRequest
-                         * @property {string|null} [name] ActivateSpokeRequest name
-                         * @property {string|null} [requestId] ActivateSpokeRequest requestId
-                         */
-    
-                        /**
-                         * Constructs a new ActivateSpokeRequest.
-                         * @memberof google.cloud.networkconnectivity.v1
-                         * @classdesc Represents an ActivateSpokeRequest.
-                         * @implements IActivateSpokeRequest
-                         * @constructor
-                         * @param {google.cloud.networkconnectivity.v1.IActivateSpokeRequest=} [properties] Properties to set
-                         */
-                        function ActivateSpokeRequest(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ActivateSpokeRequest name.
-                         * @member {string} name
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @instance
-                         */
-                        ActivateSpokeRequest.prototype.name = "";
-    
-                        /**
-                         * ActivateSpokeRequest requestId.
-                         * @member {string} requestId
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @instance
-                         */
-                        ActivateSpokeRequest.prototype.requestId = "";
-    
-                        /**
-                         * Creates a new ActivateSpokeRequest instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @static
-                         * @param {google.cloud.networkconnectivity.v1.IActivateSpokeRequest=} [properties] Properties to set
-                         * @returns {google.cloud.networkconnectivity.v1.ActivateSpokeRequest} ActivateSpokeRequest instance
-                         */
-                        ActivateSpokeRequest.create = function create(properties) {
-                            return new ActivateSpokeRequest(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ActivateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ActivateSpokeRequest.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @static
-                         * @param {google.cloud.networkconnectivity.v1.IActivateSpokeRequest} message ActivateSpokeRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ActivateSpokeRequest.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.requestId != null && Object.hasOwnProperty.call(message, "requestId"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.requestId);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ActivateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ActivateSpokeRequest.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @static
-                         * @param {google.cloud.networkconnectivity.v1.IActivateSpokeRequest} message ActivateSpokeRequest message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ActivateSpokeRequest.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes an ActivateSpokeRequest message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.networkconnectivity.v1.ActivateSpokeRequest} ActivateSpokeRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ActivateSpokeRequest.decode = function decode(reader, length) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.networkconnectivity.v1.ActivateSpokeRequest();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                switch (tag >>> 3) {
-                                case 1:
-                                    message.name = reader.string();
-                                    break;
-                                case 2:
-                                    message.requestId = reader.string();
-                                    break;
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes an ActivateSpokeRequest message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.networkconnectivity.v1.ActivateSpokeRequest} ActivateSpokeRequest
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ActivateSpokeRequest.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies an ActivateSpokeRequest message.
-                         * @function verify
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ActivateSpokeRequest.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                if (!$util.isString(message.requestId))
-                                    return "requestId: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates an ActivateSpokeRequest message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.networkconnectivity.v1.ActivateSpokeRequest} ActivateSpokeRequest
-                         */
-                        ActivateSpokeRequest.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.networkconnectivity.v1.ActivateSpokeRequest)
-                                return object;
-                            var message = new $root.google.cloud.networkconnectivity.v1.ActivateSpokeRequest();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.requestId != null)
-                                message.requestId = String(object.requestId);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from an ActivateSpokeRequest message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @static
-                         * @param {google.cloud.networkconnectivity.v1.ActivateSpokeRequest} message ActivateSpokeRequest
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ActivateSpokeRequest.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.name = "";
-                                object.requestId = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.requestId != null && message.hasOwnProperty("requestId"))
-                                object.requestId = message.requestId;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ActivateSpokeRequest to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.networkconnectivity.v1.ActivateSpokeRequest
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ActivateSpokeRequest.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        return ActivateSpokeRequest;
                     })();
     
                     v1.LinkedVpnTunnels = (function() {

@@ -299,34 +299,6 @@ export namespace google {
                     public updateSpoke(request: google.cloud.networkconnectivity.v1.IUpdateSpokeRequest): Promise<google.longrunning.Operation>;
 
                     /**
-                     * Calls DeactivateSpoke.
-                     * @param request DeactivateSpokeRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Operation
-                     */
-                    public deactivateSpoke(request: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest, callback: google.cloud.networkconnectivity.v1.HubService.DeactivateSpokeCallback): void;
-
-                    /**
-                     * Calls DeactivateSpoke.
-                     * @param request DeactivateSpokeRequest message or plain object
-                     * @returns Promise
-                     */
-                    public deactivateSpoke(request: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest): Promise<google.longrunning.Operation>;
-
-                    /**
-                     * Calls ActivateSpoke.
-                     * @param request ActivateSpokeRequest message or plain object
-                     * @param callback Node-style callback called with the error, if any, and Operation
-                     */
-                    public activateSpoke(request: google.cloud.networkconnectivity.v1.IActivateSpokeRequest, callback: google.cloud.networkconnectivity.v1.HubService.ActivateSpokeCallback): void;
-
-                    /**
-                     * Calls ActivateSpoke.
-                     * @param request ActivateSpokeRequest message or plain object
-                     * @returns Promise
-                     */
-                    public activateSpoke(request: google.cloud.networkconnectivity.v1.IActivateSpokeRequest): Promise<google.longrunning.Operation>;
-
-                    /**
                      * Calls DeleteSpoke.
                      * @param request DeleteSpokeRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -407,20 +379,6 @@ export namespace google {
                     type UpdateSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
-                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#deactivateSpoke}.
-                     * @param error Error, if any
-                     * @param [response] Operation
-                     */
-                    type DeactivateSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                    /**
-                     * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#activateSpoke}.
-                     * @param error Error, if any
-                     * @param [response] Operation
-                     */
-                    type ActivateSpokeCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
-
-                    /**
                      * Callback as used by {@link google.cloud.networkconnectivity.v1.HubService#deleteSpoke}.
                      * @param error Error, if any
                      * @param [response] Operation
@@ -451,6 +409,9 @@ export namespace google {
 
                     /** Hub state */
                     state?: (google.cloud.networkconnectivity.v1.State|keyof typeof google.cloud.networkconnectivity.v1.State|null);
+
+                    /** Hub routingVpcs */
+                    routingVpcs?: (google.cloud.networkconnectivity.v1.IRoutingVPC[]|null);
                 }
 
                 /** Represents a Hub. */
@@ -482,6 +443,9 @@ export namespace google {
 
                     /** Hub state. */
                     public state: (google.cloud.networkconnectivity.v1.State|keyof typeof google.cloud.networkconnectivity.v1.State);
+
+                    /** Hub routingVpcs. */
+                    public routingVpcs: google.cloud.networkconnectivity.v1.IRoutingVPC[];
 
                     /**
                      * Creates a new Hub instance using the specified properties.
@@ -560,6 +524,96 @@ export namespace google {
                     CREATING = 1,
                     ACTIVE = 2,
                     DELETING = 3
+                }
+
+                /** Properties of a RoutingVPC. */
+                interface IRoutingVPC {
+
+                    /** RoutingVPC uri */
+                    uri?: (string|null);
+                }
+
+                /** Represents a RoutingVPC. */
+                class RoutingVPC implements IRoutingVPC {
+
+                    /**
+                     * Constructs a new RoutingVPC.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.networkconnectivity.v1.IRoutingVPC);
+
+                    /** RoutingVPC uri. */
+                    public uri: string;
+
+                    /**
+                     * Creates a new RoutingVPC instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RoutingVPC instance
+                     */
+                    public static create(properties?: google.cloud.networkconnectivity.v1.IRoutingVPC): google.cloud.networkconnectivity.v1.RoutingVPC;
+
+                    /**
+                     * Encodes the specified RoutingVPC message. Does not implicitly {@link google.cloud.networkconnectivity.v1.RoutingVPC.verify|verify} messages.
+                     * @param message RoutingVPC message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.networkconnectivity.v1.IRoutingVPC, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RoutingVPC message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.RoutingVPC.verify|verify} messages.
+                     * @param message RoutingVPC message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IRoutingVPC, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RoutingVPC message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RoutingVPC
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.RoutingVPC;
+
+                    /**
+                     * Decodes a RoutingVPC message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RoutingVPC
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.RoutingVPC;
+
+                    /**
+                     * Verifies a RoutingVPC message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RoutingVPC message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RoutingVPC
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.RoutingVPC;
+
+                    /**
+                     * Creates a plain object from a RoutingVPC message. Also converts values to other types if specified.
+                     * @param message RoutingVPC
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.networkconnectivity.v1.RoutingVPC, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RoutingVPC to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a Spoke. */
@@ -1931,198 +1985,6 @@ export namespace google {
 
                     /**
                      * Converts this DeleteSpokeRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of a DeactivateSpokeRequest. */
-                interface IDeactivateSpokeRequest {
-
-                    /** DeactivateSpokeRequest name */
-                    name?: (string|null);
-
-                    /** DeactivateSpokeRequest requestId */
-                    requestId?: (string|null);
-                }
-
-                /** Represents a DeactivateSpokeRequest. */
-                class DeactivateSpokeRequest implements IDeactivateSpokeRequest {
-
-                    /**
-                     * Constructs a new DeactivateSpokeRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest);
-
-                    /** DeactivateSpokeRequest name. */
-                    public name: string;
-
-                    /** DeactivateSpokeRequest requestId. */
-                    public requestId: string;
-
-                    /**
-                     * Creates a new DeactivateSpokeRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DeactivateSpokeRequest instance
-                     */
-                    public static create(properties?: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest): google.cloud.networkconnectivity.v1.DeactivateSpokeRequest;
-
-                    /**
-                     * Encodes the specified DeactivateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeactivateSpokeRequest.verify|verify} messages.
-                     * @param message DeactivateSpokeRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DeactivateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.DeactivateSpokeRequest.verify|verify} messages.
-                     * @param message DeactivateSpokeRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IDeactivateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DeactivateSpokeRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DeactivateSpokeRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.DeactivateSpokeRequest;
-
-                    /**
-                     * Decodes a DeactivateSpokeRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DeactivateSpokeRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.DeactivateSpokeRequest;
-
-                    /**
-                     * Verifies a DeactivateSpokeRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DeactivateSpokeRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DeactivateSpokeRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.DeactivateSpokeRequest;
-
-                    /**
-                     * Creates a plain object from a DeactivateSpokeRequest message. Also converts values to other types if specified.
-                     * @param message DeactivateSpokeRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.networkconnectivity.v1.DeactivateSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DeactivateSpokeRequest to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-                }
-
-                /** Properties of an ActivateSpokeRequest. */
-                interface IActivateSpokeRequest {
-
-                    /** ActivateSpokeRequest name */
-                    name?: (string|null);
-
-                    /** ActivateSpokeRequest requestId */
-                    requestId?: (string|null);
-                }
-
-                /** Represents an ActivateSpokeRequest. */
-                class ActivateSpokeRequest implements IActivateSpokeRequest {
-
-                    /**
-                     * Constructs a new ActivateSpokeRequest.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.networkconnectivity.v1.IActivateSpokeRequest);
-
-                    /** ActivateSpokeRequest name. */
-                    public name: string;
-
-                    /** ActivateSpokeRequest requestId. */
-                    public requestId: string;
-
-                    /**
-                     * Creates a new ActivateSpokeRequest instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ActivateSpokeRequest instance
-                     */
-                    public static create(properties?: google.cloud.networkconnectivity.v1.IActivateSpokeRequest): google.cloud.networkconnectivity.v1.ActivateSpokeRequest;
-
-                    /**
-                     * Encodes the specified ActivateSpokeRequest message. Does not implicitly {@link google.cloud.networkconnectivity.v1.ActivateSpokeRequest.verify|verify} messages.
-                     * @param message ActivateSpokeRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.networkconnectivity.v1.IActivateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ActivateSpokeRequest message, length delimited. Does not implicitly {@link google.cloud.networkconnectivity.v1.ActivateSpokeRequest.verify|verify} messages.
-                     * @param message ActivateSpokeRequest message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.networkconnectivity.v1.IActivateSpokeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes an ActivateSpokeRequest message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ActivateSpokeRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.networkconnectivity.v1.ActivateSpokeRequest;
-
-                    /**
-                     * Decodes an ActivateSpokeRequest message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ActivateSpokeRequest
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.networkconnectivity.v1.ActivateSpokeRequest;
-
-                    /**
-                     * Verifies an ActivateSpokeRequest message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates an ActivateSpokeRequest message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ActivateSpokeRequest
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.networkconnectivity.v1.ActivateSpokeRequest;
-
-                    /**
-                     * Creates a plain object from an ActivateSpokeRequest message. Also converts values to other types if specified.
-                     * @param message ActivateSpokeRequest
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.networkconnectivity.v1.ActivateSpokeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ActivateSpokeRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

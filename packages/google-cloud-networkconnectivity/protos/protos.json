@@ -288,62 +288,6 @@
                             }
                           ]
                         },
-                        "DeactivateSpoke": {
-                          "requestType": "DeactivateSpokeRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/spokes/*}:deactivate",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name",
-                            "(google.longrunning.operation_info).response_type": "Spoke",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1/{name=projects/*/locations/*/spokes/*}:deactivate",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "Spoke",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
-                        "ActivateSpoke": {
-                          "requestType": "ActivateSpokeRequest",
-                          "responseType": "google.longrunning.Operation",
-                          "options": {
-                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/spokes/*}:activate",
-                            "(google.api.http).body": "*",
-                            "(google.api.method_signature)": "name",
-                            "(google.longrunning.operation_info).response_type": "Spoke",
-                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
-                          },
-                          "parsedOptions": [
-                            {
-                              "(google.api.http)": {
-                                "post": "/v1/{name=projects/*/locations/*/spokes/*}:activate",
-                                "body": "*"
-                              }
-                            },
-                            {
-                              "(google.api.method_signature)": "name"
-                            },
-                            {
-                              "(google.longrunning.operation_info)": {
-                                "response_type": "Spoke",
-                                "metadata_type": "OperationMetadata"
-                              }
-                            }
-                          ]
-                        },
                         "DeleteSpoke": {
                           "requestType": "DeleteSpokeRequest",
                           "responseType": "google.longrunning.Operation",
@@ -421,6 +365,11 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "routingVpcs": {
+                          "rule": "repeated",
+                          "type": "RoutingVPC",
+                          "id": 10
                         }
                       }
                     },
@@ -430,6 +379,17 @@
                         "CREATING": 1,
                         "ACTIVE": 2,
                         "DELETING": 3
+                      }
+                    },
+                    "RoutingVPC": {
+                      "fields": {
+                        "uri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Network"
+                          }
+                        }
                       }
                     },
                     "Spoke": {
@@ -756,44 +716,6 @@
                       }
                     },
                     "DeleteSpokeRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Spoke"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "DeactivateSpokeRequest": {
-                      "fields": {
-                        "name": {
-                          "type": "string",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "REQUIRED",
-                            "(google.api.resource_reference).type": "networkconnectivity.googleapis.com/Spoke"
-                          }
-                        },
-                        "requestId": {
-                          "type": "string",
-                          "id": 2,
-                          "options": {
-                            "(google.api.field_behavior)": "OPTIONAL"
-                          }
-                        }
-                      }
-                    },
-                    "ActivateSpokeRequest": {
                       "fields": {
                         "name": {
                           "type": "string",
