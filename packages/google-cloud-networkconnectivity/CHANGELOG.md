@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.3.0...v1.4.0) (2021-08-25)
+
+
+### Features
+
+* Add hub.routing_vpcs field docs: Specify that site_to_site_data_transfer field must be set to true ([cfc63fa](https://www.github.com/googleapis/nodejs-network-connectivity/commit/cfc63fa4dcb74f99d0dae8df45530a1139ac7c36))
+* Remove ActivateSpoke and DeactivateSpoke methods ([#78](https://www.github.com/googleapis/nodejs-network-connectivity/issues/78)) ([cfc63fa](https://www.github.com/googleapis/nodejs-network-connectivity/commit/cfc63fa4dcb74f99d0dae8df45530a1139ac7c36))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.2.1...v1.3.0) (2021-08-23)
 
 
