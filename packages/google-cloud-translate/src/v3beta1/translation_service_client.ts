@@ -476,14 +476,13 @@ export class TranslationServiceClient {
    *
    *   - General (built-in) models:
    *     `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
-   *     `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
    *
    *
    *   For global (non-regionalized) requests, use `location-id` `global`.
    *   For example,
    *   `projects/{project-number-or-id}/locations/global/models/general/nmt`.
    *
-   *   If missing, the system decides which google base model to use.
+   *   If not provided, the default Google model (NMT) will be used
    * @param {google.cloud.translation.v3beta1.TranslateTextGlossaryConfig} [request.glossaryConfig]
    *   Optional. Glossary to be applied. The glossary must be
    *   within the same region (have the same location-id) as the model, otherwise
@@ -599,7 +598,7 @@ export class TranslationServiceClient {
    *   For global calls, use `projects/{project-number-or-id}/locations/global` or
    *   `projects/{project-number-or-id}`.
    *
-   *   Only models within the same region, which have the same location-id, can be used.
+   *   Only models within the same region (has same location-id) can be used.
    *   Otherwise an INVALID_ARGUMENT (400) error is returned.
    * @param {string} [request.model]
    *   Optional. The language detection model to be used.
@@ -748,11 +747,10 @@ export class TranslationServiceClient {
    *
    *   - General (built-in) models:
    *     `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
-   *     `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
    *
    *
    *   Returns languages supported by the specified model.
-   *   If missing, we get supported languages of Google general base (PBMT) model.
+   *   If missing, we get supported languages of Google general NMT model.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -853,8 +851,7 @@ export class TranslationServiceClient {
    *
    *   Format: `projects/{project-number-or-id}/locations/{location-id}`.
    *
-   *   For global calls, use `projects/{project-number-or-id}/locations/global` or
-   *   `projects/{project-number-or-id}`.
+   *   For global calls, use `projects/{project-number-or-id}/locations/global`.
    *
    *   Non-global location is required for requests using AutoML models or custom
    *   glossaries.
@@ -889,7 +886,6 @@ export class TranslationServiceClient {
    *
    *   - General (built-in) models:
    *     `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
-   *     `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
    *
    *
    *   If not provided, the default Google model (NMT) will be used for
@@ -1120,7 +1116,7 @@ export class TranslationServiceClient {
    *   Required. Specify up to 10 language codes here.
    * @param {number[]} [request.models]
    *   Optional. The models to use for translation. Map's key is target language
-   *   code. Map's value is the model name. Value can be a built-in general model,
+   *   code. Map's value is model name. Value can be a built-in general model,
    *   or an AutoML Translation model.
    *
    *   The value format depends on model type:
@@ -1130,7 +1126,6 @@ export class TranslationServiceClient {
    *
    *   - General (built-in) models:
    *     `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
-   *     `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
    *
    *
    *   If the map is empty or a specific model is
@@ -1339,7 +1334,6 @@ export class TranslationServiceClient {
    *
    *   - General (built-in) models:
    *     `projects/{project-number-or-id}/locations/{location-id}/models/general/nmt`,
-   *     `projects/{project-number-or-id}/locations/{location-id}/models/general/base`
    *
    *
    *   If the map is empty or a specific model is not requested for a language
