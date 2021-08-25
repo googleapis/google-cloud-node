@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.1.0...v1.1.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* flag the module as GA ([#34](https://www.github.com/googleapis/nodejs-apigee-connect/issues/34)) ([911bec0](https://www.github.com/googleapis/nodejs-apigee-connect/commit/911bec0d826a12212ce0527acf7398eef3dea1e6))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-apigee-connect/compare/v1.0.5...v1.1.0) (2021-08-23)
 
 
