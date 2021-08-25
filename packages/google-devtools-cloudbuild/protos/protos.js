@@ -10565,6 +10565,7 @@
                          * @property {Array.<string>|null} [ignoredFiles] BuildTrigger ignoredFiles
                          * @property {Array.<string>|null} [includedFiles] BuildTrigger includedFiles
                          * @property {string|null} [filter] BuildTrigger filter
+                         * @property {string|null} [serviceAccount] BuildTrigger serviceAccount
                          */
     
                         /**
@@ -10730,6 +10731,14 @@
                          */
                         BuildTrigger.prototype.filter = "";
     
+                        /**
+                         * BuildTrigger serviceAccount.
+                         * @member {string} serviceAccount
+                         * @memberof google.devtools.cloudbuild.v1.BuildTrigger
+                         * @instance
+                         */
+                        BuildTrigger.prototype.serviceAccount = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -10806,6 +10815,8 @@
                                 writer.uint32(/* id 30, wireType 2 =*/242).string(message.filter);
                             if (message.webhookConfig != null && Object.hasOwnProperty.call(message, "webhookConfig"))
                                 $root.google.devtools.cloudbuild.v1.WebhookConfig.encode(message.webhookConfig, writer.uint32(/* id 31, wireType 2 =*/250).fork()).ldelim();
+                            if (message.serviceAccount != null && Object.hasOwnProperty.call(message, "serviceAccount"))
+                                writer.uint32(/* id 33, wireType 2 =*/266).string(message.serviceAccount);
                             if (message.resourceName != null && Object.hasOwnProperty.call(message, "resourceName"))
                                 writer.uint32(/* id 34, wireType 2 =*/274).string(message.resourceName);
                             return writer;
@@ -10920,6 +10931,9 @@
                                     break;
                                 case 30:
                                     message.filter = reader.string();
+                                    break;
+                                case 33:
+                                    message.serviceAccount = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -11051,6 +11065,9 @@
                             if (message.filter != null && message.hasOwnProperty("filter"))
                                 if (!$util.isString(message.filter))
                                     return "filter: string expected";
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                if (!$util.isString(message.serviceAccount))
+                                    return "serviceAccount: string expected";
                             return null;
                         };
     
@@ -11140,6 +11157,8 @@
                             }
                             if (object.filter != null)
                                 message.filter = String(object.filter);
+                            if (object.serviceAccount != null)
+                                message.serviceAccount = String(object.serviceAccount);
                             return message;
                         };
     
@@ -11174,6 +11193,7 @@
                                 object.pubsubConfig = null;
                                 object.filter = "";
                                 object.webhookConfig = null;
+                                object.serviceAccount = "";
                                 object.resourceName = "";
                             }
                             if (message.id != null && message.hasOwnProperty("id"))
@@ -11232,6 +11252,8 @@
                                 object.filter = message.filter;
                             if (message.webhookConfig != null && message.hasOwnProperty("webhookConfig"))
                                 object.webhookConfig = $root.google.devtools.cloudbuild.v1.WebhookConfig.toObject(message.webhookConfig, options);
+                            if (message.serviceAccount != null && message.hasOwnProperty("serviceAccount"))
+                                object.serviceAccount = message.serviceAccount;
                             if (message.resourceName != null && message.hasOwnProperty("resourceName"))
                                 object.resourceName = message.resourceName;
                             return object;

@@ -4227,6 +4227,9 @@ export namespace google {
 
                     /** BuildTrigger filter */
                     filter?: (string|null);
+
+                    /** BuildTrigger serviceAccount */
+                    serviceAccount?: (string|null);
                 }
 
                 /** Represents a BuildTrigger. */
@@ -4291,6 +4294,9 @@ export namespace google {
 
                     /** BuildTrigger filter. */
                     public filter: string;
+
+                    /** BuildTrigger serviceAccount. */
+                    public serviceAccount: string;
 
                     /** BuildTrigger buildTemplate. */
                     public buildTemplate?: ("autodetect"|"build"|"filename");

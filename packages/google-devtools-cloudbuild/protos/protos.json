@@ -1534,6 +1534,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 33,
+                          "options": {
+                            "(google.api.resource_reference).type": "iam.googleapis.com/ServiceAccount"
+                          }
                         }
                       }
                     },
