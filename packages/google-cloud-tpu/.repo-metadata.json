@@ -4,7 +4,7 @@
   "product_documentation": "https://cloud.google.com/tpu/",
   "client_documentation": "https://cloud.google.com/nodejs/docs/reference/tpu/latest",
   "issue_tracker": "https://github.com/googleapis/nodejs-cloud-tpu/issues",
-  "release_level": "BETA",
+  "release_level": "ga",
   "language": "nodejs",
   "repo": "googleapis/nodejs-cloud-tpu",
   "distribution_name": "@google-cloud/tpu",
