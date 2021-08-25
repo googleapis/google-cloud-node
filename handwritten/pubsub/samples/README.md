@@ -86,7 +86,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 Creates a new schema definition on a project, using Avro
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createAvroSchema.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createAvroSchema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createAvroSchema.js,samples/README.md)
 
@@ -105,7 +105,7 @@ __Usage:__
 
 Creates a new schema definition on a project, using Protos
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createProtoSchema.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createProtoSchema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createProtoSchema.js,samples/README.md)
 
@@ -124,7 +124,7 @@ __Usage:__
 
 Creates a new push subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createPushSubscription.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createPushSubscription.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createPushSubscription.js,samples/README.md)
 
@@ -143,7 +143,7 @@ __Usage:__
 
 Creates a new subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createSubscription.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createSubscription.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createSubscription.js,samples/README.md)
 
@@ -162,7 +162,7 @@ __Usage:__
 
 Creates a new subscription With Dead Letter Policy.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createSubscriptionWithDeadLetterPolicy.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createSubscriptionWithDeadLetterPolicy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createSubscriptionWithDeadLetterPolicy.js,samples/README.md)
 
@@ -181,7 +181,7 @@ __Usage:__
 
 Creates a new subscription with ordering enabled.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createSubscriptionWithOrdering.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createSubscriptionWithOrdering.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createSubscriptionWithOrdering.js,samples/README.md)
 
@@ -200,7 +200,7 @@ __Usage:__
 
 Creates a new topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createTopic.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createTopic.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createTopic.js,samples/README.md)
 
@@ -219,7 +219,7 @@ __Usage:__
 
 Creates a new topic, with a schema definition.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/createTopicWithSchema.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/createTopicWithSchema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/createTopicWithSchema.js,samples/README.md)
 
@@ -238,7 +238,7 @@ __Usage:__
 
 Deletes a schema which was previously created in the project.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/deleteSchema.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/deleteSchema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/deleteSchema.js,samples/README.md)
 
@@ -257,7 +257,7 @@ __Usage:__
 
 Deletes an existing subscription from a topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/deleteSubscription.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/deleteSubscription.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/deleteSubscription.js,samples/README.md)
 
@@ -276,7 +276,7 @@ __Usage:__
 
 Deletes an existing topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/deleteTopic.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/deleteTopic.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/deleteTopic.js,samples/README.md)
 
@@ -295,7 +295,7 @@ __Usage:__
 
 Detaches a subscription from a topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/detachSubscription.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/detachSubscription.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/detachSubscription.js,samples/README.md)
 
@@ -314,7 +314,7 @@ __Usage:__
 
 Gets information about a schema which was previously created in the project.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/getSchema.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/getSchema.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/getSchema.js,samples/README.md)
 
@@ -333,7 +333,7 @@ __Usage:__
 
 Gets the metadata for a subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/getSubscription.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/getSubscription.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/getSubscription.js,samples/README.md)
 
@@ -352,7 +352,7 @@ __Usage:__
 
 Gets the IAM policy for a subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/getSubscriptionPolicy.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/getSubscriptionPolicy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/getSubscriptionPolicy.js,samples/README.md)
 
@@ -371,7 +371,7 @@ __Usage:__
 
 Gets the IAM policy for a topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/getTopicPolicy.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/getTopicPolicy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/getTopicPolicy.js,samples/README.md)
 
@@ -390,7 +390,7 @@ __Usage:__
 
 Lists all topics in the current project.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listAllTopics.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listAllTopics.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listAllTopics.js,samples/README.md)
 
@@ -409,7 +409,7 @@ __Usage:__
 
 Gets a list of schemas which were previously created in the project.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listSchemas.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listSchemas.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listSchemas.js,samples/README.md)
 
@@ -428,7 +428,7 @@ __Usage:__
 
 Lists all subscriptions in the current project.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listSubscriptions.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listSubscriptions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listSubscriptions.js,samples/README.md)
 
@@ -447,7 +447,7 @@ __Usage:__
 
 Lists all subscriptions in the current project, filtering by a topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listTopicSubscriptions.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listTopicSubscriptions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listTopicSubscriptions.js,samples/README.md)
 
@@ -466,7 +466,7 @@ __Usage:__
 
 Listens for records in Avro encoding from a subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listenForAvroRecords.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listenForAvroRecords.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenForAvroRecords.js,samples/README.md)
 
@@ -485,7 +485,7 @@ __Usage:__
 
 Listens to messages and errors for a subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listenForErrors.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listenForErrors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenForErrors.js,samples/README.md)
 
@@ -504,7 +504,7 @@ __Usage:__
 
 Listens for messages from a subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listenForMessages.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listenForMessages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenForMessages.js,samples/README.md)
 
@@ -523,7 +523,7 @@ __Usage:__
 
 Listens for messages in protobuf encoding from a subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listenForProtobufMessages.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listenForProtobufMessages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenForProtobufMessages.js,samples/README.md)
 
@@ -542,7 +542,7 @@ __Usage:__
 
 Demonstrates how to receive and process custom attributes on messages.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/listenWithCustomAttributes.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/listenWithCustomAttributes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/listenWithCustomAttributes.js,samples/README.md)
 
@@ -561,7 +561,7 @@ __Usage:__
 
 Modifies the configuration of an existing push subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/modifyPushConfig.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/modifyPushConfig.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/modifyPushConfig.js,samples/README.md)
 
@@ -580,7 +580,7 @@ __Usage:__
 
 Demonstrates how to enable OpenTelemetry tracing in a publisher or subscriber.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/openTelemetryTracing.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/openTelemetryTracing.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/openTelemetryTracing.js,samples/README.md)
 
@@ -599,7 +599,7 @@ __Usage:__
 
 Publishes a record in Avro to a topic with a schema.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishAvroRecords.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/publishAvroRecords.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishAvroRecords.js,samples/README.md)
 
@@ -618,7 +618,7 @@ __Usage:__
 
 Publishes messages to a topic using custom batching settings.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishBatchedMessages.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/publishBatchedMessages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishBatchedMessages.js,samples/README.md)
 
@@ -637,7 +637,7 @@ __Usage:__
 
 Publishes a message to a topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishMessage.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/publishMessage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishMessage.js,samples/README.md)
 
@@ -656,7 +656,7 @@ __Usage:__
 
 Publishes a message with custom attributes to a topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishMessageWithCustomAttributes.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/publishMessageWithCustomAttributes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishMessageWithCustomAttributes.js,samples/README.md)
 
@@ -675,7 +675,7 @@ __Usage:__
 
 Demonstrates how to publish messages to a topic with ordering. Please see "Create Subscription With Ordering" for information on setting up a subscription that will receive the messages with proper ordering.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishOrderedMessage.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/publishOrderedMessage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishOrderedMessage.js,samples/README.md)
 
@@ -694,7 +694,7 @@ __Usage:__
 
 Publishes a message in protobuf form to a topic with a schema.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishProtobufMessages.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/publishProtobufMessages.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishProtobufMessages.js,samples/README.md)
 
@@ -713,7 +713,7 @@ __Usage:__
 
 Publishes a message to a topic with retry settings.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/publishWithRetrySettings.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/publishWithRetrySettings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/publishWithRetrySettings.js,samples/README.md)
 
@@ -732,7 +732,7 @@ __Usage:__
 
 A quick introduction to using the Pub/Sub client library.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -751,7 +751,7 @@ __Usage:__
 
 Remove Dead Letter Policy from subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/removeDeadLetterPolicy.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/removeDeadLetterPolicy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/removeDeadLetterPolicy.js,samples/README.md)
 
@@ -770,7 +770,7 @@ __Usage:__
 
 Demonstrates how to resume publishing on an ordering key if publishing fails for a message.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/resumePublish.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/resumePublish.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/resumePublish.js,samples/README.md)
 
@@ -789,7 +789,7 @@ __Usage:__
 
 Sets the IAM policy for a subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/setSubscriptionPolicy.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/setSubscriptionPolicy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/setSubscriptionPolicy.js,samples/README.md)
 
@@ -808,7 +808,7 @@ __Usage:__
 
 Sets the IAM policy for a topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/setTopicPolicy.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/setTopicPolicy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/setTopicPolicy.js,samples/README.md)
 
@@ -827,7 +827,7 @@ __Usage:__
 
 Listen to messages with flow control settings, which are properties of the client/listener instance.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/subscribeWithFlowControlSettings.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/subscribeWithFlowControlSettings.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/subscribeWithFlowControlSettings.js,samples/README.md)
 
@@ -846,7 +846,7 @@ __Usage:__
 
 Receive messages synchronously.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/synchronousPull.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/synchronousPull.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/synchronousPull.js,samples/README.md)
 
@@ -865,7 +865,7 @@ __Usage:__
 
 Receive messages synchronously with delivery attempt.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/synchronousPullWithDeliveryAttempts.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/synchronousPullWithDeliveryAttempts.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/synchronousPullWithDeliveryAttempts.js,samples/README.md)
 
@@ -884,7 +884,7 @@ __Usage:__
 
 Receive messages synchronously, setting lease management properties.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/synchronousPullWithLeaseManagement.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/synchronousPullWithLeaseManagement.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/synchronousPullWithLeaseManagement.js,samples/README.md)
 
@@ -903,7 +903,7 @@ __Usage:__
 
 Tests the permissions for a subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/testSubscriptionPermissions.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/testSubscriptionPermissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/testSubscriptionPermissions.js,samples/README.md)
 
@@ -922,7 +922,7 @@ __Usage:__
 
 Tests the permissions for a topic.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/testTopicPermissions.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/testTopicPermissions.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/testTopicPermissions.js,samples/README.md)
 
@@ -941,7 +941,7 @@ __Usage:__
 
 Update Dead Letter Policy in subscription.
 
-View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/master/samples/updateDeadLetterPolicy.js).
+View the [source code](https://github.com/googleapis/nodejs-pubsub/blob/main/samples/updateDeadLetterPolicy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-pubsub&page=editor&open_in_editor=samples/updateDeadLetterPolicy.js,samples/README.md)
 
