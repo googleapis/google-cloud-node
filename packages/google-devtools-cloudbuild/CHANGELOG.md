@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.6.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.5.0...v2.6.0) (2021-08-25)
+
+
+### Features
+
+* add script field to BuildStep message ([#273](https://www.github.com/googleapis/nodejs-cloudbuild/issues/273)) ([b91fb68](https://www.github.com/googleapis/nodejs-cloudbuild/commit/b91fb68748dbc0ddafde776eaaf81f211102a3b2))
+* Update cloudbuild proto with the service_account for BYOSA Triggers. ([#274](https://www.github.com/googleapis/nodejs-cloudbuild/issues/274)) ([0ad4f9b](https://www.github.com/googleapis/nodejs-cloudbuild/commit/0ad4f9b9646a66ab6a5a91ddbbf7c8644c17317c))
+
 ## [2.5.0](https://www.github.com/googleapis/nodejs-cloudbuild/compare/v2.4.0...v2.5.0) (2021-08-23)
 
 
