@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.1.0...v1.1.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* flag module as GA ([#34](https://www.github.com/googleapis/nodejs-vpc-access/issues/34)) ([1c41e41](https://www.github.com/googleapis/nodejs-vpc-access/commit/1c41e41f209f459be947622235b7062641a78d24))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.0.5...v1.1.0) (2021-08-23)
 
 
