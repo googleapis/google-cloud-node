@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-resource-settings/compare/v1.1.0...v1.1.1) (2021-08-25)
+
+
+### Bug Fixes
+
+* flag module as GA ([#25](https://www.github.com/googleapis/nodejs-resource-settings/issues/25)) ([575ecfa](https://www.github.com/googleapis/nodejs-resource-settings/commit/575ecfa540ceefbf77615aefd544315127a905ed))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-resource-settings/compare/v1.0.2...v1.1.0) (2021-08-23)
 
 
