@@ -2439,7 +2439,7 @@ class Bucket extends ServiceObject {
     );
   }
 
-  getLabels(options: GetLabelsOptions): Promise<GetLabelsResponse>;
+  getLabels(options?: GetLabelsOptions): Promise<GetLabelsResponse>;
   getLabels(callback: GetLabelsCallback): void;
   getLabels(options: GetLabelsOptions, callback: GetLabelsCallback): void;
   /**
