@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/error-reporting?activeTab=versions
 
+### [2.0.3](https://www.github.com/googleapis/nodejs-error-reporting/compare/v2.0.2...v2.0.3) (2021-08-26)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#593](https://www.github.com/googleapis/nodejs-error-reporting/issues/593)) ([5e37253](https://www.github.com/googleapis/nodejs-error-reporting/commit/5e37253b82f148719afd534aa48d7643810d33b5))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-error-reporting/compare/v2.0.1...v2.0.2) (2021-05-12)
 
 
