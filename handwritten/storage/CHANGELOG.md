@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.13.2](https://www.github.com/googleapis/nodejs-storage/compare/v5.13.1...v5.13.2) (2021-08-26)
+
+
+### Bug Fixes
+
+* update getLabels definition to actually allow no arguments when used in typescript ([#1559](https://www.github.com/googleapis/nodejs-storage/issues/1559)) ([176dbb5](https://www.github.com/googleapis/nodejs-storage/commit/176dbb5223f4442d10fd098ffa2cda5cf12144f2))
+
 ### [5.13.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.13.0...v5.13.1) (2021-08-18)
 
 
