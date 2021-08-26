@@ -42,8 +42,8 @@ import * as xdgBasedir from 'xdg-basedir';
 import * as zlib from 'zlib';
 import * as http from 'http';
 
-import {PreconditionOptions, Storage} from './storage';
-import {Bucket} from './bucket';
+import {IdempotencyStrategy, PreconditionOptions, Storage} from './storage';
+import {AvailableServiceObjectMethods, Bucket} from './bucket';
 import {Acl} from './acl';
 import {
   GetSignedUrlResponse,
@@ -425,6 +425,7 @@ class File extends ServiceObject<File> {
   private encryptionKeyBase64?: string;
   private encryptionKeyHash?: string;
   private encryptionKeyInterceptor?: Interceptor;
+  private instanceRetryValue?: boolean;
 
   /**
    * Cloud Storage uses access control lists (ACLs) to manage object and
@@ -862,6 +863,8 @@ class File extends ServiceObject<File> {
       request: this.request.bind(this),
       pathPrefix: '/acl',
     });
+
+    this.instanceRetryValue = this.storage?.retryOptions?.autoRetry;
   }
 
   copy(
@@ -1118,6 +1121,15 @@ class File extends ServiceObject<File> {
       }
     }
 
+    if (
+      (options?.preconditionOpts?.ifGenerationMatch === undefined &&
+        this.storage.retryOptions.idempotencyStrategy ===
+          IdempotencyStrategy.RetryConditional) ||
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryNever
+    ) {
+      this.storage.retryOptions.autoRetry = false;
+    }
     this.request(
       {
         method: 'POST',
@@ -1154,6 +1166,7 @@ class File extends ServiceObject<File> {
         callback!(null, newFile, resp);
       }
     );
+    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
 
   /**
@@ -1598,6 +1611,17 @@ class File extends ServiceObject<File> {
     callback =
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
 
+    const retryOptions = this.storage.retryOptions;
+    if (
+      (options?.preconditionOpts?.ifMetagenerationMatch === undefined &&
+        this.storage.retryOptions.idempotencyStrategy ===
+          IdempotencyStrategy.RetryConditional) ||
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryNever
+    ) {
+      retryOptions.autoRetry = false;
+    }
+
     resumableUpload.createURI(
       {
         authClient: this.storage.authClient,
@@ -1615,7 +1639,7 @@ class File extends ServiceObject<File> {
         private: options.private,
         public: options.public,
         userProject: options.userProject || this.userProject,
-        retryOptions: this.storage.retryOptions,
+        retryOptions: retryOptions,
         params: options.preconditionOpts,
       },
       callback!
@@ -3158,12 +3182,18 @@ class File extends ServiceObject<File> {
       query.userProject = options.userProject;
     }
 
+    this.disableAutoRetryConditionallyIdempotent_(
+      this.methods.setMetadata,
+      AvailableServiceObjectMethods.setMetadata
+    );
+
     // You aren't allowed to set both predefinedAcl & acl properties on a file,
     // so acl must explicitly be nullified, destroying all previous acls on the
     // file.
     const metadata = extend({}, options.metadata, {acl: null});
 
     this.setMetadata(metadata, query, callback!);
+    this.storage.retryOptions.autoRetry = this.instanceRetryValue;
   }
 
   makePublic(): Promise<MakeFilePublicResponse>;
@@ -3675,6 +3705,18 @@ class File extends ServiceObject<File> {
       typeof optionsOrCallback === 'function' ? optionsOrCallback : callback;
     const options =
       typeof optionsOrCallback === 'object' ? optionsOrCallback : {};
+
+    // Do not retry if precondition option ifMetagenerationMatch is not set
+    let maxRetries = this.storage.retryOptions.maxRetries;
+    if (
+      (options?.preconditionOpts?.ifMetagenerationMatch === undefined &&
+        this.storage.retryOptions.idempotencyStrategy ===
+          IdempotencyStrategy.RetryConditional) ||
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryNever
+    ) {
+      maxRetries = 0;
+    }
     const returnValue = retry(
       async (bail: (err: Error) => void) => {
         await new Promise<void>((resolve, reject) => {
@@ -3699,7 +3741,7 @@ class File extends ServiceObject<File> {
         });
       },
       {
-        retries: this.storage.retryOptions.maxRetries,
+        retries: maxRetries,
         factor: this.storage.retryOptions.retryDelayMultiplier,
         maxTimeout: this.storage.retryOptions.maxRetryDelay! * 1000, //convert to milliseconds
         maxRetryTime: this.storage.retryOptions.totalTimeout! * 1000, //convert to milliseconds
@@ -3848,6 +3890,18 @@ class File extends ServiceObject<File> {
       options
     );
 
+    // Do not retry if precondition option ifMetagenerationMatch is not set
+    const retryOptions = this.storage.retryOptions;
+    if (
+      (options?.preconditionOpts?.ifMetagenerationMatch === undefined &&
+        this.storage.retryOptions.idempotencyStrategy ===
+          IdempotencyStrategy.RetryConditional) ||
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryNever
+    ) {
+      retryOptions.autoRetry = false;
+    }
+
     const uploadStream = resumableUpload.upload({
       authClient: this.storage.authClient,
       apiEndpoint: this.storage.apiEndpoint,
@@ -3868,7 +3922,7 @@ class File extends ServiceObject<File> {
       public: options.public,
       uri: options.uri,
       userProject: options.userProject || this.userProject,
-      retryOptions: this.storage.retryOptions,
+      retryOptions: retryOptions,
       params: options.preconditionOpts,
     });
 
@@ -3972,6 +4026,24 @@ class File extends ServiceObject<File> {
       metadata: options.metadata,
       request: reqOpts,
     });
+  }
+
+  disableAutoRetryConditionallyIdempotent_(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    coreOpts: any,
+    methodType: AvailableServiceObjectMethods
+  ): void {
+    if (
+      (typeof coreOpts === 'object' &&
+        coreOpts?.reqOpts?.qs?.ifMetagenerationMatch === undefined &&
+        methodType === AvailableServiceObjectMethods.setMetadata &&
+        this.storage.retryOptions.idempotencyStrategy ===
+          IdempotencyStrategy.RetryConditional) ||
+      this.storage.retryOptions.idempotencyStrategy ===
+        IdempotencyStrategy.RetryNever
+    ) {
+      this.storage.retryOptions.autoRetry = false;
+    }
   }
 }
 

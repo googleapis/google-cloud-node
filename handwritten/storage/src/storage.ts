@@ -49,6 +49,12 @@ export interface CreateBucketQuery {
   userProject: string;
 }
 
+export enum IdempotencyStrategy {
+  RetryAlways,
+  RetryConditional,
+  RetryNever,
+}
+
 export interface RetryOptions {
   retryDelayMultiplier?: number;
   totalTimeout?: number;
@@ -56,6 +62,7 @@ export interface RetryOptions {
   autoRetry?: boolean;
   maxRetries?: number;
   retryableErrorFn?: (err: ApiError) => boolean;
+  idempotencyStrategy?: IdempotencyStrategy;
 }
 
 export interface PreconditionOptions {
@@ -224,6 +231,14 @@ const TOTAL_TIMEOUT_DEFAULT = 600;
  * @private
  */
 const MAX_RETRY_DELAY_DEFAULT = 64;
+
+/**
+ * Default behavior: Retry conditionally idempotent operations if correct preconditions are set.
+ *
+ * @const {enum}
+ * @private
+ */
+const IDEMPOTENCY_STRATEGY_DEFAULT = IdempotencyStrategy.RetryConditional;
 
 /**
  * Returns true if the API request should be retried, given the error that was
@@ -482,6 +497,11 @@ export class Storage extends Service {
    *     attempted before returning the error.
    * @property {function} [retryOptions.retryableErrorFn] Function that returns true if a given
    *     error should be retried and false otherwise.
+   * @property {enum} [retryOptions.idempotencyStrategy=IdempotencyStrategy.RetryConditional] Enumeration
+   *     controls how conditionally idempotent operations are retried. Possible values are: RetryAlways -
+   *     will respect other retry settings and attempt to retry conditionally idempotent operations. RetryConditional -
+   *     will retry conditionally idempotent operations if the correct preconditions are set. RetryNever - never
+   *     retry a conditionally idempotent operation.
    * @property {string} [userAgent] The value to be prepended to the User-Agent
    *     header in API requests.
    * @property {object} [authClient] GoogleAuth client to reuse instead of creating a new one.
@@ -568,6 +588,10 @@ export class Storage extends Service {
         retryableErrorFn: options.retryOptions?.retryableErrorFn
           ? options.retryOptions?.retryableErrorFn
           : RETRYABLE_ERR_FN_DEFAULT,
+        idempotencyStrategy:
+          options.retryOptions?.idempotencyStrategy !== undefined
+            ? options.retryOptions?.idempotencyStrategy
+            : IDEMPOTENCY_STRATEGY_DEFAULT,
       },
       baseUrl,
       customEndpoint,
