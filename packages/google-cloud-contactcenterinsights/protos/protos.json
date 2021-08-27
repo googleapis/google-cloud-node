@@ -1748,6 +1748,13 @@
                         "score": {
                           "type": "double",
                           "id": 2
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
                         }
                       }
                     },

@@ -15278,6 +15278,7 @@
                          * @interface IIssueAssignment
                          * @property {string|null} [issue] IssueAssignment issue
                          * @property {number|null} [score] IssueAssignment score
+                         * @property {string|null} [displayName] IssueAssignment displayName
                          */
     
                         /**
@@ -15312,6 +15313,14 @@
                         IssueAssignment.prototype.score = 0;
     
                         /**
+                         * IssueAssignment displayName.
+                         * @member {string} displayName
+                         * @memberof google.cloud.contactcenterinsights.v1.IssueAssignment
+                         * @instance
+                         */
+                        IssueAssignment.prototype.displayName = "";
+    
+                        /**
                          * Creates a new IssueAssignment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.contactcenterinsights.v1.IssueAssignment
@@ -15339,6 +15348,8 @@
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.issue);
                             if (message.score != null && Object.hasOwnProperty.call(message, "score"))
                                 writer.uint32(/* id 2, wireType 1 =*/17).double(message.score);
+                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
                             return writer;
                         };
     
@@ -15378,6 +15389,9 @@
                                     break;
                                 case 2:
                                     message.score = reader.double();
+                                    break;
+                                case 3:
+                                    message.displayName = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -15420,6 +15434,9 @@
                             if (message.score != null && message.hasOwnProperty("score"))
                                 if (typeof message.score !== "number")
                                     return "score: number expected";
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                if (!$util.isString(message.displayName))
+                                    return "displayName: string expected";
                             return null;
                         };
     
@@ -15439,6 +15456,8 @@
                                 message.issue = String(object.issue);
                             if (object.score != null)
                                 message.score = Number(object.score);
+                            if (object.displayName != null)
+                                message.displayName = String(object.displayName);
                             return message;
                         };
     
@@ -15458,11 +15477,14 @@
                             if (options.defaults) {
                                 object.issue = "";
                                 object.score = 0;
+                                object.displayName = "";
                             }
                             if (message.issue != null && message.hasOwnProperty("issue"))
                                 object.issue = message.issue;
                             if (message.score != null && message.hasOwnProperty("score"))
                                 object.score = options.json && !isFinite(message.score) ? String(message.score) : message.score;
+                            if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                object.displayName = message.displayName;
                             return object;
                         };
     

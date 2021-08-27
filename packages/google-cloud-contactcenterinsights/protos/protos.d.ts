@@ -6624,6 +6624,9 @@ export namespace google {
 
                     /** IssueAssignment score */
                     score?: (number|null);
+
+                    /** IssueAssignment displayName */
+                    displayName?: (string|null);
                 }
 
                 /** Represents an IssueAssignment. */
@@ -6640,6 +6643,9 @@ export namespace google {
 
                     /** IssueAssignment score. */
                     public score: number;
+
+                    /** IssueAssignment displayName. */
+                    public displayName: string;
 
                     /**
                      * Creates a new IssueAssignment instance using the specified properties.
