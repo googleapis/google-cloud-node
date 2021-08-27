@@ -1024,7 +1024,9 @@ export namespace google {
                         enum ResourceType {
                             RESOURCE_TYPE_UNSPECIFIED = 0,
                             CONSUMER_PROJECT = 1,
-                            ENCRYPTION_KEYS_PROJECT = 2
+                            CONSUMER_FOLDER = 4,
+                            ENCRYPTION_KEYS_PROJECT = 2,
+                            KEYRING = 3
                         }
                     }
 
@@ -1492,6 +1494,9 @@ export namespace google {
 
                         /** ResourceSettings resourceType */
                         resourceType?: (google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType|null);
+
+                        /** ResourceSettings displayName */
+                        displayName?: (string|null);
                     }
 
                     /** Represents a ResourceSettings. */
@@ -1508,6 +1513,9 @@ export namespace google {
 
                         /** ResourceSettings resourceType. */
                         public resourceType: (google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType);
+
+                        /** ResourceSettings displayName. */
+                        public displayName: string;
 
                         /**
                          * Creates a new ResourceSettings instance using the specified properties.
@@ -1590,7 +1598,8 @@ export namespace google {
                         US_REGIONAL_ACCESS = 5,
                         HIPAA = 6,
                         HITRUST = 7,
-                        EU_REGIONS_AND_SUPPORT = 8
+                        EU_REGIONS_AND_SUPPORT = 8,
+                        CA_REGIONS_AND_SUPPORT = 9
                     }
                 }
 
@@ -1608,6 +1617,9 @@ export namespace google {
 
                     /** CreateWorkloadOperationMetadata complianceRegime */
                     complianceRegime?: (google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime|null);
+
+                    /** CreateWorkloadOperationMetadata resourceSettings */
+                    resourceSettings?: (google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings[]|null);
                 }
 
                 /** Represents a CreateWorkloadOperationMetadata. */
@@ -1630,6 +1642,9 @@ export namespace google {
 
                     /** CreateWorkloadOperationMetadata complianceRegime. */
                     public complianceRegime: (google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime|keyof typeof google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime);
+
+                    /** CreateWorkloadOperationMetadata resourceSettings. */
+                    public resourceSettings: google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings[];
 
                     /**
                      * Creates a new CreateWorkloadOperationMetadata instance using the specified properties.

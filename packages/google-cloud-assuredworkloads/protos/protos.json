@@ -387,7 +387,9 @@
                               "values": {
                                 "RESOURCE_TYPE_UNSPECIFIED": 0,
                                 "CONSUMER_PROJECT": 1,
-                                "ENCRYPTION_KEYS_PROJECT": 2
+                                "CONSUMER_FOLDER": 4,
+                                "ENCRYPTION_KEYS_PROJECT": 2,
+                                "KEYRING": 3
                               }
                             }
                           }
@@ -475,6 +477,10 @@
                             "resourceType": {
                               "type": "ResourceInfo.ResourceType",
                               "id": 2
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3
                             }
                           }
                         },
@@ -488,7 +494,8 @@
                             "US_REGIONAL_ACCESS": 5,
                             "HIPAA": 6,
                             "HITRUST": 7,
-                            "EU_REGIONS_AND_SUPPORT": 8
+                            "EU_REGIONS_AND_SUPPORT": 8,
+                            "CA_REGIONS_AND_SUPPORT": 9
                           }
                         }
                       }
@@ -519,6 +526,14 @@
                         "complianceRegime": {
                           "type": "Workload.ComplianceRegime",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "resourceSettings": {
+                          "rule": "repeated",
+                          "type": "Workload.ResourceSettings",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

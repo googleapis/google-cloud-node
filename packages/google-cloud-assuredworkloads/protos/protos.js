@@ -2003,6 +2003,7 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
@@ -2144,6 +2145,10 @@
                             case "EU_REGIONS_AND_SUPPORT":
                             case 8:
                                 message.complianceRegime = 8;
+                                break;
+                            case "CA_REGIONS_AND_SUPPORT":
+                            case 9:
+                                message.complianceRegime = 9;
                                 break;
                             }
                             if (object.createTime != null) {
@@ -2450,7 +2455,9 @@
                                         return "resourceType: enum value expected";
                                     case 0:
                                     case 1:
+                                    case 4:
                                     case 2:
+                                    case 3:
                                         break;
                                     }
                                 return null;
@@ -2486,9 +2493,17 @@
                                 case 1:
                                     message.resourceType = 1;
                                     break;
+                                case "CONSUMER_FOLDER":
+                                case 4:
+                                    message.resourceType = 4;
+                                    break;
                                 case "ENCRYPTION_KEYS_PROJECT":
                                 case 2:
                                     message.resourceType = 2;
+                                    break;
+                                case "KEYRING":
+                                case 3:
+                                    message.resourceType = 3;
                                     break;
                                 }
                                 return message;
@@ -2542,13 +2557,17 @@
                              * @enum {number}
                              * @property {number} RESOURCE_TYPE_UNSPECIFIED=0 RESOURCE_TYPE_UNSPECIFIED value
                              * @property {number} CONSUMER_PROJECT=1 CONSUMER_PROJECT value
+                             * @property {number} CONSUMER_FOLDER=4 CONSUMER_FOLDER value
                              * @property {number} ENCRYPTION_KEYS_PROJECT=2 ENCRYPTION_KEYS_PROJECT value
+                             * @property {number} KEYRING=3 KEYRING value
                              */
                             ResourceInfo.ResourceType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "RESOURCE_TYPE_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "CONSUMER_PROJECT"] = 1;
+                                values[valuesById[4] = "CONSUMER_FOLDER"] = 4;
                                 values[valuesById[2] = "ENCRYPTION_KEYS_PROJECT"] = 2;
+                                values[valuesById[3] = "KEYRING"] = 3;
                                 return values;
                             })();
     
@@ -3551,6 +3570,7 @@
                              * @interface IResourceSettings
                              * @property {string|null} [resourceId] ResourceSettings resourceId
                              * @property {google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType|null} [resourceType] ResourceSettings resourceType
+                             * @property {string|null} [displayName] ResourceSettings displayName
                              */
     
                             /**
@@ -3585,6 +3605,14 @@
                             ResourceSettings.prototype.resourceType = 0;
     
                             /**
+                             * ResourceSettings displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
+                             * @instance
+                             */
+                            ResourceSettings.prototype.displayName = "";
+    
+                            /**
                              * Creates a new ResourceSettings instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings
@@ -3612,6 +3640,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceId);
                                 if (message.resourceType != null && Object.hasOwnProperty.call(message, "resourceType"))
                                     writer.uint32(/* id 2, wireType 0 =*/16).int32(message.resourceType);
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
                                 return writer;
                             };
     
@@ -3651,6 +3681,9 @@
                                         break;
                                     case 2:
                                         message.resourceType = reader.int32();
+                                        break;
+                                    case 3:
+                                        message.displayName = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -3696,9 +3729,14 @@
                                         return "resourceType: enum value expected";
                                     case 0:
                                     case 1:
+                                    case 4:
                                     case 2:
+                                    case 3:
                                         break;
                                     }
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
                                 return null;
                             };
     
@@ -3725,11 +3763,21 @@
                                 case 1:
                                     message.resourceType = 1;
                                     break;
+                                case "CONSUMER_FOLDER":
+                                case 4:
+                                    message.resourceType = 4;
+                                    break;
                                 case "ENCRYPTION_KEYS_PROJECT":
                                 case 2:
                                     message.resourceType = 2;
                                     break;
+                                case "KEYRING":
+                                case 3:
+                                    message.resourceType = 3;
+                                    break;
                                 }
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
                                 return message;
                             };
     
@@ -3749,11 +3797,14 @@
                                 if (options.defaults) {
                                     object.resourceId = "";
                                     object.resourceType = options.enums === String ? "RESOURCE_TYPE_UNSPECIFIED" : 0;
+                                    object.displayName = "";
                                 }
                                 if (message.resourceId != null && message.hasOwnProperty("resourceId"))
                                     object.resourceId = message.resourceId;
                                 if (message.resourceType != null && message.hasOwnProperty("resourceType"))
                                     object.resourceType = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceInfo.ResourceType[message.resourceType] : message.resourceType;
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
                                 return object;
                             };
     
@@ -3784,6 +3835,7 @@
                          * @property {number} HIPAA=6 HIPAA value
                          * @property {number} HITRUST=7 HITRUST value
                          * @property {number} EU_REGIONS_AND_SUPPORT=8 EU_REGIONS_AND_SUPPORT value
+                         * @property {number} CA_REGIONS_AND_SUPPORT=9 CA_REGIONS_AND_SUPPORT value
                          */
                         Workload.ComplianceRegime = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -3796,6 +3848,7 @@
                             values[valuesById[6] = "HIPAA"] = 6;
                             values[valuesById[7] = "HITRUST"] = 7;
                             values[valuesById[8] = "EU_REGIONS_AND_SUPPORT"] = 8;
+                            values[valuesById[9] = "CA_REGIONS_AND_SUPPORT"] = 9;
                             return values;
                         })();
     
@@ -3812,6 +3865,7 @@
                          * @property {string|null} [displayName] CreateWorkloadOperationMetadata displayName
                          * @property {string|null} [parent] CreateWorkloadOperationMetadata parent
                          * @property {google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime|null} [complianceRegime] CreateWorkloadOperationMetadata complianceRegime
+                         * @property {Array.<google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings>|null} [resourceSettings] CreateWorkloadOperationMetadata resourceSettings
                          */
     
                         /**
@@ -3823,6 +3877,7 @@
                          * @param {google.cloud.assuredworkloads.v1beta1.ICreateWorkloadOperationMetadata=} [properties] Properties to set
                          */
                         function CreateWorkloadOperationMetadata(properties) {
+                            this.resourceSettings = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -3862,6 +3917,14 @@
                         CreateWorkloadOperationMetadata.prototype.complianceRegime = 0;
     
                         /**
+                         * CreateWorkloadOperationMetadata resourceSettings.
+                         * @member {Array.<google.cloud.assuredworkloads.v1beta1.Workload.IResourceSettings>} resourceSettings
+                         * @memberof google.cloud.assuredworkloads.v1beta1.CreateWorkloadOperationMetadata
+                         * @instance
+                         */
+                        CreateWorkloadOperationMetadata.prototype.resourceSettings = $util.emptyArray;
+    
+                        /**
                          * Creates a new CreateWorkloadOperationMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.assuredworkloads.v1beta1.CreateWorkloadOperationMetadata
@@ -3893,6 +3956,9 @@
                                 writer.uint32(/* id 3, wireType 2 =*/26).string(message.parent);
                             if (message.complianceRegime != null && Object.hasOwnProperty.call(message, "complianceRegime"))
                                 writer.uint32(/* id 4, wireType 0 =*/32).int32(message.complianceRegime);
+                            if (message.resourceSettings != null && message.resourceSettings.length)
+                                for (var i = 0; i < message.resourceSettings.length; ++i)
+                                    $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.encode(message.resourceSettings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -3938,6 +4004,11 @@
                                     break;
                                 case 4:
                                     message.complianceRegime = reader.int32();
+                                    break;
+                                case 5:
+                                    if (!(message.resourceSettings && message.resourceSettings.length))
+                                        message.resourceSettings = [];
+                                    message.resourceSettings.push($root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.decode(reader, reader.uint32()));
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -3998,8 +4069,18 @@
                                 case 6:
                                 case 7:
                                 case 8:
+                                case 9:
                                     break;
                                 }
+                            if (message.resourceSettings != null && message.hasOwnProperty("resourceSettings")) {
+                                if (!Array.isArray(message.resourceSettings))
+                                    return "resourceSettings: array expected";
+                                for (var i = 0; i < message.resourceSettings.length; ++i) {
+                                    var error = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.verify(message.resourceSettings[i]);
+                                    if (error)
+                                        return "resourceSettings." + error;
+                                }
+                            }
                             return null;
                         };
     
@@ -4061,6 +4142,20 @@
                             case 8:
                                 message.complianceRegime = 8;
                                 break;
+                            case "CA_REGIONS_AND_SUPPORT":
+                            case 9:
+                                message.complianceRegime = 9;
+                                break;
+                            }
+                            if (object.resourceSettings) {
+                                if (!Array.isArray(object.resourceSettings))
+                                    throw TypeError(".google.cloud.assuredworkloads.v1beta1.CreateWorkloadOperationMetadata.resourceSettings: array expected");
+                                message.resourceSettings = [];
+                                for (var i = 0; i < object.resourceSettings.length; ++i) {
+                                    if (typeof object.resourceSettings[i] !== "object")
+                                        throw TypeError(".google.cloud.assuredworkloads.v1beta1.CreateWorkloadOperationMetadata.resourceSettings: object expected");
+                                    message.resourceSettings[i] = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.fromObject(object.resourceSettings[i]);
+                                }
                             }
                             return message;
                         };
@@ -4078,6 +4173,8 @@
                             if (!options)
                                 options = {};
                             var object = {};
+                            if (options.arrays || options.defaults)
+                                object.resourceSettings = [];
                             if (options.defaults) {
                                 object.createTime = null;
                                 object.displayName = "";
@@ -4092,6 +4189,11 @@
                                 object.parent = message.parent;
                             if (message.complianceRegime != null && message.hasOwnProperty("complianceRegime"))
                                 object.complianceRegime = options.enums === String ? $root.google.cloud.assuredworkloads.v1beta1.Workload.ComplianceRegime[message.complianceRegime] : message.complianceRegime;
+                            if (message.resourceSettings && message.resourceSettings.length) {
+                                object.resourceSettings = [];
+                                for (var j = 0; j < message.resourceSettings.length; ++j)
+                                    object.resourceSettings[j] = $root.google.cloud.assuredworkloads.v1beta1.Workload.ResourceSettings.toObject(message.resourceSettings[j], options);
+                            }
                             return object;
                         };
     
