@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.6.0...v1.7.0) (2021-08-27)
+
+
+### Features
+
+* Add Canada Regions And Support compliance regime ([#103](https://www.github.com/googleapis/nodejs-assured-workloads/issues/103)) ([49365ee](https://www.github.com/googleapis/nodejs-assured-workloads/commit/49365eea8ac9701957ddb508a52686e96e876bf1))
+* display_name is added to ResourceSettings ([49365ee](https://www.github.com/googleapis/nodejs-assured-workloads/commit/49365eea8ac9701957ddb508a52686e96e876bf1))
+* resource_settings is added to CreateWorkloadOperationMetadata ([49365ee](https://www.github.com/googleapis/nodejs-assured-workloads/commit/49365eea8ac9701957ddb508a52686e96e876bf1))
+* ResourceType CONSUMER_FOLDER and KEYRING are added ([49365ee](https://www.github.com/googleapis/nodejs-assured-workloads/commit/49365eea8ac9701957ddb508a52686e96e876bf1))
+
+
+### Bug Fixes
+
+* billing_account is now optional in Workload ([49365ee](https://www.github.com/googleapis/nodejs-assured-workloads/commit/49365eea8ac9701957ddb508a52686e96e876bf1))
+* ResourceType CONSUMER_PROJECT is deprecated ([49365ee](https://www.github.com/googleapis/nodejs-assured-workloads/commit/49365eea8ac9701957ddb508a52686e96e876bf1))
+
 ## [1.6.0](https://www.github.com/googleapis/nodejs-assured-workloads/compare/v1.5.2...v1.6.0) (2021-08-23)
 
 
