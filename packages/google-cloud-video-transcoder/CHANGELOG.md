@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.6.1...v1.7.0) (2021-08-27)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#103](https://www.github.com/googleapis/nodejs-video-transcoder/issues/103)) ([1fba447](https://www.github.com/googleapis/nodejs-video-transcoder/commit/1fba447cd05e0e921198dd0fa9248271f4c48ca3))
+
 ### [1.6.1](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.6.0...v1.6.1) (2021-08-19)
 
 
