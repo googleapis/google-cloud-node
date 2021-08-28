@@ -417,8 +417,7 @@ export class GameServerConfigsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the game server config to retrieve. Uses the form:
-   *
+   *   Required. The name of the game server config to retrieve, in the following form:
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -518,8 +517,7 @@ export class GameServerConfigsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
-   *
+   *   Required. The parent resource name, in the following form:
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`.
    * @param {string} request.configId
    *   Required. The ID of the game server config resource to be created.
@@ -670,8 +668,7 @@ export class GameServerConfigsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the game server config to delete. Uses the form:
-   *
+   *   Required. The name of the game server config to delete, in the following form:
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -813,8 +810,7 @@ export class GameServerConfigsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
-   *
+   *   Required. The parent resource name, in the following form:
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return.  If unspecified, server
@@ -891,8 +887,7 @@ export class GameServerConfigsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
-   *
+   *   Required. The parent resource name, in the following form:
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return.  If unspecified, server
@@ -947,8 +942,7 @@ export class GameServerConfigsServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
-   *
+   *   Required. The parent resource name, in the following form:
    *   `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*`.
    * @param {number} [request.pageSize]
    *   Optional. The maximum number of items to return.  If unspecified, server

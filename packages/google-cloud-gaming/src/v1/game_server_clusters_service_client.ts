@@ -438,9 +438,15 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the game server cluster to retrieve. Uses the form:
-   *
+   *   Required. The name of the game server cluster to retrieve, in the following form:
    *   `projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}`.
+   * @param {google.cloud.gaming.v1.GameServerClusterView} [request.view]
+   *   Optional. View for the returned GameServerCluster objects. When `FULL` is
+   *   specified, the `cluster_state` field is also returned in the
+   *   GameServerCluster object, which includes the state of the referenced
+   *   Kubernetes cluster such as versions and provider info. The default/unset
+   *   value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
+   *   not return the `cluster_state` field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -535,7 +541,7 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
+   *   Required. The parent resource name, in the following form:
    *   `projects/{project}/locations/{location}/realms/{realm}`.
    * @param {string} request.gameServerClusterId
    *   Required. The ID of the game server cluster resource to be created.
@@ -543,6 +549,9 @@ export class GameServerClustersServiceClient {
    *   Required. The game server cluster resource to be created.
    * @param {google.protobuf.Timestamp} [request.previewTime]
    *   Optional. The target timestamp to compute the preview.
+   * @param {google.cloud.gaming.v1.GameServerClusterView} [request.view]
+   *   Optional. This field is deprecated, preview will always return
+   *   KubernetesClusterState.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -643,7 +652,7 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the game server cluster to delete. Uses the form:
+   *   Required. The name of the game server cluster to delete, in the following form:
    *   `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
    * @param {google.protobuf.Timestamp} [request.previewTime]
    *   Optional. The target timestamp to compute the preview.
@@ -752,10 +761,7 @@ export class GameServerClustersServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
    *   this field. For the `FieldMask` definition, see
-   *
-   *   https:
-   *   //developers.google.com/protocol-buffers
-   *   // /docs/reference/google.protobuf#fieldmask
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
    * @param {google.protobuf.Timestamp} [request.previewTime]
    *   Optional. The target timestamp to compute the preview.
    * @param {object} [options]
@@ -861,7 +867,7 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
+   *   Required. The parent resource name, in the following form:
    *   `projects/{project}/locations/{location}/realms/{realm-id}`.
    * @param {string} request.gameServerClusterId
    *   Required. The ID of the game server cluster resource to be created.
@@ -1011,7 +1017,7 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
-   *   Required. The name of the game server cluster to delete. Uses the form:
+   *   Required. The name of the game server cluster to delete, in the following form:
    *   `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1162,10 +1168,7 @@ export class GameServerClustersServiceClient {
    * @param {google.protobuf.FieldMask} request.updateMask
    *   Required. Mask of fields to update. At least one path must be supplied in
    *   this field. For the `FieldMask` definition, see
-   *
-   *   https:
-   *   //developers.google.com/protocol-buffers
-   *   // /docs/reference/google.protobuf#fieldmask
+   *   https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1305,10 +1308,10 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
+   *   Required. The parent resource name, in the following form:
    *   "projects/{project}/locations/{location}/realms/{realm}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, the server
+   *   Optional. The maximum number of items to return. If unspecified, the server
    *   will pick an appropriate default. The server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1.ListGameServerClustersResponse.next_page_token|next_page_token} to
@@ -1320,6 +1323,13 @@ export class GameServerClustersServiceClient {
    * @param {string} [request.orderBy]
    *   Optional. Specifies the ordering of results following syntax at
    *   https://cloud.google.com/apis/design/design_patterns#sorting_order.
+   * @param {google.cloud.gaming.v1.GameServerClusterView} [request.view]
+   *   Optional. View for the returned GameServerCluster objects. When `FULL` is
+   *   specified, the `cluster_state` field is also returned in the
+   *   GameServerCluster object, which includes the state of the referenced
+   *   Kubernetes cluster such as versions and provider info. The default/unset
+   *   value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
+   *   not return the `cluster_state` field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1386,10 +1396,10 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
+   *   Required. The parent resource name, in the following form:
    *   "projects/{project}/locations/{location}/realms/{realm}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, the server
+   *   Optional. The maximum number of items to return. If unspecified, the server
    *   will pick an appropriate default. The server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1.ListGameServerClustersResponse.next_page_token|next_page_token} to
@@ -1401,6 +1411,13 @@ export class GameServerClustersServiceClient {
    * @param {string} [request.orderBy]
    *   Optional. Specifies the ordering of results following syntax at
    *   https://cloud.google.com/apis/design/design_patterns#sorting_order.
+   * @param {google.cloud.gaming.v1.GameServerClusterView} [request.view]
+   *   Optional. View for the returned GameServerCluster objects. When `FULL` is
+   *   specified, the `cluster_state` field is also returned in the
+   *   GameServerCluster object, which includes the state of the referenced
+   *   Kubernetes cluster such as versions and provider info. The default/unset
+   *   value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
+   *   not return the `cluster_state` field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
@@ -1441,10 +1458,10 @@ export class GameServerClustersServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The parent resource name. Uses the form:
+   *   Required. The parent resource name, in the following form:
    *   "projects/{project}/locations/{location}/realms/{realm}".
    * @param {number} [request.pageSize]
-   *   Optional. The maximum number of items to return.  If unspecified, the server
+   *   Optional. The maximum number of items to return. If unspecified, the server
    *   will pick an appropriate default. The server may return fewer items than
    *   requested. A caller should only rely on response's
    *   {@link google.cloud.gaming.v1.ListGameServerClustersResponse.next_page_token|next_page_token} to
@@ -1456,6 +1473,13 @@ export class GameServerClustersServiceClient {
    * @param {string} [request.orderBy]
    *   Optional. Specifies the ordering of results following syntax at
    *   https://cloud.google.com/apis/design/design_patterns#sorting_order.
+   * @param {google.cloud.gaming.v1.GameServerClusterView} [request.view]
+   *   Optional. View for the returned GameServerCluster objects. When `FULL` is
+   *   specified, the `cluster_state` field is also returned in the
+   *   GameServerCluster object, which includes the state of the referenced
+   *   Kubernetes cluster such as versions and provider info. The default/unset
+   *   value is GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED, same as BASIC, which does
+   *   not return the `cluster_state` field.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Object}

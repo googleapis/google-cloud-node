@@ -3820,6 +3820,22 @@
                         return DeployedFleetDetails;
                     })();
     
+                    /**
+                     * GameServerClusterView enum.
+                     * @name google.cloud.gaming.v1.GameServerClusterView
+                     * @enum {number}
+                     * @property {number} GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED=0 GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED value
+                     * @property {number} BASIC=1 BASIC value
+                     * @property {number} FULL=2 FULL value
+                     */
+                    v1.GameServerClusterView = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "BASIC"] = 1;
+                        values[valuesById[2] = "FULL"] = 2;
+                        return values;
+                    })();
+    
                     v1.ListGameServerClustersRequest = (function() {
     
                         /**
@@ -3831,6 +3847,7 @@
                          * @property {string|null} [pageToken] ListGameServerClustersRequest pageToken
                          * @property {string|null} [filter] ListGameServerClustersRequest filter
                          * @property {string|null} [orderBy] ListGameServerClustersRequest orderBy
+                         * @property {google.cloud.gaming.v1.GameServerClusterView|null} [view] ListGameServerClustersRequest view
                          */
     
                         /**
@@ -3889,6 +3906,14 @@
                         ListGameServerClustersRequest.prototype.orderBy = "";
     
                         /**
+                         * ListGameServerClustersRequest view.
+                         * @member {google.cloud.gaming.v1.GameServerClusterView} view
+                         * @memberof google.cloud.gaming.v1.ListGameServerClustersRequest
+                         * @instance
+                         */
+                        ListGameServerClustersRequest.prototype.view = 0;
+    
+                        /**
                          * Creates a new ListGameServerClustersRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gaming.v1.ListGameServerClustersRequest
@@ -3922,6 +3947,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
                             if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.view);
                             return writer;
                         };
     
@@ -3970,6 +3997,9 @@
                                     break;
                                 case 5:
                                     message.orderBy = reader.string();
+                                    break;
+                                case 6:
+                                    message.view = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4021,6 +4051,15 @@
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 if (!$util.isString(message.orderBy))
                                     return "orderBy: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -4046,6 +4085,20 @@
                                 message.filter = String(object.filter);
                             if (object.orderBy != null)
                                 message.orderBy = String(object.orderBy);
+                            switch (object.view) {
+                            case "GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -4068,6 +4121,7 @@
                                 object.pageToken = "";
                                 object.filter = "";
                                 object.orderBy = "";
+                                object.view = options.enums === String ? "GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -4079,6 +4133,8 @@
                                 object.filter = message.filter;
                             if (message.orderBy != null && message.hasOwnProperty("orderBy"))
                                 object.orderBy = message.orderBy;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.gaming.v1.GameServerClusterView[message.view] : message.view;
                             return object;
                         };
     
@@ -4373,6 +4429,7 @@
                          * @memberof google.cloud.gaming.v1
                          * @interface IGetGameServerClusterRequest
                          * @property {string|null} [name] GetGameServerClusterRequest name
+                         * @property {google.cloud.gaming.v1.GameServerClusterView|null} [view] GetGameServerClusterRequest view
                          */
     
                         /**
@@ -4397,6 +4454,14 @@
                          * @instance
                          */
                         GetGameServerClusterRequest.prototype.name = "";
+    
+                        /**
+                         * GetGameServerClusterRequest view.
+                         * @member {google.cloud.gaming.v1.GameServerClusterView} view
+                         * @memberof google.cloud.gaming.v1.GetGameServerClusterRequest
+                         * @instance
+                         */
+                        GetGameServerClusterRequest.prototype.view = 0;
     
                         /**
                          * Creates a new GetGameServerClusterRequest instance using the specified properties.
@@ -4424,6 +4489,8 @@
                                 writer = $Writer.create();
                             if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.view);
                             return writer;
                         };
     
@@ -4460,6 +4527,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.name = reader.string();
+                                    break;
+                                case 6:
+                                    message.view = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4499,6 +4569,15 @@
                             if (message.name != null && message.hasOwnProperty("name"))
                                 if (!$util.isString(message.name))
                                     return "name: string expected";
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -4516,6 +4595,20 @@
                             var message = new $root.google.cloud.gaming.v1.GetGameServerClusterRequest();
                             if (object.name != null)
                                 message.name = String(object.name);
+                            switch (object.view) {
+                            case "GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -4532,10 +4625,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.name = "";
+                                object.view = options.enums === String ? "GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED" : 0;
+                            }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.gaming.v1.GameServerClusterView[message.view] : message.view;
                             return object;
                         };
     
@@ -4800,6 +4897,7 @@
                          * @property {string|null} [gameServerClusterId] PreviewCreateGameServerClusterRequest gameServerClusterId
                          * @property {google.cloud.gaming.v1.IGameServerCluster|null} [gameServerCluster] PreviewCreateGameServerClusterRequest gameServerCluster
                          * @property {google.protobuf.ITimestamp|null} [previewTime] PreviewCreateGameServerClusterRequest previewTime
+                         * @property {google.cloud.gaming.v1.GameServerClusterView|null} [view] PreviewCreateGameServerClusterRequest view
                          */
     
                         /**
@@ -4850,6 +4948,14 @@
                         PreviewCreateGameServerClusterRequest.prototype.previewTime = null;
     
                         /**
+                         * PreviewCreateGameServerClusterRequest view.
+                         * @member {google.cloud.gaming.v1.GameServerClusterView} view
+                         * @memberof google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest
+                         * @instance
+                         */
+                        PreviewCreateGameServerClusterRequest.prototype.view = 0;
+    
+                        /**
                          * Creates a new PreviewCreateGameServerClusterRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest
@@ -4881,6 +4987,8 @@
                                 $root.google.cloud.gaming.v1.GameServerCluster.encode(message.gameServerCluster, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                             if (message.previewTime != null && Object.hasOwnProperty.call(message, "previewTime"))
                                 $root.google.protobuf.Timestamp.encode(message.previewTime, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.view != null && Object.hasOwnProperty.call(message, "view"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.view);
                             return writer;
                         };
     
@@ -4926,6 +5034,9 @@
                                     break;
                                 case 4:
                                     message.previewTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.view = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -4978,6 +5089,15 @@
                                 if (error)
                                     return "previewTime." + error;
                             }
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                switch (message.view) {
+                                default:
+                                    return "view: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -5007,6 +5127,20 @@
                                     throw TypeError(".google.cloud.gaming.v1.PreviewCreateGameServerClusterRequest.previewTime: object expected");
                                 message.previewTime = $root.google.protobuf.Timestamp.fromObject(object.previewTime);
                             }
+                            switch (object.view) {
+                            case "GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED":
+                            case 0:
+                                message.view = 0;
+                                break;
+                            case "BASIC":
+                            case 1:
+                                message.view = 1;
+                                break;
+                            case "FULL":
+                            case 2:
+                                message.view = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -5028,6 +5162,7 @@
                                 object.gameServerClusterId = "";
                                 object.gameServerCluster = null;
                                 object.previewTime = null;
+                                object.view = options.enums === String ? "GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED" : 0;
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -5037,6 +5172,8 @@
                                 object.gameServerCluster = $root.google.cloud.gaming.v1.GameServerCluster.toObject(message.gameServerCluster, options);
                             if (message.previewTime != null && message.hasOwnProperty("previewTime"))
                                 object.previewTime = $root.google.protobuf.Timestamp.toObject(message.previewTime, options);
+                            if (message.view != null && message.hasOwnProperty("view"))
+                                object.view = options.enums === String ? $root.google.cloud.gaming.v1.GameServerClusterView[message.view] : message.view;
                             return object;
                         };
     
@@ -5062,6 +5199,7 @@
                          * @interface IPreviewCreateGameServerClusterResponse
                          * @property {string|null} [etag] PreviewCreateGameServerClusterResponse etag
                          * @property {google.cloud.gaming.v1.ITargetState|null} [targetState] PreviewCreateGameServerClusterResponse targetState
+                         * @property {google.cloud.gaming.v1.IKubernetesClusterState|null} [clusterState] PreviewCreateGameServerClusterResponse clusterState
                          */
     
                         /**
@@ -5096,6 +5234,14 @@
                         PreviewCreateGameServerClusterResponse.prototype.targetState = null;
     
                         /**
+                         * PreviewCreateGameServerClusterResponse clusterState.
+                         * @member {google.cloud.gaming.v1.IKubernetesClusterState|null|undefined} clusterState
+                         * @memberof google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse
+                         * @instance
+                         */
+                        PreviewCreateGameServerClusterResponse.prototype.clusterState = null;
+    
+                        /**
                          * Creates a new PreviewCreateGameServerClusterResponse instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse
@@ -5123,6 +5269,8 @@
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.etag);
                             if (message.targetState != null && Object.hasOwnProperty.call(message, "targetState"))
                                 $root.google.cloud.gaming.v1.TargetState.encode(message.targetState, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.clusterState != null && Object.hasOwnProperty.call(message, "clusterState"))
+                                $root.google.cloud.gaming.v1.KubernetesClusterState.encode(message.clusterState, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                             return writer;
                         };
     
@@ -5162,6 +5310,9 @@
                                     break;
                                 case 3:
                                     message.targetState = $root.google.cloud.gaming.v1.TargetState.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.clusterState = $root.google.cloud.gaming.v1.KubernetesClusterState.decode(reader, reader.uint32());
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -5206,6 +5357,11 @@
                                 if (error)
                                     return "targetState." + error;
                             }
+                            if (message.clusterState != null && message.hasOwnProperty("clusterState")) {
+                                var error = $root.google.cloud.gaming.v1.KubernetesClusterState.verify(message.clusterState);
+                                if (error)
+                                    return "clusterState." + error;
+                            }
                             return null;
                         };
     
@@ -5228,6 +5384,11 @@
                                     throw TypeError(".google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse.targetState: object expected");
                                 message.targetState = $root.google.cloud.gaming.v1.TargetState.fromObject(object.targetState);
                             }
+                            if (object.clusterState != null) {
+                                if (typeof object.clusterState !== "object")
+                                    throw TypeError(".google.cloud.gaming.v1.PreviewCreateGameServerClusterResponse.clusterState: object expected");
+                                message.clusterState = $root.google.cloud.gaming.v1.KubernetesClusterState.fromObject(object.clusterState);
+                            }
                             return message;
                         };
     
@@ -5247,11 +5408,14 @@
                             if (options.defaults) {
                                 object.etag = "";
                                 object.targetState = null;
+                                object.clusterState = null;
                             }
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
                             if (message.targetState != null && message.hasOwnProperty("targetState"))
                                 object.targetState = $root.google.cloud.gaming.v1.TargetState.toObject(message.targetState, options);
+                            if (message.clusterState != null && message.hasOwnProperty("clusterState"))
+                                object.clusterState = $root.google.cloud.gaming.v1.KubernetesClusterState.toObject(message.clusterState, options);
                             return object;
                         };
     
@@ -7002,6 +7166,7 @@
                          * @property {google.cloud.gaming.v1.IGameServerClusterConnectionInfo|null} [connectionInfo] GameServerCluster connectionInfo
                          * @property {string|null} [etag] GameServerCluster etag
                          * @property {string|null} [description] GameServerCluster description
+                         * @property {google.cloud.gaming.v1.IKubernetesClusterState|null} [clusterState] GameServerCluster clusterState
                          */
     
                         /**
@@ -7077,6 +7242,14 @@
                         GameServerCluster.prototype.description = "";
     
                         /**
+                         * GameServerCluster clusterState.
+                         * @member {google.cloud.gaming.v1.IKubernetesClusterState|null|undefined} clusterState
+                         * @memberof google.cloud.gaming.v1.GameServerCluster
+                         * @instance
+                         */
+                        GameServerCluster.prototype.clusterState = null;
+    
+                        /**
                          * Creates a new GameServerCluster instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.gaming.v1.GameServerCluster
@@ -7115,6 +7288,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.etag);
                             if (message.description != null && Object.hasOwnProperty.call(message, "description"))
                                 writer.uint32(/* id 7, wireType 2 =*/58).string(message.description);
+                            if (message.clusterState != null && Object.hasOwnProperty.call(message, "clusterState"))
+                                $root.google.cloud.gaming.v1.KubernetesClusterState.encode(message.clusterState, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                             return writer;
                         };
     
@@ -7189,6 +7364,9 @@
                                 case 7:
                                     message.description = reader.string();
                                     break;
+                                case 11:
+                                    message.clusterState = $root.google.cloud.gaming.v1.KubernetesClusterState.decode(reader, reader.uint32());
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -7256,6 +7434,11 @@
                             if (message.description != null && message.hasOwnProperty("description"))
                                 if (!$util.isString(message.description))
                                     return "description: string expected";
+                            if (message.clusterState != null && message.hasOwnProperty("clusterState")) {
+                                var error = $root.google.cloud.gaming.v1.KubernetesClusterState.verify(message.clusterState);
+                                if (error)
+                                    return "clusterState." + error;
+                            }
                             return null;
                         };
     
@@ -7299,6 +7482,11 @@
                                 message.etag = String(object.etag);
                             if (object.description != null)
                                 message.description = String(object.description);
+                            if (object.clusterState != null) {
+                                if (typeof object.clusterState !== "object")
+                                    throw TypeError(".google.cloud.gaming.v1.GameServerCluster.clusterState: object expected");
+                                message.clusterState = $root.google.cloud.gaming.v1.KubernetesClusterState.fromObject(object.clusterState);
+                            }
                             return message;
                         };
     
@@ -7324,6 +7512,7 @@
                                 object.connectionInfo = null;
                                 object.etag = "";
                                 object.description = "";
+                                object.clusterState = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -7343,6 +7532,8 @@
                                 object.etag = message.etag;
                             if (message.description != null && message.hasOwnProperty("description"))
                                 object.description = message.description;
+                            if (message.clusterState != null && message.hasOwnProperty("clusterState"))
+                                object.clusterState = $root.google.cloud.gaming.v1.KubernetesClusterState.toObject(message.clusterState, options);
                             return object;
                         };
     
@@ -7358,6 +7549,373 @@
                         };
     
                         return GameServerCluster;
+                    })();
+    
+                    v1.KubernetesClusterState = (function() {
+    
+                        /**
+                         * Properties of a KubernetesClusterState.
+                         * @memberof google.cloud.gaming.v1
+                         * @interface IKubernetesClusterState
+                         * @property {string|null} [agonesVersionInstalled] KubernetesClusterState agonesVersionInstalled
+                         * @property {string|null} [kubernetesVersionInstalled] KubernetesClusterState kubernetesVersionInstalled
+                         * @property {google.cloud.gaming.v1.KubernetesClusterState.InstallationState|null} [installationState] KubernetesClusterState installationState
+                         * @property {string|null} [versionInstalledErrorMessage] KubernetesClusterState versionInstalledErrorMessage
+                         * @property {string|null} [provider] KubernetesClusterState provider
+                         * @property {string|null} [agonesVersionTargeted] KubernetesClusterState agonesVersionTargeted
+                         */
+    
+                        /**
+                         * Constructs a new KubernetesClusterState.
+                         * @memberof google.cloud.gaming.v1
+                         * @classdesc Represents a KubernetesClusterState.
+                         * @implements IKubernetesClusterState
+                         * @constructor
+                         * @param {google.cloud.gaming.v1.IKubernetesClusterState=} [properties] Properties to set
+                         */
+                        function KubernetesClusterState(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KubernetesClusterState agonesVersionInstalled.
+                         * @member {string} agonesVersionInstalled
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @instance
+                         */
+                        KubernetesClusterState.prototype.agonesVersionInstalled = "";
+    
+                        /**
+                         * KubernetesClusterState kubernetesVersionInstalled.
+                         * @member {string} kubernetesVersionInstalled
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @instance
+                         */
+                        KubernetesClusterState.prototype.kubernetesVersionInstalled = "";
+    
+                        /**
+                         * KubernetesClusterState installationState.
+                         * @member {google.cloud.gaming.v1.KubernetesClusterState.InstallationState} installationState
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @instance
+                         */
+                        KubernetesClusterState.prototype.installationState = 0;
+    
+                        /**
+                         * KubernetesClusterState versionInstalledErrorMessage.
+                         * @member {string} versionInstalledErrorMessage
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @instance
+                         */
+                        KubernetesClusterState.prototype.versionInstalledErrorMessage = "";
+    
+                        /**
+                         * KubernetesClusterState provider.
+                         * @member {string} provider
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @instance
+                         */
+                        KubernetesClusterState.prototype.provider = "";
+    
+                        /**
+                         * KubernetesClusterState agonesVersionTargeted.
+                         * @member {string} agonesVersionTargeted
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @instance
+                         */
+                        KubernetesClusterState.prototype.agonesVersionTargeted = "";
+    
+                        /**
+                         * Creates a new KubernetesClusterState instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @static
+                         * @param {google.cloud.gaming.v1.IKubernetesClusterState=} [properties] Properties to set
+                         * @returns {google.cloud.gaming.v1.KubernetesClusterState} KubernetesClusterState instance
+                         */
+                        KubernetesClusterState.create = function create(properties) {
+                            return new KubernetesClusterState(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesClusterState message. Does not implicitly {@link google.cloud.gaming.v1.KubernetesClusterState.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @static
+                         * @param {google.cloud.gaming.v1.IKubernetesClusterState} message KubernetesClusterState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesClusterState.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.agonesVersionInstalled != null && Object.hasOwnProperty.call(message, "agonesVersionInstalled"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.agonesVersionInstalled);
+                            if (message.kubernetesVersionInstalled != null && Object.hasOwnProperty.call(message, "kubernetesVersionInstalled"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.kubernetesVersionInstalled);
+                            if (message.installationState != null && Object.hasOwnProperty.call(message, "installationState"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.installationState);
+                            if (message.versionInstalledErrorMessage != null && Object.hasOwnProperty.call(message, "versionInstalledErrorMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.versionInstalledErrorMessage);
+                            if (message.provider != null && Object.hasOwnProperty.call(message, "provider"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.provider);
+                            if (message.agonesVersionTargeted != null && Object.hasOwnProperty.call(message, "agonesVersionTargeted"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.agonesVersionTargeted);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesClusterState message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.KubernetesClusterState.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @static
+                         * @param {google.cloud.gaming.v1.IKubernetesClusterState} message KubernetesClusterState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesClusterState.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KubernetesClusterState message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gaming.v1.KubernetesClusterState} KubernetesClusterState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesClusterState.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gaming.v1.KubernetesClusterState();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.agonesVersionInstalled = reader.string();
+                                    break;
+                                case 2:
+                                    message.kubernetesVersionInstalled = reader.string();
+                                    break;
+                                case 3:
+                                    message.installationState = reader.int32();
+                                    break;
+                                case 4:
+                                    message.versionInstalledErrorMessage = reader.string();
+                                    break;
+                                case 5:
+                                    message.provider = reader.string();
+                                    break;
+                                case 6:
+                                    message.agonesVersionTargeted = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KubernetesClusterState message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gaming.v1.KubernetesClusterState} KubernetesClusterState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesClusterState.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KubernetesClusterState message.
+                         * @function verify
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KubernetesClusterState.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.agonesVersionInstalled != null && message.hasOwnProperty("agonesVersionInstalled"))
+                                if (!$util.isString(message.agonesVersionInstalled))
+                                    return "agonesVersionInstalled: string expected";
+                            if (message.kubernetesVersionInstalled != null && message.hasOwnProperty("kubernetesVersionInstalled"))
+                                if (!$util.isString(message.kubernetesVersionInstalled))
+                                    return "kubernetesVersionInstalled: string expected";
+                            if (message.installationState != null && message.hasOwnProperty("installationState"))
+                                switch (message.installationState) {
+                                default:
+                                    return "installationState: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                case 6:
+                                case 7:
+                                    break;
+                                }
+                            if (message.versionInstalledErrorMessage != null && message.hasOwnProperty("versionInstalledErrorMessage"))
+                                if (!$util.isString(message.versionInstalledErrorMessage))
+                                    return "versionInstalledErrorMessage: string expected";
+                            if (message.provider != null && message.hasOwnProperty("provider"))
+                                if (!$util.isString(message.provider))
+                                    return "provider: string expected";
+                            if (message.agonesVersionTargeted != null && message.hasOwnProperty("agonesVersionTargeted"))
+                                if (!$util.isString(message.agonesVersionTargeted))
+                                    return "agonesVersionTargeted: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KubernetesClusterState message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gaming.v1.KubernetesClusterState} KubernetesClusterState
+                         */
+                        KubernetesClusterState.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gaming.v1.KubernetesClusterState)
+                                return object;
+                            var message = new $root.google.cloud.gaming.v1.KubernetesClusterState();
+                            if (object.agonesVersionInstalled != null)
+                                message.agonesVersionInstalled = String(object.agonesVersionInstalled);
+                            if (object.kubernetesVersionInstalled != null)
+                                message.kubernetesVersionInstalled = String(object.kubernetesVersionInstalled);
+                            switch (object.installationState) {
+                            case "INSTALLATION_STATE_UNSPECIFIED":
+                            case 0:
+                                message.installationState = 0;
+                                break;
+                            case "AGONES_KUBERNETES_VERSION_SUPPORTED":
+                            case 1:
+                                message.installationState = 1;
+                                break;
+                            case "AGONES_VERSION_UNSUPPORTED":
+                            case 2:
+                                message.installationState = 2;
+                                break;
+                            case "AGONES_KUBERNETES_VERSION_UNSUPPORTED":
+                            case 3:
+                                message.installationState = 3;
+                                break;
+                            case "AGONES_VERSION_UNRECOGNIZED":
+                            case 4:
+                                message.installationState = 4;
+                                break;
+                            case "KUBERNETES_VERSION_UNRECOGNIZED":
+                            case 5:
+                                message.installationState = 5;
+                                break;
+                            case "VERSION_VERIFICATION_FAILED":
+                            case 6:
+                                message.installationState = 6;
+                                break;
+                            case "AGONES_NOT_INSTALLED":
+                            case 7:
+                                message.installationState = 7;
+                                break;
+                            }
+                            if (object.versionInstalledErrorMessage != null)
+                                message.versionInstalledErrorMessage = String(object.versionInstalledErrorMessage);
+                            if (object.provider != null)
+                                message.provider = String(object.provider);
+                            if (object.agonesVersionTargeted != null)
+                                message.agonesVersionTargeted = String(object.agonesVersionTargeted);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KubernetesClusterState message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @static
+                         * @param {google.cloud.gaming.v1.KubernetesClusterState} message KubernetesClusterState
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KubernetesClusterState.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.agonesVersionInstalled = "";
+                                object.kubernetesVersionInstalled = "";
+                                object.installationState = options.enums === String ? "INSTALLATION_STATE_UNSPECIFIED" : 0;
+                                object.versionInstalledErrorMessage = "";
+                                object.provider = "";
+                                object.agonesVersionTargeted = "";
+                            }
+                            if (message.agonesVersionInstalled != null && message.hasOwnProperty("agonesVersionInstalled"))
+                                object.agonesVersionInstalled = message.agonesVersionInstalled;
+                            if (message.kubernetesVersionInstalled != null && message.hasOwnProperty("kubernetesVersionInstalled"))
+                                object.kubernetesVersionInstalled = message.kubernetesVersionInstalled;
+                            if (message.installationState != null && message.hasOwnProperty("installationState"))
+                                object.installationState = options.enums === String ? $root.google.cloud.gaming.v1.KubernetesClusterState.InstallationState[message.installationState] : message.installationState;
+                            if (message.versionInstalledErrorMessage != null && message.hasOwnProperty("versionInstalledErrorMessage"))
+                                object.versionInstalledErrorMessage = message.versionInstalledErrorMessage;
+                            if (message.provider != null && message.hasOwnProperty("provider"))
+                                object.provider = message.provider;
+                            if (message.agonesVersionTargeted != null && message.hasOwnProperty("agonesVersionTargeted"))
+                                object.agonesVersionTargeted = message.agonesVersionTargeted;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KubernetesClusterState to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gaming.v1.KubernetesClusterState
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KubernetesClusterState.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * InstallationState enum.
+                         * @name google.cloud.gaming.v1.KubernetesClusterState.InstallationState
+                         * @enum {number}
+                         * @property {number} INSTALLATION_STATE_UNSPECIFIED=0 INSTALLATION_STATE_UNSPECIFIED value
+                         * @property {number} AGONES_KUBERNETES_VERSION_SUPPORTED=1 AGONES_KUBERNETES_VERSION_SUPPORTED value
+                         * @property {number} AGONES_VERSION_UNSUPPORTED=2 AGONES_VERSION_UNSUPPORTED value
+                         * @property {number} AGONES_KUBERNETES_VERSION_UNSUPPORTED=3 AGONES_KUBERNETES_VERSION_UNSUPPORTED value
+                         * @property {number} AGONES_VERSION_UNRECOGNIZED=4 AGONES_VERSION_UNRECOGNIZED value
+                         * @property {number} KUBERNETES_VERSION_UNRECOGNIZED=5 KUBERNETES_VERSION_UNRECOGNIZED value
+                         * @property {number} VERSION_VERIFICATION_FAILED=6 VERSION_VERIFICATION_FAILED value
+                         * @property {number} AGONES_NOT_INSTALLED=7 AGONES_NOT_INSTALLED value
+                         */
+                        KubernetesClusterState.InstallationState = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INSTALLATION_STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "AGONES_KUBERNETES_VERSION_SUPPORTED"] = 1;
+                            values[valuesById[2] = "AGONES_VERSION_UNSUPPORTED"] = 2;
+                            values[valuesById[3] = "AGONES_KUBERNETES_VERSION_UNSUPPORTED"] = 3;
+                            values[valuesById[4] = "AGONES_VERSION_UNRECOGNIZED"] = 4;
+                            values[valuesById[5] = "KUBERNETES_VERSION_UNRECOGNIZED"] = 5;
+                            values[valuesById[6] = "VERSION_VERIFICATION_FAILED"] = 6;
+                            values[valuesById[7] = "AGONES_NOT_INSTALLED"] = 7;
+                            return values;
+                        })();
+    
+                        return KubernetesClusterState;
                     })();
     
                     v1.GameServerClustersService = (function() {

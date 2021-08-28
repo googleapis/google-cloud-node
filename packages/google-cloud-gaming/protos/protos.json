@@ -299,6 +299,13 @@
                         }
                       }
                     },
+                    "GameServerClusterView": {
+                      "values": {
+                        "GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED": 0,
+                        "BASIC": 1,
+                        "FULL": 2
+                      }
+                    },
                     "ListGameServerClustersRequest": {
                       "fields": {
                         "parent": {
@@ -336,6 +343,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "view": {
+                          "type": "GameServerClusterView",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -365,6 +379,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "gameservices.googleapis.com/GameServerCluster"
+                          }
+                        },
+                        "view": {
+                          "type": "GameServerClusterView",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -425,6 +446,14 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "view": {
+                          "type": "GameServerClusterView",
+                          "id": 6,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -437,6 +466,13 @@
                         "targetState": {
                           "type": "TargetState",
                           "id": 3
+                        },
+                        "clusterState": {
+                          "type": "KubernetesClusterState",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       }
                     },
@@ -608,6 +644,73 @@
                         "description": {
                           "type": "string",
                           "id": 7
+                        },
+                        "clusterState": {
+                          "type": "KubernetesClusterState",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "KubernetesClusterState": {
+                      "fields": {
+                        "agonesVersionInstalled": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "kubernetesVersionInstalled": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "installationState": {
+                          "type": "InstallationState",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "versionInstalledErrorMessage": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "provider": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "agonesVersionTargeted": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "InstallationState": {
+                          "values": {
+                            "INSTALLATION_STATE_UNSPECIFIED": 0,
+                            "AGONES_KUBERNETES_VERSION_SUPPORTED": 1,
+                            "AGONES_VERSION_UNSUPPORTED": 2,
+                            "AGONES_KUBERNETES_VERSION_UNSUPPORTED": 3,
+                            "AGONES_VERSION_UNRECOGNIZED": 4,
+                            "KUBERNETES_VERSION_UNRECOGNIZED": 5,
+                            "VERSION_VERIFICATION_FAILED": 6,
+                            "AGONES_NOT_INSTALLED": 7
+                          }
                         }
                       }
                     },

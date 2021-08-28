@@ -1567,6 +1567,13 @@ export namespace google {
                     }
                 }
 
+                /** GameServerClusterView enum. */
+                enum GameServerClusterView {
+                    GAME_SERVER_CLUSTER_VIEW_UNSPECIFIED = 0,
+                    BASIC = 1,
+                    FULL = 2
+                }
+
                 /** Properties of a ListGameServerClustersRequest. */
                 interface IListGameServerClustersRequest {
 
@@ -1584,6 +1591,9 @@ export namespace google {
 
                     /** ListGameServerClustersRequest orderBy */
                     orderBy?: (string|null);
+
+                    /** ListGameServerClustersRequest view */
+                    view?: (google.cloud.gaming.v1.GameServerClusterView|keyof typeof google.cloud.gaming.v1.GameServerClusterView|null);
                 }
 
                 /** Represents a ListGameServerClustersRequest. */
@@ -1609,6 +1619,9 @@ export namespace google {
 
                     /** ListGameServerClustersRequest orderBy. */
                     public orderBy: string;
+
+                    /** ListGameServerClustersRequest view. */
+                    public view: (google.cloud.gaming.v1.GameServerClusterView|keyof typeof google.cloud.gaming.v1.GameServerClusterView);
 
                     /**
                      * Creates a new ListGameServerClustersRequest instance using the specified properties.
@@ -1788,6 +1801,9 @@ export namespace google {
 
                     /** GetGameServerClusterRequest name */
                     name?: (string|null);
+
+                    /** GetGameServerClusterRequest view */
+                    view?: (google.cloud.gaming.v1.GameServerClusterView|keyof typeof google.cloud.gaming.v1.GameServerClusterView|null);
                 }
 
                 /** Represents a GetGameServerClusterRequest. */
@@ -1801,6 +1817,9 @@ export namespace google {
 
                     /** GetGameServerClusterRequest name. */
                     public name: string;
+
+                    /** GetGameServerClusterRequest view. */
+                    public view: (google.cloud.gaming.v1.GameServerClusterView|keyof typeof google.cloud.gaming.v1.GameServerClusterView);
 
                     /**
                      * Creates a new GetGameServerClusterRequest instance using the specified properties.
@@ -1989,6 +2008,9 @@ export namespace google {
 
                     /** PreviewCreateGameServerClusterRequest previewTime */
                     previewTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreviewCreateGameServerClusterRequest view */
+                    view?: (google.cloud.gaming.v1.GameServerClusterView|keyof typeof google.cloud.gaming.v1.GameServerClusterView|null);
                 }
 
                 /** Represents a PreviewCreateGameServerClusterRequest. */
@@ -2011,6 +2033,9 @@ export namespace google {
 
                     /** PreviewCreateGameServerClusterRequest previewTime. */
                     public previewTime?: (google.protobuf.ITimestamp|null);
+
+                    /** PreviewCreateGameServerClusterRequest view. */
+                    public view: (google.cloud.gaming.v1.GameServerClusterView|keyof typeof google.cloud.gaming.v1.GameServerClusterView);
 
                     /**
                      * Creates a new PreviewCreateGameServerClusterRequest instance using the specified properties.
@@ -2091,6 +2116,9 @@ export namespace google {
 
                     /** PreviewCreateGameServerClusterResponse targetState */
                     targetState?: (google.cloud.gaming.v1.ITargetState|null);
+
+                    /** PreviewCreateGameServerClusterResponse clusterState */
+                    clusterState?: (google.cloud.gaming.v1.IKubernetesClusterState|null);
                 }
 
                 /** Represents a PreviewCreateGameServerClusterResponse. */
@@ -2107,6 +2135,9 @@ export namespace google {
 
                     /** PreviewCreateGameServerClusterResponse targetState. */
                     public targetState?: (google.cloud.gaming.v1.ITargetState|null);
+
+                    /** PreviewCreateGameServerClusterResponse clusterState. */
+                    public clusterState?: (google.cloud.gaming.v1.IKubernetesClusterState|null);
 
                     /**
                      * Creates a new PreviewCreateGameServerClusterResponse instance using the specified properties.
@@ -2967,6 +2998,9 @@ export namespace google {
 
                     /** GameServerCluster description */
                     description?: (string|null);
+
+                    /** GameServerCluster clusterState */
+                    clusterState?: (google.cloud.gaming.v1.IKubernetesClusterState|null);
                 }
 
                 /** Represents a GameServerCluster. */
@@ -2998,6 +3032,9 @@ export namespace google {
 
                     /** GameServerCluster description. */
                     public description: string;
+
+                    /** GameServerCluster clusterState. */
+                    public clusterState?: (google.cloud.gaming.v1.IKubernetesClusterState|null);
 
                     /**
                      * Creates a new GameServerCluster instance using the specified properties.
@@ -3068,6 +3105,141 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a KubernetesClusterState. */
+                interface IKubernetesClusterState {
+
+                    /** KubernetesClusterState agonesVersionInstalled */
+                    agonesVersionInstalled?: (string|null);
+
+                    /** KubernetesClusterState kubernetesVersionInstalled */
+                    kubernetesVersionInstalled?: (string|null);
+
+                    /** KubernetesClusterState installationState */
+                    installationState?: (google.cloud.gaming.v1.KubernetesClusterState.InstallationState|keyof typeof google.cloud.gaming.v1.KubernetesClusterState.InstallationState|null);
+
+                    /** KubernetesClusterState versionInstalledErrorMessage */
+                    versionInstalledErrorMessage?: (string|null);
+
+                    /** KubernetesClusterState provider */
+                    provider?: (string|null);
+
+                    /** KubernetesClusterState agonesVersionTargeted */
+                    agonesVersionTargeted?: (string|null);
+                }
+
+                /** Represents a KubernetesClusterState. */
+                class KubernetesClusterState implements IKubernetesClusterState {
+
+                    /**
+                     * Constructs a new KubernetesClusterState.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gaming.v1.IKubernetesClusterState);
+
+                    /** KubernetesClusterState agonesVersionInstalled. */
+                    public agonesVersionInstalled: string;
+
+                    /** KubernetesClusterState kubernetesVersionInstalled. */
+                    public kubernetesVersionInstalled: string;
+
+                    /** KubernetesClusterState installationState. */
+                    public installationState: (google.cloud.gaming.v1.KubernetesClusterState.InstallationState|keyof typeof google.cloud.gaming.v1.KubernetesClusterState.InstallationState);
+
+                    /** KubernetesClusterState versionInstalledErrorMessage. */
+                    public versionInstalledErrorMessage: string;
+
+                    /** KubernetesClusterState provider. */
+                    public provider: string;
+
+                    /** KubernetesClusterState agonesVersionTargeted. */
+                    public agonesVersionTargeted: string;
+
+                    /**
+                     * Creates a new KubernetesClusterState instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns KubernetesClusterState instance
+                     */
+                    public static create(properties?: google.cloud.gaming.v1.IKubernetesClusterState): google.cloud.gaming.v1.KubernetesClusterState;
+
+                    /**
+                     * Encodes the specified KubernetesClusterState message. Does not implicitly {@link google.cloud.gaming.v1.KubernetesClusterState.verify|verify} messages.
+                     * @param message KubernetesClusterState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gaming.v1.IKubernetesClusterState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified KubernetesClusterState message, length delimited. Does not implicitly {@link google.cloud.gaming.v1.KubernetesClusterState.verify|verify} messages.
+                     * @param message KubernetesClusterState message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gaming.v1.IKubernetesClusterState, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a KubernetesClusterState message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns KubernetesClusterState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gaming.v1.KubernetesClusterState;
+
+                    /**
+                     * Decodes a KubernetesClusterState message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns KubernetesClusterState
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gaming.v1.KubernetesClusterState;
+
+                    /**
+                     * Verifies a KubernetesClusterState message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a KubernetesClusterState message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns KubernetesClusterState
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gaming.v1.KubernetesClusterState;
+
+                    /**
+                     * Creates a plain object from a KubernetesClusterState message. Also converts values to other types if specified.
+                     * @param message KubernetesClusterState
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gaming.v1.KubernetesClusterState, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this KubernetesClusterState to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace KubernetesClusterState {
+
+                    /** InstallationState enum. */
+                    enum InstallationState {
+                        INSTALLATION_STATE_UNSPECIFIED = 0,
+                        AGONES_KUBERNETES_VERSION_SUPPORTED = 1,
+                        AGONES_VERSION_UNSUPPORTED = 2,
+                        AGONES_KUBERNETES_VERSION_UNSUPPORTED = 3,
+                        AGONES_VERSION_UNRECOGNIZED = 4,
+                        KUBERNETES_VERSION_UNRECOGNIZED = 5,
+                        VERSION_VERIFICATION_FAILED = 6,
+                        AGONES_NOT_INSTALLED = 7
+                    }
                 }
 
                 /** Represents a GameServerClustersService */
