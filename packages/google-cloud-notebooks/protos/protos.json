@@ -6,6 +6,3227 @@
           "nested": {
             "notebooks": {
               "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Cloud.Notebooks.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/cloud/notebooks/v1;notebooks",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "NotebooksProto",
+                    "java_package": "com.google.cloud.notebooks.v1",
+                    "php_namespace": "Google\\Cloud\\Notebooks\\V1",
+                    "ruby_package": "Google::Cloud::Notebooks::V1"
+                  },
+                  "nested": {
+                    "Environment": {
+                      "options": {
+                        "(google.api.resource).type": "notebooks.googleapis.com/Environment",
+                        "(google.api.resource).pattern": "projects/{project}/environments/{environment}"
+                      },
+                      "oneofs": {
+                        "imageType": {
+                          "oneof": [
+                            "vmImage",
+                            "containerImage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "vmImage": {
+                          "type": "VmImage",
+                          "id": 6
+                        },
+                        "containerImage": {
+                          "type": "ContainerImage",
+                          "id": 7
+                        },
+                        "postStartupScript": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "VmImage": {
+                      "oneofs": {
+                        "image": {
+                          "oneof": [
+                            "imageName",
+                            "imageFamily"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "imageName": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "imageFamily": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ContainerImage": {
+                      "fields": {
+                        "repository": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "tag": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "Event": {
+                      "fields": {
+                        "reportTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "type": {
+                          "type": "EventType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "EventType": {
+                          "values": {
+                            "EVENT_TYPE_UNSPECIFIED": 0,
+                            "IDLE": 1
+                          }
+                        }
+                      }
+                    },
+                    "ExecutionTemplate": {
+                      "oneofs": {
+                        "jobParameters": {
+                          "oneof": [
+                            "dataprocParameters"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scaleTier": {
+                          "type": "ScaleTier",
+                          "id": 1,
+                          "options": {
+                            "deprecated": true,
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "masterType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "acceleratorConfig": {
+                          "type": "SchedulerAcceleratorConfig",
+                          "id": 3
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4
+                        },
+                        "inputNotebookFile": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "containerImageUri": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "outputNotebookFolder": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "paramsYamlFile": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "parameters": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "jobType": {
+                          "type": "JobType",
+                          "id": 11
+                        },
+                        "dataprocParameters": {
+                          "type": "DataprocParameters",
+                          "id": 12
+                        }
+                      },
+                      "nested": {
+                        "SchedulerAcceleratorConfig": {
+                          "fields": {
+                            "type": {
+                              "type": "SchedulerAcceleratorType",
+                              "id": 1
+                            },
+                            "coreCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataprocParameters": {
+                          "fields": {
+                            "cluster": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "ScaleTier": {
+                          "values": {
+                            "SCALE_TIER_UNSPECIFIED": 0,
+                            "BASIC": 1,
+                            "STANDARD_1": 2,
+                            "PREMIUM_1": 3,
+                            "BASIC_GPU": 4,
+                            "BASIC_TPU": 5,
+                            "CUSTOM": 6
+                          }
+                        },
+                        "SchedulerAcceleratorType": {
+                          "values": {
+                            "SCHEDULER_ACCELERATOR_TYPE_UNSPECIFIED": 0,
+                            "NVIDIA_TESLA_K80": 1,
+                            "NVIDIA_TESLA_P100": 2,
+                            "NVIDIA_TESLA_V100": 3,
+                            "NVIDIA_TESLA_P4": 4,
+                            "NVIDIA_TESLA_T4": 5,
+                            "TPU_V2": 6,
+                            "TPU_V3": 7
+                          }
+                        },
+                        "JobType": {
+                          "values": {
+                            "JOB_TYPE_UNSPECIFIED": 0,
+                            "VERTEX_AI": 1,
+                            "DATAPROC": 2
+                          }
+                        }
+                      }
+                    },
+                    "Execution": {
+                      "options": {
+                        "(google.api.resource).type": "notebooks.googleapis.com/Execution",
+                        "(google.api.resource).pattern": "projects/{project}/location/{location}/executions/{execution}"
+                      },
+                      "fields": {
+                        "executionTemplate": {
+                          "type": "ExecutionTemplate",
+                          "id": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "outputNotebookFile": {
+                          "type": "string",
+                          "id": 8
+                        },
+                        "jobUri": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "QUEUED": 1,
+                            "PREPARING": 2,
+                            "RUNNING": 3,
+                            "SUCCEEDED": 4,
+                            "FAILED": 5,
+                            "CANCELLING": 6,
+                            "CANCELLED": 7,
+                            "EXPIRED": 9,
+                            "INITIALIZING": 10
+                          }
+                        }
+                      }
+                    },
+                    "ReservationAffinity": {
+                      "fields": {
+                        "consumeReservationType": {
+                          "type": "Type",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "key": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "values": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "NO_RESERVATION": 1,
+                            "ANY_RESERVATION": 2,
+                            "SPECIFIC_RESERVATION": 3
+                          }
+                        }
+                      }
+                    },
+                    "Instance": {
+                      "options": {
+                        "(google.api.resource).type": "notebooks.googleapis.com/Instance",
+                        "(google.api.resource).pattern": "projects/{project}/instances/{instance}"
+                      },
+                      "oneofs": {
+                        "environment": {
+                          "oneof": [
+                            "vmImage",
+                            "containerImage"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "vmImage": {
+                          "type": "VmImage",
+                          "id": 2
+                        },
+                        "containerImage": {
+                          "type": "ContainerImage",
+                          "id": 3
+                        },
+                        "postStartupScript": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "proxyUri": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instanceOwners": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "serviceAccount": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "serviceAccountScopes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 31,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "acceleratorConfig": {
+                          "type": "AcceleratorConfig",
+                          "id": 9
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "installGpuDriver": {
+                          "type": "bool",
+                          "id": 11
+                        },
+                        "customGpuDriverPath": {
+                          "type": "string",
+                          "id": 12
+                        },
+                        "bootDiskType": {
+                          "type": "DiskType",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "bootDiskSizeGb": {
+                          "type": "int64",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "dataDiskType": {
+                          "type": "DiskType",
+                          "id": 25,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "dataDiskSizeGb": {
+                          "type": "int64",
+                          "id": 26,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "noRemoveDataDisk": {
+                          "type": "bool",
+                          "id": 27,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "diskEncryption": {
+                          "type": "DiskEncryption",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "disks": {
+                          "rule": "repeated",
+                          "type": "Disk",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "shieldedInstanceConfig": {
+                          "type": "ShieldedInstanceConfig",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "noPublicIp": {
+                          "type": "bool",
+                          "id": 17
+                        },
+                        "noProxyAccess": {
+                          "type": "bool",
+                          "id": 18
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 19
+                        },
+                        "subnet": {
+                          "type": "string",
+                          "id": 20
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 21
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 22
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 32,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "upgradeHistory": {
+                          "rule": "repeated",
+                          "type": "UpgradeHistoryEntry",
+                          "id": 29
+                        },
+                        "nicType": {
+                          "type": "NicType",
+                          "id": 33,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "reservationAffinity": {
+                          "type": "ReservationAffinity",
+                          "id": 34,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 23,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 24,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AcceleratorConfig": {
+                          "fields": {
+                            "type": {
+                              "type": "AcceleratorType",
+                              "id": 1
+                            },
+                            "coreCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "Disk": {
+                          "fields": {
+                            "autoDelete": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "boot": {
+                              "type": "bool",
+                              "id": 2
+                            },
+                            "deviceName": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "diskSizeGb": {
+                              "type": "int64",
+                              "id": 4
+                            },
+                            "guestOsFeatures": {
+                              "rule": "repeated",
+                              "type": "GuestOsFeature",
+                              "id": 5
+                            },
+                            "index": {
+                              "type": "int64",
+                              "id": 6
+                            },
+                            "interface": {
+                              "type": "string",
+                              "id": 7
+                            },
+                            "kind": {
+                              "type": "string",
+                              "id": 8
+                            },
+                            "licenses": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 9
+                            },
+                            "mode": {
+                              "type": "string",
+                              "id": 10
+                            },
+                            "source": {
+                              "type": "string",
+                              "id": 11
+                            },
+                            "type": {
+                              "type": "string",
+                              "id": 12
+                            }
+                          },
+                          "nested": {
+                            "GuestOsFeature": {
+                              "fields": {
+                                "type": {
+                                  "type": "string",
+                                  "id": 1
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ShieldedInstanceConfig": {
+                          "fields": {
+                            "enableSecureBoot": {
+                              "type": "bool",
+                              "id": 1
+                            },
+                            "enableVtpm": {
+                              "type": "bool",
+                              "id": 2
+                            },
+                            "enableIntegrityMonitoring": {
+                              "type": "bool",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "UpgradeHistoryEntry": {
+                          "fields": {
+                            "snapshot": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "vmImage": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "containerImage": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "framework": {
+                              "type": "string",
+                              "id": 4
+                            },
+                            "version": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 6
+                            },
+                            "createTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 7
+                            },
+                            "targetImage": {
+                              "type": "string",
+                              "id": 8,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "action": {
+                              "type": "Action",
+                              "id": 9
+                            },
+                            "targetVersion": {
+                              "type": "string",
+                              "id": 10
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "STARTED": 1,
+                                "SUCCEEDED": 2,
+                                "FAILED": 3
+                              }
+                            },
+                            "Action": {
+                              "values": {
+                                "ACTION_UNSPECIFIED": 0,
+                                "UPGRADE": 1,
+                                "ROLLBACK": 2
+                              }
+                            }
+                          }
+                        },
+                        "AcceleratorType": {
+                          "values": {
+                            "ACCELERATOR_TYPE_UNSPECIFIED": 0,
+                            "NVIDIA_TESLA_K80": 1,
+                            "NVIDIA_TESLA_P100": 2,
+                            "NVIDIA_TESLA_V100": 3,
+                            "NVIDIA_TESLA_P4": 4,
+                            "NVIDIA_TESLA_T4": 5,
+                            "NVIDIA_TESLA_A100": 11,
+                            "NVIDIA_TESLA_T4_VWS": 8,
+                            "NVIDIA_TESLA_P100_VWS": 9,
+                            "NVIDIA_TESLA_P4_VWS": 10,
+                            "TPU_V2": 6,
+                            "TPU_V3": 7
+                          }
+                        },
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STARTING": 1,
+                            "PROVISIONING": 2,
+                            "ACTIVE": 3,
+                            "STOPPING": 4,
+                            "STOPPED": 5,
+                            "DELETED": 6,
+                            "UPGRADING": 7,
+                            "INITIALIZING": 8,
+                            "REGISTERING": 9
+                          }
+                        },
+                        "DiskType": {
+                          "values": {
+                            "DISK_TYPE_UNSPECIFIED": 0,
+                            "PD_STANDARD": 1,
+                            "PD_SSD": 2,
+                            "PD_BALANCED": 3
+                          }
+                        },
+                        "DiskEncryption": {
+                          "values": {
+                            "DISK_ENCRYPTION_UNSPECIFIED": 0,
+                            "GMEK": 1,
+                            "CMEK": 2
+                          }
+                        },
+                        "NicType": {
+                          "values": {
+                            "UNSPECIFIED_NIC_TYPE": 0,
+                            "VIRTIO_NET": 1,
+                            "GVNIC": 2
+                          }
+                        }
+                      }
+                    },
+                    "InstanceConfig": {
+                      "fields": {
+                        "notebookUpgradeSchedule": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "enableHealthMonitoring": {
+                          "type": "bool",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ManagedNotebookService": {
+                      "options": {
+                        "(google.api.default_host)": "notebooks.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListRuntimes": {
+                          "requestType": "ListRuntimesRequest",
+                          "responseType": "ListRuntimesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/runtimes",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/runtimes"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetRuntime": {
+                          "requestType": "GetRuntimeRequest",
+                          "responseType": "Runtime",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/runtimes/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/runtimes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateRuntime": {
+                          "requestType": "CreateRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/runtimes",
+                            "(google.api.http).body": "runtime",
+                            "(google.api.method_signature)": "parent,runtime_id,runtime",
+                            "(google.longrunning.operation_info).response_type": "Runtime",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/runtimes",
+                                "body": "runtime"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,runtime_id,runtime"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Runtime",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteRuntime": {
+                          "requestType": "DeleteRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/runtimes/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/runtimes/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "StartRuntime": {
+                          "requestType": "StartRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/runtimes/*}:start",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Runtime",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/runtimes/*}:start",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Runtime",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "StopRuntime": {
+                          "requestType": "StopRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/runtimes/*}:stop",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Runtime",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/runtimes/*}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Runtime",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "SwitchRuntime": {
+                          "requestType": "SwitchRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/runtimes/*}:switch",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Runtime",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/runtimes/*}:switch",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Runtime",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ResetRuntime": {
+                          "requestType": "ResetRuntimeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/runtimes/*}:reset",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Runtime",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/runtimes/*}:reset",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Runtime",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ReportRuntimeEvent": {
+                          "requestType": "ReportRuntimeEventRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/runtimes/*}:reportEvent",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "Runtime",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/runtimes/*}:reportEvent",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Runtime",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ListRuntimesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "notebooks.googleapis.com/Runtime"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListRuntimesResponse": {
+                      "fields": {
+                        "runtimes": {
+                          "rule": "repeated",
+                          "type": "Runtime",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Runtime"
+                          }
+                        }
+                      }
+                    },
+                    "CreateRuntimeRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Runtime"
+                          }
+                        },
+                        "runtimeId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "runtime": {
+                          "type": "Runtime",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Runtime"
+                          }
+                        }
+                      }
+                    },
+                    "StartRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "StopRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SwitchRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "acceleratorConfig": {
+                          "type": "RuntimeAcceleratorConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ResetRuntimeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ReportRuntimeEventRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Runtime"
+                          }
+                        },
+                        "vmId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "event": {
+                          "type": "Event",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Runtime": {
+                      "options": {
+                        "(google.api.resource).type": "notebooks.googleapis.com/Runtime",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/runtimes/{runtime}"
+                      },
+                      "oneofs": {
+                        "runtimeType": {
+                          "oneof": [
+                            "virtualMachine"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "virtualMachine": {
+                          "type": "VirtualMachine",
+                          "id": 2
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "healthState": {
+                          "type": "HealthState",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "accessConfig": {
+                          "type": "RuntimeAccessConfig",
+                          "id": 5
+                        },
+                        "softwareConfig": {
+                          "type": "RuntimeSoftwareConfig",
+                          "id": 6
+                        },
+                        "metrics": {
+                          "type": "RuntimeMetrics",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 20,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "STARTING": 1,
+                            "PROVISIONING": 2,
+                            "ACTIVE": 3,
+                            "STOPPING": 4,
+                            "STOPPED": 5,
+                            "DELETING": 6,
+                            "UPGRADING": 7,
+                            "INITIALIZING": 8
+                          }
+                        },
+                        "HealthState": {
+                          "values": {
+                            "HEALTH_STATE_UNSPECIFIED": 0,
+                            "HEALTHY": 1,
+                            "UNHEALTHY": 2
+                          }
+                        }
+                      }
+                    },
+                    "RuntimeAcceleratorConfig": {
+                      "fields": {
+                        "type": {
+                          "type": "AcceleratorType",
+                          "id": 1
+                        },
+                        "coreCount": {
+                          "type": "int64",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "AcceleratorType": {
+                          "values": {
+                            "ACCELERATOR_TYPE_UNSPECIFIED": 0,
+                            "NVIDIA_TESLA_K80": 1,
+                            "NVIDIA_TESLA_P100": 2,
+                            "NVIDIA_TESLA_V100": 3,
+                            "NVIDIA_TESLA_P4": 4,
+                            "NVIDIA_TESLA_T4": 5,
+                            "NVIDIA_TESLA_A100": 6,
+                            "TPU_V2": 7,
+                            "TPU_V3": 8,
+                            "NVIDIA_TESLA_T4_VWS": 9,
+                            "NVIDIA_TESLA_P100_VWS": 10,
+                            "NVIDIA_TESLA_P4_VWS": 11
+                          }
+                        }
+                      }
+                    },
+                    "EncryptionConfig": {
+                      "fields": {
+                        "kmsKey": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "LocalDisk": {
+                      "fields": {
+                        "autoDelete": {
+                          "type": "bool",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "boot": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "deviceName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "guestOsFeatures": {
+                          "rule": "repeated",
+                          "type": "RuntimeGuestOsFeature",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "index": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "initializeParams": {
+                          "type": "LocalDiskInitializeParams",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "interface": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "licenses": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "mode": {
+                          "type": "string",
+                          "id": 10
+                        },
+                        "source": {
+                          "type": "string",
+                          "id": 11
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 12
+                        }
+                      },
+                      "nested": {
+                        "RuntimeGuestOsFeature": {
+                          "fields": {
+                            "type": {
+                              "type": "string",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "LocalDiskInitializeParams": {
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "diskName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "diskSizeGb": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "diskType": {
+                          "type": "DiskType",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "INPUT_ONLY"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DiskType": {
+                          "values": {
+                            "DISK_TYPE_UNSPECIFIED": 0,
+                            "PD_STANDARD": 1,
+                            "PD_SSD": 2,
+                            "PD_BALANCED": 3
+                          }
+                        }
+                      }
+                    },
+                    "RuntimeAccessConfig": {
+                      "fields": {
+                        "accessType": {
+                          "type": "RuntimeAccessType",
+                          "id": 1
+                        },
+                        "runtimeOwner": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "proxyUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "RuntimeAccessType": {
+                          "values": {
+                            "RUNTIME_ACCESS_TYPE_UNSPECIFIED": 0,
+                            "SINGLE_USER": 1
+                          }
+                        }
+                      }
+                    },
+                    "RuntimeSoftwareConfig": {
+                      "oneofs": {
+                        "_enableHealthMonitoring": {
+                          "oneof": [
+                            "enableHealthMonitoring"
+                          ]
+                        },
+                        "_idleShutdown": {
+                          "oneof": [
+                            "idleShutdown"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "notebookUpgradeSchedule": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "enableHealthMonitoring": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "idleShutdown": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "idleShutdownTimeout": {
+                          "type": "int32",
+                          "id": 4
+                        },
+                        "installGpuDriver": {
+                          "type": "bool",
+                          "id": 5
+                        },
+                        "customGpuDriverPath": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "postStartupScript": {
+                          "type": "string",
+                          "id": 7
+                        }
+                      }
+                    },
+                    "RuntimeMetrics": {
+                      "fields": {
+                        "systemMetrics": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RuntimeShieldedInstanceConfig": {
+                      "fields": {
+                        "enableSecureBoot": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "enableVtpm": {
+                          "type": "bool",
+                          "id": 2
+                        },
+                        "enableIntegrityMonitoring": {
+                          "type": "bool",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "VirtualMachine": {
+                      "fields": {
+                        "instanceName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "virtualMachineConfig": {
+                          "type": "VirtualMachineConfig",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "VirtualMachineConfig": {
+                      "fields": {
+                        "zone": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "containerImages": {
+                          "rule": "repeated",
+                          "type": "ContainerImage",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "dataDisk": {
+                          "type": "LocalDisk",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encryptionConfig": {
+                          "type": "EncryptionConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "shieldedInstanceConfig": {
+                          "type": "RuntimeShieldedInstanceConfig",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "acceleratorConfig": {
+                          "type": "RuntimeAcceleratorConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "network": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "subnet": {
+                          "type": "string",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "internalIpOnly": {
+                          "type": "bool",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "tags": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "guestAttributes": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 16,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "nicType": {
+                          "type": "NicType",
+                          "id": 17,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "NicType": {
+                          "values": {
+                            "UNSPECIFIED_NIC_TYPE": 0,
+                            "VIRTIO_NET": 1,
+                            "GVNIC": 2
+                          }
+                        }
+                      }
+                    },
+                    "Schedule": {
+                      "options": {
+                        "(google.api.resource).type": "notebooks.googleapis.com/Schedule",
+                        "(google.api.resource).pattern": "projects/{project}/location/{location}/schedules/{schedule}"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 4
+                        },
+                        "cronSchedule": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "timeZone": {
+                          "type": "string",
+                          "id": 6
+                        },
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "executionTemplate": {
+                          "type": "ExecutionTemplate",
+                          "id": 9
+                        },
+                        "recentExecutions": {
+                          "rule": "repeated",
+                          "type": "Execution",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "ENABLED": 1,
+                            "PAUSED": 2,
+                            "DISABLED": 3,
+                            "UPDATE_FAILED": 4,
+                            "INITIALIZING": 5,
+                            "DELETING": 6
+                          }
+                        }
+                      }
+                    },
+                    "NotebookService": {
+                      "options": {
+                        "(google.api.default_host)": "notebooks.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "ListInstances": {
+                          "requestType": "ListInstancesRequest",
+                          "responseType": "ListInstancesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/instances",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/instances"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetInstance": {
+                          "requestType": "GetInstanceRequest",
+                          "responseType": "Instance",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateInstance": {
+                          "requestType": "CreateInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/instances",
+                            "(google.api.http).body": "instance",
+                            "(google.api.method_signature)": "parent,instance,instance_id",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/instances",
+                                "body": "instance"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,instance,instance_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RegisterInstance": {
+                          "requestType": "RegisterInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/instances:register",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/instances:register",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "SetInstanceAccelerator": {
+                          "requestType": "SetInstanceAcceleratorRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{name=projects/*/locations/*/instances/*}:setAccelerator",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=projects/*/locations/*/instances/*}:setAccelerator",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "SetInstanceMachineType": {
+                          "requestType": "SetInstanceMachineTypeRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{name=projects/*/locations/*/instances/*}:setMachineType",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=projects/*/locations/*/instances/*}:setMachineType",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateInstanceConfig": {
+                          "requestType": "UpdateInstanceConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{name=projects/*/locations/*/instances/*}:updateConfig",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=projects/*/locations/*/instances/*}:updateConfig",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpdateShieldedInstanceConfig": {
+                          "requestType": "UpdateShieldedInstanceConfigRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{name=projects/*/locations/*/instances/*}:updateShieldedInstanceConfig",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=projects/*/locations/*/instances/*}:updateShieldedInstanceConfig",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "SetInstanceLabels": {
+                          "requestType": "SetInstanceLabelsRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{name=projects/*/locations/*/instances/*}:setLabels",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{name=projects/*/locations/*/instances/*}:setLabels",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteInstance": {
+                          "requestType": "DeleteInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/instances/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/instances/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "StartInstance": {
+                          "requestType": "StartInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:start",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:start",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "StopInstance": {
+                          "requestType": "StopInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:stop",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:stop",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ResetInstance": {
+                          "requestType": "ResetInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:reset",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:reset",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ReportInstanceInfo": {
+                          "requestType": "ReportInstanceInfoRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:report",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:report",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "IsInstanceUpgradeable": {
+                          "requestType": "IsInstanceUpgradeableRequest",
+                          "responseType": "IsInstanceUpgradeableResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{notebook_instance=projects/*/locations/*/instances/*}:isUpgradeable"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{notebook_instance=projects/*/locations/*/instances/*}:isUpgradeable"
+                              }
+                            }
+                          ]
+                        },
+                        "GetInstanceHealth": {
+                          "requestType": "GetInstanceHealthRequest",
+                          "responseType": "GetInstanceHealthResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/instances/*}:getInstanceHealth",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/instances/*}:getInstanceHealth"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "UpgradeInstance": {
+                          "requestType": "UpgradeInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:upgrade",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:upgrade",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "RollbackInstance": {
+                          "requestType": "RollbackInstanceRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:rollback",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:rollback",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "UpgradeInstanceInternal": {
+                          "requestType": "UpgradeInstanceInternalRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/instances/*}:upgradeInternal",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Instance",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/instances/*}:upgradeInternal",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Instance",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListEnvironments": {
+                          "requestType": "ListEnvironmentsRequest",
+                          "responseType": "ListEnvironmentsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/environments",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/environments"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetEnvironment": {
+                          "requestType": "GetEnvironmentRequest",
+                          "responseType": "Environment",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/environments/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/environments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "CreateEnvironment": {
+                          "requestType": "CreateEnvironmentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/environments",
+                            "(google.api.http).body": "environment",
+                            "(google.api.method_signature)": "parent,environment,environment_id",
+                            "(google.longrunning.operation_info).response_type": "Environment",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/environments",
+                                "body": "environment"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,environment,environment_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Environment",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "DeleteEnvironment": {
+                          "requestType": "DeleteEnvironmentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/environments/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/environments/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListSchedules": {
+                          "requestType": "ListSchedulesRequest",
+                          "responseType": "ListSchedulesResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/schedules",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/schedules"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetSchedule": {
+                          "requestType": "GetScheduleRequest",
+                          "responseType": "Schedule",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/schedules/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/schedules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteSchedule": {
+                          "requestType": "DeleteScheduleRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/schedules/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/schedules/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateSchedule": {
+                          "requestType": "CreateScheduleRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/schedules",
+                            "(google.api.http).body": "schedule",
+                            "(google.api.method_signature)": "parent,schedule,schedule_id",
+                            "(google.longrunning.operation_info).response_type": "Schedule",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/schedules",
+                                "body": "schedule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,schedule,schedule_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Schedule",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "TriggerSchedule": {
+                          "requestType": "TriggerScheduleRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{name=projects/*/locations/*/schedules/*}:trigger",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "Schedule",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{name=projects/*/locations/*/schedules/*}:trigger",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Schedule",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListExecutions": {
+                          "requestType": "ListExecutionsRequest",
+                          "responseType": "ListExecutionsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=projects/*/locations/*}/executions",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=projects/*/locations/*}/executions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetExecution": {
+                          "requestType": "GetExecutionRequest",
+                          "responseType": "Execution",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=projects/*/locations/*/executions/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=projects/*/locations/*/executions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        },
+                        "DeleteExecution": {
+                          "requestType": "DeleteExecutionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).delete": "/v1/{name=projects/*/locations/*/executions/*}",
+                            "(google.api.method_signature)": "name",
+                            "(google.longrunning.operation_info).response_type": "google.protobuf.Empty",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/v1/{name=projects/*/locations/*/executions/*}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "google.protobuf.Empty",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "CreateExecution": {
+                          "requestType": "CreateExecutionRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=projects/*/locations/*}/executions",
+                            "(google.api.http).body": "execution",
+                            "(google.api.method_signature)": "parent,execution,execution_id",
+                            "(google.longrunning.operation_info).response_type": "Execution",
+                            "(google.longrunning.operation_info).metadata_type": "OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=projects/*/locations/*}/executions",
+                                "body": "execution"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,execution,execution_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "Execution",
+                                "metadata_type": "OperationMetadata"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "OperationMetadata": {
+                      "fields": {
+                        "createTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 1
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
+                        },
+                        "target": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "verb": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "statusMessage": {
+                          "type": "string",
+                          "id": 5
+                        },
+                        "requestedCancellation": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "apiVersion": {
+                          "type": "string",
+                          "id": 7
+                        },
+                        "endpoint": {
+                          "type": "string",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "ListInstancesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListInstancesResponse": {
+                      "fields": {
+                        "instances": {
+                          "rule": "repeated",
+                          "type": "Instance",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateInstanceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instance": {
+                          "type": "Instance",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RegisterInstanceRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "instanceId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetInstanceAcceleratorRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "type": {
+                          "type": "Instance.AcceleratorType",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "coreCount": {
+                          "type": "int64",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "SetInstanceMachineTypeRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "machineType": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpdateInstanceConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "config": {
+                          "type": "InstanceConfig",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "SetInstanceLabelsRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "UpdateShieldedInstanceConfigRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "shieldedInstanceConfig": {
+                          "type": "Instance.ShieldedInstanceConfig",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "DeleteInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "StartInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "StopInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ResetInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ReportInstanceInfoRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "vmId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "metadata": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "IsInstanceUpgradeableRequest": {
+                      "fields": {
+                        "notebookInstance": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "IsInstanceUpgradeableResponse": {
+                      "fields": {
+                        "upgradeable": {
+                          "type": "bool",
+                          "id": 1
+                        },
+                        "upgradeVersion": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "upgradeInfo": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "upgradeImage": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "GetInstanceHealthRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Instance"
+                          }
+                        }
+                      }
+                    },
+                    "GetInstanceHealthResponse": {
+                      "fields": {
+                        "healthState": {
+                          "type": "HealthState",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "healthInfo": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "HealthState": {
+                          "values": {
+                            "HEALTH_STATE_UNSPECIFIED": 0,
+                            "HEALTHY": 1,
+                            "UNHEALTHY": 2,
+                            "AGENT_NOT_INSTALLED": 3,
+                            "AGENT_NOT_RUNNING": 4
+                          }
+                        }
+                      }
+                    },
+                    "UpgradeInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RollbackInstanceRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetSnapshot": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UpgradeInstanceInternalRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "vmId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListEnvironmentsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "ListEnvironmentsResponse": {
+                      "fields": {
+                        "environments": {
+                          "rule": "repeated",
+                          "type": "Environment",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetEnvironmentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CreateEnvironmentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "environmentId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "environment": {
+                          "type": "Environment",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteEnvironmentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ListSchedulesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Schedule"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListSchedulesResponse": {
+                      "fields": {
+                        "schedules": {
+                          "rule": "repeated",
+                          "type": "Schedule",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetScheduleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Schedule"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteScheduleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Schedule"
+                          }
+                        }
+                      }
+                    },
+                    "CreateScheduleRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Schedule"
+                          }
+                        },
+                        "scheduleId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "schedule": {
+                          "type": "Schedule",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TriggerScheduleRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Schedule"
+                          }
+                        }
+                      }
+                    },
+                    "ListExecutionsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Execution"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListExecutionsResponse": {
+                      "fields": {
+                        "executions": {
+                          "rule": "repeated",
+                          "type": "Execution",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "GetExecutionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Execution"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteExecutionRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Execution"
+                          }
+                        }
+                      }
+                    },
+                    "CreateExecutionRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "notebooks.googleapis.com/Execution"
+                          }
+                        },
+                        "executionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "execution": {
+                          "type": "Execution",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "v1beta1": {
                   "options": {
                     "go_package": "google.golang.org/genproto/googleapis/cloud/notebooks/v1beta1;notebooks",

@@ -1,0 +1,74 @@
+{
+  "interfaces": {
+    "google.cloud.notebooks.v1.ManagedNotebookService": {
+      "retry_codes": {
+        "non_idempotent": [],
+        "idempotent": [
+          "DEADLINE_EXCEEDED",
+          "UNAVAILABLE"
+        ],
+        "unavailable": [
+          "UNAVAILABLE"
+        ]
+      },
+      "retry_params": {
+        "default": {
+          "initial_retry_delay_millis": 100,
+          "retry_delay_multiplier": 1.3,
+          "max_retry_delay_millis": 60000,
+          "initial_rpc_timeout_millis": 60000,
+          "rpc_timeout_multiplier": 1,
+          "max_rpc_timeout_millis": 60000,
+          "total_timeout_millis": 600000
+        }
+      },
+      "methods": {
+        "ListRuntimes": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "GetRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "CreateRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StartRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "StopRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "SwitchRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ResetRuntime": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "unavailable",
+          "retry_params_name": "default"
+        },
+        "ReportRuntimeEvent": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        }
+      }
+    }
+  }
+}
