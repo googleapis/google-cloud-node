@@ -3,7 +3,7 @@
   "api_id": "metastore.googleapis.com",
   "distribution_name": "@google-cloud/dataproc-metastore",
   "release_level": "BETA",
-  "default_version": "v1beta",
+  "default_version": "v1",
   "language": "nodejs",
   "name_pretty": "Dataproc Metastore",
   "repo": "googleapis/nodejs-dataproc-metastore",

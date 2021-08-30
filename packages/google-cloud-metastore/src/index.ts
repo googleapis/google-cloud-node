@@ -20,8 +20,8 @@ import * as v1 from './v1';
 import * as v1alpha from './v1alpha';
 import * as v1beta from './v1beta';
 
-const DataprocMetastoreClient = v1beta.DataprocMetastoreClient;
-type DataprocMetastoreClient = v1beta.DataprocMetastoreClient;
+const DataprocMetastoreClient = v1.DataprocMetastoreClient;
+type DataprocMetastoreClient = v1.DataprocMetastoreClient;
 
 export {v1, v1alpha, v1beta, DataprocMetastoreClient};
 export default {v1, v1alpha, v1beta, DataprocMetastoreClient};
