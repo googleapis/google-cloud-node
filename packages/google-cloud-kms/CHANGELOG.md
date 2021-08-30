@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+## [2.8.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.7.0...v2.8.0) (2021-08-30)
+
+
+### Features
+
+* add support for Key Reimport ([#493](https://www.github.com/googleapis/nodejs-kms/issues/493)) ([9728525](https://www.github.com/googleapis/nodejs-kms/commit/97285257ec5c28821eb9c7c8d4bb50d2729bf95a))
+
 ## [2.7.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.6.0...v2.7.0) (2021-08-23)
 
 
