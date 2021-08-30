@@ -42,8 +42,14 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
- *  GKE Hub CRUD API for the Membership resource.
- *  The Membership service is currently only available in the global location.
+ *  The GKE Hub MembershipService handles the registration of many Kubernetes
+ *  clusters to Google Cloud, represented with the {@link google.cloud.gkehub.v1beta1.Membership|Membership} resource.
+ *
+ *  GKE Hub is currently only available in the global region.
+ *
+ *  **Membership management may be non-trivial:** it is recommended to use one
+ *  of the Google-provided client libraries or tools where possible when working
+ *  with Membership resources.
  * @class
  * @memberof v1beta1
  */
@@ -506,6 +512,9 @@ export class GkeHubMembershipServiceClient {
   /**
    * Generates the manifest for deployment of the GKE connect agent.
    *
+   * **This method is used internally by Google-provided libraries.**
+   * Most clients should not need to call this method directly.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
@@ -847,7 +856,11 @@ export class GkeHubMembershipServiceClient {
     >
   ): void;
   /**
-   * Adds a new Membership.
+   * Creates a new Membership.
+   *
+   * **This is currently only supported for GKE clusters on Google Cloud**.
+   * To register other clusters, follow the instructions at
+   * https://cloud.google.com/anthos/multicluster-management/connect/registering-a-cluster.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -866,6 +879,20 @@ export class GkeHubMembershipServiceClient {
    *   with a maximum length of 63 characters.
    * @param {google.cloud.gkehub.v1beta1.Membership} request.resource
    *   Required. The membership to create.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1003,11 +1030,29 @@ export class GkeHubMembershipServiceClient {
   /**
    * Removes a Membership.
    *
+   * **This is currently only supported for GKE clusters on Google Cloud**.
+   * To unregister other clusters, follow the instructions at
+   * https://cloud.google.com/anthos/multicluster-management/connect/unregistering-a-cluster.
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. The Membership resource name in the format
    *   `projects/* /locations/* /memberships/*`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1160,6 +1205,22 @@ export class GkeHubMembershipServiceClient {
    *   If you are updating a map field, set the value of a key to null or empty
    *   string to delete the key from the map. It's not possible to update a key's
    *   value to the empty string.
+   *   If you specify the update_mask to be a special path "*", fully replaces all
+   *   user-modifiable fields to match `resource`.
+   * @param {string} [request.requestId]
+   *   Optional. A request ID to identify requests. Specify a unique request ID
+   *   so that if you must retry your request, the server will know to ignore
+   *   the request if it has already been completed. The server will guarantee
+   *   that for at least 60 minutes after the first request.
+   *
+   *   For example, consider a situation where you make an initial request and
+   *   the request times out. If you make the request again with the same request
+   *   ID, the server can check if original operation with the same request ID
+   *   was received, and if so, will ignore the second request. This prevents
+   *   clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is
+   *   not supported (00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

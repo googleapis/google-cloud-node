@@ -5793,7 +5793,7 @@
                           "type": "string",
                           "id": 3,
                           "options": {
-                            "(google.api.field_behavior)": "REQUIRED"
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "endpoint": {
@@ -5878,10 +5878,33 @@
                       }
                     },
                     "MembershipEndpoint": {
+                      "oneofs": {
+                        "type": {
+                          "oneof": [
+                            "gkeCluster",
+                            "onPremCluster",
+                            "multiCloudCluster"
+                          ]
+                        }
+                      },
                       "fields": {
                         "gkeCluster": {
                           "type": "GkeCluster",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "onPremCluster": {
+                          "type": "OnPremCluster",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "multiCloudCluster": {
+                          "type": "MultiCloudCluster",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -5973,6 +5996,56 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "clusterMissing": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "OnPremCluster": {
+                      "fields": {
+                        "resourceLink": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "clusterMissing": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "adminCluster": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        }
+                      }
+                    },
+                    "MultiCloudCluster": {
+                      "fields": {
+                        "resourceLink": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
+                        "clusterMissing": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         }
                       }
@@ -6182,6 +6255,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -6192,6 +6272,13 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -6217,6 +6304,13 @@
                           "id": 3,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }

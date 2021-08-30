@@ -21962,6 +21962,12 @@ export namespace google {
                     /** MembershipEndpoint gkeCluster */
                     gkeCluster?: (google.cloud.gkehub.v1beta1.IGkeCluster|null);
 
+                    /** MembershipEndpoint onPremCluster */
+                    onPremCluster?: (google.cloud.gkehub.v1beta1.IOnPremCluster|null);
+
+                    /** MembershipEndpoint multiCloudCluster */
+                    multiCloudCluster?: (google.cloud.gkehub.v1beta1.IMultiCloudCluster|null);
+
                     /** MembershipEndpoint kubernetesMetadata */
                     kubernetesMetadata?: (google.cloud.gkehub.v1beta1.IKubernetesMetadata|null);
 
@@ -21981,11 +21987,20 @@ export namespace google {
                     /** MembershipEndpoint gkeCluster. */
                     public gkeCluster?: (google.cloud.gkehub.v1beta1.IGkeCluster|null);
 
+                    /** MembershipEndpoint onPremCluster. */
+                    public onPremCluster?: (google.cloud.gkehub.v1beta1.IOnPremCluster|null);
+
+                    /** MembershipEndpoint multiCloudCluster. */
+                    public multiCloudCluster?: (google.cloud.gkehub.v1beta1.IMultiCloudCluster|null);
+
                     /** MembershipEndpoint kubernetesMetadata. */
                     public kubernetesMetadata?: (google.cloud.gkehub.v1beta1.IKubernetesMetadata|null);
 
                     /** MembershipEndpoint kubernetesResource. */
                     public kubernetesResource?: (google.cloud.gkehub.v1beta1.IKubernetesResource|null);
+
+                    /** MembershipEndpoint type. */
+                    public type?: ("gkeCluster"|"onPremCluster"|"multiCloudCluster");
 
                     /**
                      * Creates a new MembershipEndpoint instance using the specified properties.
@@ -22363,6 +22378,9 @@ export namespace google {
 
                     /** GkeCluster resourceLink */
                     resourceLink?: (string|null);
+
+                    /** GkeCluster clusterMissing */
+                    clusterMissing?: (boolean|null);
                 }
 
                 /** Represents a GkeCluster. */
@@ -22376,6 +22394,9 @@ export namespace google {
 
                     /** GkeCluster resourceLink. */
                     public resourceLink: string;
+
+                    /** GkeCluster clusterMissing. */
+                    public clusterMissing: boolean;
 
                     /**
                      * Creates a new GkeCluster instance using the specified properties.
@@ -22443,6 +22464,204 @@ export namespace google {
 
                     /**
                      * Converts this GkeCluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an OnPremCluster. */
+                interface IOnPremCluster {
+
+                    /** OnPremCluster resourceLink */
+                    resourceLink?: (string|null);
+
+                    /** OnPremCluster clusterMissing */
+                    clusterMissing?: (boolean|null);
+
+                    /** OnPremCluster adminCluster */
+                    adminCluster?: (boolean|null);
+                }
+
+                /** Represents an OnPremCluster. */
+                class OnPremCluster implements IOnPremCluster {
+
+                    /**
+                     * Constructs a new OnPremCluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1beta1.IOnPremCluster);
+
+                    /** OnPremCluster resourceLink. */
+                    public resourceLink: string;
+
+                    /** OnPremCluster clusterMissing. */
+                    public clusterMissing: boolean;
+
+                    /** OnPremCluster adminCluster. */
+                    public adminCluster: boolean;
+
+                    /**
+                     * Creates a new OnPremCluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OnPremCluster instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1beta1.IOnPremCluster): google.cloud.gkehub.v1beta1.OnPremCluster;
+
+                    /**
+                     * Encodes the specified OnPremCluster message. Does not implicitly {@link google.cloud.gkehub.v1beta1.OnPremCluster.verify|verify} messages.
+                     * @param message OnPremCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1beta1.IOnPremCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OnPremCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1beta1.OnPremCluster.verify|verify} messages.
+                     * @param message OnPremCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1beta1.IOnPremCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OnPremCluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OnPremCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1beta1.OnPremCluster;
+
+                    /**
+                     * Decodes an OnPremCluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OnPremCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1beta1.OnPremCluster;
+
+                    /**
+                     * Verifies an OnPremCluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OnPremCluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OnPremCluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1beta1.OnPremCluster;
+
+                    /**
+                     * Creates a plain object from an OnPremCluster message. Also converts values to other types if specified.
+                     * @param message OnPremCluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1beta1.OnPremCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OnPremCluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MultiCloudCluster. */
+                interface IMultiCloudCluster {
+
+                    /** MultiCloudCluster resourceLink */
+                    resourceLink?: (string|null);
+
+                    /** MultiCloudCluster clusterMissing */
+                    clusterMissing?: (boolean|null);
+                }
+
+                /** Represents a MultiCloudCluster. */
+                class MultiCloudCluster implements IMultiCloudCluster {
+
+                    /**
+                     * Constructs a new MultiCloudCluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.gkehub.v1beta1.IMultiCloudCluster);
+
+                    /** MultiCloudCluster resourceLink. */
+                    public resourceLink: string;
+
+                    /** MultiCloudCluster clusterMissing. */
+                    public clusterMissing: boolean;
+
+                    /**
+                     * Creates a new MultiCloudCluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MultiCloudCluster instance
+                     */
+                    public static create(properties?: google.cloud.gkehub.v1beta1.IMultiCloudCluster): google.cloud.gkehub.v1beta1.MultiCloudCluster;
+
+                    /**
+                     * Encodes the specified MultiCloudCluster message. Does not implicitly {@link google.cloud.gkehub.v1beta1.MultiCloudCluster.verify|verify} messages.
+                     * @param message MultiCloudCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.gkehub.v1beta1.IMultiCloudCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MultiCloudCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1beta1.MultiCloudCluster.verify|verify} messages.
+                     * @param message MultiCloudCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.gkehub.v1beta1.IMultiCloudCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MultiCloudCluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MultiCloudCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.gkehub.v1beta1.MultiCloudCluster;
+
+                    /**
+                     * Decodes a MultiCloudCluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MultiCloudCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.gkehub.v1beta1.MultiCloudCluster;
+
+                    /**
+                     * Verifies a MultiCloudCluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MultiCloudCluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MultiCloudCluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.gkehub.v1beta1.MultiCloudCluster;
+
+                    /**
+                     * Creates a plain object from a MultiCloudCluster message. Also converts values to other types if specified.
+                     * @param message MultiCloudCluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.gkehub.v1beta1.MultiCloudCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MultiCloudCluster to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -23108,6 +23327,9 @@ export namespace google {
 
                     /** CreateMembershipRequest resource */
                     resource?: (google.cloud.gkehub.v1beta1.IMembership|null);
+
+                    /** CreateMembershipRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a CreateMembershipRequest. */
@@ -23127,6 +23349,9 @@ export namespace google {
 
                     /** CreateMembershipRequest resource. */
                     public resource?: (google.cloud.gkehub.v1beta1.IMembership|null);
+
+                    /** CreateMembershipRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new CreateMembershipRequest instance using the specified properties.
@@ -23204,6 +23429,9 @@ export namespace google {
 
                     /** DeleteMembershipRequest name */
                     name?: (string|null);
+
+                    /** DeleteMembershipRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents a DeleteMembershipRequest. */
@@ -23217,6 +23445,9 @@ export namespace google {
 
                     /** DeleteMembershipRequest name. */
                     public name: string;
+
+                    /** DeleteMembershipRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new DeleteMembershipRequest instance using the specified properties.
@@ -23300,6 +23531,9 @@ export namespace google {
 
                     /** UpdateMembershipRequest resource */
                     resource?: (google.cloud.gkehub.v1beta1.IMembership|null);
+
+                    /** UpdateMembershipRequest requestId */
+                    requestId?: (string|null);
                 }
 
                 /** Represents an UpdateMembershipRequest. */
@@ -23319,6 +23553,9 @@ export namespace google {
 
                     /** UpdateMembershipRequest resource. */
                     public resource?: (google.cloud.gkehub.v1beta1.IMembership|null);
+
+                    /** UpdateMembershipRequest requestId. */
+                    public requestId: string;
 
                     /**
                      * Creates a new UpdateMembershipRequest instance using the specified properties.
