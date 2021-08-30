@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.4.0...v2.5.0) (2021-08-28)
+
+
+### Features
+
+* support version reporting API ([#213](https://www.github.com/googleapis/nodejs-game-servers/issues/213)) ([478048a](https://www.github.com/googleapis/nodejs-game-servers/commit/478048a0ace56d35afaf637cd1c08dc28e39acc3))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-game-servers/compare/v2.3.8...v2.4.0) (2021-08-23)
 
 
