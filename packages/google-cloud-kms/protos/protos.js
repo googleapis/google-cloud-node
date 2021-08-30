@@ -1404,6 +1404,7 @@
                          * @property {google.protobuf.ITimestamp|null} [importTime] CryptoKeyVersion importTime
                          * @property {string|null} [importFailureReason] CryptoKeyVersion importFailureReason
                          * @property {google.cloud.kms.v1.IExternalProtectionLevelOptions|null} [externalProtectionLevelOptions] CryptoKeyVersion externalProtectionLevelOptions
+                         * @property {boolean|null} [reimportEligible] CryptoKeyVersion reimportEligible
                          */
     
                         /**
@@ -1526,6 +1527,14 @@
                         CryptoKeyVersion.prototype.externalProtectionLevelOptions = null;
     
                         /**
+                         * CryptoKeyVersion reimportEligible.
+                         * @member {boolean} reimportEligible
+                         * @memberof google.cloud.kms.v1.CryptoKeyVersion
+                         * @instance
+                         */
+                        CryptoKeyVersion.prototype.reimportEligible = false;
+    
+                        /**
                          * Creates a new CryptoKeyVersion instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.kms.v1.CryptoKeyVersion
@@ -1575,6 +1584,8 @@
                                 writer.uint32(/* id 16, wireType 2 =*/130).string(message.importFailureReason);
                             if (message.externalProtectionLevelOptions != null && Object.hasOwnProperty.call(message, "externalProtectionLevelOptions"))
                                 $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.encode(message.externalProtectionLevelOptions, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
+                            if (message.reimportEligible != null && Object.hasOwnProperty.call(message, "reimportEligible"))
+                                writer.uint32(/* id 18, wireType 0 =*/144).bool(message.reimportEligible);
                             return writer;
                         };
     
@@ -1647,6 +1658,9 @@
                                     break;
                                 case 17:
                                     message.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.decode(reader, reader.uint32());
+                                    break;
+                                case 18:
+                                    message.reimportEligible = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1776,6 +1790,9 @@
                                 if (error)
                                     return "externalProtectionLevelOptions." + error;
                             }
+                            if (message.reimportEligible != null && message.hasOwnProperty("reimportEligible"))
+                                if (typeof message.reimportEligible !== "boolean")
+                                    return "reimportEligible: boolean expected";
                             return null;
                         };
     
@@ -1962,6 +1979,8 @@
                                     throw TypeError(".google.cloud.kms.v1.CryptoKeyVersion.externalProtectionLevelOptions: object expected");
                                 message.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.fromObject(object.externalProtectionLevelOptions);
                             }
+                            if (object.reimportEligible != null)
+                                message.reimportEligible = Boolean(object.reimportEligible);
                             return message;
                         };
     
@@ -1992,6 +2011,7 @@
                                 object.importTime = null;
                                 object.importFailureReason = "";
                                 object.externalProtectionLevelOptions = null;
+                                object.reimportEligible = false;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2019,6 +2039,8 @@
                                 object.importFailureReason = message.importFailureReason;
                             if (message.externalProtectionLevelOptions != null && message.hasOwnProperty("externalProtectionLevelOptions"))
                                 object.externalProtectionLevelOptions = $root.google.cloud.kms.v1.ExternalProtectionLevelOptions.toObject(message.externalProtectionLevelOptions, options);
+                            if (message.reimportEligible != null && message.hasOwnProperty("reimportEligible"))
+                                object.reimportEligible = message.reimportEligible;
                             return object;
                         };
     
@@ -8168,6 +8190,7 @@
                          * @memberof google.cloud.kms.v1
                          * @interface IImportCryptoKeyVersionRequest
                          * @property {string|null} [parent] ImportCryptoKeyVersionRequest parent
+                         * @property {string|null} [cryptoKeyVersion] ImportCryptoKeyVersionRequest cryptoKeyVersion
                          * @property {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null} [algorithm] ImportCryptoKeyVersionRequest algorithm
                          * @property {string|null} [importJob] ImportCryptoKeyVersionRequest importJob
                          * @property {Uint8Array|null} [rsaAesWrappedKey] ImportCryptoKeyVersionRequest rsaAesWrappedKey
@@ -8195,6 +8218,14 @@
                          * @instance
                          */
                         ImportCryptoKeyVersionRequest.prototype.parent = "";
+    
+                        /**
+                         * ImportCryptoKeyVersionRequest cryptoKeyVersion.
+                         * @member {string} cryptoKeyVersion
+                         * @memberof google.cloud.kms.v1.ImportCryptoKeyVersionRequest
+                         * @instance
+                         */
+                        ImportCryptoKeyVersionRequest.prototype.cryptoKeyVersion = "";
     
                         /**
                          * ImportCryptoKeyVersionRequest algorithm.
@@ -8266,6 +8297,8 @@
                                 writer.uint32(/* id 4, wireType 2 =*/34).string(message.importJob);
                             if (message.rsaAesWrappedKey != null && Object.hasOwnProperty.call(message, "rsaAesWrappedKey"))
                                 writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.rsaAesWrappedKey);
+                            if (message.cryptoKeyVersion != null && Object.hasOwnProperty.call(message, "cryptoKeyVersion"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.cryptoKeyVersion);
                             return writer;
                         };
     
@@ -8302,6 +8335,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.parent = reader.string();
+                                    break;
+                                case 6:
+                                    message.cryptoKeyVersion = reader.string();
                                     break;
                                 case 2:
                                     message.algorithm = reader.int32();
@@ -8351,6 +8387,9 @@
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 if (!$util.isString(message.parent))
                                     return "parent: string expected";
+                            if (message.cryptoKeyVersion != null && message.hasOwnProperty("cryptoKeyVersion"))
+                                if (!$util.isString(message.cryptoKeyVersion))
+                                    return "cryptoKeyVersion: string expected";
                             if (message.algorithm != null && message.hasOwnProperty("algorithm"))
                                 switch (message.algorithm) {
                                 default:
@@ -8401,6 +8440,8 @@
                             var message = new $root.google.cloud.kms.v1.ImportCryptoKeyVersionRequest();
                             if (object.parent != null)
                                 message.parent = String(object.parent);
+                            if (object.cryptoKeyVersion != null)
+                                message.cryptoKeyVersion = String(object.cryptoKeyVersion);
                             switch (object.algorithm) {
                             case "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED":
                             case 0:
@@ -8506,6 +8547,7 @@
                                 object.parent = "";
                                 object.algorithm = options.enums === String ? "CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED" : 0;
                                 object.importJob = "";
+                                object.cryptoKeyVersion = "";
                             }
                             if (message.parent != null && message.hasOwnProperty("parent"))
                                 object.parent = message.parent;
@@ -8518,6 +8560,8 @@
                                 if (options.oneofs)
                                     object.wrappedKeyMaterial = "rsaAesWrappedKey";
                             }
+                            if (message.cryptoKeyVersion != null && message.hasOwnProperty("cryptoKeyVersion"))
+                                object.cryptoKeyVersion = message.cryptoKeyVersion;
                             return object;
                         };
     

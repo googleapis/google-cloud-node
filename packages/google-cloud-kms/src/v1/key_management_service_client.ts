@@ -1130,17 +1130,36 @@ export class KeyManagementServiceClient {
     >
   ): void;
   /**
-   * Imports a new {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} into an existing {@link google.cloud.kms.v1.CryptoKey|CryptoKey} using the
-   * wrapped key material provided in the request.
+   * Import wrapped key material into a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
    *
-   * The version ID will be assigned the next sequential id within the
-   * {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
+   * All requests must specify a {@link google.cloud.kms.v1.CryptoKey|CryptoKey}. If a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} is
+   * additionally specified in the request, key material will be reimported into
+   * that version. Otherwise, a new version will be created, and will be
+   * assigned the next sequential id within the {@link google.cloud.kms.v1.CryptoKey|CryptoKey}.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to
-   *   be imported into.
+   *   Required. The {@link google.cloud.kms.v1.CryptoKey.name|name} of the {@link google.cloud.kms.v1.CryptoKey|CryptoKey} to be imported into.
+   *
+   *   The create permission is only required on this key when creating a new
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}.
+   * @param {string} [request.cryptoKeyVersion]
+   *   Optional. The optional {@link google.cloud.kms.v1.CryptoKeyVersion.name|name} of an existing
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} to target for an import operation.
+   *   If this field is not present, a new {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} containing the
+   *   supplied key material is created.
+   *
+   *   If this field is present, the supplied key material is imported into
+   *   the existing {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}. To import into an existing
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion}, the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} must be a child of
+   *   {@link google.cloud.kms.v1.ImportCryptoKeyVersionRequest.parent|ImportCryptoKeyVersionRequest.parent}, have been previously created via
+   *   {@link |ImportCryptoKeyVersion}, and be in
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED} or
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.IMPORT_FAILED|IMPORT_FAILED}
+   *   state. The key material and algorithm must match the previous
+   *   {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} exactly if the {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} has ever contained
+   *   key material.
    * @param {google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm} request.algorithm
    *   Required. The {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|algorithm} of
    *   the key being imported. This does not need to match the
@@ -1650,10 +1669,11 @@ export class KeyManagementServiceClient {
    * Schedule a {@link google.cloud.kms.v1.CryptoKeyVersion|CryptoKeyVersion} for destruction.
    *
    * Upon calling this method, {@link google.cloud.kms.v1.CryptoKeyVersion.state|CryptoKeyVersion.state} will be set to
-   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED}
-   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will be set to a time 24
-   * hours in the future, at which point the {@link google.cloud.kms.v1.CryptoKeyVersion.state|state}
-   * will be changed to
+   * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED|DESTROY_SCHEDULED},
+   * and {@link google.cloud.kms.v1.CryptoKeyVersion.destroy_time|destroy_time} will be set to the time
+   * {@link google.cloud.kms.v1.CryptoKey.destroy_scheduled_duration|destroy_scheduled_duration} in the
+   * future. At that time, the {@link google.cloud.kms.v1.CryptoKeyVersion.state|state} will
+   * automatically change to
    * {@link google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED|DESTROYED}, and the key
    * material will be irrevocably destroyed.
    *

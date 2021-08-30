@@ -524,6 +524,9 @@ export namespace google {
 
                     /** CryptoKeyVersion externalProtectionLevelOptions */
                     externalProtectionLevelOptions?: (google.cloud.kms.v1.IExternalProtectionLevelOptions|null);
+
+                    /** CryptoKeyVersion reimportEligible */
+                    reimportEligible?: (boolean|null);
                 }
 
                 /** Represents a CryptoKeyVersion. */
@@ -573,6 +576,9 @@ export namespace google {
 
                     /** CryptoKeyVersion externalProtectionLevelOptions. */
                     public externalProtectionLevelOptions?: (google.cloud.kms.v1.IExternalProtectionLevelOptions|null);
+
+                    /** CryptoKeyVersion reimportEligible. */
+                    public reimportEligible: boolean;
 
                     /**
                      * Creates a new CryptoKeyVersion instance using the specified properties.
@@ -3361,6 +3367,9 @@ export namespace google {
                     /** ImportCryptoKeyVersionRequest parent */
                     parent?: (string|null);
 
+                    /** ImportCryptoKeyVersionRequest cryptoKeyVersion */
+                    cryptoKeyVersion?: (string|null);
+
                     /** ImportCryptoKeyVersionRequest algorithm */
                     algorithm?: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|null);
 
@@ -3382,6 +3391,9 @@ export namespace google {
 
                     /** ImportCryptoKeyVersionRequest parent. */
                     public parent: string;
+
+                    /** ImportCryptoKeyVersionRequest cryptoKeyVersion. */
+                    public cryptoKeyVersion: string;
 
                     /** ImportCryptoKeyVersionRequest algorithm. */
                     public algorithm: (google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm|keyof typeof google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm);
