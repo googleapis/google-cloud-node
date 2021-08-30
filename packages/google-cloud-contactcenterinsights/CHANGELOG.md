@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.3.0...v1.4.0) (2021-08-27)
+
+
+### Features
+
+* display_name is the display name for the assigned issue ([#39](https://www.github.com/googleapis/nodejs-contact-center-insights/issues/39)) ([69697c8](https://www.github.com/googleapis/nodejs-contact-center-insights/commit/69697c87771b20feb648293ad2cef1a67dd96ce2))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-contact-center-insights/compare/v1.2.1...v1.3.0) (2021-08-23)
 
 
