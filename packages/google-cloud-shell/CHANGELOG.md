@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.0.5](https://www.github.com/googleapis/nodejs-cloud-shell/compare/v1.0.4...v1.0.5) (2021-08-30)
+
+
+### Bug Fixes
+
+* flag module as GA ([#33](https://www.github.com/googleapis/nodejs-cloud-shell/issues/33)) ([cf357c8](https://www.github.com/googleapis/nodejs-cloud-shell/commit/cf357c81140d75b3c7106dc747bac328da247363))
+
 ### [1.0.4](https://www.github.com/googleapis/nodejs-cloud-shell/compare/v1.0.3...v1.0.4) (2021-08-17)
 
 
