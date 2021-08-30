@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.2.0...v1.3.0) (2021-08-30)
+
+
+### Features
+
+* added support for Notebooks v1 ([#87](https://www.github.com/googleapis/nodejs-notebooks/issues/87)) ([81c1c83](https://www.github.com/googleapis/nodejs-notebooks/commit/81c1c83a056839971fc7ed4fd273343812c207b5))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.1.7...v1.2.0) (2021-08-23)
 
 
