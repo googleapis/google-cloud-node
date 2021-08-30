@@ -4022,6 +4022,9 @@ export namespace google {
 
                         /** SoftwarePackage cosPackage */
                         cosPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage windowsApplication */
+                        windowsApplication?: (google.cloud.osconfig.v1.Inventory.IWindowsApplication|null);
                     }
 
                     /** Represents a SoftwarePackage. */
@@ -4057,8 +4060,11 @@ export namespace google {
                         /** SoftwarePackage cosPackage. */
                         public cosPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
 
+                        /** SoftwarePackage windowsApplication. */
+                        public windowsApplication?: (google.cloud.osconfig.v1.Inventory.IWindowsApplication|null);
+
                         /** SoftwarePackage details. */
-                        public details?: ("yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage");
+                        public details?: ("yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|"windowsApplication");
 
                         /**
                          * Creates a new SoftwarePackage instance using the specified properties.
@@ -4681,6 +4687,120 @@ export namespace google {
 
                         /**
                          * Converts this WindowsQuickFixEngineeringPackage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a WindowsApplication. */
+                    interface IWindowsApplication {
+
+                        /** WindowsApplication displayName */
+                        displayName?: (string|null);
+
+                        /** WindowsApplication displayVersion */
+                        displayVersion?: (string|null);
+
+                        /** WindowsApplication publisher */
+                        publisher?: (string|null);
+
+                        /** WindowsApplication installDate */
+                        installDate?: (google.type.IDate|null);
+
+                        /** WindowsApplication helpLink */
+                        helpLink?: (string|null);
+                    }
+
+                    /** Represents a WindowsApplication. */
+                    class WindowsApplication implements IWindowsApplication {
+
+                        /**
+                         * Constructs a new WindowsApplication.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.Inventory.IWindowsApplication);
+
+                        /** WindowsApplication displayName. */
+                        public displayName: string;
+
+                        /** WindowsApplication displayVersion. */
+                        public displayVersion: string;
+
+                        /** WindowsApplication publisher. */
+                        public publisher: string;
+
+                        /** WindowsApplication installDate. */
+                        public installDate?: (google.type.IDate|null);
+
+                        /** WindowsApplication helpLink. */
+                        public helpLink: string;
+
+                        /**
+                         * Creates a new WindowsApplication instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WindowsApplication instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.Inventory.IWindowsApplication): google.cloud.osconfig.v1.Inventory.WindowsApplication;
+
+                        /**
+                         * Encodes the specified WindowsApplication message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsApplication.verify|verify} messages.
+                         * @param message WindowsApplication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.Inventory.IWindowsApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WindowsApplication message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsApplication.verify|verify} messages.
+                         * @param message WindowsApplication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.IWindowsApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WindowsApplication message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WindowsApplication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.WindowsApplication;
+
+                        /**
+                         * Decodes a WindowsApplication message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WindowsApplication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.WindowsApplication;
+
+                        /**
+                         * Verifies a WindowsApplication message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WindowsApplication message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WindowsApplication
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.WindowsApplication;
+
+                        /**
+                         * Creates a plain object from a WindowsApplication message. Also converts values to other types if specified.
+                         * @param message WindowsApplication
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.Inventory.WindowsApplication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WindowsApplication to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
@@ -10068,6 +10188,9 @@ export namespace google {
 
                         /** SoftwarePackage cosPackage */
                         cosPackage?: (google.cloud.osconfig.v1alpha.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage windowsApplication */
+                        windowsApplication?: (google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication|null);
                     }
 
                     /** Represents a SoftwarePackage. */
@@ -10103,8 +10226,11 @@ export namespace google {
                         /** SoftwarePackage cosPackage. */
                         public cosPackage?: (google.cloud.osconfig.v1alpha.Inventory.IVersionedPackage|null);
 
+                        /** SoftwarePackage windowsApplication. */
+                        public windowsApplication?: (google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication|null);
+
                         /** SoftwarePackage details. */
-                        public details?: ("yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage");
+                        public details?: ("yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|"windowsApplication");
 
                         /**
                          * Creates a new SoftwarePackage instance using the specified properties.
@@ -10727,6 +10853,120 @@ export namespace google {
 
                         /**
                          * Converts this WindowsQuickFixEngineeringPackage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a WindowsApplication. */
+                    interface IWindowsApplication {
+
+                        /** WindowsApplication displayName */
+                        displayName?: (string|null);
+
+                        /** WindowsApplication displayVersion */
+                        displayVersion?: (string|null);
+
+                        /** WindowsApplication publisher */
+                        publisher?: (string|null);
+
+                        /** WindowsApplication installDate */
+                        installDate?: (google.type.IDate|null);
+
+                        /** WindowsApplication helpLink */
+                        helpLink?: (string|null);
+                    }
+
+                    /** Represents a WindowsApplication. */
+                    class WindowsApplication implements IWindowsApplication {
+
+                        /**
+                         * Constructs a new WindowsApplication.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication);
+
+                        /** WindowsApplication displayName. */
+                        public displayName: string;
+
+                        /** WindowsApplication displayVersion. */
+                        public displayVersion: string;
+
+                        /** WindowsApplication publisher. */
+                        public publisher: string;
+
+                        /** WindowsApplication installDate. */
+                        public installDate?: (google.type.IDate|null);
+
+                        /** WindowsApplication helpLink. */
+                        public helpLink: string;
+
+                        /**
+                         * Creates a new WindowsApplication instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WindowsApplication instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication): google.cloud.osconfig.v1alpha.Inventory.WindowsApplication;
+
+                        /**
+                         * Encodes the specified WindowsApplication message. Does not implicitly {@link google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.verify|verify} messages.
+                         * @param message WindowsApplication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WindowsApplication message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.verify|verify} messages.
+                         * @param message WindowsApplication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WindowsApplication message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WindowsApplication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1alpha.Inventory.WindowsApplication;
+
+                        /**
+                         * Decodes a WindowsApplication message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WindowsApplication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1alpha.Inventory.WindowsApplication;
+
+                        /**
+                         * Verifies a WindowsApplication message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WindowsApplication message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WindowsApplication
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1alpha.Inventory.WindowsApplication;
+
+                        /**
+                         * Creates a plain object from a WindowsApplication message. Also converts values to other types if specified.
+                         * @param message WindowsApplication
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1alpha.Inventory.WindowsApplication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WindowsApplication to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
@@ -16168,6 +16408,469 @@ export namespace google {
         }
     }
 
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a DateTime. */
+        interface IDateTime {
+
+            /** DateTime year */
+            year?: (number|null);
+
+            /** DateTime month */
+            month?: (number|null);
+
+            /** DateTime day */
+            day?: (number|null);
+
+            /** DateTime hours */
+            hours?: (number|null);
+
+            /** DateTime minutes */
+            minutes?: (number|null);
+
+            /** DateTime seconds */
+            seconds?: (number|null);
+
+            /** DateTime nanos */
+            nanos?: (number|null);
+
+            /** DateTime utcOffset */
+            utcOffset?: (google.protobuf.IDuration|null);
+
+            /** DateTime timeZone */
+            timeZone?: (google.type.ITimeZone|null);
+        }
+
+        /** Represents a DateTime. */
+        class DateTime implements IDateTime {
+
+            /**
+             * Constructs a new DateTime.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDateTime);
+
+            /** DateTime year. */
+            public year: number;
+
+            /** DateTime month. */
+            public month: number;
+
+            /** DateTime day. */
+            public day: number;
+
+            /** DateTime hours. */
+            public hours: number;
+
+            /** DateTime minutes. */
+            public minutes: number;
+
+            /** DateTime seconds. */
+            public seconds: number;
+
+            /** DateTime nanos. */
+            public nanos: number;
+
+            /** DateTime utcOffset. */
+            public utcOffset?: (google.protobuf.IDuration|null);
+
+            /** DateTime timeZone. */
+            public timeZone?: (google.type.ITimeZone|null);
+
+            /** DateTime timeOffset. */
+            public timeOffset?: ("utcOffset"|"timeZone");
+
+            /**
+             * Creates a new DateTime instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns DateTime instance
+             */
+            public static create(properties?: google.type.IDateTime): google.type.DateTime;
+
+            /**
+             * Encodes the specified DateTime message. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+             * @param message DateTime message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDateTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified DateTime message, length delimited. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+             * @param message DateTime message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDateTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a DateTime message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns DateTime
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.DateTime;
+
+            /**
+             * Decodes a DateTime message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns DateTime
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.DateTime;
+
+            /**
+             * Verifies a DateTime message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a DateTime message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns DateTime
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.DateTime;
+
+            /**
+             * Creates a plain object from a DateTime message. Also converts values to other types if specified.
+             * @param message DateTime
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.DateTime, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this DateTime to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a TimeZone. */
+        interface ITimeZone {
+
+            /** TimeZone id */
+            id?: (string|null);
+
+            /** TimeZone version */
+            version?: (string|null);
+        }
+
+        /** Represents a TimeZone. */
+        class TimeZone implements ITimeZone {
+
+            /**
+             * Constructs a new TimeZone.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeZone);
+
+            /** TimeZone id. */
+            public id: string;
+
+            /** TimeZone version. */
+            public version: string;
+
+            /**
+             * Creates a new TimeZone instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeZone instance
+             */
+            public static create(properties?: google.type.ITimeZone): google.type.TimeZone;
+
+            /**
+             * Encodes the specified TimeZone message. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+             * @param message TimeZone message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeZone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeZone message, length delimited. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+             * @param message TimeZone message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeZone, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeZone message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeZone
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeZone;
+
+            /**
+             * Decodes a TimeZone message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeZone
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeZone;
+
+            /**
+             * Verifies a TimeZone message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeZone message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeZone
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeZone;
+
+            /**
+             * Creates a plain object from a TimeZone message. Also converts values to other types if specified.
+             * @param message TimeZone
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeZone, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeZone to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** DayOfWeek enum. */
+        enum DayOfWeek {
+            DAY_OF_WEEK_UNSPECIFIED = 0,
+            MONDAY = 1,
+            TUESDAY = 2,
+            WEDNESDAY = 3,
+            THURSDAY = 4,
+            FRIDAY = 5,
+            SATURDAY = 6,
+            SUNDAY = 7
+        }
+
+        /** Properties of a TimeOfDay. */
+        interface ITimeOfDay {
+
+            /** TimeOfDay hours */
+            hours?: (number|null);
+
+            /** TimeOfDay minutes */
+            minutes?: (number|null);
+
+            /** TimeOfDay seconds */
+            seconds?: (number|null);
+
+            /** TimeOfDay nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a TimeOfDay. */
+        class TimeOfDay implements ITimeOfDay {
+
+            /**
+             * Constructs a new TimeOfDay.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.ITimeOfDay);
+
+            /** TimeOfDay hours. */
+            public hours: number;
+
+            /** TimeOfDay minutes. */
+            public minutes: number;
+
+            /** TimeOfDay seconds. */
+            public seconds: number;
+
+            /** TimeOfDay nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new TimeOfDay instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TimeOfDay instance
+             */
+            public static create(properties?: google.type.ITimeOfDay): google.type.TimeOfDay;
+
+            /**
+             * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+             * @param message TimeOfDay message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeOfDay;
+
+            /**
+             * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TimeOfDay
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeOfDay;
+
+            /**
+             * Verifies a TimeOfDay message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TimeOfDay
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.TimeOfDay;
+
+            /**
+             * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+             * @param message TimeOfDay
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.TimeOfDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TimeOfDay to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+    }
+
     /** Namespace api. */
     namespace api {
 
@@ -16757,367 +17460,6 @@ export namespace google {
             INPUT_ONLY = 4,
             IMMUTABLE = 5,
             UNORDERED_LIST = 6
-        }
-    }
-
-    /** Namespace type. */
-    namespace type {
-
-        /** Properties of a DateTime. */
-        interface IDateTime {
-
-            /** DateTime year */
-            year?: (number|null);
-
-            /** DateTime month */
-            month?: (number|null);
-
-            /** DateTime day */
-            day?: (number|null);
-
-            /** DateTime hours */
-            hours?: (number|null);
-
-            /** DateTime minutes */
-            minutes?: (number|null);
-
-            /** DateTime seconds */
-            seconds?: (number|null);
-
-            /** DateTime nanos */
-            nanos?: (number|null);
-
-            /** DateTime utcOffset */
-            utcOffset?: (google.protobuf.IDuration|null);
-
-            /** DateTime timeZone */
-            timeZone?: (google.type.ITimeZone|null);
-        }
-
-        /** Represents a DateTime. */
-        class DateTime implements IDateTime {
-
-            /**
-             * Constructs a new DateTime.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.type.IDateTime);
-
-            /** DateTime year. */
-            public year: number;
-
-            /** DateTime month. */
-            public month: number;
-
-            /** DateTime day. */
-            public day: number;
-
-            /** DateTime hours. */
-            public hours: number;
-
-            /** DateTime minutes. */
-            public minutes: number;
-
-            /** DateTime seconds. */
-            public seconds: number;
-
-            /** DateTime nanos. */
-            public nanos: number;
-
-            /** DateTime utcOffset. */
-            public utcOffset?: (google.protobuf.IDuration|null);
-
-            /** DateTime timeZone. */
-            public timeZone?: (google.type.ITimeZone|null);
-
-            /** DateTime timeOffset. */
-            public timeOffset?: ("utcOffset"|"timeZone");
-
-            /**
-             * Creates a new DateTime instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns DateTime instance
-             */
-            public static create(properties?: google.type.IDateTime): google.type.DateTime;
-
-            /**
-             * Encodes the specified DateTime message. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
-             * @param message DateTime message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.type.IDateTime, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified DateTime message, length delimited. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
-             * @param message DateTime message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.type.IDateTime, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a DateTime message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns DateTime
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.DateTime;
-
-            /**
-             * Decodes a DateTime message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns DateTime
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.DateTime;
-
-            /**
-             * Verifies a DateTime message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a DateTime message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns DateTime
-             */
-            public static fromObject(object: { [k: string]: any }): google.type.DateTime;
-
-            /**
-             * Creates a plain object from a DateTime message. Also converts values to other types if specified.
-             * @param message DateTime
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.type.DateTime, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this DateTime to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** Properties of a TimeZone. */
-        interface ITimeZone {
-
-            /** TimeZone id */
-            id?: (string|null);
-
-            /** TimeZone version */
-            version?: (string|null);
-        }
-
-        /** Represents a TimeZone. */
-        class TimeZone implements ITimeZone {
-
-            /**
-             * Constructs a new TimeZone.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.type.ITimeZone);
-
-            /** TimeZone id. */
-            public id: string;
-
-            /** TimeZone version. */
-            public version: string;
-
-            /**
-             * Creates a new TimeZone instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns TimeZone instance
-             */
-            public static create(properties?: google.type.ITimeZone): google.type.TimeZone;
-
-            /**
-             * Encodes the specified TimeZone message. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
-             * @param message TimeZone message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.type.ITimeZone, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified TimeZone message, length delimited. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
-             * @param message TimeZone message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.type.ITimeZone, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a TimeZone message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns TimeZone
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeZone;
-
-            /**
-             * Decodes a TimeZone message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns TimeZone
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeZone;
-
-            /**
-             * Verifies a TimeZone message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a TimeZone message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns TimeZone
-             */
-            public static fromObject(object: { [k: string]: any }): google.type.TimeZone;
-
-            /**
-             * Creates a plain object from a TimeZone message. Also converts values to other types if specified.
-             * @param message TimeZone
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.type.TimeZone, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this TimeZone to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-        }
-
-        /** DayOfWeek enum. */
-        enum DayOfWeek {
-            DAY_OF_WEEK_UNSPECIFIED = 0,
-            MONDAY = 1,
-            TUESDAY = 2,
-            WEDNESDAY = 3,
-            THURSDAY = 4,
-            FRIDAY = 5,
-            SATURDAY = 6,
-            SUNDAY = 7
-        }
-
-        /** Properties of a TimeOfDay. */
-        interface ITimeOfDay {
-
-            /** TimeOfDay hours */
-            hours?: (number|null);
-
-            /** TimeOfDay minutes */
-            minutes?: (number|null);
-
-            /** TimeOfDay seconds */
-            seconds?: (number|null);
-
-            /** TimeOfDay nanos */
-            nanos?: (number|null);
-        }
-
-        /** Represents a TimeOfDay. */
-        class TimeOfDay implements ITimeOfDay {
-
-            /**
-             * Constructs a new TimeOfDay.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.type.ITimeOfDay);
-
-            /** TimeOfDay hours. */
-            public hours: number;
-
-            /** TimeOfDay minutes. */
-            public minutes: number;
-
-            /** TimeOfDay seconds. */
-            public seconds: number;
-
-            /** TimeOfDay nanos. */
-            public nanos: number;
-
-            /**
-             * Creates a new TimeOfDay instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns TimeOfDay instance
-             */
-            public static create(properties?: google.type.ITimeOfDay): google.type.TimeOfDay;
-
-            /**
-             * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
-             * @param message TimeOfDay message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
-             * @param message TimeOfDay message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.type.ITimeOfDay, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a TimeOfDay message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns TimeOfDay
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.TimeOfDay;
-
-            /**
-             * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns TimeOfDay
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.TimeOfDay;
-
-            /**
-             * Verifies a TimeOfDay message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns TimeOfDay
-             */
-            public static fromObject(object: { [k: string]: any }): google.type.TimeOfDay;
-
-            /**
-             * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
-             * @param message TimeOfDay
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.type.TimeOfDay, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this TimeOfDay to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
         }
     }
 

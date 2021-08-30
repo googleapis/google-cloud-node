@@ -1079,7 +1079,8 @@
                                 "zypperPatch",
                                 "wuaPackage",
                                 "qfePackage",
-                                "cosPackage"
+                                "cosPackage",
+                                "windowsApplication"
                               ]
                             }
                           },
@@ -1115,6 +1116,10 @@
                             "cosPackage": {
                               "type": "VersionedPackage",
                               "id": 8
+                            },
+                            "windowsApplication": {
+                              "type": "WindowsApplication",
+                              "id": 9
                             }
                           }
                         },
@@ -1227,6 +1232,30 @@
                             },
                             "installTime": {
                               "type": "google.protobuf.Timestamp",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "WindowsApplication": {
+                          "fields": {
+                            "displayName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayVersion": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "publisher": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "installDate": {
+                              "type": "google.type.Date",
+                              "id": 4
+                            },
+                            "helpLink": {
+                              "type": "string",
                               "id": 5
                             }
                           }
@@ -2768,7 +2797,8 @@
                                 "zypperPatch",
                                 "wuaPackage",
                                 "qfePackage",
-                                "cosPackage"
+                                "cosPackage",
+                                "windowsApplication"
                               ]
                             }
                           },
@@ -2804,6 +2834,10 @@
                             "cosPackage": {
                               "type": "VersionedPackage",
                               "id": 8
+                            },
+                            "windowsApplication": {
+                              "type": "WindowsApplication",
+                              "id": 9
                             }
                           }
                         },
@@ -2916,6 +2950,30 @@
                             },
                             "installTime": {
                               "type": "google.protobuf.Timestamp",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "WindowsApplication": {
+                          "fields": {
+                            "displayName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayVersion": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "publisher": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "installDate": {
+                              "type": "google.type.Date",
+                              "id": 4
+                            },
+                            "helpLink": {
+                              "type": "string",
                               "id": 5
                             }
                           }
@@ -4426,6 +4484,126 @@
             }
           }
         },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/timeofday;timeofday",
+            "java_multiple_files": true,
+            "java_outer_classname": "TimeOfDayProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "DateTime": {
+              "oneofs": {
+                "timeOffset": {
+                  "oneof": [
+                    "utcOffset",
+                    "timeZone"
+                  ]
+                }
+              },
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "hours": {
+                  "type": "int32",
+                  "id": 4
+                },
+                "minutes": {
+                  "type": "int32",
+                  "id": 5
+                },
+                "seconds": {
+                  "type": "int32",
+                  "id": 6
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 7
+                },
+                "utcOffset": {
+                  "type": "google.protobuf.Duration",
+                  "id": 8
+                },
+                "timeZone": {
+                  "type": "TimeZone",
+                  "id": 9
+                }
+              }
+            },
+            "TimeZone": {
+              "fields": {
+                "id": {
+                  "type": "string",
+                  "id": 1
+                },
+                "version": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "DayOfWeek": {
+              "values": {
+                "DAY_OF_WEEK_UNSPECIFIED": 0,
+                "MONDAY": 1,
+                "TUESDAY": 2,
+                "WEDNESDAY": 3,
+                "THURSDAY": 4,
+                "FRIDAY": 5,
+                "SATURDAY": 6,
+                "SUNDAY": 7
+              }
+            },
+            "TimeOfDay": {
+              "fields": {
+                "hours": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "minutes": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "seconds": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 4
+                }
+              }
+            }
+          }
+        },
         "api": {
           "options": {
             "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
@@ -4631,110 +4809,6 @@
                 "INPUT_ONLY": 4,
                 "IMMUTABLE": 5,
                 "UNORDERED_LIST": 6
-              }
-            }
-          }
-        },
-        "type": {
-          "options": {
-            "cc_enable_arenas": true,
-            "go_package": "google.golang.org/genproto/googleapis/type/timeofday;timeofday",
-            "java_multiple_files": true,
-            "java_outer_classname": "TimeOfDayProto",
-            "java_package": "com.google.type",
-            "objc_class_prefix": "GTP"
-          },
-          "nested": {
-            "DateTime": {
-              "oneofs": {
-                "timeOffset": {
-                  "oneof": [
-                    "utcOffset",
-                    "timeZone"
-                  ]
-                }
-              },
-              "fields": {
-                "year": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "month": {
-                  "type": "int32",
-                  "id": 2
-                },
-                "day": {
-                  "type": "int32",
-                  "id": 3
-                },
-                "hours": {
-                  "type": "int32",
-                  "id": 4
-                },
-                "minutes": {
-                  "type": "int32",
-                  "id": 5
-                },
-                "seconds": {
-                  "type": "int32",
-                  "id": 6
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 7
-                },
-                "utcOffset": {
-                  "type": "google.protobuf.Duration",
-                  "id": 8
-                },
-                "timeZone": {
-                  "type": "TimeZone",
-                  "id": 9
-                }
-              }
-            },
-            "TimeZone": {
-              "fields": {
-                "id": {
-                  "type": "string",
-                  "id": 1
-                },
-                "version": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
-            "DayOfWeek": {
-              "values": {
-                "DAY_OF_WEEK_UNSPECIFIED": 0,
-                "MONDAY": 1,
-                "TUESDAY": 2,
-                "WEDNESDAY": 3,
-                "THURSDAY": 4,
-                "FRIDAY": 5,
-                "SATURDAY": 6,
-                "SUNDAY": 7
-              }
-            },
-            "TimeOfDay": {
-              "fields": {
-                "hours": {
-                  "type": "int32",
-                  "id": 1
-                },
-                "minutes": {
-                  "type": "int32",
-                  "id": 2
-                },
-                "seconds": {
-                  "type": "int32",
-                  "id": 3
-                },
-                "nanos": {
-                  "type": "int32",
-                  "id": 4
-                }
               }
             }
           }

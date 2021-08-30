@@ -10853,6 +10853,7 @@
                              * @property {google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage|null} [wuaPackage] SoftwarePackage wuaPackage
                              * @property {google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage|null} [qfePackage] SoftwarePackage qfePackage
                              * @property {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null} [cosPackage] SoftwarePackage cosPackage
+                             * @property {google.cloud.osconfig.v1.Inventory.IWindowsApplication|null} [windowsApplication] SoftwarePackage windowsApplication
                              */
     
                             /**
@@ -10934,17 +10935,25 @@
                              */
                             SoftwarePackage.prototype.cosPackage = null;
     
+                            /**
+                             * SoftwarePackage windowsApplication.
+                             * @member {google.cloud.osconfig.v1.Inventory.IWindowsApplication|null|undefined} windowsApplication
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.windowsApplication = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * SoftwarePackage details.
-                             * @member {"yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|undefined} details
+                             * @member {"yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|"windowsApplication"|undefined} details
                              * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
                              * @instance
                              */
                             Object.defineProperty(SoftwarePackage.prototype, "details", {
-                                get: $util.oneOfGetter($oneOfFields = ["yumPackage", "aptPackage", "zypperPackage", "googetPackage", "zypperPatch", "wuaPackage", "qfePackage", "cosPackage"]),
+                                get: $util.oneOfGetter($oneOfFields = ["yumPackage", "aptPackage", "zypperPackage", "googetPackage", "zypperPatch", "wuaPackage", "qfePackage", "cosPackage", "windowsApplication"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -10988,6 +10997,8 @@
                                     $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.encode(message.qfePackage, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.cosPackage != null && Object.hasOwnProperty.call(message, "cosPackage"))
                                     $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.encode(message.cosPackage, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.windowsApplication != null && Object.hasOwnProperty.call(message, "windowsApplication"))
+                                    $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.encode(message.windowsApplication, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -11045,6 +11056,9 @@
                                         break;
                                     case 8:
                                         message.cosPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 9:
+                                        message.windowsApplication = $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -11160,6 +11174,16 @@
                                             return "cosPackage." + error;
                                     }
                                 }
+                                if (message.windowsApplication != null && message.hasOwnProperty("windowsApplication")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.verify(message.windowsApplication);
+                                        if (error)
+                                            return "windowsApplication." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -11214,6 +11238,11 @@
                                     if (typeof object.cosPackage !== "object")
                                         throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.cosPackage: object expected");
                                     message.cosPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.fromObject(object.cosPackage);
+                                }
+                                if (object.windowsApplication != null) {
+                                    if (typeof object.windowsApplication !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.windowsApplication: object expected");
+                                    message.windowsApplication = $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.fromObject(object.windowsApplication);
                                 }
                                 return message;
                             };
@@ -11270,6 +11299,11 @@
                                     object.cosPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.toObject(message.cosPackage, options);
                                     if (options.oneofs)
                                         object.details = "cosPackage";
+                                }
+                                if (message.windowsApplication != null && message.hasOwnProperty("windowsApplication")) {
+                                    object.windowsApplication = $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.toObject(message.windowsApplication, options);
+                                    if (options.oneofs)
+                                        object.details = "windowsApplication";
                                 }
                                 return object;
                             };
@@ -12665,6 +12699,287 @@
                             };
     
                             return WindowsQuickFixEngineeringPackage;
+                        })();
+    
+                        Inventory.WindowsApplication = (function() {
+    
+                            /**
+                             * Properties of a WindowsApplication.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @interface IWindowsApplication
+                             * @property {string|null} [displayName] WindowsApplication displayName
+                             * @property {string|null} [displayVersion] WindowsApplication displayVersion
+                             * @property {string|null} [publisher] WindowsApplication publisher
+                             * @property {google.type.IDate|null} [installDate] WindowsApplication installDate
+                             * @property {string|null} [helpLink] WindowsApplication helpLink
+                             */
+    
+                            /**
+                             * Constructs a new WindowsApplication.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @classdesc Represents a WindowsApplication.
+                             * @implements IWindowsApplication
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsApplication=} [properties] Properties to set
+                             */
+                            function WindowsApplication(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * WindowsApplication displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.displayName = "";
+    
+                            /**
+                             * WindowsApplication displayVersion.
+                             * @member {string} displayVersion
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.displayVersion = "";
+    
+                            /**
+                             * WindowsApplication publisher.
+                             * @member {string} publisher
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.publisher = "";
+    
+                            /**
+                             * WindowsApplication installDate.
+                             * @member {google.type.IDate|null|undefined} installDate
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.installDate = null;
+    
+                            /**
+                             * WindowsApplication helpLink.
+                             * @member {string} helpLink
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.helpLink = "";
+    
+                            /**
+                             * Creates a new WindowsApplication instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsApplication=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsApplication} WindowsApplication instance
+                             */
+                            WindowsApplication.create = function create(properties) {
+                                return new WindowsApplication(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsApplication message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsApplication.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsApplication} message WindowsApplication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsApplication.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                if (message.displayVersion != null && Object.hasOwnProperty.call(message, "displayVersion"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayVersion);
+                                if (message.publisher != null && Object.hasOwnProperty.call(message, "publisher"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.publisher);
+                                if (message.installDate != null && Object.hasOwnProperty.call(message, "installDate"))
+                                    $root.google.type.Date.encode(message.installDate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.helpLink != null && Object.hasOwnProperty.call(message, "helpLink"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.helpLink);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsApplication message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsApplication.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsApplication} message WindowsApplication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsApplication.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a WindowsApplication message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsApplication} WindowsApplication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsApplication.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.WindowsApplication();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.displayName = reader.string();
+                                        break;
+                                    case 2:
+                                        message.displayVersion = reader.string();
+                                        break;
+                                    case 3:
+                                        message.publisher = reader.string();
+                                        break;
+                                    case 4:
+                                        message.installDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.helpLink = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a WindowsApplication message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsApplication} WindowsApplication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsApplication.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a WindowsApplication message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            WindowsApplication.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.displayVersion != null && message.hasOwnProperty("displayVersion"))
+                                    if (!$util.isString(message.displayVersion))
+                                        return "displayVersion: string expected";
+                                if (message.publisher != null && message.hasOwnProperty("publisher"))
+                                    if (!$util.isString(message.publisher))
+                                        return "publisher: string expected";
+                                if (message.installDate != null && message.hasOwnProperty("installDate")) {
+                                    var error = $root.google.type.Date.verify(message.installDate);
+                                    if (error)
+                                        return "installDate." + error;
+                                }
+                                if (message.helpLink != null && message.hasOwnProperty("helpLink"))
+                                    if (!$util.isString(message.helpLink))
+                                        return "helpLink: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a WindowsApplication message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsApplication} WindowsApplication
+                             */
+                            WindowsApplication.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.Inventory.WindowsApplication)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.Inventory.WindowsApplication();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.displayVersion != null)
+                                    message.displayVersion = String(object.displayVersion);
+                                if (object.publisher != null)
+                                    message.publisher = String(object.publisher);
+                                if (object.installDate != null) {
+                                    if (typeof object.installDate !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.WindowsApplication.installDate: object expected");
+                                    message.installDate = $root.google.type.Date.fromObject(object.installDate);
+                                }
+                                if (object.helpLink != null)
+                                    message.helpLink = String(object.helpLink);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a WindowsApplication message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.WindowsApplication} message WindowsApplication
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            WindowsApplication.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.displayName = "";
+                                    object.displayVersion = "";
+                                    object.publisher = "";
+                                    object.installDate = null;
+                                    object.helpLink = "";
+                                }
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.displayVersion != null && message.hasOwnProperty("displayVersion"))
+                                    object.displayVersion = message.displayVersion;
+                                if (message.publisher != null && message.hasOwnProperty("publisher"))
+                                    object.publisher = message.publisher;
+                                if (message.installDate != null && message.hasOwnProperty("installDate"))
+                                    object.installDate = $root.google.type.Date.toObject(message.installDate, options);
+                                if (message.helpLink != null && message.hasOwnProperty("helpLink"))
+                                    object.helpLink = message.helpLink;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this WindowsApplication to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            WindowsApplication.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return WindowsApplication;
                         })();
     
                         return Inventory;
@@ -26615,6 +26930,7 @@
                              * @property {google.cloud.osconfig.v1alpha.Inventory.IWindowsUpdatePackage|null} [wuaPackage] SoftwarePackage wuaPackage
                              * @property {google.cloud.osconfig.v1alpha.Inventory.IWindowsQuickFixEngineeringPackage|null} [qfePackage] SoftwarePackage qfePackage
                              * @property {google.cloud.osconfig.v1alpha.Inventory.IVersionedPackage|null} [cosPackage] SoftwarePackage cosPackage
+                             * @property {google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication|null} [windowsApplication] SoftwarePackage windowsApplication
                              */
     
                             /**
@@ -26696,17 +27012,25 @@
                              */
                             SoftwarePackage.prototype.cosPackage = null;
     
+                            /**
+                             * SoftwarePackage windowsApplication.
+                             * @member {google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication|null|undefined} windowsApplication
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.windowsApplication = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * SoftwarePackage details.
-                             * @member {"yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|undefined} details
+                             * @member {"yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|"windowsApplication"|undefined} details
                              * @memberof google.cloud.osconfig.v1alpha.Inventory.SoftwarePackage
                              * @instance
                              */
                             Object.defineProperty(SoftwarePackage.prototype, "details", {
-                                get: $util.oneOfGetter($oneOfFields = ["yumPackage", "aptPackage", "zypperPackage", "googetPackage", "zypperPatch", "wuaPackage", "qfePackage", "cosPackage"]),
+                                get: $util.oneOfGetter($oneOfFields = ["yumPackage", "aptPackage", "zypperPackage", "googetPackage", "zypperPatch", "wuaPackage", "qfePackage", "cosPackage", "windowsApplication"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -26750,6 +27074,8 @@
                                     $root.google.cloud.osconfig.v1alpha.Inventory.WindowsQuickFixEngineeringPackage.encode(message.qfePackage, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.cosPackage != null && Object.hasOwnProperty.call(message, "cosPackage"))
                                     $root.google.cloud.osconfig.v1alpha.Inventory.VersionedPackage.encode(message.cosPackage, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.windowsApplication != null && Object.hasOwnProperty.call(message, "windowsApplication"))
+                                    $root.google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.encode(message.windowsApplication, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -26807,6 +27133,9 @@
                                         break;
                                     case 8:
                                         message.cosPackage = $root.google.cloud.osconfig.v1alpha.Inventory.VersionedPackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 9:
+                                        message.windowsApplication = $root.google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -26922,6 +27251,16 @@
                                             return "cosPackage." + error;
                                     }
                                 }
+                                if (message.windowsApplication != null && message.hasOwnProperty("windowsApplication")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.verify(message.windowsApplication);
+                                        if (error)
+                                            return "windowsApplication." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -26976,6 +27315,11 @@
                                     if (typeof object.cosPackage !== "object")
                                         throw TypeError(".google.cloud.osconfig.v1alpha.Inventory.SoftwarePackage.cosPackage: object expected");
                                     message.cosPackage = $root.google.cloud.osconfig.v1alpha.Inventory.VersionedPackage.fromObject(object.cosPackage);
+                                }
+                                if (object.windowsApplication != null) {
+                                    if (typeof object.windowsApplication !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1alpha.Inventory.SoftwarePackage.windowsApplication: object expected");
+                                    message.windowsApplication = $root.google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.fromObject(object.windowsApplication);
                                 }
                                 return message;
                             };
@@ -27032,6 +27376,11 @@
                                     object.cosPackage = $root.google.cloud.osconfig.v1alpha.Inventory.VersionedPackage.toObject(message.cosPackage, options);
                                     if (options.oneofs)
                                         object.details = "cosPackage";
+                                }
+                                if (message.windowsApplication != null && message.hasOwnProperty("windowsApplication")) {
+                                    object.windowsApplication = $root.google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.toObject(message.windowsApplication, options);
+                                    if (options.oneofs)
+                                        object.details = "windowsApplication";
                                 }
                                 return object;
                             };
@@ -28427,6 +28776,287 @@
                             };
     
                             return WindowsQuickFixEngineeringPackage;
+                        })();
+    
+                        Inventory.WindowsApplication = (function() {
+    
+                            /**
+                             * Properties of a WindowsApplication.
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory
+                             * @interface IWindowsApplication
+                             * @property {string|null} [displayName] WindowsApplication displayName
+                             * @property {string|null} [displayVersion] WindowsApplication displayVersion
+                             * @property {string|null} [publisher] WindowsApplication publisher
+                             * @property {google.type.IDate|null} [installDate] WindowsApplication installDate
+                             * @property {string|null} [helpLink] WindowsApplication helpLink
+                             */
+    
+                            /**
+                             * Constructs a new WindowsApplication.
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory
+                             * @classdesc Represents a WindowsApplication.
+                             * @implements IWindowsApplication
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication=} [properties] Properties to set
+                             */
+                            function WindowsApplication(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * WindowsApplication displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.displayName = "";
+    
+                            /**
+                             * WindowsApplication displayVersion.
+                             * @member {string} displayVersion
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.displayVersion = "";
+    
+                            /**
+                             * WindowsApplication publisher.
+                             * @member {string} publisher
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.publisher = "";
+    
+                            /**
+                             * WindowsApplication installDate.
+                             * @member {google.type.IDate|null|undefined} installDate
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.installDate = null;
+    
+                            /**
+                             * WindowsApplication helpLink.
+                             * @member {string} helpLink
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.helpLink = "";
+    
+                            /**
+                             * Creates a new WindowsApplication instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1alpha.Inventory.WindowsApplication} WindowsApplication instance
+                             */
+                            WindowsApplication.create = function create(properties) {
+                                return new WindowsApplication(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsApplication message. Does not implicitly {@link google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication} message WindowsApplication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsApplication.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                if (message.displayVersion != null && Object.hasOwnProperty.call(message, "displayVersion"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayVersion);
+                                if (message.publisher != null && Object.hasOwnProperty.call(message, "publisher"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.publisher);
+                                if (message.installDate != null && Object.hasOwnProperty.call(message, "installDate"))
+                                    $root.google.type.Date.encode(message.installDate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.helpLink != null && Object.hasOwnProperty.call(message, "helpLink"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.helpLink);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsApplication message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1alpha.Inventory.IWindowsApplication} message WindowsApplication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsApplication.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a WindowsApplication message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1alpha.Inventory.WindowsApplication} WindowsApplication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsApplication.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1alpha.Inventory.WindowsApplication();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.displayName = reader.string();
+                                        break;
+                                    case 2:
+                                        message.displayVersion = reader.string();
+                                        break;
+                                    case 3:
+                                        message.publisher = reader.string();
+                                        break;
+                                    case 4:
+                                        message.installDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.helpLink = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a WindowsApplication message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1alpha.Inventory.WindowsApplication} WindowsApplication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsApplication.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a WindowsApplication message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            WindowsApplication.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.displayVersion != null && message.hasOwnProperty("displayVersion"))
+                                    if (!$util.isString(message.displayVersion))
+                                        return "displayVersion: string expected";
+                                if (message.publisher != null && message.hasOwnProperty("publisher"))
+                                    if (!$util.isString(message.publisher))
+                                        return "publisher: string expected";
+                                if (message.installDate != null && message.hasOwnProperty("installDate")) {
+                                    var error = $root.google.type.Date.verify(message.installDate);
+                                    if (error)
+                                        return "installDate." + error;
+                                }
+                                if (message.helpLink != null && message.hasOwnProperty("helpLink"))
+                                    if (!$util.isString(message.helpLink))
+                                        return "helpLink: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a WindowsApplication message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1alpha.Inventory.WindowsApplication} WindowsApplication
+                             */
+                            WindowsApplication.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1alpha.Inventory.WindowsApplication)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1alpha.Inventory.WindowsApplication();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.displayVersion != null)
+                                    message.displayVersion = String(object.displayVersion);
+                                if (object.publisher != null)
+                                    message.publisher = String(object.publisher);
+                                if (object.installDate != null) {
+                                    if (typeof object.installDate !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1alpha.Inventory.WindowsApplication.installDate: object expected");
+                                    message.installDate = $root.google.type.Date.fromObject(object.installDate);
+                                }
+                                if (object.helpLink != null)
+                                    message.helpLink = String(object.helpLink);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a WindowsApplication message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1alpha.Inventory.WindowsApplication} message WindowsApplication
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            WindowsApplication.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.displayName = "";
+                                    object.displayVersion = "";
+                                    object.publisher = "";
+                                    object.installDate = null;
+                                    object.helpLink = "";
+                                }
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.displayVersion != null && message.hasOwnProperty("displayVersion"))
+                                    object.displayVersion = message.displayVersion;
+                                if (message.publisher != null && message.hasOwnProperty("publisher"))
+                                    object.publisher = message.publisher;
+                                if (message.installDate != null && message.hasOwnProperty("installDate"))
+                                    object.installDate = $root.google.type.Date.toObject(message.installDate, options);
+                                if (message.helpLink != null && message.hasOwnProperty("helpLink"))
+                                    object.helpLink = message.helpLink;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this WindowsApplication to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1alpha.Inventory.WindowsApplication
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            WindowsApplication.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return WindowsApplication;
                         })();
     
                         return Inventory;
@@ -41802,6 +42432,1141 @@
             return cloud;
         })();
     
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            type.Date = (function() {
+    
+                /**
+                 * Properties of a Date.
+                 * @memberof google.type
+                 * @interface IDate
+                 * @property {number|null} [year] Date year
+                 * @property {number|null} [month] Date month
+                 * @property {number|null} [day] Date day
+                 */
+    
+                /**
+                 * Constructs a new Date.
+                 * @memberof google.type
+                 * @classdesc Represents a Date.
+                 * @implements IDate
+                 * @constructor
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 */
+                function Date(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Date year.
+                 * @member {number} year
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.year = 0;
+    
+                /**
+                 * Date month.
+                 * @member {number} month
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.month = 0;
+    
+                /**
+                 * Date day.
+                 * @member {number} day
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.day = 0;
+    
+                /**
+                 * Creates a new Date instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 * @returns {google.type.Date} Date instance
+                 */
+                Date.create = function create(properties) {
+                    return new Date(properties);
+                };
+    
+                /**
+                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.year = reader.int32();
+                            break;
+                        case 2:
+                            message.month = reader.int32();
+                            break;
+                        case 3:
+                            message.day = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Date message.
+                 * @function verify
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Date.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Date} Date
+                 */
+                Date.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Date)
+                        return object;
+                    var message = new $root.google.type.Date();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Date message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.Date} message Date
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Date.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Date to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Date
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Date.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Date;
+            })();
+    
+            type.DateTime = (function() {
+    
+                /**
+                 * Properties of a DateTime.
+                 * @memberof google.type
+                 * @interface IDateTime
+                 * @property {number|null} [year] DateTime year
+                 * @property {number|null} [month] DateTime month
+                 * @property {number|null} [day] DateTime day
+                 * @property {number|null} [hours] DateTime hours
+                 * @property {number|null} [minutes] DateTime minutes
+                 * @property {number|null} [seconds] DateTime seconds
+                 * @property {number|null} [nanos] DateTime nanos
+                 * @property {google.protobuf.IDuration|null} [utcOffset] DateTime utcOffset
+                 * @property {google.type.ITimeZone|null} [timeZone] DateTime timeZone
+                 */
+    
+                /**
+                 * Constructs a new DateTime.
+                 * @memberof google.type
+                 * @classdesc Represents a DateTime.
+                 * @implements IDateTime
+                 * @constructor
+                 * @param {google.type.IDateTime=} [properties] Properties to set
+                 */
+                function DateTime(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * DateTime year.
+                 * @member {number} year
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.year = 0;
+    
+                /**
+                 * DateTime month.
+                 * @member {number} month
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.month = 0;
+    
+                /**
+                 * DateTime day.
+                 * @member {number} day
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.day = 0;
+    
+                /**
+                 * DateTime hours.
+                 * @member {number} hours
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.hours = 0;
+    
+                /**
+                 * DateTime minutes.
+                 * @member {number} minutes
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.minutes = 0;
+    
+                /**
+                 * DateTime seconds.
+                 * @member {number} seconds
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.seconds = 0;
+    
+                /**
+                 * DateTime nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.nanos = 0;
+    
+                /**
+                 * DateTime utcOffset.
+                 * @member {google.protobuf.IDuration|null|undefined} utcOffset
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.utcOffset = null;
+    
+                /**
+                 * DateTime timeZone.
+                 * @member {google.type.ITimeZone|null|undefined} timeZone
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                DateTime.prototype.timeZone = null;
+    
+                // OneOf field names bound to virtual getters and setters
+                var $oneOfFields;
+    
+                /**
+                 * DateTime timeOffset.
+                 * @member {"utcOffset"|"timeZone"|undefined} timeOffset
+                 * @memberof google.type.DateTime
+                 * @instance
+                 */
+                Object.defineProperty(DateTime.prototype, "timeOffset", {
+                    get: $util.oneOfGetter($oneOfFields = ["utcOffset", "timeZone"]),
+                    set: $util.oneOfSetter($oneOfFields)
+                });
+    
+                /**
+                 * Creates a new DateTime instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.IDateTime=} [properties] Properties to set
+                 * @returns {google.type.DateTime} DateTime instance
+                 */
+                DateTime.create = function create(properties) {
+                    return new DateTime(properties);
+                };
+    
+                /**
+                 * Encodes the specified DateTime message. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.IDateTime} message DateTime message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DateTime.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.hours);
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
+                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.minutes);
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.nanos);
+                    if (message.utcOffset != null && Object.hasOwnProperty.call(message, "utcOffset"))
+                        $root.google.protobuf.Duration.encode(message.utcOffset, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
+                        $root.google.type.TimeZone.encode(message.timeZone, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified DateTime message, length delimited. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.IDateTime} message DateTime message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                DateTime.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a DateTime message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.DateTime} DateTime
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DateTime.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.DateTime();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.year = reader.int32();
+                            break;
+                        case 2:
+                            message.month = reader.int32();
+                            break;
+                        case 3:
+                            message.day = reader.int32();
+                            break;
+                        case 4:
+                            message.hours = reader.int32();
+                            break;
+                        case 5:
+                            message.minutes = reader.int32();
+                            break;
+                        case 6:
+                            message.seconds = reader.int32();
+                            break;
+                        case 7:
+                            message.nanos = reader.int32();
+                            break;
+                        case 8:
+                            message.utcOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
+                            break;
+                        case 9:
+                            message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32());
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a DateTime message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.DateTime} DateTime
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                DateTime.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a DateTime message.
+                 * @function verify
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                DateTime.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    var properties = {};
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        if (!$util.isInteger(message.hours))
+                            return "hours: integer expected";
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        if (!$util.isInteger(message.minutes))
+                            return "minutes: integer expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds))
+                            return "seconds: integer expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
+                        properties.timeOffset = 1;
+                        {
+                            var error = $root.google.protobuf.Duration.verify(message.utcOffset);
+                            if (error)
+                                return "utcOffset." + error;
+                        }
+                    }
+                    if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                        if (properties.timeOffset === 1)
+                            return "timeOffset: multiple values";
+                        properties.timeOffset = 1;
+                        {
+                            var error = $root.google.type.TimeZone.verify(message.timeZone);
+                            if (error)
+                                return "timeZone." + error;
+                        }
+                    }
+                    return null;
+                };
+    
+                /**
+                 * Creates a DateTime message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.DateTime} DateTime
+                 */
+                DateTime.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.DateTime)
+                        return object;
+                    var message = new $root.google.type.DateTime();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    if (object.hours != null)
+                        message.hours = object.hours | 0;
+                    if (object.minutes != null)
+                        message.minutes = object.minutes | 0;
+                    if (object.seconds != null)
+                        message.seconds = object.seconds | 0;
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    if (object.utcOffset != null) {
+                        if (typeof object.utcOffset !== "object")
+                            throw TypeError(".google.type.DateTime.utcOffset: object expected");
+                        message.utcOffset = $root.google.protobuf.Duration.fromObject(object.utcOffset);
+                    }
+                    if (object.timeZone != null) {
+                        if (typeof object.timeZone !== "object")
+                            throw TypeError(".google.type.DateTime.timeZone: object expected");
+                        message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone);
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a DateTime message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.DateTime
+                 * @static
+                 * @param {google.type.DateTime} message DateTime
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                DateTime.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                        object.hours = 0;
+                        object.minutes = 0;
+                        object.seconds = 0;
+                        object.nanos = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        object.hours = message.hours;
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        object.minutes = message.minutes;
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        object.seconds = message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
+                        object.utcOffset = $root.google.protobuf.Duration.toObject(message.utcOffset, options);
+                        if (options.oneofs)
+                            object.timeOffset = "utcOffset";
+                    }
+                    if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
+                        object.timeZone = $root.google.type.TimeZone.toObject(message.timeZone, options);
+                        if (options.oneofs)
+                            object.timeOffset = "timeZone";
+                    }
+                    return object;
+                };
+    
+                /**
+                 * Converts this DateTime to JSON.
+                 * @function toJSON
+                 * @memberof google.type.DateTime
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                DateTime.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return DateTime;
+            })();
+    
+            type.TimeZone = (function() {
+    
+                /**
+                 * Properties of a TimeZone.
+                 * @memberof google.type
+                 * @interface ITimeZone
+                 * @property {string|null} [id] TimeZone id
+                 * @property {string|null} [version] TimeZone version
+                 */
+    
+                /**
+                 * Constructs a new TimeZone.
+                 * @memberof google.type
+                 * @classdesc Represents a TimeZone.
+                 * @implements ITimeZone
+                 * @constructor
+                 * @param {google.type.ITimeZone=} [properties] Properties to set
+                 */
+                function TimeZone(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TimeZone id.
+                 * @member {string} id
+                 * @memberof google.type.TimeZone
+                 * @instance
+                 */
+                TimeZone.prototype.id = "";
+    
+                /**
+                 * TimeZone version.
+                 * @member {string} version
+                 * @memberof google.type.TimeZone
+                 * @instance
+                 */
+                TimeZone.prototype.version = "";
+    
+                /**
+                 * Creates a new TimeZone instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.ITimeZone=} [properties] Properties to set
+                 * @returns {google.type.TimeZone} TimeZone instance
+                 */
+                TimeZone.create = function create(properties) {
+                    return new TimeZone(properties);
+                };
+    
+                /**
+                 * Encodes the specified TimeZone message. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.ITimeZone} message TimeZone message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeZone.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.id != null && Object.hasOwnProperty.call(message, "id"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
+                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TimeZone message, length delimited. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.ITimeZone} message TimeZone message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeZone.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TimeZone message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.TimeZone} TimeZone
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeZone.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeZone();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.id = reader.string();
+                            break;
+                        case 2:
+                            message.version = reader.string();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TimeZone message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.TimeZone} TimeZone
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeZone.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TimeZone message.
+                 * @function verify
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TimeZone.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        if (!$util.isString(message.id))
+                            return "id: string expected";
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        if (!$util.isString(message.version))
+                            return "version: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TimeZone message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.TimeZone} TimeZone
+                 */
+                TimeZone.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.TimeZone)
+                        return object;
+                    var message = new $root.google.type.TimeZone();
+                    if (object.id != null)
+                        message.id = String(object.id);
+                    if (object.version != null)
+                        message.version = String(object.version);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TimeZone message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.TimeZone
+                 * @static
+                 * @param {google.type.TimeZone} message TimeZone
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TimeZone.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.id = "";
+                        object.version = "";
+                    }
+                    if (message.id != null && message.hasOwnProperty("id"))
+                        object.id = message.id;
+                    if (message.version != null && message.hasOwnProperty("version"))
+                        object.version = message.version;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TimeZone to JSON.
+                 * @function toJSON
+                 * @memberof google.type.TimeZone
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TimeZone.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return TimeZone;
+            })();
+    
+            /**
+             * DayOfWeek enum.
+             * @name google.type.DayOfWeek
+             * @enum {number}
+             * @property {number} DAY_OF_WEEK_UNSPECIFIED=0 DAY_OF_WEEK_UNSPECIFIED value
+             * @property {number} MONDAY=1 MONDAY value
+             * @property {number} TUESDAY=2 TUESDAY value
+             * @property {number} WEDNESDAY=3 WEDNESDAY value
+             * @property {number} THURSDAY=4 THURSDAY value
+             * @property {number} FRIDAY=5 FRIDAY value
+             * @property {number} SATURDAY=6 SATURDAY value
+             * @property {number} SUNDAY=7 SUNDAY value
+             */
+            type.DayOfWeek = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "DAY_OF_WEEK_UNSPECIFIED"] = 0;
+                values[valuesById[1] = "MONDAY"] = 1;
+                values[valuesById[2] = "TUESDAY"] = 2;
+                values[valuesById[3] = "WEDNESDAY"] = 3;
+                values[valuesById[4] = "THURSDAY"] = 4;
+                values[valuesById[5] = "FRIDAY"] = 5;
+                values[valuesById[6] = "SATURDAY"] = 6;
+                values[valuesById[7] = "SUNDAY"] = 7;
+                return values;
+            })();
+    
+            type.TimeOfDay = (function() {
+    
+                /**
+                 * Properties of a TimeOfDay.
+                 * @memberof google.type
+                 * @interface ITimeOfDay
+                 * @property {number|null} [hours] TimeOfDay hours
+                 * @property {number|null} [minutes] TimeOfDay minutes
+                 * @property {number|null} [seconds] TimeOfDay seconds
+                 * @property {number|null} [nanos] TimeOfDay nanos
+                 */
+    
+                /**
+                 * Constructs a new TimeOfDay.
+                 * @memberof google.type
+                 * @classdesc Represents a TimeOfDay.
+                 * @implements ITimeOfDay
+                 * @constructor
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 */
+                function TimeOfDay(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * TimeOfDay hours.
+                 * @member {number} hours
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.hours = 0;
+    
+                /**
+                 * TimeOfDay minutes.
+                 * @member {number} minutes
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.minutes = 0;
+    
+                /**
+                 * TimeOfDay seconds.
+                 * @member {number} seconds
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.seconds = 0;
+    
+                /**
+                 * TimeOfDay nanos.
+                 * @member {number} nanos
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 */
+                TimeOfDay.prototype.nanos = 0;
+    
+                /**
+                 * Creates a new TimeOfDay instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
+                 * @returns {google.type.TimeOfDay} TimeOfDay instance
+                 */
+                TimeOfDay.create = function create(properties) {
+                    return new TimeOfDay(properties);
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hours);
+                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minutes);
+                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.seconds);
+                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
+                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.nanos);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                TimeOfDay.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeOfDay();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.hours = reader.int32();
+                            break;
+                        case 2:
+                            message.minutes = reader.int32();
+                            break;
+                        case 3:
+                            message.seconds = reader.int32();
+                            break;
+                        case 4:
+                            message.nanos = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                TimeOfDay.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a TimeOfDay message.
+                 * @function verify
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                TimeOfDay.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        if (!$util.isInteger(message.hours))
+                            return "hours: integer expected";
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        if (!$util.isInteger(message.minutes))
+                            return "minutes: integer expected";
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        if (!$util.isInteger(message.seconds))
+                            return "seconds: integer expected";
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        if (!$util.isInteger(message.nanos))
+                            return "nanos: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.TimeOfDay} TimeOfDay
+                 */
+                TimeOfDay.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.TimeOfDay)
+                        return object;
+                    var message = new $root.google.type.TimeOfDay();
+                    if (object.hours != null)
+                        message.hours = object.hours | 0;
+                    if (object.minutes != null)
+                        message.minutes = object.minutes | 0;
+                    if (object.seconds != null)
+                        message.seconds = object.seconds | 0;
+                    if (object.nanos != null)
+                        message.nanos = object.nanos | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.TimeOfDay
+                 * @static
+                 * @param {google.type.TimeOfDay} message TimeOfDay
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                TimeOfDay.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.hours = 0;
+                        object.minutes = 0;
+                        object.seconds = 0;
+                        object.nanos = 0;
+                    }
+                    if (message.hours != null && message.hasOwnProperty("hours"))
+                        object.hours = message.hours;
+                    if (message.minutes != null && message.hasOwnProperty("minutes"))
+                        object.minutes = message.minutes;
+                    if (message.seconds != null && message.hasOwnProperty("seconds"))
+                        object.seconds = message.seconds;
+                    if (message.nanos != null && message.hasOwnProperty("nanos"))
+                        object.nanos = message.nanos;
+                    return object;
+                };
+    
+                /**
+                 * Converts this TimeOfDay to JSON.
+                 * @function toJSON
+                 * @memberof google.type.TimeOfDay
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                TimeOfDay.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return TimeOfDay;
+            })();
+    
+            return type;
+        })();
+    
         google.api = (function() {
     
             /**
@@ -43375,909 +45140,6 @@
             })();
     
             return api;
-        })();
-    
-        google.type = (function() {
-    
-            /**
-             * Namespace type.
-             * @memberof google
-             * @namespace
-             */
-            var type = {};
-    
-            type.DateTime = (function() {
-    
-                /**
-                 * Properties of a DateTime.
-                 * @memberof google.type
-                 * @interface IDateTime
-                 * @property {number|null} [year] DateTime year
-                 * @property {number|null} [month] DateTime month
-                 * @property {number|null} [day] DateTime day
-                 * @property {number|null} [hours] DateTime hours
-                 * @property {number|null} [minutes] DateTime minutes
-                 * @property {number|null} [seconds] DateTime seconds
-                 * @property {number|null} [nanos] DateTime nanos
-                 * @property {google.protobuf.IDuration|null} [utcOffset] DateTime utcOffset
-                 * @property {google.type.ITimeZone|null} [timeZone] DateTime timeZone
-                 */
-    
-                /**
-                 * Constructs a new DateTime.
-                 * @memberof google.type
-                 * @classdesc Represents a DateTime.
-                 * @implements IDateTime
-                 * @constructor
-                 * @param {google.type.IDateTime=} [properties] Properties to set
-                 */
-                function DateTime(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * DateTime year.
-                 * @member {number} year
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                DateTime.prototype.year = 0;
-    
-                /**
-                 * DateTime month.
-                 * @member {number} month
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                DateTime.prototype.month = 0;
-    
-                /**
-                 * DateTime day.
-                 * @member {number} day
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                DateTime.prototype.day = 0;
-    
-                /**
-                 * DateTime hours.
-                 * @member {number} hours
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                DateTime.prototype.hours = 0;
-    
-                /**
-                 * DateTime minutes.
-                 * @member {number} minutes
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                DateTime.prototype.minutes = 0;
-    
-                /**
-                 * DateTime seconds.
-                 * @member {number} seconds
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                DateTime.prototype.seconds = 0;
-    
-                /**
-                 * DateTime nanos.
-                 * @member {number} nanos
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                DateTime.prototype.nanos = 0;
-    
-                /**
-                 * DateTime utcOffset.
-                 * @member {google.protobuf.IDuration|null|undefined} utcOffset
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                DateTime.prototype.utcOffset = null;
-    
-                /**
-                 * DateTime timeZone.
-                 * @member {google.type.ITimeZone|null|undefined} timeZone
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                DateTime.prototype.timeZone = null;
-    
-                // OneOf field names bound to virtual getters and setters
-                var $oneOfFields;
-    
-                /**
-                 * DateTime timeOffset.
-                 * @member {"utcOffset"|"timeZone"|undefined} timeOffset
-                 * @memberof google.type.DateTime
-                 * @instance
-                 */
-                Object.defineProperty(DateTime.prototype, "timeOffset", {
-                    get: $util.oneOfGetter($oneOfFields = ["utcOffset", "timeZone"]),
-                    set: $util.oneOfSetter($oneOfFields)
-                });
-    
-                /**
-                 * Creates a new DateTime instance using the specified properties.
-                 * @function create
-                 * @memberof google.type.DateTime
-                 * @static
-                 * @param {google.type.IDateTime=} [properties] Properties to set
-                 * @returns {google.type.DateTime} DateTime instance
-                 */
-                DateTime.create = function create(properties) {
-                    return new DateTime(properties);
-                };
-    
-                /**
-                 * Encodes the specified DateTime message. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.type.DateTime
-                 * @static
-                 * @param {google.type.IDateTime} message DateTime message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                DateTime.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
-                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
-                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
-                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.hours);
-                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
-                        writer.uint32(/* id 5, wireType 0 =*/40).int32(message.minutes);
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.nanos);
-                    if (message.utcOffset != null && Object.hasOwnProperty.call(message, "utcOffset"))
-                        $root.google.protobuf.Duration.encode(message.utcOffset, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
-                    if (message.timeZone != null && Object.hasOwnProperty.call(message, "timeZone"))
-                        $root.google.type.TimeZone.encode(message.timeZone, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified DateTime message, length delimited. Does not implicitly {@link google.type.DateTime.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.type.DateTime
-                 * @static
-                 * @param {google.type.IDateTime} message DateTime message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                DateTime.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a DateTime message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.type.DateTime
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.type.DateTime} DateTime
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                DateTime.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.DateTime();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.year = reader.int32();
-                            break;
-                        case 2:
-                            message.month = reader.int32();
-                            break;
-                        case 3:
-                            message.day = reader.int32();
-                            break;
-                        case 4:
-                            message.hours = reader.int32();
-                            break;
-                        case 5:
-                            message.minutes = reader.int32();
-                            break;
-                        case 6:
-                            message.seconds = reader.int32();
-                            break;
-                        case 7:
-                            message.nanos = reader.int32();
-                            break;
-                        case 8:
-                            message.utcOffset = $root.google.protobuf.Duration.decode(reader, reader.uint32());
-                            break;
-                        case 9:
-                            message.timeZone = $root.google.type.TimeZone.decode(reader, reader.uint32());
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a DateTime message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.type.DateTime
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.type.DateTime} DateTime
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                DateTime.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a DateTime message.
-                 * @function verify
-                 * @memberof google.type.DateTime
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                DateTime.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    var properties = {};
-                    if (message.year != null && message.hasOwnProperty("year"))
-                        if (!$util.isInteger(message.year))
-                            return "year: integer expected";
-                    if (message.month != null && message.hasOwnProperty("month"))
-                        if (!$util.isInteger(message.month))
-                            return "month: integer expected";
-                    if (message.day != null && message.hasOwnProperty("day"))
-                        if (!$util.isInteger(message.day))
-                            return "day: integer expected";
-                    if (message.hours != null && message.hasOwnProperty("hours"))
-                        if (!$util.isInteger(message.hours))
-                            return "hours: integer expected";
-                    if (message.minutes != null && message.hasOwnProperty("minutes"))
-                        if (!$util.isInteger(message.minutes))
-                            return "minutes: integer expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds))
-                            return "seconds: integer expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
-                        properties.timeOffset = 1;
-                        {
-                            var error = $root.google.protobuf.Duration.verify(message.utcOffset);
-                            if (error)
-                                return "utcOffset." + error;
-                        }
-                    }
-                    if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
-                        if (properties.timeOffset === 1)
-                            return "timeOffset: multiple values";
-                        properties.timeOffset = 1;
-                        {
-                            var error = $root.google.type.TimeZone.verify(message.timeZone);
-                            if (error)
-                                return "timeZone." + error;
-                        }
-                    }
-                    return null;
-                };
-    
-                /**
-                 * Creates a DateTime message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.type.DateTime
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.type.DateTime} DateTime
-                 */
-                DateTime.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.type.DateTime)
-                        return object;
-                    var message = new $root.google.type.DateTime();
-                    if (object.year != null)
-                        message.year = object.year | 0;
-                    if (object.month != null)
-                        message.month = object.month | 0;
-                    if (object.day != null)
-                        message.day = object.day | 0;
-                    if (object.hours != null)
-                        message.hours = object.hours | 0;
-                    if (object.minutes != null)
-                        message.minutes = object.minutes | 0;
-                    if (object.seconds != null)
-                        message.seconds = object.seconds | 0;
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    if (object.utcOffset != null) {
-                        if (typeof object.utcOffset !== "object")
-                            throw TypeError(".google.type.DateTime.utcOffset: object expected");
-                        message.utcOffset = $root.google.protobuf.Duration.fromObject(object.utcOffset);
-                    }
-                    if (object.timeZone != null) {
-                        if (typeof object.timeZone !== "object")
-                            throw TypeError(".google.type.DateTime.timeZone: object expected");
-                        message.timeZone = $root.google.type.TimeZone.fromObject(object.timeZone);
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a DateTime message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.type.DateTime
-                 * @static
-                 * @param {google.type.DateTime} message DateTime
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                DateTime.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.year = 0;
-                        object.month = 0;
-                        object.day = 0;
-                        object.hours = 0;
-                        object.minutes = 0;
-                        object.seconds = 0;
-                        object.nanos = 0;
-                    }
-                    if (message.year != null && message.hasOwnProperty("year"))
-                        object.year = message.year;
-                    if (message.month != null && message.hasOwnProperty("month"))
-                        object.month = message.month;
-                    if (message.day != null && message.hasOwnProperty("day"))
-                        object.day = message.day;
-                    if (message.hours != null && message.hasOwnProperty("hours"))
-                        object.hours = message.hours;
-                    if (message.minutes != null && message.hasOwnProperty("minutes"))
-                        object.minutes = message.minutes;
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        object.seconds = message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    if (message.utcOffset != null && message.hasOwnProperty("utcOffset")) {
-                        object.utcOffset = $root.google.protobuf.Duration.toObject(message.utcOffset, options);
-                        if (options.oneofs)
-                            object.timeOffset = "utcOffset";
-                    }
-                    if (message.timeZone != null && message.hasOwnProperty("timeZone")) {
-                        object.timeZone = $root.google.type.TimeZone.toObject(message.timeZone, options);
-                        if (options.oneofs)
-                            object.timeOffset = "timeZone";
-                    }
-                    return object;
-                };
-    
-                /**
-                 * Converts this DateTime to JSON.
-                 * @function toJSON
-                 * @memberof google.type.DateTime
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                DateTime.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return DateTime;
-            })();
-    
-            type.TimeZone = (function() {
-    
-                /**
-                 * Properties of a TimeZone.
-                 * @memberof google.type
-                 * @interface ITimeZone
-                 * @property {string|null} [id] TimeZone id
-                 * @property {string|null} [version] TimeZone version
-                 */
-    
-                /**
-                 * Constructs a new TimeZone.
-                 * @memberof google.type
-                 * @classdesc Represents a TimeZone.
-                 * @implements ITimeZone
-                 * @constructor
-                 * @param {google.type.ITimeZone=} [properties] Properties to set
-                 */
-                function TimeZone(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * TimeZone id.
-                 * @member {string} id
-                 * @memberof google.type.TimeZone
-                 * @instance
-                 */
-                TimeZone.prototype.id = "";
-    
-                /**
-                 * TimeZone version.
-                 * @member {string} version
-                 * @memberof google.type.TimeZone
-                 * @instance
-                 */
-                TimeZone.prototype.version = "";
-    
-                /**
-                 * Creates a new TimeZone instance using the specified properties.
-                 * @function create
-                 * @memberof google.type.TimeZone
-                 * @static
-                 * @param {google.type.ITimeZone=} [properties] Properties to set
-                 * @returns {google.type.TimeZone} TimeZone instance
-                 */
-                TimeZone.create = function create(properties) {
-                    return new TimeZone(properties);
-                };
-    
-                /**
-                 * Encodes the specified TimeZone message. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.type.TimeZone
-                 * @static
-                 * @param {google.type.ITimeZone} message TimeZone message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                TimeZone.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.id != null && Object.hasOwnProperty.call(message, "id"))
-                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.id);
-                    if (message.version != null && Object.hasOwnProperty.call(message, "version"))
-                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.version);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified TimeZone message, length delimited. Does not implicitly {@link google.type.TimeZone.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.type.TimeZone
-                 * @static
-                 * @param {google.type.ITimeZone} message TimeZone message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                TimeZone.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a TimeZone message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.type.TimeZone
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.type.TimeZone} TimeZone
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                TimeZone.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeZone();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.id = reader.string();
-                            break;
-                        case 2:
-                            message.version = reader.string();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a TimeZone message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.type.TimeZone
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.type.TimeZone} TimeZone
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                TimeZone.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a TimeZone message.
-                 * @function verify
-                 * @memberof google.type.TimeZone
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                TimeZone.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.id != null && message.hasOwnProperty("id"))
-                        if (!$util.isString(message.id))
-                            return "id: string expected";
-                    if (message.version != null && message.hasOwnProperty("version"))
-                        if (!$util.isString(message.version))
-                            return "version: string expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a TimeZone message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.type.TimeZone
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.type.TimeZone} TimeZone
-                 */
-                TimeZone.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.type.TimeZone)
-                        return object;
-                    var message = new $root.google.type.TimeZone();
-                    if (object.id != null)
-                        message.id = String(object.id);
-                    if (object.version != null)
-                        message.version = String(object.version);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a TimeZone message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.type.TimeZone
-                 * @static
-                 * @param {google.type.TimeZone} message TimeZone
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                TimeZone.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.id = "";
-                        object.version = "";
-                    }
-                    if (message.id != null && message.hasOwnProperty("id"))
-                        object.id = message.id;
-                    if (message.version != null && message.hasOwnProperty("version"))
-                        object.version = message.version;
-                    return object;
-                };
-    
-                /**
-                 * Converts this TimeZone to JSON.
-                 * @function toJSON
-                 * @memberof google.type.TimeZone
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                TimeZone.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return TimeZone;
-            })();
-    
-            /**
-             * DayOfWeek enum.
-             * @name google.type.DayOfWeek
-             * @enum {number}
-             * @property {number} DAY_OF_WEEK_UNSPECIFIED=0 DAY_OF_WEEK_UNSPECIFIED value
-             * @property {number} MONDAY=1 MONDAY value
-             * @property {number} TUESDAY=2 TUESDAY value
-             * @property {number} WEDNESDAY=3 WEDNESDAY value
-             * @property {number} THURSDAY=4 THURSDAY value
-             * @property {number} FRIDAY=5 FRIDAY value
-             * @property {number} SATURDAY=6 SATURDAY value
-             * @property {number} SUNDAY=7 SUNDAY value
-             */
-            type.DayOfWeek = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "DAY_OF_WEEK_UNSPECIFIED"] = 0;
-                values[valuesById[1] = "MONDAY"] = 1;
-                values[valuesById[2] = "TUESDAY"] = 2;
-                values[valuesById[3] = "WEDNESDAY"] = 3;
-                values[valuesById[4] = "THURSDAY"] = 4;
-                values[valuesById[5] = "FRIDAY"] = 5;
-                values[valuesById[6] = "SATURDAY"] = 6;
-                values[valuesById[7] = "SUNDAY"] = 7;
-                return values;
-            })();
-    
-            type.TimeOfDay = (function() {
-    
-                /**
-                 * Properties of a TimeOfDay.
-                 * @memberof google.type
-                 * @interface ITimeOfDay
-                 * @property {number|null} [hours] TimeOfDay hours
-                 * @property {number|null} [minutes] TimeOfDay minutes
-                 * @property {number|null} [seconds] TimeOfDay seconds
-                 * @property {number|null} [nanos] TimeOfDay nanos
-                 */
-    
-                /**
-                 * Constructs a new TimeOfDay.
-                 * @memberof google.type
-                 * @classdesc Represents a TimeOfDay.
-                 * @implements ITimeOfDay
-                 * @constructor
-                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
-                 */
-                function TimeOfDay(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * TimeOfDay hours.
-                 * @member {number} hours
-                 * @memberof google.type.TimeOfDay
-                 * @instance
-                 */
-                TimeOfDay.prototype.hours = 0;
-    
-                /**
-                 * TimeOfDay minutes.
-                 * @member {number} minutes
-                 * @memberof google.type.TimeOfDay
-                 * @instance
-                 */
-                TimeOfDay.prototype.minutes = 0;
-    
-                /**
-                 * TimeOfDay seconds.
-                 * @member {number} seconds
-                 * @memberof google.type.TimeOfDay
-                 * @instance
-                 */
-                TimeOfDay.prototype.seconds = 0;
-    
-                /**
-                 * TimeOfDay nanos.
-                 * @member {number} nanos
-                 * @memberof google.type.TimeOfDay
-                 * @instance
-                 */
-                TimeOfDay.prototype.nanos = 0;
-    
-                /**
-                 * Creates a new TimeOfDay instance using the specified properties.
-                 * @function create
-                 * @memberof google.type.TimeOfDay
-                 * @static
-                 * @param {google.type.ITimeOfDay=} [properties] Properties to set
-                 * @returns {google.type.TimeOfDay} TimeOfDay instance
-                 */
-                TimeOfDay.create = function create(properties) {
-                    return new TimeOfDay(properties);
-                };
-    
-                /**
-                 * Encodes the specified TimeOfDay message. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.type.TimeOfDay
-                 * @static
-                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                TimeOfDay.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.hours != null && Object.hasOwnProperty.call(message, "hours"))
-                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.hours);
-                    if (message.minutes != null && Object.hasOwnProperty.call(message, "minutes"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.minutes);
-                    if (message.seconds != null && Object.hasOwnProperty.call(message, "seconds"))
-                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.seconds);
-                    if (message.nanos != null && Object.hasOwnProperty.call(message, "nanos"))
-                        writer.uint32(/* id 4, wireType 0 =*/32).int32(message.nanos);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified TimeOfDay message, length delimited. Does not implicitly {@link google.type.TimeOfDay.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.type.TimeOfDay
-                 * @static
-                 * @param {google.type.ITimeOfDay} message TimeOfDay message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                TimeOfDay.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a TimeOfDay message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.type.TimeOfDay
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.type.TimeOfDay} TimeOfDay
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                TimeOfDay.decode = function decode(reader, length) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.TimeOfDay();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        switch (tag >>> 3) {
-                        case 1:
-                            message.hours = reader.int32();
-                            break;
-                        case 2:
-                            message.minutes = reader.int32();
-                            break;
-                        case 3:
-                            message.seconds = reader.int32();
-                            break;
-                        case 4:
-                            message.nanos = reader.int32();
-                            break;
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a TimeOfDay message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.type.TimeOfDay
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.type.TimeOfDay} TimeOfDay
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                TimeOfDay.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a TimeOfDay message.
-                 * @function verify
-                 * @memberof google.type.TimeOfDay
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                TimeOfDay.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.hours != null && message.hasOwnProperty("hours"))
-                        if (!$util.isInteger(message.hours))
-                            return "hours: integer expected";
-                    if (message.minutes != null && message.hasOwnProperty("minutes"))
-                        if (!$util.isInteger(message.minutes))
-                            return "minutes: integer expected";
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        if (!$util.isInteger(message.seconds))
-                            return "seconds: integer expected";
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        if (!$util.isInteger(message.nanos))
-                            return "nanos: integer expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a TimeOfDay message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.type.TimeOfDay
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.type.TimeOfDay} TimeOfDay
-                 */
-                TimeOfDay.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.type.TimeOfDay)
-                        return object;
-                    var message = new $root.google.type.TimeOfDay();
-                    if (object.hours != null)
-                        message.hours = object.hours | 0;
-                    if (object.minutes != null)
-                        message.minutes = object.minutes | 0;
-                    if (object.seconds != null)
-                        message.seconds = object.seconds | 0;
-                    if (object.nanos != null)
-                        message.nanos = object.nanos | 0;
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a TimeOfDay message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.type.TimeOfDay
-                 * @static
-                 * @param {google.type.TimeOfDay} message TimeOfDay
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                TimeOfDay.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.defaults) {
-                        object.hours = 0;
-                        object.minutes = 0;
-                        object.seconds = 0;
-                        object.nanos = 0;
-                    }
-                    if (message.hours != null && message.hasOwnProperty("hours"))
-                        object.hours = message.hours;
-                    if (message.minutes != null && message.hasOwnProperty("minutes"))
-                        object.minutes = message.minutes;
-                    if (message.seconds != null && message.hasOwnProperty("seconds"))
-                        object.seconds = message.seconds;
-                    if (message.nanos != null && message.hasOwnProperty("nanos"))
-                        object.nanos = message.nanos;
-                    return object;
-                };
-    
-                /**
-                 * Converts this TimeOfDay to JSON.
-                 * @function toJSON
-                 * @memberof google.type.TimeOfDay
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                TimeOfDay.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                return TimeOfDay;
-            })();
-    
-            return type;
         })();
     
         google.longrunning = (function() {
