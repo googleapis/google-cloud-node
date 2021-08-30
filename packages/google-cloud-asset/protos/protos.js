@@ -32930,6 +32930,7 @@
                              * @property {google.cloud.osconfig.v1.Inventory.IWindowsUpdatePackage|null} [wuaPackage] SoftwarePackage wuaPackage
                              * @property {google.cloud.osconfig.v1.Inventory.IWindowsQuickFixEngineeringPackage|null} [qfePackage] SoftwarePackage qfePackage
                              * @property {google.cloud.osconfig.v1.Inventory.IVersionedPackage|null} [cosPackage] SoftwarePackage cosPackage
+                             * @property {google.cloud.osconfig.v1.Inventory.IWindowsApplication|null} [windowsApplication] SoftwarePackage windowsApplication
                              */
     
                             /**
@@ -33011,17 +33012,25 @@
                              */
                             SoftwarePackage.prototype.cosPackage = null;
     
+                            /**
+                             * SoftwarePackage windowsApplication.
+                             * @member {google.cloud.osconfig.v1.Inventory.IWindowsApplication|null|undefined} windowsApplication
+                             * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
+                             * @instance
+                             */
+                            SoftwarePackage.prototype.windowsApplication = null;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
                             /**
                              * SoftwarePackage details.
-                             * @member {"yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|undefined} details
+                             * @member {"yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|"windowsApplication"|undefined} details
                              * @memberof google.cloud.osconfig.v1.Inventory.SoftwarePackage
                              * @instance
                              */
                             Object.defineProperty(SoftwarePackage.prototype, "details", {
-                                get: $util.oneOfGetter($oneOfFields = ["yumPackage", "aptPackage", "zypperPackage", "googetPackage", "zypperPatch", "wuaPackage", "qfePackage", "cosPackage"]),
+                                get: $util.oneOfGetter($oneOfFields = ["yumPackage", "aptPackage", "zypperPackage", "googetPackage", "zypperPatch", "wuaPackage", "qfePackage", "cosPackage", "windowsApplication"]),
                                 set: $util.oneOfSetter($oneOfFields)
                             });
     
@@ -33065,6 +33074,8 @@
                                     $root.google.cloud.osconfig.v1.Inventory.WindowsQuickFixEngineeringPackage.encode(message.qfePackage, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.cosPackage != null && Object.hasOwnProperty.call(message, "cosPackage"))
                                     $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.encode(message.cosPackage, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.windowsApplication != null && Object.hasOwnProperty.call(message, "windowsApplication"))
+                                    $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.encode(message.windowsApplication, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -33122,6 +33133,9 @@
                                         break;
                                     case 8:
                                         message.cosPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.decode(reader, reader.uint32());
+                                        break;
+                                    case 9:
+                                        message.windowsApplication = $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -33237,6 +33251,16 @@
                                             return "cosPackage." + error;
                                     }
                                 }
+                                if (message.windowsApplication != null && message.hasOwnProperty("windowsApplication")) {
+                                    if (properties.details === 1)
+                                        return "details: multiple values";
+                                    properties.details = 1;
+                                    {
+                                        var error = $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.verify(message.windowsApplication);
+                                        if (error)
+                                            return "windowsApplication." + error;
+                                    }
+                                }
                                 return null;
                             };
     
@@ -33291,6 +33315,11 @@
                                     if (typeof object.cosPackage !== "object")
                                         throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.cosPackage: object expected");
                                     message.cosPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.fromObject(object.cosPackage);
+                                }
+                                if (object.windowsApplication != null) {
+                                    if (typeof object.windowsApplication !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.SoftwarePackage.windowsApplication: object expected");
+                                    message.windowsApplication = $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.fromObject(object.windowsApplication);
                                 }
                                 return message;
                             };
@@ -33347,6 +33376,11 @@
                                     object.cosPackage = $root.google.cloud.osconfig.v1.Inventory.VersionedPackage.toObject(message.cosPackage, options);
                                     if (options.oneofs)
                                         object.details = "cosPackage";
+                                }
+                                if (message.windowsApplication != null && message.hasOwnProperty("windowsApplication")) {
+                                    object.windowsApplication = $root.google.cloud.osconfig.v1.Inventory.WindowsApplication.toObject(message.windowsApplication, options);
+                                    if (options.oneofs)
+                                        object.details = "windowsApplication";
                                 }
                                 return object;
                             };
@@ -34742,6 +34776,287 @@
                             };
     
                             return WindowsQuickFixEngineeringPackage;
+                        })();
+    
+                        Inventory.WindowsApplication = (function() {
+    
+                            /**
+                             * Properties of a WindowsApplication.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @interface IWindowsApplication
+                             * @property {string|null} [displayName] WindowsApplication displayName
+                             * @property {string|null} [displayVersion] WindowsApplication displayVersion
+                             * @property {string|null} [publisher] WindowsApplication publisher
+                             * @property {google.type.IDate|null} [installDate] WindowsApplication installDate
+                             * @property {string|null} [helpLink] WindowsApplication helpLink
+                             */
+    
+                            /**
+                             * Constructs a new WindowsApplication.
+                             * @memberof google.cloud.osconfig.v1.Inventory
+                             * @classdesc Represents a WindowsApplication.
+                             * @implements IWindowsApplication
+                             * @constructor
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsApplication=} [properties] Properties to set
+                             */
+                            function WindowsApplication(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * WindowsApplication displayName.
+                             * @member {string} displayName
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.displayName = "";
+    
+                            /**
+                             * WindowsApplication displayVersion.
+                             * @member {string} displayVersion
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.displayVersion = "";
+    
+                            /**
+                             * WindowsApplication publisher.
+                             * @member {string} publisher
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.publisher = "";
+    
+                            /**
+                             * WindowsApplication installDate.
+                             * @member {google.type.IDate|null|undefined} installDate
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.installDate = null;
+    
+                            /**
+                             * WindowsApplication helpLink.
+                             * @member {string} helpLink
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             */
+                            WindowsApplication.prototype.helpLink = "";
+    
+                            /**
+                             * Creates a new WindowsApplication instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsApplication=} [properties] Properties to set
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsApplication} WindowsApplication instance
+                             */
+                            WindowsApplication.create = function create(properties) {
+                                return new WindowsApplication(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsApplication message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsApplication.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsApplication} message WindowsApplication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsApplication.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.displayName);
+                                if (message.displayVersion != null && Object.hasOwnProperty.call(message, "displayVersion"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayVersion);
+                                if (message.publisher != null && Object.hasOwnProperty.call(message, "publisher"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.publisher);
+                                if (message.installDate != null && Object.hasOwnProperty.call(message, "installDate"))
+                                    $root.google.type.Date.encode(message.installDate, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.helpLink != null && Object.hasOwnProperty.call(message, "helpLink"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.helpLink);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified WindowsApplication message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsApplication.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.IWindowsApplication} message WindowsApplication message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            WindowsApplication.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a WindowsApplication message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsApplication} WindowsApplication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsApplication.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.osconfig.v1.Inventory.WindowsApplication();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.displayName = reader.string();
+                                        break;
+                                    case 2:
+                                        message.displayVersion = reader.string();
+                                        break;
+                                    case 3:
+                                        message.publisher = reader.string();
+                                        break;
+                                    case 4:
+                                        message.installDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    case 5:
+                                        message.helpLink = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a WindowsApplication message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsApplication} WindowsApplication
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            WindowsApplication.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a WindowsApplication message.
+                             * @function verify
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            WindowsApplication.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    if (!$util.isString(message.displayName))
+                                        return "displayName: string expected";
+                                if (message.displayVersion != null && message.hasOwnProperty("displayVersion"))
+                                    if (!$util.isString(message.displayVersion))
+                                        return "displayVersion: string expected";
+                                if (message.publisher != null && message.hasOwnProperty("publisher"))
+                                    if (!$util.isString(message.publisher))
+                                        return "publisher: string expected";
+                                if (message.installDate != null && message.hasOwnProperty("installDate")) {
+                                    var error = $root.google.type.Date.verify(message.installDate);
+                                    if (error)
+                                        return "installDate." + error;
+                                }
+                                if (message.helpLink != null && message.hasOwnProperty("helpLink"))
+                                    if (!$util.isString(message.helpLink))
+                                        return "helpLink: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a WindowsApplication message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.osconfig.v1.Inventory.WindowsApplication} WindowsApplication
+                             */
+                            WindowsApplication.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.osconfig.v1.Inventory.WindowsApplication)
+                                    return object;
+                                var message = new $root.google.cloud.osconfig.v1.Inventory.WindowsApplication();
+                                if (object.displayName != null)
+                                    message.displayName = String(object.displayName);
+                                if (object.displayVersion != null)
+                                    message.displayVersion = String(object.displayVersion);
+                                if (object.publisher != null)
+                                    message.publisher = String(object.publisher);
+                                if (object.installDate != null) {
+                                    if (typeof object.installDate !== "object")
+                                        throw TypeError(".google.cloud.osconfig.v1.Inventory.WindowsApplication.installDate: object expected");
+                                    message.installDate = $root.google.type.Date.fromObject(object.installDate);
+                                }
+                                if (object.helpLink != null)
+                                    message.helpLink = String(object.helpLink);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a WindowsApplication message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @static
+                             * @param {google.cloud.osconfig.v1.Inventory.WindowsApplication} message WindowsApplication
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            WindowsApplication.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.displayName = "";
+                                    object.displayVersion = "";
+                                    object.publisher = "";
+                                    object.installDate = null;
+                                    object.helpLink = "";
+                                }
+                                if (message.displayName != null && message.hasOwnProperty("displayName"))
+                                    object.displayName = message.displayName;
+                                if (message.displayVersion != null && message.hasOwnProperty("displayVersion"))
+                                    object.displayVersion = message.displayVersion;
+                                if (message.publisher != null && message.hasOwnProperty("publisher"))
+                                    object.publisher = message.publisher;
+                                if (message.installDate != null && message.hasOwnProperty("installDate"))
+                                    object.installDate = $root.google.type.Date.toObject(message.installDate, options);
+                                if (message.helpLink != null && message.hasOwnProperty("helpLink"))
+                                    object.helpLink = message.helpLink;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this WindowsApplication to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.osconfig.v1.Inventory.WindowsApplication
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            WindowsApplication.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return WindowsApplication;
                         })();
     
                         return Inventory;
@@ -48529,6 +48844,238 @@
                 };
     
                 return Expr;
+            })();
+    
+            type.Date = (function() {
+    
+                /**
+                 * Properties of a Date.
+                 * @memberof google.type
+                 * @interface IDate
+                 * @property {number|null} [year] Date year
+                 * @property {number|null} [month] Date month
+                 * @property {number|null} [day] Date day
+                 */
+    
+                /**
+                 * Constructs a new Date.
+                 * @memberof google.type
+                 * @classdesc Represents a Date.
+                 * @implements IDate
+                 * @constructor
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 */
+                function Date(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Date year.
+                 * @member {number} year
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.year = 0;
+    
+                /**
+                 * Date month.
+                 * @member {number} month
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.month = 0;
+    
+                /**
+                 * Date day.
+                 * @member {number} day
+                 * @memberof google.type.Date
+                 * @instance
+                 */
+                Date.prototype.day = 0;
+    
+                /**
+                 * Creates a new Date instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate=} [properties] Properties to set
+                 * @returns {google.type.Date} Date instance
+                 */
+                Date.create = function create(properties) {
+                    return new Date(properties);
+                };
+    
+                /**
+                 * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.year != null && Object.hasOwnProperty.call(message, "year"))
+                        writer.uint32(/* id 1, wireType 0 =*/8).int32(message.year);
+                    if (message.month != null && Object.hasOwnProperty.call(message, "month"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).int32(message.month);
+                    if (message.day != null && Object.hasOwnProperty.call(message, "day"))
+                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.day);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.IDate} message Date message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Date.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decode = function decode(reader, length) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Date();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        switch (tag >>> 3) {
+                        case 1:
+                            message.year = reader.int32();
+                            break;
+                        case 2:
+                            message.month = reader.int32();
+                            break;
+                        case 3:
+                            message.day = reader.int32();
+                            break;
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a Date message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Date} Date
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Date.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a Date message.
+                 * @function verify
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Date.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        if (!$util.isInteger(message.year))
+                            return "year: integer expected";
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        if (!$util.isInteger(message.month))
+                            return "month: integer expected";
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        if (!$util.isInteger(message.day))
+                            return "day: integer expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a Date message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Date} Date
+                 */
+                Date.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Date)
+                        return object;
+                    var message = new $root.google.type.Date();
+                    if (object.year != null)
+                        message.year = object.year | 0;
+                    if (object.month != null)
+                        message.month = object.month | 0;
+                    if (object.day != null)
+                        message.day = object.day | 0;
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a Date message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Date
+                 * @static
+                 * @param {google.type.Date} message Date
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Date.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.year = 0;
+                        object.month = 0;
+                        object.day = 0;
+                    }
+                    if (message.year != null && message.hasOwnProperty("year"))
+                        object.year = message.year;
+                    if (message.month != null && message.hasOwnProperty("month"))
+                        object.month = message.month;
+                    if (message.day != null && message.hasOwnProperty("day"))
+                        object.day = message.day;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Date to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Date
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Date.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                return Date;
             })();
     
             return type;

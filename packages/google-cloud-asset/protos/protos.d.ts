@@ -13427,6 +13427,9 @@ export namespace google {
 
                         /** SoftwarePackage cosPackage */
                         cosPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
+
+                        /** SoftwarePackage windowsApplication */
+                        windowsApplication?: (google.cloud.osconfig.v1.Inventory.IWindowsApplication|null);
                     }
 
                     /** Represents a SoftwarePackage. */
@@ -13462,8 +13465,11 @@ export namespace google {
                         /** SoftwarePackage cosPackage. */
                         public cosPackage?: (google.cloud.osconfig.v1.Inventory.IVersionedPackage|null);
 
+                        /** SoftwarePackage windowsApplication. */
+                        public windowsApplication?: (google.cloud.osconfig.v1.Inventory.IWindowsApplication|null);
+
                         /** SoftwarePackage details. */
-                        public details?: ("yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage");
+                        public details?: ("yumPackage"|"aptPackage"|"zypperPackage"|"googetPackage"|"zypperPatch"|"wuaPackage"|"qfePackage"|"cosPackage"|"windowsApplication");
 
                         /**
                          * Creates a new SoftwarePackage instance using the specified properties.
@@ -14086,6 +14092,120 @@ export namespace google {
 
                         /**
                          * Converts this WindowsQuickFixEngineeringPackage to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a WindowsApplication. */
+                    interface IWindowsApplication {
+
+                        /** WindowsApplication displayName */
+                        displayName?: (string|null);
+
+                        /** WindowsApplication displayVersion */
+                        displayVersion?: (string|null);
+
+                        /** WindowsApplication publisher */
+                        publisher?: (string|null);
+
+                        /** WindowsApplication installDate */
+                        installDate?: (google.type.IDate|null);
+
+                        /** WindowsApplication helpLink */
+                        helpLink?: (string|null);
+                    }
+
+                    /** Represents a WindowsApplication. */
+                    class WindowsApplication implements IWindowsApplication {
+
+                        /**
+                         * Constructs a new WindowsApplication.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.osconfig.v1.Inventory.IWindowsApplication);
+
+                        /** WindowsApplication displayName. */
+                        public displayName: string;
+
+                        /** WindowsApplication displayVersion. */
+                        public displayVersion: string;
+
+                        /** WindowsApplication publisher. */
+                        public publisher: string;
+
+                        /** WindowsApplication installDate. */
+                        public installDate?: (google.type.IDate|null);
+
+                        /** WindowsApplication helpLink. */
+                        public helpLink: string;
+
+                        /**
+                         * Creates a new WindowsApplication instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns WindowsApplication instance
+                         */
+                        public static create(properties?: google.cloud.osconfig.v1.Inventory.IWindowsApplication): google.cloud.osconfig.v1.Inventory.WindowsApplication;
+
+                        /**
+                         * Encodes the specified WindowsApplication message. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsApplication.verify|verify} messages.
+                         * @param message WindowsApplication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.osconfig.v1.Inventory.IWindowsApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified WindowsApplication message, length delimited. Does not implicitly {@link google.cloud.osconfig.v1.Inventory.WindowsApplication.verify|verify} messages.
+                         * @param message WindowsApplication message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.osconfig.v1.Inventory.IWindowsApplication, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a WindowsApplication message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns WindowsApplication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.osconfig.v1.Inventory.WindowsApplication;
+
+                        /**
+                         * Decodes a WindowsApplication message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns WindowsApplication
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.osconfig.v1.Inventory.WindowsApplication;
+
+                        /**
+                         * Verifies a WindowsApplication message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a WindowsApplication message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns WindowsApplication
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.osconfig.v1.Inventory.WindowsApplication;
+
+                        /**
+                         * Creates a plain object from a WindowsApplication message. Also converts values to other types if specified.
+                         * @param message WindowsApplication
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.osconfig.v1.Inventory.WindowsApplication, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this WindowsApplication to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };
@@ -19240,6 +19360,108 @@ export namespace google {
 
             /**
              * Converts this Expr to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+        }
+
+        /** Properties of a Date. */
+        interface IDate {
+
+            /** Date year */
+            year?: (number|null);
+
+            /** Date month */
+            month?: (number|null);
+
+            /** Date day */
+            day?: (number|null);
+        }
+
+        /** Represents a Date. */
+        class Date implements IDate {
+
+            /**
+             * Constructs a new Date.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IDate);
+
+            /** Date year. */
+            public year: number;
+
+            /** Date month. */
+            public month: number;
+
+            /** Date day. */
+            public day: number;
+
+            /**
+             * Creates a new Date instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Date instance
+             */
+            public static create(properties?: google.type.IDate): google.type.Date;
+
+            /**
+             * Encodes the specified Date message. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Date message, length delimited. Does not implicitly {@link google.type.Date.verify|verify} messages.
+             * @param message Date message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IDate, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Date;
+
+            /**
+             * Decodes a Date message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Date
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Date;
+
+            /**
+             * Verifies a Date message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Date message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Date
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Date;
+
+            /**
+             * Creates a plain object from a Date message. Also converts values to other types if specified.
+             * @param message Date
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Date, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Date to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
