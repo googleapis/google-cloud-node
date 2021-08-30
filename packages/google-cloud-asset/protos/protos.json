@@ -3269,7 +3269,8 @@
                                 "zypperPatch",
                                 "wuaPackage",
                                 "qfePackage",
-                                "cosPackage"
+                                "cosPackage",
+                                "windowsApplication"
                               ]
                             }
                           },
@@ -3305,6 +3306,10 @@
                             "cosPackage": {
                               "type": "VersionedPackage",
                               "id": 8
+                            },
+                            "windowsApplication": {
+                              "type": "WindowsApplication",
+                              "id": 9
                             }
                           }
                         },
@@ -3417,6 +3422,30 @@
                             },
                             "installTime": {
                               "type": "google.protobuf.Timestamp",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "WindowsApplication": {
+                          "fields": {
+                            "displayName": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayVersion": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "publisher": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "installDate": {
+                              "type": "google.type.Date",
+                              "id": 4
+                            },
+                            "helpLink": {
+                              "type": "string",
                               "id": 5
                             }
                           }
@@ -4771,11 +4800,12 @@
         },
         "type": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/type/expr;expr",
+            "go_package": "google.golang.org/genproto/googleapis/type/date;date",
             "java_multiple_files": true,
-            "java_outer_classname": "ExprProto",
+            "java_outer_classname": "DateProto",
             "java_package": "com.google.type",
-            "objc_class_prefix": "GTP"
+            "objc_class_prefix": "GTP",
+            "cc_enable_arenas": true
           },
           "nested": {
             "Expr": {
@@ -4795,6 +4825,22 @@
                 "location": {
                   "type": "string",
                   "id": 4
+                }
+              }
+            },
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
                 }
               }
             }
