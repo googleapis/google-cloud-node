@@ -20,7 +20,17 @@ and a variety of common application components including Cassandra, Nginx, Apach
   * [Alerts.list Policies](#alerts.list-policies)
   * [Alerts.replace Channels](#alerts.replace-channels)
   * [Alerts.restore Policies](#alerts.restore-policies)
-  * [Metrics](#metrics)
+  * [Create Metric Descriptor](#create-metric-descriptor)
+  * [Delete Metric Descriptor](#delete-metric-descriptor)
+  * [Get Metric Descriptor](#get-metric-descriptor)
+  * [Get Monitored Resource Descriptor](#get-monitored-resource-descriptor)
+  * [List Metric Descriptors](#list-metric-descriptors)
+  * [List Monitored Resource Descriptors](#list-monitored-resource-descriptors)
+  * [Read Time Series Aggregate](#read-time-series-aggregate)
+  * [Read Time Series Data](#read-time-series-data)
+  * [Read Time Series Fields](#read-time-series-fields)
+  * [Read Time Series Reduce](#read-time-series-reduce)
+  * [Write Time Series Data](#write-time-series-data)
   * [Quickstart](#quickstart)
   * [Uptime](#uptime)
 
@@ -141,16 +151,202 @@ __Usage:__
 
 
 
-### Metrics
+### Create Metric Descriptor
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.js).
+Creates an example 'custom.googleapis.com/stores/daily_sales' custom metric descriptor.
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.js,samples/README.md)
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.createDescriptor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.createDescriptor.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/metrics.js`
+`node metrics.createDescriptor.js your-project-id`
+
+
+-----
+
+
+
+
+### Delete Metric Descriptor
+
+Deletes a custom metric descriptor.
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.deleteDescriptor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.deleteDescriptor.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.deleteDescriptor.js your-project-id custom.googleapis.com/stores/daily_sales`
+
+
+-----
+
+
+
+
+### Get Metric Descriptor
+
+Gets a custom metric descriptor
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.getDescriptor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.getDescriptor.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.getDescriptor.js your-project-id custom.googleapis.com/your/id`
+
+
+-----
+
+
+
+
+### Get Monitored Resource Descriptor
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.getMonitoredResourceDescriptor.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.getMonitoredResourceDescriptor.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.getMonitoredResourceDescriptor.js your-project-id some-resource-type`
+
+
+-----
+
+
+
+
+### List Metric Descriptors
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.listDescriptors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.listDescriptors.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.listDescriptors.js your-project-id`
+
+
+-----
+
+
+
+
+### List Monitored Resource Descriptors
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.listMonitoredResourceDescriptors.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.listMonitoredResourceDescriptors.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.listMonitoredResourceDescriptors.js your-project-id`
+
+
+-----
+
+
+
+
+### Read Time Series Aggregate
+
+Aggregates time series data that matches 'compute.googleapis.com/instance/cpu/utilization'.
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesAggregate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesAggregate.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.readTimeSeriesAggregate.js your-project-id`
+
+
+-----
+
+
+
+
+### Read Time Series Data
+
+Reads time series data that matches the given filter.
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesData.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesData.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.readTimeSeriesData.js your-project-id 'metric.type="compute.googleapis.com/instance/cpu/utilization"'`
+
+
+-----
+
+
+
+
+### Read Time Series Fields
+
+Reads headers of time series data that matches 'compute.googleapis.com/instance/cpu/utilization'.
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesFields.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesFields.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.readTimeSeriesFields.js your-project-id`
+
+
+-----
+
+
+
+
+### Read Time Series Reduce
+
+Reduces time series data that matches 'compute.googleapis.com/instance/cpu/utilization'.
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesReduce.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesReduce.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.readTimeSeriesReduce.js your-project-id`
+
+
+-----
+
+
+
+
+### Write Time Series Data
+
+Writes example time series data to 'custom.googleapis.com/stores/daily_sales'.
+
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.writeTimeSeriesData.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.writeTimeSeriesData.js,samples/README.md)
+
+__Usage:__
+
+
+`node metrics.writeTimeSeriesData.js your-project-id`
 
 
 -----
