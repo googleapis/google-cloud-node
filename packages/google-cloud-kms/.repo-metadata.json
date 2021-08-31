@@ -10,5 +10,6 @@
   "product_documentation": "https://cloud.google.com/kms",
   "requires_billing": true,
   "name": "kms",
-  "issue_tracker": "https://issuetracker.google.com/savedsearches/5264932"
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/5264932",
+  "codeowner_team": "@googleapis/api-kms"
 }
