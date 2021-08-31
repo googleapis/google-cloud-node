@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.7.0...v1.8.0) (2021-08-30)
+
+
+### Features
+
+* Update osconfig v1 and v1alpha with WindowsApplication ([#142](https://www.github.com/googleapis/nodejs-os-config/issues/142)) ([6ad0c6d](https://www.github.com/googleapis/nodejs-os-config/commit/6ad0c6d547891986e3080fbcfc73ee64f7a31681))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.6.6...v1.7.0) (2021-08-23)
 
 
