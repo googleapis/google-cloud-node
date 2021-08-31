@@ -45050,6 +45050,8 @@
                          * @memberof google.cloud.gkehub.v1alpha2
                          * @interface IMembershipEndpoint
                          * @property {google.cloud.gkehub.v1alpha2.IGkeCluster|null} [gkeCluster] MembershipEndpoint gkeCluster
+                         * @property {google.cloud.gkehub.v1alpha2.IOnPremCluster|null} [onPremCluster] MembershipEndpoint onPremCluster
+                         * @property {google.cloud.gkehub.v1alpha2.IMultiCloudCluster|null} [multiCloudCluster] MembershipEndpoint multiCloudCluster
                          * @property {google.cloud.gkehub.v1alpha2.IKubernetesMetadata|null} [kubernetesMetadata] MembershipEndpoint kubernetesMetadata
                          * @property {google.cloud.gkehub.v1alpha2.IKubernetesResource|null} [kubernetesResource] MembershipEndpoint kubernetesResource
                          */
@@ -45078,6 +45080,22 @@
                         MembershipEndpoint.prototype.gkeCluster = null;
     
                         /**
+                         * MembershipEndpoint onPremCluster.
+                         * @member {google.cloud.gkehub.v1alpha2.IOnPremCluster|null|undefined} onPremCluster
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         */
+                        MembershipEndpoint.prototype.onPremCluster = null;
+    
+                        /**
+                         * MembershipEndpoint multiCloudCluster.
+                         * @member {google.cloud.gkehub.v1alpha2.IMultiCloudCluster|null|undefined} multiCloudCluster
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         */
+                        MembershipEndpoint.prototype.multiCloudCluster = null;
+    
+                        /**
                          * MembershipEndpoint kubernetesMetadata.
                          * @member {google.cloud.gkehub.v1alpha2.IKubernetesMetadata|null|undefined} kubernetesMetadata
                          * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
@@ -45092,6 +45110,20 @@
                          * @instance
                          */
                         MembershipEndpoint.prototype.kubernetesResource = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MembershipEndpoint type.
+                         * @member {"gkeCluster"|"onPremCluster"|"multiCloudCluster"|undefined} type
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         */
+                        Object.defineProperty(MembershipEndpoint.prototype, "type", {
+                            get: $util.oneOfGetter($oneOfFields = ["gkeCluster", "onPremCluster", "multiCloudCluster"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new MembershipEndpoint instance using the specified properties.
@@ -45123,6 +45155,10 @@
                                 $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata.encode(message.kubernetesMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                             if (message.kubernetesResource != null && Object.hasOwnProperty.call(message, "kubernetesResource"))
                                 $root.google.cloud.gkehub.v1alpha2.KubernetesResource.encode(message.kubernetesResource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.onPremCluster != null && Object.hasOwnProperty.call(message, "onPremCluster"))
+                                $root.google.cloud.gkehub.v1alpha2.OnPremCluster.encode(message.onPremCluster, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.multiCloudCluster != null && Object.hasOwnProperty.call(message, "multiCloudCluster"))
+                                $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.encode(message.multiCloudCluster, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             return writer;
                         };
     
@@ -45159,6 +45195,12 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.gkeCluster = $root.google.cloud.gkehub.v1alpha2.GkeCluster.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.onPremCluster = $root.google.cloud.gkehub.v1alpha2.OnPremCluster.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.multiCloudCluster = $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.decode(reader, reader.uint32());
                                     break;
                                 case 2:
                                     message.kubernetesMetadata = $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata.decode(reader, reader.uint32());
@@ -45201,10 +45243,34 @@
                         MembershipEndpoint.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.gkeCluster != null && message.hasOwnProperty("gkeCluster")) {
-                                var error = $root.google.cloud.gkehub.v1alpha2.GkeCluster.verify(message.gkeCluster);
-                                if (error)
-                                    return "gkeCluster." + error;
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.GkeCluster.verify(message.gkeCluster);
+                                    if (error)
+                                        return "gkeCluster." + error;
+                                }
+                            }
+                            if (message.onPremCluster != null && message.hasOwnProperty("onPremCluster")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.OnPremCluster.verify(message.onPremCluster);
+                                    if (error)
+                                        return "onPremCluster." + error;
+                                }
+                            }
+                            if (message.multiCloudCluster != null && message.hasOwnProperty("multiCloudCluster")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.verify(message.multiCloudCluster);
+                                    if (error)
+                                        return "multiCloudCluster." + error;
+                                }
                             }
                             if (message.kubernetesMetadata != null && message.hasOwnProperty("kubernetesMetadata")) {
                                 var error = $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata.verify(message.kubernetesMetadata);
@@ -45236,6 +45302,16 @@
                                     throw TypeError(".google.cloud.gkehub.v1alpha2.MembershipEndpoint.gkeCluster: object expected");
                                 message.gkeCluster = $root.google.cloud.gkehub.v1alpha2.GkeCluster.fromObject(object.gkeCluster);
                             }
+                            if (object.onPremCluster != null) {
+                                if (typeof object.onPremCluster !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.MembershipEndpoint.onPremCluster: object expected");
+                                message.onPremCluster = $root.google.cloud.gkehub.v1alpha2.OnPremCluster.fromObject(object.onPremCluster);
+                            }
+                            if (object.multiCloudCluster != null) {
+                                if (typeof object.multiCloudCluster !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.MembershipEndpoint.multiCloudCluster: object expected");
+                                message.multiCloudCluster = $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.fromObject(object.multiCloudCluster);
+                            }
                             if (object.kubernetesMetadata != null) {
                                 if (typeof object.kubernetesMetadata !== "object")
                                     throw TypeError(".google.cloud.gkehub.v1alpha2.MembershipEndpoint.kubernetesMetadata: object expected");
@@ -45263,16 +45339,28 @@
                                 options = {};
                             var object = {};
                             if (options.defaults) {
-                                object.gkeCluster = null;
                                 object.kubernetesMetadata = null;
                                 object.kubernetesResource = null;
                             }
-                            if (message.gkeCluster != null && message.hasOwnProperty("gkeCluster"))
+                            if (message.gkeCluster != null && message.hasOwnProperty("gkeCluster")) {
                                 object.gkeCluster = $root.google.cloud.gkehub.v1alpha2.GkeCluster.toObject(message.gkeCluster, options);
+                                if (options.oneofs)
+                                    object.type = "gkeCluster";
+                            }
                             if (message.kubernetesMetadata != null && message.hasOwnProperty("kubernetesMetadata"))
                                 object.kubernetesMetadata = $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata.toObject(message.kubernetesMetadata, options);
                             if (message.kubernetesResource != null && message.hasOwnProperty("kubernetesResource"))
                                 object.kubernetesResource = $root.google.cloud.gkehub.v1alpha2.KubernetesResource.toObject(message.kubernetesResource, options);
+                            if (message.onPremCluster != null && message.hasOwnProperty("onPremCluster")) {
+                                object.onPremCluster = $root.google.cloud.gkehub.v1alpha2.OnPremCluster.toObject(message.onPremCluster, options);
+                                if (options.oneofs)
+                                    object.type = "onPremCluster";
+                            }
+                            if (message.multiCloudCluster != null && message.hasOwnProperty("multiCloudCluster")) {
+                                object.multiCloudCluster = $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.toObject(message.multiCloudCluster, options);
+                                if (options.oneofs)
+                                    object.type = "multiCloudCluster";
+                            }
                             return object;
                         };
     
@@ -45810,6 +45898,7 @@
                          * @memberof google.cloud.gkehub.v1alpha2
                          * @interface IGkeCluster
                          * @property {string|null} [resourceLink] GkeCluster resourceLink
+                         * @property {boolean|null} [clusterMissing] GkeCluster clusterMissing
                          */
     
                         /**
@@ -45834,6 +45923,14 @@
                          * @instance
                          */
                         GkeCluster.prototype.resourceLink = "";
+    
+                        /**
+                         * GkeCluster clusterMissing.
+                         * @member {boolean} clusterMissing
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @instance
+                         */
+                        GkeCluster.prototype.clusterMissing = false;
     
                         /**
                          * Creates a new GkeCluster instance using the specified properties.
@@ -45861,6 +45958,8 @@
                                 writer = $Writer.create();
                             if (message.resourceLink != null && Object.hasOwnProperty.call(message, "resourceLink"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceLink);
+                            if (message.clusterMissing != null && Object.hasOwnProperty.call(message, "clusterMissing"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clusterMissing);
                             return writer;
                         };
     
@@ -45897,6 +45996,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.resourceLink = reader.string();
+                                    break;
+                                case 2:
+                                    message.clusterMissing = reader.bool();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -45936,6 +46038,9 @@
                             if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
                                 if (!$util.isString(message.resourceLink))
                                     return "resourceLink: string expected";
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                if (typeof message.clusterMissing !== "boolean")
+                                    return "clusterMissing: boolean expected";
                             return null;
                         };
     
@@ -45953,6 +46058,8 @@
                             var message = new $root.google.cloud.gkehub.v1alpha2.GkeCluster();
                             if (object.resourceLink != null)
                                 message.resourceLink = String(object.resourceLink);
+                            if (object.clusterMissing != null)
+                                message.clusterMissing = Boolean(object.clusterMissing);
                             return message;
                         };
     
@@ -45969,10 +46076,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.resourceLink = "";
+                                object.clusterMissing = false;
+                            }
                             if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
                                 object.resourceLink = message.resourceLink;
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                object.clusterMissing = message.clusterMissing;
                             return object;
                         };
     
@@ -45988,6 +46099,448 @@
                         };
     
                         return GkeCluster;
+                    })();
+    
+                    v1alpha2.OnPremCluster = (function() {
+    
+                        /**
+                         * Properties of an OnPremCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IOnPremCluster
+                         * @property {string|null} [resourceLink] OnPremCluster resourceLink
+                         * @property {boolean|null} [clusterMissing] OnPremCluster clusterMissing
+                         * @property {boolean|null} [adminCluster] OnPremCluster adminCluster
+                         */
+    
+                        /**
+                         * Constructs a new OnPremCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents an OnPremCluster.
+                         * @implements IOnPremCluster
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IOnPremCluster=} [properties] Properties to set
+                         */
+                        function OnPremCluster(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OnPremCluster resourceLink.
+                         * @member {string} resourceLink
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @instance
+                         */
+                        OnPremCluster.prototype.resourceLink = "";
+    
+                        /**
+                         * OnPremCluster clusterMissing.
+                         * @member {boolean} clusterMissing
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @instance
+                         */
+                        OnPremCluster.prototype.clusterMissing = false;
+    
+                        /**
+                         * OnPremCluster adminCluster.
+                         * @member {boolean} adminCluster
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @instance
+                         */
+                        OnPremCluster.prototype.adminCluster = false;
+    
+                        /**
+                         * Creates a new OnPremCluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IOnPremCluster=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.OnPremCluster} OnPremCluster instance
+                         */
+                        OnPremCluster.create = function create(properties) {
+                            return new OnPremCluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OnPremCluster message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OnPremCluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IOnPremCluster} message OnPremCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnPremCluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceLink != null && Object.hasOwnProperty.call(message, "resourceLink"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceLink);
+                            if (message.clusterMissing != null && Object.hasOwnProperty.call(message, "clusterMissing"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clusterMissing);
+                            if (message.adminCluster != null && Object.hasOwnProperty.call(message, "adminCluster"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.adminCluster);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OnPremCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OnPremCluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IOnPremCluster} message OnPremCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnPremCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OnPremCluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.OnPremCluster} OnPremCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnPremCluster.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.OnPremCluster();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.resourceLink = reader.string();
+                                    break;
+                                case 2:
+                                    message.clusterMissing = reader.bool();
+                                    break;
+                                case 3:
+                                    message.adminCluster = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OnPremCluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.OnPremCluster} OnPremCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnPremCluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OnPremCluster message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OnPremCluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                if (!$util.isString(message.resourceLink))
+                                    return "resourceLink: string expected";
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                if (typeof message.clusterMissing !== "boolean")
+                                    return "clusterMissing: boolean expected";
+                            if (message.adminCluster != null && message.hasOwnProperty("adminCluster"))
+                                if (typeof message.adminCluster !== "boolean")
+                                    return "adminCluster: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OnPremCluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.OnPremCluster} OnPremCluster
+                         */
+                        OnPremCluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.OnPremCluster)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.OnPremCluster();
+                            if (object.resourceLink != null)
+                                message.resourceLink = String(object.resourceLink);
+                            if (object.clusterMissing != null)
+                                message.clusterMissing = Boolean(object.clusterMissing);
+                            if (object.adminCluster != null)
+                                message.adminCluster = Boolean(object.adminCluster);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OnPremCluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.OnPremCluster} message OnPremCluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OnPremCluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.resourceLink = "";
+                                object.clusterMissing = false;
+                                object.adminCluster = false;
+                            }
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                object.resourceLink = message.resourceLink;
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                object.clusterMissing = message.clusterMissing;
+                            if (message.adminCluster != null && message.hasOwnProperty("adminCluster"))
+                                object.adminCluster = message.adminCluster;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OnPremCluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OnPremCluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return OnPremCluster;
+                    })();
+    
+                    v1alpha2.MultiCloudCluster = (function() {
+    
+                        /**
+                         * Properties of a MultiCloudCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IMultiCloudCluster
+                         * @property {string|null} [resourceLink] MultiCloudCluster resourceLink
+                         * @property {boolean|null} [clusterMissing] MultiCloudCluster clusterMissing
+                         */
+    
+                        /**
+                         * Constructs a new MultiCloudCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a MultiCloudCluster.
+                         * @implements IMultiCloudCluster
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IMultiCloudCluster=} [properties] Properties to set
+                         */
+                        function MultiCloudCluster(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultiCloudCluster resourceLink.
+                         * @member {string} resourceLink
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @instance
+                         */
+                        MultiCloudCluster.prototype.resourceLink = "";
+    
+                        /**
+                         * MultiCloudCluster clusterMissing.
+                         * @member {boolean} clusterMissing
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @instance
+                         */
+                        MultiCloudCluster.prototype.clusterMissing = false;
+    
+                        /**
+                         * Creates a new MultiCloudCluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMultiCloudCluster=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.MultiCloudCluster} MultiCloudCluster instance
+                         */
+                        MultiCloudCluster.create = function create(properties) {
+                            return new MultiCloudCluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiCloudCluster message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MultiCloudCluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMultiCloudCluster} message MultiCloudCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiCloudCluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceLink != null && Object.hasOwnProperty.call(message, "resourceLink"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceLink);
+                            if (message.clusterMissing != null && Object.hasOwnProperty.call(message, "clusterMissing"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clusterMissing);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiCloudCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MultiCloudCluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMultiCloudCluster} message MultiCloudCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiCloudCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiCloudCluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.MultiCloudCluster} MultiCloudCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiCloudCluster.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.resourceLink = reader.string();
+                                    break;
+                                case 2:
+                                    message.clusterMissing = reader.bool();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiCloudCluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.MultiCloudCluster} MultiCloudCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiCloudCluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiCloudCluster message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiCloudCluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                if (!$util.isString(message.resourceLink))
+                                    return "resourceLink: string expected";
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                if (typeof message.clusterMissing !== "boolean")
+                                    return "clusterMissing: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiCloudCluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.MultiCloudCluster} MultiCloudCluster
+                         */
+                        MultiCloudCluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster();
+                            if (object.resourceLink != null)
+                                message.resourceLink = String(object.resourceLink);
+                            if (object.clusterMissing != null)
+                                message.clusterMissing = Boolean(object.clusterMissing);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiCloudCluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.MultiCloudCluster} message MultiCloudCluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiCloudCluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.resourceLink = "";
+                                object.clusterMissing = false;
+                            }
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                object.resourceLink = message.resourceLink;
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                object.clusterMissing = message.clusterMissing;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultiCloudCluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiCloudCluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MultiCloudCluster;
                     })();
     
                     v1alpha2.KubernetesMetadata = (function() {
