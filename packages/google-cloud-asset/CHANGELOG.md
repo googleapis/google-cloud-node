@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.18.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.17.0...v3.18.0) (2021-08-30)
+
+
+### Features
+
+* Update osconfig v1 and v1alpha with WindowsApplication ([#548](https://www.github.com/googleapis/nodejs-asset/issues/548)) ([c096de8](https://www.github.com/googleapis/nodejs-asset/commit/c096de83a906953a08508a799014a37b2806da61))
+
 ## [3.17.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.16.1...v3.17.0) (2021-08-23)
 
 
