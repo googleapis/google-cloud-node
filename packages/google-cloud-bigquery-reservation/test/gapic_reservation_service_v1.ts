@@ -2861,6 +2861,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
@@ -2887,6 +2888,7 @@ describe('v1.ReservationServiceClient', () => {
       ];
       client.innerApiCalls.searchAssignments = stubSimpleCall(expectedResponse);
       const [response] = await client.searchAssignments(request);
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.searchAssignments as SinonStub)
@@ -2900,6 +2902,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
@@ -2944,6 +2947,7 @@ describe('v1.ReservationServiceClient', () => {
         );
       });
       const response = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.searchAssignments as SinonStub)
@@ -2957,6 +2961,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
@@ -2976,6 +2981,7 @@ describe('v1.ReservationServiceClient', () => {
         expectedError
       );
       await assert.rejects(client.searchAssignments(request), expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.innerApiCalls.searchAssignments as SinonStub)
           .getCall(0)
@@ -2988,6 +2994,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
@@ -3027,6 +3034,7 @@ describe('v1.ReservationServiceClient', () => {
         });
       });
       const responses = await promise;
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert(
         (client.descriptors.page.searchAssignments.createStream as SinonStub)
@@ -3046,6 +3054,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
@@ -3075,6 +3084,7 @@ describe('v1.ReservationServiceClient', () => {
         });
       });
       await assert.rejects(promise, expectedError);
+      assert(stub.calledOnce);
       assert(
         (client.descriptors.page.searchAssignments.createStream as SinonStub)
           .getCall(0)
@@ -3093,6 +3103,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
@@ -3118,6 +3129,7 @@ describe('v1.ReservationServiceClient', () => {
       for await (const resource of iterable) {
         responses.push(resource!);
       }
+      assert(stub.calledOnce);
       assert.deepStrictEqual(responses, expectedResponse);
       assert.deepStrictEqual(
         (
@@ -3138,6 +3150,7 @@ describe('v1.ReservationServiceClient', () => {
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
+      const stub = sinon.stub(client, 'warn');
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.bigquery.reservation.v1.SearchAssignmentsRequest()
@@ -3155,6 +3168,7 @@ describe('v1.ReservationServiceClient', () => {
           responses.push(resource!);
         }
       });
+      assert(stub.calledOnce);
       assert.deepStrictEqual(
         (
           client.descriptors.page.searchAssignments.asyncIterate as SinonStub
@@ -3164,6 +3178,322 @@ describe('v1.ReservationServiceClient', () => {
       assert.strictEqual(
         (
           client.descriptors.page.searchAssignments.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('searchAllAssignments', () => {
+    it('invokes searchAllAssignments without error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+      ];
+      client.innerApiCalls.searchAllAssignments =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.searchAllAssignments(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.searchAllAssignments as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes searchAllAssignments without error using callback', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+      ];
+      client.innerApiCalls.searchAllAssignments =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchAllAssignments(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.bigquery.reservation.v1.IAssignment[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.searchAllAssignments as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes searchAllAssignments with error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchAllAssignments = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.searchAllAssignments(request), expectedError);
+      assert(
+        (client.innerApiCalls.searchAllAssignments as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes searchAllAssignmentsStream without error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+      ];
+      client.descriptors.page.searchAllAssignments.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.searchAllAssignmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.bigquery.reservation.v1.Assignment
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchAllAssignments, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchAllAssignments.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes searchAllAssignmentsStream with error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchAllAssignments.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.searchAllAssignmentsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.bigquery.reservation.v1.Assignment[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.bigquery.reservation.v1.Assignment
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.searchAllAssignments.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.searchAllAssignments, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchAllAssignments.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with searchAllAssignments without error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.bigquery.reservation.v1.Assignment()
+        ),
+      ];
+      client.descriptors.page.searchAllAssignments.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] =
+        [];
+      const iterable = client.searchAllAssignmentsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with searchAllAssignments with error', async () => {
+      const client = new reservationserviceModule.v1.ReservationServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchAllAssignments.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.searchAllAssignmentsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.bigquery.reservation.v1.IAssignment[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchAllAssignments.asyncIterate as SinonStub
         ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
         expectedHeaderRequestParams
       );

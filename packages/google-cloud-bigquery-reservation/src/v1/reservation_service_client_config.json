@@ -21,7 +21,7 @@
       },
       "methods": {
         "CreateReservation": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -41,12 +41,12 @@
           "retry_params_name": "default"
         },
         "UpdateReservation": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateCapacityCommitment": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -66,22 +66,22 @@
           "retry_params_name": "default"
         },
         "UpdateCapacityCommitment": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "SplitCapacityCommitment": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "MergeCapacityCommitments": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CreateAssignment": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -100,8 +100,12 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "SearchAllAssignments": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "MoveAssignment": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -111,7 +115,7 @@
           "retry_params_name": "default"
         },
         "UpdateBiReservation": {
-          "timeout_millis": 60000,
+          "timeout_millis": 300000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

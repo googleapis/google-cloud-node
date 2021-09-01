@@ -274,6 +274,20 @@ export namespace google {
                         public searchAssignments(request: google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest): Promise<google.cloud.bigquery.reservation.v1.SearchAssignmentsResponse>;
 
                         /**
+                         * Calls SearchAllAssignments.
+                         * @param request SearchAllAssignmentsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and SearchAllAssignmentsResponse
+                         */
+                        public searchAllAssignments(request: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.SearchAllAssignmentsCallback): void;
+
+                        /**
+                         * Calls SearchAllAssignments.
+                         * @param request SearchAllAssignmentsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public searchAllAssignments(request: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest): Promise<google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse>;
+
+                        /**
                          * Calls MoveAssignment.
                          * @param request MoveAssignmentRequest message or plain object
                          * @param callback Node-style callback called with the error, if any, and Assignment
@@ -431,6 +445,13 @@ export namespace google {
                         type SearchAssignmentsCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.SearchAssignmentsResponse) => void;
 
                         /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService#searchAllAssignments}.
+                         * @param error Error, if any
+                         * @param [response] SearchAllAssignmentsResponse
+                         */
+                        type SearchAllAssignmentsCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse) => void;
+
+                        /**
                          * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService#moveAssignment}.
                          * @param error Error, if any
                          * @param [response] Assignment
@@ -463,6 +484,12 @@ export namespace google {
 
                         /** Reservation ignoreIdleSlots */
                         ignoreIdleSlots?: (boolean|null);
+
+                        /** Reservation creationTime */
+                        creationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Reservation updateTime */
+                        updateTime?: (google.protobuf.ITimestamp|null);
                     }
 
                     /** Represents a Reservation. */
@@ -482,6 +509,12 @@ export namespace google {
 
                         /** Reservation ignoreIdleSlots. */
                         public ignoreIdleSlots: boolean;
+
+                        /** Reservation creationTime. */
+                        public creationTime?: (google.protobuf.ITimestamp|null);
+
+                        /** Reservation updateTime. */
+                        public updateTime?: (google.protobuf.ITimestamp|null);
 
                         /**
                          * Creates a new Reservation instance using the specified properties.
@@ -569,6 +602,9 @@ export namespace google {
                         /** CapacityCommitment state */
                         state?: (google.cloud.bigquery.reservation.v1.CapacityCommitment.State|keyof typeof google.cloud.bigquery.reservation.v1.CapacityCommitment.State|null);
 
+                        /** CapacityCommitment commitmentStartTime */
+                        commitmentStartTime?: (google.protobuf.ITimestamp|null);
+
                         /** CapacityCommitment commitmentEndTime */
                         commitmentEndTime?: (google.protobuf.ITimestamp|null);
 
@@ -599,6 +635,9 @@ export namespace google {
 
                         /** CapacityCommitment state. */
                         public state: (google.cloud.bigquery.reservation.v1.CapacityCommitment.State|keyof typeof google.cloud.bigquery.reservation.v1.CapacityCommitment.State);
+
+                        /** CapacityCommitment commitmentStartTime. */
+                        public commitmentStartTime?: (google.protobuf.ITimestamp|null);
 
                         /** CapacityCommitment commitmentEndTime. */
                         public commitmentEndTime?: (google.protobuf.ITimestamp|null);
@@ -1287,6 +1326,9 @@ export namespace google {
 
                         /** CreateCapacityCommitmentRequest enforceSingleAdminProjectPerOrg */
                         enforceSingleAdminProjectPerOrg?: (boolean|null);
+
+                        /** CreateCapacityCommitmentRequest capacityCommitmentId */
+                        capacityCommitmentId?: (string|null);
                     }
 
                     /** Represents a CreateCapacityCommitmentRequest. */
@@ -1306,6 +1348,9 @@ export namespace google {
 
                         /** CreateCapacityCommitmentRequest enforceSingleAdminProjectPerOrg. */
                         public enforceSingleAdminProjectPerOrg: boolean;
+
+                        /** CreateCapacityCommitmentRequest capacityCommitmentId. */
+                        public capacityCommitmentId: string;
 
                         /**
                          * Creates a new CreateCapacityCommitmentRequest instance using the specified properties.
@@ -1671,6 +1716,9 @@ export namespace google {
 
                         /** DeleteCapacityCommitmentRequest name */
                         name?: (string|null);
+
+                        /** DeleteCapacityCommitmentRequest force */
+                        force?: (boolean|null);
                     }
 
                     /** Represents a DeleteCapacityCommitmentRequest. */
@@ -1684,6 +1732,9 @@ export namespace google {
 
                         /** DeleteCapacityCommitmentRequest name. */
                         public name: string;
+
+                        /** DeleteCapacityCommitmentRequest force. */
+                        public force: boolean;
 
                         /**
                          * Creates a new DeleteCapacityCommitmentRequest instance using the specified properties.
@@ -2254,7 +2305,8 @@ export namespace google {
                         enum JobType {
                             JOB_TYPE_UNSPECIFIED = 0,
                             PIPELINE = 1,
-                            QUERY = 2
+                            QUERY = 2,
+                            ML_EXTERNAL = 3
                         }
 
                         /** State enum. */
@@ -2273,6 +2325,9 @@ export namespace google {
 
                         /** CreateAssignmentRequest assignment */
                         assignment?: (google.cloud.bigquery.reservation.v1.IAssignment|null);
+
+                        /** CreateAssignmentRequest assignmentId */
+                        assignmentId?: (string|null);
                     }
 
                     /** Represents a CreateAssignmentRequest. */
@@ -2289,6 +2344,9 @@ export namespace google {
 
                         /** CreateAssignmentRequest assignment. */
                         public assignment?: (google.cloud.bigquery.reservation.v1.IAssignment|null);
+
+                        /** CreateAssignmentRequest assignmentId. */
+                        public assignmentId: string;
 
                         /**
                          * Creates a new CreateAssignmentRequest instance using the specified properties.
@@ -2757,6 +2815,114 @@ export namespace google {
                         public toJSON(): { [k: string]: any };
                     }
 
+                    /** Properties of a SearchAllAssignmentsRequest. */
+                    interface ISearchAllAssignmentsRequest {
+
+                        /** SearchAllAssignmentsRequest parent */
+                        parent?: (string|null);
+
+                        /** SearchAllAssignmentsRequest query */
+                        query?: (string|null);
+
+                        /** SearchAllAssignmentsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** SearchAllAssignmentsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a SearchAllAssignmentsRequest. */
+                    class SearchAllAssignmentsRequest implements ISearchAllAssignmentsRequest {
+
+                        /**
+                         * Constructs a new SearchAllAssignmentsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest);
+
+                        /** SearchAllAssignmentsRequest parent. */
+                        public parent: string;
+
+                        /** SearchAllAssignmentsRequest query. */
+                        public query: string;
+
+                        /** SearchAllAssignmentsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** SearchAllAssignmentsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new SearchAllAssignmentsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchAllAssignmentsRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest): google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest;
+
+                        /**
+                         * Encodes the specified SearchAllAssignmentsRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest.verify|verify} messages.
+                         * @param message SearchAllAssignmentsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchAllAssignmentsRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest.verify|verify} messages.
+                         * @param message SearchAllAssignmentsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchAllAssignmentsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchAllAssignmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest;
+
+                        /**
+                         * Decodes a SearchAllAssignmentsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchAllAssignmentsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest;
+
+                        /**
+                         * Verifies a SearchAllAssignmentsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchAllAssignmentsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchAllAssignmentsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest;
+
+                        /**
+                         * Creates a plain object from a SearchAllAssignmentsRequest message. Also converts values to other types if specified.
+                         * @param message SearchAllAssignmentsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchAllAssignmentsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
                     /** Properties of a SearchAssignmentsResponse. */
                     interface ISearchAssignmentsResponse {
 
@@ -2848,6 +3014,102 @@ export namespace google {
 
                         /**
                          * Converts this SearchAssignmentsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+                    }
+
+                    /** Properties of a SearchAllAssignmentsResponse. */
+                    interface ISearchAllAssignmentsResponse {
+
+                        /** SearchAllAssignmentsResponse assignments */
+                        assignments?: (google.cloud.bigquery.reservation.v1.IAssignment[]|null);
+
+                        /** SearchAllAssignmentsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a SearchAllAssignmentsResponse. */
+                    class SearchAllAssignmentsResponse implements ISearchAllAssignmentsResponse {
+
+                        /**
+                         * Constructs a new SearchAllAssignmentsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse);
+
+                        /** SearchAllAssignmentsResponse assignments. */
+                        public assignments: google.cloud.bigquery.reservation.v1.IAssignment[];
+
+                        /** SearchAllAssignmentsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new SearchAllAssignmentsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SearchAllAssignmentsResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse): google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse;
+
+                        /**
+                         * Encodes the specified SearchAllAssignmentsResponse message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse.verify|verify} messages.
+                         * @param message SearchAllAssignmentsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SearchAllAssignmentsResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse.verify|verify} messages.
+                         * @param message SearchAllAssignmentsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SearchAllAssignmentsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SearchAllAssignmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse;
+
+                        /**
+                         * Decodes a SearchAllAssignmentsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SearchAllAssignmentsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse;
+
+                        /**
+                         * Verifies a SearchAllAssignmentsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SearchAllAssignmentsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SearchAllAssignmentsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse;
+
+                        /**
+                         * Creates a plain object from a SearchAllAssignmentsResponse message. Also converts values to other types if specified.
+                         * @param message SearchAllAssignmentsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SearchAllAssignmentsResponse to JSON.
                          * @returns JSON object
                          */
                         public toJSON(): { [k: string]: any };

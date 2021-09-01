@@ -182,7 +182,7 @@ export class ReservationServiceClient {
         'projects/{project}/locations/{location}/reservations/{reservation}/assignments/{assignment}'
       ),
       biReservationPathTemplate: new this._gaxModule.PathTemplate(
-        'projects/{project}/locations/{location}/bireservation'
+        'projects/{project}/locations/{location}/biReservation'
       ),
       capacityCommitmentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/capacityCommitments/{capacity_commitment}'
@@ -218,6 +218,11 @@ export class ReservationServiceClient {
         'assignments'
       ),
       searchAssignments: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'assignments'
+      ),
+      searchAllAssignments: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
         'assignments'
@@ -291,6 +296,7 @@ export class ReservationServiceClient {
       'listAssignments',
       'deleteAssignment',
       'searchAssignments',
+      'searchAllAssignments',
       'moveAssignment',
       'getBiReservation',
       'updateBiReservation',
@@ -826,6 +832,12 @@ export class ReservationServiceClient {
    * @param {boolean} request.enforceSingleAdminProjectPerOrg
    *   If true, fail the request if another project in the organization has a
    *   capacity commitment.
+   * @param {string} request.capacityCommitmentId
+   *   The optional capacity commitment ID. Capacity commitment name will be
+   *   generated automatically if this field is empty.
+   *   This field must only contain lower case alphanumeric characters or dash.
+   *   Max length is 64 characters.
+   *   NOTE: this ID won't be kept if the capacity commitment is split or merged.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1028,6 +1040,10 @@ export class ReservationServiceClient {
    * @param {string} request.name
    *   Required. Resource name of the capacity commitment to delete. E.g.,
    *      `projects/myproject/locations/US/capacityCommitments/123`
+   * @param {boolean} request.force
+   *   Can be used to force delete commitments even if assignments exist. Deleting
+   *   commitments with assignments may cause queries to fail if they no longer
+   *   have access to slots.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1481,6 +1497,11 @@ export class ReservationServiceClient {
    *   `project2`) could all be created and mapped to the same or different
    *   reservations.
    *
+   * "None" assignments represent an absence of the assignment. Projects
+   * assigned to None use on-demand pricing. To create a "None" assignment, use
+   * "none" as a reservation_id in the parent. Example parent:
+   * `projects/myproject/locations/US/reservations/none`.
+   *
    * Returns `google.rpc.Code.PERMISSION_DENIED` if user does not have
    * 'bigquery.admin' permissions on the project using the reservation
    * and the project that owns this reservation.
@@ -1495,6 +1516,11 @@ export class ReservationServiceClient {
    *   E.g. `projects/myproject/locations/US/reservations/team1-prod`
    * @param {google.cloud.bigquery.reservation.v1.Assignment} request.assignment
    *   Assignment resource to create.
+   * @param {string} request.assignmentId
+   *   The optional assignment ID. Assignment name will be generated automatically
+   *   if this field is empty.
+   *   This field must only contain lower case alphanumeric characters or dash.
+   *   Max length is 64 characters.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1810,7 +1836,7 @@ export class ReservationServiceClient {
    *   The request object that will be sent.
    * @param {string} request.name
    *   Required. Name of the requested reservation, for example:
-   *   `projects/{project_id}/locations/{location_id}/bireservation`
+   *   `projects/{project_id}/locations/{location_id}/biReservation`
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2627,7 +2653,7 @@ export class ReservationServiceClient {
     >
   ): void;
   /**
-   * Looks up assignments for a specified resource for a particular region.
+   * Deprecated: Looks up assignments for a specified resource for a particular region.
    * If the request is about a project:
    *
    * 1. Assignments created on the project will be returned if they exist.
@@ -2681,6 +2707,7 @@ export class ReservationServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   * @deprecated SearchAssignments is deprecated and may be removed in a future version.
    */
   searchAssignments(
     request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
@@ -2723,6 +2750,11 @@ export class ReservationServiceClient {
         parent: request.parent || '',
       });
     this.initialize();
+    this.warn(
+      'DEP$ReservationService-$SearchAssignments',
+      'SearchAssignments is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.innerApiCalls.searchAssignments(request, options, callback);
   }
 
@@ -2757,6 +2789,7 @@ export class ReservationServiceClient {
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
+   * @deprecated SearchAssignments is deprecated and may be removed in a future version.
    */
   searchAssignmentsStream(
     request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
@@ -2772,6 +2805,11 @@ export class ReservationServiceClient {
       });
     const callSettings = new gax.CallSettings(options);
     this.initialize();
+    this.warn(
+      'DEP$ReservationService-$SearchAssignments',
+      'SearchAssignments is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.searchAssignments.createStream(
       this.innerApiCalls.searchAssignments as gax.GaxCall,
       request,
@@ -2816,6 +2854,7 @@ export class ReservationServiceClient {
    * for await (const response of iterable) {
    *   // process response
    * }
+   * @deprecated SearchAssignments is deprecated and may be removed in a future version.
    */
   searchAssignmentsAsync(
     request?: protos.google.cloud.bigquery.reservation.v1.ISearchAssignmentsRequest,
@@ -2832,8 +2871,253 @@ export class ReservationServiceClient {
     options = options || {};
     const callSettings = new gax.CallSettings(options);
     this.initialize();
+    this.warn(
+      'DEP$ReservationService-$SearchAssignments',
+      'SearchAssignments is deprecated and may be removed in a future version.',
+      'DeprecationWarning'
+    );
     return this.descriptors.page.searchAssignments.asyncIterate(
       this.innerApiCalls['searchAssignments'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>;
+  }
+  searchAllAssignments(
+    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest | null,
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+    ]
+  >;
+  searchAllAssignments(
+    request: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      | protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.bigquery.reservation.v1.IAssignment
+    >
+  ): void;
+  searchAllAssignments(
+    request: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      | protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.bigquery.reservation.v1.IAssignment
+    >
+  ): void;
+  /**
+   * Looks up assignments for a specified resource for a particular region.
+   * If the request is about a project:
+   *
+   * 1. Assignments created on the project will be returned if they exist.
+   * 2. Otherwise assignments created on the closest ancestor will be
+   *    returned.
+   * 3. Assignments for different JobTypes will all be returned.
+   *
+   * The same logic applies if the request is about a folder.
+   *
+   * If the request is about an organization, then assignments created on the
+   * organization will be returned (organization doesn't have ancestors).
+   *
+   * Comparing to ListAssignments, there are some behavior
+   * differences:
+   *
+   * 1. permission on the assignee will be verified in this API.
+   * 2. Hierarchy lookup (project->folder->organization) happens in this API.
+   * 3. Parent here is `projects/* /locations/*`, instead of
+   *    `projects/* /locations/*reservations/*`.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name with location (project name could be the wildcard '-'),
+   *   e.g.:
+   *     `projects/-/locations/US`.
+   * @param {string} request.query
+   *   Please specify resource name as assignee in the query.
+   *
+   *   Examples:
+   *
+   *   * `assignee=projects/myproject`
+   *   * `assignee=folders/123`
+   *   * `assignee=organizations/456`
+   * @param {number} request.pageSize
+   *   The maximum number of items to return per page.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchAllAssignmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchAllAssignments(
+    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+          | protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+          | null
+          | undefined,
+          protos.google.cloud.bigquery.reservation.v1.IAssignment
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+      | protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+      | null
+      | undefined,
+      protos.google.cloud.bigquery.reservation.v1.IAssignment
+    >
+  ): Promise<
+    [
+      protos.google.cloud.bigquery.reservation.v1.IAssignment[],
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest | null,
+      protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchAllAssignments(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name with location (project name could be the wildcard '-'),
+   *   e.g.:
+   *     `projects/-/locations/US`.
+   * @param {string} request.query
+   *   Please specify resource name as assignee in the query.
+   *
+   *   Examples:
+   *
+   *   * `assignee=projects/myproject`
+   *   * `assignee=folders/123`
+   *   * `assignee=organizations/456`
+   * @param {number} request.pageSize
+   *   The maximum number of items to return per page.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchAllAssignmentsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchAllAssignmentsStream(
+    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchAllAssignments.createStream(
+      this.innerApiCalls.searchAllAssignments as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `searchAllAssignments`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name with location (project name could be the wildcard '-'),
+   *   e.g.:
+   *     `projects/-/locations/US`.
+   * @param {string} request.query
+   *   Please specify resource name as assignee in the query.
+   *
+   *   Examples:
+   *
+   *   * `assignee=projects/myproject`
+   *   * `assignee=folders/123`
+   *   * `assignee=organizations/456`
+   * @param {number} request.pageSize
+   *   The maximum number of items to return per page.
+   * @param {string} request.pageToken
+   *   The next_page_token value returned from a previous List request, if any.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Assignment]{@link google.cloud.bigquery.reservation.v1.Assignment}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.searchAllAssignmentsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  searchAllAssignmentsAsync(
+    request?: protos.google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchAllAssignments.asyncIterate(
+      this.innerApiCalls['searchAllAssignments'] as GaxCall,
       request as unknown as RequestType,
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>;

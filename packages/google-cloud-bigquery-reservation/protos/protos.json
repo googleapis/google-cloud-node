@@ -312,13 +312,35 @@
                               "requestType": "SearchAssignmentsRequest",
                               "responseType": "SearchAssignmentsResponse",
                               "options": {
+                                "deprecated": true,
                                 "(google.api.http).get": "/v1/{parent=projects/*/locations/*}:searchAssignments",
                                 "(google.api.method_signature)": "parent,query"
                               },
                               "parsedOptions": [
                                 {
+                                  "deprecated": true
+                                },
+                                {
                                   "(google.api.http)": {
                                     "get": "/v1/{parent=projects/*/locations/*}:searchAssignments"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "parent,query"
+                                }
+                              ]
+                            },
+                            "SearchAllAssignments": {
+                              "requestType": "SearchAllAssignmentsRequest",
+                              "responseType": "SearchAllAssignmentsResponse",
+                              "options": {
+                                "(google.api.http).get": "/v1/{parent=projects/*/locations/*}:searchAllAssignments",
+                                "(google.api.method_signature)": "parent,query"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "get": "/v1/{parent=projects/*/locations/*}:searchAllAssignments"
                                   }
                                 },
                                 {
@@ -403,6 +425,20 @@
                             "ignoreIdleSlots": {
                               "type": "bool",
                               "id": 4
+                            },
+                            "creationTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "updateTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           }
                         },
@@ -430,6 +466,13 @@
                             "state": {
                               "type": "State",
                               "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "commitmentStartTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 9,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -579,6 +622,10 @@
                             "enforceSingleAdminProjectPerOrg": {
                               "type": "bool",
                               "id": 4
+                            },
+                            "capacityCommitmentId": {
+                              "type": "string",
+                              "id": 5
                             }
                           }
                         },
@@ -636,6 +683,10 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "bigqueryreservation.googleapis.com/CapacityCommitment"
                               }
+                            },
+                            "force": {
+                              "type": "bool",
+                              "id": 3
                             }
                           }
                         },
@@ -729,7 +780,8 @@
                               "values": {
                                 "JOB_TYPE_UNSPECIFIED": 0,
                                 "PIPELINE": 1,
-                                "QUERY": 2
+                                "QUERY": 2,
+                                "ML_EXTERNAL": 3
                               }
                             },
                             "State": {
@@ -754,6 +806,10 @@
                             "assignment": {
                               "type": "Assignment",
                               "id": 2
+                            },
+                            "assignmentId": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },
@@ -826,7 +882,44 @@
                             }
                           }
                         },
+                        "SearchAllAssignmentsRequest": {
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                              }
+                            },
+                            "query": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "pageSize": {
+                              "type": "int32",
+                              "id": 3
+                            },
+                            "pageToken": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
                         "SearchAssignmentsResponse": {
+                          "fields": {
+                            "assignments": {
+                              "rule": "repeated",
+                              "type": "Assignment",
+                              "id": 1
+                            },
+                            "nextPageToken": {
+                              "type": "string",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "SearchAllAssignmentsResponse": {
                           "fields": {
                             "assignments": {
                               "rule": "repeated",
@@ -861,7 +954,7 @@
                         "BiReservation": {
                           "options": {
                             "(google.api.resource).type": "bigqueryreservation.googleapis.com/BiReservation",
-                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/bireservation"
+                            "(google.api.resource).pattern": "projects/{project}/locations/{location}/biReservation"
                           },
                           "fields": {
                             "name": {

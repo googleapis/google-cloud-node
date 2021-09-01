@@ -636,6 +636,39 @@
                              */
     
                             /**
+                             * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService#searchAllAssignments}.
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @typedef SearchAllAssignmentsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse} [response] SearchAllAssignmentsResponse
+                             */
+    
+                            /**
+                             * Calls SearchAllAssignments.
+                             * @function searchAllAssignments
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest} request SearchAllAssignmentsRequest message or plain object
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationService.SearchAllAssignmentsCallback} callback Node-style callback called with the error, if any, and SearchAllAssignmentsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReservationService.prototype.searchAllAssignments = function searchAllAssignments(request, callback) {
+                                return this.rpcCall(searchAllAssignments, $root.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest, $root.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse, request, callback);
+                            }, "name", { value: "SearchAllAssignments" });
+    
+                            /**
+                             * Calls SearchAllAssignments.
+                             * @function searchAllAssignments
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest} request SearchAllAssignmentsRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
                              * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService#moveAssignment}.
                              * @memberof google.cloud.bigquery.reservation.v1.ReservationService
                              * @typedef MoveAssignmentCallback
@@ -746,6 +779,8 @@
                              * @property {string|null} [name] Reservation name
                              * @property {number|Long|null} [slotCapacity] Reservation slotCapacity
                              * @property {boolean|null} [ignoreIdleSlots] Reservation ignoreIdleSlots
+                             * @property {google.protobuf.ITimestamp|null} [creationTime] Reservation creationTime
+                             * @property {google.protobuf.ITimestamp|null} [updateTime] Reservation updateTime
                              */
     
                             /**
@@ -788,6 +823,22 @@
                             Reservation.prototype.ignoreIdleSlots = false;
     
                             /**
+                             * Reservation creationTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} creationTime
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.creationTime = null;
+    
+                            /**
+                             * Reservation updateTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.updateTime = null;
+    
+                            /**
                              * Creates a new Reservation instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.Reservation
@@ -817,6 +868,10 @@
                                     writer.uint32(/* id 2, wireType 0 =*/16).int64(message.slotCapacity);
                                 if (message.ignoreIdleSlots != null && Object.hasOwnProperty.call(message, "ignoreIdleSlots"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.ignoreIdleSlots);
+                                if (message.creationTime != null && Object.hasOwnProperty.call(message, "creationTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.creationTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                                if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -859,6 +914,12 @@
                                         break;
                                     case 4:
                                         message.ignoreIdleSlots = reader.bool();
+                                        break;
+                                    case 8:
+                                        message.creationTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    case 9:
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -904,6 +965,16 @@
                                 if (message.ignoreIdleSlots != null && message.hasOwnProperty("ignoreIdleSlots"))
                                     if (typeof message.ignoreIdleSlots !== "boolean")
                                         return "ignoreIdleSlots: boolean expected";
+                                if (message.creationTime != null && message.hasOwnProperty("creationTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.creationTime);
+                                    if (error)
+                                        return "creationTime." + error;
+                                }
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                    if (error)
+                                        return "updateTime." + error;
+                                }
                                 return null;
                             };
     
@@ -932,6 +1003,16 @@
                                         message.slotCapacity = new $util.LongBits(object.slotCapacity.low >>> 0, object.slotCapacity.high >>> 0).toNumber();
                                 if (object.ignoreIdleSlots != null)
                                     message.ignoreIdleSlots = Boolean(object.ignoreIdleSlots);
+                                if (object.creationTime != null) {
+                                    if (typeof object.creationTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.creationTime: object expected");
+                                    message.creationTime = $root.google.protobuf.Timestamp.fromObject(object.creationTime);
+                                }
+                                if (object.updateTime != null) {
+                                    if (typeof object.updateTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.updateTime: object expected");
+                                    message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                                }
                                 return message;
                             };
     
@@ -956,6 +1037,8 @@
                                     } else
                                         object.slotCapacity = options.longs === String ? "0" : 0;
                                     object.ignoreIdleSlots = false;
+                                    object.creationTime = null;
+                                    object.updateTime = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -966,6 +1049,10 @@
                                         object.slotCapacity = options.longs === String ? $util.Long.prototype.toString.call(message.slotCapacity) : options.longs === Number ? new $util.LongBits(message.slotCapacity.low >>> 0, message.slotCapacity.high >>> 0).toNumber() : message.slotCapacity;
                                 if (message.ignoreIdleSlots != null && message.hasOwnProperty("ignoreIdleSlots"))
                                     object.ignoreIdleSlots = message.ignoreIdleSlots;
+                                if (message.creationTime != null && message.hasOwnProperty("creationTime"))
+                                    object.creationTime = $root.google.protobuf.Timestamp.toObject(message.creationTime, options);
+                                if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                    object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                                 return object;
                             };
     
@@ -993,6 +1080,7 @@
                              * @property {number|Long|null} [slotCount] CapacityCommitment slotCount
                              * @property {google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan|null} [plan] CapacityCommitment plan
                              * @property {google.cloud.bigquery.reservation.v1.CapacityCommitment.State|null} [state] CapacityCommitment state
+                             * @property {google.protobuf.ITimestamp|null} [commitmentStartTime] CapacityCommitment commitmentStartTime
                              * @property {google.protobuf.ITimestamp|null} [commitmentEndTime] CapacityCommitment commitmentEndTime
                              * @property {google.rpc.IStatus|null} [failureStatus] CapacityCommitment failureStatus
                              * @property {google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan|null} [renewalPlan] CapacityCommitment renewalPlan
@@ -1044,6 +1132,14 @@
                              * @instance
                              */
                             CapacityCommitment.prototype.state = 0;
+    
+                            /**
+                             * CapacityCommitment commitmentStartTime.
+                             * @member {google.protobuf.ITimestamp|null|undefined} commitmentStartTime
+                             * @memberof google.cloud.bigquery.reservation.v1.CapacityCommitment
+                             * @instance
+                             */
+                            CapacityCommitment.prototype.commitmentStartTime = null;
     
                             /**
                              * CapacityCommitment commitmentEndTime.
@@ -1107,6 +1203,8 @@
                                     $root.google.rpc.Status.encode(message.failureStatus, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                                 if (message.renewalPlan != null && Object.hasOwnProperty.call(message, "renewalPlan"))
                                     writer.uint32(/* id 8, wireType 0 =*/64).int32(message.renewalPlan);
+                                if (message.commitmentStartTime != null && Object.hasOwnProperty.call(message, "commitmentStartTime"))
+                                    $root.google.protobuf.Timestamp.encode(message.commitmentStartTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1152,6 +1250,9 @@
                                         break;
                                     case 4:
                                         message.state = reader.int32();
+                                        break;
+                                    case 9:
+                                        message.commitmentStartTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
                                     case 5:
                                         message.commitmentEndTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
@@ -1224,6 +1325,11 @@
                                     case 3:
                                         break;
                                     }
+                                if (message.commitmentStartTime != null && message.hasOwnProperty("commitmentStartTime")) {
+                                    var error = $root.google.protobuf.Timestamp.verify(message.commitmentStartTime);
+                                    if (error)
+                                        return "commitmentStartTime." + error;
+                                }
                                 if (message.commitmentEndTime != null && message.hasOwnProperty("commitmentEndTime")) {
                                     var error = $root.google.protobuf.Timestamp.verify(message.commitmentEndTime);
                                     if (error)
@@ -1311,6 +1417,11 @@
                                     message.state = 3;
                                     break;
                                 }
+                                if (object.commitmentStartTime != null) {
+                                    if (typeof object.commitmentStartTime !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.CapacityCommitment.commitmentStartTime: object expected");
+                                    message.commitmentStartTime = $root.google.protobuf.Timestamp.fromObject(object.commitmentStartTime);
+                                }
                                 if (object.commitmentEndTime != null) {
                                     if (typeof object.commitmentEndTime !== "object")
                                         throw TypeError(".google.cloud.bigquery.reservation.v1.CapacityCommitment.commitmentEndTime: object expected");
@@ -1371,6 +1482,7 @@
                                     object.commitmentEndTime = null;
                                     object.failureStatus = null;
                                     object.renewalPlan = options.enums === String ? "COMMITMENT_PLAN_UNSPECIFIED" : 0;
+                                    object.commitmentStartTime = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -1389,6 +1501,8 @@
                                     object.failureStatus = $root.google.rpc.Status.toObject(message.failureStatus, options);
                                 if (message.renewalPlan != null && message.hasOwnProperty("renewalPlan"))
                                     object.renewalPlan = options.enums === String ? $root.google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan[message.renewalPlan] : message.renewalPlan;
+                                if (message.commitmentStartTime != null && message.hasOwnProperty("commitmentStartTime"))
+                                    object.commitmentStartTime = $root.google.protobuf.Timestamp.toObject(message.commitmentStartTime, options);
                                 return object;
                             };
     
@@ -2747,6 +2861,7 @@
                              * @property {string|null} [parent] CreateCapacityCommitmentRequest parent
                              * @property {google.cloud.bigquery.reservation.v1.ICapacityCommitment|null} [capacityCommitment] CreateCapacityCommitmentRequest capacityCommitment
                              * @property {boolean|null} [enforceSingleAdminProjectPerOrg] CreateCapacityCommitmentRequest enforceSingleAdminProjectPerOrg
+                             * @property {string|null} [capacityCommitmentId] CreateCapacityCommitmentRequest capacityCommitmentId
                              */
     
                             /**
@@ -2789,6 +2904,14 @@
                             CreateCapacityCommitmentRequest.prototype.enforceSingleAdminProjectPerOrg = false;
     
                             /**
+                             * CreateCapacityCommitmentRequest capacityCommitmentId.
+                             * @member {string} capacityCommitmentId
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest
+                             * @instance
+                             */
+                            CreateCapacityCommitmentRequest.prototype.capacityCommitmentId = "";
+    
+                            /**
                              * Creates a new CreateCapacityCommitmentRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.CreateCapacityCommitmentRequest
@@ -2818,6 +2941,8 @@
                                     $root.google.cloud.bigquery.reservation.v1.CapacityCommitment.encode(message.capacityCommitment, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                                 if (message.enforceSingleAdminProjectPerOrg != null && Object.hasOwnProperty.call(message, "enforceSingleAdminProjectPerOrg"))
                                     writer.uint32(/* id 4, wireType 0 =*/32).bool(message.enforceSingleAdminProjectPerOrg);
+                                if (message.capacityCommitmentId != null && Object.hasOwnProperty.call(message, "capacityCommitmentId"))
+                                    writer.uint32(/* id 5, wireType 2 =*/42).string(message.capacityCommitmentId);
                                 return writer;
                             };
     
@@ -2860,6 +2985,9 @@
                                         break;
                                     case 4:
                                         message.enforceSingleAdminProjectPerOrg = reader.bool();
+                                        break;
+                                    case 5:
+                                        message.capacityCommitmentId = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -2907,6 +3035,9 @@
                                 if (message.enforceSingleAdminProjectPerOrg != null && message.hasOwnProperty("enforceSingleAdminProjectPerOrg"))
                                     if (typeof message.enforceSingleAdminProjectPerOrg !== "boolean")
                                         return "enforceSingleAdminProjectPerOrg: boolean expected";
+                                if (message.capacityCommitmentId != null && message.hasOwnProperty("capacityCommitmentId"))
+                                    if (!$util.isString(message.capacityCommitmentId))
+                                        return "capacityCommitmentId: string expected";
                                 return null;
                             };
     
@@ -2931,6 +3062,8 @@
                                 }
                                 if (object.enforceSingleAdminProjectPerOrg != null)
                                     message.enforceSingleAdminProjectPerOrg = Boolean(object.enforceSingleAdminProjectPerOrg);
+                                if (object.capacityCommitmentId != null)
+                                    message.capacityCommitmentId = String(object.capacityCommitmentId);
                                 return message;
                             };
     
@@ -2951,6 +3084,7 @@
                                     object.parent = "";
                                     object.capacityCommitment = null;
                                     object.enforceSingleAdminProjectPerOrg = false;
+                                    object.capacityCommitmentId = "";
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
@@ -2958,6 +3092,8 @@
                                     object.capacityCommitment = $root.google.cloud.bigquery.reservation.v1.CapacityCommitment.toObject(message.capacityCommitment, options);
                                 if (message.enforceSingleAdminProjectPerOrg != null && message.hasOwnProperty("enforceSingleAdminProjectPerOrg"))
                                     object.enforceSingleAdminProjectPerOrg = message.enforceSingleAdminProjectPerOrg;
+                                if (message.capacityCommitmentId != null && message.hasOwnProperty("capacityCommitmentId"))
+                                    object.capacityCommitmentId = message.capacityCommitmentId;
                                 return object;
                             };
     
@@ -3632,6 +3768,7 @@
                              * @memberof google.cloud.bigquery.reservation.v1
                              * @interface IDeleteCapacityCommitmentRequest
                              * @property {string|null} [name] DeleteCapacityCommitmentRequest name
+                             * @property {boolean|null} [force] DeleteCapacityCommitmentRequest force
                              */
     
                             /**
@@ -3656,6 +3793,14 @@
                              * @instance
                              */
                             DeleteCapacityCommitmentRequest.prototype.name = "";
+    
+                            /**
+                             * DeleteCapacityCommitmentRequest force.
+                             * @member {boolean} force
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest
+                             * @instance
+                             */
+                            DeleteCapacityCommitmentRequest.prototype.force = false;
     
                             /**
                              * Creates a new DeleteCapacityCommitmentRequest instance using the specified properties.
@@ -3683,6 +3828,8 @@
                                     writer = $Writer.create();
                                 if (message.name != null && Object.hasOwnProperty.call(message, "name"))
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                if (message.force != null && Object.hasOwnProperty.call(message, "force"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).bool(message.force);
                                 return writer;
                             };
     
@@ -3719,6 +3866,9 @@
                                     switch (tag >>> 3) {
                                     case 1:
                                         message.name = reader.string();
+                                        break;
+                                    case 3:
+                                        message.force = reader.bool();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -3758,6 +3908,9 @@
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     if (!$util.isString(message.name))
                                         return "name: string expected";
+                                if (message.force != null && message.hasOwnProperty("force"))
+                                    if (typeof message.force !== "boolean")
+                                        return "force: boolean expected";
                                 return null;
                             };
     
@@ -3775,6 +3928,8 @@
                                 var message = new $root.google.cloud.bigquery.reservation.v1.DeleteCapacityCommitmentRequest();
                                 if (object.name != null)
                                     message.name = String(object.name);
+                                if (object.force != null)
+                                    message.force = Boolean(object.force);
                                 return message;
                             };
     
@@ -3791,10 +3946,14 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.name = "";
+                                    object.force = false;
+                                }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
+                                if (message.force != null && message.hasOwnProperty("force"))
+                                    object.force = message.force;
                                 return object;
                             };
     
@@ -4887,6 +5046,7 @@
                                     case 0:
                                     case 1:
                                     case 2:
+                                    case 3:
                                         break;
                                     }
                                 if (message.state != null && message.hasOwnProperty("state"))
@@ -4929,6 +5089,10 @@
                                 case "QUERY":
                                 case 2:
                                     message.jobType = 2;
+                                    break;
+                                case "ML_EXTERNAL":
+                                case 3:
+                                    message.jobType = 3;
                                     break;
                                 }
                                 switch (object.state) {
@@ -4996,12 +5160,14 @@
                              * @property {number} JOB_TYPE_UNSPECIFIED=0 JOB_TYPE_UNSPECIFIED value
                              * @property {number} PIPELINE=1 PIPELINE value
                              * @property {number} QUERY=2 QUERY value
+                             * @property {number} ML_EXTERNAL=3 ML_EXTERNAL value
                              */
                             Assignment.JobType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
                                 values[valuesById[0] = "JOB_TYPE_UNSPECIFIED"] = 0;
                                 values[valuesById[1] = "PIPELINE"] = 1;
                                 values[valuesById[2] = "QUERY"] = 2;
+                                values[valuesById[3] = "ML_EXTERNAL"] = 3;
                                 return values;
                             })();
     
@@ -5032,6 +5198,7 @@
                              * @interface ICreateAssignmentRequest
                              * @property {string|null} [parent] CreateAssignmentRequest parent
                              * @property {google.cloud.bigquery.reservation.v1.IAssignment|null} [assignment] CreateAssignmentRequest assignment
+                             * @property {string|null} [assignmentId] CreateAssignmentRequest assignmentId
                              */
     
                             /**
@@ -5066,6 +5233,14 @@
                             CreateAssignmentRequest.prototype.assignment = null;
     
                             /**
+                             * CreateAssignmentRequest assignmentId.
+                             * @member {string} assignmentId
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateAssignmentRequest
+                             * @instance
+                             */
+                            CreateAssignmentRequest.prototype.assignmentId = "";
+    
+                            /**
                              * Creates a new CreateAssignmentRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.CreateAssignmentRequest
@@ -5093,6 +5268,8 @@
                                     writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
                                 if (message.assignment != null && Object.hasOwnProperty.call(message, "assignment"))
                                     $root.google.cloud.bigquery.reservation.v1.Assignment.encode(message.assignment, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.assignmentId != null && Object.hasOwnProperty.call(message, "assignmentId"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.assignmentId);
                                 return writer;
                             };
     
@@ -5132,6 +5309,9 @@
                                         break;
                                     case 2:
                                         message.assignment = $root.google.cloud.bigquery.reservation.v1.Assignment.decode(reader, reader.uint32());
+                                        break;
+                                    case 4:
+                                        message.assignmentId = reader.string();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -5176,6 +5356,9 @@
                                     if (error)
                                         return "assignment." + error;
                                 }
+                                if (message.assignmentId != null && message.hasOwnProperty("assignmentId"))
+                                    if (!$util.isString(message.assignmentId))
+                                        return "assignmentId: string expected";
                                 return null;
                             };
     
@@ -5198,6 +5381,8 @@
                                         throw TypeError(".google.cloud.bigquery.reservation.v1.CreateAssignmentRequest.assignment: object expected");
                                     message.assignment = $root.google.cloud.bigquery.reservation.v1.Assignment.fromObject(object.assignment);
                                 }
+                                if (object.assignmentId != null)
+                                    message.assignmentId = String(object.assignmentId);
                                 return message;
                             };
     
@@ -5217,11 +5402,14 @@
                                 if (options.defaults) {
                                     object.parent = "";
                                     object.assignment = null;
+                                    object.assignmentId = "";
                                 }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
                                 if (message.assignment != null && message.hasOwnProperty("assignment"))
                                     object.assignment = $root.google.cloud.bigquery.reservation.v1.Assignment.toObject(message.assignment, options);
+                                if (message.assignmentId != null && message.hasOwnProperty("assignmentId"))
+                                    object.assignmentId = message.assignmentId;
                                 return object;
                             };
     
@@ -6143,6 +6331,260 @@
                             return SearchAssignmentsRequest;
                         })();
     
+                        v1.SearchAllAssignmentsRequest = (function() {
+    
+                            /**
+                             * Properties of a SearchAllAssignmentsRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface ISearchAllAssignmentsRequest
+                             * @property {string|null} [parent] SearchAllAssignmentsRequest parent
+                             * @property {string|null} [query] SearchAllAssignmentsRequest query
+                             * @property {number|null} [pageSize] SearchAllAssignmentsRequest pageSize
+                             * @property {string|null} [pageToken] SearchAllAssignmentsRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new SearchAllAssignmentsRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a SearchAllAssignmentsRequest.
+                             * @implements ISearchAllAssignmentsRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest=} [properties] Properties to set
+                             */
+                            function SearchAllAssignmentsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SearchAllAssignmentsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @instance
+                             */
+                            SearchAllAssignmentsRequest.prototype.parent = "";
+    
+                            /**
+                             * SearchAllAssignmentsRequest query.
+                             * @member {string} query
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @instance
+                             */
+                            SearchAllAssignmentsRequest.prototype.query = "";
+    
+                            /**
+                             * SearchAllAssignmentsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @instance
+                             */
+                            SearchAllAssignmentsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * SearchAllAssignmentsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @instance
+                             */
+                            SearchAllAssignmentsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new SearchAllAssignmentsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest} SearchAllAssignmentsRequest instance
+                             */
+                            SearchAllAssignmentsRequest.create = function create(properties) {
+                                return new SearchAllAssignmentsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SearchAllAssignmentsRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest} message SearchAllAssignmentsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchAllAssignmentsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.query != null && Object.hasOwnProperty.call(message, "query"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.query);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 3, wireType 0 =*/24).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SearchAllAssignmentsRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsRequest} message SearchAllAssignmentsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchAllAssignmentsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SearchAllAssignmentsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest} SearchAllAssignmentsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchAllAssignmentsRequest.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        message.parent = reader.string();
+                                        break;
+                                    case 2:
+                                        message.query = reader.string();
+                                        break;
+                                    case 3:
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    case 4:
+                                        message.pageToken = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SearchAllAssignmentsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest} SearchAllAssignmentsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchAllAssignmentsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SearchAllAssignmentsRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SearchAllAssignmentsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    if (!$util.isString(message.query))
+                                        return "query: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SearchAllAssignmentsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest} SearchAllAssignmentsRequest
+                             */
+                            SearchAllAssignmentsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.query != null)
+                                    message.query = String(object.query);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SearchAllAssignmentsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest} message SearchAllAssignmentsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SearchAllAssignmentsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.query = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.query != null && message.hasOwnProperty("query"))
+                                    object.query = message.query;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SearchAllAssignmentsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SearchAllAssignmentsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return SearchAllAssignmentsRequest;
+                        })();
+    
                         v1.SearchAssignmentsResponse = (function() {
     
                             /**
@@ -6372,6 +6814,237 @@
                             };
     
                             return SearchAssignmentsResponse;
+                        })();
+    
+                        v1.SearchAllAssignmentsResponse = (function() {
+    
+                            /**
+                             * Properties of a SearchAllAssignmentsResponse.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface ISearchAllAssignmentsResponse
+                             * @property {Array.<google.cloud.bigquery.reservation.v1.IAssignment>|null} [assignments] SearchAllAssignmentsResponse assignments
+                             * @property {string|null} [nextPageToken] SearchAllAssignmentsResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new SearchAllAssignmentsResponse.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a SearchAllAssignmentsResponse.
+                             * @implements ISearchAllAssignmentsResponse
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse=} [properties] Properties to set
+                             */
+                            function SearchAllAssignmentsResponse(properties) {
+                                this.assignments = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SearchAllAssignmentsResponse assignments.
+                             * @member {Array.<google.cloud.bigquery.reservation.v1.IAssignment>} assignments
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @instance
+                             */
+                            SearchAllAssignmentsResponse.prototype.assignments = $util.emptyArray;
+    
+                            /**
+                             * SearchAllAssignmentsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @instance
+                             */
+                            SearchAllAssignmentsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new SearchAllAssignmentsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse} SearchAllAssignmentsResponse instance
+                             */
+                            SearchAllAssignmentsResponse.create = function create(properties) {
+                                return new SearchAllAssignmentsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SearchAllAssignmentsResponse message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse} message SearchAllAssignmentsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchAllAssignmentsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.assignments != null && message.assignments.length)
+                                    for (var i = 0; i < message.assignments.length; ++i)
+                                        $root.google.cloud.bigquery.reservation.v1.Assignment.encode(message.assignments[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SearchAllAssignmentsResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ISearchAllAssignmentsResponse} message SearchAllAssignmentsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SearchAllAssignmentsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SearchAllAssignmentsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse} SearchAllAssignmentsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchAllAssignmentsResponse.decode = function decode(reader, length) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    switch (tag >>> 3) {
+                                    case 1:
+                                        if (!(message.assignments && message.assignments.length))
+                                            message.assignments = [];
+                                        message.assignments.push($root.google.cloud.bigquery.reservation.v1.Assignment.decode(reader, reader.uint32()));
+                                        break;
+                                    case 2:
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SearchAllAssignmentsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse} SearchAllAssignmentsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SearchAllAssignmentsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SearchAllAssignmentsResponse message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SearchAllAssignmentsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.assignments != null && message.hasOwnProperty("assignments")) {
+                                    if (!Array.isArray(message.assignments))
+                                        return "assignments: array expected";
+                                    for (var i = 0; i < message.assignments.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.reservation.v1.Assignment.verify(message.assignments[i]);
+                                        if (error)
+                                            return "assignments." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SearchAllAssignmentsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse} SearchAllAssignmentsResponse
+                             */
+                            SearchAllAssignmentsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse();
+                                if (object.assignments) {
+                                    if (!Array.isArray(object.assignments))
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse.assignments: array expected");
+                                    message.assignments = [];
+                                    for (var i = 0; i < object.assignments.length; ++i) {
+                                        if (typeof object.assignments[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse.assignments: object expected");
+                                        message.assignments[i] = $root.google.cloud.bigquery.reservation.v1.Assignment.fromObject(object.assignments[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SearchAllAssignmentsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse} message SearchAllAssignmentsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SearchAllAssignmentsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.assignments = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.assignments && message.assignments.length) {
+                                    object.assignments = [];
+                                    for (var j = 0; j < message.assignments.length; ++j)
+                                        object.assignments[j] = $root.google.cloud.bigquery.reservation.v1.Assignment.toObject(message.assignments[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SearchAllAssignmentsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SearchAllAssignmentsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            return SearchAllAssignmentsResponse;
                         })();
     
                         v1.MoveAssignmentRequest = (function() {

@@ -112,6 +112,13 @@
                 "searchAssignmentsStream",
                 "searchAssignmentsAsync"
               ]
+            },
+            "SearchAllAssignments": {
+              "methods": [
+                "searchAllAssignments",
+                "searchAllAssignmentsStream",
+                "searchAllAssignmentsAsync"
+              ]
             }
           }
         },
@@ -219,6 +226,13 @@
                 "searchAssignments",
                 "searchAssignmentsStream",
                 "searchAssignmentsAsync"
+              ]
+            },
+            "SearchAllAssignments": {
+              "methods": [
+                "searchAllAssignments",
+                "searchAllAssignmentsStream",
+                "searchAllAssignmentsAsync"
               ]
             }
           }
