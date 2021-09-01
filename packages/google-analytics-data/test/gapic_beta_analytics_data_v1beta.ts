@@ -832,6 +832,124 @@ describe('v1beta.BetaAnalyticsDataClient', () => {
     });
   });
 
+  describe('checkCompatibility', () => {
+    it('invokes checkCompatibility without error', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.CheckCompatibilityRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.CheckCompatibilityResponse()
+      );
+      client.innerApiCalls.checkCompatibility =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.checkCompatibility(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.checkCompatibility as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkCompatibility without error using callback', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.CheckCompatibilityRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.CheckCompatibilityResponse()
+      );
+      client.innerApiCalls.checkCompatibility =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.checkCompatibility(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.analytics.data.v1beta.ICheckCompatibilityResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.checkCompatibility as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes checkCompatibility with error', async () => {
+      const client = new betaanalyticsdataModule.v1beta.BetaAnalyticsDataClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.analytics.data.v1beta.CheckCompatibilityRequest()
+      );
+      request.property = '';
+      const expectedHeaderRequestParams = 'property=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.checkCompatibility = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.checkCompatibility(request), expectedError);
+      assert(
+        (client.innerApiCalls.checkCompatibility as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('metadata', () => {
       const fakePath = '/rendered/path/metadata';

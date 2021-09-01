@@ -39,6 +39,11 @@
               "methods": [
                 "runRealtimeReport"
               ]
+            },
+            "CheckCompatibility": {
+              "methods": [
+                "checkCompatibility"
+              ]
             }
           }
         },
@@ -73,6 +78,11 @@
             "RunRealtimeReport": {
               "methods": [
                 "runRealtimeReport"
+              ]
+            },
+            "CheckCompatibility": {
+              "methods": [
+                "checkCompatibility"
               ]
             }
           }

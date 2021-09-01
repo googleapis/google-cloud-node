@@ -5467,6 +5467,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public runRealtimeReport(request: google.analytics.data.v1beta.IRunRealtimeReportRequest): Promise<google.analytics.data.v1beta.RunRealtimeReportResponse>;
+
+                    /**
+                     * Calls CheckCompatibility.
+                     * @param request CheckCompatibilityRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CheckCompatibilityResponse
+                     */
+                    public checkCompatibility(request: google.analytics.data.v1beta.ICheckCompatibilityRequest, callback: google.analytics.data.v1beta.BetaAnalyticsData.CheckCompatibilityCallback): void;
+
+                    /**
+                     * Calls CheckCompatibility.
+                     * @param request CheckCompatibilityRequest message or plain object
+                     * @returns Promise
+                     */
+                    public checkCompatibility(request: google.analytics.data.v1beta.ICheckCompatibilityRequest): Promise<google.analytics.data.v1beta.CheckCompatibilityResponse>;
                 }
 
                 namespace BetaAnalyticsData {
@@ -5512,6 +5526,229 @@ export namespace google {
                      * @param [response] RunRealtimeReportResponse
                      */
                     type RunRealtimeReportCallback = (error: (Error|null), response?: google.analytics.data.v1beta.RunRealtimeReportResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#checkCompatibility}.
+                     * @param error Error, if any
+                     * @param [response] CheckCompatibilityResponse
+                     */
+                    type CheckCompatibilityCallback = (error: (Error|null), response?: google.analytics.data.v1beta.CheckCompatibilityResponse) => void;
+                }
+
+                /** Properties of a CheckCompatibilityRequest. */
+                interface ICheckCompatibilityRequest {
+
+                    /** CheckCompatibilityRequest property */
+                    property?: (string|null);
+
+                    /** CheckCompatibilityRequest dimensions */
+                    dimensions?: (google.analytics.data.v1beta.IDimension[]|null);
+
+                    /** CheckCompatibilityRequest metrics */
+                    metrics?: (google.analytics.data.v1beta.IMetric[]|null);
+
+                    /** CheckCompatibilityRequest dimensionFilter */
+                    dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** CheckCompatibilityRequest metricFilter */
+                    metricFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** CheckCompatibilityRequest compatibilityFilter */
+                    compatibilityFilter?: (google.analytics.data.v1beta.Compatibility|keyof typeof google.analytics.data.v1beta.Compatibility|null);
+                }
+
+                /** Represents a CheckCompatibilityRequest. */
+                class CheckCompatibilityRequest implements ICheckCompatibilityRequest {
+
+                    /**
+                     * Constructs a new CheckCompatibilityRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.ICheckCompatibilityRequest);
+
+                    /** CheckCompatibilityRequest property. */
+                    public property: string;
+
+                    /** CheckCompatibilityRequest dimensions. */
+                    public dimensions: google.analytics.data.v1beta.IDimension[];
+
+                    /** CheckCompatibilityRequest metrics. */
+                    public metrics: google.analytics.data.v1beta.IMetric[];
+
+                    /** CheckCompatibilityRequest dimensionFilter. */
+                    public dimensionFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** CheckCompatibilityRequest metricFilter. */
+                    public metricFilter?: (google.analytics.data.v1beta.IFilterExpression|null);
+
+                    /** CheckCompatibilityRequest compatibilityFilter. */
+                    public compatibilityFilter: (google.analytics.data.v1beta.Compatibility|keyof typeof google.analytics.data.v1beta.Compatibility);
+
+                    /**
+                     * Creates a new CheckCompatibilityRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckCompatibilityRequest instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.ICheckCompatibilityRequest): google.analytics.data.v1beta.CheckCompatibilityRequest;
+
+                    /**
+                     * Encodes the specified CheckCompatibilityRequest message. Does not implicitly {@link google.analytics.data.v1beta.CheckCompatibilityRequest.verify|verify} messages.
+                     * @param message CheckCompatibilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.ICheckCompatibilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckCompatibilityRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CheckCompatibilityRequest.verify|verify} messages.
+                     * @param message CheckCompatibilityRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.ICheckCompatibilityRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckCompatibilityRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckCompatibilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.CheckCompatibilityRequest;
+
+                    /**
+                     * Decodes a CheckCompatibilityRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckCompatibilityRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.CheckCompatibilityRequest;
+
+                    /**
+                     * Verifies a CheckCompatibilityRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckCompatibilityRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckCompatibilityRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.CheckCompatibilityRequest;
+
+                    /**
+                     * Creates a plain object from a CheckCompatibilityRequest message. Also converts values to other types if specified.
+                     * @param message CheckCompatibilityRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.CheckCompatibilityRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckCompatibilityRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a CheckCompatibilityResponse. */
+                interface ICheckCompatibilityResponse {
+
+                    /** CheckCompatibilityResponse dimensionCompatibilities */
+                    dimensionCompatibilities?: (google.analytics.data.v1beta.IDimensionCompatibility[]|null);
+
+                    /** CheckCompatibilityResponse metricCompatibilities */
+                    metricCompatibilities?: (google.analytics.data.v1beta.IMetricCompatibility[]|null);
+                }
+
+                /** Represents a CheckCompatibilityResponse. */
+                class CheckCompatibilityResponse implements ICheckCompatibilityResponse {
+
+                    /**
+                     * Constructs a new CheckCompatibilityResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.ICheckCompatibilityResponse);
+
+                    /** CheckCompatibilityResponse dimensionCompatibilities. */
+                    public dimensionCompatibilities: google.analytics.data.v1beta.IDimensionCompatibility[];
+
+                    /** CheckCompatibilityResponse metricCompatibilities. */
+                    public metricCompatibilities: google.analytics.data.v1beta.IMetricCompatibility[];
+
+                    /**
+                     * Creates a new CheckCompatibilityResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CheckCompatibilityResponse instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.ICheckCompatibilityResponse): google.analytics.data.v1beta.CheckCompatibilityResponse;
+
+                    /**
+                     * Encodes the specified CheckCompatibilityResponse message. Does not implicitly {@link google.analytics.data.v1beta.CheckCompatibilityResponse.verify|verify} messages.
+                     * @param message CheckCompatibilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.ICheckCompatibilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CheckCompatibilityResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CheckCompatibilityResponse.verify|verify} messages.
+                     * @param message CheckCompatibilityResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.ICheckCompatibilityResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CheckCompatibilityResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CheckCompatibilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.CheckCompatibilityResponse;
+
+                    /**
+                     * Decodes a CheckCompatibilityResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CheckCompatibilityResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.CheckCompatibilityResponse;
+
+                    /**
+                     * Verifies a CheckCompatibilityResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CheckCompatibilityResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CheckCompatibilityResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.CheckCompatibilityResponse;
+
+                    /**
+                     * Creates a plain object from a CheckCompatibilityResponse message. Also converts values to other types if specified.
+                     * @param message CheckCompatibilityResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.CheckCompatibilityResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CheckCompatibilityResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
                 }
 
                 /** Properties of a Metadata. */
@@ -10503,6 +10740,9 @@ export namespace google {
 
                     /** DimensionMetadata customDefinition */
                     customDefinition?: (boolean|null);
+
+                    /** DimensionMetadata category */
+                    category?: (string|null);
                 }
 
                 /** Represents a DimensionMetadata. */
@@ -10528,6 +10768,9 @@ export namespace google {
 
                     /** DimensionMetadata customDefinition. */
                     public customDefinition: boolean;
+
+                    /** DimensionMetadata category. */
+                    public category: string;
 
                     /**
                      * Creates a new DimensionMetadata instance using the specified properties.
@@ -10623,6 +10866,9 @@ export namespace google {
 
                     /** MetricMetadata customDefinition */
                     customDefinition?: (boolean|null);
+
+                    /** MetricMetadata category */
+                    category?: (string|null);
                 }
 
                 /** Represents a MetricMetadata. */
@@ -10654,6 +10900,9 @@ export namespace google {
 
                     /** MetricMetadata customDefinition. */
                     public customDefinition: boolean;
+
+                    /** MetricMetadata category. */
+                    public category: string;
 
                     /**
                      * Creates a new MetricMetadata instance using the specified properties.
@@ -10726,6 +10975,210 @@ export namespace google {
                     public toJSON(): { [k: string]: any };
                 }
 
+                /** Properties of a DimensionCompatibility. */
+                interface IDimensionCompatibility {
+
+                    /** DimensionCompatibility dimensionMetadata */
+                    dimensionMetadata?: (google.analytics.data.v1beta.IDimensionMetadata|null);
+
+                    /** DimensionCompatibility compatibility */
+                    compatibility?: (google.analytics.data.v1beta.Compatibility|keyof typeof google.analytics.data.v1beta.Compatibility|null);
+                }
+
+                /** Represents a DimensionCompatibility. */
+                class DimensionCompatibility implements IDimensionCompatibility {
+
+                    /**
+                     * Constructs a new DimensionCompatibility.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IDimensionCompatibility);
+
+                    /** DimensionCompatibility dimensionMetadata. */
+                    public dimensionMetadata?: (google.analytics.data.v1beta.IDimensionMetadata|null);
+
+                    /** DimensionCompatibility compatibility. */
+                    public compatibility?: (google.analytics.data.v1beta.Compatibility|keyof typeof google.analytics.data.v1beta.Compatibility|null);
+
+                    /** DimensionCompatibility _dimensionMetadata. */
+                    public _dimensionMetadata?: "dimensionMetadata";
+
+                    /** DimensionCompatibility _compatibility. */
+                    public _compatibility?: "compatibility";
+
+                    /**
+                     * Creates a new DimensionCompatibility instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DimensionCompatibility instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IDimensionCompatibility): google.analytics.data.v1beta.DimensionCompatibility;
+
+                    /**
+                     * Encodes the specified DimensionCompatibility message. Does not implicitly {@link google.analytics.data.v1beta.DimensionCompatibility.verify|verify} messages.
+                     * @param message DimensionCompatibility message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IDimensionCompatibility, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DimensionCompatibility message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionCompatibility.verify|verify} messages.
+                     * @param message DimensionCompatibility message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IDimensionCompatibility, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DimensionCompatibility message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DimensionCompatibility
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.DimensionCompatibility;
+
+                    /**
+                     * Decodes a DimensionCompatibility message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DimensionCompatibility
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.DimensionCompatibility;
+
+                    /**
+                     * Verifies a DimensionCompatibility message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DimensionCompatibility message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DimensionCompatibility
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.DimensionCompatibility;
+
+                    /**
+                     * Creates a plain object from a DimensionCompatibility message. Also converts values to other types if specified.
+                     * @param message DimensionCompatibility
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.DimensionCompatibility, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DimensionCompatibility to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a MetricCompatibility. */
+                interface IMetricCompatibility {
+
+                    /** MetricCompatibility metricMetadata */
+                    metricMetadata?: (google.analytics.data.v1beta.IMetricMetadata|null);
+
+                    /** MetricCompatibility compatibility */
+                    compatibility?: (google.analytics.data.v1beta.Compatibility|keyof typeof google.analytics.data.v1beta.Compatibility|null);
+                }
+
+                /** Represents a MetricCompatibility. */
+                class MetricCompatibility implements IMetricCompatibility {
+
+                    /**
+                     * Constructs a new MetricCompatibility.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.analytics.data.v1beta.IMetricCompatibility);
+
+                    /** MetricCompatibility metricMetadata. */
+                    public metricMetadata?: (google.analytics.data.v1beta.IMetricMetadata|null);
+
+                    /** MetricCompatibility compatibility. */
+                    public compatibility?: (google.analytics.data.v1beta.Compatibility|keyof typeof google.analytics.data.v1beta.Compatibility|null);
+
+                    /** MetricCompatibility _metricMetadata. */
+                    public _metricMetadata?: "metricMetadata";
+
+                    /** MetricCompatibility _compatibility. */
+                    public _compatibility?: "compatibility";
+
+                    /**
+                     * Creates a new MetricCompatibility instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MetricCompatibility instance
+                     */
+                    public static create(properties?: google.analytics.data.v1beta.IMetricCompatibility): google.analytics.data.v1beta.MetricCompatibility;
+
+                    /**
+                     * Encodes the specified MetricCompatibility message. Does not implicitly {@link google.analytics.data.v1beta.MetricCompatibility.verify|verify} messages.
+                     * @param message MetricCompatibility message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.analytics.data.v1beta.IMetricCompatibility, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MetricCompatibility message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MetricCompatibility.verify|verify} messages.
+                     * @param message MetricCompatibility message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.analytics.data.v1beta.IMetricCompatibility, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MetricCompatibility message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MetricCompatibility
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.analytics.data.v1beta.MetricCompatibility;
+
+                    /**
+                     * Decodes a MetricCompatibility message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MetricCompatibility
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.analytics.data.v1beta.MetricCompatibility;
+
+                    /**
+                     * Verifies a MetricCompatibility message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MetricCompatibility message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MetricCompatibility
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.analytics.data.v1beta.MetricCompatibility;
+
+                    /**
+                     * Creates a plain object from a MetricCompatibility message. Also converts values to other types if specified.
+                     * @param message MetricCompatibility
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.analytics.data.v1beta.MetricCompatibility, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MetricCompatibility to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
                 /** MetricAggregation enum. */
                 enum MetricAggregation {
                     METRIC_AGGREGATION_UNSPECIFIED = 0,
@@ -10750,6 +11203,13 @@ export namespace google {
                     TYPE_MILES = 11,
                     TYPE_METERS = 12,
                     TYPE_KILOMETERS = 13
+                }
+
+                /** Compatibility enum. */
+                enum Compatibility {
+                    COMPATIBILITY_UNSPECIFIED = 0,
+                    COMPATIBLE = 1,
+                    INCOMPATIBLE = 2
                 }
             }
         }

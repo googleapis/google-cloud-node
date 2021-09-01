@@ -1267,6 +1267,66 @@
                               }
                             }
                           ]
+                        },
+                        "CheckCompatibility": {
+                          "requestType": "CheckCompatibilityRequest",
+                          "responseType": "CheckCompatibilityResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta/{property=properties/*}:checkCompatibility",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta/{property=properties/*}:checkCompatibility",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "CheckCompatibilityRequest": {
+                      "fields": {
+                        "property": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "dimensions": {
+                          "rule": "repeated",
+                          "type": "Dimension",
+                          "id": 2
+                        },
+                        "metrics": {
+                          "rule": "repeated",
+                          "type": "Metric",
+                          "id": 3
+                        },
+                        "dimensionFilter": {
+                          "type": "FilterExpression",
+                          "id": 4
+                        },
+                        "metricFilter": {
+                          "type": "FilterExpression",
+                          "id": 5
+                        },
+                        "compatibilityFilter": {
+                          "type": "Compatibility",
+                          "id": 6
+                        }
+                      }
+                    },
+                    "CheckCompatibilityResponse": {
+                      "fields": {
+                        "dimensionCompatibilities": {
+                          "rule": "repeated",
+                          "type": "DimensionCompatibility",
+                          "id": 1
+                        },
+                        "metricCompatibilities": {
+                          "rule": "repeated",
+                          "type": "MetricCompatibility",
+                          "id": 2
                         }
                       }
                     },
@@ -2292,6 +2352,10 @@
                         "customDefinition": {
                           "type": "bool",
                           "id": 5
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 7
                         }
                       }
                     },
@@ -2325,6 +2389,70 @@
                         "customDefinition": {
                           "type": "bool",
                           "id": 7
+                        },
+                        "category": {
+                          "type": "string",
+                          "id": 10
+                        }
+                      }
+                    },
+                    "DimensionCompatibility": {
+                      "oneofs": {
+                        "_dimensionMetadata": {
+                          "oneof": [
+                            "dimensionMetadata"
+                          ]
+                        },
+                        "_compatibility": {
+                          "oneof": [
+                            "compatibility"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dimensionMetadata": {
+                          "type": "DimensionMetadata",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "compatibility": {
+                          "type": "Compatibility",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "MetricCompatibility": {
+                      "oneofs": {
+                        "_metricMetadata": {
+                          "oneof": [
+                            "metricMetadata"
+                          ]
+                        },
+                        "_compatibility": {
+                          "oneof": [
+                            "compatibility"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "metricMetadata": {
+                          "type": "MetricMetadata",
+                          "id": 1,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "compatibility": {
+                          "type": "Compatibility",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -2352,6 +2480,13 @@
                         "TYPE_MILES": 11,
                         "TYPE_METERS": 12,
                         "TYPE_KILOMETERS": 13
+                      }
+                    },
+                    "Compatibility": {
+                      "values": {
+                        "COMPATIBILITY_UNSPECIFIED": 0,
+                        "COMPATIBLE": 1,
+                        "INCOMPATIBLE": 2
                       }
                     }
                   }

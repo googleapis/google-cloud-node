@@ -14214,7 +14214,662 @@
                          * @variation 2
                          */
     
+                        /**
+                         * Callback as used by {@link google.analytics.data.v1beta.BetaAnalyticsData#checkCompatibility}.
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @typedef CheckCompatibilityCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.analytics.data.v1beta.CheckCompatibilityResponse} [response] CheckCompatibilityResponse
+                         */
+    
+                        /**
+                         * Calls CheckCompatibility.
+                         * @function checkCompatibility
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityRequest} request CheckCompatibilityRequest message or plain object
+                         * @param {google.analytics.data.v1beta.BetaAnalyticsData.CheckCompatibilityCallback} callback Node-style callback called with the error, if any, and CheckCompatibilityResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(BetaAnalyticsData.prototype.checkCompatibility = function checkCompatibility(request, callback) {
+                            return this.rpcCall(checkCompatibility, $root.google.analytics.data.v1beta.CheckCompatibilityRequest, $root.google.analytics.data.v1beta.CheckCompatibilityResponse, request, callback);
+                        }, "name", { value: "CheckCompatibility" });
+    
+                        /**
+                         * Calls CheckCompatibility.
+                         * @function checkCompatibility
+                         * @memberof google.analytics.data.v1beta.BetaAnalyticsData
+                         * @instance
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityRequest} request CheckCompatibilityRequest message or plain object
+                         * @returns {Promise<google.analytics.data.v1beta.CheckCompatibilityResponse>} Promise
+                         * @variation 2
+                         */
+    
                         return BetaAnalyticsData;
+                    })();
+    
+                    v1beta.CheckCompatibilityRequest = (function() {
+    
+                        /**
+                         * Properties of a CheckCompatibilityRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface ICheckCompatibilityRequest
+                         * @property {string|null} [property] CheckCompatibilityRequest property
+                         * @property {Array.<google.analytics.data.v1beta.IDimension>|null} [dimensions] CheckCompatibilityRequest dimensions
+                         * @property {Array.<google.analytics.data.v1beta.IMetric>|null} [metrics] CheckCompatibilityRequest metrics
+                         * @property {google.analytics.data.v1beta.IFilterExpression|null} [dimensionFilter] CheckCompatibilityRequest dimensionFilter
+                         * @property {google.analytics.data.v1beta.IFilterExpression|null} [metricFilter] CheckCompatibilityRequest metricFilter
+                         * @property {google.analytics.data.v1beta.Compatibility|null} [compatibilityFilter] CheckCompatibilityRequest compatibilityFilter
+                         */
+    
+                        /**
+                         * Constructs a new CheckCompatibilityRequest.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a CheckCompatibilityRequest.
+                         * @implements ICheckCompatibilityRequest
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityRequest=} [properties] Properties to set
+                         */
+                        function CheckCompatibilityRequest(properties) {
+                            this.dimensions = [];
+                            this.metrics = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CheckCompatibilityRequest property.
+                         * @member {string} property
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @instance
+                         */
+                        CheckCompatibilityRequest.prototype.property = "";
+    
+                        /**
+                         * CheckCompatibilityRequest dimensions.
+                         * @member {Array.<google.analytics.data.v1beta.IDimension>} dimensions
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @instance
+                         */
+                        CheckCompatibilityRequest.prototype.dimensions = $util.emptyArray;
+    
+                        /**
+                         * CheckCompatibilityRequest metrics.
+                         * @member {Array.<google.analytics.data.v1beta.IMetric>} metrics
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @instance
+                         */
+                        CheckCompatibilityRequest.prototype.metrics = $util.emptyArray;
+    
+                        /**
+                         * CheckCompatibilityRequest dimensionFilter.
+                         * @member {google.analytics.data.v1beta.IFilterExpression|null|undefined} dimensionFilter
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @instance
+                         */
+                        CheckCompatibilityRequest.prototype.dimensionFilter = null;
+    
+                        /**
+                         * CheckCompatibilityRequest metricFilter.
+                         * @member {google.analytics.data.v1beta.IFilterExpression|null|undefined} metricFilter
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @instance
+                         */
+                        CheckCompatibilityRequest.prototype.metricFilter = null;
+    
+                        /**
+                         * CheckCompatibilityRequest compatibilityFilter.
+                         * @member {google.analytics.data.v1beta.Compatibility} compatibilityFilter
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @instance
+                         */
+                        CheckCompatibilityRequest.prototype.compatibilityFilter = 0;
+    
+                        /**
+                         * Creates a new CheckCompatibilityRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityRequest=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.CheckCompatibilityRequest} CheckCompatibilityRequest instance
+                         */
+                        CheckCompatibilityRequest.create = function create(properties) {
+                            return new CheckCompatibilityRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CheckCompatibilityRequest message. Does not implicitly {@link google.analytics.data.v1beta.CheckCompatibilityRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityRequest} message CheckCompatibilityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CheckCompatibilityRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.property != null && Object.hasOwnProperty.call(message, "property"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.property);
+                            if (message.dimensions != null && message.dimensions.length)
+                                for (var i = 0; i < message.dimensions.length; ++i)
+                                    $root.google.analytics.data.v1beta.Dimension.encode(message.dimensions[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.metrics != null && message.metrics.length)
+                                for (var i = 0; i < message.metrics.length; ++i)
+                                    $root.google.analytics.data.v1beta.Metric.encode(message.metrics[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.dimensionFilter != null && Object.hasOwnProperty.call(message, "dimensionFilter"))
+                                $root.google.analytics.data.v1beta.FilterExpression.encode(message.dimensionFilter, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.metricFilter != null && Object.hasOwnProperty.call(message, "metricFilter"))
+                                $root.google.analytics.data.v1beta.FilterExpression.encode(message.metricFilter, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.compatibilityFilter != null && Object.hasOwnProperty.call(message, "compatibilityFilter"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int32(message.compatibilityFilter);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CheckCompatibilityRequest message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CheckCompatibilityRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityRequest} message CheckCompatibilityRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CheckCompatibilityRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CheckCompatibilityRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.CheckCompatibilityRequest} CheckCompatibilityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CheckCompatibilityRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.CheckCompatibilityRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.property = reader.string();
+                                    break;
+                                case 2:
+                                    if (!(message.dimensions && message.dimensions.length))
+                                        message.dimensions = [];
+                                    message.dimensions.push($root.google.analytics.data.v1beta.Dimension.decode(reader, reader.uint32()));
+                                    break;
+                                case 3:
+                                    if (!(message.metrics && message.metrics.length))
+                                        message.metrics = [];
+                                    message.metrics.push($root.google.analytics.data.v1beta.Metric.decode(reader, reader.uint32()));
+                                    break;
+                                case 4:
+                                    message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.compatibilityFilter = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CheckCompatibilityRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.CheckCompatibilityRequest} CheckCompatibilityRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CheckCompatibilityRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CheckCompatibilityRequest message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CheckCompatibilityRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                if (!$util.isString(message.property))
+                                    return "property: string expected";
+                            if (message.dimensions != null && message.hasOwnProperty("dimensions")) {
+                                if (!Array.isArray(message.dimensions))
+                                    return "dimensions: array expected";
+                                for (var i = 0; i < message.dimensions.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Dimension.verify(message.dimensions[i]);
+                                    if (error)
+                                        return "dimensions." + error;
+                                }
+                            }
+                            if (message.metrics != null && message.hasOwnProperty("metrics")) {
+                                if (!Array.isArray(message.metrics))
+                                    return "metrics: array expected";
+                                for (var i = 0; i < message.metrics.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.Metric.verify(message.metrics[i]);
+                                    if (error)
+                                        return "metrics." + error;
+                                }
+                            }
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter")) {
+                                var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.dimensionFilter);
+                                if (error)
+                                    return "dimensionFilter." + error;
+                            }
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter")) {
+                                var error = $root.google.analytics.data.v1beta.FilterExpression.verify(message.metricFilter);
+                                if (error)
+                                    return "metricFilter." + error;
+                            }
+                            if (message.compatibilityFilter != null && message.hasOwnProperty("compatibilityFilter"))
+                                switch (message.compatibilityFilter) {
+                                default:
+                                    return "compatibilityFilter: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CheckCompatibilityRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.CheckCompatibilityRequest} CheckCompatibilityRequest
+                         */
+                        CheckCompatibilityRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.CheckCompatibilityRequest)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.CheckCompatibilityRequest();
+                            if (object.property != null)
+                                message.property = String(object.property);
+                            if (object.dimensions) {
+                                if (!Array.isArray(object.dimensions))
+                                    throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityRequest.dimensions: array expected");
+                                message.dimensions = [];
+                                for (var i = 0; i < object.dimensions.length; ++i) {
+                                    if (typeof object.dimensions[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityRequest.dimensions: object expected");
+                                    message.dimensions[i] = $root.google.analytics.data.v1beta.Dimension.fromObject(object.dimensions[i]);
+                                }
+                            }
+                            if (object.metrics) {
+                                if (!Array.isArray(object.metrics))
+                                    throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityRequest.metrics: array expected");
+                                message.metrics = [];
+                                for (var i = 0; i < object.metrics.length; ++i) {
+                                    if (typeof object.metrics[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityRequest.metrics: object expected");
+                                    message.metrics[i] = $root.google.analytics.data.v1beta.Metric.fromObject(object.metrics[i]);
+                                }
+                            }
+                            if (object.dimensionFilter != null) {
+                                if (typeof object.dimensionFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityRequest.dimensionFilter: object expected");
+                                message.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.dimensionFilter);
+                            }
+                            if (object.metricFilter != null) {
+                                if (typeof object.metricFilter !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityRequest.metricFilter: object expected");
+                                message.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.fromObject(object.metricFilter);
+                            }
+                            switch (object.compatibilityFilter) {
+                            case "COMPATIBILITY_UNSPECIFIED":
+                            case 0:
+                                message.compatibilityFilter = 0;
+                                break;
+                            case "COMPATIBLE":
+                            case 1:
+                                message.compatibilityFilter = 1;
+                                break;
+                            case "INCOMPATIBLE":
+                            case 2:
+                                message.compatibilityFilter = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CheckCompatibilityRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @static
+                         * @param {google.analytics.data.v1beta.CheckCompatibilityRequest} message CheckCompatibilityRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CheckCompatibilityRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensions = [];
+                                object.metrics = [];
+                            }
+                            if (options.defaults) {
+                                object.property = "";
+                                object.dimensionFilter = null;
+                                object.metricFilter = null;
+                                object.compatibilityFilter = options.enums === String ? "COMPATIBILITY_UNSPECIFIED" : 0;
+                            }
+                            if (message.property != null && message.hasOwnProperty("property"))
+                                object.property = message.property;
+                            if (message.dimensions && message.dimensions.length) {
+                                object.dimensions = [];
+                                for (var j = 0; j < message.dimensions.length; ++j)
+                                    object.dimensions[j] = $root.google.analytics.data.v1beta.Dimension.toObject(message.dimensions[j], options);
+                            }
+                            if (message.metrics && message.metrics.length) {
+                                object.metrics = [];
+                                for (var j = 0; j < message.metrics.length; ++j)
+                                    object.metrics[j] = $root.google.analytics.data.v1beta.Metric.toObject(message.metrics[j], options);
+                            }
+                            if (message.dimensionFilter != null && message.hasOwnProperty("dimensionFilter"))
+                                object.dimensionFilter = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.dimensionFilter, options);
+                            if (message.metricFilter != null && message.hasOwnProperty("metricFilter"))
+                                object.metricFilter = $root.google.analytics.data.v1beta.FilterExpression.toObject(message.metricFilter, options);
+                            if (message.compatibilityFilter != null && message.hasOwnProperty("compatibilityFilter"))
+                                object.compatibilityFilter = options.enums === String ? $root.google.analytics.data.v1beta.Compatibility[message.compatibilityFilter] : message.compatibilityFilter;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CheckCompatibilityRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CheckCompatibilityRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CheckCompatibilityRequest;
+                    })();
+    
+                    v1beta.CheckCompatibilityResponse = (function() {
+    
+                        /**
+                         * Properties of a CheckCompatibilityResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface ICheckCompatibilityResponse
+                         * @property {Array.<google.analytics.data.v1beta.IDimensionCompatibility>|null} [dimensionCompatibilities] CheckCompatibilityResponse dimensionCompatibilities
+                         * @property {Array.<google.analytics.data.v1beta.IMetricCompatibility>|null} [metricCompatibilities] CheckCompatibilityResponse metricCompatibilities
+                         */
+    
+                        /**
+                         * Constructs a new CheckCompatibilityResponse.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a CheckCompatibilityResponse.
+                         * @implements ICheckCompatibilityResponse
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityResponse=} [properties] Properties to set
+                         */
+                        function CheckCompatibilityResponse(properties) {
+                            this.dimensionCompatibilities = [];
+                            this.metricCompatibilities = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CheckCompatibilityResponse dimensionCompatibilities.
+                         * @member {Array.<google.analytics.data.v1beta.IDimensionCompatibility>} dimensionCompatibilities
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @instance
+                         */
+                        CheckCompatibilityResponse.prototype.dimensionCompatibilities = $util.emptyArray;
+    
+                        /**
+                         * CheckCompatibilityResponse metricCompatibilities.
+                         * @member {Array.<google.analytics.data.v1beta.IMetricCompatibility>} metricCompatibilities
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @instance
+                         */
+                        CheckCompatibilityResponse.prototype.metricCompatibilities = $util.emptyArray;
+    
+                        /**
+                         * Creates a new CheckCompatibilityResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityResponse=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.CheckCompatibilityResponse} CheckCompatibilityResponse instance
+                         */
+                        CheckCompatibilityResponse.create = function create(properties) {
+                            return new CheckCompatibilityResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CheckCompatibilityResponse message. Does not implicitly {@link google.analytics.data.v1beta.CheckCompatibilityResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityResponse} message CheckCompatibilityResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CheckCompatibilityResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensionCompatibilities != null && message.dimensionCompatibilities.length)
+                                for (var i = 0; i < message.dimensionCompatibilities.length; ++i)
+                                    $root.google.analytics.data.v1beta.DimensionCompatibility.encode(message.dimensionCompatibilities[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.metricCompatibilities != null && message.metricCompatibilities.length)
+                                for (var i = 0; i < message.metricCompatibilities.length; ++i)
+                                    $root.google.analytics.data.v1beta.MetricCompatibility.encode(message.metricCompatibilities[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CheckCompatibilityResponse message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.CheckCompatibilityResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.ICheckCompatibilityResponse} message CheckCompatibilityResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CheckCompatibilityResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CheckCompatibilityResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.CheckCompatibilityResponse} CheckCompatibilityResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CheckCompatibilityResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.CheckCompatibilityResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.dimensionCompatibilities && message.dimensionCompatibilities.length))
+                                        message.dimensionCompatibilities = [];
+                                    message.dimensionCompatibilities.push($root.google.analytics.data.v1beta.DimensionCompatibility.decode(reader, reader.uint32()));
+                                    break;
+                                case 2:
+                                    if (!(message.metricCompatibilities && message.metricCompatibilities.length))
+                                        message.metricCompatibilities = [];
+                                    message.metricCompatibilities.push($root.google.analytics.data.v1beta.MetricCompatibility.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CheckCompatibilityResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.CheckCompatibilityResponse} CheckCompatibilityResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CheckCompatibilityResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CheckCompatibilityResponse message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CheckCompatibilityResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.dimensionCompatibilities != null && message.hasOwnProperty("dimensionCompatibilities")) {
+                                if (!Array.isArray(message.dimensionCompatibilities))
+                                    return "dimensionCompatibilities: array expected";
+                                for (var i = 0; i < message.dimensionCompatibilities.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.DimensionCompatibility.verify(message.dimensionCompatibilities[i]);
+                                    if (error)
+                                        return "dimensionCompatibilities." + error;
+                                }
+                            }
+                            if (message.metricCompatibilities != null && message.hasOwnProperty("metricCompatibilities")) {
+                                if (!Array.isArray(message.metricCompatibilities))
+                                    return "metricCompatibilities: array expected";
+                                for (var i = 0; i < message.metricCompatibilities.length; ++i) {
+                                    var error = $root.google.analytics.data.v1beta.MetricCompatibility.verify(message.metricCompatibilities[i]);
+                                    if (error)
+                                        return "metricCompatibilities." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CheckCompatibilityResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.CheckCompatibilityResponse} CheckCompatibilityResponse
+                         */
+                        CheckCompatibilityResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.CheckCompatibilityResponse)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.CheckCompatibilityResponse();
+                            if (object.dimensionCompatibilities) {
+                                if (!Array.isArray(object.dimensionCompatibilities))
+                                    throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityResponse.dimensionCompatibilities: array expected");
+                                message.dimensionCompatibilities = [];
+                                for (var i = 0; i < object.dimensionCompatibilities.length; ++i) {
+                                    if (typeof object.dimensionCompatibilities[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityResponse.dimensionCompatibilities: object expected");
+                                    message.dimensionCompatibilities[i] = $root.google.analytics.data.v1beta.DimensionCompatibility.fromObject(object.dimensionCompatibilities[i]);
+                                }
+                            }
+                            if (object.metricCompatibilities) {
+                                if (!Array.isArray(object.metricCompatibilities))
+                                    throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityResponse.metricCompatibilities: array expected");
+                                message.metricCompatibilities = [];
+                                for (var i = 0; i < object.metricCompatibilities.length; ++i) {
+                                    if (typeof object.metricCompatibilities[i] !== "object")
+                                        throw TypeError(".google.analytics.data.v1beta.CheckCompatibilityResponse.metricCompatibilities: object expected");
+                                    message.metricCompatibilities[i] = $root.google.analytics.data.v1beta.MetricCompatibility.fromObject(object.metricCompatibilities[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CheckCompatibilityResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @static
+                         * @param {google.analytics.data.v1beta.CheckCompatibilityResponse} message CheckCompatibilityResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CheckCompatibilityResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.dimensionCompatibilities = [];
+                                object.metricCompatibilities = [];
+                            }
+                            if (message.dimensionCompatibilities && message.dimensionCompatibilities.length) {
+                                object.dimensionCompatibilities = [];
+                                for (var j = 0; j < message.dimensionCompatibilities.length; ++j)
+                                    object.dimensionCompatibilities[j] = $root.google.analytics.data.v1beta.DimensionCompatibility.toObject(message.dimensionCompatibilities[j], options);
+                            }
+                            if (message.metricCompatibilities && message.metricCompatibilities.length) {
+                                object.metricCompatibilities = [];
+                                for (var j = 0; j < message.metricCompatibilities.length; ++j)
+                                    object.metricCompatibilities[j] = $root.google.analytics.data.v1beta.MetricCompatibility.toObject(message.metricCompatibilities[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CheckCompatibilityResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.CheckCompatibilityResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CheckCompatibilityResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return CheckCompatibilityResponse;
                     })();
     
                     v1beta.Metadata = (function() {
@@ -27359,6 +28014,7 @@
                          * @property {string|null} [description] DimensionMetadata description
                          * @property {Array.<string>|null} [deprecatedApiNames] DimensionMetadata deprecatedApiNames
                          * @property {boolean|null} [customDefinition] DimensionMetadata customDefinition
+                         * @property {string|null} [category] DimensionMetadata category
                          */
     
                         /**
@@ -27418,6 +28074,14 @@
                         DimensionMetadata.prototype.customDefinition = false;
     
                         /**
+                         * DimensionMetadata category.
+                         * @member {string} category
+                         * @memberof google.analytics.data.v1beta.DimensionMetadata
+                         * @instance
+                         */
+                        DimensionMetadata.prototype.category = "";
+    
+                        /**
                          * Creates a new DimensionMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1beta.DimensionMetadata
@@ -27452,6 +28116,8 @@
                                     writer.uint32(/* id 4, wireType 2 =*/34).string(message.deprecatedApiNames[i]);
                             if (message.customDefinition != null && Object.hasOwnProperty.call(message, "customDefinition"))
                                 writer.uint32(/* id 5, wireType 0 =*/40).bool(message.customDefinition);
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.category);
                             return writer;
                         };
     
@@ -27502,6 +28168,9 @@
                                     break;
                                 case 5:
                                     message.customDefinition = reader.bool();
+                                    break;
+                                case 7:
+                                    message.category = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -27557,6 +28226,9 @@
                             if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
                                 if (typeof message.customDefinition !== "boolean")
                                     return "customDefinition: boolean expected";
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                if (!$util.isString(message.category))
+                                    return "category: string expected";
                             return null;
                         };
     
@@ -27587,6 +28259,8 @@
                             }
                             if (object.customDefinition != null)
                                 message.customDefinition = Boolean(object.customDefinition);
+                            if (object.category != null)
+                                message.category = String(object.category);
                             return message;
                         };
     
@@ -27610,6 +28284,7 @@
                                 object.uiName = "";
                                 object.description = "";
                                 object.customDefinition = false;
+                                object.category = "";
                             }
                             if (message.apiName != null && message.hasOwnProperty("apiName"))
                                 object.apiName = message.apiName;
@@ -27624,6 +28299,8 @@
                             }
                             if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
                                 object.customDefinition = message.customDefinition;
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = message.category;
                             return object;
                         };
     
@@ -27654,6 +28331,7 @@
                          * @property {google.analytics.data.v1beta.MetricType|null} [type] MetricMetadata type
                          * @property {string|null} [expression] MetricMetadata expression
                          * @property {boolean|null} [customDefinition] MetricMetadata customDefinition
+                         * @property {string|null} [category] MetricMetadata category
                          */
     
                         /**
@@ -27729,6 +28407,14 @@
                         MetricMetadata.prototype.customDefinition = false;
     
                         /**
+                         * MetricMetadata category.
+                         * @member {string} category
+                         * @memberof google.analytics.data.v1beta.MetricMetadata
+                         * @instance
+                         */
+                        MetricMetadata.prototype.category = "";
+    
+                        /**
                          * Creates a new MetricMetadata instance using the specified properties.
                          * @function create
                          * @memberof google.analytics.data.v1beta.MetricMetadata
@@ -27767,6 +28453,8 @@
                                 writer.uint32(/* id 6, wireType 2 =*/50).string(message.expression);
                             if (message.customDefinition != null && Object.hasOwnProperty.call(message, "customDefinition"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).bool(message.customDefinition);
+                            if (message.category != null && Object.hasOwnProperty.call(message, "category"))
+                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.category);
                             return writer;
                         };
     
@@ -27823,6 +28511,9 @@
                                     break;
                                 case 7:
                                     message.customDefinition = reader.bool();
+                                    break;
+                                case 10:
+                                    message.category = reader.string();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -27900,6 +28591,9 @@
                             if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
                                 if (typeof message.customDefinition !== "boolean")
                                     return "customDefinition: boolean expected";
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                if (!$util.isString(message.category))
+                                    return "category: string expected";
                             return null;
                         };
     
@@ -27986,6 +28680,8 @@
                                 message.expression = String(object.expression);
                             if (object.customDefinition != null)
                                 message.customDefinition = Boolean(object.customDefinition);
+                            if (object.category != null)
+                                message.category = String(object.category);
                             return message;
                         };
     
@@ -28011,6 +28707,7 @@
                                 object.type = options.enums === String ? "METRIC_TYPE_UNSPECIFIED" : 0;
                                 object.expression = "";
                                 object.customDefinition = false;
+                                object.category = "";
                             }
                             if (message.apiName != null && message.hasOwnProperty("apiName"))
                                 object.apiName = message.apiName;
@@ -28029,6 +28726,8 @@
                                 object.expression = message.expression;
                             if (message.customDefinition != null && message.hasOwnProperty("customDefinition"))
                                 object.customDefinition = message.customDefinition;
+                            if (message.category != null && message.hasOwnProperty("category"))
+                                object.category = message.category;
                             return object;
                         };
     
@@ -28044,6 +28743,538 @@
                         };
     
                         return MetricMetadata;
+                    })();
+    
+                    v1beta.DimensionCompatibility = (function() {
+    
+                        /**
+                         * Properties of a DimensionCompatibility.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IDimensionCompatibility
+                         * @property {google.analytics.data.v1beta.IDimensionMetadata|null} [dimensionMetadata] DimensionCompatibility dimensionMetadata
+                         * @property {google.analytics.data.v1beta.Compatibility|null} [compatibility] DimensionCompatibility compatibility
+                         */
+    
+                        /**
+                         * Constructs a new DimensionCompatibility.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a DimensionCompatibility.
+                         * @implements IDimensionCompatibility
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IDimensionCompatibility=} [properties] Properties to set
+                         */
+                        function DimensionCompatibility(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DimensionCompatibility dimensionMetadata.
+                         * @member {google.analytics.data.v1beta.IDimensionMetadata|null|undefined} dimensionMetadata
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @instance
+                         */
+                        DimensionCompatibility.prototype.dimensionMetadata = null;
+    
+                        /**
+                         * DimensionCompatibility compatibility.
+                         * @member {google.analytics.data.v1beta.Compatibility|null|undefined} compatibility
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @instance
+                         */
+                        DimensionCompatibility.prototype.compatibility = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DimensionCompatibility _dimensionMetadata.
+                         * @member {"dimensionMetadata"|undefined} _dimensionMetadata
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @instance
+                         */
+                        Object.defineProperty(DimensionCompatibility.prototype, "_dimensionMetadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["dimensionMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * DimensionCompatibility _compatibility.
+                         * @member {"compatibility"|undefined} _compatibility
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @instance
+                         */
+                        Object.defineProperty(DimensionCompatibility.prototype, "_compatibility", {
+                            get: $util.oneOfGetter($oneOfFields = ["compatibility"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DimensionCompatibility instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionCompatibility=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.DimensionCompatibility} DimensionCompatibility instance
+                         */
+                        DimensionCompatibility.create = function create(properties) {
+                            return new DimensionCompatibility(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionCompatibility message. Does not implicitly {@link google.analytics.data.v1beta.DimensionCompatibility.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionCompatibility} message DimensionCompatibility message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionCompatibility.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.dimensionMetadata != null && Object.hasOwnProperty.call(message, "dimensionMetadata"))
+                                $root.google.analytics.data.v1beta.DimensionMetadata.encode(message.dimensionMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.compatibility != null && Object.hasOwnProperty.call(message, "compatibility"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.compatibility);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DimensionCompatibility message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.DimensionCompatibility.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @static
+                         * @param {google.analytics.data.v1beta.IDimensionCompatibility} message DimensionCompatibility message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DimensionCompatibility.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DimensionCompatibility message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.DimensionCompatibility} DimensionCompatibility
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionCompatibility.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.DimensionCompatibility();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.dimensionMetadata = $root.google.analytics.data.v1beta.DimensionMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.compatibility = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DimensionCompatibility message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.DimensionCompatibility} DimensionCompatibility
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DimensionCompatibility.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DimensionCompatibility message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DimensionCompatibility.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.dimensionMetadata != null && message.hasOwnProperty("dimensionMetadata")) {
+                                properties._dimensionMetadata = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.DimensionMetadata.verify(message.dimensionMetadata);
+                                    if (error)
+                                        return "dimensionMetadata." + error;
+                                }
+                            }
+                            if (message.compatibility != null && message.hasOwnProperty("compatibility")) {
+                                properties._compatibility = 1;
+                                switch (message.compatibility) {
+                                default:
+                                    return "compatibility: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DimensionCompatibility message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.DimensionCompatibility} DimensionCompatibility
+                         */
+                        DimensionCompatibility.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.DimensionCompatibility)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.DimensionCompatibility();
+                            if (object.dimensionMetadata != null) {
+                                if (typeof object.dimensionMetadata !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.DimensionCompatibility.dimensionMetadata: object expected");
+                                message.dimensionMetadata = $root.google.analytics.data.v1beta.DimensionMetadata.fromObject(object.dimensionMetadata);
+                            }
+                            switch (object.compatibility) {
+                            case "COMPATIBILITY_UNSPECIFIED":
+                            case 0:
+                                message.compatibility = 0;
+                                break;
+                            case "COMPATIBLE":
+                            case 1:
+                                message.compatibility = 1;
+                                break;
+                            case "INCOMPATIBLE":
+                            case 2:
+                                message.compatibility = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DimensionCompatibility message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @static
+                         * @param {google.analytics.data.v1beta.DimensionCompatibility} message DimensionCompatibility
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DimensionCompatibility.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.dimensionMetadata != null && message.hasOwnProperty("dimensionMetadata")) {
+                                object.dimensionMetadata = $root.google.analytics.data.v1beta.DimensionMetadata.toObject(message.dimensionMetadata, options);
+                                if (options.oneofs)
+                                    object._dimensionMetadata = "dimensionMetadata";
+                            }
+                            if (message.compatibility != null && message.hasOwnProperty("compatibility")) {
+                                object.compatibility = options.enums === String ? $root.google.analytics.data.v1beta.Compatibility[message.compatibility] : message.compatibility;
+                                if (options.oneofs)
+                                    object._compatibility = "compatibility";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DimensionCompatibility to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.DimensionCompatibility
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DimensionCompatibility.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DimensionCompatibility;
+                    })();
+    
+                    v1beta.MetricCompatibility = (function() {
+    
+                        /**
+                         * Properties of a MetricCompatibility.
+                         * @memberof google.analytics.data.v1beta
+                         * @interface IMetricCompatibility
+                         * @property {google.analytics.data.v1beta.IMetricMetadata|null} [metricMetadata] MetricCompatibility metricMetadata
+                         * @property {google.analytics.data.v1beta.Compatibility|null} [compatibility] MetricCompatibility compatibility
+                         */
+    
+                        /**
+                         * Constructs a new MetricCompatibility.
+                         * @memberof google.analytics.data.v1beta
+                         * @classdesc Represents a MetricCompatibility.
+                         * @implements IMetricCompatibility
+                         * @constructor
+                         * @param {google.analytics.data.v1beta.IMetricCompatibility=} [properties] Properties to set
+                         */
+                        function MetricCompatibility(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MetricCompatibility metricMetadata.
+                         * @member {google.analytics.data.v1beta.IMetricMetadata|null|undefined} metricMetadata
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @instance
+                         */
+                        MetricCompatibility.prototype.metricMetadata = null;
+    
+                        /**
+                         * MetricCompatibility compatibility.
+                         * @member {google.analytics.data.v1beta.Compatibility|null|undefined} compatibility
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @instance
+                         */
+                        MetricCompatibility.prototype.compatibility = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MetricCompatibility _metricMetadata.
+                         * @member {"metricMetadata"|undefined} _metricMetadata
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @instance
+                         */
+                        Object.defineProperty(MetricCompatibility.prototype, "_metricMetadata", {
+                            get: $util.oneOfGetter($oneOfFields = ["metricMetadata"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * MetricCompatibility _compatibility.
+                         * @member {"compatibility"|undefined} _compatibility
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @instance
+                         */
+                        Object.defineProperty(MetricCompatibility.prototype, "_compatibility", {
+                            get: $util.oneOfGetter($oneOfFields = ["compatibility"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MetricCompatibility instance using the specified properties.
+                         * @function create
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricCompatibility=} [properties] Properties to set
+                         * @returns {google.analytics.data.v1beta.MetricCompatibility} MetricCompatibility instance
+                         */
+                        MetricCompatibility.create = function create(properties) {
+                            return new MetricCompatibility(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MetricCompatibility message. Does not implicitly {@link google.analytics.data.v1beta.MetricCompatibility.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricCompatibility} message MetricCompatibility message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricCompatibility.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.metricMetadata != null && Object.hasOwnProperty.call(message, "metricMetadata"))
+                                $root.google.analytics.data.v1beta.MetricMetadata.encode(message.metricMetadata, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.compatibility != null && Object.hasOwnProperty.call(message, "compatibility"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.compatibility);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MetricCompatibility message, length delimited. Does not implicitly {@link google.analytics.data.v1beta.MetricCompatibility.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @static
+                         * @param {google.analytics.data.v1beta.IMetricCompatibility} message MetricCompatibility message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MetricCompatibility.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MetricCompatibility message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.analytics.data.v1beta.MetricCompatibility} MetricCompatibility
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricCompatibility.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.analytics.data.v1beta.MetricCompatibility();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.metricMetadata = $root.google.analytics.data.v1beta.MetricMetadata.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.compatibility = reader.int32();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MetricCompatibility message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.analytics.data.v1beta.MetricCompatibility} MetricCompatibility
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MetricCompatibility.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MetricCompatibility message.
+                         * @function verify
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MetricCompatibility.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.metricMetadata != null && message.hasOwnProperty("metricMetadata")) {
+                                properties._metricMetadata = 1;
+                                {
+                                    var error = $root.google.analytics.data.v1beta.MetricMetadata.verify(message.metricMetadata);
+                                    if (error)
+                                        return "metricMetadata." + error;
+                                }
+                            }
+                            if (message.compatibility != null && message.hasOwnProperty("compatibility")) {
+                                properties._compatibility = 1;
+                                switch (message.compatibility) {
+                                default:
+                                    return "compatibility: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MetricCompatibility message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.analytics.data.v1beta.MetricCompatibility} MetricCompatibility
+                         */
+                        MetricCompatibility.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.analytics.data.v1beta.MetricCompatibility)
+                                return object;
+                            var message = new $root.google.analytics.data.v1beta.MetricCompatibility();
+                            if (object.metricMetadata != null) {
+                                if (typeof object.metricMetadata !== "object")
+                                    throw TypeError(".google.analytics.data.v1beta.MetricCompatibility.metricMetadata: object expected");
+                                message.metricMetadata = $root.google.analytics.data.v1beta.MetricMetadata.fromObject(object.metricMetadata);
+                            }
+                            switch (object.compatibility) {
+                            case "COMPATIBILITY_UNSPECIFIED":
+                            case 0:
+                                message.compatibility = 0;
+                                break;
+                            case "COMPATIBLE":
+                            case 1:
+                                message.compatibility = 1;
+                                break;
+                            case "INCOMPATIBLE":
+                            case 2:
+                                message.compatibility = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MetricCompatibility message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @static
+                         * @param {google.analytics.data.v1beta.MetricCompatibility} message MetricCompatibility
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MetricCompatibility.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.metricMetadata != null && message.hasOwnProperty("metricMetadata")) {
+                                object.metricMetadata = $root.google.analytics.data.v1beta.MetricMetadata.toObject(message.metricMetadata, options);
+                                if (options.oneofs)
+                                    object._metricMetadata = "metricMetadata";
+                            }
+                            if (message.compatibility != null && message.hasOwnProperty("compatibility")) {
+                                object.compatibility = options.enums === String ? $root.google.analytics.data.v1beta.Compatibility[message.compatibility] : message.compatibility;
+                                if (options.oneofs)
+                                    object._compatibility = "compatibility";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MetricCompatibility to JSON.
+                         * @function toJSON
+                         * @memberof google.analytics.data.v1beta.MetricCompatibility
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MetricCompatibility.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return MetricCompatibility;
                     })();
     
                     /**
@@ -28099,6 +29330,22 @@
                         values[valuesById[11] = "TYPE_MILES"] = 11;
                         values[valuesById[12] = "TYPE_METERS"] = 12;
                         values[valuesById[13] = "TYPE_KILOMETERS"] = 13;
+                        return values;
+                    })();
+    
+                    /**
+                     * Compatibility enum.
+                     * @name google.analytics.data.v1beta.Compatibility
+                     * @enum {number}
+                     * @property {number} COMPATIBILITY_UNSPECIFIED=0 COMPATIBILITY_UNSPECIFIED value
+                     * @property {number} COMPATIBLE=1 COMPATIBLE value
+                     * @property {number} INCOMPATIBLE=2 INCOMPATIBLE value
+                     */
+                    v1beta.Compatibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "COMPATIBILITY_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "COMPATIBLE"] = 1;
+                        values[valuesById[2] = "INCOMPATIBLE"] = 2;
                         return values;
                     })();
     

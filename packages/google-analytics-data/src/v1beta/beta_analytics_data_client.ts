@@ -216,6 +216,7 @@ export class BetaAnalyticsDataClient {
       'batchRunPivotReports',
       'getMetadata',
       'runRealtimeReport',
+      'checkCompatibility',
     ];
     for (const methodName of betaAnalyticsDataStubMethods) {
       const callPromise = this.betaAnalyticsDataStub.then(
@@ -359,12 +360,13 @@ export class BetaAnalyticsDataClient {
    *   response rows for both date ranges. In a cohort request, this `dateRanges`
    *   must be unspecified.
    * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
-   *   The filter clause of dimensions. Dimensions must be requested to be used in
-   *   this filter. Metrics cannot be used in this filter.
+   *   Dimension filters allow you to ask for only specific dimension values in
+   *   the report. To learn more, see [Fundamentals of Dimension
+   *   Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
+   *   for examples. Metrics cannot be used in this filter.
    * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
    *   The filter clause of metrics. Applied at post aggregation phase, similar to
-   *   SQL having-clause. Metrics must be requested to be used in this filter.
-   *   Dimensions cannot be used in this filter.
+   *   SQL having-clause. Dimensions cannot be used in this filter.
    * @param {number} request.offset
    *   The row count of the start row. The first row is counted as row 0.
    *
@@ -1051,6 +1053,137 @@ export class BetaAnalyticsDataClient {
       });
     this.initialize();
     return this.innerApiCalls.runRealtimeReport(request, options, callback);
+  }
+  checkCompatibility(
+    request?: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      (
+        | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  checkCompatibility(
+    request: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  checkCompatibility(
+    request: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
+    callback: Callback<
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * This compatibility method lists dimensions and metrics that can be added to
+   * a report request and maintain compatibility. This method fails if the
+   * request's dimensions and metrics are incompatible.
+   *
+   * In Google Analytics, reports fail if they request incompatible dimensions
+   * and/or metrics; in that case, you will need to remove dimensions and/or
+   * metrics from the incompatible report until the report is compatible.
+   *
+   * The Realtime and Core reports have different compatibility rules. This
+   * method checks compatibility for Core reports.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.property
+   *   A Google Analytics GA4 property identifier whose events are tracked. To
+   *   learn more, see [where to find your Property
+   *   ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
+   *   `property` should be the same value as in your `runReport` request.
+   *
+   *   Example: properties/1234
+   *
+   *   Set the Property ID to 0 for compatibility checking on dimensions and
+   *   metrics common to all properties. In this special mode, this method will
+   *   not return custom dimensions and metrics.
+   * @param {number[]} request.dimensions
+   *   The dimensions in this report. `dimensions` should be the same value as in
+   *   your `runReport` request.
+   * @param {number[]} request.metrics
+   *   The metrics in this report. `metrics` should be the same value as in your
+   *   `runReport` request.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.dimensionFilter
+   *   The filter clause of dimensions. `dimensionFilter` should be the same value
+   *   as in your `runReport` request.
+   * @param {google.analytics.data.v1beta.FilterExpression} request.metricFilter
+   *   The filter clause of metrics. `metricFilter` should be the same value as in
+   *   your `runReport` request
+   * @param {google.analytics.data.v1beta.Compatibility} request.compatibilityFilter
+   *   Filters the dimensions and metrics in the response to just this
+   *   compatibility. Commonly used as `”compatibilityFilter”: “COMPATIBLE”`
+   *   to only return compatible dimensions & metrics.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [CheckCompatibilityResponse]{@link google.analytics.data.v1beta.CheckCompatibilityResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.checkCompatibility(request);
+   */
+  checkCompatibility(
+    request?: protos.google.analytics.data.v1beta.ICheckCompatibilityRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+          | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.analytics.data.v1beta.ICheckCompatibilityResponse,
+      (
+        | protos.google.analytics.data.v1beta.ICheckCompatibilityRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        property: request.property || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.checkCompatibility(request, options, callback);
   }
 
   // --------------------
