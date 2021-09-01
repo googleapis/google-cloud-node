@@ -10,5 +10,6 @@
   "distribution_name": "@google-cloud/contact-center-insights",
   "api_id": "contactcenterinsights.googleapis.com",
   "default_version": "v1",
-  "requires_billing": true
+  "requires_billing": true,
+  "codeowner_team": "@googleapis/api-contact-center-insights"
 }
