@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.7.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.6.0...v2.7.0) (2021-09-01)
+
+
+### Features
+
+* add `CheckCompatibility` method to the API ([#141](https://www.github.com/googleapis/nodejs-analytics-data/issues/141)) ([62c787f](https://www.github.com/googleapis/nodejs-analytics-data/commit/62c787fe3cda77a924a1de119de0ac1893a9390c))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-analytics-data/compare/v2.5.3...v2.6.0) (2021-08-23)
 
 
