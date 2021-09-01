@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.3.0](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.2.0...v1.3.0) (2021-09-01)
+
+
+### Features
+
+* Added commitment_start_time to capacity commitments ([be13d46](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/be13d466f443af4ab88aff045eca2965eb11a968))
+* Deprecated SearchAssignments in favor of SearchAllAssignments ([be13d46](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/be13d466f443af4ab88aff045eca2965eb11a968))
+* Deprecated SearchAssignments in favor of SearchAllAssignments ([be13d46](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/be13d466f443af4ab88aff045eca2965eb11a968))
+* Force deleting capacity commitments is allowed ... ([#103](https://www.github.com/googleapis/nodejs-bigquery-reservation/issues/103)) ([be13d46](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/be13d466f443af4ab88aff045eca2965eb11a968))
+* Reservation objects now contain a creation time and an update time ([be13d46](https://www.github.com/googleapis/nodejs-bigquery-reservation/commit/be13d466f443af4ab88aff045eca2965eb11a968))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-bigquery-reservation/compare/v1.1.6...v1.2.0) (2021-08-23)
 
 
