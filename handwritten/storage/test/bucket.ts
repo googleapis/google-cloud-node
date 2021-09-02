@@ -2523,7 +2523,7 @@ describe('Bucket', () => {
       bucket.setStorageClass(STORAGE_CLASS, OPTIONS, CALLBACK);
     });
 
-    it('should disable autoRetry when ifMetagenerationMathc is undefined', done => {
+    it('should disable autoRetry when ifMetagenerationMatch is undefined', done => {
       bucket.setMetadata = (
         metadata: Metadata,
         options: {},
