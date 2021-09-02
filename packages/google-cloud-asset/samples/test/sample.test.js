@@ -79,8 +79,14 @@ describe('quickstart sample tests', () => {
   // the newly created bucket:
   it('should get assets history successfully', async () => {
     const assetName = `//storage.googleapis.com/${bucketName}`;
-    const stdout = execSync(`node getBatchAssetHistory ${assetName}`);
-    assert.include(stdout, assetName);
+    let waitMs = 1000;
+    let included = false;
+    for (let retry = 0; retry < 3 && !included; ++retry) {
+      await sleep((waitMs *= 2));
+      const stdout = execSync(`node getBatchAssetHistory ${assetName}`);
+      included = stdout.includes(assetName);
+    }
+    assert.ok(included);
   });
 
   it('should run the quickstart', async () => {
