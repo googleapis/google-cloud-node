@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.3.0...v2.0.0) (2021-08-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* mark v1 as the default API version (#85)
+
+### Features
+
+* mark v1 as the default API version ([#85](https://www.github.com/googleapis/nodejs-dataproc-metastore/issues/85)) ([1869574](https://www.github.com/googleapis/nodejs-dataproc-metastore/commit/1869574b0deef84866f62c8f8550f7e3d5fed8c9))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-dataproc-metastore/compare/v1.2.0...v1.3.0) (2021-08-23)
 
 
