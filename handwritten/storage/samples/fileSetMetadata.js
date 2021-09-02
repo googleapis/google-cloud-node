@@ -43,7 +43,7 @@ function main(bucketName = 'my-bucket', fileName = 'file.txt') {
       .file(fileName)
       .setMetadata({
         // Predefinded metadata for server e.g. 'cacheControl', 'contentDisposition',
-        // 'contentEncoding', 'contentEncoding', 'contentLanguage', 'contentType'
+        // 'contentEncoding', 'contentLanguage', 'contentType'
         contentDisposition: 'attachment; filename*=utf-8\'\'"anotherImage.jpg"',
         contentType: 'image/jpeg',
 
