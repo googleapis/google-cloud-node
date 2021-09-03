@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.6.1](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.6.0...v2.6.1) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** migrate to main branch ([#204](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/204)) ([759c9f0](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/759c9f0442f9cec7eec94055da87b17ba7ef18ad))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.5.4...v2.6.0) (2021-08-23)
 
 
