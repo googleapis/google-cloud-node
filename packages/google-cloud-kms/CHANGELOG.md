@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/kms?activeTab=versions
 
+### [2.8.1](https://www.github.com/googleapis/nodejs-kms/compare/v2.8.0...v2.8.1) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** migrate to main branch ([#496](https://www.github.com/googleapis/nodejs-kms/issues/496)) ([b1804fb](https://www.github.com/googleapis/nodejs-kms/commit/b1804fbc2bc85cbc03c50c82f33690682dd91d58))
+
 ## [2.8.0](https://www.github.com/googleapis/nodejs-kms/compare/v2.7.0...v2.8.0) (2021-08-30)
 
 
