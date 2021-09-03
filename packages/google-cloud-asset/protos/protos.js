@@ -13839,6 +13839,7 @@
                          * @property {string|null} [parentFullResourceName] ResourceSearchResult parentFullResourceName
                          * @property {Array.<google.cloud.asset.v1.IVersionedResource>|null} [versionedResources] ResourceSearchResult versionedResources
                          * @property {Array.<google.cloud.asset.v1.IAttachedResource>|null} [attachedResources] ResourceSearchResult attachedResources
+                         * @property {Object.<string,google.cloud.asset.v1.IRelatedResources>|null} [relationships] ResourceSearchResult relationships
                          * @property {string|null} [parentAssetType] ResourceSearchResult parentAssetType
                          */
     
@@ -13856,6 +13857,7 @@
                             this.networkTags = [];
                             this.versionedResources = [];
                             this.attachedResources = [];
+                            this.relationships = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -14007,6 +14009,14 @@
                         ResourceSearchResult.prototype.attachedResources = $util.emptyArray;
     
                         /**
+                         * ResourceSearchResult relationships.
+                         * @member {Object.<string,google.cloud.asset.v1.IRelatedResources>} relationships
+                         * @memberof google.cloud.asset.v1.ResourceSearchResult
+                         * @instance
+                         */
+                        ResourceSearchResult.prototype.relationships = $util.emptyObject;
+    
+                        /**
                          * ResourceSearchResult parentAssetType.
                          * @member {string} parentAssetType
                          * @memberof google.cloud.asset.v1.ResourceSearchResult
@@ -14079,6 +14089,11 @@
                             if (message.attachedResources != null && message.attachedResources.length)
                                 for (var i = 0; i < message.attachedResources.length; ++i)
                                     $root.google.cloud.asset.v1.AttachedResource.encode(message.attachedResources[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
+                            if (message.relationships != null && Object.hasOwnProperty.call(message, "relationships"))
+                                for (var keys = Object.keys(message.relationships), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 21, wireType 2 =*/170).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.asset.v1.RelatedResources.encode(message.relationships[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
                             if (message.parentAssetType != null && Object.hasOwnProperty.call(message, "parentAssetType"))
                                 writer.uint32(/* id 103, wireType 2 =*/826).string(message.parentAssetType);
                             return writer;
@@ -14195,6 +14210,28 @@
                                     if (!(message.attachedResources && message.attachedResources.length))
                                         message.attachedResources = [];
                                     message.attachedResources.push($root.google.cloud.asset.v1.AttachedResource.decode(reader, reader.uint32()));
+                                    break;
+                                case 21:
+                                    if (message.relationships === $util.emptyObject)
+                                        message.relationships = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.asset.v1.RelatedResources.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.relationships[key] = value;
                                     break;
                                 case 103:
                                     message.parentAssetType = reader.string();
@@ -14319,6 +14356,16 @@
                                         return "attachedResources." + error;
                                 }
                             }
+                            if (message.relationships != null && message.hasOwnProperty("relationships")) {
+                                if (!$util.isObject(message.relationships))
+                                    return "relationships: object expected";
+                                var key = Object.keys(message.relationships);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.RelatedResources.verify(message.relationships[key[i]]);
+                                    if (error)
+                                        return "relationships." + error;
+                                }
+                            }
                             if (message.parentAssetType != null && message.hasOwnProperty("parentAssetType"))
                                 if (!$util.isString(message.parentAssetType))
                                     return "parentAssetType: string expected";
@@ -14413,6 +14460,16 @@
                                     message.attachedResources[i] = $root.google.cloud.asset.v1.AttachedResource.fromObject(object.attachedResources[i]);
                                 }
                             }
+                            if (object.relationships) {
+                                if (typeof object.relationships !== "object")
+                                    throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.relationships: object expected");
+                                message.relationships = {};
+                                for (var keys = Object.keys(object.relationships), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.relationships[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.ResourceSearchResult.relationships: object expected");
+                                    message.relationships[keys[i]] = $root.google.cloud.asset.v1.RelatedResources.fromObject(object.relationships[keys[i]]);
+                                }
+                            }
                             if (object.parentAssetType != null)
                                 message.parentAssetType = String(object.parentAssetType);
                             return message;
@@ -14437,8 +14494,10 @@
                                 object.folders = [];
                                 object.attachedResources = [];
                             }
-                            if (options.objects || options.defaults)
+                            if (options.objects || options.defaults) {
                                 object.labels = {};
+                                object.relationships = {};
+                            }
                             if (options.defaults) {
                                 object.name = "";
                                 object.assetType = "";
@@ -14506,6 +14565,11 @@
                                 object.attachedResources = [];
                                 for (var j = 0; j < message.attachedResources.length; ++j)
                                     object.attachedResources[j] = $root.google.cloud.asset.v1.AttachedResource.toObject(message.attachedResources[j], options);
+                            }
+                            if (message.relationships && (keys2 = Object.keys(message.relationships)).length) {
+                                object.relationships = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.relationships[keys2[j]] = $root.google.cloud.asset.v1.RelatedResources.toObject(message.relationships[keys2[j]], options);
                             }
                             if (message.parentAssetType != null && message.hasOwnProperty("parentAssetType"))
                                 object.parentAssetType = message.parentAssetType;
@@ -14970,6 +15034,424 @@
                         };
     
                         return AttachedResource;
+                    })();
+    
+                    v1.RelatedResources = (function() {
+    
+                        /**
+                         * Properties of a RelatedResources.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IRelatedResources
+                         * @property {Array.<google.cloud.asset.v1.IRelatedResource>|null} [relatedResources] RelatedResources relatedResources
+                         */
+    
+                        /**
+                         * Constructs a new RelatedResources.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a RelatedResources.
+                         * @implements IRelatedResources
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IRelatedResources=} [properties] Properties to set
+                         */
+                        function RelatedResources(properties) {
+                            this.relatedResources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RelatedResources relatedResources.
+                         * @member {Array.<google.cloud.asset.v1.IRelatedResource>} relatedResources
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @instance
+                         */
+                        RelatedResources.prototype.relatedResources = $util.emptyArray;
+    
+                        /**
+                         * Creates a new RelatedResources instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedResources=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.RelatedResources} RelatedResources instance
+                         */
+                        RelatedResources.create = function create(properties) {
+                            return new RelatedResources(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedResources message. Does not implicitly {@link google.cloud.asset.v1.RelatedResources.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedResources} message RelatedResources message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedResources.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.relatedResources != null && message.relatedResources.length)
+                                for (var i = 0; i < message.relatedResources.length; ++i)
+                                    $root.google.cloud.asset.v1.RelatedResource.encode(message.relatedResources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedResources message, length delimited. Does not implicitly {@link google.cloud.asset.v1.RelatedResources.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedResources} message RelatedResources message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedResources.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RelatedResources message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.RelatedResources} RelatedResources
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedResources.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelatedResources();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.relatedResources && message.relatedResources.length))
+                                        message.relatedResources = [];
+                                    message.relatedResources.push($root.google.cloud.asset.v1.RelatedResource.decode(reader, reader.uint32()));
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RelatedResources message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.RelatedResources} RelatedResources
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedResources.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RelatedResources message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RelatedResources.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.relatedResources != null && message.hasOwnProperty("relatedResources")) {
+                                if (!Array.isArray(message.relatedResources))
+                                    return "relatedResources: array expected";
+                                for (var i = 0; i < message.relatedResources.length; ++i) {
+                                    var error = $root.google.cloud.asset.v1.RelatedResource.verify(message.relatedResources[i]);
+                                    if (error)
+                                        return "relatedResources." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RelatedResources message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.RelatedResources} RelatedResources
+                         */
+                        RelatedResources.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.RelatedResources)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.RelatedResources();
+                            if (object.relatedResources) {
+                                if (!Array.isArray(object.relatedResources))
+                                    throw TypeError(".google.cloud.asset.v1.RelatedResources.relatedResources: array expected");
+                                message.relatedResources = [];
+                                for (var i = 0; i < object.relatedResources.length; ++i) {
+                                    if (typeof object.relatedResources[i] !== "object")
+                                        throw TypeError(".google.cloud.asset.v1.RelatedResources.relatedResources: object expected");
+                                    message.relatedResources[i] = $root.google.cloud.asset.v1.RelatedResource.fromObject(object.relatedResources[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RelatedResources message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @static
+                         * @param {google.cloud.asset.v1.RelatedResources} message RelatedResources
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RelatedResources.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.relatedResources = [];
+                            if (message.relatedResources && message.relatedResources.length) {
+                                object.relatedResources = [];
+                                for (var j = 0; j < message.relatedResources.length; ++j)
+                                    object.relatedResources[j] = $root.google.cloud.asset.v1.RelatedResource.toObject(message.relatedResources[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RelatedResources to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.RelatedResources
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RelatedResources.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RelatedResources;
+                    })();
+    
+                    v1.RelatedResource = (function() {
+    
+                        /**
+                         * Properties of a RelatedResource.
+                         * @memberof google.cloud.asset.v1
+                         * @interface IRelatedResource
+                         * @property {string|null} [assetType] RelatedResource assetType
+                         * @property {string|null} [fullResourceName] RelatedResource fullResourceName
+                         */
+    
+                        /**
+                         * Constructs a new RelatedResource.
+                         * @memberof google.cloud.asset.v1
+                         * @classdesc Represents a RelatedResource.
+                         * @implements IRelatedResource
+                         * @constructor
+                         * @param {google.cloud.asset.v1.IRelatedResource=} [properties] Properties to set
+                         */
+                        function RelatedResource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * RelatedResource assetType.
+                         * @member {string} assetType
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @instance
+                         */
+                        RelatedResource.prototype.assetType = "";
+    
+                        /**
+                         * RelatedResource fullResourceName.
+                         * @member {string} fullResourceName
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @instance
+                         */
+                        RelatedResource.prototype.fullResourceName = "";
+    
+                        /**
+                         * Creates a new RelatedResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedResource=} [properties] Properties to set
+                         * @returns {google.cloud.asset.v1.RelatedResource} RelatedResource instance
+                         */
+                        RelatedResource.create = function create(properties) {
+                            return new RelatedResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedResource message. Does not implicitly {@link google.cloud.asset.v1.RelatedResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedResource} message RelatedResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.assetType != null && Object.hasOwnProperty.call(message, "assetType"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.assetType);
+                            if (message.fullResourceName != null && Object.hasOwnProperty.call(message, "fullResourceName"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.fullResourceName);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified RelatedResource message, length delimited. Does not implicitly {@link google.cloud.asset.v1.RelatedResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.IRelatedResource} message RelatedResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        RelatedResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a RelatedResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.asset.v1.RelatedResource} RelatedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedResource.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.asset.v1.RelatedResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.assetType = reader.string();
+                                    break;
+                                case 2:
+                                    message.fullResourceName = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a RelatedResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.asset.v1.RelatedResource} RelatedResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        RelatedResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a RelatedResource message.
+                         * @function verify
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        RelatedResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                if (!$util.isString(message.assetType))
+                                    return "assetType: string expected";
+                            if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                if (!$util.isString(message.fullResourceName))
+                                    return "fullResourceName: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a RelatedResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.asset.v1.RelatedResource} RelatedResource
+                         */
+                        RelatedResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.asset.v1.RelatedResource)
+                                return object;
+                            var message = new $root.google.cloud.asset.v1.RelatedResource();
+                            if (object.assetType != null)
+                                message.assetType = String(object.assetType);
+                            if (object.fullResourceName != null)
+                                message.fullResourceName = String(object.fullResourceName);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a RelatedResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @static
+                         * @param {google.cloud.asset.v1.RelatedResource} message RelatedResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        RelatedResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.assetType = "";
+                                object.fullResourceName = "";
+                            }
+                            if (message.assetType != null && message.hasOwnProperty("assetType"))
+                                object.assetType = message.assetType;
+                            if (message.fullResourceName != null && message.hasOwnProperty("fullResourceName"))
+                                object.fullResourceName = message.fullResourceName;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this RelatedResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.asset.v1.RelatedResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        RelatedResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return RelatedResource;
                     })();
     
                     v1.IamPolicySearchResult = (function() {
