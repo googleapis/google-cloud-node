@@ -5751,6 +5751,9 @@ export namespace google {
                     /** ResourceSearchResult attachedResources */
                     attachedResources?: (google.cloud.asset.v1.IAttachedResource[]|null);
 
+                    /** ResourceSearchResult relationships */
+                    relationships?: ({ [k: string]: google.cloud.asset.v1.IRelatedResources }|null);
+
                     /** ResourceSearchResult parentAssetType */
                     parentAssetType?: (string|null);
                 }
@@ -5817,6 +5820,9 @@ export namespace google {
 
                     /** ResourceSearchResult attachedResources. */
                     public attachedResources: google.cloud.asset.v1.IAttachedResource[];
+
+                    /** ResourceSearchResult relationships. */
+                    public relationships: { [k: string]: google.cloud.asset.v1.IRelatedResources };
 
                     /** ResourceSearchResult parentAssetType. */
                     public parentAssetType: string;
@@ -6079,6 +6085,192 @@ export namespace google {
 
                     /**
                      * Converts this AttachedResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RelatedResources. */
+                interface IRelatedResources {
+
+                    /** RelatedResources relatedResources */
+                    relatedResources?: (google.cloud.asset.v1.IRelatedResource[]|null);
+                }
+
+                /** Represents a RelatedResources. */
+                class RelatedResources implements IRelatedResources {
+
+                    /**
+                     * Constructs a new RelatedResources.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IRelatedResources);
+
+                    /** RelatedResources relatedResources. */
+                    public relatedResources: google.cloud.asset.v1.IRelatedResource[];
+
+                    /**
+                     * Creates a new RelatedResources instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RelatedResources instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IRelatedResources): google.cloud.asset.v1.RelatedResources;
+
+                    /**
+                     * Encodes the specified RelatedResources message. Does not implicitly {@link google.cloud.asset.v1.RelatedResources.verify|verify} messages.
+                     * @param message RelatedResources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IRelatedResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RelatedResources message, length delimited. Does not implicitly {@link google.cloud.asset.v1.RelatedResources.verify|verify} messages.
+                     * @param message RelatedResources message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IRelatedResources, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RelatedResources message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RelatedResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.RelatedResources;
+
+                    /**
+                     * Decodes a RelatedResources message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RelatedResources
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.RelatedResources;
+
+                    /**
+                     * Verifies a RelatedResources message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RelatedResources message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RelatedResources
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.RelatedResources;
+
+                    /**
+                     * Creates a plain object from a RelatedResources message. Also converts values to other types if specified.
+                     * @param message RelatedResources
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.RelatedResources, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RelatedResources to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a RelatedResource. */
+                interface IRelatedResource {
+
+                    /** RelatedResource assetType */
+                    assetType?: (string|null);
+
+                    /** RelatedResource fullResourceName */
+                    fullResourceName?: (string|null);
+                }
+
+                /** Represents a RelatedResource. */
+                class RelatedResource implements IRelatedResource {
+
+                    /**
+                     * Constructs a new RelatedResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.asset.v1.IRelatedResource);
+
+                    /** RelatedResource assetType. */
+                    public assetType: string;
+
+                    /** RelatedResource fullResourceName. */
+                    public fullResourceName: string;
+
+                    /**
+                     * Creates a new RelatedResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RelatedResource instance
+                     */
+                    public static create(properties?: google.cloud.asset.v1.IRelatedResource): google.cloud.asset.v1.RelatedResource;
+
+                    /**
+                     * Encodes the specified RelatedResource message. Does not implicitly {@link google.cloud.asset.v1.RelatedResource.verify|verify} messages.
+                     * @param message RelatedResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.asset.v1.IRelatedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RelatedResource message, length delimited. Does not implicitly {@link google.cloud.asset.v1.RelatedResource.verify|verify} messages.
+                     * @param message RelatedResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.asset.v1.IRelatedResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RelatedResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RelatedResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.asset.v1.RelatedResource;
+
+                    /**
+                     * Decodes a RelatedResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RelatedResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.asset.v1.RelatedResource;
+
+                    /**
+                     * Verifies a RelatedResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RelatedResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RelatedResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.asset.v1.RelatedResource;
+
+                    /**
+                     * Creates a plain object from a RelatedResource message. Also converts values to other types if specified.
+                     * @param message RelatedResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.asset.v1.RelatedResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RelatedResource to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };

@@ -1500,6 +1500,11 @@
                           "type": "AttachedResource",
                           "id": 20
                         },
+                        "relationships": {
+                          "keyType": "string",
+                          "type": "RelatedResources",
+                          "id": 21
+                        },
                         "parentAssetType": {
                           "type": "string",
                           "id": 103
@@ -1528,6 +1533,27 @@
                           "rule": "repeated",
                           "type": "VersionedResource",
                           "id": 3
+                        }
+                      }
+                    },
+                    "RelatedResources": {
+                      "fields": {
+                        "relatedResources": {
+                          "rule": "repeated",
+                          "type": "RelatedResource",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RelatedResource": {
+                      "fields": {
+                        "assetType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "fullResourceName": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },
