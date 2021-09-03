@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.6...v2.4.0) (2021-09-03)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#509](https://www.github.com/googleapis/nodejs-iot/issues/509)) ([09350a3](https://www.github.com/googleapis/nodejs-iot/commit/09350a3b33d418c94dc36d0ff3abd1e11958fc55))
+
+
+### Bug Fixes
+
+* **build:** migrate to main branch ([#512](https://www.github.com/googleapis/nodejs-iot/issues/512)) ([8528684](https://www.github.com/googleapis/nodejs-iot/commit/852868454982502c0a1ab0d2fa09f14bcfe5ff13))
+
 ### [2.3.6](https://www.github.com/googleapis/nodejs-iot/compare/v2.3.5...v2.3.6) (2021-08-17)
 
 
