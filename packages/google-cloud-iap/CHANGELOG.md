@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-iap/compare/v1.1.0...v1.1.1) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** migrate to main branch ([#12](https://www.github.com/googleapis/nodejs-iap/issues/12)) ([2826ce0](https://www.github.com/googleapis/nodejs-iap/commit/2826ce0cb7ed7573d02665410f91dd40c3ad08c2))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-iap/compare/v1.0.1...v1.1.0) (2021-08-23)
 
 
