@@ -65,7 +65,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Create Key Asymmetric Decrypt
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeyAsymmetricDecrypt.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/createKeyAsymmetricDecrypt.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeyAsymmetricDecrypt.js,samples/README.md)
 
@@ -82,7 +82,7 @@ __Usage:__
 
 ### Create Key Asymmetric Sign
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeyAsymmetricSign.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/createKeyAsymmetricSign.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeyAsymmetricSign.js,samples/README.md)
 
@@ -99,7 +99,7 @@ __Usage:__
 
 ### Create Key Hsm
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeyHsm.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/createKeyHsm.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeyHsm.js,samples/README.md)
 
@@ -116,7 +116,7 @@ __Usage:__
 
 ### Create Key Labels
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeyLabels.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/createKeyLabels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeyLabels.js,samples/README.md)
 
@@ -133,7 +133,7 @@ __Usage:__
 
 ### Create Key Mac
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeyMac.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/createKeyMac.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeyMac.js,samples/README.md)
 
@@ -150,7 +150,7 @@ __Usage:__
 
 ### Create Key Ring
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeyRing.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/createKeyRing.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeyRing.js,samples/README.md)
 
@@ -167,7 +167,7 @@ __Usage:__
 
 ### Create Key Rotation Schedule
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeyRotationSchedule.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/createKeyRotationSchedule.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeyRotationSchedule.js,samples/README.md)
 
@@ -184,7 +184,7 @@ __Usage:__
 
 ### Create Key Symmetric Encrypt Decrypt
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeySymmetricEncryptDecrypt.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/createKeySymmetricEncryptDecrypt.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeySymmetricEncryptDecrypt.js,samples/README.md)
 
@@ -201,7 +201,7 @@ __Usage:__
 
 ### Create Key Version
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/createKeyVersion.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/createKeyVersion.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/createKeyVersion.js,samples/README.md)
 
@@ -218,7 +218,7 @@ __Usage:__
 
 ### Decrypt Asymmetric
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/decryptAsymmetric.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/decryptAsymmetric.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/decryptAsymmetric.js,samples/README.md)
 
@@ -235,7 +235,7 @@ __Usage:__
 
 ### Decrypt Symmetric
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/decryptSymmetric.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/decryptSymmetric.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/decryptSymmetric.js,samples/README.md)
 
@@ -252,7 +252,7 @@ __Usage:__
 
 ### Destroy Key Version
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/destroyKeyVersion.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/destroyKeyVersion.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/destroyKeyVersion.js,samples/README.md)
 
@@ -269,7 +269,7 @@ __Usage:__
 
 ### Disable Key Version
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/disableKeyVersion.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/disableKeyVersion.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/disableKeyVersion.js,samples/README.md)
 
@@ -286,7 +286,7 @@ __Usage:__
 
 ### Enable Key Version
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/enableKeyVersion.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/enableKeyVersion.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/enableKeyVersion.js,samples/README.md)
 
@@ -303,7 +303,7 @@ __Usage:__
 
 ### Encrypt Asymmetric
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/encryptAsymmetric.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/encryptAsymmetric.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/encryptAsymmetric.js,samples/README.md)
 
@@ -320,7 +320,7 @@ __Usage:__
 
 ### Encrypt Symmetric
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/encryptSymmetric.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/encryptSymmetric.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/encryptSymmetric.js,samples/README.md)
 
@@ -337,7 +337,7 @@ __Usage:__
 
 ### Generate Random Bytes
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/generateRandomBytes.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/generateRandomBytes.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/generateRandomBytes.js,samples/README.md)
 
@@ -354,7 +354,7 @@ __Usage:__
 
 ### Get Key Labels
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/getKeyLabels.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/getKeyLabels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/getKeyLabels.js,samples/README.md)
 
@@ -371,7 +371,7 @@ __Usage:__
 
 ### Get Key Version Attestation
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/getKeyVersionAttestation.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/getKeyVersionAttestation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/getKeyVersionAttestation.js,samples/README.md)
 
@@ -388,7 +388,7 @@ __Usage:__
 
 ### Get Public Key
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/getPublicKey.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/getPublicKey.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/getPublicKey.js,samples/README.md)
 
@@ -405,7 +405,7 @@ __Usage:__
 
 ### Iam Add Member
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/iamAddMember.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/iamAddMember.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/iamAddMember.js,samples/README.md)
 
@@ -422,7 +422,7 @@ __Usage:__
 
 ### Iam Get Policy
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/iamGetPolicy.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/iamGetPolicy.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/iamGetPolicy.js,samples/README.md)
 
@@ -439,7 +439,7 @@ __Usage:__
 
 ### Iam Remove Member
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/iamRemoveMember.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/iamRemoveMember.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/iamRemoveMember.js,samples/README.md)
 
@@ -456,7 +456,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -473,7 +473,7 @@ __Usage:__
 
 ### Restore Key Version
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/restoreKeyVersion.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/restoreKeyVersion.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/restoreKeyVersion.js,samples/README.md)
 
@@ -490,7 +490,7 @@ __Usage:__
 
 ### Sign Asymmetric
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/signAsymmetric.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/signAsymmetric.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/signAsymmetric.js,samples/README.md)
 
@@ -507,7 +507,7 @@ __Usage:__
 
 ### Sign Mac
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/signMac.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/signMac.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/signMac.js,samples/README.md)
 
@@ -524,7 +524,7 @@ __Usage:__
 
 ### Update Key Add Rotation
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/updateKeyAddRotation.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/updateKeyAddRotation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/updateKeyAddRotation.js,samples/README.md)
 
@@ -541,7 +541,7 @@ __Usage:__
 
 ### Update Key Remove Labels
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/updateKeyRemoveLabels.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/updateKeyRemoveLabels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/updateKeyRemoveLabels.js,samples/README.md)
 
@@ -558,7 +558,7 @@ __Usage:__
 
 ### Update Key Remove Rotation
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/updateKeyRemoveRotation.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/updateKeyRemoveRotation.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/updateKeyRemoveRotation.js,samples/README.md)
 
@@ -575,7 +575,7 @@ __Usage:__
 
 ### Update Key Set Primary
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/updateKeySetPrimary.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/updateKeySetPrimary.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/updateKeySetPrimary.js,samples/README.md)
 
@@ -592,7 +592,7 @@ __Usage:__
 
 ### Update Key Update Labels
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/updateKeyUpdateLabels.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/updateKeyUpdateLabels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/updateKeyUpdateLabels.js,samples/README.md)
 
@@ -609,7 +609,7 @@ __Usage:__
 
 ### Verify Asymmetric Ec
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/verifyAsymmetricEc.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/verifyAsymmetricEc.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/verifyAsymmetricEc.js,samples/README.md)
 
@@ -626,7 +626,7 @@ __Usage:__
 
 ### Verify Asymmetric Rsa
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/verifyAsymmetricRsa.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/verifyAsymmetricRsa.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/verifyAsymmetricRsa.js,samples/README.md)
 
@@ -643,7 +643,7 @@ __Usage:__
 
 ### Verify Mac
 
-View the [source code](https://github.com/googleapis/nodejs-kms/blob/master/samples/verifyMac.js).
+View the [source code](https://github.com/googleapis/nodejs-kms/blob/main/samples/verifyMac.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-kms&page=editor&open_in_editor=samples/verifyMac.js,samples/README.md)
 
