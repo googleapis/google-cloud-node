@@ -35,7 +35,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Analyze v1
 
-View the [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/analyze.v1.js).
+View the [source code](https://github.com/googleapis/nodejs-language/blob/main/samples/analyze.v1.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/analyze.v1.js,samples/README.md)
 
@@ -52,7 +52,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-language/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -69,7 +69,7 @@ __Usage:__
 
 ### Set Endpoint
 
-View the [source code](https://github.com/googleapis/nodejs-language/blob/master/samples/setEndpoint.js).
+View the [source code](https://github.com/googleapis/nodejs-language/blob/main/samples/setEndpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-language&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md)
 
