@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.1.0...v1.1.1) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** migrate to main branch ([#83](https://www.github.com/googleapis/nodejs-iam-credentials/issues/83)) ([621aeec](https://www.github.com/googleapis/nodejs-iam-credentials/commit/621aeecc0814e594bae1c67d837cad1d5e81d4d6))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-iam-credentials/compare/v1.0.8...v1.1.0) (2021-08-23)
 
 
