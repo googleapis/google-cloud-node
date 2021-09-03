@@ -33,7 +33,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 Read data from a table via read stream.
 
-View the [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-bigquery-storage/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-bigquery-storage&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
