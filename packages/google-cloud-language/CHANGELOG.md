@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/language?activeTab=versions
 
+### [4.3.1](https://www.github.com/googleapis/nodejs-language/compare/v4.3.0...v4.3.1) (2021-09-03)
+
+
+### Bug Fixes
+
+* **build:** migrate to main branch ([#614](https://www.github.com/googleapis/nodejs-language/issues/614)) ([703d479](https://www.github.com/googleapis/nodejs-language/commit/703d47916ba915a0b173dd702c8558e7fedb8a77))
+
 ## [4.3.0](https://www.github.com/googleapis/nodejs-language/compare/v4.2.9...v4.3.0) (2021-08-23)
 
 
