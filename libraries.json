@@ -30,6 +30,21 @@
     "support_documentation": "https://cloud.google.com/api-gateway/docs/getting-support"
   },
   {
+    "name": "apigeeconnect",
+    "name_pretty": "Apigee Connect API",
+    "product_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apigee-connect/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-apigee-connect/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-apigee-connect",
+    "distribution_name": "@google-cloud/apigee-connect",
+    "api_id": "apigeeconnect.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/"
+  },
+  {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/appengine-admin/latest",
     "product_documentation": "https://cloud.google.com/appengine/docs/admin-api/",
     "name": "appengine-admin",
@@ -57,6 +72,7 @@
     "api_id": "cloudasset.googleapis.com",
     "requires_billing": true,
     "default_version": "v1",
+    "codeowner_team": "@googleapis/cloud-asset-team",
     "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
   },
   {
@@ -167,7 +183,7 @@
     "support_documentation": "https://cloud.google.com/data-catalog/docs/getting-support"
   },
   {
-    "client_documentation": "https://googleapis.dev/nodejs/dlp/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dlp/latest",
     "api_id": "dlp.googleapis.com",
     "distribution_name": "@google-cloud/dlp",
     "release_level": "ga",
@@ -197,7 +213,7 @@
     "support_documentation": "https://cloud.google.com/database-migration/docs/getting-support"
   },
   {
-    "client_documentation": "https://googleapis.dev/nodejs/dataproc/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/dataproc/latest",
     "api_id": "dataproc.googleapis.com",
     "distribution_name": "@google-cloud/dataproc",
     "release_level": "ga",
@@ -286,6 +302,37 @@
     "support_documentation": "https://cloud.google.com/dns/docs/getting-support"
   },
   {
+    "name": "documentai",
+    "name_pretty": "Document AI",
+    "product_documentation": "https://cloud.google.com/document-ai/docs/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/documentai/latest",
+    "issue_tracker": "",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-document-ai",
+    "distribution_name": "@google-cloud/documentai",
+    "api_id": "documentai.googleapis.com",
+    "requires_billing": true,
+    "codeowner_team": "@googleapis/ml-apis",
+    "default_version": "v1",
+    "support_documentation": "https://cloud.google.com/document-ai/docs/getting-support"
+  },
+  {
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/essential-contacts/latest",
+    "product_documentation": "https://cloud.google.com/resource-manager/docs/managing-notification-contacts/",
+    "name": "essentialcontacts",
+    "requires_billing": true,
+    "release_level": "ga",
+    "language": "nodejs",
+    "api_id": "essentialcontacts.googleapis.com",
+    "distribution_name": "@google-cloud/essential-contacts",
+    "repo": "googleapis/nodejs-essential-contacts",
+    "issue_tracker": "https://github.com/googleapis/nodejs-essential-contacts/issues",
+    "name_pretty": "Essential Contacts API",
+    "default_version": "v1",
+    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
+  },
+  {
     "name": "filestore",
     "name_pretty": "Filestore",
     "product_documentation": "https://cloud.google.com/filestore/",
@@ -301,18 +348,19 @@
     "support_documentation": "https://cloud.google.com/filestore/docs/getting-support"
   },
   {
-    "name": "firestore",
-    "name_pretty": "Firestore",
-    "product_documentation": "https://cloud.google.com/firestore",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/firestore/latest",
-    "issue_tracker": "https://issuetracker.google.com/savedsearches/5337669",
-    "release_level": "ga",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-firestore",
-    "distribution_name": "@google-cloud/firestore",
-    "api_id": "firestore.googleapis.com",
-    "requires_billing ": false,
     "codeowner_team": "@googleapis/firestore-dpe",
+    "language": "nodejs",
+    "api_id": "firestore.googleapis.com",
+    "name_pretty": "Firestore",
+    "requires_billing ": false,
+    "default_version": "v1",
+    "product_documentation": "https://cloud.google.com/firestore",
+    "name": "firestore",
+    "issue_tracker": "https://issuetracker.google.com/savedsearches/5337669",
+    "distribution_name": "@google-cloud/firestore",
+    "repo": "googleapis/nodejs-firestore",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/firestore/latest",
+    "release_level": "ga",
     "support_documentation": "https://cloud.google.com/firestore/docs/getting-support"
   },
   {
@@ -544,6 +592,7 @@
     "requires_billing": true,
     "name": "kms",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/5264932",
+    "codeowner_team": "@googleapis/api-kms",
     "support_documentation": "https://cloud.google.com/kms/docs/getting-support"
   },
   {
@@ -788,6 +837,21 @@
     "support_documentation": "https://cloud.google.com/memorystore/docs/redis/"
   },
   {
+    "name": "resourcesettings",
+    "name_pretty": "Resource Settings API",
+    "product_documentation": "https://cloud.google.com/resource-manager/docs/reference/resource-settings/rest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/resource-settings/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-resource-settings/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-resource-settings",
+    "distribution_name": "@google-cloud/resource-settings",
+    "api_id": "resourcesettings.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
+  },
+  {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/retail/latest",
     "api_id": "retail.googleapis.com",
     "distribution_name": "@google-cloud/retail",
@@ -831,6 +895,7 @@
     "requires_billing": true,
     "name": "secretmanager",
     "issue_tracker": "https://issuetracker.google.com/issues/new?component=784854",
+    "codeowner_team": "@googleapis/api-secrets",
     "support_documentation": "https://cloud.google.com/secret-manager/docs/getting-support"
   },
   {
@@ -908,10 +973,25 @@
     "support_documentation": "https://cloud.google.com/service-usage/"
   },
   {
+    "name": "cloudshell",
+    "name_pretty": "Shell",
+    "product_documentation": "https://cloud.google.com/shell/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/shell/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-cloud-shell/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-cloud-shell",
+    "distribution_name": "@google-cloud/shell",
+    "api_id": "shell.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/shell/docs/getting-support"
+  },
+  {
     "name": "spanner",
     "name_pretty": "Spanner",
     "product_documentation": "https://cloud.google.com/spanner/docs/",
-    "client_documentation": "https://googleapis.dev/nodejs/spanner/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/spanner/latest",
     "issue_tracker": "https://issuetracker.google.com/issues?q=componentid:190851%2B%20status:open",
     "release_level": "ga",
     "language": "nodejs",
@@ -957,7 +1037,7 @@
     "name": "storage",
     "name_pretty": "Storage",
     "product_documentation": "https://cloud.google.com/storage",
-    "client_documentation": "https://googleapis.dev/nodejs/storage/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/storage/latest",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559782",
     "release_level": "ga",
     "language": "nodejs",
@@ -984,7 +1064,7 @@
     "support_documentation": "https://cloud.google.com/storage-transfer/docs/getting-support"
   },
   {
-    "client_documentation": "https://googleapis.dev/nodejs/talent/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/talent/latest",
     "api_id": "jobs.googleapis.com",
     "distribution_name": "@google-cloud/talent",
     "release_level": "ga",
@@ -1007,7 +1087,7 @@
     "language": "nodejs",
     "requires_billing": true,
     "issue_tracker": "https://issuetracker.google.com/savedsearches/5433985",
-    "client_documentation": "https://googleapis.dev/nodejs/tasks/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/tasks/latest",
     "name": "tasks",
     "name_pretty": "Tasks",
     "api_id": "tasks.googleapis.com",
@@ -1029,6 +1109,21 @@
     "api_id": "texttospeech.googleapis.com",
     "repo": "googleapis/nodejs-text-to-speech",
     "support_documentation": "https://cloud.google.com/text-to-speech/docs/getting-support"
+  },
+  {
+    "name": "tpu",
+    "name_pretty": "TPU",
+    "product_documentation": "https://cloud.google.com/tpu/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/tpu/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-cloud-tpu/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-cloud-tpu",
+    "distribution_name": "@google-cloud/tpu",
+    "api_id": "tpu.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/tpu/docs/getting-support"
   },
   {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/video-transcoder/latest",
@@ -1054,7 +1149,7 @@
     "language": "nodejs",
     "requires_billing": true,
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559749",
-    "client_documentation": "https://googleapis.dev/nodejs/translate/latest",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/translate/latest",
     "name": "translate",
     "name_pretty": "Translation",
     "api_id": "translate.googleapis.com",
@@ -1076,6 +1171,21 @@
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/video-intelligence/latest",
     "release_level": "ga",
     "support_documentation": "https://cloud.google.com/video-intelligence/docs/getting-support"
+  },
+  {
+    "name": "vpcaccess",
+    "name_pretty": "Virtual Private Cloud",
+    "product_documentation": "https://cloud.google.com/vpc/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vpc-access/latest",
+    "issue_tracker": "https://github.com/googleapis/nodejs-vpc-access/issues",
+    "release_level": "ga",
+    "language": "nodejs",
+    "repo": "googleapis/nodejs-vpc-access",
+    "distribution_name": "@google-cloud/vpc-access",
+    "api_id": "vpcaccess.googleapis.com",
+    "default_version": "v1",
+    "requires_billing": true,
+    "support_documentation": "https://cloud.google.com/vpc/"
   },
   {
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559765",
@@ -1170,21 +1280,6 @@
     "support_documentation": "https://cloud.google.com/api-gateway/docs/getting-support"
   },
   {
-    "name": "apigeeconnect",
-    "name_pretty": "Apigee Connect API",
-    "product_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/apigee-connect/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-apigee-connect/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-apigee-connect",
-    "distribution_name": "@google-cloud/apigee-connect",
-    "api_id": "apigeeconnect.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/apigee/docs/hybrid/v1.3/apigee-connect/"
-  },
-  {
     "language": "nodejs",
     "repo": "googleapis/nodejs-area120-tables",
     "name": "area120tables",
@@ -1232,7 +1327,7 @@
     "support_documentation": "https://cloud.google.com/assured-workloads/docs/getting-support"
   },
   {
-    "client_documentation": "https://googleapis.dev/nodejs/binaryauthorization/latest/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/binary-authorization/latest",
     "api_id": "binaryauthorization.googleapis.com",
     "distribution_name": "@google-cloud/binary-authorization",
     "release_level": "beta",
@@ -1275,6 +1370,7 @@
     "api_id": "contactcenterinsights.googleapis.com",
     "default_version": "v1",
     "requires_billing": true,
+    "codeowner_team": "@googleapis/api-contact-center-insights",
     "support_documentation": "https://cloud.google.com/solutions/contact-center"
   },
   {
@@ -1328,7 +1424,7 @@
     "api_id": "metastore.googleapis.com",
     "distribution_name": "@google-cloud/dataproc-metastore",
     "release_level": "beta",
-    "default_version": "v1beta",
+    "default_version": "v1",
     "language": "nodejs",
     "name_pretty": "Dataproc Metastore",
     "repo": "googleapis/nodejs-dataproc-metastore",
@@ -1337,22 +1433,6 @@
     "name": "metastore",
     "issue_tracker": "https://github.com/googleapis/nodejs-dataproc-metastore/issues",
     "support_documentation": "https://cloud.google.com/dataproc-metastore/"
-  },
-  {
-    "name": "documentai",
-    "name_pretty": "Document AI",
-    "product_documentation": "https://cloud.google.com/document-understanding/docs/",
-    "client_documentation": "https://googleapis.dev/nodejs/documentai/latest/index.html",
-    "issue_tracker": "",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-document-ai",
-    "distribution_name": "@google-cloud/documentai",
-    "api_id": "documentai.googleapis.com",
-    "requires_billing": true,
-    "codeowner_team": "@googleapis/ml-apis",
-    "default_version": "v1",
-    "support_documentation": "https://cloud.google.com/document-understanding/docs/"
   },
   {
     "client_documentation": "https://cloud.google.com/nodejs/docs/reference/domains/latest",
@@ -1382,21 +1462,6 @@
     "api_id": "clouderrorreporting.googleapis.com",
     "codeowner_team": "@googleapis/api-logging",
     "support_documentation": "https://cloud.google.com/error-reporting"
-  },
-  {
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/essential-contacts/latest",
-    "product_documentation": "https://cloud.google.com/resource-manager/docs/managing-notification-contacts/",
-    "name": "essentialcontacts",
-    "requires_billing": true,
-    "release_level": "beta",
-    "language": "nodejs",
-    "api_id": "essentialcontacts.googleapis.com",
-    "distribution_name": "@google-cloud/essential-contacts",
-    "repo": "googleapis/nodejs-essential-contacts",
-    "issue_tracker": "https://github.com/googleapis/nodejs-essential-contacts/issues",
-    "name_pretty": "Essential Contacts API",
-    "default_version": "v1",
-    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
   },
   {
     "name": "eventarc",
@@ -1470,6 +1535,8 @@
     "distribution_name": "@google-cloud/compute",
     "api_id": "compute.googleapis.com",
     "requires_billing": true,
+    "library_type": "GAPIC_AUTO",
+    "codeowner_team": "@googleapis/api-compute",
     "support_documentation": "https://cloud.google.com/compute/docs/getting-support"
   },
   {
@@ -1577,21 +1644,6 @@
     "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
   },
   {
-    "name": "resourcesettings",
-    "name_pretty": "Resource Settings API",
-    "product_documentation": "https://cloud.google.com/resource-manager/docs/reference/resource-settings/rest",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/resource-settings/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-resource-settings/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-resource-settings",
-    "distribution_name": "@google-cloud/resource-settings",
-    "api_id": "resourcesettings.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/resource-manager/docs/getting-support"
-  },
-  {
     "name": "rcloadenv",
     "name_pretty": "Runtime Config",
     "product_documentation": "https://cloud.google.com/deployment-manager/runtime-configurator/",
@@ -1601,21 +1653,6 @@
     "distribution_name": "@google-cloud/rcloadenv",
     "api_id": "runtimeconfig.googleapis.com",
     "support_documentation": "https://cloud.google.com/deployment-manager/runtime-configurator/"
-  },
-  {
-    "name": "cloudshell",
-    "name_pretty": "Shell",
-    "product_documentation": "https://cloud.google.com/shell/",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/shell/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-cloud-shell/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-cloud-shell",
-    "distribution_name": "@google-cloud/shell",
-    "api_id": "shell.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/shell/docs/getting-support"
   },
   {
     "name": "debugger",
@@ -1635,7 +1672,7 @@
     "name": "trace",
     "name_pretty": "Stackdriver Trace",
     "product_documentation": "https://cloud.google.com/trace",
-    "client_documentation": "https://googleapis.dev/nodejs/trace/latest/",
+    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/trace-agent/latest",
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559776",
     "release_level": "beta",
     "language": "nodejs",
@@ -1644,21 +1681,6 @@
     "api_id": "cloudtrace.googleapis.com",
     "codeowner_team": "@googleapis/api-trace",
     "support_documentation": "https://cloud.google.com/stackdriver/docs/getting-support"
-  },
-  {
-    "name": "tpu",
-    "name_pretty": "TPU",
-    "product_documentation": "https://cloud.google.com/tpu/",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/tpu/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-cloud-tpu/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-cloud-tpu",
-    "distribution_name": "@google-cloud/tpu",
-    "api_id": "tpu.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/tpu/docs/getting-support"
   },
   {
     "language": "nodejs",
@@ -1675,20 +1697,5 @@
     "codeowner_team": "@googleapis/ml-apis",
     "distribution_name": "@google-cloud/aiplatform",
     "support_documentation": "https://cloud.google.com/vertex-ai/docs"
-  },
-  {
-    "name": "vpcaccess",
-    "name_pretty": "Virtual Private Cloud",
-    "product_documentation": "https://cloud.google.com/vpc/",
-    "client_documentation": "https://cloud.google.com/nodejs/docs/reference/vpc-access/latest",
-    "issue_tracker": "https://github.com/googleapis/nodejs-vpc-access/issues",
-    "release_level": "beta",
-    "language": "nodejs",
-    "repo": "googleapis/nodejs-vpc-access",
-    "distribution_name": "@google-cloud/vpc-access",
-    "api_id": "vpcaccess.googleapis.com",
-    "default_version": "v1",
-    "requires_billing": true,
-    "support_documentation": "https://cloud.google.com/vpc/"
   }
 ]
