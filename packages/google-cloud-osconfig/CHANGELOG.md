@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.8.0...v1.9.0) (2021-09-07)
+
+
+### Features
+
+* add OSConfigZonalService API Committer: [@jaiminsh](https://www.github.com/jaiminsh) ([#144](https://www.github.com/googleapis/nodejs-os-config/issues/144)) ([317a7a2](https://www.github.com/googleapis/nodejs-os-config/commit/317a7a2c3ea899b28fd0a5f2f4abe18524df1f7a))
+
 ## [1.8.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.7.0...v1.8.0) (2021-08-30)
 
 
