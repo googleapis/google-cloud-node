@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.6...v2.4.0) (2021-09-07)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#561](https://www.github.com/googleapis/nodejs-tasks/issues/561)) ([9fde4fe](https://www.github.com/googleapis/nodejs-tasks/commit/9fde4fe9a7274493ce0b4bb1a2d25bd85a3e9af2))
+
 ### [2.3.6](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.5...v2.3.6) (2021-07-16)
 
 
