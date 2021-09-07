@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://www.github.com/googleapis/nodejs-channel/compare/v1.3.0...v1.4.0) (2021-09-07)
+
+
+### Features
+
+* add API ImportCustomer for Cloud Channel API docs: update comments for a few fields ([#89](https://www.github.com/googleapis/nodejs-channel/issues/89)) ([9d34eba](https://www.github.com/googleapis/nodejs-channel/commit/9d34eba73691c71fd219fc6e9faa4e6a6102e1f4))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-channel/compare/v1.2.6...v1.3.0) (2021-08-23)
 
 
