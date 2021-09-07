@@ -15,7 +15,7 @@
     "test": "mocha --timeout 180000"
   },
   "dependencies": {
-    "@google-cloud/asset": "^3.18.0",
+    "@google-cloud/asset": "^3.19.0",
     "@google-cloud/bigquery": "^5.5.0",
     "@google-cloud/compute": "^2.0.0",
     "@google-cloud/storage": "^5.0.0",
