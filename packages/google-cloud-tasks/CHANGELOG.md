@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-tasks/compare/v2.4.0...v2.4.1) (2021-09-07)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.24.1 ([#559](https://www.github.com/googleapis/nodejs-tasks/issues/559)) ([1b2b162](https://www.github.com/googleapis/nodejs-tasks/commit/1b2b162e6ad653f39c620bedcd32ca66818e7807))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-tasks/compare/v2.3.6...v2.4.0) (2021-09-07)
 
 
