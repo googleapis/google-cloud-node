@@ -35,6 +35,11 @@
                 "deleteCustomer"
               ]
             },
+            "ImportCustomer": {
+              "methods": [
+                "importCustomer"
+              ]
+            },
             "GetEntitlement": {
               "methods": [
                 "getEntitlement"
@@ -230,6 +235,11 @@
             "DeleteCustomer": {
               "methods": [
                 "deleteCustomer"
+              ]
+            },
+            "ImportCustomer": {
+              "methods": [
+                "importCustomer"
               ]
             },
             "GetEntitlement": {

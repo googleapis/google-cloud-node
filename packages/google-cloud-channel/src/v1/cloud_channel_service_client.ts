@@ -465,6 +465,7 @@ export class CloudChannelServiceClient {
       'createCustomer',
       'updateCustomer',
       'deleteCustomer',
+      'importCustomer',
       'provisionCloudIdentity',
       'listEntitlements',
       'listTransferableSkus',
@@ -1083,6 +1084,130 @@ export class CloudChannelServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.deleteCustomer(request, options, callback);
+  }
+  importCustomer(
+    request?: protos.google.cloud.channel.v1.IImportCustomerRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IImportCustomerRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  importCustomer(
+    request: protos.google.cloud.channel.v1.IImportCustomerRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IImportCustomerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  importCustomer(
+    request: protos.google.cloud.channel.v1.IImportCustomerRequest,
+    callback: Callback<
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IImportCustomerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Imports a {@link google.cloud.channel.v1.Customer|Customer} from the Cloud Identity associated with the provided
+   * Cloud Identity ID or domain before a TransferEntitlements call. If a
+   * linked Customer already exists and overwrite_if_exists is true, it will
+   * update that Customer's data.
+   *
+   * Possible error codes:
+   *
+   * * PERMISSION_DENIED: The reseller account making the request is different
+   * from the reseller account in the API request.
+   * * NOT_FOUND: Cloud Identity doesn't exist or was deleted.
+   * * INVALID_ARGUMENT: Required parameters are missing, or the auth_token is
+   * expired or invalid.
+   * * ALREADY_EXISTS: A customer already exists and has conflicting critical
+   * fields. Requires an overwrite.
+   *
+   * Return value:
+   * The {@link google.cloud.channel.v1.Customer|Customer}.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.domain
+   *   Required. Customer domain.
+   * @param {string} request.cloudIdentityId
+   *   Required. Customer's Cloud Identity ID
+   * @param {string} request.parent
+   *   Required. The resource name of the reseller's account.
+   *   Parent takes the format: accounts/{account_id} or
+   *   accounts/{account_id}/channelPartnerLinks/{channel_partner_id}
+   * @param {string} [request.authToken]
+   *   Optional. The super admin of the resold customer generates this token to
+   *   authorize a reseller to access their Cloud Identity and purchase
+   *   entitlements on their behalf. You can omit this token after authorization.
+   *   See https://support.google.com/a/answer/7643790 for more details.
+   * @param {boolean} request.overwriteIfExists
+   *   Required. Choose to overwrite an existing customer if found.
+   *   This must be set to true if there is an existing customer with a
+   *   conflicting region code or domain.
+   * @param {string} [request.channelPartnerId]
+   *   Optional. Cloud Identity ID of a channel partner who will be the direct reseller for
+   *   the customer's order. This field is required for 2-tier transfer scenarios
+   *   and can be provided via the request Parent binding as well.
+   * @param {string} [request.customer]
+   *   Optional. Specifies the customer that will receive imported Cloud Identity
+   *   information.
+   *   Format: accounts/{account_id}/customers/{customer_id}
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Customer]{@link google.cloud.channel.v1.Customer}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.importCustomer(request);
+   */
+  importCustomer(
+    request?: protos.google.cloud.channel.v1.IImportCustomerRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.channel.v1.ICustomer,
+          | protos.google.cloud.channel.v1.IImportCustomerRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IImportCustomerRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.channel.v1.ICustomer,
+      protos.google.cloud.channel.v1.IImportCustomerRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.importCustomer(request, options, callback);
   }
   getEntitlement(
     request?: protos.google.cloud.channel.v1.IGetEntitlementRequest,

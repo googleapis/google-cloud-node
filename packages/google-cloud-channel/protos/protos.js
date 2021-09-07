@@ -9658,6 +9658,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#importCustomer}.
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @typedef ImportCustomerCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.channel.v1.Customer} [response] Customer
+                         */
+    
+                        /**
+                         * Calls ImportCustomer.
+                         * @function importCustomer
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IImportCustomerRequest} request ImportCustomerRequest message or plain object
+                         * @param {google.cloud.channel.v1.CloudChannelService.ImportCustomerCallback} callback Node-style callback called with the error, if any, and Customer
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(CloudChannelService.prototype.importCustomer = function importCustomer(request, callback) {
+                            return this.rpcCall(importCustomer, $root.google.cloud.channel.v1.ImportCustomerRequest, $root.google.cloud.channel.v1.Customer, request, callback);
+                        }, "name", { value: "ImportCustomer" });
+    
+                        /**
+                         * Calls ImportCustomer.
+                         * @function importCustomer
+                         * @memberof google.cloud.channel.v1.CloudChannelService
+                         * @instance
+                         * @param {google.cloud.channel.v1.IImportCustomerRequest} request ImportCustomerRequest message or plain object
+                         * @returns {Promise<google.cloud.channel.v1.Customer>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#provisionCloudIdentity}.
                          * @memberof google.cloud.channel.v1.CloudChannelService
                          * @typedef ProvisionCloudIdentityCallback
@@ -12526,6 +12559,351 @@
                         };
     
                         return DeleteCustomerRequest;
+                    })();
+    
+                    v1.ImportCustomerRequest = (function() {
+    
+                        /**
+                         * Properties of an ImportCustomerRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @interface IImportCustomerRequest
+                         * @property {string|null} [domain] ImportCustomerRequest domain
+                         * @property {string|null} [cloudIdentityId] ImportCustomerRequest cloudIdentityId
+                         * @property {string|null} [parent] ImportCustomerRequest parent
+                         * @property {string|null} [authToken] ImportCustomerRequest authToken
+                         * @property {boolean|null} [overwriteIfExists] ImportCustomerRequest overwriteIfExists
+                         * @property {string|null} [channelPartnerId] ImportCustomerRequest channelPartnerId
+                         * @property {string|null} [customer] ImportCustomerRequest customer
+                         */
+    
+                        /**
+                         * Constructs a new ImportCustomerRequest.
+                         * @memberof google.cloud.channel.v1
+                         * @classdesc Represents an ImportCustomerRequest.
+                         * @implements IImportCustomerRequest
+                         * @constructor
+                         * @param {google.cloud.channel.v1.IImportCustomerRequest=} [properties] Properties to set
+                         */
+                        function ImportCustomerRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ImportCustomerRequest domain.
+                         * @member {string|null|undefined} domain
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         */
+                        ImportCustomerRequest.prototype.domain = null;
+    
+                        /**
+                         * ImportCustomerRequest cloudIdentityId.
+                         * @member {string|null|undefined} cloudIdentityId
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         */
+                        ImportCustomerRequest.prototype.cloudIdentityId = null;
+    
+                        /**
+                         * ImportCustomerRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         */
+                        ImportCustomerRequest.prototype.parent = "";
+    
+                        /**
+                         * ImportCustomerRequest authToken.
+                         * @member {string} authToken
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         */
+                        ImportCustomerRequest.prototype.authToken = "";
+    
+                        /**
+                         * ImportCustomerRequest overwriteIfExists.
+                         * @member {boolean} overwriteIfExists
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         */
+                        ImportCustomerRequest.prototype.overwriteIfExists = false;
+    
+                        /**
+                         * ImportCustomerRequest channelPartnerId.
+                         * @member {string} channelPartnerId
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         */
+                        ImportCustomerRequest.prototype.channelPartnerId = "";
+    
+                        /**
+                         * ImportCustomerRequest customer.
+                         * @member {string} customer
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         */
+                        ImportCustomerRequest.prototype.customer = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * ImportCustomerRequest customerIdentity.
+                         * @member {"domain"|"cloudIdentityId"|undefined} customerIdentity
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         */
+                        Object.defineProperty(ImportCustomerRequest.prototype, "customerIdentity", {
+                            get: $util.oneOfGetter($oneOfFields = ["domain", "cloudIdentityId"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new ImportCustomerRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IImportCustomerRequest=} [properties] Properties to set
+                         * @returns {google.cloud.channel.v1.ImportCustomerRequest} ImportCustomerRequest instance
+                         */
+                        ImportCustomerRequest.create = function create(properties) {
+                            return new ImportCustomerRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ImportCustomerRequest message. Does not implicitly {@link google.cloud.channel.v1.ImportCustomerRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IImportCustomerRequest} message ImportCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportCustomerRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.domain != null && Object.hasOwnProperty.call(message, "domain"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.domain);
+                            if (message.cloudIdentityId != null && Object.hasOwnProperty.call(message, "cloudIdentityId"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.cloudIdentityId);
+                            if (message.authToken != null && Object.hasOwnProperty.call(message, "authToken"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.authToken);
+                            if (message.overwriteIfExists != null && Object.hasOwnProperty.call(message, "overwriteIfExists"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.overwriteIfExists);
+                            if (message.channelPartnerId != null && Object.hasOwnProperty.call(message, "channelPartnerId"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.channelPartnerId);
+                            if (message.customer != null && Object.hasOwnProperty.call(message, "customer"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.customer);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ImportCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ImportCustomerRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.IImportCustomerRequest} message ImportCustomerRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ImportCustomerRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an ImportCustomerRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.channel.v1.ImportCustomerRequest} ImportCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportCustomerRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.channel.v1.ImportCustomerRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 2:
+                                    message.domain = reader.string();
+                                    break;
+                                case 3:
+                                    message.cloudIdentityId = reader.string();
+                                    break;
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 4:
+                                    message.authToken = reader.string();
+                                    break;
+                                case 5:
+                                    message.overwriteIfExists = reader.bool();
+                                    break;
+                                case 6:
+                                    message.channelPartnerId = reader.string();
+                                    break;
+                                case 7:
+                                    message.customer = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an ImportCustomerRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.channel.v1.ImportCustomerRequest} ImportCustomerRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ImportCustomerRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an ImportCustomerRequest message.
+                         * @function verify
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ImportCustomerRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.domain != null && message.hasOwnProperty("domain")) {
+                                properties.customerIdentity = 1;
+                                if (!$util.isString(message.domain))
+                                    return "domain: string expected";
+                            }
+                            if (message.cloudIdentityId != null && message.hasOwnProperty("cloudIdentityId")) {
+                                if (properties.customerIdentity === 1)
+                                    return "customerIdentity: multiple values";
+                                properties.customerIdentity = 1;
+                                if (!$util.isString(message.cloudIdentityId))
+                                    return "cloudIdentityId: string expected";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.authToken != null && message.hasOwnProperty("authToken"))
+                                if (!$util.isString(message.authToken))
+                                    return "authToken: string expected";
+                            if (message.overwriteIfExists != null && message.hasOwnProperty("overwriteIfExists"))
+                                if (typeof message.overwriteIfExists !== "boolean")
+                                    return "overwriteIfExists: boolean expected";
+                            if (message.channelPartnerId != null && message.hasOwnProperty("channelPartnerId"))
+                                if (!$util.isString(message.channelPartnerId))
+                                    return "channelPartnerId: string expected";
+                            if (message.customer != null && message.hasOwnProperty("customer"))
+                                if (!$util.isString(message.customer))
+                                    return "customer: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an ImportCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.channel.v1.ImportCustomerRequest} ImportCustomerRequest
+                         */
+                        ImportCustomerRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.channel.v1.ImportCustomerRequest)
+                                return object;
+                            var message = new $root.google.cloud.channel.v1.ImportCustomerRequest();
+                            if (object.domain != null)
+                                message.domain = String(object.domain);
+                            if (object.cloudIdentityId != null)
+                                message.cloudIdentityId = String(object.cloudIdentityId);
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.authToken != null)
+                                message.authToken = String(object.authToken);
+                            if (object.overwriteIfExists != null)
+                                message.overwriteIfExists = Boolean(object.overwriteIfExists);
+                            if (object.channelPartnerId != null)
+                                message.channelPartnerId = String(object.channelPartnerId);
+                            if (object.customer != null)
+                                message.customer = String(object.customer);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an ImportCustomerRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @static
+                         * @param {google.cloud.channel.v1.ImportCustomerRequest} message ImportCustomerRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ImportCustomerRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.authToken = "";
+                                object.overwriteIfExists = false;
+                                object.channelPartnerId = "";
+                                object.customer = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.domain != null && message.hasOwnProperty("domain")) {
+                                object.domain = message.domain;
+                                if (options.oneofs)
+                                    object.customerIdentity = "domain";
+                            }
+                            if (message.cloudIdentityId != null && message.hasOwnProperty("cloudIdentityId")) {
+                                object.cloudIdentityId = message.cloudIdentityId;
+                                if (options.oneofs)
+                                    object.customerIdentity = "cloudIdentityId";
+                            }
+                            if (message.authToken != null && message.hasOwnProperty("authToken"))
+                                object.authToken = message.authToken;
+                            if (message.overwriteIfExists != null && message.hasOwnProperty("overwriteIfExists"))
+                                object.overwriteIfExists = message.overwriteIfExists;
+                            if (message.channelPartnerId != null && message.hasOwnProperty("channelPartnerId"))
+                                object.channelPartnerId = message.channelPartnerId;
+                            if (message.customer != null && message.hasOwnProperty("customer"))
+                                object.customer = message.customer;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ImportCustomerRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.channel.v1.ImportCustomerRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ImportCustomerRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return ImportCustomerRequest;
                     })();
     
                     v1.ProvisionCloudIdentityRequest = (function() {

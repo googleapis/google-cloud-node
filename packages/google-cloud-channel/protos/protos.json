@@ -1113,6 +1113,28 @@
                             }
                           ]
                         },
+                        "ImportCustomer": {
+                          "requestType": "ImportCustomerRequest",
+                          "responseType": "Customer",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=accounts/*}/customers:import",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=accounts/*/channelPartnerLinks/*}/customers:import",
+                            "(google.api.http).additional_bindings.body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=accounts/*}/customers:import",
+                                "body": "*",
+                                "additional_bindings": {
+                                  "post": "/v1/{parent=accounts/*/channelPartnerLinks/*}/customers:import",
+                                  "body": "*"
+                                }
+                              }
+                            }
+                          ]
+                        },
                         "ProvisionCloudIdentity": {
                           "requestType": "ProvisionCloudIdentityRequest",
                           "responseType": "google.longrunning.Operation",
@@ -1766,6 +1788,68 @@
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Customer"
+                          }
+                        }
+                      }
+                    },
+                    "ImportCustomerRequest": {
+                      "oneofs": {
+                        "customerIdentity": {
+                          "oneof": [
+                            "domain",
+                            "cloudIdentityId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "domain": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "cloudIdentityId": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "authToken": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "overwriteIfExists": {
+                          "type": "bool",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "channelPartnerId": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customer": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
                             "(google.api.resource_reference).type": "cloudchannel.googleapis.com/Customer"
                           }
                         }

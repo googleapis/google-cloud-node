@@ -3690,6 +3690,20 @@ export namespace google {
                     public deleteCustomer(request: google.cloud.channel.v1.IDeleteCustomerRequest): Promise<google.protobuf.Empty>;
 
                     /**
+                     * Calls ImportCustomer.
+                     * @param request ImportCustomerRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Customer
+                     */
+                    public importCustomer(request: google.cloud.channel.v1.IImportCustomerRequest, callback: google.cloud.channel.v1.CloudChannelService.ImportCustomerCallback): void;
+
+                    /**
+                     * Calls ImportCustomer.
+                     * @param request ImportCustomerRequest message or plain object
+                     * @returns Promise
+                     */
+                    public importCustomer(request: google.cloud.channel.v1.IImportCustomerRequest): Promise<google.cloud.channel.v1.Customer>;
+
+                    /**
                      * Calls ProvisionCloudIdentity.
                      * @param request ProvisionCloudIdentityRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -4125,6 +4139,13 @@ export namespace google {
                      * @param [response] Empty
                      */
                     type DeleteCustomerCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#importCustomer}.
+                     * @param error Error, if any
+                     * @param [response] Customer
+                     */
+                    type ImportCustomerCallback = (error: (Error|null), response?: google.cloud.channel.v1.Customer) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.channel.v1.CloudChannelService#provisionCloudIdentity}.
@@ -5182,6 +5203,135 @@ export namespace google {
 
                     /**
                      * Converts this DeleteCustomerRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of an ImportCustomerRequest. */
+                interface IImportCustomerRequest {
+
+                    /** ImportCustomerRequest domain */
+                    domain?: (string|null);
+
+                    /** ImportCustomerRequest cloudIdentityId */
+                    cloudIdentityId?: (string|null);
+
+                    /** ImportCustomerRequest parent */
+                    parent?: (string|null);
+
+                    /** ImportCustomerRequest authToken */
+                    authToken?: (string|null);
+
+                    /** ImportCustomerRequest overwriteIfExists */
+                    overwriteIfExists?: (boolean|null);
+
+                    /** ImportCustomerRequest channelPartnerId */
+                    channelPartnerId?: (string|null);
+
+                    /** ImportCustomerRequest customer */
+                    customer?: (string|null);
+                }
+
+                /** Represents an ImportCustomerRequest. */
+                class ImportCustomerRequest implements IImportCustomerRequest {
+
+                    /**
+                     * Constructs a new ImportCustomerRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.channel.v1.IImportCustomerRequest);
+
+                    /** ImportCustomerRequest domain. */
+                    public domain?: (string|null);
+
+                    /** ImportCustomerRequest cloudIdentityId. */
+                    public cloudIdentityId?: (string|null);
+
+                    /** ImportCustomerRequest parent. */
+                    public parent: string;
+
+                    /** ImportCustomerRequest authToken. */
+                    public authToken: string;
+
+                    /** ImportCustomerRequest overwriteIfExists. */
+                    public overwriteIfExists: boolean;
+
+                    /** ImportCustomerRequest channelPartnerId. */
+                    public channelPartnerId: string;
+
+                    /** ImportCustomerRequest customer. */
+                    public customer: string;
+
+                    /** ImportCustomerRequest customerIdentity. */
+                    public customerIdentity?: ("domain"|"cloudIdentityId");
+
+                    /**
+                     * Creates a new ImportCustomerRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImportCustomerRequest instance
+                     */
+                    public static create(properties?: google.cloud.channel.v1.IImportCustomerRequest): google.cloud.channel.v1.ImportCustomerRequest;
+
+                    /**
+                     * Encodes the specified ImportCustomerRequest message. Does not implicitly {@link google.cloud.channel.v1.ImportCustomerRequest.verify|verify} messages.
+                     * @param message ImportCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.channel.v1.IImportCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImportCustomerRequest message, length delimited. Does not implicitly {@link google.cloud.channel.v1.ImportCustomerRequest.verify|verify} messages.
+                     * @param message ImportCustomerRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.channel.v1.IImportCustomerRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImportCustomerRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImportCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.channel.v1.ImportCustomerRequest;
+
+                    /**
+                     * Decodes an ImportCustomerRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImportCustomerRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.channel.v1.ImportCustomerRequest;
+
+                    /**
+                     * Verifies an ImportCustomerRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImportCustomerRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImportCustomerRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.channel.v1.ImportCustomerRequest;
+
+                    /**
+                     * Creates a plain object from an ImportCustomerRequest message. Also converts values to other types if specified.
+                     * @param message ImportCustomerRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.channel.v1.ImportCustomerRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImportCustomerRequest to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
