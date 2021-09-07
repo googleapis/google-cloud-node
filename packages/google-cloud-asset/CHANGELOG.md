@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/asset?activeTab=versions
 
+## [3.19.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.18.0...v3.19.0) (2021-09-07)
+
+
+### Features
+
+* add OSConfigZonalService API Committer: [@jaiminsh](https://www.github.com/jaiminsh) ([#553](https://www.github.com/googleapis/nodejs-asset/issues/553)) ([1ab2458](https://www.github.com/googleapis/nodejs-asset/commit/1ab2458b63ebe46b8aa8edbd2b1837e793d531f1))
+* Release of relationships in v1, Add content type Relationship to support relationship search Committer: yuwangyw@ ([#551](https://www.github.com/googleapis/nodejs-asset/issues/551)) ([56526b0](https://www.github.com/googleapis/nodejs-asset/commit/56526b02d14d15fd6fc469cd614bff9098f3789b))
+
 ## [3.18.0](https://www.github.com/googleapis/nodejs-asset/compare/v3.17.0...v3.18.0) (2021-08-30)
 
 
