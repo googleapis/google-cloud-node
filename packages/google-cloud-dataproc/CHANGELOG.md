@@ -4,6 +4,14 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/dataproc?activeTab=versions
 
+## [2.5.0](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.4...v2.5.0) (2021-09-07)
+
+
+### Features
+
+* remove v1beta2 API surface ([#530](https://www.github.com/googleapis/nodejs-dataproc/issues/530)) ([95592f2](https://www.github.com/googleapis/nodejs-dataproc/commit/95592f29584aa4b421e447f8bbdedaf9896371d1))
+* turns on self-signed JWT feature flag ([#525](https://www.github.com/googleapis/nodejs-dataproc/issues/525)) ([e4251d8](https://www.github.com/googleapis/nodejs-dataproc/commit/e4251d8160d4dac847d0c65832685288cbf216ce))
+
 ### [2.4.4](https://www.github.com/googleapis/nodejs-dataproc/compare/v2.4.3...v2.4.4) (2021-08-17)
 
 
