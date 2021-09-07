@@ -995,6 +995,14 @@ export class EntityTypesClient {
   /**
    * Updates/Creates multiple entity types in the specified agent.
    *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: {@link google.cloud.dialogflow.v2beta1.BatchUpdateEntityTypesResponse|BatchUpdateEntityTypesResponse}
+   *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training
    * documentation](https://cloud.google.com/dialogflow/es/docs/training).
@@ -1162,6 +1170,15 @@ export class EntityTypesClient {
   /**
    * Deletes entity types in the specified agent.
    *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+   *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training
    * documentation](https://cloud.google.com/dialogflow/es/docs/training).
@@ -1313,6 +1330,15 @@ export class EntityTypesClient {
   ): void;
   /**
    * Creates multiple new entities in the specified entity type.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training
@@ -1474,6 +1500,15 @@ export class EntityTypesClient {
    * [training
    * documentation](https://cloud.google.com/dialogflow/es/docs/training).
    *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
+   *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
@@ -1625,6 +1660,15 @@ export class EntityTypesClient {
   ): void;
   /**
    * Deletes entities in the specified entity type.
+   *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training
