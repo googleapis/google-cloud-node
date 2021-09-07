@@ -908,6 +908,13 @@ export class IntentsClient {
   /**
    * Updates/Creates multiple intents in the specified agent.
    *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: {@link google.cloud.dialogflow.v2.BatchUpdateIntentsResponse|BatchUpdateIntentsResponse}
    *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training
@@ -1071,6 +1078,14 @@ export class IntentsClient {
   /**
    * Deletes intents in the specified agent.
    *
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: An [Empty
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
    *
    * Note: You should always train an agent prior to sending it queries. See the
    * [training
