@@ -7942,10 +7942,7 @@
                             },
                             "updateMask": {
                               "type": "google.protobuf.FieldMask",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
+                              "id": 2
                             },
                             "languageCode": {
                               "type": "string",

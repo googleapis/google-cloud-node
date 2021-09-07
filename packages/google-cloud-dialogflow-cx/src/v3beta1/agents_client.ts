@@ -1053,6 +1053,13 @@ export class AgentsClient {
   ): void;
   /**
    * Exports the specified agent to a binary file.
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: An empty [Struct
+   *   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+   * - `response`: {@link google.cloud.dialogflow.cx.v3beta1.ExportAgentResponse|ExportAgentResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.

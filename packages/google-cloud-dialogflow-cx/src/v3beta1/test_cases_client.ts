@@ -1090,6 +1090,12 @@ export class TestCasesClient {
   ): void;
   /**
    * Kicks off a test case run.
+   * This method is a [long-running
+   * operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+   * The returned `Operation` type has the following method-specific fields:
+   *
+   * - `metadata`: {@link google.cloud.dialogflow.cx.v3beta1.RunTestCaseMetadata|RunTestCaseMetadata}
+   * - `response`: {@link google.cloud.dialogflow.cx.v3beta1.RunTestCaseResponse|RunTestCaseResponse}
    *
    * @param {Object} request
    *   The request object that will be sent.
