@@ -2550,6 +2550,70 @@ describe('v1.AssetServiceClient', () => {
       });
     });
 
+    describe('inventory', () => {
+      const fakePath = '/rendered/path/inventory';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        instance: 'instanceValue',
+      };
+      const client = new assetserviceModule.v1.AssetServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.inventoryPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.inventoryPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('inventoryPath', () => {
+        const result = client.inventoryPath(
+          'projectValue',
+          'locationValue',
+          'instanceValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.inventoryPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromInventoryName', () => {
+        const result = client.matchProjectFromInventoryName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.inventoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromInventoryName', () => {
+        const result = client.matchLocationFromInventoryName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.inventoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchInstanceFromInventoryName', () => {
+        const result = client.matchInstanceFromInventoryName(fakePath);
+        assert.strictEqual(result, 'instanceValue');
+        assert(
+          (client.pathTemplates.inventoryPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('organizationFeed', () => {
       const fakePath = '/rendered/path/organizationFeed';
       const expectedParameters = {

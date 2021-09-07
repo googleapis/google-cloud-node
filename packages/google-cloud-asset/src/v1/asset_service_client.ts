@@ -175,6 +175,9 @@ export class AssetServiceClient {
       folderFeedPathTemplate: new this._gaxModule.PathTemplate(
         'folders/{folder}/feeds/{feed}'
       ),
+      inventoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/inventory'
+      ),
       organizationFeedPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/feeds/{feed}'
       ),
@@ -2986,6 +2989,58 @@ export class AssetServiceClient {
    */
   matchFeedFromFolderFeedName(folderFeedName: string) {
     return this.pathTemplates.folderFeedPathTemplate.match(folderFeedName).feed;
+  }
+
+  /**
+   * Return a fully-qualified inventory resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  inventoryPath(project: string, location: string, instance: string) {
+    return this.pathTemplates.inventoryPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from Inventory resource.
+   *
+   * @param {string} inventoryName
+   *   A fully-qualified path representing Inventory resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInventoryName(inventoryName: string) {
+    return this.pathTemplates.inventoryPathTemplate.match(inventoryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Inventory resource.
+   *
+   * @param {string} inventoryName
+   *   A fully-qualified path representing Inventory resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInventoryName(inventoryName: string) {
+    return this.pathTemplates.inventoryPathTemplate.match(inventoryName)
+      .location;
+  }
+
+  /**
+   * Parse the instance from Inventory resource.
+   *
+   * @param {string} inventoryName
+   *   A fully-qualified path representing Inventory resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromInventoryName(inventoryName: string) {
+    return this.pathTemplates.inventoryPathTemplate.match(inventoryName)
+      .instance;
   }
 
   /**

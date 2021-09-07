@@ -3181,7 +3181,18 @@
                   },
                   "nested": {
                     "Inventory": {
+                      "options": {
+                        "(google.api.resource).type": "osconfig.googleapis.com/Inventory",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/instances/{instance}/inventory"
+                      },
                       "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "osInfo": {
                           "type": "OsInfo",
                           "id": 1
@@ -3190,6 +3201,13 @@
                           "keyType": "string",
                           "type": "Item",
                           "id": 2
+                        },
+                        "updateTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -3355,6 +3373,26 @@
                             }
                           }
                         },
+                        "ZypperPatch": {
+                          "fields": {
+                            "patchName": {
+                              "type": "string",
+                              "id": 5
+                            },
+                            "category": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "severity": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "summary": {
+                              "type": "string",
+                              "id": 4
+                            }
+                          }
+                        },
                         "WindowsUpdatePackage": {
                           "fields": {
                             "title": {
@@ -3412,26 +3450,6 @@
                             }
                           }
                         },
-                        "ZypperPatch": {
-                          "fields": {
-                            "patchName": {
-                              "type": "string",
-                              "id": 5
-                            },
-                            "category": {
-                              "type": "string",
-                              "id": 2
-                            },
-                            "severity": {
-                              "type": "string",
-                              "id": 3
-                            },
-                            "summary": {
-                              "type": "string",
-                              "id": 4
-                            }
-                          }
-                        },
                         "WindowsQuickFixEngineeringPackage": {
                           "fields": {
                             "caption": {
@@ -3476,6 +3494,70 @@
                             }
                           }
                         }
+                      }
+                    },
+                    "GetInventoryRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "osconfig.googleapis.com/Inventory"
+                          }
+                        },
+                        "view": {
+                          "type": "InventoryView",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ListInventoriesRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "compute.googleapis.com/Instance"
+                          }
+                        },
+                        "view": {
+                          "type": "InventoryView",
+                          "id": 2
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 4
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 5
+                        }
+                      }
+                    },
+                    "ListInventoriesResponse": {
+                      "fields": {
+                        "inventories": {
+                          "rule": "repeated",
+                          "type": "Inventory",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "InventoryView": {
+                      "values": {
+                        "INVENTORY_VIEW_UNSPECIFIED": 0,
+                        "BASIC": 1,
+                        "FULL": 2
                       }
                     }
                   }
