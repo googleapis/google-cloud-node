@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.6.2](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.6.1...v2.6.2) (2021-09-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency snappy to v7 ([#196](https://www.github.com/googleapis/nodejs-bigquery-storage/issues/196)) ([37538ec](https://www.github.com/googleapis/nodejs-bigquery-storage/commit/37538ec42815d0ce325416b4ee299ca3fb7b59fe))
+
 ### [2.6.1](https://www.github.com/googleapis/nodejs-bigquery-storage/compare/v2.6.0...v2.6.1) (2021-09-03)
 
 
