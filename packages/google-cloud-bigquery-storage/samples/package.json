@@ -15,7 +15,7 @@
   "dependencies": {
     "@google-cloud/bigquery-storage": "^2.6.1",
     "avsc": "^5.4.18",
-    "snappy": "^6.2.3"
+    "snappy": "^7.0.0"
   },
   "devDependencies": {
     "c8": "^7.0.0",
