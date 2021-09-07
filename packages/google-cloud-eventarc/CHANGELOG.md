@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-eventarc/compare/v1.1.0...v1.1.1) (2021-09-07)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#17](https://www.github.com/googleapis/nodejs-eventarc/issues/17)) ([f84f6ee](https://www.github.com/googleapis/nodejs-eventarc/commit/f84f6ee1aa8a86f8b78f0281c09ea3db388acfc1))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-eventarc/compare/v1.0.3...v1.1.0) (2021-08-23)
 
 
