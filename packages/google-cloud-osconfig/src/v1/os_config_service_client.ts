@@ -167,11 +167,17 @@ export class OsConfigServiceClient {
     // identifiers to uniquely identify resources within the API.
     // Create useful helper objects for these.
     this.pathTemplates = {
+      inventoryPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/inventory'
+      ),
       patchDeploymentPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/patchDeployments/{patch_deployment}'
       ),
       patchJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/patchJobs/{patch_job}'
+      ),
+      vulnerabilityReportPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/instances/{instance}/vulnerabilityReport'
       ),
     };
 
@@ -1524,6 +1530,58 @@ export class OsConfigServiceClient {
   // --------------------
 
   /**
+   * Return a fully-qualified inventory resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  inventoryPath(project: string, location: string, instance: string) {
+    return this.pathTemplates.inventoryPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from Inventory resource.
+   *
+   * @param {string} inventoryName
+   *   A fully-qualified path representing Inventory resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromInventoryName(inventoryName: string) {
+    return this.pathTemplates.inventoryPathTemplate.match(inventoryName)
+      .project;
+  }
+
+  /**
+   * Parse the location from Inventory resource.
+   *
+   * @param {string} inventoryName
+   *   A fully-qualified path representing Inventory resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromInventoryName(inventoryName: string) {
+    return this.pathTemplates.inventoryPathTemplate.match(inventoryName)
+      .location;
+  }
+
+  /**
+   * Parse the instance from Inventory resource.
+   *
+   * @param {string} inventoryName
+   *   A fully-qualified path representing Inventory resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromInventoryName(inventoryName: string) {
+    return this.pathTemplates.inventoryPathTemplate.match(inventoryName)
+      .instance;
+  }
+
+  /**
    * Return a fully-qualified patchDeployment resource name string.
    *
    * @param {string} project
@@ -1598,6 +1656,61 @@ export class OsConfigServiceClient {
   matchPatchJobFromPatchJobName(patchJobName: string) {
     return this.pathTemplates.patchJobPathTemplate.match(patchJobName)
       .patch_job;
+  }
+
+  /**
+   * Return a fully-qualified vulnerabilityReport resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} instance
+   * @returns {string} Resource name string.
+   */
+  vulnerabilityReportPath(project: string, location: string, instance: string) {
+    return this.pathTemplates.vulnerabilityReportPathTemplate.render({
+      project: project,
+      location: location,
+      instance: instance,
+    });
+  }
+
+  /**
+   * Parse the project from VulnerabilityReport resource.
+   *
+   * @param {string} vulnerabilityReportName
+   *   A fully-qualified path representing VulnerabilityReport resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromVulnerabilityReportName(vulnerabilityReportName: string) {
+    return this.pathTemplates.vulnerabilityReportPathTemplate.match(
+      vulnerabilityReportName
+    ).project;
+  }
+
+  /**
+   * Parse the location from VulnerabilityReport resource.
+   *
+   * @param {string} vulnerabilityReportName
+   *   A fully-qualified path representing VulnerabilityReport resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromVulnerabilityReportName(vulnerabilityReportName: string) {
+    return this.pathTemplates.vulnerabilityReportPathTemplate.match(
+      vulnerabilityReportName
+    ).location;
+  }
+
+  /**
+   * Parse the instance from VulnerabilityReport resource.
+   *
+   * @param {string} vulnerabilityReportName
+   *   A fully-qualified path representing VulnerabilityReport resource.
+   * @returns {string} A string representing the instance.
+   */
+  matchInstanceFromVulnerabilityReportName(vulnerabilityReportName: string) {
+    return this.pathTemplates.vulnerabilityReportPathTemplate.match(
+      vulnerabilityReportName
+    ).instance;
   }
 
   /**

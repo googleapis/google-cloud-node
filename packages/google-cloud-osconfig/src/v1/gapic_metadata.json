@@ -120,6 +120,68 @@
           }
         }
       }
+    },
+    "OsConfigZonalService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OsConfigZonalServiceClient",
+          "rpcs": {
+            "GetInventory": {
+              "methods": [
+                "getInventory"
+              ]
+            },
+            "GetVulnerabilityReport": {
+              "methods": [
+                "getVulnerabilityReport"
+              ]
+            },
+            "ListInventories": {
+              "methods": [
+                "listInventories",
+                "listInventoriesStream",
+                "listInventoriesAsync"
+              ]
+            },
+            "ListVulnerabilityReports": {
+              "methods": [
+                "listVulnerabilityReports",
+                "listVulnerabilityReportsStream",
+                "listVulnerabilityReportsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OsConfigZonalServiceClient",
+          "rpcs": {
+            "GetInventory": {
+              "methods": [
+                "getInventory"
+              ]
+            },
+            "GetVulnerabilityReport": {
+              "methods": [
+                "getVulnerabilityReport"
+              ]
+            },
+            "ListInventories": {
+              "methods": [
+                "listInventories",
+                "listInventoriesStream",
+                "listInventoriesAsync"
+              ]
+            },
+            "ListVulnerabilityReports": {
+              "methods": [
+                "listVulnerabilityReports",
+                "listVulnerabilityReportsStream",
+                "listVulnerabilityReportsAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

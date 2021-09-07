@@ -17,3 +17,4 @@
 // ** All changes to this file may be overwritten. **
 
 export {OsConfigServiceClient} from './os_config_service_client';
+export {OsConfigZonalServiceClient} from './os_config_zonal_service_client';
