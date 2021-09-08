@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-logging-bunyan?activeTab=versions
 
+### [3.1.1](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v3.1.0...v3.1.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* **build:** update branch to main ([#560](https://www.github.com/googleapis/nodejs-logging-bunyan/issues/560)) ([4616ad9](https://www.github.com/googleapis/nodejs-logging-bunyan/commit/4616ad9ccbd592f694b33b701eb945146b2fe203))
+
 ## [3.1.0](https://www.github.com/googleapis/nodejs-logging-bunyan/compare/v3.0.2...v3.1.0) (2021-06-15)
 
 
