@@ -13,10 +13,13 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Create-agent](#create-agent)
+  * [Create-page](#create-page)
+  * [Delete-page](#delete-page)
   * [Detect-intent-audio](#detect-intent-audio)
   * [Detect-intent-streaming](#detect-intent-streaming)
   * [Detect-intent-text](#detect-intent-text)
   * [List-intents](#list-intents)
+  * [List-page](#list-page)
   * [Quickstart](#quickstart)
   * [Update-intent](#update-intent)
 
@@ -45,6 +48,40 @@ __Usage:__
 
 
 `node samples/create-agent.js`
+
+
+-----
+
+
+
+
+### Create-page
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/create-page.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/create-page.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/create-page.js`
+
+
+-----
+
+
+
+
+### Delete-page
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/delete-page.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/delete-page.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/delete-page.js`
 
 
 -----
@@ -113,6 +150,23 @@ __Usage:__
 
 
 `node samples/list-intents.js`
+
+
+-----
+
+
+
+
+### List-page
+
+View the [source code](https://github.com/googleapis/nodejs-dialogflow-cx/blob/main/samples/list-page.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-dialogflow-cx&page=editor&open_in_editor=samples/list-page.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/list-page.js`
 
 
 -----
