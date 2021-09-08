@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.1.0...v1.1.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* **build:** update branch to main ([#81](https://www.github.com/googleapis/nodejs-managed-identities/issues/81)) ([5dcd46f](https://www.github.com/googleapis/nodejs-managed-identities/commit/5dcd46f708efa4ca9bbb5e1c2eef6ad59f942918))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-managed-identities/compare/v1.0.7...v1.1.0) (2021-08-23)
 
 
