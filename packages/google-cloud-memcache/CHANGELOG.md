@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.5.1](https://www.github.com/googleapis/nodejs-memcache/compare/v1.5.0...v1.5.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* **build:** update branch to main ([#150](https://www.github.com/googleapis/nodejs-memcache/issues/150)) ([8c534ef](https://www.github.com/googleapis/nodejs-memcache/commit/8c534efaa39919a8df10622c9fa4e7dae18f5f61))
+
 ## [1.5.0](https://www.github.com/googleapis/nodejs-memcache/compare/v1.4.7...v1.5.0) (2021-08-23)
 
 
