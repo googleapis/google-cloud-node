@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.14.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.0...v5.14.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* **types:** remove duplicated definition of BucketOptions and make sure proper version is exported ([#1583](https://www.github.com/googleapis/nodejs-storage/issues/1583)) ([d8f4bc5](https://www.github.com/googleapis/nodejs-storage/commit/d8f4bc59bd3e2cebfe6494842414cd9f7e32018f))
+
 ## [5.14.0](https://www.github.com/googleapis/nodejs-storage/compare/v5.13.2...v5.14.0) (2021-08-26)
 
 
