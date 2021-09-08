@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/network-connectivity.svg)](https://www.npmjs.org/package/@google-cloud/network-connectivity)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-network-connectivity/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-network-connectivity)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-network-connectivity/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-network-connectivity)
 
 
 
@@ -15,7 +15,7 @@ Networkconnectivity client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-network-connectivity/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-network-connectivity/blob/main/CHANGELOG.md).
 
 * [Network Connectivity Center Node.js Client API Reference][client-docs]
 * [Network Connectivity Center Documentation][product-docs]
@@ -85,11 +85,11 @@ listNetworkHubs();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-network-connectivity/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-network-connectivity/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-network-connectivity/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-network-connectivity&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-network-connectivity/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-network-connectivity&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -136,7 +136,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-network-connectivity/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-network-connectivity/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -148,7 +148,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-network-connectivity/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-network-connectivity/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/network-connectivity/latest
 [product-docs]: https://cloud.google.com/network-connectivity/docs
