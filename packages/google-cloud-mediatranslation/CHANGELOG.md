@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.3.4...v2.4.0) (2021-09-08)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#176](https://www.github.com/googleapis/nodejs-media-translation/issues/176)) ([26a0d2e](https://www.github.com/googleapis/nodejs-media-translation/commit/26a0d2e7b39176ad27dcfe076c70fc5c90be5159))
+
 ### [2.3.4](https://www.github.com/googleapis/nodejs-media-translation/compare/v2.3.3...v2.3.4) (2021-08-17)
 
 
