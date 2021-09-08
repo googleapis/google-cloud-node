@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/monitoring?activeTab=versions
 
+### [2.3.5](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.3.4...v2.3.5) (2021-09-08)
+
+
+### Bug Fixes
+
+* **build:** update branch to main ([#574](https://www.github.com/googleapis/nodejs-monitoring/issues/574)) ([955622f](https://www.github.com/googleapis/nodejs-monitoring/commit/955622f40583247a78301340fc172c9d42fa1354))
+
 ### [2.3.4](https://www.github.com/googleapis/nodejs-monitoring/compare/v2.3.3...v2.3.4) (2021-08-17)
 
 
