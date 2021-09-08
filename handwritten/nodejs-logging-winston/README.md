@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/logging-winston.svg)](https://www.npmjs.org/package/@google-cloud/logging-winston)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-logging-winston/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-logging-winston)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-logging-winston/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-logging-winston)
 
 
 
@@ -18,7 +18,7 @@ transport to your existing Winston loggers.
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-logging-winston/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-logging-winston/blob/main/CHANGELOG.md).
 
 * [Cloud Logging for Winston Node.js Client API Reference][client-docs]
 * [Cloud Logging for Winston Documentation][product-docs]
@@ -270,12 +270,12 @@ logger.debug('test msg');
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-logging-winston/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-logging-winston/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-logging-winston/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Explicit Auth Setup | [source code](https://github.com/googleapis/nodejs-logging-winston/blob/master/samples/setup_explicit.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-logging-winston/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Explicit Auth Setup | [source code](https://github.com/googleapis/nodejs-logging-winston/blob/main/samples/setup_explicit.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-winston&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md) |
 
 
 
@@ -324,7 +324,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-logging-winston/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-logging-winston/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -336,7 +336,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-logging-winston/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-logging-winston/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/logging-winston/latest
 [product-docs]: https://cloud.google.com/logging
