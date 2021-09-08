@@ -51,7 +51,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Alerts.backup Policies
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.backupPolicies.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.backupPolicies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.backupPolicies.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Alerts.delete Channels
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.deleteChannels.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.deleteChannels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.deleteChannels.js,samples/README.md)
 
@@ -85,7 +85,7 @@ __Usage:__
 
 ### Alerts.enable Policies
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.enablePolicies.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.enablePolicies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.enablePolicies.js,samples/README.md)
 
@@ -102,7 +102,7 @@ __Usage:__
 
 ### Alerts.list Policies
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.listPolicies.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.listPolicies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.listPolicies.js,samples/README.md)
 
@@ -119,7 +119,7 @@ __Usage:__
 
 ### Alerts.replace Channels
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.replaceChannels.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.replaceChannels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.replaceChannels.js,samples/README.md)
 
@@ -136,7 +136,7 @@ __Usage:__
 
 ### Alerts.restore Policies
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.restorePolicies.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.restorePolicies.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.restorePolicies.js,samples/README.md)
 
@@ -155,7 +155,7 @@ __Usage:__
 
 Creates an example 'custom.googleapis.com/stores/daily_sales' custom metric descriptor.
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.createDescriptor.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.createDescriptor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.createDescriptor.js,samples/README.md)
 
@@ -174,7 +174,7 @@ __Usage:__
 
 Deletes a custom metric descriptor.
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.deleteDescriptor.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.deleteDescriptor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.deleteDescriptor.js,samples/README.md)
 
@@ -193,7 +193,7 @@ __Usage:__
 
 Gets a custom metric descriptor
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.getDescriptor.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.getDescriptor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.getDescriptor.js,samples/README.md)
 
@@ -210,7 +210,7 @@ __Usage:__
 
 ### Get Monitored Resource Descriptor
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.getMonitoredResourceDescriptor.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.getMonitoredResourceDescriptor.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.getMonitoredResourceDescriptor.js,samples/README.md)
 
@@ -227,7 +227,7 @@ __Usage:__
 
 ### List Metric Descriptors
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.listDescriptors.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.listDescriptors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.listDescriptors.js,samples/README.md)
 
@@ -244,7 +244,7 @@ __Usage:__
 
 ### List Monitored Resource Descriptors
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.listMonitoredResourceDescriptors.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.listMonitoredResourceDescriptors.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.listMonitoredResourceDescriptors.js,samples/README.md)
 
@@ -263,7 +263,7 @@ __Usage:__
 
 Aggregates time series data that matches 'compute.googleapis.com/instance/cpu/utilization'.
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesAggregate.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.readTimeSeriesAggregate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesAggregate.js,samples/README.md)
 
@@ -282,7 +282,7 @@ __Usage:__
 
 Reads time series data that matches the given filter.
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesData.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.readTimeSeriesData.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesData.js,samples/README.md)
 
@@ -301,7 +301,7 @@ __Usage:__
 
 Reads headers of time series data that matches 'compute.googleapis.com/instance/cpu/utilization'.
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesFields.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.readTimeSeriesFields.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesFields.js,samples/README.md)
 
@@ -320,7 +320,7 @@ __Usage:__
 
 Reduces time series data that matches 'compute.googleapis.com/instance/cpu/utilization'.
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesReduce.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.readTimeSeriesReduce.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesReduce.js,samples/README.md)
 
@@ -339,7 +339,7 @@ __Usage:__
 
 Writes example time series data to 'custom.googleapis.com/stores/daily_sales'.
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.writeTimeSeriesData.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.writeTimeSeriesData.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.writeTimeSeriesData.js,samples/README.md)
 
@@ -356,7 +356,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -373,7 +373,7 @@ __Usage:__
 
 ### Uptime
 
-View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/uptime.js).
+View the [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/uptime.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/uptime.js,samples/README.md)
 

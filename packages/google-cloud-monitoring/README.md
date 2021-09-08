@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/monitoring.svg)](https://www.npmjs.org/package/@google-cloud/monitoring)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-monitoring/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-monitoring)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-monitoring/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-monitoring)
 
 
 
@@ -17,7 +17,7 @@ and a variety of common application components including Cassandra, Nginx, Apach
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-monitoring/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-monitoring/blob/main/CHANGELOG.md).
 
 * [Stackdriver Monitoring Node.js Client API Reference][client-docs]
 * [Stackdriver Monitoring Documentation][product-docs]
@@ -118,29 +118,29 @@ quickstart();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-monitoring/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-monitoring/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Alerts.backup Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.backupPolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.backupPolicies.js,samples/README.md) |
-| Alerts.delete Channels | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.deleteChannels.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.deleteChannels.js,samples/README.md) |
-| Alerts.enable Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.enablePolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.enablePolicies.js,samples/README.md) |
-| Alerts.list Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.listPolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.listPolicies.js,samples/README.md) |
-| Alerts.replace Channels | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.replaceChannels.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.replaceChannels.js,samples/README.md) |
-| Alerts.restore Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/alerts.restorePolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.restorePolicies.js,samples/README.md) |
-| Create Metric Descriptor | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.createDescriptor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.createDescriptor.js,samples/README.md) |
-| Delete Metric Descriptor | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.deleteDescriptor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.deleteDescriptor.js,samples/README.md) |
-| Get Metric Descriptor | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.getDescriptor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.getDescriptor.js,samples/README.md) |
-| Get Monitored Resource Descriptor | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.getMonitoredResourceDescriptor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.getMonitoredResourceDescriptor.js,samples/README.md) |
-| List Metric Descriptors | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.listDescriptors.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.listDescriptors.js,samples/README.md) |
-| List Monitored Resource Descriptors | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.listMonitoredResourceDescriptors.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.listMonitoredResourceDescriptors.js,samples/README.md) |
-| Read Time Series Aggregate | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesAggregate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesAggregate.js,samples/README.md) |
-| Read Time Series Data | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesData.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesData.js,samples/README.md) |
-| Read Time Series Fields | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesFields.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesFields.js,samples/README.md) |
-| Read Time Series Reduce | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.readTimeSeriesReduce.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesReduce.js,samples/README.md) |
-| Write Time Series Data | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/metrics.writeTimeSeriesData.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.writeTimeSeriesData.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Uptime | [source code](https://github.com/googleapis/nodejs-monitoring/blob/master/samples/uptime.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/uptime.js,samples/README.md) |
+| Alerts.backup Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.backupPolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.backupPolicies.js,samples/README.md) |
+| Alerts.delete Channels | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.deleteChannels.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.deleteChannels.js,samples/README.md) |
+| Alerts.enable Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.enablePolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.enablePolicies.js,samples/README.md) |
+| Alerts.list Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.listPolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.listPolicies.js,samples/README.md) |
+| Alerts.replace Channels | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.replaceChannels.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.replaceChannels.js,samples/README.md) |
+| Alerts.restore Policies | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/alerts.restorePolicies.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/alerts.restorePolicies.js,samples/README.md) |
+| Create Metric Descriptor | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.createDescriptor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.createDescriptor.js,samples/README.md) |
+| Delete Metric Descriptor | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.deleteDescriptor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.deleteDescriptor.js,samples/README.md) |
+| Get Metric Descriptor | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.getDescriptor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.getDescriptor.js,samples/README.md) |
+| Get Monitored Resource Descriptor | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.getMonitoredResourceDescriptor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.getMonitoredResourceDescriptor.js,samples/README.md) |
+| List Metric Descriptors | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.listDescriptors.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.listDescriptors.js,samples/README.md) |
+| List Monitored Resource Descriptors | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.listMonitoredResourceDescriptors.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.listMonitoredResourceDescriptors.js,samples/README.md) |
+| Read Time Series Aggregate | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.readTimeSeriesAggregate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesAggregate.js,samples/README.md) |
+| Read Time Series Data | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.readTimeSeriesData.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesData.js,samples/README.md) |
+| Read Time Series Fields | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.readTimeSeriesFields.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesFields.js,samples/README.md) |
+| Read Time Series Reduce | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.readTimeSeriesReduce.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.readTimeSeriesReduce.js,samples/README.md) |
+| Write Time Series Data | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/metrics.writeTimeSeriesData.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/metrics.writeTimeSeriesData.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Uptime | [source code](https://github.com/googleapis/nodejs-monitoring/blob/main/samples/uptime.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-monitoring&page=editor&open_in_editor=samples/uptime.js,samples/README.md) |
 
 
 
@@ -189,7 +189,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-monitoring/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-monitoring/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -201,7 +201,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-monitoring/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-monitoring/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/monitoring/latest
 [product-docs]: https://cloud.google.com/monitoring/docs
