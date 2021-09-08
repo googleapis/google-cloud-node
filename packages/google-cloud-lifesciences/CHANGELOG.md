@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-life-sciences/compare/v1.1.0...v1.1.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* **build:** update branch to main ([#32](https://www.github.com/googleapis/nodejs-life-sciences/issues/32)) ([9e0bab6](https://www.github.com/googleapis/nodejs-life-sciences/commit/9e0bab622b3490529e5fb6f7a462a47f3feb4681))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-life-sciences/compare/v1.0.3...v1.1.0) (2021-08-23)
 
 
