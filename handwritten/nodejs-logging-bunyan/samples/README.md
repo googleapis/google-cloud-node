@@ -34,7 +34,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Express
 
-View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/express.js).
+View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/main/samples/express.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/express.js,samples/README.md)
 
@@ -51,7 +51,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -68,7 +68,7 @@ __Usage:__
 
 ### Explict Auth Setup
 
-View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/master/samples/setup_explicit.js).
+View the [source code](https://github.com/googleapis/nodejs-logging-bunyan/blob/main/samples/setup_explicit.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-logging-bunyan&page=editor&open_in_editor=samples/setup_explicit.js,samples/README.md)
 
