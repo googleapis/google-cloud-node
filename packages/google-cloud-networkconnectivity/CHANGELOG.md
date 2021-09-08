@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.4.1](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.4.0...v1.4.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* **build:** update branch to main ([#81](https://www.github.com/googleapis/nodejs-network-connectivity/issues/81)) ([7c3a917](https://www.github.com/googleapis/nodejs-network-connectivity/commit/7c3a9179e1b2a770c6cdd16d8cf935c99b5cc9eb))
+
 ## [1.4.0](https://www.github.com/googleapis/nodejs-network-connectivity/compare/v1.3.0...v1.4.0) (2021-08-25)
 
 
