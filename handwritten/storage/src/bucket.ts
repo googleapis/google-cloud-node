@@ -54,6 +54,7 @@ import {
   Cors,
   PreconditionOptions,
   IdempotencyStrategy,
+  BucketOptions,
 } from './storage';
 import {
   GetSignedUrlResponse,
@@ -75,11 +76,6 @@ interface CreateNotificationQuery {
 interface MetadataOptions {
   predefinedAcl: string;
   userProject?: string;
-}
-
-interface BucketOptions {
-  userProject?: string;
-  preconditionOpts?: PreconditionOptions;
 }
 
 export type GetFilesResponse = [File[], {}, Metadata];

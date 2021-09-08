@@ -91,6 +91,7 @@ export interface StorageOptions extends ServiceOptions {
 export interface BucketOptions {
   kmsKeyName?: string;
   userProject?: string;
+  preconditionOpts?: PreconditionOptions;
 }
 
 export interface Cors {
