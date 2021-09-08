@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.6.1](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.6.0...v2.6.1) (2021-09-08)
+
+
+### Bug Fixes
+
+* **build:** update branch to main ([#215](https://www.github.com/googleapis/nodejs-monitoring-dashboards/issues/215)) ([9506380](https://www.github.com/googleapis/nodejs-monitoring-dashboards/commit/950638076cec0320fa886e25b025844f58fce97e))
+
 ## [2.6.0](https://www.github.com/googleapis/nodejs-monitoring-dashboards/compare/v2.5.1...v2.6.0) (2021-08-23)
 
 
