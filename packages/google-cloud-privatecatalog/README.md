@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-beta-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/private-catalog.svg)](https://www.npmjs.org/package/@google-cloud/private-catalog)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-private-catalog/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-private-catalog)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-private-catalog/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-private-catalog)
 
 
 
@@ -15,7 +15,7 @@ cloudprivatecatalog client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-private-catalog/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-private-catalog/blob/main/CHANGELOG.md).
 
 * [Private Catalog Node.js Client API Reference][client-docs]
 * [Private Catalog Documentation][product-docs]
@@ -84,11 +84,11 @@ searchCatalogs();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-private-catalog/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-private-catalog/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-private-catalog/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-private-catalog&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-private-catalog/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-private-catalog&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -131,7 +131,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-private-catalog/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-private-catalog/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -143,7 +143,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-private-catalog/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-private-catalog/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/private-catalog/latest
 [product-docs]: https://cloud.google.com/private-catalog/
