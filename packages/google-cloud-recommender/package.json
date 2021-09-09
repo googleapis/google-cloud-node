@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/recommender",
-  "version": "4.2.4",
+  "version": "4.2.5",
   "description": "Recommender client for Node.js",
   "repository": "googleapis/nodejs-recommender",
   "license": "Apache-2.0",

@@ -1,5 +1,12 @@
 # Changelog
 
+### [4.2.5](https://www.github.com/googleapis/nodejs-recommender/compare/v4.2.4...v4.2.5) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#194](https://www.github.com/googleapis/nodejs-recommender/issues/194)) ([f2b12a1](https://www.github.com/googleapis/nodejs-recommender/commit/f2b12a15de8f81a3d3ab626ca3422b694d4ed3d6))
+
 ### [4.2.4](https://www.github.com/googleapis/nodejs-recommender/compare/v4.2.3...v4.2.4) (2021-08-17)
 
 
