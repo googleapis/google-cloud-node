@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.1.0...v1.1.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#76](https://www.github.com/googleapis/nodejs-policy-troubleshooter/issues/76)) ([dd536c5](https://www.github.com/googleapis/nodejs-policy-troubleshooter/commit/dd536c5796007a1c5c42c30bbd672b40b7bc5e60))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-policy-troubleshooter/compare/v1.0.6...v1.1.0) (2021-08-23)
 
 
