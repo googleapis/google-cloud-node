@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-network-management/compare/v1.1.0...v1.1.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#19](https://www.github.com/googleapis/nodejs-network-management/issues/19)) ([2bc25cf](https://www.github.com/googleapis/nodejs-network-management/commit/2bc25cfffcd08659eafbe5ab3f2e35d7078deab8))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-network-management/compare/v1.0.2...v1.1.0) (2021-08-23)
 
 
