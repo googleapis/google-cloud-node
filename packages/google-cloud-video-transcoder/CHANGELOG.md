@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.7.1](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.7.0...v1.7.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#109](https://www.github.com/googleapis/nodejs-video-transcoder/issues/109)) ([5612895](https://www.github.com/googleapis/nodejs-video-transcoder/commit/5612895e1e4a0cfaaf5722b52da20fba249890c6))
+
 ## [1.7.0](https://www.github.com/googleapis/nodejs-video-transcoder/compare/v1.6.1...v1.7.0) (2021-08-27)
 
 
