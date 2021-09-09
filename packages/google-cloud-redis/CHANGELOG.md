@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-redis?activeTab=versions
 
+### [2.3.1](https://www.github.com/googleapis/nodejs-redis/compare/v2.3.0...v2.3.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#514](https://www.github.com/googleapis/nodejs-redis/issues/514)) ([9882c5d](https://www.github.com/googleapis/nodejs-redis/commit/9882c5d3f6684cd4b2b049b61a7a38dbc995f90e))
+
 ## [2.3.0](https://www.github.com/googleapis/nodejs-redis/compare/v2.2.6...v2.3.0) (2021-08-23)
 
 
