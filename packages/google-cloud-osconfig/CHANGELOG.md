@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.9.1](https://www.github.com/googleapis/nodejs-os-config/compare/v1.9.0...v1.9.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#146](https://www.github.com/googleapis/nodejs-os-config/issues/146)) ([3947132](https://www.github.com/googleapis/nodejs-os-config/commit/39471322fa54f12943ff74e4ff4548034a99c5e6))
+
 ## [1.9.0](https://www.github.com/googleapis/nodejs-os-config/compare/v1.8.0...v1.9.0) (2021-09-07)
 
 
