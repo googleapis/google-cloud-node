@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/vision.svg)](https://www.npmjs.org/package/@google-cloud/vision)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-vision/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-vision)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-vision/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-vision)
 
 
 
@@ -15,7 +15,7 @@ Google Cloud Vision API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-vision/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-vision/blob/main/CHANGELOG.md).
 
 * [Google Cloud Vision API Node.js Client API Reference][client-docs]
 * [Google Cloud Vision API Documentation][product-docs]
@@ -79,21 +79,21 @@ quickstart();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-vision/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-vision/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Async-batch-annotate-images | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/async-batch-annotate-images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/async-batch-annotate-images.js,samples/README.md) |
-| Batch-annotate-files-gcs | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/batch-annotate-files-gcs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/batch-annotate-files-gcs.js,samples/README.md) |
-| Batch-annotate-files | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/batch-annotate-files.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/batch-annotate-files.js,samples/README.md) |
-| Detect | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/detect.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.js,samples/README.md) |
-| Detect.v1p1beta1 | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/detect.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.v1p1beta1.js,samples/README.md) |
-| Detect.v1p3beta1 | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/detect.v1p3beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.v1p3beta1.js,samples/README.md) |
-| Face Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/faceDetection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/faceDetection.js,samples/README.md) |
-| Cloud Vision Quickstart | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Cloud Vision Custom API Endpoint | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/setEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md) |
-| Text Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/textDetection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/textDetection.js,samples/README.md) |
-| Cloud Vision Face Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/master/samples/vision-face-detection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/vision-face-detection.js,samples/README.md) |
+| Async-batch-annotate-images | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/async-batch-annotate-images.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/async-batch-annotate-images.js,samples/README.md) |
+| Batch-annotate-files-gcs | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/batch-annotate-files-gcs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/batch-annotate-files-gcs.js,samples/README.md) |
+| Batch-annotate-files | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/batch-annotate-files.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/batch-annotate-files.js,samples/README.md) |
+| Detect | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/detect.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.js,samples/README.md) |
+| Detect.v1p1beta1 | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/detect.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.v1p1beta1.js,samples/README.md) |
+| Detect.v1p3beta1 | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/detect.v1p3beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/detect.v1p3beta1.js,samples/README.md) |
+| Face Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/faceDetection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/faceDetection.js,samples/README.md) |
+| Cloud Vision Quickstart | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Cloud Vision Custom API Endpoint | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/setEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/setEndpoint.js,samples/README.md) |
+| Text Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/textDetection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/textDetection.js,samples/README.md) |
+| Cloud Vision Face Detection | [source code](https://github.com/googleapis/nodejs-vision/blob/main/samples/vision-face-detection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-vision&page=editor&open_in_editor=samples/vision-face-detection.js,samples/README.md) |
 
 
 
@@ -142,7 +142,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-vision/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-vision/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -154,7 +154,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-vision/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-vision/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/vision/latest
 [product-docs]: https://cloud.google.com/vision
