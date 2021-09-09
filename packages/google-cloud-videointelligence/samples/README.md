@@ -46,7 +46,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Analyze-face-detection-gcs
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-face-detection-gcs.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-face-detection-gcs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-face-detection-gcs.js,samples/README.md)
 
@@ -63,7 +63,7 @@ __Usage:__
 
 ### Analyze-face-detection
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-face-detection.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-face-detection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-face-detection.js,samples/README.md)
 
@@ -80,7 +80,7 @@ __Usage:__
 
 ### Analyze-person-detection-gcs
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-person-detection-gcs.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-person-detection-gcs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-person-detection-gcs.js,samples/README.md)
 
@@ -97,7 +97,7 @@ __Usage:__
 
 ### Analyze-person-detection
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-person-detection.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-person-detection.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-person-detection.js,samples/README.md)
 
@@ -114,7 +114,7 @@ __Usage:__
 
 ### Analyze-streaming-annotation-to-storage
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-annotation-to-storage.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-streaming-annotation-to-storage.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-annotation-to-storage.js,samples/README.md)
 
@@ -131,7 +131,7 @@ __Usage:__
 
 ### Analyze-streaming-automl-classification
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-automl-classification.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-streaming-automl-classification.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-automl-classification.js,samples/README.md)
 
@@ -148,7 +148,7 @@ __Usage:__
 
 ### Analyze-streaming-automl-object-tracking
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-automl-object-tracking.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-streaming-automl-object-tracking.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-automl-object-tracking.js,samples/README.md)
 
@@ -165,7 +165,7 @@ __Usage:__
 
 ### Analyze-streaming-labels
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-labels.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-streaming-labels.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-labels.js,samples/README.md)
 
@@ -182,7 +182,7 @@ __Usage:__
 
 ### Analyze-streaming-object
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-object.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-streaming-object.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-object.js,samples/README.md)
 
@@ -199,7 +199,7 @@ __Usage:__
 
 ### Analyze-streaming-safe-search
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-safe-search.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-streaming-safe-search.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-safe-search.js,samples/README.md)
 
@@ -216,7 +216,7 @@ __Usage:__
 
 ### Analyze-streaming-shot-change
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze-streaming-shot-change.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze-streaming-shot-change.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze-streaming-shot-change.js,samples/README.md)
 
@@ -233,7 +233,7 @@ __Usage:__
 
 ### Analyze
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze.js,samples/README.md)
 
@@ -250,7 +250,7 @@ __Usage:__
 
 ### Analyze.v1p2beta1
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/analyze.v1p2beta1.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/analyze.v1p2beta1.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/analyze.v1p2beta1.js,samples/README.md)
 
@@ -267,7 +267,7 @@ __Usage:__
 
 ### Detect_logo
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/detect_logo.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/detect_logo.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/detect_logo.js,samples/README.md)
 
@@ -284,7 +284,7 @@ __Usage:__
 
 ### Detect_logo_gcs
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/detect_logo_gcs.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/detect_logo_gcs.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/detect_logo_gcs.js,samples/README.md)
 
@@ -301,7 +301,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-video-intelligence/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-intelligence&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
