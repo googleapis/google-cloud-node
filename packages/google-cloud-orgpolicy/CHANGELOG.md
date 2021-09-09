@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.1.0...v1.1.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#60](https://www.github.com/googleapis/nodejs-org-policy/issues/60)) ([b15a6d6](https://www.github.com/googleapis/nodejs-org-policy/commit/b15a6d675382145f2a270d24ee456f8400dd2a99))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-org-policy/compare/v1.0.7...v1.1.0) (2021-08-23)
 
 
