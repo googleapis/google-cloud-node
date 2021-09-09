@@ -13,7 +13,7 @@
     "test": "c8 mocha --timeout 600000 test/*.js"
   },
   "dependencies": {
-    "@google-cloud/workflows": "^1.3.0"
+    "@google-cloud/workflows": "^1.3.1"
   },
   "devDependencies": {
     "c8": "^7.3.0",

@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-workflows/compare/v1.3.0...v1.3.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#92](https://www.github.com/googleapis/nodejs-workflows/issues/92)) ([1f6e084](https://www.github.com/googleapis/nodejs-workflows/commit/1f6e084c99b648f9e02a5067ef6e7be4c04c1392))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-workflows/compare/v1.2.6...v1.3.0) (2021-08-23)
 
 

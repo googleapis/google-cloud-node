@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/workflows",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Workflows client for Node.js",
   "repository": "googleapis/nodejs-workflows",
   "license": "Apache-2.0",
