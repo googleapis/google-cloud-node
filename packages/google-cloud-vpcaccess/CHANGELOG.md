@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.1.1...v1.1.2) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#37](https://www.github.com/googleapis/nodejs-vpc-access/issues/37)) ([57b3021](https://www.github.com/googleapis/nodejs-vpc-access/commit/57b302164d8c04f2547874b84cd0a4db1cccc3a8))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-vpc-access/compare/v1.1.0...v1.1.1) (2021-08-25)
 
 
