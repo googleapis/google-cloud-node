@@ -74,8 +74,16 @@ export interface PreconditionOptions {
 
 export interface StorageOptions extends ServiceOptions {
   retryOptions?: RetryOptions;
-  autoRetry?: boolean; //Deprecated. Use retryOptions instead.
-  maxRetries?: number; //Deprecated. Use retryOptions instead.
+  /**
+   * @deprecated Use retryOptions instead.
+   * @internal
+   */
+  autoRetry?: boolean;
+  /**
+   * @deprecated Use retryOptions instead.
+   * @internal
+   */
+  maxRetries?: number;
   /**
    * **This option is deprecated.**
    * @todo Remove in next major release.

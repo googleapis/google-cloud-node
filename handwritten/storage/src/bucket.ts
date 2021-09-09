@@ -116,7 +116,10 @@ export interface EnableLoggingOptions {
 export interface GetFilesOptions {
   autoPaginate?: boolean;
   delimiter?: string;
-  /** @deprecated */
+  /**
+   * @deprecated dirrectory is deprecated
+   * @internal
+   * */
   directory?: string;
   endOffset?: string;
   includeTrailingDelimiter?: boolean;

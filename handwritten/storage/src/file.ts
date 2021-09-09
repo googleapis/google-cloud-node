@@ -2313,6 +2313,7 @@ class File extends ServiceObject<File> {
    *     Currently, this method is an alias to `getSignedPolicyV2()`,
    *     and will be removed in a future major release.
    *     We recommend signing new policies using v4.
+   * @internal
    *
    * @throws {Error} If an expiration timestamp from the past is given.
    * @throws {Error} If options.equals has an array with less or more than two
