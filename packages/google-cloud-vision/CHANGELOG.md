@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [2.4.0](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.8...v2.4.0) (2021-09-09)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#942](https://www.github.com/googleapis/nodejs-vision/issues/942)) ([c0558c7](https://www.github.com/googleapis/nodejs-vision/commit/c0558c7ec2097c713cf591ae985eb5c8f7f7435a))
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#947](https://www.github.com/googleapis/nodejs-vision/issues/947)) ([f1ce40f](https://www.github.com/googleapis/nodejs-vision/commit/f1ce40fcf255a052442d2fdd46516182a58b0aed))
+
 ### [2.3.8](https://www.github.com/googleapis/nodejs-vision/compare/v2.3.7...v2.3.8) (2021-08-17)
 
 
