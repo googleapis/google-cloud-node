@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/resource-manager",
   "description": "Cloud Resource Manager Client Library for Node.js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "Apache-2.0",
   "author": "Google LLC",
   "engines": {
