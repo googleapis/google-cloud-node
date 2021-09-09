@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.3.1](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.3.0...v1.3.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#89](https://www.github.com/googleapis/nodejs-notebooks/issues/89)) ([87276a1](https://www.github.com/googleapis/nodejs-notebooks/commit/87276a11f6410e5e6cb03c61c6e662c1bc92a063))
+
 ## [1.3.0](https://www.github.com/googleapis/nodejs-notebooks/compare/v1.2.0...v1.3.0) (2021-08-30)
 
 
