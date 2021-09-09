@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/video-transcoder.svg)](https://www.npmjs.org/package/@google-cloud/video-transcoder)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-video-transcoder/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-video-transcoder)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-video-transcoder/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-video-transcoder)
 
 
 
@@ -15,7 +15,7 @@ Transcoder client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-video-transcoder/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-video-transcoder/blob/main/CHANGELOG.md).
 
 * [Transcoder API Node.js Client API Reference][client-docs]
 * [Transcoder API Documentation][product-docs]
@@ -83,26 +83,26 @@ listJobs();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-video-transcoder/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-video-transcoder/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Create Job From Ad Hoc | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobFromAdHoc.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobFromAdHoc.js,samples/README.md) |
-| Create Job From Preset | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobFromPreset.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobFromPreset.js,samples/README.md) |
-| Create Job From Template | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobFromTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobFromTemplate.js,samples/README.md) |
-| Create Job Template | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobTemplate.js,samples/README.md) |
-| Create Job With Animated Overlay | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobWithAnimatedOverlay.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithAnimatedOverlay.js,samples/README.md) |
-| Create Job With Periodic Images Spritesheet | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobWithPeriodicImagesSpritesheet.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithPeriodicImagesSpritesheet.js,samples/README.md) |
-| Create Job With Set Number Images Spritesheet | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobWithSetNumberImagesSpritesheet.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithSetNumberImagesSpritesheet.js,samples/README.md) |
-| Create Job With Static Overlay | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/createJobWithStaticOverlay.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithStaticOverlay.js,samples/README.md) |
-| Delete Job | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/deleteJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md) |
-| Delete Job Template | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/deleteJobTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/deleteJobTemplate.js,samples/README.md) |
-| Get Job | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/getJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/getJob.js,samples/README.md) |
-| Get Job State | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/getJobState.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/getJobState.js,samples/README.md) |
-| Get Job Template | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/getJobTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/getJobTemplate.js,samples/README.md) |
-| List Job Templates | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/listJobTemplates.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/listJobTemplates.js,samples/README.md) |
-| List Jobs | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/listJobs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/listJobs.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Create Job From Ad Hoc | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobFromAdHoc.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobFromAdHoc.js,samples/README.md) |
+| Create Job From Preset | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobFromPreset.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobFromPreset.js,samples/README.md) |
+| Create Job From Template | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobFromTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobFromTemplate.js,samples/README.md) |
+| Create Job Template | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobTemplate.js,samples/README.md) |
+| Create Job With Animated Overlay | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobWithAnimatedOverlay.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithAnimatedOverlay.js,samples/README.md) |
+| Create Job With Periodic Images Spritesheet | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobWithPeriodicImagesSpritesheet.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithPeriodicImagesSpritesheet.js,samples/README.md) |
+| Create Job With Set Number Images Spritesheet | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobWithSetNumberImagesSpritesheet.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithSetNumberImagesSpritesheet.js,samples/README.md) |
+| Create Job With Static Overlay | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/createJobWithStaticOverlay.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/createJobWithStaticOverlay.js,samples/README.md) |
+| Delete Job | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/deleteJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md) |
+| Delete Job Template | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/deleteJobTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/deleteJobTemplate.js,samples/README.md) |
+| Get Job | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/getJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/getJob.js,samples/README.md) |
+| Get Job State | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/getJobState.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/getJobState.js,samples/README.md) |
+| Get Job Template | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/getJobTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/getJobTemplate.js,samples/README.md) |
+| List Job Templates | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/listJobTemplates.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/listJobTemplates.js,samples/README.md) |
+| List Jobs | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/listJobs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/listJobs.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-video-transcoder/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-video-transcoder&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -151,7 +151,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-video-transcoder/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-video-transcoder/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -163,7 +163,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-video-transcoder/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-video-transcoder/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/video-transcoder/latest
 [product-docs]: https://googleapis.dev/nodejs/transcoder/latest
