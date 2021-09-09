@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.1.0...v1.1.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** migrate to using main branch ([#77](https://www.github.com/googleapis/nodejs-web-security-scanner/issues/77)) ([caf7a6c](https://www.github.com/googleapis/nodejs-web-security-scanner/commit/caf7a6c7b28c5bc2346edbf5051c991c9ee8f62e))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-web-security-scanner/compare/v1.0.7...v1.1.0) (2021-08-23)
 
 
