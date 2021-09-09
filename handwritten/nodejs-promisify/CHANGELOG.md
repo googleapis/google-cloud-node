@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-promisify?activeTab=versions
 
+### [2.0.4](https://www.github.com/googleapis/nodejs-promisify/compare/v2.0.3...v2.0.4) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#270](https://www.github.com/googleapis/nodejs-promisify/issues/270)) ([11242f7](https://www.github.com/googleapis/nodejs-promisify/commit/11242f7f76e170dae7a429f8d4064bf33be9bb3f))
+
 ### [2.0.3](https://www.github.com/googleapis/nodejs-promisify/compare/v2.0.2...v2.0.3) (2020-09-04)
 
 
