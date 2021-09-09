@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-paginator?activeTab=versions
 
+### [3.0.6](https://www.github.com/googleapis/nodejs-paginator/compare/v3.0.5...v3.0.6) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#287](https://www.github.com/googleapis/nodejs-paginator/issues/287)) ([1b796f3](https://www.github.com/googleapis/nodejs-paginator/commit/1b796f3377174354a62b7475d16f52213197f650))
+
 ### [3.0.5](https://www.github.com/googleapis/nodejs-paginator/compare/v3.0.4...v3.0.5) (2020-09-02)
 
 
