@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.2](https://www.github.com/googleapis/nodejs-resource-settings/compare/v1.1.1...v1.1.2) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#28](https://www.github.com/googleapis/nodejs-resource-settings/issues/28)) ([73cdf29](https://www.github.com/googleapis/nodejs-resource-settings/commit/73cdf29b0ed329b259da29fe782a35b3c6f4a836))
+
 ### [1.1.1](https://www.github.com/googleapis/nodejs-resource-settings/compare/v1.1.0...v1.1.1) (2021-08-25)
 
 
