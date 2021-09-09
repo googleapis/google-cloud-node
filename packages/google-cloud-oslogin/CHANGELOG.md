@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+### [3.3.1](https://www.github.com/googleapis/nodejs-os-login/compare/v3.3.0...v3.3.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#480](https://www.github.com/googleapis/nodejs-os-login/issues/480)) ([0b7bec3](https://www.github.com/googleapis/nodejs-os-login/commit/0b7bec3162c80b1be59f309d8d05a2a5ff938917))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-os-login/compare/v3.2.6...v3.3.0) (2021-08-23)
 
 
