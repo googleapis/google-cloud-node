@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-private-catalog/compare/v1.1.0...v1.1.1) (2021-09-09)
+
+
+### Bug Fixes
+
+* **build:** switch primary branch to main ([#37](https://www.github.com/googleapis/nodejs-private-catalog/issues/37)) ([0d9868a](https://www.github.com/googleapis/nodejs-private-catalog/commit/0d9868aae4968603b418474f5154020225149a1c))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-private-catalog/compare/v1.0.4...v1.1.0) (2021-08-23)
 
 
