@@ -31,7 +31,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-redis/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-redis/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-redis&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
