@@ -45,7 +45,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 List all current projects.
 
-View the [source code](https://github.com/googleapis/nodejs-resource-manager/blob/master/samples/listProjects.js).
+View the [source code](https://github.com/googleapis/nodejs-resource-manager/blob/main/samples/listProjects.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource-manager&page=editor&open_in_editor=samples/listProjects.js,samples/README.md)
 
@@ -62,7 +62,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-resource-manager/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-resource-manager/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-resource-manager&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
