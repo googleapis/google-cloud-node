@@ -35,7 +35,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### App
 
-View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/app.js).
+View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/app.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/app.js,samples/README.md)
 
@@ -54,7 +54,7 @@ __Usage:__
 
 Create a job that posts to /log_payload on an App Engine service.
 
-View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/createJob.js).
+View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/createJob.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/createJob.js,samples/README.md)
 
@@ -73,7 +73,7 @@ __Usage:__
 
 Delete a job by its ID.
 
-View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/deleteJob.js).
+View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/deleteJob.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md)
 
@@ -92,7 +92,7 @@ __Usage:__
 
 POST "Hello World" to a URL every minute.
 
-View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -111,7 +111,7 @@ __Usage:__
 
 Update a job by its ID.
 
-View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/updateJob.js).
+View the [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/updateJob.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/updateJob.js,samples/README.md)
 

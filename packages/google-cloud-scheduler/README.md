@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/scheduler.svg)](https://www.npmjs.org/package/@google-cloud/scheduler)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-scheduler/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-scheduler)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-scheduler/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-scheduler)
 
 
 
@@ -15,7 +15,7 @@ Cloud Scheduler API client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-scheduler/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-scheduler/blob/main/CHANGELOG.md).
 
 * [Google Cloud Scheduler Node.js Client API Reference][client-docs]
 * [Google Cloud Scheduler Documentation][product-docs]
@@ -95,15 +95,15 @@ console.log(`Created job: ${response.name}`);
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-scheduler/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-scheduler/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| App | [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/app.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/app.js,samples/README.md) |
-| Create Job | [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/createJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/createJob.js,samples/README.md) |
-| Delete Job | [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/deleteJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Update Job | [source code](https://github.com/googleapis/nodejs-scheduler/blob/master/samples/updateJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/updateJob.js,samples/README.md) |
+| App | [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/app.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/app.js,samples/README.md) |
+| Create Job | [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/createJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/createJob.js,samples/README.md) |
+| Delete Job | [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/deleteJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/deleteJob.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Update Job | [source code](https://github.com/googleapis/nodejs-scheduler/blob/main/samples/updateJob.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-scheduler&page=editor&open_in_editor=samples/updateJob.js,samples/README.md) |
 
 
 
@@ -152,7 +152,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-scheduler/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-scheduler/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -164,7 +164,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-scheduler/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-scheduler/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/scheduler/latest
 [product-docs]: https://cloud.google.com/scheduler
