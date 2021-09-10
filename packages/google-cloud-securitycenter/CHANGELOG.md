@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/security-center?activeTab=versions
 
+### [5.5.1](https://www.github.com/googleapis/nodejs-security-center/compare/v5.5.0...v5.5.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#420](https://www.github.com/googleapis/nodejs-security-center/issues/420)) ([7a04895](https://www.github.com/googleapis/nodejs-security-center/commit/7a04895d15fc51694aba186bfbffaf7495744937))
+
 ## [5.5.0](https://www.github.com/googleapis/nodejs-security-center/compare/v5.4.1...v5.5.0) (2021-08-23)
 
 
