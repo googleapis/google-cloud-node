@@ -99,7 +99,7 @@ node v3beta1/translate_list_codes_beta.js "your_project_id"
 
 ### Hybrid Glossaries
 
-View the [source code](https://github.com/googleapis/nodejs-translate/blob/master/samples/hybridGlossaries.js).
+View the [source code](https://github.com/googleapis/nodejs-translate/blob/main/samples/hybridGlossaries.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/hybridGlossaries.js,samples/README.md)
 
@@ -116,7 +116,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-translate/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-translate/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -133,7 +133,7 @@ __Usage:__
 
 ### Translate
 
-View the [source code](https://github.com/googleapis/nodejs-translate/blob/master/samples/translate.js).
+View the [source code](https://github.com/googleapis/nodejs-translate/blob/main/samples/translate.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-translate&page=editor&open_in_editor=samples/translate.js,samples/README.md)
 
