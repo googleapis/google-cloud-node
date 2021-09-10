@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/retail.svg)](https://www.npmjs.org/package/@google-cloud/retail)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-retail/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-retail)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-retail/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-retail)
 
 
 
@@ -15,7 +15,7 @@ Retail client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-retail/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-retail/blob/main/CHANGELOG.md).
 
 * [Retail API Node.js Client API Reference][client-docs]
 * [Retail API Documentation][product-docs]
@@ -83,11 +83,11 @@ listCatalogs();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-retail/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-retail/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-retail/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-retail&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-retail/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-retail&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 
 
@@ -136,7 +136,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-retail/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-retail/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -148,7 +148,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-retail/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-retail/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/retail/latest
 [product-docs]: https://cloud.google.com/recommendations/
