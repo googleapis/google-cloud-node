@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-service-control/compare/v1.2.0...v1.2.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#75](https://www.github.com/googleapis/nodejs-service-control/issues/75)) ([96864af](https://www.github.com/googleapis/nodejs-service-control/commit/96864af35c2ba7a08c5aacbdf73024ab15f722c3))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-service-control/compare/v1.1.4...v1.2.0) (2021-08-23)
 
 
