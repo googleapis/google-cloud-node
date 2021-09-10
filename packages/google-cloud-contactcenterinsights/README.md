@@ -88,6 +88,7 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-contact-cen
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
+| Get Operation | [source code](https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/getOperation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-contact-center-insights&page=editor&open_in_editor=samples/getOperation.js,samples/README.md) |
 | Quickstart | [source code](https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-contact-center-insights&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
 
 

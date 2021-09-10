@@ -2,6 +2,7 @@
 **/node_modules
 .coverage
 coverage
+.idea/
 .nyc_output
 docs/
 out/
