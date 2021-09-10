@@ -1,5 +1,12 @@
 # Changelog
 
+### [2.4.1](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.4.0...v2.4.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#122](https://www.github.com/googleapis/nodejs-security-private-ca/issues/122)) ([dbd2a17](https://www.github.com/googleapis/nodejs-security-private-ca/commit/dbd2a1722f5624cbe4d7533e4a537c645cc87659))
+
 ## [2.4.0](https://www.github.com/googleapis/nodejs-security-private-ca/compare/v2.3.7...v2.4.0) (2021-08-23)
 
 
