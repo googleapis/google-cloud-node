@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.10.1](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.10.0...v3.10.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#295](https://www.github.com/googleapis/nodejs-secret-manager/issues/295)) ([65d43f1](https://www.github.com/googleapis/nodejs-secret-manager/commit/65d43f1131855c31cb377472f60a8fcba70fbb60))
+
 ## [3.10.0](https://www.github.com/googleapis/nodejs-secret-manager/compare/v3.9.1...v3.10.0) (2021-08-23)
 
 
