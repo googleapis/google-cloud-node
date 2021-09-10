@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/scheduler?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.6...v2.3.0) (2021-09-10)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#399](https://www.github.com/googleapis/nodejs-scheduler/issues/399)) ([bdeff1d](https://www.github.com/googleapis/nodejs-scheduler/commit/bdeff1dc5115dc2a3687980127d8c256c5a910ff))
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#403](https://www.github.com/googleapis/nodejs-scheduler/issues/403)) ([cb1d8d2](https://www.github.com/googleapis/nodejs-scheduler/commit/cb1d8d2c023d80fefece432537ea7c09fb50638f))
+
 ### [2.2.6](https://www.github.com/googleapis/nodejs-scheduler/compare/v2.2.5...v2.2.6) (2021-08-17)
 
 
