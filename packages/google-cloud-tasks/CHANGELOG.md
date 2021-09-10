@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-tasks?activeTab=versions
 
+### [2.4.2](https://www.github.com/googleapis/nodejs-tasks/compare/v2.4.1...v2.4.2) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#565](https://www.github.com/googleapis/nodejs-tasks/issues/565)) ([e486ef8](https://www.github.com/googleapis/nodejs-tasks/commit/e486ef834a07e246b5bc2a6d6854a99ea803b4b8))
+
 ### [2.4.1](https://www.github.com/googleapis/nodejs-tasks/compare/v2.4.0...v2.4.1) (2021-09-07)
 
 
