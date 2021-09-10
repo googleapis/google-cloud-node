@@ -1,5 +1,12 @@
 # Changelog
 
+### [0.3.1](https://www.github.com/googleapis/nodejs-service-management/compare/v0.3.0...v0.3.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#85](https://www.github.com/googleapis/nodejs-service-management/issues/85)) ([b343eac](https://www.github.com/googleapis/nodejs-service-management/commit/b343eaca04b4f651c737d8a84baa5a75a361c4b0))
+
 ## [0.3.0](https://www.github.com/googleapis/nodejs-service-management/compare/v0.2.6...v0.3.0) (2021-08-23)
 
 
