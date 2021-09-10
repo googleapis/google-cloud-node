@@ -89,6 +89,20 @@ export namespace google {
                     public getSupportedLanguages(request: google.cloud.translation.v3.IGetSupportedLanguagesRequest): Promise<google.cloud.translation.v3.SupportedLanguages>;
 
                     /**
+                     * Calls TranslateDocument.
+                     * @param request TranslateDocumentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and TranslateDocumentResponse
+                     */
+                    public translateDocument(request: google.cloud.translation.v3.ITranslateDocumentRequest, callback: google.cloud.translation.v3.TranslationService.TranslateDocumentCallback): void;
+
+                    /**
+                     * Calls TranslateDocument.
+                     * @param request TranslateDocumentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public translateDocument(request: google.cloud.translation.v3.ITranslateDocumentRequest): Promise<google.cloud.translation.v3.TranslateDocumentResponse>;
+
+                    /**
                      * Calls BatchTranslateText.
                      * @param request BatchTranslateTextRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Operation
@@ -101,6 +115,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public batchTranslateText(request: google.cloud.translation.v3.IBatchTranslateTextRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls BatchTranslateDocument.
+                     * @param request BatchTranslateDocumentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public batchTranslateDocument(request: google.cloud.translation.v3.IBatchTranslateDocumentRequest, callback: google.cloud.translation.v3.TranslationService.BatchTranslateDocumentCallback): void;
+
+                    /**
+                     * Calls BatchTranslateDocument.
+                     * @param request BatchTranslateDocumentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public batchTranslateDocument(request: google.cloud.translation.v3.IBatchTranslateDocumentRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls CreateGlossary.
@@ -183,11 +211,25 @@ export namespace google {
                     type GetSupportedLanguagesCallback = (error: (Error|null), response?: google.cloud.translation.v3.SupportedLanguages) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService#translateDocument}.
+                     * @param error Error, if any
+                     * @param [response] TranslateDocumentResponse
+                     */
+                    type TranslateDocumentCallback = (error: (Error|null), response?: google.cloud.translation.v3.TranslateDocumentResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.translation.v3.TranslationService#batchTranslateText}.
                      * @param error Error, if any
                      * @param [response] Operation
                      */
                     type BatchTranslateTextCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3.TranslationService#batchTranslateDocument}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type BatchTranslateDocumentCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.translation.v3.TranslationService#createGlossary}.
@@ -1620,6 +1662,552 @@ export namespace google {
 
                     /**
                      * Converts this OutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DocumentInputConfig. */
+                interface IDocumentInputConfig {
+
+                    /** DocumentInputConfig content */
+                    content?: (Uint8Array|string|null);
+
+                    /** DocumentInputConfig gcsSource */
+                    gcsSource?: (google.cloud.translation.v3.IGcsSource|null);
+
+                    /** DocumentInputConfig mimeType */
+                    mimeType?: (string|null);
+                }
+
+                /** Represents a DocumentInputConfig. */
+                class DocumentInputConfig implements IDocumentInputConfig {
+
+                    /**
+                     * Constructs a new DocumentInputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDocumentInputConfig);
+
+                    /** DocumentInputConfig content. */
+                    public content?: (Uint8Array|string|null);
+
+                    /** DocumentInputConfig gcsSource. */
+                    public gcsSource?: (google.cloud.translation.v3.IGcsSource|null);
+
+                    /** DocumentInputConfig mimeType. */
+                    public mimeType: string;
+
+                    /** DocumentInputConfig source. */
+                    public source?: ("content"|"gcsSource");
+
+                    /**
+                     * Creates a new DocumentInputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DocumentInputConfig instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDocumentInputConfig): google.cloud.translation.v3.DocumentInputConfig;
+
+                    /**
+                     * Encodes the specified DocumentInputConfig message. Does not implicitly {@link google.cloud.translation.v3.DocumentInputConfig.verify|verify} messages.
+                     * @param message DocumentInputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDocumentInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DocumentInputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DocumentInputConfig.verify|verify} messages.
+                     * @param message DocumentInputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDocumentInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DocumentInputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DocumentInputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DocumentInputConfig;
+
+                    /**
+                     * Decodes a DocumentInputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DocumentInputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DocumentInputConfig;
+
+                    /**
+                     * Verifies a DocumentInputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DocumentInputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DocumentInputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DocumentInputConfig;
+
+                    /**
+                     * Creates a plain object from a DocumentInputConfig message. Also converts values to other types if specified.
+                     * @param message DocumentInputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DocumentInputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DocumentInputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DocumentOutputConfig. */
+                interface IDocumentOutputConfig {
+
+                    /** DocumentOutputConfig gcsDestination */
+                    gcsDestination?: (google.cloud.translation.v3.IGcsDestination|null);
+
+                    /** DocumentOutputConfig mimeType */
+                    mimeType?: (string|null);
+                }
+
+                /** Represents a DocumentOutputConfig. */
+                class DocumentOutputConfig implements IDocumentOutputConfig {
+
+                    /**
+                     * Constructs a new DocumentOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDocumentOutputConfig);
+
+                    /** DocumentOutputConfig gcsDestination. */
+                    public gcsDestination?: (google.cloud.translation.v3.IGcsDestination|null);
+
+                    /** DocumentOutputConfig mimeType. */
+                    public mimeType: string;
+
+                    /** DocumentOutputConfig destination. */
+                    public destination?: "gcsDestination";
+
+                    /**
+                     * Creates a new DocumentOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DocumentOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDocumentOutputConfig): google.cloud.translation.v3.DocumentOutputConfig;
+
+                    /**
+                     * Encodes the specified DocumentOutputConfig message. Does not implicitly {@link google.cloud.translation.v3.DocumentOutputConfig.verify|verify} messages.
+                     * @param message DocumentOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDocumentOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DocumentOutputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DocumentOutputConfig.verify|verify} messages.
+                     * @param message DocumentOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDocumentOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DocumentOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DocumentOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DocumentOutputConfig;
+
+                    /**
+                     * Decodes a DocumentOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DocumentOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DocumentOutputConfig;
+
+                    /**
+                     * Verifies a DocumentOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DocumentOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DocumentOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DocumentOutputConfig;
+
+                    /**
+                     * Creates a plain object from a DocumentOutputConfig message. Also converts values to other types if specified.
+                     * @param message DocumentOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DocumentOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DocumentOutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TranslateDocumentRequest. */
+                interface ITranslateDocumentRequest {
+
+                    /** TranslateDocumentRequest parent */
+                    parent?: (string|null);
+
+                    /** TranslateDocumentRequest sourceLanguageCode */
+                    sourceLanguageCode?: (string|null);
+
+                    /** TranslateDocumentRequest targetLanguageCode */
+                    targetLanguageCode?: (string|null);
+
+                    /** TranslateDocumentRequest documentInputConfig */
+                    documentInputConfig?: (google.cloud.translation.v3.IDocumentInputConfig|null);
+
+                    /** TranslateDocumentRequest documentOutputConfig */
+                    documentOutputConfig?: (google.cloud.translation.v3.IDocumentOutputConfig|null);
+
+                    /** TranslateDocumentRequest model */
+                    model?: (string|null);
+
+                    /** TranslateDocumentRequest glossaryConfig */
+                    glossaryConfig?: (google.cloud.translation.v3.ITranslateTextGlossaryConfig|null);
+
+                    /** TranslateDocumentRequest labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a TranslateDocumentRequest. */
+                class TranslateDocumentRequest implements ITranslateDocumentRequest {
+
+                    /**
+                     * Constructs a new TranslateDocumentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.ITranslateDocumentRequest);
+
+                    /** TranslateDocumentRequest parent. */
+                    public parent: string;
+
+                    /** TranslateDocumentRequest sourceLanguageCode. */
+                    public sourceLanguageCode: string;
+
+                    /** TranslateDocumentRequest targetLanguageCode. */
+                    public targetLanguageCode: string;
+
+                    /** TranslateDocumentRequest documentInputConfig. */
+                    public documentInputConfig?: (google.cloud.translation.v3.IDocumentInputConfig|null);
+
+                    /** TranslateDocumentRequest documentOutputConfig. */
+                    public documentOutputConfig?: (google.cloud.translation.v3.IDocumentOutputConfig|null);
+
+                    /** TranslateDocumentRequest model. */
+                    public model: string;
+
+                    /** TranslateDocumentRequest glossaryConfig. */
+                    public glossaryConfig?: (google.cloud.translation.v3.ITranslateTextGlossaryConfig|null);
+
+                    /** TranslateDocumentRequest labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new TranslateDocumentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TranslateDocumentRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.ITranslateDocumentRequest): google.cloud.translation.v3.TranslateDocumentRequest;
+
+                    /**
+                     * Encodes the specified TranslateDocumentRequest message. Does not implicitly {@link google.cloud.translation.v3.TranslateDocumentRequest.verify|verify} messages.
+                     * @param message TranslateDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.ITranslateDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TranslateDocumentRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TranslateDocumentRequest.verify|verify} messages.
+                     * @param message TranslateDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.ITranslateDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TranslateDocumentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TranslateDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.TranslateDocumentRequest;
+
+                    /**
+                     * Decodes a TranslateDocumentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TranslateDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.TranslateDocumentRequest;
+
+                    /**
+                     * Verifies a TranslateDocumentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TranslateDocumentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TranslateDocumentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.TranslateDocumentRequest;
+
+                    /**
+                     * Creates a plain object from a TranslateDocumentRequest message. Also converts values to other types if specified.
+                     * @param message TranslateDocumentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.TranslateDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TranslateDocumentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a DocumentTranslation. */
+                interface IDocumentTranslation {
+
+                    /** DocumentTranslation byteStreamOutputs */
+                    byteStreamOutputs?: (Uint8Array[]|null);
+
+                    /** DocumentTranslation mimeType */
+                    mimeType?: (string|null);
+
+                    /** DocumentTranslation detectedLanguageCode */
+                    detectedLanguageCode?: (string|null);
+                }
+
+                /** Represents a DocumentTranslation. */
+                class DocumentTranslation implements IDocumentTranslation {
+
+                    /**
+                     * Constructs a new DocumentTranslation.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IDocumentTranslation);
+
+                    /** DocumentTranslation byteStreamOutputs. */
+                    public byteStreamOutputs: Uint8Array[];
+
+                    /** DocumentTranslation mimeType. */
+                    public mimeType: string;
+
+                    /** DocumentTranslation detectedLanguageCode. */
+                    public detectedLanguageCode: string;
+
+                    /**
+                     * Creates a new DocumentTranslation instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DocumentTranslation instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IDocumentTranslation): google.cloud.translation.v3.DocumentTranslation;
+
+                    /**
+                     * Encodes the specified DocumentTranslation message. Does not implicitly {@link google.cloud.translation.v3.DocumentTranslation.verify|verify} messages.
+                     * @param message DocumentTranslation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IDocumentTranslation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DocumentTranslation message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DocumentTranslation.verify|verify} messages.
+                     * @param message DocumentTranslation message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IDocumentTranslation, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DocumentTranslation message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DocumentTranslation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.DocumentTranslation;
+
+                    /**
+                     * Decodes a DocumentTranslation message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DocumentTranslation
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.DocumentTranslation;
+
+                    /**
+                     * Verifies a DocumentTranslation message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DocumentTranslation message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DocumentTranslation
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.DocumentTranslation;
+
+                    /**
+                     * Creates a plain object from a DocumentTranslation message. Also converts values to other types if specified.
+                     * @param message DocumentTranslation
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.DocumentTranslation, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DocumentTranslation to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a TranslateDocumentResponse. */
+                interface ITranslateDocumentResponse {
+
+                    /** TranslateDocumentResponse documentTranslation */
+                    documentTranslation?: (google.cloud.translation.v3.IDocumentTranslation|null);
+
+                    /** TranslateDocumentResponse glossaryDocumentTranslation */
+                    glossaryDocumentTranslation?: (google.cloud.translation.v3.IDocumentTranslation|null);
+
+                    /** TranslateDocumentResponse model */
+                    model?: (string|null);
+
+                    /** TranslateDocumentResponse glossaryConfig */
+                    glossaryConfig?: (google.cloud.translation.v3.ITranslateTextGlossaryConfig|null);
+                }
+
+                /** Represents a TranslateDocumentResponse. */
+                class TranslateDocumentResponse implements ITranslateDocumentResponse {
+
+                    /**
+                     * Constructs a new TranslateDocumentResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.ITranslateDocumentResponse);
+
+                    /** TranslateDocumentResponse documentTranslation. */
+                    public documentTranslation?: (google.cloud.translation.v3.IDocumentTranslation|null);
+
+                    /** TranslateDocumentResponse glossaryDocumentTranslation. */
+                    public glossaryDocumentTranslation?: (google.cloud.translation.v3.IDocumentTranslation|null);
+
+                    /** TranslateDocumentResponse model. */
+                    public model: string;
+
+                    /** TranslateDocumentResponse glossaryConfig. */
+                    public glossaryConfig?: (google.cloud.translation.v3.ITranslateTextGlossaryConfig|null);
+
+                    /**
+                     * Creates a new TranslateDocumentResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TranslateDocumentResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.ITranslateDocumentResponse): google.cloud.translation.v3.TranslateDocumentResponse;
+
+                    /**
+                     * Encodes the specified TranslateDocumentResponse message. Does not implicitly {@link google.cloud.translation.v3.TranslateDocumentResponse.verify|verify} messages.
+                     * @param message TranslateDocumentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.ITranslateDocumentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TranslateDocumentResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TranslateDocumentResponse.verify|verify} messages.
+                     * @param message TranslateDocumentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.ITranslateDocumentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TranslateDocumentResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TranslateDocumentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.TranslateDocumentResponse;
+
+                    /**
+                     * Decodes a TranslateDocumentResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TranslateDocumentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.TranslateDocumentResponse;
+
+                    /**
+                     * Verifies a TranslateDocumentResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TranslateDocumentResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TranslateDocumentResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.TranslateDocumentResponse;
+
+                    /**
+                     * Creates a plain object from a TranslateDocumentResponse message. Also converts values to other types if specified.
+                     * @param message TranslateDocumentResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.TranslateDocumentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TranslateDocumentResponse to JSON.
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
@@ -3219,6 +3807,625 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchTranslateDocumentRequest. */
+                interface IBatchTranslateDocumentRequest {
+
+                    /** BatchTranslateDocumentRequest parent */
+                    parent?: (string|null);
+
+                    /** BatchTranslateDocumentRequest sourceLanguageCode */
+                    sourceLanguageCode?: (string|null);
+
+                    /** BatchTranslateDocumentRequest targetLanguageCodes */
+                    targetLanguageCodes?: (string[]|null);
+
+                    /** BatchTranslateDocumentRequest inputConfigs */
+                    inputConfigs?: (google.cloud.translation.v3.IBatchDocumentInputConfig[]|null);
+
+                    /** BatchTranslateDocumentRequest outputConfig */
+                    outputConfig?: (google.cloud.translation.v3.IBatchDocumentOutputConfig|null);
+
+                    /** BatchTranslateDocumentRequest models */
+                    models?: ({ [k: string]: string }|null);
+
+                    /** BatchTranslateDocumentRequest glossaries */
+                    glossaries?: ({ [k: string]: google.cloud.translation.v3.ITranslateTextGlossaryConfig }|null);
+
+                    /** BatchTranslateDocumentRequest formatConversions */
+                    formatConversions?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents a BatchTranslateDocumentRequest. */
+                class BatchTranslateDocumentRequest implements IBatchTranslateDocumentRequest {
+
+                    /**
+                     * Constructs a new BatchTranslateDocumentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IBatchTranslateDocumentRequest);
+
+                    /** BatchTranslateDocumentRequest parent. */
+                    public parent: string;
+
+                    /** BatchTranslateDocumentRequest sourceLanguageCode. */
+                    public sourceLanguageCode: string;
+
+                    /** BatchTranslateDocumentRequest targetLanguageCodes. */
+                    public targetLanguageCodes: string[];
+
+                    /** BatchTranslateDocumentRequest inputConfigs. */
+                    public inputConfigs: google.cloud.translation.v3.IBatchDocumentInputConfig[];
+
+                    /** BatchTranslateDocumentRequest outputConfig. */
+                    public outputConfig?: (google.cloud.translation.v3.IBatchDocumentOutputConfig|null);
+
+                    /** BatchTranslateDocumentRequest models. */
+                    public models: { [k: string]: string };
+
+                    /** BatchTranslateDocumentRequest glossaries. */
+                    public glossaries: { [k: string]: google.cloud.translation.v3.ITranslateTextGlossaryConfig };
+
+                    /** BatchTranslateDocumentRequest formatConversions. */
+                    public formatConversions: { [k: string]: string };
+
+                    /**
+                     * Creates a new BatchTranslateDocumentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchTranslateDocumentRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IBatchTranslateDocumentRequest): google.cloud.translation.v3.BatchTranslateDocumentRequest;
+
+                    /**
+                     * Encodes the specified BatchTranslateDocumentRequest message. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentRequest.verify|verify} messages.
+                     * @param message BatchTranslateDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IBatchTranslateDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchTranslateDocumentRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentRequest.verify|verify} messages.
+                     * @param message BatchTranslateDocumentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IBatchTranslateDocumentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchTranslateDocumentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchTranslateDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.BatchTranslateDocumentRequest;
+
+                    /**
+                     * Decodes a BatchTranslateDocumentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchTranslateDocumentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.BatchTranslateDocumentRequest;
+
+                    /**
+                     * Verifies a BatchTranslateDocumentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchTranslateDocumentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchTranslateDocumentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.BatchTranslateDocumentRequest;
+
+                    /**
+                     * Creates a plain object from a BatchTranslateDocumentRequest message. Also converts values to other types if specified.
+                     * @param message BatchTranslateDocumentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.BatchTranslateDocumentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchTranslateDocumentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchDocumentInputConfig. */
+                interface IBatchDocumentInputConfig {
+
+                    /** BatchDocumentInputConfig gcsSource */
+                    gcsSource?: (google.cloud.translation.v3.IGcsSource|null);
+                }
+
+                /** Represents a BatchDocumentInputConfig. */
+                class BatchDocumentInputConfig implements IBatchDocumentInputConfig {
+
+                    /**
+                     * Constructs a new BatchDocumentInputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IBatchDocumentInputConfig);
+
+                    /** BatchDocumentInputConfig gcsSource. */
+                    public gcsSource?: (google.cloud.translation.v3.IGcsSource|null);
+
+                    /** BatchDocumentInputConfig source. */
+                    public source?: "gcsSource";
+
+                    /**
+                     * Creates a new BatchDocumentInputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDocumentInputConfig instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IBatchDocumentInputConfig): google.cloud.translation.v3.BatchDocumentInputConfig;
+
+                    /**
+                     * Encodes the specified BatchDocumentInputConfig message. Does not implicitly {@link google.cloud.translation.v3.BatchDocumentInputConfig.verify|verify} messages.
+                     * @param message BatchDocumentInputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IBatchDocumentInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDocumentInputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchDocumentInputConfig.verify|verify} messages.
+                     * @param message BatchDocumentInputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IBatchDocumentInputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDocumentInputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDocumentInputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.BatchDocumentInputConfig;
+
+                    /**
+                     * Decodes a BatchDocumentInputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDocumentInputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.BatchDocumentInputConfig;
+
+                    /**
+                     * Verifies a BatchDocumentInputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDocumentInputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDocumentInputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.BatchDocumentInputConfig;
+
+                    /**
+                     * Creates a plain object from a BatchDocumentInputConfig message. Also converts values to other types if specified.
+                     * @param message BatchDocumentInputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.BatchDocumentInputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDocumentInputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchDocumentOutputConfig. */
+                interface IBatchDocumentOutputConfig {
+
+                    /** BatchDocumentOutputConfig gcsDestination */
+                    gcsDestination?: (google.cloud.translation.v3.IGcsDestination|null);
+                }
+
+                /** Represents a BatchDocumentOutputConfig. */
+                class BatchDocumentOutputConfig implements IBatchDocumentOutputConfig {
+
+                    /**
+                     * Constructs a new BatchDocumentOutputConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IBatchDocumentOutputConfig);
+
+                    /** BatchDocumentOutputConfig gcsDestination. */
+                    public gcsDestination?: (google.cloud.translation.v3.IGcsDestination|null);
+
+                    /** BatchDocumentOutputConfig destination. */
+                    public destination?: "gcsDestination";
+
+                    /**
+                     * Creates a new BatchDocumentOutputConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchDocumentOutputConfig instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IBatchDocumentOutputConfig): google.cloud.translation.v3.BatchDocumentOutputConfig;
+
+                    /**
+                     * Encodes the specified BatchDocumentOutputConfig message. Does not implicitly {@link google.cloud.translation.v3.BatchDocumentOutputConfig.verify|verify} messages.
+                     * @param message BatchDocumentOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IBatchDocumentOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchDocumentOutputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchDocumentOutputConfig.verify|verify} messages.
+                     * @param message BatchDocumentOutputConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IBatchDocumentOutputConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchDocumentOutputConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchDocumentOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.BatchDocumentOutputConfig;
+
+                    /**
+                     * Decodes a BatchDocumentOutputConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchDocumentOutputConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.BatchDocumentOutputConfig;
+
+                    /**
+                     * Verifies a BatchDocumentOutputConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchDocumentOutputConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchDocumentOutputConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.BatchDocumentOutputConfig;
+
+                    /**
+                     * Creates a plain object from a BatchDocumentOutputConfig message. Also converts values to other types if specified.
+                     * @param message BatchDocumentOutputConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.BatchDocumentOutputConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchDocumentOutputConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchTranslateDocumentResponse. */
+                interface IBatchTranslateDocumentResponse {
+
+                    /** BatchTranslateDocumentResponse totalPages */
+                    totalPages?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentResponse translatedPages */
+                    translatedPages?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentResponse failedPages */
+                    failedPages?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentResponse totalBillablePages */
+                    totalBillablePages?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentResponse totalCharacters */
+                    totalCharacters?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentResponse translatedCharacters */
+                    translatedCharacters?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentResponse failedCharacters */
+                    failedCharacters?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentResponse totalBillableCharacters */
+                    totalBillableCharacters?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentResponse submitTime */
+                    submitTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchTranslateDocumentResponse endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a BatchTranslateDocumentResponse. */
+                class BatchTranslateDocumentResponse implements IBatchTranslateDocumentResponse {
+
+                    /**
+                     * Constructs a new BatchTranslateDocumentResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IBatchTranslateDocumentResponse);
+
+                    /** BatchTranslateDocumentResponse totalPages. */
+                    public totalPages: (number|Long|string);
+
+                    /** BatchTranslateDocumentResponse translatedPages. */
+                    public translatedPages: (number|Long|string);
+
+                    /** BatchTranslateDocumentResponse failedPages. */
+                    public failedPages: (number|Long|string);
+
+                    /** BatchTranslateDocumentResponse totalBillablePages. */
+                    public totalBillablePages: (number|Long|string);
+
+                    /** BatchTranslateDocumentResponse totalCharacters. */
+                    public totalCharacters: (number|Long|string);
+
+                    /** BatchTranslateDocumentResponse translatedCharacters. */
+                    public translatedCharacters: (number|Long|string);
+
+                    /** BatchTranslateDocumentResponse failedCharacters. */
+                    public failedCharacters: (number|Long|string);
+
+                    /** BatchTranslateDocumentResponse totalBillableCharacters. */
+                    public totalBillableCharacters: (number|Long|string);
+
+                    /** BatchTranslateDocumentResponse submitTime. */
+                    public submitTime?: (google.protobuf.ITimestamp|null);
+
+                    /** BatchTranslateDocumentResponse endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new BatchTranslateDocumentResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchTranslateDocumentResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IBatchTranslateDocumentResponse): google.cloud.translation.v3.BatchTranslateDocumentResponse;
+
+                    /**
+                     * Encodes the specified BatchTranslateDocumentResponse message. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentResponse.verify|verify} messages.
+                     * @param message BatchTranslateDocumentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IBatchTranslateDocumentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchTranslateDocumentResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentResponse.verify|verify} messages.
+                     * @param message BatchTranslateDocumentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IBatchTranslateDocumentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchTranslateDocumentResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchTranslateDocumentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.BatchTranslateDocumentResponse;
+
+                    /**
+                     * Decodes a BatchTranslateDocumentResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchTranslateDocumentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.BatchTranslateDocumentResponse;
+
+                    /**
+                     * Verifies a BatchTranslateDocumentResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchTranslateDocumentResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchTranslateDocumentResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.BatchTranslateDocumentResponse;
+
+                    /**
+                     * Creates a plain object from a BatchTranslateDocumentResponse message. Also converts values to other types if specified.
+                     * @param message BatchTranslateDocumentResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.BatchTranslateDocumentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchTranslateDocumentResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                /** Properties of a BatchTranslateDocumentMetadata. */
+                interface IBatchTranslateDocumentMetadata {
+
+                    /** BatchTranslateDocumentMetadata state */
+                    state?: (google.cloud.translation.v3.BatchTranslateDocumentMetadata.State|keyof typeof google.cloud.translation.v3.BatchTranslateDocumentMetadata.State|null);
+
+                    /** BatchTranslateDocumentMetadata totalPages */
+                    totalPages?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentMetadata translatedPages */
+                    translatedPages?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentMetadata failedPages */
+                    failedPages?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentMetadata totalBillablePages */
+                    totalBillablePages?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentMetadata totalCharacters */
+                    totalCharacters?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentMetadata translatedCharacters */
+                    translatedCharacters?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentMetadata failedCharacters */
+                    failedCharacters?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentMetadata totalBillableCharacters */
+                    totalBillableCharacters?: (number|Long|string|null);
+
+                    /** BatchTranslateDocumentMetadata submitTime */
+                    submitTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a BatchTranslateDocumentMetadata. */
+                class BatchTranslateDocumentMetadata implements IBatchTranslateDocumentMetadata {
+
+                    /**
+                     * Constructs a new BatchTranslateDocumentMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3.IBatchTranslateDocumentMetadata);
+
+                    /** BatchTranslateDocumentMetadata state. */
+                    public state: (google.cloud.translation.v3.BatchTranslateDocumentMetadata.State|keyof typeof google.cloud.translation.v3.BatchTranslateDocumentMetadata.State);
+
+                    /** BatchTranslateDocumentMetadata totalPages. */
+                    public totalPages: (number|Long|string);
+
+                    /** BatchTranslateDocumentMetadata translatedPages. */
+                    public translatedPages: (number|Long|string);
+
+                    /** BatchTranslateDocumentMetadata failedPages. */
+                    public failedPages: (number|Long|string);
+
+                    /** BatchTranslateDocumentMetadata totalBillablePages. */
+                    public totalBillablePages: (number|Long|string);
+
+                    /** BatchTranslateDocumentMetadata totalCharacters. */
+                    public totalCharacters: (number|Long|string);
+
+                    /** BatchTranslateDocumentMetadata translatedCharacters. */
+                    public translatedCharacters: (number|Long|string);
+
+                    /** BatchTranslateDocumentMetadata failedCharacters. */
+                    public failedCharacters: (number|Long|string);
+
+                    /** BatchTranslateDocumentMetadata totalBillableCharacters. */
+                    public totalBillableCharacters: (number|Long|string);
+
+                    /** BatchTranslateDocumentMetadata submitTime. */
+                    public submitTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new BatchTranslateDocumentMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BatchTranslateDocumentMetadata instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3.IBatchTranslateDocumentMetadata): google.cloud.translation.v3.BatchTranslateDocumentMetadata;
+
+                    /**
+                     * Encodes the specified BatchTranslateDocumentMetadata message. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentMetadata.verify|verify} messages.
+                     * @param message BatchTranslateDocumentMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3.IBatchTranslateDocumentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BatchTranslateDocumentMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentMetadata.verify|verify} messages.
+                     * @param message BatchTranslateDocumentMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3.IBatchTranslateDocumentMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BatchTranslateDocumentMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BatchTranslateDocumentMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3.BatchTranslateDocumentMetadata;
+
+                    /**
+                     * Decodes a BatchTranslateDocumentMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BatchTranslateDocumentMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3.BatchTranslateDocumentMetadata;
+
+                    /**
+                     * Verifies a BatchTranslateDocumentMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BatchTranslateDocumentMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BatchTranslateDocumentMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3.BatchTranslateDocumentMetadata;
+
+                    /**
+                     * Creates a plain object from a BatchTranslateDocumentMetadata message. Also converts values to other types if specified.
+                     * @param message BatchTranslateDocumentMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3.BatchTranslateDocumentMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BatchTranslateDocumentMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+                }
+
+                namespace BatchTranslateDocumentMetadata {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        RUNNING = 1,
+                        SUCCEEDED = 2,
+                        FAILED = 3,
+                        CANCELLING = 4,
+                        CANCELLED = 5
+                    }
                 }
             }
 
@@ -7031,6 +8238,9 @@ export namespace google {
 
                     /** BatchTranslateDocumentRequest glossaries */
                     glossaries?: ({ [k: string]: google.cloud.translation.v3beta1.ITranslateTextGlossaryConfig }|null);
+
+                    /** BatchTranslateDocumentRequest formatConversions */
+                    formatConversions?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a BatchTranslateDocumentRequest. */
@@ -7062,6 +8272,9 @@ export namespace google {
 
                     /** BatchTranslateDocumentRequest glossaries. */
                     public glossaries: { [k: string]: google.cloud.translation.v3beta1.ITranslateTextGlossaryConfig };
+
+                    /** BatchTranslateDocumentRequest formatConversions. */
+                    public formatConversions: { [k: string]: string };
 
                     /**
                      * Creates a new BatchTranslateDocumentRequest instance using the specified properties.

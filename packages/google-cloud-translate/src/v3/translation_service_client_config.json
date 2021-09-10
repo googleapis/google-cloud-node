@@ -35,7 +35,17 @@
           "retry_codes_name": "idempotent",
           "retry_params_name": "default"
         },
+        "TranslateDocument": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "BatchTranslateText": {
+          "timeout_millis": 600000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchTranslateDocument": {
           "timeout_millis": 600000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"

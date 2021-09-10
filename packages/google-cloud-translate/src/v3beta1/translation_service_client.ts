@@ -1340,6 +1340,17 @@ export class TranslationServiceClient {
    *   pair, then default google model (nmt) is used.
    * @param {number[]} [request.glossaries]
    *   Optional. Glossaries to be applied. It's keyed by target language code.
+   * @param {number[]} [request.formatConversions]
+   *   Optional. File format conversion map to be applied to all input files.
+   *   Map's key is the original mime_type. Map's value is the target mime_type of
+   *   translated documents.
+   *
+   *   Supported file format conversion includes:
+   *   - `application/pdf` to
+   *     `application/vnd.openxmlformats-officedocument.wordprocessingml.document`
+   *
+   *   If nothing specified, output files will be in the same format as the
+   *   original file.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -25,6 +25,11 @@
                 "getSupportedLanguages"
               ]
             },
+            "TranslateDocument": {
+              "methods": [
+                "translateDocument"
+              ]
+            },
             "GetGlossary": {
               "methods": [
                 "getGlossary"
@@ -33,6 +38,11 @@
             "BatchTranslateText": {
               "methods": [
                 "batchTranslateText"
+              ]
+            },
+            "BatchTranslateDocument": {
+              "methods": [
+                "batchTranslateDocument"
               ]
             },
             "CreateGlossary": {
@@ -72,6 +82,11 @@
                 "getSupportedLanguages"
               ]
             },
+            "TranslateDocument": {
+              "methods": [
+                "translateDocument"
+              ]
+            },
             "GetGlossary": {
               "methods": [
                 "getGlossary"
@@ -80,6 +95,11 @@
             "BatchTranslateText": {
               "methods": [
                 "batchTranslateText"
+              ]
+            },
+            "BatchTranslateDocument": {
+              "methods": [
+                "batchTranslateDocument"
               ]
             },
             "CreateGlossary": {

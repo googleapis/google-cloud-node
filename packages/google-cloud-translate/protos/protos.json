@@ -101,6 +101,22 @@
                             }
                           ]
                         },
+                        "TranslateDocument": {
+                          "requestType": "TranslateDocumentRequest",
+                          "responseType": "TranslateDocumentResponse",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*}:translateDocument",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*}:translateDocument",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "BatchTranslateText": {
                           "requestType": "BatchTranslateTextRequest",
                           "responseType": "google.longrunning.Operation",
@@ -121,6 +137,30 @@
                               "(google.longrunning.operation_info)": {
                                 "response_type": "BatchTranslateResponse",
                                 "metadata_type": "BatchTranslateMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "BatchTranslateDocument": {
+                          "requestType": "BatchTranslateDocumentRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v3/{parent=projects/*/locations/*}:batchTranslateDocument",
+                            "(google.api.http).body": "*",
+                            "(google.longrunning.operation_info).response_type": "BatchTranslateDocumentResponse",
+                            "(google.longrunning.operation_info).metadata_type": "BatchTranslateDocumentMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v3/{parent=projects/*/locations/*}:batchTranslateDocument",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "BatchTranslateDocumentResponse",
+                                "metadata_type": "BatchTranslateDocumentMetadata"
                               }
                             }
                           ]
@@ -457,7 +497,10 @@
                       "fields": {
                         "inputUri": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -487,7 +530,10 @@
                       "fields": {
                         "outputUriPrefix": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -503,6 +549,153 @@
                         "gcsDestination": {
                           "type": "GcsDestination",
                           "id": 1
+                        }
+                      }
+                    },
+                    "DocumentInputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "content",
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "content": {
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 2
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 4
+                        }
+                      }
+                    },
+                    "DocumentOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TranslateDocumentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "targetLanguageCode": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "documentInputConfig": {
+                          "type": "DocumentInputConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "documentOutputConfig": {
+                          "type": "DocumentOutputConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "glossaryConfig": {
+                          "type": "TranslateTextGlossaryConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "DocumentTranslation": {
+                      "fields": {
+                        "byteStreamOutputs": {
+                          "rule": "repeated",
+                          "type": "bytes",
+                          "id": 1
+                        },
+                        "mimeType": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "detectedLanguageCode": {
+                          "type": "string",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "TranslateDocumentResponse": {
+                      "fields": {
+                        "documentTranslation": {
+                          "type": "DocumentTranslation",
+                          "id": 1
+                        },
+                        "glossaryDocumentTranslation": {
+                          "type": "DocumentTranslation",
+                          "id": 2
+                        },
+                        "model": {
+                          "type": "string",
+                          "id": 3
+                        },
+                        "glossaryConfig": {
+                          "type": "TranslateTextGlossaryConfig",
+                          "id": 4
                         }
                       }
                     },
@@ -663,7 +856,10 @@
                       "fields": {
                         "name": {
                           "type": "string",
-                          "id": 1
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "languagePair": {
                           "type": "LanguageCodePair",
@@ -881,6 +1077,202 @@
                         "endTime": {
                           "type": "google.protobuf.Timestamp",
                           "id": 3
+                        }
+                      }
+                    },
+                    "BatchTranslateDocumentRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "locations.googleapis.com/Location"
+                          }
+                        },
+                        "sourceLanguageCode": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "targetLanguageCodes": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "inputConfigs": {
+                          "rule": "repeated",
+                          "type": "BatchDocumentInputConfig",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "outputConfig": {
+                          "type": "BatchDocumentOutputConfig",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "models": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "glossaries": {
+                          "keyType": "string",
+                          "type": "TranslateTextGlossaryConfig",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "formatConversions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "BatchDocumentInputConfig": {
+                      "oneofs": {
+                        "source": {
+                          "oneof": [
+                            "gcsSource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsSource": {
+                          "type": "GcsSource",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BatchDocumentOutputConfig": {
+                      "oneofs": {
+                        "destination": {
+                          "oneof": [
+                            "gcsDestination"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcsDestination": {
+                          "type": "GcsDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BatchTranslateDocumentResponse": {
+                      "fields": {
+                        "totalPages": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "translatedPages": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "failedPages": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "totalBillablePages": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "totalCharacters": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "translatedCharacters": {
+                          "type": "int64",
+                          "id": 6
+                        },
+                        "failedCharacters": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "totalBillableCharacters": {
+                          "type": "int64",
+                          "id": 8
+                        },
+                        "submitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 9
+                        },
+                        "endTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        }
+                      }
+                    },
+                    "BatchTranslateDocumentMetadata": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1
+                        },
+                        "totalPages": {
+                          "type": "int64",
+                          "id": 2
+                        },
+                        "translatedPages": {
+                          "type": "int64",
+                          "id": 3
+                        },
+                        "failedPages": {
+                          "type": "int64",
+                          "id": 4
+                        },
+                        "totalBillablePages": {
+                          "type": "int64",
+                          "id": 5
+                        },
+                        "totalCharacters": {
+                          "type": "int64",
+                          "id": 6
+                        },
+                        "translatedCharacters": {
+                          "type": "int64",
+                          "id": 7
+                        },
+                        "failedCharacters": {
+                          "type": "int64",
+                          "id": 8
+                        },
+                        "totalBillableCharacters": {
+                          "type": "int64",
+                          "id": 9
+                        },
+                        "submitTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 10
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "RUNNING": 1,
+                            "SUCCEEDED": 2,
+                            "FAILED": 3,
+                            "CANCELLING": 4,
+                            "CANCELLED": 5
+                          }
                         }
                       }
                     }
@@ -2005,6 +2397,14 @@
                           "keyType": "string",
                           "type": "TranslateTextGlossaryConfig",
                           "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "formatConversions": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 8,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

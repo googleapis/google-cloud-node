@@ -198,6 +198,39 @@
                          */
     
                         /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService#translateDocument}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef TranslateDocumentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.translation.v3.TranslateDocumentResponse} [response] TranslateDocumentResponse
+                         */
+    
+                        /**
+                         * Calls TranslateDocument.
+                         * @function translateDocument
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ITranslateDocumentRequest} request TranslateDocumentRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.TranslateDocumentCallback} callback Node-style callback called with the error, if any, and TranslateDocumentResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.translateDocument = function translateDocument(request, callback) {
+                            return this.rpcCall(translateDocument, $root.google.cloud.translation.v3.TranslateDocumentRequest, $root.google.cloud.translation.v3.TranslateDocumentResponse, request, callback);
+                        }, "name", { value: "TranslateDocument" });
+    
+                        /**
+                         * Calls TranslateDocument.
+                         * @function translateDocument
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.ITranslateDocumentRequest} request TranslateDocumentRequest message or plain object
+                         * @returns {Promise<google.cloud.translation.v3.TranslateDocumentResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
                          * Callback as used by {@link google.cloud.translation.v3.TranslationService#batchTranslateText}.
                          * @memberof google.cloud.translation.v3.TranslationService
                          * @typedef BatchTranslateTextCallback
@@ -226,6 +259,39 @@
                          * @memberof google.cloud.translation.v3.TranslationService
                          * @instance
                          * @param {google.cloud.translation.v3.IBatchTranslateTextRequest} request BatchTranslateTextRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.translation.v3.TranslationService#batchTranslateDocument}.
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @typedef BatchTranslateDocumentCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls BatchTranslateDocument.
+                         * @function batchTranslateDocument
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentRequest} request BatchTranslateDocumentRequest message or plain object
+                         * @param {google.cloud.translation.v3.TranslationService.BatchTranslateDocumentCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(TranslationService.prototype.batchTranslateDocument = function batchTranslateDocument(request, callback) {
+                            return this.rpcCall(batchTranslateDocument, $root.google.cloud.translation.v3.BatchTranslateDocumentRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "BatchTranslateDocument" });
+    
+                        /**
+                         * Calls BatchTranslateDocument.
+                         * @function batchTranslateDocument
+                         * @memberof google.cloud.translation.v3.TranslationService
+                         * @instance
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentRequest} request BatchTranslateDocumentRequest message or plain object
                          * @returns {Promise<google.longrunning.Operation>} Promise
                          * @variation 2
                          */
@@ -3746,6 +3812,1419 @@
                         };
     
                         return OutputConfig;
+                    })();
+    
+                    v3.DocumentInputConfig = (function() {
+    
+                        /**
+                         * Properties of a DocumentInputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDocumentInputConfig
+                         * @property {Uint8Array|null} [content] DocumentInputConfig content
+                         * @property {google.cloud.translation.v3.IGcsSource|null} [gcsSource] DocumentInputConfig gcsSource
+                         * @property {string|null} [mimeType] DocumentInputConfig mimeType
+                         */
+    
+                        /**
+                         * Constructs a new DocumentInputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DocumentInputConfig.
+                         * @implements IDocumentInputConfig
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDocumentInputConfig=} [properties] Properties to set
+                         */
+                        function DocumentInputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DocumentInputConfig content.
+                         * @member {Uint8Array|null|undefined} content
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @instance
+                         */
+                        DocumentInputConfig.prototype.content = null;
+    
+                        /**
+                         * DocumentInputConfig gcsSource.
+                         * @member {google.cloud.translation.v3.IGcsSource|null|undefined} gcsSource
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @instance
+                         */
+                        DocumentInputConfig.prototype.gcsSource = null;
+    
+                        /**
+                         * DocumentInputConfig mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @instance
+                         */
+                        DocumentInputConfig.prototype.mimeType = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DocumentInputConfig source.
+                         * @member {"content"|"gcsSource"|undefined} source
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(DocumentInputConfig.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["content", "gcsSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DocumentInputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDocumentInputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DocumentInputConfig} DocumentInputConfig instance
+                         */
+                        DocumentInputConfig.create = function create(properties) {
+                            return new DocumentInputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DocumentInputConfig message. Does not implicitly {@link google.cloud.translation.v3.DocumentInputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDocumentInputConfig} message DocumentInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DocumentInputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.content != null && Object.hasOwnProperty.call(message, "content"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.content);
+                            if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                $root.google.cloud.translation.v3.GcsSource.encode(message.gcsSource, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.mimeType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DocumentInputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DocumentInputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDocumentInputConfig} message DocumentInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DocumentInputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DocumentInputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DocumentInputConfig} DocumentInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DocumentInputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DocumentInputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.content = reader.bytes();
+                                    break;
+                                case 2:
+                                    message.gcsSource = $root.google.cloud.translation.v3.GcsSource.decode(reader, reader.uint32());
+                                    break;
+                                case 4:
+                                    message.mimeType = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DocumentInputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DocumentInputConfig} DocumentInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DocumentInputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DocumentInputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DocumentInputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.content != null && message.hasOwnProperty("content")) {
+                                properties.source = 1;
+                                if (!(message.content && typeof message.content.length === "number" || $util.isString(message.content)))
+                                    return "content: buffer expected";
+                            }
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                if (properties.source === 1)
+                                    return "source: multiple values";
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.GcsSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DocumentInputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DocumentInputConfig} DocumentInputConfig
+                         */
+                        DocumentInputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DocumentInputConfig)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DocumentInputConfig();
+                            if (object.content != null)
+                                if (typeof object.content === "string")
+                                    $util.base64.decode(object.content, message.content = $util.newBuffer($util.base64.length(object.content)), 0);
+                                else if (object.content.length)
+                                    message.content = object.content;
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.DocumentInputConfig.gcsSource: object expected");
+                                message.gcsSource = $root.google.cloud.translation.v3.GcsSource.fromObject(object.gcsSource);
+                            }
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DocumentInputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.DocumentInputConfig} message DocumentInputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DocumentInputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.mimeType = "";
+                            if (message.content != null && message.hasOwnProperty("content")) {
+                                object.content = options.bytes === String ? $util.base64.encode(message.content, 0, message.content.length) : options.bytes === Array ? Array.prototype.slice.call(message.content) : message.content;
+                                if (options.oneofs)
+                                    object.source = "content";
+                            }
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.cloud.translation.v3.GcsSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.source = "gcsSource";
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DocumentInputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DocumentInputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DocumentInputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DocumentInputConfig;
+                    })();
+    
+                    v3.DocumentOutputConfig = (function() {
+    
+                        /**
+                         * Properties of a DocumentOutputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDocumentOutputConfig
+                         * @property {google.cloud.translation.v3.IGcsDestination|null} [gcsDestination] DocumentOutputConfig gcsDestination
+                         * @property {string|null} [mimeType] DocumentOutputConfig mimeType
+                         */
+    
+                        /**
+                         * Constructs a new DocumentOutputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DocumentOutputConfig.
+                         * @implements IDocumentOutputConfig
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDocumentOutputConfig=} [properties] Properties to set
+                         */
+                        function DocumentOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DocumentOutputConfig gcsDestination.
+                         * @member {google.cloud.translation.v3.IGcsDestination|null|undefined} gcsDestination
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @instance
+                         */
+                        DocumentOutputConfig.prototype.gcsDestination = null;
+    
+                        /**
+                         * DocumentOutputConfig mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @instance
+                         */
+                        DocumentOutputConfig.prototype.mimeType = "";
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * DocumentOutputConfig destination.
+                         * @member {"gcsDestination"|undefined} destination
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(DocumentOutputConfig.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsDestination"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new DocumentOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDocumentOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DocumentOutputConfig} DocumentOutputConfig instance
+                         */
+                        DocumentOutputConfig.create = function create(properties) {
+                            return new DocumentOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DocumentOutputConfig message. Does not implicitly {@link google.cloud.translation.v3.DocumentOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDocumentOutputConfig} message DocumentOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DocumentOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsDestination != null && Object.hasOwnProperty.call(message, "gcsDestination"))
+                                $root.google.cloud.translation.v3.GcsDestination.encode(message.gcsDestination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.mimeType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DocumentOutputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DocumentOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IDocumentOutputConfig} message DocumentOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DocumentOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DocumentOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DocumentOutputConfig} DocumentOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DocumentOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DocumentOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsDestination = $root.google.cloud.translation.v3.GcsDestination.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.mimeType = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DocumentOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DocumentOutputConfig} DocumentOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DocumentOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DocumentOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DocumentOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.GcsDestination.verify(message.gcsDestination);
+                                    if (error)
+                                        return "gcsDestination." + error;
+                                }
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DocumentOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DocumentOutputConfig} DocumentOutputConfig
+                         */
+                        DocumentOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DocumentOutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DocumentOutputConfig();
+                            if (object.gcsDestination != null) {
+                                if (typeof object.gcsDestination !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.DocumentOutputConfig.gcsDestination: object expected");
+                                message.gcsDestination = $root.google.cloud.translation.v3.GcsDestination.fromObject(object.gcsDestination);
+                            }
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DocumentOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.DocumentOutputConfig} message DocumentOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DocumentOutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.mimeType = "";
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                object.gcsDestination = $root.google.cloud.translation.v3.GcsDestination.toObject(message.gcsDestination, options);
+                                if (options.oneofs)
+                                    object.destination = "gcsDestination";
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DocumentOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DocumentOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DocumentOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DocumentOutputConfig;
+                    })();
+    
+                    v3.TranslateDocumentRequest = (function() {
+    
+                        /**
+                         * Properties of a TranslateDocumentRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface ITranslateDocumentRequest
+                         * @property {string|null} [parent] TranslateDocumentRequest parent
+                         * @property {string|null} [sourceLanguageCode] TranslateDocumentRequest sourceLanguageCode
+                         * @property {string|null} [targetLanguageCode] TranslateDocumentRequest targetLanguageCode
+                         * @property {google.cloud.translation.v3.IDocumentInputConfig|null} [documentInputConfig] TranslateDocumentRequest documentInputConfig
+                         * @property {google.cloud.translation.v3.IDocumentOutputConfig|null} [documentOutputConfig] TranslateDocumentRequest documentOutputConfig
+                         * @property {string|null} [model] TranslateDocumentRequest model
+                         * @property {google.cloud.translation.v3.ITranslateTextGlossaryConfig|null} [glossaryConfig] TranslateDocumentRequest glossaryConfig
+                         * @property {Object.<string,string>|null} [labels] TranslateDocumentRequest labels
+                         */
+    
+                        /**
+                         * Constructs a new TranslateDocumentRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a TranslateDocumentRequest.
+                         * @implements ITranslateDocumentRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.ITranslateDocumentRequest=} [properties] Properties to set
+                         */
+                        function TranslateDocumentRequest(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranslateDocumentRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.parent = "";
+    
+                        /**
+                         * TranslateDocumentRequest sourceLanguageCode.
+                         * @member {string} sourceLanguageCode
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.sourceLanguageCode = "";
+    
+                        /**
+                         * TranslateDocumentRequest targetLanguageCode.
+                         * @member {string} targetLanguageCode
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.targetLanguageCode = "";
+    
+                        /**
+                         * TranslateDocumentRequest documentInputConfig.
+                         * @member {google.cloud.translation.v3.IDocumentInputConfig|null|undefined} documentInputConfig
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.documentInputConfig = null;
+    
+                        /**
+                         * TranslateDocumentRequest documentOutputConfig.
+                         * @member {google.cloud.translation.v3.IDocumentOutputConfig|null|undefined} documentOutputConfig
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.documentOutputConfig = null;
+    
+                        /**
+                         * TranslateDocumentRequest model.
+                         * @member {string} model
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.model = "";
+    
+                        /**
+                         * TranslateDocumentRequest glossaryConfig.
+                         * @member {google.cloud.translation.v3.ITranslateTextGlossaryConfig|null|undefined} glossaryConfig
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.glossaryConfig = null;
+    
+                        /**
+                         * TranslateDocumentRequest labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         */
+                        TranslateDocumentRequest.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Creates a new TranslateDocumentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ITranslateDocumentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.TranslateDocumentRequest} TranslateDocumentRequest instance
+                         */
+                        TranslateDocumentRequest.create = function create(properties) {
+                            return new TranslateDocumentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranslateDocumentRequest message. Does not implicitly {@link google.cloud.translation.v3.TranslateDocumentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ITranslateDocumentRequest} message TranslateDocumentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslateDocumentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.sourceLanguageCode != null && Object.hasOwnProperty.call(message, "sourceLanguageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceLanguageCode);
+                            if (message.targetLanguageCode != null && Object.hasOwnProperty.call(message, "targetLanguageCode"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetLanguageCode);
+                            if (message.documentInputConfig != null && Object.hasOwnProperty.call(message, "documentInputConfig"))
+                                $root.google.cloud.translation.v3.DocumentInputConfig.encode(message.documentInputConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.documentOutputConfig != null && Object.hasOwnProperty.call(message, "documentOutputConfig"))
+                                $root.google.cloud.translation.v3.DocumentOutputConfig.encode(message.documentOutputConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.model);
+                            if (message.glossaryConfig != null && Object.hasOwnProperty.call(message, "glossaryConfig"))
+                                $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.encode(message.glossaryConfig, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranslateDocumentRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TranslateDocumentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.ITranslateDocumentRequest} message TranslateDocumentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslateDocumentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranslateDocumentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.TranslateDocumentRequest} TranslateDocumentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslateDocumentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.TranslateDocumentRequest(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.sourceLanguageCode = reader.string();
+                                    break;
+                                case 3:
+                                    message.targetLanguageCode = reader.string();
+                                    break;
+                                case 4:
+                                    message.documentInputConfig = $root.google.cloud.translation.v3.DocumentInputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 5:
+                                    message.documentOutputConfig = $root.google.cloud.translation.v3.DocumentOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    message.model = reader.string();
+                                    break;
+                                case 7:
+                                    message.glossaryConfig = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 8:
+                                    if (message.labels === $util.emptyObject)
+                                        message.labels = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.labels[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranslateDocumentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.TranslateDocumentRequest} TranslateDocumentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslateDocumentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranslateDocumentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranslateDocumentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                if (!$util.isString(message.sourceLanguageCode))
+                                    return "sourceLanguageCode: string expected";
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                if (!$util.isString(message.targetLanguageCode))
+                                    return "targetLanguageCode: string expected";
+                            if (message.documentInputConfig != null && message.hasOwnProperty("documentInputConfig")) {
+                                var error = $root.google.cloud.translation.v3.DocumentInputConfig.verify(message.documentInputConfig);
+                                if (error)
+                                    return "documentInputConfig." + error;
+                            }
+                            if (message.documentOutputConfig != null && message.hasOwnProperty("documentOutputConfig")) {
+                                var error = $root.google.cloud.translation.v3.DocumentOutputConfig.verify(message.documentOutputConfig);
+                                if (error)
+                                    return "documentOutputConfig." + error;
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.glossaryConfig != null && message.hasOwnProperty("glossaryConfig")) {
+                                var error = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.verify(message.glossaryConfig);
+                                if (error)
+                                    return "glossaryConfig." + error;
+                            }
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranslateDocumentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.TranslateDocumentRequest} TranslateDocumentRequest
+                         */
+                        TranslateDocumentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.TranslateDocumentRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.TranslateDocumentRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.sourceLanguageCode != null)
+                                message.sourceLanguageCode = String(object.sourceLanguageCode);
+                            if (object.targetLanguageCode != null)
+                                message.targetLanguageCode = String(object.targetLanguageCode);
+                            if (object.documentInputConfig != null) {
+                                if (typeof object.documentInputConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.TranslateDocumentRequest.documentInputConfig: object expected");
+                                message.documentInputConfig = $root.google.cloud.translation.v3.DocumentInputConfig.fromObject(object.documentInputConfig);
+                            }
+                            if (object.documentOutputConfig != null) {
+                                if (typeof object.documentOutputConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.TranslateDocumentRequest.documentOutputConfig: object expected");
+                                message.documentOutputConfig = $root.google.cloud.translation.v3.DocumentOutputConfig.fromObject(object.documentOutputConfig);
+                            }
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.glossaryConfig != null) {
+                                if (typeof object.glossaryConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.TranslateDocumentRequest.glossaryConfig: object expected");
+                                message.glossaryConfig = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.fromObject(object.glossaryConfig);
+                            }
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.TranslateDocumentRequest.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranslateDocumentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.TranslateDocumentRequest} message TranslateDocumentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranslateDocumentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.sourceLanguageCode = "";
+                                object.targetLanguageCode = "";
+                                object.documentInputConfig = null;
+                                object.documentOutputConfig = null;
+                                object.model = "";
+                                object.glossaryConfig = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                object.sourceLanguageCode = message.sourceLanguageCode;
+                            if (message.targetLanguageCode != null && message.hasOwnProperty("targetLanguageCode"))
+                                object.targetLanguageCode = message.targetLanguageCode;
+                            if (message.documentInputConfig != null && message.hasOwnProperty("documentInputConfig"))
+                                object.documentInputConfig = $root.google.cloud.translation.v3.DocumentInputConfig.toObject(message.documentInputConfig, options);
+                            if (message.documentOutputConfig != null && message.hasOwnProperty("documentOutputConfig"))
+                                object.documentOutputConfig = $root.google.cloud.translation.v3.DocumentOutputConfig.toObject(message.documentOutputConfig, options);
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.glossaryConfig != null && message.hasOwnProperty("glossaryConfig"))
+                                object.glossaryConfig = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.toObject(message.glossaryConfig, options);
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranslateDocumentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.TranslateDocumentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranslateDocumentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TranslateDocumentRequest;
+                    })();
+    
+                    v3.DocumentTranslation = (function() {
+    
+                        /**
+                         * Properties of a DocumentTranslation.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IDocumentTranslation
+                         * @property {Array.<Uint8Array>|null} [byteStreamOutputs] DocumentTranslation byteStreamOutputs
+                         * @property {string|null} [mimeType] DocumentTranslation mimeType
+                         * @property {string|null} [detectedLanguageCode] DocumentTranslation detectedLanguageCode
+                         */
+    
+                        /**
+                         * Constructs a new DocumentTranslation.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a DocumentTranslation.
+                         * @implements IDocumentTranslation
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IDocumentTranslation=} [properties] Properties to set
+                         */
+                        function DocumentTranslation(properties) {
+                            this.byteStreamOutputs = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DocumentTranslation byteStreamOutputs.
+                         * @member {Array.<Uint8Array>} byteStreamOutputs
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @instance
+                         */
+                        DocumentTranslation.prototype.byteStreamOutputs = $util.emptyArray;
+    
+                        /**
+                         * DocumentTranslation mimeType.
+                         * @member {string} mimeType
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @instance
+                         */
+                        DocumentTranslation.prototype.mimeType = "";
+    
+                        /**
+                         * DocumentTranslation detectedLanguageCode.
+                         * @member {string} detectedLanguageCode
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @instance
+                         */
+                        DocumentTranslation.prototype.detectedLanguageCode = "";
+    
+                        /**
+                         * Creates a new DocumentTranslation instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @static
+                         * @param {google.cloud.translation.v3.IDocumentTranslation=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.DocumentTranslation} DocumentTranslation instance
+                         */
+                        DocumentTranslation.create = function create(properties) {
+                            return new DocumentTranslation(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DocumentTranslation message. Does not implicitly {@link google.cloud.translation.v3.DocumentTranslation.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @static
+                         * @param {google.cloud.translation.v3.IDocumentTranslation} message DocumentTranslation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DocumentTranslation.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.byteStreamOutputs != null && message.byteStreamOutputs.length)
+                                for (var i = 0; i < message.byteStreamOutputs.length; ++i)
+                                    writer.uint32(/* id 1, wireType 2 =*/10).bytes(message.byteStreamOutputs[i]);
+                            if (message.mimeType != null && Object.hasOwnProperty.call(message, "mimeType"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.mimeType);
+                            if (message.detectedLanguageCode != null && Object.hasOwnProperty.call(message, "detectedLanguageCode"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.detectedLanguageCode);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DocumentTranslation message, length delimited. Does not implicitly {@link google.cloud.translation.v3.DocumentTranslation.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @static
+                         * @param {google.cloud.translation.v3.IDocumentTranslation} message DocumentTranslation message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DocumentTranslation.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DocumentTranslation message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.DocumentTranslation} DocumentTranslation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DocumentTranslation.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.DocumentTranslation();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    if (!(message.byteStreamOutputs && message.byteStreamOutputs.length))
+                                        message.byteStreamOutputs = [];
+                                    message.byteStreamOutputs.push(reader.bytes());
+                                    break;
+                                case 2:
+                                    message.mimeType = reader.string();
+                                    break;
+                                case 3:
+                                    message.detectedLanguageCode = reader.string();
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DocumentTranslation message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.DocumentTranslation} DocumentTranslation
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DocumentTranslation.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DocumentTranslation message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DocumentTranslation.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.byteStreamOutputs != null && message.hasOwnProperty("byteStreamOutputs")) {
+                                if (!Array.isArray(message.byteStreamOutputs))
+                                    return "byteStreamOutputs: array expected";
+                                for (var i = 0; i < message.byteStreamOutputs.length; ++i)
+                                    if (!(message.byteStreamOutputs[i] && typeof message.byteStreamOutputs[i].length === "number" || $util.isString(message.byteStreamOutputs[i])))
+                                        return "byteStreamOutputs: buffer[] expected";
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                if (!$util.isString(message.mimeType))
+                                    return "mimeType: string expected";
+                            if (message.detectedLanguageCode != null && message.hasOwnProperty("detectedLanguageCode"))
+                                if (!$util.isString(message.detectedLanguageCode))
+                                    return "detectedLanguageCode: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DocumentTranslation message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.DocumentTranslation} DocumentTranslation
+                         */
+                        DocumentTranslation.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.DocumentTranslation)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.DocumentTranslation();
+                            if (object.byteStreamOutputs) {
+                                if (!Array.isArray(object.byteStreamOutputs))
+                                    throw TypeError(".google.cloud.translation.v3.DocumentTranslation.byteStreamOutputs: array expected");
+                                message.byteStreamOutputs = [];
+                                for (var i = 0; i < object.byteStreamOutputs.length; ++i)
+                                    if (typeof object.byteStreamOutputs[i] === "string")
+                                        $util.base64.decode(object.byteStreamOutputs[i], message.byteStreamOutputs[i] = $util.newBuffer($util.base64.length(object.byteStreamOutputs[i])), 0);
+                                    else if (object.byteStreamOutputs[i].length)
+                                        message.byteStreamOutputs[i] = object.byteStreamOutputs[i];
+                            }
+                            if (object.mimeType != null)
+                                message.mimeType = String(object.mimeType);
+                            if (object.detectedLanguageCode != null)
+                                message.detectedLanguageCode = String(object.detectedLanguageCode);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DocumentTranslation message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @static
+                         * @param {google.cloud.translation.v3.DocumentTranslation} message DocumentTranslation
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DocumentTranslation.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.byteStreamOutputs = [];
+                            if (options.defaults) {
+                                object.mimeType = "";
+                                object.detectedLanguageCode = "";
+                            }
+                            if (message.byteStreamOutputs && message.byteStreamOutputs.length) {
+                                object.byteStreamOutputs = [];
+                                for (var j = 0; j < message.byteStreamOutputs.length; ++j)
+                                    object.byteStreamOutputs[j] = options.bytes === String ? $util.base64.encode(message.byteStreamOutputs[j], 0, message.byteStreamOutputs[j].length) : options.bytes === Array ? Array.prototype.slice.call(message.byteStreamOutputs[j]) : message.byteStreamOutputs[j];
+                            }
+                            if (message.mimeType != null && message.hasOwnProperty("mimeType"))
+                                object.mimeType = message.mimeType;
+                            if (message.detectedLanguageCode != null && message.hasOwnProperty("detectedLanguageCode"))
+                                object.detectedLanguageCode = message.detectedLanguageCode;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DocumentTranslation to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.DocumentTranslation
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DocumentTranslation.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return DocumentTranslation;
+                    })();
+    
+                    v3.TranslateDocumentResponse = (function() {
+    
+                        /**
+                         * Properties of a TranslateDocumentResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface ITranslateDocumentResponse
+                         * @property {google.cloud.translation.v3.IDocumentTranslation|null} [documentTranslation] TranslateDocumentResponse documentTranslation
+                         * @property {google.cloud.translation.v3.IDocumentTranslation|null} [glossaryDocumentTranslation] TranslateDocumentResponse glossaryDocumentTranslation
+                         * @property {string|null} [model] TranslateDocumentResponse model
+                         * @property {google.cloud.translation.v3.ITranslateTextGlossaryConfig|null} [glossaryConfig] TranslateDocumentResponse glossaryConfig
+                         */
+    
+                        /**
+                         * Constructs a new TranslateDocumentResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a TranslateDocumentResponse.
+                         * @implements ITranslateDocumentResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.ITranslateDocumentResponse=} [properties] Properties to set
+                         */
+                        function TranslateDocumentResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TranslateDocumentResponse documentTranslation.
+                         * @member {google.cloud.translation.v3.IDocumentTranslation|null|undefined} documentTranslation
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @instance
+                         */
+                        TranslateDocumentResponse.prototype.documentTranslation = null;
+    
+                        /**
+                         * TranslateDocumentResponse glossaryDocumentTranslation.
+                         * @member {google.cloud.translation.v3.IDocumentTranslation|null|undefined} glossaryDocumentTranslation
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @instance
+                         */
+                        TranslateDocumentResponse.prototype.glossaryDocumentTranslation = null;
+    
+                        /**
+                         * TranslateDocumentResponse model.
+                         * @member {string} model
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @instance
+                         */
+                        TranslateDocumentResponse.prototype.model = "";
+    
+                        /**
+                         * TranslateDocumentResponse glossaryConfig.
+                         * @member {google.cloud.translation.v3.ITranslateTextGlossaryConfig|null|undefined} glossaryConfig
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @instance
+                         */
+                        TranslateDocumentResponse.prototype.glossaryConfig = null;
+    
+                        /**
+                         * Creates a new TranslateDocumentResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ITranslateDocumentResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.TranslateDocumentResponse} TranslateDocumentResponse instance
+                         */
+                        TranslateDocumentResponse.create = function create(properties) {
+                            return new TranslateDocumentResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TranslateDocumentResponse message. Does not implicitly {@link google.cloud.translation.v3.TranslateDocumentResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ITranslateDocumentResponse} message TranslateDocumentResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslateDocumentResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.documentTranslation != null && Object.hasOwnProperty.call(message, "documentTranslation"))
+                                $root.google.cloud.translation.v3.DocumentTranslation.encode(message.documentTranslation, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.glossaryDocumentTranslation != null && Object.hasOwnProperty.call(message, "glossaryDocumentTranslation"))
+                                $root.google.cloud.translation.v3.DocumentTranslation.encode(message.glossaryDocumentTranslation, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.model != null && Object.hasOwnProperty.call(message, "model"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.model);
+                            if (message.glossaryConfig != null && Object.hasOwnProperty.call(message, "glossaryConfig"))
+                                $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.encode(message.glossaryConfig, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TranslateDocumentResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.TranslateDocumentResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.ITranslateDocumentResponse} message TranslateDocumentResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TranslateDocumentResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TranslateDocumentResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.TranslateDocumentResponse} TranslateDocumentResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslateDocumentResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.TranslateDocumentResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.documentTranslation = $root.google.cloud.translation.v3.DocumentTranslation.decode(reader, reader.uint32());
+                                    break;
+                                case 2:
+                                    message.glossaryDocumentTranslation = $root.google.cloud.translation.v3.DocumentTranslation.decode(reader, reader.uint32());
+                                    break;
+                                case 3:
+                                    message.model = reader.string();
+                                    break;
+                                case 4:
+                                    message.glossaryConfig = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TranslateDocumentResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.TranslateDocumentResponse} TranslateDocumentResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TranslateDocumentResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TranslateDocumentResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TranslateDocumentResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.documentTranslation != null && message.hasOwnProperty("documentTranslation")) {
+                                var error = $root.google.cloud.translation.v3.DocumentTranslation.verify(message.documentTranslation);
+                                if (error)
+                                    return "documentTranslation." + error;
+                            }
+                            if (message.glossaryDocumentTranslation != null && message.hasOwnProperty("glossaryDocumentTranslation")) {
+                                var error = $root.google.cloud.translation.v3.DocumentTranslation.verify(message.glossaryDocumentTranslation);
+                                if (error)
+                                    return "glossaryDocumentTranslation." + error;
+                            }
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                if (!$util.isString(message.model))
+                                    return "model: string expected";
+                            if (message.glossaryConfig != null && message.hasOwnProperty("glossaryConfig")) {
+                                var error = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.verify(message.glossaryConfig);
+                                if (error)
+                                    return "glossaryConfig." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TranslateDocumentResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.TranslateDocumentResponse} TranslateDocumentResponse
+                         */
+                        TranslateDocumentResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.TranslateDocumentResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.TranslateDocumentResponse();
+                            if (object.documentTranslation != null) {
+                                if (typeof object.documentTranslation !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.TranslateDocumentResponse.documentTranslation: object expected");
+                                message.documentTranslation = $root.google.cloud.translation.v3.DocumentTranslation.fromObject(object.documentTranslation);
+                            }
+                            if (object.glossaryDocumentTranslation != null) {
+                                if (typeof object.glossaryDocumentTranslation !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.TranslateDocumentResponse.glossaryDocumentTranslation: object expected");
+                                message.glossaryDocumentTranslation = $root.google.cloud.translation.v3.DocumentTranslation.fromObject(object.glossaryDocumentTranslation);
+                            }
+                            if (object.model != null)
+                                message.model = String(object.model);
+                            if (object.glossaryConfig != null) {
+                                if (typeof object.glossaryConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.TranslateDocumentResponse.glossaryConfig: object expected");
+                                message.glossaryConfig = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.fromObject(object.glossaryConfig);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TranslateDocumentResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.TranslateDocumentResponse} message TranslateDocumentResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TranslateDocumentResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.documentTranslation = null;
+                                object.glossaryDocumentTranslation = null;
+                                object.model = "";
+                                object.glossaryConfig = null;
+                            }
+                            if (message.documentTranslation != null && message.hasOwnProperty("documentTranslation"))
+                                object.documentTranslation = $root.google.cloud.translation.v3.DocumentTranslation.toObject(message.documentTranslation, options);
+                            if (message.glossaryDocumentTranslation != null && message.hasOwnProperty("glossaryDocumentTranslation"))
+                                object.glossaryDocumentTranslation = $root.google.cloud.translation.v3.DocumentTranslation.toObject(message.glossaryDocumentTranslation, options);
+                            if (message.model != null && message.hasOwnProperty("model"))
+                                object.model = message.model;
+                            if (message.glossaryConfig != null && message.hasOwnProperty("glossaryConfig"))
+                                object.glossaryConfig = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.toObject(message.glossaryConfig, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TranslateDocumentResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.TranslateDocumentResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TranslateDocumentResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return TranslateDocumentResponse;
                     })();
     
                     v3.BatchTranslateTextRequest = (function() {
@@ -7846,6 +9325,1992 @@
                         };
     
                         return DeleteGlossaryResponse;
+                    })();
+    
+                    v3.BatchTranslateDocumentRequest = (function() {
+    
+                        /**
+                         * Properties of a BatchTranslateDocumentRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IBatchTranslateDocumentRequest
+                         * @property {string|null} [parent] BatchTranslateDocumentRequest parent
+                         * @property {string|null} [sourceLanguageCode] BatchTranslateDocumentRequest sourceLanguageCode
+                         * @property {Array.<string>|null} [targetLanguageCodes] BatchTranslateDocumentRequest targetLanguageCodes
+                         * @property {Array.<google.cloud.translation.v3.IBatchDocumentInputConfig>|null} [inputConfigs] BatchTranslateDocumentRequest inputConfigs
+                         * @property {google.cloud.translation.v3.IBatchDocumentOutputConfig|null} [outputConfig] BatchTranslateDocumentRequest outputConfig
+                         * @property {Object.<string,string>|null} [models] BatchTranslateDocumentRequest models
+                         * @property {Object.<string,google.cloud.translation.v3.ITranslateTextGlossaryConfig>|null} [glossaries] BatchTranslateDocumentRequest glossaries
+                         * @property {Object.<string,string>|null} [formatConversions] BatchTranslateDocumentRequest formatConversions
+                         */
+    
+                        /**
+                         * Constructs a new BatchTranslateDocumentRequest.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a BatchTranslateDocumentRequest.
+                         * @implements IBatchTranslateDocumentRequest
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentRequest=} [properties] Properties to set
+                         */
+                        function BatchTranslateDocumentRequest(properties) {
+                            this.targetLanguageCodes = [];
+                            this.inputConfigs = [];
+                            this.models = {};
+                            this.glossaries = {};
+                            this.formatConversions = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchTranslateDocumentRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.parent = "";
+    
+                        /**
+                         * BatchTranslateDocumentRequest sourceLanguageCode.
+                         * @member {string} sourceLanguageCode
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.sourceLanguageCode = "";
+    
+                        /**
+                         * BatchTranslateDocumentRequest targetLanguageCodes.
+                         * @member {Array.<string>} targetLanguageCodes
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.targetLanguageCodes = $util.emptyArray;
+    
+                        /**
+                         * BatchTranslateDocumentRequest inputConfigs.
+                         * @member {Array.<google.cloud.translation.v3.IBatchDocumentInputConfig>} inputConfigs
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.inputConfigs = $util.emptyArray;
+    
+                        /**
+                         * BatchTranslateDocumentRequest outputConfig.
+                         * @member {google.cloud.translation.v3.IBatchDocumentOutputConfig|null|undefined} outputConfig
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.outputConfig = null;
+    
+                        /**
+                         * BatchTranslateDocumentRequest models.
+                         * @member {Object.<string,string>} models
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.models = $util.emptyObject;
+    
+                        /**
+                         * BatchTranslateDocumentRequest glossaries.
+                         * @member {Object.<string,google.cloud.translation.v3.ITranslateTextGlossaryConfig>} glossaries
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.glossaries = $util.emptyObject;
+    
+                        /**
+                         * BatchTranslateDocumentRequest formatConversions.
+                         * @member {Object.<string,string>} formatConversions
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.formatConversions = $util.emptyObject;
+    
+                        /**
+                         * Creates a new BatchTranslateDocumentRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentRequest=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentRequest} BatchTranslateDocumentRequest instance
+                         */
+                        BatchTranslateDocumentRequest.create = function create(properties) {
+                            return new BatchTranslateDocumentRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchTranslateDocumentRequest message. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentRequest} message BatchTranslateDocumentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchTranslateDocumentRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.sourceLanguageCode != null && Object.hasOwnProperty.call(message, "sourceLanguageCode"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.sourceLanguageCode);
+                            if (message.targetLanguageCodes != null && message.targetLanguageCodes.length)
+                                for (var i = 0; i < message.targetLanguageCodes.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.targetLanguageCodes[i]);
+                            if (message.inputConfigs != null && message.inputConfigs.length)
+                                for (var i = 0; i < message.inputConfigs.length; ++i)
+                                    $root.google.cloud.translation.v3.BatchDocumentInputConfig.encode(message.inputConfigs[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.outputConfig != null && Object.hasOwnProperty.call(message, "outputConfig"))
+                                $root.google.cloud.translation.v3.BatchDocumentOutputConfig.encode(message.outputConfig, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.models != null && Object.hasOwnProperty.call(message, "models"))
+                                for (var keys = Object.keys(message.models), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 6, wireType 2 =*/50).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.models[keys[i]]).ldelim();
+                            if (message.glossaries != null && Object.hasOwnProperty.call(message, "glossaries"))
+                                for (var keys = Object.keys(message.glossaries), i = 0; i < keys.length; ++i) {
+                                    writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
+                                    $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.encode(message.glossaries[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
+                                }
+                            if (message.formatConversions != null && Object.hasOwnProperty.call(message, "formatConversions"))
+                                for (var keys = Object.keys(message.formatConversions), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.formatConversions[keys[i]]).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchTranslateDocumentRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentRequest} message BatchTranslateDocumentRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchTranslateDocumentRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchTranslateDocumentRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentRequest} BatchTranslateDocumentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchTranslateDocumentRequest.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.BatchTranslateDocumentRequest(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.parent = reader.string();
+                                    break;
+                                case 2:
+                                    message.sourceLanguageCode = reader.string();
+                                    break;
+                                case 3:
+                                    if (!(message.targetLanguageCodes && message.targetLanguageCodes.length))
+                                        message.targetLanguageCodes = [];
+                                    message.targetLanguageCodes.push(reader.string());
+                                    break;
+                                case 4:
+                                    if (!(message.inputConfigs && message.inputConfigs.length))
+                                        message.inputConfigs = [];
+                                    message.inputConfigs.push($root.google.cloud.translation.v3.BatchDocumentInputConfig.decode(reader, reader.uint32()));
+                                    break;
+                                case 5:
+                                    message.outputConfig = $root.google.cloud.translation.v3.BatchDocumentOutputConfig.decode(reader, reader.uint32());
+                                    break;
+                                case 6:
+                                    if (message.models === $util.emptyObject)
+                                        message.models = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.models[key] = value;
+                                    break;
+                                case 7:
+                                    if (message.glossaries === $util.emptyObject)
+                                        message.glossaries = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = null;
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.decode(reader, reader.uint32());
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.glossaries[key] = value;
+                                    break;
+                                case 8:
+                                    if (message.formatConversions === $util.emptyObject)
+                                        message.formatConversions = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.formatConversions[key] = value;
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchTranslateDocumentRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentRequest} BatchTranslateDocumentRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchTranslateDocumentRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchTranslateDocumentRequest message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchTranslateDocumentRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                if (!$util.isString(message.sourceLanguageCode))
+                                    return "sourceLanguageCode: string expected";
+                            if (message.targetLanguageCodes != null && message.hasOwnProperty("targetLanguageCodes")) {
+                                if (!Array.isArray(message.targetLanguageCodes))
+                                    return "targetLanguageCodes: array expected";
+                                for (var i = 0; i < message.targetLanguageCodes.length; ++i)
+                                    if (!$util.isString(message.targetLanguageCodes[i]))
+                                        return "targetLanguageCodes: string[] expected";
+                            }
+                            if (message.inputConfigs != null && message.hasOwnProperty("inputConfigs")) {
+                                if (!Array.isArray(message.inputConfigs))
+                                    return "inputConfigs: array expected";
+                                for (var i = 0; i < message.inputConfigs.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.BatchDocumentInputConfig.verify(message.inputConfigs[i]);
+                                    if (error)
+                                        return "inputConfigs." + error;
+                                }
+                            }
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig")) {
+                                var error = $root.google.cloud.translation.v3.BatchDocumentOutputConfig.verify(message.outputConfig);
+                                if (error)
+                                    return "outputConfig." + error;
+                            }
+                            if (message.models != null && message.hasOwnProperty("models")) {
+                                if (!$util.isObject(message.models))
+                                    return "models: object expected";
+                                var key = Object.keys(message.models);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.models[key[i]]))
+                                        return "models: string{k:string} expected";
+                            }
+                            if (message.glossaries != null && message.hasOwnProperty("glossaries")) {
+                                if (!$util.isObject(message.glossaries))
+                                    return "glossaries: object expected";
+                                var key = Object.keys(message.glossaries);
+                                for (var i = 0; i < key.length; ++i) {
+                                    var error = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.verify(message.glossaries[key[i]]);
+                                    if (error)
+                                        return "glossaries." + error;
+                                }
+                            }
+                            if (message.formatConversions != null && message.hasOwnProperty("formatConversions")) {
+                                if (!$util.isObject(message.formatConversions))
+                                    return "formatConversions: object expected";
+                                var key = Object.keys(message.formatConversions);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.formatConversions[key[i]]))
+                                        return "formatConversions: string{k:string} expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchTranslateDocumentRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentRequest} BatchTranslateDocumentRequest
+                         */
+                        BatchTranslateDocumentRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.BatchTranslateDocumentRequest)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.BatchTranslateDocumentRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.sourceLanguageCode != null)
+                                message.sourceLanguageCode = String(object.sourceLanguageCode);
+                            if (object.targetLanguageCodes) {
+                                if (!Array.isArray(object.targetLanguageCodes))
+                                    throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentRequest.targetLanguageCodes: array expected");
+                                message.targetLanguageCodes = [];
+                                for (var i = 0; i < object.targetLanguageCodes.length; ++i)
+                                    message.targetLanguageCodes[i] = String(object.targetLanguageCodes[i]);
+                            }
+                            if (object.inputConfigs) {
+                                if (!Array.isArray(object.inputConfigs))
+                                    throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentRequest.inputConfigs: array expected");
+                                message.inputConfigs = [];
+                                for (var i = 0; i < object.inputConfigs.length; ++i) {
+                                    if (typeof object.inputConfigs[i] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentRequest.inputConfigs: object expected");
+                                    message.inputConfigs[i] = $root.google.cloud.translation.v3.BatchDocumentInputConfig.fromObject(object.inputConfigs[i]);
+                                }
+                            }
+                            if (object.outputConfig != null) {
+                                if (typeof object.outputConfig !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentRequest.outputConfig: object expected");
+                                message.outputConfig = $root.google.cloud.translation.v3.BatchDocumentOutputConfig.fromObject(object.outputConfig);
+                            }
+                            if (object.models) {
+                                if (typeof object.models !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentRequest.models: object expected");
+                                message.models = {};
+                                for (var keys = Object.keys(object.models), i = 0; i < keys.length; ++i)
+                                    message.models[keys[i]] = String(object.models[keys[i]]);
+                            }
+                            if (object.glossaries) {
+                                if (typeof object.glossaries !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentRequest.glossaries: object expected");
+                                message.glossaries = {};
+                                for (var keys = Object.keys(object.glossaries), i = 0; i < keys.length; ++i) {
+                                    if (typeof object.glossaries[keys[i]] !== "object")
+                                        throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentRequest.glossaries: object expected");
+                                    message.glossaries[keys[i]] = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.fromObject(object.glossaries[keys[i]]);
+                                }
+                            }
+                            if (object.formatConversions) {
+                                if (typeof object.formatConversions !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentRequest.formatConversions: object expected");
+                                message.formatConversions = {};
+                                for (var keys = Object.keys(object.formatConversions), i = 0; i < keys.length; ++i)
+                                    message.formatConversions[keys[i]] = String(object.formatConversions[keys[i]]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchTranslateDocumentRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @static
+                         * @param {google.cloud.translation.v3.BatchTranslateDocumentRequest} message BatchTranslateDocumentRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchTranslateDocumentRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.targetLanguageCodes = [];
+                                object.inputConfigs = [];
+                            }
+                            if (options.objects || options.defaults) {
+                                object.models = {};
+                                object.glossaries = {};
+                                object.formatConversions = {};
+                            }
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.sourceLanguageCode = "";
+                                object.outputConfig = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.sourceLanguageCode != null && message.hasOwnProperty("sourceLanguageCode"))
+                                object.sourceLanguageCode = message.sourceLanguageCode;
+                            if (message.targetLanguageCodes && message.targetLanguageCodes.length) {
+                                object.targetLanguageCodes = [];
+                                for (var j = 0; j < message.targetLanguageCodes.length; ++j)
+                                    object.targetLanguageCodes[j] = message.targetLanguageCodes[j];
+                            }
+                            if (message.inputConfigs && message.inputConfigs.length) {
+                                object.inputConfigs = [];
+                                for (var j = 0; j < message.inputConfigs.length; ++j)
+                                    object.inputConfigs[j] = $root.google.cloud.translation.v3.BatchDocumentInputConfig.toObject(message.inputConfigs[j], options);
+                            }
+                            if (message.outputConfig != null && message.hasOwnProperty("outputConfig"))
+                                object.outputConfig = $root.google.cloud.translation.v3.BatchDocumentOutputConfig.toObject(message.outputConfig, options);
+                            var keys2;
+                            if (message.models && (keys2 = Object.keys(message.models)).length) {
+                                object.models = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.models[keys2[j]] = message.models[keys2[j]];
+                            }
+                            if (message.glossaries && (keys2 = Object.keys(message.glossaries)).length) {
+                                object.glossaries = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.glossaries[keys2[j]] = $root.google.cloud.translation.v3.TranslateTextGlossaryConfig.toObject(message.glossaries[keys2[j]], options);
+                            }
+                            if (message.formatConversions && (keys2 = Object.keys(message.formatConversions)).length) {
+                                object.formatConversions = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.formatConversions[keys2[j]] = message.formatConversions[keys2[j]];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchTranslateDocumentRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchTranslateDocumentRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchTranslateDocumentRequest;
+                    })();
+    
+                    v3.BatchDocumentInputConfig = (function() {
+    
+                        /**
+                         * Properties of a BatchDocumentInputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IBatchDocumentInputConfig
+                         * @property {google.cloud.translation.v3.IGcsSource|null} [gcsSource] BatchDocumentInputConfig gcsSource
+                         */
+    
+                        /**
+                         * Constructs a new BatchDocumentInputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a BatchDocumentInputConfig.
+                         * @implements IBatchDocumentInputConfig
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IBatchDocumentInputConfig=} [properties] Properties to set
+                         */
+                        function BatchDocumentInputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchDocumentInputConfig gcsSource.
+                         * @member {google.cloud.translation.v3.IGcsSource|null|undefined} gcsSource
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @instance
+                         */
+                        BatchDocumentInputConfig.prototype.gcsSource = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BatchDocumentInputConfig source.
+                         * @member {"gcsSource"|undefined} source
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(BatchDocumentInputConfig.prototype, "source", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsSource"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BatchDocumentInputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchDocumentInputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.BatchDocumentInputConfig} BatchDocumentInputConfig instance
+                         */
+                        BatchDocumentInputConfig.create = function create(properties) {
+                            return new BatchDocumentInputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDocumentInputConfig message. Does not implicitly {@link google.cloud.translation.v3.BatchDocumentInputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchDocumentInputConfig} message BatchDocumentInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDocumentInputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsSource != null && Object.hasOwnProperty.call(message, "gcsSource"))
+                                $root.google.cloud.translation.v3.GcsSource.encode(message.gcsSource, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDocumentInputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchDocumentInputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchDocumentInputConfig} message BatchDocumentInputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDocumentInputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchDocumentInputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.BatchDocumentInputConfig} BatchDocumentInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDocumentInputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.BatchDocumentInputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsSource = $root.google.cloud.translation.v3.GcsSource.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchDocumentInputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.BatchDocumentInputConfig} BatchDocumentInputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDocumentInputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchDocumentInputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchDocumentInputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                properties.source = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.GcsSource.verify(message.gcsSource);
+                                    if (error)
+                                        return "gcsSource." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchDocumentInputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.BatchDocumentInputConfig} BatchDocumentInputConfig
+                         */
+                        BatchDocumentInputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.BatchDocumentInputConfig)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.BatchDocumentInputConfig();
+                            if (object.gcsSource != null) {
+                                if (typeof object.gcsSource !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.BatchDocumentInputConfig.gcsSource: object expected");
+                                message.gcsSource = $root.google.cloud.translation.v3.GcsSource.fromObject(object.gcsSource);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchDocumentInputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.BatchDocumentInputConfig} message BatchDocumentInputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchDocumentInputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.gcsSource != null && message.hasOwnProperty("gcsSource")) {
+                                object.gcsSource = $root.google.cloud.translation.v3.GcsSource.toObject(message.gcsSource, options);
+                                if (options.oneofs)
+                                    object.source = "gcsSource";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchDocumentInputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.BatchDocumentInputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchDocumentInputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchDocumentInputConfig;
+                    })();
+    
+                    v3.BatchDocumentOutputConfig = (function() {
+    
+                        /**
+                         * Properties of a BatchDocumentOutputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IBatchDocumentOutputConfig
+                         * @property {google.cloud.translation.v3.IGcsDestination|null} [gcsDestination] BatchDocumentOutputConfig gcsDestination
+                         */
+    
+                        /**
+                         * Constructs a new BatchDocumentOutputConfig.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a BatchDocumentOutputConfig.
+                         * @implements IBatchDocumentOutputConfig
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IBatchDocumentOutputConfig=} [properties] Properties to set
+                         */
+                        function BatchDocumentOutputConfig(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchDocumentOutputConfig gcsDestination.
+                         * @member {google.cloud.translation.v3.IGcsDestination|null|undefined} gcsDestination
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @instance
+                         */
+                        BatchDocumentOutputConfig.prototype.gcsDestination = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * BatchDocumentOutputConfig destination.
+                         * @member {"gcsDestination"|undefined} destination
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @instance
+                         */
+                        Object.defineProperty(BatchDocumentOutputConfig.prototype, "destination", {
+                            get: $util.oneOfGetter($oneOfFields = ["gcsDestination"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new BatchDocumentOutputConfig instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchDocumentOutputConfig=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.BatchDocumentOutputConfig} BatchDocumentOutputConfig instance
+                         */
+                        BatchDocumentOutputConfig.create = function create(properties) {
+                            return new BatchDocumentOutputConfig(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDocumentOutputConfig message. Does not implicitly {@link google.cloud.translation.v3.BatchDocumentOutputConfig.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchDocumentOutputConfig} message BatchDocumentOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDocumentOutputConfig.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gcsDestination != null && Object.hasOwnProperty.call(message, "gcsDestination"))
+                                $root.google.cloud.translation.v3.GcsDestination.encode(message.gcsDestination, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchDocumentOutputConfig message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchDocumentOutputConfig.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchDocumentOutputConfig} message BatchDocumentOutputConfig message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchDocumentOutputConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchDocumentOutputConfig message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.BatchDocumentOutputConfig} BatchDocumentOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDocumentOutputConfig.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.BatchDocumentOutputConfig();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.gcsDestination = $root.google.cloud.translation.v3.GcsDestination.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchDocumentOutputConfig message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.BatchDocumentOutputConfig} BatchDocumentOutputConfig
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchDocumentOutputConfig.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchDocumentOutputConfig message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchDocumentOutputConfig.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                properties.destination = 1;
+                                {
+                                    var error = $root.google.cloud.translation.v3.GcsDestination.verify(message.gcsDestination);
+                                    if (error)
+                                        return "gcsDestination." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchDocumentOutputConfig message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.BatchDocumentOutputConfig} BatchDocumentOutputConfig
+                         */
+                        BatchDocumentOutputConfig.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.BatchDocumentOutputConfig)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.BatchDocumentOutputConfig();
+                            if (object.gcsDestination != null) {
+                                if (typeof object.gcsDestination !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.BatchDocumentOutputConfig.gcsDestination: object expected");
+                                message.gcsDestination = $root.google.cloud.translation.v3.GcsDestination.fromObject(object.gcsDestination);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchDocumentOutputConfig message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @static
+                         * @param {google.cloud.translation.v3.BatchDocumentOutputConfig} message BatchDocumentOutputConfig
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchDocumentOutputConfig.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (message.gcsDestination != null && message.hasOwnProperty("gcsDestination")) {
+                                object.gcsDestination = $root.google.cloud.translation.v3.GcsDestination.toObject(message.gcsDestination, options);
+                                if (options.oneofs)
+                                    object.destination = "gcsDestination";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchDocumentOutputConfig to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.BatchDocumentOutputConfig
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchDocumentOutputConfig.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchDocumentOutputConfig;
+                    })();
+    
+                    v3.BatchTranslateDocumentResponse = (function() {
+    
+                        /**
+                         * Properties of a BatchTranslateDocumentResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IBatchTranslateDocumentResponse
+                         * @property {number|Long|null} [totalPages] BatchTranslateDocumentResponse totalPages
+                         * @property {number|Long|null} [translatedPages] BatchTranslateDocumentResponse translatedPages
+                         * @property {number|Long|null} [failedPages] BatchTranslateDocumentResponse failedPages
+                         * @property {number|Long|null} [totalBillablePages] BatchTranslateDocumentResponse totalBillablePages
+                         * @property {number|Long|null} [totalCharacters] BatchTranslateDocumentResponse totalCharacters
+                         * @property {number|Long|null} [translatedCharacters] BatchTranslateDocumentResponse translatedCharacters
+                         * @property {number|Long|null} [failedCharacters] BatchTranslateDocumentResponse failedCharacters
+                         * @property {number|Long|null} [totalBillableCharacters] BatchTranslateDocumentResponse totalBillableCharacters
+                         * @property {google.protobuf.ITimestamp|null} [submitTime] BatchTranslateDocumentResponse submitTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] BatchTranslateDocumentResponse endTime
+                         */
+    
+                        /**
+                         * Constructs a new BatchTranslateDocumentResponse.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a BatchTranslateDocumentResponse.
+                         * @implements IBatchTranslateDocumentResponse
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentResponse=} [properties] Properties to set
+                         */
+                        function BatchTranslateDocumentResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchTranslateDocumentResponse totalPages.
+                         * @member {number|Long} totalPages
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.totalPages = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentResponse translatedPages.
+                         * @member {number|Long} translatedPages
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.translatedPages = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentResponse failedPages.
+                         * @member {number|Long} failedPages
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.failedPages = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentResponse totalBillablePages.
+                         * @member {number|Long} totalBillablePages
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.totalBillablePages = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentResponse totalCharacters.
+                         * @member {number|Long} totalCharacters
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.totalCharacters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentResponse translatedCharacters.
+                         * @member {number|Long} translatedCharacters
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.translatedCharacters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentResponse failedCharacters.
+                         * @member {number|Long} failedCharacters
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.failedCharacters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentResponse totalBillableCharacters.
+                         * @member {number|Long} totalBillableCharacters
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.totalBillableCharacters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentResponse submitTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} submitTime
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.submitTime = null;
+    
+                        /**
+                         * BatchTranslateDocumentResponse endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         */
+                        BatchTranslateDocumentResponse.prototype.endTime = null;
+    
+                        /**
+                         * Creates a new BatchTranslateDocumentResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentResponse=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentResponse} BatchTranslateDocumentResponse instance
+                         */
+                        BatchTranslateDocumentResponse.create = function create(properties) {
+                            return new BatchTranslateDocumentResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchTranslateDocumentResponse message. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentResponse} message BatchTranslateDocumentResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchTranslateDocumentResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.totalPages != null && Object.hasOwnProperty.call(message, "totalPages"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int64(message.totalPages);
+                            if (message.translatedPages != null && Object.hasOwnProperty.call(message, "translatedPages"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.translatedPages);
+                            if (message.failedPages != null && Object.hasOwnProperty.call(message, "failedPages"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.failedPages);
+                            if (message.totalBillablePages != null && Object.hasOwnProperty.call(message, "totalBillablePages"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.totalBillablePages);
+                            if (message.totalCharacters != null && Object.hasOwnProperty.call(message, "totalCharacters"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.totalCharacters);
+                            if (message.translatedCharacters != null && Object.hasOwnProperty.call(message, "translatedCharacters"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.translatedCharacters);
+                            if (message.failedCharacters != null && Object.hasOwnProperty.call(message, "failedCharacters"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.failedCharacters);
+                            if (message.totalBillableCharacters != null && Object.hasOwnProperty.call(message, "totalBillableCharacters"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.totalBillableCharacters);
+                            if (message.submitTime != null && Object.hasOwnProperty.call(message, "submitTime"))
+                                $root.google.protobuf.Timestamp.encode(message.submitTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchTranslateDocumentResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentResponse} message BatchTranslateDocumentResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchTranslateDocumentResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchTranslateDocumentResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentResponse} BatchTranslateDocumentResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchTranslateDocumentResponse.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.BatchTranslateDocumentResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.totalPages = reader.int64();
+                                    break;
+                                case 2:
+                                    message.translatedPages = reader.int64();
+                                    break;
+                                case 3:
+                                    message.failedPages = reader.int64();
+                                    break;
+                                case 4:
+                                    message.totalBillablePages = reader.int64();
+                                    break;
+                                case 5:
+                                    message.totalCharacters = reader.int64();
+                                    break;
+                                case 6:
+                                    message.translatedCharacters = reader.int64();
+                                    break;
+                                case 7:
+                                    message.failedCharacters = reader.int64();
+                                    break;
+                                case 8:
+                                    message.totalBillableCharacters = reader.int64();
+                                    break;
+                                case 9:
+                                    message.submitTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                case 10:
+                                    message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchTranslateDocumentResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentResponse} BatchTranslateDocumentResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchTranslateDocumentResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchTranslateDocumentResponse message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchTranslateDocumentResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.totalPages != null && message.hasOwnProperty("totalPages"))
+                                if (!$util.isInteger(message.totalPages) && !(message.totalPages && $util.isInteger(message.totalPages.low) && $util.isInteger(message.totalPages.high)))
+                                    return "totalPages: integer|Long expected";
+                            if (message.translatedPages != null && message.hasOwnProperty("translatedPages"))
+                                if (!$util.isInteger(message.translatedPages) && !(message.translatedPages && $util.isInteger(message.translatedPages.low) && $util.isInteger(message.translatedPages.high)))
+                                    return "translatedPages: integer|Long expected";
+                            if (message.failedPages != null && message.hasOwnProperty("failedPages"))
+                                if (!$util.isInteger(message.failedPages) && !(message.failedPages && $util.isInteger(message.failedPages.low) && $util.isInteger(message.failedPages.high)))
+                                    return "failedPages: integer|Long expected";
+                            if (message.totalBillablePages != null && message.hasOwnProperty("totalBillablePages"))
+                                if (!$util.isInteger(message.totalBillablePages) && !(message.totalBillablePages && $util.isInteger(message.totalBillablePages.low) && $util.isInteger(message.totalBillablePages.high)))
+                                    return "totalBillablePages: integer|Long expected";
+                            if (message.totalCharacters != null && message.hasOwnProperty("totalCharacters"))
+                                if (!$util.isInteger(message.totalCharacters) && !(message.totalCharacters && $util.isInteger(message.totalCharacters.low) && $util.isInteger(message.totalCharacters.high)))
+                                    return "totalCharacters: integer|Long expected";
+                            if (message.translatedCharacters != null && message.hasOwnProperty("translatedCharacters"))
+                                if (!$util.isInteger(message.translatedCharacters) && !(message.translatedCharacters && $util.isInteger(message.translatedCharacters.low) && $util.isInteger(message.translatedCharacters.high)))
+                                    return "translatedCharacters: integer|Long expected";
+                            if (message.failedCharacters != null && message.hasOwnProperty("failedCharacters"))
+                                if (!$util.isInteger(message.failedCharacters) && !(message.failedCharacters && $util.isInteger(message.failedCharacters.low) && $util.isInteger(message.failedCharacters.high)))
+                                    return "failedCharacters: integer|Long expected";
+                            if (message.totalBillableCharacters != null && message.hasOwnProperty("totalBillableCharacters"))
+                                if (!$util.isInteger(message.totalBillableCharacters) && !(message.totalBillableCharacters && $util.isInteger(message.totalBillableCharacters.low) && $util.isInteger(message.totalBillableCharacters.high)))
+                                    return "totalBillableCharacters: integer|Long expected";
+                            if (message.submitTime != null && message.hasOwnProperty("submitTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.submitTime);
+                                if (error)
+                                    return "submitTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchTranslateDocumentResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentResponse} BatchTranslateDocumentResponse
+                         */
+                        BatchTranslateDocumentResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.BatchTranslateDocumentResponse)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.BatchTranslateDocumentResponse();
+                            if (object.totalPages != null)
+                                if ($util.Long)
+                                    (message.totalPages = $util.Long.fromValue(object.totalPages)).unsigned = false;
+                                else if (typeof object.totalPages === "string")
+                                    message.totalPages = parseInt(object.totalPages, 10);
+                                else if (typeof object.totalPages === "number")
+                                    message.totalPages = object.totalPages;
+                                else if (typeof object.totalPages === "object")
+                                    message.totalPages = new $util.LongBits(object.totalPages.low >>> 0, object.totalPages.high >>> 0).toNumber();
+                            if (object.translatedPages != null)
+                                if ($util.Long)
+                                    (message.translatedPages = $util.Long.fromValue(object.translatedPages)).unsigned = false;
+                                else if (typeof object.translatedPages === "string")
+                                    message.translatedPages = parseInt(object.translatedPages, 10);
+                                else if (typeof object.translatedPages === "number")
+                                    message.translatedPages = object.translatedPages;
+                                else if (typeof object.translatedPages === "object")
+                                    message.translatedPages = new $util.LongBits(object.translatedPages.low >>> 0, object.translatedPages.high >>> 0).toNumber();
+                            if (object.failedPages != null)
+                                if ($util.Long)
+                                    (message.failedPages = $util.Long.fromValue(object.failedPages)).unsigned = false;
+                                else if (typeof object.failedPages === "string")
+                                    message.failedPages = parseInt(object.failedPages, 10);
+                                else if (typeof object.failedPages === "number")
+                                    message.failedPages = object.failedPages;
+                                else if (typeof object.failedPages === "object")
+                                    message.failedPages = new $util.LongBits(object.failedPages.low >>> 0, object.failedPages.high >>> 0).toNumber();
+                            if (object.totalBillablePages != null)
+                                if ($util.Long)
+                                    (message.totalBillablePages = $util.Long.fromValue(object.totalBillablePages)).unsigned = false;
+                                else if (typeof object.totalBillablePages === "string")
+                                    message.totalBillablePages = parseInt(object.totalBillablePages, 10);
+                                else if (typeof object.totalBillablePages === "number")
+                                    message.totalBillablePages = object.totalBillablePages;
+                                else if (typeof object.totalBillablePages === "object")
+                                    message.totalBillablePages = new $util.LongBits(object.totalBillablePages.low >>> 0, object.totalBillablePages.high >>> 0).toNumber();
+                            if (object.totalCharacters != null)
+                                if ($util.Long)
+                                    (message.totalCharacters = $util.Long.fromValue(object.totalCharacters)).unsigned = false;
+                                else if (typeof object.totalCharacters === "string")
+                                    message.totalCharacters = parseInt(object.totalCharacters, 10);
+                                else if (typeof object.totalCharacters === "number")
+                                    message.totalCharacters = object.totalCharacters;
+                                else if (typeof object.totalCharacters === "object")
+                                    message.totalCharacters = new $util.LongBits(object.totalCharacters.low >>> 0, object.totalCharacters.high >>> 0).toNumber();
+                            if (object.translatedCharacters != null)
+                                if ($util.Long)
+                                    (message.translatedCharacters = $util.Long.fromValue(object.translatedCharacters)).unsigned = false;
+                                else if (typeof object.translatedCharacters === "string")
+                                    message.translatedCharacters = parseInt(object.translatedCharacters, 10);
+                                else if (typeof object.translatedCharacters === "number")
+                                    message.translatedCharacters = object.translatedCharacters;
+                                else if (typeof object.translatedCharacters === "object")
+                                    message.translatedCharacters = new $util.LongBits(object.translatedCharacters.low >>> 0, object.translatedCharacters.high >>> 0).toNumber();
+                            if (object.failedCharacters != null)
+                                if ($util.Long)
+                                    (message.failedCharacters = $util.Long.fromValue(object.failedCharacters)).unsigned = false;
+                                else if (typeof object.failedCharacters === "string")
+                                    message.failedCharacters = parseInt(object.failedCharacters, 10);
+                                else if (typeof object.failedCharacters === "number")
+                                    message.failedCharacters = object.failedCharacters;
+                                else if (typeof object.failedCharacters === "object")
+                                    message.failedCharacters = new $util.LongBits(object.failedCharacters.low >>> 0, object.failedCharacters.high >>> 0).toNumber();
+                            if (object.totalBillableCharacters != null)
+                                if ($util.Long)
+                                    (message.totalBillableCharacters = $util.Long.fromValue(object.totalBillableCharacters)).unsigned = false;
+                                else if (typeof object.totalBillableCharacters === "string")
+                                    message.totalBillableCharacters = parseInt(object.totalBillableCharacters, 10);
+                                else if (typeof object.totalBillableCharacters === "number")
+                                    message.totalBillableCharacters = object.totalBillableCharacters;
+                                else if (typeof object.totalBillableCharacters === "object")
+                                    message.totalBillableCharacters = new $util.LongBits(object.totalBillableCharacters.low >>> 0, object.totalBillableCharacters.high >>> 0).toNumber();
+                            if (object.submitTime != null) {
+                                if (typeof object.submitTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentResponse.submitTime: object expected");
+                                message.submitTime = $root.google.protobuf.Timestamp.fromObject(object.submitTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentResponse.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchTranslateDocumentResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @static
+                         * @param {google.cloud.translation.v3.BatchTranslateDocumentResponse} message BatchTranslateDocumentResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchTranslateDocumentResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalPages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalPages = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.translatedPages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.translatedPages = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.failedPages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.failedPages = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalBillablePages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalBillablePages = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalCharacters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalCharacters = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.translatedCharacters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.translatedCharacters = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.failedCharacters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.failedCharacters = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalBillableCharacters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalBillableCharacters = options.longs === String ? "0" : 0;
+                                object.submitTime = null;
+                                object.endTime = null;
+                            }
+                            if (message.totalPages != null && message.hasOwnProperty("totalPages"))
+                                if (typeof message.totalPages === "number")
+                                    object.totalPages = options.longs === String ? String(message.totalPages) : message.totalPages;
+                                else
+                                    object.totalPages = options.longs === String ? $util.Long.prototype.toString.call(message.totalPages) : options.longs === Number ? new $util.LongBits(message.totalPages.low >>> 0, message.totalPages.high >>> 0).toNumber() : message.totalPages;
+                            if (message.translatedPages != null && message.hasOwnProperty("translatedPages"))
+                                if (typeof message.translatedPages === "number")
+                                    object.translatedPages = options.longs === String ? String(message.translatedPages) : message.translatedPages;
+                                else
+                                    object.translatedPages = options.longs === String ? $util.Long.prototype.toString.call(message.translatedPages) : options.longs === Number ? new $util.LongBits(message.translatedPages.low >>> 0, message.translatedPages.high >>> 0).toNumber() : message.translatedPages;
+                            if (message.failedPages != null && message.hasOwnProperty("failedPages"))
+                                if (typeof message.failedPages === "number")
+                                    object.failedPages = options.longs === String ? String(message.failedPages) : message.failedPages;
+                                else
+                                    object.failedPages = options.longs === String ? $util.Long.prototype.toString.call(message.failedPages) : options.longs === Number ? new $util.LongBits(message.failedPages.low >>> 0, message.failedPages.high >>> 0).toNumber() : message.failedPages;
+                            if (message.totalBillablePages != null && message.hasOwnProperty("totalBillablePages"))
+                                if (typeof message.totalBillablePages === "number")
+                                    object.totalBillablePages = options.longs === String ? String(message.totalBillablePages) : message.totalBillablePages;
+                                else
+                                    object.totalBillablePages = options.longs === String ? $util.Long.prototype.toString.call(message.totalBillablePages) : options.longs === Number ? new $util.LongBits(message.totalBillablePages.low >>> 0, message.totalBillablePages.high >>> 0).toNumber() : message.totalBillablePages;
+                            if (message.totalCharacters != null && message.hasOwnProperty("totalCharacters"))
+                                if (typeof message.totalCharacters === "number")
+                                    object.totalCharacters = options.longs === String ? String(message.totalCharacters) : message.totalCharacters;
+                                else
+                                    object.totalCharacters = options.longs === String ? $util.Long.prototype.toString.call(message.totalCharacters) : options.longs === Number ? new $util.LongBits(message.totalCharacters.low >>> 0, message.totalCharacters.high >>> 0).toNumber() : message.totalCharacters;
+                            if (message.translatedCharacters != null && message.hasOwnProperty("translatedCharacters"))
+                                if (typeof message.translatedCharacters === "number")
+                                    object.translatedCharacters = options.longs === String ? String(message.translatedCharacters) : message.translatedCharacters;
+                                else
+                                    object.translatedCharacters = options.longs === String ? $util.Long.prototype.toString.call(message.translatedCharacters) : options.longs === Number ? new $util.LongBits(message.translatedCharacters.low >>> 0, message.translatedCharacters.high >>> 0).toNumber() : message.translatedCharacters;
+                            if (message.failedCharacters != null && message.hasOwnProperty("failedCharacters"))
+                                if (typeof message.failedCharacters === "number")
+                                    object.failedCharacters = options.longs === String ? String(message.failedCharacters) : message.failedCharacters;
+                                else
+                                    object.failedCharacters = options.longs === String ? $util.Long.prototype.toString.call(message.failedCharacters) : options.longs === Number ? new $util.LongBits(message.failedCharacters.low >>> 0, message.failedCharacters.high >>> 0).toNumber() : message.failedCharacters;
+                            if (message.totalBillableCharacters != null && message.hasOwnProperty("totalBillableCharacters"))
+                                if (typeof message.totalBillableCharacters === "number")
+                                    object.totalBillableCharacters = options.longs === String ? String(message.totalBillableCharacters) : message.totalBillableCharacters;
+                                else
+                                    object.totalBillableCharacters = options.longs === String ? $util.Long.prototype.toString.call(message.totalBillableCharacters) : options.longs === Number ? new $util.LongBits(message.totalBillableCharacters.low >>> 0, message.totalBillableCharacters.high >>> 0).toNumber() : message.totalBillableCharacters;
+                            if (message.submitTime != null && message.hasOwnProperty("submitTime"))
+                                object.submitTime = $root.google.protobuf.Timestamp.toObject(message.submitTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchTranslateDocumentResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchTranslateDocumentResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        return BatchTranslateDocumentResponse;
+                    })();
+    
+                    v3.BatchTranslateDocumentMetadata = (function() {
+    
+                        /**
+                         * Properties of a BatchTranslateDocumentMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @interface IBatchTranslateDocumentMetadata
+                         * @property {google.cloud.translation.v3.BatchTranslateDocumentMetadata.State|null} [state] BatchTranslateDocumentMetadata state
+                         * @property {number|Long|null} [totalPages] BatchTranslateDocumentMetadata totalPages
+                         * @property {number|Long|null} [translatedPages] BatchTranslateDocumentMetadata translatedPages
+                         * @property {number|Long|null} [failedPages] BatchTranslateDocumentMetadata failedPages
+                         * @property {number|Long|null} [totalBillablePages] BatchTranslateDocumentMetadata totalBillablePages
+                         * @property {number|Long|null} [totalCharacters] BatchTranslateDocumentMetadata totalCharacters
+                         * @property {number|Long|null} [translatedCharacters] BatchTranslateDocumentMetadata translatedCharacters
+                         * @property {number|Long|null} [failedCharacters] BatchTranslateDocumentMetadata failedCharacters
+                         * @property {number|Long|null} [totalBillableCharacters] BatchTranslateDocumentMetadata totalBillableCharacters
+                         * @property {google.protobuf.ITimestamp|null} [submitTime] BatchTranslateDocumentMetadata submitTime
+                         */
+    
+                        /**
+                         * Constructs a new BatchTranslateDocumentMetadata.
+                         * @memberof google.cloud.translation.v3
+                         * @classdesc Represents a BatchTranslateDocumentMetadata.
+                         * @implements IBatchTranslateDocumentMetadata
+                         * @constructor
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentMetadata=} [properties] Properties to set
+                         */
+                        function BatchTranslateDocumentMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * BatchTranslateDocumentMetadata state.
+                         * @member {google.cloud.translation.v3.BatchTranslateDocumentMetadata.State} state
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.state = 0;
+    
+                        /**
+                         * BatchTranslateDocumentMetadata totalPages.
+                         * @member {number|Long} totalPages
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.totalPages = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentMetadata translatedPages.
+                         * @member {number|Long} translatedPages
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.translatedPages = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentMetadata failedPages.
+                         * @member {number|Long} failedPages
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.failedPages = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentMetadata totalBillablePages.
+                         * @member {number|Long} totalBillablePages
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.totalBillablePages = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentMetadata totalCharacters.
+                         * @member {number|Long} totalCharacters
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.totalCharacters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentMetadata translatedCharacters.
+                         * @member {number|Long} translatedCharacters
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.translatedCharacters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentMetadata failedCharacters.
+                         * @member {number|Long} failedCharacters
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.failedCharacters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentMetadata totalBillableCharacters.
+                         * @member {number|Long} totalBillableCharacters
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.totalBillableCharacters = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
+                        /**
+                         * BatchTranslateDocumentMetadata submitTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} submitTime
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         */
+                        BatchTranslateDocumentMetadata.prototype.submitTime = null;
+    
+                        /**
+                         * Creates a new BatchTranslateDocumentMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentMetadata} BatchTranslateDocumentMetadata instance
+                         */
+                        BatchTranslateDocumentMetadata.create = function create(properties) {
+                            return new BatchTranslateDocumentMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified BatchTranslateDocumentMetadata message. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentMetadata} message BatchTranslateDocumentMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchTranslateDocumentMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            if (message.totalPages != null && Object.hasOwnProperty.call(message, "totalPages"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.totalPages);
+                            if (message.translatedPages != null && Object.hasOwnProperty.call(message, "translatedPages"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int64(message.translatedPages);
+                            if (message.failedPages != null && Object.hasOwnProperty.call(message, "failedPages"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int64(message.failedPages);
+                            if (message.totalBillablePages != null && Object.hasOwnProperty.call(message, "totalBillablePages"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int64(message.totalBillablePages);
+                            if (message.totalCharacters != null && Object.hasOwnProperty.call(message, "totalCharacters"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.totalCharacters);
+                            if (message.translatedCharacters != null && Object.hasOwnProperty.call(message, "translatedCharacters"))
+                                writer.uint32(/* id 7, wireType 0 =*/56).int64(message.translatedCharacters);
+                            if (message.failedCharacters != null && Object.hasOwnProperty.call(message, "failedCharacters"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).int64(message.failedCharacters);
+                            if (message.totalBillableCharacters != null && Object.hasOwnProperty.call(message, "totalBillableCharacters"))
+                                writer.uint32(/* id 9, wireType 0 =*/72).int64(message.totalBillableCharacters);
+                            if (message.submitTime != null && Object.hasOwnProperty.call(message, "submitTime"))
+                                $root.google.protobuf.Timestamp.encode(message.submitTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified BatchTranslateDocumentMetadata message, length delimited. Does not implicitly {@link google.cloud.translation.v3.BatchTranslateDocumentMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.IBatchTranslateDocumentMetadata} message BatchTranslateDocumentMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        BatchTranslateDocumentMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a BatchTranslateDocumentMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentMetadata} BatchTranslateDocumentMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchTranslateDocumentMetadata.decode = function decode(reader, length) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.translation.v3.BatchTranslateDocumentMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                switch (tag >>> 3) {
+                                case 1:
+                                    message.state = reader.int32();
+                                    break;
+                                case 2:
+                                    message.totalPages = reader.int64();
+                                    break;
+                                case 3:
+                                    message.translatedPages = reader.int64();
+                                    break;
+                                case 4:
+                                    message.failedPages = reader.int64();
+                                    break;
+                                case 5:
+                                    message.totalBillablePages = reader.int64();
+                                    break;
+                                case 6:
+                                    message.totalCharacters = reader.int64();
+                                    break;
+                                case 7:
+                                    message.translatedCharacters = reader.int64();
+                                    break;
+                                case 8:
+                                    message.failedCharacters = reader.int64();
+                                    break;
+                                case 9:
+                                    message.totalBillableCharacters = reader.int64();
+                                    break;
+                                case 10:
+                                    message.submitTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                    break;
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a BatchTranslateDocumentMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentMetadata} BatchTranslateDocumentMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        BatchTranslateDocumentMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a BatchTranslateDocumentMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        BatchTranslateDocumentMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            if (message.totalPages != null && message.hasOwnProperty("totalPages"))
+                                if (!$util.isInteger(message.totalPages) && !(message.totalPages && $util.isInteger(message.totalPages.low) && $util.isInteger(message.totalPages.high)))
+                                    return "totalPages: integer|Long expected";
+                            if (message.translatedPages != null && message.hasOwnProperty("translatedPages"))
+                                if (!$util.isInteger(message.translatedPages) && !(message.translatedPages && $util.isInteger(message.translatedPages.low) && $util.isInteger(message.translatedPages.high)))
+                                    return "translatedPages: integer|Long expected";
+                            if (message.failedPages != null && message.hasOwnProperty("failedPages"))
+                                if (!$util.isInteger(message.failedPages) && !(message.failedPages && $util.isInteger(message.failedPages.low) && $util.isInteger(message.failedPages.high)))
+                                    return "failedPages: integer|Long expected";
+                            if (message.totalBillablePages != null && message.hasOwnProperty("totalBillablePages"))
+                                if (!$util.isInteger(message.totalBillablePages) && !(message.totalBillablePages && $util.isInteger(message.totalBillablePages.low) && $util.isInteger(message.totalBillablePages.high)))
+                                    return "totalBillablePages: integer|Long expected";
+                            if (message.totalCharacters != null && message.hasOwnProperty("totalCharacters"))
+                                if (!$util.isInteger(message.totalCharacters) && !(message.totalCharacters && $util.isInteger(message.totalCharacters.low) && $util.isInteger(message.totalCharacters.high)))
+                                    return "totalCharacters: integer|Long expected";
+                            if (message.translatedCharacters != null && message.hasOwnProperty("translatedCharacters"))
+                                if (!$util.isInteger(message.translatedCharacters) && !(message.translatedCharacters && $util.isInteger(message.translatedCharacters.low) && $util.isInteger(message.translatedCharacters.high)))
+                                    return "translatedCharacters: integer|Long expected";
+                            if (message.failedCharacters != null && message.hasOwnProperty("failedCharacters"))
+                                if (!$util.isInteger(message.failedCharacters) && !(message.failedCharacters && $util.isInteger(message.failedCharacters.low) && $util.isInteger(message.failedCharacters.high)))
+                                    return "failedCharacters: integer|Long expected";
+                            if (message.totalBillableCharacters != null && message.hasOwnProperty("totalBillableCharacters"))
+                                if (!$util.isInteger(message.totalBillableCharacters) && !(message.totalBillableCharacters && $util.isInteger(message.totalBillableCharacters.low) && $util.isInteger(message.totalBillableCharacters.high)))
+                                    return "totalBillableCharacters: integer|Long expected";
+                            if (message.submitTime != null && message.hasOwnProperty("submitTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.submitTime);
+                                if (error)
+                                    return "submitTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a BatchTranslateDocumentMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.translation.v3.BatchTranslateDocumentMetadata} BatchTranslateDocumentMetadata
+                         */
+                        BatchTranslateDocumentMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.translation.v3.BatchTranslateDocumentMetadata)
+                                return object;
+                            var message = new $root.google.cloud.translation.v3.BatchTranslateDocumentMetadata();
+                            switch (object.state) {
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "RUNNING":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "SUCCEEDED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            case "FAILED":
+                            case 3:
+                                message.state = 3;
+                                break;
+                            case "CANCELLING":
+                            case 4:
+                                message.state = 4;
+                                break;
+                            case "CANCELLED":
+                            case 5:
+                                message.state = 5;
+                                break;
+                            }
+                            if (object.totalPages != null)
+                                if ($util.Long)
+                                    (message.totalPages = $util.Long.fromValue(object.totalPages)).unsigned = false;
+                                else if (typeof object.totalPages === "string")
+                                    message.totalPages = parseInt(object.totalPages, 10);
+                                else if (typeof object.totalPages === "number")
+                                    message.totalPages = object.totalPages;
+                                else if (typeof object.totalPages === "object")
+                                    message.totalPages = new $util.LongBits(object.totalPages.low >>> 0, object.totalPages.high >>> 0).toNumber();
+                            if (object.translatedPages != null)
+                                if ($util.Long)
+                                    (message.translatedPages = $util.Long.fromValue(object.translatedPages)).unsigned = false;
+                                else if (typeof object.translatedPages === "string")
+                                    message.translatedPages = parseInt(object.translatedPages, 10);
+                                else if (typeof object.translatedPages === "number")
+                                    message.translatedPages = object.translatedPages;
+                                else if (typeof object.translatedPages === "object")
+                                    message.translatedPages = new $util.LongBits(object.translatedPages.low >>> 0, object.translatedPages.high >>> 0).toNumber();
+                            if (object.failedPages != null)
+                                if ($util.Long)
+                                    (message.failedPages = $util.Long.fromValue(object.failedPages)).unsigned = false;
+                                else if (typeof object.failedPages === "string")
+                                    message.failedPages = parseInt(object.failedPages, 10);
+                                else if (typeof object.failedPages === "number")
+                                    message.failedPages = object.failedPages;
+                                else if (typeof object.failedPages === "object")
+                                    message.failedPages = new $util.LongBits(object.failedPages.low >>> 0, object.failedPages.high >>> 0).toNumber();
+                            if (object.totalBillablePages != null)
+                                if ($util.Long)
+                                    (message.totalBillablePages = $util.Long.fromValue(object.totalBillablePages)).unsigned = false;
+                                else if (typeof object.totalBillablePages === "string")
+                                    message.totalBillablePages = parseInt(object.totalBillablePages, 10);
+                                else if (typeof object.totalBillablePages === "number")
+                                    message.totalBillablePages = object.totalBillablePages;
+                                else if (typeof object.totalBillablePages === "object")
+                                    message.totalBillablePages = new $util.LongBits(object.totalBillablePages.low >>> 0, object.totalBillablePages.high >>> 0).toNumber();
+                            if (object.totalCharacters != null)
+                                if ($util.Long)
+                                    (message.totalCharacters = $util.Long.fromValue(object.totalCharacters)).unsigned = false;
+                                else if (typeof object.totalCharacters === "string")
+                                    message.totalCharacters = parseInt(object.totalCharacters, 10);
+                                else if (typeof object.totalCharacters === "number")
+                                    message.totalCharacters = object.totalCharacters;
+                                else if (typeof object.totalCharacters === "object")
+                                    message.totalCharacters = new $util.LongBits(object.totalCharacters.low >>> 0, object.totalCharacters.high >>> 0).toNumber();
+                            if (object.translatedCharacters != null)
+                                if ($util.Long)
+                                    (message.translatedCharacters = $util.Long.fromValue(object.translatedCharacters)).unsigned = false;
+                                else if (typeof object.translatedCharacters === "string")
+                                    message.translatedCharacters = parseInt(object.translatedCharacters, 10);
+                                else if (typeof object.translatedCharacters === "number")
+                                    message.translatedCharacters = object.translatedCharacters;
+                                else if (typeof object.translatedCharacters === "object")
+                                    message.translatedCharacters = new $util.LongBits(object.translatedCharacters.low >>> 0, object.translatedCharacters.high >>> 0).toNumber();
+                            if (object.failedCharacters != null)
+                                if ($util.Long)
+                                    (message.failedCharacters = $util.Long.fromValue(object.failedCharacters)).unsigned = false;
+                                else if (typeof object.failedCharacters === "string")
+                                    message.failedCharacters = parseInt(object.failedCharacters, 10);
+                                else if (typeof object.failedCharacters === "number")
+                                    message.failedCharacters = object.failedCharacters;
+                                else if (typeof object.failedCharacters === "object")
+                                    message.failedCharacters = new $util.LongBits(object.failedCharacters.low >>> 0, object.failedCharacters.high >>> 0).toNumber();
+                            if (object.totalBillableCharacters != null)
+                                if ($util.Long)
+                                    (message.totalBillableCharacters = $util.Long.fromValue(object.totalBillableCharacters)).unsigned = false;
+                                else if (typeof object.totalBillableCharacters === "string")
+                                    message.totalBillableCharacters = parseInt(object.totalBillableCharacters, 10);
+                                else if (typeof object.totalBillableCharacters === "number")
+                                    message.totalBillableCharacters = object.totalBillableCharacters;
+                                else if (typeof object.totalBillableCharacters === "object")
+                                    message.totalBillableCharacters = new $util.LongBits(object.totalBillableCharacters.low >>> 0, object.totalBillableCharacters.high >>> 0).toNumber();
+                            if (object.submitTime != null) {
+                                if (typeof object.submitTime !== "object")
+                                    throw TypeError(".google.cloud.translation.v3.BatchTranslateDocumentMetadata.submitTime: object expected");
+                                message.submitTime = $root.google.protobuf.Timestamp.fromObject(object.submitTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a BatchTranslateDocumentMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @static
+                         * @param {google.cloud.translation.v3.BatchTranslateDocumentMetadata} message BatchTranslateDocumentMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        BatchTranslateDocumentMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalPages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalPages = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.translatedPages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.translatedPages = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.failedPages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.failedPages = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalBillablePages = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalBillablePages = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalCharacters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalCharacters = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.translatedCharacters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.translatedCharacters = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.failedCharacters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.failedCharacters = options.longs === String ? "0" : 0;
+                                if ($util.Long) {
+                                    var long = new $util.Long(0, 0, false);
+                                    object.totalBillableCharacters = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                } else
+                                    object.totalBillableCharacters = options.longs === String ? "0" : 0;
+                                object.submitTime = null;
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.translation.v3.BatchTranslateDocumentMetadata.State[message.state] : message.state;
+                            if (message.totalPages != null && message.hasOwnProperty("totalPages"))
+                                if (typeof message.totalPages === "number")
+                                    object.totalPages = options.longs === String ? String(message.totalPages) : message.totalPages;
+                                else
+                                    object.totalPages = options.longs === String ? $util.Long.prototype.toString.call(message.totalPages) : options.longs === Number ? new $util.LongBits(message.totalPages.low >>> 0, message.totalPages.high >>> 0).toNumber() : message.totalPages;
+                            if (message.translatedPages != null && message.hasOwnProperty("translatedPages"))
+                                if (typeof message.translatedPages === "number")
+                                    object.translatedPages = options.longs === String ? String(message.translatedPages) : message.translatedPages;
+                                else
+                                    object.translatedPages = options.longs === String ? $util.Long.prototype.toString.call(message.translatedPages) : options.longs === Number ? new $util.LongBits(message.translatedPages.low >>> 0, message.translatedPages.high >>> 0).toNumber() : message.translatedPages;
+                            if (message.failedPages != null && message.hasOwnProperty("failedPages"))
+                                if (typeof message.failedPages === "number")
+                                    object.failedPages = options.longs === String ? String(message.failedPages) : message.failedPages;
+                                else
+                                    object.failedPages = options.longs === String ? $util.Long.prototype.toString.call(message.failedPages) : options.longs === Number ? new $util.LongBits(message.failedPages.low >>> 0, message.failedPages.high >>> 0).toNumber() : message.failedPages;
+                            if (message.totalBillablePages != null && message.hasOwnProperty("totalBillablePages"))
+                                if (typeof message.totalBillablePages === "number")
+                                    object.totalBillablePages = options.longs === String ? String(message.totalBillablePages) : message.totalBillablePages;
+                                else
+                                    object.totalBillablePages = options.longs === String ? $util.Long.prototype.toString.call(message.totalBillablePages) : options.longs === Number ? new $util.LongBits(message.totalBillablePages.low >>> 0, message.totalBillablePages.high >>> 0).toNumber() : message.totalBillablePages;
+                            if (message.totalCharacters != null && message.hasOwnProperty("totalCharacters"))
+                                if (typeof message.totalCharacters === "number")
+                                    object.totalCharacters = options.longs === String ? String(message.totalCharacters) : message.totalCharacters;
+                                else
+                                    object.totalCharacters = options.longs === String ? $util.Long.prototype.toString.call(message.totalCharacters) : options.longs === Number ? new $util.LongBits(message.totalCharacters.low >>> 0, message.totalCharacters.high >>> 0).toNumber() : message.totalCharacters;
+                            if (message.translatedCharacters != null && message.hasOwnProperty("translatedCharacters"))
+                                if (typeof message.translatedCharacters === "number")
+                                    object.translatedCharacters = options.longs === String ? String(message.translatedCharacters) : message.translatedCharacters;
+                                else
+                                    object.translatedCharacters = options.longs === String ? $util.Long.prototype.toString.call(message.translatedCharacters) : options.longs === Number ? new $util.LongBits(message.translatedCharacters.low >>> 0, message.translatedCharacters.high >>> 0).toNumber() : message.translatedCharacters;
+                            if (message.failedCharacters != null && message.hasOwnProperty("failedCharacters"))
+                                if (typeof message.failedCharacters === "number")
+                                    object.failedCharacters = options.longs === String ? String(message.failedCharacters) : message.failedCharacters;
+                                else
+                                    object.failedCharacters = options.longs === String ? $util.Long.prototype.toString.call(message.failedCharacters) : options.longs === Number ? new $util.LongBits(message.failedCharacters.low >>> 0, message.failedCharacters.high >>> 0).toNumber() : message.failedCharacters;
+                            if (message.totalBillableCharacters != null && message.hasOwnProperty("totalBillableCharacters"))
+                                if (typeof message.totalBillableCharacters === "number")
+                                    object.totalBillableCharacters = options.longs === String ? String(message.totalBillableCharacters) : message.totalBillableCharacters;
+                                else
+                                    object.totalBillableCharacters = options.longs === String ? $util.Long.prototype.toString.call(message.totalBillableCharacters) : options.longs === Number ? new $util.LongBits(message.totalBillableCharacters.low >>> 0, message.totalBillableCharacters.high >>> 0).toNumber() : message.totalBillableCharacters;
+                            if (message.submitTime != null && message.hasOwnProperty("submitTime"))
+                                object.submitTime = $root.google.protobuf.Timestamp.toObject(message.submitTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this BatchTranslateDocumentMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.translation.v3.BatchTranslateDocumentMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        BatchTranslateDocumentMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.translation.v3.BatchTranslateDocumentMetadata.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} RUNNING=1 RUNNING value
+                         * @property {number} SUCCEEDED=2 SUCCEEDED value
+                         * @property {number} FAILED=3 FAILED value
+                         * @property {number} CANCELLING=4 CANCELLING value
+                         * @property {number} CANCELLED=5 CANCELLED value
+                         */
+                        BatchTranslateDocumentMetadata.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "RUNNING"] = 1;
+                            values[valuesById[2] = "SUCCEEDED"] = 2;
+                            values[valuesById[3] = "FAILED"] = 3;
+                            values[valuesById[4] = "CANCELLING"] = 4;
+                            values[valuesById[5] = "CANCELLED"] = 5;
+                            return values;
+                        })();
+    
+                        return BatchTranslateDocumentMetadata;
                     })();
     
                     return v3;
@@ -17134,6 +20599,7 @@
                          * @property {google.cloud.translation.v3beta1.IBatchDocumentOutputConfig|null} [outputConfig] BatchTranslateDocumentRequest outputConfig
                          * @property {Object.<string,string>|null} [models] BatchTranslateDocumentRequest models
                          * @property {Object.<string,google.cloud.translation.v3beta1.ITranslateTextGlossaryConfig>|null} [glossaries] BatchTranslateDocumentRequest glossaries
+                         * @property {Object.<string,string>|null} [formatConversions] BatchTranslateDocumentRequest formatConversions
                          */
     
                         /**
@@ -17149,6 +20615,7 @@
                             this.inputConfigs = [];
                             this.models = {};
                             this.glossaries = {};
+                            this.formatConversions = {};
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -17212,6 +20679,14 @@
                         BatchTranslateDocumentRequest.prototype.glossaries = $util.emptyObject;
     
                         /**
+                         * BatchTranslateDocumentRequest formatConversions.
+                         * @member {Object.<string,string>} formatConversions
+                         * @memberof google.cloud.translation.v3beta1.BatchTranslateDocumentRequest
+                         * @instance
+                         */
+                        BatchTranslateDocumentRequest.prototype.formatConversions = $util.emptyObject;
+    
+                        /**
                          * Creates a new BatchTranslateDocumentRequest instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.translation.v3beta1.BatchTranslateDocumentRequest
@@ -17255,6 +20730,9 @@
                                     writer.uint32(/* id 7, wireType 2 =*/58).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]);
                                     $root.google.cloud.translation.v3beta1.TranslateTextGlossaryConfig.encode(message.glossaries[keys[i]], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim().ldelim();
                                 }
+                            if (message.formatConversions != null && Object.hasOwnProperty.call(message, "formatConversions"))
+                                for (var keys = Object.keys(message.formatConversions), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.formatConversions[keys[i]]).ldelim();
                             return writer;
                         };
     
@@ -17352,6 +20830,28 @@
                                     }
                                     message.glossaries[key] = value;
                                     break;
+                                case 8:
+                                    if (message.formatConversions === $util.emptyObject)
+                                        message.formatConversions = {};
+                                    var end2 = reader.uint32() + reader.pos;
+                                    key = "";
+                                    value = "";
+                                    while (reader.pos < end2) {
+                                        var tag2 = reader.uint32();
+                                        switch (tag2 >>> 3) {
+                                        case 1:
+                                            key = reader.string();
+                                            break;
+                                        case 2:
+                                            value = reader.string();
+                                            break;
+                                        default:
+                                            reader.skipType(tag2 & 7);
+                                            break;
+                                        }
+                                    }
+                                    message.formatConversions[key] = value;
+                                    break;
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -17432,6 +20932,14 @@
                                         return "glossaries." + error;
                                 }
                             }
+                            if (message.formatConversions != null && message.hasOwnProperty("formatConversions")) {
+                                if (!$util.isObject(message.formatConversions))
+                                    return "formatConversions: object expected";
+                                var key = Object.keys(message.formatConversions);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.formatConversions[key[i]]))
+                                        return "formatConversions: string{k:string} expected";
+                            }
                             return null;
                         };
     
@@ -17490,6 +20998,13 @@
                                     message.glossaries[keys[i]] = $root.google.cloud.translation.v3beta1.TranslateTextGlossaryConfig.fromObject(object.glossaries[keys[i]]);
                                 }
                             }
+                            if (object.formatConversions) {
+                                if (typeof object.formatConversions !== "object")
+                                    throw TypeError(".google.cloud.translation.v3beta1.BatchTranslateDocumentRequest.formatConversions: object expected");
+                                message.formatConversions = {};
+                                for (var keys = Object.keys(object.formatConversions), i = 0; i < keys.length; ++i)
+                                    message.formatConversions[keys[i]] = String(object.formatConversions[keys[i]]);
+                            }
                             return message;
                         };
     
@@ -17513,6 +21028,7 @@
                             if (options.objects || options.defaults) {
                                 object.models = {};
                                 object.glossaries = {};
+                                object.formatConversions = {};
                             }
                             if (options.defaults) {
                                 object.parent = "";
@@ -17545,6 +21061,11 @@
                                 object.glossaries = {};
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.glossaries[keys2[j]] = $root.google.cloud.translation.v3beta1.TranslateTextGlossaryConfig.toObject(message.glossaries[keys2[j]], options);
+                            }
+                            if (message.formatConversions && (keys2 = Object.keys(message.formatConversions)).length) {
+                                object.formatConversions = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.formatConversions[keys2[j]] = message.formatConversions[keys2[j]];
                             }
                             return object;
                         };
