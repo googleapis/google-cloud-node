@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/speech.svg)](https://www.npmjs.org/package/@google-cloud/speech)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-speech/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-speech)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-speech/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-speech)
 
 
 
@@ -15,7 +15,7 @@ Cloud Speech Client Library for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-speech/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-speech/blob/main/CHANGELOG.md).
 
 * [Cloud Speech Node.js Client API Reference][client-docs]
 * [Cloud Speech Documentation][product-docs]
@@ -96,21 +96,21 @@ quickstart();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-speech/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-speech/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Microphone stream | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/MicrophoneStream.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/MicrophoneStream.js,samples/README.md) |
-| Beta Features | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/betaFeatures.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/betaFeatures.js,samples/README.md) |
-| Export-to-storage.v1p1beta1 | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/export-to-storage.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/export-to-storage.v1p1beta1.js,samples/README.md) |
-| Infinite Streaming | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/infiniteStreaming.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/infiniteStreaming.js,samples/README.md) |
-| Model Adaptation | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/modelAdaptation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/modelAdaptation.js,samples/README.md) |
-| Multi Region | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/multiRegion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/multiRegion.js,samples/README.md) |
-| Profanity Filter | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/profanityFilter.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/profanityFilter.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Recognize | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.js,samples/README.md) |
-| Recognize speech with metadata | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/recognize.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.v1p1beta1.js,samples/README.md) |
-| Transcribe Context Classes | [source code](https://github.com/googleapis/nodejs-speech/blob/master/samples/transcribeContextClasses.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/transcribeContextClasses.js,samples/README.md) |
+| Microphone stream | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/MicrophoneStream.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/MicrophoneStream.js,samples/README.md) |
+| Beta Features | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/betaFeatures.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/betaFeatures.js,samples/README.md) |
+| Export-to-storage.v1p1beta1 | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/export-to-storage.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/export-to-storage.v1p1beta1.js,samples/README.md) |
+| Infinite Streaming | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/infiniteStreaming.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/infiniteStreaming.js,samples/README.md) |
+| Model Adaptation | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/modelAdaptation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/modelAdaptation.js,samples/README.md) |
+| Multi Region | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/multiRegion.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/multiRegion.js,samples/README.md) |
+| Profanity Filter | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/profanityFilter.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/profanityFilter.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Recognize | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/recognize.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.js,samples/README.md) |
+| Recognize speech with metadata | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/recognize.v1p1beta1.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/recognize.v1p1beta1.js,samples/README.md) |
+| Transcribe Context Classes | [source code](https://github.com/googleapis/nodejs-speech/blob/main/samples/transcribeContextClasses.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-speech&page=editor&open_in_editor=samples/transcribeContextClasses.js,samples/README.md) |
 
 
 
@@ -159,7 +159,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-speech/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-speech/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -171,7 +171,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-speech/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-speech/blob/main/LICENSE)
 
 [client-docs]: https://googleapis.dev/nodejs/speech/latest
 [product-docs]: https://cloud.google.com/speech-to-text/docs/
