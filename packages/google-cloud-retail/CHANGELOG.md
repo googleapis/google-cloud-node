@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.2](https://www.github.com/googleapis/nodejs-retail/compare/v1.2.1...v1.2.2) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#98](https://www.github.com/googleapis/nodejs-retail/issues/98)) ([637a23e](https://www.github.com/googleapis/nodejs-retail/commit/637a23e229641c42103c7b60f2ce2fb974e23d90))
+
 ### [1.2.1](https://www.github.com/googleapis/nodejs-retail/compare/v1.2.0...v1.2.1) (2021-08-17)
 
 
