@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+### [3.4.1](https://www.github.com/googleapis/nodejs-talent/compare/v3.4.0...v3.4.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#362](https://www.github.com/googleapis/nodejs-talent/issues/362)) ([be3048a](https://www.github.com/googleapis/nodejs-talent/commit/be3048a67de34346b6e7ae3f6963c8fe437e3227))
+
 ## [3.4.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.3.0...v3.4.0) (2021-08-23)
 
 
