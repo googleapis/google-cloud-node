@@ -35,7 +35,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Audio Profile
 
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/master/samples/audioProfile.js).
+View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/audioProfile.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/audioProfile.js,samples/README.md)
 
@@ -52,7 +52,7 @@ __Usage:__
 
 ### List Voices
 
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/master/samples/listVoices.js).
+View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/listVoices.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/listVoices.js,samples/README.md)
 
@@ -69,7 +69,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -86,7 +86,7 @@ __Usage:__
 
 ### Ssml Addresses
 
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/master/samples/ssmlAddresses.js).
+View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/ssmlAddresses.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/ssmlAddresses.js,samples/README.md)
 
@@ -103,7 +103,7 @@ __Usage:__
 
 ### Synthesize
 
-View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/master/samples/synthesize.js).
+View the [source code](https://github.com/googleapis/nodejs-text-to-speech/blob/main/samples/synthesize.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-text-to-speech&page=editor&open_in_editor=samples/synthesize.js,samples/README.md)
 
