@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.1.1](https://www.github.com/googleapis/nodejs-storage-transfer/compare/v1.1.0...v1.1.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#14](https://www.github.com/googleapis/nodejs-storage-transfer/issues/14)) ([9068b92](https://www.github.com/googleapis/nodejs-storage-transfer/commit/9068b9213daa48d4592ff51c0e520af6eb631b45))
+
 ## [1.1.0](https://www.github.com/googleapis/nodejs-storage-transfer/compare/v1.0.1...v1.1.0) (2021-08-23)
 
 
