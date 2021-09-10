@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+### [3.3.1](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.3.0...v3.3.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#548](https://www.github.com/googleapis/nodejs-text-to-speech/issues/548)) ([6891351](https://www.github.com/googleapis/nodejs-text-to-speech/commit/6891351d06b48e6337567c4fb9e6f885204920e3))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-text-to-speech/compare/v3.2.7...v3.3.0) (2021-08-23)
 
 
