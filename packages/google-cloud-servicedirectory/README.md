@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-general%20availability%20%28GA%29-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/service-directory.svg)](https://www.npmjs.org/package/@google-cloud/service-directory)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-service-directory/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-service-directory)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-service-directory/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-service-directory)
 
 
 
@@ -15,7 +15,7 @@ Servicedirectory client for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-service-directory/blob/master/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-service-directory/blob/main/CHANGELOG.md).
 
 * [Service Directory Node.js Client API Reference][client-docs]
 
@@ -98,18 +98,18 @@ return listNamespaces();
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-service-directory/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-service-directory/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Create Endpoint | [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/createEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createEndpoint.js,samples/README.md) |
-| Create Namespace | [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/createNamespace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createNamespace.js,samples/README.md) |
-| Create Service | [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/createService.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createService.js,samples/README.md) |
-| Delete Endpoint | [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/deleteEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteEndpoint.js,samples/README.md) |
-| Delete Namespace | [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/deleteNamespace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteNamespace.js,samples/README.md) |
-| Delete Service | [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/deleteService.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteService.js,samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-| Resolve Service | [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/resolveService.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/resolveService.js,samples/README.md) |
+| Create Endpoint | [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/createEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createEndpoint.js,samples/README.md) |
+| Create Namespace | [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/createNamespace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createNamespace.js,samples/README.md) |
+| Create Service | [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/createService.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createService.js,samples/README.md) |
+| Delete Endpoint | [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/deleteEndpoint.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteEndpoint.js,samples/README.md) |
+| Delete Namespace | [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/deleteNamespace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteNamespace.js,samples/README.md) |
+| Delete Service | [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/deleteService.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteService.js,samples/README.md) |
+| Quickstart | [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
+| Resolve Service | [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/resolveService.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/resolveService.js,samples/README.md) |
 
 
 
@@ -158,7 +158,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-service-directory/blob/master/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-service-directory/blob/main/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -170,7 +170,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-service-directory/blob/master/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-service-directory/blob/main/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/service-directory/latest
 

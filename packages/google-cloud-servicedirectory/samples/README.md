@@ -38,7 +38,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### Create Endpoint
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/createEndpoint.js).
+View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/createEndpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createEndpoint.js,samples/README.md)
 
@@ -55,7 +55,7 @@ __Usage:__
 
 ### Create Namespace
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/createNamespace.js).
+View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/createNamespace.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createNamespace.js,samples/README.md)
 
@@ -72,7 +72,7 @@ __Usage:__
 
 ### Create Service
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/createService.js).
+View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/createService.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/createService.js,samples/README.md)
 
@@ -89,7 +89,7 @@ __Usage:__
 
 ### Delete Endpoint
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/deleteEndpoint.js).
+View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/deleteEndpoint.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteEndpoint.js,samples/README.md)
 
@@ -106,7 +106,7 @@ __Usage:__
 
 ### Delete Namespace
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/deleteNamespace.js).
+View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/deleteNamespace.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteNamespace.js,samples/README.md)
 
@@ -123,7 +123,7 @@ __Usage:__
 
 ### Delete Service
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/deleteService.js).
+View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/deleteService.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/deleteService.js,samples/README.md)
 
@@ -140,7 +140,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -157,7 +157,7 @@ __Usage:__
 
 ### Resolve Service
 
-View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/master/samples/resolveService.js).
+View the [source code](https://github.com/googleapis/nodejs-service-directory/blob/main/samples/resolveService.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-service-directory&page=editor&open_in_editor=samples/resolveService.js,samples/README.md)
 
