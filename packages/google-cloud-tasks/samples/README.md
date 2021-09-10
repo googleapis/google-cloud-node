@@ -40,7 +40,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 Create Cloud Tasks with a HTTP Target
 
-View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createHttpTask.js).
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/main/samples/createHttpTask.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createHttpTask.js,samples/README.md)
 
@@ -59,7 +59,7 @@ __Usage:__
 
 Create Cloud Tasks with a HTTP Target with Token
 
-View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createHttpTaskWithToken.js).
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/main/samples/createHttpTaskWithToken.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createHttpTaskWithToken.js,samples/README.md)
 
@@ -76,7 +76,7 @@ __Usage:__
 
 ### Create Queue
 
-View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createQueue.js).
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/main/samples/createQueue.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createQueue.js,samples/README.md)
 
@@ -95,7 +95,7 @@ __Usage:__
 
 Create Cloud Tasks with a Google App Engine Target
 
-View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/createTask.js).
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/main/samples/createTask.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/createTask.js,samples/README.md)
 
@@ -112,7 +112,7 @@ __Usage:__
 
 ### Delete Queue
 
-View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/deleteQueue.js).
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/main/samples/deleteQueue.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/deleteQueue.js,samples/README.md)
 
@@ -129,7 +129,7 @@ __Usage:__
 
 ### List Queues
 
-View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/listQueues.js).
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/main/samples/listQueues.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/listQueues.js,samples/README.md)
 
@@ -146,7 +146,7 @@ __Usage:__
 
 ### Quickstart
 
-View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/main/samples/quickstart.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
 
@@ -163,7 +163,7 @@ __Usage:__
 
 ### Server
 
-View the [source code](https://github.com/googleapis/nodejs-tasks/blob/master/samples/server.js).
+View the [source code](https://github.com/googleapis/nodejs-tasks/blob/main/samples/server.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-tasks&page=editor&open_in_editor=samples/server.js,samples/README.md)
 
