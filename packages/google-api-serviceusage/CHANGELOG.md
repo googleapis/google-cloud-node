@@ -1,5 +1,12 @@
 # Changelog
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.2.0...v1.2.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#43](https://www.github.com/googleapis/nodejs-service-usage/issues/43)) ([1fb6128](https://www.github.com/googleapis/nodejs-service-usage/commit/1fb61286aa4822531057675439c8e702f10f2559))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-service-usage/compare/v1.1.4...v1.2.0) (2021-08-23)
 
 
