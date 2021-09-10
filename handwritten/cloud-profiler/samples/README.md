@@ -32,7 +32,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 ### App
 
-View the [source code](https://github.com/googleapis/cloud-profiler-nodejs/blob/master/samples/app.js).
+View the [source code](https://github.com/googleapis/cloud-profiler-nodejs/blob/main/samples/app.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/cloud-profiler-nodejs&page=editor&open_in_editor=samples/app.js,samples/README.md)
 
@@ -49,7 +49,7 @@ __Usage:__
 
 ### Snippets
 
-View the [source code](https://github.com/googleapis/cloud-profiler-nodejs/blob/master/samples/snippets.js).
+View the [source code](https://github.com/googleapis/cloud-profiler-nodejs/blob/main/samples/snippets.js).
 
 [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/cloud-profiler-nodejs&page=editor&open_in_editor=samples/snippets.js,samples/README.md)
 
