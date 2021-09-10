@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/speech?activeTab=versions
 
+### [4.8.1](https://www.github.com/googleapis/nodejs-speech/compare/v4.8.0...v4.8.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#797](https://www.github.com/googleapis/nodejs-speech/issues/797)) ([7746ee5](https://www.github.com/googleapis/nodejs-speech/commit/7746ee5c5879b527a6565a134e3154509de94656))
+
 ## [4.8.0](https://www.github.com/googleapis/nodejs-speech/compare/v4.7.0...v4.8.0) (2021-08-23)
 
 
