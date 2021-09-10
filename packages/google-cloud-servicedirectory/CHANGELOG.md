@@ -1,5 +1,12 @@
 # Changelog
 
+### [3.3.1](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.3.0...v3.3.1) (2021-09-10)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#177](https://www.github.com/googleapis/nodejs-service-directory/issues/177)) ([5db2287](https://www.github.com/googleapis/nodejs-service-directory/commit/5db2287a4db74b83cd3822e7c37fa0925165cf77))
+
 ## [3.3.0](https://www.github.com/googleapis/nodejs-service-directory/compare/v3.2.4...v3.3.0) (2021-08-23)
 
 
