@@ -232,7 +232,7 @@ describe('v1.InstanceGroupsClient', () => {
       );
       client.innerApiCalls.addInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.addInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addInstances as SinonStub)
           .getCall(0)
@@ -343,7 +343,7 @@ describe('v1.InstanceGroupsClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -558,7 +558,7 @@ describe('v1.InstanceGroupsClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -666,7 +666,7 @@ describe('v1.InstanceGroupsClient', () => {
       );
       client.innerApiCalls.removeInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.removeInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.removeInstances as SinonStub)
           .getCall(0)
@@ -777,7 +777,7 @@ describe('v1.InstanceGroupsClient', () => {
       );
       client.innerApiCalls.setNamedPorts = stubSimpleCall(expectedResponse);
       const [response] = await client.setNamedPorts(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setNamedPorts as SinonStub)
           .getCall(0)

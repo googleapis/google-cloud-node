@@ -339,7 +339,7 @@ describe('v1.RegionCommitmentsClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)

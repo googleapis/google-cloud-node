@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -135,6 +136,9 @@ export class ForwardingRulesClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = staticMembers.servicePath;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -323,8 +327,8 @@ export class ForwardingRulesClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteForwardingRuleRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -369,12 +373,17 @@ export class ForwardingRulesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.delete(request);
+   * const [operation] = await client.delete(request);
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteForwardingRuleRequest,
@@ -396,8 +405,8 @@ export class ForwardingRulesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteForwardingRuleRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -417,7 +426,27 @@ export class ForwardingRulesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.delete(request, options, callback);
+    return this.innerApiCalls
+      .delete(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   get(
     request?: protos.google.cloud.compute.v1.IGetForwardingRuleRequest,
@@ -519,8 +548,8 @@ export class ForwardingRulesClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertForwardingRuleRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -565,12 +594,17 @@ export class ForwardingRulesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.insert(request);
+   * const [operation] = await client.insert(request);
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertForwardingRuleRequest,
@@ -592,8 +626,8 @@ export class ForwardingRulesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertForwardingRuleRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -613,15 +647,35 @@ export class ForwardingRulesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.insert(request, options, callback);
+    return this.innerApiCalls
+      .insert(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   patch(
     request?: protos.google.cloud.compute.v1.IPatchForwardingRuleRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IPatchForwardingRuleRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -668,12 +722,17 @@ export class ForwardingRulesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.patch(request);
+   * const [operation] = await client.patch(request);
    */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchForwardingRuleRequest,
@@ -695,8 +754,8 @@ export class ForwardingRulesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IPatchForwardingRuleRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -716,18 +775,35 @@ export class ForwardingRulesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.patch(request, options, callback);
+    return this.innerApiCalls
+      .patch(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setLabels(
     request?: protos.google.cloud.compute.v1.ISetLabelsForwardingRuleRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetLabelsForwardingRuleRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -774,12 +850,17 @@ export class ForwardingRulesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setLabels(request);
+   * const [operation] = await client.setLabels(request);
    */
   setLabels(
     request?: protos.google.cloud.compute.v1.ISetLabelsForwardingRuleRequest,
@@ -801,11 +882,8 @@ export class ForwardingRulesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetLabelsForwardingRuleRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -825,18 +903,35 @@ export class ForwardingRulesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setLabels(request, options, callback);
+    return this.innerApiCalls
+      .setLabels(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setTarget(
     request?: protos.google.cloud.compute.v1.ISetTargetForwardingRuleRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetTargetForwardingRuleRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -883,12 +978,17 @@ export class ForwardingRulesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setTarget(request);
+   * const [operation] = await client.setTarget(request);
    */
   setTarget(
     request?: protos.google.cloud.compute.v1.ISetTargetForwardingRuleRequest,
@@ -910,11 +1010,8 @@ export class ForwardingRulesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetTargetForwardingRuleRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -934,7 +1031,27 @@ export class ForwardingRulesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setTarget(request, options, callback);
+    return this.innerApiCalls
+      .setTarget(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
 
   /**

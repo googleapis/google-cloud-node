@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -135,6 +136,9 @@ export class RegionDisksClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = staticMembers.servicePath;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -322,11 +326,8 @@ export class RegionDisksClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -373,12 +374,17 @@ export class RegionDisksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.addResourcePolicies(request);
+   * const [operation] = await client.addResourcePolicies(request);
    */
   addResourcePolicies(
     request?: protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest,
@@ -400,11 +406,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -424,18 +427,35 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.addResourcePolicies(request, options, callback);
+    return this.innerApiCalls
+      .addResourcePolicies(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   createSnapshot(
     request?: protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -482,12 +502,17 @@ export class RegionDisksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.createSnapshot(request);
+   * const [operation] = await client.createSnapshot(request);
    */
   createSnapshot(
     request?: protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest,
@@ -509,11 +534,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -533,15 +555,35 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.createSnapshot(request, options, callback);
+    return this.innerApiCalls
+      .createSnapshot(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteRegionDiskRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -586,12 +628,17 @@ export class RegionDisksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.delete(request);
+   * const [operation] = await client.delete(request);
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteRegionDiskRequest,
@@ -613,8 +660,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteRegionDiskRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -634,7 +681,27 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.delete(request, options, callback);
+    return this.innerApiCalls
+      .delete(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   get(
     request?: protos.google.cloud.compute.v1.IGetRegionDiskRequest,
@@ -827,8 +894,8 @@ export class RegionDisksClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertRegionDiskRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -875,12 +942,17 @@ export class RegionDisksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.insert(request);
+   * const [operation] = await client.insert(request);
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertRegionDiskRequest,
@@ -902,8 +974,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertRegionDiskRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -923,18 +995,35 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.insert(request, options, callback);
+    return this.innerApiCalls
+      .insert(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   removeResourcePolicies(
     request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -981,12 +1070,17 @@ export class RegionDisksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.removeResourcePolicies(request);
+   * const [operation] = await client.removeResourcePolicies(request);
    */
   removeResourcePolicies(
     request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest,
@@ -1008,11 +1102,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1032,19 +1123,35 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.removeResourcePolicies(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls
+      .removeResourcePolicies(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   resize(
     request?: protos.google.cloud.compute.v1.IResizeRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResizeRegionDiskRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -1091,12 +1198,17 @@ export class RegionDisksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.resize(request);
+   * const [operation] = await client.resize(request);
    */
   resize(
     request?: protos.google.cloud.compute.v1.IResizeRegionDiskRequest,
@@ -1118,8 +1230,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResizeRegionDiskRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1139,7 +1251,27 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.resize(request, options, callback);
+    return this.innerApiCalls
+      .resize(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setIamPolicy(
     request?: protos.google.cloud.compute.v1.ISetIamPolicyRegionDiskRequest,
@@ -1243,8 +1375,8 @@ export class RegionDisksClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -1291,12 +1423,17 @@ export class RegionDisksClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setLabels(request);
+   * const [operation] = await client.setLabels(request);
    */
   setLabels(
     request?: protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest,
@@ -1318,8 +1455,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1339,7 +1476,27 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setLabels(request, options, callback);
+    return this.innerApiCalls
+      .setLabels(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsRegionDiskRequest,

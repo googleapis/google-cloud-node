@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -136,6 +137,9 @@ export class RegionSslCertificatesClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = staticMembers.servicePath;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -315,11 +319,8 @@ export class RegionSslCertificatesClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteRegionSslCertificateRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -364,12 +365,17 @@ export class RegionSslCertificatesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.delete(request);
+   * const [operation] = await client.delete(request);
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteRegionSslCertificateRequest,
@@ -391,11 +397,8 @@ export class RegionSslCertificatesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteRegionSslCertificateRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -415,7 +418,27 @@ export class RegionSslCertificatesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.delete(request, options, callback);
+    return this.innerApiCalls
+      .delete(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   get(
     request?: protos.google.cloud.compute.v1.IGetRegionSslCertificateRequest,
@@ -523,11 +546,8 @@ export class RegionSslCertificatesClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IInsertRegionSslCertificateRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -572,12 +592,17 @@ export class RegionSslCertificatesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.insert(request);
+   * const [operation] = await client.insert(request);
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertRegionSslCertificateRequest,
@@ -599,11 +624,8 @@ export class RegionSslCertificatesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IInsertRegionSslCertificateRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -623,7 +645,27 @@ export class RegionSslCertificatesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.insert(request, options, callback);
+    return this.innerApiCalls
+      .insert(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
 
   list(

@@ -232,7 +232,7 @@ describe('v1.TargetHttpsProxiesClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -447,7 +447,7 @@ describe('v1.TargetHttpsProxiesClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -555,7 +555,7 @@ describe('v1.TargetHttpsProxiesClient', () => {
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.patch as SinonStub)
           .getCall(0)
@@ -662,7 +662,7 @@ describe('v1.TargetHttpsProxiesClient', () => {
       );
       client.innerApiCalls.setQuicOverride = stubSimpleCall(expectedResponse);
       const [response] = await client.setQuicOverride(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setQuicOverride as SinonStub)
           .getCall(0)
@@ -774,7 +774,7 @@ describe('v1.TargetHttpsProxiesClient', () => {
       client.innerApiCalls.setSslCertificates =
         stubSimpleCall(expectedResponse);
       const [response] = await client.setSslCertificates(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setSslCertificates as SinonStub)
           .getCall(0)
@@ -885,7 +885,7 @@ describe('v1.TargetHttpsProxiesClient', () => {
       );
       client.innerApiCalls.setSslPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setSslPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setSslPolicy as SinonStub)
           .getCall(0)
@@ -996,7 +996,7 @@ describe('v1.TargetHttpsProxiesClient', () => {
       );
       client.innerApiCalls.setUrlMap = stubSimpleCall(expectedResponse);
       const [response] = await client.setUrlMap(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setUrlMap as SinonStub)
           .getCall(0)

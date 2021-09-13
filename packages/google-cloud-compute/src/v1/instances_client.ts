@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -135,6 +136,9 @@ export class InstancesClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = staticMembers.servicePath;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -362,11 +366,8 @@ export class InstancesClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -415,12 +416,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.addAccessConfig(request);
+   * const [operation] = await client.addAccessConfig(request);
    */
   addAccessConfig(
     request?: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
@@ -442,11 +448,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -466,18 +469,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.addAccessConfig(request, options, callback);
+    return this.innerApiCalls
+      .addAccessConfig(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   addResourcePolicies(
     request?: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -524,12 +544,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.addResourcePolicies(request);
+   * const [operation] = await client.addResourcePolicies(request);
    */
   addResourcePolicies(
     request?: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
@@ -551,11 +576,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -575,15 +597,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.addResourcePolicies(request, options, callback);
+    return this.innerApiCalls
+      .addResourcePolicies(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   attachDisk(
     request?: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IAttachDiskInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -632,12 +674,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.attachDisk(request);
+   * const [operation] = await client.attachDisk(request);
    */
   attachDisk(
     request?: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
@@ -659,8 +706,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IAttachDiskInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -680,15 +727,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.attachDisk(request, options, callback);
+    return this.innerApiCalls
+      .attachDisk(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   bulkInsert(
     request?: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IBulkInsertInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -733,12 +800,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.bulkInsert(request);
+   * const [operation] = await client.bulkInsert(request);
    */
   bulkInsert(
     request?: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
@@ -760,8 +832,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IBulkInsertInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -781,15 +853,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.bulkInsert(request, options, callback);
+    return this.innerApiCalls
+      .bulkInsert(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -830,12 +922,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.delete(request);
+   * const [operation] = await client.delete(request);
    */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
@@ -855,8 +952,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -876,18 +973,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.delete(request, options, callback);
+    return this.innerApiCalls
+      .delete(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   deleteAccessConfig(
     request?: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -936,12 +1050,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.deleteAccessConfig(request);
+   * const [operation] = await client.deleteAccessConfig(request);
    */
   deleteAccessConfig(
     request?: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
@@ -963,11 +1082,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -987,15 +1103,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.deleteAccessConfig(request, options, callback);
+    return this.innerApiCalls
+      .deleteAccessConfig(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   detachDisk(
     request?: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDetachDiskInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -1042,12 +1178,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.detachDisk(request);
+   * const [operation] = await client.detachDisk(request);
    */
   detachDisk(
     request?: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
@@ -1069,8 +1210,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDetachDiskInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1090,7 +1231,27 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.detachDisk(request, options, callback);
+    return this.innerApiCalls
+      .detachDisk(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   get(
     request?: protos.google.cloud.compute.v1.IGetInstanceRequest,
@@ -1798,8 +1959,8 @@ export class InstancesClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -1847,12 +2008,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.insert(request);
+   * const [operation] = await client.insert(request);
    */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertInstanceRequest,
@@ -1872,8 +2038,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -1893,18 +2059,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.insert(request, options, callback);
+    return this.innerApiCalls
+      .insert(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   removeResourcePolicies(
     request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -1951,12 +2134,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.removeResourcePolicies(request);
+   * const [operation] = await client.removeResourcePolicies(request);
    */
   removeResourcePolicies(
     request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
@@ -1978,11 +2166,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -2002,19 +2187,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.removeResourcePolicies(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls
+      .removeResourcePolicies(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   reset(
     request?: protos.google.cloud.compute.v1.IResetInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResetInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -2055,12 +2256,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.reset(request);
+   * const [operation] = await client.reset(request);
    */
   reset(
     request?: protos.google.cloud.compute.v1.IResetInstanceRequest,
@@ -2080,8 +2286,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IResetInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -2101,18 +2307,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.reset(request, options, callback);
+    return this.innerApiCalls
+      .reset(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setDeletionProtection(
     request?: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -2159,12 +2382,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setDeletionProtection(request);
+   * const [operation] = await client.setDeletionProtection(request);
    */
   setDeletionProtection(
     request?: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
@@ -2186,11 +2414,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -2210,18 +2435,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setDeletionProtection(request, options, callback);
+    return this.innerApiCalls
+      .setDeletionProtection(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setDiskAutoDelete(
     request?: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -2270,12 +2512,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setDiskAutoDelete(request);
+   * const [operation] = await client.setDiskAutoDelete(request);
    */
   setDiskAutoDelete(
     request?: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
@@ -2297,11 +2544,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -2321,7 +2565,27 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setDiskAutoDelete(request, options, callback);
+    return this.innerApiCalls
+      .setDiskAutoDelete(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setIamPolicy(
     request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
@@ -2425,8 +2689,8 @@ export class InstancesClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetLabelsInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -2473,12 +2737,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setLabels(request);
+   * const [operation] = await client.setLabels(request);
    */
   setLabels(
     request?: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
@@ -2500,8 +2769,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetLabelsInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -2521,18 +2790,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setLabels(request, options, callback);
+    return this.innerApiCalls
+      .setLabels(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setMachineResources(
     request?: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -2579,12 +2865,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setMachineResources(request);
+   * const [operation] = await client.setMachineResources(request);
    */
   setMachineResources(
     request?: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
@@ -2606,11 +2897,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -2630,15 +2918,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setMachineResources(request, options, callback);
+    return this.innerApiCalls
+      .setMachineResources(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setMachineType(
     request?: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -2685,12 +2993,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setMachineType(request);
+   * const [operation] = await client.setMachineType(request);
    */
   setMachineType(
     request?: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
@@ -2712,8 +3025,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -2733,15 +3046,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setMachineType(request, options, callback);
+    return this.innerApiCalls
+      .setMachineType(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setMetadata(
     request?: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetMetadataInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -2788,12 +3121,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setMetadata(request);
+   * const [operation] = await client.setMetadata(request);
    */
   setMetadata(
     request?: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
@@ -2815,8 +3153,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetMetadataInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -2836,18 +3174,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setMetadata(request, options, callback);
+    return this.innerApiCalls
+      .setMetadata(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setMinCpuPlatform(
     request?: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -2894,12 +3249,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setMinCpuPlatform(request);
+   * const [operation] = await client.setMinCpuPlatform(request);
    */
   setMinCpuPlatform(
     request?: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
@@ -2921,11 +3281,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -2945,15 +3302,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setMinCpuPlatform(request, options, callback);
+    return this.innerApiCalls
+      .setMinCpuPlatform(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setScheduling(
     request?: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -3000,12 +3377,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setScheduling(request);
+   * const [operation] = await client.setScheduling(request);
    */
   setScheduling(
     request?: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
@@ -3027,8 +3409,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -3048,18 +3430,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setScheduling(request, options, callback);
+    return this.innerApiCalls
+      .setScheduling(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setServiceAccount(
     request?: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -3106,12 +3505,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setServiceAccount(request);
+   * const [operation] = await client.setServiceAccount(request);
    */
   setServiceAccount(
     request?: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
@@ -3133,11 +3537,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -3157,18 +3558,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setServiceAccount(request, options, callback);
+    return this.innerApiCalls
+      .setServiceAccount(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setShieldedInstanceIntegrityPolicy(
     request?: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -3215,12 +3633,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setShieldedInstanceIntegrityPolicy(request);
+   * const [operation] = await client.setShieldedInstanceIntegrityPolicy(request);
    */
   setShieldedInstanceIntegrityPolicy(
     request?: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
@@ -3242,11 +3665,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -3266,19 +3686,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setShieldedInstanceIntegrityPolicy(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls
+      .setShieldedInstanceIntegrityPolicy(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   setTags(
     request?: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetTagsInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -3321,12 +3757,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.setTags(request);
+   * const [operation] = await client.setTags(request);
    */
   setTags(
     request?: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
@@ -3346,8 +3787,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.ISetTagsInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -3367,18 +3808,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.setTags(request, options, callback);
+    return this.innerApiCalls
+      .setTags(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   simulateMaintenanceEvent(
     request?: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -3417,12 +3875,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.simulateMaintenanceEvent(request);
+   * const [operation] = await client.simulateMaintenanceEvent(request);
    */
   simulateMaintenanceEvent(
     request?: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
@@ -3444,11 +3907,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -3468,19 +3928,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.simulateMaintenanceEvent(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls
+      .simulateMaintenanceEvent(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   start(
     request?: protos.google.cloud.compute.v1.IStartInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStartInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -3521,12 +3997,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.start(request);
+   * const [operation] = await client.start(request);
    */
   start(
     request?: protos.google.cloud.compute.v1.IStartInstanceRequest,
@@ -3546,8 +4027,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStartInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -3567,18 +4048,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.start(request, options, callback);
+    return this.innerApiCalls
+      .start(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   startWithEncryptionKey(
     request?: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -3625,12 +4123,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.startWithEncryptionKey(request);
+   * const [operation] = await client.startWithEncryptionKey(request);
    */
   startWithEncryptionKey(
     request?: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
@@ -3652,11 +4155,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -3676,19 +4176,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.startWithEncryptionKey(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls
+      .startWithEncryptionKey(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   stop(
     request?: protos.google.cloud.compute.v1.IStopInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStopInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -3729,12 +4245,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.stop(request);
+   * const [operation] = await client.stop(request);
    */
   stop(
     request?: protos.google.cloud.compute.v1.IStopInstanceRequest,
@@ -3754,8 +4275,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IStopInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -3775,7 +4296,27 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.stop(request, options, callback);
+    return this.innerApiCalls
+      .stop(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
@@ -3885,8 +4426,8 @@ export class InstancesClient {
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IUpdateInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -3933,12 +4474,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.update(request);
+   * const [operation] = await client.update(request);
    */
   update(
     request?: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
@@ -3958,8 +4504,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IUpdateInstanceRequest | undefined,
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -3979,18 +4525,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.update(request, options, callback);
+    return this.innerApiCalls
+      .update(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   updateAccessConfig(
     request?: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -4039,12 +4602,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.updateAccessConfig(request);
+   * const [operation] = await client.updateAccessConfig(request);
    */
   updateAccessConfig(
     request?: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
@@ -4066,11 +4634,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -4090,18 +4655,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.updateAccessConfig(request, options, callback);
+    return this.innerApiCalls
+      .updateAccessConfig(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   updateDisplayDevice(
     request?: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -4148,12 +4730,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.updateDisplayDevice(request);
+   * const [operation] = await client.updateDisplayDevice(request);
    */
   updateDisplayDevice(
     request?: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
@@ -4175,11 +4762,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -4199,18 +4783,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.updateDisplayDevice(request, options, callback);
+    return this.innerApiCalls
+      .updateDisplayDevice(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   updateNetworkInterface(
     request?: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -4259,12 +4860,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.updateNetworkInterface(request);
+   * const [operation] = await client.updateNetworkInterface(request);
    */
   updateNetworkInterface(
     request?: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
@@ -4286,11 +4892,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -4310,22 +4913,35 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.updateNetworkInterface(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls
+      .updateNetworkInterface(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
   updateShieldedInstanceConfig(
     request?: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
@@ -4372,12 +4988,17 @@ export class InstancesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
    * @example
-   * const [response] = await client.updateShieldedInstanceConfig(request);
+   * const [operation] = await client.updateShieldedInstanceConfig(request);
    */
   updateShieldedInstanceConfig(
     request?: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
@@ -4399,11 +5020,8 @@ export class InstancesClient {
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   > | void {
@@ -4423,11 +5041,27 @@ export class InstancesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls.updateShieldedInstanceConfig(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls
+      .updateShieldedInstanceConfig(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
   }
 
   /**

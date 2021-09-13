@@ -230,7 +230,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.addAccessConfig = stubSimpleCall(expectedResponse);
       const [response] = await client.addAccessConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addAccessConfig as SinonStub)
           .getCall(0)
@@ -342,7 +342,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.addResourcePolicies =
         stubSimpleCall(expectedResponse);
       const [response] = await client.addResourcePolicies(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addResourcePolicies as SinonStub)
           .getCall(0)
@@ -453,7 +453,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.attachDisk = stubSimpleCall(expectedResponse);
       const [response] = await client.attachDisk(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.attachDisk as SinonStub)
           .getCall(0)
@@ -564,7 +564,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.bulkInsert = stubSimpleCall(expectedResponse);
       const [response] = await client.bulkInsert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.bulkInsert as SinonStub)
           .getCall(0)
@@ -675,7 +675,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -784,7 +784,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.deleteAccessConfig =
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAccessConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.deleteAccessConfig as SinonStub)
           .getCall(0)
@@ -895,7 +895,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.detachDisk = stubSimpleCall(expectedResponse);
       const [response] = await client.detachDisk(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.detachDisk as SinonStub)
           .getCall(0)
@@ -1789,7 +1789,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -1898,7 +1898,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.removeResourcePolicies =
         stubSimpleCall(expectedResponse);
       const [response] = await client.removeResourcePolicies(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.removeResourcePolicies as SinonStub)
           .getCall(0)
@@ -2012,7 +2012,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.reset = stubSimpleCall(expectedResponse);
       const [response] = await client.reset(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.reset as SinonStub)
           .getCall(0)
@@ -2120,7 +2120,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.setDeletionProtection =
         stubSimpleCall(expectedResponse);
       const [response] = await client.setDeletionProtection(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setDeletionProtection as SinonStub)
           .getCall(0)
@@ -2234,7 +2234,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.setDiskAutoDelete = stubSimpleCall(expectedResponse);
       const [response] = await client.setDiskAutoDelete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setDiskAutoDelete as SinonStub)
           .getCall(0)
@@ -2456,7 +2456,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
       const [response] = await client.setLabels(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setLabels as SinonStub)
           .getCall(0)
@@ -2565,7 +2565,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.setMachineResources =
         stubSimpleCall(expectedResponse);
       const [response] = await client.setMachineResources(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setMachineResources as SinonStub)
           .getCall(0)
@@ -2676,7 +2676,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.setMachineType = stubSimpleCall(expectedResponse);
       const [response] = await client.setMachineType(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setMachineType as SinonStub)
           .getCall(0)
@@ -2787,7 +2787,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.setMetadata = stubSimpleCall(expectedResponse);
       const [response] = await client.setMetadata(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setMetadata as SinonStub)
           .getCall(0)
@@ -2898,7 +2898,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.setMinCpuPlatform = stubSimpleCall(expectedResponse);
       const [response] = await client.setMinCpuPlatform(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setMinCpuPlatform as SinonStub)
           .getCall(0)
@@ -3009,7 +3009,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.setScheduling = stubSimpleCall(expectedResponse);
       const [response] = await client.setScheduling(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setScheduling as SinonStub)
           .getCall(0)
@@ -3120,7 +3120,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.setServiceAccount = stubSimpleCall(expectedResponse);
       const [response] = await client.setServiceAccount(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setServiceAccount as SinonStub)
           .getCall(0)
@@ -3234,7 +3234,7 @@ describe('v1.InstancesClient', () => {
       const [response] = await client.setShieldedInstanceIntegrityPolicy(
         request
       );
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub)
           .getCall(0)
@@ -3348,7 +3348,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.setTags = stubSimpleCall(expectedResponse);
       const [response] = await client.setTags(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setTags as SinonStub)
           .getCall(0)
@@ -3457,7 +3457,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.simulateMaintenanceEvent =
         stubSimpleCall(expectedResponse);
       const [response] = await client.simulateMaintenanceEvent(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.simulateMaintenanceEvent as SinonStub)
           .getCall(0)
@@ -3571,7 +3571,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.start = stubSimpleCall(expectedResponse);
       const [response] = await client.start(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.start as SinonStub)
           .getCall(0)
@@ -3679,7 +3679,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.startWithEncryptionKey =
         stubSimpleCall(expectedResponse);
       const [response] = await client.startWithEncryptionKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.startWithEncryptionKey as SinonStub)
           .getCall(0)
@@ -3793,7 +3793,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.stop = stubSimpleCall(expectedResponse);
       const [response] = await client.stop(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.stop as SinonStub)
           .getCall(0)
@@ -4012,7 +4012,7 @@ describe('v1.InstancesClient', () => {
       );
       client.innerApiCalls.update = stubSimpleCall(expectedResponse);
       const [response] = await client.update(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.update as SinonStub)
           .getCall(0)
@@ -4121,7 +4121,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.updateAccessConfig =
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateAccessConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.updateAccessConfig as SinonStub)
           .getCall(0)
@@ -4233,7 +4233,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.updateDisplayDevice =
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateDisplayDevice(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.updateDisplayDevice as SinonStub)
           .getCall(0)
@@ -4345,7 +4345,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.updateNetworkInterface =
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateNetworkInterface(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.updateNetworkInterface as SinonStub)
           .getCall(0)
@@ -4460,7 +4460,7 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.updateShieldedInstanceConfig =
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateShieldedInstanceConfig(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.updateShieldedInstanceConfig as SinonStub)
           .getCall(0)

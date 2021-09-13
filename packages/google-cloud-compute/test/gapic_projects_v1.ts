@@ -230,7 +230,7 @@ describe('v1.ProjectsClient', () => {
       );
       client.innerApiCalls.disableXpnHost = stubSimpleCall(expectedResponse);
       const [response] = await client.disableXpnHost(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.disableXpnHost as SinonStub)
           .getCall(0)
@@ -342,7 +342,7 @@ describe('v1.ProjectsClient', () => {
       client.innerApiCalls.disableXpnResource =
         stubSimpleCall(expectedResponse);
       const [response] = await client.disableXpnResource(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.disableXpnResource as SinonStub)
           .getCall(0)
@@ -453,7 +453,7 @@ describe('v1.ProjectsClient', () => {
       );
       client.innerApiCalls.enableXpnHost = stubSimpleCall(expectedResponse);
       const [response] = await client.enableXpnHost(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.enableXpnHost as SinonStub)
           .getCall(0)
@@ -564,7 +564,7 @@ describe('v1.ProjectsClient', () => {
       );
       client.innerApiCalls.enableXpnResource = stubSimpleCall(expectedResponse);
       const [response] = await client.enableXpnResource(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.enableXpnResource as SinonStub)
           .getCall(0)
@@ -893,7 +893,7 @@ describe('v1.ProjectsClient', () => {
       );
       client.innerApiCalls.moveDisk = stubSimpleCall(expectedResponse);
       const [response] = await client.moveDisk(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.moveDisk as SinonStub)
           .getCall(0)
@@ -1001,7 +1001,7 @@ describe('v1.ProjectsClient', () => {
       );
       client.innerApiCalls.moveInstance = stubSimpleCall(expectedResponse);
       const [response] = await client.moveInstance(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.moveInstance as SinonStub)
           .getCall(0)
@@ -1113,7 +1113,7 @@ describe('v1.ProjectsClient', () => {
       client.innerApiCalls.setCommonInstanceMetadata =
         stubSimpleCall(expectedResponse);
       const [response] = await client.setCommonInstanceMetadata(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setCommonInstanceMetadata as SinonStub)
           .getCall(0)
@@ -1228,7 +1228,7 @@ describe('v1.ProjectsClient', () => {
       client.innerApiCalls.setDefaultNetworkTier =
         stubSimpleCall(expectedResponse);
       const [response] = await client.setDefaultNetworkTier(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setDefaultNetworkTier as SinonStub)
           .getCall(0)
@@ -1343,7 +1343,7 @@ describe('v1.ProjectsClient', () => {
       client.innerApiCalls.setUsageExportBucket =
         stubSimpleCall(expectedResponse);
       const [response] = await client.setUsageExportBucket(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setUsageExportBucket as SinonStub)
           .getCall(0)

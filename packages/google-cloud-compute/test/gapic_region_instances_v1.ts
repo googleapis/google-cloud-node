@@ -169,7 +169,7 @@ describe('v1.RegionInstancesClient', () => {
       );
       client.innerApiCalls.bulkInsert = stubSimpleCall(expectedResponse);
       const [response] = await client.bulkInsert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.bulkInsert as SinonStub)
           .getCall(0)

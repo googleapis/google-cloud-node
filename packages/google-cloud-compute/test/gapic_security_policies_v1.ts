@@ -232,7 +232,7 @@ describe('v1.SecurityPoliciesClient', () => {
       );
       client.innerApiCalls.addRule = stubSimpleCall(expectedResponse);
       const [response] = await client.addRule(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addRule as SinonStub)
           .getCall(0)
@@ -340,7 +340,7 @@ describe('v1.SecurityPoliciesClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -663,7 +663,7 @@ describe('v1.SecurityPoliciesClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -886,7 +886,7 @@ describe('v1.SecurityPoliciesClient', () => {
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.patch as SinonStub)
           .getCall(0)
@@ -993,7 +993,7 @@ describe('v1.SecurityPoliciesClient', () => {
       );
       client.innerApiCalls.patchRule = stubSimpleCall(expectedResponse);
       const [response] = await client.patchRule(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.patchRule as SinonStub)
           .getCall(0)
@@ -1101,7 +1101,7 @@ describe('v1.SecurityPoliciesClient', () => {
       );
       client.innerApiCalls.removeRule = stubSimpleCall(expectedResponse);
       const [response] = await client.removeRule(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.removeRule as SinonStub)
           .getCall(0)

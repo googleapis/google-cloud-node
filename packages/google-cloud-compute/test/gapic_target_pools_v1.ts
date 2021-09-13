@@ -230,7 +230,7 @@ describe('v1.TargetPoolsClient', () => {
       );
       client.innerApiCalls.addHealthCheck = stubSimpleCall(expectedResponse);
       const [response] = await client.addHealthCheck(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addHealthCheck as SinonStub)
           .getCall(0)
@@ -341,7 +341,7 @@ describe('v1.TargetPoolsClient', () => {
       );
       client.innerApiCalls.addInstance = stubSimpleCall(expectedResponse);
       const [response] = await client.addInstance(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addInstance as SinonStub)
           .getCall(0)
@@ -452,7 +452,7 @@ describe('v1.TargetPoolsClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -775,7 +775,7 @@ describe('v1.TargetPoolsClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -883,7 +883,7 @@ describe('v1.TargetPoolsClient', () => {
       );
       client.innerApiCalls.removeHealthCheck = stubSimpleCall(expectedResponse);
       const [response] = await client.removeHealthCheck(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.removeHealthCheck as SinonStub)
           .getCall(0)
@@ -994,7 +994,7 @@ describe('v1.TargetPoolsClient', () => {
       );
       client.innerApiCalls.removeInstance = stubSimpleCall(expectedResponse);
       const [response] = await client.removeInstance(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.removeInstance as SinonStub)
           .getCall(0)
@@ -1105,7 +1105,7 @@ describe('v1.TargetPoolsClient', () => {
       );
       client.innerApiCalls.setBackup = stubSimpleCall(expectedResponse);
       const [response] = await client.setBackup(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setBackup as SinonStub)
           .getCall(0)

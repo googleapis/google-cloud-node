@@ -232,7 +232,7 @@ describe('v1.ForwardingRulesClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -447,7 +447,7 @@ describe('v1.ForwardingRulesClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -555,7 +555,7 @@ describe('v1.ForwardingRulesClient', () => {
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.patch as SinonStub)
           .getCall(0)
@@ -662,7 +662,7 @@ describe('v1.ForwardingRulesClient', () => {
       );
       client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
       const [response] = await client.setLabels(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setLabels as SinonStub)
           .getCall(0)
@@ -770,7 +770,7 @@ describe('v1.ForwardingRulesClient', () => {
       );
       client.innerApiCalls.setTarget = stubSimpleCall(expectedResponse);
       const [response] = await client.setTarget(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setTarget as SinonStub)
           .getCall(0)

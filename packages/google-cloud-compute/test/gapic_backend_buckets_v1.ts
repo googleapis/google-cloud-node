@@ -232,7 +232,7 @@ describe('v1.BackendBucketsClient', () => {
       );
       client.innerApiCalls.addSignedUrlKey = stubSimpleCall(expectedResponse);
       const [response] = await client.addSignedUrlKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addSignedUrlKey as SinonStub)
           .getCall(0)
@@ -343,7 +343,7 @@ describe('v1.BackendBucketsClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -452,7 +452,7 @@ describe('v1.BackendBucketsClient', () => {
       client.innerApiCalls.deleteSignedUrlKey =
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteSignedUrlKey(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.deleteSignedUrlKey as SinonStub)
           .getCall(0)
@@ -670,7 +670,7 @@ describe('v1.BackendBucketsClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -778,7 +778,7 @@ describe('v1.BackendBucketsClient', () => {
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.patch as SinonStub)
           .getCall(0)
@@ -885,7 +885,7 @@ describe('v1.BackendBucketsClient', () => {
       );
       client.innerApiCalls.update = stubSimpleCall(expectedResponse);
       const [response] = await client.update(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.update as SinonStub)
           .getCall(0)

@@ -240,7 +240,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       );
       client.innerApiCalls.abandonInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.abandonInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.abandonInstances as SinonStub)
           .getCall(0)
@@ -355,7 +355,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       client.innerApiCalls.applyUpdatesToInstances =
         stubSimpleCall(expectedResponse);
       const [response] = await client.applyUpdatesToInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.applyUpdatesToInstances as SinonStub)
           .getCall(0)
@@ -472,7 +472,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       );
       client.innerApiCalls.createInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.createInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.createInstances as SinonStub)
           .getCall(0)
@@ -586,7 +586,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -697,7 +697,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       );
       client.innerApiCalls.deleteInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.deleteInstances as SinonStub)
           .getCall(0)
@@ -812,7 +812,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       client.innerApiCalls.deletePerInstanceConfigs =
         stubSimpleCall(expectedResponse);
       const [response] = await client.deletePerInstanceConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.deletePerInstanceConfigs as SinonStub)
           .getCall(0)
@@ -1039,7 +1039,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -1150,7 +1150,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.patch as SinonStub)
           .getCall(0)
@@ -1261,7 +1261,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       client.innerApiCalls.patchPerInstanceConfigs =
         stubSimpleCall(expectedResponse);
       const [response] = await client.patchPerInstanceConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.patchPerInstanceConfigs as SinonStub)
           .getCall(0)
@@ -1378,7 +1378,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       );
       client.innerApiCalls.recreateInstances = stubSimpleCall(expectedResponse);
       const [response] = await client.recreateInstances(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.recreateInstances as SinonStub)
           .getCall(0)
@@ -1492,7 +1492,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       );
       client.innerApiCalls.resize = stubSimpleCall(expectedResponse);
       const [response] = await client.resize(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.resize as SinonStub)
           .getCall(0)
@@ -1604,7 +1604,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       client.innerApiCalls.setInstanceTemplate =
         stubSimpleCall(expectedResponse);
       const [response] = await client.setInstanceTemplate(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setInstanceTemplate as SinonStub)
           .getCall(0)
@@ -1718,7 +1718,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       );
       client.innerApiCalls.setTargetPools = stubSimpleCall(expectedResponse);
       const [response] = await client.setTargetPools(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setTargetPools as SinonStub)
           .getCall(0)
@@ -1833,7 +1833,7 @@ describe('v1.InstanceGroupManagersClient', () => {
       client.innerApiCalls.updatePerInstanceConfigs =
         stubSimpleCall(expectedResponse);
       const [response] = await client.updatePerInstanceConfigs(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.updatePerInstanceConfigs as SinonStub)
           .getCall(0)

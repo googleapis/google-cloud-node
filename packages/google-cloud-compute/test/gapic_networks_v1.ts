@@ -230,7 +230,7 @@ describe('v1.NetworksClient', () => {
       );
       client.innerApiCalls.addPeering = stubSimpleCall(expectedResponse);
       const [response] = await client.addPeering(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addPeering as SinonStub)
           .getCall(0)
@@ -341,7 +341,7 @@ describe('v1.NetworksClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -671,7 +671,7 @@ describe('v1.NetworksClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -779,7 +779,7 @@ describe('v1.NetworksClient', () => {
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.patch as SinonStub)
           .getCall(0)
@@ -886,7 +886,7 @@ describe('v1.NetworksClient', () => {
       );
       client.innerApiCalls.removePeering = stubSimpleCall(expectedResponse);
       const [response] = await client.removePeering(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.removePeering as SinonStub)
           .getCall(0)
@@ -998,7 +998,7 @@ describe('v1.NetworksClient', () => {
       client.innerApiCalls.switchToCustomMode =
         stubSimpleCall(expectedResponse);
       const [response] = await client.switchToCustomMode(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.switchToCustomMode as SinonStub)
           .getCall(0)
@@ -1109,7 +1109,7 @@ describe('v1.NetworksClient', () => {
       );
       client.innerApiCalls.updatePeering = stubSimpleCall(expectedResponse);
       const [response] = await client.updatePeering(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.updatePeering as SinonStub)
           .getCall(0)

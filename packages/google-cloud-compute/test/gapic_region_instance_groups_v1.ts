@@ -354,7 +354,7 @@ describe('v1.RegionInstanceGroupsClient', () => {
       );
       client.innerApiCalls.setNamedPorts = stubSimpleCall(expectedResponse);
       const [response] = await client.setNamedPorts(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setNamedPorts as SinonStub)
           .getCall(0)

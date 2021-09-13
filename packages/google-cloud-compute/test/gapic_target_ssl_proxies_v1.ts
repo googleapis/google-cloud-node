@@ -232,7 +232,7 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -447,7 +447,7 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -555,7 +555,7 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       client.innerApiCalls.setBackendService = stubSimpleCall(expectedResponse);
       const [response] = await client.setBackendService(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setBackendService as SinonStub)
           .getCall(0)
@@ -666,7 +666,7 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       client.innerApiCalls.setProxyHeader = stubSimpleCall(expectedResponse);
       const [response] = await client.setProxyHeader(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setProxyHeader as SinonStub)
           .getCall(0)
@@ -778,7 +778,7 @@ describe('v1.TargetSslProxiesClient', () => {
       client.innerApiCalls.setSslCertificates =
         stubSimpleCall(expectedResponse);
       const [response] = await client.setSslCertificates(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setSslCertificates as SinonStub)
           .getCall(0)
@@ -889,7 +889,7 @@ describe('v1.TargetSslProxiesClient', () => {
       );
       client.innerApiCalls.setSslPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setSslPolicy(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setSslPolicy as SinonStub)
           .getCall(0)

@@ -231,7 +231,7 @@ describe('v1.RegionDisksClient', () => {
       client.innerApiCalls.addResourcePolicies =
         stubSimpleCall(expectedResponse);
       const [response] = await client.addResourcePolicies(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addResourcePolicies as SinonStub)
           .getCall(0)
@@ -342,7 +342,7 @@ describe('v1.RegionDisksClient', () => {
       );
       client.innerApiCalls.createSnapshot = stubSimpleCall(expectedResponse);
       const [response] = await client.createSnapshot(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.createSnapshot as SinonStub)
           .getCall(0)
@@ -453,7 +453,7 @@ describe('v1.RegionDisksClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -779,7 +779,7 @@ describe('v1.RegionDisksClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -888,7 +888,7 @@ describe('v1.RegionDisksClient', () => {
       client.innerApiCalls.removeResourcePolicies =
         stubSimpleCall(expectedResponse);
       const [response] = await client.removeResourcePolicies(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.removeResourcePolicies as SinonStub)
           .getCall(0)
@@ -1002,7 +1002,7 @@ describe('v1.RegionDisksClient', () => {
       );
       client.innerApiCalls.resize = stubSimpleCall(expectedResponse);
       const [response] = await client.resize(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.resize as SinonStub)
           .getCall(0)
@@ -1221,7 +1221,7 @@ describe('v1.RegionDisksClient', () => {
       );
       client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
       const [response] = await client.setLabels(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setLabels as SinonStub)
           .getCall(0)

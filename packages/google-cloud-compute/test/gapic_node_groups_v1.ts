@@ -230,7 +230,7 @@ describe('v1.NodeGroupsClient', () => {
       );
       client.innerApiCalls.addNodes = stubSimpleCall(expectedResponse);
       const [response] = await client.addNodes(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.addNodes as SinonStub)
           .getCall(0)
@@ -338,7 +338,7 @@ describe('v1.NodeGroupsClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -446,7 +446,7 @@ describe('v1.NodeGroupsClient', () => {
       );
       client.innerApiCalls.deleteNodes = stubSimpleCall(expectedResponse);
       const [response] = await client.deleteNodes(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.deleteNodes as SinonStub)
           .getCall(0)
@@ -775,7 +775,7 @@ describe('v1.NodeGroupsClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -883,7 +883,7 @@ describe('v1.NodeGroupsClient', () => {
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.patch as SinonStub)
           .getCall(0)
@@ -1101,7 +1101,7 @@ describe('v1.NodeGroupsClient', () => {
       );
       client.innerApiCalls.setNodeTemplate = stubSimpleCall(expectedResponse);
       const [response] = await client.setNodeTemplate(request);
-      assert.deepStrictEqual(response, expectedResponse);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
       assert(
         (client.innerApiCalls.setNodeTemplate as SinonStub)
           .getCall(0)

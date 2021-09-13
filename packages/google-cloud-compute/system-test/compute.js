@@ -318,7 +318,7 @@ describe('Compute', () => {
       await waitGlobalOperation(insertOp);
       const instanceGroupManager = {
         baseInstanceName: 'tsgapic',
-        instanceTemplate: insertOp.targetLink,
+        instanceTemplate: insertOp.latestResponse.targetLink,
         name: instanceGroupName,
         targetSize: 0,
       };
