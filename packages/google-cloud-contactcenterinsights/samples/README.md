@@ -15,6 +15,7 @@
   * [Create Analysis](#create-analysis)
   * [Create Conversation](#create-conversation)
   * [Create Conversation With Ttl](#create-conversation-with-ttl)
+  * [Enable Pub Sub Notifications](#enable-pub-sub-notifications)
   * [Export To Bigquery](#export-to-bigquery)
   * [Get Operation](#get-operation)
   * [Quickstart](#quickstart)
@@ -78,6 +79,23 @@ __Usage:__
 
 
 `node samples/createConversationWithTtl.js`
+
+
+-----
+
+
+
+
+### Enable Pub Sub Notifications
+
+View the [source code](https://github.com/googleapis/nodejs-contact-center-insights/blob/main/samples/enablePubSubNotifications.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-contact-center-insights&page=editor&open_in_editor=samples/enablePubSubNotifications.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/enablePubSubNotifications.js`
 
 
 -----
