@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.8...v1.1.0) (2021-09-13)
+
+
+### Features
+
+* turns on self-signed JWT feature flag ([#66](https://www.github.com/googleapis/nodejs-data-qna/issues/66)) ([aa0c29d](https://www.github.com/googleapis/nodejs-data-qna/commit/aa0c29d27dc464fa437ca9f412b162e13ed4531f))
+
 ### [1.0.8](https://www.github.com/googleapis/nodejs-data-qna/compare/v1.0.7...v1.0.8) (2021-08-17)
 
 
