@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-storage?activeTab=versions
 
+### [5.14.2](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.1...v5.14.2) (2021-09-13)
+
+
+### Bug Fixes
+
+* **build:** set default branch to main ([#1587](https://www.github.com/googleapis/nodejs-storage/issues/1587)) ([b39ce95](https://www.github.com/googleapis/nodejs-storage/commit/b39ce95a2ec9d8dd2114863898181ea10670d962))
+
 ### [5.14.1](https://www.github.com/googleapis/nodejs-storage/compare/v5.14.0...v5.14.1) (2021-09-08)
 
 
