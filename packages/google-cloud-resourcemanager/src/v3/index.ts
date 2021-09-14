@@ -16,40 +16,9 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-'use strict';
-
-module.exports = {
-  opts: {
-    readme: './README.md',
-    package: './package.json',
-    template: './node_modules/jsdoc-fresh',
-    recurse: true,
-    verbose: true,
-    destination: './docs/'
-  },
-  plugins: [
-    'plugins/markdown',
-    'jsdoc-region-tag'
-  ],
-  source: {
-    excludePattern: '(^|\\/|\\\\)[._]',
-    include: [
-      'build/src',
-      'protos'
-    ],
-    includePattern: '\\.js$'
-  },
-  templates: {
-    copyright: 'Copyright 2021 Google LLC',
-    includeDate: false,
-    sourceFiles: false,
-    systemName: '@google-cloud/resourcemanager',
-    theme: 'lumen',
-    default: {
-      outputSourceFiles: false
-    }
-  },
-  markdown: {
-    idInHeadings: true
-  }
-};
+export {FoldersClient} from './folders_client';
+export {OrganizationsClient} from './organizations_client';
+export {ProjectsClient} from './projects_client';
+export {TagBindingsClient} from './tag_bindings_client';
+export {TagKeysClient} from './tag_keys_client';
+export {TagValuesClient} from './tag_values_client';

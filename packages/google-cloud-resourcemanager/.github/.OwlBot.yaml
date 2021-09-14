@@ -14,6 +14,11 @@
 docker:
   image: gcr.io/repo-automation-bots/owlbot-nodejs:latest
 
+deep-remove-regex:
+  - /owl-bot-staging
+
+deep-copy-regex:
+  - source: /google/cloud/resourcemanager/(.*)/.*-nodejs/(.*)
+    dest: /owl-bot-staging/$1/$2
 
 begin-after-commit-hash: 397c0bfd367a2427104f988d5329bc117caafd95
-
