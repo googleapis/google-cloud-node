@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.resourcemanager.v3",
-  "libraryPackage": "@google-cloud/resourcemanager",
+  "libraryPackage": "@google-cloud/resource-manager",
   "services": {
     "Folders": {
       "clients": {
