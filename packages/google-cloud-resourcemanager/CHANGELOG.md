@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/resource-manager?activeTab=versions
 
+## [3.0.0](https://www.github.com/googleapis/nodejs-resource-manager/compare/v2.0.1...v3.0.0) (2021-09-14)
+
+
+### ⚠ BREAKING CHANGES
+
+* v3 introduces significant changes to API surface, see: https://cloud.google.com/resource-manager/reference/rest/v3/folders
+
+### Features
+
+* migrate to v3 API surface ([#387](https://www.github.com/googleapis/nodejs-resource-manager/issues/387)) ([88da339](https://www.github.com/googleapis/nodejs-resource-manager/commit/88da339803e7a8bb04f75124232ab0e09d4d971f))
+
 ### [2.0.1](https://www.github.com/googleapis/nodejs-resource-manager/compare/v2.0.0...v2.0.1) (2021-09-09)
 
 
