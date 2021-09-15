@@ -990,6 +990,14 @@ export class JobServiceClient {
    *   Controls over how job documents get ranked on top of existing relevance
    *   score (determined by API algorithm).
    * @param {boolean} request.disableKeywordMatch
+   *   This field is deprecated. Please use
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} going forward.
+   *
+   *   To migrate, disable_keyword_match set to false maps to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+   *   true maps to {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+   *
    *   Controls whether to disable exact keyword match on {@link google.cloud.talent.v4.Job.title|Job.title},
    *   {@link google.cloud.talent.v4.Job.description|Job.description}, {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}, {@link google.cloud.talent.v4.Job.addresses|Job.addresses},
    *   {@link google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When disable keyword match is turned off, a
@@ -1009,6 +1017,12 @@ export class JobServiceClient {
    *   requests.
    *
    *   Defaults to false.
+   * @param {google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode} request.keywordMatchMode
+   *   Controls what keyword match options to use. If both keyword_match_mode and
+   *   disable_keyword_match are set, keyword_match_mode will take precedence.
+   *
+   *   Defaults to {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+   *   is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1302,6 +1316,14 @@ export class JobServiceClient {
    *   Controls over how job documents get ranked on top of existing relevance
    *   score (determined by API algorithm).
    * @param {boolean} request.disableKeywordMatch
+   *   This field is deprecated. Please use
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} going forward.
+   *
+   *   To migrate, disable_keyword_match set to false maps to
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+   *   true maps to {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_DISABLED|KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+   *   {@link google.cloud.talent.v4.SearchJobsRequest.keyword_match_mode|SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+   *
    *   Controls whether to disable exact keyword match on {@link google.cloud.talent.v4.Job.title|Job.title},
    *   {@link google.cloud.talent.v4.Job.description|Job.description}, {@link google.cloud.talent.v4.Job.company_display_name|Job.company_display_name}, {@link google.cloud.talent.v4.Job.addresses|Job.addresses},
    *   {@link google.cloud.talent.v4.Job.qualifications|Job.qualifications}. When disable keyword match is turned off, a
@@ -1321,6 +1343,12 @@ export class JobServiceClient {
    *   requests.
    *
    *   Defaults to false.
+   * @param {google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode} request.keywordMatchMode
+   *   Controls what keyword match options to use. If both keyword_match_mode and
+   *   disable_keyword_match are set, keyword_match_mode will take precedence.
+   *
+   *   Defaults to {@link google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode.KEYWORD_MATCH_ALL|KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+   *   is specified.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

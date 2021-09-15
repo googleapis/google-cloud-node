@@ -5301,6 +5301,9 @@ export namespace google {
 
                     /** SearchJobsRequest disableKeywordMatch */
                     disableKeywordMatch?: (boolean|null);
+
+                    /** SearchJobsRequest keywordMatchMode */
+                    keywordMatchMode?: (google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode|keyof typeof google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode|null);
                 }
 
                 /** Represents a SearchJobsRequest. */
@@ -5353,6 +5356,9 @@ export namespace google {
 
                     /** SearchJobsRequest disableKeywordMatch. */
                     public disableKeywordMatch: boolean;
+
+                    /** SearchJobsRequest keywordMatchMode. */
+                    public keywordMatchMode: (google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode|keyof typeof google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode);
 
                     /**
                      * Creates a new SearchJobsRequest instance using the specified properties.
@@ -5548,7 +5554,18 @@ export namespace google {
                     enum DiversificationLevel {
                         DIVERSIFICATION_LEVEL_UNSPECIFIED = 0,
                         DISABLED = 1,
-                        SIMPLE = 2
+                        SIMPLE = 2,
+                        ONE_PER_COMPANY = 3,
+                        TWO_PER_COMPANY = 4,
+                        DIVERSIFY_BY_LOOSER_SIMILARITY = 5
+                    }
+
+                    /** KeywordMatchMode enum. */
+                    enum KeywordMatchMode {
+                        KEYWORD_MATCH_MODE_UNSPECIFIED = 0,
+                        KEYWORD_MATCH_DISABLED = 1,
+                        KEYWORD_MATCH_ALL = 2,
+                        KEYWORD_MATCH_TITLE_ONLY = 3
                     }
                 }
 
