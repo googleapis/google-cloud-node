@@ -3204,6 +3204,7 @@
                              * @property {google.cloud.bigquery.storage.v1.ReadSession.ITableModifiers|null} [tableModifiers] ReadSession tableModifiers
                              * @property {google.cloud.bigquery.storage.v1.ReadSession.ITableReadOptions|null} [readOptions] ReadSession readOptions
                              * @property {Array.<google.cloud.bigquery.storage.v1.IReadStream>|null} [streams] ReadSession streams
+                             * @property {number|Long|null} [estimatedTotalBytesScanned] ReadSession estimatedTotalBytesScanned
                              */
     
                             /**
@@ -3294,6 +3295,14 @@
                              */
                             ReadSession.prototype.streams = $util.emptyArray;
     
+                            /**
+                             * ReadSession estimatedTotalBytesScanned.
+                             * @member {number|Long} estimatedTotalBytesScanned
+                             * @memberof google.cloud.bigquery.storage.v1.ReadSession
+                             * @instance
+                             */
+                            ReadSession.prototype.estimatedTotalBytesScanned = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+    
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
     
@@ -3351,6 +3360,8 @@
                                 if (message.streams != null && message.streams.length)
                                     for (var i = 0; i < message.streams.length; ++i)
                                         $root.google.cloud.bigquery.storage.v1.ReadStream.encode(message.streams[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                                if (message.estimatedTotalBytesScanned != null && Object.hasOwnProperty.call(message, "estimatedTotalBytesScanned"))
+                                    writer.uint32(/* id 12, wireType 0 =*/96).int64(message.estimatedTotalBytesScanned);
                                 return writer;
                             };
     
@@ -3413,6 +3424,9 @@
                                         if (!(message.streams && message.streams.length))
                                             message.streams = [];
                                         message.streams.push($root.google.cloud.bigquery.storage.v1.ReadStream.decode(reader, reader.uint32()));
+                                        break;
+                                    case 12:
+                                        message.estimatedTotalBytesScanned = reader.int64();
                                         break;
                                     default:
                                         reader.skipType(tag & 7);
@@ -3507,6 +3521,9 @@
                                             return "streams." + error;
                                     }
                                 }
+                                if (message.estimatedTotalBytesScanned != null && message.hasOwnProperty("estimatedTotalBytesScanned"))
+                                    if (!$util.isInteger(message.estimatedTotalBytesScanned) && !(message.estimatedTotalBytesScanned && $util.isInteger(message.estimatedTotalBytesScanned.low) && $util.isInteger(message.estimatedTotalBytesScanned.high)))
+                                        return "estimatedTotalBytesScanned: integer|Long expected";
                                 return null;
                             };
     
@@ -3575,6 +3592,15 @@
                                         message.streams[i] = $root.google.cloud.bigquery.storage.v1.ReadStream.fromObject(object.streams[i]);
                                     }
                                 }
+                                if (object.estimatedTotalBytesScanned != null)
+                                    if ($util.Long)
+                                        (message.estimatedTotalBytesScanned = $util.Long.fromValue(object.estimatedTotalBytesScanned)).unsigned = false;
+                                    else if (typeof object.estimatedTotalBytesScanned === "string")
+                                        message.estimatedTotalBytesScanned = parseInt(object.estimatedTotalBytesScanned, 10);
+                                    else if (typeof object.estimatedTotalBytesScanned === "number")
+                                        message.estimatedTotalBytesScanned = object.estimatedTotalBytesScanned;
+                                    else if (typeof object.estimatedTotalBytesScanned === "object")
+                                        message.estimatedTotalBytesScanned = new $util.LongBits(object.estimatedTotalBytesScanned.low >>> 0, object.estimatedTotalBytesScanned.high >>> 0).toNumber();
                                 return message;
                             };
     
@@ -3600,6 +3626,11 @@
                                     object.table = "";
                                     object.tableModifiers = null;
                                     object.readOptions = null;
+                                    if ($util.Long) {
+                                        var long = new $util.Long(0, 0, false);
+                                        object.estimatedTotalBytesScanned = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                                    } else
+                                        object.estimatedTotalBytesScanned = options.longs === String ? "0" : 0;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -3628,6 +3659,11 @@
                                     for (var j = 0; j < message.streams.length; ++j)
                                         object.streams[j] = $root.google.cloud.bigquery.storage.v1.ReadStream.toObject(message.streams[j], options);
                                 }
+                                if (message.estimatedTotalBytesScanned != null && message.hasOwnProperty("estimatedTotalBytesScanned"))
+                                    if (typeof message.estimatedTotalBytesScanned === "number")
+                                        object.estimatedTotalBytesScanned = options.longs === String ? String(message.estimatedTotalBytesScanned) : message.estimatedTotalBytesScanned;
+                                    else
+                                        object.estimatedTotalBytesScanned = options.longs === String ? $util.Long.prototype.toString.call(message.estimatedTotalBytesScanned) : options.longs === Number ? new $util.LongBits(message.estimatedTotalBytesScanned.low >>> 0, message.estimatedTotalBytesScanned.high >>> 0).toNumber() : message.estimatedTotalBytesScanned;
                                 return object;
                             };
     

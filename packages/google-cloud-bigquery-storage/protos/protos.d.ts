@@ -1425,6 +1425,9 @@ export namespace google {
 
                         /** ReadSession streams */
                         streams?: (google.cloud.bigquery.storage.v1.IReadStream[]|null);
+
+                        /** ReadSession estimatedTotalBytesScanned */
+                        estimatedTotalBytesScanned?: (number|Long|string|null);
                     }
 
                     /** Represents a ReadSession. */
@@ -1462,6 +1465,9 @@ export namespace google {
 
                         /** ReadSession streams. */
                         public streams: google.cloud.bigquery.storage.v1.IReadStream[];
+
+                        /** ReadSession estimatedTotalBytesScanned. */
+                        public estimatedTotalBytesScanned: (number|Long|string);
 
                         /** ReadSession schema. */
                         public schema?: ("avroSchema"|"arrowSchema");

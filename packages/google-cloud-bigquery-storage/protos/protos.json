@@ -372,6 +372,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
+                            },
+                            "estimatedTotalBytesScanned": {
+                              "type": "int64",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
