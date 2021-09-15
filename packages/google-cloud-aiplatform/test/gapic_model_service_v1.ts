@@ -3055,6 +3055,134 @@ describe('v1.ModelServiceClient', () => {
       });
     });
 
+    describe('index', () => {
+      const fakePath = '/rendered/path/index';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index: 'indexValue',
+      };
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.indexPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexPath', () => {
+        const result = client.indexPath(
+          'projectValue',
+          'locationValue',
+          'indexValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexName', () => {
+        const result = client.matchProjectFromIndexName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexName', () => {
+        const result = client.matchLocationFromIndexName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexFromIndexName', () => {
+        const result = client.matchIndexFromIndexName(fakePath);
+        assert.strictEqual(result, 'indexValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('indexEndpoint', () => {
+      const fakePath = '/rendered/path/indexEndpoint';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index_endpoint: 'indexEndpointValue',
+      };
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.indexEndpointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexEndpointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexEndpointPath', () => {
+        const result = client.indexEndpointPath(
+          'projectValue',
+          'locationValue',
+          'indexEndpointValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexEndpointName', () => {
+        const result = client.matchProjectFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexEndpointName', () => {
+        const result = client.matchLocationFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexEndpointFromIndexEndpointName', () => {
+        const result = client.matchIndexEndpointFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'indexEndpointValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('location', () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
@@ -3162,6 +3290,85 @@ describe('v1.ModelServiceClient', () => {
         assert.strictEqual(result, 'modelValue');
         assert(
           (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelDeploymentMonitoringJob', () => {
+      const fakePath = '/rendered/path/modelDeploymentMonitoringJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
+      };
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('modelDeploymentMonitoringJobPath', () => {
+        const result = client.modelDeploymentMonitoringJobPath(
+          'projectValue',
+          'locationValue',
+          'modelDeploymentMonitoringJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelDeploymentMonitoringJobName', () => {
+        const result =
+          client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelDeploymentMonitoringJobName', () => {
+        const result =
+          client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', () => {
+        const result =
+          client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -3476,6 +3683,70 @@ describe('v1.ModelServiceClient', () => {
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('study', () => {
+      const fakePath = '/rendered/path/study';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        study: 'studyValue',
+      };
+      const client = new modelserviceModule.v1.ModelServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.studyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.studyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('studyPath', () => {
+        const result = client.studyPath(
+          'projectValue',
+          'locationValue',
+          'studyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.studyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromStudyName', () => {
+        const result = client.matchProjectFromStudyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromStudyName', () => {
+        const result = client.matchLocationFromStudyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchStudyFromStudyName', () => {
+        const result = client.matchStudyFromStudyName(fakePath);
+        assert.strictEqual(result, 'studyValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -1590,6 +1590,472 @@ describe('v1.JobServiceClient', () => {
     });
   });
 
+  describe('createModelDeploymentMonitoringJob', () => {
+    it('invokes createModelDeploymentMonitoringJob without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateModelDeploymentMonitoringJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+      );
+      client.innerApiCalls.createModelDeploymentMonitoringJob =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.createModelDeploymentMonitoringJob(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes createModelDeploymentMonitoringJob without error using callback', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateModelDeploymentMonitoringJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+      );
+      client.innerApiCalls.createModelDeploymentMonitoringJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.createModelDeploymentMonitoringJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.createModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes createModelDeploymentMonitoringJob with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.CreateModelDeploymentMonitoringJobRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.createModelDeploymentMonitoringJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.createModelDeploymentMonitoringJob(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.createModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getModelDeploymentMonitoringJob', () => {
+    it('invokes getModelDeploymentMonitoringJob without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+      );
+      client.innerApiCalls.getModelDeploymentMonitoringJob =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.getModelDeploymentMonitoringJob(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes getModelDeploymentMonitoringJob without error using callback', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+      );
+      client.innerApiCalls.getModelDeploymentMonitoringJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getModelDeploymentMonitoringJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes getModelDeploymentMonitoringJob with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.GetModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getModelDeploymentMonitoringJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.getModelDeploymentMonitoringJob(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.getModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('pauseModelDeploymentMonitoringJob', () => {
+    it('invokes pauseModelDeploymentMonitoringJob without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.PauseModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.pauseModelDeploymentMonitoringJob =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.pauseModelDeploymentMonitoringJob(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.pauseModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes pauseModelDeploymentMonitoringJob without error using callback', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.PauseModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.pauseModelDeploymentMonitoringJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.pauseModelDeploymentMonitoringJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.pauseModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes pauseModelDeploymentMonitoringJob with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.PauseModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.pauseModelDeploymentMonitoringJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.pauseModelDeploymentMonitoringJob(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.pauseModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('resumeModelDeploymentMonitoringJob', () => {
+    it('invokes resumeModelDeploymentMonitoringJob without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ResumeModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.resumeModelDeploymentMonitoringJob =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.resumeModelDeploymentMonitoringJob(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.resumeModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes resumeModelDeploymentMonitoringJob without error using callback', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ResumeModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.protobuf.Empty()
+      );
+      client.innerApiCalls.resumeModelDeploymentMonitoringJob =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.resumeModelDeploymentMonitoringJob(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.protobuf.IEmpty | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.resumeModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes resumeModelDeploymentMonitoringJob with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ResumeModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.resumeModelDeploymentMonitoringJob = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.resumeModelDeploymentMonitoringJob(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.resumeModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('deleteCustomJob', () => {
     it('invokes deleteCustomJob without error', async () => {
       const client = new jobserviceModule.v1.JobServiceClient({
@@ -2371,6 +2837,408 @@ describe('v1.JobServiceClient', () => {
       );
       await assert.rejects(
         client.checkDeleteBatchPredictionJobProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('updateModelDeploymentMonitoringJob', () => {
+    it('invokes updateModelDeploymentMonitoringJob without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobRequest()
+      );
+      request.modelDeploymentMonitoringJob = {};
+      request.modelDeploymentMonitoringJob.name = '';
+      const expectedHeaderRequestParams =
+        'model_deployment_monitoring_job.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateModelDeploymentMonitoringJob =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.updateModelDeploymentMonitoringJob(
+        request
+      );
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateModelDeploymentMonitoringJob without error using callback', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobRequest()
+      );
+      request.modelDeploymentMonitoringJob = {};
+      request.modelDeploymentMonitoringJob.name = '';
+      const expectedHeaderRequestParams =
+        'model_deployment_monitoring_job.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.updateModelDeploymentMonitoringJob =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.updateModelDeploymentMonitoringJob(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+              protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.updateModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes updateModelDeploymentMonitoringJob with call error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobRequest()
+      );
+      request.modelDeploymentMonitoringJob = {};
+      request.modelDeploymentMonitoringJob.name = '';
+      const expectedHeaderRequestParams =
+        'model_deployment_monitoring_job.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateModelDeploymentMonitoringJob =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.updateModelDeploymentMonitoringJob(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.updateModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes updateModelDeploymentMonitoringJob with LRO error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobRequest()
+      );
+      request.modelDeploymentMonitoringJob = {};
+      request.modelDeploymentMonitoringJob.name = '';
+      const expectedHeaderRequestParams =
+        'model_deployment_monitoring_job.name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.updateModelDeploymentMonitoringJob =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] = await client.updateModelDeploymentMonitoringJob(
+        request
+      );
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.updateModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkUpdateModelDeploymentMonitoringJobProgress without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkUpdateModelDeploymentMonitoringJobProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkUpdateModelDeploymentMonitoringJobProgress with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkUpdateModelDeploymentMonitoringJobProgress(''),
+        expectedError
+      );
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+  });
+
+  describe('deleteModelDeploymentMonitoringJob', () => {
+    it('invokes deleteModelDeploymentMonitoringJob without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteModelDeploymentMonitoringJob =
+        stubLongRunningCall(expectedResponse);
+      const [operation] = await client.deleteModelDeploymentMonitoringJob(
+        request
+      );
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteModelDeploymentMonitoringJob without error using callback', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.longrunning.Operation()
+      );
+      client.innerApiCalls.deleteModelDeploymentMonitoringJob =
+        stubLongRunningCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.deleteModelDeploymentMonitoringJob(
+          request,
+          (
+            err?: Error | null,
+            result?: LROperation<
+              protos.google.protobuf.IEmpty,
+              protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+            > | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const operation = (await promise) as LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >;
+      const [response] = await operation.promise();
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.deleteModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes deleteModelDeploymentMonitoringJob with call error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteModelDeploymentMonitoringJob =
+        stubLongRunningCall(undefined, expectedError);
+      await assert.rejects(
+        client.deleteModelDeploymentMonitoringJob(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.deleteModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes deleteModelDeploymentMonitoringJob with LRO error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.DeleteModelDeploymentMonitoringJobRequest()
+      );
+      request.name = '';
+      const expectedHeaderRequestParams = 'name=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.deleteModelDeploymentMonitoringJob =
+        stubLongRunningCall(undefined, undefined, expectedError);
+      const [operation] = await client.deleteModelDeploymentMonitoringJob(
+        request
+      );
+      await assert.rejects(operation.promise(), expectedError);
+      assert(
+        (client.innerApiCalls.deleteModelDeploymentMonitoringJob as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes checkDeleteModelDeploymentMonitoringJobProgress without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedResponse = generateSampleMessage(
+        new operationsProtos.google.longrunning.Operation()
+      );
+      expectedResponse.name = 'test';
+      expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+      expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')};
+
+      client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+      const decodedOperation =
+        await client.checkDeleteModelDeploymentMonitoringJobProgress(
+          expectedResponse.name
+        );
+      assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+      assert(decodedOperation.metadata);
+      assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+    });
+
+    it('invokes checkDeleteModelDeploymentMonitoringJobProgress with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const expectedError = new Error('expected');
+
+      client.operationsClient.getOperation = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.checkDeleteModelDeploymentMonitoringJobProgress(''),
         expectedError
       );
       assert((client.operationsClient.getOperation as SinonStub).getCall(0));
@@ -3656,6 +4524,694 @@ describe('v1.JobServiceClient', () => {
     });
   });
 
+  describe('searchModelDeploymentMonitoringStatsAnomalies', () => {
+    it('invokes searchModelDeploymentMonitoringStatsAnomalies without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
+      );
+      request.modelDeploymentMonitoringJob = '';
+      const expectedHeaderRequestParams = 'model_deployment_monitoring_job=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+      ];
+      client.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies =
+        stubSimpleCall(expectedResponse);
+      const [response] =
+        await client.searchModelDeploymentMonitoringStatsAnomalies(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .searchModelDeploymentMonitoringStatsAnomalies as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes searchModelDeploymentMonitoringStatsAnomalies without error using callback', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
+      );
+      request.modelDeploymentMonitoringJob = '';
+      const expectedHeaderRequestParams = 'model_deployment_monitoring_job=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+      ];
+      client.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.searchModelDeploymentMonitoringStatsAnomalies(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (
+          client.innerApiCalls
+            .searchModelDeploymentMonitoringStatsAnomalies as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes searchModelDeploymentMonitoringStatsAnomalies with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
+      );
+      request.modelDeploymentMonitoringJob = '';
+      const expectedHeaderRequestParams = 'model_deployment_monitoring_job=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies =
+        stubSimpleCall(undefined, expectedError);
+      await assert.rejects(
+        client.searchModelDeploymentMonitoringStatsAnomalies(request),
+        expectedError
+      );
+      assert(
+        (
+          client.innerApiCalls
+            .searchModelDeploymentMonitoringStatsAnomalies as SinonStub
+        )
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes searchModelDeploymentMonitoringStatsAnomaliesStream without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
+      );
+      request.modelDeploymentMonitoringJob = '';
+      const expectedHeaderRequestParams = 'model_deployment_monitoring_job=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+      ];
+      client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream =
+        client.searchModelDeploymentMonitoringStatsAnomaliesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes searchModelDeploymentMonitoringStatsAnomaliesStream with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
+      );
+      request.modelDeploymentMonitoringJob = '';
+      const expectedHeaderRequestParams = 'model_deployment_monitoring_job=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream =
+        client.searchModelDeploymentMonitoringStatsAnomaliesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with searchModelDeploymentMonitoringStatsAnomalies without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
+      );
+      request.modelDeploymentMonitoringJob = '';
+      const expectedHeaderRequestParams = 'model_deployment_monitoring_job=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies()
+        ),
+      ];
+      client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[] =
+        [];
+      const iterable =
+        client.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with searchModelDeploymentMonitoringStatsAnomalies with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.SearchModelDeploymentMonitoringStatsAnomaliesRequest()
+      );
+      request.modelDeploymentMonitoringJob = '';
+      const expectedHeaderRequestParams = 'model_deployment_monitoring_job=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable =
+        client.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('listModelDeploymentMonitoringJobs', () => {
+    it('invokes listModelDeploymentMonitoringJobs without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+      ];
+      client.innerApiCalls.listModelDeploymentMonitoringJobs =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listModelDeploymentMonitoringJobs(
+        request
+      );
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listModelDeploymentMonitoringJobs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listModelDeploymentMonitoringJobs without error using callback', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+      ];
+      client.innerApiCalls.listModelDeploymentMonitoringJobs =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listModelDeploymentMonitoringJobs(
+          request,
+          (
+            err?: Error | null,
+            result?:
+              | protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[]
+              | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listModelDeploymentMonitoringJobs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes listModelDeploymentMonitoringJobs with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listModelDeploymentMonitoringJobs = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listModelDeploymentMonitoringJobs(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listModelDeploymentMonitoringJobs as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listModelDeploymentMonitoringJobsStream without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+      ];
+      client.descriptors.page.listModelDeploymentMonitoringJobs.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listModelDeploymentMonitoringJobsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (
+          client.descriptors.page.listModelDeploymentMonitoringJobs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listModelDeploymentMonitoringJobs,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listModelDeploymentMonitoringJobs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listModelDeploymentMonitoringJobsStream with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listModelDeploymentMonitoringJobs.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.listModelDeploymentMonitoringJobsStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob[] =
+          [];
+        stream.on(
+          'data',
+          (
+            response: protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob
+          ) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (
+          client.descriptors.page.listModelDeploymentMonitoringJobs
+            .createStream as SinonStub
+        )
+          .getCall(0)
+          .calledWith(
+            client.innerApiCalls.listModelDeploymentMonitoringJobs,
+            request
+          )
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listModelDeploymentMonitoringJobs
+            .createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listModelDeploymentMonitoringJobs without error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob()
+        ),
+      ];
+      client.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[] =
+        [];
+      const iterable = client.listModelDeploymentMonitoringJobsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listModelDeploymentMonitoringJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listModelDeploymentMonitoringJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listModelDeploymentMonitoringJobs with error', async () => {
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1.ListModelDeploymentMonitoringJobsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listModelDeploymentMonitoringJobsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[] =
+          [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listModelDeploymentMonitoringJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listModelDeploymentMonitoringJobs
+            .asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
   describe('Path templates', () => {
     describe('annotation', () => {
       const fakePath = '/rendered/path/annotation';
@@ -4541,6 +6097,134 @@ describe('v1.JobServiceClient', () => {
       });
     });
 
+    describe('index', () => {
+      const fakePath = '/rendered/path/index';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index: 'indexValue',
+      };
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.indexPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexPath', () => {
+        const result = client.indexPath(
+          'projectValue',
+          'locationValue',
+          'indexValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexName', () => {
+        const result = client.matchProjectFromIndexName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexName', () => {
+        const result = client.matchLocationFromIndexName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexFromIndexName', () => {
+        const result = client.matchIndexFromIndexName(fakePath);
+        assert.strictEqual(result, 'indexValue');
+        assert(
+          (client.pathTemplates.indexPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('indexEndpoint', () => {
+      const fakePath = '/rendered/path/indexEndpoint';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        index_endpoint: 'indexEndpointValue',
+      };
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.indexEndpointPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.indexEndpointPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('indexEndpointPath', () => {
+        const result = client.indexEndpointPath(
+          'projectValue',
+          'locationValue',
+          'indexEndpointValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromIndexEndpointName', () => {
+        const result = client.matchProjectFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromIndexEndpointName', () => {
+        const result = client.matchLocationFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchIndexEndpointFromIndexEndpointName', () => {
+        const result = client.matchIndexEndpointFromIndexEndpointName(fakePath);
+        assert.strictEqual(result, 'indexEndpointValue');
+        assert(
+          (client.pathTemplates.indexEndpointPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
     describe('location', () => {
       const fakePath = '/rendered/path/location';
       const expectedParameters = {
@@ -4648,6 +6332,85 @@ describe('v1.JobServiceClient', () => {
         assert.strictEqual(result, 'modelValue');
         assert(
           (client.pathTemplates.modelPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('modelDeploymentMonitoringJob', () => {
+      const fakePath = '/rendered/path/modelDeploymentMonitoringJob';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        model_deployment_monitoring_job: 'modelDeploymentMonitoringJobValue',
+      };
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render =
+        sinon.stub().returns(fakePath);
+      client.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match =
+        sinon.stub().returns(expectedParameters);
+
+      it('modelDeploymentMonitoringJobPath', () => {
+        const result = client.modelDeploymentMonitoringJobPath(
+          'projectValue',
+          'locationValue',
+          'modelDeploymentMonitoringJobValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .render as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromModelDeploymentMonitoringJobName', () => {
+        const result =
+          client.matchProjectFromModelDeploymentMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromModelDeploymentMonitoringJobName', () => {
+        const result =
+          client.matchLocationFromModelDeploymentMonitoringJobName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName', () => {
+        const result =
+          client.matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+            fakePath
+          );
+        assert.strictEqual(result, 'modelDeploymentMonitoringJobValue');
+        assert(
+          (
+            client.pathTemplates.modelDeploymentMonitoringJobPathTemplate
+              .match as SinonStub
+          )
             .getCall(-1)
             .calledWith(fakePath)
         );
@@ -4962,6 +6725,70 @@ describe('v1.JobServiceClient', () => {
         assert.strictEqual(result, 'specialistPoolValue');
         assert(
           (client.pathTemplates.specialistPoolPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+    });
+
+    describe('study', () => {
+      const fakePath = '/rendered/path/study';
+      const expectedParameters = {
+        project: 'projectValue',
+        location: 'locationValue',
+        study: 'studyValue',
+      };
+      const client = new jobserviceModule.v1.JobServiceClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      client.pathTemplates.studyPathTemplate.render = sinon
+        .stub()
+        .returns(fakePath);
+      client.pathTemplates.studyPathTemplate.match = sinon
+        .stub()
+        .returns(expectedParameters);
+
+      it('studyPath', () => {
+        const result = client.studyPath(
+          'projectValue',
+          'locationValue',
+          'studyValue'
+        );
+        assert.strictEqual(result, fakePath);
+        assert(
+          (client.pathTemplates.studyPathTemplate.render as SinonStub)
+            .getCall(-1)
+            .calledWith(expectedParameters)
+        );
+      });
+
+      it('matchProjectFromStudyName', () => {
+        const result = client.matchProjectFromStudyName(fakePath);
+        assert.strictEqual(result, 'projectValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchLocationFromStudyName', () => {
+        const result = client.matchLocationFromStudyName(fakePath);
+        assert.strictEqual(result, 'locationValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
+            .getCall(-1)
+            .calledWith(fakePath)
+        );
+      });
+
+      it('matchStudyFromStudyName', () => {
+        const result = client.matchStudyFromStudyName(fakePath);
+        assert.strictEqual(result, 'studyValue');
+        assert(
+          (client.pathTemplates.studyPathTemplate.match as SinonStub)
             .getCall(-1)
             .calledWith(fakePath)
         );

@@ -64,6 +64,10 @@
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
+        "BatchCreateTensorboardRuns": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
         "GetTensorboardRun": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -77,6 +81,10 @@
           "retry_params_name": "default"
         },
         "DeleteTensorboardRun": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "BatchCreateTensorboardTimeSeries": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
@@ -105,6 +113,10 @@
           "retry_params_name": "default"
         },
         "ReadTensorboardBlobData": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "WriteTensorboardExperimentData": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

@@ -21,27 +21,22 @@
       },
       "methods": {
         "CreateSpecialistPool": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetSpecialistPool": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListSpecialistPools": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteSpecialistPool": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateSpecialistPool": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

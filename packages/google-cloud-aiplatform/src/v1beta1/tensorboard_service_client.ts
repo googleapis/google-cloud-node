@@ -462,10 +462,12 @@ export class TensorboardServiceClient {
       'listTensorboardExperiments',
       'deleteTensorboardExperiment',
       'createTensorboardRun',
+      'batchCreateTensorboardRuns',
       'getTensorboardRun',
       'updateTensorboardRun',
       'listTensorboardRuns',
       'deleteTensorboardRun',
+      'batchCreateTensorboardTimeSeries',
       'createTensorboardTimeSeries',
       'getTensorboardTimeSeries',
       'updateTensorboardTimeSeries',
@@ -473,6 +475,7 @@ export class TensorboardServiceClient {
       'deleteTensorboardTimeSeries',
       'readTensorboardTimeSeriesData',
       'readTensorboardBlobData',
+      'writeTensorboardExperimentData',
       'writeTensorboardRunData',
       'exportTensorboardTimeSeriesData',
     ];
@@ -1019,8 +1022,8 @@ export class TensorboardServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Tensorboard to create the TensorboardRun in.
-   *   Format:
+   *   Required. The resource name of the TensorboardExperiment to create the TensorboardRun
+   *   in. Format:
    *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
    * @param {google.cloud.aiplatform.v1beta1.TensorboardRun} request.tensorboardRun
    *   Required. The TensorboardRun to create.
@@ -1085,6 +1088,114 @@ export class TensorboardServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.createTensorboardRun(request, options, callback);
+  }
+  batchCreateTensorboardRuns(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchCreateTensorboardRuns(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateTensorboardRuns(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Batch create TensorboardRuns.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the TensorboardExperiment to create the
+   *   TensorboardRuns in. Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   *   The parent field in the CreateTensorboardRunRequest messages must match
+   *   this field.
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the TensorboardRuns to create.
+   *   A maximum of 1000 TensorboardRuns can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchCreateTensorboardRunsResponse]{@link google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.batchCreateTensorboardRuns(request);
+   */
+  batchCreateTensorboardRuns(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchCreateTensorboardRuns(
+      request,
+      options,
+      callback
+    );
   }
   getTensorboardRun(
     request?: protos.google.cloud.aiplatform.v1beta1.IGetTensorboardRunRequest,
@@ -1290,6 +1401,116 @@ export class TensorboardServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.updateTensorboardRun(request, options, callback);
+  }
+  batchCreateTensorboardTimeSeries(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  batchCreateTensorboardTimeSeries(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  batchCreateTensorboardTimeSeries(
+    request: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Batch create TensorboardTimeSeries that belong to a TensorboardExperiment.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The resource name of the TensorboardExperiment to create the
+   *   TensorboardTimeSeries in.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   *   The TensorboardRuns referenced by the parent fields in the
+   *   CreateTensorboardTimeSeriesRequest messages must be sub resources of this
+   *   TensorboardExperiment.
+   * @param {number[]} request.requests
+   *   Required. The request message specifying the TensorboardTimeSeries to create.
+   *   A maximum of 1000 TensorboardTimeSeries can be created in a batch.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BatchCreateTensorboardTimeSeriesResponse]{@link google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.batchCreateTensorboardTimeSeries(request);
+   */
+  batchCreateTensorboardTimeSeries(
+    request?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.batchCreateTensorboardTimeSeries(
+      request,
+      options,
+      callback
+    );
   }
   createTensorboardTimeSeries(
     request?: protos.google.cloud.aiplatform.v1beta1.ICreateTensorboardTimeSeriesRequest,
@@ -1727,6 +1948,113 @@ export class TensorboardServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.readTensorboardTimeSeriesData(
+      request,
+      options,
+      callback
+    );
+  }
+  writeTensorboardExperimentData(
+    request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  writeTensorboardExperimentData(
+    request: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  writeTensorboardExperimentData(
+    request: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Write time series data points of multiple TensorboardTimeSeries in multiple
+   * TensorboardRun's. If any data fail to be ingested, an error will be
+   * returned.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.tensorboardExperiment
+   *   Required. The resource name of the TensorboardExperiment to write data to.
+   *   Format:
+   *   `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
+   * @param {number[]} request.writeRunDataRequests
+   *   Required. Requests containing per-run TensorboardTimeSeries data to write.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [WriteTensorboardExperimentDataResponse]{@link google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.writeTensorboardExperimentData(request);
+   */
+  writeTensorboardExperimentData(
+    request?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataResponse,
+          | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataResponse,
+      | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataResponse,
+      (
+        | protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        tensorboard_experiment: request.tensorboardExperiment || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.writeTensorboardExperimentData(
       request,
       options,
       callback
@@ -2799,7 +3127,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Location to list Tensorboards.
    *   Format:
-   *   'projects/{project}/locations/{location}'
+   *   `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   Lists the Tensorboards that match the filter expression.
    * @param {number} request.pageSize
@@ -2883,7 +3211,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Location to list Tensorboards.
    *   Format:
-   *   'projects/{project}/locations/{location}'
+   *   `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   Lists the Tensorboards that match the filter expression.
    * @param {number} request.pageSize
@@ -2945,7 +3273,7 @@ export class TensorboardServiceClient {
    * @param {string} request.parent
    *   Required. The resource name of the Location to list Tensorboards.
    *   Format:
-   *   'projects/{project}/locations/{location}'
+   *   `projects/{project}/locations/{location}`
    * @param {string} request.filter
    *   Lists the Tensorboards that match the filter expression.
    * @param {number} request.pageSize
@@ -3285,7 +3613,7 @@ export class TensorboardServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Tensorboard to list TensorboardRuns.
+   *   Required. The resource name of the TensorboardExperiment to list TensorboardRuns.
    *   Format:
    *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
    * @param {string} request.filter
@@ -3369,7 +3697,7 @@ export class TensorboardServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Tensorboard to list TensorboardRuns.
+   *   Required. The resource name of the TensorboardExperiment to list TensorboardRuns.
    *   Format:
    *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
    * @param {string} request.filter
@@ -3431,7 +3759,7 @@ export class TensorboardServiceClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.parent
-   *   Required. The resource name of the Tensorboard to list TensorboardRuns.
+   *   Required. The resource name of the TensorboardExperiment to list TensorboardRuns.
    *   Format:
    *   'projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}'
    * @param {string} request.filter

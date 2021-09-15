@@ -21,52 +21,42 @@
       },
       "methods": {
         "CreateDataset": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetDataset": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "UpdateDataset": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListDatasets": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteDataset": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ImportData": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ExportData": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListDataItems": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetAnnotationSpec": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListAnnotations": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

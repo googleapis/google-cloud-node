@@ -21,27 +21,22 @@
       },
       "methods": {
         "CreateTrainingPipeline": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "GetTrainingPipeline": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "ListTrainingPipelines": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "DeleteTrainingPipeline": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },
         "CancelTrainingPipeline": {
-          "timeout_millis": 5000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         },

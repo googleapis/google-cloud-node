@@ -840,6 +840,124 @@ describe('v1beta1.TensorboardServiceClient', () => {
     });
   });
 
+  describe('batchCreateTensorboardRuns', () => {
+    it('invokes batchCreateTensorboardRuns without error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsResponse()
+      );
+      client.innerApiCalls.batchCreateTensorboardRuns =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchCreateTensorboardRuns(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchCreateTensorboardRuns as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchCreateTensorboardRuns without error using callback', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsResponse()
+      );
+      client.innerApiCalls.batchCreateTensorboardRuns =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchCreateTensorboardRuns(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardRunsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchCreateTensorboardRuns as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes batchCreateTensorboardRuns with error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardRunsRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchCreateTensorboardRuns = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.batchCreateTensorboardRuns(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.batchCreateTensorboardRuns as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('getTensorboardRun', () => {
     it('invokes getTensorboardRun without error', async () => {
       const client =
@@ -1066,6 +1184,124 @@ describe('v1beta1.TensorboardServiceClient', () => {
       await assert.rejects(client.updateTensorboardRun(request), expectedError);
       assert(
         (client.innerApiCalls.updateTensorboardRun as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('batchCreateTensorboardTimeSeries', () => {
+    it('invokes batchCreateTensorboardTimeSeries without error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesResponse()
+      );
+      client.innerApiCalls.batchCreateTensorboardTimeSeries =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.batchCreateTensorboardTimeSeries(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes batchCreateTensorboardTimeSeries without error using callback', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesResponse()
+      );
+      client.innerApiCalls.batchCreateTensorboardTimeSeries =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.batchCreateTensorboardTimeSeries(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IBatchCreateTensorboardTimeSeriesResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes batchCreateTensorboardTimeSeries with error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.BatchCreateTensorboardTimeSeriesRequest()
+      );
+      request.parent = '';
+      const expectedHeaderRequestParams = 'parent=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.batchCreateTensorboardTimeSeries = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.batchCreateTensorboardTimeSeries(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.batchCreateTensorboardTimeSeries as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -1541,6 +1777,124 @@ describe('v1beta1.TensorboardServiceClient', () => {
       );
       assert(
         (client.innerApiCalls.readTensorboardTimeSeriesData as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('writeTensorboardExperimentData', () => {
+    it('invokes writeTensorboardExperimentData without error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataRequest()
+      );
+      request.tensorboardExperiment = '';
+      const expectedHeaderRequestParams = 'tensorboard_experiment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataResponse()
+      );
+      client.innerApiCalls.writeTensorboardExperimentData =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.writeTensorboardExperimentData(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.writeTensorboardExperimentData as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes writeTensorboardExperimentData without error using callback', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataRequest()
+      );
+      request.tensorboardExperiment = '';
+      const expectedHeaderRequestParams = 'tensorboard_experiment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataResponse()
+      );
+      client.innerApiCalls.writeTensorboardExperimentData =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.writeTensorboardExperimentData(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.aiplatform.v1beta1.IWriteTensorboardExperimentDataResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.writeTensorboardExperimentData as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes writeTensorboardExperimentData with error', async () => {
+      const client =
+        new tensorboardserviceModule.v1beta1.TensorboardServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.WriteTensorboardExperimentDataRequest()
+      );
+      request.tensorboardExperiment = '';
+      const expectedHeaderRequestParams = 'tensorboard_experiment=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.writeTensorboardExperimentData = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.writeTensorboardExperimentData(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.writeTensorboardExperimentData as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );

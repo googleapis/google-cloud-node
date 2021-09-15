@@ -21,7 +21,14 @@
       },
       "methods": {
         "Predict": {
-          "timeout_millis": 5000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RawPredict": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "Explain": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
         }

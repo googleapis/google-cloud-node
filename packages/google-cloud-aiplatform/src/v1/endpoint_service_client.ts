@@ -42,6 +42,7 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
+ *  A service for managing Vertex AI's Endpoints.
  * @class
  * @memberof v1
  */
@@ -201,12 +202,22 @@ export class EndpointServiceClient {
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
       ),
+      indexPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexes/{index}'
+      ),
+      indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
+      modelDeploymentMonitoringJobPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+        ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
@@ -218,6 +229,9 @@ export class EndpointServiceClient {
       ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
+      ),
+      studyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}'
       ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
@@ -2282,6 +2296,107 @@ export class EndpointServiceClient {
   }
 
   /**
+   * Return a fully-qualified index resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index
+   * @returns {string} Resource name string.
+   */
+  indexPath(project: string, location: string, index: string) {
+    return this.pathTemplates.indexPathTemplate.render({
+      project: project,
+      location: location,
+      index: index,
+    });
+  }
+
+  /**
+   * Parse the project from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).project;
+  }
+
+  /**
+   * Parse the location from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).location;
+  }
+
+  /**
+   * Parse the index from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the index.
+   */
+  matchIndexFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).index;
+  }
+
+  /**
+   * Return a fully-qualified indexEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index_endpoint
+   * @returns {string} Resource name string.
+   */
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      index_endpoint: indexEndpoint,
+    });
+  }
+
+  /**
+   * Parse the project from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
+  }
+
+  /**
+   * Parse the location from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
+  }
+
+  /**
+   * Parse the index_endpoint from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the index_endpoint.
+   */
+  matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -2364,6 +2479,71 @@ export class EndpointServiceClient {
    */
   matchModelFromModelName(modelName: string) {
     return this.pathTemplates.modelPathTemplate.match(modelName).model;
+  }
+
+  /**
+   * Return a fully-qualified modelDeploymentMonitoringJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_deployment_monitoring_job
+   * @returns {string} Resource name string.
+   */
+  modelDeploymentMonitoringJobPath(
+    project: string,
+    location: string,
+    modelDeploymentMonitoringJob: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
+      project: project,
+      location: location,
+      model_deployment_monitoring_job: modelDeploymentMonitoringJob,
+    });
+  }
+
+  /**
+   * Parse the project from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).location;
+  }
+
+  /**
+   * Parse the model_deployment_monitoring_job from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the model_deployment_monitoring_job.
+   */
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).model_deployment_monitoring_job;
   }
 
   /**
@@ -2643,6 +2823,55 @@ export class EndpointServiceClient {
     return this.pathTemplates.specialistPoolPathTemplate.match(
       specialistPoolName
     ).specialist_pool;
+  }
+
+  /**
+   * Return a fully-qualified study resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @returns {string} Resource name string.
+   */
+  studyPath(project: string, location: string, study: string) {
+    return this.pathTemplates.studyPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+    });
+  }
+
+  /**
+   * Parse the project from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).project;
+  }
+
+  /**
+   * Parse the location from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).location;
+  }
+
+  /**
+   * Parse the study from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).study;
   }
 
   /**

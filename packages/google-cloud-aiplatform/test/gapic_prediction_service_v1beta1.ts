@@ -244,6 +244,117 @@ describe('v1beta1.PredictionServiceClient', () => {
     });
   });
 
+  describe('rawPredict', () => {
+    it('invokes rawPredict without error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RawPredictRequest()
+      );
+      request.endpoint = '';
+      const expectedHeaderRequestParams = 'endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.api.HttpBody()
+      );
+      client.innerApiCalls.rawPredict = stubSimpleCall(expectedResponse);
+      const [response] = await client.rawPredict(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.rawPredict as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes rawPredict without error using callback', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RawPredictRequest()
+      );
+      request.endpoint = '';
+      const expectedHeaderRequestParams = 'endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.api.HttpBody()
+      );
+      client.innerApiCalls.rawPredict =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.rawPredict(
+          request,
+          (err?: Error | null, result?: protos.google.api.IHttpBody | null) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.rawPredict as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes rawPredict with error', async () => {
+      const client =
+        new predictionserviceModule.v1beta1.PredictionServiceClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.aiplatform.v1beta1.RawPredictRequest()
+      );
+      request.endpoint = '';
+      const expectedHeaderRequestParams = 'endpoint=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.rawPredict = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.rawPredict(request), expectedError);
+      assert(
+        (client.innerApiCalls.rawPredict as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('explain', () => {
     it('invokes explain without error', async () => {
       const client =

@@ -35,6 +35,10 @@ const PredictionServiceClient = v1.PredictionServiceClient;
 type PredictionServiceClient = v1.PredictionServiceClient;
 const SpecialistPoolServiceClient = v1.SpecialistPoolServiceClient;
 type SpecialistPoolServiceClient = v1.SpecialistPoolServiceClient;
+const IndexEndpointServiceClient = v1.IndexEndpointServiceClient;
+type IndexEndpointServiceClient = v1.IndexEndpointServiceClient;
+const IndexServiceClient = v1.IndexServiceClient;
+type IndexServiceClient = v1.IndexServiceClient;
 
 export {
   v1beta1,
@@ -47,6 +51,8 @@ export {
   PipelineServiceClient,
   PredictionServiceClient,
   SpecialistPoolServiceClient,
+  IndexEndpointServiceClient,
+  IndexServiceClient,
 };
 export default {
   v1beta1,
@@ -59,6 +65,8 @@ export default {
   PipelineServiceClient,
   PredictionServiceClient,
   SpecialistPoolServiceClient,
+  IndexEndpointServiceClient,
+  IndexServiceClient,
 };
 import * as protos from '../protos/protos';
 export {protos};

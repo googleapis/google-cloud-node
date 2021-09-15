@@ -19,6 +19,8 @@
 import {
   DatasetServiceClient,
   EndpointServiceClient,
+  IndexEndpointServiceClient,
+  IndexServiceClient,
   JobServiceClient,
   MigrationServiceClient,
   ModelServiceClient,
@@ -32,6 +34,14 @@ function doStuffWithDatasetServiceClient(client: DatasetServiceClient) {
   client.close();
 }
 function doStuffWithEndpointServiceClient(client: EndpointServiceClient) {
+  client.close();
+}
+function doStuffWithIndexEndpointServiceClient(
+  client: IndexEndpointServiceClient
+) {
+  client.close();
+}
+function doStuffWithIndexServiceClient(client: IndexServiceClient) {
   client.close();
 }
 function doStuffWithJobServiceClient(client: JobServiceClient) {
@@ -62,6 +72,12 @@ function main() {
   // check that the client instance can be created
   const endpointServiceClient = new EndpointServiceClient();
   doStuffWithEndpointServiceClient(endpointServiceClient);
+  // check that the client instance can be created
+  const indexEndpointServiceClient = new IndexEndpointServiceClient();
+  doStuffWithIndexEndpointServiceClient(indexEndpointServiceClient);
+  // check that the client instance can be created
+  const indexServiceClient = new IndexServiceClient();
+  doStuffWithIndexServiceClient(indexServiceClient);
   // check that the client instance can be created
   const jobServiceClient = new JobServiceClient();
   doStuffWithJobServiceClient(jobServiceClient);

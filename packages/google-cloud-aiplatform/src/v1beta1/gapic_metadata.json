@@ -1592,6 +1592,11 @@
                 "predict"
               ]
             },
+            "RawPredict": {
+              "methods": [
+                "rawPredict"
+              ]
+            },
             "Explain": {
               "methods": [
                 "explain"
@@ -1605,6 +1610,11 @@
             "Predict": {
               "methods": [
                 "predict"
+              ]
+            },
+            "RawPredict": {
+              "methods": [
+                "rawPredict"
               ]
             },
             "Explain": {
@@ -1714,6 +1724,11 @@
                 "createTensorboardRun"
               ]
             },
+            "BatchCreateTensorboardRuns": {
+              "methods": [
+                "batchCreateTensorboardRuns"
+              ]
+            },
             "GetTensorboardRun": {
               "methods": [
                 "getTensorboardRun"
@@ -1722,6 +1737,11 @@
             "UpdateTensorboardRun": {
               "methods": [
                 "updateTensorboardRun"
+              ]
+            },
+            "BatchCreateTensorboardTimeSeries": {
+              "methods": [
+                "batchCreateTensorboardTimeSeries"
               ]
             },
             "CreateTensorboardTimeSeries": {
@@ -1742,6 +1762,11 @@
             "ReadTensorboardTimeSeriesData": {
               "methods": [
                 "readTensorboardTimeSeriesData"
+              ]
+            },
+            "WriteTensorboardExperimentData": {
+              "methods": [
+                "writeTensorboardExperimentData"
               ]
             },
             "WriteTensorboardRunData": {
@@ -1849,6 +1874,11 @@
                 "createTensorboardRun"
               ]
             },
+            "BatchCreateTensorboardRuns": {
+              "methods": [
+                "batchCreateTensorboardRuns"
+              ]
+            },
             "GetTensorboardRun": {
               "methods": [
                 "getTensorboardRun"
@@ -1857,6 +1887,11 @@
             "UpdateTensorboardRun": {
               "methods": [
                 "updateTensorboardRun"
+              ]
+            },
+            "BatchCreateTensorboardTimeSeries": {
+              "methods": [
+                "batchCreateTensorboardTimeSeries"
               ]
             },
             "CreateTensorboardTimeSeries": {
@@ -1877,6 +1912,11 @@
             "ReadTensorboardTimeSeriesData": {
               "methods": [
                 "readTensorboardTimeSeriesData"
+              ]
+            },
+            "WriteTensorboardExperimentData": {
+              "methods": [
+                "writeTensorboardExperimentData"
               ]
             },
             "WriteTensorboardRunData": {

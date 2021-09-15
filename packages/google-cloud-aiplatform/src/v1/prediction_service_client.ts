@@ -191,9 +191,19 @@ export class PredictionServiceClient {
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
       ),
+      indexPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexes/{index}'
+      ),
+      indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
+      ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
+      modelDeploymentMonitoringJobPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+        ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
@@ -205,6 +215,9 @@ export class PredictionServiceClient {
       ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
+      ),
+      studyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}'
       ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
@@ -263,7 +276,7 @@ export class PredictionServiceClient {
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const predictionServiceStubMethods = ['predict'];
+    const predictionServiceStubMethods = ['predict', 'rawPredict', 'explain'];
     for (const methodName of predictionServiceStubMethods) {
       const callPromise = this.predictionServiceStub.then(
         stub =>
@@ -444,6 +457,228 @@ export class PredictionServiceClient {
       });
     this.initialize();
     return this.innerApiCalls.predict(request, options, callback);
+  }
+  rawPredict(
+    request?: protos.google.cloud.aiplatform.v1.IRawPredictRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      protos.google.cloud.aiplatform.v1.IRawPredictRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  rawPredict(
+    request: protos.google.cloud.aiplatform.v1.IRawPredictRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.cloud.aiplatform.v1.IRawPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  rawPredict(
+    request: protos.google.cloud.aiplatform.v1.IRawPredictRequest,
+    callback: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.cloud.aiplatform.v1.IRawPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Perform an online prediction with arbitrary http payload.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.endpoint
+   *   Required. The name of the Endpoint requested to serve the prediction.
+   *   Format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   * @param {google.api.HttpBody} request.httpBody
+   *   The prediction input. Supports HTTP headers and arbitrary data payload.
+   *
+   *   A {@link google.cloud.aiplatform.v1.DeployedModel|DeployedModel} may have an upper limit on the number of instances it
+   *   supports per request. When this limit it is exceeded for an AutoML model,
+   *   the {@link google.cloud.aiplatform.v1.PredictionService.RawPredict|RawPredict} method returns an error.
+   *   When this limit is exceeded for a custom-trained model, the behavior varies
+   *   depending on the model.
+   *
+   *   You can specify the schema for each instance in the
+   *   {@link google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|predict_schemata.instance_schema_uri}
+   *   field when you create a {@link google.cloud.aiplatform.v1.Model|Model}. This schema applies when you deploy the
+   *   `Model` as a `DeployedModel` to an {@link google.cloud.aiplatform.v1.Endpoint|Endpoint} and use the `RawPredict`
+   *   method.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [HttpBody]{@link google.api.HttpBody}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.rawPredict(request);
+   */
+  rawPredict(
+    request?: protos.google.cloud.aiplatform.v1.IRawPredictRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.api.IHttpBody,
+          | protos.google.cloud.aiplatform.v1.IRawPredictRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.api.IHttpBody,
+      protos.google.cloud.aiplatform.v1.IRawPredictRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.api.IHttpBody,
+      protos.google.cloud.aiplatform.v1.IRawPredictRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        endpoint: request.endpoint || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.rawPredict(request, options, callback);
+  }
+  explain(
+    request?: protos.google.cloud.aiplatform.v1.IExplainRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IExplainResponse,
+      protos.google.cloud.aiplatform.v1.IExplainRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  explain(
+    request: protos.google.cloud.aiplatform.v1.IExplainRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IExplainResponse,
+      protos.google.cloud.aiplatform.v1.IExplainRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  explain(
+    request: protos.google.cloud.aiplatform.v1.IExplainRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IExplainResponse,
+      protos.google.cloud.aiplatform.v1.IExplainRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Perform an online explanation.
+   *
+   * If {@link google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id|deployed_model_id} is specified,
+   * the corresponding DeployModel must have
+   * {@link google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec}
+   * populated. If {@link google.cloud.aiplatform.v1.ExplainRequest.deployed_model_id|deployed_model_id}
+   * is not specified, all DeployedModels must have
+   * {@link google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec}
+   * populated. Only deployed AutoML tabular Models have
+   * explanation_spec.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.endpoint
+   *   Required. The name of the Endpoint requested to serve the explanation.
+   *   Format:
+   *   `projects/{project}/locations/{location}/endpoints/{endpoint}`
+   * @param {number[]} request.instances
+   *   Required. The instances that are the input to the explanation call.
+   *   A DeployedModel may have an upper limit on the number of instances it
+   *   supports per request, and when it is exceeded the explanation call errors
+   *   in case of AutoML Models, or, in case of customer created Models, the
+   *   behaviour is as documented by that Model.
+   *   The schema of any single instance may be specified via Endpoint's
+   *   DeployedModels' {@link google.cloud.aiplatform.v1.DeployedModel.model|Model's}
+   *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
+   *   {@link google.cloud.aiplatform.v1.PredictSchemata.instance_schema_uri|instance_schema_uri}.
+   * @param {google.protobuf.Value} request.parameters
+   *   The parameters that govern the prediction. The schema of the parameters may
+   *   be specified via Endpoint's DeployedModels' {@link google.cloud.aiplatform.v1.DeployedModel.model|Model's }
+   *   {@link google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
+   *   {@link google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
+   * @param {google.cloud.aiplatform.v1.ExplanationSpecOverride} request.explanationSpecOverride
+   *   If specified, overrides the
+   *   {@link google.cloud.aiplatform.v1.DeployedModel.explanation_spec|explanation_spec} of the DeployedModel.
+   *   Can be used for explaining prediction results with different
+   *   configurations, such as:
+   *    - Explaining top-5 predictions results as opposed to top-1;
+   *    - Increasing path count or step count of the attribution methods to reduce
+   *      approximate errors;
+   *    - Using different baselines for explaining the prediction results.
+   * @param {string} request.deployedModelId
+   *   If specified, this ExplainRequest will be served by the chosen
+   *   DeployedModel, overriding {@link google.cloud.aiplatform.v1.Endpoint.traffic_split|Endpoint.traffic_split}.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ExplainResponse]{@link google.cloud.aiplatform.v1.ExplainResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.explain(request);
+   */
+  explain(
+    request?: protos.google.cloud.aiplatform.v1.IExplainRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IExplainResponse,
+          protos.google.cloud.aiplatform.v1.IExplainRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IExplainResponse,
+      protos.google.cloud.aiplatform.v1.IExplainRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IExplainResponse,
+      protos.google.cloud.aiplatform.v1.IExplainRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        endpoint: request.endpoint || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.explain(request, options, callback);
   }
 
   // --------------------
@@ -1222,6 +1457,107 @@ export class PredictionServiceClient {
   }
 
   /**
+   * Return a fully-qualified index resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index
+   * @returns {string} Resource name string.
+   */
+  indexPath(project: string, location: string, index: string) {
+    return this.pathTemplates.indexPathTemplate.render({
+      project: project,
+      location: location,
+      index: index,
+    });
+  }
+
+  /**
+   * Parse the project from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).project;
+  }
+
+  /**
+   * Parse the location from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).location;
+  }
+
+  /**
+   * Parse the index from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the index.
+   */
+  matchIndexFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).index;
+  }
+
+  /**
+   * Return a fully-qualified indexEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index_endpoint
+   * @returns {string} Resource name string.
+   */
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      index_endpoint: indexEndpoint,
+    });
+  }
+
+  /**
+   * Parse the project from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
+  }
+
+  /**
+   * Parse the location from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
+  }
+
+  /**
+   * Parse the index_endpoint from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the index_endpoint.
+   */
+  matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
+  }
+
+  /**
    * Return a fully-qualified model resource name string.
    *
    * @param {string} project
@@ -1268,6 +1604,71 @@ export class PredictionServiceClient {
    */
   matchModelFromModelName(modelName: string) {
     return this.pathTemplates.modelPathTemplate.match(modelName).model;
+  }
+
+  /**
+   * Return a fully-qualified modelDeploymentMonitoringJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_deployment_monitoring_job
+   * @returns {string} Resource name string.
+   */
+  modelDeploymentMonitoringJobPath(
+    project: string,
+    location: string,
+    modelDeploymentMonitoringJob: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
+      project: project,
+      location: location,
+      model_deployment_monitoring_job: modelDeploymentMonitoringJob,
+    });
+  }
+
+  /**
+   * Parse the project from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).location;
+  }
+
+  /**
+   * Parse the model_deployment_monitoring_job from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the model_deployment_monitoring_job.
+   */
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).model_deployment_monitoring_job;
   }
 
   /**
@@ -1547,6 +1948,55 @@ export class PredictionServiceClient {
     return this.pathTemplates.specialistPoolPathTemplate.match(
       specialistPoolName
     ).specialist_pool;
+  }
+
+  /**
+   * Return a fully-qualified study resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @returns {string} Resource name string.
+   */
+  studyPath(project: string, location: string, study: string) {
+    return this.pathTemplates.studyPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+    });
+  }
+
+  /**
+   * Parse the project from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).project;
+  }
+
+  /**
+   * Parse the location from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).location;
+  }
+
+  /**
+   * Parse the study from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).study;
   }
 
   /**

@@ -202,12 +202,22 @@ export class JobServiceClient {
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
       ),
+      indexPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexes/{index}'
+      ),
+      indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
+      modelDeploymentMonitoringJobPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+        ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
@@ -219,6 +229,9 @@ export class JobServiceClient {
       ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
+      ),
+      studyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}'
       ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
@@ -251,6 +264,17 @@ export class JobServiceClient {
         'pageToken',
         'nextPageToken',
         'batchPredictionJobs'
+      ),
+      searchModelDeploymentMonitoringStatsAnomalies:
+        new this._gaxModule.PageDescriptor(
+          'pageToken',
+          'nextPageToken',
+          'monitoringStats'
+        ),
+      listModelDeploymentMonitoringJobs: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'modelDeploymentMonitoringJobs'
       ),
     };
 
@@ -290,6 +314,18 @@ export class JobServiceClient {
     const deleteBatchPredictionJobMetadata = protoFilesRoot.lookup(
       '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
     ) as gax.protobuf.Type;
+    const updateModelDeploymentMonitoringJobResponse = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob'
+    ) as gax.protobuf.Type;
+    const updateModelDeploymentMonitoringJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata'
+    ) as gax.protobuf.Type;
+    const deleteModelDeploymentMonitoringJobResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty'
+    ) as gax.protobuf.Type;
+    const deleteModelDeploymentMonitoringJobMetadata = protoFilesRoot.lookup(
+      '.google.cloud.aiplatform.v1.DeleteOperationMetadata'
+    ) as gax.protobuf.Type;
 
     this.descriptors.longrunning = {
       deleteCustomJob: new this._gaxModule.LongrunningDescriptor(
@@ -322,6 +358,26 @@ export class JobServiceClient {
           deleteBatchPredictionJobMetadata
         )
       ),
+      updateModelDeploymentMonitoringJob:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          updateModelDeploymentMonitoringJobResponse.decode.bind(
+            updateModelDeploymentMonitoringJobResponse
+          ),
+          updateModelDeploymentMonitoringJobMetadata.decode.bind(
+            updateModelDeploymentMonitoringJobMetadata
+          )
+        ),
+      deleteModelDeploymentMonitoringJob:
+        new this._gaxModule.LongrunningDescriptor(
+          this.operationsClient,
+          deleteModelDeploymentMonitoringJobResponse.decode.bind(
+            deleteModelDeploymentMonitoringJobResponse
+          ),
+          deleteModelDeploymentMonitoringJobMetadata.decode.bind(
+            deleteModelDeploymentMonitoringJobMetadata
+          )
+        ),
     };
 
     // Put together the default options sent with requests.
@@ -394,6 +450,14 @@ export class JobServiceClient {
       'listBatchPredictionJobs',
       'deleteBatchPredictionJob',
       'cancelBatchPredictionJob',
+      'createModelDeploymentMonitoringJob',
+      'searchModelDeploymentMonitoringStatsAnomalies',
+      'getModelDeploymentMonitoringJob',
+      'listModelDeploymentMonitoringJobs',
+      'updateModelDeploymentMonitoringJob',
+      'deleteModelDeploymentMonitoringJob',
+      'pauseModelDeploymentMonitoringJob',
+      'resumeModelDeploymentMonitoringJob',
     ];
     for (const methodName of jobServiceStubMethods) {
       const callPromise = this.jobServiceStub.then(
@@ -1690,6 +1754,424 @@ export class JobServiceClient {
       callback
     );
   }
+  createModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  createModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  createModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a ModelDeploymentMonitoringJob. It will run periodically on a
+   * configured interval.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
+   *   Required. The ModelDeploymentMonitoringJob to create
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.createModelDeploymentMonitoringJob(request);
+   */
+  createModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1.ICreateModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.createModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  getModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getModelDeploymentMonitoringJob(request);
+   */
+  getModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+          | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+      (
+        | protos.google.cloud.aiplatform.v1.IGetModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  pauseModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  pauseModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  pauseModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Pauses a ModelDeploymentMonitoringJob. If the job is running, the server
+   * makes a best effort to cancel the job. Will mark
+   * {@link google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.state|ModelDeploymentMonitoringJob.state} to 'PAUSED'.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob to pause.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.pauseModelDeploymentMonitoringJob(request);
+   */
+  pauseModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.IPauseModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.pauseModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  resumeModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  resumeModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  resumeModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Resumes a paused ModelDeploymentMonitoringJob. It will start to run from
+   * next scheduled time. A deleted ModelDeploymentMonitoringJob can't be
+   * resumed.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the ModelDeploymentMonitoringJob to resume.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Empty]{@link google.protobuf.Empty}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.resumeModelDeploymentMonitoringJob(request);
+   */
+  resumeModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.protobuf.IEmpty,
+          | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.IEmpty,
+      | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.protobuf.IEmpty,
+      (
+        | protos.google.cloud.aiplatform.v1.IResumeModelDeploymentMonitoringJobRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.resumeModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
 
   deleteCustomJob(
     request?: protos.google.cloud.aiplatform.v1.IDeleteCustomJobRequest,
@@ -2265,6 +2747,302 @@ export class JobServiceClient {
     const decodeOperation = new gax.Operation(
       operation,
       this.descriptors.longrunning.deleteBatchPredictionJob,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >;
+  }
+  updateModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  updateModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  updateModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob} request.modelDeploymentMonitoringJob
+   *   Required. The model monitoring configuration which replaces the resource on the
+   *   server.
+   * @param {google.protobuf.FieldMask} request.updateMask
+   *   Required. The update mask applies to the resource.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.updateModelDeploymentMonitoringJob(request);
+   * const [response] = await operation.promise();
+   */
+  updateModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+            protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob,
+        protos.google.cloud.aiplatform.v1.IUpdateModelDeploymentMonitoringJobOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        'model_deployment_monitoring_job.name':
+          request.modelDeploymentMonitoringJob!.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.updateModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `updateModelDeploymentMonitoringJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkUpdateModelDeploymentMonitoringJobProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkUpdateModelDeploymentMonitoringJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob,
+      protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.updateModelDeploymentMonitoringJob,
+      gax.createDefaultBackoffSettings()
+    );
+    return decodeOperation as LROperation<
+      protos.google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob,
+      protos.google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobOperationMetadata
+    >;
+  }
+  deleteModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  deleteModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
+    options: CallOptions,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  deleteModelDeploymentMonitoringJob(
+    request: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
+    callback: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a ModelDeploymentMonitoringJob.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.name
+   *   Required. The resource name of the model monitoring job to delete.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation. Its `promise()` method returns a promise
+   *   you can `await` for.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const [operation] = await client.deleteModelDeploymentMonitoringJob(request);
+   * const [response] = await operation.promise();
+   */
+  deleteModelDeploymentMonitoringJob(
+    request?: protos.google.cloud.aiplatform.v1.IDeleteModelDeploymentMonitoringJobRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          LROperation<
+            protos.google.protobuf.IEmpty,
+            protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+          >,
+          protos.google.longrunning.IOperation | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.aiplatform.v1.IDeleteOperationMetadata
+      >,
+      protos.google.longrunning.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        name: request.name || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.deleteModelDeploymentMonitoringJob(
+      request,
+      options,
+      callback
+    );
+  }
+  /**
+   * Check the status of the long running operation returned by `deleteModelDeploymentMonitoringJob()`.
+   * @param {String} name
+   *   The operation name that will be passed.
+   * @returns {Promise} - The promise which resolves to an object.
+   *   The decoded operation object has result and metadata field to get information from.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   * @example
+   * const decodedOperation = await checkDeleteModelDeploymentMonitoringJobProgress(name);
+   * console.log(decodedOperation.result);
+   * console.log(decodedOperation.done);
+   * console.log(decodedOperation.metadata);
+   */
+  async checkDeleteModelDeploymentMonitoringJobProgress(
+    name: string
+  ): Promise<
+    LROperation<
+      protos.google.protobuf.Empty,
+      protos.google.cloud.aiplatform.v1.DeleteOperationMetadata
+    >
+  > {
+    const request = new operationsProtos.google.longrunning.GetOperationRequest(
+      {name}
+    );
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new gax.Operation(
+      operation,
+      this.descriptors.longrunning.deleteModelDeploymentMonitoringJob,
       gax.createDefaultBackoffSettings()
     );
     return decodeOperation as LROperation<
@@ -3350,6 +4128,477 @@ export class JobServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IBatchPredictionJob>;
   }
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+    ]
+  >;
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+    >
+  ): void;
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+    >
+  ): void;
+  /**
+   * Searches Model Monitoring Statistics generated within a given time window.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.modelDeploymentMonitoringJob
+   *   Required. ModelDeploymentMonitoring Job resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   * @param {string} request.deployedModelId
+   *   Required. The DeployedModel ID of the
+   *   [google.cloud.aiplatform.master.ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   * @param {string} request.featureDisplayName
+   *   The feature display name. If specified, only return the stats belonging to
+   *   this feature. Format:
+   *   {@link google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
+   *   example: "user_destination".
+   * @param {number[]} request.objectives
+   *   Required. Objectives of the stats to retrieve.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
+   *   call.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   The earliest timestamp of stats being generated.
+   *   If not set, indicates fetching stats till the earliest possible one.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   The latest timestamp of stats being generated.
+   *   If not set, indicates feching stats till the latest possible one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ModelMonitoringStatsAnomalies]{@link google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `searchModelDeploymentMonitoringStatsAnomaliesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchModelDeploymentMonitoringStatsAnomalies(
+    request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+          | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+      | protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies[],
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest | null,
+      protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        model_deployment_monitoring_job:
+          request.modelDeploymentMonitoringJob || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.searchModelDeploymentMonitoringStatsAnomalies(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.modelDeploymentMonitoringJob
+   *   Required. ModelDeploymentMonitoring Job resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   * @param {string} request.deployedModelId
+   *   Required. The DeployedModel ID of the
+   *   [google.cloud.aiplatform.master.ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   * @param {string} request.featureDisplayName
+   *   The feature display name. If specified, only return the stats belonging to
+   *   this feature. Format:
+   *   {@link google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
+   *   example: "user_destination".
+   * @param {number[]} request.objectives
+   *   Required. Objectives of the stats to retrieve.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
+   *   call.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   The earliest timestamp of stats being generated.
+   *   If not set, indicates fetching stats till the earliest possible one.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   The latest timestamp of stats being generated.
+   *   If not set, indicates feching stats till the latest possible one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ModelMonitoringStatsAnomalies]{@link google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `searchModelDeploymentMonitoringStatsAnomaliesAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  searchModelDeploymentMonitoringStatsAnomaliesStream(
+    request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        model_deployment_monitoring_job:
+          request.modelDeploymentMonitoringJob || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.createStream(
+      this.innerApiCalls
+        .searchModelDeploymentMonitoringStatsAnomalies as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `searchModelDeploymentMonitoringStatsAnomalies`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.modelDeploymentMonitoringJob
+   *   Required. ModelDeploymentMonitoring Job resource name.
+   *   Format:
+   *   `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}
+   * @param {string} request.deployedModelId
+   *   Required. The DeployedModel ID of the
+   *   [google.cloud.aiplatform.master.ModelDeploymentMonitoringObjectiveConfig.deployed_model_id].
+   * @param {string} request.featureDisplayName
+   *   The feature display name. If specified, only return the stats belonging to
+   *   this feature. Format:
+   *   {@link google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name|ModelMonitoringStatsAnomalies.FeatureHistoricStatsAnomalies.feature_display_name},
+   *   example: "user_destination".
+   * @param {number[]} request.objectives
+   *   Required. Objectives of the stats to retrieve.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   A page token received from a previous
+   *   {@link google.cloud.aiplatform.v1.JobService.SearchModelDeploymentMonitoringStatsAnomalies|JobService.SearchModelDeploymentMonitoringStatsAnomalies}
+   *   call.
+   * @param {google.protobuf.Timestamp} request.startTime
+   *   The earliest timestamp of stats being generated.
+   *   If not set, indicates fetching stats till the earliest possible one.
+   * @param {google.protobuf.Timestamp} request.endTime
+   *   The latest timestamp of stats being generated.
+   *   If not set, indicates feching stats till the latest possible one.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ModelMonitoringStatsAnomalies]{@link google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.searchModelDeploymentMonitoringStatsAnomaliesAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  searchModelDeploymentMonitoringStatsAnomaliesAsync(
+    request?: protos.google.cloud.aiplatform.v1.ISearchModelDeploymentMonitoringStatsAnomaliesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        model_deployment_monitoring_job:
+          request.modelDeploymentMonitoringJob || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.searchModelDeploymentMonitoringStatsAnomalies.asyncIterate(
+      this.innerApiCalls[
+        'searchModelDeploymentMonitoringStatsAnomalies'
+      ] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelMonitoringStatsAnomalies>;
+  }
+  listModelDeploymentMonitoringJobs(
+    request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+    ]
+  >;
+  listModelDeploymentMonitoringJobs(
+    request: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+    >
+  ): void;
+  listModelDeploymentMonitoringJobs(
+    request: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+    >
+  ): void;
+  /**
+   * Lists ModelDeploymentMonitoringJobs in a Location.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listModelDeploymentMonitoringJobs(
+    request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+          | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+          | null
+          | undefined,
+          protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+      | protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+      | null
+      | undefined,
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob
+    >
+  ): Promise<
+    [
+      protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob[],
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest | null,
+      protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsResponse
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listModelDeploymentMonitoringJobs(
+      request,
+      options,
+      callback
+    );
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listModelDeploymentMonitoringJobsAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listModelDeploymentMonitoringJobsStream(
+    request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listModelDeploymentMonitoringJobs.createStream(
+      this.innerApiCalls.listModelDeploymentMonitoringJobs as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listModelDeploymentMonitoringJobs`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.parent
+   *   Required. The parent of the ModelDeploymentMonitoringJob.
+   *   Format: `projects/{project}/locations/{location}`
+   * @param {string} request.filter
+   *   The standard list filter.
+   * @param {number} request.pageSize
+   *   The standard list page size.
+   * @param {string} request.pageToken
+   *   The standard list page token.
+   * @param {google.protobuf.FieldMask} request.readMask
+   *   Mask specifying which fields to read
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [ModelDeploymentMonitoringJob]{@link google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listModelDeploymentMonitoringJobsAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listModelDeploymentMonitoringJobsAsync(
+    request?: protos.google.cloud.aiplatform.v1.IListModelDeploymentMonitoringJobsRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        parent: request.parent || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listModelDeploymentMonitoringJobs.asyncIterate(
+      this.innerApiCalls['listModelDeploymentMonitoringJobs'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.aiplatform.v1.IModelDeploymentMonitoringJob>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -4126,6 +5375,107 @@ export class JobServiceClient {
   }
 
   /**
+   * Return a fully-qualified index resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index
+   * @returns {string} Resource name string.
+   */
+  indexPath(project: string, location: string, index: string) {
+    return this.pathTemplates.indexPathTemplate.render({
+      project: project,
+      location: location,
+      index: index,
+    });
+  }
+
+  /**
+   * Parse the project from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).project;
+  }
+
+  /**
+   * Parse the location from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).location;
+  }
+
+  /**
+   * Parse the index from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the index.
+   */
+  matchIndexFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).index;
+  }
+
+  /**
+   * Return a fully-qualified indexEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index_endpoint
+   * @returns {string} Resource name string.
+   */
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      index_endpoint: indexEndpoint,
+    });
+  }
+
+  /**
+   * Parse the project from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
+  }
+
+  /**
+   * Parse the location from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
+  }
+
+  /**
+   * Parse the index_endpoint from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the index_endpoint.
+   */
+  matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -4208,6 +5558,71 @@ export class JobServiceClient {
    */
   matchModelFromModelName(modelName: string) {
     return this.pathTemplates.modelPathTemplate.match(modelName).model;
+  }
+
+  /**
+   * Return a fully-qualified modelDeploymentMonitoringJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_deployment_monitoring_job
+   * @returns {string} Resource name string.
+   */
+  modelDeploymentMonitoringJobPath(
+    project: string,
+    location: string,
+    modelDeploymentMonitoringJob: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
+      project: project,
+      location: location,
+      model_deployment_monitoring_job: modelDeploymentMonitoringJob,
+    });
+  }
+
+  /**
+   * Parse the project from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).location;
+  }
+
+  /**
+   * Parse the model_deployment_monitoring_job from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the model_deployment_monitoring_job.
+   */
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).model_deployment_monitoring_job;
   }
 
   /**
@@ -4487,6 +5902,55 @@ export class JobServiceClient {
     return this.pathTemplates.specialistPoolPathTemplate.match(
       specialistPoolName
     ).specialist_pool;
+  }
+
+  /**
+   * Return a fully-qualified study resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @returns {string} Resource name string.
+   */
+  studyPath(project: string, location: string, study: string) {
+    return this.pathTemplates.studyPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+    });
+  }
+
+  /**
+   * Parse the project from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).project;
+  }
+
+  /**
+   * Parse the location from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).location;
+  }
+
+  /**
+   * Parse the study from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).study;
   }
 
   /**

@@ -219,6 +219,162 @@
         }
       }
     },
+    "IndexEndpointService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IndexEndpointServiceClient",
+          "rpcs": {
+            "GetIndexEndpoint": {
+              "methods": [
+                "getIndexEndpoint"
+              ]
+            },
+            "UpdateIndexEndpoint": {
+              "methods": [
+                "updateIndexEndpoint"
+              ]
+            },
+            "CreateIndexEndpoint": {
+              "methods": [
+                "createIndexEndpoint"
+              ]
+            },
+            "DeleteIndexEndpoint": {
+              "methods": [
+                "deleteIndexEndpoint"
+              ]
+            },
+            "DeployIndex": {
+              "methods": [
+                "deployIndex"
+              ]
+            },
+            "UndeployIndex": {
+              "methods": [
+                "undeployIndex"
+              ]
+            },
+            "ListIndexEndpoints": {
+              "methods": [
+                "listIndexEndpoints",
+                "listIndexEndpointsStream",
+                "listIndexEndpointsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IndexEndpointServiceClient",
+          "rpcs": {
+            "GetIndexEndpoint": {
+              "methods": [
+                "getIndexEndpoint"
+              ]
+            },
+            "UpdateIndexEndpoint": {
+              "methods": [
+                "updateIndexEndpoint"
+              ]
+            },
+            "CreateIndexEndpoint": {
+              "methods": [
+                "createIndexEndpoint"
+              ]
+            },
+            "DeleteIndexEndpoint": {
+              "methods": [
+                "deleteIndexEndpoint"
+              ]
+            },
+            "DeployIndex": {
+              "methods": [
+                "deployIndex"
+              ]
+            },
+            "UndeployIndex": {
+              "methods": [
+                "undeployIndex"
+              ]
+            },
+            "ListIndexEndpoints": {
+              "methods": [
+                "listIndexEndpoints",
+                "listIndexEndpointsStream",
+                "listIndexEndpointsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "IndexService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IndexServiceClient",
+          "rpcs": {
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "CreateIndex": {
+              "methods": [
+                "createIndex"
+              ]
+            },
+            "UpdateIndex": {
+              "methods": [
+                "updateIndex"
+              ]
+            },
+            "DeleteIndex": {
+              "methods": [
+                "deleteIndex"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IndexServiceClient",
+          "rpcs": {
+            "GetIndex": {
+              "methods": [
+                "getIndex"
+              ]
+            },
+            "CreateIndex": {
+              "methods": [
+                "createIndex"
+              ]
+            },
+            "UpdateIndex": {
+              "methods": [
+                "updateIndex"
+              ]
+            },
+            "DeleteIndex": {
+              "methods": [
+                "deleteIndex"
+              ]
+            },
+            "ListIndexes": {
+              "methods": [
+                "listIndexes",
+                "listIndexesStream",
+                "listIndexesAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "JobService": {
       "clients": {
         "grpc": {
@@ -284,6 +440,26 @@
                 "cancelBatchPredictionJob"
               ]
             },
+            "CreateModelDeploymentMonitoringJob": {
+              "methods": [
+                "createModelDeploymentMonitoringJob"
+              ]
+            },
+            "GetModelDeploymentMonitoringJob": {
+              "methods": [
+                "getModelDeploymentMonitoringJob"
+              ]
+            },
+            "PauseModelDeploymentMonitoringJob": {
+              "methods": [
+                "pauseModelDeploymentMonitoringJob"
+              ]
+            },
+            "ResumeModelDeploymentMonitoringJob": {
+              "methods": [
+                "resumeModelDeploymentMonitoringJob"
+              ]
+            },
             "DeleteCustomJob": {
               "methods": [
                 "deleteCustomJob"
@@ -302,6 +478,16 @@
             "DeleteBatchPredictionJob": {
               "methods": [
                 "deleteBatchPredictionJob"
+              ]
+            },
+            "UpdateModelDeploymentMonitoringJob": {
+              "methods": [
+                "updateModelDeploymentMonitoringJob"
+              ]
+            },
+            "DeleteModelDeploymentMonitoringJob": {
+              "methods": [
+                "deleteModelDeploymentMonitoringJob"
               ]
             },
             "ListCustomJobs": {
@@ -330,6 +516,20 @@
                 "listBatchPredictionJobs",
                 "listBatchPredictionJobsStream",
                 "listBatchPredictionJobsAsync"
+              ]
+            },
+            "SearchModelDeploymentMonitoringStatsAnomalies": {
+              "methods": [
+                "searchModelDeploymentMonitoringStatsAnomalies",
+                "searchModelDeploymentMonitoringStatsAnomaliesStream",
+                "searchModelDeploymentMonitoringStatsAnomaliesAsync"
+              ]
+            },
+            "ListModelDeploymentMonitoringJobs": {
+              "methods": [
+                "listModelDeploymentMonitoringJobs",
+                "listModelDeploymentMonitoringJobsStream",
+                "listModelDeploymentMonitoringJobsAsync"
               ]
             }
           }
@@ -397,6 +597,26 @@
                 "cancelBatchPredictionJob"
               ]
             },
+            "CreateModelDeploymentMonitoringJob": {
+              "methods": [
+                "createModelDeploymentMonitoringJob"
+              ]
+            },
+            "GetModelDeploymentMonitoringJob": {
+              "methods": [
+                "getModelDeploymentMonitoringJob"
+              ]
+            },
+            "PauseModelDeploymentMonitoringJob": {
+              "methods": [
+                "pauseModelDeploymentMonitoringJob"
+              ]
+            },
+            "ResumeModelDeploymentMonitoringJob": {
+              "methods": [
+                "resumeModelDeploymentMonitoringJob"
+              ]
+            },
             "DeleteCustomJob": {
               "methods": [
                 "deleteCustomJob"
@@ -415,6 +635,16 @@
             "DeleteBatchPredictionJob": {
               "methods": [
                 "deleteBatchPredictionJob"
+              ]
+            },
+            "UpdateModelDeploymentMonitoringJob": {
+              "methods": [
+                "updateModelDeploymentMonitoringJob"
+              ]
+            },
+            "DeleteModelDeploymentMonitoringJob": {
+              "methods": [
+                "deleteModelDeploymentMonitoringJob"
               ]
             },
             "ListCustomJobs": {
@@ -443,6 +673,20 @@
                 "listBatchPredictionJobs",
                 "listBatchPredictionJobsStream",
                 "listBatchPredictionJobsAsync"
+              ]
+            },
+            "SearchModelDeploymentMonitoringStatsAnomalies": {
+              "methods": [
+                "searchModelDeploymentMonitoringStatsAnomalies",
+                "searchModelDeploymentMonitoringStatsAnomaliesStream",
+                "searchModelDeploymentMonitoringStatsAnomaliesAsync"
+              ]
+            },
+            "ListModelDeploymentMonitoringJobs": {
+              "methods": [
+                "listModelDeploymentMonitoringJobs",
+                "listModelDeploymentMonitoringJobsStream",
+                "listModelDeploymentMonitoringJobsAsync"
               ]
             }
           }
@@ -744,6 +988,16 @@
               "methods": [
                 "predict"
               ]
+            },
+            "RawPredict": {
+              "methods": [
+                "rawPredict"
+              ]
+            },
+            "Explain": {
+              "methods": [
+                "explain"
+              ]
             }
           }
         },
@@ -753,6 +1007,16 @@
             "Predict": {
               "methods": [
                 "predict"
+              ]
+            },
+            "RawPredict": {
+              "methods": [
+                "rawPredict"
+              ]
+            },
+            "Explain": {
+              "methods": [
+                "explain"
               ]
             }
           }

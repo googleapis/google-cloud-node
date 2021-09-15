@@ -42,6 +42,8 @@ import {operationsProtos} from 'google-gax';
 const version = require('../../../package.json').version;
 
 /**
+ *  The service that handles the CRUD of Vertex AI Dataset and its child
+ *  resources.
  * @class
  * @memberof v1beta1
  */

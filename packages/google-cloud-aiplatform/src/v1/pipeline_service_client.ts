@@ -204,12 +204,22 @@ export class PipelineServiceClient {
       hyperparameterTuningJobPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/hyperparameterTuningJobs/{hyperparameter_tuning_job}'
       ),
+      indexPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexes/{index}'
+      ),
+      indexEndpointPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/indexEndpoints/{index_endpoint}'
+      ),
       locationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}'
       ),
       modelPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}'
       ),
+      modelDeploymentMonitoringJobPathTemplate:
+        new this._gaxModule.PathTemplate(
+          'projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}'
+        ),
       modelEvaluationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}'
       ),
@@ -221,6 +231,9 @@ export class PipelineServiceClient {
       ),
       specialistPoolPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/specialistPools/{specialist_pool}'
+      ),
+      studyPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/studies/{study}'
       ),
       trainingPipelinePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/trainingPipelines/{training_pipeline}'
@@ -1370,32 +1383,22 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the TrainingPipelines from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   Lists the PipelineJobs that match the filter expression. The following
-   *   fields are supported:
+   *   The standard list filter.
+   *   Supported fields:
    *
-   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
-   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `labels`: Supports key-value equality and key presence.
+   *     * `display_name` supports = and !=.
    *
-   *   Filter expressions can be combined together using logical operators
-   *   (`AND` & `OR`).
-   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
+   *     * `state` supports = and !=.
    *
-   *   The syntax to define filter expression is based on
-   *   https://google.aip.dev/160.
+   *   Some examples of using the filter are:
    *
-   *   Examples:
+   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
    *
-   *   * `create_time>"2021-05-18T00:00:00Z" OR
-   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
-   *     after 2020-05-18 00:00:00 UTC.
-   *   * `labels.env = "prod"`
-   *     PipelineJobs with label "env" set to "prod".
+   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+   *
+   *    * `NOT display_name="my_pipeline"`
+   *
+   *    * `state="PIPELINE_STATE_FAILED"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1470,32 +1473,22 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the TrainingPipelines from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   Lists the PipelineJobs that match the filter expression. The following
-   *   fields are supported:
+   *   The standard list filter.
+   *   Supported fields:
    *
-   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
-   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `labels`: Supports key-value equality and key presence.
+   *     * `display_name` supports = and !=.
    *
-   *   Filter expressions can be combined together using logical operators
-   *   (`AND` & `OR`).
-   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
+   *     * `state` supports = and !=.
    *
-   *   The syntax to define filter expression is based on
-   *   https://google.aip.dev/160.
+   *   Some examples of using the filter are:
    *
-   *   Examples:
+   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
    *
-   *   * `create_time>"2021-05-18T00:00:00Z" OR
-   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
-   *     after 2020-05-18 00:00:00 UTC.
-   *   * `labels.env = "prod"`
-   *     PipelineJobs with label "env" set to "prod".
+   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+   *
+   *    * `NOT display_name="my_pipeline"`
+   *
+   *    * `state="PIPELINE_STATE_FAILED"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1548,32 +1541,22 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the TrainingPipelines from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   Lists the PipelineJobs that match the filter expression. The following
-   *   fields are supported:
+   *   The standard list filter.
+   *   Supported fields:
    *
-   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
-   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
-   *     Values must be in RFC 3339 format.
-   *   * `labels`: Supports key-value equality and key presence.
+   *     * `display_name` supports = and !=.
    *
-   *   Filter expressions can be combined together using logical operators
-   *   (`AND` & `OR`).
-   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
+   *     * `state` supports = and !=.
    *
-   *   The syntax to define filter expression is based on
-   *   https://google.aip.dev/160.
+   *   Some examples of using the filter are:
    *
-   *   Examples:
+   *    * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
    *
-   *   * `create_time>"2021-05-18T00:00:00Z" OR
-   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
-   *     after 2020-05-18 00:00:00 UTC.
-   *   * `labels.env = "prod"`
-   *     PipelineJobs with label "env" set to "prod".
+   *    * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
+   *
+   *    * `NOT display_name="my_pipeline"`
+   *
+   *    * `state="PIPELINE_STATE_FAILED"`
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1660,18 +1643,32 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the PipelineJobs from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
-   *   Supported fields:
+   *   Lists the PipelineJobs that match the filter expression. The following
+   *   fields are supported:
    *
-   *   * `display_name` supports `=` and `!=`.
-   *   * `state` supports `=` and `!=`.
+   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
    *
-   *   The following examples demonstrate how to filter the list of PipelineJobs:
+   *   Filter expressions can be combined together using logical operators
+   *   (`AND` & `OR`).
+   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
    *
-   *   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *   * `NOT display_name="my_pipeline"`
-   *   * `state="PIPELINE_STATE_FAILED"`
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *   * `create_time>"2021-05-18T00:00:00Z" OR
+   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+   *     after 2020-05-18 00:00:00 UTC.
+   *   * `labels.env = "prod"`
+   *     PipelineJobs with label "env" set to "prod".
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1744,18 +1741,32 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the PipelineJobs from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
-   *   Supported fields:
+   *   Lists the PipelineJobs that match the filter expression. The following
+   *   fields are supported:
    *
-   *   * `display_name` supports `=` and `!=`.
-   *   * `state` supports `=` and `!=`.
+   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
    *
-   *   The following examples demonstrate how to filter the list of PipelineJobs:
+   *   Filter expressions can be combined together using logical operators
+   *   (`AND` & `OR`).
+   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
    *
-   *   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *   * `NOT display_name="my_pipeline"`
-   *   * `state="PIPELINE_STATE_FAILED"`
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *   * `create_time>"2021-05-18T00:00:00Z" OR
+   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+   *     after 2020-05-18 00:00:00 UTC.
+   *   * `labels.env = "prod"`
+   *     PipelineJobs with label "env" set to "prod".
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -1806,18 +1817,32 @@ export class PipelineServiceClient {
    *   Required. The resource name of the Location to list the PipelineJobs from.
    *   Format: `projects/{project}/locations/{location}`
    * @param {string} request.filter
-   *   The standard list filter.
-   *   Supported fields:
+   *   Lists the PipelineJobs that match the filter expression. The following
+   *   fields are supported:
    *
-   *   * `display_name` supports `=` and `!=`.
-   *   * `state` supports `=` and `!=`.
+   *   * `pipeline_name`: Supports `=` and `!=` comparisons.
+   *   * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `update_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `end_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
+   *     Values must be in RFC 3339 format.
+   *   * `labels`: Supports key-value equality and key presence.
    *
-   *   The following examples demonstrate how to filter the list of PipelineJobs:
+   *   Filter expressions can be combined together using logical operators
+   *   (`AND` & `OR`).
+   *   For example: `pipeline_name="test" AND create_time>"2020-05-18T13:30:00Z"`.
    *
-   *   * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-   *   * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-   *   * `NOT display_name="my_pipeline"`
-   *   * `state="PIPELINE_STATE_FAILED"`
+   *   The syntax to define filter expression is based on
+   *   https://google.aip.dev/160.
+   *
+   *   Examples:
+   *
+   *   * `create_time>"2021-05-18T00:00:00Z" OR
+   *     update_time>"2020-05-18T00:00:00Z"` PipelineJobs created or updated
+   *     after 2020-05-18 00:00:00 UTC.
+   *   * `labels.env = "prod"`
+   *     PipelineJobs with label "env" set to "prod".
    * @param {number} request.pageSize
    *   The standard list page size.
    * @param {string} request.pageToken
@@ -2638,6 +2663,107 @@ export class PipelineServiceClient {
   }
 
   /**
+   * Return a fully-qualified index resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index
+   * @returns {string} Resource name string.
+   */
+  indexPath(project: string, location: string, index: string) {
+    return this.pathTemplates.indexPathTemplate.render({
+      project: project,
+      location: location,
+      index: index,
+    });
+  }
+
+  /**
+   * Parse the project from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).project;
+  }
+
+  /**
+   * Parse the location from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).location;
+  }
+
+  /**
+   * Parse the index from Index resource.
+   *
+   * @param {string} indexName
+   *   A fully-qualified path representing Index resource.
+   * @returns {string} A string representing the index.
+   */
+  matchIndexFromIndexName(indexName: string) {
+    return this.pathTemplates.indexPathTemplate.match(indexName).index;
+  }
+
+  /**
+   * Return a fully-qualified indexEndpoint resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} index_endpoint
+   * @returns {string} Resource name string.
+   */
+  indexEndpointPath(project: string, location: string, indexEndpoint: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.render({
+      project: project,
+      location: location,
+      index_endpoint: indexEndpoint,
+    });
+  }
+
+  /**
+   * Parse the project from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .project;
+  }
+
+  /**
+   * Parse the location from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .location;
+  }
+
+  /**
+   * Parse the index_endpoint from IndexEndpoint resource.
+   *
+   * @param {string} indexEndpointName
+   *   A fully-qualified path representing IndexEndpoint resource.
+   * @returns {string} A string representing the index_endpoint.
+   */
+  matchIndexEndpointFromIndexEndpointName(indexEndpointName: string) {
+    return this.pathTemplates.indexEndpointPathTemplate.match(indexEndpointName)
+      .index_endpoint;
+  }
+
+  /**
    * Return a fully-qualified location resource name string.
    *
    * @param {string} project
@@ -2720,6 +2846,71 @@ export class PipelineServiceClient {
    */
   matchModelFromModelName(modelName: string) {
     return this.pathTemplates.modelPathTemplate.match(modelName).model;
+  }
+
+  /**
+   * Return a fully-qualified modelDeploymentMonitoringJob resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} model_deployment_monitoring_job
+   * @returns {string} Resource name string.
+   */
+  modelDeploymentMonitoringJobPath(
+    project: string,
+    location: string,
+    modelDeploymentMonitoringJob: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.render({
+      project: project,
+      location: location,
+      model_deployment_monitoring_job: modelDeploymentMonitoringJob,
+    });
+  }
+
+  /**
+   * Parse the project from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).project;
+  }
+
+  /**
+   * Parse the location from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).location;
+  }
+
+  /**
+   * Parse the model_deployment_monitoring_job from ModelDeploymentMonitoringJob resource.
+   *
+   * @param {string} modelDeploymentMonitoringJobName
+   *   A fully-qualified path representing ModelDeploymentMonitoringJob resource.
+   * @returns {string} A string representing the model_deployment_monitoring_job.
+   */
+  matchModelDeploymentMonitoringJobFromModelDeploymentMonitoringJobName(
+    modelDeploymentMonitoringJobName: string
+  ) {
+    return this.pathTemplates.modelDeploymentMonitoringJobPathTemplate.match(
+      modelDeploymentMonitoringJobName
+    ).model_deployment_monitoring_job;
   }
 
   /**
@@ -2999,6 +3190,55 @@ export class PipelineServiceClient {
     return this.pathTemplates.specialistPoolPathTemplate.match(
       specialistPoolName
     ).specialist_pool;
+  }
+
+  /**
+   * Return a fully-qualified study resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} study
+   * @returns {string} Resource name string.
+   */
+  studyPath(project: string, location: string, study: string) {
+    return this.pathTemplates.studyPathTemplate.render({
+      project: project,
+      location: location,
+      study: study,
+    });
+  }
+
+  /**
+   * Parse the project from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).project;
+  }
+
+  /**
+   * Parse the location from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).location;
+  }
+
+  /**
+   * Parse the study from Study resource.
+   *
+   * @param {string} studyName
+   *   A fully-qualified path representing Study resource.
+   * @returns {string} A string representing the study.
+   */
+  matchStudyFromStudyName(studyName: string) {
+    return this.pathTemplates.studyPathTemplate.match(studyName).study;
   }
 
   /**
