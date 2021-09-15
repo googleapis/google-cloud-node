@@ -1637,6 +1637,7 @@
     "issue_tracker": "https://issuetracker.google.com/savedsearches/559757",
     "release_level": "alpha",
     "language": "nodejs",
+    "default_version": "v3",
     "repo": "googleapis/nodejs-resource-manager",
     "distribution_name": "@google-cloud/resource-manager",
     "api_id": "cloudresourcemanager.googleapis.com",
