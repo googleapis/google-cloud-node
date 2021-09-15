@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/video-intelligence?activeTab=versions
 
+### [3.4.1](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.4.0...v3.4.1) (2021-09-15)
+
+
+### Bug Fixes
+
+* **deps:** require google-gax v2.24.1 ([#589](https://www.github.com/googleapis/nodejs-video-intelligence/issues/589)) ([6af1a84](https://www.github.com/googleapis/nodejs-video-intelligence/commit/6af1a84112ab56a3ff2862ff7a5eda0da9772244))
+
 ## [3.4.0](https://www.github.com/googleapis/nodejs-video-intelligence/compare/v3.3.6...v3.4.0) (2021-09-15)
 
 
