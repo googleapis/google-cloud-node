@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/talent?activeTab=versions
 
+## [3.5.0](https://www.github.com/googleapis/nodejs-talent/compare/v3.4.1...v3.5.0) (2021-09-15)
+
+
+### Features
+
+* Added a new `KeywordMatchMode` field to support more keyword matching options feat: Added more `DiversificationLevel` configuration options ([#365](https://www.github.com/googleapis/nodejs-talent/issues/365)) ([bc2c5cf](https://www.github.com/googleapis/nodejs-talent/commit/bc2c5cfc7dd465dd476c027acd978e07ed18b298))
+
 ### [3.4.1](https://www.github.com/googleapis/nodejs-talent/compare/v3.4.0...v3.4.1) (2021-09-10)
 
 
