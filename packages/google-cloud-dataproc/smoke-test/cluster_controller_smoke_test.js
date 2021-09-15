@@ -25,7 +25,7 @@ describe('ClusterControllerSmokeTest', () => {
   it('successfully makes a call to the service using promises', done => {
     const dataproc = require('../build/src');
 
-    const client = new dataproc.v1beta2.ClusterControllerClient({
+    const client = new dataproc.ClusterControllerClient({
       // optional auth parameters.
     });
 
@@ -52,7 +52,7 @@ describe('ClusterControllerSmokeTest', () => {
   it('successfully makes a call to the service using callbacks', done => {
     const dataproc = require('../build/src');
 
-    const client = new dataproc.v1beta2.ClusterControllerClient({
+    const client = new dataproc.ClusterControllerClient({
       // optional auth parameters.
     });
 
@@ -88,7 +88,7 @@ describe('ClusterControllerSmokeTest', () => {
   it('successfully makes a call to the service using streaming', done => {
     const dataproc = require('../build/src');
 
-    const client = new dataproc.v1beta2.ClusterControllerClient({
+    const client = new dataproc.ClusterControllerClient({
       // optional auth parameters.
     });
 

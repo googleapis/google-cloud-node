@@ -1,8 +1,0 @@
-[
-  "../../protos/google/cloud/dataproc/v1beta2/autoscaling_policies.proto",
-  "../../protos/google/cloud/dataproc/v1beta2/clusters.proto",
-  "../../protos/google/cloud/dataproc/v1beta2/jobs.proto",
-  "../../protos/google/cloud/dataproc/v1beta2/operations.proto",
-  "../../protos/google/cloud/dataproc/v1beta2/shared.proto",
-  "../../protos/google/cloud/dataproc/v1beta2/workflow_templates.proto"
-]
