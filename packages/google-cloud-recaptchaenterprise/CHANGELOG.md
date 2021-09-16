@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/recaptcha-enterprise?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.2.1...v2.3.0) (2021-09-16)
+
+
+### Features
+
+* add GetMetrics and MigrateKey methods to reCAPTCHA enterprise API ([#318](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/issues/318)) ([55b1adc](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/commit/55b1adc261879db1b073f3ad9cd3453c09d1e8d8))
+
 ### [2.2.1](https://www.github.com/googleapis/nodejs-recaptcha-enterprise/compare/v2.2.0...v2.2.1) (2021-09-09)
 
 
