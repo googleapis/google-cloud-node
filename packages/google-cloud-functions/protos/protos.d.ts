@@ -628,6 +628,9 @@ export namespace google {
 
                     /** HttpsTrigger url */
                     url?: (string|null);
+
+                    /** HttpsTrigger securityLevel */
+                    securityLevel?: (google.cloud.functions.v1.HttpsTrigger.SecurityLevel|keyof typeof google.cloud.functions.v1.HttpsTrigger.SecurityLevel|null);
                 }
 
                 /** Represents a HttpsTrigger. */
@@ -641,6 +644,9 @@ export namespace google {
 
                     /** HttpsTrigger url. */
                     public url: string;
+
+                    /** HttpsTrigger securityLevel. */
+                    public securityLevel: (google.cloud.functions.v1.HttpsTrigger.SecurityLevel|keyof typeof google.cloud.functions.v1.HttpsTrigger.SecurityLevel);
 
                     /**
                      * Creates a new HttpsTrigger instance using the specified properties.
@@ -711,6 +717,16 @@ export namespace google {
                      * @returns JSON object
                      */
                     public toJSON(): { [k: string]: any };
+                }
+
+                namespace HttpsTrigger {
+
+                    /** SecurityLevel enum. */
+                    enum SecurityLevel {
+                        SECURITY_LEVEL_UNSPECIFIED = 0,
+                        SECURE_ALWAYS = 1,
+                        SECURE_OPTIONAL = 2
+                    }
                 }
 
                 /** Properties of an EventTrigger. */

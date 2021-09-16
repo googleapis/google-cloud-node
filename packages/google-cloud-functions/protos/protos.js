@@ -1626,6 +1626,7 @@
                          * @memberof google.cloud.functions.v1
                          * @interface IHttpsTrigger
                          * @property {string|null} [url] HttpsTrigger url
+                         * @property {google.cloud.functions.v1.HttpsTrigger.SecurityLevel|null} [securityLevel] HttpsTrigger securityLevel
                          */
     
                         /**
@@ -1650,6 +1651,14 @@
                          * @instance
                          */
                         HttpsTrigger.prototype.url = "";
+    
+                        /**
+                         * HttpsTrigger securityLevel.
+                         * @member {google.cloud.functions.v1.HttpsTrigger.SecurityLevel} securityLevel
+                         * @memberof google.cloud.functions.v1.HttpsTrigger
+                         * @instance
+                         */
+                        HttpsTrigger.prototype.securityLevel = 0;
     
                         /**
                          * Creates a new HttpsTrigger instance using the specified properties.
@@ -1677,6 +1686,8 @@
                                 writer = $Writer.create();
                             if (message.url != null && Object.hasOwnProperty.call(message, "url"))
                                 writer.uint32(/* id 1, wireType 2 =*/10).string(message.url);
+                            if (message.securityLevel != null && Object.hasOwnProperty.call(message, "securityLevel"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.securityLevel);
                             return writer;
                         };
     
@@ -1713,6 +1724,9 @@
                                 switch (tag >>> 3) {
                                 case 1:
                                     message.url = reader.string();
+                                    break;
+                                case 2:
+                                    message.securityLevel = reader.int32();
                                     break;
                                 default:
                                     reader.skipType(tag & 7);
@@ -1752,6 +1766,15 @@
                             if (message.url != null && message.hasOwnProperty("url"))
                                 if (!$util.isString(message.url))
                                     return "url: string expected";
+                            if (message.securityLevel != null && message.hasOwnProperty("securityLevel"))
+                                switch (message.securityLevel) {
+                                default:
+                                    return "securityLevel: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -1769,6 +1792,20 @@
                             var message = new $root.google.cloud.functions.v1.HttpsTrigger();
                             if (object.url != null)
                                 message.url = String(object.url);
+                            switch (object.securityLevel) {
+                            case "SECURITY_LEVEL_UNSPECIFIED":
+                            case 0:
+                                message.securityLevel = 0;
+                                break;
+                            case "SECURE_ALWAYS":
+                            case 1:
+                                message.securityLevel = 1;
+                                break;
+                            case "SECURE_OPTIONAL":
+                            case 2:
+                                message.securityLevel = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1785,10 +1822,14 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.defaults)
+                            if (options.defaults) {
                                 object.url = "";
+                                object.securityLevel = options.enums === String ? "SECURITY_LEVEL_UNSPECIFIED" : 0;
+                            }
                             if (message.url != null && message.hasOwnProperty("url"))
                                 object.url = message.url;
+                            if (message.securityLevel != null && message.hasOwnProperty("securityLevel"))
+                                object.securityLevel = options.enums === String ? $root.google.cloud.functions.v1.HttpsTrigger.SecurityLevel[message.securityLevel] : message.securityLevel;
                             return object;
                         };
     
@@ -1802,6 +1843,22 @@
                         HttpsTrigger.prototype.toJSON = function toJSON() {
                             return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
                         };
+    
+                        /**
+                         * SecurityLevel enum.
+                         * @name google.cloud.functions.v1.HttpsTrigger.SecurityLevel
+                         * @enum {number}
+                         * @property {number} SECURITY_LEVEL_UNSPECIFIED=0 SECURITY_LEVEL_UNSPECIFIED value
+                         * @property {number} SECURE_ALWAYS=1 SECURE_ALWAYS value
+                         * @property {number} SECURE_OPTIONAL=2 SECURE_OPTIONAL value
+                         */
+                        HttpsTrigger.SecurityLevel = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "SECURITY_LEVEL_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SECURE_ALWAYS"] = 1;
+                            values[valuesById[2] = "SECURE_OPTIONAL"] = 2;
+                            return values;
+                        })();
     
                         return HttpsTrigger;
                     })();
